@@ -239,6 +239,7 @@ module AwsSdkCodeGenerator
         receiver: 'client',
         resp_var: 'resp',
       ).format
+      # TODO - QuickSight is breaking this
       example if example && example.lines.count < 1000
     end
 
@@ -251,6 +252,7 @@ module AwsSdkCodeGenerator
         resp_var: 'async_resp',
         async: true
       ).format
+      # TODO - QuickSight is breaking this
       example if example && example.lines.count < 1000
     end
 
@@ -261,6 +263,7 @@ module AwsSdkCodeGenerator
           shape_ref: operation['output'],
           api: api
         ).to_s)
+        # TODO - QuickSight is breaking this
         docstring if docstring && docstring.lines.count < 1000
       end
     end
