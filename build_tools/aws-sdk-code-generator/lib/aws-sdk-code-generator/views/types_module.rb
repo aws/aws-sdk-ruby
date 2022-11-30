@@ -102,8 +102,8 @@ module AwsSdkCodeGenerator
       def struct_class_docs(shape_name, shape)
         join_docstrings([
           html_to_markdown(Api.docstring(shape_name, @api)),
-          input_example_docs(shape_name, shape),
-          output_example_docs(shape_name, shape),
+          #input_example_docs(shape_name, shape),
+          #output_example_docs(shape_name, shape),
           attribute_macros_docs(shape_name),
           see_also_tag(shape_name),
         ])
@@ -112,7 +112,7 @@ module AwsSdkCodeGenerator
       def eventstream_class_docs(shape_name, shape)
         join_docstrings([
           html_to_markdown(Api.docstring(shape_name, @api)),
-          input_example_docs(shape_name, shape),
+          #input_example_docs(shape_name, shape),
           eventstream_docs(shape_name),
           see_also_tag(shape_name),
         ])
