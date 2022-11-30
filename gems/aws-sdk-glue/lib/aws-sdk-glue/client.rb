@@ -872,6 +872,57 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves a list of data quality results for the specified result IDs.
+    #
+    # @option params [required, Array<String>] :result_ids
+    #   A list of unique result IDs for the data quality results.
+    #
+    # @return [Types::BatchGetDataQualityResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetDataQualityResultResponse#results #results} => Array&lt;Types::DataQualityResult&gt;
+    #   * {Types::BatchGetDataQualityResultResponse#results_not_found #results_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_data_quality_result({
+    #     result_ids: ["HashString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].result_id #=> String
+    #   resp.results[0].score #=> Float
+    #   resp.results[0].data_source.glue_table.database_name #=> String
+    #   resp.results[0].data_source.glue_table.table_name #=> String
+    #   resp.results[0].data_source.glue_table.catalog_id #=> String
+    #   resp.results[0].data_source.glue_table.connection_name #=> String
+    #   resp.results[0].data_source.glue_table.additional_options #=> Hash
+    #   resp.results[0].data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.results[0].ruleset_name #=> String
+    #   resp.results[0].evaluation_context #=> String
+    #   resp.results[0].started_on #=> Time
+    #   resp.results[0].completed_on #=> Time
+    #   resp.results[0].job_name #=> String
+    #   resp.results[0].job_run_id #=> String
+    #   resp.results[0].ruleset_evaluation_run_id #=> String
+    #   resp.results[0].rule_results #=> Array
+    #   resp.results[0].rule_results[0].name #=> String
+    #   resp.results[0].rule_results[0].description #=> String
+    #   resp.results[0].rule_results[0].evaluation_message #=> String
+    #   resp.results[0].rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
+    #   resp.results_not_found #=> Array
+    #   resp.results_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityResult AWS API Documentation
+    #
+    # @overload batch_get_data_quality_result(params = {})
+    # @param [Hash] params ({})
+    def batch_get_data_quality_result(params = {}, options = {})
+      req = build_request(:batch_get_data_quality_result, params)
+      req.send_request(options)
+    end
+
     # Returns a list of resource metadata for a given list of development
     # endpoint names. After calling the `ListDevEndpoints` operation, you
     # can call this operation to access the data to which you have been
@@ -1481,6 +1532,16 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.ruleset #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.output #=> String, one of "PrimaryInput", "EvaluationResults"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.evaluation_context #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_s3_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -2012,6 +2073,52 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Cancels the specified recommendation run that was being used to
+    # generate rules.
+    #
+    # @option params [required, String] :run_id
+    #   The unique run identifier associated with this run.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_data_quality_rule_recommendation_run({
+    #     run_id: "HashString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelDataQualityRuleRecommendationRun AWS API Documentation
+    #
+    # @overload cancel_data_quality_rule_recommendation_run(params = {})
+    # @param [Hash] params ({})
+    def cancel_data_quality_rule_recommendation_run(params = {}, options = {})
+      req = build_request(:cancel_data_quality_rule_recommendation_run, params)
+      req.send_request(options)
+    end
+
+    # Cancels a run where a ruleset is being evaluated against a data
+    # source.
+    #
+    # @option params [required, String] :run_id
+    #   The unique run identifier associated with this run.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_data_quality_ruleset_evaluation_run({
+    #     run_id: "HashString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelDataQualityRulesetEvaluationRun AWS API Documentation
+    #
+    # @overload cancel_data_quality_ruleset_evaluation_run(params = {})
+    # @param [Hash] params ({})
+    def cancel_data_quality_ruleset_evaluation_run(params = {}, options = {})
+      req = build_request(:cancel_data_quality_ruleset_evaluation_run, params)
+      req.send_request(options)
+    end
+
     # Cancels (stops) a task run. Machine learning task runs are
     # asynchronous tasks that Glue runs on your behalf as part of various
     # machine learning workflows. You can cancel a machine learning task run
@@ -2478,6 +2585,66 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_custom_entity_type(params = {}, options = {})
       req = build_request(:create_custom_entity_type, params)
+      req.send_request(options)
+    end
+
+    # Creates a data quality ruleset with DQDL rules applied to a specified
+    # Glue table.
+    #
+    # You create the ruleset using the Data Quality Definition Language
+    # (DQDL). For more information, see the Glue developer guide.
+    #
+    # @option params [required, String] :name
+    #   A unique name for the data quality ruleset.
+    #
+    # @option params [String] :description
+    #   A description of the data quality ruleset.
+    #
+    # @option params [required, String] :ruleset
+    #   A Data Quality Definition Language (DQDL) ruleset. For more
+    #   information, see the Glue developer guide.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags applied to the data quality ruleset.
+    #
+    # @option params [Types::DataQualityTargetTable] :target_table
+    #   A target table associated with the data quality ruleset.
+    #
+    # @option params [String] :client_token
+    #   Used for idempotency and is recommended to be set to a random ID (such
+    #   as a UUID) to avoid creating or starting multiple instances of the
+    #   same resource.
+    #
+    # @return [Types::CreateDataQualityRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataQualityRulesetResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_quality_ruleset({
+    #     name: "NameString", # required
+    #     description: "DescriptionString",
+    #     ruleset: "DataQualityRulesetString", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     target_table: {
+    #       table_name: "NameString", # required
+    #       database_name: "NameString", # required
+    #     },
+    #     client_token: "HashString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDataQualityRuleset AWS API Documentation
+    #
+    # @overload create_data_quality_ruleset(params = {})
+    # @param [Hash] params ({})
+    def create_data_quality_ruleset(params = {}, options = {})
+      req = build_request(:create_data_quality_ruleset, params)
       req.send_request(options)
     end
 
@@ -3639,6 +3806,21 @@ module Aws::Glue
     #           path: "EnclosedInStringProperty", # required
     #           version: "EnclosedInStringProperty",
     #         },
+    #         evaluate_data_quality: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           ruleset: "DQDLString", # required
+    #           output: "PrimaryInput", # accepts PrimaryInput, EvaluationResults
+    #           publishing_options: {
+    #             evaluation_context: "GenericLimitedString",
+    #             results_s3_prefix: "EnclosedInStringProperty",
+    #             cloud_watch_metrics_enabled: false,
+    #             results_publishing_enabled: false,
+    #           },
+    #           stop_job_on_failure_options: {
+    #             stop_job_on_failure_timing: "Immediate", # accepts Immediate, AfterDataLoad
+    #           },
+    #         },
     #       },
     #     },
     #     execution_class: "FLEX", # accepts FLEX, STANDARD
@@ -3833,6 +4015,9 @@ module Aws::Glue
     #         table_name: "NameString", # required
     #         catalog_id: "NameString",
     #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString",
+    #         },
     #       },
     #     ],
     #     parameters: { # required
@@ -4997,6 +5182,28 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_custom_entity_type(params = {}, options = {})
       req = build_request(:delete_custom_entity_type, params)
+      req.send_request(options)
+    end
+
+    # Deletes a data quality ruleset.
+    #
+    # @option params [required, String] :name
+    #   A name for the data quality ruleset.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_quality_ruleset({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDataQualityRuleset AWS API Documentation
+    #
+    # @overload delete_data_quality_ruleset(params = {})
+    # @param [Hash] params ({})
+    def delete_data_quality_ruleset(params = {}, options = {})
+      req = build_request(:delete_data_quality_ruleset, params)
       req.send_request(options)
     end
 
@@ -6497,6 +6704,224 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the result of a data quality rule evaluation.
+    #
+    # @option params [required, String] :result_id
+    #   A unique result ID for the data quality result.
+    #
+    # @return [Types::GetDataQualityResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityResultResponse#result_id #result_id} => String
+    #   * {Types::GetDataQualityResultResponse#score #score} => Float
+    #   * {Types::GetDataQualityResultResponse#data_source #data_source} => Types::DataSource
+    #   * {Types::GetDataQualityResultResponse#ruleset_name #ruleset_name} => String
+    #   * {Types::GetDataQualityResultResponse#evaluation_context #evaluation_context} => String
+    #   * {Types::GetDataQualityResultResponse#started_on #started_on} => Time
+    #   * {Types::GetDataQualityResultResponse#completed_on #completed_on} => Time
+    #   * {Types::GetDataQualityResultResponse#job_name #job_name} => String
+    #   * {Types::GetDataQualityResultResponse#job_run_id #job_run_id} => String
+    #   * {Types::GetDataQualityResultResponse#ruleset_evaluation_run_id #ruleset_evaluation_run_id} => String
+    #   * {Types::GetDataQualityResultResponse#rule_results #rule_results} => Array&lt;Types::DataQualityRuleResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_result({
+    #     result_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result_id #=> String
+    #   resp.score #=> Float
+    #   resp.data_source.glue_table.database_name #=> String
+    #   resp.data_source.glue_table.table_name #=> String
+    #   resp.data_source.glue_table.catalog_id #=> String
+    #   resp.data_source.glue_table.connection_name #=> String
+    #   resp.data_source.glue_table.additional_options #=> Hash
+    #   resp.data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.ruleset_name #=> String
+    #   resp.evaluation_context #=> String
+    #   resp.started_on #=> Time
+    #   resp.completed_on #=> Time
+    #   resp.job_name #=> String
+    #   resp.job_run_id #=> String
+    #   resp.ruleset_evaluation_run_id #=> String
+    #   resp.rule_results #=> Array
+    #   resp.rule_results[0].name #=> String
+    #   resp.rule_results[0].description #=> String
+    #   resp.rule_results[0].evaluation_message #=> String
+    #   resp.rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResult AWS API Documentation
+    #
+    # @overload get_data_quality_result(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_result(params = {}, options = {})
+      req = build_request(:get_data_quality_result, params)
+      req.send_request(options)
+    end
+
+    # Gets the specified recommendation run that was used to generate rules.
+    #
+    # @option params [required, String] :run_id
+    #   The unique run identifier associated with this run.
+    #
+    # @return [Types::GetDataQualityRuleRecommendationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#run_id #run_id} => String
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#data_source #data_source} => Types::DataSource
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#role #role} => String
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#number_of_workers #number_of_workers} => Integer
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#timeout #timeout} => Integer
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#status #status} => String
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#error_string #error_string} => String
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#started_on #started_on} => Time
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#last_modified_on #last_modified_on} => Time
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#completed_on #completed_on} => Time
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#execution_time #execution_time} => Integer
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#recommended_ruleset #recommended_ruleset} => String
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#created_ruleset_name #created_ruleset_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_rule_recommendation_run({
+    #     run_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_id #=> String
+    #   resp.data_source.glue_table.database_name #=> String
+    #   resp.data_source.glue_table.table_name #=> String
+    #   resp.data_source.glue_table.catalog_id #=> String
+    #   resp.data_source.glue_table.connection_name #=> String
+    #   resp.data_source.glue_table.additional_options #=> Hash
+    #   resp.data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.role #=> String
+    #   resp.number_of_workers #=> Integer
+    #   resp.timeout #=> Integer
+    #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.error_string #=> String
+    #   resp.started_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #   resp.completed_on #=> Time
+    #   resp.execution_time #=> Integer
+    #   resp.recommended_ruleset #=> String
+    #   resp.created_ruleset_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRun AWS API Documentation
+    #
+    # @overload get_data_quality_rule_recommendation_run(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_rule_recommendation_run(params = {}, options = {})
+      req = build_request(:get_data_quality_rule_recommendation_run, params)
+      req.send_request(options)
+    end
+
+    # Returns an existing ruleset by identifier or name.
+    #
+    # @option params [required, String] :name
+    #   The name of the ruleset.
+    #
+    # @return [Types::GetDataQualityRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityRulesetResponse#name #name} => String
+    #   * {Types::GetDataQualityRulesetResponse#description #description} => String
+    #   * {Types::GetDataQualityRulesetResponse#ruleset #ruleset} => String
+    #   * {Types::GetDataQualityRulesetResponse#target_table #target_table} => Types::DataQualityTargetTable
+    #   * {Types::GetDataQualityRulesetResponse#created_on #created_on} => Time
+    #   * {Types::GetDataQualityRulesetResponse#last_modified_on #last_modified_on} => Time
+    #   * {Types::GetDataQualityRulesetResponse#recommendation_run_id #recommendation_run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_ruleset({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.ruleset #=> String
+    #   resp.target_table.table_name #=> String
+    #   resp.target_table.database_name #=> String
+    #   resp.created_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #   resp.recommendation_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleset AWS API Documentation
+    #
+    # @overload get_data_quality_ruleset(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_ruleset(params = {}, options = {})
+      req = build_request(:get_data_quality_ruleset, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a specific run where a ruleset is evaluated against a data
+    # source.
+    #
+    # @option params [required, String] :run_id
+    #   The unique run identifier associated with this run.
+    #
+    # @return [Types::GetDataQualityRulesetEvaluationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#run_id #run_id} => String
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#data_source #data_source} => Types::DataSource
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#role #role} => String
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#number_of_workers #number_of_workers} => Integer
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#timeout #timeout} => Integer
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#additional_run_options #additional_run_options} => Types::DataQualityEvaluationRunAdditionalRunOptions
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#status #status} => String
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#error_string #error_string} => String
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#started_on #started_on} => Time
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#last_modified_on #last_modified_on} => Time
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#completed_on #completed_on} => Time
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#execution_time #execution_time} => Integer
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#ruleset_names #ruleset_names} => Array&lt;String&gt;
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#result_ids #result_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_ruleset_evaluation_run({
+    #     run_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_id #=> String
+    #   resp.data_source.glue_table.database_name #=> String
+    #   resp.data_source.glue_table.table_name #=> String
+    #   resp.data_source.glue_table.catalog_id #=> String
+    #   resp.data_source.glue_table.connection_name #=> String
+    #   resp.data_source.glue_table.additional_options #=> Hash
+    #   resp.data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.role #=> String
+    #   resp.number_of_workers #=> Integer
+    #   resp.timeout #=> Integer
+    #   resp.additional_run_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.additional_run_options.results_s3_prefix #=> String
+    #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.error_string #=> String
+    #   resp.started_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #   resp.completed_on #=> Time
+    #   resp.execution_time #=> Integer
+    #   resp.ruleset_names #=> Array
+    #   resp.ruleset_names[0] #=> String
+    #   resp.result_ids #=> Array
+    #   resp.result_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetEvaluationRun AWS API Documentation
+    #
+    # @overload get_data_quality_ruleset_evaluation_run(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_ruleset_evaluation_run(params = {}, options = {})
+      req = build_request(:get_data_quality_ruleset_evaluation_run, params)
+      req.send_request(options)
+    end
+
     # Retrieves the definition of a specified database.
     #
     # @option params [String] :catalog_id
@@ -7320,6 +7745,16 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.ruleset #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.output #=> String, one of "PrimaryInput", "EvaluationResults"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.evaluation_context #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_s3_prefix #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -8066,6 +8501,16 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.ruleset #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.output #=> String, one of "PrimaryInput", "EvaluationResults"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.evaluation_context #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_s3_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -8281,6 +8726,8 @@ module Aws::Glue
     #   resp.input_record_tables[0].table_name #=> String
     #   resp.input_record_tables[0].catalog_id #=> String
     #   resp.input_record_tables[0].connection_name #=> String
+    #   resp.input_record_tables[0].additional_options #=> Hash
+    #   resp.input_record_tables[0].additional_options["NameString"] #=> String
     #   resp.parameters.transform_type #=> String, one of "FIND_MATCHES"
     #   resp.parameters.find_matches_parameters.primary_key_column_name #=> String
     #   resp.parameters.find_matches_parameters.precision_recall_tradeoff #=> Float
@@ -8389,6 +8836,8 @@ module Aws::Glue
     #   resp.transforms[0].input_record_tables[0].table_name #=> String
     #   resp.transforms[0].input_record_tables[0].catalog_id #=> String
     #   resp.transforms[0].input_record_tables[0].connection_name #=> String
+    #   resp.transforms[0].input_record_tables[0].additional_options #=> Hash
+    #   resp.transforms[0].input_record_tables[0].additional_options["NameString"] #=> String
     #   resp.transforms[0].parameters.transform_type #=> String, one of "FIND_MATCHES"
     #   resp.transforms[0].parameters.find_matches_parameters.primary_key_column_name #=> String
     #   resp.transforms[0].parameters.find_matches_parameters.precision_recall_tradeoff #=> Float
@@ -11257,6 +11706,265 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Returns all data quality execution results for your account.
+    #
+    # @option params [Types::DataQualityResultFilterCriteria] :filter
+    #   The filter criteria.
+    #
+    # @option params [String] :next_token
+    #   A paginated token to offset the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListDataQualityResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityResultsResponse#results #results} => Array&lt;Types::DataQualityResultDescription&gt;
+    #   * {Types::ListDataQualityResultsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_results({
+    #     filter: {
+    #       data_source: {
+    #         glue_table: { # required
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #         },
+    #       },
+    #       job_name: "NameString",
+    #       job_run_id: "HashString",
+    #       started_after: Time.now,
+    #       started_before: Time.now,
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].result_id #=> String
+    #   resp.results[0].data_source.glue_table.database_name #=> String
+    #   resp.results[0].data_source.glue_table.table_name #=> String
+    #   resp.results[0].data_source.glue_table.catalog_id #=> String
+    #   resp.results[0].data_source.glue_table.connection_name #=> String
+    #   resp.results[0].data_source.glue_table.additional_options #=> Hash
+    #   resp.results[0].data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.results[0].job_name #=> String
+    #   resp.results[0].job_run_id #=> String
+    #   resp.results[0].started_on #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResults AWS API Documentation
+    #
+    # @overload list_data_quality_results(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_results(params = {}, options = {})
+      req = build_request(:list_data_quality_results, params)
+      req.send_request(options)
+    end
+
+    # Lists the recommendation runs meeting the filter criteria.
+    #
+    # @option params [Types::DataQualityRuleRecommendationRunFilter] :filter
+    #   The filter criteria.
+    #
+    # @option params [String] :next_token
+    #   A paginated token to offset the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListDataQualityRuleRecommendationRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityRuleRecommendationRunsResponse#runs #runs} => Array&lt;Types::DataQualityRuleRecommendationRunDescription&gt;
+    #   * {Types::ListDataQualityRuleRecommendationRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_rule_recommendation_runs({
+    #     filter: {
+    #       data_source: { # required
+    #         glue_table: { # required
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #         },
+    #       },
+    #       started_before: Time.now,
+    #       started_after: Time.now,
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runs #=> Array
+    #   resp.runs[0].run_id #=> String
+    #   resp.runs[0].status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.runs[0].started_on #=> Time
+    #   resp.runs[0].data_source.glue_table.database_name #=> String
+    #   resp.runs[0].data_source.glue_table.table_name #=> String
+    #   resp.runs[0].data_source.glue_table.catalog_id #=> String
+    #   resp.runs[0].data_source.glue_table.connection_name #=> String
+    #   resp.runs[0].data_source.glue_table.additional_options #=> Hash
+    #   resp.runs[0].data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRuleRecommendationRuns AWS API Documentation
+    #
+    # @overload list_data_quality_rule_recommendation_runs(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_rule_recommendation_runs(params = {}, options = {})
+      req = build_request(:list_data_quality_rule_recommendation_runs, params)
+      req.send_request(options)
+    end
+
+    # Lists all the runs meeting the filter criteria, where a ruleset is
+    # evaluated against a data source.
+    #
+    # @option params [Types::DataQualityRulesetEvaluationRunFilter] :filter
+    #   The filter criteria.
+    #
+    # @option params [String] :next_token
+    #   A paginated token to offset the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListDataQualityRulesetEvaluationRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityRulesetEvaluationRunsResponse#runs #runs} => Array&lt;Types::DataQualityRulesetEvaluationRunDescription&gt;
+    #   * {Types::ListDataQualityRulesetEvaluationRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_ruleset_evaluation_runs({
+    #     filter: {
+    #       data_source: { # required
+    #         glue_table: { # required
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #         },
+    #       },
+    #       started_before: Time.now,
+    #       started_after: Time.now,
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runs #=> Array
+    #   resp.runs[0].run_id #=> String
+    #   resp.runs[0].status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.runs[0].started_on #=> Time
+    #   resp.runs[0].data_source.glue_table.database_name #=> String
+    #   resp.runs[0].data_source.glue_table.table_name #=> String
+    #   resp.runs[0].data_source.glue_table.catalog_id #=> String
+    #   resp.runs[0].data_source.glue_table.connection_name #=> String
+    #   resp.runs[0].data_source.glue_table.additional_options #=> Hash
+    #   resp.runs[0].data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRulesetEvaluationRuns AWS API Documentation
+    #
+    # @overload list_data_quality_ruleset_evaluation_runs(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_ruleset_evaluation_runs(params = {}, options = {})
+      req = build_request(:list_data_quality_ruleset_evaluation_runs, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of rulesets for the specified list of Glue
+    # tables.
+    #
+    # @option params [String] :next_token
+    #   A paginated token to offset the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [Types::DataQualityRulesetFilterCriteria] :filter
+    #   The filter criteria.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pair tags.
+    #
+    # @return [Types::ListDataQualityRulesetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityRulesetsResponse#rulesets #rulesets} => Array&lt;Types::DataQualityRulesetListDetails&gt;
+    #   * {Types::ListDataQualityRulesetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_rulesets({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filter: {
+    #       name: "NameString",
+    #       description: "DescriptionString",
+    #       created_before: Time.now,
+    #       created_after: Time.now,
+    #       last_modified_before: Time.now,
+    #       last_modified_after: Time.now,
+    #       target_table: {
+    #         table_name: "NameString", # required
+    #         database_name: "NameString", # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rulesets #=> Array
+    #   resp.rulesets[0].name #=> String
+    #   resp.rulesets[0].description #=> String
+    #   resp.rulesets[0].created_on #=> Time
+    #   resp.rulesets[0].last_modified_on #=> Time
+    #   resp.rulesets[0].target_table.table_name #=> String
+    #   resp.rulesets[0].target_table.database_name #=> String
+    #   resp.rulesets[0].recommendation_run_id #=> String
+    #   resp.rulesets[0].rule_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRulesets AWS API Documentation
+    #
+    # @overload list_data_quality_rulesets(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_rulesets(params = {}, options = {})
+      req = build_request(:list_data_quality_rulesets, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all `DevEndpoint` resources in this Amazon Web
     # Services account, or the resources with the specified tag. This
     # operation allows you to see which resources are available in your
@@ -12593,6 +13301,144 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Starts a recommendation run that is used to generate rules when you
+    # don't know what rules to write. Glue Data Quality analyzes the data
+    # and comes up with recommendations for a potential ruleset. You can
+    # then triage the ruleset and modify the generated ruleset to your
+    # liking.
+    #
+    # @option params [required, Types::DataSource] :data_source
+    #   The data source (Glue table) associated with this run.
+    #
+    # @option params [required, String] :role
+    #   An IAM role supplied to encrypt the results of the run.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is 5.
+    #
+    # @option params [Integer] :timeout
+    #   The timeout for a run in minutes. This is the maximum time that a run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
+    #
+    # @option params [String] :created_ruleset_name
+    #   A name for the ruleset.
+    #
+    # @option params [String] :client_token
+    #   Used for idempotency and is recommended to be set to a random ID (such
+    #   as a UUID) to avoid creating or starting multiple instances of the
+    #   same resource.
+    #
+    # @return [Types::StartDataQualityRuleRecommendationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDataQualityRuleRecommendationRunResponse#run_id #run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_data_quality_rule_recommendation_run({
+    #     data_source: { # required
+    #       glue_table: { # required
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString",
+    #         },
+    #       },
+    #     },
+    #     role: "RoleString", # required
+    #     number_of_workers: 1,
+    #     timeout: 1,
+    #     created_ruleset_name: "NameString",
+    #     client_token: "HashString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRuleRecommendationRun AWS API Documentation
+    #
+    # @overload start_data_quality_rule_recommendation_run(params = {})
+    # @param [Hash] params ({})
+    def start_data_quality_rule_recommendation_run(params = {}, options = {})
+      req = build_request(:start_data_quality_rule_recommendation_run, params)
+      req.send_request(options)
+    end
+
+    # Once you have a ruleset definition (either recommended or your own),
+    # you call this operation to evaluate the ruleset against a data source
+    # (Glue table). The evaluation computes results which you can retrieve
+    # with the `GetDataQualityResult` API.
+    #
+    # @option params [required, Types::DataSource] :data_source
+    #   The data source (Glue table) associated with this run.
+    #
+    # @option params [required, String] :role
+    #   An IAM role supplied to encrypt the results of the run.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is 5.
+    #
+    # @option params [Integer] :timeout
+    #   The timeout for a run in minutes. This is the maximum time that a run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
+    #
+    # @option params [String] :client_token
+    #   Used for idempotency and is recommended to be set to a random ID (such
+    #   as a UUID) to avoid creating or starting multiple instances of the
+    #   same resource.
+    #
+    # @option params [Types::DataQualityEvaluationRunAdditionalRunOptions] :additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #
+    # @option params [required, Array<String>] :ruleset_names
+    #   A list of ruleset names.
+    #
+    # @return [Types::StartDataQualityRulesetEvaluationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDataQualityRulesetEvaluationRunResponse#run_id #run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_data_quality_ruleset_evaluation_run({
+    #     data_source: { # required
+    #       glue_table: { # required
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString",
+    #         },
+    #       },
+    #     },
+    #     role: "RoleString", # required
+    #     number_of_workers: 1,
+    #     timeout: 1,
+    #     client_token: "HashString",
+    #     additional_run_options: {
+    #       cloud_watch_metrics_enabled: false,
+    #       results_s3_prefix: "UriString",
+    #     },
+    #     ruleset_names: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRulesetEvaluationRun AWS API Documentation
+    #
+    # @overload start_data_quality_ruleset_evaluation_run(params = {})
+    # @param [Hash] params ({})
+    def start_data_quality_ruleset_evaluation_run(params = {}, options = {})
+      req = build_request(:start_data_quality_ruleset_evaluation_run, params)
+      req.send_request(options)
+    end
+
     # Begins an asynchronous task to export all labeled data for a
     # particular transform. This task is the only label-related API call
     # that is not part of the typical active learning workflow. You
@@ -13802,6 +14648,51 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Updates the specified data quality ruleset.
+    #
+    # @option params [required, String] :name
+    #   The name of the data quality ruleset.
+    #
+    # @option params [String] :updated_name
+    #   The new name of the ruleset, if you are renaming it.
+    #
+    # @option params [String] :description
+    #   A description of the ruleset.
+    #
+    # @option params [String] :ruleset
+    #   A Data Quality Definition Language (DQDL) ruleset. For more
+    #   information, see the Glue developer guide.
+    #
+    # @return [Types::UpdateDataQualityRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataQualityRulesetResponse#name #name} => String
+    #   * {Types::UpdateDataQualityRulesetResponse#description #description} => String
+    #   * {Types::UpdateDataQualityRulesetResponse#ruleset #ruleset} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_quality_ruleset({
+    #     name: "NameString", # required
+    #     updated_name: "NameString",
+    #     description: "DescriptionString",
+    #     ruleset: "DataQualityRulesetString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.ruleset #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDataQualityRuleset AWS API Documentation
+    #
+    # @overload update_data_quality_ruleset(params = {})
+    # @param [Hash] params ({})
+    def update_data_quality_ruleset(params = {}, options = {})
+      req = build_request(:update_data_quality_ruleset, params)
+      req.send_request(options)
+    end
+
     # Updates an existing database definition in a Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -14659,6 +15550,21 @@ module Aws::Glue
     #             path: "EnclosedInStringProperty", # required
     #             version: "EnclosedInStringProperty",
     #           },
+    #           evaluate_data_quality: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             ruleset: "DQDLString", # required
+    #             output: "PrimaryInput", # accepts PrimaryInput, EvaluationResults
+    #             publishing_options: {
+    #               evaluation_context: "GenericLimitedString",
+    #               results_s3_prefix: "EnclosedInStringProperty",
+    #               cloud_watch_metrics_enabled: false,
+    #               results_publishing_enabled: false,
+    #             },
+    #             stop_job_on_failure_options: {
+    #               stop_job_on_failure_timing: "Immediate", # accepts Immediate, AfterDataLoad
+    #             },
+    #           },
     #         },
     #       },
     #       execution_class: "FLEX", # accepts FLEX, STANDARD
@@ -15484,7 +16390,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

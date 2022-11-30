@@ -966,7 +966,7 @@ module Aws::SageMaker
     # @option params [required, String] :domain_id
     #   The domain ID.
     #
-    # @option params [required, String] :user_profile_name
+    # @option params [String] :user_profile_name
     #   The user profile name.
     #
     # @option params [required, String] :app_type
@@ -992,6 +992,9 @@ module Aws::SageMaker
     #
     #    </note>
     #
+    # @option params [String] :space_name
+    #   The name of the space.
+    #
     # @return [Types::CreateAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAppResponse#app_arn #app_arn} => String
@@ -1000,7 +1003,7 @@ module Aws::SageMaker
     #
     #   resp = client.create_app({
     #     domain_id: "DomainId", # required
-    #     user_profile_name: "UserProfileName", # required
+    #     user_profile_name: "UserProfileName",
     #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #     app_name: "AppName", # required
     #     tags: [
@@ -1015,6 +1018,7 @@ module Aws::SageMaker
     #       instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #       lifecycle_config_arn: "StudioLifecycleConfigArn",
     #     },
+    #     space_name: "SpaceName",
     #   })
     #
     # @example Response structure
@@ -1929,6 +1933,9 @@ module Aws::SageMaker
     # @option params [Types::DomainSettings] :domain_settings
     #   A collection of `Domain` settings.
     #
+    # @option params [Types::DefaultSpaceSettings] :default_space_settings
+    #   The default settings used to create a space.
+    #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResponse#domain_arn #domain_arn} => String
@@ -1955,6 +1962,11 @@ module Aws::SageMaker
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
@@ -2032,6 +2044,40 @@ module Aws::SageMaker
     #         },
     #       },
     #       execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
+    #     },
+    #     default_space_settings: {
+    #       execution_role: "RoleArn",
+    #       security_groups: ["SecurityGroupId"],
+    #       jupyter_server_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       kernel_gateway_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #       },
     #     },
     #   })
     #
@@ -2515,6 +2561,13 @@ module Aws::SageMaker
     # @option params [Types::ExplainerConfig] :explainer_config
     #   A member of `CreateEndpointConfig` that enables explainers.
     #
+    # @option params [Array<Types::ProductionVariant>] :shadow_production_variants
+    #   Array of `ProductionVariant` objects. There is one for each model that
+    #   you want to host at this endpoint in shadow mode with production
+    #   traffic replicated from the model specified on `ProductionVariants`.If
+    #   you use this field, you can only specify one variant for
+    #   `ProductionVariants` and one variant for `ShadowProductionVariants`.
+    #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointConfigOutput#endpoint_config_arn #endpoint_config_arn} => String
@@ -2611,6 +2664,27 @@ module Aws::SageMaker
     #         },
     #       },
     #     },
+    #     shadow_production_variants: [
+    #       {
+    #         variant_name: "VariantName", # required
+    #         model_name: "ModelName", # required
+    #         initial_instance_count: 1,
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
+    #         initial_variant_weight: 1.0,
+    #         accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
+    #         core_dump_config: {
+    #           destination_s3_uri: "DestinationS3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         serverless_config: {
+    #           memory_size_in_mb: 1, # required
+    #           max_concurrency: 1, # required
+    #         },
+    #         volume_size_in_gb: 1,
+    #         model_data_download_timeout_in_seconds: 1,
+    #         container_startup_health_check_timeout_in_seconds: 1,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2853,6 +2927,7 @@ module Aws::SageMaker
     #         catalog: "Catalog", # required
     #         database: "Database", # required
     #       },
+    #       table_format: "Glue", # accepts Glue, Iceberg
     #     },
     #     role_arn: "RoleArn",
     #     description: "Description",
@@ -2965,6 +3040,61 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_flow_definition(params = {}, options = {})
       req = build_request(:create_flow_definition, params)
+      req.send_request(options)
+    end
+
+    # Create a hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to create.
+    #
+    # @option params [required, String] :hub_description
+    #   A description of the hub.
+    #
+    # @option params [String] :hub_display_name
+    #   The display name of the hub.
+    #
+    # @option params [Array<String>] :hub_search_keywords
+    #   The searchable keywords for the hub.
+    #
+    # @option params [Types::HubS3StorageConfig] :s3_storage_config
+    #   The Amazon S3 storage configuration for the hub.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Any tags to associate with the hub.
+    #
+    # @return [Types::CreateHubResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHubResponse#hub_arn #hub_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_hub({
+    #     hub_name: "HubName", # required
+    #     hub_description: "HubDescription", # required
+    #     hub_display_name: "HubDisplayName",
+    #     hub_search_keywords: ["HubSearchKeyword"],
+    #     s3_storage_config: {
+    #       s3_output_path: "S3OutputPath",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHub AWS API Documentation
+    #
+    # @overload create_hub(params = {})
+    # @param [Hash] params ({})
+    def create_hub(params = {}, options = {})
+      req = build_request(:create_hub, params)
       req.send_request(options)
     end
 
@@ -3533,6 +3663,200 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_image_version(params = {}, options = {})
       req = build_request(:create_image_version, params)
+      req.send_request(options)
+    end
+
+    # Creates an inference experiment using the configurations specified in
+    # the request.
+    #
+    # Use this API to schedule an experiment to compare model variants on a
+    # Amazon SageMaker inference endpoint. For more information about
+    # inference experiments, see [Shadow tests][1].
+    #
+    # Amazon SageMaker begins your experiment at the scheduled time and
+    # routes traffic to your endpoint's model variants based on your
+    # specified configuration.
+    #
+    # While the experiment is in progress or after it has concluded, you can
+    # view metrics that compare your model variants. For more information,
+    # see [View, monitor, and edit shadow tests][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-view-monitor-edit.html
+    #
+    # @option params [required, String] :name
+    #   The name for the inference experiment.
+    #
+    # @option params [required, String] :type
+    #   The type of the inference experiment that you want to run. The
+    #   following types of experiments are possible:
+    #
+    #   * `ShadowMode`\: You can use this type to validate a shadow variant.
+    #     For more information, see [Shadow tests][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html
+    #
+    # @option params [Types::InferenceExperimentSchedule] :schedule
+    #   The duration for which you want the inference experiment to run. If
+    #   you don't specify this field, the experiment automatically concludes
+    #   after 7 days.
+    #
+    # @option params [String] :description
+    #   A description for the inference experiment.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the IAM role that Amazon SageMaker can assume to access
+    #   model artifacts and container images.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the Amazon SageMaker endpoint on which you want to run the
+    #   inference experiment.
+    #
+    # @option params [required, Array<Types::ModelVariantConfig>] :model_variants
+    #   Array of `ModelVariantConfigSummary` objects. There is one for each
+    #   variant in the inference experiment. Each `ModelVariantConfigSummary`
+    #   object in the array describes the infrastructure configuration for the
+    #   corresponding variant.
+    #
+    # @option params [Types::InferenceExperimentDataStorageConfig] :data_storage_config
+    #   The storage configuration for the inference experiment. This is an
+    #   optional parameter that you can use for data capture. For more
+    #   information, see [Capture data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
+    #
+    # @option params [required, Types::ShadowModeConfig] :shadow_mode_config
+    #   Shows which variant is the production variant and which variant is the
+    #   shadow variant. For the shadow variant, also shows the sampling
+    #   percentage.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume attached to the ML compute instance that hosts the endpoint.
+    #   The `KmsKey` can be any of the following formats:
+    #
+    #   * KMS key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS key
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * KMS key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS key Alias
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #
+    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
+    #   SageMaker execution role must include permissions to call
+    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
+    #   uses the default KMS key for Amazon S3 for your role's account.
+    #   Amazon SageMaker uses server-side encryption with KMS managed keys for
+    #   `OutputDataConfig`. If you use a bucket policy with an `s3:PutObject`
+    #   permission that only allows objects with server-side encryption, set
+    #   the condition key of `s3:x-amz-server-side-encryption` to `"aws:kms"`.
+    #   For more information, see [KMS managed Encryption Keys][1] in the
+    #   *Amazon Simple Storage Service Developer Guide.*
+    #
+    #   The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateEndpoint` and `UpdateEndpoint` requests. For
+    #   more information, see [Using Key Policies in Amazon Web Services
+    #   KMS][2] in the *Amazon Web Services Key Management Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Array of key-value pairs. You can use tags to categorize your Amazon
+    #   Web Services resources in different ways, for example, by purpose,
+    #   owner, or environment. For more information, see [Tagging your Amazon
+    #   Web Services Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/userguide/tagging.html
+    #
+    # @return [Types::CreateInferenceExperimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInferenceExperimentResponse#inference_experiment_arn #inference_experiment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_inference_experiment({
+    #     name: "InferenceExperimentName", # required
+    #     type: "ShadowMode", # required, accepts ShadowMode
+    #     schedule: {
+    #       start_time: Time.now,
+    #       end_time: Time.now,
+    #     },
+    #     description: "InferenceExperimentDescription",
+    #     role_arn: "RoleArn", # required
+    #     endpoint_name: "EndpointName", # required
+    #     model_variants: [ # required
+    #       {
+    #         model_name: "ModelName", # required
+    #         variant_name: "ModelVariantName", # required
+    #         infrastructure_config: { # required
+    #           infrastructure_type: "RealTimeInference", # required, accepts RealTimeInference
+    #           real_time_inference_config: { # required
+    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1, # required
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     data_storage_config: {
+    #       destination: "DestinationS3Uri", # required
+    #       kms_key: "KmsKeyId",
+    #       content_type: {
+    #         csv_content_types: ["CsvContentType"],
+    #         json_content_types: ["JsonContentType"],
+    #       },
+    #     },
+    #     shadow_mode_config: { # required
+    #       source_model_variant_name: "ModelVariantName", # required
+    #       shadow_model_variants: [ # required
+    #         {
+    #           shadow_model_variant_name: "ModelVariantName", # required
+    #           sampling_percentage: 1, # required
+    #         },
+    #       ],
+    #     },
+    #     kms_key: "KmsKeyId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_experiment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceExperiment AWS API Documentation
+    #
+    # @overload create_inference_experiment(params = {})
+    # @param [Hash] params ({})
+    def create_inference_experiment(params = {}, options = {})
+      req = build_request(:create_inference_experiment, params)
       req.send_request(options)
     end
 
@@ -4309,6 +4633,126 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_model_bias_job_definition(params = {}, options = {})
       req = build_request(:create_model_bias_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon SageMaker Model Card.
+    #
+    # For information about how to use model cards, see [Amazon SageMaker
+    # Model Card][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html
+    #
+    # @option params [required, String] :model_card_name
+    #   The unique name of the model card.
+    #
+    # @option params [Types::ModelCardSecurityConfig] :security_config
+    #   An optional Key Management Service key to encrypt, decrypt, and
+    #   re-encrypt model card content for regulated workloads with highly
+    #   sensitive data.
+    #
+    # @option params [required, String] :content
+    #   The content of the model card. Content must be in [model card JSON
+    #   schema][1] and provided as a string.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html
+    #
+    # @option params [required, String] :model_card_status
+    #   The approval status of the model card within your organization.
+    #   Different organizations might have different criteria for model card
+    #   review and approval.
+    #
+    #   * `Draft`\: The model card is a work in progress.
+    #
+    #   * `PendingReview`\: The model card is pending review.
+    #
+    #   * `Approved`\: The model card is approved.
+    #
+    #   * `Archived`\: The model card is archived. No more updates should be
+    #     made to the model card, but it can still be exported.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs used to manage metadata for model cards.
+    #
+    # @return [Types::CreateModelCardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelCardResponse#model_card_arn #model_card_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_card({
+    #     model_card_name: "EntityName", # required
+    #     security_config: {
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     content: "ModelCardContent", # required
+    #     model_card_status: "Draft", # required, accepts Draft, PendingReview, Approved, Archived
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_card_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelCard AWS API Documentation
+    #
+    # @overload create_model_card(params = {})
+    # @param [Hash] params ({})
+    def create_model_card(params = {}, options = {})
+      req = build_request(:create_model_card, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon SageMaker Model Card export job.
+    #
+    # @option params [required, String] :model_card_name
+    #   The name of the model card to export.
+    #
+    # @option params [Integer] :model_card_version
+    #   The version of the model card to export. If a version is not provided,
+    #   then the latest version of the model card is exported.
+    #
+    # @option params [required, String] :model_card_export_job_name
+    #   The name of the model card export job.
+    #
+    # @option params [required, Types::ModelCardExportOutputConfig] :output_config
+    #   The model card output configuration that specifies the Amazon S3 path
+    #   for exporting.
+    #
+    # @return [Types::CreateModelCardExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelCardExportJobResponse#model_card_export_job_arn #model_card_export_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_card_export_job({
+    #     model_card_name: "EntityName", # required
+    #     model_card_version: 1,
+    #     model_card_export_job_name: "EntityName", # required
+    #     output_config: { # required
+    #       s3_output_path: "S3Uri", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_card_export_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelCardExportJob AWS API Documentation
+    #
+    # @overload create_model_card_export_job(params = {})
+    # @param [Hash] params ({})
+    def create_model_card_export_job(params = {}, options = {})
+      req = build_request(:create_model_card_export_job, params)
       req.send_request(options)
     end
 
@@ -5625,6 +6069,9 @@ module Aws::SageMaker
     #   The number of seconds until the pre-signed URL expires. This value
     #   defaults to 300.
     #
+    # @option params [String] :space_name
+    #   The name of the space.
+    #
     # @return [Types::CreatePresignedDomainUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePresignedDomainUrlResponse#authorized_url #authorized_url} => String
@@ -5636,6 +6083,7 @@ module Aws::SageMaker
     #     user_profile_name: "UserProfileName", # required
     #     session_expiration_duration_in_seconds: 1,
     #     expires_in_seconds: 1,
+    #     space_name: "SpaceName",
     #   })
     #
     # @example Response structure
@@ -5873,6 +6321,7 @@ module Aws::SageMaker
     #       experiment_name: "ExperimentEntityName",
     #       trial_name: "ExperimentEntityName",
     #       trial_component_display_name: "ExperimentEntityName",
+    #       run_name: "ExperimentEntityName",
     #     },
     #   })
     #
@@ -5960,6 +6409,84 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_project(params = {}, options = {})
       req = build_request(:create_project, params)
+      req.send_request(options)
+    end
+
+    # Creates a space used for real time collaboration in a Domain.
+    #
+    # @option params [required, String] :domain_id
+    #   The ID of the associated Domain.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to associated with the space. Each tag consists of a key and an
+    #   optional value. Tag keys must be unique for each resource. Tags are
+    #   searchable using the `Search` API.
+    #
+    # @option params [Types::SpaceSettings] :space_settings
+    #   A collection of space settings.
+    #
+    # @return [Types::CreateSpaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSpaceResponse#space_arn #space_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_space({
+    #     domain_id: "DomainId", # required
+    #     space_name: "SpaceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     space_settings: {
+    #       jupyter_server_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       kernel_gateway_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateSpace AWS API Documentation
+    #
+    # @overload create_space(params = {})
+    # @param [Hash] params ({})
+    def create_space(params = {}, options = {})
+      req = build_request(:create_space, params)
       req.send_request(options)
     end
 
@@ -6232,23 +6759,23 @@ module Aws::SageMaker
     #   training checkpoint data.
     #
     # @option params [Types::DebugHookConfig] :debug_hook_config
-    #   Configuration information for the Debugger hook parameters, metric and
-    #   tensor collections, and storage paths. To learn more about how to
-    #   configure the `DebugHookConfig` parameter, see [Use the SageMaker and
-    #   Debugger Configuration API Operations to Create, Update, and Debug
-    #   Your Training Job][1].
+    #   Configuration information for the Amazon SageMaker Debugger hook
+    #   parameters, metric and tensor collections, and storage paths. To learn
+    #   more about how to configure the `DebugHookConfig` parameter, see [Use
+    #   the SageMaker and Debugger Configuration API Operations to Create,
+    #   Update, and Debug Your Training Job][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html
     #
     # @option params [Array<Types::DebugRuleConfiguration>] :debug_rule_configurations
-    #   Configuration information for Debugger rules for debugging output
-    #   tensors.
+    #   Configuration information for Amazon SageMaker Debugger rules for
+    #   debugging output tensors.
     #
     # @option params [Types::TensorBoardOutputConfig] :tensor_board_output_config
-    #   Configuration of storage locations for the Debugger TensorBoard output
-    #   data.
+    #   Configuration of storage locations for the Amazon SageMaker Debugger
+    #   TensorBoard output data.
     #
     # @option params [Types::ExperimentConfig] :experiment_config
     #   Associates a SageMaker job as a trial component with an experiment and
@@ -6261,12 +6788,12 @@ module Aws::SageMaker
     #   * CreateTransformJob
     #
     # @option params [Types::ProfilerConfig] :profiler_config
-    #   Configuration information for Debugger system monitoring, framework
-    #   profiling, and storage paths.
+    #   Configuration information for Amazon SageMaker Debugger system
+    #   monitoring, framework profiling, and storage paths.
     #
     # @option params [Array<Types::ProfilerRuleConfiguration>] :profiler_rule_configurations
-    #   Configuration information for Debugger rules for profiling system and
-    #   framework metrics.
+    #   Configuration information for Amazon SageMaker Debugger rules for
+    #   profiling system and framework metrics.
     #
     # @option params [Hash<String,String>] :environment
     #   The environment variables to set in the Docker container.
@@ -6403,6 +6930,7 @@ module Aws::SageMaker
     #       experiment_name: "ExperimentEntityName",
     #       trial_name: "ExperimentEntityName",
     #       trial_component_display_name: "ExperimentEntityName",
+    #       run_name: "ExperimentEntityName",
     #     },
     #     profiler_config: {
     #       s3_output_path: "S3Uri",
@@ -6656,6 +7184,7 @@ module Aws::SageMaker
     #       experiment_name: "ExperimentEntityName",
     #       trial_name: "ExperimentEntityName",
     #       trial_component_display_name: "ExperimentEntityName",
+    #       run_name: "ExperimentEntityName",
     #     },
     #   })
     #
@@ -6934,6 +7463,11 @@ module Aws::SageMaker
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
@@ -7273,7 +7807,7 @@ module Aws::SageMaker
     # @option params [required, String] :domain_id
     #   The domain ID.
     #
-    # @option params [required, String] :user_profile_name
+    # @option params [String] :user_profile_name
     #   The user profile name.
     #
     # @option params [required, String] :app_type
@@ -7282,15 +7816,19 @@ module Aws::SageMaker
     # @option params [required, String] :app_name
     #   The name of the app.
     #
+    # @option params [String] :space_name
+    #   The name of the space.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_app({
     #     domain_id: "DomainId", # required
-    #     user_profile_name: "UserProfileName", # required
+    #     user_profile_name: "UserProfileName",
     #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #     app_name: "AppName", # required
+    #     space_name: "SpaceName",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteApp AWS API Documentation
@@ -7727,6 +8265,62 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Delete a hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_hub({
+    #     hub_name: "HubName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHub AWS API Documentation
+    #
+    # @overload delete_hub(params = {})
+    # @param [Hash] params ({})
+    def delete_hub(params = {}, options = {})
+      req = build_request(:delete_hub, params)
+      req.send_request(options)
+    end
+
+    # Delete the contents of a hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub that you want to delete content in.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The type of content that you want to delete from a hub.
+    #
+    # @option params [required, String] :hub_content_name
+    #   The name of the content that you want to delete from a hub.
+    #
+    # @option params [required, String] :hub_content_version
+    #   The version of the content that you want to delete from a hub.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_hub_content({
+    #     hub_name: "HubName", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     hub_content_name: "HubContentName", # required
+    #     hub_content_version: "HubContentVersion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHubContent AWS API Documentation
+    #
+    # @overload delete_hub_content(params = {})
+    # @param [Hash] params ({})
+    def delete_hub_content(params = {}, options = {})
+      req = build_request(:delete_hub_content, params)
+      req.send_request(options)
+    end
+
     # Use this operation to delete a human task user interface (worker task
     # template).
     #
@@ -7805,6 +8399,40 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an inference experiment.
+    #
+    # <note markdown="1"> This operation does not delete your endpoint, variants, or any
+    # underlying resources. This operation only deletes the metadata of your
+    # experiment.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :name
+    #   The name of the inference experiment you want to delete.
+    #
+    # @return [Types::DeleteInferenceExperimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInferenceExperimentResponse#inference_experiment_arn #inference_experiment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inference_experiment({
+    #     name: "InferenceExperimentName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_experiment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteInferenceExperiment AWS API Documentation
+    #
+    # @overload delete_inference_experiment(params = {})
+    # @param [Hash] params ({})
+    def delete_inference_experiment(params = {}, options = {})
+      req = build_request(:delete_inference_experiment, params)
+      req.send_request(options)
+    end
+
     # Deletes a model. The `DeleteModel` API deletes only the model entry
     # that was created in SageMaker when you called the `CreateModel` API.
     # It does not delete model artifacts, inference code, or the IAM role
@@ -7849,6 +8477,28 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_model_bias_job_definition(params = {}, options = {})
       req = build_request(:delete_model_bias_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon SageMaker Model Card.
+    #
+    # @option params [required, String] :model_card_name
+    #   The name of the model card to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_model_card({
+    #     model_card_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelCard AWS API Documentation
+    #
+    # @overload delete_model_card(params = {})
+    # @param [Hash] params ({})
+    def delete_model_card(params = {}, options = {})
+      req = build_request(:delete_model_card, params)
       req.send_request(options)
     end
 
@@ -8103,6 +8753,32 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_project(params = {}, options = {})
       req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # Used to delete a space.
+    #
+    # @option params [required, String] :domain_id
+    #   The ID of the associated Domain.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_space({
+    #     domain_id: "DomainId", # required
+    #     space_name: "SpaceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteSpace AWS API Documentation
+    #
+    # @overload delete_space(params = {})
+    # @param [Hash] params ({})
+    def delete_space(params = {}, options = {})
+      req = build_request(:delete_space, params)
       req.send_request(options)
     end
 
@@ -8576,7 +9252,7 @@ module Aws::SageMaker
     # @option params [required, String] :domain_id
     #   The domain ID.
     #
-    # @option params [required, String] :user_profile_name
+    # @option params [String] :user_profile_name
     #   The user profile name.
     #
     # @option params [required, String] :app_type
@@ -8584,6 +9260,9 @@ module Aws::SageMaker
     #
     # @option params [required, String] :app_name
     #   The name of the app.
+    #
+    # @option params [String] :space_name
+    #   The name of the space.
     #
     # @return [Types::DescribeAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8598,14 +9277,16 @@ module Aws::SageMaker
     #   * {Types::DescribeAppResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeAppResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeAppResponse#resource_spec #resource_spec} => Types::ResourceSpec
+    #   * {Types::DescribeAppResponse#space_name #space_name} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_app({
     #     domain_id: "DomainId", # required
-    #     user_profile_name: "UserProfileName", # required
+    #     user_profile_name: "UserProfileName",
     #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #     app_name: "AppName", # required
+    #     space_name: "SpaceName",
     #   })
     #
     # @example Response structure
@@ -8624,6 +9305,7 @@ module Aws::SageMaker
     #   resp.resource_spec.sage_maker_image_version_arn #=> String
     #   resp.resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.resource_spec.lifecycle_config_arn #=> String
+    #   resp.space_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeApp AWS API Documentation
     #
@@ -9245,6 +9927,7 @@ module Aws::SageMaker
     #   * {Types::DescribeDomainResponse#domain_settings #domain_settings} => Types::DomainSettings
     #   * {Types::DescribeDomainResponse#app_security_group_management #app_security_group_management} => String
     #   * {Types::DescribeDomainResponse#security_group_id_for_domain_boundary #security_group_id_for_domain_boundary} => String
+    #   * {Types::DescribeDomainResponse#default_space_settings #default_space_settings} => Types::DefaultSpaceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -9276,6 +9959,8 @@ module Aws::SageMaker
     #   resp.default_user_settings.jupyter_server_app_settings.default_resource_spec.lifecycle_config_arn #=> String
     #   resp.default_user_settings.jupyter_server_app_settings.lifecycle_config_arns #=> Array
     #   resp.default_user_settings.jupyter_server_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.default_user_settings.jupyter_server_app_settings.code_repositories #=> Array
+    #   resp.default_user_settings.jupyter_server_app_settings.code_repositories[0].repository_url #=> String
     #   resp.default_user_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_arn #=> String
     #   resp.default_user_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.default_user_settings.kernel_gateway_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
@@ -9321,6 +10006,27 @@ module Aws::SageMaker
     #   resp.domain_settings.execution_role_identity_config #=> String, one of "USER_PROFILE_NAME", "DISABLED"
     #   resp.app_security_group_management #=> String, one of "Service", "Customer"
     #   resp.security_group_id_for_domain_boundary #=> String
+    #   resp.default_space_settings.execution_role #=> String
+    #   resp.default_space_settings.security_groups #=> Array
+    #   resp.default_space_settings.security_groups[0] #=> String
+    #   resp.default_space_settings.jupyter_server_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.default_space_settings.jupyter_server_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.default_space_settings.jupyter_server_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.default_space_settings.jupyter_server_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.default_space_settings.jupyter_server_app_settings.lifecycle_config_arns #=> Array
+    #   resp.default_space_settings.jupyter_server_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.default_space_settings.jupyter_server_app_settings.code_repositories #=> Array
+    #   resp.default_space_settings.jupyter_server_app_settings.code_repositories[0].repository_url #=> String
+    #   resp.default_space_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.default_space_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.default_space_settings.kernel_gateway_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.default_space_settings.kernel_gateway_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.default_space_settings.kernel_gateway_app_settings.custom_images #=> Array
+    #   resp.default_space_settings.kernel_gateway_app_settings.custom_images[0].image_name #=> String
+    #   resp.default_space_settings.kernel_gateway_app_settings.custom_images[0].image_version_number #=> Integer
+    #   resp.default_space_settings.kernel_gateway_app_settings.custom_images[0].app_image_config_name #=> String
+    #   resp.default_space_settings.kernel_gateway_app_settings.lifecycle_config_arns #=> Array
+    #   resp.default_space_settings.kernel_gateway_app_settings.lifecycle_config_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomain AWS API Documentation
     #
@@ -9485,6 +10191,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointOutput#async_inference_config #async_inference_config} => Types::AsyncInferenceConfig
     #   * {Types::DescribeEndpointOutput#pending_deployment_summary #pending_deployment_summary} => Types::PendingDeploymentSummary
     #   * {Types::DescribeEndpointOutput#explainer_config #explainer_config} => Types::ExplainerConfig
+    #   * {Types::DescribeEndpointOutput#shadow_production_variants #shadow_production_variants} => Array&lt;Types::ProductionVariantSummary&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -9561,6 +10268,26 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.max_concurrency #=> Integer
     #   resp.pending_deployment_summary.start_time #=> Time
+    #   resp.pending_deployment_summary.shadow_production_variants #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].variant_name #=> String
+    #   resp.pending_deployment_summary.shadow_production_variants[0].deployed_images #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].deployed_images[0].specified_image #=> String
+    #   resp.pending_deployment_summary.shadow_production_variants[0].deployed_images[0].resolved_image #=> String
+    #   resp.pending_deployment_summary.shadow_production_variants[0].deployed_images[0].resolution_time #=> Time
+    #   resp.pending_deployment_summary.shadow_production_variants[0].current_weight #=> Float
+    #   resp.pending_deployment_summary.shadow_production_variants[0].desired_weight #=> Float
+    #   resp.pending_deployment_summary.shadow_production_variants[0].current_instance_count #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].desired_instance_count #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.p4d.24xlarge", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m6gd.large", "ml.m6gd.xlarge", "ml.m6gd.2xlarge", "ml.m6gd.4xlarge", "ml.m6gd.8xlarge", "ml.m6gd.12xlarge", "ml.m6gd.16xlarge", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c6gd.large", "ml.c6gd.xlarge", "ml.c6gd.2xlarge", "ml.c6gd.4xlarge", "ml.c6gd.8xlarge", "ml.c6gd.12xlarge", "ml.c6gd.16xlarge", "ml.c6gn.large", "ml.c6gn.xlarge", "ml.c6gn.2xlarge", "ml.c6gn.4xlarge", "ml.c6gn.8xlarge", "ml.c6gn.12xlarge", "ml.c6gn.16xlarge", "ml.r6g.large", "ml.r6g.xlarge", "ml.r6g.2xlarge", "ml.r6g.4xlarge", "ml.r6g.8xlarge", "ml.r6g.12xlarge", "ml.r6g.16xlarge", "ml.r6gd.large", "ml.r6gd.xlarge", "ml.r6gd.2xlarge", "ml.r6gd.4xlarge", "ml.r6gd.8xlarge", "ml.r6gd.12xlarge", "ml.r6gd.16xlarge"
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_type #=> String, one of "ml.eia1.medium", "ml.eia1.large", "ml.eia1.xlarge", "ml.eia2.medium", "ml.eia2.large", "ml.eia2.xlarge"
+    #   resp.pending_deployment_summary.shadow_production_variants[0].variant_status #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].variant_status[0].status #=> String, one of "Creating", "Updating", "Deleting", "ActivatingTraffic", "Baking"
+    #   resp.pending_deployment_summary.shadow_production_variants[0].variant_status[0].status_message #=> String
+    #   resp.pending_deployment_summary.shadow_production_variants[0].variant_status[0].start_time #=> Time
+    #   resp.pending_deployment_summary.shadow_production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].desired_serverless_config.max_concurrency #=> Integer
     #   resp.explainer_config.clarify_explainer_config.enable_explanations #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.features_attribute #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.content_template #=> String
@@ -9584,6 +10311,24 @@ module Aws::SageMaker
     #   resp.explainer_config.clarify_explainer_config.shap_config.seed #=> Integer
     #   resp.explainer_config.clarify_explainer_config.shap_config.text_config.language #=> String, one of "af", "sq", "ar", "hy", "eu", "bn", "bg", "ca", "zh", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "gu", "he", "hi", "hu", "is", "id", "ga", "it", "kn", "ky", "lv", "lt", "lb", "mk", "ml", "mr", "ne", "nb", "fa", "pl", "pt", "ro", "ru", "sa", "sr", "tn", "si", "sk", "sl", "es", "sv", "tl", "ta", "tt", "te", "tr", "uk", "ur", "yo", "lij", "xx"
     #   resp.explainer_config.clarify_explainer_config.shap_config.text_config.granularity #=> String, one of "token", "sentence", "paragraph"
+    #   resp.shadow_production_variants #=> Array
+    #   resp.shadow_production_variants[0].variant_name #=> String
+    #   resp.shadow_production_variants[0].deployed_images #=> Array
+    #   resp.shadow_production_variants[0].deployed_images[0].specified_image #=> String
+    #   resp.shadow_production_variants[0].deployed_images[0].resolved_image #=> String
+    #   resp.shadow_production_variants[0].deployed_images[0].resolution_time #=> Time
+    #   resp.shadow_production_variants[0].current_weight #=> Float
+    #   resp.shadow_production_variants[0].desired_weight #=> Float
+    #   resp.shadow_production_variants[0].current_instance_count #=> Integer
+    #   resp.shadow_production_variants[0].desired_instance_count #=> Integer
+    #   resp.shadow_production_variants[0].variant_status #=> Array
+    #   resp.shadow_production_variants[0].variant_status[0].status #=> String, one of "Creating", "Updating", "Deleting", "ActivatingTraffic", "Baking"
+    #   resp.shadow_production_variants[0].variant_status[0].status_message #=> String
+    #   resp.shadow_production_variants[0].variant_status[0].start_time #=> Time
+    #   resp.shadow_production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.shadow_production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.shadow_production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.shadow_production_variants[0].desired_serverless_config.max_concurrency #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -9616,6 +10361,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointConfigOutput#creation_time #creation_time} => Time
     #   * {Types::DescribeEndpointConfigOutput#async_inference_config #async_inference_config} => Types::AsyncInferenceConfig
     #   * {Types::DescribeEndpointConfigOutput#explainer_config #explainer_config} => Types::ExplainerConfig
+    #   * {Types::DescribeEndpointConfigOutput#shadow_production_variants #shadow_production_variants} => Array&lt;Types::ProductionVariant&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -9681,6 +10427,20 @@ module Aws::SageMaker
     #   resp.explainer_config.clarify_explainer_config.shap_config.seed #=> Integer
     #   resp.explainer_config.clarify_explainer_config.shap_config.text_config.language #=> String, one of "af", "sq", "ar", "hy", "eu", "bn", "bg", "ca", "zh", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "gu", "he", "hi", "hu", "is", "id", "ga", "it", "kn", "ky", "lv", "lt", "lb", "mk", "ml", "mr", "ne", "nb", "fa", "pl", "pt", "ro", "ru", "sa", "sr", "tn", "si", "sk", "sl", "es", "sv", "tl", "ta", "tt", "te", "tr", "uk", "ur", "yo", "lij", "xx"
     #   resp.explainer_config.clarify_explainer_config.shap_config.text_config.granularity #=> String, one of "token", "sentence", "paragraph"
+    #   resp.shadow_production_variants #=> Array
+    #   resp.shadow_production_variants[0].variant_name #=> String
+    #   resp.shadow_production_variants[0].model_name #=> String
+    #   resp.shadow_production_variants[0].initial_instance_count #=> Integer
+    #   resp.shadow_production_variants[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.p4d.24xlarge", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m6gd.large", "ml.m6gd.xlarge", "ml.m6gd.2xlarge", "ml.m6gd.4xlarge", "ml.m6gd.8xlarge", "ml.m6gd.12xlarge", "ml.m6gd.16xlarge", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c6gd.large", "ml.c6gd.xlarge", "ml.c6gd.2xlarge", "ml.c6gd.4xlarge", "ml.c6gd.8xlarge", "ml.c6gd.12xlarge", "ml.c6gd.16xlarge", "ml.c6gn.large", "ml.c6gn.xlarge", "ml.c6gn.2xlarge", "ml.c6gn.4xlarge", "ml.c6gn.8xlarge", "ml.c6gn.12xlarge", "ml.c6gn.16xlarge", "ml.r6g.large", "ml.r6g.xlarge", "ml.r6g.2xlarge", "ml.r6g.4xlarge", "ml.r6g.8xlarge", "ml.r6g.12xlarge", "ml.r6g.16xlarge", "ml.r6gd.large", "ml.r6gd.xlarge", "ml.r6gd.2xlarge", "ml.r6gd.4xlarge", "ml.r6gd.8xlarge", "ml.r6gd.12xlarge", "ml.r6gd.16xlarge"
+    #   resp.shadow_production_variants[0].initial_variant_weight #=> Float
+    #   resp.shadow_production_variants[0].accelerator_type #=> String, one of "ml.eia1.medium", "ml.eia1.large", "ml.eia1.xlarge", "ml.eia2.medium", "ml.eia2.large", "ml.eia2.xlarge"
+    #   resp.shadow_production_variants[0].core_dump_config.destination_s3_uri #=> String
+    #   resp.shadow_production_variants[0].core_dump_config.kms_key_id #=> String
+    #   resp.shadow_production_variants[0].serverless_config.memory_size_in_mb #=> Integer
+    #   resp.shadow_production_variants[0].serverless_config.max_concurrency #=> Integer
+    #   resp.shadow_production_variants[0].volume_size_in_gb #=> Integer
+    #   resp.shadow_production_variants[0].model_data_download_timeout_in_seconds #=> Integer
+    #   resp.shadow_production_variants[0].container_startup_health_check_timeout_in_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig AWS API Documentation
     #
@@ -9798,6 +10558,7 @@ module Aws::SageMaker
     #   resp.offline_store_config.data_catalog_config.table_name #=> String
     #   resp.offline_store_config.data_catalog_config.catalog #=> String
     #   resp.offline_store_config.data_catalog_config.database #=> String
+    #   resp.offline_store_config.table_format #=> String, one of "Glue", "Iceberg"
     #   resp.role_arn #=> String
     #   resp.feature_group_status #=> String, one of "Creating", "Created", "CreateFailed", "Deleting", "DeleteFailed"
     #   resp.offline_store_status.status #=> String, one of "Active", "Blocked", "Disabled"
@@ -9921,6 +10682,126 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_flow_definition(params = {}, options = {})
       req = build_request(:describe_flow_definition, params)
+      req.send_request(options)
+    end
+
+    # Describe a hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to describe.
+    #
+    # @return [Types::DescribeHubResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHubResponse#hub_name #hub_name} => String
+    #   * {Types::DescribeHubResponse#hub_arn #hub_arn} => String
+    #   * {Types::DescribeHubResponse#hub_display_name #hub_display_name} => String
+    #   * {Types::DescribeHubResponse#hub_description #hub_description} => String
+    #   * {Types::DescribeHubResponse#hub_search_keywords #hub_search_keywords} => Array&lt;String&gt;
+    #   * {Types::DescribeHubResponse#s3_storage_config #s3_storage_config} => Types::HubS3StorageConfig
+    #   * {Types::DescribeHubResponse#hub_status #hub_status} => String
+    #   * {Types::DescribeHubResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeHubResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeHubResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_hub({
+    #     hub_name: "HubName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_name #=> String
+    #   resp.hub_arn #=> String
+    #   resp.hub_display_name #=> String
+    #   resp.hub_description #=> String
+    #   resp.hub_search_keywords #=> Array
+    #   resp.hub_search_keywords[0] #=> String
+    #   resp.s3_storage_config.s3_output_path #=> String
+    #   resp.hub_status #=> String, one of "InService", "Creating", "Updating", "Deleting", "CreateFailed", "UpdateFailed", "DeleteFailed"
+    #   resp.failure_reason #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHub AWS API Documentation
+    #
+    # @overload describe_hub(params = {})
+    # @param [Hash] params ({})
+    def describe_hub(params = {}, options = {})
+      req = build_request(:describe_hub, params)
+      req.send_request(options)
+    end
+
+    # Describe the content of a hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub that contains the content to describe.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The type of content in the hub.
+    #
+    # @option params [required, String] :hub_content_name
+    #   The name of the content to describe.
+    #
+    # @option params [String] :hub_content_version
+    #   The version of the content to describe.
+    #
+    # @return [Types::DescribeHubContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHubContentResponse#hub_content_name #hub_content_name} => String
+    #   * {Types::DescribeHubContentResponse#hub_content_arn #hub_content_arn} => String
+    #   * {Types::DescribeHubContentResponse#hub_content_version #hub_content_version} => String
+    #   * {Types::DescribeHubContentResponse#hub_content_type #hub_content_type} => String
+    #   * {Types::DescribeHubContentResponse#document_schema_version #document_schema_version} => String
+    #   * {Types::DescribeHubContentResponse#hub_name #hub_name} => String
+    #   * {Types::DescribeHubContentResponse#hub_arn #hub_arn} => String
+    #   * {Types::DescribeHubContentResponse#hub_content_display_name #hub_content_display_name} => String
+    #   * {Types::DescribeHubContentResponse#hub_content_description #hub_content_description} => String
+    #   * {Types::DescribeHubContentResponse#hub_content_markdown #hub_content_markdown} => String
+    #   * {Types::DescribeHubContentResponse#hub_content_document #hub_content_document} => String
+    #   * {Types::DescribeHubContentResponse#hub_content_search_keywords #hub_content_search_keywords} => Array&lt;String&gt;
+    #   * {Types::DescribeHubContentResponse#hub_content_dependencies #hub_content_dependencies} => Array&lt;Types::HubContentDependency&gt;
+    #   * {Types::DescribeHubContentResponse#hub_content_status #hub_content_status} => String
+    #   * {Types::DescribeHubContentResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeHubContentResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_hub_content({
+    #     hub_name: "HubName", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     hub_content_name: "HubContentName", # required
+    #     hub_content_version: "HubContentVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_content_name #=> String
+    #   resp.hub_content_arn #=> String
+    #   resp.hub_content_version #=> String
+    #   resp.hub_content_type #=> String, one of "Model", "Notebook"
+    #   resp.document_schema_version #=> String
+    #   resp.hub_name #=> String
+    #   resp.hub_arn #=> String
+    #   resp.hub_content_display_name #=> String
+    #   resp.hub_content_description #=> String
+    #   resp.hub_content_markdown #=> String
+    #   resp.hub_content_document #=> String
+    #   resp.hub_content_search_keywords #=> Array
+    #   resp.hub_content_search_keywords[0] #=> String
+    #   resp.hub_content_dependencies #=> Array
+    #   resp.hub_content_dependencies[0].dependency_origin_path #=> String
+    #   resp.hub_content_dependencies[0].dependency_copy_path #=> String
+    #   resp.hub_content_status #=> String, one of "Available", "Importing", "Deleting", "ImportFailed", "DeleteFailed"
+    #   resp.failure_reason #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContent AWS API Documentation
+    #
+    # @overload describe_hub_content(params = {})
+    # @param [Hash] params ({})
+    def describe_hub_content(params = {}, options = {})
+      req = build_request(:describe_hub_content, params)
       req.send_request(options)
     end
 
@@ -10334,6 +11215,82 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns details about an inference experiment.
+    #
+    # @option params [required, String] :name
+    #   The name of the inference experiment to describe.
+    #
+    # @return [Types::DescribeInferenceExperimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInferenceExperimentResponse#arn #arn} => String
+    #   * {Types::DescribeInferenceExperimentResponse#name #name} => String
+    #   * {Types::DescribeInferenceExperimentResponse#type #type} => String
+    #   * {Types::DescribeInferenceExperimentResponse#schedule #schedule} => Types::InferenceExperimentSchedule
+    #   * {Types::DescribeInferenceExperimentResponse#status #status} => String
+    #   * {Types::DescribeInferenceExperimentResponse#status_reason #status_reason} => String
+    #   * {Types::DescribeInferenceExperimentResponse#description #description} => String
+    #   * {Types::DescribeInferenceExperimentResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeInferenceExperimentResponse#completion_time #completion_time} => Time
+    #   * {Types::DescribeInferenceExperimentResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeInferenceExperimentResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeInferenceExperimentResponse#endpoint_metadata #endpoint_metadata} => Types::EndpointMetadata
+    #   * {Types::DescribeInferenceExperimentResponse#model_variants #model_variants} => Array&lt;Types::ModelVariantConfigSummary&gt;
+    #   * {Types::DescribeInferenceExperimentResponse#data_storage_config #data_storage_config} => Types::InferenceExperimentDataStorageConfig
+    #   * {Types::DescribeInferenceExperimentResponse#shadow_mode_config #shadow_mode_config} => Types::ShadowModeConfig
+    #   * {Types::DescribeInferenceExperimentResponse#kms_key #kms_key} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inference_experiment({
+    #     name: "InferenceExperimentName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "ShadowMode"
+    #   resp.schedule.start_time #=> Time
+    #   resp.schedule.end_time #=> Time
+    #   resp.status #=> String, one of "Creating", "Created", "Updating", "Running", "Starting", "Stopping", "Completed", "Cancelled"
+    #   resp.status_reason #=> String
+    #   resp.description #=> String
+    #   resp.creation_time #=> Time
+    #   resp.completion_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.role_arn #=> String
+    #   resp.endpoint_metadata.endpoint_name #=> String
+    #   resp.endpoint_metadata.endpoint_config_name #=> String
+    #   resp.endpoint_metadata.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoint_metadata.failure_reason #=> String
+    #   resp.model_variants #=> Array
+    #   resp.model_variants[0].model_name #=> String
+    #   resp.model_variants[0].variant_name #=> String
+    #   resp.model_variants[0].infrastructure_config.infrastructure_type #=> String, one of "RealTimeInference"
+    #   resp.model_variants[0].infrastructure_config.real_time_inference_config.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.model_variants[0].infrastructure_config.real_time_inference_config.instance_count #=> Integer
+    #   resp.model_variants[0].status #=> String, one of "Creating", "Updating", "InService", "Deleting", "Deleted"
+    #   resp.data_storage_config.destination #=> String
+    #   resp.data_storage_config.kms_key #=> String
+    #   resp.data_storage_config.content_type.csv_content_types #=> Array
+    #   resp.data_storage_config.content_type.csv_content_types[0] #=> String
+    #   resp.data_storage_config.content_type.json_content_types #=> Array
+    #   resp.data_storage_config.content_type.json_content_types[0] #=> String
+    #   resp.shadow_mode_config.source_model_variant_name #=> String
+    #   resp.shadow_mode_config.shadow_model_variants #=> Array
+    #   resp.shadow_mode_config.shadow_model_variants[0].shadow_model_variant_name #=> String
+    #   resp.shadow_mode_config.shadow_model_variants[0].sampling_percentage #=> Integer
+    #   resp.kms_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceExperiment AWS API Documentation
+    #
+    # @overload describe_inference_experiment(params = {})
+    # @param [Hash] params ({})
+    def describe_inference_experiment(params = {}, options = {})
+      req = build_request(:describe_inference_experiment, params)
+      req.send_request(options)
+    end
+
     # Provides the results of the Inference Recommender job. One or more
     # recommendation jobs are returned.
     #
@@ -10738,6 +11695,111 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_model_bias_job_definition(params = {}, options = {})
       req = build_request(:describe_model_bias_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Describes the content, creation time, and security configuration of an
+    # Amazon SageMaker Model Card.
+    #
+    # @option params [required, String] :model_card_name
+    #   The name of the model card to describe.
+    #
+    # @option params [Integer] :model_card_version
+    #   The version of the model card to describe. If a version is not
+    #   provided, then the latest version of the model card is described.
+    #
+    # @return [Types::DescribeModelCardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeModelCardResponse#model_card_arn #model_card_arn} => String
+    #   * {Types::DescribeModelCardResponse#model_card_name #model_card_name} => String
+    #   * {Types::DescribeModelCardResponse#model_card_version #model_card_version} => Integer
+    #   * {Types::DescribeModelCardResponse#content #content} => String
+    #   * {Types::DescribeModelCardResponse#model_card_status #model_card_status} => String
+    #   * {Types::DescribeModelCardResponse#security_config #security_config} => Types::ModelCardSecurityConfig
+    #   * {Types::DescribeModelCardResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeModelCardResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeModelCardResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeModelCardResponse#last_modified_by #last_modified_by} => Types::UserContext
+    #   * {Types::DescribeModelCardResponse#model_card_processing_status #model_card_processing_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_model_card({
+    #     model_card_name: "EntityName", # required
+    #     model_card_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_card_arn #=> String
+    #   resp.model_card_name #=> String
+    #   resp.model_card_version #=> Integer
+    #   resp.content #=> String
+    #   resp.model_card_status #=> String, one of "Draft", "PendingReview", "Approved", "Archived"
+    #   resp.security_config.kms_key_id #=> String
+    #   resp.creation_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #   resp.model_card_processing_status #=> String, one of "DeleteInProgress", "DeletePending", "ContentDeleted", "ExportJobsDeleted", "DeleteCompleted", "DeleteFailed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelCard AWS API Documentation
+    #
+    # @overload describe_model_card(params = {})
+    # @param [Hash] params ({})
+    def describe_model_card(params = {}, options = {})
+      req = build_request(:describe_model_card, params)
+      req.send_request(options)
+    end
+
+    # Describes an Amazon SageMaker Model Card export job.
+    #
+    # @option params [required, String] :model_card_export_job_arn
+    #   The Amazon Resource Name (ARN) of the model card export job to
+    #   describe.
+    #
+    # @return [Types::DescribeModelCardExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeModelCardExportJobResponse#model_card_export_job_name #model_card_export_job_name} => String
+    #   * {Types::DescribeModelCardExportJobResponse#model_card_export_job_arn #model_card_export_job_arn} => String
+    #   * {Types::DescribeModelCardExportJobResponse#status #status} => String
+    #   * {Types::DescribeModelCardExportJobResponse#model_card_name #model_card_name} => String
+    #   * {Types::DescribeModelCardExportJobResponse#model_card_version #model_card_version} => Integer
+    #   * {Types::DescribeModelCardExportJobResponse#output_config #output_config} => Types::ModelCardExportOutputConfig
+    #   * {Types::DescribeModelCardExportJobResponse#created_at #created_at} => Time
+    #   * {Types::DescribeModelCardExportJobResponse#last_modified_at #last_modified_at} => Time
+    #   * {Types::DescribeModelCardExportJobResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeModelCardExportJobResponse#export_artifacts #export_artifacts} => Types::ModelCardExportArtifacts
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_model_card_export_job({
+    #     model_card_export_job_arn: "ModelCardExportJobArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_card_export_job_name #=> String
+    #   resp.model_card_export_job_arn #=> String
+    #   resp.status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.model_card_name #=> String
+    #   resp.model_card_version #=> Integer
+    #   resp.output_config.s3_output_path #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_at #=> Time
+    #   resp.failure_reason #=> String
+    #   resp.export_artifacts.s3_export_artifacts #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelCardExportJob AWS API Documentation
+    #
+    # @overload describe_model_card_export_job(params = {})
+    # @param [Hash] params ({})
+    def describe_model_card_export_job(params = {}, options = {})
+      req = build_request(:describe_model_card_export_job, params)
       req.send_request(options)
     end
 
@@ -11432,7 +12494,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_pipeline({
-    #     pipeline_name: "PipelineName", # required
+    #     pipeline_name: "PipelineNameOrArn", # required
     #   })
     #
     # @example Response structure
@@ -11647,6 +12709,7 @@ module Aws::SageMaker
     #   resp.experiment_config.experiment_name #=> String
     #   resp.experiment_config.trial_name #=> String
     #   resp.experiment_config.trial_component_display_name #=> String
+    #   resp.experiment_config.run_name #=> String
     #   resp.processing_job_arn #=> String
     #   resp.processing_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.exit_message #=> String
@@ -11728,6 +12791,71 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_project(params = {}, options = {})
       req = build_request(:describe_project, params)
+      req.send_request(options)
+    end
+
+    # Describes the space.
+    #
+    # @option params [required, String] :domain_id
+    #   The ID of the associated Domain.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @return [Types::DescribeSpaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSpaceResponse#domain_id #domain_id} => String
+    #   * {Types::DescribeSpaceResponse#space_arn #space_arn} => String
+    #   * {Types::DescribeSpaceResponse#space_name #space_name} => String
+    #   * {Types::DescribeSpaceResponse#home_efs_file_system_uid #home_efs_file_system_uid} => String
+    #   * {Types::DescribeSpaceResponse#status #status} => String
+    #   * {Types::DescribeSpaceResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeSpaceResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeSpaceResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeSpaceResponse#space_settings #space_settings} => Types::SpaceSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_space({
+    #     domain_id: "DomainId", # required
+    #     space_name: "SpaceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_id #=> String
+    #   resp.space_arn #=> String
+    #   resp.space_name #=> String
+    #   resp.home_efs_file_system_uid #=> String
+    #   resp.status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
+    #   resp.last_modified_time #=> Time
+    #   resp.creation_time #=> Time
+    #   resp.failure_reason #=> String
+    #   resp.space_settings.jupyter_server_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.space_settings.jupyter_server_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.space_settings.jupyter_server_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.space_settings.jupyter_server_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.space_settings.jupyter_server_app_settings.lifecycle_config_arns #=> Array
+    #   resp.space_settings.jupyter_server_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.space_settings.jupyter_server_app_settings.code_repositories #=> Array
+    #   resp.space_settings.jupyter_server_app_settings.code_repositories[0].repository_url #=> String
+    #   resp.space_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.space_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.space_settings.kernel_gateway_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.space_settings.kernel_gateway_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.space_settings.kernel_gateway_app_settings.custom_images #=> Array
+    #   resp.space_settings.kernel_gateway_app_settings.custom_images[0].image_name #=> String
+    #   resp.space_settings.kernel_gateway_app_settings.custom_images[0].image_version_number #=> Integer
+    #   resp.space_settings.kernel_gateway_app_settings.custom_images[0].app_image_config_name #=> String
+    #   resp.space_settings.kernel_gateway_app_settings.lifecycle_config_arns #=> Array
+    #   resp.space_settings.kernel_gateway_app_settings.lifecycle_config_arns[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSpace AWS API Documentation
+    #
+    # @overload describe_space(params = {})
+    # @param [Hash] params ({})
+    def describe_space(params = {}, options = {})
+      req = build_request(:describe_space, params)
       req.send_request(options)
     end
 
@@ -11956,6 +13084,7 @@ module Aws::SageMaker
     #   resp.experiment_config.experiment_name #=> String
     #   resp.experiment_config.trial_name #=> String
     #   resp.experiment_config.trial_component_display_name #=> String
+    #   resp.experiment_config.run_name #=> String
     #   resp.debug_rule_configurations #=> Array
     #   resp.debug_rule_configurations[0].rule_configuration_name #=> String
     #   resp.debug_rule_configurations[0].local_path #=> String
@@ -12090,6 +13219,7 @@ module Aws::SageMaker
     #   resp.experiment_config.experiment_name #=> String
     #   resp.experiment_config.trial_name #=> String
     #   resp.experiment_config.trial_component_display_name #=> String
+    #   resp.experiment_config.run_name #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -12183,6 +13313,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrialComponentResponse#metadata_properties #metadata_properties} => Types::MetadataProperties
     #   * {Types::DescribeTrialComponentResponse#metrics #metrics} => Array&lt;Types::TrialComponentMetricSummary&gt;
     #   * {Types::DescribeTrialComponentResponse#lineage_group_arn #lineage_group_arn} => String
+    #   * {Types::DescribeTrialComponentResponse#sources #sources} => Array&lt;Types::TrialComponentSource&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -12233,6 +13364,9 @@ module Aws::SageMaker
     #   resp.metrics[0].avg #=> Float
     #   resp.metrics[0].std_dev #=> Float
     #   resp.lineage_group_arn #=> String
+    #   resp.sources #=> Array
+    #   resp.sources[0].source_arn #=> String
+    #   resp.sources[0].source_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrialComponent AWS API Documentation
     #
@@ -12297,6 +13431,8 @@ module Aws::SageMaker
     #   resp.user_settings.jupyter_server_app_settings.default_resource_spec.lifecycle_config_arn #=> String
     #   resp.user_settings.jupyter_server_app_settings.lifecycle_config_arns #=> Array
     #   resp.user_settings.jupyter_server_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.user_settings.jupyter_server_app_settings.code_repositories #=> Array
+    #   resp.user_settings.jupyter_server_app_settings.code_repositories[0].repository_url #=> String
     #   resp.user_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_arn #=> String
     #   resp.user_settings.kernel_gateway_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.user_settings.kernel_gateway_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
@@ -12668,7 +13804,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_search_suggestions({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob, ModelCard, Model
     #     suggestion_query: {
     #       property_name_query: {
     #         property_name_hint: "PropertyNameHint", # required
@@ -12687,6 +13823,82 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def get_search_suggestions(params = {}, options = {})
       req = build_request(:get_search_suggestions, params)
+      req.send_request(options)
+    end
+
+    # Import hub content.
+    #
+    # @option params [required, String] :hub_content_name
+    #   The name of the hub content to import.
+    #
+    # @option params [String] :hub_content_version
+    #   The version of the hub content to import.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The type of hub content to import.
+    #
+    # @option params [required, String] :document_schema_version
+    #   The version of the hub content schema to import.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to import content into.
+    #
+    # @option params [String] :hub_content_display_name
+    #   The display name of the hub content to import.
+    #
+    # @option params [String] :hub_content_description
+    #   A description of the hub content to import.
+    #
+    # @option params [String] :hub_content_markdown
+    #   Markdown files associated with the hub content to import.
+    #
+    # @option params [required, String] :hub_content_document
+    #   The hub content document that describes information about the hub
+    #   content such as type, associated containers, scripts, and more.
+    #
+    # @option params [Array<String>] :hub_content_search_keywords
+    #   The searchable keywords of the hub content.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Any tags associated with the hub content.
+    #
+    # @return [Types::ImportHubContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportHubContentResponse#hub_arn #hub_arn} => String
+    #   * {Types::ImportHubContentResponse#hub_content_arn #hub_content_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_hub_content({
+    #     hub_content_name: "HubContentName", # required
+    #     hub_content_version: "HubContentVersion",
+    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     document_schema_version: "DocumentSchemaVersion", # required
+    #     hub_name: "HubName", # required
+    #     hub_content_display_name: "HubContentDisplayName",
+    #     hub_content_description: "HubContentDescription",
+    #     hub_content_markdown: "HubContentMarkdown",
+    #     hub_content_document: "HubContentDocument", # required
+    #     hub_content_search_keywords: ["HubSearchKeyword"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_arn #=> String
+    #   resp.hub_content_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ImportHubContent AWS API Documentation
+    #
+    # @overload import_hub_content(params = {})
+    # @param [Hash] params ({})
+    def import_hub_content(params = {}, options = {})
+      req = build_request(:import_hub_content, params)
       req.send_request(options)
     end
 
@@ -12938,6 +14150,9 @@ module Aws::SageMaker
     # @option params [String] :user_profile_name_equals
     #   A parameter to search by user profile name.
     #
+    # @option params [String] :space_name_equals
+    #   A parameter to search by space name.
+    #
     # @return [Types::ListAppsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAppsResponse#apps #apps} => Array&lt;Types::AppDetails&gt;
@@ -12954,6 +14169,7 @@ module Aws::SageMaker
     #     sort_by: "CreationTime", # accepts CreationTime
     #     domain_id_equals: "DomainId",
     #     user_profile_name_equals: "UserProfileName",
+    #     space_name_equals: "SpaceName",
     #   })
     #
     # @example Response structure
@@ -12965,6 +14181,7 @@ module Aws::SageMaker
     #   resp.apps[0].app_name #=> String
     #   resp.apps[0].status #=> String, one of "Deleted", "Deleting", "Failed", "InService", "Pending"
     #   resp.apps[0].creation_time #=> Time
+    #   resp.apps[0].space_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListApps AWS API Documentation
@@ -14301,6 +15518,243 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # List hub content versions.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to list the content versions of.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The type of hub content to list versions of.
+    #
+    # @option params [required, String] :hub_content_name
+    #   The name of the hub content.
+    #
+    # @option params [String] :min_version
+    #   The lower bound of the hub content versions to list.
+    #
+    # @option params [String] :max_schema_version
+    #   The upper bound of the hub content schema version.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Only list hub content versions that were created before the time
+    #   specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Only list hub content versions that were created after the time
+    #   specified.
+    #
+    # @option params [String] :sort_by
+    #   Sort hub content versions by either name or creation time.
+    #
+    # @option params [String] :sort_order
+    #   Sort hub content versions by ascending or descending order.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of hub content versions to list.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListHubContentVersions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of hub content versions, use the token in the next request.
+    #
+    # @return [Types::ListHubContentVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHubContentVersionsResponse#hub_content_summaries #hub_content_summaries} => Array&lt;Types::HubContentInfo&gt;
+    #   * {Types::ListHubContentVersionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hub_content_versions({
+    #     hub_name: "HubName", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     hub_content_name: "HubContentName", # required
+    #     min_version: "HubContentVersion",
+    #     max_schema_version: "DocumentSchemaVersion",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     sort_by: "HubContentName", # accepts HubContentName, CreationTime, HubContentStatus
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_content_summaries #=> Array
+    #   resp.hub_content_summaries[0].hub_content_name #=> String
+    #   resp.hub_content_summaries[0].hub_content_arn #=> String
+    #   resp.hub_content_summaries[0].hub_content_version #=> String
+    #   resp.hub_content_summaries[0].hub_content_type #=> String, one of "Model", "Notebook"
+    #   resp.hub_content_summaries[0].document_schema_version #=> String
+    #   resp.hub_content_summaries[0].hub_content_display_name #=> String
+    #   resp.hub_content_summaries[0].hub_content_description #=> String
+    #   resp.hub_content_summaries[0].hub_content_search_keywords #=> Array
+    #   resp.hub_content_summaries[0].hub_content_search_keywords[0] #=> String
+    #   resp.hub_content_summaries[0].hub_content_status #=> String, one of "Available", "Importing", "Deleting", "ImportFailed", "DeleteFailed"
+    #   resp.hub_content_summaries[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubContentVersions AWS API Documentation
+    #
+    # @overload list_hub_content_versions(params = {})
+    # @param [Hash] params ({})
+    def list_hub_content_versions(params = {}, options = {})
+      req = build_request(:list_hub_content_versions, params)
+      req.send_request(options)
+    end
+
+    # List the contents of a hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to list the contents of.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The type of hub content to list.
+    #
+    # @option params [String] :name_contains
+    #   Only list hub content if the name contains the specified string.
+    #
+    # @option params [String] :max_schema_version
+    #   The upper bound of the hub content schema verion.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Only list hub content that was created before the time specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Only list hub content that was created after the time specified.
+    #
+    # @option params [String] :sort_by
+    #   Sort hub content versions by either name or creation time.
+    #
+    # @option params [String] :sort_order
+    #   Sort hubs by ascending or descending order.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum amount of hub content to list.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListHubContents` request was truncated,
+    #   the response includes a `NextToken`. To retrieve the next set of hub
+    #   content, use the token in the next request.
+    #
+    # @return [Types::ListHubContentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHubContentsResponse#hub_content_summaries #hub_content_summaries} => Array&lt;Types::HubContentInfo&gt;
+    #   * {Types::ListHubContentsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hub_contents({
+    #     hub_name: "HubName", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     name_contains: "NameContains",
+    #     max_schema_version: "DocumentSchemaVersion",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     sort_by: "HubContentName", # accepts HubContentName, CreationTime, HubContentStatus
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_content_summaries #=> Array
+    #   resp.hub_content_summaries[0].hub_content_name #=> String
+    #   resp.hub_content_summaries[0].hub_content_arn #=> String
+    #   resp.hub_content_summaries[0].hub_content_version #=> String
+    #   resp.hub_content_summaries[0].hub_content_type #=> String, one of "Model", "Notebook"
+    #   resp.hub_content_summaries[0].document_schema_version #=> String
+    #   resp.hub_content_summaries[0].hub_content_display_name #=> String
+    #   resp.hub_content_summaries[0].hub_content_description #=> String
+    #   resp.hub_content_summaries[0].hub_content_search_keywords #=> Array
+    #   resp.hub_content_summaries[0].hub_content_search_keywords[0] #=> String
+    #   resp.hub_content_summaries[0].hub_content_status #=> String, one of "Available", "Importing", "Deleting", "ImportFailed", "DeleteFailed"
+    #   resp.hub_content_summaries[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubContents AWS API Documentation
+    #
+    # @overload list_hub_contents(params = {})
+    # @param [Hash] params ({})
+    def list_hub_contents(params = {}, options = {})
+      req = build_request(:list_hub_contents, params)
+      req.send_request(options)
+    end
+
+    # List all existing hubs.
+    #
+    # @option params [String] :name_contains
+    #   Only list hubs with names that contain the specified string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Only list hubs that were created before the time specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Only list hubs that were created after the time specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   Only list hubs that were last modified before the time specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   Only list hubs that were last modified after the time specified.
+    #
+    # @option params [String] :sort_by
+    #   Sort hubs by either name or creation time.
+    #
+    # @option params [String] :sort_order
+    #   Sort hubs by ascending or descending order.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of hubs to list.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListHubs` request was truncated, the
+    #   response includes a `NextToken`. To retrieve the next set of hubs, use
+    #   the token in the next request.
+    #
+    # @return [Types::ListHubsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHubsResponse#hub_summaries #hub_summaries} => Array&lt;Types::HubInfo&gt;
+    #   * {Types::ListHubsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hubs({
+    #     name_contains: "NameContains",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     sort_by: "HubName", # accepts HubName, CreationTime, HubStatus, AccountIdOwner
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_summaries #=> Array
+    #   resp.hub_summaries[0].hub_name #=> String
+    #   resp.hub_summaries[0].hub_arn #=> String
+    #   resp.hub_summaries[0].hub_display_name #=> String
+    #   resp.hub_summaries[0].hub_description #=> String
+    #   resp.hub_summaries[0].hub_search_keywords #=> Array
+    #   resp.hub_summaries[0].hub_search_keywords[0] #=> String
+    #   resp.hub_summaries[0].hub_status #=> String, one of "InService", "Creating", "Updating", "Deleting", "CreateFailed", "UpdateFailed", "DeleteFailed"
+    #   resp.hub_summaries[0].creation_time #=> Time
+    #   resp.hub_summaries[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubs AWS API Documentation
+    #
+    # @overload list_hubs(params = {})
+    # @param [Hash] params ({})
+    def list_hubs(params = {}, options = {})
+      req = build_request(:list_hubs, params)
+      req.send_request(options)
+    end
+
     # Returns information about the human task user interfaces in your
     # account.
     #
@@ -14611,6 +16065,95 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_images(params = {}, options = {})
       req = build_request(:list_images, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of all inference experiments.
+    #
+    # @option params [String] :name_contains
+    #   Selects inference experiments whose names contain this name.
+    #
+    # @option params [String] :type
+    #   Selects inference experiments of this type. For the possible types of
+    #   inference experiments, see CreateInferenceExperimentRequest$Type.
+    #
+    # @option params [String] :status_equals
+    #   Selects inference experiments which are in this status. For the
+    #   possible statuses, see DescribeInferenceExperimentResponse$Status.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Selects inference experiments which were created after this timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Selects inference experiments which were created before this
+    #   timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   Selects inference experiments which were last modified after this
+    #   timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   Selects inference experiments which were last modified before this
+    #   timestamp.
+    #
+    # @option params [String] :sort_by
+    #   The column by which to sort the listed inference experiments.
+    #
+    # @option params [String] :sort_order
+    #   The direction of sorting (ascending or descending).
+    #
+    # @option params [String] :next_token
+    #   The response from the last list when returning a list large enough to
+    #   need tokening.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to select.
+    #
+    # @return [Types::ListInferenceExperimentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInferenceExperimentsResponse#inference_experiments #inference_experiments} => Array&lt;Types::InferenceExperimentSummary&gt;
+    #   * {Types::ListInferenceExperimentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inference_experiments({
+    #     name_contains: "NameContains",
+    #     type: "ShadowMode", # accepts ShadowMode
+    #     status_equals: "Creating", # accepts Creating, Created, Updating, Running, Starting, Stopping, Completed, Cancelled
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     sort_by: "Name", # accepts Name, CreationTime, Status
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_experiments #=> Array
+    #   resp.inference_experiments[0].name #=> String
+    #   resp.inference_experiments[0].type #=> String, one of "ShadowMode"
+    #   resp.inference_experiments[0].schedule.start_time #=> Time
+    #   resp.inference_experiments[0].schedule.end_time #=> Time
+    #   resp.inference_experiments[0].status #=> String, one of "Creating", "Created", "Updating", "Running", "Starting", "Stopping", "Completed", "Cancelled"
+    #   resp.inference_experiments[0].status_reason #=> String
+    #   resp.inference_experiments[0].description #=> String
+    #   resp.inference_experiments[0].creation_time #=> Time
+    #   resp.inference_experiments[0].completion_time #=> Time
+    #   resp.inference_experiments[0].last_modified_time #=> Time
+    #   resp.inference_experiments[0].role_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceExperiments AWS API Documentation
+    #
+    # @overload list_inference_experiments(params = {})
+    # @param [Hash] params ({})
+    def list_inference_experiments(params = {}, options = {})
+      req = build_request(:list_inference_experiments, params)
       req.send_request(options)
     end
 
@@ -15084,6 +16627,226 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # List the export jobs for the Amazon SageMaker Model Card.
+    #
+    # @option params [required, String] :model_card_name
+    #   List export jobs for the model card with the specified name.
+    #
+    # @option params [Integer] :model_card_version
+    #   List export jobs for the model card with the specified version.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Only list model card export jobs that were created after the time
+    #   specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Only list model card export jobs that were created before the time
+    #   specified.
+    #
+    # @option params [String] :model_card_export_job_name_contains
+    #   Only list model card export jobs with names that contain the specified
+    #   string.
+    #
+    # @option params [String] :status_equals
+    #   Only list model card export jobs with the specified status.
+    #
+    # @option params [String] :sort_by
+    #   Sort model card export jobs by either name or creation time. Sorts by
+    #   creation time by default.
+    #
+    # @option params [String] :sort_order
+    #   Sort model card export jobs by ascending or descending order.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListModelCardExportJobs` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of model card export jobs, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of model card export jobs to list.
+    #
+    # @return [Types::ListModelCardExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelCardExportJobsResponse#model_card_export_job_summaries #model_card_export_job_summaries} => Array&lt;Types::ModelCardExportJobSummary&gt;
+    #   * {Types::ListModelCardExportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_card_export_jobs({
+    #     model_card_name: "EntityName", # required
+    #     model_card_version: 1,
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     model_card_export_job_name_contains: "EntityName",
+    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed
+    #     sort_by: "Name", # accepts Name, CreationTime, Status
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_card_export_job_summaries #=> Array
+    #   resp.model_card_export_job_summaries[0].model_card_export_job_name #=> String
+    #   resp.model_card_export_job_summaries[0].model_card_export_job_arn #=> String
+    #   resp.model_card_export_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.model_card_export_job_summaries[0].model_card_name #=> String
+    #   resp.model_card_export_job_summaries[0].model_card_version #=> Integer
+    #   resp.model_card_export_job_summaries[0].created_at #=> Time
+    #   resp.model_card_export_job_summaries[0].last_modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCardExportJobs AWS API Documentation
+    #
+    # @overload list_model_card_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_model_card_export_jobs(params = {}, options = {})
+      req = build_request(:list_model_card_export_jobs, params)
+      req.send_request(options)
+    end
+
+    # List existing versions of an Amazon SageMaker Model Card.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Only list model card versions that were created after the time
+    #   specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Only list model card versions that were created before the time
+    #   specified.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of model card versions to list.
+    #
+    # @option params [required, String] :model_card_name
+    #   List model card versions for the model card with the specified name.
+    #
+    # @option params [String] :model_card_status
+    #   Only list model card versions with the specified approval status.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListModelCardVersions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of model card versions, use the token in the next request.
+    #
+    # @option params [String] :sort_by
+    #   Sort listed model card versions by version. Sorts by version by
+    #   default.
+    #
+    # @option params [String] :sort_order
+    #   Sort model card versions by ascending or descending order.
+    #
+    # @return [Types::ListModelCardVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelCardVersionsResponse#model_card_version_summary_list #model_card_version_summary_list} => Array&lt;Types::ModelCardVersionSummary&gt;
+    #   * {Types::ListModelCardVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_card_versions({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     max_results: 1,
+    #     model_card_name: "EntityName", # required
+    #     model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
+    #     next_token: "NextToken",
+    #     sort_by: "Version", # accepts Version
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_card_version_summary_list #=> Array
+    #   resp.model_card_version_summary_list[0].model_card_name #=> String
+    #   resp.model_card_version_summary_list[0].model_card_arn #=> String
+    #   resp.model_card_version_summary_list[0].model_card_status #=> String, one of "Draft", "PendingReview", "Approved", "Archived"
+    #   resp.model_card_version_summary_list[0].model_card_version #=> Integer
+    #   resp.model_card_version_summary_list[0].creation_time #=> Time
+    #   resp.model_card_version_summary_list[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCardVersions AWS API Documentation
+    #
+    # @overload list_model_card_versions(params = {})
+    # @param [Hash] params ({})
+    def list_model_card_versions(params = {}, options = {})
+      req = build_request(:list_model_card_versions, params)
+      req.send_request(options)
+    end
+
+    # List existing model cards.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Only list model cards that were created after the time specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Only list model cards that were created before the time specified.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of model cards to list.
+    #
+    # @option params [String] :name_contains
+    #   Only list model cards with names that contain the specified string.
+    #
+    # @option params [String] :model_card_status
+    #   Only list model cards with the specified approval status.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListModelCards` request was truncated,
+    #   the response includes a `NextToken`. To retrieve the next set of model
+    #   cards, use the token in the next request.
+    #
+    # @option params [String] :sort_by
+    #   Sort model cards by either name or creation time. Sorts by creation
+    #   time by default.
+    #
+    # @option params [String] :sort_order
+    #   Sort model cards by ascending or descending order.
+    #
+    # @return [Types::ListModelCardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelCardsResponse#model_card_summaries #model_card_summaries} => Array&lt;Types::ModelCardSummary&gt;
+    #   * {Types::ListModelCardsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_cards({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     max_results: 1,
+    #     name_contains: "EntityName",
+    #     model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
+    #     next_token: "NextToken",
+    #     sort_by: "Name", # accepts Name, CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_card_summaries #=> Array
+    #   resp.model_card_summaries[0].model_card_name #=> String
+    #   resp.model_card_summaries[0].model_card_arn #=> String
+    #   resp.model_card_summaries[0].model_card_status #=> String, one of "Draft", "PendingReview", "Approved", "Archived"
+    #   resp.model_card_summaries[0].creation_time #=> Time
+    #   resp.model_card_summaries[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCards AWS API Documentation
+    #
+    # @overload list_model_cards(params = {})
+    # @param [Hash] params ({})
+    def list_model_cards(params = {}, options = {})
+      req = build_request(:list_model_cards, params)
+      req.send_request(options)
+    end
+
     # Lists model explainability job definitions that satisfy various
     # filters.
     #
@@ -15508,6 +17271,128 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_models(params = {}, options = {})
       req = build_request(:list_models, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of past alerts in a model monitoring schedule.
+    #
+    # @option params [String] :monitoring_schedule_name
+    #   The name of a monitoring schedule.
+    #
+    # @option params [String] :monitoring_alert_name
+    #   The name of a monitoring alert.
+    #
+    # @option params [String] :sort_by
+    #   The field used to sort results. The default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order, whether `Ascending` or `Descending`, of the alert
+    #   history. The default is `Descending`.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListMonitoringAlertHistory` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of alerts in the history, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to display. The default is 100.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only alerts created on or before the specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only alerts created on or after the specified
+    #   time.
+    #
+    # @option params [String] :status_equals
+    #   A filter that retrieves only alerts with a specific status.
+    #
+    # @return [Types::ListMonitoringAlertHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMonitoringAlertHistoryResponse#monitoring_alert_history #monitoring_alert_history} => Array&lt;Types::MonitoringAlertHistorySummary&gt;
+    #   * {Types::ListMonitoringAlertHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_monitoring_alert_history({
+    #     monitoring_schedule_name: "MonitoringScheduleName",
+    #     monitoring_alert_name: "MonitoringAlertName",
+    #     sort_by: "CreationTime", # accepts CreationTime, Status
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     status_equals: "InAlert", # accepts InAlert, OK
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitoring_alert_history #=> Array
+    #   resp.monitoring_alert_history[0].monitoring_schedule_name #=> String
+    #   resp.monitoring_alert_history[0].monitoring_alert_name #=> String
+    #   resp.monitoring_alert_history[0].creation_time #=> Time
+    #   resp.monitoring_alert_history[0].alert_status #=> String, one of "InAlert", "OK"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringAlertHistory AWS API Documentation
+    #
+    # @overload list_monitoring_alert_history(params = {})
+    # @param [Hash] params ({})
+    def list_monitoring_alert_history(params = {}, options = {})
+      req = build_request(:list_monitoring_alert_history, params)
+      req.send_request(options)
+    end
+
+    # Gets the alerts for a single monitoring schedule.
+    #
+    # @option params [required, String] :monitoring_schedule_name
+    #   The name of a monitoring schedule.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListMonitoringAlerts` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of alerts in the history, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to display. The default is 100.
+    #
+    # @return [Types::ListMonitoringAlertsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMonitoringAlertsResponse#monitoring_alert_summaries #monitoring_alert_summaries} => Array&lt;Types::MonitoringAlertSummary&gt;
+    #   * {Types::ListMonitoringAlertsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_monitoring_alerts({
+    #     monitoring_schedule_name: "MonitoringScheduleName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitoring_alert_summaries #=> Array
+    #   resp.monitoring_alert_summaries[0].monitoring_alert_name #=> String
+    #   resp.monitoring_alert_summaries[0].creation_time #=> Time
+    #   resp.monitoring_alert_summaries[0].last_modified_time #=> Time
+    #   resp.monitoring_alert_summaries[0].alert_status #=> String, one of "InAlert", "OK"
+    #   resp.monitoring_alert_summaries[0].datapoints_to_alert #=> Integer
+    #   resp.monitoring_alert_summaries[0].evaluation_period #=> Integer
+    #   resp.monitoring_alert_summaries[0].actions.model_dashboard_indicator.enabled #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringAlerts AWS API Documentation
+    #
+    # @overload list_monitoring_alerts(params = {})
+    # @param [Hash] params ({})
+    def list_monitoring_alerts(params = {}, options = {})
+      req = build_request(:list_monitoring_alerts, params)
       req.send_request(options)
     end
 
@@ -15990,6 +17875,7 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.emr.step_name #=> String
     #   resp.pipeline_execution_steps[0].metadata.emr.log_file_path #=> String
     #   resp.pipeline_execution_steps[0].metadata.fail.error_message #=> String
+    #   resp.pipeline_execution_steps[0].metadata.auto_ml_job.arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionSteps AWS API Documentation
@@ -16038,7 +17924,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pipeline_executions({
-    #     pipeline_name: "PipelineName", # required
+    #     pipeline_name: "PipelineNameOrArn", # required
     #     created_after: Time.now,
     #     created_before: Time.now,
     #     sort_by: "CreationTime", # accepts CreationTime, PipelineExecutionArn
@@ -16327,6 +18213,65 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_projects(params = {}, options = {})
       req = build_request(:list_projects, params)
+      req.send_request(options)
+    end
+
+    # Lists spaces.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Returns a list up to a specified limit.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for the results. The default is `Ascending`.
+    #
+    # @option params [String] :sort_by
+    #   The parameter by which to sort the results. The default is
+    #   `CreationTime`.
+    #
+    # @option params [String] :domain_id_equals
+    #   A parameter to search for the Domain ID.
+    #
+    # @option params [String] :space_name_contains
+    #   A parameter by which to filter the results.
+    #
+    # @return [Types::ListSpacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSpacesResponse#spaces #spaces} => Array&lt;Types::SpaceDetails&gt;
+    #   * {Types::ListSpacesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_spaces({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     sort_by: "CreationTime", # accepts CreationTime, LastModifiedTime
+    #     domain_id_equals: "DomainId",
+    #     space_name_contains: "SpaceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.spaces #=> Array
+    #   resp.spaces[0].domain_id #=> String
+    #   resp.spaces[0].space_name #=> String
+    #   resp.spaces[0].status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
+    #   resp.spaces[0].creation_time #=> Time
+    #   resp.spaces[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSpaces AWS API Documentation
+    #
+    # @overload list_spaces(params = {})
+    # @param [Hash] params ({})
+    def list_spaces(params = {}, options = {})
+      req = build_request(:list_spaces, params)
       req.send_request(options)
     end
 
@@ -17553,7 +19498,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob, ModelCard, Model
     #     search_expression: {
     #       filters: [
     #         {
@@ -17715,6 +19660,34 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Starts an inference experiment.
+    #
+    # @option params [required, String] :name
+    #   The name of the inference experiment to start.
+    #
+    # @return [Types::StartInferenceExperimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartInferenceExperimentResponse#inference_experiment_arn #inference_experiment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_inference_experiment({
+    #     name: "InferenceExperimentName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_experiment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartInferenceExperiment AWS API Documentation
+    #
+    # @overload start_inference_experiment(params = {})
+    # @param [Hash] params ({})
+    def start_inference_experiment(params = {}, options = {})
+      req = build_request(:start_inference_experiment, params)
+      req.send_request(options)
+    end
+
     # Starts a previously stopped monitoring schedule.
     #
     # <note markdown="1"> By default, when you successfully create a new schedule, the status of
@@ -17801,7 +19774,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_pipeline_execution({
-    #     pipeline_name: "PipelineName", # required
+    #     pipeline_name: "PipelineNameOrArn", # required
     #     pipeline_execution_display_name: "PipelineExecutionName",
     #     pipeline_parameters: [
     #       {
@@ -17956,6 +19929,79 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def stop_hyper_parameter_tuning_job(params = {}, options = {})
       req = build_request(:stop_hyper_parameter_tuning_job, params)
+      req.send_request(options)
+    end
+
+    # Stops an inference experiment.
+    #
+    # @option params [required, String] :name
+    #   The name of the inference experiment to stop.
+    #
+    # @option params [required, Hash<String,String>] :model_variant_actions
+    #   Array of key-value pairs, with names of variants mapped to actions.
+    #   The possible actions are the following:
+    #
+    #   * `Promote` - Promote the shadow variant to a production variant
+    #
+    #   * `Remove` - Delete the variant
+    #
+    #   * `Retain` - Keep the variant as it is
+    #
+    # @option params [Array<Types::ModelVariantConfig>] :desired_model_variants
+    #   Array of `ModelVariantConfig` objects. There is one for each variant
+    #   that you want to deploy after the inference experiment stops. Each
+    #   `ModelVariantConfig` describes the infrastructure configuration for
+    #   deploying the corresponding variant.
+    #
+    # @option params [String] :desired_state
+    #   The desired state of the experiment after stopping. The possible
+    #   states are the following:
+    #
+    #   * `Completed`\: The experiment completed successfully
+    #
+    #   * `Cancelled`\: The experiment was canceled
+    #
+    # @option params [String] :reason
+    #   The reason for stopping the experiment.
+    #
+    # @return [Types::StopInferenceExperimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopInferenceExperimentResponse#inference_experiment_arn #inference_experiment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_inference_experiment({
+    #     name: "InferenceExperimentName", # required
+    #     model_variant_actions: { # required
+    #       "ModelVariantName" => "Retain", # accepts Retain, Remove, Promote
+    #     },
+    #     desired_model_variants: [
+    #       {
+    #         model_name: "ModelName", # required
+    #         variant_name: "ModelVariantName", # required
+    #         infrastructure_config: { # required
+    #           infrastructure_type: "RealTimeInference", # required, accepts RealTimeInference
+    #           real_time_inference_config: { # required
+    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1, # required
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     desired_state: "Completed", # accepts Completed, Cancelled
+    #     reason: "InferenceExperimentStatusReason",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_experiment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopInferenceExperiment AWS API Documentation
+    #
+    # @overload stop_inference_experiment(params = {})
+    # @param [Hash] params ({})
+    def stop_inference_experiment(params = {}, options = {})
+      req = build_request(:stop_inference_experiment, params)
       req.send_request(options)
     end
 
@@ -18506,6 +20552,9 @@ module Aws::SageMaker
     # @option params [Types::DomainSettingsForUpdate] :domain_settings_for_update
     #   A collection of `DomainSettings` configuration values to update.
     #
+    # @option params [Types::DefaultSpaceSettings] :default_space_settings
+    #   The default settings used to create a space within the Domain.
+    #
     # @return [Types::UpdateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainResponse#domain_arn #domain_arn} => String
@@ -18530,6 +20579,11 @@ module Aws::SageMaker
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
@@ -18592,6 +20646,40 @@ module Aws::SageMaker
     #         },
     #       },
     #       execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
+    #     },
+    #     default_space_settings: {
+    #       execution_role: "RoleArn",
+    #       security_groups: ["SecurityGroupId"],
+    #       jupyter_server_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       kernel_gateway_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #       },
     #     },
     #   })
     #
@@ -18889,6 +20977,46 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Update a hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to update.
+    #
+    # @option params [String] :hub_description
+    #   A description of the updated hub.
+    #
+    # @option params [String] :hub_display_name
+    #   The display name of the hub.
+    #
+    # @option params [Array<String>] :hub_search_keywords
+    #   The searchable keywords for the hub.
+    #
+    # @return [Types::UpdateHubResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateHubResponse#hub_arn #hub_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_hub({
+    #     hub_name: "HubName", # required
+    #     hub_description: "HubDescription",
+    #     hub_display_name: "HubDisplayName",
+    #     hub_search_keywords: ["HubSearchKeyword"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHub AWS API Documentation
+    #
+    # @overload update_hub(params = {})
+    # @param [Hash] params ({})
+    def update_hub(params = {}, options = {})
+      req = build_request(:update_hub, params)
+      req.send_request(options)
+    end
+
     # Updates the properties of a SageMaker image. To change the image's
     # tags, use the AddTags and DeleteTags APIs.
     #
@@ -18933,6 +21061,149 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_image(params = {}, options = {})
       req = build_request(:update_image, params)
+      req.send_request(options)
+    end
+
+    # Updates an inference experiment that you created. The status of the
+    # inference experiment has to be either `Created`, `Running`. For more
+    # information on the status of an inference experiment, see
+    # DescribeInferenceExperimentResponse$Status.
+    #
+    # @option params [required, String] :name
+    #   The name of the inference experiment to be updated.
+    #
+    # @option params [Types::InferenceExperimentSchedule] :schedule
+    #   The duration for which the inference experiment will run. If the
+    #   status of the inference experiment is `Created`, then you can update
+    #   both the start and end dates. If the status of the inference
+    #   experiment is `Running`, then you can update only the end date.
+    #
+    # @option params [String] :description
+    #   The description of the inference experiment.
+    #
+    # @option params [Array<Types::ModelVariantConfig>] :model_variants
+    #   Array of `ModelVariantConfigSummary` objects. There is one for each
+    #   variant, whose infrastructure configuration you want to update.
+    #
+    # @option params [Types::InferenceExperimentDataStorageConfig] :data_storage_config
+    #   The Amazon S3 storage configuration for the inference experiment.
+    #
+    # @option params [Types::ShadowModeConfig] :shadow_mode_config
+    #   The Amazon S3 storage configuration for the inference experiment.
+    #
+    # @return [Types::UpdateInferenceExperimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInferenceExperimentResponse#inference_experiment_arn #inference_experiment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_inference_experiment({
+    #     name: "InferenceExperimentName", # required
+    #     schedule: {
+    #       start_time: Time.now,
+    #       end_time: Time.now,
+    #     },
+    #     description: "InferenceExperimentDescription",
+    #     model_variants: [
+    #       {
+    #         model_name: "ModelName", # required
+    #         variant_name: "ModelVariantName", # required
+    #         infrastructure_config: { # required
+    #           infrastructure_type: "RealTimeInference", # required, accepts RealTimeInference
+    #           real_time_inference_config: { # required
+    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1, # required
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     data_storage_config: {
+    #       destination: "DestinationS3Uri", # required
+    #       kms_key: "KmsKeyId",
+    #       content_type: {
+    #         csv_content_types: ["CsvContentType"],
+    #         json_content_types: ["JsonContentType"],
+    #       },
+    #     },
+    #     shadow_mode_config: {
+    #       source_model_variant_name: "ModelVariantName", # required
+    #       shadow_model_variants: [ # required
+    #         {
+    #           shadow_model_variant_name: "ModelVariantName", # required
+    #           sampling_percentage: 1, # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_experiment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateInferenceExperiment AWS API Documentation
+    #
+    # @overload update_inference_experiment(params = {})
+    # @param [Hash] params ({})
+    def update_inference_experiment(params = {}, options = {})
+      req = build_request(:update_inference_experiment, params)
+      req.send_request(options)
+    end
+
+    # Update an Amazon SageMaker Model Card.
+    #
+    # You cannot update both model card content and model card status in a
+    # single call.
+    #
+    # @option params [required, String] :model_card_name
+    #   The name of the model card to update.
+    #
+    # @option params [String] :content
+    #   The updated model card content. Content must be in [model card JSON
+    #   schema][1] and provided as a string.
+    #
+    #   When updating model card content, be sure to include the full content
+    #   and not just updated content.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html
+    #
+    # @option params [String] :model_card_status
+    #   The approval status of the model card within your organization.
+    #   Different organizations might have different criteria for model card
+    #   review and approval.
+    #
+    #   * `Draft`\: The model card is a work in progress.
+    #
+    #   * `PendingReview`\: The model card is pending review.
+    #
+    #   * `Approved`\: The model card is approved.
+    #
+    #   * `Archived`\: The model card is archived. No more updates should be
+    #     made to the model card, but it can still be exported.
+    #
+    # @return [Types::UpdateModelCardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateModelCardResponse#model_card_arn #model_card_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_model_card({
+    #     model_card_name: "EntityName", # required
+    #     content: "ModelCardContent",
+    #     model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_card_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelCard AWS API Documentation
+    #
+    # @overload update_model_card(params = {})
+    # @param [Hash] params ({})
+    def update_model_card(params = {}, options = {})
+      req = build_request(:update_model_card, params)
       req.send_request(options)
     end
 
@@ -19016,6 +21287,50 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_model_package(params = {}, options = {})
       req = build_request(:update_model_package, params)
+      req.send_request(options)
+    end
+
+    # Update the parameters of a model monitor alert.
+    #
+    # @option params [required, String] :monitoring_schedule_name
+    #   The name of a monitoring schedule.
+    #
+    # @option params [required, String] :monitoring_alert_name
+    #   The name of a monitoring alert.
+    #
+    # @option params [required, Integer] :datapoints_to_alert
+    #   Within `EvaluationPeriod`, how many execution failures will raise an
+    #   alert.
+    #
+    # @option params [required, Integer] :evaluation_period
+    #   The number of most recent monitoring executions to consider when
+    #   evaluating alert status.
+    #
+    # @return [Types::UpdateMonitoringAlertResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMonitoringAlertResponse#monitoring_schedule_arn #monitoring_schedule_arn} => String
+    #   * {Types::UpdateMonitoringAlertResponse#monitoring_alert_name #monitoring_alert_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_monitoring_alert({
+    #     monitoring_schedule_name: "MonitoringScheduleName", # required
+    #     monitoring_alert_name: "MonitoringAlertName", # required
+    #     datapoints_to_alert: 1, # required
+    #     evaluation_period: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitoring_schedule_arn #=> String
+    #   resp.monitoring_alert_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMonitoringAlert AWS API Documentation
+    #
+    # @overload update_monitoring_alert(params = {})
+    # @param [Hash] params ({})
+    def update_monitoring_alert(params = {}, options = {})
+      req = build_request(:update_monitoring_alert, params)
       req.send_request(options)
     end
 
@@ -19528,6 +21843,73 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Updates the settings of a space.
+    #
+    # @option params [required, String] :domain_id
+    #   The ID of the associated Domain.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [Types::SpaceSettings] :space_settings
+    #   A collection of space settings.
+    #
+    # @return [Types::UpdateSpaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSpaceResponse#space_arn #space_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_space({
+    #     domain_id: "DomainId", # required
+    #     space_name: "SpaceName", # required
+    #     space_settings: {
+    #       jupyter_server_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       kernel_gateway_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateSpace AWS API Documentation
+    #
+    # @overload update_space(params = {})
+    # @param [Hash] params ({})
+    def update_space(params = {}, options = {})
+      req = build_request(:update_space, params)
+      req.send_request(options)
+    end
+
     # Update a model training job to request a new Debugger profiling
     # configuration or to change warm pool retention length.
     #
@@ -19536,12 +21918,12 @@ module Aws::SageMaker
     #   configuration.
     #
     # @option params [Types::ProfilerConfigForUpdate] :profiler_config
-    #   Configuration information for Debugger system monitoring, framework
-    #   profiling, and storage paths.
+    #   Configuration information for Amazon SageMaker Debugger system
+    #   monitoring, framework profiling, and storage paths.
     #
     # @option params [Array<Types::ProfilerRuleConfiguration>] :profiler_rule_configurations
-    #   Configuration information for Debugger rules for profiling system and
-    #   framework metrics.
+    #   Configuration information for Amazon SageMaker Debugger rules for
+    #   profiling system and framework metrics.
     #
     # @option params [Types::ResourceConfigForUpdate] :resource_config
     #   The training job `ResourceConfig` to update warm pool retention
@@ -19754,6 +22136,11 @@ module Aws::SageMaker
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
@@ -20054,7 +22441,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

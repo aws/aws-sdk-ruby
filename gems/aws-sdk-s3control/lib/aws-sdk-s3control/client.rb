@@ -422,8 +422,8 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
     # @option params [String] :account_id
-    #   The Amazon Web Services account ID for the owner of the bucket for
-    #   which you want to create an access point.
+    #   The Amazon Web Services account ID for the account that owns the
+    #   specified access point.
     #
     # @option params [required, String] :name
     #   The name you want to assign to this access point.
@@ -458,6 +458,10 @@ module Aws::S3Control
     #   The `PublicAccessBlock` configuration that you want to apply to the
     #   access point.
     #
+    # @option params [String] :bucket_account_id
+    #   The Amazon Web Services account ID associated with the S3 bucket
+    #   associated with this access point.
+    #
     # @return [Types::CreateAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessPointResult#access_point_arn #access_point_arn} => String
@@ -478,6 +482,7 @@ module Aws::S3Control
     #       block_public_policy: false,
     #       restrict_public_buckets: false,
     #     },
+    #     bucket_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1099,7 +1104,8 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
     # @option params [String] :account_id
-    #   The account ID for the account that owns the specified access point.
+    #   The Amazon Web Services account ID for the account that owns the
+    #   specified access point.
     #
     # @option params [required, String] :name
     #   The name of the access point you want to delete.
@@ -2092,7 +2098,8 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
     # @option params [String] :account_id
-    #   The account ID for the account that owns the specified access point.
+    #   The Amazon Web Services account ID for the account that owns the
+    #   specified access point.
     #
     # @option params [required, String] :name
     #   The name of the access point whose configuration information you want
@@ -2122,6 +2129,7 @@ module Aws::S3Control
     #   * {Types::GetAccessPointResult#alias #alias} => String
     #   * {Types::GetAccessPointResult#access_point_arn #access_point_arn} => String
     #   * {Types::GetAccessPointResult#endpoints #endpoints} => Hash&lt;String,String&gt;
+    #   * {Types::GetAccessPointResult#bucket_account_id #bucket_account_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2145,6 +2153,7 @@ module Aws::S3Control
     #   resp.access_point_arn #=> String
     #   resp.endpoints #=> Hash
     #   resp.endpoints["NonEmptyMaxLength64String"] #=> String
+    #   resp.bucket_account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPoint AWS API Documentation
     #
@@ -3394,12 +3403,12 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Returns a list of the access points currently associated with the
-    # specified bucket. You can retrieve up to 1000 access points per call.
-    # If the specified bucket has more than 1,000 access points (or the
-    # number specified in `maxResults`, whichever is less), the response
-    # will include a continuation token that you can use to list the
-    # additional access points.
+    # Returns a list of the access points owned by the current account
+    # associated with the specified bucket. You can retrieve up to 1000
+    # access points per call. If the specified bucket has more than 1,000
+    # access points (or the number specified in `maxResults`, whichever is
+    # less), the response will include a continuation token that you can use
+    # to list the additional access points.
     #
     #
     #
@@ -3427,8 +3436,8 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
     #
     # @option params [String] :account_id
-    #   The Amazon Web Services account ID for owner of the bucket whose
-    #   access points you want to list.
+    #   The Amazon Web Services account ID for the account that owns the
+    #   specified access points.
     #
     # @option params [String] :bucket
     #   The name of the bucket whose associated access points you want to
@@ -3484,6 +3493,7 @@ module Aws::S3Control
     #   resp.access_point_list[0].bucket #=> String
     #   resp.access_point_list[0].access_point_arn #=> String
     #   resp.access_point_list[0].alias #=> String
+    #   resp.access_point_list[0].bucket_account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPoints AWS API Documentation
@@ -5094,7 +5104,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

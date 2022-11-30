@@ -636,6 +636,36 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] result_ids
+    #   A list of unique result IDs for the data quality results.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityResultRequest AWS API Documentation
+    #
+    class BatchGetDataQualityResultRequest < Struct.new(
+      :result_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of `DataQualityResult` objects representing the data quality
+    #   results.
+    #   @return [Array<Types::DataQualityResult>]
+    #
+    # @!attribute [rw] results_not_found
+    #   A list of result IDs for which results were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityResultResponse AWS API Documentation
+    #
+    class BatchGetDataQualityResultResponse < Struct.new(
+      :results,
+      :results_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dev_endpoint_names
     #   The list of `DevEndpoint` names, which might be the names returned
     #   from the `ListDevEndpoint` operation.
@@ -1188,6 +1218,38 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelDataQualityRuleRecommendationRunRequest AWS API Documentation
+    #
+    class CancelDataQualityRuleRecommendationRunRequest < Struct.new(
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelDataQualityRuleRecommendationRunResponse AWS API Documentation
+    #
+    class CancelDataQualityRuleRecommendationRunResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelDataQualityRulesetEvaluationRunRequest AWS API Documentation
+    #
+    class CancelDataQualityRulesetEvaluationRunRequest < Struct.new(
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelDataQualityRulesetEvaluationRunResponse AWS API Documentation
+    #
+    class CancelDataQualityRulesetEvaluationRunResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] transform_id
     #   The unique identifier of the machine learning transform.
@@ -1807,6 +1869,10 @@ module Aws::Glue
     #   Specifies a custom visual transform created by a user.
     #   @return [Types::DynamicTransform]
     #
+    # @!attribute [rw] evaluate_data_quality
+    #   Specifies your data quality evaluation criteria.
+    #   @return [Types::EvaluateDataQuality]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -1860,7 +1926,8 @@ module Aws::Glue
       :my_sql_catalog_target,
       :oracle_sql_catalog_target,
       :postgre_sql_catalog_target,
-      :dynamic_transform)
+      :dynamic_transform,
+      :evaluate_data_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3316,6 +3383,58 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCustomEntityTypeResponse AWS API Documentation
     #
     class CreateCustomEntityTypeResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A unique name for the data quality ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data quality ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] ruleset
+    #   A Data Quality Definition Language (DQDL) ruleset. For more
+    #   information, see the Glue developer guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags applied to the data quality ruleset.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_table
+    #   A target table associated with the data quality ruleset.
+    #   @return [Types::DataQualityTargetTable]
+    #
+    # @!attribute [rw] client_token
+    #   Used for idempotency and is recommended to be set to a random ID
+    #   (such as a UUID) to avoid creating or starting multiple instances of
+    #   the same resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDataQualityRulesetRequest AWS API Documentation
+    #
+    class CreateDataQualityRulesetRequest < Struct.new(
+      :name,
+      :description,
+      :ruleset,
+      :tags,
+      :target_table,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A unique name for the data quality ruleset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDataQualityRulesetResponse AWS API Documentation
+    #
+    class CreateDataQualityRulesetResponse < Struct.new(
       :name)
       SENSITIVE = []
       include Aws::Structure
@@ -4982,6 +5101,52 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Options to configure how your data quality evaluation results are
+    # published.
+    #
+    # @!attribute [rw] evaluation_context
+    #   The context of the evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] results_s3_prefix
+    #   The Amazon S3 prefix prepended to the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_metrics_enabled
+    #   Enable metrics for your data quality results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] results_publishing_enabled
+    #   Enable publishing for your data quality results.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DQResultsPublishingOptions AWS API Documentation
+    #
+    class DQResultsPublishingOptions < Struct.new(
+      :evaluation_context,
+      :results_s3_prefix,
+      :cloud_watch_metrics_enabled,
+      :results_publishing_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options to configure how your job will stop if your data quality
+    # evaluation fails.
+    #
+    # @!attribute [rw] stop_job_on_failure_timing
+    #   When to stop job if your data quality evaluation fails. Options are
+    #   Immediate or AfterDataLoad.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DQStopJobOnFailureOptions AWS API Documentation
+    #
+    class DQStopJobOnFailureOptions < Struct.new(
+      :stop_job_on_failure_timing)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configuration information for maintaining Data Catalog
     # security.
     #
@@ -5016,6 +5181,422 @@ module Aws::Glue
     #
     class DataLakePrincipal < Struct.new(
       :data_lake_principal_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional run options you can specify for an evaluation run.
+    #
+    # @!attribute [rw] cloud_watch_metrics_enabled
+    #   Whether or not to enable CloudWatch metrics.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] results_s3_prefix
+    #   Prefix for Amazon S3 to store results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationRunAdditionalRunOptions AWS API Documentation
+    #
+    class DataQualityEvaluationRunAdditionalRunOptions < Struct.new(
+      :cloud_watch_metrics_enabled,
+      :results_s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a data quality result.
+    #
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   An aggregate data quality score. Represents the ratio of rules that
+    #   passed to the total number of rules.
+    #   @return [Float]
+    #
+    # @!attribute [rw] data_source
+    #   The table associated with the data quality result, if any.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the ruleset associated with the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_context
+    #   In the context of a job in Glue Studio, each node in the canvas is
+    #   typically assigned some sort of name and data quality nodes will
+    #   have names. In the case of multiple nodes, the `evaluationContext`
+    #   can differentiate the nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when this data quality run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time when this data quality run completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_name
+    #   The job name associated with the data quality result, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The job run ID associated with the data quality result, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] ruleset_evaluation_run_id
+    #   The unique run ID for the ruleset evaluation for this data quality
+    #   result.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_results
+    #   A list of `DataQualityRuleResult` objects representing the results
+    #   for each rule.
+    #   @return [Array<Types::DataQualityRuleResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResult AWS API Documentation
+    #
+    class DataQualityResult < Struct.new(
+      :result_id,
+      :score,
+      :data_source,
+      :ruleset_name,
+      :evaluation_context,
+      :started_on,
+      :completed_on,
+      :job_name,
+      :job_run_id,
+      :ruleset_evaluation_run_id,
+      :rule_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a data quality result.
+    #
+    # @!attribute [rw] result_id
+    #   The unique result ID for this data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The table name associated with the data quality result.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] job_name
+    #   The job name associated with the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The job run ID associated with the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The time that the run started for this data quality result.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultDescription AWS API Documentation
+    #
+    class DataQualityResultDescription < Struct.new(
+      :result_id,
+      :data_source,
+      :job_name,
+      :job_run_id,
+      :started_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Criteria used to return data quality results.
+    #
+    # @!attribute [rw] data_source
+    #   Filter results by the specified data source. For example, retrieving
+    #   all results for an Glue table.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] job_name
+    #   Filter results by the specified job name.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   Filter results by the specified job run ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_after
+    #   Filter results by runs that started after this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_before
+    #   Filter results by runs that started before this time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultFilterCriteria AWS API Documentation
+    #
+    class DataQualityResultFilterCriteria < Struct.new(
+      :data_source,
+      :job_name,
+      :job_run_id,
+      :started_after,
+      :started_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the result of a data quality rule recommendation run.
+    #
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status for this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when this run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_source
+    #   The data source (Glue table) associated with the recommendation run.
+    #   @return [Types::DataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleRecommendationRunDescription AWS API Documentation
+    #
+    class DataQualityRuleRecommendationRunDescription < Struct.new(
+      :run_id,
+      :status,
+      :started_on,
+      :data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for listing data quality recommendation runs.
+    #
+    # @!attribute [rw] data_source
+    #   Filter based on a specified data source (Glue table).
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] started_before
+    #   Filter based on time for results started before provided time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_after
+    #   Filter based on time for results started after provided time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleRecommendationRunFilter AWS API Documentation
+    #
+    class DataQualityRuleRecommendationRunFilter < Struct.new(
+      :data_source,
+      :started_before,
+      :started_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the result of the evaluation of a data quality rule.
+    #
+    # @!attribute [rw] name
+    #   The name of the data quality rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data quality rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_message
+    #   An evaluation message.
+    #   @return [String]
+    #
+    # @!attribute [rw] result
+    #   A pass or fail status for the rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleResult AWS API Documentation
+    #
+    class DataQualityRuleResult < Struct.new(
+      :name,
+      :description,
+      :evaluation_message,
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the result of a data quality ruleset evaluation run.
+    #
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status for this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when the run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_source
+    #   The data source (an Glue table) associated with the run.
+    #   @return [Types::DataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRulesetEvaluationRunDescription AWS API Documentation
+    #
+    class DataQualityRulesetEvaluationRunDescription < Struct.new(
+      :run_id,
+      :status,
+      :started_on,
+      :data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter criteria.
+    #
+    # @!attribute [rw] data_source
+    #   Filter based on a data source (an Glue table) associated with the
+    #   run.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] started_before
+    #   Filter results by runs that started before this time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_after
+    #   Filter results by runs that started after this time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRulesetEvaluationRunFilter AWS API Documentation
+    #
+    class DataQualityRulesetEvaluationRunFilter < Struct.new(
+      :data_source,
+      :started_before,
+      :started_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria used to filter data quality rulesets.
+    #
+    # @!attribute [rw] name
+    #   The name of the ruleset filter criteria.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ruleset filter criteria.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_before
+    #   Filter on rulesets created before this date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_after
+    #   Filter on rulesets created after this date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_before
+    #   Filter on rulesets last modified before this date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_after
+    #   Filter on rulesets last modified after this date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_table
+    #   The name and database name of the target table.
+    #   @return [Types::DataQualityTargetTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRulesetFilterCriteria AWS API Documentation
+    #
+    class DataQualityRulesetFilterCriteria < Struct.new(
+      :name,
+      :description,
+      :created_before,
+      :created_after,
+      :last_modified_before,
+      :last_modified_after,
+      :target_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a data quality ruleset returned by `GetDataQualityRuleset`.
+    #
+    # @!attribute [rw] name
+    #   The name of the data quality ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data quality ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_on
+    #   The date and time the data quality ruleset was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The date and time the data quality ruleset was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_table
+    #   An object representing an Glue table.
+    #   @return [Types::DataQualityTargetTable]
+    #
+    # @!attribute [rw] recommendation_run_id
+    #   When a ruleset was created from a recommendation run, this run ID is
+    #   generated to link the two together.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_count
+    #   The number of rules in the ruleset.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRulesetListDetails AWS API Documentation
+    #
+    class DataQualityRulesetListDetails < Struct.new(
+      :name,
+      :description,
+      :created_on,
+      :last_modified_on,
+      :target_table,
+      :recommendation_run_id,
+      :rule_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing an Glue table.
+    #
+    # @!attribute [rw] table_name
+    #   The name of the Glue table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database where the Glue table exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityTargetTable AWS API Documentation
+    #
+    class DataQualityTargetTable < Struct.new(
+      :table_name,
+      :database_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data source (an Glue table) for which you want data quality results.
+    #
+    # @!attribute [rw] glue_table
+    #   An Glue table.
+    #   @return [Types::GlueTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataSource AWS API Documentation
+    #
+    class DataSource < Struct.new(
+      :glue_table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5407,6 +5988,22 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] name
+    #   A name for the data quality ruleset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDataQualityRulesetRequest AWS API Documentation
+    #
+    class DeleteDataQualityRulesetRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDataQualityRulesetResponse AWS API Documentation
+    #
+    class DeleteDataQualityRulesetResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
@@ -6612,6 +7209,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies your data quality evaluation criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The inputs of your data quality evaluation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ruleset
+    #   The ruleset for your data quality evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   The output of your data quality evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] publishing_options
+    #   Options to configure how your results are published.
+    #   @return [Types::DQResultsPublishingOptions]
+    #
+    # @!attribute [rw] stop_job_on_failure_options
+    #   Options to configure how your job will stop if your data quality
+    #   evaluation fails.
+    #   @return [Types::DQStopJobOnFailureOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EvaluateDataQuality AWS API Documentation
+    #
+    class EvaluateDataQuality < Struct.new(
+      :name,
+      :inputs,
+      :ruleset,
+      :output,
+      :publishing_options,
+      :stop_job_on_failure_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Evaluation metrics provide an estimate of the quality of your machine
     # learning transform.
     #
@@ -7523,6 +8160,327 @@ module Aws::Glue
     #
     class GetDataCatalogEncryptionSettingsResponse < Struct.new(
       :data_catalog_encryption_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultRequest AWS API Documentation
+    #
+    class GetDataQualityResultRequest < Struct.new(
+      :result_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   An aggregate data quality score. Represents the ratio of rules that
+    #   passed to the total number of rules.
+    #   @return [Float]
+    #
+    # @!attribute [rw] data_source
+    #   The table associated with the data quality result, if any.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the ruleset associated with the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_context
+    #   In the context of a job in Glue Studio, each node in the canvas is
+    #   typically assigned some sort of name and data quality nodes will
+    #   have names. In the case of multiple nodes, the `evaluationContext`
+    #   can differentiate the nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when the run for this data quality result started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time when the run for this data quality result was
+    #   completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_name
+    #   The job name associated with the data quality result, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The job run ID associated with the data quality result, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] ruleset_evaluation_run_id
+    #   The unique run ID associated with the ruleset evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_results
+    #   A list of `DataQualityRuleResult` objects representing the results
+    #   for each rule.
+    #   @return [Array<Types::DataQualityRuleResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultResponse AWS API Documentation
+    #
+    class GetDataQualityResultResponse < Struct.new(
+      :result_id,
+      :score,
+      :data_source,
+      :ruleset_name,
+      :evaluation_context,
+      :started_on,
+      :completed_on,
+      :job_name,
+      :job_run_id,
+      :ruleset_evaluation_run_id,
+      :rule_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRunRequest AWS API Documentation
+    #
+    class GetDataQualityRuleRecommendationRunRequest < Struct.new(
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The data source (an Glue table) associated with this run.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] role
+    #   An IAM role supplied to encrypt the results of the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status for this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_string
+    #   The error strings that are associated with the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when this run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   A timestamp. The last point in time when this data quality rule
+    #   recommendation run was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time when this run was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_time
+    #   The amount of time (in seconds) that the run consumed resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] recommended_ruleset
+    #   When a start rule recommendation run completes, it creates a
+    #   recommended ruleset (a set of rules). This member has those rules in
+    #   Data Quality Definition Language (DQDL) format.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_ruleset_name
+    #   The name of the ruleset that was created by the run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRunResponse AWS API Documentation
+    #
+    class GetDataQualityRuleRecommendationRunResponse < Struct.new(
+      :run_id,
+      :data_source,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :status,
+      :error_string,
+      :started_on,
+      :last_modified_on,
+      :completed_on,
+      :execution_time,
+      :recommended_ruleset,
+      :created_ruleset_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetEvaluationRunRequest AWS API Documentation
+    #
+    class GetDataQualityRulesetEvaluationRunRequest < Struct.new(
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The data source (an Glue table) associated with this evaluation run.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] role
+    #   An IAM role supplied to encrypt the results of the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #   @return [Types::DataQualityEvaluationRunAdditionalRunOptions]
+    #
+    # @!attribute [rw] status
+    #   The status for this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_string
+    #   The error strings that are associated with the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when this run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   A timestamp. The last point in time when this data quality rule
+    #   recommendation run was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time when this run was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_time
+    #   The amount of time (in seconds) that the run consumed resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ruleset_names
+    #   A list of ruleset names for the run.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] result_ids
+    #   A list of result IDs for the data quality results for the run.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetEvaluationRunResponse AWS API Documentation
+    #
+    class GetDataQualityRulesetEvaluationRunResponse < Struct.new(
+      :run_id,
+      :data_source,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :additional_run_options,
+      :status,
+      :error_string,
+      :started_on,
+      :last_modified_on,
+      :completed_on,
+      :execution_time,
+      :ruleset_names,
+      :result_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the ruleset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetRequest AWS API Documentation
+    #
+    class GetDataQualityRulesetRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] ruleset
+    #   A Data Quality Definition Language (DQDL) ruleset. For more
+    #   information, see the Glue developer guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_table
+    #   The name and database name of the target table.
+    #   @return [Types::DataQualityTargetTable]
+    #
+    # @!attribute [rw] created_on
+    #   A timestamp. The time and date that this data quality ruleset was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   A timestamp. The last point in time when this data quality ruleset
+    #   was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recommendation_run_id
+    #   When a ruleset was created from a recommendation run, this run ID is
+    #   generated to link the two together.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetResponse AWS API Documentation
+    #
+    class GetDataQualityRulesetResponse < Struct.new(
+      :name,
+      :description,
+      :ruleset,
+      :target_table,
+      :created_on,
+      :last_modified_on,
+      :recommendation_run_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9872,13 +10830,25 @@ module Aws::Glue
     #   The name of the connection to the Glue Data Catalog.
     #   @return [String]
     #
+    # @!attribute [rw] additional_options
+    #   Additional options for the table. Currently there are two keys
+    #   supported:
+    #
+    #   * `pushDownPredicate`\: to filter on partitions without having to
+    #     list and read all the files in your dataset.
+    #
+    #   * `catalogPartitionPredicate`\: to use server-side partition pruning
+    #     using partition indexes in the Glue Data Catalog.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueTable AWS API Documentation
     #
     class GlueTable < Struct.new(
       :database_name,
       :table_name,
       :catalog_id,
-      :connection_name)
+      :connection_name,
+      :additional_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11784,6 +12754,168 @@ module Aws::Glue
     #
     class ListCustomEntityTypesResponse < Struct.new(
       :custom_entity_types,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   The filter criteria.
+    #   @return [Types::DataQualityResultFilterCriteria]
+    #
+    # @!attribute [rw] next_token
+    #   A paginated token to offset the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsRequest AWS API Documentation
+    #
+    class ListDataQualityResultsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of `DataQualityResultDescription` objects.
+    #   @return [Array<Types::DataQualityResultDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token, if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsResponse AWS API Documentation
+    #
+    class ListDataQualityResultsResponse < Struct.new(
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   The filter criteria.
+    #   @return [Types::DataQualityRuleRecommendationRunFilter]
+    #
+    # @!attribute [rw] next_token
+    #   A paginated token to offset the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRuleRecommendationRunsRequest AWS API Documentation
+    #
+    class ListDataQualityRuleRecommendationRunsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] runs
+    #   A list of `DataQualityRuleRecommendationRunDescription` objects.
+    #   @return [Array<Types::DataQualityRuleRecommendationRunDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token, if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRuleRecommendationRunsResponse AWS API Documentation
+    #
+    class ListDataQualityRuleRecommendationRunsResponse < Struct.new(
+      :runs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   The filter criteria.
+    #   @return [Types::DataQualityRulesetEvaluationRunFilter]
+    #
+    # @!attribute [rw] next_token
+    #   A paginated token to offset the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRulesetEvaluationRunsRequest AWS API Documentation
+    #
+    class ListDataQualityRulesetEvaluationRunsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] runs
+    #   A list of `DataQualityRulesetEvaluationRunDescription` objects
+    #   representing data quality ruleset runs.
+    #   @return [Array<Types::DataQualityRulesetEvaluationRunDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token, if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRulesetEvaluationRunsResponse AWS API Documentation
+    #
+    class ListDataQualityRulesetEvaluationRunsResponse < Struct.new(
+      :runs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A paginated token to offset the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   The filter criteria.
+    #   @return [Types::DataQualityRulesetFilterCriteria]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pair tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRulesetsRequest AWS API Documentation
+    #
+    class ListDataQualityRulesetsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filter,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rulesets
+    #   A paginated list of rulesets for the specified list of Glue tables.
+    #   @return [Array<Types::DataQualityRulesetListDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token, if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRulesetsResponse AWS API Documentation
+    #
+    class ListDataQualityRulesetsResponse < Struct.new(
+      :rulesets,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -15792,6 +16924,119 @@ module Aws::Glue
     #
     class StartCrawlerScheduleResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] data_source
+    #   The data source (Glue table) associated with this run.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] role
+    #   An IAM role supplied to encrypt the results of the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_ruleset_name
+    #   A name for the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Used for idempotency and is recommended to be set to a random ID
+    #   (such as a UUID) to avoid creating or starting multiple instances of
+    #   the same resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRuleRecommendationRunRequest AWS API Documentation
+    #
+    class StartDataQualityRuleRecommendationRunRequest < Struct.new(
+      :data_source,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :created_ruleset_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRuleRecommendationRunResponse AWS API Documentation
+    #
+    class StartDataQualityRuleRecommendationRunResponse < Struct.new(
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_source
+    #   The data source (Glue table) associated with this run.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] role
+    #   An IAM role supplied to encrypt the results of the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   Used for idempotency and is recommended to be set to a random ID
+    #   (such as a UUID) to avoid creating or starting multiple instances of
+    #   the same resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #   @return [Types::DataQualityEvaluationRunAdditionalRunOptions]
+    #
+    # @!attribute [rw] ruleset_names
+    #   A list of ruleset names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRulesetEvaluationRunRequest AWS API Documentation
+    #
+    class StartDataQualityRulesetEvaluationRunRequest < Struct.new(
+      :data_source,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :client_token,
+      :additional_run_options,
+      :ruleset_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRulesetEvaluationRunResponse AWS API Documentation
+    #
+    class StartDataQualityRulesetEvaluationRunResponse < Struct.new(
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transform_id
     #   The unique identifier of the machine learning transform.
     #   @return [String]
@@ -17725,6 +18970,57 @@ module Aws::Glue
       :allow_single_column,
       :custom_datatype_configured,
       :custom_datatypes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the data quality ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_name
+    #   The new name of the ruleset, if you are renaming it.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] ruleset
+    #   A Data Quality Definition Language (DQDL) ruleset. For more
+    #   information, see the Glue developer guide.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDataQualityRulesetRequest AWS API Documentation
+    #
+    class UpdateDataQualityRulesetRequest < Struct.new(
+      :name,
+      :updated_name,
+      :description,
+      :ruleset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the data quality ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] ruleset
+    #   A Data Quality Definition Language (DQDL) ruleset. For more
+    #   information, see the Glue developer guide.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDataQualityRulesetResponse AWS API Documentation
+    #
+    class UpdateDataQualityRulesetResponse < Struct.new(
+      :name,
+      :description,
+      :ruleset)
       SENSITIVE = []
       include Aws::Structure
     end

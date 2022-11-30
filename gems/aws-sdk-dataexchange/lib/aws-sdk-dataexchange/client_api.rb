@@ -26,6 +26,7 @@ module Aws::DataExchange
     AssetType = Shapes::StringShape.new(name: 'AssetType')
     AutoExportRevisionDestinationEntry = Shapes::StructureShape.new(name: 'AutoExportRevisionDestinationEntry')
     AutoExportRevisionToS3RequestDetails = Shapes::StructureShape.new(name: 'AutoExportRevisionToS3RequestDetails')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     Code = Shapes::StringShape.new(name: 'Code')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -37,7 +38,12 @@ module Aws::DataExchange
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
     CreateRevisionRequest = Shapes::StructureShape.new(name: 'CreateRevisionRequest')
     CreateRevisionResponse = Shapes::StructureShape.new(name: 'CreateRevisionResponse')
+    CreateS3DataAccessFromS3BucketRequestDetails = Shapes::StructureShape.new(name: 'CreateS3DataAccessFromS3BucketRequestDetails')
+    CreateS3DataAccessFromS3BucketResponseDetails = Shapes::StructureShape.new(name: 'CreateS3DataAccessFromS3BucketResponseDetails')
     DataSetEntry = Shapes::StructureShape.new(name: 'DataSetEntry')
+    DatabaseLFTagPolicy = Shapes::StructureShape.new(name: 'DatabaseLFTagPolicy')
+    DatabaseLFTagPolicyAndPermissions = Shapes::StructureShape.new(name: 'DatabaseLFTagPolicyAndPermissions')
+    DatabaseLFTagPolicyPermission = Shapes::StringShape.new(name: 'DatabaseLFTagPolicyPermission')
     DeleteAssetRequest = Shapes::StructureShape.new(name: 'DeleteAssetRequest')
     DeleteDataSetRequest = Shapes::StructureShape.new(name: 'DeleteDataSetRequest')
     DeleteEventActionRequest = Shapes::StructureShape.new(name: 'DeleteEventActionRequest')
@@ -70,6 +76,8 @@ module Aws::DataExchange
     ImportAssetFromSignedUrlJobErrorDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlJobErrorDetails')
     ImportAssetFromSignedUrlRequestDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlRequestDetails')
     ImportAssetFromSignedUrlResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlResponseDetails')
+    ImportAssetsFromLakeFormationTagPolicyRequestDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromLakeFormationTagPolicyRequestDetails')
+    ImportAssetsFromLakeFormationTagPolicyResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromLakeFormationTagPolicyResponseDetails')
     ImportAssetsFromRedshiftDataSharesRequestDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromRedshiftDataSharesRequestDetails')
     ImportAssetsFromRedshiftDataSharesResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromRedshiftDataSharesResponseDetails')
     ImportAssetsFromS3RequestDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromS3RequestDetails')
@@ -79,6 +87,14 @@ module Aws::DataExchange
     JobError = Shapes::StructureShape.new(name: 'JobError')
     JobErrorLimitName = Shapes::StringShape.new(name: 'JobErrorLimitName')
     JobErrorResourceTypes = Shapes::StringShape.new(name: 'JobErrorResourceTypes')
+    LFPermission = Shapes::StringShape.new(name: 'LFPermission')
+    LFResourceDetails = Shapes::StructureShape.new(name: 'LFResourceDetails')
+    LFResourceType = Shapes::StringShape.new(name: 'LFResourceType')
+    LFTag = Shapes::StructureShape.new(name: 'LFTag')
+    LFTagPolicyDetails = Shapes::StructureShape.new(name: 'LFTagPolicyDetails')
+    LakeFormationDataPermissionAsset = Shapes::StructureShape.new(name: 'LakeFormationDataPermissionAsset')
+    LakeFormationDataPermissionDetails = Shapes::StructureShape.new(name: 'LakeFormationDataPermissionDetails')
+    LakeFormationDataPermissionType = Shapes::StringShape.new(name: 'LakeFormationDataPermissionType')
     LimitName = Shapes::StringShape.new(name: 'LimitName')
     ListDataSetRevisionsRequest = Shapes::StructureShape.new(name: 'ListDataSetRevisionsRequest')
     ListDataSetRevisionsResponse = Shapes::StructureShape.new(name: 'ListDataSetRevisionsResponse')
@@ -92,12 +108,17 @@ module Aws::DataExchange
     ListOfAssetEntry = Shapes::ListShape.new(name: 'ListOfAssetEntry')
     ListOfAssetSourceEntry = Shapes::ListShape.new(name: 'ListOfAssetSourceEntry')
     ListOfDataSetEntry = Shapes::ListShape.new(name: 'ListOfDataSetEntry')
+    ListOfDatabaseLFTagPolicyPermissions = Shapes::ListShape.new(name: 'ListOfDatabaseLFTagPolicyPermissions')
     ListOfEventActionEntry = Shapes::ListShape.new(name: 'ListOfEventActionEntry')
     ListOfJobEntry = Shapes::ListShape.new(name: 'ListOfJobEntry')
     ListOfJobError = Shapes::ListShape.new(name: 'ListOfJobError')
+    ListOfLFPermissions = Shapes::ListShape.new(name: 'ListOfLFPermissions')
+    ListOfLFTagValues = Shapes::ListShape.new(name: 'ListOfLFTagValues')
+    ListOfLFTags = Shapes::ListShape.new(name: 'ListOfLFTags')
     ListOfRedshiftDataShareAssetSourceEntry = Shapes::ListShape.new(name: 'ListOfRedshiftDataShareAssetSourceEntry')
     ListOfRevisionDestinationEntry = Shapes::ListShape.new(name: 'ListOfRevisionDestinationEntry')
     ListOfRevisionEntry = Shapes::ListShape.new(name: 'ListOfRevisionEntry')
+    ListOfTableTagPolicyLFPermissions = Shapes::ListShape.new(name: 'ListOfTableTagPolicyLFPermissions')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
     ListRevisionAssetsRequest = Shapes::StructureShape.new(name: 'ListRevisionAssetsRequest')
     ListRevisionAssetsResponse = Shapes::StructureShape.new(name: 'ListRevisionAssetsResponse')
@@ -121,6 +142,9 @@ module Aws::DataExchange
     RevisionPublished = Shapes::StructureShape.new(name: 'RevisionPublished')
     RevokeRevisionRequest = Shapes::StructureShape.new(name: 'RevokeRevisionRequest')
     RevokeRevisionResponse = Shapes::StructureShape.new(name: 'RevokeRevisionResponse')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3DataAccessAsset = Shapes::StructureShape.new(name: 'S3DataAccessAsset')
+    S3DataAccessAssetSourceEntry = Shapes::StructureShape.new(name: 'S3DataAccessAssetSourceEntry')
     S3SnapshotAsset = Shapes::StructureShape.new(name: 'S3SnapshotAsset')
     SendApiAssetRequest = Shapes::StructureShape.new(name: 'SendApiAssetRequest')
     SendApiAssetResponse = Shapes::StructureShape.new(name: 'SendApiAssetResponse')
@@ -129,6 +153,10 @@ module Aws::DataExchange
     StartJobRequest = Shapes::StructureShape.new(name: 'StartJobRequest')
     StartJobResponse = Shapes::StructureShape.new(name: 'StartJobResponse')
     State = Shapes::StringShape.new(name: 'State')
+    String = Shapes::StringShape.new(name: 'String')
+    TableLFTagPolicy = Shapes::StructureShape.new(name: 'TableLFTagPolicy')
+    TableLFTagPolicyAndPermissions = Shapes::StructureShape.new(name: 'TableLFTagPolicyAndPermissions')
+    TableTagPolicyLFPermission = Shapes::StringShape.new(name: 'TableTagPolicyLFPermission')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
@@ -176,6 +204,8 @@ module Aws::DataExchange
     AssetDetails.add_member(:s3_snapshot_asset, Shapes::ShapeRef.new(shape: S3SnapshotAsset, location_name: "S3SnapshotAsset"))
     AssetDetails.add_member(:redshift_data_share_asset, Shapes::ShapeRef.new(shape: RedshiftDataShareAsset, location_name: "RedshiftDataShareAsset"))
     AssetDetails.add_member(:api_gateway_api_asset, Shapes::ShapeRef.new(shape: ApiGatewayApiAsset, location_name: "ApiGatewayApiAsset"))
+    AssetDetails.add_member(:s3_data_access_asset, Shapes::ShapeRef.new(shape: S3DataAccessAsset, location_name: "S3DataAccessAsset"))
+    AssetDetails.add_member(:lake_formation_data_permission_asset, Shapes::ShapeRef.new(shape: LakeFormationDataPermissionAsset, location_name: "LakeFormationDataPermissionAsset"))
     AssetDetails.struct_class = Types::AssetDetails
 
     AssetEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -274,6 +304,16 @@ module Aws::DataExchange
     CreateRevisionResponse.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
     CreateRevisionResponse.struct_class = Types::CreateRevisionResponse
 
+    CreateS3DataAccessFromS3BucketRequestDetails.add_member(:asset_source, Shapes::ShapeRef.new(shape: S3DataAccessAssetSourceEntry, required: true, location_name: "AssetSource"))
+    CreateS3DataAccessFromS3BucketRequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    CreateS3DataAccessFromS3BucketRequestDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    CreateS3DataAccessFromS3BucketRequestDetails.struct_class = Types::CreateS3DataAccessFromS3BucketRequestDetails
+
+    CreateS3DataAccessFromS3BucketResponseDetails.add_member(:asset_source, Shapes::ShapeRef.new(shape: S3DataAccessAssetSourceEntry, required: true, location_name: "AssetSource"))
+    CreateS3DataAccessFromS3BucketResponseDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    CreateS3DataAccessFromS3BucketResponseDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    CreateS3DataAccessFromS3BucketResponseDetails.struct_class = Types::CreateS3DataAccessFromS3BucketResponseDetails
+
     DataSetEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     DataSetEntry.add_member(:asset_type, Shapes::ShapeRef.new(shape: AssetType, required: true, location_name: "AssetType"))
     DataSetEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
@@ -285,6 +325,13 @@ module Aws::DataExchange
     DataSetEntry.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
     DataSetEntry.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
     DataSetEntry.struct_class = Types::DataSetEntry
+
+    DatabaseLFTagPolicy.add_member(:expression, Shapes::ShapeRef.new(shape: ListOfLFTags, required: true, location_name: "Expression"))
+    DatabaseLFTagPolicy.struct_class = Types::DatabaseLFTagPolicy
+
+    DatabaseLFTagPolicyAndPermissions.add_member(:expression, Shapes::ShapeRef.new(shape: ListOfLFTags, required: true, location_name: "Expression"))
+    DatabaseLFTagPolicyAndPermissions.add_member(:permissions, Shapes::ShapeRef.new(shape: ListOfDatabaseLFTagPolicyPermissions, required: true, location_name: "Permissions"))
+    DatabaseLFTagPolicyAndPermissions.struct_class = Types::DatabaseLFTagPolicyAndPermissions
 
     DeleteAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "AssetId"))
     DeleteAssetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
@@ -471,6 +518,22 @@ module Aws::DataExchange
     ImportAssetFromSignedUrlResponseDetails.add_member(:signed_url_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SignedUrlExpiresAt"))
     ImportAssetFromSignedUrlResponseDetails.struct_class = Types::ImportAssetFromSignedUrlResponseDetails
 
+    ImportAssetsFromLakeFormationTagPolicyRequestDetails.add_member(:catalog_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "CatalogId"))
+    ImportAssetsFromLakeFormationTagPolicyRequestDetails.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseLFTagPolicyAndPermissions, location_name: "Database"))
+    ImportAssetsFromLakeFormationTagPolicyRequestDetails.add_member(:table, Shapes::ShapeRef.new(shape: TableLFTagPolicyAndPermissions, location_name: "Table"))
+    ImportAssetsFromLakeFormationTagPolicyRequestDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    ImportAssetsFromLakeFormationTagPolicyRequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ImportAssetsFromLakeFormationTagPolicyRequestDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    ImportAssetsFromLakeFormationTagPolicyRequestDetails.struct_class = Types::ImportAssetsFromLakeFormationTagPolicyRequestDetails
+
+    ImportAssetsFromLakeFormationTagPolicyResponseDetails.add_member(:catalog_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "CatalogId"))
+    ImportAssetsFromLakeFormationTagPolicyResponseDetails.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseLFTagPolicyAndPermissions, location_name: "Database"))
+    ImportAssetsFromLakeFormationTagPolicyResponseDetails.add_member(:table, Shapes::ShapeRef.new(shape: TableLFTagPolicyAndPermissions, location_name: "Table"))
+    ImportAssetsFromLakeFormationTagPolicyResponseDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    ImportAssetsFromLakeFormationTagPolicyResponseDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ImportAssetsFromLakeFormationTagPolicyResponseDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    ImportAssetsFromLakeFormationTagPolicyResponseDetails.struct_class = Types::ImportAssetsFromLakeFormationTagPolicyResponseDetails
+
     ImportAssetsFromRedshiftDataSharesRequestDetails.add_member(:asset_sources, Shapes::ShapeRef.new(shape: ListOfRedshiftDataShareAssetSourceEntry, required: true, location_name: "AssetSources"))
     ImportAssetsFromRedshiftDataSharesRequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
     ImportAssetsFromRedshiftDataSharesRequestDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
@@ -512,6 +575,28 @@ module Aws::DataExchange
     JobError.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "ResourceId"))
     JobError.add_member(:resource_type, Shapes::ShapeRef.new(shape: JobErrorResourceTypes, location_name: "ResourceType"))
     JobError.struct_class = Types::JobError
+
+    LFResourceDetails.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseLFTagPolicy, location_name: "Database"))
+    LFResourceDetails.add_member(:table, Shapes::ShapeRef.new(shape: TableLFTagPolicy, location_name: "Table"))
+    LFResourceDetails.struct_class = Types::LFResourceDetails
+
+    LFTag.add_member(:tag_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TagKey"))
+    LFTag.add_member(:tag_values, Shapes::ShapeRef.new(shape: ListOfLFTagValues, required: true, location_name: "TagValues"))
+    LFTag.struct_class = Types::LFTag
+
+    LFTagPolicyDetails.add_member(:catalog_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "CatalogId"))
+    LFTagPolicyDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: LFResourceType, required: true, location_name: "ResourceType"))
+    LFTagPolicyDetails.add_member(:resource_details, Shapes::ShapeRef.new(shape: LFResourceDetails, required: true, location_name: "ResourceDetails"))
+    LFTagPolicyDetails.struct_class = Types::LFTagPolicyDetails
+
+    LakeFormationDataPermissionAsset.add_member(:lake_formation_data_permission_details, Shapes::ShapeRef.new(shape: LakeFormationDataPermissionDetails, required: true, location_name: "LakeFormationDataPermissionDetails"))
+    LakeFormationDataPermissionAsset.add_member(:lake_formation_data_permission_type, Shapes::ShapeRef.new(shape: LakeFormationDataPermissionType, required: true, location_name: "LakeFormationDataPermissionType"))
+    LakeFormationDataPermissionAsset.add_member(:permissions, Shapes::ShapeRef.new(shape: ListOfLFPermissions, required: true, location_name: "Permissions"))
+    LakeFormationDataPermissionAsset.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    LakeFormationDataPermissionAsset.struct_class = Types::LakeFormationDataPermissionAsset
+
+    LakeFormationDataPermissionDetails.add_member(:lf_tag_policy, Shapes::ShapeRef.new(shape: LFTagPolicyDetails, location_name: "LFTagPolicy"))
+    LakeFormationDataPermissionDetails.struct_class = Types::LakeFormationDataPermissionDetails
 
     ListDataSetRevisionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     ListDataSetRevisionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -558,17 +643,27 @@ module Aws::DataExchange
 
     ListOfDataSetEntry.member = Shapes::ShapeRef.new(shape: DataSetEntry)
 
+    ListOfDatabaseLFTagPolicyPermissions.member = Shapes::ShapeRef.new(shape: DatabaseLFTagPolicyPermission)
+
     ListOfEventActionEntry.member = Shapes::ShapeRef.new(shape: EventActionEntry)
 
     ListOfJobEntry.member = Shapes::ShapeRef.new(shape: JobEntry)
 
     ListOfJobError.member = Shapes::ShapeRef.new(shape: JobError)
 
+    ListOfLFPermissions.member = Shapes::ShapeRef.new(shape: LFPermission)
+
+    ListOfLFTagValues.member = Shapes::ShapeRef.new(shape: String)
+
+    ListOfLFTags.member = Shapes::ShapeRef.new(shape: LFTag)
+
     ListOfRedshiftDataShareAssetSourceEntry.member = Shapes::ShapeRef.new(shape: RedshiftDataShareAssetSourceEntry)
 
     ListOfRevisionDestinationEntry.member = Shapes::ShapeRef.new(shape: RevisionDestinationEntry)
 
     ListOfRevisionEntry.member = Shapes::ShapeRef.new(shape: RevisionEntry)
+
+    ListOfTableTagPolicyLFPermissions.member = Shapes::ShapeRef.new(shape: TableTagPolicyLFPermission)
 
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -607,6 +702,8 @@ module Aws::DataExchange
     RequestDetails.add_member(:import_assets_from_s3, Shapes::ShapeRef.new(shape: ImportAssetsFromS3RequestDetails, location_name: "ImportAssetsFromS3"))
     RequestDetails.add_member(:import_assets_from_redshift_data_shares, Shapes::ShapeRef.new(shape: ImportAssetsFromRedshiftDataSharesRequestDetails, location_name: "ImportAssetsFromRedshiftDataShares"))
     RequestDetails.add_member(:import_asset_from_api_gateway_api, Shapes::ShapeRef.new(shape: ImportAssetFromApiGatewayApiRequestDetails, location_name: "ImportAssetFromApiGatewayApi"))
+    RequestDetails.add_member(:create_s3_data_access_from_s3_bucket, Shapes::ShapeRef.new(shape: CreateS3DataAccessFromS3BucketRequestDetails, location_name: "CreateS3DataAccessFromS3Bucket"))
+    RequestDetails.add_member(:import_assets_from_lake_formation_tag_policy, Shapes::ShapeRef.new(shape: ImportAssetsFromLakeFormationTagPolicyRequestDetails, location_name: "ImportAssetsFromLakeFormationTagPolicy"))
     RequestDetails.struct_class = Types::RequestDetails
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
@@ -621,6 +718,8 @@ module Aws::DataExchange
     ResponseDetails.add_member(:import_assets_from_s3, Shapes::ShapeRef.new(shape: ImportAssetsFromS3ResponseDetails, location_name: "ImportAssetsFromS3"))
     ResponseDetails.add_member(:import_assets_from_redshift_data_shares, Shapes::ShapeRef.new(shape: ImportAssetsFromRedshiftDataSharesResponseDetails, location_name: "ImportAssetsFromRedshiftDataShares"))
     ResponseDetails.add_member(:import_asset_from_api_gateway_api, Shapes::ShapeRef.new(shape: ImportAssetFromApiGatewayApiResponseDetails, location_name: "ImportAssetFromApiGatewayApi"))
+    ResponseDetails.add_member(:create_s3_data_access_from_s3_bucket, Shapes::ShapeRef.new(shape: CreateS3DataAccessFromS3BucketResponseDetails, location_name: "CreateS3DataAccessFromS3Bucket"))
+    ResponseDetails.add_member(:import_assets_from_lake_formation_tag_policy, Shapes::ShapeRef.new(shape: ImportAssetsFromLakeFormationTagPolicyResponseDetails, location_name: "ImportAssetsFromLakeFormationTagPolicy"))
     ResponseDetails.struct_class = Types::ResponseDetails
 
     RevisionDestinationEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
@@ -662,6 +761,18 @@ module Aws::DataExchange
     RevokeRevisionResponse.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
     RevokeRevisionResponse.struct_class = Types::RevokeRevisionResponse
 
+    S3DataAccessAsset.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
+    S3DataAccessAsset.add_member(:key_prefixes, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "KeyPrefixes"))
+    S3DataAccessAsset.add_member(:keys, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Keys"))
+    S3DataAccessAsset.add_member(:s3_access_point_alias, Shapes::ShapeRef.new(shape: __string, location_name: "S3AccessPointAlias"))
+    S3DataAccessAsset.add_member(:s3_access_point_arn, Shapes::ShapeRef.new(shape: __string, location_name: "S3AccessPointArn"))
+    S3DataAccessAsset.struct_class = Types::S3DataAccessAsset
+
+    S3DataAccessAssetSourceEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
+    S3DataAccessAssetSourceEntry.add_member(:key_prefixes, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "KeyPrefixes"))
+    S3DataAccessAssetSourceEntry.add_member(:keys, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Keys"))
+    S3DataAccessAssetSourceEntry.struct_class = Types::S3DataAccessAssetSourceEntry
+
     S3SnapshotAsset.add_member(:size, Shapes::ShapeRef.new(shape: __doubleMin0, required: true, location_name: "Size"))
     S3SnapshotAsset.struct_class = Types::S3SnapshotAsset
 
@@ -692,6 +803,13 @@ module Aws::DataExchange
     StartJobRequest.struct_class = Types::StartJobRequest
 
     StartJobResponse.struct_class = Types::StartJobResponse
+
+    TableLFTagPolicy.add_member(:expression, Shapes::ShapeRef.new(shape: ListOfLFTags, required: true, location_name: "Expression"))
+    TableLFTagPolicy.struct_class = Types::TableLFTagPolicy
+
+    TableLFTagPolicyAndPermissions.add_member(:expression, Shapes::ShapeRef.new(shape: ListOfLFTags, required: true, location_name: "Expression"))
+    TableLFTagPolicyAndPermissions.add_member(:permissions, Shapes::ShapeRef.new(shape: ListOfTableTagPolicyLFPermissions, required: true, location_name: "Permissions"))
+    TableLFTagPolicyAndPermissions.struct_class = Types::TableLFTagPolicyAndPermissions
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, required: true, location_name: "tags"))

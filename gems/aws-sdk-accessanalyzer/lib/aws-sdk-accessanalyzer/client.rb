@@ -1021,8 +1021,9 @@ module Aws::AccessAnalyzer
     #   resp.finding.resource_owner_account #=> String
     #   resp.finding.error #=> String
     #   resp.finding.sources #=> Array
-    #   resp.finding.sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT"
+    #   resp.finding.sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT", "S3_ACCESS_POINT_ACCOUNT"
     #   resp.finding.sources[0].detail.access_point_arn #=> String
+    #   resp.finding.sources[0].detail.access_point_account #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetFinding AWS API Documentation
     #
@@ -1167,8 +1168,9 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].resource_owner_account #=> String
     #   resp.findings[0].error #=> String
     #   resp.findings[0].sources #=> Array
-    #   resp.findings[0].sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT"
+    #   resp.findings[0].sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT", "S3_ACCESS_POINT_ACCOUNT"
     #   resp.findings[0].sources[0].detail.access_point_arn #=> String
+    #   resp.findings[0].sources[0].detail.access_point_account #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAccessPreviewFindings AWS API Documentation
@@ -1459,8 +1461,9 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].resource_owner_account #=> String
     #   resp.findings[0].error #=> String
     #   resp.findings[0].sources #=> Array
-    #   resp.findings[0].sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT"
+    #   resp.findings[0].sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT", "S3_ACCESS_POINT_ACCOUNT"
     #   resp.findings[0].sources[0].detail.access_point_arn #=> String
+    #   resp.findings[0].sources[0].detail.access_point_account #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListFindings AWS API Documentation
@@ -1899,7 +1902,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

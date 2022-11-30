@@ -62,6 +62,11 @@ module Aws::S3Control
     #   The name or alias of the access point.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_account_id
+    #   The Amazon Web Services account ID associated with the S3 bucket
+    #   associated with this access point.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccessPoint AWS API Documentation
     #
     class AccessPoint < Struct.new(
@@ -70,7 +75,8 @@ module Aws::S3Control
       :vpc_configuration,
       :bucket,
       :access_point_arn,
-      :alias)
+      :alias,
+      :bucket_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -487,8 +493,8 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account ID for the owner of the bucket for
-    #   which you want to create an access point.
+    #   The Amazon Web Services account ID for the account that owns the
+    #   specified access point.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -528,6 +534,11 @@ module Aws::S3Control
     #   access point.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
+    # @!attribute [rw] bucket_account_id
+    #   The Amazon Web Services account ID associated with the S3 bucket
+    #   associated with this access point.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointRequest AWS API Documentation
     #
     class CreateAccessPointRequest < Struct.new(
@@ -535,7 +546,8 @@ module Aws::S3Control
       :name,
       :bucket,
       :vpc_configuration,
-      :public_access_block_configuration)
+      :public_access_block_configuration,
+      :bucket_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -963,7 +975,8 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The account ID for the account that owns the specified access point.
+    #   The Amazon Web Services account ID for the account that owns the
+    #   specified access point.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1620,7 +1633,8 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The account ID for the account that owns the specified access point.
+    #   The Amazon Web Services account ID for the account that owns the
+    #   specified access point.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1709,6 +1723,11 @@ module Aws::S3Control
     #   The VPC endpoint for the access point.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] bucket_account_id
+    #   The Amazon Web Services account ID associated with the S3 bucket
+    #   associated with this access point.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointResult AWS API Documentation
     #
     class GetAccessPointResult < Struct.new(
@@ -1720,7 +1739,8 @@ module Aws::S3Control
       :creation_date,
       :alias,
       :access_point_arn,
-      :endpoints)
+      :endpoints,
+      :bucket_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3038,8 +3058,8 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account ID for owner of the bucket whose
-    #   access points you want to list.
+    #   The Amazon Web Services account ID for the account that owns the
+    #   specified access points.
     #   @return [String]
     #
     # @!attribute [rw] bucket

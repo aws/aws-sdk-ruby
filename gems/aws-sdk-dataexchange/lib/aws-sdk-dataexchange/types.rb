@@ -99,7 +99,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket that is the destination for the asset.
+    #   The Amazon S3 bucket that is the destination for the asset.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -116,10 +116,10 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # Information about the asset.
+    # Details about the asset.
     #
     # @!attribute [rw] s3_snapshot_asset
-    #   The S3 object that is the asset.
+    #   The Amazon S3 object that is the asset.
     #   @return [Types::S3SnapshotAsset]
     #
     # @!attribute [rw] redshift_data_share_asset
@@ -130,30 +130,43 @@ module Aws::DataExchange
     #   Information about the API Gateway API asset.
     #   @return [Types::ApiGatewayApiAsset]
     #
+    # @!attribute [rw] s3_data_access_asset
+    #   The Amazon S3 data access that is the asset.
+    #   @return [Types::S3DataAccessAsset]
+    #
+    # @!attribute [rw] lake_formation_data_permission_asset
+    #   The AWS Lake Formation data permission that is the asset.
+    #   @return [Types::LakeFormationDataPermissionAsset]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/AssetDetails AWS API Documentation
     #
     class AssetDetails < Struct.new(
       :s3_snapshot_asset,
       :redshift_data_share_asset,
-      :api_gateway_api_asset)
+      :api_gateway_api_asset,
+      :s3_data_access_asset,
+      :lake_formation_data_permission_asset)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An asset in AWS Data Exchange is a piece of data (S3 object) or a
-    # means of fulfilling data (Amazon Redshift datashare or Amazon API
-    # Gateway API). The asset can be a structured data file, an image file,
-    # or some other data file that can be stored as an S3 object, an Amazon
-    # API Gateway API, or an Amazon Redshift datashare. When you create an
-    # import job for your files, API Gateway APIs, or Amazon Redshift
-    # datashares, you create an asset in AWS Data Exchange.
+    # An asset in AWS Data Exchange is a piece of data (Amazon S3 object) or
+    # a means of fulfilling data (Amazon Redshift datashare or Amazon API
+    # Gateway API, AWS Lake Formation data permission, or Amazon S3 data
+    # access). The asset can be a structured data file, an image file, or
+    # some other data file that can be stored as an Amazon S3 object, an
+    # Amazon API Gateway API, or an Amazon Redshift datashare, an AWS Lake
+    # Formation data permission, or an Amazon S3 data access. When you
+    # create an import job for your files, API Gateway APIs, Amazon Redshift
+    # datashares, AWS Lake Formation data permission, or Amazon S3 data
+    # access, you create an asset in AWS Data Exchange.
     #
     # @!attribute [rw] arn
     #   The ARN for the asset.
     #   @return [String]
     #
     # @!attribute [rw] asset_details
-    #   Information about the asset.
+    #   Details about the asset.
     #   @return [Types::AssetDetails]
     #
     # @!attribute [rw] asset_type
@@ -173,12 +186,14 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the asset. When importing from Amazon S3, the S3 object
-    #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key. When importing
-    #   from Amazon API Gateway API, the API name is used as the asset name.
-    #   When importing from Amazon Redshift, the datashare name is used as
-    #   the asset name.
+    #   The name of the asset. When importing from Amazon S3, the Amazon S3
+    #   object key is used as the asset name. When exporting to Amazon S3,
+    #   the asset name is used as default target Amazon S3 object key. When
+    #   importing from Amazon API Gateway API, the API name is used as the
+    #   asset name. When importing from Amazon Redshift, the datashare name
+    #   is used as the asset name. When importing from AWS Lake Formation,
+    #   the static values of "Database(s) included in LF-tag policy" or
+    #   "Table(s) included in LF-tag policy" are used as the asset name.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -216,7 +231,7 @@ module Aws::DataExchange
     # The source of the assets.
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket that's part of the source of the asset.
+    #   The Amazon S3 bucket that's part of the source of the asset.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -236,7 +251,7 @@ module Aws::DataExchange
     # where the export will be sent.
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket that is the destination for the event action.
+    #   The Amazon S3 bucket that is the destination for the event action.
     #   @return [String]
     #
     # @!attribute [rw] key_pattern
@@ -574,7 +589,7 @@ module Aws::DataExchange
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   The unique identifier for the data set associated with this
+    #   The unique identifier for the data set associated with the data set
     #   revision.
     #   @return [String]
     #
@@ -641,6 +656,57 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Details of the operation to create an Amazon S3 data access from an S3
+    # bucket.
+    #
+    # @!attribute [rw] asset_source
+    #   Details about the S3 data access source asset.
+    #   @return [Types::S3DataAccessAssetSourceEntry]
+    #
+    # @!attribute [rw] data_set_id
+    #   The unique identifier for the data set associated with the creation
+    #   of this Amazon S3 data access.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateS3DataAccessFromS3BucketRequestDetails AWS API Documentation
+    #
+    class CreateS3DataAccessFromS3BucketRequestDetails < Struct.new(
+      :asset_source,
+      :data_set_id,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the response of the operation to create an S3 data
+    # access from an S3 bucket.
+    #
+    # @!attribute [rw] asset_source
+    #   Details about the asset source from an Amazon S3 bucket.
+    #   @return [Types::S3DataAccessAssetSourceEntry]
+    #
+    # @!attribute [rw] data_set_id
+    #   The unique identifier for this data set.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The unique identifier for the revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateS3DataAccessFromS3BucketResponseDetails AWS API Documentation
+    #
+    class CreateS3DataAccessFromS3BucketResponseDetails < Struct.new(
+      :asset_source,
+      :data_set_id,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A data set is an AWS resource with one or more revisions.
     #
     # @!attribute [rw] arn
@@ -701,6 +767,39 @@ module Aws::DataExchange
       :origin_details,
       :source_id,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The LF-tag policy for database resources.
+    #
+    # @!attribute [rw] expression
+    #   A list of LF-tag conditions that apply to database resources.
+    #   @return [Array<Types::LFTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DatabaseLFTagPolicy AWS API Documentation
+    #
+    class DatabaseLFTagPolicy < Struct.new(
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The LF-tag policy and permissions for database resources.
+    #
+    # @!attribute [rw] expression
+    #   A list of LF-tag conditions that apply to database resources.
+    #   @return [Array<Types::LFTag>]
+    #
+    # @!attribute [rw] permissions
+    #   The permissions granted to subscribers on database resources.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DatabaseLFTagPolicyAndPermissions AWS API Documentation
+    #
+    class DatabaseLFTagPolicyAndPermissions < Struct.new(
+      :expression,
+      :permissions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -775,7 +874,7 @@ module Aws::DataExchange
     #   @return [Types::ImportAssetFromSignedUrlJobErrorDetails]
     #
     # @!attribute [rw] import_assets_from_s3_job_error_details
-    #   Information about the job error.
+    #   Details about the job error.
     #   @return [Array<Types::AssetSourceEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/Details AWS API Documentation
@@ -1075,7 +1174,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] asset_details
-    #   Information about the asset.
+    #   Details about the asset.
     #   @return [Types::AssetDetails]
     #
     # @!attribute [rw] asset_type
@@ -1095,12 +1194,15 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the asset. When importing from Amazon S3, the S3 object
-    #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key. When importing
-    #   from Amazon API Gateway API, the API name is used as the asset name.
-    #   When importing from Amazon Redshift, the datashare name is used as
-    #   the asset name.
+    #   The name of the asset. When importing from Amazon S3, the Amazon S3
+    #   object key is used as the asset name. When exporting to Amazon S3,
+    #   the asset name is used as default target Amazon S3 object key. When
+    #   importing from Amazon API Gateway API, the API name is used as the
+    #   asset name. When importing from Amazon Redshift, the datashare name
+    #   is used as the asset name. When importing from AWS Lake Formation,
+    #   the static values of "Database(s) included in the LF-tag policy"
+    #   or "Table(s) included in the LF-tag policy" are used as the asset
+    #   name.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -1354,7 +1456,7 @@ module Aws::DataExchange
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   The unique identifier for the data set associated with this
+    #   The unique identifier for the data set associated with the data set
     #   revision.
     #   @return [String]
     #
@@ -1541,10 +1643,10 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # Information about the job error.
+    # Details about the job error.
     #
     # @!attribute [rw] asset_name
-    #   Information about the job error.
+    #   Details about the job error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ImportAssetFromSignedUrlJobErrorDetails AWS API Documentation
@@ -1558,8 +1660,8 @@ module Aws::DataExchange
     # Details of the operation to be performed by the job.
     #
     # @!attribute [rw] asset_name
-    #   The name of the asset. When importing from Amazon S3, the S3 object
-    #   key is used as the asset name.
+    #   The name of the asset. When importing from Amazon S3, the Amazon S3
+    #   object key is used as the asset name.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -1632,6 +1734,93 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Details about the assets imported from an AWS Lake Formation tag
+    # policy request.
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the AWS Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   A structure for the database object.
+    #   @return [Types::DatabaseLFTagPolicyAndPermissions]
+    #
+    # @!attribute [rw] table
+    #   A structure for the table object.
+    #   @return [Types::TableLFTagPolicyAndPermissions]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role's ARN that allows AWS Data Exchange to assume the role
+    #   and grant and revoke permissions of subscribers to AWS Lake
+    #   Formation data permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   The unique identifier for the data set associated with this import
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The unique identifier for the revision associated with this import
+    #   job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ImportAssetsFromLakeFormationTagPolicyRequestDetails AWS API Documentation
+    #
+    class ImportAssetsFromLakeFormationTagPolicyRequestDetails < Struct.new(
+      :catalog_id,
+      :database,
+      :table,
+      :role_arn,
+      :data_set_id,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details from an import AWS Lake Formation tag policy job response.
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the AWS Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   A structure for the database object.
+    #   @return [Types::DatabaseLFTagPolicyAndPermissions]
+    #
+    # @!attribute [rw] table
+    #   A structure for the table object.
+    #   @return [Types::TableLFTagPolicyAndPermissions]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role's ARN that allows AWS Data Exchange to assume the role
+    #   and grant and revoke permissions to AWS Lake Formation data
+    #   permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   The unique identifier for the data set associated with this import
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The unique identifier for the revision associated with this import
+    #   job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ImportAssetsFromLakeFormationTagPolicyResponseDetails AWS API Documentation
+    #
+    class ImportAssetsFromLakeFormationTagPolicyResponseDetails < Struct.new(
+      :catalog_id,
+      :database,
+      :table,
+      :role_arn,
+      :data_set_id,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details from an import from Amazon Redshift datashare request.
     #
     # @!attribute [rw] asset_sources
@@ -1687,7 +1876,7 @@ module Aws::DataExchange
     # Details of the operation to be performed by the job.
     #
     # @!attribute [rw] asset_sources
-    #   Is a list of S3 bucket and object key pairs.
+    #   Is a list of Amazon S3 bucket and object key pairs.
     #   @return [Array<Types::AssetSourceEntry>]
     #
     # @!attribute [rw] data_set_id
@@ -1843,6 +2032,118 @@ module Aws::DataExchange
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the AWS Lake Formation resource (Table or Database)
+    # included in the AWS Lake Formation data permission.
+    #
+    # @!attribute [rw] database
+    #   Details about the database resource included in the AWS Lake
+    #   Formation data permission.
+    #   @return [Types::DatabaseLFTagPolicy]
+    #
+    # @!attribute [rw] table
+    #   Details about the table resource included in the AWS Lake Formation
+    #   data permission.
+    #   @return [Types::TableLFTagPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/LFResourceDetails AWS API Documentation
+    #
+    class LFResourceDetails < Struct.new(
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that allows an LF-admin to grant permissions on certain
+    # conditions.
+    #
+    # @!attribute [rw] tag_key
+    #   The key name for the LF-tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_values
+    #   A list of LF-tag values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/LFTag AWS API Documentation
+    #
+    class LFTag < Struct.new(
+      :tag_key,
+      :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the LF-tag policy.
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the AWS Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type for which the LF-tag policy applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_details
+    #   Details for the Lake Formation Resources included in the LF-tag
+    #   policy.
+    #   @return [Types::LFResourceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/LFTagPolicyDetails AWS API Documentation
+    #
+    class LFTagPolicyDetails < Struct.new(
+      :catalog_id,
+      :resource_type,
+      :resource_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AWS Lake Formation data permission asset.
+    #
+    # @!attribute [rw] lake_formation_data_permission_details
+    #   Details about the AWS Lake Formation data permission.
+    #   @return [Types::LakeFormationDataPermissionDetails]
+    #
+    # @!attribute [rw] lake_formation_data_permission_type
+    #   The data permission type.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The permissions granted to the subscribers on the resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role's ARN that allows AWS Data Exchange to assume the role
+    #   and grant and revoke permissions to AWS Lake Formation data
+    #   permissions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/LakeFormationDataPermissionAsset AWS API Documentation
+    #
+    class LakeFormationDataPermissionAsset < Struct.new(
+      :lake_formation_data_permission_details,
+      :lake_formation_data_permission_type,
+      :permissions,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the AWS Lake Formation data permission.
+    #
+    # @!attribute [rw] lf_tag_policy
+    #   Details about the LF-tag policy.
+    #   @return [Types::LFTagPolicyDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/LakeFormationDataPermissionDetails AWS API Documentation
+    #
+    class LakeFormationDataPermissionDetails < Struct.new(
+      :lf_tag_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2089,7 +2390,7 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # Information about the origin of the data set.
+    # Details about the origin of the data set.
     #
     # @!attribute [rw] product_id
     #   The product ID of the origin of the data set.
@@ -2150,7 +2451,7 @@ module Aws::DataExchange
     #   @return [Types::ImportAssetFromSignedUrlRequestDetails]
     #
     # @!attribute [rw] import_assets_from_s3
-    #   Information about the import asset from API Gateway API request.
+    #   Details about the import asset from API Gateway API request.
     #   @return [Types::ImportAssetsFromS3RequestDetails]
     #
     # @!attribute [rw] import_assets_from_redshift_data_shares
@@ -2161,6 +2462,15 @@ module Aws::DataExchange
     #   Details about the import from signed URL request.
     #   @return [Types::ImportAssetFromApiGatewayApiRequestDetails]
     #
+    # @!attribute [rw] create_s3_data_access_from_s3_bucket
+    #   Details of the request to create S3 data access from the Amazon S3
+    #   bucket.
+    #   @return [Types::CreateS3DataAccessFromS3BucketRequestDetails]
+    #
+    # @!attribute [rw] import_assets_from_lake_formation_tag_policy
+    #   Request details for the ImportAssetsFromLakeFormationTagPolicy job.
+    #   @return [Types::ImportAssetsFromLakeFormationTagPolicyRequestDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RequestDetails AWS API Documentation
     #
     class RequestDetails < Struct.new(
@@ -2170,7 +2480,9 @@ module Aws::DataExchange
       :import_asset_from_signed_url,
       :import_assets_from_s3,
       :import_assets_from_redshift_data_shares,
-      :import_asset_from_api_gateway_api)
+      :import_asset_from_api_gateway_api,
+      :create_s3_data_access_from_s3_bucket,
+      :import_assets_from_lake_formation_tag_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2229,6 +2541,15 @@ module Aws::DataExchange
     #   The response details.
     #   @return [Types::ImportAssetFromApiGatewayApiResponseDetails]
     #
+    # @!attribute [rw] create_s3_data_access_from_s3_bucket
+    #   Response details from the CreateS3DataAccessFromS3Bucket job.
+    #   @return [Types::CreateS3DataAccessFromS3BucketResponseDetails]
+    #
+    # @!attribute [rw] import_assets_from_lake_formation_tag_policy
+    #   Response details from the ImportAssetsFromLakeFormationTagPolicy
+    #   job.
+    #   @return [Types::ImportAssetsFromLakeFormationTagPolicyResponseDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ResponseDetails AWS API Documentation
     #
     class ResponseDetails < Struct.new(
@@ -2238,7 +2559,9 @@ module Aws::DataExchange
       :import_asset_from_signed_url,
       :import_assets_from_s3,
       :import_assets_from_redshift_data_shares,
-      :import_asset_from_api_gateway_api)
+      :import_asset_from_api_gateway_api,
+      :create_s3_data_access_from_s3_bucket,
+      :import_assets_from_lake_formation_tag_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2246,7 +2569,7 @@ module Aws::DataExchange
     # The destination where the assets in the revision will be exported.
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket that is the destination for the assets in the
+    #   The Amazon S3 bucket that is the destination for the assets in the
     #   revision.
     #   @return [String]
     #
@@ -2289,7 +2612,7 @@ module Aws::DataExchange
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   The unique identifier for the data set associated with this
+    #   The unique identifier for the data set associated with the data set
     #   revision.
     #   @return [String]
     #
@@ -2401,7 +2724,7 @@ module Aws::DataExchange
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   The unique identifier for the data set associated with this
+    #   The unique identifier for the data set associated with the data set
     #   revision.
     #   @return [String]
     #
@@ -2463,10 +2786,75 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # The S3 object that is the asset.
+    # The Amazon S3 data access that is the asset.
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket hosting data to be shared in the S3 data
+    #   access.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefixes
+    #   The Amazon S3 bucket used for hosting shared data in the Amazon S3
+    #   data access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] keys
+    #   S3 keys made available using this asset.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_access_point_alias
+    #   The automatically-generated bucket-style alias for your Amazon S3
+    #   Access Point. Customers can access their entitled data using the S3
+    #   Access Point alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_point_arn
+    #   The ARN for your Amazon S3 Access Point. Customers can also access
+    #   their entitled data using the S3 Access Point ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/S3DataAccessAsset AWS API Documentation
+    #
+    class S3DataAccessAsset < Struct.new(
+      :bucket,
+      :key_prefixes,
+      :keys,
+      :s3_access_point_alias,
+      :s3_access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Source details for an Amazon S3 data access asset.
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket used for hosting shared data in the Amazon S3
+    #   data access.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefixes
+    #   Organizes Amazon S3 asset key prefixes stored in an Amazon S3
+    #   bucket.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] keys
+    #   The keys used to create the Amazon S3 data access.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/S3DataAccessAssetSourceEntry AWS API Documentation
+    #
+    class S3DataAccessAssetSourceEntry < Struct.new(
+      :bucket,
+      :key_prefixes,
+      :keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 object that is the asset.
     #
     # @!attribute [rw] size
-    #   The size of the S3 object that is the object.
+    #   The size of the Amazon S3 object that is the object.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/S3SnapshotAsset AWS API Documentation
@@ -2589,6 +2977,39 @@ module Aws::DataExchange
     #
     class StartJobResponse < Aws::EmptyStructure; end
 
+    # The LF-tag policy for a table resource.
+    #
+    # @!attribute [rw] expression
+    #   A list of LF-tag conditions that apply to table resources.
+    #   @return [Array<Types::LFTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/TableLFTagPolicy AWS API Documentation
+    #
+    class TableLFTagPolicy < Struct.new(
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The LF-tag policy and permissions that apply to table resources.
+    #
+    # @!attribute [rw] expression
+    #   A list of LF-tag conditions that apply to table resources.
+    #   @return [Array<Types::LFTag>]
+    #
+    # @!attribute [rw] permissions
+    #   The permissions granted to subscribers on table resources.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/TableLFTagPolicyAndPermissions AWS API Documentation
+    #
+    class TableLFTagPolicyAndPermissions < Struct.new(
+      :expression,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
     #   resource.
@@ -2649,12 +3070,14 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the asset. When importing from Amazon S3, the S3 object
-    #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key. When importing
-    #   from Amazon API Gateway API, the API name is used as the asset name.
-    #   When importing from Amazon Redshift, the datashare name is used as
-    #   the asset name.
+    #   The name of the asset. When importing from Amazon S3, the Amazon S3
+    #   object key is used as the asset name. When exporting to Amazon S3,
+    #   the asset name is used as default target Amazon S3 object key. When
+    #   importing from Amazon API Gateway API, the API name is used as the
+    #   asset name. When importing from Amazon Redshift, the datashare name
+    #   is used as the asset name. When importing from AWS Lake Formation,
+    #   the static values of "Database(s) included in the LF-tag policy"
+    #   or "Table(s) included in LF-tag policy" are used as the name.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -2677,7 +3100,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] asset_details
-    #   Information about the asset.
+    #   Details about the asset.
     #   @return [Types::AssetDetails]
     #
     # @!attribute [rw] asset_type
@@ -2697,12 +3120,15 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the asset. When importing from Amazon S3, the S3 object
-    #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key. When importing
-    #   from Amazon API Gateway API, the API name is used as the asset name.
-    #   When importing from Amazon Redshift, the datashare name is used as
-    #   the asset name.
+    #   The name of the asset. When importing from Amazon S3, the Amazon S3
+    #   object key is used as the asset name. When exporting to Amazon S3,
+    #   the asset name is used as default target Amazon S3 object key. When
+    #   importing from Amazon API Gateway API, the API name is used as the
+    #   asset name. When importing from Amazon Redshift, the datashare name
+    #   is used as the asset name. When importing from AWS Lake Formation,
+    #   the static values of "Database(s) included in the LF-tag policy"-
+    #   or "Table(s) included in LF-tag policy" are used as the asset
+    #   name.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -2919,7 +3345,7 @@ module Aws::DataExchange
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   The unique identifier for the data set associated with this
+    #   The unique identifier for the data set associated with the data set
     #   revision.
     #   @return [String]
     #

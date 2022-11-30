@@ -1246,6 +1246,10 @@ module Aws::SageMaker
     #   The creation time.
     #   @return [Time]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppDetails AWS API Documentation
     #
     class AppDetails < Struct.new(
@@ -1254,7 +1258,8 @@ module Aws::SageMaker
       :app_type,
       :app_name,
       :status,
-      :creation_time)
+      :creation_time,
+      :space_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1416,7 +1421,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] trial_component_arn
-    #   The ARN of the trial component.
+    #   The Amazon Resource Name (ARN) of the trial component.
     #   @return [String]
     #
     # @!attribute [rw] trial_arn
@@ -1470,7 +1475,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AssociationSummary AWS API Documentation
@@ -2089,6 +2094,20 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Metadata for an AutoML job step.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the AutoML job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobStepMetadata AWS API Documentation
+    #
+    class AutoMLJobStepMetadata < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides a summary about an AutoML job.
     #
     # @!attribute [rw] auto_ml_job_name
@@ -2146,7 +2165,7 @@ module Aws::SageMaker
     # The output data configuration.
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Web Services KMS encryption key ID.
+    #   The Key Management Service (KMS) encryption key ID.
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
@@ -3293,6 +3312,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A Git repository that SageMaker automatically displays to users for
+    # cloning in the JupyterServer application.
+    #
+    # @!attribute [rw] repository_url
+    #   The URL of the Git repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeRepository AWS API Documentation
+    #
+    class CodeRepository < Struct.new(
+      :repository_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies summary information about a Git repository.
     #
     # @!attribute [rw] code_repository_name
@@ -3390,7 +3424,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configuration information for the Debugger output tensor collections.
+    # Configuration information for the Amazon SageMaker Debugger output
+    # tensor collections.
     #
     # @!attribute [rw] collection_name
     #   The name of the tensor collection. The name must be unique relative
@@ -4006,6 +4041,10 @@ module Aws::SageMaker
     #    </note>
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppRequest AWS API Documentation
     #
     class CreateAppRequest < Struct.new(
@@ -4014,7 +4053,8 @@ module Aws::SageMaker
       :app_type,
       :app_name,
       :tags,
-      :resource_spec)
+      :resource_spec,
+      :space_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4566,6 +4606,10 @@ module Aws::SageMaker
     #   A collection of `Domain` settings.
     #   @return [Types::DomainSettings]
     #
+    # @!attribute [rw] default_space_settings
+    #   The default settings used to create a space.
+    #   @return [Types::DefaultSpaceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -4579,7 +4623,8 @@ module Aws::SageMaker
       :home_efs_file_system_kms_key_id,
       :kms_key_id,
       :app_security_group_management,
-      :domain_settings)
+      :domain_settings,
+      :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4802,6 +4847,15 @@ module Aws::SageMaker
     #   A member of `CreateEndpointConfig` that enables explainers.
     #   @return [Types::ExplainerConfig]
     #
+    # @!attribute [rw] shadow_production_variants
+    #   Array of `ProductionVariant` objects. There is one for each model
+    #   that you want to host at this endpoint in shadow mode with
+    #   production traffic replicated from the model specified on
+    #   `ProductionVariants`.If you use this field, you can only specify one
+    #   variant for `ProductionVariants` and one variant for
+    #   `ShadowProductionVariants`.
+    #   @return [Array<Types::ProductionVariant>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
     #
     class CreateEndpointConfigInput < Struct.new(
@@ -4811,7 +4865,8 @@ module Aws::SageMaker
       :tags,
       :kms_key_id,
       :async_inference_config,
-      :explainer_config)
+      :explainer_config,
+      :shadow_production_variants)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5125,6 +5180,55 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] hub_name
+    #   The name of the hub to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_description
+    #   A description of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_display_name
+    #   The display name of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_search_keywords
+    #   The searchable keywords for the hub.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_storage_config
+    #   The Amazon S3 storage configuration for the hub.
+    #   @return [Types::HubS3StorageConfig]
+    #
+    # @!attribute [rw] tags
+    #   Any tags to associate with the hub.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHubRequest AWS API Documentation
+    #
+    class CreateHubRequest < Struct.new(
+      :hub_name,
+      :hub_description,
+      :hub_display_name,
+      :hub_search_keywords,
+      :s3_storage_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_arn
+    #   The Amazon Resource Name (ARN) of the hub.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHubResponse AWS API Documentation
+    #
+    class CreateHubResponse < Struct.new(
+      :hub_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] human_task_ui_name
     #   The name of the user interface you are creating.
     #   @return [String]
@@ -5344,6 +5448,154 @@ module Aws::SageMaker
     #
     class CreateImageVersionResponse < Struct.new(
       :image_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name for the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the inference experiment that you want to run. The
+    #   following types of experiments are possible:
+    #
+    #   * `ShadowMode`\: You can use this type to validate a shadow variant.
+    #     For more information, see [Shadow tests][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The duration for which you want the inference experiment to run. If
+    #   you don't specify this field, the experiment automatically
+    #   concludes after 7 days.
+    #   @return [Types::InferenceExperimentSchedule]
+    #
+    # @!attribute [rw] description
+    #   A description for the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that Amazon SageMaker can assume to access
+    #   model artifacts and container images.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the Amazon SageMaker endpoint on which you want to run
+    #   the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_variants
+    #   Array of `ModelVariantConfigSummary` objects. There is one for each
+    #   variant in the inference experiment. Each
+    #   `ModelVariantConfigSummary` object in the array describes the
+    #   infrastructure configuration for the corresponding variant.
+    #   @return [Array<Types::ModelVariantConfig>]
+    #
+    # @!attribute [rw] data_storage_config
+    #   The storage configuration for the inference experiment. This is an
+    #   optional parameter that you can use for data capture. For more
+    #   information, see [Capture data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
+    #   @return [Types::InferenceExperimentDataStorageConfig]
+    #
+    # @!attribute [rw] shadow_mode_config
+    #   Shows which variant is the production variant and which variant is
+    #   the shadow variant. For the shadow variant, also shows the sampling
+    #   percentage.
+    #   @return [Types::ShadowModeConfig]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume attached to the ML compute instance that hosts the endpoint.
+    #   The `KmsKey` can be any of the following formats:
+    #
+    #   * KMS key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS key
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * KMS key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS key Alias
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #
+    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
+    #   SageMaker execution role must include permissions to call
+    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
+    #   uses the default KMS key for Amazon S3 for your role's account.
+    #   Amazon SageMaker uses server-side encryption with KMS managed keys
+    #   for `OutputDataConfig`. If you use a bucket policy with an
+    #   `s3:PutObject` permission that only allows objects with server-side
+    #   encryption, set the condition key of
+    #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
+    #   information, see [KMS managed Encryption Keys][1] in the *Amazon
+    #   Simple Storage Service Developer Guide.*
+    #
+    #   The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateEndpoint` and `UpdateEndpoint` requests. For
+    #   more information, see [Using Key Policies in Amazon Web Services
+    #   KMS][2] in the *Amazon Web Services Key Management Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Array of key-value pairs. You can use tags to categorize your Amazon
+    #   Web Services resources in different ways, for example, by purpose,
+    #   owner, or environment. For more information, see [Tagging your
+    #   Amazon Web Services Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/userguide/tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceExperimentRequest AWS API Documentation
+    #
+    class CreateInferenceExperimentRequest < Struct.new(
+      :name,
+      :type,
+      :schedule,
+      :description,
+      :role_arn,
+      :endpoint_name,
+      :model_variants,
+      :data_storage_config,
+      :shadow_mode_config,
+      :kms_key,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_experiment_arn
+    #   The ARN for your inference experiment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceExperimentResponse AWS API Documentation
+    #
+    class CreateInferenceExperimentResponse < Struct.new(
+      :inference_experiment_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5711,6 +5963,110 @@ module Aws::SageMaker
     #
     class CreateModelBiasJobDefinitionResponse < Struct.new(
       :job_definition_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_name
+    #   The name of the model card to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   The version of the model card to export. If a version is not
+    #   provided, then the latest version of the model card is exported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_card_export_job_name
+    #   The name of the model card export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   The model card output configuration that specifies the Amazon S3
+    #   path for exporting.
+    #   @return [Types::ModelCardExportOutputConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelCardExportJobRequest AWS API Documentation
+    #
+    class CreateModelCardExportJobRequest < Struct.new(
+      :model_card_name,
+      :model_card_version,
+      :model_card_export_job_name,
+      :output_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_export_job_arn
+    #   The Amazon Resource Name (ARN) of the model card export job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelCardExportJobResponse AWS API Documentation
+    #
+    class CreateModelCardExportJobResponse < Struct.new(
+      :model_card_export_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_name
+    #   The unique name of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_config
+    #   An optional Key Management Service key to encrypt, decrypt, and
+    #   re-encrypt model card content for regulated workloads with highly
+    #   sensitive data.
+    #   @return [Types::ModelCardSecurityConfig]
+    #
+    # @!attribute [rw] content
+    #   The content of the model card. Content must be in [model card JSON
+    #   schema][1] and provided as a string.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   The approval status of the model card within your organization.
+    #   Different organizations might have different criteria for model card
+    #   review and approval.
+    #
+    #   * `Draft`\: The model card is a work in progress.
+    #
+    #   * `PendingReview`\: The model card is pending review.
+    #
+    #   * `Approved`\: The model card is approved.
+    #
+    #   * `Archived`\: The model card is archived. No more updates should be
+    #     made to the model card, but it can still be exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pairs used to manage metadata for model cards.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelCardRequest AWS API Documentation
+    #
+    class CreateModelCardRequest < Struct.new(
+      :model_card_name,
+      :security_config,
+      :content,
+      :model_card_status,
+      :tags)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_arn
+    #   The Amazon Resource Name (ARN) of the successfully created model
+    #   card.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelCardResponse AWS API Documentation
+    #
+    class CreateModelCardResponse < Struct.new(
+      :model_card_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6534,13 +6890,18 @@ module Aws::SageMaker
     #   defaults to 300.
     #   @return [Integer]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedDomainUrlRequest AWS API Documentation
     #
     class CreatePresignedDomainUrlRequest < Struct.new(
       :domain_id,
       :user_profile_name,
       :session_expiration_duration_in_seconds,
-      :expires_in_seconds)
+      :expires_in_seconds,
+      :space_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6738,6 +7099,47 @@ module Aws::SageMaker
     class CreateProjectOutput < Struct.new(
       :project_arn,
       :project_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The ID of the associated Domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to associated with the space. Each tag consists of a key and an
+    #   optional value. Tag keys must be unique for each resource. Tags are
+    #   searchable using the `Search` API.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] space_settings
+    #   A collection of space settings.
+    #   @return [Types::SpaceSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateSpaceRequest AWS API Documentation
+    #
+    class CreateSpaceRequest < Struct.new(
+      :domain_id,
+      :space_name,
+      :tags,
+      :space_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_arn
+    #   The space's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateSpaceResponse AWS API Documentation
+    #
+    class CreateSpaceResponse < Struct.new(
+      :space_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6960,11 +7362,11 @@ module Aws::SageMaker
     #   @return [Types::CheckpointConfig]
     #
     # @!attribute [rw] debug_hook_config
-    #   Configuration information for the Debugger hook parameters, metric
-    #   and tensor collections, and storage paths. To learn more about how
-    #   to configure the `DebugHookConfig` parameter, see [Use the SageMaker
-    #   and Debugger Configuration API Operations to Create, Update, and
-    #   Debug Your Training Job][1].
+    #   Configuration information for the Amazon SageMaker Debugger hook
+    #   parameters, metric and tensor collections, and storage paths. To
+    #   learn more about how to configure the `DebugHookConfig` parameter,
+    #   see [Use the SageMaker and Debugger Configuration API Operations to
+    #   Create, Update, and Debug Your Training Job][1].
     #
     #
     #
@@ -6972,13 +7374,13 @@ module Aws::SageMaker
     #   @return [Types::DebugHookConfig]
     #
     # @!attribute [rw] debug_rule_configurations
-    #   Configuration information for Debugger rules for debugging output
-    #   tensors.
+    #   Configuration information for Amazon SageMaker Debugger rules for
+    #   debugging output tensors.
     #   @return [Array<Types::DebugRuleConfiguration>]
     #
     # @!attribute [rw] tensor_board_output_config
-    #   Configuration of storage locations for the Debugger TensorBoard
-    #   output data.
+    #   Configuration of storage locations for the Amazon SageMaker Debugger
+    #   TensorBoard output data.
     #   @return [Types::TensorBoardOutputConfig]
     #
     # @!attribute [rw] experiment_config
@@ -6993,13 +7395,13 @@ module Aws::SageMaker
     #   @return [Types::ExperimentConfig]
     #
     # @!attribute [rw] profiler_config
-    #   Configuration information for Debugger system monitoring, framework
-    #   profiling, and storage paths.
+    #   Configuration information for Amazon SageMaker Debugger system
+    #   monitoring, framework profiling, and storage paths.
     #   @return [Types::ProfilerConfig]
     #
     # @!attribute [rw] profiler_rule_configurations
-    #   Configuration information for Debugger rules for profiling system
-    #   and framework metrics.
+    #   Configuration information for Amazon SageMaker Debugger rules for
+    #   profiling system and framework metrics.
     #   @return [Array<Types::ProfilerRuleConfiguration>]
     #
     # @!attribute [rw] environment
@@ -7946,11 +8348,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configuration information for the Debugger hook parameters, metric and
-    # tensor collections, and storage paths. To learn more about how to
-    # configure the `DebugHookConfig` parameter, see [Use the SageMaker and
-    # Debugger Configuration API Operations to Create, Update, and Debug
-    # Your Training Job][1].
+    # Configuration information for the Amazon SageMaker Debugger hook
+    # parameters, metric and tensor collections, and storage paths. To learn
+    # more about how to configure the `DebugHookConfig` parameter, see [Use
+    # the SageMaker and Debugger Configuration API Operations to Create,
+    # Update, and Debug Your Training Job][1].
     #
     #
     #
@@ -7966,14 +8368,16 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] hook_parameters
-    #   Configuration information for the Debugger hook parameters.
+    #   Configuration information for the Amazon SageMaker Debugger hook
+    #   parameters.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] collection_configurations
-    #   Configuration information for Debugger tensor collections. To learn
-    #   more about how to configure the `CollectionConfiguration` parameter,
-    #   see [Use the SageMaker and Debugger Configuration API Operations to
-    #   Create, Update, and Debug Your Training Job][1].
+    #   Configuration information for Amazon SageMaker Debugger tensor
+    #   collections. To learn more about how to configure the
+    #   `CollectionConfiguration` parameter, see [Use the SageMaker and
+    #   Debugger Configuration API Operations to Create, Update, and Debug
+    #   Your Training Job][1].
     #
     #
     #
@@ -8020,8 +8424,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type to deploy a Debugger custom rule for debugging a
-    #   training job.
+    #   The instance type to deploy a custom rule for debugging a training
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -8077,6 +8481,36 @@ module Aws::SageMaker
       :rule_evaluation_status,
       :status_details,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of settings that apply to spaces created in the Domain.
+    #
+    # @!attribute [rw] execution_role
+    #   The execution role for the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   The security groups for the Amazon Virtual Private Cloud that the
+    #   space uses for communication.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] jupyter_server_app_settings
+    #   The JupyterServer app settings.
+    #   @return [Types::JupyterServerAppSettings]
+    #
+    # @!attribute [rw] kernel_gateway_app_settings
+    #   The KernelGateway app settings.
+    #   @return [Types::KernelGatewayAppSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultSpaceSettings AWS API Documentation
+    #
+    class DefaultSpaceSettings < Struct.new(
+      :execution_role,
+      :security_groups,
+      :jupyter_server_app_settings,
+      :kernel_gateway_app_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8145,13 +8579,18 @@ module Aws::SageMaker
     #   The name of the app.
     #   @return [String]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAppRequest AWS API Documentation
     #
     class DeleteAppRequest < Struct.new(
       :domain_id,
       :user_profile_name,
       :app_type,
-      :app_name)
+      :app_name,
+      :space_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8407,6 +8846,45 @@ module Aws::SageMaker
     #
     class DeleteFlowDefinitionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] hub_name
+    #   The name of the hub that you want to delete content in.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of content that you want to delete from a hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the content that you want to delete from a hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The version of the content that you want to delete from a hub.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHubContentRequest AWS API Documentation
+    #
+    class DeleteHubContentRequest < Struct.new(
+      :hub_name,
+      :hub_content_type,
+      :hub_content_name,
+      :hub_content_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
+    #   The name of the hub to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHubRequest AWS API Documentation
+    #
+    class DeleteHubRequest < Struct.new(
+      :hub_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] human_task_ui_name
     #   The name of the human task user interface (work task template) you
     #   want to delete.
@@ -8461,6 +8939,30 @@ module Aws::SageMaker
     #
     class DeleteImageVersionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   The name of the inference experiment you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteInferenceExperimentRequest AWS API Documentation
+    #
+    class DeleteInferenceExperimentRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_experiment_arn
+    #   The ARN of the deleted inference experiment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteInferenceExperimentResponse AWS API Documentation
+    #
+    class DeleteInferenceExperimentResponse < Struct.new(
+      :inference_experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_definition_name
     #   The name of the model bias job definition to delete.
     #   @return [String]
@@ -8469,6 +8971,18 @@ module Aws::SageMaker
     #
     class DeleteModelBiasJobDefinitionRequest < Struct.new(
       :job_definition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_name
+    #   The name of the model card to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelCardRequest AWS API Documentation
+    #
+    class DeleteModelCardRequest < Struct.new(
+      :model_card_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8627,6 +9141,23 @@ module Aws::SageMaker
     #
     class DeleteProjectInput < Struct.new(
       :project_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The ID of the associated Domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteSpaceRequest AWS API Documentation
+    #
+    class DeleteSpaceRequest < Struct.new(
+      :domain_id,
+      :space_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8953,7 +9484,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -8962,7 +9493,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -9130,13 +9661,18 @@ module Aws::SageMaker
     #   The name of the app.
     #   @return [String]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppRequest AWS API Documentation
     #
     class DescribeAppRequest < Struct.new(
       :domain_id,
       :user_profile_name,
       :app_type,
-      :app_name)
+      :app_name,
+      :space_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9189,6 +9725,10 @@ module Aws::SageMaker
     #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppResponse AWS API Documentation
     #
     class DescribeAppResponse < Struct.new(
@@ -9202,7 +9742,8 @@ module Aws::SageMaker
       :last_user_activity_timestamp,
       :creation_time,
       :failure_reason,
-      :resource_spec)
+      :resource_spec,
+      :space_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9245,7 +9786,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -9254,7 +9795,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -9313,10 +9854,9 @@ module Aws::SageMaker
     #   @return [Types::AutoMLOutputDataConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
-    #   and Access Management (IAM) role that has read permission to the
-    #   input data location and write permission to the output data location
-    #   in Amazon S3.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that has read permission to the input data location and
+    #   write permission to the output data location in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
@@ -9639,7 +10179,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -9648,7 +10188,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] lineage_group_arn
@@ -10009,6 +10549,10 @@ module Aws::SageMaker
     #   `RSessionGateway` apps and the `RStudioServerPro` app.
     #   @return [String]
     #
+    # @!attribute [rw] default_space_settings
+    #   The default settings used to create a space.
+    #   @return [Types::DefaultSpaceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomainResponse AWS API Documentation
     #
     class DescribeDomainResponse < Struct.new(
@@ -10031,7 +10575,8 @@ module Aws::SageMaker
       :kms_key_id,
       :domain_settings,
       :app_security_group_management,
-      :security_group_id_for_domain_boundary)
+      :security_group_id_for_domain_boundary,
+      :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10272,6 +10817,15 @@ module Aws::SageMaker
     #   The configuration parameters for an explainer.
     #   @return [Types::ExplainerConfig]
     #
+    # @!attribute [rw] shadow_production_variants
+    #   Array of `ProductionVariant` objects. There is one for each model
+    #   that you want to host at this endpoint in shadow mode with
+    #   production traffic replicated from the model specified on
+    #   `ProductionVariants`.If you use this field, you can only specify one
+    #   variant for `ProductionVariants` and one variant for
+    #   `ShadowProductionVariants`.
+    #   @return [Array<Types::ProductionVariant>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput AWS API Documentation
     #
     class DescribeEndpointConfigOutput < Struct.new(
@@ -10282,7 +10836,8 @@ module Aws::SageMaker
       :kms_key_id,
       :creation_time,
       :async_inference_config,
-      :explainer_config)
+      :explainer_config,
+      :shadow_production_variants)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10393,6 +10948,15 @@ module Aws::SageMaker
     #   The configuration parameters for an explainer.
     #   @return [Types::ExplainerConfig]
     #
+    # @!attribute [rw] shadow_production_variants
+    #   Array of `ProductionVariant` objects. There is one for each model
+    #   that you want to host at this endpoint in shadow mode with
+    #   production traffic replicated from the model specified on
+    #   `ProductionVariants`.If you use this field, you can only specify one
+    #   variant for `ProductionVariants` and one variant for
+    #   `ShadowProductionVariants`.
+    #   @return [Array<Types::ProductionVariantSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput AWS API Documentation
     #
     class DescribeEndpointOutput < Struct.new(
@@ -10408,7 +10972,8 @@ module Aws::SageMaker
       :last_deployment_config,
       :async_inference_config,
       :pending_deployment_summary,
-      :explainer_config)
+      :explainer_config,
+      :shadow_production_variants)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10439,7 +11004,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The ARN of the source and, optionally, the type.
+    #   The Amazon Resource Name (ARN) of the source and, optionally, the
+    #   type.
     #   @return [Types::ExperimentSource]
     #
     # @!attribute [rw] description
@@ -10750,6 +11316,191 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] hub_name
+    #   The name of the hub that contains the content to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of content in the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the content to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The version of the content to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContentRequest AWS API Documentation
+    #
+    class DescribeHubContentRequest < Struct.new(
+      :hub_name,
+      :hub_content_type,
+      :hub_content_name,
+      :hub_content_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The Amazon Resource Name (ARN) of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The version of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_schema_version
+    #   The document schema version for the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_name
+    #   The name of the hub that contains the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_arn
+    #   The Amazon Resource Name (ARN) of the hub that contains the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_display_name
+    #   The display name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_description
+    #   A description of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_markdown
+    #   Markdown files associated with the hub content to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_document
+    #   The hub content document that describes information about the hub
+    #   content such as type, associated containers, scripts, and more.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_search_keywords
+    #   The searchable keywords for the hub content.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] hub_content_dependencies
+    #   The location of any dependencies that the hub content has, such as
+    #   scripts, model artifacts, datasets, or notebooks.
+    #   @return [Array<Types::HubContentDependency>]
+    #
+    # @!attribute [rw] hub_content_status
+    #   The status of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The failure reason if importing hub content failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that hub content was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContentResponse AWS API Documentation
+    #
+    class DescribeHubContentResponse < Struct.new(
+      :hub_content_name,
+      :hub_content_arn,
+      :hub_content_version,
+      :hub_content_type,
+      :document_schema_version,
+      :hub_name,
+      :hub_arn,
+      :hub_content_display_name,
+      :hub_content_description,
+      :hub_content_markdown,
+      :hub_content_document,
+      :hub_content_search_keywords,
+      :hub_content_dependencies,
+      :hub_content_status,
+      :failure_reason,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
+    #   The name of the hub to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubRequest AWS API Documentation
+    #
+    class DescribeHubRequest < Struct.new(
+      :hub_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
+    #   The name of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_arn
+    #   The Amazon Resource Name (ARN) of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_display_name
+    #   The display name of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_description
+    #   A description of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_search_keywords
+    #   The searchable keywords for the hub.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_storage_config
+    #   The Amazon S3 storage configuration for the hub.
+    #   @return [Types::HubS3StorageConfig]
+    #
+    # @!attribute [rw] hub_status
+    #   The status of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The failure reason if importing hub content failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the hub was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the hub was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubResponse AWS API Documentation
+    #
+    class DescribeHubResponse < Struct.new(
+      :hub_name,
+      :hub_arn,
+      :hub_display_name,
+      :hub_description,
+      :hub_search_keywords,
+      :s3_storage_config,
+      :hub_status,
+      :failure_reason,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] human_task_ui_name
     #   The name of the human task user interface (worker task template) you
     #   want information about.
@@ -11041,6 +11792,136 @@ module Aws::SageMaker
       :image_version_status,
       :last_modified_time,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the inference experiment to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceExperimentRequest AWS API Documentation
+    #
+    class DescribeInferenceExperimentRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the inference experiment being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The duration for which the inference experiment ran or will run.
+    #   @return [Types::InferenceExperimentSchedule]
+    #
+    # @!attribute [rw] status
+    #   The status of the inference experiment. The following are the
+    #   possible statuses for an inference experiment:
+    #
+    #   * `Creating` - Amazon SageMaker is creating your experiment.
+    #
+    #   * `Created` - Amazon SageMaker has finished creating your experiment
+    #     and it will begin at the scheduled time.
+    #
+    #   * `Updating` - When you make changes to your experiment, your
+    #     experiment shows as updating.
+    #
+    #   * `Starting` - Amazon SageMaker is beginning your experiment.
+    #
+    #   * `Running` - Your experiment is in progress.
+    #
+    #   * `Stopping` - Amazon SageMaker is stopping your experiment.
+    #
+    #   * `Completed` - Your experiment has completed.
+    #
+    #   * `Cancelled` - When you conclude your experiment early, it shows as
+    #     canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message for the inference experiment status result.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp at which you created the inference experiment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   The timestamp at which the inference experiment was completed or
+    #   will complete.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp at which you last modified the inference experiment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that Amazon SageMaker can assume to access
+    #   model artifacts and container images.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_metadata
+    #   The metadata of the endpoint on which the inference experiment ran.
+    #   @return [Types::EndpointMetadata]
+    #
+    # @!attribute [rw] model_variants
+    #   Array of `ModelVariantConfigSummary` objects. There is one for each
+    #   variant in the inference experiment. Each
+    #   `ModelVariantConfigSummary` object in the array describes the
+    #   infrastructure configuration for deploying the corresponding
+    #   variant.
+    #   @return [Array<Types::ModelVariantConfigSummary>]
+    #
+    # @!attribute [rw] data_storage_config
+    #   The Amazon S3 storage configuration for the inference experiment.
+    #   @return [Types::InferenceExperimentDataStorageConfig]
+    #
+    # @!attribute [rw] shadow_mode_config
+    #   Shows which variant is a production variant and which variant is a
+    #   shadow variant. For shadow variants, also shows the sampling
+    #   percentage.
+    #   @return [Types::ShadowModeConfig]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume attached to the ML compute instance that hosts the endpoint.
+    #   For more information, see CreateInferenceExperimentRequest$KmsKey.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceExperimentResponse AWS API Documentation
+    #
+    class DescribeInferenceExperimentResponse < Struct.new(
+      :arn,
+      :name,
+      :type,
+      :schedule,
+      :status,
+      :status_reason,
+      :description,
+      :creation_time,
+      :completion_time,
+      :last_modified_time,
+      :role_arn,
+      :endpoint_metadata,
+      :model_variants,
+      :data_storage_config,
+      :shadow_mode_config,
+      :kms_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11340,7 +12221,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11349,7 +12230,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLineageGroupResponse AWS API Documentation
@@ -11446,6 +12327,192 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_export_job_arn
+    #   The Amazon Resource Name (ARN) of the model card export job to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelCardExportJobRequest AWS API Documentation
+    #
+    class DescribeModelCardExportJobRequest < Struct.new(
+      :model_card_export_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_export_job_name
+    #   The name of the model card export job to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_export_job_arn
+    #   The Amazon Resource Name (ARN) of the model card export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The completion status of the model card export job.
+    #
+    #   * `InProgress`\: The model card export job is in progress.
+    #
+    #   * `Completed`\: The model card export job is complete.
+    #
+    #   * `Failed`\: The model card export job failed. To see the reason for
+    #     the failure, see the `FailureReason` field in the response to a
+    #     `DescribeModelCardExportJob` call.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_name
+    #   The name of the model card that the model export job exports.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   The version of the model card that the model export job exports.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_config
+    #   The export output details for the model card.
+    #   @return [Types::ModelCardExportOutputConfig]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the model export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time that the model export job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The failure reason if the model export job fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_artifacts
+    #   The exported model card artifacts.
+    #   @return [Types::ModelCardExportArtifacts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelCardExportJobResponse AWS API Documentation
+    #
+    class DescribeModelCardExportJobResponse < Struct.new(
+      :model_card_export_job_name,
+      :model_card_export_job_arn,
+      :status,
+      :model_card_name,
+      :model_card_version,
+      :output_config,
+      :created_at,
+      :last_modified_at,
+      :failure_reason,
+      :export_artifacts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_name
+    #   The name of the model card to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   The version of the model card to describe. If a version is not
+    #   provided, then the latest version of the model card is described.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelCardRequest AWS API Documentation
+    #
+    class DescribeModelCardRequest < Struct.new(
+      :model_card_name,
+      :model_card_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_arn
+    #   The Amazon Resource Name (ARN) of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_name
+    #   The name of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   The version of the model card.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] content
+    #   The content of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   The approval status of the model card within your organization.
+    #   Different organizations might have different criteria for model card
+    #   review and approval.
+    #
+    #   * `Draft`\: The model card is a work in progress.
+    #
+    #   * `PendingReview`\: The model card is pending review.
+    #
+    #   * `Approved`\: The model card is approved.
+    #
+    #   * `Archived`\: The model card is archived. No more updates should be
+    #     made to the model card, but it can still be exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_config
+    #   The security configuration used to protect model card content.
+    #   @return [Types::ModelCardSecurityConfig]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time the model card was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, project, or model card.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the model card was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, project, or model card.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] model_card_processing_status
+    #   The processing status of model card deletion. The
+    #   `ModelCardProcessingStatus` updates throughout the different
+    #   deletion steps.
+    #
+    #   * `DeletePending`\: Model card deletion request received.
+    #
+    #   * `DeleteInProgress`\: Model card deletion is in progress.
+    #
+    #   * `ContentDeleted`\: Deleted model card content.
+    #
+    #   * `ExportJobsDeleted`\: Deleted all export jobs associated with the
+    #     model card.
+    #
+    #   * `DeleteCompleted`\: Successfully deleted the model card.
+    #
+    #   * `DeleteFailed`\: The model card failed to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelCardResponse AWS API Documentation
+    #
+    class DescribeModelCardResponse < Struct.new(
+      :model_card_arn,
+      :model_card_name,
+      :model_card_version,
+      :content,
+      :model_card_status,
+      :security_config,
+      :creation_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by,
+      :model_card_processing_status)
+      SENSITIVE = [:content]
       include Aws::Structure
     end
 
@@ -11637,7 +12704,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -11732,7 +12799,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -11750,7 +12817,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -12316,12 +13383,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parallelism_configuration
@@ -12401,12 +13468,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parallelism_configuration
@@ -12612,7 +13679,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] creation_time
@@ -12625,7 +13692,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeProjectOutput AWS API Documentation
@@ -12642,6 +13709,76 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :last_modified_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The ID of the associated Domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSpaceRequest AWS API Documentation
+    #
+    class DescribeSpaceRequest < Struct.new(
+      :domain_id,
+      :space_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The ID of the associated Domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_arn
+    #   The space's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_efs_file_system_uid
+    #   The ID of the space's profile in the Amazon Elastic File System
+    #   volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The failure reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_settings
+    #   A collection of space settings.
+    #   @return [Types::SpaceSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSpaceResponse AWS API Documentation
+    #
+    class DescribeSpaceResponse < Struct.new(
+      :domain_id,
+      :space_arn,
+      :space_name,
+      :home_efs_file_system_uid,
+      :status,
+      :last_modified_time,
+      :creation_time,
+      :failure_reason,
+      :space_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12982,11 +14119,11 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] debug_hook_config
-    #   Configuration information for the Debugger hook parameters, metric
-    #   and tensor collections, and storage paths. To learn more about how
-    #   to configure the `DebugHookConfig` parameter, see [Use the SageMaker
-    #   and Debugger Configuration API Operations to Create, Update, and
-    #   Debug Your Training Job][1].
+    #   Configuration information for the Amazon SageMaker Debugger hook
+    #   parameters, metric and tensor collections, and storage paths. To
+    #   learn more about how to configure the `DebugHookConfig` parameter,
+    #   see [Use the SageMaker and Debugger Configuration API Operations to
+    #   Create, Update, and Debug Your Training Job][1].
     #
     #
     #
@@ -13005,31 +14142,33 @@ module Aws::SageMaker
     #   @return [Types::ExperimentConfig]
     #
     # @!attribute [rw] debug_rule_configurations
-    #   Configuration information for Debugger rules for debugging output
-    #   tensors.
+    #   Configuration information for Amazon SageMaker Debugger rules for
+    #   debugging output tensors.
     #   @return [Array<Types::DebugRuleConfiguration>]
     #
     # @!attribute [rw] tensor_board_output_config
-    #   Configuration of storage locations for the Debugger TensorBoard
-    #   output data.
+    #   Configuration of storage locations for the Amazon SageMaker Debugger
+    #   TensorBoard output data.
     #   @return [Types::TensorBoardOutputConfig]
     #
     # @!attribute [rw] debug_rule_evaluation_statuses
-    #   Evaluation status of Debugger rules for debugging on a training job.
+    #   Evaluation status of Amazon SageMaker Debugger rules for debugging
+    #   on a training job.
     #   @return [Array<Types::DebugRuleEvaluationStatus>]
     #
     # @!attribute [rw] profiler_config
-    #   Configuration information for Debugger system monitoring, framework
-    #   profiling, and storage paths.
+    #   Configuration information for Amazon SageMaker Debugger system
+    #   monitoring, framework profiling, and storage paths.
     #   @return [Types::ProfilerConfig]
     #
     # @!attribute [rw] profiler_rule_configurations
-    #   Configuration information for Debugger rules for profiling system
-    #   and framework metrics.
+    #   Configuration information for Amazon SageMaker Debugger rules for
+    #   profiling system and framework metrics.
     #   @return [Array<Types::ProfilerRuleConfiguration>]
     #
     # @!attribute [rw] profiler_rule_evaluation_statuses
-    #   Evaluation status of Debugger rules for profiling on a training job.
+    #   Evaluation status of Amazon SageMaker Debugger rules for profiling
+    #   on a training job.
     #   @return [Array<Types::ProfilerRuleEvaluationStatus>]
     #
     # @!attribute [rw] profiling_status
@@ -13354,6 +14493,11 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the lineage group.
     #   @return [String]
     #
+    # @!attribute [rw] sources
+    #   A list of the Amazon Resource Name (ARN) and, if applicable, job
+    #   type for multiple sources of an experiment run.
+    #   @return [Array<Types::TrialComponentSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrialComponentResponse AWS API Documentation
     #
     class DescribeTrialComponentResponse < Struct.new(
@@ -13373,7 +14517,8 @@ module Aws::SageMaker
       :output_artifacts,
       :metadata_properties,
       :metrics,
-      :lineage_group_arn)
+      :lineage_group_arn,
+      :sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13859,7 +15004,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] trial_component_arn
-    #   The ARN of the trial component.
+    #   The Amazon Resource Name (ARN) of the trial component.
     #   @return [String]
     #
     # @!attribute [rw] trial_arn
@@ -14592,6 +15737,14 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] shadow_production_variants
+    #   Array of `ProductionVariant` objects, one for each model that you
+    #   want to host at this endpoint in shadow mode with production traffic
+    #   replicated from the model specified on `ProductionVariants`.If you
+    #   use this field, you can only specify one variant for
+    #   `ProductionVariants` and one variant for `ShadowProductionVariants`.
+    #   @return [Array<Types::ProductionVariantSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -14605,7 +15758,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :monitoring_schedules,
-      :tags)
+      :tags,
+      :shadow_production_variants)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14749,6 +15903,37 @@ module Aws::SageMaker
       :instance_type,
       :inference_specification_name,
       :environment_parameter_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the endpoint.
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_config_name
+    #   The name of the endpoint configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_status
+    #   The status of the endpoint. For possible values of the status of an
+    #   endpoint, see EndpointSummary$EndpointStatus.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the status of the endpoint is `Failed`, this provides the reason
+    #   why it failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointMetadata AWS API Documentation
+    #
+    class EndpointMetadata < Struct.new(
+      :endpoint_name,
+      :endpoint_config_name,
+      :endpoint_status,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14953,7 +16138,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -15002,12 +16187,18 @@ module Aws::SageMaker
     #   specified, the display name is the trial component name.
     #   @return [String]
     #
+    # @!attribute [rw] run_name
+    #   The name of the experiment run to associate the trial component
+    #   with.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExperimentConfig AWS API Documentation
     #
     class ExperimentConfig < Struct.new(
       :experiment_name,
       :trial_name,
-      :trial_component_display_name)
+      :trial_component_display_name,
+      :run_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15937,6 +17128,148 @@ module Aws::SageMaker
     #
     class GitConfigForUpdate < Struct.new(
       :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Any dependencies related to hub content, such as scripts, model
+    # artifacts, datasets, or notebooks.
+    #
+    # @!attribute [rw] dependency_origin_path
+    #   The hub content dependency origin path.
+    #   @return [String]
+    #
+    # @!attribute [rw] dependency_copy_path
+    #   The hub content dependency copy path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubContentDependency AWS API Documentation
+    #
+    class HubContentDependency < Struct.new(
+      :dependency_origin_path,
+      :dependency_copy_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about hub content.
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The Amazon Resource Name (ARN) of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The version of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_schema_version
+    #   The version of the hub content document schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_display_name
+    #   The display name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_description
+    #   A description of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_search_keywords
+    #   The searchable keywords for the hub content.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] hub_content_status
+    #   The status of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the hub content was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubContentInfo AWS API Documentation
+    #
+    class HubContentInfo < Struct.new(
+      :hub_content_name,
+      :hub_content_arn,
+      :hub_content_version,
+      :hub_content_type,
+      :document_schema_version,
+      :hub_content_display_name,
+      :hub_content_description,
+      :hub_content_search_keywords,
+      :hub_content_status,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a hub.
+    #
+    # @!attribute [rw] hub_name
+    #   The name of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_arn
+    #   The Amazon Resource Name (ARN) of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_display_name
+    #   The display name of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_description
+    #   A description of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_search_keywords
+    #   The searchable keywords for the hub.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] hub_status
+    #   The status of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the hub was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the hub was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubInfo AWS API Documentation
+    #
+    class HubInfo < Struct.new(
+      :hub_name,
+      :hub_arn,
+      :hub_display_name,
+      :hub_description,
+      :hub_search_keywords,
+      :hub_status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 storage configuration of a hub.
+    #
+    # @!attribute [rw] s3_output_path
+    #   The Amazon S3 output path for the hub.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubS3StorageConfig AWS API Documentation
+    #
+    class HubS3StorageConfig < Struct.new(
+      :s3_output_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18190,6 +19523,86 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The version of the hub content to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_schema_version
+    #   The version of the hub content schema to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_name
+    #   The name of the hub to import content into.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_display_name
+    #   The display name of the hub content to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_description
+    #   A description of the hub content to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_markdown
+    #   Markdown files associated with the hub content to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_document
+    #   The hub content document that describes information about the hub
+    #   content such as type, associated containers, scripts, and more.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_search_keywords
+    #   The searchable keywords of the hub content.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Any tags associated with the hub content.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ImportHubContentRequest AWS API Documentation
+    #
+    class ImportHubContentRequest < Struct.new(
+      :hub_content_name,
+      :hub_content_version,
+      :hub_content_type,
+      :document_schema_version,
+      :hub_name,
+      :hub_content_display_name,
+      :hub_content_description,
+      :hub_content_markdown,
+      :hub_content_document,
+      :hub_content_search_keywords,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_arn
+    #   The ARN of the hub that the content was imported into.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The ARN of the hub content that was imported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ImportHubContentResponse AWS API Documentation
+    #
+    class ImportHubContentResponse < Struct.new(
+      :hub_arn,
+      :hub_content_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies details about how containers in a multi-container endpoint
     # are run.
     #
@@ -18206,6 +19619,121 @@ module Aws::SageMaker
     #
     class InferenceExecutionConfig < Struct.new(
       :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location and configuration for storing inference
+    # experiment data.
+    #
+    # @!attribute [rw] destination
+    #   The Amazon S3 bucket where the inference experiment data is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service key that Amazon SageMaker uses to encrypt
+    #   captured data when uploading to Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   Configuration specifying how to treat different headers. If no
+    #   headers are specified SageMaker will by default base64 encode when
+    #   capturing the data.
+    #   @return [Types::CaptureContentTypeHeader]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceExperimentDataStorageConfig AWS API Documentation
+    #
+    class InferenceExperimentDataStorageConfig < Struct.new(
+      :destination,
+      :kms_key,
+      :content_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The start and end times of an inference experiment.
+    #
+    # The maximum duration that you can set for an inference experiment is
+    # 30 days.
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp at which the inference experiment started or will
+    #   start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp at which the inference experiment ended or will end.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceExperimentSchedule AWS API Documentation
+    #
+    class InferenceExperimentSchedule < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists a summary of properties of an inference experiment.
+    #
+    # @!attribute [rw] name
+    #   The name of the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The duration for which the inference experiment ran or will run.
+    #
+    #   The maximum duration that you can set for an inference experiment is
+    #   30 days.
+    #   @return [Types::InferenceExperimentSchedule]
+    #
+    # @!attribute [rw] status
+    #   The status of the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message for the inference experiment status result.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp at which the inference experiment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   The timestamp at which the inference experiment was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when you last modified the inference experiment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that Amazon SageMaker can assume to access
+    #   model artifacts and container images.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceExperimentSummary AWS API Documentation
+    #
+    class InferenceExperimentSummary < Struct.new(
+      :name,
+      :type,
+      :schedule,
+      :status,
+      :status_reason,
+      :description,
+      :creation_time,
+      :completion_time,
+      :last_modified_time,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18770,11 +20298,17 @@ module Aws::SageMaker
     #    </note>
     #   @return [Array<String>]
     #
+    # @!attribute [rw] code_repositories
+    #   A list of Git repositories that SageMaker automatically displays to
+    #   users for cloning in the JupyterServer application.
+    #   @return [Array<Types::CodeRepository>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterServerAppSettings AWS API Documentation
     #
     class JupyterServerAppSettings < Struct.new(
       :default_resource_spec,
-      :lifecycle_config_arns)
+      :lifecycle_config_arns,
+      :code_repositories)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19686,6 +21220,10 @@ module Aws::SageMaker
     #   A parameter to search by user profile name.
     #   @return [String]
     #
+    # @!attribute [rw] space_name_equals
+    #   A parameter to search by space name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAppsRequest AWS API Documentation
     #
     class ListAppsRequest < Struct.new(
@@ -19694,7 +21232,8 @@ module Aws::SageMaker
       :sort_order,
       :sort_by,
       :domain_id_equals,
-      :user_profile_name_equals)
+      :user_profile_name_equals,
+      :space_name_equals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20996,6 +22535,241 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] hub_name
+    #   The name of the hub to list the content versions of.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content to list versions of.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_version
+    #   The lower bound of the hub content versions to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_schema_version
+    #   The upper bound of the hub content schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Only list hub content versions that were created before the time
+    #   specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Only list hub content versions that were created after the time
+    #   specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort hub content versions by either name or creation time.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Sort hub content versions by ascending or descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of hub content versions to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListHubContentVersions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of hub content versions, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubContentVersionsRequest AWS API Documentation
+    #
+    class ListHubContentVersionsRequest < Struct.new(
+      :hub_name,
+      :hub_content_type,
+      :hub_content_name,
+      :min_version,
+      :max_schema_version,
+      :creation_time_before,
+      :creation_time_after,
+      :sort_by,
+      :sort_order,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_content_summaries
+    #   The summaries of the listed hub content versions.
+    #   @return [Array<Types::HubContentInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of hub content versions, use it in the
+    #   subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubContentVersionsResponse AWS API Documentation
+    #
+    class ListHubContentVersionsResponse < Struct.new(
+      :hub_content_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
+    #   The name of the hub to list the contents of.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   Only list hub content if the name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_schema_version
+    #   The upper bound of the hub content schema verion.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Only list hub content that was created before the time specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Only list hub content that was created after the time specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort hub content versions by either name or creation time.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Sort hubs by ascending or descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum amount of hub content to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListHubContents` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of hub content, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubContentsRequest AWS API Documentation
+    #
+    class ListHubContentsRequest < Struct.new(
+      :hub_name,
+      :hub_content_type,
+      :name_contains,
+      :max_schema_version,
+      :creation_time_before,
+      :creation_time_after,
+      :sort_by,
+      :sort_order,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_content_summaries
+    #   The summaries of the listed hub content.
+    #   @return [Array<Types::HubContentInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of hub content, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubContentsResponse AWS API Documentation
+    #
+    class ListHubContentsResponse < Struct.new(
+      :hub_content_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name_contains
+    #   Only list hubs with names that contain the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Only list hubs that were created before the time specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Only list hubs that were created after the time specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   Only list hubs that were last modified before the time specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   Only list hubs that were last modified after the time specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort hubs by either name or creation time.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Sort hubs by ascending or descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of hubs to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListHubs` request was truncated, the
+    #   response includes a `NextToken`. To retrieve the next set of hubs,
+    #   use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubsRequest AWS API Documentation
+    #
+    class ListHubsRequest < Struct.new(
+      :name_contains,
+      :creation_time_before,
+      :creation_time_after,
+      :last_modified_time_before,
+      :last_modified_time_after,
+      :sort_by,
+      :sort_order,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_summaries
+    #   The summaries of the listed hubs.
+    #   @return [Array<Types::HubInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of hubs, use it in the subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubsResponse AWS API Documentation
+    #
+    class ListHubsResponse < Struct.new(
+      :hub_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] creation_time_after
     #   A filter that returns only human task user interfaces with a
     #   creation time greater than or equal to the specified timestamp.
@@ -21286,6 +23060,92 @@ module Aws::SageMaker
     #
     class ListImagesResponse < Struct.new(
       :images,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name_contains
+    #   Selects inference experiments whose names contain this name.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Selects inference experiments of this type. For the possible types
+    #   of inference experiments, see CreateInferenceExperimentRequest$Type.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   Selects inference experiments which are in this status. For the
+    #   possible statuses, see DescribeInferenceExperimentResponse$Status.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Selects inference experiments which were created after this
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Selects inference experiments which were created before this
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   Selects inference experiments which were last modified after this
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   Selects inference experiments which were last modified before this
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   The column by which to sort the listed inference experiments.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The direction of sorting (ascending or descending).
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The response from the last list when returning a list large enough
+    #   to need tokening.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to select.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceExperimentsRequest AWS API Documentation
+    #
+    class ListInferenceExperimentsRequest < Struct.new(
+      :name_contains,
+      :type,
+      :status_equals,
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_experiments
+    #   List of inference experiments.
+    #   @return [Array<Types::InferenceExperimentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when calling the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceExperimentsResponse AWS API Documentation
+    #
+    class ListInferenceExperimentsResponse < Struct.new(
+      :inference_experiments,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -21725,6 +23585,228 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] model_card_name
+    #   List export jobs for the model card with the specified name.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   List export jobs for the model card with the specified version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Only list model card export jobs that were created after the time
+    #   specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Only list model card export jobs that were created before the time
+    #   specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] model_card_export_job_name_contains
+    #   Only list model card export jobs with names that contain the
+    #   specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   Only list model card export jobs with the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort model card export jobs by either name or creation time. Sorts
+    #   by creation time by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Sort model card export jobs by ascending or descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListModelCardExportJobs` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of model card export jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of model card export jobs to list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCardExportJobsRequest AWS API Documentation
+    #
+    class ListModelCardExportJobsRequest < Struct.new(
+      :model_card_name,
+      :model_card_version,
+      :creation_time_after,
+      :creation_time_before,
+      :model_card_export_job_name_contains,
+      :status_equals,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_export_job_summaries
+    #   The summaries of the listed model card export jobs.
+    #   @return [Array<Types::ModelCardExportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of model card export jobs, use it in the
+    #   subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCardExportJobsResponse AWS API Documentation
+    #
+    class ListModelCardExportJobsResponse < Struct.new(
+      :model_card_export_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_time_after
+    #   Only list model card versions that were created after the time
+    #   specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Only list model card versions that were created before the time
+    #   specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of model card versions to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_card_name
+    #   List model card versions for the model card with the specified name.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   Only list model card versions with the specified approval status.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListModelCardVersions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of model card versions, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort listed model card versions by version. Sorts by version by
+    #   default.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Sort model card versions by ascending or descending order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCardVersionsRequest AWS API Documentation
+    #
+    class ListModelCardVersionsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :max_results,
+      :model_card_name,
+      :model_card_status,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_version_summary_list
+    #   The summaries of the listed versions of the model card.
+    #   @return [Array<Types::ModelCardVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of model card versions, use it in the
+    #   subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCardVersionsResponse AWS API Documentation
+    #
+    class ListModelCardVersionsResponse < Struct.new(
+      :model_card_version_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_time_after
+    #   Only list model cards that were created after the time specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Only list model cards that were created before the time specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of model cards to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name_contains
+    #   Only list model cards with names that contain the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   Only list model cards with the specified approval status.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListModelCards` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of model cards, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort model cards by either name or creation time. Sorts by creation
+    #   time by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Sort model cards by ascending or descending order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCardsRequest AWS API Documentation
+    #
+    class ListModelCardsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :max_results,
+      :name_contains,
+      :model_card_status,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_summaries
+    #   The summaries of the listed model cards.
+    #   @return [Array<Types::ModelCardSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of model cards, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelCardsResponse AWS API Documentation
+    #
+    class ListModelCardsResponse < Struct.new(
+      :model_card_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] endpoint_name
     #   Name of the endpoint to monitor for model explainability.
     #   @return [String]
@@ -22139,6 +24221,124 @@ module Aws::SageMaker
     #
     class ListModelsOutput < Struct.new(
       :models,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitoring_schedule_name
+    #   The name of a monitoring schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_alert_name
+    #   The name of a monitoring alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field used to sort results. The default is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order, whether `Ascending` or `Descending`, of the alert
+    #   history. The default is `Descending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListMonitoringAlertHistory` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of alerts in the history, use the token in the next
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to display. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only alerts created on or before the specified
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only alerts created on or after the specified
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that retrieves only alerts with a specific status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringAlertHistoryRequest AWS API Documentation
+    #
+    class ListMonitoringAlertHistoryRequest < Struct.new(
+      :monitoring_schedule_name,
+      :monitoring_alert_name,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results,
+      :creation_time_before,
+      :creation_time_after,
+      :status_equals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitoring_alert_history
+    #   An alert history for a model monitoring schedule.
+    #   @return [Array<Types::MonitoringAlertHistorySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of alerts, use it in the subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringAlertHistoryResponse AWS API Documentation
+    #
+    class ListMonitoringAlertHistoryResponse < Struct.new(
+      :monitoring_alert_history,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitoring_schedule_name
+    #   The name of a monitoring schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListMonitoringAlerts` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of alerts in the history, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to display. The default is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringAlertsRequest AWS API Documentation
+    #
+    class ListMonitoringAlertsRequest < Struct.new(
+      :monitoring_schedule_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitoring_alert_summaries
+    #   A JSON array where each element is a summary for a monitoring alert.
+    #   @return [Array<Types::MonitoringAlertSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of alerts, use it in the subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringAlertsResponse AWS API Documentation
+    #
+    class ListMonitoringAlertsResponse < Struct.new(
+      :monitoring_alert_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -22930,6 +25130,63 @@ module Aws::SageMaker
     #
     class ListProjectsOutput < Struct.new(
       :project_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Returns a list up to a specified limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The parameter by which to sort the results. The default is
+    #   `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id_equals
+    #   A parameter to search for the Domain ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_name_contains
+    #   A parameter by which to filter the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSpacesRequest AWS API Documentation
+    #
+    class ListSpacesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :sort_order,
+      :sort_by,
+      :domain_id_equals,
+      :space_name_contains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] spaces
+    #   The list of spaces.
+    #   @return [Array<Types::SpaceDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSpacesResponse AWS API Documentation
+    #
+    class ListSpacesResponse < Struct.new(
+      :spaces,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -23883,6 +26140,83 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The properties of a model as returned by the Search API.
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_container
+    #   Describes the container, as part of model definition.
+    #   @return [Types::ContainerDefinition]
+    #
+    # @!attribute [rw] containers
+    #   The containers in the inference pipeline.
+    #   @return [Array<Types::ContainerDefinition>]
+    #
+    # @!attribute [rw] inference_execution_config
+    #   Specifies details about how containers in a multi-container endpoint
+    #   are run.
+    #   @return [Types::InferenceExecutionConfig]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that you specified
+    #   for the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Specifies a VPC that your training jobs and hosted models have
+    #   access to. Control access to and from your training and model
+    #   containers by configuring the VPC. For more information, see
+    #   [Protect Endpoints by Using an Amazon Virtual Private Cloud][1] and
+    #   [Protect Training Jobs by Using an Amazon Virtual Private Cloud][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that indicates when the model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_network_isolation
+    #   Isolates the model container. No inbound or outbound network calls
+    #   can be made to or from the model container.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs associated with the model. For more
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Model AWS API Documentation
+    #
+    class Model < Struct.new(
+      :model_name,
+      :primary_container,
+      :containers,
+      :inference_execution_config,
+      :execution_role_arn,
+      :vpc_config,
+      :creation_time,
+      :model_arn,
+      :enable_network_isolation,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the location that is configured for storing
     # model artifacts.
     #
@@ -23976,6 +26310,292 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An Amazon SageMaker Model Card.
+    #
+    # @!attribute [rw] model_card_arn
+    #   The Amazon Resource Name (ARN) of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_name
+    #   The unique name of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   The version of the model card.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] content
+    #   The content of the model card. Content uses the [model card JSON
+    #   schema][1] and provided as a string.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   The approval status of the model card within your organization.
+    #   Different organizations might have different criteria for model card
+    #   review and approval.
+    #
+    #   * `Draft`\: The model card is a work in progress.
+    #
+    #   * `PendingReview`\: The model card is pending review.
+    #
+    #   * `Approved`\: The model card is approved.
+    #
+    #   * `Archived`\: The model card is archived. No more updates should be
+    #     made to the model card, but it can still be exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_config
+    #   The security configuration used to protect model card data.
+    #   @return [Types::ModelCardSecurityConfig]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the model card was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, project, or model card.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the model card was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, project, or model card.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pairs used to manage metadata for the model card.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] model_id
+    #   The unique name (ID) of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_rating
+    #   The risk rating of the model. Different organizations might have
+    #   different criteria for model card risk ratings. For more
+    #   information, see [Risk ratings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCard AWS API Documentation
+    #
+    class ModelCard < Struct.new(
+      :model_card_arn,
+      :model_card_name,
+      :model_card_version,
+      :content,
+      :model_card_status,
+      :security_config,
+      :creation_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by,
+      :tags,
+      :model_id,
+      :risk_rating)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
+    # The artifacts of the model card export job.
+    #
+    # @!attribute [rw] s3_export_artifacts
+    #   The Amazon S3 URI of the exported model artifacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCardExportArtifacts AWS API Documentation
+    #
+    class ModelCardExportArtifacts < Struct.new(
+      :s3_export_artifacts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the Amazon SageMaker Model Card export job.
+    #
+    # @!attribute [rw] model_card_export_job_name
+    #   The name of the model card export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_export_job_arn
+    #   The Amazon Resource Name (ARN) of the model card export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The completion status of the model card export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_name
+    #   The name of the model card that the export job exports.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   The version of the model card that the export job exports.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the model card export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time that the model card export job was last modified..
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCardExportJobSummary AWS API Documentation
+    #
+    class ModelCardExportJobSummary < Struct.new(
+      :model_card_export_job_name,
+      :model_card_export_job_arn,
+      :status,
+      :model_card_name,
+      :model_card_version,
+      :created_at,
+      :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configure the export output details for an Amazon SageMaker Model
+    # Card.
+    #
+    # @!attribute [rw] s3_output_path
+    #   The Amazon S3 output path to export your model card PDF.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCardExportOutputConfig AWS API Documentation
+    #
+    class ModelCardExportOutputConfig < Struct.new(
+      :s3_output_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configure the security settings to protect model card data.
+    #
+    # @!attribute [rw] kms_key_id
+    #   A Key Management Service [key ID][1] to use for encrypting a model
+    #   card.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCardSecurityConfig AWS API Documentation
+    #
+    class ModelCardSecurityConfig < Struct.new(
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the model card.
+    #
+    # @!attribute [rw] model_card_name
+    #   The name of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_arn
+    #   The Amazon Resource Name (ARN) of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   The approval status of the model card within your organization.
+    #   Different organizations might have different criteria for model card
+    #   review and approval.
+    #
+    #   * `Draft`\: The model card is a work in progress.
+    #
+    #   * `PendingReview`\: The model card is pending review.
+    #
+    #   * `Approved`\: The model card is approved.
+    #
+    #   * `Archived`\: The model card is archived. No more updates should be
+    #     made to the model card, but it can still be exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the model card was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the model card was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCardSummary AWS API Documentation
+    #
+    class ModelCardSummary < Struct.new(
+      :model_card_name,
+      :model_card_arn,
+      :model_card_status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a specific version of the model card.
+    #
+    # @!attribute [rw] model_card_name
+    #   The name of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_arn
+    #   The Amazon Resource Name (ARN) of the model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   The approval status of the model card version within your
+    #   organization. Different organizations might have different criteria
+    #   for model card review and approval.
+    #
+    #   * `Draft`\: The model card is a work in progress.
+    #
+    #   * `PendingReview`\: The model card is pending review.
+    #
+    #   * `Approved`\: The model card is approved.
+    #
+    #   * `Archived`\: The model card is archived. No more updates should be
+    #     made to the model card, but it can still be exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   A version of the model card.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the model card version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time date and time that the model card version was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCardVersionSummary AWS API Documentation
+    #
+    class ModelCardVersionSummary < Struct.new(
+      :model_card_name,
+      :model_card_arn,
+      :model_card_status,
+      :model_card_version,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configures the timeout and maximum number of retries for processing a
     # transform job invocation.
     #
@@ -24015,6 +26635,235 @@ module Aws::SageMaker
     class ModelConfiguration < Struct.new(
       :inference_specification_name,
       :environment_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An endpoint that hosts a model displayed in the Amazon SageMaker Model
+    # Dashboard.
+    #
+    # @!attribute [rw] endpoint_name
+    #   The endpoint name.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Name (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that indicates when the endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last time the endpoint was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] endpoint_status
+    #   The endpoint status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDashboardEndpoint AWS API Documentation
+    #
+    class ModelDashboardEndpoint < Struct.new(
+      :endpoint_name,
+      :endpoint_arn,
+      :creation_time,
+      :last_modified_time,
+      :endpoint_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An alert action taken to light up an icon on the Amazon SageMaker
+    # Model Dashboard when an alert goes into `InAlert` status.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the alert action is turned on.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDashboardIndicatorAction AWS API Documentation
+    #
+    class ModelDashboardIndicatorAction < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A model displayed in the Amazon SageMaker Model Dashboard.
+    #
+    # @!attribute [rw] model
+    #   A model displayed in the Model Dashboard.
+    #   @return [Types::Model]
+    #
+    # @!attribute [rw] endpoints
+    #   The endpoints that host a model.
+    #   @return [Array<Types::ModelDashboardEndpoint>]
+    #
+    # @!attribute [rw] last_batch_transform_job
+    #   A batch transform job. For information about SageMaker batch
+    #   transform, see [Use Batch Transform][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
+    #   @return [Types::TransformJob]
+    #
+    # @!attribute [rw] monitoring_schedules
+    #   The monitoring schedules for a model.
+    #   @return [Array<Types::ModelDashboardMonitoringSchedule>]
+    #
+    # @!attribute [rw] model_card
+    #   The model card for a model.
+    #   @return [Types::ModelDashboardModelCard]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDashboardModel AWS API Documentation
+    #
+    class ModelDashboardModel < Struct.new(
+      :model,
+      :endpoints,
+      :last_batch_transform_job,
+      :monitoring_schedules,
+      :model_card)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The model card for a model displayed in the Amazon SageMaker Model
+    # Dashboard.
+    #
+    # @!attribute [rw] model_card_arn
+    #   The Amazon Resource Name (ARN) for a model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_name
+    #   The name of a model card.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_version
+    #   The model card version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_card_status
+    #   The model card status.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_config
+    #   The KMS Key ID (`KMSKeyId`) for encryption of model card
+    #   information.
+    #   @return [Types::ModelCardSecurityConfig]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that indicates when the model card was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, project, or model card.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp that indicates when the model card was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, project, or model card.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with a model card.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] model_id
+    #   For models created in SageMaker, this is the model ARN. For models
+    #   created outside of SageMaker, this is a user-customized string.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_rating
+    #   A model card's risk rating. Can be low, medium, or high.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDashboardModelCard AWS API Documentation
+    #
+    class ModelDashboardModelCard < Struct.new(
+      :model_card_arn,
+      :model_card_name,
+      :model_card_version,
+      :model_card_status,
+      :security_config,
+      :creation_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by,
+      :tags,
+      :model_id,
+      :risk_rating)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A monitoring schedule for a model displayed in the Amazon SageMaker
+    # Model Dashboard.
+    #
+    # @!attribute [rw] monitoring_schedule_arn
+    #   The Amazon Resource Name (ARN) of a monitoring schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_schedule_name
+    #   The name of a monitoring schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_schedule_status
+    #   The status of the monitoring schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_type
+    #   The monitor type of a model monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a monitoring job failed, provides the reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that indicates when the monitoring schedule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp that indicates when the monitoring schedule was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitoring_schedule_config
+    #   Configures the monitoring schedule and defines the monitoring job.
+    #   @return [Types::MonitoringScheduleConfig]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The endpoint which is monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_alert_summaries
+    #   A JSON array where each element is a summary for a monitoring alert.
+    #   @return [Array<Types::MonitoringAlertSummary>]
+    #
+    # @!attribute [rw] last_monitoring_execution_summary
+    #   Summary of information about the last monitoring job to run.
+    #   @return [Types::MonitoringExecutionSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDashboardMonitoringSchedule AWS API Documentation
+    #
+    class ModelDashboardMonitoringSchedule < Struct.new(
+      :monitoring_schedule_arn,
+      :monitoring_schedule_name,
+      :monitoring_schedule_status,
+      :monitoring_type,
+      :failure_reason,
+      :creation_time,
+      :last_modified_time,
+      :monitoring_schedule_config,
+      :endpoint_name,
+      :monitoring_alert_summaries,
+      :last_monitoring_execution_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24171,6 +27020,32 @@ module Aws::SageMaker
     class ModelExplainabilityJobInput < Struct.new(
       :endpoint_input,
       :batch_transform_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the infrastructure that the model will be
+    # deployed to.
+    #
+    # @!attribute [rw] infrastructure_type
+    #   The inference option to which to deploy your model. Possible values
+    #   are the following:
+    #
+    #   * `RealTime`\: Deploy to real-time inference.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] real_time_inference_config
+    #   The infrastructure configuration for deploying the model to
+    #   real-time inference.
+    #   @return [Types::RealTimeInferenceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelInfrastructureConfig AWS API Documentation
+    #
+    class ModelInfrastructureConfig < Struct.new(
+      :infrastructure_type,
+      :real_time_inference_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24596,7 +27471,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -24977,6 +27852,155 @@ module Aws::SageMaker
       :model_name,
       :model_arn,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the deployment options of a model.
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] variant_name
+    #   The name of the variant.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_config
+    #   The configuration for the infrastructure that the model will be
+    #   deployed to.
+    #   @return [Types::ModelInfrastructureConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelVariantConfig AWS API Documentation
+    #
+    class ModelVariantConfig < Struct.new(
+      :model_name,
+      :variant_name,
+      :infrastructure_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of the deployment configuration of a model.
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] variant_name
+    #   The name of the variant.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_config
+    #   The configuration of the infrastructure that the model has been
+    #   deployed to.
+    #   @return [Types::ModelInfrastructureConfig]
+    #
+    # @!attribute [rw] status
+    #   The status of the deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelVariantConfigSummary AWS API Documentation
+    #
+    class ModelVariantConfigSummary < Struct.new(
+      :model_name,
+      :variant_name,
+      :infrastructure_config,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of alert actions taken in response to an alert going into
+    # `InAlert` status.
+    #
+    # @!attribute [rw] model_dashboard_indicator
+    #   An alert action taken to light up an icon on the Model Dashboard
+    #   when an alert goes into `InAlert` status.
+    #   @return [Types::ModelDashboardIndicatorAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringAlertActions AWS API Documentation
+    #
+    class MonitoringAlertActions < Struct.new(
+      :model_dashboard_indicator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information of an alert's history.
+    #
+    # @!attribute [rw] monitoring_schedule_name
+    #   The name of a monitoring schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_alert_name
+    #   The name of a monitoring alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that indicates when the first alert transition occurred
+    #   in an alert history. An alert transition can be from status
+    #   `InAlert` to `OK`, or from `OK` to `InAlert`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] alert_status
+    #   The current alert status of an alert.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringAlertHistorySummary AWS API Documentation
+    #
+    class MonitoringAlertHistorySummary < Struct.new(
+      :monitoring_schedule_name,
+      :monitoring_alert_name,
+      :creation_time,
+      :alert_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about a monitor alert.
+    #
+    # @!attribute [rw] monitoring_alert_name
+    #   The name of a monitoring alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that indicates when a monitor alert was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp that indicates when a monitor alert was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] alert_status
+    #   The current status of an alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] datapoints_to_alert
+    #   Within `EvaluationPeriod`, how many execution failures will raise an
+    #   alert.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] evaluation_period
+    #   The number of most recent monitoring executions to consider when
+    #   evaluating alert status.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actions
+    #   A list of alert actions taken in response to an alert going into
+    #   `InAlert` status.
+    #   @return [Types::MonitoringAlertActions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringAlertSummary AWS API Documentation
+    #
+    class MonitoringAlertSummary < Struct.new(
+      :monitoring_alert_name,
+      :creation_time,
+      :last_modified_time,
+      :alert_status,
+      :datapoints_to_alert,
+      :evaluation_period,
+      :actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26016,12 +29040,18 @@ module Aws::SageMaker
     #   `OfflineStore` is created.
     #   @return [Types::DataCatalogConfig]
     #
+    # @!attribute [rw] table_format
+    #   Format for the offline store feature group. `Iceberg` is the optimal
+    #   format for feature groups shared between offline and online stores.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OfflineStoreConfig AWS API Documentation
     #
     class OfflineStoreConfig < Struct.new(
       :s3_storage_config,
       :disable_glue_table_creation,
-      :data_catalog_config)
+      :data_catalog_config,
+      :table_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26692,12 +29722,21 @@ module Aws::SageMaker
     #   The start time of the deployment.
     #   @return [Time]
     #
+    # @!attribute [rw] shadow_production_variants
+    #   Array of `ProductionVariant` objects, one for each model that you
+    #   want to host at this endpoint in shadow mode with production traffic
+    #   replicated from the model specified on `ProductionVariants`.If you
+    #   use this field, you can only specify one variant for
+    #   `ProductionVariants` and one variant for `ShadowProductionVariants`.
+    #   @return [Array<Types::PendingProductionVariantSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PendingDeploymentSummary AWS API Documentation
     #
     class PendingDeploymentSummary < Struct.new(
       :endpoint_config_name,
       :production_variants,
-      :start_time)
+      :start_time,
+      :shadow_production_variants)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26849,12 +29888,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parallelism_configuration
@@ -26952,12 +29991,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parallelism_configuration
@@ -27034,7 +30073,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   Metadata for the step execution.
+    #   Metadata to run the pipeline step.
     #   @return [Types::PipelineExecutionStepMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStep AWS API Documentation
@@ -27082,8 +30121,8 @@ module Aws::SageMaker
     #   @return [Types::ModelStepMetadata]
     #
     # @!attribute [rw] register_model
-    #   The Amazon Resource Name (ARN) of the model package the model was
-    #   registered to by this step execution.
+    #   The Amazon Resource Name (ARN) of the model package that the model
+    #   was registered to by this step execution.
     #   @return [Types::RegisterModelStepMetadata]
     #
     # @!attribute [rw] condition
@@ -27105,7 +30144,7 @@ module Aws::SageMaker
     #   The configurations and outcomes of the check step execution. This
     #   includes:
     #
-    #   * The type of the check conducted,
+    #   * The type of the check conducted.
     #
     #   * The Amazon S3 URIs of baseline constraints and statistics files to
     #     be used for the drift check.
@@ -27120,7 +30159,7 @@ module Aws::SageMaker
     #   * The Amazon Resource Name (ARN) of check processing job initiated
     #     by the step execution.
     #
-    #   * The boolean flags indicating if the drift check is skipped.
+    #   * The Boolean flags indicating if the drift check is skipped.
     #
     #   * If step property `BaselineUsedForDriftCheck` is set the same as
     #     `CalculatedBaseline`.
@@ -27153,12 +30192,17 @@ module Aws::SageMaker
     #   @return [Types::ClarifyCheckStepMetadata]
     #
     # @!attribute [rw] emr
-    #   The configurations and outcomes of an EMR step execution.
+    #   The configurations and outcomes of an Amazon EMR step execution.
     #   @return [Types::EMRStepMetadata]
     #
     # @!attribute [rw] fail
     #   The configurations and outcomes of a Fail step execution.
     #   @return [Types::FailStepMetadata]
+    #
+    # @!attribute [rw] auto_ml_job
+    #   The Amazon Resource Name (ARN) of the AutoML job that was run by
+    #   this step.
+    #   @return [Types::AutoMLJobStepMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
@@ -27175,7 +30219,8 @@ module Aws::SageMaker
       :quality_check,
       :clarify_check,
       :emr,
-      :fail)
+      :fail,
+      :auto_ml_job)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28086,8 +31131,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configuration information for Debugger system monitoring, framework
-    # profiling, and storage paths.
+    # Configuration information for Amazon SageMaker Debugger system
+    # monitoring, framework profiling, and storage paths.
     #
     # @!attribute [rw] s3_output_path
     #   Path to Amazon S3 storage location for system and framework metrics.
@@ -28116,7 +31161,9 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] disable_profiler
-    #   To disable system monitoring and profiling, set to `True`.
+    #   Configuration to turn off Amazon SageMaker Debugger's system
+    #   monitoring and profiling functionality. To turn it off, set to
+    #   `True`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProfilerConfig AWS API Documentation
@@ -28130,9 +31177,9 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configuration information for updating the Debugger profile
-    # parameters, system and framework metrics configurations, and storage
-    # paths.
+    # Configuration information for updating the Amazon SageMaker Debugger
+    # profile parameters, system and framework metrics configurations, and
+    # storage paths.
     #
     # @!attribute [rw] s3_output_path
     #   Path to Amazon S3 storage location for system and framework metrics.
@@ -28161,7 +31208,8 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] disable_profiler
-    #   To disable Debugger monitoring and profiling, set to `True`.
+    #   To turn off Amazon SageMaker Debugger monitoring and profiling while
+    #   a training job is in progress, set to `True`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProfilerConfigForUpdate AWS API Documentation
@@ -28192,13 +31240,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] rule_evaluator_image
-    #   The Amazon Elastic Container (ECR) Image for the managed rule
+    #   The Amazon Elastic Container Registry Image for the managed rule
     #   evaluation.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type to deploy a Debugger custom rule for profiling a
-    #   training job.
+    #   The instance type to deploy a custom rule for profiling a training
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -28325,7 +31373,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Project AWS API Documentation
@@ -29009,6 +32057,26 @@ module Aws::SageMaker
     class RStudioServerProDomainSettingsForUpdate < Struct.new(
       :domain_execution_role_arn,
       :default_resource_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The infrastructure configuration for deploying the model to real-time
+    # inference.
+    #
+    # @!attribute [rw] instance_type
+    #   The number of instances of the type specified by `InstanceType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The instance type the model is deployed to.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RealTimeInferenceConfig AWS API Documentation
+    #
+    class RealTimeInferenceConfig < Struct.new(
+      :instance_type,
+      :instance_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30218,6 +33286,15 @@ module Aws::SageMaker
     #   The properties of a hyperparameter tuning job.
     #   @return [Types::HyperParameterTuningJobSearchEntity]
     #
+    # @!attribute [rw] model
+    #   A model displayed in the Amazon SageMaker Model Dashboard.
+    #   @return [Types::ModelDashboardModel]
+    #
+    # @!attribute [rw] model_card
+    #   An Amazon SageMaker Model Card that documents details about a
+    #   machine learning model.
+    #   @return [Types::ModelCard]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -30233,7 +33310,9 @@ module Aws::SageMaker
       :feature_group,
       :project,
       :feature_metadata,
-      :hyper_parameter_tuning_job)
+      :hyper_parameter_tuning_job,
+      :model,
+      :model_card)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30613,6 +33692,47 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Shows which variant is a production variant and which variant is a
+    # shadow variant. For shadow variants, also shows the sampling
+    # percentages.
+    #
+    # @!attribute [rw] source_model_variant_name
+    #   The name of the production variant.
+    #   @return [String]
+    #
+    # @!attribute [rw] shadow_model_variants
+    #   List of shadow variant configurations.
+    #   @return [Array<Types::ShadowModelVariantConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ShadowModeConfig AWS API Documentation
+    #
+    class ShadowModeConfig < Struct.new(
+      :source_model_variant_name,
+      :shadow_model_variants)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name and sampling percentage of a shadow variant.
+    #
+    # @!attribute [rw] shadow_model_variant_name
+    #   The name of the shadow variant.
+    #   @return [String]
+    #
+    # @!attribute [rw] sampling_percentage
+    #   The percentage of inference requests that are replicated to the
+    #   shadow variant.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ShadowModelVariantConfig AWS API Documentation
+    #
+    class ShadowModelVariantConfig < Struct.new(
+      :shadow_model_variant_name,
+      :sampling_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies options for sharing SageMaker Studio notebooks. These
     # settings are specified as part of `DefaultUserSettings` when the
     # `CreateDomain` API is called, and as part of `UserSettings` when the
@@ -30753,6 +33873,59 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The space's details.
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the associated Domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceDetails AWS API Documentation
+    #
+    class SpaceDetails < Struct.new(
+      :domain_id,
+      :space_name,
+      :status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of space settings.
+    #
+    # @!attribute [rw] jupyter_server_app_settings
+    #   The JupyterServer app settings.
+    #   @return [Types::JupyterServerAppSettings]
+    #
+    # @!attribute [rw] kernel_gateway_app_settings
+    #   The KernelGateway app settings.
+    #   @return [Types::KernelGatewayAppSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceSettings AWS API Documentation
+    #
+    class SpaceSettings < Struct.new(
+      :jupyter_server_app_settings,
+      :kernel_gateway_app_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the edge deployment plan to start.
     #   @return [String]
@@ -30766,6 +33939,30 @@ module Aws::SageMaker
     class StartEdgeDeploymentStageRequest < Struct.new(
       :edge_deployment_plan_name,
       :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the inference experiment to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartInferenceExperimentRequest AWS API Documentation
+    #
+    class StartInferenceExperimentRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_experiment_arn
+    #   The ARN of the started inference experiment to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartInferenceExperimentResponse AWS API Documentation
+    #
+    class StartInferenceExperimentResponse < Struct.new(
+      :inference_experiment_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30910,6 +34107,65 @@ module Aws::SageMaker
     #
     class StopHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the inference experiment to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_variant_actions
+    #   Array of key-value pairs, with names of variants mapped to actions.
+    #   The possible actions are the following:
+    #
+    #   * `Promote` - Promote the shadow variant to a production variant
+    #
+    #   * `Remove` - Delete the variant
+    #
+    #   * `Retain` - Keep the variant as it is
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] desired_model_variants
+    #   Array of `ModelVariantConfig` objects. There is one for each variant
+    #   that you want to deploy after the inference experiment stops. Each
+    #   `ModelVariantConfig` describes the infrastructure configuration for
+    #   deploying the corresponding variant.
+    #   @return [Array<Types::ModelVariantConfig>]
+    #
+    # @!attribute [rw] desired_state
+    #   The desired state of the experiment after stopping. The possible
+    #   states are the following:
+    #
+    #   * `Completed`\: The experiment completed successfully
+    #
+    #   * `Cancelled`\: The experiment was canceled
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for stopping the experiment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopInferenceExperimentRequest AWS API Documentation
+    #
+    class StopInferenceExperimentRequest < Struct.new(
+      :name,
+      :model_variant_actions,
+      :desired_model_variants,
+      :desired_state,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_experiment_arn
+    #   The ARN of the stopped inference experiment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopInferenceExperimentResponse AWS API Documentation
+    #
+    class StopInferenceExperimentResponse < Struct.new(
+      :inference_experiment_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31286,8 +34542,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configuration of storage locations for the Debugger TensorBoard output
-    # data.
+    # Configuration of storage locations for the Amazon SageMaker Debugger
+    # TensorBoard output data.
     #
     # @!attribute [rw] local_path
     #   Path to local storage location for tensorBoard output. Defaults to
@@ -31638,11 +34894,11 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] debug_hook_config
-    #   Configuration information for the Debugger hook parameters, metric
-    #   and tensor collections, and storage paths. To learn more about how
-    #   to configure the `DebugHookConfig` parameter, see [Use the SageMaker
-    #   and Debugger Configuration API Operations to Create, Update, and
-    #   Debug Your Training Job][1].
+    #   Configuration information for the Amazon SageMaker Debugger hook
+    #   parameters, metric and tensor collections, and storage paths. To
+    #   learn more about how to configure the `DebugHookConfig` parameter,
+    #   see [Use the SageMaker and Debugger Configuration API Operations to
+    #   Create, Update, and Debug Your Training Job][1].
     #
     #
     #
@@ -31665,8 +34921,8 @@ module Aws::SageMaker
     #   @return [Array<Types::DebugRuleConfiguration>]
     #
     # @!attribute [rw] tensor_board_output_config
-    #   Configuration of storage locations for the Debugger TensorBoard
-    #   output data.
+    #   Configuration of storage locations for the Amazon SageMaker Debugger
+    #   TensorBoard output data.
     #   @return [Types::TensorBoardOutputConfig]
     #
     # @!attribute [rw] debug_rule_evaluation_statuses
@@ -32626,7 +35882,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -32709,7 +35965,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parameters
@@ -32752,6 +36008,10 @@ module Aws::SageMaker
     #   of. A component might not have any parents.
     #   @return [Array<Types::Parent>]
     #
+    # @!attribute [rw] run_name
+    #   The name of the experiment run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponent AWS API Documentation
     #
     class TrialComponent < Struct.new(
@@ -32774,7 +36034,8 @@ module Aws::SageMaker
       :source_detail,
       :lineage_group_arn,
       :tags,
-      :parents)
+      :parents,
+      :run_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32909,7 +36170,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, or project.
+    #   trial, trial component, lineage group, project, or model card.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponentSimpleSummary AWS API Documentation
@@ -32928,7 +36189,7 @@ module Aws::SageMaker
     # component.
     #
     # @!attribute [rw] source_arn
-    #   The source ARN.
+    #   The source Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -33005,7 +36266,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] trial_component_arn
-    #   The ARN of the trial component.
+    #   The Amazon Resource Name (ARN) of the trial component.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -33559,12 +36820,17 @@ module Aws::SageMaker
     #   A collection of `DomainSettings` configuration values to update.
     #   @return [Types::DomainSettingsForUpdate]
     #
+    # @!attribute [rw] default_space_settings
+    #   The default settings used to create a space within the Domain.
+    #   @return [Types::DefaultSpaceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDomainRequest AWS API Documentation
     #
     class UpdateDomainRequest < Struct.new(
       :domain_id,
       :default_user_settings,
-      :domain_settings_for_update)
+      :domain_settings_for_update,
+      :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33781,6 +37047,45 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] hub_name
+    #   The name of the hub to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_description
+    #   A description of the updated hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_display_name
+    #   The display name of the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_search_keywords
+    #   The searchable keywords for the hub.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHubRequest AWS API Documentation
+    #
+    class UpdateHubRequest < Struct.new(
+      :hub_name,
+      :hub_description,
+      :hub_display_name,
+      :hub_search_keywords)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_arn
+    #   The Amazon Resource Name (ARN) of the updated hub.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHubResponse AWS API Documentation
+    #
+    class UpdateHubResponse < Struct.new(
+      :hub_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] delete_properties
     #   A list of properties to delete. Only the `Description` and
     #   `DisplayName` properties can be deleted.
@@ -33823,6 +37128,112 @@ module Aws::SageMaker
     #
     class UpdateImageResponse < Struct.new(
       :image_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the inference experiment to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The duration for which the inference experiment will run. If the
+    #   status of the inference experiment is `Created`, then you can update
+    #   both the start and end dates. If the status of the inference
+    #   experiment is `Running`, then you can update only the end date.
+    #   @return [Types::InferenceExperimentSchedule]
+    #
+    # @!attribute [rw] description
+    #   The description of the inference experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_variants
+    #   Array of `ModelVariantConfigSummary` objects. There is one for each
+    #   variant, whose infrastructure configuration you want to update.
+    #   @return [Array<Types::ModelVariantConfig>]
+    #
+    # @!attribute [rw] data_storage_config
+    #   The Amazon S3 storage configuration for the inference experiment.
+    #   @return [Types::InferenceExperimentDataStorageConfig]
+    #
+    # @!attribute [rw] shadow_mode_config
+    #   The Amazon S3 storage configuration for the inference experiment.
+    #   @return [Types::ShadowModeConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateInferenceExperimentRequest AWS API Documentation
+    #
+    class UpdateInferenceExperimentRequest < Struct.new(
+      :name,
+      :schedule,
+      :description,
+      :model_variants,
+      :data_storage_config,
+      :shadow_mode_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_experiment_arn
+    #   The ARN of the updated inference experiment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateInferenceExperimentResponse AWS API Documentation
+    #
+    class UpdateInferenceExperimentResponse < Struct.new(
+      :inference_experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_name
+    #   The name of the model card to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The updated model card content. Content must be in [model card JSON
+    #   schema][1] and provided as a string.
+    #
+    #   When updating model card content, be sure to include the full
+    #   content and not just updated content.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   The approval status of the model card within your organization.
+    #   Different organizations might have different criteria for model card
+    #   review and approval.
+    #
+    #   * `Draft`\: The model card is a work in progress.
+    #
+    #   * `PendingReview`\: The model card is pending review.
+    #
+    #   * `Approved`\: The model card is approved.
+    #
+    #   * `Archived`\: The model card is archived. No more updates should be
+    #     made to the model card, but it can still be exported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelCardRequest AWS API Documentation
+    #
+    class UpdateModelCardRequest < Struct.new(
+      :model_card_name,
+      :content,
+      :model_card_status)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_card_arn
+    #   The Amazon Resource Name (ARN) of the updated model card.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelCardResponse AWS API Documentation
+    #
+    class UpdateModelCardResponse < Struct.new(
+      :model_card_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33878,6 +37289,52 @@ module Aws::SageMaker
     #
     class UpdateModelPackageOutput < Struct.new(
       :model_package_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitoring_schedule_name
+    #   The name of a monitoring schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_alert_name
+    #   The name of a monitoring alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] datapoints_to_alert
+    #   Within `EvaluationPeriod`, how many execution failures will raise an
+    #   alert.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] evaluation_period
+    #   The number of most recent monitoring executions to consider when
+    #   evaluating alert status.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMonitoringAlertRequest AWS API Documentation
+    #
+    class UpdateMonitoringAlertRequest < Struct.new(
+      :monitoring_schedule_name,
+      :monitoring_alert_name,
+      :datapoints_to_alert,
+      :evaluation_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitoring_schedule_arn
+    #   The Amazon Resource Name (ARN) of the monitoring schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring_alert_name
+    #   The name of a monitoring alert.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMonitoringAlertResponse AWS API Documentation
+    #
+    class UpdateMonitoringAlertResponse < Struct.new(
+      :monitoring_schedule_arn,
+      :monitoring_alert_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34252,19 +37709,53 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_id
+    #   The ID of the associated Domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_settings
+    #   A collection of space settings.
+    #   @return [Types::SpaceSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateSpaceRequest AWS API Documentation
+    #
+    class UpdateSpaceRequest < Struct.new(
+      :domain_id,
+      :space_name,
+      :space_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_arn
+    #   The space's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateSpaceResponse AWS API Documentation
+    #
+    class UpdateSpaceResponse < Struct.new(
+      :space_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] training_job_name
     #   The name of a training job to update the Debugger profiling
     #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] profiler_config
-    #   Configuration information for Debugger system monitoring, framework
-    #   profiling, and storage paths.
+    #   Configuration information for Amazon SageMaker Debugger system
+    #   monitoring, framework profiling, and storage paths.
     #   @return [Types::ProfilerConfigForUpdate]
     #
     # @!attribute [rw] profiler_rule_configurations
-    #   Configuration information for Debugger rules for profiling system
-    #   and framework metrics.
+    #   Configuration information for Amazon SageMaker Debugger rules for
+    #   profiling system and framework metrics.
     #   @return [Array<Types::ProfilerRuleConfiguration>]
     #
     # @!attribute [rw] resource_config
@@ -34563,7 +38054,7 @@ module Aws::SageMaker
     end
 
     # Information about the user who created or modified an experiment,
-    # trial, trial component, lineage group, or project.
+    # trial, trial component, lineage group, project, or model card.
     #
     # @!attribute [rw] user_profile_arn
     #   The Amazon Resource Name (ARN) of the user's profile.

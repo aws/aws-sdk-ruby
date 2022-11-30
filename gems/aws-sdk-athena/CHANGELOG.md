@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2022-11-30)
+------------------
+
+* Feature - This release includes support for using Apache Spark in Amazon Athena.
+
 1.58.0 (2022-11-07)
 ------------------
 

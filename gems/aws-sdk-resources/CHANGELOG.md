@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.151.0 (2022-11-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakergeospatial` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-docdbelastic` gem.
+
 3.150.0 (2022-11-29)
 ------------------
 

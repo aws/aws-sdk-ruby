@@ -104,6 +104,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateFeatureGroup.build(context)
           when :create_flow_definition
             Aws::SageMaker::Endpoints::CreateFlowDefinition.build(context)
+          when :create_hub
+            Aws::SageMaker::Endpoints::CreateHub.build(context)
           when :create_human_task_ui
             Aws::SageMaker::Endpoints::CreateHumanTaskUi.build(context)
           when :create_hyper_parameter_tuning_job
@@ -112,6 +114,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateImage.build(context)
           when :create_image_version
             Aws::SageMaker::Endpoints::CreateImageVersion.build(context)
+          when :create_inference_experiment
+            Aws::SageMaker::Endpoints::CreateInferenceExperiment.build(context)
           when :create_inference_recommendations_job
             Aws::SageMaker::Endpoints::CreateInferenceRecommendationsJob.build(context)
           when :create_labeling_job
@@ -120,6 +124,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateModel.build(context)
           when :create_model_bias_job_definition
             Aws::SageMaker::Endpoints::CreateModelBiasJobDefinition.build(context)
+          when :create_model_card
+            Aws::SageMaker::Endpoints::CreateModelCard.build(context)
+          when :create_model_card_export_job
+            Aws::SageMaker::Endpoints::CreateModelCardExportJob.build(context)
           when :create_model_explainability_job_definition
             Aws::SageMaker::Endpoints::CreateModelExplainabilityJobDefinition.build(context)
           when :create_model_package
@@ -144,6 +152,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateProcessingJob.build(context)
           when :create_project
             Aws::SageMaker::Endpoints::CreateProject.build(context)
+          when :create_space
+            Aws::SageMaker::Endpoints::CreateSpace.build(context)
           when :create_studio_lifecycle_config
             Aws::SageMaker::Endpoints::CreateStudioLifecycleConfig.build(context)
           when :create_training_job
@@ -196,16 +206,24 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteFeatureGroup.build(context)
           when :delete_flow_definition
             Aws::SageMaker::Endpoints::DeleteFlowDefinition.build(context)
+          when :delete_hub
+            Aws::SageMaker::Endpoints::DeleteHub.build(context)
+          when :delete_hub_content
+            Aws::SageMaker::Endpoints::DeleteHubContent.build(context)
           when :delete_human_task_ui
             Aws::SageMaker::Endpoints::DeleteHumanTaskUi.build(context)
           when :delete_image
             Aws::SageMaker::Endpoints::DeleteImage.build(context)
           when :delete_image_version
             Aws::SageMaker::Endpoints::DeleteImageVersion.build(context)
+          when :delete_inference_experiment
+            Aws::SageMaker::Endpoints::DeleteInferenceExperiment.build(context)
           when :delete_model
             Aws::SageMaker::Endpoints::DeleteModel.build(context)
           when :delete_model_bias_job_definition
             Aws::SageMaker::Endpoints::DeleteModelBiasJobDefinition.build(context)
+          when :delete_model_card
+            Aws::SageMaker::Endpoints::DeleteModelCard.build(context)
           when :delete_model_explainability_job_definition
             Aws::SageMaker::Endpoints::DeleteModelExplainabilityJobDefinition.build(context)
           when :delete_model_package
@@ -226,6 +244,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeletePipeline.build(context)
           when :delete_project
             Aws::SageMaker::Endpoints::DeleteProject.build(context)
+          when :delete_space
+            Aws::SageMaker::Endpoints::DeleteSpace.build(context)
           when :delete_studio_lifecycle_config
             Aws::SageMaker::Endpoints::DeleteStudioLifecycleConfig.build(context)
           when :delete_tags
@@ -284,6 +304,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeFeatureMetadata.build(context)
           when :describe_flow_definition
             Aws::SageMaker::Endpoints::DescribeFlowDefinition.build(context)
+          when :describe_hub
+            Aws::SageMaker::Endpoints::DescribeHub.build(context)
+          when :describe_hub_content
+            Aws::SageMaker::Endpoints::DescribeHubContent.build(context)
           when :describe_human_task_ui
             Aws::SageMaker::Endpoints::DescribeHumanTaskUi.build(context)
           when :describe_hyper_parameter_tuning_job
@@ -292,6 +316,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeImage.build(context)
           when :describe_image_version
             Aws::SageMaker::Endpoints::DescribeImageVersion.build(context)
+          when :describe_inference_experiment
+            Aws::SageMaker::Endpoints::DescribeInferenceExperiment.build(context)
           when :describe_inference_recommendations_job
             Aws::SageMaker::Endpoints::DescribeInferenceRecommendationsJob.build(context)
           when :describe_labeling_job
@@ -302,6 +328,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeModel.build(context)
           when :describe_model_bias_job_definition
             Aws::SageMaker::Endpoints::DescribeModelBiasJobDefinition.build(context)
+          when :describe_model_card
+            Aws::SageMaker::Endpoints::DescribeModelCard.build(context)
+          when :describe_model_card_export_job
+            Aws::SageMaker::Endpoints::DescribeModelCardExportJob.build(context)
           when :describe_model_explainability_job_definition
             Aws::SageMaker::Endpoints::DescribeModelExplainabilityJobDefinition.build(context)
           when :describe_model_package
@@ -326,6 +356,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeProcessingJob.build(context)
           when :describe_project
             Aws::SageMaker::Endpoints::DescribeProject.build(context)
+          when :describe_space
+            Aws::SageMaker::Endpoints::DescribeSpace.build(context)
           when :describe_studio_lifecycle_config
             Aws::SageMaker::Endpoints::DescribeStudioLifecycleConfig.build(context)
           when :describe_subscribed_workteam
@@ -360,6 +392,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::GetSagemakerServicecatalogPortfolioStatus.build(context)
           when :get_search_suggestions
             Aws::SageMaker::Endpoints::GetSearchSuggestions.build(context)
+          when :import_hub_content
+            Aws::SageMaker::Endpoints::ImportHubContent.build(context)
           when :list_actions
             Aws::SageMaker::Endpoints::ListActions.build(context)
           when :list_algorithms
@@ -404,6 +438,12 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListFeatureGroups.build(context)
           when :list_flow_definitions
             Aws::SageMaker::Endpoints::ListFlowDefinitions.build(context)
+          when :list_hub_content_versions
+            Aws::SageMaker::Endpoints::ListHubContentVersions.build(context)
+          when :list_hub_contents
+            Aws::SageMaker::Endpoints::ListHubContents.build(context)
+          when :list_hubs
+            Aws::SageMaker::Endpoints::ListHubs.build(context)
           when :list_human_task_uis
             Aws::SageMaker::Endpoints::ListHumanTaskUis.build(context)
           when :list_hyper_parameter_tuning_jobs
@@ -412,6 +452,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListImageVersions.build(context)
           when :list_images
             Aws::SageMaker::Endpoints::ListImages.build(context)
+          when :list_inference_experiments
+            Aws::SageMaker::Endpoints::ListInferenceExperiments.build(context)
           when :list_inference_recommendations_job_steps
             Aws::SageMaker::Endpoints::ListInferenceRecommendationsJobSteps.build(context)
           when :list_inference_recommendations_jobs
@@ -424,6 +466,12 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListLineageGroups.build(context)
           when :list_model_bias_job_definitions
             Aws::SageMaker::Endpoints::ListModelBiasJobDefinitions.build(context)
+          when :list_model_card_export_jobs
+            Aws::SageMaker::Endpoints::ListModelCardExportJobs.build(context)
+          when :list_model_card_versions
+            Aws::SageMaker::Endpoints::ListModelCardVersions.build(context)
+          when :list_model_cards
+            Aws::SageMaker::Endpoints::ListModelCards.build(context)
           when :list_model_explainability_job_definitions
             Aws::SageMaker::Endpoints::ListModelExplainabilityJobDefinitions.build(context)
           when :list_model_metadata
@@ -436,6 +484,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListModelQualityJobDefinitions.build(context)
           when :list_models
             Aws::SageMaker::Endpoints::ListModels.build(context)
+          when :list_monitoring_alert_history
+            Aws::SageMaker::Endpoints::ListMonitoringAlertHistory.build(context)
+          when :list_monitoring_alerts
+            Aws::SageMaker::Endpoints::ListMonitoringAlerts.build(context)
           when :list_monitoring_executions
             Aws::SageMaker::Endpoints::ListMonitoringExecutions.build(context)
           when :list_monitoring_schedules
@@ -456,6 +508,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListProcessingJobs.build(context)
           when :list_projects
             Aws::SageMaker::Endpoints::ListProjects.build(context)
+          when :list_spaces
+            Aws::SageMaker::Endpoints::ListSpaces.build(context)
           when :list_stage_devices
             Aws::SageMaker::Endpoints::ListStageDevices.build(context)
           when :list_studio_lifecycle_configs
@@ -498,6 +552,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::SendPipelineExecutionStepSuccess.build(context)
           when :start_edge_deployment_stage
             Aws::SageMaker::Endpoints::StartEdgeDeploymentStage.build(context)
+          when :start_inference_experiment
+            Aws::SageMaker::Endpoints::StartInferenceExperiment.build(context)
           when :start_monitoring_schedule
             Aws::SageMaker::Endpoints::StartMonitoringSchedule.build(context)
           when :start_notebook_instance
@@ -514,6 +570,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::StopEdgePackagingJob.build(context)
           when :stop_hyper_parameter_tuning_job
             Aws::SageMaker::Endpoints::StopHyperParameterTuningJob.build(context)
+          when :stop_inference_experiment
+            Aws::SageMaker::Endpoints::StopInferenceExperiment.build(context)
           when :stop_inference_recommendations_job
             Aws::SageMaker::Endpoints::StopInferenceRecommendationsJob.build(context)
           when :stop_labeling_job
@@ -556,10 +614,18 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::UpdateFeatureGroup.build(context)
           when :update_feature_metadata
             Aws::SageMaker::Endpoints::UpdateFeatureMetadata.build(context)
+          when :update_hub
+            Aws::SageMaker::Endpoints::UpdateHub.build(context)
           when :update_image
             Aws::SageMaker::Endpoints::UpdateImage.build(context)
+          when :update_inference_experiment
+            Aws::SageMaker::Endpoints::UpdateInferenceExperiment.build(context)
+          when :update_model_card
+            Aws::SageMaker::Endpoints::UpdateModelCard.build(context)
           when :update_model_package
             Aws::SageMaker::Endpoints::UpdateModelPackage.build(context)
+          when :update_monitoring_alert
+            Aws::SageMaker::Endpoints::UpdateMonitoringAlert.build(context)
           when :update_monitoring_schedule
             Aws::SageMaker::Endpoints::UpdateMonitoringSchedule.build(context)
           when :update_notebook_instance
@@ -572,6 +638,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::UpdatePipelineExecution.build(context)
           when :update_project
             Aws::SageMaker::Endpoints::UpdateProject.build(context)
+          when :update_space
+            Aws::SageMaker::Endpoints::UpdateSpace.build(context)
           when :update_training_job
             Aws::SageMaker::Endpoints::UpdateTrainingJob.build(context)
           when :update_trial

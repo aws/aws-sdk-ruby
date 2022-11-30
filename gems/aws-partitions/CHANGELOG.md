@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.669.0 (2022-11-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerGeospatial`.
+
+* Feature - Added support for enumerating regions for `Aws::DocDBElastic`.
+
 1.668.0 (2022-11-29)
 ------------------
 

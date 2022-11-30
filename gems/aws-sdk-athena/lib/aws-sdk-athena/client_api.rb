@@ -16,7 +16,10 @@ module Aws::Athena
     AclConfiguration = Shapes::StructureShape.new(name: 'AclConfiguration')
     Age = Shapes::IntegerShape.new(name: 'Age')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    ApplicationDPUSizes = Shapes::StructureShape.new(name: 'ApplicationDPUSizes')
+    ApplicationDPUSizesList = Shapes::ListShape.new(name: 'ApplicationDPUSizesList')
     AthenaError = Shapes::StructureShape.new(name: 'AthenaError')
+    AuthToken = Shapes::StringShape.new(name: 'AuthToken')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BatchGetNamedQueryInput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryInput')
     BatchGetNamedQueryOutput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryOutput')
@@ -27,21 +30,38 @@ module Aws::Athena
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BytesScannedCutoffValue = Shapes::IntegerShape.new(name: 'BytesScannedCutoffValue')
+    CalculationConfiguration = Shapes::StructureShape.new(name: 'CalculationConfiguration')
+    CalculationExecutionId = Shapes::StringShape.new(name: 'CalculationExecutionId')
+    CalculationExecutionState = Shapes::StringShape.new(name: 'CalculationExecutionState')
+    CalculationResult = Shapes::StructureShape.new(name: 'CalculationResult')
+    CalculationResultType = Shapes::StringShape.new(name: 'CalculationResultType')
+    CalculationStatistics = Shapes::StructureShape.new(name: 'CalculationStatistics')
+    CalculationStatus = Shapes::StructureShape.new(name: 'CalculationStatus')
+    CalculationSummary = Shapes::StructureShape.new(name: 'CalculationSummary')
+    CalculationsList = Shapes::ListShape.new(name: 'CalculationsList')
     CatalogNameString = Shapes::StringShape.new(name: 'CatalogNameString')
+    ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    CodeBlock = Shapes::StringShape.new(name: 'CodeBlock')
     Column = Shapes::StructureShape.new(name: 'Column')
     ColumnInfo = Shapes::StructureShape.new(name: 'ColumnInfo')
     ColumnInfoList = Shapes::ListShape.new(name: 'ColumnInfoList')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnNullable = Shapes::StringShape.new(name: 'ColumnNullable')
     CommentString = Shapes::StringShape.new(name: 'CommentString')
+    CoordinatorDpuSize = Shapes::IntegerShape.new(name: 'CoordinatorDpuSize')
     CreateDataCatalogInput = Shapes::StructureShape.new(name: 'CreateDataCatalogInput')
     CreateDataCatalogOutput = Shapes::StructureShape.new(name: 'CreateDataCatalogOutput')
     CreateNamedQueryInput = Shapes::StructureShape.new(name: 'CreateNamedQueryInput')
     CreateNamedQueryOutput = Shapes::StructureShape.new(name: 'CreateNamedQueryOutput')
+    CreateNotebookInput = Shapes::StructureShape.new(name: 'CreateNotebookInput')
+    CreateNotebookOutput = Shapes::StructureShape.new(name: 'CreateNotebookOutput')
     CreatePreparedStatementInput = Shapes::StructureShape.new(name: 'CreatePreparedStatementInput')
     CreatePreparedStatementOutput = Shapes::StructureShape.new(name: 'CreatePreparedStatementOutput')
+    CreatePresignedNotebookUrlRequest = Shapes::StructureShape.new(name: 'CreatePresignedNotebookUrlRequest')
+    CreatePresignedNotebookUrlResponse = Shapes::StructureShape.new(name: 'CreatePresignedNotebookUrlResponse')
     CreateWorkGroupInput = Shapes::StructureShape.new(name: 'CreateWorkGroupInput')
     CreateWorkGroupOutput = Shapes::StructureShape.new(name: 'CreateWorkGroupOutput')
+    CustomerContentEncryptionConfiguration = Shapes::StructureShape.new(name: 'CustomerContentEncryptionConfiguration')
     DataCatalog = Shapes::StructureShape.new(name: 'DataCatalog')
     DataCatalogSummary = Shapes::StructureShape.new(name: 'DataCatalogSummary')
     DataCatalogSummaryList = Shapes::ListShape.new(name: 'DataCatalogSummaryList')
@@ -51,10 +71,13 @@ module Aws::Athena
     DatabaseString = Shapes::StringShape.new(name: 'DatabaseString')
     Date = Shapes::TimestampShape.new(name: 'Date')
     Datum = Shapes::StructureShape.new(name: 'Datum')
+    DefaultExecutorDpuSize = Shapes::IntegerShape.new(name: 'DefaultExecutorDpuSize')
     DeleteDataCatalogInput = Shapes::StructureShape.new(name: 'DeleteDataCatalogInput')
     DeleteDataCatalogOutput = Shapes::StructureShape.new(name: 'DeleteDataCatalogOutput')
     DeleteNamedQueryInput = Shapes::StructureShape.new(name: 'DeleteNamedQueryInput')
     DeleteNamedQueryOutput = Shapes::StructureShape.new(name: 'DeleteNamedQueryOutput')
+    DeleteNotebookInput = Shapes::StructureShape.new(name: 'DeleteNotebookInput')
+    DeleteNotebookOutput = Shapes::StructureShape.new(name: 'DeleteNotebookOutput')
     DeletePreparedStatementInput = Shapes::StructureShape.new(name: 'DeletePreparedStatementInput')
     DeletePreparedStatementOutput = Shapes::StructureShape.new(name: 'DeletePreparedStatementOutput')
     DeleteWorkGroupInput = Shapes::StructureShape.new(name: 'DeleteWorkGroupInput')
@@ -62,6 +85,7 @@ module Aws::Athena
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionOption = Shapes::StringShape.new(name: 'EncryptionOption')
+    EngineConfiguration = Shapes::StructureShape.new(name: 'EngineConfiguration')
     EngineVersion = Shapes::StructureShape.new(name: 'EngineVersion')
     EngineVersionsList = Shapes::ListShape.new(name: 'EngineVersionsList')
     ErrorCategory = Shapes::IntegerShape.new(name: 'ErrorCategory')
@@ -70,13 +94,29 @@ module Aws::Athena
     ErrorType = Shapes::IntegerShape.new(name: 'ErrorType')
     ExecutionParameter = Shapes::StringShape.new(name: 'ExecutionParameter')
     ExecutionParameters = Shapes::ListShape.new(name: 'ExecutionParameters')
+    ExecutorId = Shapes::StringShape.new(name: 'ExecutorId')
+    ExecutorState = Shapes::StringShape.new(name: 'ExecutorState')
+    ExecutorType = Shapes::StringShape.new(name: 'ExecutorType')
+    ExecutorsSummary = Shapes::StructureShape.new(name: 'ExecutorsSummary')
+    ExecutorsSummaryList = Shapes::ListShape.new(name: 'ExecutorsSummaryList')
+    ExportNotebookInput = Shapes::StructureShape.new(name: 'ExportNotebookInput')
+    ExportNotebookOutput = Shapes::StructureShape.new(name: 'ExportNotebookOutput')
     ExpressionString = Shapes::StringShape.new(name: 'ExpressionString')
+    FilterDefinition = Shapes::StructureShape.new(name: 'FilterDefinition')
+    GetCalculationExecutionCodeRequest = Shapes::StructureShape.new(name: 'GetCalculationExecutionCodeRequest')
+    GetCalculationExecutionCodeResponse = Shapes::StructureShape.new(name: 'GetCalculationExecutionCodeResponse')
+    GetCalculationExecutionRequest = Shapes::StructureShape.new(name: 'GetCalculationExecutionRequest')
+    GetCalculationExecutionResponse = Shapes::StructureShape.new(name: 'GetCalculationExecutionResponse')
+    GetCalculationExecutionStatusRequest = Shapes::StructureShape.new(name: 'GetCalculationExecutionStatusRequest')
+    GetCalculationExecutionStatusResponse = Shapes::StructureShape.new(name: 'GetCalculationExecutionStatusResponse')
     GetDataCatalogInput = Shapes::StructureShape.new(name: 'GetDataCatalogInput')
     GetDataCatalogOutput = Shapes::StructureShape.new(name: 'GetDataCatalogOutput')
     GetDatabaseInput = Shapes::StructureShape.new(name: 'GetDatabaseInput')
     GetDatabaseOutput = Shapes::StructureShape.new(name: 'GetDatabaseOutput')
     GetNamedQueryInput = Shapes::StructureShape.new(name: 'GetNamedQueryInput')
     GetNamedQueryOutput = Shapes::StructureShape.new(name: 'GetNamedQueryOutput')
+    GetNotebookMetadataInput = Shapes::StructureShape.new(name: 'GetNotebookMetadataInput')
+    GetNotebookMetadataOutput = Shapes::StructureShape.new(name: 'GetNotebookMetadataOutput')
     GetPreparedStatementInput = Shapes::StructureShape.new(name: 'GetPreparedStatementInput')
     GetPreparedStatementOutput = Shapes::StructureShape.new(name: 'GetPreparedStatementOutput')
     GetQueryExecutionInput = Shapes::StructureShape.new(name: 'GetQueryExecutionInput')
@@ -85,27 +125,46 @@ module Aws::Athena
     GetQueryResultsOutput = Shapes::StructureShape.new(name: 'GetQueryResultsOutput')
     GetQueryRuntimeStatisticsInput = Shapes::StructureShape.new(name: 'GetQueryRuntimeStatisticsInput')
     GetQueryRuntimeStatisticsOutput = Shapes::StructureShape.new(name: 'GetQueryRuntimeStatisticsOutput')
+    GetSessionRequest = Shapes::StructureShape.new(name: 'GetSessionRequest')
+    GetSessionResponse = Shapes::StructureShape.new(name: 'GetSessionResponse')
+    GetSessionStatusRequest = Shapes::StructureShape.new(name: 'GetSessionStatusRequest')
+    GetSessionStatusResponse = Shapes::StructureShape.new(name: 'GetSessionStatusResponse')
     GetTableMetadataInput = Shapes::StructureShape.new(name: 'GetTableMetadataInput')
     GetTableMetadataOutput = Shapes::StructureShape.new(name: 'GetTableMetadataOutput')
     GetWorkGroupInput = Shapes::StructureShape.new(name: 'GetWorkGroupInput')
     GetWorkGroupOutput = Shapes::StructureShape.new(name: 'GetWorkGroupOutput')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    ImportNotebookInput = Shapes::StructureShape.new(name: 'ImportNotebookInput')
+    ImportNotebookOutput = Shapes::StructureShape.new(name: 'ImportNotebookOutput')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     KeyString = Shapes::StringShape.new(name: 'KeyString')
+    KmsKey = Shapes::StringShape.new(name: 'KmsKey')
+    ListApplicationDPUSizesInput = Shapes::StructureShape.new(name: 'ListApplicationDPUSizesInput')
+    ListApplicationDPUSizesOutput = Shapes::StructureShape.new(name: 'ListApplicationDPUSizesOutput')
+    ListCalculationExecutionsRequest = Shapes::StructureShape.new(name: 'ListCalculationExecutionsRequest')
+    ListCalculationExecutionsResponse = Shapes::StructureShape.new(name: 'ListCalculationExecutionsResponse')
     ListDataCatalogsInput = Shapes::StructureShape.new(name: 'ListDataCatalogsInput')
     ListDataCatalogsOutput = Shapes::StructureShape.new(name: 'ListDataCatalogsOutput')
     ListDatabasesInput = Shapes::StructureShape.new(name: 'ListDatabasesInput')
     ListDatabasesOutput = Shapes::StructureShape.new(name: 'ListDatabasesOutput')
     ListEngineVersionsInput = Shapes::StructureShape.new(name: 'ListEngineVersionsInput')
     ListEngineVersionsOutput = Shapes::StructureShape.new(name: 'ListEngineVersionsOutput')
+    ListExecutorsRequest = Shapes::StructureShape.new(name: 'ListExecutorsRequest')
+    ListExecutorsResponse = Shapes::StructureShape.new(name: 'ListExecutorsResponse')
     ListNamedQueriesInput = Shapes::StructureShape.new(name: 'ListNamedQueriesInput')
     ListNamedQueriesOutput = Shapes::StructureShape.new(name: 'ListNamedQueriesOutput')
+    ListNotebookMetadataInput = Shapes::StructureShape.new(name: 'ListNotebookMetadataInput')
+    ListNotebookMetadataOutput = Shapes::StructureShape.new(name: 'ListNotebookMetadataOutput')
+    ListNotebookSessionsRequest = Shapes::StructureShape.new(name: 'ListNotebookSessionsRequest')
+    ListNotebookSessionsResponse = Shapes::StructureShape.new(name: 'ListNotebookSessionsResponse')
     ListPreparedStatementsInput = Shapes::StructureShape.new(name: 'ListPreparedStatementsInput')
     ListPreparedStatementsOutput = Shapes::StructureShape.new(name: 'ListPreparedStatementsOutput')
     ListQueryExecutionsInput = Shapes::StructureShape.new(name: 'ListQueryExecutionsInput')
     ListQueryExecutionsOutput = Shapes::StructureShape.new(name: 'ListQueryExecutionsOutput')
+    ListSessionsRequest = Shapes::StructureShape.new(name: 'ListSessionsRequest')
+    ListSessionsResponse = Shapes::StructureShape.new(name: 'ListSessionsResponse')
     ListTableMetadataInput = Shapes::StructureShape.new(name: 'ListTableMetadataInput')
     ListTableMetadataOutput = Shapes::StructureShape.new(name: 'ListTableMetadataOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -113,13 +172,19 @@ module Aws::Athena
     ListWorkGroupsInput = Shapes::StructureShape.new(name: 'ListWorkGroupsInput')
     ListWorkGroupsOutput = Shapes::StructureShape.new(name: 'ListWorkGroupsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxApplicationDPUSizesCount = Shapes::IntegerShape.new(name: 'MaxApplicationDPUSizesCount')
+    MaxCalculationsCount = Shapes::IntegerShape.new(name: 'MaxCalculationsCount')
+    MaxConcurrentDpus = Shapes::IntegerShape.new(name: 'MaxConcurrentDpus')
     MaxDataCatalogsCount = Shapes::IntegerShape.new(name: 'MaxDataCatalogsCount')
     MaxDatabasesCount = Shapes::IntegerShape.new(name: 'MaxDatabasesCount')
     MaxEngineVersionsCount = Shapes::IntegerShape.new(name: 'MaxEngineVersionsCount')
+    MaxListExecutorsCount = Shapes::IntegerShape.new(name: 'MaxListExecutorsCount')
     MaxNamedQueriesCount = Shapes::IntegerShape.new(name: 'MaxNamedQueriesCount')
+    MaxNotebooksCount = Shapes::IntegerShape.new(name: 'MaxNotebooksCount')
     MaxPreparedStatementsCount = Shapes::IntegerShape.new(name: 'MaxPreparedStatementsCount')
     MaxQueryExecutionsCount = Shapes::IntegerShape.new(name: 'MaxQueryExecutionsCount')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
+    MaxSessionsCount = Shapes::IntegerShape.new(name: 'MaxSessionsCount')
     MaxTableMetadataCount = Shapes::IntegerShape.new(name: 'MaxTableMetadataCount')
     MaxTagsCount = Shapes::IntegerShape.new(name: 'MaxTagsCount')
     MaxWorkGroupsCount = Shapes::IntegerShape.new(name: 'MaxWorkGroupsCount')
@@ -130,8 +195,16 @@ module Aws::Athena
     NamedQueryId = Shapes::StringShape.new(name: 'NamedQueryId')
     NamedQueryIdList = Shapes::ListShape.new(name: 'NamedQueryIdList')
     NamedQueryList = Shapes::ListShape.new(name: 'NamedQueryList')
+    NotebookId = Shapes::StringShape.new(name: 'NotebookId')
+    NotebookMetadata = Shapes::StructureShape.new(name: 'NotebookMetadata')
+    NotebookMetadataArray = Shapes::ListShape.new(name: 'NotebookMetadataArray')
+    NotebookName = Shapes::StringShape.new(name: 'NotebookName')
+    NotebookSessionSummary = Shapes::StructureShape.new(name: 'NotebookSessionSummary')
+    NotebookSessionsList = Shapes::ListShape.new(name: 'NotebookSessionsList')
+    NotebookType = Shapes::StringShape.new(name: 'NotebookType')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     ParametersMapValue = Shapes::StringShape.new(name: 'ParametersMapValue')
+    Payload = Shapes::StringShape.new(name: 'Payload')
     PreparedStatement = Shapes::StructureShape.new(name: 'PreparedStatement')
     PreparedStatementDetailsList = Shapes::ListShape.new(name: 'PreparedStatementDetailsList')
     PreparedStatementNameList = Shapes::ListShape.new(name: 'PreparedStatementNameList')
@@ -162,17 +235,36 @@ module Aws::Athena
     ResultReuseInformation = Shapes::StructureShape.new(name: 'ResultReuseInformation')
     ResultSet = Shapes::StructureShape.new(name: 'ResultSet')
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Row = Shapes::StructureShape.new(name: 'Row')
     RowList = Shapes::ListShape.new(name: 'RowList')
     S3AclOption = Shapes::StringShape.new(name: 'S3AclOption')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SessionAlreadyExistsException = Shapes::StructureShape.new(name: 'SessionAlreadyExistsException')
+    SessionConfiguration = Shapes::StructureShape.new(name: 'SessionConfiguration')
+    SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SessionIdleTimeoutInMinutes = Shapes::IntegerShape.new(name: 'SessionIdleTimeoutInMinutes')
+    SessionManagerToken = Shapes::StringShape.new(name: 'SessionManagerToken')
+    SessionState = Shapes::StringShape.new(name: 'SessionState')
+    SessionStatistics = Shapes::StructureShape.new(name: 'SessionStatistics')
+    SessionStatus = Shapes::StructureShape.new(name: 'SessionStatus')
+    SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
+    SessionsList = Shapes::ListShape.new(name: 'SessionsList')
+    StartCalculationExecutionRequest = Shapes::StructureShape.new(name: 'StartCalculationExecutionRequest')
+    StartCalculationExecutionResponse = Shapes::StructureShape.new(name: 'StartCalculationExecutionResponse')
     StartQueryExecutionInput = Shapes::StructureShape.new(name: 'StartQueryExecutionInput')
     StartQueryExecutionOutput = Shapes::StructureShape.new(name: 'StartQueryExecutionOutput')
+    StartSessionRequest = Shapes::StructureShape.new(name: 'StartSessionRequest')
+    StartSessionResponse = Shapes::StructureShape.new(name: 'StartSessionResponse')
     StatementName = Shapes::StringShape.new(name: 'StatementName')
     StatementType = Shapes::StringShape.new(name: 'StatementType')
+    StopCalculationExecutionRequest = Shapes::StructureShape.new(name: 'StopCalculationExecutionRequest')
+    StopCalculationExecutionResponse = Shapes::StructureShape.new(name: 'StopCalculationExecutionResponse')
     StopQueryExecutionInput = Shapes::StructureShape.new(name: 'StopQueryExecutionInput')
     StopQueryExecutionOutput = Shapes::StructureShape.new(name: 'StopQueryExecutionOutput')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    SupportedDPUSizeList = Shapes::ListShape.new(name: 'SupportedDPUSizeList')
     TableMetadata = Shapes::StructureShape.new(name: 'TableMetadata')
     TableMetadataList = Shapes::ListShape.new(name: 'TableMetadataList')
     TableTypeString = Shapes::StringShape.new(name: 'TableTypeString')
@@ -183,6 +275,8 @@ module Aws::Athena
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TerminateSessionRequest = Shapes::StructureShape.new(name: 'TerminateSessionRequest')
+    TerminateSessionResponse = Shapes::StructureShape.new(name: 'TerminateSessionResponse')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
@@ -200,6 +294,10 @@ module Aws::Athena
     UpdateDataCatalogOutput = Shapes::StructureShape.new(name: 'UpdateDataCatalogOutput')
     UpdateNamedQueryInput = Shapes::StructureShape.new(name: 'UpdateNamedQueryInput')
     UpdateNamedQueryOutput = Shapes::StructureShape.new(name: 'UpdateNamedQueryOutput')
+    UpdateNotebookInput = Shapes::StructureShape.new(name: 'UpdateNotebookInput')
+    UpdateNotebookMetadataInput = Shapes::StructureShape.new(name: 'UpdateNotebookMetadataInput')
+    UpdateNotebookMetadataOutput = Shapes::StructureShape.new(name: 'UpdateNotebookMetadataOutput')
+    UpdateNotebookOutput = Shapes::StructureShape.new(name: 'UpdateNotebookOutput')
     UpdatePreparedStatementInput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementInput')
     UpdatePreparedStatementOutput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementOutput')
     UpdateWorkGroupInput = Shapes::StructureShape.new(name: 'UpdateWorkGroupInput')
@@ -217,6 +315,12 @@ module Aws::Athena
 
     AclConfiguration.add_member(:s3_acl_option, Shapes::ShapeRef.new(shape: S3AclOption, required: true, location_name: "S3AclOption"))
     AclConfiguration.struct_class = Types::AclConfiguration
+
+    ApplicationDPUSizes.add_member(:application_runtime_id, Shapes::ShapeRef.new(shape: NameString, location_name: "ApplicationRuntimeId"))
+    ApplicationDPUSizes.add_member(:supported_dpu_sizes, Shapes::ShapeRef.new(shape: SupportedDPUSizeList, location_name: "SupportedDPUSizes"))
+    ApplicationDPUSizes.struct_class = Types::ApplicationDPUSizes
+
+    ApplicationDPUSizesList.member = Shapes::ShapeRef.new(shape: ApplicationDPUSizes)
 
     AthenaError.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
     AthenaError.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
@@ -245,6 +349,32 @@ module Aws::Athena
     BatchGetQueryExecutionOutput.add_member(:query_executions, Shapes::ShapeRef.new(shape: QueryExecutionList, location_name: "QueryExecutions"))
     BatchGetQueryExecutionOutput.add_member(:unprocessed_query_execution_ids, Shapes::ShapeRef.new(shape: UnprocessedQueryExecutionIdList, location_name: "UnprocessedQueryExecutionIds"))
     BatchGetQueryExecutionOutput.struct_class = Types::BatchGetQueryExecutionOutput
+
+    CalculationConfiguration.add_member(:code_block, Shapes::ShapeRef.new(shape: CodeBlock, location_name: "CodeBlock"))
+    CalculationConfiguration.struct_class = Types::CalculationConfiguration
+
+    CalculationResult.add_member(:std_out_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "StdOutS3Uri"))
+    CalculationResult.add_member(:std_error_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "StdErrorS3Uri"))
+    CalculationResult.add_member(:result_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ResultS3Uri"))
+    CalculationResult.add_member(:result_type, Shapes::ShapeRef.new(shape: CalculationResultType, location_name: "ResultType"))
+    CalculationResult.struct_class = Types::CalculationResult
+
+    CalculationStatistics.add_member(:dpu_execution_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "DpuExecutionInMillis"))
+    CalculationStatistics.add_member(:progress, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Progress"))
+    CalculationStatistics.struct_class = Types::CalculationStatistics
+
+    CalculationStatus.add_member(:submission_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "SubmissionDateTime"))
+    CalculationStatus.add_member(:completion_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CompletionDateTime"))
+    CalculationStatus.add_member(:state, Shapes::ShapeRef.new(shape: CalculationExecutionState, location_name: "State"))
+    CalculationStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "StateChangeReason"))
+    CalculationStatus.struct_class = Types::CalculationStatus
+
+    CalculationSummary.add_member(:calculation_execution_id, Shapes::ShapeRef.new(shape: CalculationExecutionId, location_name: "CalculationExecutionId"))
+    CalculationSummary.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CalculationSummary.add_member(:status, Shapes::ShapeRef.new(shape: CalculationStatus, location_name: "Status"))
+    CalculationSummary.struct_class = Types::CalculationSummary
+
+    CalculationsList.member = Shapes::ShapeRef.new(shape: CalculationSummary)
 
     Column.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     Column.add_member(:type, Shapes::ShapeRef.new(shape: TypeString, location_name: "Type"))
@@ -287,6 +417,14 @@ module Aws::Athena
     CreateNamedQueryOutput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, location_name: "NamedQueryId"))
     CreateNamedQueryOutput.struct_class = Types::CreateNamedQueryOutput
 
+    CreateNotebookInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    CreateNotebookInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "Name"))
+    CreateNotebookInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    CreateNotebookInput.struct_class = Types::CreateNotebookInput
+
+    CreateNotebookOutput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, location_name: "NotebookId"))
+    CreateNotebookOutput.struct_class = Types::CreateNotebookOutput
+
     CreatePreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
     CreatePreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     CreatePreparedStatementInput.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryStatement"))
@@ -295,6 +433,14 @@ module Aws::Athena
 
     CreatePreparedStatementOutput.struct_class = Types::CreatePreparedStatementOutput
 
+    CreatePresignedNotebookUrlRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
+    CreatePresignedNotebookUrlRequest.struct_class = Types::CreatePresignedNotebookUrlRequest
+
+    CreatePresignedNotebookUrlResponse.add_member(:notebook_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NotebookUrl"))
+    CreatePresignedNotebookUrlResponse.add_member(:auth_token, Shapes::ShapeRef.new(shape: AuthToken, required: true, location_name: "AuthToken"))
+    CreatePresignedNotebookUrlResponse.add_member(:auth_token_expiration_time, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "AuthTokenExpirationTime"))
+    CreatePresignedNotebookUrlResponse.struct_class = Types::CreatePresignedNotebookUrlResponse
+
     CreateWorkGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "Name"))
     CreateWorkGroupInput.add_member(:configuration, Shapes::ShapeRef.new(shape: WorkGroupConfiguration, location_name: "Configuration"))
     CreateWorkGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
@@ -302,6 +448,9 @@ module Aws::Athena
     CreateWorkGroupInput.struct_class = Types::CreateWorkGroupInput
 
     CreateWorkGroupOutput.struct_class = Types::CreateWorkGroupOutput
+
+    CustomerContentEncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, required: true, location_name: "KmsKey"))
+    CustomerContentEncryptionConfiguration.struct_class = Types::CustomerContentEncryptionConfiguration
 
     DataCatalog.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     DataCatalog.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -335,6 +484,11 @@ module Aws::Athena
 
     DeleteNamedQueryOutput.struct_class = Types::DeleteNamedQueryOutput
 
+    DeleteNotebookInput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "NotebookId"))
+    DeleteNotebookInput.struct_class = Types::DeleteNotebookInput
+
+    DeleteNotebookOutput.struct_class = Types::DeleteNotebookOutput
+
     DeletePreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
     DeletePreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     DeletePreparedStatementInput.struct_class = Types::DeletePreparedStatementInput
@@ -351,6 +505,12 @@ module Aws::Athena
     EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: String, location_name: "KmsKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
+    EngineConfiguration.add_member(:coordinator_dpu_size, Shapes::ShapeRef.new(shape: CoordinatorDpuSize, location_name: "CoordinatorDpuSize"))
+    EngineConfiguration.add_member(:max_concurrent_dpus, Shapes::ShapeRef.new(shape: MaxConcurrentDpus, required: true, location_name: "MaxConcurrentDpus"))
+    EngineConfiguration.add_member(:default_executor_dpu_size, Shapes::ShapeRef.new(shape: DefaultExecutorDpuSize, location_name: "DefaultExecutorDpuSize"))
+    EngineConfiguration.add_member(:additional_configs, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "AdditionalConfigs"))
+    EngineConfiguration.struct_class = Types::EngineConfiguration
+
     EngineVersion.add_member(:selected_engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "SelectedEngineVersion"))
     EngineVersion.add_member(:effective_engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "EffectiveEngineVersion"))
     EngineVersion.struct_class = Types::EngineVersion
@@ -358,6 +518,51 @@ module Aws::Athena
     EngineVersionsList.member = Shapes::ShapeRef.new(shape: EngineVersion)
 
     ExecutionParameters.member = Shapes::ShapeRef.new(shape: ExecutionParameter)
+
+    ExecutorsSummary.add_member(:executor_id, Shapes::ShapeRef.new(shape: ExecutorId, required: true, location_name: "ExecutorId"))
+    ExecutorsSummary.add_member(:executor_type, Shapes::ShapeRef.new(shape: ExecutorType, location_name: "ExecutorType"))
+    ExecutorsSummary.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Long, location_name: "StartDateTime"))
+    ExecutorsSummary.add_member(:termination_date_time, Shapes::ShapeRef.new(shape: Long, location_name: "TerminationDateTime"))
+    ExecutorsSummary.add_member(:executor_state, Shapes::ShapeRef.new(shape: ExecutorState, location_name: "ExecutorState"))
+    ExecutorsSummary.add_member(:executor_size, Shapes::ShapeRef.new(shape: Long, location_name: "ExecutorSize"))
+    ExecutorsSummary.struct_class = Types::ExecutorsSummary
+
+    ExecutorsSummaryList.member = Shapes::ShapeRef.new(shape: ExecutorsSummary)
+
+    ExportNotebookInput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "NotebookId"))
+    ExportNotebookInput.struct_class = Types::ExportNotebookInput
+
+    ExportNotebookOutput.add_member(:notebook_metadata, Shapes::ShapeRef.new(shape: NotebookMetadata, location_name: "NotebookMetadata"))
+    ExportNotebookOutput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "Payload"))
+    ExportNotebookOutput.struct_class = Types::ExportNotebookOutput
+
+    FilterDefinition.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "Name"))
+    FilterDefinition.struct_class = Types::FilterDefinition
+
+    GetCalculationExecutionCodeRequest.add_member(:calculation_execution_id, Shapes::ShapeRef.new(shape: CalculationExecutionId, required: true, location_name: "CalculationExecutionId"))
+    GetCalculationExecutionCodeRequest.struct_class = Types::GetCalculationExecutionCodeRequest
+
+    GetCalculationExecutionCodeResponse.add_member(:code_block, Shapes::ShapeRef.new(shape: CodeBlock, location_name: "CodeBlock"))
+    GetCalculationExecutionCodeResponse.struct_class = Types::GetCalculationExecutionCodeResponse
+
+    GetCalculationExecutionRequest.add_member(:calculation_execution_id, Shapes::ShapeRef.new(shape: CalculationExecutionId, required: true, location_name: "CalculationExecutionId"))
+    GetCalculationExecutionRequest.struct_class = Types::GetCalculationExecutionRequest
+
+    GetCalculationExecutionResponse.add_member(:calculation_execution_id, Shapes::ShapeRef.new(shape: CalculationExecutionId, location_name: "CalculationExecutionId"))
+    GetCalculationExecutionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
+    GetCalculationExecutionResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    GetCalculationExecutionResponse.add_member(:working_directory, Shapes::ShapeRef.new(shape: S3Uri, location_name: "WorkingDirectory"))
+    GetCalculationExecutionResponse.add_member(:status, Shapes::ShapeRef.new(shape: CalculationStatus, location_name: "Status"))
+    GetCalculationExecutionResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: CalculationStatistics, location_name: "Statistics"))
+    GetCalculationExecutionResponse.add_member(:result, Shapes::ShapeRef.new(shape: CalculationResult, location_name: "Result"))
+    GetCalculationExecutionResponse.struct_class = Types::GetCalculationExecutionResponse
+
+    GetCalculationExecutionStatusRequest.add_member(:calculation_execution_id, Shapes::ShapeRef.new(shape: CalculationExecutionId, required: true, location_name: "CalculationExecutionId"))
+    GetCalculationExecutionStatusRequest.struct_class = Types::GetCalculationExecutionStatusRequest
+
+    GetCalculationExecutionStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: CalculationStatus, location_name: "Status"))
+    GetCalculationExecutionStatusResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: CalculationStatistics, location_name: "Statistics"))
+    GetCalculationExecutionStatusResponse.struct_class = Types::GetCalculationExecutionStatusResponse
 
     GetDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     GetDataCatalogInput.struct_class = Types::GetDataCatalogInput
@@ -377,6 +582,12 @@ module Aws::Athena
 
     GetNamedQueryOutput.add_member(:named_query, Shapes::ShapeRef.new(shape: NamedQuery, location_name: "NamedQuery"))
     GetNamedQueryOutput.struct_class = Types::GetNamedQueryOutput
+
+    GetNotebookMetadataInput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "NotebookId"))
+    GetNotebookMetadataInput.struct_class = Types::GetNotebookMetadataInput
+
+    GetNotebookMetadataOutput.add_member(:notebook_metadata, Shapes::ShapeRef.new(shape: NotebookMetadata, location_name: "NotebookMetadata"))
+    GetNotebookMetadataOutput.struct_class = Types::GetNotebookMetadataOutput
 
     GetPreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
     GetPreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
@@ -407,6 +618,27 @@ module Aws::Athena
     GetQueryRuntimeStatisticsOutput.add_member(:query_runtime_statistics, Shapes::ShapeRef.new(shape: QueryRuntimeStatistics, location_name: "QueryRuntimeStatistics"))
     GetQueryRuntimeStatisticsOutput.struct_class = Types::GetQueryRuntimeStatisticsOutput
 
+    GetSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
+    GetSessionRequest.struct_class = Types::GetSessionRequest
+
+    GetSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
+    GetSessionResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    GetSessionResponse.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
+    GetSessionResponse.add_member(:engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "EngineVersion"))
+    GetSessionResponse.add_member(:engine_configuration, Shapes::ShapeRef.new(shape: EngineConfiguration, location_name: "EngineConfiguration"))
+    GetSessionResponse.add_member(:notebook_version, Shapes::ShapeRef.new(shape: NameString, location_name: "NotebookVersion"))
+    GetSessionResponse.add_member(:session_configuration, Shapes::ShapeRef.new(shape: SessionConfiguration, location_name: "SessionConfiguration"))
+    GetSessionResponse.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "Status"))
+    GetSessionResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: SessionStatistics, location_name: "Statistics"))
+    GetSessionResponse.struct_class = Types::GetSessionResponse
+
+    GetSessionStatusRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
+    GetSessionStatusRequest.struct_class = Types::GetSessionStatusRequest
+
+    GetSessionStatusResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
+    GetSessionStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "Status"))
+    GetSessionStatusResponse.struct_class = Types::GetSessionStatusResponse
+
     GetTableMetadataInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
     GetTableMetadataInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetTableMetadataInput.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -421,12 +653,40 @@ module Aws::Athena
     GetWorkGroupOutput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     GetWorkGroupOutput.struct_class = Types::GetWorkGroupOutput
 
+    ImportNotebookInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    ImportNotebookInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "Name"))
+    ImportNotebookInput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, required: true, location_name: "Payload"))
+    ImportNotebookInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, required: true, location_name: "Type"))
+    ImportNotebookInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    ImportNotebookInput.struct_class = Types::ImportNotebookInput
+
+    ImportNotebookOutput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, location_name: "NotebookId"))
+    ImportNotebookOutput.struct_class = Types::ImportNotebookOutput
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
     InvalidRequestException.add_member(:athena_error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "AthenaErrorCode"))
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    ListApplicationDPUSizesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxApplicationDPUSizesCount, location_name: "MaxResults"))
+    ListApplicationDPUSizesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListApplicationDPUSizesInput.struct_class = Types::ListApplicationDPUSizesInput
+
+    ListApplicationDPUSizesOutput.add_member(:application_dpu_sizes, Shapes::ShapeRef.new(shape: ApplicationDPUSizesList, location_name: "ApplicationDPUSizes"))
+    ListApplicationDPUSizesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListApplicationDPUSizesOutput.struct_class = Types::ListApplicationDPUSizesOutput
+
+    ListCalculationExecutionsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
+    ListCalculationExecutionsRequest.add_member(:state_filter, Shapes::ShapeRef.new(shape: CalculationExecutionState, location_name: "StateFilter"))
+    ListCalculationExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxCalculationsCount, location_name: "MaxResults"))
+    ListCalculationExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SessionManagerToken, location_name: "NextToken"))
+    ListCalculationExecutionsRequest.struct_class = Types::ListCalculationExecutionsRequest
+
+    ListCalculationExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SessionManagerToken, location_name: "NextToken"))
+    ListCalculationExecutionsResponse.add_member(:calculations, Shapes::ShapeRef.new(shape: CalculationsList, location_name: "Calculations"))
+    ListCalculationExecutionsResponse.struct_class = Types::ListCalculationExecutionsResponse
 
     ListDataCatalogsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDataCatalogsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxDataCatalogsCount, location_name: "MaxResults"))
@@ -453,6 +713,17 @@ module Aws::Athena
     ListEngineVersionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListEngineVersionsOutput.struct_class = Types::ListEngineVersionsOutput
 
+    ListExecutorsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
+    ListExecutorsRequest.add_member(:executor_state_filter, Shapes::ShapeRef.new(shape: ExecutorState, location_name: "ExecutorStateFilter"))
+    ListExecutorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxListExecutorsCount, location_name: "MaxResults"))
+    ListExecutorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SessionManagerToken, location_name: "NextToken"))
+    ListExecutorsRequest.struct_class = Types::ListExecutorsRequest
+
+    ListExecutorsResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
+    ListExecutorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SessionManagerToken, location_name: "NextToken"))
+    ListExecutorsResponse.add_member(:executors_summary, Shapes::ShapeRef.new(shape: ExecutorsSummaryList, location_name: "ExecutorsSummary"))
+    ListExecutorsResponse.struct_class = Types::ListExecutorsResponse
+
     ListNamedQueriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListNamedQueriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxNamedQueriesCount, location_name: "MaxResults"))
     ListNamedQueriesInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
@@ -461,6 +732,25 @@ module Aws::Athena
     ListNamedQueriesOutput.add_member(:named_query_ids, Shapes::ShapeRef.new(shape: NamedQueryIdList, location_name: "NamedQueryIds"))
     ListNamedQueriesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListNamedQueriesOutput.struct_class = Types::ListNamedQueriesOutput
+
+    ListNotebookMetadataInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterDefinition, location_name: "Filters"))
+    ListNotebookMetadataInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListNotebookMetadataInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxNotebooksCount, location_name: "MaxResults"))
+    ListNotebookMetadataInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    ListNotebookMetadataInput.struct_class = Types::ListNotebookMetadataInput
+
+    ListNotebookMetadataOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListNotebookMetadataOutput.add_member(:notebook_metadata_list, Shapes::ShapeRef.new(shape: NotebookMetadataArray, location_name: "NotebookMetadataList"))
+    ListNotebookMetadataOutput.struct_class = Types::ListNotebookMetadataOutput
+
+    ListNotebookSessionsRequest.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "NotebookId"))
+    ListNotebookSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSessionsCount, location_name: "MaxResults"))
+    ListNotebookSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListNotebookSessionsRequest.struct_class = Types::ListNotebookSessionsRequest
+
+    ListNotebookSessionsResponse.add_member(:notebook_sessions_list, Shapes::ShapeRef.new(shape: NotebookSessionsList, required: true, location_name: "NotebookSessionsList"))
+    ListNotebookSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListNotebookSessionsResponse.struct_class = Types::ListNotebookSessionsResponse
 
     ListPreparedStatementsInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     ListPreparedStatementsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -479,6 +769,16 @@ module Aws::Athena
     ListQueryExecutionsOutput.add_member(:query_execution_ids, Shapes::ShapeRef.new(shape: QueryExecutionIdList, location_name: "QueryExecutionIds"))
     ListQueryExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListQueryExecutionsOutput.struct_class = Types::ListQueryExecutionsOutput
+
+    ListSessionsRequest.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    ListSessionsRequest.add_member(:state_filter, Shapes::ShapeRef.new(shape: SessionState, location_name: "StateFilter"))
+    ListSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSessionsCount, location_name: "MaxResults"))
+    ListSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SessionManagerToken, location_name: "NextToken"))
+    ListSessionsRequest.struct_class = Types::ListSessionsRequest
+
+    ListSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SessionManagerToken, location_name: "NextToken"))
+    ListSessionsResponse.add_member(:sessions, Shapes::ShapeRef.new(shape: SessionsList, location_name: "Sessions"))
+    ListSessionsResponse.struct_class = Types::ListSessionsResponse
 
     ListTableMetadataInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
     ListTableMetadataInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -522,6 +822,22 @@ module Aws::Athena
     NamedQueryIdList.member = Shapes::ShapeRef.new(shape: NamedQueryId)
 
     NamedQueryList.member = Shapes::ShapeRef.new(shape: NamedQuery)
+
+    NotebookMetadata.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, location_name: "NotebookId"))
+    NotebookMetadata.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "Name"))
+    NotebookMetadata.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
+    NotebookMetadata.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
+    NotebookMetadata.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "Type"))
+    NotebookMetadata.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedTime"))
+    NotebookMetadata.struct_class = Types::NotebookMetadata
+
+    NotebookMetadataArray.member = Shapes::ShapeRef.new(shape: NotebookMetadata)
+
+    NotebookSessionSummary.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
+    NotebookSessionSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
+    NotebookSessionSummary.struct_class = Types::NotebookSessionSummary
+
+    NotebookSessionsList.member = Shapes::ShapeRef.new(shape: NotebookSessionSummary)
 
     ParametersMap.key = Shapes::ShapeRef.new(shape: KeyString)
     ParametersMap.value = Shapes::ShapeRef.new(shape: ParametersMapValue)
@@ -662,6 +978,46 @@ module Aws::Athena
 
     RowList.member = Shapes::ShapeRef.new(shape: Row)
 
+    SessionAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SessionAlreadyExistsException.struct_class = Types::SessionAlreadyExistsException
+
+    SessionConfiguration.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
+    SessionConfiguration.add_member(:working_directory, Shapes::ShapeRef.new(shape: ResultOutputLocation, location_name: "WorkingDirectory"))
+    SessionConfiguration.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "IdleTimeoutSeconds"))
+    SessionConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    SessionConfiguration.struct_class = Types::SessionConfiguration
+
+    SessionStatistics.add_member(:dpu_execution_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "DpuExecutionInMillis"))
+    SessionStatistics.struct_class = Types::SessionStatistics
+
+    SessionStatus.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartDateTime"))
+    SessionStatus.add_member(:last_modified_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedDateTime"))
+    SessionStatus.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndDateTime"))
+    SessionStatus.add_member(:idle_since_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "IdleSinceDateTime"))
+    SessionStatus.add_member(:state, Shapes::ShapeRef.new(shape: SessionState, location_name: "State"))
+    SessionStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "StateChangeReason"))
+    SessionStatus.struct_class = Types::SessionStatus
+
+    SessionSummary.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
+    SessionSummary.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    SessionSummary.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
+    SessionSummary.add_member(:notebook_version, Shapes::ShapeRef.new(shape: NameString, location_name: "NotebookVersion"))
+    SessionSummary.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "Status"))
+    SessionSummary.struct_class = Types::SessionSummary
+
+    SessionsList.member = Shapes::ShapeRef.new(shape: SessionSummary)
+
+    StartCalculationExecutionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
+    StartCalculationExecutionRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    StartCalculationExecutionRequest.add_member(:calculation_configuration, Shapes::ShapeRef.new(shape: CalculationConfiguration, deprecated: true, location_name: "CalculationConfiguration", metadata: {"deprecatedMessage"=>"Kepler Post GA Tasks : https://sim.amazon.com/issues/ATHENA-39828"}))
+    StartCalculationExecutionRequest.add_member(:code_block, Shapes::ShapeRef.new(shape: CodeBlock, location_name: "CodeBlock"))
+    StartCalculationExecutionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken"))
+    StartCalculationExecutionRequest.struct_class = Types::StartCalculationExecutionRequest
+
+    StartCalculationExecutionResponse.add_member(:calculation_execution_id, Shapes::ShapeRef.new(shape: CalculationExecutionId, location_name: "CalculationExecutionId"))
+    StartCalculationExecutionResponse.add_member(:state, Shapes::ShapeRef.new(shape: CalculationExecutionState, location_name: "State"))
+    StartCalculationExecutionResponse.struct_class = Types::StartCalculationExecutionResponse
+
     StartQueryExecutionInput.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryString"))
     StartQueryExecutionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartQueryExecutionInput.add_member(:query_execution_context, Shapes::ShapeRef.new(shape: QueryExecutionContext, location_name: "QueryExecutionContext"))
@@ -674,12 +1030,32 @@ module Aws::Athena
     StartQueryExecutionOutput.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, location_name: "QueryExecutionId"))
     StartQueryExecutionOutput.struct_class = Types::StartQueryExecutionOutput
 
+    StartSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    StartSessionRequest.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    StartSessionRequest.add_member(:engine_configuration, Shapes::ShapeRef.new(shape: EngineConfiguration, required: true, location_name: "EngineConfiguration"))
+    StartSessionRequest.add_member(:notebook_version, Shapes::ShapeRef.new(shape: NameString, location_name: "NotebookVersion"))
+    StartSessionRequest.add_member(:session_idle_timeout_in_minutes, Shapes::ShapeRef.new(shape: SessionIdleTimeoutInMinutes, location_name: "SessionIdleTimeoutInMinutes"))
+    StartSessionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken"))
+    StartSessionRequest.struct_class = Types::StartSessionRequest
+
+    StartSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
+    StartSessionResponse.add_member(:state, Shapes::ShapeRef.new(shape: SessionState, location_name: "State"))
+    StartSessionResponse.struct_class = Types::StartSessionResponse
+
+    StopCalculationExecutionRequest.add_member(:calculation_execution_id, Shapes::ShapeRef.new(shape: CalculationExecutionId, required: true, location_name: "CalculationExecutionId"))
+    StopCalculationExecutionRequest.struct_class = Types::StopCalculationExecutionRequest
+
+    StopCalculationExecutionResponse.add_member(:state, Shapes::ShapeRef.new(shape: CalculationExecutionState, location_name: "State"))
+    StopCalculationExecutionResponse.struct_class = Types::StopCalculationExecutionResponse
+
     StopQueryExecutionInput.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, required: true, location_name: "QueryExecutionId", metadata: {"idempotencyToken"=>true}))
     StopQueryExecutionInput.struct_class = Types::StopQueryExecutionInput
 
     StopQueryExecutionOutput.struct_class = Types::StopQueryExecutionOutput
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    SupportedDPUSizeList.member = Shapes::ShapeRef.new(shape: Integer)
 
     TableMetadata.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     TableMetadata.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
@@ -705,6 +1081,12 @@ module Aws::Athena
     TagResourceInput.struct_class = Types::TagResourceInput
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    TerminateSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
+    TerminateSessionRequest.struct_class = Types::TerminateSessionRequest
+
+    TerminateSessionResponse.add_member(:state, Shapes::ShapeRef.new(shape: SessionState, location_name: "State"))
+    TerminateSessionResponse.struct_class = Types::TerminateSessionResponse
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     TooManyRequestsException.add_member(:reason, Shapes::ShapeRef.new(shape: ThrottleReason, location_name: "Reason"))
@@ -753,6 +1135,22 @@ module Aws::Athena
 
     UpdateNamedQueryOutput.struct_class = Types::UpdateNamedQueryOutput
 
+    UpdateNotebookInput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "NotebookId"))
+    UpdateNotebookInput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "Payload"))
+    UpdateNotebookInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "Type"))
+    UpdateNotebookInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
+    UpdateNotebookInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    UpdateNotebookInput.struct_class = Types::UpdateNotebookInput
+
+    UpdateNotebookMetadataInput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "NotebookId"))
+    UpdateNotebookMetadataInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    UpdateNotebookMetadataInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "Name"))
+    UpdateNotebookMetadataInput.struct_class = Types::UpdateNotebookMetadataInput
+
+    UpdateNotebookMetadataOutput.struct_class = Types::UpdateNotebookMetadataOutput
+
+    UpdateNotebookOutput.struct_class = Types::UpdateNotebookOutput
+
     UpdatePreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
     UpdatePreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     UpdatePreparedStatementInput.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryStatement"))
@@ -782,6 +1180,9 @@ module Aws::Athena
     WorkGroupConfiguration.add_member(:bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BytesScannedCutoffValue, location_name: "BytesScannedCutoffPerQuery"))
     WorkGroupConfiguration.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RequesterPaysEnabled"))
     WorkGroupConfiguration.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
+    WorkGroupConfiguration.add_member(:additional_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "AdditionalConfiguration"))
+    WorkGroupConfiguration.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
+    WorkGroupConfiguration.add_member(:customer_content_encryption_configuration, Shapes::ShapeRef.new(shape: CustomerContentEncryptionConfiguration, location_name: "CustomerContentEncryptionConfiguration"))
     WorkGroupConfiguration.struct_class = Types::WorkGroupConfiguration
 
     WorkGroupConfigurationUpdates.add_member(:enforce_work_group_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnforceWorkGroupConfiguration"))
@@ -791,6 +1192,10 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:remove_bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveBytesScannedCutoffPerQuery"))
     WorkGroupConfigurationUpdates.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RequesterPaysEnabled"))
     WorkGroupConfigurationUpdates.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
+    WorkGroupConfigurationUpdates.add_member(:remove_customer_content_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveCustomerContentEncryptionConfiguration"))
+    WorkGroupConfigurationUpdates.add_member(:additional_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "AdditionalConfiguration"))
+    WorkGroupConfigurationUpdates.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
+    WorkGroupConfigurationUpdates.add_member(:customer_content_encryption_configuration, Shapes::ShapeRef.new(shape: CustomerContentEncryptionConfiguration, location_name: "CustomerContentEncryptionConfiguration"))
     WorkGroupConfigurationUpdates.struct_class = Types::WorkGroupConfigurationUpdates
 
     WorkGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "Name"))
@@ -872,6 +1277,17 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:create_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNotebook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:create_prepared_statement, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePreparedStatement"
         o.http_method = "POST"
@@ -880,6 +1296,17 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: CreatePreparedStatementOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:create_presigned_notebook_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePresignedNotebookUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePresignedNotebookUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePresignedNotebookUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_work_group, Seahorse::Model::Operation.new.tap do |o|
@@ -912,6 +1339,17 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:delete_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNotebook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:delete_prepared_statement, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePreparedStatement"
         o.http_method = "POST"
@@ -931,6 +1369,49 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: DeleteWorkGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:export_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportNotebook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: ExportNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_calculation_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCalculationExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCalculationExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCalculationExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_calculation_execution_code, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCalculationExecutionCode"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCalculationExecutionCodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCalculationExecutionCodeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_calculation_execution_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCalculationExecutionStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCalculationExecutionStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCalculationExecutionStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_data_catalog, Seahorse::Model::Operation.new.tap do |o|
@@ -962,6 +1443,17 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: GetNamedQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:get_notebook_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNotebookMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetNotebookMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: GetNotebookMetadataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:get_prepared_statement, Seahorse::Model::Operation.new.tap do |o|
@@ -1012,6 +1504,28 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:get_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_session_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSessionStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSessionStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSessionStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_table_metadata, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTableMetadata"
         o.http_method = "POST"
@@ -1031,6 +1545,51 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: GetWorkGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:import_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportNotebook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: ImportNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:list_application_dpu_sizes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplicationDPUSizes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationDPUSizesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationDPUSizesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_calculation_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCalculationExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCalculationExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCalculationExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_data_catalogs, Seahorse::Model::Operation.new.tap do |o|
@@ -1082,6 +1641,23 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:list_executors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExecutors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListExecutorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExecutorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_named_queries, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListNamedQueries"
         o.http_method = "POST"
@@ -1096,6 +1672,28 @@ module Aws::Athena
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_notebook_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNotebookMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListNotebookMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: ListNotebookMetadataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:list_notebook_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNotebookSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListNotebookSessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNotebookSessionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_prepared_statements, Seahorse::Model::Operation.new.tap do |o|
@@ -1122,6 +1720,23 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: ListQueryExecutionsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSessionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1180,6 +1795,17 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:start_calculation_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCalculationExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartCalculationExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartCalculationExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_query_execution, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartQueryExecution"
         o.http_method = "POST"
@@ -1189,6 +1815,29 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:start_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: SessionAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:stop_calculation_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopCalculationExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopCalculationExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopCalculationExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:stop_query_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -1207,6 +1856,17 @@ module Aws::Athena
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:terminate_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TerminateSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TerminateSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: TerminateSessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1241,6 +1901,28 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: UpdateNamedQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNotebook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_notebook_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNotebookMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNotebookMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNotebookMetadataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_prepared_statement, Seahorse::Model::Operation.new.tap do |o|

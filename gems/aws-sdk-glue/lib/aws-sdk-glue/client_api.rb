@@ -56,6 +56,8 @@ module Aws::Glue
     BatchGetCrawlersResponse = Shapes::StructureShape.new(name: 'BatchGetCrawlersResponse')
     BatchGetCustomEntityTypesRequest = Shapes::StructureShape.new(name: 'BatchGetCustomEntityTypesRequest')
     BatchGetCustomEntityTypesResponse = Shapes::StructureShape.new(name: 'BatchGetCustomEntityTypesResponse')
+    BatchGetDataQualityResultRequest = Shapes::StructureShape.new(name: 'BatchGetDataQualityResultRequest')
+    BatchGetDataQualityResultResponse = Shapes::StructureShape.new(name: 'BatchGetDataQualityResultResponse')
     BatchGetDevEndpointsRequest = Shapes::StructureShape.new(name: 'BatchGetDevEndpointsRequest')
     BatchGetDevEndpointsResponse = Shapes::StructureShape.new(name: 'BatchGetDevEndpointsResponse')
     BatchGetJobsRequest = Shapes::StructureShape.new(name: 'BatchGetJobsRequest')
@@ -105,6 +107,10 @@ module Aws::Glue
     BoxedNonNegativeInt = Shapes::IntegerShape.new(name: 'BoxedNonNegativeInt')
     BoxedNonNegativeLong = Shapes::IntegerShape.new(name: 'BoxedNonNegativeLong')
     BoxedPositiveInt = Shapes::IntegerShape.new(name: 'BoxedPositiveInt')
+    CancelDataQualityRuleRecommendationRunRequest = Shapes::StructureShape.new(name: 'CancelDataQualityRuleRecommendationRunRequest')
+    CancelDataQualityRuleRecommendationRunResponse = Shapes::StructureShape.new(name: 'CancelDataQualityRuleRecommendationRunResponse')
+    CancelDataQualityRulesetEvaluationRunRequest = Shapes::StructureShape.new(name: 'CancelDataQualityRulesetEvaluationRunRequest')
+    CancelDataQualityRulesetEvaluationRunResponse = Shapes::StructureShape.new(name: 'CancelDataQualityRulesetEvaluationRunResponse')
     CancelMLTaskRunRequest = Shapes::StructureShape.new(name: 'CancelMLTaskRunRequest')
     CancelMLTaskRunResponse = Shapes::StructureShape.new(name: 'CancelMLTaskRunResponse')
     CancelStatementRequest = Shapes::StructureShape.new(name: 'CancelStatementRequest')
@@ -214,6 +220,8 @@ module Aws::Glue
     CreateCsvClassifierRequest = Shapes::StructureShape.new(name: 'CreateCsvClassifierRequest')
     CreateCustomEntityTypeRequest = Shapes::StructureShape.new(name: 'CreateCustomEntityTypeRequest')
     CreateCustomEntityTypeResponse = Shapes::StructureShape.new(name: 'CreateCustomEntityTypeResponse')
+    CreateDataQualityRulesetRequest = Shapes::StructureShape.new(name: 'CreateDataQualityRulesetRequest')
+    CreateDataQualityRulesetResponse = Shapes::StructureShape.new(name: 'CreateDataQualityRulesetResponse')
     CreateDatabaseRequest = Shapes::StructureShape.new(name: 'CreateDatabaseRequest')
     CreateDatabaseResponse = Shapes::StructureShape.new(name: 'CreateDatabaseResponse')
     CreateDevEndpointRequest = Shapes::StructureShape.new(name: 'CreateDevEndpointRequest')
@@ -260,12 +268,40 @@ module Aws::Glue
     CustomEntityTypeNames = Shapes::ListShape.new(name: 'CustomEntityTypeNames')
     CustomEntityTypes = Shapes::ListShape.new(name: 'CustomEntityTypes')
     CustomPatterns = Shapes::StringShape.new(name: 'CustomPatterns')
+    DQDLString = Shapes::StringShape.new(name: 'DQDLString')
+    DQResultsPublishingOptions = Shapes::StructureShape.new(name: 'DQResultsPublishingOptions')
+    DQStopJobOnFailureOptions = Shapes::StructureShape.new(name: 'DQStopJobOnFailureOptions')
+    DQStopJobOnFailureTiming = Shapes::StringShape.new(name: 'DQStopJobOnFailureTiming')
+    DQTransformOutput = Shapes::StringShape.new(name: 'DQTransformOutput')
     DagEdges = Shapes::ListShape.new(name: 'DagEdges')
     DagNodes = Shapes::ListShape.new(name: 'DagNodes')
     DataCatalogEncryptionSettings = Shapes::StructureShape.new(name: 'DataCatalogEncryptionSettings')
     DataFormat = Shapes::StringShape.new(name: 'DataFormat')
     DataLakePrincipal = Shapes::StructureShape.new(name: 'DataLakePrincipal')
     DataLakePrincipalString = Shapes::StringShape.new(name: 'DataLakePrincipalString')
+    DataQualityEvaluationRunAdditionalRunOptions = Shapes::StructureShape.new(name: 'DataQualityEvaluationRunAdditionalRunOptions')
+    DataQualityResult = Shapes::StructureShape.new(name: 'DataQualityResult')
+    DataQualityResultDescription = Shapes::StructureShape.new(name: 'DataQualityResultDescription')
+    DataQualityResultDescriptionList = Shapes::ListShape.new(name: 'DataQualityResultDescriptionList')
+    DataQualityResultFilterCriteria = Shapes::StructureShape.new(name: 'DataQualityResultFilterCriteria')
+    DataQualityResultIdList = Shapes::ListShape.new(name: 'DataQualityResultIdList')
+    DataQualityResultIds = Shapes::ListShape.new(name: 'DataQualityResultIds')
+    DataQualityResultsList = Shapes::ListShape.new(name: 'DataQualityResultsList')
+    DataQualityRuleRecommendationRunDescription = Shapes::StructureShape.new(name: 'DataQualityRuleRecommendationRunDescription')
+    DataQualityRuleRecommendationRunFilter = Shapes::StructureShape.new(name: 'DataQualityRuleRecommendationRunFilter')
+    DataQualityRuleRecommendationRunList = Shapes::ListShape.new(name: 'DataQualityRuleRecommendationRunList')
+    DataQualityRuleResult = Shapes::StructureShape.new(name: 'DataQualityRuleResult')
+    DataQualityRuleResultStatus = Shapes::StringShape.new(name: 'DataQualityRuleResultStatus')
+    DataQualityRuleResults = Shapes::ListShape.new(name: 'DataQualityRuleResults')
+    DataQualityRulesetEvaluationRunDescription = Shapes::StructureShape.new(name: 'DataQualityRulesetEvaluationRunDescription')
+    DataQualityRulesetEvaluationRunFilter = Shapes::StructureShape.new(name: 'DataQualityRulesetEvaluationRunFilter')
+    DataQualityRulesetEvaluationRunList = Shapes::ListShape.new(name: 'DataQualityRulesetEvaluationRunList')
+    DataQualityRulesetFilterCriteria = Shapes::StructureShape.new(name: 'DataQualityRulesetFilterCriteria')
+    DataQualityRulesetList = Shapes::ListShape.new(name: 'DataQualityRulesetList')
+    DataQualityRulesetListDetails = Shapes::StructureShape.new(name: 'DataQualityRulesetListDetails')
+    DataQualityRulesetString = Shapes::StringShape.new(name: 'DataQualityRulesetString')
+    DataQualityTargetTable = Shapes::StructureShape.new(name: 'DataQualityTargetTable')
+    DataSource = Shapes::StructureShape.new(name: 'DataSource')
     Database = Shapes::StructureShape.new(name: 'Database')
     DatabaseIdentifier = Shapes::StructureShape.new(name: 'DatabaseIdentifier')
     DatabaseInput = Shapes::StructureShape.new(name: 'DatabaseInput')
@@ -291,6 +327,8 @@ module Aws::Glue
     DeleteCrawlerResponse = Shapes::StructureShape.new(name: 'DeleteCrawlerResponse')
     DeleteCustomEntityTypeRequest = Shapes::StructureShape.new(name: 'DeleteCustomEntityTypeRequest')
     DeleteCustomEntityTypeResponse = Shapes::StructureShape.new(name: 'DeleteCustomEntityTypeResponse')
+    DeleteDataQualityRulesetRequest = Shapes::StructureShape.new(name: 'DeleteDataQualityRulesetRequest')
+    DeleteDataQualityRulesetResponse = Shapes::StructureShape.new(name: 'DeleteDataQualityRulesetResponse')
     DeleteDatabaseRequest = Shapes::StructureShape.new(name: 'DeleteDatabaseRequest')
     DeleteDatabaseResponse = Shapes::StructureShape.new(name: 'DeleteDatabaseResponse')
     DeleteDevEndpointRequest = Shapes::StructureShape.new(name: 'DeleteDevEndpointRequest')
@@ -364,6 +402,7 @@ module Aws::Glue
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessageString = Shapes::StringShape.new(name: 'ErrorMessageString')
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
+    EvaluateDataQuality = Shapes::StructureShape.new(name: 'EvaluateDataQuality')
     EvaluationMetrics = Shapes::StructureShape.new(name: 'EvaluationMetrics')
     EventBatchingCondition = Shapes::StructureShape.new(name: 'EventBatchingCondition')
     EventQueueArn = Shapes::StringShape.new(name: 'EventQueueArn')
@@ -427,6 +466,14 @@ module Aws::Glue
     GetCustomEntityTypeResponse = Shapes::StructureShape.new(name: 'GetCustomEntityTypeResponse')
     GetDataCatalogEncryptionSettingsRequest = Shapes::StructureShape.new(name: 'GetDataCatalogEncryptionSettingsRequest')
     GetDataCatalogEncryptionSettingsResponse = Shapes::StructureShape.new(name: 'GetDataCatalogEncryptionSettingsResponse')
+    GetDataQualityResultRequest = Shapes::StructureShape.new(name: 'GetDataQualityResultRequest')
+    GetDataQualityResultResponse = Shapes::StructureShape.new(name: 'GetDataQualityResultResponse')
+    GetDataQualityRuleRecommendationRunRequest = Shapes::StructureShape.new(name: 'GetDataQualityRuleRecommendationRunRequest')
+    GetDataQualityRuleRecommendationRunResponse = Shapes::StructureShape.new(name: 'GetDataQualityRuleRecommendationRunResponse')
+    GetDataQualityRulesetEvaluationRunRequest = Shapes::StructureShape.new(name: 'GetDataQualityRulesetEvaluationRunRequest')
+    GetDataQualityRulesetEvaluationRunResponse = Shapes::StructureShape.new(name: 'GetDataQualityRulesetEvaluationRunResponse')
+    GetDataQualityRulesetRequest = Shapes::StructureShape.new(name: 'GetDataQualityRulesetRequest')
+    GetDataQualityRulesetResponse = Shapes::StructureShape.new(name: 'GetDataQualityRulesetResponse')
     GetDatabaseRequest = Shapes::StructureShape.new(name: 'GetDatabaseRequest')
     GetDatabaseResponse = Shapes::StructureShape.new(name: 'GetDatabaseResponse')
     GetDatabasesRequest = Shapes::StructureShape.new(name: 'GetDatabasesRequest')
@@ -532,6 +579,7 @@ module Aws::Glue
     GlueStudioSchemaColumn = Shapes::StructureShape.new(name: 'GlueStudioSchemaColumn')
     GlueStudioSchemaColumnList = Shapes::ListShape.new(name: 'GlueStudioSchemaColumnList')
     GlueTable = Shapes::StructureShape.new(name: 'GlueTable')
+    GlueTableAdditionalOptions = Shapes::MapShape.new(name: 'GlueTableAdditionalOptions')
     GlueTables = Shapes::ListShape.new(name: 'GlueTables')
     GlueVersionString = Shapes::StringShape.new(name: 'GlueVersionString')
     GovernedCatalogSource = Shapes::StructureShape.new(name: 'GovernedCatalogSource')
@@ -608,6 +656,14 @@ module Aws::Glue
     ListCrawlsResponse = Shapes::StructureShape.new(name: 'ListCrawlsResponse')
     ListCustomEntityTypesRequest = Shapes::StructureShape.new(name: 'ListCustomEntityTypesRequest')
     ListCustomEntityTypesResponse = Shapes::StructureShape.new(name: 'ListCustomEntityTypesResponse')
+    ListDataQualityResultsRequest = Shapes::StructureShape.new(name: 'ListDataQualityResultsRequest')
+    ListDataQualityResultsResponse = Shapes::StructureShape.new(name: 'ListDataQualityResultsResponse')
+    ListDataQualityRuleRecommendationRunsRequest = Shapes::StructureShape.new(name: 'ListDataQualityRuleRecommendationRunsRequest')
+    ListDataQualityRuleRecommendationRunsResponse = Shapes::StructureShape.new(name: 'ListDataQualityRuleRecommendationRunsResponse')
+    ListDataQualityRulesetEvaluationRunsRequest = Shapes::StructureShape.new(name: 'ListDataQualityRulesetEvaluationRunsRequest')
+    ListDataQualityRulesetEvaluationRunsResponse = Shapes::StructureShape.new(name: 'ListDataQualityRulesetEvaluationRunsResponse')
+    ListDataQualityRulesetsRequest = Shapes::StructureShape.new(name: 'ListDataQualityRulesetsRequest')
+    ListDataQualityRulesetsResponse = Shapes::StructureShape.new(name: 'ListDataQualityRulesetsResponse')
     ListDevEndpointsRequest = Shapes::StructureShape.new(name: 'ListDevEndpointsRequest')
     ListDevEndpointsResponse = Shapes::StructureShape.new(name: 'ListDevEndpointsResponse')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
@@ -795,6 +851,7 @@ module Aws::Glue
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleString = Shapes::StringShape.new(name: 'RoleString')
     RowTag = Shapes::StringShape.new(name: 'RowTag')
+    RulesetNames = Shapes::ListShape.new(name: 'RulesetNames')
     RunId = Shapes::StringShape.new(name: 'RunId')
     RunStatementRequest = Shapes::StructureShape.new(name: 'RunStatementRequest')
     RunStatementResponse = Shapes::StructureShape.new(name: 'RunStatementResponse')
@@ -879,6 +936,10 @@ module Aws::Glue
     StartCrawlerResponse = Shapes::StructureShape.new(name: 'StartCrawlerResponse')
     StartCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StartCrawlerScheduleRequest')
     StartCrawlerScheduleResponse = Shapes::StructureShape.new(name: 'StartCrawlerScheduleResponse')
+    StartDataQualityRuleRecommendationRunRequest = Shapes::StructureShape.new(name: 'StartDataQualityRuleRecommendationRunRequest')
+    StartDataQualityRuleRecommendationRunResponse = Shapes::StructureShape.new(name: 'StartDataQualityRuleRecommendationRunResponse')
+    StartDataQualityRulesetEvaluationRunRequest = Shapes::StructureShape.new(name: 'StartDataQualityRulesetEvaluationRunRequest')
+    StartDataQualityRulesetEvaluationRunResponse = Shapes::StructureShape.new(name: 'StartDataQualityRulesetEvaluationRunResponse')
     StartExportLabelsTaskRunRequest = Shapes::StructureShape.new(name: 'StartExportLabelsTaskRunRequest')
     StartExportLabelsTaskRunResponse = Shapes::StructureShape.new(name: 'StartExportLabelsTaskRunResponse')
     StartImportLabelsTaskRunRequest = Shapes::StructureShape.new(name: 'StartImportLabelsTaskRunRequest')
@@ -994,6 +1055,8 @@ module Aws::Glue
     UpdateCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'UpdateCrawlerScheduleRequest')
     UpdateCrawlerScheduleResponse = Shapes::StructureShape.new(name: 'UpdateCrawlerScheduleResponse')
     UpdateCsvClassifierRequest = Shapes::StructureShape.new(name: 'UpdateCsvClassifierRequest')
+    UpdateDataQualityRulesetRequest = Shapes::StructureShape.new(name: 'UpdateDataQualityRulesetRequest')
+    UpdateDataQualityRulesetResponse = Shapes::StructureShape.new(name: 'UpdateDataQualityRulesetResponse')
     UpdateDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateDatabaseRequest')
     UpdateDatabaseResponse = Shapes::StructureShape.new(name: 'UpdateDatabaseResponse')
     UpdateDevEndpointRequest = Shapes::StructureShape.new(name: 'UpdateDevEndpointRequest')
@@ -1194,6 +1257,13 @@ module Aws::Glue
     BatchGetCustomEntityTypesResponse.add_member(:custom_entity_types_not_found, Shapes::ShapeRef.new(shape: CustomEntityTypeNames, location_name: "CustomEntityTypesNotFound"))
     BatchGetCustomEntityTypesResponse.struct_class = Types::BatchGetCustomEntityTypesResponse
 
+    BatchGetDataQualityResultRequest.add_member(:result_ids, Shapes::ShapeRef.new(shape: DataQualityResultIds, required: true, location_name: "ResultIds"))
+    BatchGetDataQualityResultRequest.struct_class = Types::BatchGetDataQualityResultRequest
+
+    BatchGetDataQualityResultResponse.add_member(:results, Shapes::ShapeRef.new(shape: DataQualityResultsList, required: true, location_name: "Results"))
+    BatchGetDataQualityResultResponse.add_member(:results_not_found, Shapes::ShapeRef.new(shape: DataQualityResultIds, location_name: "ResultsNotFound"))
+    BatchGetDataQualityResultResponse.struct_class = Types::BatchGetDataQualityResultResponse
+
     BatchGetDevEndpointsRequest.add_member(:dev_endpoint_names, Shapes::ShapeRef.new(shape: DevEndpointNames, required: true, location_name: "DevEndpointNames"))
     BatchGetDevEndpointsRequest.struct_class = Types::BatchGetDevEndpointsRequest
 
@@ -1324,6 +1394,16 @@ module Aws::Glue
     BooleanColumnStatisticsData.struct_class = Types::BooleanColumnStatisticsData
 
     BoundedPartitionValueList.member = Shapes::ShapeRef.new(shape: ValueString)
+
+    CancelDataQualityRuleRecommendationRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "RunId"))
+    CancelDataQualityRuleRecommendationRunRequest.struct_class = Types::CancelDataQualityRuleRecommendationRunRequest
+
+    CancelDataQualityRuleRecommendationRunResponse.struct_class = Types::CancelDataQualityRuleRecommendationRunResponse
+
+    CancelDataQualityRulesetEvaluationRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "RunId"))
+    CancelDataQualityRulesetEvaluationRunRequest.struct_class = Types::CancelDataQualityRulesetEvaluationRunRequest
+
+    CancelDataQualityRulesetEvaluationRunResponse.struct_class = Types::CancelDataQualityRulesetEvaluationRunResponse
 
     CancelMLTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
     CancelMLTaskRunRequest.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TaskRunId"))
@@ -1463,6 +1543,7 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:oracle_sql_catalog_target, Shapes::ShapeRef.new(shape: OracleSQLCatalogTarget, location_name: "OracleSQLCatalogTarget"))
     CodeGenConfigurationNode.add_member(:postgre_sql_catalog_target, Shapes::ShapeRef.new(shape: PostgreSQLCatalogTarget, location_name: "PostgreSQLCatalogTarget"))
     CodeGenConfigurationNode.add_member(:dynamic_transform, Shapes::ShapeRef.new(shape: DynamicTransform, location_name: "DynamicTransform"))
+    CodeGenConfigurationNode.add_member(:evaluate_data_quality, Shapes::ShapeRef.new(shape: EvaluateDataQuality, location_name: "EvaluateDataQuality"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -1749,6 +1830,17 @@ module Aws::Glue
     CreateCustomEntityTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     CreateCustomEntityTypeResponse.struct_class = Types::CreateCustomEntityTypeResponse
 
+    CreateDataQualityRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateDataQualityRulesetRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateDataQualityRulesetRequest.add_member(:ruleset, Shapes::ShapeRef.new(shape: DataQualityRulesetString, required: true, location_name: "Ruleset"))
+    CreateDataQualityRulesetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateDataQualityRulesetRequest.add_member(:target_table, Shapes::ShapeRef.new(shape: DataQualityTargetTable, location_name: "TargetTable"))
+    CreateDataQualityRulesetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: HashString, location_name: "ClientToken"))
+    CreateDataQualityRulesetRequest.struct_class = Types::CreateDataQualityRulesetRequest
+
+    CreateDataQualityRulesetResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    CreateDataQualityRulesetResponse.struct_class = Types::CreateDataQualityRulesetResponse
+
     CreateDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateDatabaseRequest.add_member(:database_input, Shapes::ShapeRef.new(shape: DatabaseInput, required: true, location_name: "DatabaseInput"))
     CreateDatabaseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
@@ -2018,6 +2110,15 @@ module Aws::Glue
 
     CustomEntityTypes.member = Shapes::ShapeRef.new(shape: CustomEntityType)
 
+    DQResultsPublishingOptions.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "EvaluationContext"))
+    DQResultsPublishingOptions.add_member(:results_s3_prefix, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "ResultsS3Prefix"))
+    DQResultsPublishingOptions.add_member(:cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "CloudWatchMetricsEnabled"))
+    DQResultsPublishingOptions.add_member(:results_publishing_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "ResultsPublishingEnabled"))
+    DQResultsPublishingOptions.struct_class = Types::DQResultsPublishingOptions
+
+    DQStopJobOnFailureOptions.add_member(:stop_job_on_failure_timing, Shapes::ShapeRef.new(shape: DQStopJobOnFailureTiming, location_name: "StopJobOnFailureTiming"))
+    DQStopJobOnFailureOptions.struct_class = Types::DQStopJobOnFailureOptions
+
     DagEdges.member = Shapes::ShapeRef.new(shape: CodeGenEdge)
 
     DagNodes.member = Shapes::ShapeRef.new(shape: CodeGenNode)
@@ -2028,6 +2129,106 @@ module Aws::Glue
 
     DataLakePrincipal.add_member(:data_lake_principal_identifier, Shapes::ShapeRef.new(shape: DataLakePrincipalString, location_name: "DataLakePrincipalIdentifier"))
     DataLakePrincipal.struct_class = Types::DataLakePrincipal
+
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "CloudWatchMetricsEnabled"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:results_s3_prefix, Shapes::ShapeRef.new(shape: UriString, location_name: "ResultsS3Prefix"))
+    DataQualityEvaluationRunAdditionalRunOptions.struct_class = Types::DataQualityEvaluationRunAdditionalRunOptions
+
+    DataQualityResult.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ResultId"))
+    DataQualityResult.add_member(:score, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "Score"))
+    DataQualityResult.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DataQualityResult.add_member(:ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "RulesetName"))
+    DataQualityResult.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: GenericString, location_name: "EvaluationContext"))
+    DataQualityResult.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    DataQualityResult.add_member(:completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedOn"))
+    DataQualityResult.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    DataQualityResult.add_member(:job_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "JobRunId"))
+    DataQualityResult.add_member(:ruleset_evaluation_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RulesetEvaluationRunId"))
+    DataQualityResult.add_member(:rule_results, Shapes::ShapeRef.new(shape: DataQualityRuleResults, location_name: "RuleResults"))
+    DataQualityResult.struct_class = Types::DataQualityResult
+
+    DataQualityResultDescription.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ResultId"))
+    DataQualityResultDescription.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DataQualityResultDescription.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    DataQualityResultDescription.add_member(:job_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "JobRunId"))
+    DataQualityResultDescription.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    DataQualityResultDescription.struct_class = Types::DataQualityResultDescription
+
+    DataQualityResultDescriptionList.member = Shapes::ShapeRef.new(shape: DataQualityResultDescription)
+
+    DataQualityResultFilterCriteria.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DataQualityResultFilterCriteria.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    DataQualityResultFilterCriteria.add_member(:job_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "JobRunId"))
+    DataQualityResultFilterCriteria.add_member(:started_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedAfter"))
+    DataQualityResultFilterCriteria.add_member(:started_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedBefore"))
+    DataQualityResultFilterCriteria.struct_class = Types::DataQualityResultFilterCriteria
+
+    DataQualityResultIdList.member = Shapes::ShapeRef.new(shape: HashString)
+
+    DataQualityResultIds.member = Shapes::ShapeRef.new(shape: HashString)
+
+    DataQualityResultsList.member = Shapes::ShapeRef.new(shape: DataQualityResult)
+
+    DataQualityRuleRecommendationRunDescription.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))
+    DataQualityRuleRecommendationRunDescription.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
+    DataQualityRuleRecommendationRunDescription.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    DataQualityRuleRecommendationRunDescription.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DataQualityRuleRecommendationRunDescription.struct_class = Types::DataQualityRuleRecommendationRunDescription
+
+    DataQualityRuleRecommendationRunFilter.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "DataSource"))
+    DataQualityRuleRecommendationRunFilter.add_member(:started_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedBefore"))
+    DataQualityRuleRecommendationRunFilter.add_member(:started_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedAfter"))
+    DataQualityRuleRecommendationRunFilter.struct_class = Types::DataQualityRuleRecommendationRunFilter
+
+    DataQualityRuleRecommendationRunList.member = Shapes::ShapeRef.new(shape: DataQualityRuleRecommendationRunDescription)
+
+    DataQualityRuleResult.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    DataQualityRuleResult.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    DataQualityRuleResult.add_member(:evaluation_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "EvaluationMessage"))
+    DataQualityRuleResult.add_member(:result, Shapes::ShapeRef.new(shape: DataQualityRuleResultStatus, location_name: "Result"))
+    DataQualityRuleResult.struct_class = Types::DataQualityRuleResult
+
+    DataQualityRuleResults.member = Shapes::ShapeRef.new(shape: DataQualityRuleResult)
+
+    DataQualityRulesetEvaluationRunDescription.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))
+    DataQualityRulesetEvaluationRunDescription.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
+    DataQualityRulesetEvaluationRunDescription.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    DataQualityRulesetEvaluationRunDescription.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DataQualityRulesetEvaluationRunDescription.struct_class = Types::DataQualityRulesetEvaluationRunDescription
+
+    DataQualityRulesetEvaluationRunFilter.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "DataSource"))
+    DataQualityRulesetEvaluationRunFilter.add_member(:started_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedBefore"))
+    DataQualityRulesetEvaluationRunFilter.add_member(:started_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedAfter"))
+    DataQualityRulesetEvaluationRunFilter.struct_class = Types::DataQualityRulesetEvaluationRunFilter
+
+    DataQualityRulesetEvaluationRunList.member = Shapes::ShapeRef.new(shape: DataQualityRulesetEvaluationRunDescription)
+
+    DataQualityRulesetFilterCriteria.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    DataQualityRulesetFilterCriteria.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    DataQualityRulesetFilterCriteria.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedBefore"))
+    DataQualityRulesetFilterCriteria.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAfter"))
+    DataQualityRulesetFilterCriteria.add_member(:last_modified_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedBefore"))
+    DataQualityRulesetFilterCriteria.add_member(:last_modified_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedAfter"))
+    DataQualityRulesetFilterCriteria.add_member(:target_table, Shapes::ShapeRef.new(shape: DataQualityTargetTable, location_name: "TargetTable"))
+    DataQualityRulesetFilterCriteria.struct_class = Types::DataQualityRulesetFilterCriteria
+
+    DataQualityRulesetList.member = Shapes::ShapeRef.new(shape: DataQualityRulesetListDetails)
+
+    DataQualityRulesetListDetails.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    DataQualityRulesetListDetails.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    DataQualityRulesetListDetails.add_member(:created_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedOn"))
+    DataQualityRulesetListDetails.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedOn"))
+    DataQualityRulesetListDetails.add_member(:target_table, Shapes::ShapeRef.new(shape: DataQualityTargetTable, location_name: "TargetTable"))
+    DataQualityRulesetListDetails.add_member(:recommendation_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RecommendationRunId"))
+    DataQualityRulesetListDetails.add_member(:rule_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "RuleCount"))
+    DataQualityRulesetListDetails.struct_class = Types::DataQualityRulesetListDetails
+
+    DataQualityTargetTable.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    DataQualityTargetTable.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    DataQualityTargetTable.struct_class = Types::DataQualityTargetTable
+
+    DataSource.add_member(:glue_table, Shapes::ShapeRef.new(shape: GlueTable, required: true, location_name: "GlueTable"))
+    DataSource.struct_class = Types::DataSource
 
     Database.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     Database.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -2119,6 +2320,11 @@ module Aws::Glue
 
     DeleteCustomEntityTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     DeleteCustomEntityTypeResponse.struct_class = Types::DeleteCustomEntityTypeResponse
+
+    DeleteDataQualityRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DeleteDataQualityRulesetRequest.struct_class = Types::DeleteDataQualityRulesetRequest
+
+    DeleteDataQualityRulesetResponse.struct_class = Types::DeleteDataQualityRulesetResponse
 
     DeleteDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeleteDatabaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -2377,6 +2583,14 @@ module Aws::Glue
     ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessageString, location_name: "ErrorMessage"))
     ErrorDetails.struct_class = Types::ErrorDetails
 
+    EvaluateDataQuality.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    EvaluateDataQuality.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    EvaluateDataQuality.add_member(:ruleset, Shapes::ShapeRef.new(shape: DQDLString, required: true, location_name: "Ruleset"))
+    EvaluateDataQuality.add_member(:output, Shapes::ShapeRef.new(shape: DQTransformOutput, location_name: "Output"))
+    EvaluateDataQuality.add_member(:publishing_options, Shapes::ShapeRef.new(shape: DQResultsPublishingOptions, location_name: "PublishingOptions"))
+    EvaluateDataQuality.add_member(:stop_job_on_failure_options, Shapes::ShapeRef.new(shape: DQStopJobOnFailureOptions, location_name: "StopJobOnFailureOptions"))
+    EvaluateDataQuality.struct_class = Types::EvaluateDataQuality
+
     EvaluationMetrics.add_member(:transform_type, Shapes::ShapeRef.new(shape: TransformType, required: true, location_name: "TransformType"))
     EvaluationMetrics.add_member(:find_matches_metrics, Shapes::ShapeRef.new(shape: FindMatchesMetrics, location_name: "FindMatchesMetrics"))
     EvaluationMetrics.struct_class = Types::EvaluationMetrics
@@ -2564,6 +2778,71 @@ module Aws::Glue
 
     GetDataCatalogEncryptionSettingsResponse.add_member(:data_catalog_encryption_settings, Shapes::ShapeRef.new(shape: DataCatalogEncryptionSettings, location_name: "DataCatalogEncryptionSettings"))
     GetDataCatalogEncryptionSettingsResponse.struct_class = Types::GetDataCatalogEncryptionSettingsResponse
+
+    GetDataQualityResultRequest.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "ResultId"))
+    GetDataQualityResultRequest.struct_class = Types::GetDataQualityResultRequest
+
+    GetDataQualityResultResponse.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ResultId"))
+    GetDataQualityResultResponse.add_member(:score, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "Score"))
+    GetDataQualityResultResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    GetDataQualityResultResponse.add_member(:ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "RulesetName"))
+    GetDataQualityResultResponse.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: GenericString, location_name: "EvaluationContext"))
+    GetDataQualityResultResponse.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    GetDataQualityResultResponse.add_member(:completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedOn"))
+    GetDataQualityResultResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    GetDataQualityResultResponse.add_member(:job_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "JobRunId"))
+    GetDataQualityResultResponse.add_member(:ruleset_evaluation_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RulesetEvaluationRunId"))
+    GetDataQualityResultResponse.add_member(:rule_results, Shapes::ShapeRef.new(shape: DataQualityRuleResults, location_name: "RuleResults"))
+    GetDataQualityResultResponse.struct_class = Types::GetDataQualityResultResponse
+
+    GetDataQualityRuleRecommendationRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "RunId"))
+    GetDataQualityRuleRecommendationRunRequest.struct_class = Types::GetDataQualityRuleRecommendationRunRequest
+
+    GetDataQualityRuleRecommendationRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:error_string, Shapes::ShapeRef.new(shape: GenericString, location_name: "ErrorString"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedOn"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedOn"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:recommended_ruleset, Shapes::ShapeRef.new(shape: DataQualityRulesetString, location_name: "RecommendedRuleset"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:created_ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "CreatedRulesetName"))
+    GetDataQualityRuleRecommendationRunResponse.struct_class = Types::GetDataQualityRuleRecommendationRunResponse
+
+    GetDataQualityRulesetEvaluationRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "RunId"))
+    GetDataQualityRulesetEvaluationRunRequest.struct_class = Types::GetDataQualityRulesetEvaluationRunRequest
+
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:additional_run_options, Shapes::ShapeRef.new(shape: DataQualityEvaluationRunAdditionalRunOptions, location_name: "AdditionalRunOptions"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:error_string, Shapes::ShapeRef.new(shape: GenericString, location_name: "ErrorString"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedOn"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedOn"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:ruleset_names, Shapes::ShapeRef.new(shape: RulesetNames, location_name: "RulesetNames"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:result_ids, Shapes::ShapeRef.new(shape: DataQualityResultIdList, location_name: "ResultIds"))
+    GetDataQualityRulesetEvaluationRunResponse.struct_class = Types::GetDataQualityRulesetEvaluationRunResponse
+
+    GetDataQualityRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetDataQualityRulesetRequest.struct_class = Types::GetDataQualityRulesetRequest
+
+    GetDataQualityRulesetResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    GetDataQualityRulesetResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    GetDataQualityRulesetResponse.add_member(:ruleset, Shapes::ShapeRef.new(shape: DataQualityRulesetString, location_name: "Ruleset"))
+    GetDataQualityRulesetResponse.add_member(:target_table, Shapes::ShapeRef.new(shape: DataQualityTargetTable, location_name: "TargetTable"))
+    GetDataQualityRulesetResponse.add_member(:created_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedOn"))
+    GetDataQualityRulesetResponse.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedOn"))
+    GetDataQualityRulesetResponse.add_member(:recommendation_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RecommendationRunId"))
+    GetDataQualityRulesetResponse.struct_class = Types::GetDataQualityRulesetResponse
 
     GetDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetDatabaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -3052,7 +3331,11 @@ module Aws::Glue
     GlueTable.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     GlueTable.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, location_name: "CatalogId"))
     GlueTable.add_member(:connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionName"))
+    GlueTable.add_member(:additional_options, Shapes::ShapeRef.new(shape: GlueTableAdditionalOptions, location_name: "AdditionalOptions"))
     GlueTable.struct_class = Types::GlueTable
+
+    GlueTableAdditionalOptions.key = Shapes::ShapeRef.new(shape: NameString)
+    GlueTableAdditionalOptions.value = Shapes::ShapeRef.new(shape: DescriptionString)
 
     GlueTables.member = Shapes::ShapeRef.new(shape: GlueTable)
 
@@ -3379,6 +3662,43 @@ module Aws::Glue
     ListCustomEntityTypesResponse.add_member(:custom_entity_types, Shapes::ShapeRef.new(shape: CustomEntityTypes, location_name: "CustomEntityTypes"))
     ListCustomEntityTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListCustomEntityTypesResponse.struct_class = Types::ListCustomEntityTypesResponse
+
+    ListDataQualityResultsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DataQualityResultFilterCriteria, location_name: "Filter"))
+    ListDataQualityResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListDataQualityResultsRequest.struct_class = Types::ListDataQualityResultsRequest
+
+    ListDataQualityResultsResponse.add_member(:results, Shapes::ShapeRef.new(shape: DataQualityResultDescriptionList, required: true, location_name: "Results"))
+    ListDataQualityResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityResultsResponse.struct_class = Types::ListDataQualityResultsResponse
+
+    ListDataQualityRuleRecommendationRunsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DataQualityRuleRecommendationRunFilter, location_name: "Filter"))
+    ListDataQualityRuleRecommendationRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityRuleRecommendationRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListDataQualityRuleRecommendationRunsRequest.struct_class = Types::ListDataQualityRuleRecommendationRunsRequest
+
+    ListDataQualityRuleRecommendationRunsResponse.add_member(:runs, Shapes::ShapeRef.new(shape: DataQualityRuleRecommendationRunList, location_name: "Runs"))
+    ListDataQualityRuleRecommendationRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityRuleRecommendationRunsResponse.struct_class = Types::ListDataQualityRuleRecommendationRunsResponse
+
+    ListDataQualityRulesetEvaluationRunsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DataQualityRulesetEvaluationRunFilter, location_name: "Filter"))
+    ListDataQualityRulesetEvaluationRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityRulesetEvaluationRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListDataQualityRulesetEvaluationRunsRequest.struct_class = Types::ListDataQualityRulesetEvaluationRunsRequest
+
+    ListDataQualityRulesetEvaluationRunsResponse.add_member(:runs, Shapes::ShapeRef.new(shape: DataQualityRulesetEvaluationRunList, location_name: "Runs"))
+    ListDataQualityRulesetEvaluationRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityRulesetEvaluationRunsResponse.struct_class = Types::ListDataQualityRulesetEvaluationRunsResponse
+
+    ListDataQualityRulesetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityRulesetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListDataQualityRulesetsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DataQualityRulesetFilterCriteria, location_name: "Filter"))
+    ListDataQualityRulesetsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    ListDataQualityRulesetsRequest.struct_class = Types::ListDataQualityRulesetsRequest
+
+    ListDataQualityRulesetsResponse.add_member(:rulesets, Shapes::ShapeRef.new(shape: DataQualityRulesetList, location_name: "Rulesets"))
+    ListDataQualityRulesetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityRulesetsResponse.struct_class = Types::ListDataQualityRulesetsResponse
 
     ListDevEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListDevEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -3912,6 +4232,8 @@ module Aws::Glue
     ResumeWorkflowRunResponse.add_member(:node_ids, Shapes::ShapeRef.new(shape: NodeIdList, location_name: "NodeIds"))
     ResumeWorkflowRunResponse.struct_class = Types::ResumeWorkflowRunResponse
 
+    RulesetNames.member = Shapes::ShapeRef.new(shape: NameString)
+
     RunStatementRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "SessionId"))
     RunStatementRequest.add_member(:code, Shapes::ShapeRef.new(shape: OrchestrationStatementCodeString, required: true, location_name: "Code"))
     RunStatementRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
@@ -4234,6 +4556,29 @@ module Aws::Glue
     StartCrawlerScheduleRequest.struct_class = Types::StartCrawlerScheduleRequest
 
     StartCrawlerScheduleResponse.struct_class = Types::StartCrawlerScheduleResponse
+
+    StartDataQualityRuleRecommendationRunRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "DataSource"))
+    StartDataQualityRuleRecommendationRunRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, required: true, location_name: "Role"))
+    StartDataQualityRuleRecommendationRunRequest.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    StartDataQualityRuleRecommendationRunRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    StartDataQualityRuleRecommendationRunRequest.add_member(:created_ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "CreatedRulesetName"))
+    StartDataQualityRuleRecommendationRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: HashString, location_name: "ClientToken"))
+    StartDataQualityRuleRecommendationRunRequest.struct_class = Types::StartDataQualityRuleRecommendationRunRequest
+
+    StartDataQualityRuleRecommendationRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))
+    StartDataQualityRuleRecommendationRunResponse.struct_class = Types::StartDataQualityRuleRecommendationRunResponse
+
+    StartDataQualityRulesetEvaluationRunRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "DataSource"))
+    StartDataQualityRulesetEvaluationRunRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, required: true, location_name: "Role"))
+    StartDataQualityRulesetEvaluationRunRequest.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    StartDataQualityRulesetEvaluationRunRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    StartDataQualityRulesetEvaluationRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: HashString, location_name: "ClientToken"))
+    StartDataQualityRulesetEvaluationRunRequest.add_member(:additional_run_options, Shapes::ShapeRef.new(shape: DataQualityEvaluationRunAdditionalRunOptions, location_name: "AdditionalRunOptions"))
+    StartDataQualityRulesetEvaluationRunRequest.add_member(:ruleset_names, Shapes::ShapeRef.new(shape: RulesetNames, required: true, location_name: "RulesetNames"))
+    StartDataQualityRulesetEvaluationRunRequest.struct_class = Types::StartDataQualityRulesetEvaluationRunRequest
+
+    StartDataQualityRulesetEvaluationRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))
+    StartDataQualityRulesetEvaluationRunResponse.struct_class = Types::StartDataQualityRulesetEvaluationRunResponse
 
     StartExportLabelsTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
     StartExportLabelsTaskRunRequest.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, required: true, location_name: "OutputS3Path"))
@@ -4644,6 +4989,17 @@ module Aws::Glue
     UpdateCsvClassifierRequest.add_member(:custom_datatypes, Shapes::ShapeRef.new(shape: CustomDatatypes, location_name: "CustomDatatypes"))
     UpdateCsvClassifierRequest.struct_class = Types::UpdateCsvClassifierRequest
 
+    UpdateDataQualityRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateDataQualityRulesetRequest.add_member(:updated_name, Shapes::ShapeRef.new(shape: NameString, location_name: "UpdatedName"))
+    UpdateDataQualityRulesetRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UpdateDataQualityRulesetRequest.add_member(:ruleset, Shapes::ShapeRef.new(shape: DataQualityRulesetString, location_name: "Ruleset"))
+    UpdateDataQualityRulesetRequest.struct_class = Types::UpdateDataQualityRulesetRequest
+
+    UpdateDataQualityRulesetResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    UpdateDataQualityRulesetResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UpdateDataQualityRulesetResponse.add_member(:ruleset, Shapes::ShapeRef.new(shape: DataQualityRulesetString, location_name: "Ruleset"))
+    UpdateDataQualityRulesetResponse.struct_class = Types::UpdateDataQualityRulesetResponse
+
     UpdateDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateDatabaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     UpdateDatabaseRequest.add_member(:database_input, Shapes::ShapeRef.new(shape: DatabaseInput, required: true, location_name: "DatabaseInput"))
@@ -4991,6 +5347,17 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:batch_get_data_quality_result, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetDataQualityResult"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetDataQualityResultRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetDataQualityResultResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:batch_get_dev_endpoints, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetDevEndpoints"
         o.http_method = "POST"
@@ -5072,6 +5439,30 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
+      api.add_operation(:cancel_data_quality_rule_recommendation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelDataQualityRuleRecommendationRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelDataQualityRuleRecommendationRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelDataQualityRuleRecommendationRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:cancel_data_quality_ruleset_evaluation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelDataQualityRulesetEvaluationRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelDataQualityRulesetEvaluationRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelDataQualityRulesetEvaluationRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:cancel_ml_task_run, Seahorse::Model::Operation.new.tap do |o|
@@ -5172,6 +5563,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+      end)
+
+      api.add_operation(:create_data_quality_ruleset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataQualityRuleset"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataQualityRulesetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataQualityRulesetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
@@ -5477,6 +5881,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:delete_data_quality_ruleset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataQualityRuleset"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataQualityRulesetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataQualityRulesetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:delete_database, Seahorse::Model::Operation.new.tap do |o|
@@ -5884,6 +6300,54 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:get_data_quality_result, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataQualityResult"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataQualityResultRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataQualityResultResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
+      api.add_operation(:get_data_quality_rule_recommendation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataQualityRuleRecommendationRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataQualityRuleRecommendationRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataQualityRuleRecommendationRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_data_quality_ruleset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataQualityRuleset"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataQualityRulesetRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataQualityRulesetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_data_quality_ruleset_evaluation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataQualityRulesetEvaluationRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataQualityRulesetEvaluationRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataQualityRulesetEvaluationRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:get_database, Seahorse::Model::Operation.new.tap do |o|
@@ -6624,6 +7088,75 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:list_data_quality_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataQualityResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDataQualityResultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataQualityResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_data_quality_rule_recommendation_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataQualityRuleRecommendationRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDataQualityRuleRecommendationRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataQualityRuleRecommendationRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_data_quality_ruleset_evaluation_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataQualityRulesetEvaluationRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDataQualityRulesetEvaluationRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataQualityRulesetEvaluationRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_data_quality_rulesets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataQualityRulesets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDataQualityRulesetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataQualityRulesetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_dev_endpoints, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDevEndpoints"
         o.http_method = "POST"
@@ -6983,6 +7516,31 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:start_data_quality_rule_recommendation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDataQualityRuleRecommendationRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDataQualityRuleRecommendationRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDataQualityRuleRecommendationRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_data_quality_ruleset_evaluation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDataQualityRulesetEvaluationRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDataQualityRulesetEvaluationRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDataQualityRulesetEvaluationRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:start_export_labels_task_run, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartExportLabelsTaskRun"
         o.http_method = "POST"
@@ -7254,6 +7812,21 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: VersionMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: SchedulerTransitioningException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:update_data_quality_ruleset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataQualityRuleset"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDataQualityRulesetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDataQualityRulesetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
       api.add_operation(:update_database, Seahorse::Model::Operation.new.tap do |o|

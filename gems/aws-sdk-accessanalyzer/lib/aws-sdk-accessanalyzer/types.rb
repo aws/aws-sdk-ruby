@@ -822,7 +822,13 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # The criteria to use in the filter that defines the archive rule.
+    # The criteria to use in the filter that defines the archive rule. For
+    # more information on available filter keys, see [IAM Access Analyzer
+    # filter keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html
     #
     # @!attribute [rw] eq
     #   An "equals" operator to match for the filter used to create the
@@ -1167,10 +1173,16 @@ module Aws::AccessAnalyzer
     #   multi-region access point.
     #   @return [String]
     #
+    # @!attribute [rw] access_point_account
+    #   The account of the cross-account access point that generated the
+    #   finding.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/FindingSourceDetail AWS API Documentation
     #
     class FindingSourceDetail < Struct.new(
-      :access_point_arn)
+      :access_point_arn,
+      :access_point_account)
       SENSITIVE = []
       include Aws::Structure
     end

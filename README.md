@@ -512,6 +512,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Data Lifecycle Manager                         | Aws::DLM                                 | aws-sdk-dlm                                 | 2018-01-12  |
 | Amazon Detective                                      | Aws::Detective                           | aws-sdk-detective                           | 2018-10-26  |
 | Amazon DevOps Guru                                    | Aws::DevOpsGuru                          | aws-sdk-devopsguru                          | 2020-12-01  |
+| Amazon DocumentDB Elastic Clusters                    | Aws::DocDBElastic                        | aws-sdk-docdbelastic                        | 2022-11-28  |
 | Amazon DocumentDB with MongoDB compatibility          | Aws::DocDB                               | aws-sdk-docdb                               | 2014-10-31  |
 | Amazon DynamoDB                                       | Aws::DynamoDB                            | aws-sdk-dynamodb                            | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)                     | Aws::DAX                                 | aws-sdk-dax                                 | 2017-04-19  |
@@ -595,6 +596,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon SageMaker Feature Store Runtime                | Aws::SageMakerFeatureStoreRuntime        | aws-sdk-sagemakerfeaturestoreruntime        | 2020-07-01  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                    | aws-sdk-sagemakerruntime                    | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                           | aws-sdk-sagemaker                           | 2017-07-24  |
+| Amazon SageMaker geospatial capabilities              | Aws::SageMakerGeospatial                 | aws-sdk-sagemakergeospatial                 | 2020-05-27  |
 | Amazon Sagemaker Edge Manager                         | Aws::SagemakerEdgeManager                | aws-sdk-sagemakeredgemanager                | 2020-09-23  |
 | Amazon Security Lake                                  | Aws::SecurityLake                        | aws-sdk-securitylake                        | 2018-05-10  |
 | Amazon Simple Email Service                           | Aws::SES                                 | aws-sdk-ses                                 | 2010-12-01  |

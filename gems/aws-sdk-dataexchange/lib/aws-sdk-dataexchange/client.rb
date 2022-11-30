@@ -427,7 +427,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_set({
-    #     asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE, API_GATEWAY_API
+    #     asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE, API_GATEWAY_API, S3_DATA_ACCESS, LAKE_FORMATION_DATA_PERMISSION
     #     description: "Description", # required
     #     name: "Name", # required
     #     tags: {
@@ -438,7 +438,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API", "S3_DATA_ACCESS", "LAKE_FORMATION_DATA_PERMISSION"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -612,8 +612,41 @@ module Aws::DataExchange
     #         revision_id: "Id", # required
     #         stage: "__string", # required
     #       },
+    #       create_s3_data_access_from_s3_bucket: {
+    #         asset_source: { # required
+    #           bucket: "__string", # required
+    #           key_prefixes: ["__string"],
+    #           keys: ["__string"],
+    #         },
+    #         data_set_id: "Id", # required
+    #         revision_id: "Id", # required
+    #       },
+    #       import_assets_from_lake_formation_tag_policy: {
+    #         catalog_id: "AwsAccountId", # required
+    #         database: {
+    #           expression: [ # required
+    #             {
+    #               tag_key: "String", # required
+    #               tag_values: ["String"], # required
+    #             },
+    #           ],
+    #           permissions: ["DESCRIBE"], # required, accepts DESCRIBE
+    #         },
+    #         table: {
+    #           expression: [ # required
+    #             {
+    #               tag_key: "String", # required
+    #               tag_values: ["String"], # required
+    #             },
+    #           ],
+    #           permissions: ["DESCRIBE"], # required, accepts DESCRIBE, SELECT
+    #         },
+    #         role_arn: "RoleArn", # required
+    #         data_set_id: "Id", # required
+    #         revision_id: "Id", # required
+    #       },
     #     },
-    #     type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES, IMPORT_ASSET_FROM_API_GATEWAY_API
+    #     type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES, IMPORT_ASSET_FROM_API_GATEWAY_API, CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET, IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY
     #   })
     #
     # @example Response structure
@@ -667,20 +700,43 @@ module Aws::DataExchange
     #   resp.details.import_asset_from_api_gateway_api.protocol_type #=> String, one of "REST"
     #   resp.details.import_asset_from_api_gateway_api.revision_id #=> String
     #   resp.details.import_asset_from_api_gateway_api.stage #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.bucket #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes #=> Array
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes[0] #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.keys #=> Array
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.keys[0] #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.data_set_id #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.revision_id #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.catalog_id #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.expression #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_key #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_values #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_values[0] #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.permissions #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.permissions[0] #=> String, one of "DESCRIBE"
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.expression #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_key #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_values #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_values[0] #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.permissions #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.permissions[0] #=> String, one of "DESCRIBE", "SELECT"
+    #   resp.details.import_assets_from_lake_formation_tag_policy.role_arn #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.data_set_id #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.revision_id #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
     #   resp.errors[0].details.import_assets_from_s3_job_error_details #=> Array
     #   resp.errors[0].details.import_assets_from_s3_job_error_details[0].bucket #=> String
     #   resp.errors[0].details.import_assets_from_s3_job_error_details[0].key #=> String
-    #   resp.errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision"
+    #   resp.errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision", "AWS Lake Formation data permission assets per revision", "Amazon S3 data access assets per revision"
     #   resp.errors[0].limit_value #=> Float
     #   resp.errors[0].message #=> String
     #   resp.errors[0].resource_id #=> String
     #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API"
+    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API", "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET", "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateJob AWS API Documentation
@@ -903,7 +959,28 @@ module Aws::DataExchange
     #   resp.asset_details.api_gateway_api_asset.api_specification_download_url_expires_at #=> Time
     #   resp.asset_details.api_gateway_api_asset.protocol_type #=> String, one of "REST"
     #   resp.asset_details.api_gateway_api_asset.stage #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
+    #   resp.asset_details.s3_data_access_asset.bucket #=> String
+    #   resp.asset_details.s3_data_access_asset.key_prefixes #=> Array
+    #   resp.asset_details.s3_data_access_asset.key_prefixes[0] #=> String
+    #   resp.asset_details.s3_data_access_asset.keys #=> Array
+    #   resp.asset_details.s3_data_access_asset.keys[0] #=> String
+    #   resp.asset_details.s3_data_access_asset.s3_access_point_alias #=> String
+    #   resp.asset_details.s3_data_access_asset.s3_access_point_arn #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.catalog_id #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_type #=> String, one of "TABLE", "DATABASE"
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_key #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_values #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_values[0] #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_key #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_values #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_values[0] #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_type #=> String, one of "LFTagPolicy"
+    #   resp.asset_details.lake_formation_data_permission_asset.permissions #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.permissions[0] #=> String, one of "DESCRIBE", "SELECT"
+    #   resp.asset_details.lake_formation_data_permission_asset.role_arn #=> String
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API", "S3_DATA_ACCESS", "LAKE_FORMATION_DATA_PERMISSION"
     #   resp.created_at #=> Time
     #   resp.data_set_id #=> String
     #   resp.id #=> String
@@ -949,7 +1026,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API", "S3_DATA_ACCESS", "LAKE_FORMATION_DATA_PERMISSION"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -1084,20 +1161,43 @@ module Aws::DataExchange
     #   resp.details.import_asset_from_api_gateway_api.protocol_type #=> String, one of "REST"
     #   resp.details.import_asset_from_api_gateway_api.revision_id #=> String
     #   resp.details.import_asset_from_api_gateway_api.stage #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.bucket #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes #=> Array
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes[0] #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.keys #=> Array
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.keys[0] #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.data_set_id #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.revision_id #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.catalog_id #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.expression #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_key #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_values #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_values[0] #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.permissions #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.database.permissions[0] #=> String, one of "DESCRIBE"
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.expression #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_key #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_values #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_values[0] #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.permissions #=> Array
+    #   resp.details.import_assets_from_lake_formation_tag_policy.table.permissions[0] #=> String, one of "DESCRIBE", "SELECT"
+    #   resp.details.import_assets_from_lake_formation_tag_policy.role_arn #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.data_set_id #=> String
+    #   resp.details.import_assets_from_lake_formation_tag_policy.revision_id #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
     #   resp.errors[0].details.import_assets_from_s3_job_error_details #=> Array
     #   resp.errors[0].details.import_assets_from_s3_job_error_details[0].bucket #=> String
     #   resp.errors[0].details.import_assets_from_s3_job_error_details[0].key #=> String
-    #   resp.errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision"
+    #   resp.errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision", "AWS Lake Formation data permission assets per revision", "Amazon S3 data access assets per revision"
     #   resp.errors[0].limit_value #=> Float
     #   resp.errors[0].message #=> String
     #   resp.errors[0].resource_id #=> String
     #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API"
+    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API", "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET", "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetJob AWS API Documentation
@@ -1252,7 +1352,7 @@ module Aws::DataExchange
     #
     #   resp.data_sets #=> Array
     #   resp.data_sets[0].arn #=> String
-    #   resp.data_sets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
+    #   resp.data_sets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API", "S3_DATA_ACCESS", "LAKE_FORMATION_DATA_PERMISSION"
     #   resp.data_sets[0].created_at #=> Time
     #   resp.data_sets[0].description #=> String
     #   resp.data_sets[0].id #=> String
@@ -1406,20 +1506,43 @@ module Aws::DataExchange
     #   resp.jobs[0].details.import_asset_from_api_gateway_api.protocol_type #=> String, one of "REST"
     #   resp.jobs[0].details.import_asset_from_api_gateway_api.revision_id #=> String
     #   resp.jobs[0].details.import_asset_from_api_gateway_api.stage #=> String
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.bucket #=> String
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes #=> Array
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes[0] #=> String
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.keys #=> Array
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.keys[0] #=> String
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.data_set_id #=> String
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.revision_id #=> String
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.catalog_id #=> String
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.database.expression #=> Array
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_key #=> String
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_values #=> Array
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.database.expression[0].tag_values[0] #=> String
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.database.permissions #=> Array
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.database.permissions[0] #=> String, one of "DESCRIBE"
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.table.expression #=> Array
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_key #=> String
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_values #=> Array
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.table.expression[0].tag_values[0] #=> String
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.table.permissions #=> Array
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.table.permissions[0] #=> String, one of "DESCRIBE", "SELECT"
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.role_arn #=> String
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.data_set_id #=> String
+    #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.revision_id #=> String
     #   resp.jobs[0].errors #=> Array
     #   resp.jobs[0].errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.jobs[0].errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
     #   resp.jobs[0].errors[0].details.import_assets_from_s3_job_error_details #=> Array
     #   resp.jobs[0].errors[0].details.import_assets_from_s3_job_error_details[0].bucket #=> String
     #   resp.jobs[0].errors[0].details.import_assets_from_s3_job_error_details[0].key #=> String
-    #   resp.jobs[0].errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision"
+    #   resp.jobs[0].errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision", "AWS Lake Formation data permission assets per revision", "Amazon S3 data access assets per revision"
     #   resp.jobs[0].errors[0].limit_value #=> Float
     #   resp.jobs[0].errors[0].message #=> String
     #   resp.jobs[0].errors[0].resource_id #=> String
     #   resp.jobs[0].errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.jobs[0].id #=> String
     #   resp.jobs[0].state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API"
+    #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API", "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET", "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY"
     #   resp.jobs[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1479,7 +1602,28 @@ module Aws::DataExchange
     #   resp.assets[0].asset_details.api_gateway_api_asset.api_specification_download_url_expires_at #=> Time
     #   resp.assets[0].asset_details.api_gateway_api_asset.protocol_type #=> String, one of "REST"
     #   resp.assets[0].asset_details.api_gateway_api_asset.stage #=> String
-    #   resp.assets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
+    #   resp.assets[0].asset_details.s3_data_access_asset.bucket #=> String
+    #   resp.assets[0].asset_details.s3_data_access_asset.key_prefixes #=> Array
+    #   resp.assets[0].asset_details.s3_data_access_asset.key_prefixes[0] #=> String
+    #   resp.assets[0].asset_details.s3_data_access_asset.keys #=> Array
+    #   resp.assets[0].asset_details.s3_data_access_asset.keys[0] #=> String
+    #   resp.assets[0].asset_details.s3_data_access_asset.s3_access_point_alias #=> String
+    #   resp.assets[0].asset_details.s3_data_access_asset.s3_access_point_arn #=> String
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.catalog_id #=> String
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_type #=> String, one of "TABLE", "DATABASE"
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression #=> Array
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_key #=> String
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_values #=> Array
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_values[0] #=> String
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression #=> Array
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_key #=> String
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_values #=> Array
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_values[0] #=> String
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_type #=> String, one of "LFTagPolicy"
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.permissions #=> Array
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.permissions[0] #=> String, one of "DESCRIBE", "SELECT"
+    #   resp.assets[0].asset_details.lake_formation_data_permission_asset.role_arn #=> String
+    #   resp.assets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API", "S3_DATA_ACCESS", "LAKE_FORMATION_DATA_PERMISSION"
     #   resp.assets[0].created_at #=> Time
     #   resp.assets[0].data_set_id #=> String
     #   resp.assets[0].id #=> String
@@ -1742,12 +1886,14 @@ module Aws::DataExchange
     #   The unique identifier for a data set.
     #
     # @option params [required, String] :name
-    #   The name of the asset. When importing from Amazon S3, the S3 object
-    #   key is used as the asset name. When exporting to Amazon S3, the asset
-    #   name is used as default target S3 object key. When importing from
-    #   Amazon API Gateway API, the API name is used as the asset name. When
-    #   importing from Amazon Redshift, the datashare name is used as the
-    #   asset name.
+    #   The name of the asset. When importing from Amazon S3, the Amazon S3
+    #   object key is used as the asset name. When exporting to Amazon S3, the
+    #   asset name is used as default target Amazon S3 object key. When
+    #   importing from Amazon API Gateway API, the API name is used as the
+    #   asset name. When importing from Amazon Redshift, the datashare name is
+    #   used as the asset name. When importing from AWS Lake Formation, the
+    #   static values of "Database(s) included in the LF-tag policy" or
+    #   "Table(s) included in LF-tag policy" are used as the name.
     #
     # @option params [required, String] :revision_id
     #   The unique identifier for a revision.
@@ -1788,7 +1934,28 @@ module Aws::DataExchange
     #   resp.asset_details.api_gateway_api_asset.api_specification_download_url_expires_at #=> Time
     #   resp.asset_details.api_gateway_api_asset.protocol_type #=> String, one of "REST"
     #   resp.asset_details.api_gateway_api_asset.stage #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
+    #   resp.asset_details.s3_data_access_asset.bucket #=> String
+    #   resp.asset_details.s3_data_access_asset.key_prefixes #=> Array
+    #   resp.asset_details.s3_data_access_asset.key_prefixes[0] #=> String
+    #   resp.asset_details.s3_data_access_asset.keys #=> Array
+    #   resp.asset_details.s3_data_access_asset.keys[0] #=> String
+    #   resp.asset_details.s3_data_access_asset.s3_access_point_alias #=> String
+    #   resp.asset_details.s3_data_access_asset.s3_access_point_arn #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.catalog_id #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_type #=> String, one of "TABLE", "DATABASE"
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_key #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_values #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression[0].tag_values[0] #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_key #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_values #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.table.expression[0].tag_values[0] #=> String
+    #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_type #=> String, one of "LFTagPolicy"
+    #   resp.asset_details.lake_formation_data_permission_asset.permissions #=> Array
+    #   resp.asset_details.lake_formation_data_permission_asset.permissions[0] #=> String, one of "DESCRIBE", "SELECT"
+    #   resp.asset_details.lake_formation_data_permission_asset.role_arn #=> String
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API", "S3_DATA_ACCESS", "LAKE_FORMATION_DATA_PERMISSION"
     #   resp.created_at #=> Time
     #   resp.data_set_id #=> String
     #   resp.id #=> String
@@ -1841,7 +2008,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API", "S3_DATA_ACCESS", "LAKE_FORMATION_DATA_PERMISSION"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -1991,7 +2158,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

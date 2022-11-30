@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2022-11-30)
+------------------
+
+* Feature - This release enables data providers to license direct access to data in their Amazon S3 buckets or AWS Lake Formation data lakes through AWS Data Exchange. Subscribers get read-only access to the data and can use it in downstream AWS services, like Amazon Athena, without creating or managing copies.
+
 1.28.0 (2022-10-25)
 ------------------
 

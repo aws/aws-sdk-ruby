@@ -709,6 +709,53 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Creates an empty `ipynb` file in the specified Apache Spark enabled
+    # workgroup. Throws an error if a file in the workgroup with the same
+    # name already exists.
+    #
+    # @option params [required, String] :work_group
+    #   The name of the Spark enabled workgroup in which the notebook will be
+    #   created.
+    #
+    # @option params [required, String] :name
+    #   The name of the `ipynb` file to be created in the Spark workgroup,
+    #   without the `.ipynb` extension.
+    #
+    # @option params [String] :client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the notebook is idempotent (executes only once).
+    #
+    #   This token is listed as not required because Amazon Web Services SDKs
+    #   (for example the Amazon Web Services SDK for Java) auto-generate the
+    #   token for you. If you are not using the Amazon Web Services SDK or the
+    #   Amazon Web Services CLI, you must provide this token or the action
+    #   will fail.
+    #
+    # @return [Types::CreateNotebookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNotebookOutput#notebook_id #notebook_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_notebook({
+    #     work_group: "WorkGroupName", # required
+    #     name: "NotebookName", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateNotebook AWS API Documentation
+    #
+    # @overload create_notebook(params = {})
+    # @param [Hash] params ({})
+    def create_notebook(params = {}, options = {})
+      req = build_request(:create_notebook, params)
+      req.send_request(options)
+    end
+
     # Creates a prepared statement for use with SQL queries in Athena.
     #
     # @option params [required, String] :statement_name
@@ -743,20 +790,58 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Creates a workgroup with the specified name.
+    # Gets an authentication token and the URL at which the notebook can be
+    # accessed. During programmatic access, `CreatePresignedNotebookUrl`
+    # must be called every 10 minutes to refresh the authentication token.
+    #
+    # @option params [required, String] :session_id
+    #   The session ID.
+    #
+    # @return [Types::CreatePresignedNotebookUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePresignedNotebookUrlResponse#notebook_url #notebook_url} => String
+    #   * {Types::CreatePresignedNotebookUrlResponse#auth_token #auth_token} => String
+    #   * {Types::CreatePresignedNotebookUrlResponse#auth_token_expiration_time #auth_token_expiration_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_presigned_notebook_url({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_url #=> String
+    #   resp.auth_token #=> String
+    #   resp.auth_token_expiration_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreatePresignedNotebookUrl AWS API Documentation
+    #
+    # @overload create_presigned_notebook_url(params = {})
+    # @param [Hash] params ({})
+    def create_presigned_notebook_url(params = {}, options = {})
+      req = build_request(:create_presigned_notebook_url, params)
+      req.send_request(options)
+    end
+
+    # Creates a workgroup with the specified name. Only one of
+    # `Configurations` or `Configuration` can be specified; `Configurations`
+    # for a workgroup with multi engine support (for example, an Apache
+    # Spark enabled workgroup) or `Configuration` for an Athena SQL
+    # workgroup.
     #
     # @option params [required, String] :name
     #   The workgroup name.
     #
     # @option params [Types::WorkGroupConfiguration] :configuration
-    #   The configuration for the workgroup, which includes the location in
-    #   Amazon S3 where query results are stored, the encryption
-    #   configuration, if any, used for encrypting query results, whether the
-    #   Amazon CloudWatch Metrics are enabled for the workgroup, the limit for
-    #   the amount of bytes scanned (cutoff) per query, if it is specified,
-    #   and whether workgroup's settings (specified with
-    #   `EnforceWorkGroupConfiguration`) in the `WorkGroupConfiguration`
-    #   override client-side settings. See
+    #   Contains configuration information for creating an Athena SQL
+    #   workgroup, which includes the location in Amazon S3 where query
+    #   results are stored, the encryption configuration, if any, used for
+    #   encrypting query results, whether the Amazon CloudWatch Metrics are
+    #   enabled for the workgroup, the limit for the amount of bytes scanned
+    #   (cutoff) per query, if it is specified, and whether workgroup's
+    #   settings (specified with `EnforceWorkGroupConfiguration`) in the
+    #   `WorkGroupConfiguration` override client-side settings. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
     # @option params [String] :description
@@ -791,6 +876,11 @@ module Aws::Athena
     #       engine_version: {
     #         selected_engine_version: "NameString",
     #         effective_engine_version: "NameString",
+    #       },
+    #       additional_configuration: "NameString",
+    #       execution_role: "RoleArn",
+    #       customer_content_encryption_configuration: {
+    #         kms_key: "KmsKey", # required
     #       },
     #     },
     #     description: "WorkGroupDescriptionString",
@@ -866,6 +956,28 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Deletes the specified notebook.
+    #
+    # @option params [required, String] :notebook_id
+    #   The ID of the notebook to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_notebook({
+    #     notebook_id: "NotebookId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNotebook AWS API Documentation
+    #
+    # @overload delete_notebook(params = {})
+    # @param [Hash] params ({})
+    def delete_notebook(params = {}, options = {})
+      req = build_request(:delete_notebook, params)
+      req.send_request(options)
+    end
+
     # Deletes the prepared statement with the specified name from the
     # specified workgroup.
     #
@@ -918,6 +1030,151 @@ module Aws::Athena
     # @param [Hash] params ({})
     def delete_work_group(params = {}, options = {})
       req = build_request(:delete_work_group, params)
+      req.send_request(options)
+    end
+
+    # Exports the specified notebook and its metadata.
+    #
+    # @option params [required, String] :notebook_id
+    #   The ID of the notebook to export.
+    #
+    # @return [Types::ExportNotebookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportNotebookOutput#notebook_metadata #notebook_metadata} => Types::NotebookMetadata
+    #   * {Types::ExportNotebookOutput#payload #payload} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_notebook({
+    #     notebook_id: "NotebookId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_metadata.notebook_id #=> String
+    #   resp.notebook_metadata.name #=> String
+    #   resp.notebook_metadata.work_group #=> String
+    #   resp.notebook_metadata.creation_time #=> Time
+    #   resp.notebook_metadata.type #=> String, one of "IPYNB"
+    #   resp.notebook_metadata.last_modified_time #=> Time
+    #   resp.payload #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ExportNotebook AWS API Documentation
+    #
+    # @overload export_notebook(params = {})
+    # @param [Hash] params ({})
+    def export_notebook(params = {}, options = {})
+      req = build_request(:export_notebook, params)
+      req.send_request(options)
+    end
+
+    # Describes a previously submitted calculation execution.
+    #
+    # @option params [required, String] :calculation_execution_id
+    #   The calculation execution UUID.
+    #
+    # @return [Types::GetCalculationExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCalculationExecutionResponse#calculation_execution_id #calculation_execution_id} => String
+    #   * {Types::GetCalculationExecutionResponse#session_id #session_id} => String
+    #   * {Types::GetCalculationExecutionResponse#description #description} => String
+    #   * {Types::GetCalculationExecutionResponse#working_directory #working_directory} => String
+    #   * {Types::GetCalculationExecutionResponse#status #status} => Types::CalculationStatus
+    #   * {Types::GetCalculationExecutionResponse#statistics #statistics} => Types::CalculationStatistics
+    #   * {Types::GetCalculationExecutionResponse#result #result} => Types::CalculationResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_calculation_execution({
+    #     calculation_execution_id: "CalculationExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.calculation_execution_id #=> String
+    #   resp.session_id #=> String
+    #   resp.description #=> String
+    #   resp.working_directory #=> String
+    #   resp.status.submission_date_time #=> Time
+    #   resp.status.completion_date_time #=> Time
+    #   resp.status.state #=> String, one of "CREATING", "CREATED", "QUEUED", "RUNNING", "CANCELING", "CANCELED", "COMPLETED", "FAILED"
+    #   resp.status.state_change_reason #=> String
+    #   resp.statistics.dpu_execution_in_millis #=> Integer
+    #   resp.statistics.progress #=> String
+    #   resp.result.std_out_s3_uri #=> String
+    #   resp.result.std_error_s3_uri #=> String
+    #   resp.result.result_s3_uri #=> String
+    #   resp.result.result_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecution AWS API Documentation
+    #
+    # @overload get_calculation_execution(params = {})
+    # @param [Hash] params ({})
+    def get_calculation_execution(params = {}, options = {})
+      req = build_request(:get_calculation_execution, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a pre-signed URL to a copy of the code that was executed for
+    # the calculation.
+    #
+    # @option params [required, String] :calculation_execution_id
+    #   The calculation execution UUID.
+    #
+    # @return [Types::GetCalculationExecutionCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCalculationExecutionCodeResponse#code_block #code_block} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_calculation_execution_code({
+    #     calculation_execution_id: "CalculationExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_block #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionCode AWS API Documentation
+    #
+    # @overload get_calculation_execution_code(params = {})
+    # @param [Hash] params ({})
+    def get_calculation_execution_code(params = {}, options = {})
+      req = build_request(:get_calculation_execution_code, params)
+      req.send_request(options)
+    end
+
+    # Gets the status of a current calculation.
+    #
+    # @option params [required, String] :calculation_execution_id
+    #   The calculation execution UUID.
+    #
+    # @return [Types::GetCalculationExecutionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCalculationExecutionStatusResponse#status #status} => Types::CalculationStatus
+    #   * {Types::GetCalculationExecutionStatusResponse#statistics #statistics} => Types::CalculationStatistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_calculation_execution_status({
+    #     calculation_execution_id: "CalculationExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.submission_date_time #=> Time
+    #   resp.status.completion_date_time #=> Time
+    #   resp.status.state #=> String, one of "CREATING", "CREATED", "QUEUED", "RUNNING", "CANCELING", "CANCELED", "COMPLETED", "FAILED"
+    #   resp.status.state_change_reason #=> String
+    #   resp.statistics.dpu_execution_in_millis #=> Integer
+    #   resp.statistics.progress #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionStatus AWS API Documentation
+    #
+    # @overload get_calculation_execution_status(params = {})
+    # @param [Hash] params ({})
+    def get_calculation_execution_status(params = {}, options = {})
+      req = build_request(:get_calculation_execution_status, params)
       req.send_request(options)
     end
 
@@ -1019,6 +1276,39 @@ module Aws::Athena
     # @param [Hash] params ({})
     def get_named_query(params = {}, options = {})
       req = build_request(:get_named_query, params)
+      req.send_request(options)
+    end
+
+    # Retrieves notebook metadata for the specified notebook ID.
+    #
+    # @option params [required, String] :notebook_id
+    #   The ID of the notebook whose metadata is to be retrieved.
+    #
+    # @return [Types::GetNotebookMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNotebookMetadataOutput#notebook_metadata #notebook_metadata} => Types::NotebookMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_notebook_metadata({
+    #     notebook_id: "NotebookId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_metadata.notebook_id #=> String
+    #   resp.notebook_metadata.name #=> String
+    #   resp.notebook_metadata.work_group #=> String
+    #   resp.notebook_metadata.creation_time #=> Time
+    #   resp.notebook_metadata.type #=> String, one of "IPYNB"
+    #   resp.notebook_metadata.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNotebookMetadata AWS API Documentation
+    #
+    # @overload get_notebook_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_notebook_metadata(params = {}, options = {})
+      req = build_request(:get_notebook_metadata, params)
       req.send_request(options)
     end
 
@@ -1252,6 +1542,99 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Gets the full details of a previously created session, including the
+    # session status and configuration.
+    #
+    # @option params [required, String] :session_id
+    #   The session ID.
+    #
+    # @return [Types::GetSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionResponse#session_id #session_id} => String
+    #   * {Types::GetSessionResponse#description #description} => String
+    #   * {Types::GetSessionResponse#work_group #work_group} => String
+    #   * {Types::GetSessionResponse#engine_version #engine_version} => String
+    #   * {Types::GetSessionResponse#engine_configuration #engine_configuration} => Types::EngineConfiguration
+    #   * {Types::GetSessionResponse#notebook_version #notebook_version} => String
+    #   * {Types::GetSessionResponse#session_configuration #session_configuration} => Types::SessionConfiguration
+    #   * {Types::GetSessionResponse#status #status} => Types::SessionStatus
+    #   * {Types::GetSessionResponse#statistics #statistics} => Types::SessionStatistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.description #=> String
+    #   resp.work_group #=> String
+    #   resp.engine_version #=> String
+    #   resp.engine_configuration.coordinator_dpu_size #=> Integer
+    #   resp.engine_configuration.max_concurrent_dpus #=> Integer
+    #   resp.engine_configuration.default_executor_dpu_size #=> Integer
+    #   resp.engine_configuration.additional_configs #=> Hash
+    #   resp.engine_configuration.additional_configs["KeyString"] #=> String
+    #   resp.notebook_version #=> String
+    #   resp.session_configuration.execution_role #=> String
+    #   resp.session_configuration.working_directory #=> String
+    #   resp.session_configuration.idle_timeout_seconds #=> Integer
+    #   resp.session_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
+    #   resp.session_configuration.encryption_configuration.kms_key #=> String
+    #   resp.status.start_date_time #=> Time
+    #   resp.status.last_modified_date_time #=> Time
+    #   resp.status.end_date_time #=> Time
+    #   resp.status.idle_since_date_time #=> Time
+    #   resp.status.state #=> String, one of "CREATING", "CREATED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "DEGRADED", "FAILED"
+    #   resp.status.state_change_reason #=> String
+    #   resp.statistics.dpu_execution_in_millis #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSession AWS API Documentation
+    #
+    # @overload get_session(params = {})
+    # @param [Hash] params ({})
+    def get_session(params = {}, options = {})
+      req = build_request(:get_session, params)
+      req.send_request(options)
+    end
+
+    # Gets the current status of a session.
+    #
+    # @option params [required, String] :session_id
+    #   The session ID.
+    #
+    # @return [Types::GetSessionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionStatusResponse#session_id #session_id} => String
+    #   * {Types::GetSessionStatusResponse#status #status} => Types::SessionStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session_status({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.status.start_date_time #=> Time
+    #   resp.status.last_modified_date_time #=> Time
+    #   resp.status.end_date_time #=> Time
+    #   resp.status.idle_since_date_time #=> Time
+    #   resp.status.state #=> String, one of "CREATING", "CREATED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "DEGRADED", "FAILED"
+    #   resp.status.state_change_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSessionStatus AWS API Documentation
+    #
+    # @overload get_session_status(params = {})
+    # @param [Hash] params ({})
+    def get_session_status(params = {}, options = {})
+      req = build_request(:get_session_status, params)
+      req.send_request(options)
+    end
+
     # Returns table metadata for the specified catalog, database, and table.
     #
     # @option params [required, String] :catalog_name
@@ -1332,6 +1715,9 @@ module Aws::Athena
     #   resp.work_group.configuration.requester_pays_enabled #=> Boolean
     #   resp.work_group.configuration.engine_version.selected_engine_version #=> String
     #   resp.work_group.configuration.engine_version.effective_engine_version #=> String
+    #   resp.work_group.configuration.additional_configuration #=> String
+    #   resp.work_group.configuration.execution_role #=> String
+    #   resp.work_group.configuration.customer_content_encryption_configuration.kms_key #=> String
     #   resp.work_group.description #=> String
     #   resp.work_group.creation_time #=> Time
     #
@@ -1341,6 +1727,175 @@ module Aws::Athena
     # @param [Hash] params ({})
     def get_work_group(params = {}, options = {})
       req = build_request(:get_work_group, params)
+      req.send_request(options)
+    end
+
+    # Imports a single `ipynb` file to a Spark enabled workgroup. The
+    # maximum file size that can be imported is 10 megabytes. If an `ipynb`
+    # file with the same name already exists in the workgroup, throws an
+    # error.
+    #
+    # @option params [required, String] :work_group
+    #   The name of the Spark enabled workgroup to import the notebook to.
+    #
+    # @option params [required, String] :name
+    #   The name of the notebook to import.
+    #
+    # @option params [required, String] :payload
+    #   The notebook content to be imported.
+    #
+    # @option params [required, String] :type
+    #   The notebook content type. Currently, the only valid type is `IPYNB`.
+    #
+    # @option params [String] :client_request_token
+    #   A unique case-sensitive string used to ensure the request to import
+    #   the notebook is idempotent (executes only once).
+    #
+    #   This token is listed as not required because Amazon Web Services SDKs
+    #   (for example the Amazon Web Services SDK for Java) auto-generate the
+    #   token for you. If you are not using the Amazon Web Services SDK or the
+    #   Amazon Web Services CLI, you must provide this token or the action
+    #   will fail.
+    #
+    # @return [Types::ImportNotebookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportNotebookOutput#notebook_id #notebook_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_notebook({
+    #     work_group: "WorkGroupName", # required
+    #     name: "NotebookName", # required
+    #     payload: "Payload", # required
+    #     type: "IPYNB", # required, accepts IPYNB
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ImportNotebook AWS API Documentation
+    #
+    # @overload import_notebook(params = {})
+    # @param [Hash] params ({})
+    def import_notebook(params = {}, options = {})
+      req = build_request(:import_notebook, params)
+      req.send_request(options)
+    end
+
+    # Returns the supported DPU sizes for the supported application runtimes
+    # (for example, `Jupyter 1.0`).
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated.
+    #
+    # @return [Types::ListApplicationDPUSizesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationDPUSizesOutput#application_dpu_sizes #application_dpu_sizes} => Array&lt;Types::ApplicationDPUSizes&gt;
+    #   * {Types::ListApplicationDPUSizesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_application_dpu_sizes({
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_dpu_sizes #=> Array
+    #   resp.application_dpu_sizes[0].application_runtime_id #=> String
+    #   resp.application_dpu_sizes[0].supported_dpu_sizes #=> Array
+    #   resp.application_dpu_sizes[0].supported_dpu_sizes[0] #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListApplicationDPUSizes AWS API Documentation
+    #
+    # @overload list_application_dpu_sizes(params = {})
+    # @param [Hash] params ({})
+    def list_application_dpu_sizes(params = {}, options = {})
+      req = build_request(:list_application_dpu_sizes, params)
+      req.send_request(options)
+    end
+
+    # Lists the calculations that have been submitted to a session in
+    # descending order. Newer calculations are listed first; older
+    # calculations are listed later.
+    #
+    # @option params [required, String] :session_id
+    #   The session ID.
+    #
+    # @option params [String] :state_filter
+    #   A filter for a specific calculation execution state. A description of
+    #   each state follows.
+    #
+    #   `CREATING` - The calculation is in the process of being created.
+    #
+    #   `CREATED` - The calculation has been created and is ready to run.
+    #
+    #   `QUEUED` - The calculation has been queued for processing.
+    #
+    #   `RUNNING` - The calculation is running.
+    #
+    #   `CANCELING` - A request to cancel the calculation has been received
+    #   and the system is working to stop it.
+    #
+    #   `CANCELED` - The calculation is no longer running as the result of a
+    #   cancel request.
+    #
+    #   `COMPLETED` - The calculation has completed without error.
+    #
+    #   `FAILED` - The calculation failed and is no longer running.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of calculation executions to return.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
+    #
+    # @return [Types::ListCalculationExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCalculationExecutionsResponse#next_token #next_token} => String
+    #   * {Types::ListCalculationExecutionsResponse#calculations #calculations} => Array&lt;Types::CalculationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_calculation_executions({
+    #     session_id: "SessionId", # required
+    #     state_filter: "CREATING", # accepts CREATING, CREATED, QUEUED, RUNNING, CANCELING, CANCELED, COMPLETED, FAILED
+    #     max_results: 1,
+    #     next_token: "SessionManagerToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.calculations #=> Array
+    #   resp.calculations[0].calculation_execution_id #=> String
+    #   resp.calculations[0].description #=> String
+    #   resp.calculations[0].status.submission_date_time #=> Time
+    #   resp.calculations[0].status.completion_date_time #=> Time
+    #   resp.calculations[0].status.state #=> String, one of "CREATING", "CREATED", "QUEUED", "RUNNING", "CANCELING", "CANCELED", "COMPLETED", "FAILED"
+    #   resp.calculations[0].status.state_change_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListCalculationExecutions AWS API Documentation
+    #
+    # @overload list_calculation_executions(params = {})
+    # @param [Hash] params ({})
+    def list_calculation_executions(params = {}, options = {})
+      req = build_request(:list_calculation_executions, params)
       req.send_request(options)
     end
 
@@ -1474,6 +2029,77 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Lists, in descending order, the executors that have been submitted to
+    # a session. Newer executors are listed first; older executors are
+    # listed later. The result can be optionally filtered by state.
+    #
+    # @option params [required, String] :session_id
+    #   The session ID.
+    #
+    # @option params [String] :executor_state_filter
+    #   A filter for a specific executor state. A description of each state
+    #   follows.
+    #
+    #   `CREATING` - The executor is being started, including acquiring
+    #   resources.
+    #
+    #   `CREATED` - The executor has been started.
+    #
+    #   `REGISTERED` - The executor has been registered.
+    #
+    #   `TERMINATING` - The executor is in the process of shutting down.
+    #
+    #   `TERMINATED` - The executor is no longer running.
+    #
+    #   `FAILED` - Due to a failure, the executor is no longer running.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of executors to return.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
+    #
+    # @return [Types::ListExecutorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExecutorsResponse#session_id #session_id} => String
+    #   * {Types::ListExecutorsResponse#next_token #next_token} => String
+    #   * {Types::ListExecutorsResponse#executors_summary #executors_summary} => Array&lt;Types::ExecutorsSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_executors({
+    #     session_id: "SessionId", # required
+    #     executor_state_filter: "CREATING", # accepts CREATING, CREATED, REGISTERED, TERMINATING, TERMINATED, FAILED
+    #     max_results: 1,
+    #     next_token: "SessionManagerToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.next_token #=> String
+    #   resp.executors_summary #=> Array
+    #   resp.executors_summary[0].executor_id #=> String
+    #   resp.executors_summary[0].executor_type #=> String, one of "COORDINATOR", "GATEWAY", "WORKER"
+    #   resp.executors_summary[0].start_date_time #=> Integer
+    #   resp.executors_summary[0].termination_date_time #=> Integer
+    #   resp.executors_summary[0].executor_state #=> String, one of "CREATING", "CREATED", "REGISTERED", "TERMINATING", "TERMINATED", "FAILED"
+    #   resp.executors_summary[0].executor_size #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListExecutors AWS API Documentation
+    #
+    # @overload list_executors(params = {})
+    # @param [Hash] params ({})
+    def list_executors(params = {}, options = {})
+      req = build_request(:list_executors, params)
+      req.send_request(options)
+    end
+
     # Provides a list of available query IDs only for queries saved in the
     # specified workgroup. Requires that you have access to the specified
     # workgroup. If a workgroup is not specified, lists the saved queries
@@ -1527,6 +2153,105 @@ module Aws::Athena
     # @param [Hash] params ({})
     def list_named_queries(params = {}, options = {})
       req = build_request(:list_named_queries, params)
+      req.send_request(options)
+    end
+
+    # Displays the notebook files for the specified workgroup in paginated
+    # format.
+    #
+    # @option params [Types::FilterDefinition] :filters
+    #   Search filter string.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of results to return.
+    #
+    # @option params [required, String] :work_group
+    #   The name of the Spark enabled workgroup to retrieve notebook metadata
+    #   for.
+    #
+    # @return [Types::ListNotebookMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNotebookMetadataOutput#next_token #next_token} => String
+    #   * {Types::ListNotebookMetadataOutput#notebook_metadata_list #notebook_metadata_list} => Array&lt;Types::NotebookMetadata&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_notebook_metadata({
+    #     filters: {
+    #       name: "NotebookName",
+    #     },
+    #     next_token: "Token",
+    #     max_results: 1,
+    #     work_group: "WorkGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.notebook_metadata_list #=> Array
+    #   resp.notebook_metadata_list[0].notebook_id #=> String
+    #   resp.notebook_metadata_list[0].name #=> String
+    #   resp.notebook_metadata_list[0].work_group #=> String
+    #   resp.notebook_metadata_list[0].creation_time #=> Time
+    #   resp.notebook_metadata_list[0].type #=> String, one of "IPYNB"
+    #   resp.notebook_metadata_list[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNotebookMetadata AWS API Documentation
+    #
+    # @overload list_notebook_metadata(params = {})
+    # @param [Hash] params ({})
+    def list_notebook_metadata(params = {}, options = {})
+      req = build_request(:list_notebook_metadata, params)
+      req.send_request(options)
+    end
+
+    # Lists, in descending order, the sessions that have been created in a
+    # notebook that are in an active state like `CREATING`, `CREATED`,
+    # `IDLE` or `BUSY`. Newer sessions are listed first; older sessions are
+    # listed later.
+    #
+    # @option params [required, String] :notebook_id
+    #   The ID of the notebook to list sessions for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of notebook sessions to return.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
+    #
+    # @return [Types::ListNotebookSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNotebookSessionsResponse#notebook_sessions_list #notebook_sessions_list} => Array&lt;Types::NotebookSessionSummary&gt;
+    #   * {Types::ListNotebookSessionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_notebook_sessions({
+    #     notebook_id: "NotebookId", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_sessions_list #=> Array
+    #   resp.notebook_sessions_list[0].session_id #=> String
+    #   resp.notebook_sessions_list[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNotebookSessions AWS API Documentation
+    #
+    # @overload list_notebook_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_notebook_sessions(params = {}, options = {})
+      req = build_request(:list_notebook_sessions, params)
       req.send_request(options)
     end
 
@@ -1628,6 +2353,86 @@ module Aws::Athena
     # @param [Hash] params ({})
     def list_query_executions(params = {}, options = {})
       req = build_request(:list_query_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists the sessions in a workgroup that are in an active state like
+    # `CREATING`, `CREATED`, `IDLE`, or `BUSY`. Newer sessions are listed
+    # first; older sessions are listed later.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup to which the session belongs.
+    #
+    # @option params [String] :state_filter
+    #   A filter for a specific session state. A description of each state
+    #   follows.
+    #
+    #   `CREATING` - The session is being started, including acquiring
+    #   resources.
+    #
+    #   `CREATED` - The session has been started.
+    #
+    #   `IDLE` - The session is able to accept a calculation.
+    #
+    #   `BUSY` - The session is processing another task and is unable to
+    #   accept a calculation.
+    #
+    #   `TERMINATING` - The session is in the process of shutting down.
+    #
+    #   `TERMINATED` - The session and its resources are no longer running.
+    #
+    #   `DEGRADED` - The session has no healthy coordinators.
+    #
+    #   `FAILED` - Due to a failure, the session and its resources are no
+    #   longer running.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of sessions to return.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
+    #
+    # @return [Types::ListSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionsResponse#next_token #next_token} => String
+    #   * {Types::ListSessionsResponse#sessions #sessions} => Array&lt;Types::SessionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sessions({
+    #     work_group: "WorkGroupName", # required
+    #     state_filter: "CREATING", # accepts CREATING, CREATED, IDLE, BUSY, TERMINATING, TERMINATED, DEGRADED, FAILED
+    #     max_results: 1,
+    #     next_token: "SessionManagerToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].description #=> String
+    #   resp.sessions[0].engine_version.selected_engine_version #=> String
+    #   resp.sessions[0].engine_version.effective_engine_version #=> String
+    #   resp.sessions[0].notebook_version #=> String
+    #   resp.sessions[0].status.start_date_time #=> Time
+    #   resp.sessions[0].status.last_modified_date_time #=> Time
+    #   resp.sessions[0].status.end_date_time #=> Time
+    #   resp.sessions[0].status.idle_since_date_time #=> Time
+    #   resp.sessions[0].status.state #=> String, one of "CREATING", "CREATED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "DEGRADED", "FAILED"
+    #   resp.sessions[0].status.state_change_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListSessions AWS API Documentation
+    #
+    # @overload list_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_sessions(params = {}, options = {})
+      req = build_request(:list_sessions, params)
       req.send_request(options)
     end
 
@@ -1790,6 +2595,66 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Submits calculations for execution within a session. You can supply
+    # the code to run as an inline code block within the request or as an
+    # Amazon S3 URL.
+    #
+    # @option params [required, String] :session_id
+    #   The session ID.
+    #
+    # @option params [String] :description
+    #   A description of the calculation.
+    #
+    # @option params [Types::CalculationConfiguration] :calculation_configuration
+    #   Contains configuration information for the calculation.
+    #
+    # @option params [String] :code_block
+    #   A string that contains the code of the calculation.
+    #
+    # @option params [String] :client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the calculation is idempotent (executes only once). If another
+    #   `StartCalculationExecutionRequest` is received, the same response is
+    #   returned and another calculation is not created. If a parameter has
+    #   changed, an error is returned.
+    #
+    #   This token is listed as not required because Amazon Web Services SDKs
+    #   (for example the Amazon Web Services SDK for Java) auto-generate the
+    #   token for users. If you are not using the Amazon Web Services SDK or
+    #   the Amazon Web Services CLI, you must provide this token or the action
+    #   will fail.
+    #
+    # @return [Types::StartCalculationExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCalculationExecutionResponse#calculation_execution_id #calculation_execution_id} => String
+    #   * {Types::StartCalculationExecutionResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_calculation_execution({
+    #     session_id: "SessionId", # required
+    #     description: "DescriptionString",
+    #     calculation_configuration: {
+    #       code_block: "CodeBlock",
+    #     },
+    #     code_block: "CodeBlock",
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.calculation_execution_id #=> String
+    #   resp.state #=> String, one of "CREATING", "CREATED", "QUEUED", "RUNNING", "CANCELING", "CANCELED", "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartCalculationExecution AWS API Documentation
+    #
+    # @overload start_calculation_execution(params = {})
+    # @param [Hash] params ({})
+    def start_calculation_execution(params = {}, options = {})
+      req = build_request(:start_calculation_execution, params)
+      req.send_request(options)
+    end
+
     # Runs the SQL query statements contained in the `Query`. Requires you
     # to have access to the workgroup in which the query ran. Running
     # queries against an external catalog requires GetDataCatalog permission
@@ -1890,6 +2755,116 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Creates a session for running calculations within a workgroup. The
+    # session is ready when it reaches an `IDLE` state.
+    #
+    # @option params [String] :description
+    #   The session description.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup to which the session belongs.
+    #
+    # @option params [required, Types::EngineConfiguration] :engine_configuration
+    #   Contains engine data processing unit (DPU) configuration settings and
+    #   parameter mappings.
+    #
+    # @option params [String] :notebook_version
+    #   The notebook version. This value is required only when requesting that
+    #   a notebook server be started for the session. The only valid notebook
+    #   version is `Jupyter1.0`.
+    #
+    # @option params [Integer] :session_idle_timeout_in_minutes
+    #   The idle timeout in minutes for the session.
+    #
+    # @option params [String] :client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the session is idempotent (executes only once). If another
+    #   `StartSessionRequest` is received, the same response is returned and
+    #   another session is not created. If a parameter has changed, an error
+    #   is returned.
+    #
+    #   This token is listed as not required because Amazon Web Services SDKs
+    #   (for example the Amazon Web Services SDK for Java) auto-generate the
+    #   token for users. If you are not using the Amazon Web Services SDK or
+    #   the Amazon Web Services CLI, you must provide this token or the action
+    #   will fail.
+    #
+    # @return [Types::StartSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSessionResponse#session_id #session_id} => String
+    #   * {Types::StartSessionResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_session({
+    #     description: "DescriptionString",
+    #     work_group: "WorkGroupName", # required
+    #     engine_configuration: { # required
+    #       coordinator_dpu_size: 1,
+    #       max_concurrent_dpus: 1, # required
+    #       default_executor_dpu_size: 1,
+    #       additional_configs: {
+    #         "KeyString" => "ParametersMapValue",
+    #       },
+    #     },
+    #     notebook_version: "NameString",
+    #     session_idle_timeout_in_minutes: 1,
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.state #=> String, one of "CREATING", "CREATED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "DEGRADED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartSession AWS API Documentation
+    #
+    # @overload start_session(params = {})
+    # @param [Hash] params ({})
+    def start_session(params = {}, options = {})
+      req = build_request(:start_session, params)
+      req.send_request(options)
+    end
+
+    # Requests the cancellation of a calculation. A
+    # `StopCalculationExecution` call on a calculation that is already in a
+    # terminal state (for example, `STOPPED`, `FAILED`, or `COMPLETED`)
+    # succeeds but has no effect.
+    #
+    # <note markdown="1"> Cancelling a calculation is done on a best effort basis. If a
+    # calculation cannot be cancelled, you can be charged for its
+    # completion. If you are concerned about being charged for a calculation
+    # that cannot be cancelled, consider terminating the session in which
+    # the calculation is running.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :calculation_execution_id
+    #   The calculation execution UUID.
+    #
+    # @return [Types::StopCalculationExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopCalculationExecutionResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_calculation_execution({
+    #     calculation_execution_id: "CalculationExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "CREATING", "CREATED", "QUEUED", "RUNNING", "CANCELING", "CANCELED", "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopCalculationExecution AWS API Documentation
+    #
+    # @overload stop_calculation_execution(params = {})
+    # @param [Hash] params ({})
+    def stop_calculation_execution(params = {}, options = {})
+      req = build_request(:stop_calculation_execution, params)
+      req.send_request(options)
+    end
+
     # Stops a query execution. Requires you to have access to the workgroup
     # in which the query ran.
     #
@@ -1969,6 +2944,38 @@ module Aws::Athena
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Terminates an active session. A `TerminateSession` call on a session
+    # that is already inactive (for example, in a `FAILED`, `TERMINATED` or
+    # `TERMINATING` state) succeeds but has no effect. Calculations running
+    # in the session when `TerminateSession` is called are forcefully
+    # stopped, but may display as `FAILED` instead of `STOPPED`.
+    #
+    # @option params [required, String] :session_id
+    #   The session ID.
+    #
+    # @return [Types::TerminateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateSessionResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_session({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "CREATING", "CREATED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "DEGRADED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TerminateSession AWS API Documentation
+    #
+    # @overload terminate_session(params = {})
+    # @param [Hash] params ({})
+    def terminate_session(params = {}, options = {})
+      req = build_request(:terminate_session, params)
       req.send_request(options)
     end
 
@@ -2100,6 +3107,88 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Updates the contents of a Spark notebook.
+    #
+    # @option params [required, String] :notebook_id
+    #   The ID of the notebook to update.
+    #
+    # @option params [String] :payload
+    #   The updated content for the notebook.
+    #
+    # @option params [String] :type
+    #   The notebook content type. Currently, the only valid type is `IPYNB`.
+    #
+    # @option params [String] :session_id
+    #   The ID of the session in which the notebook will be updated.
+    #
+    # @option params [String] :client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the notebook is idempotent (executes only once).
+    #
+    #   This token is listed as not required because Amazon Web Services SDKs
+    #   (for example the Amazon Web Services SDK for Java) auto-generate the
+    #   token for you. If you are not using the Amazon Web Services SDK or the
+    #   Amazon Web Services CLI, you must provide this token or the action
+    #   will fail.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_notebook({
+    #     notebook_id: "NotebookId", # required
+    #     payload: "Payload",
+    #     type: "IPYNB", # accepts IPYNB
+    #     session_id: "SessionId",
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNotebook AWS API Documentation
+    #
+    # @overload update_notebook(params = {})
+    # @param [Hash] params ({})
+    def update_notebook(params = {}, options = {})
+      req = build_request(:update_notebook, params)
+      req.send_request(options)
+    end
+
+    # Updates the metadata for a notebook.
+    #
+    # @option params [required, String] :notebook_id
+    #   The ID of the notebook to update the metadata for.
+    #
+    # @option params [String] :client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the notebook is idempotent (executes only once).
+    #
+    #   This token is listed as not required because Amazon Web Services SDKs
+    #   (for example the Amazon Web Services SDK for Java) auto-generate the
+    #   token for you. If you are not using the Amazon Web Services SDK or the
+    #   Amazon Web Services CLI, you must provide this token or the action
+    #   will fail.
+    #
+    # @option params [required, String] :name
+    #   The name to update the notebook to.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_notebook_metadata({
+    #     notebook_id: "NotebookId", # required
+    #     client_request_token: "ClientRequestToken",
+    #     name: "NotebookName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNotebookMetadata AWS API Documentation
+    #
+    # @overload update_notebook_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_notebook_metadata(params = {}, options = {})
+      req = build_request(:update_notebook_metadata, params)
+      req.send_request(options)
+    end
+
     # Updates a prepared statement.
     #
     # @option params [required, String] :statement_name
@@ -2135,7 +3224,11 @@ module Aws::Athena
     end
 
     # Updates the workgroup with the specified name. The workgroup's name
-    # cannot be changed.
+    # cannot be changed. Only one of `ConfigurationsUpdates` or
+    # `ConfigurationUpdates` can be specified; `ConfigurationsUpdates` for a
+    # workgroup with multi engine support (for example, an Apache Spark
+    # enabled workgroup) or `ConfigurationUpdates` for an Athena SQL
+    # workgroup.
     #
     # @option params [required, String] :work_group
     #   The specified workgroup that will be updated.
@@ -2144,8 +3237,7 @@ module Aws::Athena
     #   The workgroup description.
     #
     # @option params [Types::WorkGroupConfigurationUpdates] :configuration_updates
-    #   The workgroup configuration that will be updated for the given
-    #   workgroup.
+    #   Contains configuration updates for an Athena SQL workgroup.
     #
     # @option params [String] :state
     #   The workgroup state that will be updated for the given workgroup.
@@ -2182,6 +3274,12 @@ module Aws::Athena
     #         selected_engine_version: "NameString",
     #         effective_engine_version: "NameString",
     #       },
+    #       remove_customer_content_encryption_configuration: false,
+    #       additional_configuration: "NameString",
+    #       execution_role: "RoleArn",
+    #       customer_content_encryption_configuration: {
+    #         kms_key: "KmsKey", # required
+    #       },
     #     },
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
@@ -2208,7 +3306,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

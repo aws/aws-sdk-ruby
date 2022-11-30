@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2022-11-30)
+------------------
+
+* Feature - This release adds support for S3 cross account access points. IAM Access Analyzer will now produce public or cross account findings when it detects bucket delegation to external account access points.
+
 1.31.0 (2022-10-25)
 ------------------
 

@@ -388,6 +388,7 @@ module Aws::S3Control
     AccessPoint.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
     AccessPoint.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))
     AccessPoint.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
+    AccessPoint.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
     AccessPoint.struct_class = Types::AccessPoint
 
     AccessPointList.member = Shapes::ShapeRef.new(shape: AccessPoint, location_name: "AccessPoint")
@@ -467,6 +468,7 @@ module Aws::S3Control
     CreateAccessPointRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     CreateAccessPointRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     CreateAccessPointRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
+    CreateAccessPointRequest.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
     CreateAccessPointRequest.struct_class = Types::CreateAccessPointRequest
 
     CreateAccessPointResult.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))
@@ -673,6 +675,7 @@ module Aws::S3Control
     GetAccessPointResult.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     GetAccessPointResult.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))
     GetAccessPointResult.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
+    GetAccessPointResult.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
     GetAccessPointResult.struct_class = Types::GetAccessPointResult
 
     GetBucketLifecycleConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))

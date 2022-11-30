@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2022-11-30)
+------------------
+
+* Feature - Added Models as part of the Search API. Added Model shadow deployments in realtime inference, and shadow testing in managed inference. Added support for shared spaces, geospatial APIs, Model Cards, AutoMLJobStep in pipelines, Git repositories on user profiles and domains, Model sharing in Jumpstart.
+
 1.153.0 (2022-11-18)
 ------------------
 

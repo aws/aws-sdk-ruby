@@ -42,6 +42,27 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # Contains the application runtime IDs and their supported DPU sizes.
+    #
+    # @!attribute [rw] application_runtime_id
+    #   The name of the supported application runtime (for example, `Jupyter
+    #   1.0`).
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_dpu_sizes
+    #   A list of the supported DPU sizes that the application runtime
+    #   supports.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ApplicationDPUSizes AWS API Documentation
+    #
+    class ApplicationDPUSizes < Struct.new(
+      :application_runtime_id,
+      :supported_dpu_sizes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an Athena query error. The `AthenaError`
     # feature provides standardized error information to help you understand
     # failed queries and take steps after a query failure occurs.
@@ -182,6 +203,143 @@ module Aws::Athena
     class BatchGetQueryExecutionOutput < Struct.new(
       :query_executions,
       :unprocessed_query_execution_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration information for the calculation.
+    #
+    # @!attribute [rw] code_block
+    #   A string that contains the code for the calculation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CalculationConfiguration AWS API Documentation
+    #
+    class CalculationConfiguration < Struct.new(
+      :code_block)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an application-specific calculation result.
+    #
+    # @!attribute [rw] std_out_s3_uri
+    #   The Amazon S3 location of the `stdout` file for the calculation.
+    #   @return [String]
+    #
+    # @!attribute [rw] std_error_s3_uri
+    #   The Amazon S3 location of the `stderr` error messages file for the
+    #   calculation.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_s3_uri
+    #   The Amazon S3 location of the folder for the calculation results.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_type
+    #   The data format of the calculation result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CalculationResult AWS API Documentation
+    #
+    class CalculationResult < Struct.new(
+      :std_out_s3_uri,
+      :std_error_s3_uri,
+      :result_s3_uri,
+      :result_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains statistics for a notebook calculation.
+    #
+    # @!attribute [rw] dpu_execution_in_millis
+    #   The data processing unit execution time in milliseconds for the
+    #   calculation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] progress
+    #   The progress of the calculation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CalculationStatistics AWS API Documentation
+    #
+    class CalculationStatistics < Struct.new(
+      :dpu_execution_in_millis,
+      :progress)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the status of a notebook calculation.
+    #
+    # @!attribute [rw] submission_date_time
+    #   The date and time the calculation was submitted for processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_date_time
+    #   The date and time the calculation completed processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the calculation execution. A description of each state
+    #   follows.
+    #
+    #   `CREATING` - The calculation is in the process of being created.
+    #
+    #   `CREATED` - The calculation has been created and is ready to run.
+    #
+    #   `QUEUED` - The calculation has been queued for processing.
+    #
+    #   `RUNNING` - The calculation is running.
+    #
+    #   `CANCELING` - A request to cancel the calculation has been received
+    #   and the system is working to stop it.
+    #
+    #   `CANCELED` - The calculation is no longer running as the result of a
+    #   cancel request.
+    #
+    #   `COMPLETED` - The calculation has completed without error.
+    #
+    #   `FAILED` - The calculation failed and is no longer running.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_change_reason
+    #   The reason for the calculation state change (for example, the
+    #   calculation was canceled because the session was terminated).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CalculationStatus AWS API Documentation
+    #
+    class CalculationStatus < Struct.new(
+      :submission_date_time,
+      :completion_date_time,
+      :state,
+      :state_change_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for a notebook calculation.
+    #
+    # @!attribute [rw] calculation_execution_id
+    #   The calculation execution UUID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the calculation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Contains information about the status of the calculation.
+    #   @return [Types::CalculationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CalculationSummary AWS API Documentation
+    #
+    class CalculationSummary < Struct.new(
+      :calculation_execution_id,
+      :description,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -417,6 +575,49 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @!attribute [rw] work_group
+    #   The name of the Spark enabled workgroup in which the notebook will
+    #   be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `ipynb` file to be created in the Spark workgroup,
+    #   without the `.ipynb` extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the notebook is idempotent (executes only once).
+    #
+    #   This token is listed as not required because Amazon Web Services
+    #   SDKs (for example the Amazon Web Services SDK for Java)
+    #   auto-generate the token for you. If you are not using the Amazon Web
+    #   Services SDK or the Amazon Web Services CLI, you must provide this
+    #   token or the action will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateNotebookInput AWS API Documentation
+    #
+    class CreateNotebookInput < Struct.new(
+      :work_group,
+      :name,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_id
+    #   A unique identifier for the notebook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateNotebookOutput AWS API Documentation
+    #
+    class CreateNotebookOutput < Struct.new(
+      :notebook_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] statement_name
     #   The name of the prepared statement.
     #   @return [String]
@@ -448,19 +649,54 @@ module Aws::Athena
     #
     class CreatePreparedStatementOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreatePresignedNotebookUrlRequest AWS API Documentation
+    #
+    class CreatePresignedNotebookUrlRequest < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_url
+    #   The URL of the notebook. The URL includes the authentication token
+    #   and notebook file name and points directly to the opened notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token
+    #   The authentication token for the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token_expiration_time
+    #   The UTC epoch time when the authentication token expires.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreatePresignedNotebookUrlResponse AWS API Documentation
+    #
+    class CreatePresignedNotebookUrlResponse < Struct.new(
+      :notebook_url,
+      :auth_token,
+      :auth_token_expiration_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The workgroup name.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The configuration for the workgroup, which includes the location in
-    #   Amazon S3 where query results are stored, the encryption
-    #   configuration, if any, used for encrypting query results, whether
-    #   the Amazon CloudWatch Metrics are enabled for the workgroup, the
-    #   limit for the amount of bytes scanned (cutoff) per query, if it is
-    #   specified, and whether workgroup's settings (specified with
-    #   `EnforceWorkGroupConfiguration`) in the `WorkGroupConfiguration`
-    #   override client-side settings. See
+    #   Contains configuration information for creating an Athena SQL
+    #   workgroup, which includes the location in Amazon S3 where query
+    #   results are stored, the encryption configuration, if any, used for
+    #   encrypting query results, whether the Amazon CloudWatch Metrics are
+    #   enabled for the workgroup, the limit for the amount of bytes scanned
+    #   (cutoff) per query, if it is specified, and whether workgroup's
+    #   settings (specified with `EnforceWorkGroupConfiguration`) in the
+    #   `WorkGroupConfiguration` override client-side settings. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #   @return [Types::WorkGroupConfiguration]
     #
@@ -487,6 +723,22 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateWorkGroupOutput AWS API Documentation
     #
     class CreateWorkGroupOutput < Aws::EmptyStructure; end
+
+    # Specifies the KMS key that is used to encrypt the user's data stores
+    # in Athena.
+    #
+    # @!attribute [rw] kms_key
+    #   The KMS key that is used to encrypt the user's data stores in
+    #   Athena.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CustomerContentEncryptionConfiguration AWS API Documentation
+    #
+    class CustomerContentEncryptionConfiguration < Struct.new(
+      :kms_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains information about a data catalog in an Amazon Web Services
     # account.
@@ -657,6 +909,22 @@ module Aws::Athena
     #
     class DeleteNamedQueryOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] notebook_id
+    #   The ID of the notebook to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNotebookInput AWS API Documentation
+    #
+    class DeleteNotebookInput < Struct.new(
+      :notebook_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNotebookOutput AWS API Documentation
+    #
+    class DeleteNotebookOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] statement_name
     #   The name of the prepared statement to delete.
     #   @return [String]
@@ -728,7 +996,47 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # The Athena engine version for running queries.
+    # Contains data processing unit (DPU) configuration settings and
+    # parameter mappings for a notebook engine.
+    #
+    # @!attribute [rw] coordinator_dpu_size
+    #   The number of DPUs to use for the coordinator. A coordinator is a
+    #   special executor that orchestrates processing work and manages other
+    #   executors in a notebook session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrent_dpus
+    #   The maximum number of DPUs that can run concurrently.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_executor_dpu_size
+    #   The default number of DPUs to use for executors. An executor is the
+    #   smallest unit of compute that a notebook session can request from
+    #   Athena.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_configs
+    #   Contains additional notebook engine `MAP<string, string>` parameter
+    #   mappings in the form of key-value pairs. To specify an Amazon S3 URI
+    #   that the Jupyter server will download and serve, specify a value for
+    #   the StartSessionRequest$NotebookVersion field, and then add a key
+    #   named `NotebookFileURI` to `AdditionalConfigs` that has value of the
+    #   Amazon S3 URI.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EngineConfiguration AWS API Documentation
+    #
+    class EngineConfiguration < Struct.new(
+      :coordinator_dpu_size,
+      :max_concurrent_dpus,
+      :default_executor_dpu_size,
+      :additional_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Athena engine version for running queries, or the PySpark engine
+    # version for running sessions.
     #
     # @!attribute [rw] selected_engine_version
     #   The engine version requested by the user. Possible values are
@@ -751,6 +1059,216 @@ module Aws::Athena
     class EngineVersion < Struct.new(
       :selected_engine_version,
       :effective_engine_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an executor.
+    #
+    # @!attribute [rw] executor_id
+    #   The UUID of the executor.
+    #   @return [String]
+    #
+    # @!attribute [rw] executor_type
+    #   The type of executor used for the application (`COORDINATOR`,
+    #   `GATEWAY`, or `WORKER`).
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   The date and time that the executor started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] termination_date_time
+    #   The date and time that the executor was terminated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] executor_state
+    #   The processing state of the executor. A description of each state
+    #   follows.
+    #
+    #   `CREATING` - The executor is being started, including acquiring
+    #   resources.
+    #
+    #   `CREATED` - The executor has been started.
+    #
+    #   `REGISTERED` - The executor has been registered.
+    #
+    #   `TERMINATING` - The executor is in the process of shutting down.
+    #
+    #   `TERMINATED` - The executor is no longer running.
+    #
+    #   `FAILED` - Due to a failure, the executor is no longer running.
+    #   @return [String]
+    #
+    # @!attribute [rw] executor_size
+    #   The smallest unit of compute that a session can request from Athena.
+    #   Size is measured in data processing unit (DPU) values, a relative
+    #   measure of processing power.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ExecutorsSummary AWS API Documentation
+    #
+    class ExecutorsSummary < Struct.new(
+      :executor_id,
+      :executor_type,
+      :start_date_time,
+      :termination_date_time,
+      :executor_state,
+      :executor_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_id
+    #   The ID of the notebook to export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ExportNotebookInput AWS API Documentation
+    #
+    class ExportNotebookInput < Struct.new(
+      :notebook_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_metadata
+    #   The notebook metadata, including notebook ID, notebook name, and
+    #   workgroup name.
+    #   @return [Types::NotebookMetadata]
+    #
+    # @!attribute [rw] payload
+    #   The content of the exported notebook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ExportNotebookOutput AWS API Documentation
+    #
+    class ExportNotebookOutput < Struct.new(
+      :notebook_metadata,
+      :payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A string for searching notebook names.
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook to search for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/FilterDefinition AWS API Documentation
+    #
+    class FilterDefinition < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculation_execution_id
+    #   The calculation execution UUID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionCodeRequest AWS API Documentation
+    #
+    class GetCalculationExecutionCodeRequest < Struct.new(
+      :calculation_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code_block
+    #   A pre-signed URL to the code that executed the calculation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionCodeResponse AWS API Documentation
+    #
+    class GetCalculationExecutionCodeResponse < Struct.new(
+      :code_block)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculation_execution_id
+    #   The calculation execution UUID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionRequest AWS API Documentation
+    #
+    class GetCalculationExecutionRequest < Struct.new(
+      :calculation_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculation_execution_id
+    #   The calculation execution UUID.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The session ID that the calculation ran in.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the calculation execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] working_directory
+    #   The Amazon S3 location in which calculation results are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Contains information about the status of the calculation.
+    #   @return [Types::CalculationStatus]
+    #
+    # @!attribute [rw] statistics
+    #   Contains information about the data processing unit (DPU) execution
+    #   time and progress. This field is populated only when statistics are
+    #   available.
+    #   @return [Types::CalculationStatistics]
+    #
+    # @!attribute [rw] result
+    #   Contains result information. This field is populated only if the
+    #   calculation is completed.
+    #   @return [Types::CalculationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionResponse AWS API Documentation
+    #
+    class GetCalculationExecutionResponse < Struct.new(
+      :calculation_execution_id,
+      :session_id,
+      :description,
+      :working_directory,
+      :status,
+      :statistics,
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculation_execution_id
+    #   The calculation execution UUID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionStatusRequest AWS API Documentation
+    #
+    class GetCalculationExecutionStatusRequest < Struct.new(
+      :calculation_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   Contains information about the calculation execution status.
+    #   @return [Types::CalculationStatus]
+    #
+    # @!attribute [rw] statistics
+    #   Contains information about the DPU execution time and progress.
+    #   @return [Types::CalculationStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionStatusResponse AWS API Documentation
+    #
+    class GetCalculationExecutionStatusResponse < Struct.new(
+      :status,
+      :statistics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -828,6 +1346,30 @@ module Aws::Athena
     #
     class GetNamedQueryOutput < Struct.new(
       :named_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_id
+    #   The ID of the notebook whose metadata is to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNotebookMetadataInput AWS API Documentation
+    #
+    class GetNotebookMetadataInput < Struct.new(
+      :notebook_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_metadata
+    #   The metadata that is returned for the specified notebook ID.
+    #   @return [Types::NotebookMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNotebookMetadataOutput AWS API Documentation
+    #
+    class GetNotebookMetadataOutput < Struct.new(
+      :notebook_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -960,6 +1502,102 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSessionRequest AWS API Documentation
+    #
+    class GetSessionRequest < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The session description.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group
+    #   The workgroup to which the session belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version used by the session (for example, `PySpark engine
+    #   version 3`). You can get a list of engine versions by calling
+    #   ListEngineVersions.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_configuration
+    #   Contains engine configuration information like DPU usage.
+    #   @return [Types::EngineConfiguration]
+    #
+    # @!attribute [rw] notebook_version
+    #   The notebook version.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_configuration
+    #   Contains the workgroup configuration information used by the
+    #   session.
+    #   @return [Types::SessionConfiguration]
+    #
+    # @!attribute [rw] status
+    #   Contains information about the status of the session.
+    #   @return [Types::SessionStatus]
+    #
+    # @!attribute [rw] statistics
+    #   Contains the DPU execution time.
+    #   @return [Types::SessionStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSessionResponse AWS API Documentation
+    #
+    class GetSessionResponse < Struct.new(
+      :session_id,
+      :description,
+      :work_group,
+      :engine_version,
+      :engine_configuration,
+      :notebook_version,
+      :session_configuration,
+      :status,
+      :statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSessionStatusRequest AWS API Documentation
+    #
+    class GetSessionStatusRequest < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Contains information about the status of the session.
+    #   @return [Types::SessionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSessionStatusResponse AWS API Documentation
+    #
+    class GetSessionStatusResponse < Struct.new(
+      :session_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_name
     #   The name of the data catalog that contains the database and table
     #   metadata to return.
@@ -1019,6 +1657,58 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @!attribute [rw] work_group
+    #   The name of the Spark enabled workgroup to import the notebook to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   The notebook content to be imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The notebook content type. Currently, the only valid type is
+    #   `IPYNB`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure the request to import
+    #   the notebook is idempotent (executes only once).
+    #
+    #   This token is listed as not required because Amazon Web Services
+    #   SDKs (for example the Amazon Web Services SDK for Java)
+    #   auto-generate the token for you. If you are not using the Amazon Web
+    #   Services SDK or the Amazon Web Services CLI, you must provide this
+    #   token or the action will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ImportNotebookInput AWS API Documentation
+    #
+    class ImportNotebookInput < Struct.new(
+      :work_group,
+      :name,
+      :payload,
+      :type,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_id
+    #   The ID of the notebook to import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ImportNotebookOutput AWS API Documentation
+    #
+    class ImportNotebookOutput < Struct.new(
+      :notebook_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates a platform issue, which may be due to a transient condition
     # or outage.
     #
@@ -1049,6 +1739,114 @@ module Aws::Athena
     class InvalidRequestException < Struct.new(
       :athena_error_code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListApplicationDPUSizesInput AWS API Documentation
+    #
+    class ListApplicationDPUSizesInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_dpu_sizes
+    #   A list of the supported DPU sizes that the application runtime
+    #   supports.
+    #   @return [Array<Types::ApplicationDPUSizes>]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListApplicationDPUSizesOutput AWS API Documentation
+    #
+    class ListApplicationDPUSizesOutput < Struct.new(
+      :application_dpu_sizes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_filter
+    #   A filter for a specific calculation execution state. A description
+    #   of each state follows.
+    #
+    #   `CREATING` - The calculation is in the process of being created.
+    #
+    #   `CREATED` - The calculation has been created and is ready to run.
+    #
+    #   `QUEUED` - The calculation has been queued for processing.
+    #
+    #   `RUNNING` - The calculation is running.
+    #
+    #   `CANCELING` - A request to cancel the calculation has been received
+    #   and the system is working to stop it.
+    #
+    #   `CANCELED` - The calculation is no longer running as the result of a
+    #   cancel request.
+    #
+    #   `COMPLETED` - The calculation has completed without error.
+    #
+    #   `FAILED` - The calculation failed and is no longer running.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of calculation executions to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListCalculationExecutionsRequest AWS API Documentation
+    #
+    class ListCalculationExecutionsRequest < Struct.new(
+      :session_id,
+      :state_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculations
+    #   A list of CalculationSummary objects.
+    #   @return [Array<Types::CalculationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListCalculationExecutionsResponse AWS API Documentation
+    #
+    class ListCalculationExecutionsResponse < Struct.new(
+      :next_token,
+      :calculations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1178,6 +1976,75 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] executor_state_filter
+    #   A filter for a specific executor state. A description of each state
+    #   follows.
+    #
+    #   `CREATING` - The executor is being started, including acquiring
+    #   resources.
+    #
+    #   `CREATED` - The executor has been started.
+    #
+    #   `REGISTERED` - The executor has been registered.
+    #
+    #   `TERMINATING` - The executor is in the process of shutting down.
+    #
+    #   `TERMINATED` - The executor is no longer running.
+    #
+    #   `FAILED` - Due to a failure, the executor is no longer running.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of executors to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListExecutorsRequest AWS API Documentation
+    #
+    class ListExecutorsRequest < Struct.new(
+      :session_id,
+      :executor_state_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] executors_summary
+    #   Contains summary information about the executor.
+    #   @return [Array<Types::ExecutorsSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListExecutorsResponse AWS API Documentation
+    #
+    class ListExecutorsResponse < Struct.new(
+      :session_id,
+      :next_token,
+      :executors_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A token generated by the Athena service that specifies where to
     #   continue pagination if a previous request was truncated. To obtain
@@ -1220,6 +2087,100 @@ module Aws::Athena
     #
     class ListNamedQueriesOutput < Struct.new(
       :named_query_ids,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Search filter string.
+    #   @return [Types::FilterDefinition]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] work_group
+    #   The name of the Spark enabled workgroup to retrieve notebook
+    #   metadata for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNotebookMetadataInput AWS API Documentation
+    #
+    class ListNotebookMetadataInput < Struct.new(
+      :filters,
+      :next_token,
+      :max_results,
+      :work_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_metadata_list
+    #   The list of notebook metadata for the specified workgroup.
+    #   @return [Array<Types::NotebookMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNotebookMetadataOutput AWS API Documentation
+    #
+    class ListNotebookMetadataOutput < Struct.new(
+      :next_token,
+      :notebook_metadata_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_id
+    #   The ID of the notebook to list sessions for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of notebook sessions to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNotebookSessionsRequest AWS API Documentation
+    #
+    class ListNotebookSessionsRequest < Struct.new(
+      :notebook_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_sessions_list
+    #   A list of the sessions belonging to the notebook.
+    #   @return [Array<Types::NotebookSessionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNotebookSessionsResponse AWS API Documentation
+    #
+    class ListNotebookSessionsResponse < Struct.new(
+      :notebook_sessions_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1310,6 +2271,76 @@ module Aws::Athena
     class ListQueryExecutionsOutput < Struct.new(
       :query_execution_ids,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] work_group
+    #   The workgroup to which the session belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_filter
+    #   A filter for a specific session state. A description of each state
+    #   follows.
+    #
+    #   `CREATING` - The session is being started, including acquiring
+    #   resources.
+    #
+    #   `CREATED` - The session has been started.
+    #
+    #   `IDLE` - The session is able to accept a calculation.
+    #
+    #   `BUSY` - The session is processing another task and is unable to
+    #   accept a calculation.
+    #
+    #   `TERMINATING` - The session is in the process of shutting down.
+    #
+    #   `TERMINATED` - The session and its resources are no longer running.
+    #
+    #   `DEGRADED` - The session has no healthy coordinators.
+    #
+    #   `FAILED` - Due to a failure, the session and its resources are no
+    #   longer running.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of sessions to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListSessionsRequest AWS API Documentation
+    #
+    class ListSessionsRequest < Struct.new(
+      :work_group,
+      :state_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] sessions
+    #   A list of sessions.
+    #   @return [Array<Types::SessionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListSessionsResponse AWS API Documentation
+    #
+    class ListSessionsResponse < Struct.new(
+      :next_token,
+      :sessions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1509,6 +2540,66 @@ module Aws::Athena
       :query_string,
       :named_query_id,
       :work_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata for notebook, including the notebook name, ID,
+    # workgroup, and time created.
+    #
+    # @!attribute [rw] notebook_id
+    #   The notebook ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group
+    #   The name of the Spark enabled workgroup to which the notebook
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the notebook was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type
+    #   The type of notebook. Currently, the only valid type is `IPYNB`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the notebook was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/NotebookMetadata AWS API Documentation
+    #
+    class NotebookMetadata < Struct.new(
+      :notebook_id,
+      :name,
+      :work_group,
+      :creation_time,
+      :type,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the notebook session ID and notebook session creation time.
+    #
+    # @!attribute [rw] session_id
+    #   The notebook session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the notebook session was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/NotebookSessionSummary AWS API Documentation
+    #
+    class NotebookSessionSummary < Struct.new(
+      :session_id,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2308,6 +3399,235 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # The specified session already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/SessionAlreadyExistsException AWS API Documentation
+    #
+    class SessionAlreadyExistsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains session configuration information.
+    #
+    # @!attribute [rw] execution_role
+    #   The ARN of the execution role used for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] working_directory
+    #   The Amazon S3 location that stores information for the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] idle_timeout_seconds
+    #   The idle timeout in seconds for the session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   If query results are encrypted in Amazon S3, indicates the
+    #   encryption option used (for example, `SSE_KMS` or `CSE_KMS`) and key
+    #   information.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/SessionConfiguration AWS API Documentation
+    #
+    class SessionConfiguration < Struct.new(
+      :execution_role,
+      :working_directory,
+      :idle_timeout_seconds,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains statistics for a notebook session.
+    #
+    # @!attribute [rw] dpu_execution_in_millis
+    #   The data processing unit execution time for a session in
+    #   milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/SessionStatistics AWS API Documentation
+    #
+    class SessionStatistics < Struct.new(
+      :dpu_execution_in_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the status of a notebook session.
+    #
+    # @!attribute [rw] start_date_time
+    #   The date and time that the session started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date_time
+    #   The most recent date and time that the session was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The date and time that the session ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] idle_since_date_time
+    #   The date and time starting at which the session became idle. Can be
+    #   empty if the session is not currently idle.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the session. A description of each state follows.
+    #
+    #   `CREATING` - The session is being started, including acquiring
+    #   resources.
+    #
+    #   `CREATED` - The session has been started.
+    #
+    #   `IDLE` - The session is able to accept a calculation.
+    #
+    #   `BUSY` - The session is processing another task and is unable to
+    #   accept a calculation.
+    #
+    #   `TERMINATING` - The session is in the process of shutting down.
+    #
+    #   `TERMINATED` - The session and its resources are no longer running.
+    #
+    #   `DEGRADED` - The session has no healthy coordinators.
+    #
+    #   `FAILED` - Due to a failure, the session and its resources are no
+    #   longer running.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_change_reason
+    #   The reason for the session state change (for example, canceled
+    #   because the session was terminated).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/SessionStatus AWS API Documentation
+    #
+    class SessionStatus < Struct.new(
+      :start_date_time,
+      :last_modified_date_time,
+      :end_date_time,
+      :idle_since_date_time,
+      :state,
+      :state_change_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a notebook session.
+    #
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The session description.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version used by the session (for example, `PySpark engine
+    #   version 3`).
+    #   @return [Types::EngineVersion]
+    #
+    # @!attribute [rw] notebook_version
+    #   The notebook version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Contains information about the session status.
+    #   @return [Types::SessionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/SessionSummary AWS API Documentation
+    #
+    class SessionSummary < Struct.new(
+      :session_id,
+      :description,
+      :engine_version,
+      :notebook_version,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the calculation.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculation_configuration
+    #   Contains configuration information for the calculation.
+    #   @return [Types::CalculationConfiguration]
+    #
+    # @!attribute [rw] code_block
+    #   A string that contains the code of the calculation.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the calculation is idempotent (executes only once). If another
+    #   `StartCalculationExecutionRequest` is received, the same response is
+    #   returned and another calculation is not created. If a parameter has
+    #   changed, an error is returned.
+    #
+    #   This token is listed as not required because Amazon Web Services
+    #   SDKs (for example the Amazon Web Services SDK for Java)
+    #   auto-generate the token for users. If you are not using the Amazon
+    #   Web Services SDK or the Amazon Web Services CLI, you must provide
+    #   this token or the action will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartCalculationExecutionRequest AWS API Documentation
+    #
+    class StartCalculationExecutionRequest < Struct.new(
+      :session_id,
+      :description,
+      :calculation_configuration,
+      :code_block,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculation_execution_id
+    #   The calculation execution UUID.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   `CREATING` - The calculation is in the process of being created.
+    #
+    #   `CREATED` - The calculation has been created and is ready to run.
+    #
+    #   `QUEUED` - The calculation has been queued for processing.
+    #
+    #   `RUNNING` - The calculation is running.
+    #
+    #   `CANCELING` - A request to cancel the calculation has been received
+    #   and the system is working to stop it.
+    #
+    #   `CANCELED` - The calculation is no longer running as the result of a
+    #   cancel request.
+    #
+    #   `COMPLETED` - The calculation has completed without error.
+    #
+    #   `FAILED` - The calculation failed and is no longer running.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartCalculationExecutionResponse AWS API Documentation
+    #
+    class StartCalculationExecutionResponse < Struct.new(
+      :calculation_execution_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] query_string
     #   The SQL query statements to be executed.
     #   @return [String]
@@ -2379,6 +3699,132 @@ module Aws::Athena
     #
     class StartQueryExecutionOutput < Struct.new(
       :query_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The session description.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group
+    #   The workgroup to which the session belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_configuration
+    #   Contains engine data processing unit (DPU) configuration settings
+    #   and parameter mappings.
+    #   @return [Types::EngineConfiguration]
+    #
+    # @!attribute [rw] notebook_version
+    #   The notebook version. This value is required only when requesting
+    #   that a notebook server be started for the session. The only valid
+    #   notebook version is `Jupyter1.0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_idle_timeout_in_minutes
+    #   The idle timeout in minutes for the session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the session is idempotent (executes only once). If another
+    #   `StartSessionRequest` is received, the same response is returned and
+    #   another session is not created. If a parameter has changed, an error
+    #   is returned.
+    #
+    #   This token is listed as not required because Amazon Web Services
+    #   SDKs (for example the Amazon Web Services SDK for Java)
+    #   auto-generate the token for users. If you are not using the Amazon
+    #   Web Services SDK or the Amazon Web Services CLI, you must provide
+    #   this token or the action will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartSessionRequest AWS API Documentation
+    #
+    class StartSessionRequest < Struct.new(
+      :description,
+      :work_group,
+      :engine_configuration,
+      :notebook_version,
+      :session_idle_timeout_in_minutes,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the session. A description of each state follows.
+    #
+    #   `CREATING` - The session is being started, including acquiring
+    #   resources.
+    #
+    #   `CREATED` - The session has been started.
+    #
+    #   `IDLE` - The session is able to accept a calculation.
+    #
+    #   `BUSY` - The session is processing another task and is unable to
+    #   accept a calculation.
+    #
+    #   `TERMINATING` - The session is in the process of shutting down.
+    #
+    #   `TERMINATED` - The session and its resources are no longer running.
+    #
+    #   `DEGRADED` - The session has no healthy coordinators.
+    #
+    #   `FAILED` - Due to a failure, the session and its resources are no
+    #   longer running.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartSessionResponse AWS API Documentation
+    #
+    class StartSessionResponse < Struct.new(
+      :session_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculation_execution_id
+    #   The calculation execution UUID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopCalculationExecutionRequest AWS API Documentation
+    #
+    class StopCalculationExecutionRequest < Struct.new(
+      :calculation_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   `CREATING` - The calculation is in the process of being created.
+    #
+    #   `CREATED` - The calculation has been created and is ready to run.
+    #
+    #   `QUEUED` - The calculation has been queued for processing.
+    #
+    #   `RUNNING` - The calculation is running.
+    #
+    #   `CANCELING` - A request to cancel the calculation has been received
+    #   and the system is working to stop it.
+    #
+    #   `CANCELED` - The calculation is no longer running as the result of a
+    #   cancel request.
+    #
+    #   `COMPLETED` - The calculation has completed without error.
+    #
+    #   `FAILED` - The calculation failed and is no longer running.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopCalculationExecutionResponse AWS API Documentation
+    #
+    class StopCalculationExecutionResponse < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2508,6 +3954,49 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] session_id
+    #   The session ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TerminateSessionRequest AWS API Documentation
+    #
+    class TerminateSessionRequest < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The state of the session. A description of each state follows.
+    #
+    #   `CREATING` - The session is being started, including acquiring
+    #   resources.
+    #
+    #   `CREATED` - The session has been started.
+    #
+    #   `IDLE` - The session is able to accept a calculation.
+    #
+    #   `BUSY` - The session is processing another task and is unable to
+    #   accept a calculation.
+    #
+    #   `TERMINATING` - The session is in the process of shutting down.
+    #
+    #   `TERMINATED` - The session and its resources are no longer running.
+    #
+    #   `DEGRADED` - The session has no healthy coordinators.
+    #
+    #   `FAILED` - Due to a failure, the session and its resources are no
+    #   longer running.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TerminateSessionResponse AWS API Documentation
+    #
+    class TerminateSessionResponse < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Indicates that the request was throttled.
     #
@@ -2730,6 +4219,83 @@ module Aws::Athena
     #
     class UpdateNamedQueryOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] notebook_id
+    #   The ID of the notebook to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   The updated content for the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The notebook content type. Currently, the only valid type is
+    #   `IPYNB`.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session in which the notebook will be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the notebook is idempotent (executes only once).
+    #
+    #   This token is listed as not required because Amazon Web Services
+    #   SDKs (for example the Amazon Web Services SDK for Java)
+    #   auto-generate the token for you. If you are not using the Amazon Web
+    #   Services SDK or the Amazon Web Services CLI, you must provide this
+    #   token or the action will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNotebookInput AWS API Documentation
+    #
+    class UpdateNotebookInput < Struct.new(
+      :notebook_id,
+      :payload,
+      :type,
+      :session_id,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_id
+    #   The ID of the notebook to update the metadata for.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the notebook is idempotent (executes only once).
+    #
+    #   This token is listed as not required because Amazon Web Services
+    #   SDKs (for example the Amazon Web Services SDK for Java)
+    #   auto-generate the token for you. If you are not using the Amazon Web
+    #   Services SDK or the Amazon Web Services CLI, you must provide this
+    #   token or the action will fail.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name to update the notebook to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNotebookMetadataInput AWS API Documentation
+    #
+    class UpdateNotebookMetadataInput < Struct.new(
+      :notebook_id,
+      :client_request_token,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNotebookMetadataOutput AWS API Documentation
+    #
+    class UpdateNotebookMetadataOutput < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNotebookOutput AWS API Documentation
+    #
+    class UpdateNotebookOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] statement_name
     #   The name of the prepared statement.
     #   @return [String]
@@ -2770,8 +4336,7 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] configuration_updates
-    #   The workgroup configuration that will be updated for the given
-    #   workgroup.
+    #   Contains configuration updates for an Athena SQL workgroup.
     #   @return [Types::WorkGroupConfigurationUpdates]
     #
     # @!attribute [rw] state
@@ -2912,6 +4477,20 @@ module Aws::Athena
     #   the preview engine regardless of this setting.
     #   @return [Types::EngineVersion]
     #
+    # @!attribute [rw] additional_configuration
+    #   Specifies a user defined JSON string that is passed to the notebook
+    #   engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role
+    #   Role used in a notebook session for accessing the user's resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_content_encryption_configuration
+    #   Specifies the KMS key that is used to encrypt the user's data
+    #   stores in Athena.
+    #   @return [Types::CustomerContentEncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfiguration AWS API Documentation
     #
     class WorkGroupConfiguration < Struct.new(
@@ -2920,7 +4499,10 @@ module Aws::Athena
       :publish_cloud_watch_metrics_enabled,
       :bytes_scanned_cutoff_per_query,
       :requester_pays_enabled,
-      :engine_version)
+      :engine_version,
+      :additional_configuration,
+      :execution_role,
+      :customer_content_encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2987,6 +4569,24 @@ module Aws::Athena
     #   the preview engine regardless of this setting.
     #   @return [Types::EngineVersion]
     #
+    # @!attribute [rw] remove_customer_content_encryption_configuration
+    #   Removes content encryption configuration for a workgroup.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] additional_configuration
+    #   Contains a user defined string in JSON format for a Spark-enabled
+    #   workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role
+    #   Contains the ARN of the execution role for the workgroup
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_content_encryption_configuration
+    #   Specifies the KMS key that is used to encrypt the user's data
+    #   stores in Athena.
+    #   @return [Types::CustomerContentEncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfigurationUpdates AWS API Documentation
     #
     class WorkGroupConfigurationUpdates < Struct.new(
@@ -2996,7 +4596,11 @@ module Aws::Athena
       :bytes_scanned_cutoff_per_query,
       :remove_bytes_scanned_cutoff_per_query,
       :requester_pays_enabled,
-      :engine_version)
+      :engine_version,
+      :remove_customer_content_encryption_configuration,
+      :additional_configuration,
+      :execution_role,
+      :customer_content_encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -72,6 +72,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::BatchGetCrawlers.build(context)
           when :batch_get_custom_entity_types
             Aws::Glue::Endpoints::BatchGetCustomEntityTypes.build(context)
+          when :batch_get_data_quality_result
+            Aws::Glue::Endpoints::BatchGetDataQualityResult.build(context)
           when :batch_get_dev_endpoints
             Aws::Glue::Endpoints::BatchGetDevEndpoints.build(context)
           when :batch_get_jobs
@@ -86,6 +88,10 @@ module Aws::Glue
             Aws::Glue::Endpoints::BatchStopJobRun.build(context)
           when :batch_update_partition
             Aws::Glue::Endpoints::BatchUpdatePartition.build(context)
+          when :cancel_data_quality_rule_recommendation_run
+            Aws::Glue::Endpoints::CancelDataQualityRuleRecommendationRun.build(context)
+          when :cancel_data_quality_ruleset_evaluation_run
+            Aws::Glue::Endpoints::CancelDataQualityRulesetEvaluationRun.build(context)
           when :cancel_ml_task_run
             Aws::Glue::Endpoints::CancelMLTaskRun.build(context)
           when :cancel_statement
@@ -102,6 +108,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::CreateCrawler.build(context)
           when :create_custom_entity_type
             Aws::Glue::Endpoints::CreateCustomEntityType.build(context)
+          when :create_data_quality_ruleset
+            Aws::Glue::Endpoints::CreateDataQualityRuleset.build(context)
           when :create_database
             Aws::Glue::Endpoints::CreateDatabase.build(context)
           when :create_dev_endpoint
@@ -146,6 +154,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::DeleteCrawler.build(context)
           when :delete_custom_entity_type
             Aws::Glue::Endpoints::DeleteCustomEntityType.build(context)
+          when :delete_data_quality_ruleset
+            Aws::Glue::Endpoints::DeleteDataQualityRuleset.build(context)
           when :delete_database
             Aws::Glue::Endpoints::DeleteDatabase.build(context)
           when :delete_dev_endpoint
@@ -210,6 +220,14 @@ module Aws::Glue
             Aws::Glue::Endpoints::GetCustomEntityType.build(context)
           when :get_data_catalog_encryption_settings
             Aws::Glue::Endpoints::GetDataCatalogEncryptionSettings.build(context)
+          when :get_data_quality_result
+            Aws::Glue::Endpoints::GetDataQualityResult.build(context)
+          when :get_data_quality_rule_recommendation_run
+            Aws::Glue::Endpoints::GetDataQualityRuleRecommendationRun.build(context)
+          when :get_data_quality_ruleset
+            Aws::Glue::Endpoints::GetDataQualityRuleset.build(context)
+          when :get_data_quality_ruleset_evaluation_run
+            Aws::Glue::Endpoints::GetDataQualityRulesetEvaluationRun.build(context)
           when :get_database
             Aws::Glue::Endpoints::GetDatabase.build(context)
           when :get_databases
@@ -312,6 +330,14 @@ module Aws::Glue
             Aws::Glue::Endpoints::ListCrawls.build(context)
           when :list_custom_entity_types
             Aws::Glue::Endpoints::ListCustomEntityTypes.build(context)
+          when :list_data_quality_results
+            Aws::Glue::Endpoints::ListDataQualityResults.build(context)
+          when :list_data_quality_rule_recommendation_runs
+            Aws::Glue::Endpoints::ListDataQualityRuleRecommendationRuns.build(context)
+          when :list_data_quality_ruleset_evaluation_runs
+            Aws::Glue::Endpoints::ListDataQualityRulesetEvaluationRuns.build(context)
+          when :list_data_quality_rulesets
+            Aws::Glue::Endpoints::ListDataQualityRulesets.build(context)
           when :list_dev_endpoints
             Aws::Glue::Endpoints::ListDevEndpoints.build(context)
           when :list_jobs
@@ -360,6 +386,10 @@ module Aws::Glue
             Aws::Glue::Endpoints::StartCrawler.build(context)
           when :start_crawler_schedule
             Aws::Glue::Endpoints::StartCrawlerSchedule.build(context)
+          when :start_data_quality_rule_recommendation_run
+            Aws::Glue::Endpoints::StartDataQualityRuleRecommendationRun.build(context)
+          when :start_data_quality_ruleset_evaluation_run
+            Aws::Glue::Endpoints::StartDataQualityRulesetEvaluationRun.build(context)
           when :start_export_labels_task_run
             Aws::Glue::Endpoints::StartExportLabelsTaskRun.build(context)
           when :start_import_labels_task_run
@@ -402,6 +432,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::UpdateCrawler.build(context)
           when :update_crawler_schedule
             Aws::Glue::Endpoints::UpdateCrawlerSchedule.build(context)
+          when :update_data_quality_ruleset
+            Aws::Glue::Endpoints::UpdateDataQualityRuleset.build(context)
           when :update_database
             Aws::Glue::Endpoints::UpdateDatabase.build(context)
           when :update_dev_endpoint

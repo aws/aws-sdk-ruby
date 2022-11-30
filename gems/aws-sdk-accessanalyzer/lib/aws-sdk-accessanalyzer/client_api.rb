@@ -466,6 +466,7 @@ module Aws::AccessAnalyzer
     FindingSource.struct_class = Types::FindingSource
 
     FindingSourceDetail.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "accessPointArn"))
+    FindingSourceDetail.add_member(:access_point_account, Shapes::ShapeRef.new(shape: String, location_name: "accessPointAccount"))
     FindingSourceDetail.struct_class = Types::FindingSourceDetail
 
     FindingSourceList.member = Shapes::ShapeRef.new(shape: FindingSource)
@@ -684,7 +685,7 @@ module Aws::AccessAnalyzer
     NetworkOriginConfiguration.add_member_subclass(:unknown, Types::NetworkOriginConfiguration::Unknown)
     NetworkOriginConfiguration.struct_class = Types::NetworkOriginConfiguration
 
-    PathElement.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index", metadata: {"box"=>true}))
+    PathElement.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
     PathElement.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     PathElement.add_member(:substring, Shapes::ShapeRef.new(shape: Substring, location_name: "substring"))
     PathElement.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))

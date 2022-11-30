@@ -308,6 +308,9 @@
       "Aws::DocDB::Plugins::CrossRegionCopying"
     ]
   },
+  "DocDBElastic": {
+    "models": "docdb-elastic/2022-11-28"
+  },
   "Drs": {
     "models": "drs/2020-02-26"
   },
@@ -967,6 +970,9 @@
   },
   "SageMakerFeatureStoreRuntime": {
     "models": "sagemaker-featurestore-runtime/2020-07-01"
+  },
+  "SageMakerGeospatial": {
+    "models": "sagemaker-geospatial/2020-05-27"
   },
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
