@@ -498,6 +498,12 @@ module Aws
               raise ArgumentError, "invalid option #{opt_name.inspect}"
             end
           end
+
+          max_number_of_messages = @request_params[:max_number_of_messages]
+          unless max_number_of_messages.is_a?(Integer) && max_number_of_messages.positive?
+            raise ArgumentError, ':max_number_of_messages must be a positive integer'
+          end
+
           @request_params.freeze
           freeze
         end

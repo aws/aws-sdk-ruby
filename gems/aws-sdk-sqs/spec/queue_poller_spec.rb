@@ -80,6 +80,25 @@ module Aws
           })
         end
 
+        context 'max_number_of_messages validation' do
+          subject { QueuePoller.new(queue_url, client: client, max_number_of_messages: max_number_of_messages) }
+
+          let(:max_number_of_messages) { 1 }
+
+          it 'accepts a positive integer' do
+            expect(subject.default_config.request_params[:max_number_of_messages]).to eq(1)
+          end
+
+          [0, nil, 1.1, '1'].each do |value|
+            context "with `max_number_of_messages: #{value.inspect}`" do
+              let(:max_number_of_messages) { value }
+
+              it "raises an error" do
+                expect { subject }.to raise_error(ArgumentError, /positive integer/)
+              end
+            end
+          end
+        end
       end
 
       describe '#poll' do
