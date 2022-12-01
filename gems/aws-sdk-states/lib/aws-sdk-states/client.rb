@@ -639,6 +639,16 @@ module Aws::States
     # the state machine's status to `DELETING` and begins the deletion
     # process.
     #
+    # If the given state machine Amazon Resource Name (ARN) is a qualified
+    # state machine ARN, it will fail with ValidationException.
+    #
+    # A qualified state machine ARN refers to a *Distributed Map state*
+    # defined within a state machine. For example, the qualified state
+    # machine ARN
+    # `arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel`
+    # refers to a *Distributed Map state* with a label `mapStateLabel` in
+    # the state machine named `stateMachineName`.
+    #
     # <note markdown="1"> For `EXPRESS` state machines, the deletion will happen eventually
     # (usually less than a minute). Running executions may emit logs after
     # `DeleteStateMachine` API is called.
@@ -702,14 +712,18 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Describes an execution.
+    # Provides all information about a state machine execution, such as the
+    # state machine associated with the execution, the execution input and
+    # output, and relevant execution metadata. Use this API action to return
+    # the Map Run ARN if the execution was dispatched by a Map Run.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
     #
     #  </note>
     #
-    # This API action is not supported by `EXPRESS` state machines.
+    # This API action is not supported by `EXPRESS` state machine executions
+    # unless they were dispatched by a Map Run.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
@@ -727,6 +741,9 @@ module Aws::States
     #   * {Types::DescribeExecutionOutput#output #output} => String
     #   * {Types::DescribeExecutionOutput#output_details #output_details} => Types::CloudWatchEventsExecutionDataDetails
     #   * {Types::DescribeExecutionOutput#trace_header #trace_header} => String
+    #   * {Types::DescribeExecutionOutput#map_run_arn #map_run_arn} => String
+    #   * {Types::DescribeExecutionOutput#error #error} => String
+    #   * {Types::DescribeExecutionOutput#cause #cause} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -747,6 +764,9 @@ module Aws::States
     #   resp.output #=> String
     #   resp.output_details.included #=> Boolean
     #   resp.trace_header #=> String
+    #   resp.map_run_arn #=> String
+    #   resp.error #=> String
+    #   resp.cause #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution AWS API Documentation
     #
@@ -757,7 +777,83 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Describes a state machine.
+    # Provides information about a Map Run's configuration, progress, and
+    # results. For more information, see [Examining Map Run][1] in the *Step
+    # Functions Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
+    #
+    # @option params [required, String] :map_run_arn
+    #   The Amazon Resource Name (ARN) that identifies a Map Run.
+    #
+    # @return [Types::DescribeMapRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMapRunOutput#map_run_arn #map_run_arn} => String
+    #   * {Types::DescribeMapRunOutput#execution_arn #execution_arn} => String
+    #   * {Types::DescribeMapRunOutput#status #status} => String
+    #   * {Types::DescribeMapRunOutput#start_date #start_date} => Time
+    #   * {Types::DescribeMapRunOutput#stop_date #stop_date} => Time
+    #   * {Types::DescribeMapRunOutput#max_concurrency #max_concurrency} => Integer
+    #   * {Types::DescribeMapRunOutput#tolerated_failure_percentage #tolerated_failure_percentage} => Float
+    #   * {Types::DescribeMapRunOutput#tolerated_failure_count #tolerated_failure_count} => Integer
+    #   * {Types::DescribeMapRunOutput#item_counts #item_counts} => Types::MapRunItemCounts
+    #   * {Types::DescribeMapRunOutput#execution_counts #execution_counts} => Types::MapRunExecutionCounts
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_map_run({
+    #     map_run_arn: "LongArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.map_run_arn #=> String
+    #   resp.execution_arn #=> String
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "ABORTED"
+    #   resp.start_date #=> Time
+    #   resp.stop_date #=> Time
+    #   resp.max_concurrency #=> Integer
+    #   resp.tolerated_failure_percentage #=> Float
+    #   resp.tolerated_failure_count #=> Integer
+    #   resp.item_counts.pending #=> Integer
+    #   resp.item_counts.running #=> Integer
+    #   resp.item_counts.succeeded #=> Integer
+    #   resp.item_counts.failed #=> Integer
+    #   resp.item_counts.timed_out #=> Integer
+    #   resp.item_counts.aborted #=> Integer
+    #   resp.item_counts.total #=> Integer
+    #   resp.item_counts.results_written #=> Integer
+    #   resp.execution_counts.pending #=> Integer
+    #   resp.execution_counts.running #=> Integer
+    #   resp.execution_counts.succeeded #=> Integer
+    #   resp.execution_counts.failed #=> Integer
+    #   resp.execution_counts.timed_out #=> Integer
+    #   resp.execution_counts.aborted #=> Integer
+    #   resp.execution_counts.total #=> Integer
+    #   resp.execution_counts.results_written #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeMapRun AWS API Documentation
+    #
+    # @overload describe_map_run(params = {})
+    # @param [Hash] params ({})
+    def describe_map_run(params = {}, options = {})
+      req = build_request(:describe_map_run, params)
+      req.send_request(options)
+    end
+
+    # Provides information about a state machine's definition, its IAM role
+    # Amazon Resource Name (ARN), and configuration. If the state machine
+    # ARN is a qualified state machine ARN, the response returned includes
+    # the `Map` state's label.
+    #
+    # A qualified state machine ARN refers to a *Distributed Map state*
+    # defined within a state machine. For example, the qualified state
+    # machine ARN
+    # `arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel`
+    # refers to a *Distributed Map state* with a label `mapStateLabel` in
+    # the state machine named `stateMachineName`.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -778,6 +874,7 @@ module Aws::States
     #   * {Types::DescribeStateMachineOutput#creation_date #creation_date} => Time
     #   * {Types::DescribeStateMachineOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
     #   * {Types::DescribeStateMachineOutput#tracing_configuration #tracing_configuration} => Types::TracingConfiguration
+    #   * {Types::DescribeStateMachineOutput#label #label} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -799,6 +896,7 @@ module Aws::States
     #   resp.logging_configuration.destinations #=> Array
     #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
     #   resp.tracing_configuration.enabled #=> Boolean
+    #   resp.label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine AWS API Documentation
     #
@@ -809,7 +907,11 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Describes the state machine associated with a specific execution.
+    # Provides information about a state machine's definition, its
+    # execution role ARN, and configuration. If an execution was dispatched
+    # by a Map Run, the Map Run is returned in the response. Additionally,
+    # the state machine returned will be the state machine associated with
+    # the Map Run.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -831,6 +933,8 @@ module Aws::States
     #   * {Types::DescribeStateMachineForExecutionOutput#update_date #update_date} => Time
     #   * {Types::DescribeStateMachineForExecutionOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
     #   * {Types::DescribeStateMachineForExecutionOutput#tracing_configuration #tracing_configuration} => Types::TracingConfiguration
+    #   * {Types::DescribeStateMachineForExecutionOutput#map_run_arn #map_run_arn} => String
+    #   * {Types::DescribeStateMachineForExecutionOutput#label #label} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -850,6 +954,8 @@ module Aws::States
     #   resp.logging_configuration.destinations #=> Array
     #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
     #   resp.tracing_configuration.enabled #=> Boolean
+    #   resp.map_run_arn #=> String
+    #   resp.label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecution AWS API Documentation
     #
@@ -981,7 +1087,7 @@ module Aws::States
     #
     #   resp.events #=> Array
     #   resp.events[0].timestamp #=> Time
-    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduled", "ActivityScheduleFailed", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionAborted", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduled", "LambdaFunctionScheduleFailed", "LambdaFunctionStarted", "LambdaFunctionStartFailed", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "MapIterationAborted", "MapIterationFailed", "MapIterationStarted", "MapIterationSucceeded", "MapStateAborted", "MapStateEntered", "MapStateExited", "MapStateFailed", "MapStateStarted", "MapStateSucceeded", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "PassStateEntered", "PassStateExited", "SucceedStateEntered", "SucceedStateExited", "TaskFailed", "TaskScheduled", "TaskStarted", "TaskStartFailed", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
+    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduled", "ActivityScheduleFailed", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionAborted", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduled", "LambdaFunctionScheduleFailed", "LambdaFunctionStarted", "LambdaFunctionStartFailed", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "MapIterationAborted", "MapIterationFailed", "MapIterationStarted", "MapIterationSucceeded", "MapStateAborted", "MapStateEntered", "MapStateExited", "MapStateFailed", "MapStateStarted", "MapStateSucceeded", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "PassStateEntered", "PassStateExited", "SucceedStateEntered", "SucceedStateExited", "TaskFailed", "TaskScheduled", "TaskStarted", "TaskStartFailed", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "WaitStateAborted", "WaitStateEntered", "WaitStateExited", "MapRunAborted", "MapRunFailed", "MapRunStarted", "MapRunSucceeded"
     #   resp.events[0].id #=> Integer
     #   resp.events[0].previous_event_id #=> Integer
     #   resp.events[0].activity_failed_event_details.error #=> String
@@ -1072,6 +1178,9 @@ module Aws::States
     #   resp.events[0].state_exited_event_details.name #=> String
     #   resp.events[0].state_exited_event_details.output #=> String
     #   resp.events[0].state_exited_event_details.output_details.truncated #=> Boolean
+    #   resp.events[0].map_run_started_event_details.map_run_arn #=> String
+    #   resp.events[0].map_run_failed_event_details.error #=> String
+    #   resp.events[0].map_run_failed_event_details.cause #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistory AWS API Documentation
@@ -1144,9 +1253,12 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Lists the executions of a state machine that meet the filtering
-    # criteria. Results are sorted by time, with the most recent execution
-    # first.
+    # Lists all executions of a state machine or a Map Run. You can list all
+    # executions related to a state machine by specifying a state machine
+    # Amazon Resource Name (ARN), or those related to a Map Run by
+    # specifying a Map Run ARN.
+    #
+    # Results are sorted by time, with the most recent execution first.
     #
     # If `nextToken` is returned, there are more results available. The
     # value of `nextToken` is a unique pagination token for each page. Make
@@ -1162,9 +1274,12 @@ module Aws::States
     #
     # This API action is not supported by `EXPRESS` state machines.
     #
-    # @option params [required, String] :state_machine_arn
+    # @option params [String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
     #   is listed.
+    #
+    #   You can specify either a `mapRunArn` or a `stateMachineArn`, but not
+    #   both.
     #
     # @option params [String] :status_filter
     #   If specified, only list the executions whose current execution status
@@ -1186,6 +1301,20 @@ module Aws::States
     #   after 24 hours. Using an expired pagination token will return an *HTTP
     #   400 InvalidToken* error.
     #
+    # @option params [String] :map_run_arn
+    #   The Amazon Resource Name (ARN) of the Map Run that started the child
+    #   workflow executions. If the `mapRunArn` field is specified, a list of
+    #   all of the child workflow executions started by a Map Run is returned.
+    #   For more information, see [Examining Map Run][1] in the *Step
+    #   Functions Developer Guide*.
+    #
+    #   You can specify either a `mapRunArn` or a `stateMachineArn`, but not
+    #   both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
+    #
     # @return [Types::ListExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListExecutionsOutput#executions #executions} => Array&lt;Types::ExecutionListItem&gt;
@@ -1196,10 +1325,11 @@ module Aws::States
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_executions({
-    #     state_machine_arn: "Arn", # required
+    #     state_machine_arn: "Arn",
     #     status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED
     #     max_results: 1,
     #     next_token: "ListExecutionsPageToken",
+    #     map_run_arn: "LongArn",
     #   })
     #
     # @example Response structure
@@ -1211,6 +1341,8 @@ module Aws::States
     #   resp.executions[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "ABORTED"
     #   resp.executions[0].start_date #=> Time
     #   resp.executions[0].stop_date #=> Time
+    #   resp.executions[0].map_run_arn #=> String
+    #   resp.executions[0].item_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutions AWS API Documentation
@@ -1219,6 +1351,64 @@ module Aws::States
     # @param [Hash] params ({})
     def list_executions(params = {}, options = {})
       req = build_request(:list_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists all Map Runs that were started by a given state machine
+    # execution. Use this API action to obtain Map Run ARNs, and then call
+    # `DescribeMapRun` to obtain more information, if needed.
+    #
+    # @option params [required, String] :execution_arn
+    #   The Amazon Resource Name (ARN) of the execution for which the Map Runs
+    #   must be listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results. The default is 100 and
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
+    #
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
+    #
+    # @option params [String] :next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
+    #
+    # @return [Types::ListMapRunsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMapRunsOutput#map_runs #map_runs} => Array&lt;Types::MapRunListItem&gt;
+    #   * {Types::ListMapRunsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_map_runs({
+    #     execution_arn: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.map_runs #=> Array
+    #   resp.map_runs[0].execution_arn #=> String
+    #   resp.map_runs[0].map_run_arn #=> String
+    #   resp.map_runs[0].state_machine_arn #=> String
+    #   resp.map_runs[0].start_date #=> Time
+    #   resp.map_runs[0].stop_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListMapRuns AWS API Documentation
+    #
+    # @overload list_map_runs(params = {})
+    # @param [Hash] params ({})
+    def list_map_runs(params = {}, options = {})
+      req = build_request(:list_map_runs, params)
       req.send_request(options)
     end
 
@@ -1450,7 +1640,16 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Starts a state machine execution.
+    # Starts a state machine execution. If the given state machine Amazon
+    # Resource Name (ARN) is a qualified state machine ARN, it will fail
+    # with ValidationException.
+    #
+    # A qualified state machine ARN refers to a *Distributed Map state*
+    # defined within a state machine. For example, the qualified state
+    # machine ARN
+    # `arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel`
+    # refers to a *Distributed Map state* with a label `mapStateLabel` in
+    # the state machine named `stateMachineName`.
     #
     # <note markdown="1"> `StartExecution` is idempotent for `STANDARD` workflows. For a
     # `STANDARD` workflow, if `StartExecution` is called with the same name
@@ -1741,11 +1940,57 @@ module Aws::States
       req.send_request(options)
     end
 
+    # Updates an in-progress Map Run's configuration to include changes to
+    # the settings that control maximum concurrency and Map Run failure.
+    #
+    # @option params [required, String] :map_run_arn
+    #   The Amazon Resource Name (ARN) of a Map Run.
+    #
+    # @option params [Integer] :max_concurrency
+    #   The maximum number of child workflow executions that can be specified
+    #   to run in parallel for the Map Run at the same time.
+    #
+    # @option params [Float] :tolerated_failure_percentage
+    #   The maximum percentage of failed items before the Map Run fails.
+    #
+    # @option params [Integer] :tolerated_failure_count
+    #   The maximum number of failed items before the Map Run fails.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_map_run({
+    #     map_run_arn: "LongArn", # required
+    #     max_concurrency: 1,
+    #     tolerated_failure_percentage: 1.0,
+    #     tolerated_failure_count: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateMapRun AWS API Documentation
+    #
+    # @overload update_map_run(params = {})
+    # @param [Hash] params ({})
+    def update_map_run(params = {}, options = {})
+      req = build_request(:update_map_run, params)
+      req.send_request(options)
+    end
+
     # Updates an existing state machine by modifying its `definition`,
     # `roleArn`, or `loggingConfiguration`. Running executions will continue
     # to use the previous `definition` and `roleArn`. You must include at
     # least one of `definition` or `roleArn` or you will receive a
     # `MissingRequiredParameter` error.
+    #
+    # If the given state machine Amazon Resource Name (ARN) is a qualified
+    # state machine ARN, it will fail with ValidationException.
+    #
+    # A qualified state machine ARN refers to a *Distributed Map state*
+    # defined within a state machine. For example, the qualified state
+    # machine ARN
+    # `arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel`
+    # refers to a *Distributed Map state* with a label `mapStateLabel` in
+    # the state machine named `stateMachineName`.
     #
     # <note markdown="1"> All `StartExecution` calls within a few seconds will use the updated
     # `definition` and `roleArn`. Executions started immediately after
@@ -1827,7 +2072,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

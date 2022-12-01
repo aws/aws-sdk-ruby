@@ -601,6 +601,19 @@ module Aws::States
     #   The X-Ray trace header that was passed to the execution.
     #   @return [String]
     #
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) that identifies a Map Run, which
+    #   dispatched this execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error string if the state machine execution failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   The cause string if the state machine execution failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput AWS API Documentation
     #
     class DescribeExecutionOutput < Struct.new(
@@ -614,8 +627,89 @@ module Aws::States
       :input_details,
       :output,
       :output_details,
-      :trace_header)
-      SENSITIVE = [:input, :output]
+      :trace_header,
+      :map_run_arn,
+      :error,
+      :cause)
+      SENSITIVE = [:input, :output, :error, :cause]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) that identifies a Map Run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeMapRunInput AWS API Documentation
+    #
+    class DescribeMapRunInput < Struct.new(
+      :map_run_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) that identifies a Map Run.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_arn
+    #   The Amazon Resource Name (ARN) that identifies the execution in
+    #   which the Map Run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Map Run.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date when the Map Run was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_date
+    #   The date when the Map Run was stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of child workflow executions configured to run in
+    #   parallel for the Map Run at the same time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tolerated_failure_percentage
+    #   The maximum percentage of failed child workflow executions before
+    #   the Map Run fails.
+    #   @return [Float]
+    #
+    # @!attribute [rw] tolerated_failure_count
+    #   The maximum number of failed child workflow executions before the
+    #   Map Run fails.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] item_counts
+    #   A JSON object that contains information about the total number of
+    #   items, and the item count for each processing status, such as
+    #   `pending` and `failed`.
+    #   @return [Types::MapRunItemCounts]
+    #
+    # @!attribute [rw] execution_counts
+    #   A JSON object that contains information about the total number of
+    #   child workflow executions for the Map Run, and the count of child
+    #   workflow executions for each status, such as `failed` and
+    #   `succeeded`.
+    #   @return [Types::MapRunExecutionCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeMapRunOutput AWS API Documentation
+    #
+    class DescribeMapRunOutput < Struct.new(
+      :map_run_arn,
+      :execution_arn,
+      :status,
+      :start_date,
+      :stop_date,
+      :max_concurrency,
+      :tolerated_failure_percentage,
+      :tolerated_failure_count,
+      :item_counts,
+      :execution_counts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -670,6 +764,19 @@ module Aws::States
     #   Selects whether X-Ray tracing is enabled.
     #   @return [Types::TracingConfiguration]
     #
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) of the Map Run that started the child
+    #   workflow execution. This field is returned only if the
+    #   `executionArn` is a child workflow execution that was started by a
+    #   Distributed Map state.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   A user-defined or an auto-generated string that identifies a `Map`
+    #   state. This ﬁeld is returned only if the `executionArn` is a child
+    #   workflow execution that was started by a Distributed Map state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecutionOutput AWS API Documentation
     #
     class DescribeStateMachineForExecutionOutput < Struct.new(
@@ -679,7 +786,9 @@ module Aws::States
       :role_arn,
       :update_date,
       :logging_configuration,
-      :tracing_configuration)
+      :tracing_configuration,
+      :map_run_arn,
+      :label)
       SENSITIVE = [:definition]
       include Aws::Structure
     end
@@ -755,6 +864,12 @@ module Aws::States
     #   Selects whether X-Ray tracing is enabled.
     #   @return [Types::TracingConfiguration]
     #
+    # @!attribute [rw] label
+    #   A user-defined or an auto-generated string that identifies a `Map`
+    #   state. This parameter is present only if the `stateMachineArn`
+    #   specified in input is a qualified state machine ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput AWS API Documentation
     #
     class DescribeStateMachineOutput < Struct.new(
@@ -766,7 +881,8 @@ module Aws::States
       :type,
       :creation_date,
       :logging_configuration,
-      :tracing_configuration)
+      :tracing_configuration,
+      :label)
       SENSITIVE = [:definition]
       include Aws::Structure
     end
@@ -896,6 +1012,20 @@ module Aws::States
     #   If the execution already ended, the date the execution stopped.
     #   @return [Time]
     #
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) of a Map Run. This field is returned
+    #   only if `mapRunArn` was specified in the `ListExecutions` API
+    #   action. If `stateMachineArn` was specified in `ListExecutions`, the
+    #   `mapRunArn` isn't returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_count
+    #   The total number of items processed in a child workflow execution.
+    #   This field is returned only if `mapRunArn` was specified in the
+    #   `ListExecutions` API action. If `stateMachineArn` was specified in
+    #   `ListExecutions`, the `itemCount` field isn't returned.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionListItem AWS API Documentation
     #
     class ExecutionListItem < Struct.new(
@@ -904,7 +1034,9 @@ module Aws::States
       :name,
       :status,
       :start_date,
-      :stop_date)
+      :stop_date,
+      :map_run_arn,
+      :item_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1240,6 +1372,16 @@ module Aws::States
     #   Contains details about an exit from a state during an execution.
     #   @return [Types::StateExitedEventDetails]
     #
+    # @!attribute [rw] map_run_started_event_details
+    #   Contains details, such as `mapRunArn`, and the start date and time
+    #   of a Map Run. `mapRunArn` is the Amazon Resource Name (ARN) of the
+    #   Map Run that was started.
+    #   @return [Types::MapRunStartedEventDetails]
+    #
+    # @!attribute [rw] map_run_failed_event_details
+    #   Contains error and cause details about a Map Run that failed.
+    #   @return [Types::MapRunFailedEventDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/HistoryEvent AWS API Documentation
     #
     class HistoryEvent < Struct.new(
@@ -1278,7 +1420,9 @@ module Aws::States
       :lambda_function_succeeded_event_details,
       :lambda_function_timed_out_event_details,
       :state_entered_event_details,
-      :state_exited_event_details)
+      :state_exited_event_details,
+      :map_run_started_event_details,
+      :map_run_failed_event_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1298,7 +1442,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # The provided Amazon Resource Name (ARN) is invalid.
+    # The provided Amazon Resource Name (ARN) is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1311,7 +1455,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # The provided Amazon States Language definition is invalid.
+    # The provided Amazon States Language definition is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1324,7 +1468,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # The provided JSON input data is invalid.
+    # The provided JSON input data is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1348,7 +1492,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # The provided name is invalid.
+    # The provided name is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1361,7 +1505,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # The provided JSON output data is invalid.
+    # The provided JSON output data is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1374,7 +1518,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # The provided token is invalid.
+    # The provided token is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1592,6 +1736,9 @@ module Aws::States
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
     #   is listed.
+    #
+    #   You can specify either a `mapRunArn` or a `stateMachineArn`, but not
+    #   both.
     #   @return [String]
     #
     # @!attribute [rw] status_filter
@@ -1618,13 +1765,29 @@ module Aws::States
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) of the Map Run that started the child
+    #   workflow executions. If the `mapRunArn` field is specified, a list
+    #   of all of the child workflow executions started by a Map Run is
+    #   returned. For more information, see [Examining Map Run][1] in the
+    #   *Step Functions Developer Guide*.
+    #
+    #   You can specify either a `mapRunArn` or a `stateMachineArn`, but not
+    #   both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsInput AWS API Documentation
     #
     class ListExecutionsInput < Struct.new(
       :state_machine_arn,
       :status_filter,
       :max_results,
-      :next_token)
+      :next_token,
+      :map_run_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1646,6 +1809,64 @@ module Aws::States
     #
     class ListExecutionsOutput < Struct.new(
       :executions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_arn
+    #   The Amazon Resource Name (ARN) of the execution for which the Map
+    #   Runs must be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned per call. You can
+    #   use `nextToken` to obtain further pages of results. The default is
+    #   100 and the maximum allowed page size is 1000. A value of 0 uses the
+    #   default.
+    #
+    #   This is only an upper limit. The actual number of results returned
+    #   per call might be fewer than the specified maximum.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListMapRunsInput AWS API Documentation
+    #
+    class ListMapRunsInput < Struct.new(
+      :execution_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] map_runs
+    #   An array that lists information related to a Map Run, such as the
+    #   Amazon Resource Name (ARN) of the Map Run and the ARN of the state
+    #   machine that started the Map Run.
+    #   @return [Array<Types::MapRunListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListMapRunsOutput AWS API Documentation
+    #
+    class ListMapRunsOutput < Struct.new(
+      :map_runs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1785,6 +2006,204 @@ module Aws::States
     class MapIterationEventDetails < Struct.new(
       :name,
       :index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about all of the child workflow executions started by
+    # a Map Run.
+    #
+    # @!attribute [rw] pending
+    #   The total number of child workflow executions that were started by a
+    #   Map Run, but haven't started executing yet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] running
+    #   The total number of child workflow executions that were started by a
+    #   Map Run and are currently in-progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded
+    #   The total number of child workflow executions that were started by a
+    #   Map Run and have completed successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed
+    #   The total number of child workflow executions that were started by a
+    #   Map Run, but have failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timed_out
+    #   The total number of child workflow executions that were started by a
+    #   Map Run and have timed out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aborted
+    #   The total number of child workflow executions that were started by a
+    #   Map Run and were running, but were either stopped by the user or by
+    #   Step Functions because the Map Run failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total
+    #   The total number of child workflow executions that were started by a
+    #   Map Run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] results_written
+    #   Returns the count of child workflow executions whose results were
+    #   written by `ResultWriter`. For more information, see
+    #   [ResultWriter][1] in the *Step Functions Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunExecutionCounts AWS API Documentation
+    #
+    class MapRunExecutionCounts < Struct.new(
+      :pending,
+      :running,
+      :succeeded,
+      :failed,
+      :timed_out,
+      :aborted,
+      :total,
+      :results_written)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a Map Run failure event that occurred during a
+    # state machine execution.
+    #
+    # @!attribute [rw] error
+    #   The error code of the Map Run failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A more detailed explanation of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunFailedEventDetails AWS API Documentation
+    #
+    class MapRunFailedEventDetails < Struct.new(
+      :error,
+      :cause)
+      SENSITIVE = [:error, :cause]
+      include Aws::Structure
+    end
+
+    # Contains details about items that were processed in all of the child
+    # workflow executions that were started by a Map Run.
+    #
+    # @!attribute [rw] pending
+    #   The total number of items to process in child workflow executions
+    #   that haven't started running yet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] running
+    #   The total number of items being processed in child workflow
+    #   executions that are currently in-progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded
+    #   The total number of items processed in child workflow executions
+    #   that have completed successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed
+    #   The total number of items processed in child workflow executions
+    #   that have failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timed_out
+    #   The total number of items processed in child workflow executions
+    #   that have timed out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aborted
+    #   The total number of items processed in child workflow executions
+    #   that were either stopped by the user or by Step Functions, because
+    #   the Map Run failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total
+    #   The total number of items processed in all the child workflow
+    #   executions started by a Map Run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] results_written
+    #   Returns the count of items whose results were written by
+    #   `ResultWriter`. For more information, see [ResultWriter][1] in the
+    #   *Step Functions Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunItemCounts AWS API Documentation
+    #
+    class MapRunItemCounts < Struct.new(
+      :pending,
+      :running,
+      :succeeded,
+      :failed,
+      :timed_out,
+      :aborted,
+      :total,
+      :results_written)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a specific Map Run.
+    #
+    # @!attribute [rw] execution_arn
+    #   The `executionArn` of the execution from which the Map Run was
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) of the Map Run.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_machine_arn
+    #   The Amazon Resource Name (ARN) of the executed state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date on which the Map Run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_date
+    #   The date on which the Map Run stopped.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunListItem AWS API Documentation
+    #
+    class MapRunListItem < Struct.new(
+      :execution_arn,
+      :map_run_arn,
+      :state_machine_arn,
+      :start_date,
+      :stop_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a Map Run that was started during a state
+    # machine execution.
+    #
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) of a Map Run that was started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunStartedEventDetails AWS API Documentation
+    #
+    class MapRunStartedEventDetails < Struct.new(
+      :map_run_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2732,6 +3151,38 @@ module Aws::States
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) of a Map Run.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of child workflow executions that can be
+    #   specified to run in parallel for the Map Run at the same time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tolerated_failure_percentage
+    #   The maximum percentage of failed items before the Map Run fails.
+    #   @return [Float]
+    #
+    # @!attribute [rw] tolerated_failure_count
+    #   The maximum number of failed items before the Map Run fails.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateMapRunInput AWS API Documentation
+    #
+    class UpdateMapRunInput < Struct.new(
+      :map_run_arn,
+      :max_concurrency,
+      :tolerated_failure_percentage,
+      :tolerated_failure_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateMapRunOutput AWS API Documentation
+    #
+    class UpdateMapRunOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine.
     #   @return [String]
@@ -2778,6 +3229,26 @@ module Aws::States
     #
     class UpdateStateMachineOutput < Struct.new(
       :update_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input does not satisfy the constraints specified by an Amazon Web
+    # Services service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The input does not satisfy the constraints specified by an Amazon
+    #   Web Services service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end

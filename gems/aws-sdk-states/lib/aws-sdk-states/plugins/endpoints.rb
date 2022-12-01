@@ -68,6 +68,8 @@ module Aws::States
             Aws::States::Endpoints::DescribeActivity.build(context)
           when :describe_execution
             Aws::States::Endpoints::DescribeExecution.build(context)
+          when :describe_map_run
+            Aws::States::Endpoints::DescribeMapRun.build(context)
           when :describe_state_machine
             Aws::States::Endpoints::DescribeStateMachine.build(context)
           when :describe_state_machine_for_execution
@@ -80,6 +82,8 @@ module Aws::States
             Aws::States::Endpoints::ListActivities.build(context)
           when :list_executions
             Aws::States::Endpoints::ListExecutions.build(context)
+          when :list_map_runs
+            Aws::States::Endpoints::ListMapRuns.build(context)
           when :list_state_machines
             Aws::States::Endpoints::ListStateMachines.build(context)
           when :list_tags_for_resource
@@ -100,6 +104,8 @@ module Aws::States
             Aws::States::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::States::Endpoints::UntagResource.build(context)
+          when :update_map_run
+            Aws::States::Endpoints::UpdateMapRun.build(context)
           when :update_state_machine
             Aws::States::Endpoints::UpdateStateMachine.build(context)
           end

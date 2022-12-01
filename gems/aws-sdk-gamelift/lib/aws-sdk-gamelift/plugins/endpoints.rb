@@ -74,6 +74,8 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::CreateGameSession.build(context)
           when :create_game_session_queue
             Aws::GameLift::Endpoints::CreateGameSessionQueue.build(context)
+          when :create_location
+            Aws::GameLift::Endpoints::CreateLocation.build(context)
           when :create_matchmaking_configuration
             Aws::GameLift::Endpoints::CreateMatchmakingConfiguration.build(context)
           when :create_matchmaking_rule_set
@@ -100,6 +102,8 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::DeleteGameServerGroup.build(context)
           when :delete_game_session_queue
             Aws::GameLift::Endpoints::DeleteGameSessionQueue.build(context)
+          when :delete_location
+            Aws::GameLift::Endpoints::DeleteLocation.build(context)
           when :delete_matchmaking_configuration
             Aws::GameLift::Endpoints::DeleteMatchmakingConfiguration.build(context)
           when :delete_matchmaking_rule_set
@@ -112,12 +116,16 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::DeleteVpcPeeringAuthorization.build(context)
           when :delete_vpc_peering_connection
             Aws::GameLift::Endpoints::DeleteVpcPeeringConnection.build(context)
+          when :deregister_compute
+            Aws::GameLift::Endpoints::DeregisterCompute.build(context)
           when :deregister_game_server
             Aws::GameLift::Endpoints::DeregisterGameServer.build(context)
           when :describe_alias
             Aws::GameLift::Endpoints::DescribeAlias.build(context)
           when :describe_build
             Aws::GameLift::Endpoints::DescribeBuild.build(context)
+          when :describe_compute
+            Aws::GameLift::Endpoints::DescribeCompute.build(context)
           when :describe_ec2_instance_limits
             Aws::GameLift::Endpoints::DescribeEC2InstanceLimits.build(context)
           when :describe_fleet_attributes
@@ -170,6 +178,10 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::DescribeVpcPeeringAuthorizations.build(context)
           when :describe_vpc_peering_connections
             Aws::GameLift::Endpoints::DescribeVpcPeeringConnections.build(context)
+          when :get_compute_access
+            Aws::GameLift::Endpoints::GetComputeAccess.build(context)
+          when :get_compute_auth_token
+            Aws::GameLift::Endpoints::GetComputeAuthToken.build(context)
           when :get_game_session_log_url
             Aws::GameLift::Endpoints::GetGameSessionLogUrl.build(context)
           when :get_instance_access
@@ -178,18 +190,24 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::ListAliases.build(context)
           when :list_builds
             Aws::GameLift::Endpoints::ListBuilds.build(context)
+          when :list_compute
+            Aws::GameLift::Endpoints::ListCompute.build(context)
           when :list_fleets
             Aws::GameLift::Endpoints::ListFleets.build(context)
           when :list_game_server_groups
             Aws::GameLift::Endpoints::ListGameServerGroups.build(context)
           when :list_game_servers
             Aws::GameLift::Endpoints::ListGameServers.build(context)
+          when :list_locations
+            Aws::GameLift::Endpoints::ListLocations.build(context)
           when :list_scripts
             Aws::GameLift::Endpoints::ListScripts.build(context)
           when :list_tags_for_resource
             Aws::GameLift::Endpoints::ListTagsForResource.build(context)
           when :put_scaling_policy
             Aws::GameLift::Endpoints::PutScalingPolicy.build(context)
+          when :register_compute
+            Aws::GameLift::Endpoints::RegisterCompute.build(context)
           when :register_game_server
             Aws::GameLift::Endpoints::RegisterGameServer.build(context)
           when :request_upload_credentials

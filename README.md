@@ -497,6 +497,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon CloudWatch Events                              | Aws::CloudWatchEvents                    | aws-sdk-cloudwatchevents                    | 2015-10-07  |
 | Amazon CloudWatch Evidently                           | Aws::CloudWatchEvidently                 | aws-sdk-cloudwatchevidently                 | 2021-02-01  |
 | Amazon CloudWatch Logs                                | Aws::CloudWatchLogs                      | aws-sdk-cloudwatchlogs                      | 2014-03-28  |
+| Amazon CodeCatalyst                                   | Aws::CodeCatalyst                        | aws-sdk-codecatalyst                        | 2022-09-28  |
 | Amazon CodeGuru Profiler                              | Aws::CodeGuruProfiler                    | aws-sdk-codeguruprofiler                    | 2019-07-18  |
 | Amazon CodeGuru Reviewer                              | Aws::CodeGuruReviewer                    | aws-sdk-codegurureviewer                    | 2019-09-19  |
 | Amazon Cognito Identity                               | Aws::CognitoIdentity                     | aws-sdk-cognitoidentity                     | 2014-06-30  |
@@ -531,6 +532,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Elastic Transcoder                             | Aws::ElasticTranscoder                   | aws-sdk-elastictranscoder                   | 2012-09-25  |
 | Amazon Elasticsearch Service                          | Aws::ElasticsearchService                | aws-sdk-elasticsearchservice                | 2015-01-01  |
 | Amazon EventBridge                                    | Aws::EventBridge                         | aws-sdk-eventbridge                         | 2015-10-07  |
+| Amazon EventBridge Pipes                              | Aws::Pipes                               | aws-sdk-pipes                               | 2015-10-07  |
 | Amazon EventBridge Scheduler                          | Aws::Scheduler                           | aws-sdk-scheduler                           | 2021-06-30  |
 | Amazon FSx                                            | Aws::FSx                                 | aws-sdk-fsx                                 | 2018-03-01  |
 | Amazon Forecast Query Service                         | Aws::ForecastQueryService                | aws-sdk-forecastqueryservice                | 2018-06-26  |

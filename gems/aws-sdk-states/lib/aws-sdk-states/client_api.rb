@@ -44,6 +44,8 @@ module Aws::States
     DescribeActivityOutput = Shapes::StructureShape.new(name: 'DescribeActivityOutput')
     DescribeExecutionInput = Shapes::StructureShape.new(name: 'DescribeExecutionInput')
     DescribeExecutionOutput = Shapes::StructureShape.new(name: 'DescribeExecutionOutput')
+    DescribeMapRunInput = Shapes::StructureShape.new(name: 'DescribeMapRunInput')
+    DescribeMapRunOutput = Shapes::StructureShape.new(name: 'DescribeMapRunOutput')
     DescribeStateMachineForExecutionInput = Shapes::StructureShape.new(name: 'DescribeStateMachineForExecutionInput')
     DescribeStateMachineForExecutionOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineForExecutionOutput')
     DescribeStateMachineInput = Shapes::StructureShape.new(name: 'DescribeStateMachineInput')
@@ -92,6 +94,8 @@ module Aws::States
     ListExecutionsInput = Shapes::StructureShape.new(name: 'ListExecutionsInput')
     ListExecutionsOutput = Shapes::StructureShape.new(name: 'ListExecutionsOutput')
     ListExecutionsPageToken = Shapes::StringShape.new(name: 'ListExecutionsPageToken')
+    ListMapRunsInput = Shapes::StructureShape.new(name: 'ListMapRunsInput')
+    ListMapRunsOutput = Shapes::StructureShape.new(name: 'ListMapRunsOutput')
     ListStateMachinesInput = Shapes::StructureShape.new(name: 'ListStateMachinesInput')
     ListStateMachinesOutput = Shapes::StructureShape.new(name: 'ListStateMachinesOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -102,7 +106,16 @@ module Aws::States
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     LongArn = Shapes::StringShape.new(name: 'LongArn')
     MapIterationEventDetails = Shapes::StructureShape.new(name: 'MapIterationEventDetails')
+    MapRunExecutionCounts = Shapes::StructureShape.new(name: 'MapRunExecutionCounts')
+    MapRunFailedEventDetails = Shapes::StructureShape.new(name: 'MapRunFailedEventDetails')
+    MapRunItemCounts = Shapes::StructureShape.new(name: 'MapRunItemCounts')
+    MapRunLabel = Shapes::StringShape.new(name: 'MapRunLabel')
+    MapRunList = Shapes::ListShape.new(name: 'MapRunList')
+    MapRunListItem = Shapes::StructureShape.new(name: 'MapRunListItem')
+    MapRunStartedEventDetails = Shapes::StructureShape.new(name: 'MapRunStartedEventDetails')
+    MapRunStatus = Shapes::StringShape.new(name: 'MapRunStatus')
     MapStateStartedEventDetails = Shapes::StructureShape.new(name: 'MapStateStartedEventDetails')
+    MaxConcurrency = Shapes::IntegerShape.new(name: 'MaxConcurrency')
     MissingRequiredParameter = Shapes::StructureShape.new(name: 'MissingRequiredParameter')
     Name = Shapes::StringShape.new(name: 'Name')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
@@ -158,14 +171,21 @@ module Aws::States
     TaskToken = Shapes::StringShape.new(name: 'TaskToken')
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    ToleratedFailureCount = Shapes::IntegerShape.new(name: 'ToleratedFailureCount')
+    ToleratedFailurePercentage = Shapes::FloatShape.new(name: 'ToleratedFailurePercentage')
     TooManyTags = Shapes::StructureShape.new(name: 'TooManyTags')
     TraceHeader = Shapes::StringShape.new(name: 'TraceHeader')
     TracingConfiguration = Shapes::StructureShape.new(name: 'TracingConfiguration')
     UnsignedInteger = Shapes::IntegerShape.new(name: 'UnsignedInteger')
+    UnsignedLong = Shapes::IntegerShape.new(name: 'UnsignedLong')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateMapRunInput = Shapes::StructureShape.new(name: 'UpdateMapRunInput')
+    UpdateMapRunOutput = Shapes::StructureShape.new(name: 'UpdateMapRunOutput')
     UpdateStateMachineInput = Shapes::StructureShape.new(name: 'UpdateStateMachineInput')
     UpdateStateMachineOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineOutput')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     includedDetails = Shapes::BooleanShape.new(name: 'includedDetails')
     truncated = Shapes::BooleanShape.new(name: 'truncated')
 
@@ -274,7 +294,25 @@ module Aws::States
     DescribeExecutionOutput.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
     DescribeExecutionOutput.add_member(:output_details, Shapes::ShapeRef.new(shape: CloudWatchEventsExecutionDataDetails, location_name: "outputDetails"))
     DescribeExecutionOutput.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "traceHeader"))
+    DescribeExecutionOutput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
+    DescribeExecutionOutput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    DescribeExecutionOutput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     DescribeExecutionOutput.struct_class = Types::DescribeExecutionOutput
+
+    DescribeMapRunInput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "mapRunArn"))
+    DescribeMapRunInput.struct_class = Types::DescribeMapRunInput
+
+    DescribeMapRunOutput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "mapRunArn"))
+    DescribeMapRunOutput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
+    DescribeMapRunOutput.add_member(:status, Shapes::ShapeRef.new(shape: MapRunStatus, required: true, location_name: "status"))
+    DescribeMapRunOutput.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
+    DescribeMapRunOutput.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stopDate"))
+    DescribeMapRunOutput.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, required: true, location_name: "maxConcurrency"))
+    DescribeMapRunOutput.add_member(:tolerated_failure_percentage, Shapes::ShapeRef.new(shape: ToleratedFailurePercentage, required: true, location_name: "toleratedFailurePercentage"))
+    DescribeMapRunOutput.add_member(:tolerated_failure_count, Shapes::ShapeRef.new(shape: ToleratedFailureCount, required: true, location_name: "toleratedFailureCount"))
+    DescribeMapRunOutput.add_member(:item_counts, Shapes::ShapeRef.new(shape: MapRunItemCounts, required: true, location_name: "itemCounts"))
+    DescribeMapRunOutput.add_member(:execution_counts, Shapes::ShapeRef.new(shape: MapRunExecutionCounts, required: true, location_name: "executionCounts"))
+    DescribeMapRunOutput.struct_class = Types::DescribeMapRunOutput
 
     DescribeStateMachineForExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
     DescribeStateMachineForExecutionInput.struct_class = Types::DescribeStateMachineForExecutionInput
@@ -286,6 +324,8 @@ module Aws::States
     DescribeStateMachineForExecutionOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
     DescribeStateMachineForExecutionOutput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     DescribeStateMachineForExecutionOutput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
+    DescribeStateMachineForExecutionOutput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
+    DescribeStateMachineForExecutionOutput.add_member(:label, Shapes::ShapeRef.new(shape: MapRunLabel, location_name: "label"))
     DescribeStateMachineForExecutionOutput.struct_class = Types::DescribeStateMachineForExecutionOutput
 
     DescribeStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -300,6 +340,7 @@ module Aws::States
     DescribeStateMachineOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     DescribeStateMachineOutput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     DescribeStateMachineOutput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
+    DescribeStateMachineOutput.add_member(:label, Shapes::ShapeRef.new(shape: MapRunLabel, location_name: "label"))
     DescribeStateMachineOutput.struct_class = Types::DescribeStateMachineOutput
 
     ExecutionAbortedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
@@ -327,6 +368,8 @@ module Aws::States
     ExecutionListItem.add_member(:status, Shapes::ShapeRef.new(shape: ExecutionStatus, required: true, location_name: "status"))
     ExecutionListItem.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
     ExecutionListItem.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stopDate"))
+    ExecutionListItem.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
+    ExecutionListItem.add_member(:item_count, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "itemCount", metadata: {"box"=>true}))
     ExecutionListItem.struct_class = Types::ExecutionListItem
 
     ExecutionStartedEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
@@ -397,6 +440,8 @@ module Aws::States
     HistoryEvent.add_member(:lambda_function_timed_out_event_details, Shapes::ShapeRef.new(shape: LambdaFunctionTimedOutEventDetails, location_name: "lambdaFunctionTimedOutEventDetails"))
     HistoryEvent.add_member(:state_entered_event_details, Shapes::ShapeRef.new(shape: StateEnteredEventDetails, location_name: "stateEnteredEventDetails"))
     HistoryEvent.add_member(:state_exited_event_details, Shapes::ShapeRef.new(shape: StateExitedEventDetails, location_name: "stateExitedEventDetails"))
+    HistoryEvent.add_member(:map_run_started_event_details, Shapes::ShapeRef.new(shape: MapRunStartedEventDetails, location_name: "mapRunStartedEventDetails"))
+    HistoryEvent.add_member(:map_run_failed_event_details, Shapes::ShapeRef.new(shape: MapRunFailedEventDetails, location_name: "mapRunFailedEventDetails"))
     HistoryEvent.struct_class = Types::HistoryEvent
 
     HistoryEventExecutionDataDetails.add_member(:truncated, Shapes::ShapeRef.new(shape: truncated, location_name: "truncated"))
@@ -463,15 +508,25 @@ module Aws::States
     ListActivitiesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
     ListActivitiesOutput.struct_class = Types::ListActivitiesOutput
 
-    ListExecutionsInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    ListExecutionsInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineArn"))
     ListExecutionsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "statusFilter"))
     ListExecutionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
     ListExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExecutionsPageToken, location_name: "nextToken"))
+    ListExecutionsInput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
     ListExecutionsInput.struct_class = Types::ListExecutionsInput
 
     ListExecutionsOutput.add_member(:executions, Shapes::ShapeRef.new(shape: ExecutionList, required: true, location_name: "executions"))
     ListExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExecutionsPageToken, location_name: "nextToken"))
     ListExecutionsOutput.struct_class = Types::ListExecutionsOutput
+
+    ListMapRunsInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
+    ListMapRunsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    ListMapRunsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListMapRunsInput.struct_class = Types::ListMapRunsInput
+
+    ListMapRunsOutput.add_member(:map_runs, Shapes::ShapeRef.new(shape: MapRunList, required: true, location_name: "mapRuns"))
+    ListMapRunsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListMapRunsOutput.struct_class = Types::ListMapRunsOutput
 
     ListStateMachinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
     ListStateMachinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
@@ -500,6 +555,42 @@ module Aws::States
     MapIterationEventDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     MapIterationEventDetails.add_member(:index, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "index"))
     MapIterationEventDetails.struct_class = Types::MapIterationEventDetails
+
+    MapRunExecutionCounts.add_member(:pending, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "pending"))
+    MapRunExecutionCounts.add_member(:running, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "running"))
+    MapRunExecutionCounts.add_member(:succeeded, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "succeeded"))
+    MapRunExecutionCounts.add_member(:failed, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "failed"))
+    MapRunExecutionCounts.add_member(:timed_out, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "timedOut"))
+    MapRunExecutionCounts.add_member(:aborted, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "aborted"))
+    MapRunExecutionCounts.add_member(:total, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "total"))
+    MapRunExecutionCounts.add_member(:results_written, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "resultsWritten"))
+    MapRunExecutionCounts.struct_class = Types::MapRunExecutionCounts
+
+    MapRunFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    MapRunFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    MapRunFailedEventDetails.struct_class = Types::MapRunFailedEventDetails
+
+    MapRunItemCounts.add_member(:pending, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "pending"))
+    MapRunItemCounts.add_member(:running, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "running"))
+    MapRunItemCounts.add_member(:succeeded, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "succeeded"))
+    MapRunItemCounts.add_member(:failed, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "failed"))
+    MapRunItemCounts.add_member(:timed_out, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "timedOut"))
+    MapRunItemCounts.add_member(:aborted, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "aborted"))
+    MapRunItemCounts.add_member(:total, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "total"))
+    MapRunItemCounts.add_member(:results_written, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "resultsWritten"))
+    MapRunItemCounts.struct_class = Types::MapRunItemCounts
+
+    MapRunList.member = Shapes::ShapeRef.new(shape: MapRunListItem)
+
+    MapRunListItem.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
+    MapRunListItem.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "mapRunArn"))
+    MapRunListItem.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    MapRunListItem.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
+    MapRunListItem.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stopDate"))
+    MapRunListItem.struct_class = Types::MapRunListItem
+
+    MapRunStartedEventDetails.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
+    MapRunStartedEventDetails.struct_class = Types::MapRunStartedEventDetails
 
     MapStateStartedEventDetails.add_member(:length, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "length"))
     MapStateStartedEventDetails.struct_class = Types::MapStateStartedEventDetails
@@ -687,6 +778,14 @@ module Aws::States
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
+    UpdateMapRunInput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "mapRunArn"))
+    UpdateMapRunInput.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "maxConcurrency", metadata: {"box"=>true}))
+    UpdateMapRunInput.add_member(:tolerated_failure_percentage, Shapes::ShapeRef.new(shape: ToleratedFailurePercentage, location_name: "toleratedFailurePercentage", metadata: {"box"=>true}))
+    UpdateMapRunInput.add_member(:tolerated_failure_count, Shapes::ShapeRef.new(shape: ToleratedFailureCount, location_name: "toleratedFailureCount", metadata: {"box"=>true}))
+    UpdateMapRunInput.struct_class = Types::UpdateMapRunInput
+
+    UpdateMapRunOutput.struct_class = Types::UpdateMapRunOutput
+
     UpdateStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     UpdateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, location_name: "definition"))
     UpdateStateMachineInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
@@ -696,6 +795,10 @@ module Aws::States
 
     UpdateStateMachineOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
     UpdateStateMachineOutput.struct_class = Types::UpdateStateMachineOutput
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private
@@ -761,6 +864,7 @@ module Aws::States
         o.input = Shapes::ShapeRef.new(shape: DeleteStateMachineInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteStateMachineOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_activity, Seahorse::Model::Operation.new.tap do |o|
@@ -780,6 +884,16 @@ module Aws::States
         o.input = Shapes::ShapeRef.new(shape: DescribeExecutionInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+      end)
+
+      api.add_operation(:describe_map_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMapRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMapRunInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMapRunOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
       end)
 
@@ -856,6 +970,25 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidToken)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_map_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMapRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMapRunsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListMapRunsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidToken)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -936,6 +1069,7 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidName)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:start_sync_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -963,6 +1097,7 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: StopExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -986,6 +1121,17 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:update_map_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMapRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMapRunInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMapRunOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:update_state_machine, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateStateMachine"
         o.http_method = "POST"
@@ -999,6 +1145,7 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameter)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-12-01)
+------------------
+
+* Feature - Comprehend now supports semi-structured documents (such as PDF files or image files) as inputs for custom analysis using the synchronous APIs (ClassifyDocument and DetectEntities).
+
 1.63.0 (2022-10-25)
 ------------------
 

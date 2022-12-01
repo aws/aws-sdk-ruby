@@ -516,6 +516,157 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Information about each word or line of text in the input document.
+    #
+    # For additional information, see [Block][1] in the Amazon Textract API
+    # reference.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/API_Block.html
+    #
+    # @!attribute [rw] id
+    #   Unique identifier for the block.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_type
+    #   The block represents a line of text or one word of text.
+    #
+    #   * WORD - A word that's detected on a document page. A word is one
+    #     or more ISO basic Latin script characters that aren't separated
+    #     by spaces.
+    #
+    #   * LINE - A string of tab-delimited, contiguous words that are
+    #     detected on a document page
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The word or line of text extracted from the block.
+    #   @return [String]
+    #
+    # @!attribute [rw] page
+    #   Page number where the block appears.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] geometry
+    #   Co-ordinates of the rectangle or polygon that contains the text.
+    #   @return [Types::Geometry]
+    #
+    # @!attribute [rw] relationships
+    #   A list of child blocks of the current block. For example, a LINE
+    #   object has child blocks for each WORD block that's part of the line
+    #   of text.
+    #   @return [Array<Types::RelationshipsListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Block AWS API Documentation
+    #
+    class Block < Struct.new(
+      :id,
+      :block_type,
+      :text,
+      :page,
+      :geometry,
+      :relationships)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to a block.
+    #
+    # @!attribute [rw] block_id
+    #   Unique identifier for the block.
+    #   @return [String]
+    #
+    # @!attribute [rw] begin_offset
+    #   Offset of the start of the block within its parent block.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   Offset of the end of the block within its parent block.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] child_blocks
+    #   List of child blocks within this block.
+    #   @return [Array<Types::ChildBlock>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BlockReference AWS API Documentation
+    #
+    class BlockReference < Struct.new(
+      :block_id,
+      :begin_offset,
+      :end_offset,
+      :child_blocks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The bounding box around the detected page or around an element on a
+    # document page. The left (x-coordinate) and top (y-coordinate) are
+    # coordinates that represent the top and left sides of the bounding box.
+    # Note that the upper-left corner of the image is the origin (0,0).
+    #
+    # For additional information, see [BoundingBox][1] in the Amazon
+    # Textract API reference.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/API_BoundingBox.html
+    #
+    # @!attribute [rw] height
+    #   The height of the bounding box as a ratio of the overall document
+    #   page height.
+    #   @return [Float]
+    #
+    # @!attribute [rw] left
+    #   The left coordinate of the bounding box as a ratio of overall
+    #   document page width.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top
+    #   The top coordinate of the bounding box as a ratio of overall
+    #   document page height.
+    #   @return [Float]
+    #
+    # @!attribute [rw] width
+    #   The width of the bounding box as a ratio of the overall document
+    #   page width.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BoundingBox AWS API Documentation
+    #
+    class BoundingBox < Struct.new(
+      :height,
+      :left,
+      :top,
+      :width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Nested block contained within a block.
+    #
+    # @!attribute [rw] child_block_id
+    #   Unique identifier for the child block.
+    #   @return [String]
+    #
+    # @!attribute [rw] begin_offset
+    #   Offset of the start of the child block within its parent block.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   Offset of the end of the child block within its parent block.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ChildBlock AWS API Documentation
+    #
+    class ChildBlock < Struct.new(
+      :child_block_id,
+      :begin_offset,
+      :end_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the result metrics for the test data associated with an
     # documentation classifier.
     #
@@ -628,7 +779,8 @@ module Aws::Comprehend
     end
 
     # @!attribute [rw] text
-    #   The document text to be analyzed.
+    #   The document text to be analyzed. If you enter text using this
+    #   parameter, do not use the `Bytes` parameter.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_arn
@@ -640,11 +792,38 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #   @return [String]
     #
+    # @!attribute [rw] bytes
+    #   Use the `Bytes` parameter to input a text, PDF, Word or image file.
+    #   You can also use the `Bytes` parameter to input an Amazon Textract
+    #   `DetectDocumentText` or `AnalyzeDocument` output file.
+    #
+    #   Provide the input document as a sequence of base64-encoded bytes. If
+    #   your code uses an Amazon Web Services SDK to classify documents, the
+    #   SDK may encode the document file bytes for you.
+    #
+    #   The maximum length of this field depends on the input document type.
+    #   For details, see [ Inputs for real-time custom analysis][1] in the
+    #   Comprehend Developer Guide.
+    #
+    #   If you use the `Bytes` parameter, do not use the `Text` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html
+    #   @return [String]
+    #
+    # @!attribute [rw] document_reader_config
+    #   Provides configuration parameters to override the default actions
+    #   for extracting text from PDF documents and image files.
+    #   @return [Types::DocumentReaderConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentRequest AWS API Documentation
     #
     class ClassifyDocumentRequest < Struct.new(
       :text,
-      :endpoint_arn)
+      :endpoint_arn,
+      :bytes,
+      :document_reader_config)
       SENSITIVE = [:text]
       include Aws::Structure
     end
@@ -666,11 +845,31 @@ module Aws::Comprehend
     #   at the same time.
     #   @return [Array<Types::DocumentLabel>]
     #
+    # @!attribute [rw] document_metadata
+    #   Extraction information about the document. This field is present in
+    #   the response only if your request includes the `Byte` parameter.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] document_type
+    #   The document type for each page in the input document. This field is
+    #   present in the response only if your request includes the `Byte`
+    #   parameter.
+    #   @return [Array<Types::DocumentTypeListItem>]
+    #
+    # @!attribute [rw] errors
+    #   Page-level errors that the system detected while processing the
+    #   input document. The field is empty if the system encountered no
+    #   errors.
+    #   @return [Array<Types::ErrorsListItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentResponse AWS API Documentation
     #
     class ClassifyDocumentResponse < Struct.new(
       :classes,
-      :labels)
+      :labels,
+      :document_metadata,
+      :document_type,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -973,10 +1172,12 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   You can specify any of the following languages supported by Amazon
-    #   Comprehend: English ("en"), Spanish ("es"), French ("fr"),
-    #   Italian ("it"), German ("de"), or Portuguese ("pt"). All
-    #   documents must be in the same language.
+    #   You can specify any of the following languages: English ("en"),
+    #   Spanish ("es"), French ("fr"), Italian ("it"), German
+    #   ("de"), or Portuguese ("pt"). If you plan to use this entity
+    #   recognizer with PDF, Word, or image input files, you must specify
+    #   English as the language. All training documents must be in the same
+    #   language.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
@@ -1364,7 +1565,8 @@ module Aws::Comprehend
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the policy to describe.
+    #   The Amazon Resource Name (ARN) of the custom model version that has
+    #   the resource policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeResourcePolicyRequest AWS API Documentation
@@ -1514,18 +1716,18 @@ module Aws::Comprehend
     end
 
     # @!attribute [rw] text
-    #   A UTF-8 text string. The maximum string size is 100 KB.
+    #   A UTF-8 text string. The maximum string size is 100 KB. If you enter
+    #   text using this parameter, do not use the `Bytes` parameter.
     #   @return [String]
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend. All documents must
-    #   be in the same language.
+    #   primary languages supported by Amazon Comprehend. If your request
+    #   includes the endpoint for a custom entity recognition model, Amazon
+    #   Comprehend uses the language of your custom model, and it ignores
+    #   any language code that you specify here.
     #
-    #   If your request includes the endpoint for a custom entity
-    #   recognition model, Amazon Comprehend uses the language of your
-    #   custom model, and it ignores any language code that you specify
-    #   here.
+    #   All input documents must be in the same language.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_arn
@@ -1545,12 +1747,47 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #   @return [String]
     #
+    # @!attribute [rw] bytes
+    #   This field applies only when you use a custom entity recognition
+    #   model that was trained with PDF annotations. For other cases, enter
+    #   your text input in the `Text` field.
+    #
+    #   Use the `Bytes` parameter to input a text, PDF, Word or image file.
+    #   Using a plain-text file in the `Bytes` parameter is equivelent to
+    #   using the `Text` parameter (the `Entities` field in the response is
+    #   identical).
+    #
+    #   You can also use the `Bytes` parameter to input an Amazon Textract
+    #   `DetectDocumentText` or `AnalyzeDocument` output file.
+    #
+    #   Provide the input document as a sequence of base64-encoded bytes. If
+    #   your code uses an Amazon Web Services SDK to detect entities, the
+    #   SDK may encode the document file bytes for you.
+    #
+    #   The maximum length of this field depends on the input document type.
+    #   For details, see [ Inputs for real-time custom analysis][1] in the
+    #   Comprehend Developer Guide.
+    #
+    #   If you use the `Bytes` parameter, do not use the `Text` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html
+    #   @return [String]
+    #
+    # @!attribute [rw] document_reader_config
+    #   Provides configuration parameters to override the default actions
+    #   for extracting text from PDF documents and image files.
+    #   @return [Types::DocumentReaderConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesRequest AWS API Documentation
     #
     class DetectEntitiesRequest < Struct.new(
       :text,
       :language_code,
-      :endpoint_arn)
+      :endpoint_arn,
+      :bytes,
+      :document_reader_config)
       SENSITIVE = [:text]
       include Aws::Structure
     end
@@ -1572,10 +1809,44 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html
     #   @return [Array<Types::Entity>]
     #
+    # @!attribute [rw] document_metadata
+    #   Information about the document, discovered during text extraction.
+    #   This field is present in the response only if your request used the
+    #   `Byte` parameter.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] document_type
+    #   The document type for each page in the input document. This field is
+    #   present in the response only if your request used the `Byte`
+    #   parameter.
+    #   @return [Array<Types::DocumentTypeListItem>]
+    #
+    # @!attribute [rw] blocks
+    #   Information about each block of text in the input document. Blocks
+    #   are nested. A page block contains a block for each line of text,
+    #   which contains a block for each word.
+    #
+    #   The `Block` content for a Word input document does not include a
+    #   `Geometry` field.
+    #
+    #   The `Block` field is not present in the response for plain-text
+    #   inputs.
+    #   @return [Array<Types::Block>]
+    #
+    # @!attribute [rw] errors
+    #   Page-level errors that the system detected while processing the
+    #   input document. The field is empty if the system encountered no
+    #   errors.
+    #   @return [Array<Types::ErrorsListItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesResponse AWS API Documentation
     #
     class DetectEntitiesResponse < Struct.new(
-      :entities)
+      :entities,
+      :document_metadata,
+      :document_type,
+      :blocks,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1775,11 +2046,17 @@ module Aws::Comprehend
     #   attributed.
     #   @return [Float]
     #
+    # @!attribute [rw] page
+    #   Page number in the input document. This field is present in the
+    #   response only if your request includes the `Byte` parameter.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClass AWS API Documentation
     #
     class DocumentClass < Struct.new(
       :name,
-      :score)
+      :score,
+      :page)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2274,40 +2551,99 @@ module Aws::Comprehend
     #   attributed.
     #   @return [Float]
     #
+    # @!attribute [rw] page
+    #   Page number where the label occurs. This field is present in the
+    #   response only if your request includes the `Byte` parameter.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentLabel AWS API Documentation
     #
     class DocumentLabel < Struct.new(
       :name,
-      :score)
+      :score,
+      :page)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The input properties for a topic detection job.
+    # Information about the document, discovered during text extraction.
+    #
+    # @!attribute [rw] pages
+    #   Number of pages in the document.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] extracted_characters
+    #   List of pages in the document, with the number of characters
+    #   extracted from each page.
+    #   @return [Array<Types::ExtractedCharactersListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentMetadata AWS API Documentation
+    #
+    class DocumentMetadata < Struct.new(
+      :pages,
+      :extracted_characters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration parameters to override the default actions for
+    # extracting text from PDF documents and image files.
+    #
+    # By default, Amazon Comprehend performs the following actions to
+    # extract text from files, based on the input file type:
+    #
+    # * **Word files** - Amazon Comprehend parser extracts the text.
+    #
+    # * **Digital PDF files** - Amazon Comprehend parser extracts the text.
+    #
+    # * **Image files and scanned PDF files** - Amazon Comprehend uses the
+    #   Amazon Textract `DetectDocumentText` API to extract the text.
+    #
+    # `DocumentReaderConfig` does not apply to plain text files or Word
+    # files.
+    #
+    # For image files and PDF documents, you can override these default
+    # actions using the fields listed below. For more information, see [
+    # Setting text extraction options][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/detecting-cer.html#detecting-cer-pdf
     #
     # @!attribute [rw] document_read_action
-    #   This enum field will start with two values which will apply to PDFs:
+    #   This field defines the Amazon Textract API operation that Amazon
+    #   Comprehend uses to extract text from PDF files and image files.
+    #   Enter one of the following values:
     #
-    #   * `TEXTRACT_DETECT_DOCUMENT_TEXT` - The service calls
-    #     DetectDocumentText for PDF documents per page.
+    #   * `TEXTRACT_DETECT_DOCUMENT_TEXT` - The Amazon Comprehend service
+    #     uses the `DetectDocumentText` API operation.
     #
-    #   * `TEXTRACT_ANALYZE_DOCUMENT` - The service calls AnalyzeDocument
-    #     for PDF documents per page.
+    #   * `TEXTRACT_ANALYZE_DOCUMENT` - The Amazon Comprehend service uses
+    #     the `AnalyzeDocument` API operation.
     #   @return [String]
     #
     # @!attribute [rw] document_read_mode
-    #   This enum field provides two values:
+    #   Determines the text extraction actions for PDF files. Enter one of
+    #   the following values:
     #
-    #   * `SERVICE_DEFAULT` - use service defaults for Document reading. For
-    #     Digital PDF it would mean using an internal parser instead of
-    #     Textract APIs
+    #   * `SERVICE_DEFAULT` - use the Amazon Comprehend service defaults for
+    #     PDF files.
     #
-    #   * `FORCE_DOCUMENT_READ_ACTION` - Always use specified action for
-    #     DocumentReadAction, including Digital PDF.
+    #   * `FORCE_DOCUMENT_READ_ACTION` - Amazon Comprehend uses the Textract
+    #     API specified by DocumentReadAction for all PDF files, including
+    #     digital PDF files.
     #   @return [String]
     #
     # @!attribute [rw] feature_types
-    #   Specifies how the text in an input file should be processed:
+    #   Specifies the type of Amazon Textract features to apply. If you
+    #   chose `TEXTRACT_ANALYZE_DOCUMENT` as the read action, you must
+    #   specify one or both of the following values:
+    #
+    #   * `TABLES` - Returns information about any tables that are detected
+    #     in the input document.
+    #
+    #   * `FORMS` - Returns information and the data from any forms that are
+    #     detected in the input document.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentReaderConfig AWS API Documentation
@@ -2316,6 +2652,25 @@ module Aws::Comprehend
       :document_read_action,
       :document_read_mode,
       :feature_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Document type for each page in the document.
+    #
+    # @!attribute [rw] page
+    #   Page number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   Document type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentTypeListItem AWS API Documentation
+    #
+    class DocumentTypeListItem < Struct.new(
+      :page,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2752,7 +3107,11 @@ module Aws::Comprehend
     #   @return [Float]
     #
     # @!attribute [rw] type
-    #   The entity's type.
+    #   The entity type. For entity detection using the built-in model, this
+    #   field contains one of the standard entity types listed below.
+    #
+    #   For custom entity detection, this field contains one of the entity
+    #   types that you specified when you trained your custom model.
     #   @return [String]
     #
     # @!attribute [rw] text
@@ -2762,12 +3121,21 @@ module Aws::Comprehend
     # @!attribute [rw] begin_offset
     #   The zero-based offset from the beginning of the source text to the
     #   first character in the entity.
+    #
+    #   This field is empty for non-text input.
     #   @return [Integer]
     #
     # @!attribute [rw] end_offset
     #   The zero-based offset from the beginning of the source text to the
     #   last character in the entity.
+    #
+    #   This field is empty for non-text input.
     #   @return [Integer]
+    #
+    # @!attribute [rw] block_references
+    #   A reference to each block for this entity. This field is empty for
+    #   plain-text input.
+    #   @return [Array<Types::BlockReference>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Entity AWS API Documentation
     #
@@ -2776,7 +3144,8 @@ module Aws::Comprehend
       :type,
       :text,
       :begin_offset,
-      :end_offset)
+      :end_offset,
+      :block_references)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3293,6 +3662,55 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Text extraction encountered one or more page-level errors in the input
+    # document.
+    #
+    # The `ErrorCode` contains one of the following values:
+    #
+    # * TEXTRACT\_BAD\_PAGE - Amazon Textract cannot read the page. For more
+    #   information about page limits in Amazon Textract, see [ Page Quotas
+    #   in Amazon Textract][1].
+    #
+    # * TEXTRACT\_PROVISIONED\_THROUGHPUT\_EXCEEDED - The number of requests
+    #   exceeded your throughput limit. For more information about
+    #   throughput quotas in Amazon Textract, see [ Default quotas in Amazon
+    #   Textract][2].
+    #
+    # * PAGE\_CHARACTERS\_EXCEEDED - Too many text characters on the page
+    #   (10,000 characters maximum).
+    #
+    # * PAGE\_SIZE\_EXCEEDED - The maximum page size is 10 MB.
+    #
+    # * INTERNAL\_SERVER\_ERROR - The request encountered a service issue.
+    #   Try the API request again.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/limits-document.html
+    # [2]: https://docs.aws.amazon.com/textract/latest/dg/limits-quotas-explained.html
+    #
+    # @!attribute [rw] page
+    #   Page number where the error occurred.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   Error code for the cause of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Text message explaining the reason for the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ErrorsListItem AWS API Documentation
+    #
+    class ErrorsListItem < Struct.new(
+      :page,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information for filtering a list of event detection jobs.
     #
     # @!attribute [rw] job_name
@@ -3411,6 +3829,53 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Array of the number of characters extracted from each page.
+    #
+    # @!attribute [rw] page
+    #   Page number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] count
+    #   Number of characters extracted from each page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ExtractedCharactersListItem AWS API Documentation
+    #
+    class ExtractedCharactersListItem < Struct.new(
+      :page,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the location of items on a document page.
+    #
+    # For additional information, see [Geometry][1] in the Amazon Textract
+    # API reference.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/API_Geometry.html
+    #
+    # @!attribute [rw] bounding_box
+    #   An axis-aligned coarse representation of the location of the
+    #   recognized item on the document page.
+    #   @return [Types::BoundingBox]
+    #
+    # @!attribute [rw] polygon
+    #   Within the bounding box, a fine-grained polygon around the
+    #   recognized item.
+    #   @return [Array<Types::Point>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Geometry AWS API Documentation
+    #
+    class Geometry < Struct.new(
+      :bounding_box,
+      :polygon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_model_arn
     #   The Amazon Resource Name (ARN) of the custom model to import.
     #   @return [String]
@@ -3478,7 +3943,8 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The input properties for an inference job.
+    # The input properties for an inference job. The document reader config
+    # field applies only to non-text inputs for custom analysis.
     #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 URI for the input data. The URI must be in same region
@@ -3505,12 +3971,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] document_reader_config
-    #   The document reader config field applies only for InputDataConfig of
-    #   StartEntitiesDetectionJob.
-    #
-    #   Use DocumentReaderConfig to provide specifications about how you
-    #   want your inference documents read. Currently it applies for PDF
-    #   documents in StartEntitiesDetectionJob custom inference.
+    #   Provides configuration parameters to override the default actions
+    #   for extracting text from PDF documents and image files.
     #   @return [Types::DocumentReaderConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InputDataConfig AWS API Documentation
@@ -3550,15 +4012,64 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Provides additional detail about why the request failed:
+    #
+    # * Document size is too large - Check the size of your file and
+    #   resubmit the request.
+    #
+    # * Document type is not supported - Check the file type and resubmit
+    #   the request.
+    #
+    # * Too many pages in the document - Check the number of pages in your
+    #   file and resubmit the request.
+    #
+    # * Access denied to Amazon Textract - Verify that your account has
+    #   permission to use Amazon Textract API operations and resubmit the
+    #   request.
+    #
+    # @!attribute [rw] reason
+    #   Reason code is `INVALID_DOCUMENT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidRequestDetail AWS API Documentation
+    #
+    class InvalidRequestDetail < Struct.new(
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request is invalid.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   Provides additional detail about why the request failed:
+    #
+    #   * Document size is too large - Check the size of your file and
+    #     resubmit the request.
+    #
+    #   * Document type is not supported - Check the file type and resubmit
+    #     the request.
+    #
+    #   * Too many pages in the document - Check the number of pages in your
+    #     file and resubmit the request.
+    #
+    #   * Access denied to Amazon Textract - Verify that your account has
+    #     permission to use Amazon Textract API operations and resubmit the
+    #     request.
+    #   @return [Types::InvalidRequestDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidRequestException AWS API Documentation
     #
     class InvalidRequestException < Struct.new(
-      :message)
+      :message,
+      :reason,
+      :detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4657,6 +5168,32 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # The X and Y coordinates of a point on a document page.
+    #
+    # For additional information, see [Point][1] in the Amazon Textract API
+    # reference.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/API_Point.html
+    #
+    # @!attribute [rw] x
+    #   The value of the X coordinate for a point on a polygon
+    #   @return [Float]
+    #
+    # @!attribute [rw] y
+    #   The value of the Y coordinate for a point on a polygon
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Point AWS API Documentation
+    #
+    class Point < Struct.new(
+      :x,
+      :y)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the custom model to attach the
     #   policy to.
@@ -4731,6 +5268,25 @@ module Aws::Comprehend
       :pii_entity_types,
       :mask_mode,
       :mask_character)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List of child blocks for the current block.
+    #
+    # @!attribute [rw] ids
+    #   Identifers of the child blocks.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   Only supported relationship is a child relationship.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/RelationshipsListItem AWS API Documentation
+    #
+    class RelationshipsListItem < Struct.new(
+      :ids,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5782,7 +6338,8 @@ module Aws::Comprehend
     end
 
     # @!attribute [rw] input_data_config
-    #   The input properties for an inference job.
+    #   The input properties for an inference job. The document reader
+    #   config field applies only to non-text inputs for custom analysis.
     #   @return [Types::InputDataConfig]
     #
     # @!attribute [rw] output_data_config
@@ -6458,7 +7015,8 @@ module Aws::Comprehend
     #   @return [Time]
     #
     # @!attribute [rw] input_data_config
-    #   The input properties for an inference job.
+    #   The input properties for an inference job. The document reader
+    #   config field applies only to non-text inputs for custom analysis.
     #   @return [Types::InputDataConfig]
     #
     # @!attribute [rw] output_data_config

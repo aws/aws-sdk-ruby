@@ -464,6 +464,14 @@ module Aws::Comprehend
     #   resp.result_list[0].entities[0].text #=> String
     #   resp.result_list[0].entities[0].begin_offset #=> Integer
     #   resp.result_list[0].entities[0].end_offset #=> Integer
+    #   resp.result_list[0].entities[0].block_references #=> Array
+    #   resp.result_list[0].entities[0].block_references[0].block_id #=> String
+    #   resp.result_list[0].entities[0].block_references[0].begin_offset #=> Integer
+    #   resp.result_list[0].entities[0].block_references[0].end_offset #=> Integer
+    #   resp.result_list[0].entities[0].block_references[0].child_blocks #=> Array
+    #   resp.result_list[0].entities[0].block_references[0].child_blocks[0].child_block_id #=> String
+    #   resp.result_list[0].entities[0].block_references[0].child_blocks[0].begin_offset #=> Integer
+    #   resp.result_list[0].entities[0].block_references[0].child_blocks[0].end_offset #=> Integer
     #   resp.error_list #=> Array
     #   resp.error_list[0].index #=> Integer
     #   resp.error_list[0].error_code #=> String
@@ -705,8 +713,25 @@ module Aws::Comprehend
     # document in real-time, using a previously created and trained custom
     # model and an endpoint.
     #
-    # @option params [required, String] :text
-    #   The document text to be analyzed.
+    # You can input plain text or you can upload a single-page input
+    # document (text, PDF, Word, or image).
+    #
+    # If the system detects errors while processing a page in the input
+    # document, the API response includes an entry in `Errors` that
+    # describes the errors.
+    #
+    # If the system detects a document-level error in your input document,
+    # the API returns an `InvalidRequestException` error response. For
+    # details about this exception, see [ Errors in semi-structured
+    # documents][1] in the Comprehend Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html
+    #
+    # @option params [String] :text
+    #   The document text to be analyzed. If you enter text using this
+    #   parameter, do not use the `Bytes` parameter.
     #
     # @option params [required, String] :endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint. For information
@@ -716,16 +741,48 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
+    # @option params [String, StringIO, File] :bytes
+    #   Use the `Bytes` parameter to input a text, PDF, Word or image file.
+    #   You can also use the `Bytes` parameter to input an Amazon Textract
+    #   `DetectDocumentText` or `AnalyzeDocument` output file.
+    #
+    #   Provide the input document as a sequence of base64-encoded bytes. If
+    #   your code uses an Amazon Web Services SDK to classify documents, the
+    #   SDK may encode the document file bytes for you.
+    #
+    #   The maximum length of this field depends on the input document type.
+    #   For details, see [ Inputs for real-time custom analysis][1] in the
+    #   Comprehend Developer Guide.
+    #
+    #   If you use the `Bytes` parameter, do not use the `Text` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html
+    #
+    # @option params [Types::DocumentReaderConfig] :document_reader_config
+    #   Provides configuration parameters to override the default actions for
+    #   extracting text from PDF documents and image files.
+    #
     # @return [Types::ClassifyDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ClassifyDocumentResponse#classes #classes} => Array&lt;Types::DocumentClass&gt;
     #   * {Types::ClassifyDocumentResponse#labels #labels} => Array&lt;Types::DocumentLabel&gt;
+    #   * {Types::ClassifyDocumentResponse#document_metadata #document_metadata} => Types::DocumentMetadata
+    #   * {Types::ClassifyDocumentResponse#document_type #document_type} => Array&lt;Types::DocumentTypeListItem&gt;
+    #   * {Types::ClassifyDocumentResponse#errors #errors} => Array&lt;Types::ErrorsListItem&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.classify_document({
-    #     text: "CustomerInputString", # required
+    #     text: "CustomerInputString",
     #     endpoint_arn: "DocumentClassifierEndpointArn", # required
+    #     bytes: "data",
+    #     document_reader_config: {
+    #       document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #       document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #       feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #     },
     #   })
     #
     # @example Response structure
@@ -733,9 +790,22 @@ module Aws::Comprehend
     #   resp.classes #=> Array
     #   resp.classes[0].name #=> String
     #   resp.classes[0].score #=> Float
+    #   resp.classes[0].page #=> Integer
     #   resp.labels #=> Array
     #   resp.labels[0].name #=> String
     #   resp.labels[0].score #=> Float
+    #   resp.labels[0].page #=> Integer
+    #   resp.document_metadata.pages #=> Integer
+    #   resp.document_metadata.extracted_characters #=> Array
+    #   resp.document_metadata.extracted_characters[0].page #=> Integer
+    #   resp.document_metadata.extracted_characters[0].count #=> Integer
+    #   resp.document_type #=> Array
+    #   resp.document_type[0].page #=> Integer
+    #   resp.document_type[0].type #=> String, one of "NATIVE_PDF", "SCANNED_PDF", "MS_WORD", "IMAGE", "PLAIN_TEXT", "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON", "TEXTRACT_ANALYZE_DOCUMENT_JSON"
+    #   resp.errors #=> Array
+    #   resp.errors[0].page #=> Integer
+    #   resp.errors[0].error_code #=> String, one of "TEXTRACT_BAD_PAGE", "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED", "PAGE_CHARACTERS_EXCEEDED", "PAGE_SIZE_EXCEEDED", "INTERNAL_SERVER_ERROR"
+    #   resp.errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocument AWS API Documentation
     #
@@ -1067,10 +1137,11 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [required, String] :language_code
-    #   You can specify any of the following languages supported by Amazon
-    #   Comprehend: English ("en"), Spanish ("es"), French ("fr"),
-    #   Italian ("it"), German ("de"), or Portuguese ("pt"). All
-    #   documents must be in the same language.
+    #   You can specify any of the following languages: English ("en"),
+    #   Spanish ("es"), French ("fr"), Italian ("it"), German ("de"),
+    #   or Portuguese ("pt"). If you plan to use this entity recognizer with
+    #   PDF, Word, or image input files, you must specify English as the
+    #   language. All training documents must be in the same language.
     #
     # @option params [String] :volume_kms_key_id
     #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
@@ -1802,7 +1873,8 @@ module Aws::Comprehend
     # custom model, including the JSON body of the policy.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the policy to describe.
+    #   The Amazon Resource Name (ARN) of the custom model version that has
+    #   the resource policy.
     #
     # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2022,25 +2094,44 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Inspects text for named entities, and returns information about them.
-    # For more information, about named entities, see [Entities][1] in the
-    # Comprehend Developer Guide.
+    # Detects named entities in input text when you use the pre-trained
+    # model. Detects custom entities if you have a custom entity recognition
+    # model.
+    #
+    # When detecting named entities using the pre-trained model, use plain
+    # text as the input. For more information about named entities, see
+    # [Entities][1] in the Comprehend Developer Guide.
+    #
+    # When you use a custom entity recognition model, you can input plain
+    # text or you can upload a single-page input document (text, PDF, Word,
+    # or image).
+    #
+    # If the system detects errors while processing a page in the input
+    # document, the API response includes an entry in `Errors` for each
+    # error.
+    #
+    # If the system detects a document-level error in your input document,
+    # the API returns an `InvalidRequestException` error response. For
+    # details about this exception, see [ Errors in semi-structured
+    # documents][2] in the Comprehend Developer Guide.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html
+    # [2]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html
     #
-    # @option params [required, String] :text
-    #   A UTF-8 text string. The maximum string size is 100 KB.
+    # @option params [String] :text
+    #   A UTF-8 text string. The maximum string size is 100 KB. If you enter
+    #   text using this parameter, do not use the `Bytes` parameter.
     #
     # @option params [String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend. All documents must
-    #   be in the same language.
+    #   primary languages supported by Amazon Comprehend. If your request
+    #   includes the endpoint for a custom entity recognition model, Amazon
+    #   Comprehend uses the language of your custom model, and it ignores any
+    #   language code that you specify here.
     #
-    #   If your request includes the endpoint for a custom entity recognition
-    #   model, Amazon Comprehend uses the language of your custom model, and
-    #   it ignores any language code that you specify here.
+    #   All input documents must be in the same language.
     #
     # @option params [String] :endpoint_arn
     #   The Amazon Resource Name of an endpoint that is associated with a
@@ -2058,16 +2149,57 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
+    # @option params [String, StringIO, File] :bytes
+    #   This field applies only when you use a custom entity recognition model
+    #   that was trained with PDF annotations. For other cases, enter your
+    #   text input in the `Text` field.
+    #
+    #   Use the `Bytes` parameter to input a text, PDF, Word or image file.
+    #   Using a plain-text file in the `Bytes` parameter is equivelent to
+    #   using the `Text` parameter (the `Entities` field in the response is
+    #   identical).
+    #
+    #   You can also use the `Bytes` parameter to input an Amazon Textract
+    #   `DetectDocumentText` or `AnalyzeDocument` output file.
+    #
+    #   Provide the input document as a sequence of base64-encoded bytes. If
+    #   your code uses an Amazon Web Services SDK to detect entities, the SDK
+    #   may encode the document file bytes for you.
+    #
+    #   The maximum length of this field depends on the input document type.
+    #   For details, see [ Inputs for real-time custom analysis][1] in the
+    #   Comprehend Developer Guide.
+    #
+    #   If you use the `Bytes` parameter, do not use the `Text` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html
+    #
+    # @option params [Types::DocumentReaderConfig] :document_reader_config
+    #   Provides configuration parameters to override the default actions for
+    #   extracting text from PDF documents and image files.
+    #
     # @return [Types::DetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetectEntitiesResponse#entities #entities} => Array&lt;Types::Entity&gt;
+    #   * {Types::DetectEntitiesResponse#document_metadata #document_metadata} => Types::DocumentMetadata
+    #   * {Types::DetectEntitiesResponse#document_type #document_type} => Array&lt;Types::DocumentTypeListItem&gt;
+    #   * {Types::DetectEntitiesResponse#blocks #blocks} => Array&lt;Types::Block&gt;
+    #   * {Types::DetectEntitiesResponse#errors #errors} => Array&lt;Types::ErrorsListItem&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detect_entities({
-    #     text: "CustomerInputString", # required
+    #     text: "CustomerInputString",
     #     language_code: "en", # accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #     endpoint_arn: "EntityRecognizerEndpointArn",
+    #     bytes: "data",
+    #     document_reader_config: {
+    #       document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #       document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #       feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #     },
     #   })
     #
     # @example Response structure
@@ -2078,6 +2210,41 @@ module Aws::Comprehend
     #   resp.entities[0].text #=> String
     #   resp.entities[0].begin_offset #=> Integer
     #   resp.entities[0].end_offset #=> Integer
+    #   resp.entities[0].block_references #=> Array
+    #   resp.entities[0].block_references[0].block_id #=> String
+    #   resp.entities[0].block_references[0].begin_offset #=> Integer
+    #   resp.entities[0].block_references[0].end_offset #=> Integer
+    #   resp.entities[0].block_references[0].child_blocks #=> Array
+    #   resp.entities[0].block_references[0].child_blocks[0].child_block_id #=> String
+    #   resp.entities[0].block_references[0].child_blocks[0].begin_offset #=> Integer
+    #   resp.entities[0].block_references[0].child_blocks[0].end_offset #=> Integer
+    #   resp.document_metadata.pages #=> Integer
+    #   resp.document_metadata.extracted_characters #=> Array
+    #   resp.document_metadata.extracted_characters[0].page #=> Integer
+    #   resp.document_metadata.extracted_characters[0].count #=> Integer
+    #   resp.document_type #=> Array
+    #   resp.document_type[0].page #=> Integer
+    #   resp.document_type[0].type #=> String, one of "NATIVE_PDF", "SCANNED_PDF", "MS_WORD", "IMAGE", "PLAIN_TEXT", "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON", "TEXTRACT_ANALYZE_DOCUMENT_JSON"
+    #   resp.blocks #=> Array
+    #   resp.blocks[0].id #=> String
+    #   resp.blocks[0].block_type #=> String, one of "LINE", "WORD"
+    #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].page #=> Integer
+    #   resp.blocks[0].geometry.bounding_box.height #=> Float
+    #   resp.blocks[0].geometry.bounding_box.left #=> Float
+    #   resp.blocks[0].geometry.bounding_box.top #=> Float
+    #   resp.blocks[0].geometry.bounding_box.width #=> Float
+    #   resp.blocks[0].geometry.polygon #=> Array
+    #   resp.blocks[0].geometry.polygon[0].x #=> Float
+    #   resp.blocks[0].geometry.polygon[0].y #=> Float
+    #   resp.blocks[0].relationships #=> Array
+    #   resp.blocks[0].relationships[0].ids #=> Array
+    #   resp.blocks[0].relationships[0].ids[0] #=> String
+    #   resp.blocks[0].relationships[0].type #=> String, one of "CHILD"
+    #   resp.errors #=> Array
+    #   resp.errors[0].page #=> Integer
+    #   resp.errors[0].error_code #=> String, one of "TEXTRACT_BAD_PAGE", "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED", "PAGE_CHARACTERS_EXCEEDED", "PAGE_SIZE_EXCEEDED", "INTERNAL_SERVER_ERROR"
+    #   resp.errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntities AWS API Documentation
     #
@@ -2692,6 +2859,8 @@ module Aws::Comprehend
     #   * {Types::ListEndpointsResponse#endpoint_properties_list #endpoint_properties_list} => Array&lt;Types::EndpointProperties&gt;
     #   * {Types::ListEndpointsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_endpoints({
@@ -3097,6 +3266,8 @@ module Aws::Comprehend
     #
     #   * {Types::ListPiiEntitiesDetectionJobsResponse#pii_entities_detection_job_properties_list #pii_entities_detection_job_properties_list} => Array&lt;Types::PiiEntitiesDetectionJobProperties&gt;
     #   * {Types::ListPiiEntitiesDetectionJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4208,7 +4379,8 @@ module Aws::Comprehend
     # job.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
-    #   The input properties for an inference job.
+    #   The input properties for an inference job. The document reader config
+    #   field applies only to non-text inputs for custom analysis.
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
     #   Specifies where to send the output files.
@@ -4885,7 +5057,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -194,6 +194,9 @@
   "CodeBuild": {
     "models": "codebuild/2016-10-06"
   },
+  "CodeCatalyst": {
+    "models": "codecatalyst/2022-09-28"
+  },
   "CodeCommit": {
     "models": "codecommit/2015-04-13"
   },
@@ -778,6 +781,9 @@
   },
   "PinpointSMSVoiceV2": {
     "models": "pinpoint-sms-voice-v2/2022-03-31"
+  },
+  "Pipes": {
+    "models": "pipes/2015-10-07"
   },
   "Polly": {
     "models": "polly/2016-06-10"

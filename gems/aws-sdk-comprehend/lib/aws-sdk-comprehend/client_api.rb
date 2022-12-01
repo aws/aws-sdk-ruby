@@ -39,6 +39,11 @@ module Aws::Comprehend
     BatchItemError = Shapes::StructureShape.new(name: 'BatchItemError')
     BatchItemErrorList = Shapes::ListShape.new(name: 'BatchItemErrorList')
     BatchSizeLimitExceededException = Shapes::StructureShape.new(name: 'BatchSizeLimitExceededException')
+    Block = Shapes::StructureShape.new(name: 'Block')
+    BlockReference = Shapes::StructureShape.new(name: 'BlockReference')
+    BlockType = Shapes::StringShape.new(name: 'BlockType')
+    BoundingBox = Shapes::StructureShape.new(name: 'BoundingBox')
+    ChildBlock = Shapes::StructureShape.new(name: 'ChildBlock')
     ClassifierEvaluationMetrics = Shapes::StructureShape.new(name: 'ClassifierEvaluationMetrics')
     ClassifierMetadata = Shapes::StructureShape.new(name: 'ClassifierMetadata')
     ClassifyDocumentRequest = Shapes::StructureShape.new(name: 'ClassifyDocumentRequest')
@@ -125,10 +130,13 @@ module Aws::Comprehend
     DocumentClassifierSummariesList = Shapes::ListShape.new(name: 'DocumentClassifierSummariesList')
     DocumentClassifierSummary = Shapes::StructureShape.new(name: 'DocumentClassifierSummary')
     DocumentLabel = Shapes::StructureShape.new(name: 'DocumentLabel')
+    DocumentMetadata = Shapes::StructureShape.new(name: 'DocumentMetadata')
     DocumentReadAction = Shapes::StringShape.new(name: 'DocumentReadAction')
     DocumentReadFeatureTypes = Shapes::StringShape.new(name: 'DocumentReadFeatureTypes')
     DocumentReadMode = Shapes::StringShape.new(name: 'DocumentReadMode')
     DocumentReaderConfig = Shapes::StructureShape.new(name: 'DocumentReaderConfig')
+    DocumentType = Shapes::StringShape.new(name: 'DocumentType')
+    DocumentTypeListItem = Shapes::StructureShape.new(name: 'DocumentTypeListItem')
     DominantLanguage = Shapes::StructureShape.new(name: 'DominantLanguage')
     DominantLanguageDetectionJobFilter = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobFilter')
     DominantLanguageDetectionJobProperties = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobProperties')
@@ -165,11 +173,14 @@ module Aws::Comprehend
     EntityTypesEvaluationMetrics = Shapes::StructureShape.new(name: 'EntityTypesEvaluationMetrics')
     EntityTypesList = Shapes::ListShape.new(name: 'EntityTypesList')
     EntityTypesListItem = Shapes::StructureShape.new(name: 'EntityTypesListItem')
+    ErrorsListItem = Shapes::StructureShape.new(name: 'ErrorsListItem')
     EventTypeString = Shapes::StringShape.new(name: 'EventTypeString')
     EventsDetectionJobFilter = Shapes::StructureShape.new(name: 'EventsDetectionJobFilter')
     EventsDetectionJobProperties = Shapes::StructureShape.new(name: 'EventsDetectionJobProperties')
     EventsDetectionJobPropertiesList = Shapes::ListShape.new(name: 'EventsDetectionJobPropertiesList')
+    ExtractedCharactersListItem = Shapes::StructureShape.new(name: 'ExtractedCharactersListItem')
     Float = Shapes::FloatShape.new(name: 'Float')
+    Geometry = Shapes::StructureShape.new(name: 'Geometry')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     ImportModelRequest = Shapes::StructureShape.new(name: 'ImportModelRequest')
     ImportModelResponse = Shapes::StructureShape.new(name: 'ImportModelResponse')
@@ -179,7 +190,10 @@ module Aws::Comprehend
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidFilterException = Shapes::StructureShape.new(name: 'InvalidFilterException')
+    InvalidRequestDetail = Shapes::StructureShape.new(name: 'InvalidRequestDetail')
+    InvalidRequestDetailReason = Shapes::StringShape.new(name: 'InvalidRequestDetailReason')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    InvalidRequestReason = Shapes::StringShape.new(name: 'InvalidRequestReason')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobName = Shapes::StringShape.new(name: 'JobName')
     JobNotFoundException = Shapes::StructureShape.new(name: 'JobNotFoundException')
@@ -212,6 +226,9 @@ module Aws::Comprehend
     ListEventsDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListEventsDetectionJobsResponse')
     ListKeyPhrasesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListKeyPhrasesDetectionJobsRequest')
     ListKeyPhrasesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListKeyPhrasesDetectionJobsResponse')
+    ListOfBlockReferences = Shapes::ListShape.new(name: 'ListOfBlockReferences')
+    ListOfBlocks = Shapes::ListShape.new(name: 'ListOfBlocks')
+    ListOfChildBlocks = Shapes::ListShape.new(name: 'ListOfChildBlocks')
     ListOfClasses = Shapes::ListShape.new(name: 'ListOfClasses')
     ListOfDescriptiveMentionIndices = Shapes::ListShape.new(name: 'ListOfDescriptiveMentionIndices')
     ListOfDetectDominantLanguageResult = Shapes::ListShape.new(name: 'ListOfDetectDominantLanguageResult')
@@ -221,14 +238,18 @@ module Aws::Comprehend
     ListOfDetectSyntaxResult = Shapes::ListShape.new(name: 'ListOfDetectSyntaxResult')
     ListOfDetectTargetedSentimentResult = Shapes::ListShape.new(name: 'ListOfDetectTargetedSentimentResult')
     ListOfDocumentReadFeatureTypes = Shapes::ListShape.new(name: 'ListOfDocumentReadFeatureTypes')
+    ListOfDocumentType = Shapes::ListShape.new(name: 'ListOfDocumentType')
     ListOfDominantLanguages = Shapes::ListShape.new(name: 'ListOfDominantLanguages')
     ListOfEntities = Shapes::ListShape.new(name: 'ListOfEntities')
     ListOfEntityLabels = Shapes::ListShape.new(name: 'ListOfEntityLabels')
+    ListOfErrors = Shapes::ListShape.new(name: 'ListOfErrors')
+    ListOfExtractedCharacters = Shapes::ListShape.new(name: 'ListOfExtractedCharacters')
     ListOfKeyPhrases = Shapes::ListShape.new(name: 'ListOfKeyPhrases')
     ListOfLabels = Shapes::ListShape.new(name: 'ListOfLabels')
     ListOfMentions = Shapes::ListShape.new(name: 'ListOfMentions')
     ListOfPiiEntities = Shapes::ListShape.new(name: 'ListOfPiiEntities')
     ListOfPiiEntityTypes = Shapes::ListShape.new(name: 'ListOfPiiEntityTypes')
+    ListOfRelationships = Shapes::ListShape.new(name: 'ListOfRelationships')
     ListOfSyntaxTokens = Shapes::ListShape.new(name: 'ListOfSyntaxTokens')
     ListOfTargetedSentimentEntities = Shapes::ListShape.new(name: 'ListOfTargetedSentimentEntities')
     ListPiiEntitiesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListPiiEntitiesDetectionJobsRequest')
@@ -247,6 +268,7 @@ module Aws::Comprehend
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     NumberOfTopicsInteger = Shapes::IntegerShape.new(name: 'NumberOfTopicsInteger')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
+    PageBasedErrorCode = Shapes::StringShape.new(name: 'PageBasedErrorCode')
     PartOfSpeechTag = Shapes::StructureShape.new(name: 'PartOfSpeechTag')
     PartOfSpeechTagType = Shapes::StringShape.new(name: 'PartOfSpeechTagType')
     PiiEntitiesDetectionJobFilter = Shapes::StructureShape.new(name: 'PiiEntitiesDetectionJobFilter')
@@ -257,11 +279,15 @@ module Aws::Comprehend
     PiiEntity = Shapes::StructureShape.new(name: 'PiiEntity')
     PiiEntityType = Shapes::StringShape.new(name: 'PiiEntityType')
     PiiOutputDataConfig = Shapes::StructureShape.new(name: 'PiiOutputDataConfig')
+    Point = Shapes::StructureShape.new(name: 'Point')
     Policy = Shapes::StringShape.new(name: 'Policy')
     PolicyRevisionId = Shapes::StringShape.new(name: 'PolicyRevisionId')
+    Polygon = Shapes::ListShape.new(name: 'Polygon')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     RedactionConfig = Shapes::StructureShape.new(name: 'RedactionConfig')
+    RelationshipType = Shapes::StringShape.new(name: 'RelationshipType')
+    RelationshipsListItem = Shapes::StructureShape.new(name: 'RelationshipsListItem')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -269,6 +295,7 @@ module Aws::Comprehend
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    SemiStructuredDocumentBlob = Shapes::BlobShape.new(name: 'SemiStructuredDocumentBlob')
     SentimentDetectionJobFilter = Shapes::StructureShape.new(name: 'SentimentDetectionJobFilter')
     SentimentDetectionJobProperties = Shapes::StructureShape.new(name: 'SentimentDetectionJobProperties')
     SentimentDetectionJobPropertiesList = Shapes::ListShape.new(name: 'SentimentDetectionJobPropertiesList')
@@ -312,6 +339,7 @@ module Aws::Comprehend
     StopTrainingEntityRecognizerRequest = Shapes::StructureShape.new(name: 'StopTrainingEntityRecognizerRequest')
     StopTrainingEntityRecognizerResponse = Shapes::StructureShape.new(name: 'StopTrainingEntityRecognizerResponse')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     Subnets = Shapes::ListShape.new(name: 'Subnets')
     SyntaxLanguageCode = Shapes::StringShape.new(name: 'SyntaxLanguageCode')
@@ -438,6 +466,31 @@ module Aws::Comprehend
     BatchSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     BatchSizeLimitExceededException.struct_class = Types::BatchSizeLimitExceededException
 
+    Block.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    Block.add_member(:block_type, Shapes::ShapeRef.new(shape: BlockType, location_name: "BlockType"))
+    Block.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    Block.add_member(:page, Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
+    Block.add_member(:geometry, Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
+    Block.add_member(:relationships, Shapes::ShapeRef.new(shape: ListOfRelationships, location_name: "Relationships"))
+    Block.struct_class = Types::Block
+
+    BlockReference.add_member(:block_id, Shapes::ShapeRef.new(shape: String, location_name: "BlockId"))
+    BlockReference.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
+    BlockReference.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    BlockReference.add_member(:child_blocks, Shapes::ShapeRef.new(shape: ListOfChildBlocks, location_name: "ChildBlocks"))
+    BlockReference.struct_class = Types::BlockReference
+
+    BoundingBox.add_member(:height, Shapes::ShapeRef.new(shape: Float, location_name: "Height"))
+    BoundingBox.add_member(:left, Shapes::ShapeRef.new(shape: Float, location_name: "Left"))
+    BoundingBox.add_member(:top, Shapes::ShapeRef.new(shape: Float, location_name: "Top"))
+    BoundingBox.add_member(:width, Shapes::ShapeRef.new(shape: Float, location_name: "Width"))
+    BoundingBox.struct_class = Types::BoundingBox
+
+    ChildBlock.add_member(:child_block_id, Shapes::ShapeRef.new(shape: String, location_name: "ChildBlockId"))
+    ChildBlock.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
+    ChildBlock.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    ChildBlock.struct_class = Types::ChildBlock
+
     ClassifierEvaluationMetrics.add_member(:accuracy, Shapes::ShapeRef.new(shape: Double, location_name: "Accuracy"))
     ClassifierEvaluationMetrics.add_member(:precision, Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
     ClassifierEvaluationMetrics.add_member(:recall, Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
@@ -454,12 +507,17 @@ module Aws::Comprehend
     ClassifierMetadata.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: ClassifierEvaluationMetrics, location_name: "EvaluationMetrics"))
     ClassifierMetadata.struct_class = Types::ClassifierMetadata
 
-    ClassifyDocumentRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
+    ClassifyDocumentRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text"))
     ClassifyDocumentRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: DocumentClassifierEndpointArn, required: true, location_name: "EndpointArn"))
+    ClassifyDocumentRequest.add_member(:bytes, Shapes::ShapeRef.new(shape: SemiStructuredDocumentBlob, location_name: "Bytes"))
+    ClassifyDocumentRequest.add_member(:document_reader_config, Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     ClassifyDocumentRequest.struct_class = Types::ClassifyDocumentRequest
 
     ClassifyDocumentResponse.add_member(:classes, Shapes::ShapeRef.new(shape: ListOfClasses, location_name: "Classes"))
     ClassifyDocumentResponse.add_member(:labels, Shapes::ShapeRef.new(shape: ListOfLabels, location_name: "Labels"))
+    ClassifyDocumentResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
+    ClassifyDocumentResponse.add_member(:document_type, Shapes::ShapeRef.new(shape: ListOfDocumentType, location_name: "DocumentType"))
+    ClassifyDocumentResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ListOfErrors, location_name: "Errors"))
     ClassifyDocumentResponse.struct_class = Types::ClassifyDocumentResponse
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -627,12 +685,18 @@ module Aws::Comprehend
     DetectDominantLanguageResponse.add_member(:languages, Shapes::ShapeRef.new(shape: ListOfDominantLanguages, location_name: "Languages"))
     DetectDominantLanguageResponse.struct_class = Types::DetectDominantLanguageResponse
 
-    DetectEntitiesRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
+    DetectEntitiesRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text"))
     DetectEntitiesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     DetectEntitiesRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EntityRecognizerEndpointArn, location_name: "EndpointArn"))
+    DetectEntitiesRequest.add_member(:bytes, Shapes::ShapeRef.new(shape: SemiStructuredDocumentBlob, location_name: "Bytes"))
+    DetectEntitiesRequest.add_member(:document_reader_config, Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     DetectEntitiesRequest.struct_class = Types::DetectEntitiesRequest
 
     DetectEntitiesResponse.add_member(:entities, Shapes::ShapeRef.new(shape: ListOfEntities, location_name: "Entities"))
+    DetectEntitiesResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
+    DetectEntitiesResponse.add_member(:document_type, Shapes::ShapeRef.new(shape: ListOfDocumentType, location_name: "DocumentType"))
+    DetectEntitiesResponse.add_member(:blocks, Shapes::ShapeRef.new(shape: ListOfBlocks, location_name: "Blocks"))
+    DetectEntitiesResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ListOfErrors, location_name: "Errors"))
     DetectEntitiesResponse.struct_class = Types::DetectEntitiesResponse
 
     DetectKeyPhrasesRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
@@ -673,6 +737,7 @@ module Aws::Comprehend
 
     DocumentClass.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     DocumentClass.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    DocumentClass.add_member(:page, Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
     DocumentClass.struct_class = Types::DocumentClass
 
     DocumentClassificationJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -750,12 +815,21 @@ module Aws::Comprehend
 
     DocumentLabel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     DocumentLabel.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    DocumentLabel.add_member(:page, Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
     DocumentLabel.struct_class = Types::DocumentLabel
+
+    DocumentMetadata.add_member(:pages, Shapes::ShapeRef.new(shape: Integer, location_name: "Pages"))
+    DocumentMetadata.add_member(:extracted_characters, Shapes::ShapeRef.new(shape: ListOfExtractedCharacters, location_name: "ExtractedCharacters"))
+    DocumentMetadata.struct_class = Types::DocumentMetadata
 
     DocumentReaderConfig.add_member(:document_read_action, Shapes::ShapeRef.new(shape: DocumentReadAction, required: true, location_name: "DocumentReadAction"))
     DocumentReaderConfig.add_member(:document_read_mode, Shapes::ShapeRef.new(shape: DocumentReadMode, location_name: "DocumentReadMode"))
     DocumentReaderConfig.add_member(:feature_types, Shapes::ShapeRef.new(shape: ListOfDocumentReadFeatureTypes, location_name: "FeatureTypes"))
     DocumentReaderConfig.struct_class = Types::DocumentReaderConfig
+
+    DocumentTypeListItem.add_member(:page, Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
+    DocumentTypeListItem.add_member(:type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "Type"))
+    DocumentTypeListItem.struct_class = Types::DocumentTypeListItem
 
     DominantLanguage.add_member(:language_code, Shapes::ShapeRef.new(shape: String, location_name: "LanguageCode"))
     DominantLanguage.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
@@ -833,6 +907,7 @@ module Aws::Comprehend
     Entity.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     Entity.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
     Entity.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    Entity.add_member(:block_references, Shapes::ShapeRef.new(shape: ListOfBlockReferences, location_name: "BlockReferences"))
     Entity.struct_class = Types::Entity
 
     EntityLabel.add_member(:name, Shapes::ShapeRef.new(shape: PiiEntityType, location_name: "Name"))
@@ -924,6 +999,11 @@ module Aws::Comprehend
     EntityTypesListItem.add_member(:type, Shapes::ShapeRef.new(shape: EntityTypeName, required: true, location_name: "Type"))
     EntityTypesListItem.struct_class = Types::EntityTypesListItem
 
+    ErrorsListItem.add_member(:page, Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
+    ErrorsListItem.add_member(:error_code, Shapes::ShapeRef.new(shape: PageBasedErrorCode, location_name: "ErrorCode"))
+    ErrorsListItem.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    ErrorsListItem.struct_class = Types::ErrorsListItem
+
     EventsDetectionJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     EventsDetectionJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     EventsDetectionJobFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
@@ -945,6 +1025,14 @@ module Aws::Comprehend
     EventsDetectionJobProperties.struct_class = Types::EventsDetectionJobProperties
 
     EventsDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: EventsDetectionJobProperties)
+
+    ExtractedCharactersListItem.add_member(:page, Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
+    ExtractedCharactersListItem.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "Count"))
+    ExtractedCharactersListItem.struct_class = Types::ExtractedCharactersListItem
+
+    Geometry.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    Geometry.add_member(:polygon, Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
+    Geometry.struct_class = Types::Geometry
 
     ImportModelRequest.add_member(:source_model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, required: true, location_name: "SourceModelArn"))
     ImportModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "ModelName"))
@@ -968,7 +1056,12 @@ module Aws::Comprehend
     InvalidFilterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidFilterException.struct_class = Types::InvalidFilterException
 
+    InvalidRequestDetail.add_member(:reason, Shapes::ShapeRef.new(shape: InvalidRequestDetailReason, location_name: "Reason"))
+    InvalidRequestDetail.struct_class = Types::InvalidRequestDetail
+
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRequestException.add_member(:reason, Shapes::ShapeRef.new(shape: InvalidRequestReason, location_name: "Reason"))
+    InvalidRequestException.add_member(:detail, Shapes::ShapeRef.new(shape: InvalidRequestDetail, location_name: "Detail"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
     JobNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1094,6 +1187,12 @@ module Aws::Comprehend
     ListKeyPhrasesDetectionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListKeyPhrasesDetectionJobsResponse.struct_class = Types::ListKeyPhrasesDetectionJobsResponse
 
+    ListOfBlockReferences.member = Shapes::ShapeRef.new(shape: BlockReference)
+
+    ListOfBlocks.member = Shapes::ShapeRef.new(shape: Block)
+
+    ListOfChildBlocks.member = Shapes::ShapeRef.new(shape: ChildBlock)
+
     ListOfClasses.member = Shapes::ShapeRef.new(shape: DocumentClass)
 
     ListOfDescriptiveMentionIndices.member = Shapes::ShapeRef.new(shape: Integer)
@@ -1112,11 +1211,17 @@ module Aws::Comprehend
 
     ListOfDocumentReadFeatureTypes.member = Shapes::ShapeRef.new(shape: DocumentReadFeatureTypes)
 
+    ListOfDocumentType.member = Shapes::ShapeRef.new(shape: DocumentTypeListItem)
+
     ListOfDominantLanguages.member = Shapes::ShapeRef.new(shape: DominantLanguage)
 
     ListOfEntities.member = Shapes::ShapeRef.new(shape: Entity)
 
     ListOfEntityLabels.member = Shapes::ShapeRef.new(shape: EntityLabel)
+
+    ListOfErrors.member = Shapes::ShapeRef.new(shape: ErrorsListItem)
+
+    ListOfExtractedCharacters.member = Shapes::ShapeRef.new(shape: ExtractedCharactersListItem)
 
     ListOfKeyPhrases.member = Shapes::ShapeRef.new(shape: KeyPhrase)
 
@@ -1127,6 +1232,8 @@ module Aws::Comprehend
     ListOfPiiEntities.member = Shapes::ShapeRef.new(shape: PiiEntity)
 
     ListOfPiiEntityTypes.member = Shapes::ShapeRef.new(shape: PiiEntityType)
+
+    ListOfRelationships.member = Shapes::ShapeRef.new(shape: RelationshipsListItem)
 
     ListOfSyntaxTokens.member = Shapes::ShapeRef.new(shape: SyntaxToken)
 
@@ -1220,6 +1327,12 @@ module Aws::Comprehend
     PiiOutputDataConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     PiiOutputDataConfig.struct_class = Types::PiiOutputDataConfig
 
+    Point.add_member(:x, Shapes::ShapeRef.new(shape: Float, location_name: "X"))
+    Point.add_member(:y, Shapes::ShapeRef.new(shape: Float, location_name: "Y"))
+    Point.struct_class = Types::Point
+
+    Polygon.member = Shapes::ShapeRef.new(shape: Point)
+
     PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, required: true, location_name: "ResourceArn"))
     PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "ResourcePolicy"))
     PutResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
@@ -1232,6 +1345,10 @@ module Aws::Comprehend
     RedactionConfig.add_member(:mask_mode, Shapes::ShapeRef.new(shape: PiiEntitiesDetectionMaskMode, location_name: "MaskMode"))
     RedactionConfig.add_member(:mask_character, Shapes::ShapeRef.new(shape: MaskCharacter, location_name: "MaskCharacter"))
     RedactionConfig.struct_class = Types::RedactionConfig
+
+    RelationshipsListItem.add_member(:ids, Shapes::ShapeRef.new(shape: StringList, location_name: "Ids"))
+    RelationshipsListItem.add_member(:type, Shapes::ShapeRef.new(shape: RelationshipType, location_name: "Type"))
+    RelationshipsListItem.struct_class = Types::RelationshipsListItem
 
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceInUseException.struct_class = Types::ResourceInUseException
@@ -1477,6 +1594,8 @@ module Aws::Comprehend
     StopTrainingEntityRecognizerRequest.struct_class = Types::StopTrainingEntityRecognizerRequest
 
     StopTrainingEntityRecognizerResponse.struct_class = Types::StopTrainingEntityRecognizerResponse
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -2151,6 +2270,12 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_entities_detection_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -2252,6 +2377,12 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_sentiment_detection_jobs, Seahorse::Model::Operation.new.tap do |o|

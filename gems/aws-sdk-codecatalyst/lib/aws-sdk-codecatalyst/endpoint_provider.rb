@@ -1,0 +1,85 @@
+# frozen_string_literal: true
+
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeCatalyst
+  class EndpointProvider
+    def initialize(rule_set = nil)
+      @@rule_set ||= begin
+        endpoint_rules = Aws::Json.load(Base64.decode64(RULES))
+        Aws::Endpoints::RuleSet.new(
+          version: endpoint_rules['version'],
+          service_id: endpoint_rules['serviceId'],
+          parameters: endpoint_rules['parameters'],
+          rules: endpoint_rules['rules']
+        )
+      end
+      @provider = Aws::Endpoints::RulesProvider.new(rule_set || @@rule_set)
+    end
+
+    def resolve_endpoint(parameters)
+      @provider.resolve_endpoint(parameters)
+    end
+
+    # @api private
+    RULES = <<-JSON
+eyJ2ZXJzaW9uIjoiMS4zIiwicGFyYW1ldGVycyI6eyJVc2VGSVBTIjp7ImJ1
+aWx0SW4iOiJBV1M6OlVzZUZJUFMiLCJyZXF1aXJlZCI6dHJ1ZSwiZGVmYXVs
+dCI6ZmFsc2UsImRvY3VtZW50YXRpb24iOiJXaGVuIHRydWUsIHNlbmQgdGhp
+cyByZXF1ZXN0IHRvIHRoZSBGSVBTLWNvbXBsaWFudCByZWdpb25hbCBlbmRw
+b2ludC4gSWYgdGhlIGNvbmZpZ3VyZWQgZW5kcG9pbnQgZG9lcyBub3QgaGF2
+ZSBhIEZJUFMgY29tcGxpYW50IGVuZHBvaW50LCBkaXNwYXRjaGluZyB0aGUg
+cmVxdWVzdCB3aWxsIHJldHVybiBhbiBlcnJvci4iLCJ0eXBlIjoiQm9vbGVh
+biJ9LCJSZWdpb24iOnsiYnVpbHRJbiI6IkFXUzo6UmVnaW9uIiwicmVxdWly
+ZWQiOmZhbHNlLCJkb2N1bWVudGF0aW9uIjoiVGhlIEFXUyByZWdpb24gdXNl
+ZCB0byBkaXNwYXRjaCB0aGUgcmVxdWVzdC4iLCJ0eXBlIjoiU3RyaW5nIn0s
+IkVuZHBvaW50Ijp7ImJ1aWx0SW4iOiJTREs6OkVuZHBvaW50IiwicmVxdWly
+ZWQiOmZhbHNlLCJkb2N1bWVudGF0aW9uIjoiT3ZlcnJpZGUgdGhlIGVuZHBv
+aW50IHVzZWQgdG8gc2VuZCB0aGlzIHJlcXVlc3QiLCJ0eXBlIjoiU3RyaW5n
+In19LCJydWxlcyI6W3siY29uZGl0aW9ucyI6W10sInR5cGUiOiJ0cmVlIiwi
+cnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoiaXNTZXQiLCJhcmd2Ijpb
+eyJyZWYiOiJFbmRwb2ludCJ9XX1dLCJlbmRwb2ludCI6eyJ1cmwiOnsicmVm
+IjoiRW5kcG9pbnQifSwicHJvcGVydGllcyI6e30sImhlYWRlcnMiOnt9fSwi
+dHlwZSI6ImVuZHBvaW50In0seyJjb25kaXRpb25zIjpbeyJmbiI6Im5vdCIs
+ImFyZ3YiOlt7ImZuIjoiaXNTZXQiLCJhcmd2IjpbeyJyZWYiOiJSZWdpb24i
+fV19XX0seyJmbiI6ImF3cy5wYXJ0aXRpb24iLCJhcmd2IjpbInVzLXdlc3Qt
+MiJdLCJhc3NpZ24iOiJQYXJ0aXRpb25SZXN1bHQifV0sInR5cGUiOiJ0cmVl
+IiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVxdWFs
+cyIsImFyZ3YiOlt7InJlZiI6IlVzZUZJUFMifSx0cnVlXX1dLCJ0eXBlIjoi
+dHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbeyJmbiI6ImJvb2xlYW5F
+cXVhbHMiLCJhcmd2IjpbeyJmbiI6ImdldEF0dHIiLCJhcmd2IjpbeyJyZWYi
+OiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNGSVBTIl19LGZhbHNlXX1d
+LCJlcnJvciI6IlBhcnRpdGlvbiBkb2VzIG5vdCBzdXBwb3J0IEZJUFMuIiwi
+dHlwZSI6ImVycm9yIn0seyJjb25kaXRpb25zIjpbXSwiZW5kcG9pbnQiOnsi
+dXJsIjoiaHR0cHM6Ly9jb2RlY2F0YWx5c3QtZmlwcy5nbG9iYWwue1BhcnRp
+dGlvblJlc3VsdCNkdWFsU3RhY2tEbnNTdWZmaXh9IiwicHJvcGVydGllcyI6
+e30sImhlYWRlcnMiOnt9fSwidHlwZSI6ImVuZHBvaW50In1dfSx7ImNvbmRp
+dGlvbnMiOltdLCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL2NvZGVjYXRh
+bHlzdC5nbG9iYWwue1BhcnRpdGlvblJlc3VsdCNkdWFsU3RhY2tEbnNTdWZm
+aXh9IiwicHJvcGVydGllcyI6e30sImhlYWRlcnMiOnt9fSwidHlwZSI6ImVu
+ZHBvaW50In1dfSx7ImNvbmRpdGlvbnMiOlt7ImZuIjoiaXNTZXQiLCJhcmd2
+IjpbeyJyZWYiOiJSZWdpb24ifV19LHsiZm4iOiJhd3MucGFydGl0aW9uIiwi
+YXJndiI6W3sicmVmIjoiUmVnaW9uIn1dLCJhc3NpZ24iOiJQYXJ0aXRpb25S
+ZXN1bHQifV0sInR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMi
+Olt7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFyZ3YiOlt7InJlZiI6IlVzZUZJ
+UFMifSx0cnVlXX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRp
+b25zIjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbeyJmbiI6Imdl
+dEF0dHIiLCJhcmd2IjpbeyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwic3Vw
+cG9ydHNGSVBTIl19LGZhbHNlXX1dLCJlcnJvciI6IlBhcnRpdGlvbiBkb2Vz
+IG5vdCBzdXBwb3J0IEZJUFMuIiwidHlwZSI6ImVycm9yIn0seyJjb25kaXRp
+b25zIjpbXSwiZW5kcG9pbnQiOnsidXJsIjoiaHR0cHM6Ly9jb2RlY2F0YWx5
+c3QtZmlwcy5nbG9iYWwue1BhcnRpdGlvblJlc3VsdCNkdWFsU3RhY2tEbnNT
+dWZmaXh9IiwicHJvcGVydGllcyI6e30sImhlYWRlcnMiOnt9fSwidHlwZSI6
+ImVuZHBvaW50In1dfSx7ImNvbmRpdGlvbnMiOltdLCJlbmRwb2ludCI6eyJ1
+cmwiOiJodHRwczovL2NvZGVjYXRhbHlzdC5nbG9iYWwue1BhcnRpdGlvblJl
+c3VsdCNkdWFsU3RhY2tEbnNTdWZmaXh9IiwicHJvcGVydGllcyI6e30sImhl
+YWRlcnMiOnt9fSwidHlwZSI6ImVuZHBvaW50In1dfV19XX0=
+
+    JSON
+  end
+end

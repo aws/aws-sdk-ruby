@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.152.0 (2022-12-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pipes` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-codecatalyst` gem.
+
 3.151.0 (2022-11-30)
 ------------------
 

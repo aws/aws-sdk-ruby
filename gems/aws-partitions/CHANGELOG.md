@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.670.0 (2022-12-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Pipes`.
+
+* Feature - Added support for enumerating regions for `Aws::CodeCatalyst`.
+
 1.669.0 (2022-11-30)
 ------------------
 
