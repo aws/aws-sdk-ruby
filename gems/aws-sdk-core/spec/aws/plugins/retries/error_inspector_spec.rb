@@ -103,6 +103,12 @@ module Aws
           ).to be(true)
         end
 
+        it 'returns true for BadDigest' do
+          expect(
+            inspector(RetryErrorsSvc::Errors::BadDigest).checksum?
+          ).to be(true)
+        end
+
         it 'returns false for other errors' do
           expect(
             inspector(RetryErrorsSvc::Errors::SomeRandomError).checksum?

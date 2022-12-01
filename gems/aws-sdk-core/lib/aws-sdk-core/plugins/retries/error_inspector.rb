@@ -39,7 +39,8 @@ module Aws
 
         CHECKSUM_ERRORS = Set.new(
           [
-            'CRC32CheckFailed' # dynamodb
+            'CRC32CheckFailed', # dynamodb
+            'BadDigest' # s3
           ]
         )
 
