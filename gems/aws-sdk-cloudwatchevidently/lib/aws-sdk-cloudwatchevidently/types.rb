@@ -3513,6 +3513,10 @@ module Aws::CloudWatchEvidently
     # exactly one field. It can be `boolValue`, `doubleValue`, `longValue`,
     # or `stringValue`.
     #
+    # @note VariableValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VariableValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VariableValue corresponding to the set member.
+    #
     # @!attribute [rw] bool_value
     #   If this feature uses the Boolean variation type, this field contains
     #   the Boolean value of this variation.

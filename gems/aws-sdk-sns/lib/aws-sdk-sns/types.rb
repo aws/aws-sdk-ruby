@@ -726,6 +726,8 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSSandboxAccountStatusInput AWS API Documentation
     #
     class GetSMSSandboxAccountStatusInput < Aws::EmptyStructure; end

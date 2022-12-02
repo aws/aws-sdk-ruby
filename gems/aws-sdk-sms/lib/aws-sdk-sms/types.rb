@@ -455,6 +455,8 @@ module Aws::SMS
     #
     class DeleteReplicationJobResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalogRequest AWS API Documentation
     #
     class DeleteServerCatalogRequest < Aws::EmptyStructure; end
@@ -906,6 +908,8 @@ module Aws::SMS
     #
     class ImportAppCatalogResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalogRequest AWS API Documentation
     #
     class ImportServerCatalogRequest < Aws::EmptyStructure; end

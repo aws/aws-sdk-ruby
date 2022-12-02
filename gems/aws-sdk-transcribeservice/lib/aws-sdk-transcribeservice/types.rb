@@ -3094,6 +3094,10 @@ module Aws::TranscribeService
     # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html
     # [3]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html
     #
+    # @note Rule is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Rule is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Rule corresponding to the set member.
+    #
     # @!attribute [rw] non_talk_time_filter
     #   Flag the presence or absence of periods of silence in your Call
     #   Analytics transcription output. Refer to for more detail.

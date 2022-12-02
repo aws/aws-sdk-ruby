@@ -102,8 +102,8 @@ module AwsSdkCodeGenerator
       def struct_class_docs(shape_name, shape)
         join_docstrings([
           html_to_markdown(Api.docstring(shape_name, @api)),
-          #input_example_docs(shape_name, shape),
-          #output_example_docs(shape_name, shape),
+          input_example_docs(shape_name, shape),
+          output_example_docs(shape_name, shape),
           attribute_macros_docs(shape_name),
           see_also_tag(shape_name),
         ])
@@ -112,7 +112,7 @@ module AwsSdkCodeGenerator
       def eventstream_class_docs(shape_name, shape)
         join_docstrings([
           html_to_markdown(Api.docstring(shape_name, @api)),
-          #input_example_docs(shape_name, shape),
+          input_example_docs(shape_name, shape),
           eventstream_docs(shape_name),
           see_also_tag(shape_name),
         ])
@@ -141,13 +141,14 @@ module AwsSdkCodeGenerator
           elsif shape['union']
             "@note #{shape_name} is a union - when making an API calls you"\
             ' must set exactly one of the members.'
-          else
-            note = "@note When making an API call, you may pass #{shape_name}\n"
-            note += "  data as a hash:\n\n"
-            note += '      ' + SyntaxExampleHash.new(
-              shape: shape(shape_name),
-              api: @service.api,
-            ).format('      ')
+          # This doc block is no longer useful, but keeping for records
+          # else
+          #   note = "@note When making an API call, you may pass #{shape_name}\n"
+          #   note += "  data as a hash:\n\n"
+          #   note += '      ' + SyntaxExampleHash.new(
+          #     shape: shape(shape_name),
+          #     api: @service.api,
+          #   ).format('      ')
           end
         end
       end

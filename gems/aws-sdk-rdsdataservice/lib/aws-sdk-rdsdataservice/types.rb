@@ -25,6 +25,10 @@ module Aws::RDSDataService
 
     # Contains an array.
     #
+    # @note ArrayValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ArrayValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ArrayValue corresponding to the set member.
+    #
     # @!attribute [rw] boolean_values
     #   An array of Boolean values.
     #   @return [Array<Boolean>]
@@ -553,6 +557,10 @@ module Aws::RDSDataService
 
     # Contains a value.
     #
+    # @note Field is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Field is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Field corresponding to the set member.
+    #
     # @!attribute [rw] is_null
     #   A NULL value.
     #   @return [Boolean]
@@ -907,6 +915,8 @@ module Aws::RDSDataService
     # Contains the value of a column.
     #
     #      <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
+    #
+    # @note Value is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Value corresponding to the set member.
     #
     # @!attribute [rw] is_null
     #   A NULL value.

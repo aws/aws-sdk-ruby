@@ -125,6 +125,8 @@ module Aws::Inspector2
 
     # Contains details about an aggregation request.
     #
+    # @note AggregationRequest is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] account_aggregation
     #   An object that contains details about an aggregation request based
     #   on Amazon Web Services account IDs.
@@ -213,6 +215,8 @@ module Aws::Inspector2
 
     # A structure that contains details about the results of an aggregation
     # type.
+    #
+    # @note AggregationResponse is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AggregationResponse corresponding to the set member.
     #
     # @!attribute [rw] account_aggregation
     #   An object that contains details about an aggregation response based
@@ -1243,6 +1247,8 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DescribeOrganizationConfigurationRequest AWS API Documentation
     #
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
@@ -2248,6 +2254,8 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfigurationRequest AWS API Documentation
     #
     class GetConfigurationRequest < Aws::EmptyStructure; end
@@ -2265,6 +2273,8 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetDelegatedAdminAccountRequest AWS API Documentation
     #
     class GetDelegatedAdminAccountRequest < Aws::EmptyStructure; end

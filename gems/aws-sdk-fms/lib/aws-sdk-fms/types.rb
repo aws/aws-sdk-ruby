@@ -398,6 +398,8 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeleteNotificationChannelRequest AWS API Documentation
     #
     class DeleteNotificationChannelRequest < Aws::EmptyStructure; end
@@ -475,6 +477,8 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DisassociateAdminAccountRequest AWS API Documentation
     #
     class DisassociateAdminAccountRequest < Aws::EmptyStructure; end
@@ -1050,6 +1054,8 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccountRequest AWS API Documentation
     #
     class GetAdminAccountRequest < Aws::EmptyStructure; end
@@ -1141,6 +1147,8 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetNotificationChannelRequest AWS API Documentation
     #
     class GetNotificationChannelRequest < Aws::EmptyStructure; end

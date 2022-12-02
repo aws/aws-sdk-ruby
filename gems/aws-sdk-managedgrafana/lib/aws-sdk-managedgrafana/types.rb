@@ -584,6 +584,10 @@ module Aws::ManagedGrafana
     # parameter, or by specifying the full metadata in XML format in the
     # `xml` parameter. Specifying both will cause an error.
     #
+    # @note IdpMetadata is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note IdpMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IdpMetadata corresponding to the set member.
+    #
     # @!attribute [rw] url
     #   The URL of the location containing the IdP metadata.
     #   @return [String]

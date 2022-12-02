@@ -1228,6 +1228,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
+    # @api private
+    #
     class DescribeLoggingOptionsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] logging_options

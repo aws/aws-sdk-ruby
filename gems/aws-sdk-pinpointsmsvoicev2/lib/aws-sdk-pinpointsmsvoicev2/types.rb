@@ -1018,6 +1018,8 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteTextMessageSpendLimitOverrideRequest AWS API Documentation
     #
     class DeleteTextMessageSpendLimitOverrideRequest < Aws::EmptyStructure; end
@@ -1034,6 +1036,8 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteVoiceMessageSpendLimitOverrideRequest AWS API Documentation
     #
     class DeleteVoiceMessageSpendLimitOverrideRequest < Aws::EmptyStructure; end

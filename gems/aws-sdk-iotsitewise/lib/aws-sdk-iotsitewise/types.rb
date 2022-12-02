@@ -3197,6 +3197,8 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @api private
+    #
     class DescribeDefaultEncryptionConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] encryption_type
@@ -3343,6 +3345,8 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @api private
+    #
     class DescribeLoggingOptionsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] logging_options
@@ -3522,6 +3526,8 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @api private
+    #
     class DescribeStorageConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] storage_type

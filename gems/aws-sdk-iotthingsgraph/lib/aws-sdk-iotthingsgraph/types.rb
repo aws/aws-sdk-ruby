@@ -187,6 +187,8 @@ module Aws::IoTThingsGraph
 
     class DeleteFlowTemplateResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     class DeleteNamespaceRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] namespace_arn
@@ -664,6 +666,8 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetNamespaceDeletionStatusRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] namespace_arn

@@ -1503,6 +1503,8 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUsageReportSubscriptionRequest AWS API Documentation
     #
     class CreateUsageReportSubscriptionRequest < Aws::EmptyStructure; end
@@ -1756,6 +1758,8 @@ module Aws::AppStream
     #
     class DeleteStackResult < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUsageReportSubscriptionRequest AWS API Documentation
     #
     class DeleteUsageReportSubscriptionRequest < Aws::EmptyStructure; end

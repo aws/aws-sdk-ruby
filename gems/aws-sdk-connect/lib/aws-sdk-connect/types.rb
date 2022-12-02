@@ -7279,6 +7279,8 @@ module Aws::Connect
     # contains only one non null field between the URL and attachment based
     # on the reference type.
     #
+    # @note ReferenceSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReferenceSummary corresponding to the set member.
+    #
     # @!attribute [rw] url
     #   Information about the reference when the `referenceType` is `URL`.
     #   Otherwise, null.

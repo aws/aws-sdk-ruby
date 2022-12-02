@@ -86,6 +86,8 @@ module Aws::IdentityStore
     # provider (IdP) that is associated with the user, the group, or a
     # unique attribute. For example, a unique `GroupDisplayName`.
     #
+    # @note AlternateIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] external_id
     #   The identifier issued to this resource by an external identity
     #   provider.
@@ -1226,6 +1228,10 @@ module Aws::IdentityStore
     end
 
     # An object containing the identifier of a group member.
+    #
+    # @note MemberId is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MemberId is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MemberId corresponding to the set member.
     #
     # @!attribute [rw] user_id
     #   An object containing the identifiers of resources that can be

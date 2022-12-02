@@ -719,6 +719,8 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigRequest AWS API Documentation
     #
     class GetEncryptionConfigRequest < Aws::EmptyStructure; end

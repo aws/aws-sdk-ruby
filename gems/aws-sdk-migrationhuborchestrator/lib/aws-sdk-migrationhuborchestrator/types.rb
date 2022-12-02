@@ -1542,6 +1542,10 @@ module Aws::MigrationHubOrchestrator
     # workflow. The key value pairs will differ based on your selection of
     # the template.
     #
+    # @note StepInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StepInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StepInput corresponding to the set member.
+    #
     # @!attribute [rw] integer_value
     #   The value of the integer.
     #   @return [Integer]
@@ -2258,6 +2262,10 @@ module Aws::MigrationHubOrchestrator
     end
 
     # A structure to hold multiple values of an output.
+    #
+    # @note WorkflowStepOutputUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note WorkflowStepOutputUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of WorkflowStepOutputUnion corresponding to the set member.
     #
     # @!attribute [rw] integer_value
     #   The integer value.

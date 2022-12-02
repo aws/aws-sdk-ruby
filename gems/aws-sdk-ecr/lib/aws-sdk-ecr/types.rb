@@ -637,6 +637,8 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRegistryPolicyRequest AWS API Documentation
     #
     class DeleteRegistryPolicyRequest < Aws::EmptyStructure; end
@@ -1033,6 +1035,8 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRegistryRequest AWS API Documentation
     #
     class DescribeRegistryRequest < Aws::EmptyStructure; end
@@ -1506,6 +1510,8 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRegistryPolicyRequest AWS API Documentation
     #
     class GetRegistryPolicyRequest < Aws::EmptyStructure; end
@@ -1527,6 +1533,8 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRegistryScanningConfigurationRequest AWS API Documentation
     #
     class GetRegistryScanningConfigurationRequest < Aws::EmptyStructure; end

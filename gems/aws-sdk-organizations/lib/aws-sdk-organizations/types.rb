@@ -1941,6 +1941,8 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeaturesRequest AWS API Documentation
     #
     class EnableAllFeaturesRequest < Aws::EmptyStructure; end

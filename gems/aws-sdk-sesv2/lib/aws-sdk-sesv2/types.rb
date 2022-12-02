@@ -2189,6 +2189,8 @@ module Aws::SESV2
     # A request to obtain information about the email-sending capabilities
     # of your Amazon SES account.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccountRequest AWS API Documentation
     #
     class GetAccountRequest < Aws::EmptyStructure; end
@@ -2710,6 +2712,8 @@ module Aws::SESV2
     #
     #
     # [1]: http://aws.amazon.com/pinpoint/pricing/
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetDeliverabilityDashboardOptionsRequest AWS API Documentation
     #

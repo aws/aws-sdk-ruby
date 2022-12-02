@@ -163,6 +163,8 @@ module Aws::MainframeModernization
 
     # Defines the details of a batch job.
     #
+    # @note BatchJobDefinition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of BatchJobDefinition corresponding to the set member.
+    #
     # @!attribute [rw] file_batch_job_definition
     #   Specifies a file containing a batch job definition.
     #   @return [Types::FileBatchJobDefinition]
@@ -237,6 +239,8 @@ module Aws::MainframeModernization
     end
 
     # Identifies a specific batch job.
+    #
+    # @note BatchJobIdentifier is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] file_batch_job_identifier
     #   Specifies a file associated with a specific batch job.
@@ -607,6 +611,8 @@ module Aws::MainframeModernization
     # Identifies one or more data sets you want to import with the
     # CreateDataSetImportTask operation.
     #
+    # @note DataSetImportConfig is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] data_sets
     #   The data sets.
     #   @return [Array<Types::DataSetImportItem>]
@@ -751,6 +757,8 @@ module Aws::MainframeModernization
     # to different data set organizations. The values are populated based on
     # datasetOrg, storageType and backend (Blu Age or Micro Focus).
     #
+    # @note DatasetDetailOrgAttributes is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DatasetDetailOrgAttributes corresponding to the set member.
+    #
     # @!attribute [rw] gdg
     #   The generation data group of the data set.
     #   @return [Types::GdgDetailAttributes]
@@ -778,6 +786,8 @@ module Aws::MainframeModernization
     # to different data set organizations. The values are populated based on
     # datasetOrg, storageType and backend (Blu Age or Micro Focus).
     #
+    # @note DatasetOrgAttributes is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] gdg
     #   The generation data group of the data set.
     #   @return [Types::GdgAttributes]
@@ -802,6 +812,8 @@ module Aws::MainframeModernization
     end
 
     # The application definition for a particular application.
+    #
+    # @note Definition is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] content
     #   The content of the application definition. This is a JSON object
@@ -1040,6 +1052,8 @@ module Aws::MainframeModernization
     end
 
     # Defines an external storage location.
+    #
+    # @note ExternalLocation is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] s3_location
     #   The URI of the Amazon S3 bucket.
@@ -2491,6 +2505,10 @@ module Aws::MainframeModernization
     class StopApplicationResponse < Aws::EmptyStructure; end
 
     # Defines the storage configuration for an environment.
+    #
+    # @note StorageConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StorageConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StorageConfiguration corresponding to the set member.
     #
     # @!attribute [rw] efs
     #   Defines the storage configuration for an Amazon EFS file system.

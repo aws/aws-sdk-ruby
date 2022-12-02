@@ -1112,6 +1112,8 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsageRequest AWS API Documentation
     #
     class GetSnowballUsageRequest < Aws::EmptyStructure; end

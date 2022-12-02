@@ -3036,6 +3036,10 @@ module Aws::NimbleStudio
 
     # The configuration of the studio component, based on component type.
     #
+    # @note StudioComponentConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StudioComponentConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StudioComponentConfiguration corresponding to the set member.
+    #
     # @!attribute [rw] active_directory_configuration
     #   The configuration for a Microsoft Active Directory (Microsoft AD)
     #   studio resource.

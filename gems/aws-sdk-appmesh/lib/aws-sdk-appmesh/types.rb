@@ -13,6 +13,10 @@ module Aws::AppMesh
     # An object that represents the access logging information for a virtual
     # node.
     #
+    # @note AccessLog is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AccessLog is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AccessLog corresponding to the set member.
+    #
     # @!attribute [rw] file
     #   The file object to send virtual node access logs to.
     #   @return [Types::FileAccessLog]
@@ -99,6 +103,10 @@ module Aws::AppMesh
 
     # An object that represents the backends that a virtual node is expected
     # to send outbound traffic to.
+    #
+    # @note Backend is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Backend is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Backend corresponding to the set member.
     #
     # @!attribute [rw] virtual_service
     #   Specifies a virtual service to use as a backend.
@@ -193,6 +201,10 @@ module Aws::AppMesh
     end
 
     # An object that represents the client's certificate.
+    #
+    # @note ClientTlsCertificate is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ClientTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ClientTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a local file certificate. The certificate
@@ -1836,6 +1848,10 @@ module Aws::AppMesh
 
     # An object representing the method header to be matched.
     #
+    # @note GrpcMetadataMatchMethod is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GrpcMetadataMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GrpcMetadataMatchMethod corresponding to the set member.
+    #
     # @!attribute [rw] exact
     #   The exact method header to be matched on.
     #   @return [String]
@@ -2041,6 +2057,10 @@ module Aws::AppMesh
     # An object that represents the match method. Specify one of the match
     # values.
     #
+    # @note GrpcRouteMetadataMatchMethod is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GrpcRouteMetadataMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GrpcRouteMetadataMatchMethod corresponding to the set member.
+    #
     # @!attribute [rw] exact
     #   The value sent by the client must match the specified value exactly.
     #   @return [String]
@@ -2112,6 +2132,10 @@ module Aws::AppMesh
 
     # An object that represents the method and value to match with the
     # header value sent in a request. Specify one match method.
+    #
+    # @note HeaderMatchMethod is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note HeaderMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HeaderMatchMethod corresponding to the set member.
     #
     # @!attribute [rw] exact
     #   The value sent by the client must match the specified value exactly.
@@ -3278,6 +3302,10 @@ module Aws::AppMesh
 
     # An object that represents timeouts for different protocols.
     #
+    # @note ListenerTimeout is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ListenerTimeout is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTimeout corresponding to the set member.
+    #
     # @!attribute [rw] grpc
     #   An object that represents types of timeouts.
     #   @return [Types::GrpcTimeout]
@@ -3370,6 +3398,10 @@ module Aws::AppMesh
 
     # An object that represents a listener's Transport Layer Security (TLS)
     # certificate.
+    #
+    # @note ListenerTlsCertificate is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ListenerTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents an Certificate Manager
@@ -3478,6 +3510,10 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # validation context trust.
     #
+    # @note ListenerTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ListenerTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTlsValidationContextTrust corresponding to the set member.
+    #
     # @!attribute [rw] file
     #   An object that represents a Transport Layer Security (TLS)
     #   validation context trust for a local file.
@@ -3519,6 +3555,10 @@ module Aws::AppMesh
     end
 
     # An object that represents the format for the logs.
+    #
+    # @note LoggingFormat is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LoggingFormat is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LoggingFormat corresponding to the set member.
     #
     # @!attribute [rw] json
     #   @return [Array<Types::JsonFormatRef>]
@@ -4020,6 +4060,10 @@ module Aws::AppMesh
     # An object that represents the service discovery information for a
     # virtual node.
     #
+    # @note ServiceDiscovery is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ServiceDiscovery is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ServiceDiscovery corresponding to the set member.
+    #
     # @!attribute [rw] aws_cloud_map
     #   Specifies any Cloud Map information for the virtual node.
     #   @return [Types::AwsCloudMapServiceDiscovery]
@@ -4300,6 +4344,10 @@ module Aws::AppMesh
 
     # An object that represents a Transport Layer Security (TLS) validation
     # context trust.
+    #
+    # @note TlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents a Transport Layer Security
@@ -4829,6 +4877,10 @@ module Aws::AppMesh
 
     # The access log configuration for a virtual gateway.
     #
+    # @note VirtualGatewayAccessLog is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VirtualGatewayAccessLog is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayAccessLog corresponding to the set member.
+    #
     # @!attribute [rw] file
     #   The file object to send virtual gateway access logs to.
     #   @return [Types::VirtualGatewayFileAccessLog]
@@ -4911,6 +4963,10 @@ module Aws::AppMesh
     # An object that represents the virtual gateway's client's Transport
     # Layer Security (TLS) certificate.
     #
+    # @note VirtualGatewayClientTlsCertificate is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VirtualGatewayClientTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayClientTlsCertificate corresponding to the set member.
+    #
     # @!attribute [rw] file
     #   An object that represents a local file certificate. The certificate
     #   must meet specific requirements and you must have proxy
@@ -4949,6 +5005,10 @@ module Aws::AppMesh
     #
     # If not present the default value for `maxPendingRequests` is
     # `2147483647`.
+    #
+    # @note VirtualGatewayConnectionPool is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VirtualGatewayConnectionPool is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayConnectionPool corresponding to the set member.
     #
     # @!attribute [rw] grpc
     #   An object that represents a type of connection pool.
@@ -5235,6 +5295,10 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # certificate.
     #
+    # @note VirtualGatewayListenerTlsCertificate is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VirtualGatewayListenerTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayListenerTlsCertificate corresponding to the set member.
+    #
     # @!attribute [rw] acm
     #   A reference to an object that represents an Certificate Manager
     #   certificate.
@@ -5342,6 +5406,10 @@ module Aws::AppMesh
 
     # An object that represents a virtual gateway's listener's Transport
     # Layer Security (TLS) validation context trust.
+    #
+    # @note VirtualGatewayListenerTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VirtualGatewayListenerTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayListenerTlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a Transport Layer Security (TLS)
@@ -5589,6 +5657,10 @@ module Aws::AppMesh
     # An object that represents a Transport Layer Security (TLS) validation
     # context trust.
     #
+    # @note VirtualGatewayTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VirtualGatewayTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayTlsValidationContextTrust corresponding to the set member.
+    #
     # @!attribute [rw] acm
     #   A reference to an object that represents a Transport Layer Security
     #   (TLS) validation context trust for an Certificate Manager
@@ -5630,6 +5702,10 @@ module Aws::AppMesh
     #
     # If not present the default value for `maxPendingRequests` is
     # `2147483647`.
+    #
+    # @note VirtualNodeConnectionPool is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VirtualNodeConnectionPool is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualNodeConnectionPool corresponding to the set member.
     #
     # @!attribute [rw] grpc
     #   An object that represents a type of connection pool.
@@ -6118,6 +6194,10 @@ module Aws::AppMesh
     end
 
     # An object that represents the provider for a virtual service.
+    #
+    # @note VirtualServiceProvider is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VirtualServiceProvider is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualServiceProvider corresponding to the set member.
     #
     # @!attribute [rw] virtual_node
     #   The virtual node associated with a virtual service.

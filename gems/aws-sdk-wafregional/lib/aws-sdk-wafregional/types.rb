@@ -1912,6 +1912,8 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenRequest AWS API Documentation
     #
     class GetChangeTokenRequest < Aws::EmptyStructure; end

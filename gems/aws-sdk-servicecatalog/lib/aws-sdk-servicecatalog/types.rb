@@ -2343,6 +2343,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccessInput AWS API Documentation
     #
     class DisableAWSOrganizationsAccessInput < Aws::EmptyStructure; end
@@ -2511,6 +2513,8 @@ module Aws::ServiceCatalog
     #
     class DuplicateResourceException < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccessInput AWS API Documentation
     #
     class EnableAWSOrganizationsAccessInput < Aws::EmptyStructure; end
@@ -2687,6 +2691,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetAWSOrganizationsAccessStatusInput AWS API Documentation
     #
     class GetAWSOrganizationsAccessStatusInput < Aws::EmptyStructure; end

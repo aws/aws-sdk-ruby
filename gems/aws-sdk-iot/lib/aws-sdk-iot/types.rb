@@ -1925,6 +1925,8 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @api private
+    #
     class ClearDefaultAuthorizerRequest < Aws::EmptyStructure; end
 
     class ClearDefaultAuthorizerResponse < Aws::EmptyStructure; end
@@ -4296,6 +4298,8 @@ module Aws::IoT
 
     # The input for the DeleteRegistrationCode operation.
     #
+    # @api private
+    #
     class DeleteRegistrationCodeRequest < Aws::EmptyStructure; end
 
     # The output for the DeleteRegistrationCode operation.
@@ -4497,6 +4501,8 @@ module Aws::IoT
     #
     class DeprecateThingTypeResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     class DescribeAccountAuditConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] role_arn
@@ -4872,6 +4878,8 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @api private
+    #
     class DescribeDefaultAuthorizerRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] authorizer_description
@@ -5063,6 +5071,8 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @api private
+    #
     class DescribeEventConfigurationsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] event_configurations
@@ -6871,6 +6881,8 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetIndexingConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] thing_indexing_configuration
@@ -6909,6 +6921,8 @@ module Aws::IoT
     end
 
     # The input for the GetLoggingOptions operation.
+    #
+    # @api private
     #
     class GetLoggingOptionsRequest < Aws::EmptyStructure; end
 
@@ -7109,6 +7123,8 @@ module Aws::IoT
 
     # The input to the GetRegistrationCode operation.
     #
+    # @api private
+    #
     class GetRegistrationCodeRequest < Aws::EmptyStructure; end
 
     # The output from the GetRegistrationCode operation.
@@ -7210,6 +7226,8 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetV2LoggingOptionsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] role_arn

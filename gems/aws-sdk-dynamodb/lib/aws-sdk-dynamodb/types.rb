@@ -2595,6 +2595,8 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsRequest AWS API Documentation
     #
     class DescribeEndpointsRequest < Aws::EmptyStructure; end
@@ -2746,6 +2748,8 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `DescribeLimits` operation. Has no content.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimitsInput AWS API Documentation
     #

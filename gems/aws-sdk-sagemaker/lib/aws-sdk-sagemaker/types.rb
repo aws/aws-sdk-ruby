@@ -14978,6 +14978,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DisableSagemakerServicecatalogPortfolioInput AWS API Documentation
     #
     class DisableSagemakerServicecatalogPortfolioInput < Aws::EmptyStructure; end
@@ -15670,6 +15672,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EnableSagemakerServicecatalogPortfolioInput AWS API Documentation
     #
     class EnableSagemakerServicecatalogPortfolioInput < Aws::EmptyStructure; end
@@ -17036,6 +17040,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetSagemakerServicecatalogPortfolioStatusInput AWS API Documentation
     #
     class GetSagemakerServicecatalogPortfolioStatusInput < Aws::EmptyStructure; end
@@ -28436,6 +28442,8 @@ module Aws::SageMaker
 
     # Represents the Parquet dataset format used when running a monitoring
     # job.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringParquetDatasetFormat AWS API Documentation
     #

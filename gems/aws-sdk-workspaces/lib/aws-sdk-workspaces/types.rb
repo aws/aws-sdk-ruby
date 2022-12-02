@@ -1167,6 +1167,8 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountRequest AWS API Documentation
     #
     class DescribeAccountRequest < Aws::EmptyStructure; end

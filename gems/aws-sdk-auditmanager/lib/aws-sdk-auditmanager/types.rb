@@ -2044,6 +2044,8 @@ module Aws::AuditManager
     #
     class DeleteControlResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeregisterAccountRequest AWS API Documentation
     #
     class DeregisterAccountRequest < Aws::EmptyStructure; end
@@ -2427,6 +2429,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAccountStatusRequest AWS API Documentation
     #
     class GetAccountStatusRequest < Aws::EmptyStructure; end
@@ -2880,6 +2884,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetInsightsRequest AWS API Documentation
     #
     class GetInsightsRequest < Aws::EmptyStructure; end
@@ -2896,6 +2902,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetOrganizationAdminAccountRequest AWS API Documentation
     #
     class GetOrganizationAdminAccountRequest < Aws::EmptyStructure; end
@@ -2917,6 +2925,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetServicesInScopeRequest AWS API Documentation
     #
     class GetServicesInScopeRequest < Aws::EmptyStructure; end

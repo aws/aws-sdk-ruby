@@ -2549,6 +2549,8 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImagesInput AWS API Documentation
     #
     class ListCuratedEnvironmentImagesInput < Aws::EmptyStructure; end
@@ -2973,6 +2975,8 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentialsInput AWS API Documentation
     #
     class ListSourceCredentialsInput < Aws::EmptyStructure; end

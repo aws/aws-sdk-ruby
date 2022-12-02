@@ -1663,6 +1663,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributesMessage AWS API Documentation
     #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end

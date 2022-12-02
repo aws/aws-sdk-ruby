@@ -2306,6 +2306,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsRequest AWS API Documentation
     #
     class GetAccountSettingsRequest < Aws::EmptyStructure; end

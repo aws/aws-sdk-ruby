@@ -1135,6 +1135,8 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetPricingPlanRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] current_pricing_plan
@@ -1497,6 +1499,8 @@ module Aws::IoTTwinMaker
     #
     #  </note>
     #
+    # @note ListComponentTypesFilter is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] extends_from
     #   The component type that the component types in the list extend.
     #   @return [String]
@@ -1580,6 +1584,8 @@ module Aws::IoTTwinMaker
     end
 
     # An object that filters items in a list of entities.
+    #
+    # @note ListEntitiesFilter is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] parent_entity_id
     #   The parent of the entities in the list.

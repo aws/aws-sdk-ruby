@@ -85,6 +85,8 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/DescribeReportCreationInput AWS API Documentation
     #
     class DescribeReportCreationInput < Aws::EmptyStructure; end

@@ -130,6 +130,8 @@ module Aws::MigrationHubConfig
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhub-config-2019-06-30/GetHomeRegionRequest AWS API Documentation
     #
     class GetHomeRegionRequest < Aws::EmptyStructure; end

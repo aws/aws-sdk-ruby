@@ -1847,6 +1847,8 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationInput AWS API Documentation
     #
     class GetBlockPublicAccessConfigurationInput < Aws::EmptyStructure; end

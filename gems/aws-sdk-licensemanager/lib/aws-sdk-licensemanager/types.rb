@@ -1568,6 +1568,8 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetServiceSettingsRequest AWS API Documentation
     #
     class GetServiceSettingsRequest < Aws::EmptyStructure; end

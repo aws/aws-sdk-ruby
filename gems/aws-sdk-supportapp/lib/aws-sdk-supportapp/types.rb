@@ -142,6 +142,8 @@ module Aws::SupportApp
     #
     class CreateSlackChannelConfigurationResult < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/DeleteAccountAliasRequest AWS API Documentation
     #
     class DeleteAccountAliasRequest < Aws::EmptyStructure; end
@@ -190,6 +192,8 @@ module Aws::SupportApp
     #
     class DeleteSlackWorkspaceConfigurationResult < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/GetAccountAliasRequest AWS API Documentation
     #
     class GetAccountAliasRequest < Aws::EmptyStructure; end

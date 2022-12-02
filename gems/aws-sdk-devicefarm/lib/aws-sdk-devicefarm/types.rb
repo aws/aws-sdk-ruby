@@ -1698,6 +1698,8 @@ module Aws::DeviceFarm
 
     # Represents the request sent to retrieve the account settings.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettingsRequest AWS API Documentation
     #
     class GetAccountSettingsRequest < Aws::EmptyStructure; end

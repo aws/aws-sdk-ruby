@@ -2682,6 +2682,8 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateUploadUrlRequest AWS API Documentation
     #
     class CreateUploadUrlRequest < Aws::EmptyStructure; end

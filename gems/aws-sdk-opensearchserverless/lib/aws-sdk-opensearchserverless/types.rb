@@ -956,6 +956,8 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetAccountSettingsRequest AWS API Documentation
     #
     class GetAccountSettingsRequest < Aws::EmptyStructure; end
@@ -972,6 +974,8 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetPoliciesStatsRequest AWS API Documentation
     #
     class GetPoliciesStatsRequest < Aws::EmptyStructure; end

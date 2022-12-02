@@ -1086,6 +1086,8 @@ module Aws::PinpointEmail
     # A request to obtain information about the email-sending capabilities
     # of your Amazon Pinpoint account.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetAccountRequest AWS API Documentation
     #
     class GetAccountRequest < Aws::EmptyStructure; end
@@ -1379,6 +1381,8 @@ module Aws::PinpointEmail
     #
     #
     # [1]: http://aws.amazon.com/pinpoint/pricing/
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptionsRequest AWS API Documentation
     #

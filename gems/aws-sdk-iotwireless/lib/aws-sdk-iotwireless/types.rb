@@ -1642,6 +1642,8 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetEventConfigurationByResourceTypesRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] device_registration_state
@@ -1737,6 +1739,8 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetLogLevelsByResourceTypesRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] default_log_level
@@ -4481,6 +4485,8 @@ module Aws::IoTWireless
 
     class PutResourceLogLevelResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     class ResetAllResourceLogLevelsRequest < Aws::EmptyStructure; end
 
     class ResetAllResourceLogLevelsResponse < Aws::EmptyStructure; end

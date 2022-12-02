@@ -2491,6 +2491,8 @@ module Aws::Route53
 
     # Empty request.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesRequest AWS API Documentation
     #
     class GetCheckerIpRangesRequest < Aws::EmptyStructure; end
@@ -2613,6 +2615,8 @@ module Aws::Route53
 
     # A request for the number of health checks that are associated with the
     # current Amazon Web Services account.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCountRequest AWS API Documentation
     #
@@ -2748,6 +2752,8 @@ module Aws::Route53
 
     # A request to retrieve a count of all the hosted zones that are
     # associated with the current Amazon Web Services account.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCountRequest AWS API Documentation
     #
@@ -2971,6 +2977,8 @@ module Aws::Route53
 
     # Request to get the number of traffic policy instances that are
     # associated with the current Amazon Web Services account.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCountRequest AWS API Documentation
     #

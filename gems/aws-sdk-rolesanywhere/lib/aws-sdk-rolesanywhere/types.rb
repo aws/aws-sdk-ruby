@@ -590,6 +590,10 @@ module Aws::RolesAnywhere
 
     # The data field of the trust anchor depending on its type.
     #
+    # @note SourceData is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SourceData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceData corresponding to the set member.
+    #
     # @!attribute [rw] acm_pca_arn
     #   The root certificate of the Certificate Manager Private Certificate
     #   Authority specified by this ARN is used in trust validation for

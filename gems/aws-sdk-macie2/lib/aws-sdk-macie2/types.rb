@@ -1629,6 +1629,8 @@ module Aws::Macie2
     # Specifies that a classification job runs once a day, every day. This
     # is an empty object.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DailySchedule AWS API Documentation
     #
     class DailySchedule < Aws::EmptyStructure; end
@@ -1967,6 +1969,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeOrganizationConfigurationRequest AWS API Documentation
     #
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
@@ -2043,6 +2047,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisableMacieRequest AWS API Documentation
     #
     class DisableMacieRequest < Aws::EmptyStructure; end
@@ -2066,6 +2072,8 @@ module Aws::Macie2
     #
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromAdministratorAccountRequest AWS API Documentation
     #
     class DisassociateFromAdministratorAccountRequest < Aws::EmptyStructure; end
@@ -2074,6 +2082,8 @@ module Aws::Macie2
     #
     class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromMasterAccountRequest AWS API Documentation
     #
     class DisassociateFromMasterAccountRequest < Aws::EmptyStructure; end
@@ -2438,6 +2448,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAdministratorAccountRequest AWS API Documentation
     #
     class GetAdministratorAccountRequest < Aws::EmptyStructure; end
@@ -2523,6 +2535,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAutomatedDiscoveryConfigurationRequest AWS API Documentation
     #
     class GetAutomatedDiscoveryConfigurationRequest < Aws::EmptyStructure; end
@@ -2687,6 +2701,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetClassificationExportConfigurationRequest AWS API Documentation
     #
     class GetClassificationExportConfigurationRequest < Aws::EmptyStructure; end
@@ -2936,6 +2952,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsPublicationConfigurationRequest AWS API Documentation
     #
     class GetFindingsPublicationConfigurationRequest < Aws::EmptyStructure; end
@@ -2994,6 +3012,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetInvitationsCountRequest AWS API Documentation
     #
     class GetInvitationsCountRequest < Aws::EmptyStructure; end
@@ -3013,6 +3033,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMacieSessionRequest AWS API Documentation
     #
     class GetMacieSessionRequest < Aws::EmptyStructure; end
@@ -3057,6 +3079,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMasterAccountRequest AWS API Documentation
     #
     class GetMasterAccountRequest < Aws::EmptyStructure; end
@@ -3185,6 +3209,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetRevealConfigurationRequest AWS API Documentation
     #
     class GetRevealConfigurationRequest < Aws::EmptyStructure; end

@@ -1258,6 +1258,10 @@ module Aws::AmplifyUIBuilder
 
     # Describes the field position.
     #
+    # @note FieldPosition is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FieldPosition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FieldPosition corresponding to the set member.
+    #
     # @!attribute [rw] below
     #   The field position is below the field specified by the string.
     #   @return [String]
@@ -1528,6 +1532,10 @@ module Aws::AmplifyUIBuilder
     end
 
     # Describes the configuration settings for the form's style properties.
+    #
+    # @note FormStyleConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FormStyleConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FormStyleConfig corresponding to the set member.
     #
     # @!attribute [rw] token_reference
     #   A reference to a design token to use to bind the form's style

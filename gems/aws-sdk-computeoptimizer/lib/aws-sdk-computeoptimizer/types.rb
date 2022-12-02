@@ -1651,6 +1651,8 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEnrollmentStatusRequest AWS API Documentation
     #
     class GetEnrollmentStatusRequest < Aws::EmptyStructure; end

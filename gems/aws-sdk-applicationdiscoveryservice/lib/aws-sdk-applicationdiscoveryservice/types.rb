@@ -1079,6 +1079,8 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetDiscoverySummaryRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] servers
@@ -1526,6 +1528,8 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # @api private
+    #
     class StartContinuousExportRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] export_id

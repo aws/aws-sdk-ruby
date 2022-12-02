@@ -236,6 +236,8 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DescribeEndpointsRequest AWS API Documentation
     #
     class DescribeEndpointsRequest < Aws::EmptyStructure; end

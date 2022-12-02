@@ -37,6 +37,8 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/AssociateServiceQuotaTemplateRequest AWS API Documentation
     #
     class AssociateServiceQuotaTemplateRequest < Aws::EmptyStructure; end
@@ -85,6 +87,8 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DisassociateServiceQuotaTemplateRequest AWS API Documentation
     #
     class DisassociateServiceQuotaTemplateRequest < Aws::EmptyStructure; end
@@ -153,6 +157,8 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAssociationForServiceQuotaTemplateRequest AWS API Documentation
     #
     class GetAssociationForServiceQuotaTemplateRequest < Aws::EmptyStructure; end

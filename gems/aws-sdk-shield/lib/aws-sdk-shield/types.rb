@@ -440,6 +440,8 @@ module Aws::Shield
     #
     # JSON specification: `"Block": \{\}`
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/BlockAction AWS API Documentation
     #
     class BlockAction < Aws::EmptyStructure; end
@@ -474,6 +476,8 @@ module Aws::Shield
     # This is only used in the context of the `ResponseAction` setting.
     #
     # JSON specification: `"Count": \{\}`
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CountAction AWS API Documentation
     #
@@ -605,6 +609,8 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscriptionRequest AWS API Documentation
     #
     class CreateSubscriptionRequest < Aws::EmptyStructure; end
@@ -647,6 +653,8 @@ module Aws::Shield
     #
     class DeleteProtectionResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscriptionRequest AWS API Documentation
     #
     class DeleteSubscriptionRequest < Aws::EmptyStructure; end
@@ -679,6 +687,8 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackStatisticsRequest AWS API Documentation
     #
     class DescribeAttackStatisticsRequest < Aws::EmptyStructure; end
@@ -700,6 +710,8 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccessRequest AWS API Documentation
     #
     class DescribeDRTAccessRequest < Aws::EmptyStructure; end
@@ -722,6 +734,8 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettingsRequest AWS API Documentation
     #
     class DescribeEmergencyContactSettingsRequest < Aws::EmptyStructure; end
@@ -802,6 +816,8 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscriptionRequest AWS API Documentation
     #
     class DescribeSubscriptionRequest < Aws::EmptyStructure; end
@@ -834,6 +850,8 @@ module Aws::Shield
     #
     class DisableApplicationLayerAutomaticResponseResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagementRequest AWS API Documentation
     #
     class DisableProactiveEngagementRequest < Aws::EmptyStructure; end
@@ -858,6 +876,8 @@ module Aws::Shield
     #
     class DisassociateDRTLogBucketResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRoleRequest AWS API Documentation
     #
     class DisassociateDRTRoleRequest < Aws::EmptyStructure; end
@@ -943,6 +963,8 @@ module Aws::Shield
     #
     class EnableApplicationLayerAutomaticResponseResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagementRequest AWS API Documentation
     #
     class EnableProactiveEngagementRequest < Aws::EmptyStructure; end
@@ -951,6 +973,8 @@ module Aws::Shield
     #
     class EnableProactiveEngagementResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateRequest AWS API Documentation
     #
     class GetSubscriptionStateRequest < Aws::EmptyStructure; end

@@ -259,6 +259,10 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html
     #
+    # @note AclGrantee is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AclGrantee is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AclGrantee corresponding to the set member.
+    #
     # @!attribute [rw] id
     #   The value specified is the canonical user ID of an Amazon Web
     #   Services account.
@@ -584,6 +588,10 @@ module Aws::AccessAnalyzer
     # Access control configuration structures for your resource. You specify
     # the configuration as a type-value pair. You can specify only one type
     # of access control configuration.
+    #
+    # @note Configuration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Configuration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Configuration corresponding to the set member.
     #
     # @!attribute [rw] ebs_snapshot
     #   The access control configuration is for an Amazon EBS volume
@@ -1636,6 +1644,8 @@ module Aws::AccessAnalyzer
     # This configuration sets the network origin for the Amazon S3 access
     # point or multi-region access point to `Internet`.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternetConfiguration AWS API Documentation
     #
     class InternetConfiguration < Aws::EmptyStructure; end
@@ -2236,6 +2246,10 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html
     #
+    # @note NetworkOriginConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note NetworkOriginConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of NetworkOriginConfiguration corresponding to the set member.
+    #
     # @!attribute [rw] vpc_configuration
     #   The proposed virtual private cloud (VPC) configuration for the
     #   Amazon S3 access point. VPC configuration does not apply to
@@ -2269,6 +2283,8 @@ module Aws::AccessAnalyzer
 
     # A single element in a path through the JSON representation of a
     # policy.
+    #
+    # @note PathElement is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PathElement corresponding to the set member.
     #
     # @!attribute [rw] index
     #   Refers to an index in a JSON array.
@@ -2386,6 +2402,10 @@ module Aws::AccessAnalyzer
 
     # The values for a manual Amazon RDS DB cluster snapshot attribute.
     #
+    # @note RdsDbClusterSnapshotAttributeValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RdsDbClusterSnapshotAttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RdsDbClusterSnapshotAttributeValue corresponding to the set member.
+    #
     # @!attribute [rw] account_ids
     #   The Amazon Web Services account IDs that have access to the manual
     #   Amazon RDS DB cluster snapshot. If the value `all` is specified,
@@ -2466,6 +2486,10 @@ module Aws::AccessAnalyzer
     # The name and values of a manual Amazon RDS DB snapshot attribute.
     # Manual DB snapshot attributes are used to authorize other Amazon Web
     # Services accounts to restore a manual DB snapshot.
+    #
+    # @note RdsDbSnapshotAttributeValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RdsDbSnapshotAttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RdsDbSnapshotAttributeValue corresponding to the set member.
     #
     # @!attribute [rw] account_ids
     #   The Amazon Web Services account IDs that have access to the manual

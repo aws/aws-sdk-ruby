@@ -455,6 +455,10 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Preferences for migrating a database to AWS.
     #
+    # @note DatabaseMigrationPreference is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DatabaseMigrationPreference is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DatabaseMigrationPreference corresponding to the set member.
+    #
     # @!attribute [rw] heterogeneous
     #   Indicates whether you are interested in moving from one type of
     #   database to another. For example, from SQL Server to Amazon Aurora
@@ -683,6 +687,8 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetPortfolioPreferencesRequest AWS API Documentation
     #
     class GetPortfolioPreferencesRequest < Aws::EmptyStructure; end
@@ -709,6 +715,8 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetPortfolioSummaryRequest AWS API Documentation
     #
     class GetPortfolioSummaryRequest < Aws::EmptyStructure; end
@@ -1172,6 +1180,10 @@ module Aws::MigrationHubStrategyRecommendations
     end
 
     # Preferences for migrating an application to AWS.
+    #
+    # @note ManagementPreference is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ManagementPreference is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ManagementPreference corresponding to the set member.
     #
     # @!attribute [rw] aws_managed_resources
     #   Indicates interest in solutions that are managed by AWS.

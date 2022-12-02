@@ -3357,6 +3357,8 @@ module Aws::MediaConvert
 
     # Send a request to permanently delete a policy that you created.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePolicyRequest AWS API Documentation
     #
     class DeletePolicyRequest < Aws::EmptyStructure; end
@@ -4826,6 +4828,8 @@ module Aws::MediaConvert
     end
 
     # Send a request to retrieve the JSON for your policy.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPolicyRequest AWS API Documentation
     #

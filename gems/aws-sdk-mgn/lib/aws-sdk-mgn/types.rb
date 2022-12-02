@@ -1186,6 +1186,8 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/InitializeServiceRequest AWS API Documentation
     #
     class InitializeServiceRequest < Aws::EmptyStructure; end

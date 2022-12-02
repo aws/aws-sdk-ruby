@@ -1704,6 +1704,8 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetMessagingSessionEndpointRequest AWS API Documentation
     #
     class GetMessagingSessionEndpointRequest < Aws::EmptyStructure; end

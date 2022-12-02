@@ -26,6 +26,10 @@ module Aws::SSMIncidents
     # The action that starts at the beginning of an incident. The response
     # plan defines the action.
     #
+    # @note Action is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Action is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Action corresponding to the set member.
+    #
     # @!attribute [rw] ssm_automation
     #   The Systems Manager automation document to start as the runbook at
     #   the beginning of the incident.
@@ -66,6 +70,8 @@ module Aws::SSMIncidents
 
     # Use the AttributeValueList to filter by string or integer values.
     #
+    # @note AttributeValueList is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] integer_values
     #   The list of integer values that the filter matches.
     #   @return [Array<Integer>]
@@ -92,6 +98,8 @@ module Aws::SSMIncidents
     # The Systems Manager automation document process to start as the
     # runbook at the beginning of the incident.
     #
+    # @note AutomationExecution is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AutomationExecution corresponding to the set member.
+    #
     # @!attribute [rw] ssm_execution_arn
     #   The Amazon Resource Name (ARN) of the automation process.
     #   @return [String]
@@ -110,6 +118,10 @@ module Aws::SSMIncidents
     end
 
     # The Chatbot chat channel used for collaboration during an incident.
+    #
+    # @note ChatChannel is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ChatChannel is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ChatChannel corresponding to the set member.
     #
     # @!attribute [rw] chatbot_sns
     #   The Amazon SNS targets that Chatbot uses to notify the chat channel
@@ -142,6 +154,8 @@ module Aws::SSMIncidents
     # multiple conditions are specified, the conditionals become an `AND`ed
     # statement. If multiple values are specified for a conditional, the
     # values are `OR`d.
+    #
+    # @note Condition is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] after
     #   After the specified timestamp.
@@ -492,6 +506,10 @@ module Aws::SSMIncidents
 
     # The dynamic SSM parameter value.
     #
+    # @note DynamicSsmParameterValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DynamicSsmParameterValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DynamicSsmParameterValue corresponding to the set member.
+    #
     # @!attribute [rw] variable
     #   Variable dynamic parameters. A parameter value is determined when an
     #   incident is created.
@@ -513,6 +531,8 @@ module Aws::SSMIncidents
     # Used to remove the chat channel from an incident record or response
     # plan.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/EmptyChatChannel AWS API Documentation
     #
     class EmptyChatChannel < Aws::EmptyStructure; end
@@ -520,6 +540,10 @@ module Aws::SSMIncidents
     # An item referenced in a `TimelineEvent` that is involved in or somehow
     # associated with an incident. You can specify an Amazon Resource Name
     # (ARN) for an Amazon Web Services resource or a `RelatedItem` ID.
+    #
+    # @note EventReference is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EventReference is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EventReference corresponding to the set member.
     #
     # @!attribute [rw] related_item_id
     #   The ID of a `RelatedItem` referenced in a `TimelineEvent`.
@@ -1000,6 +1024,10 @@ module Aws::SSMIncidents
     # Information about third-party services integrated into a response
     # plan.
     #
+    # @note Integration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Integration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Integration corresponding to the set member.
+    #
     # @!attribute [rw] pager_duty_configuration
     #   Information about the PagerDuty service where the response plan
     #   creates an incident.
@@ -1052,6 +1080,10 @@ module Aws::SSMIncidents
     end
 
     # Describes a related item.
+    #
+    # @note ItemValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ItemValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ItemValue corresponding to the set member.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the related item, if the related
@@ -1357,6 +1389,10 @@ module Aws::SSMIncidents
     # The SNS targets that are notified when updates are made to an
     # incident.
     #
+    # @note NotificationTargetItem is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note NotificationTargetItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of NotificationTargetItem corresponding to the set member.
+    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic.
     #   @return [String]
@@ -1552,6 +1588,8 @@ module Aws::SSMIncidents
     end
 
     # Details about the related item you're adding.
+    #
+    # @note RelatedItemsUpdate is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] item_to_add
     #   Details about the related item you're adding.
@@ -2147,6 +2185,8 @@ module Aws::SSMIncidents
     class UpdateRelatedItemsOutput < Aws::EmptyStructure; end
 
     # Details used when updating the replication set.
+    #
+    # @note UpdateReplicationSetAction is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] add_region_action
     #   Details about the Amazon Web Services Region that you're adding to

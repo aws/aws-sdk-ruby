@@ -636,6 +636,8 @@ module Aws::SecurityLake
     #
     class DeleteDatalakeDelegatedAdminResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeExceptionsSubscriptionRequest AWS API Documentation
     #
     class DeleteDatalakeExceptionsSubscriptionRequest < Aws::EmptyStructure; end
@@ -653,6 +655,8 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeRequest AWS API Documentation
     #
     class DeleteDatalakeRequest < Aws::EmptyStructure; end
@@ -753,6 +757,8 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeAutoEnableRequest AWS API Documentation
     #
     class GetDatalakeAutoEnableRequest < Aws::EmptyStructure; end
@@ -769,6 +775,8 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeExceptionsExpiryRequest AWS API Documentation
     #
     class GetDatalakeExceptionsExpiryRequest < Aws::EmptyStructure; end
@@ -785,6 +793,8 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeExceptionsSubscriptionRequest AWS API Documentation
     #
     class GetDatalakeExceptionsSubscriptionRequest < Aws::EmptyStructure; end
@@ -801,6 +811,8 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeRequest AWS API Documentation
     #
     class GetDatalakeRequest < Aws::EmptyStructure; end
@@ -1328,6 +1340,10 @@ module Aws::SecurityLake
 
     # The supported source types from which logs and events are collected in
     # Amazon Security Lake.
+    #
+    # @note SourceType is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SourceType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceType corresponding to the set member.
     #
     # @!attribute [rw] aws_source_type
     #   Amazon Security Lake supports logs and events collection for

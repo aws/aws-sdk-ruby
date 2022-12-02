@@ -2519,6 +2519,10 @@ module Aws::S3Control
 
     # Configures the type of the job's ManifestGenerator.
     #
+    # @note JobManifestGenerator is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note JobManifestGenerator is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of JobManifestGenerator corresponding to the set member.
+    #
     # @!attribute [rw] s3_job_manifest_generator
     #   The S3 job ManifestGenerator's configuration details.
     #   @return [Types::S3JobManifestGenerator]
@@ -3667,6 +3671,10 @@ module Aws::S3Control
 
     # A container for AwsLambdaTransformation.
     #
+    # @note ObjectLambdaContentTransformation is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ObjectLambdaContentTransformation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ObjectLambdaContentTransformation corresponding to the set member.
+    #
     # @!attribute [rw] aws_lambda
     #   A container for an Lambda function.
     #   @return [Types::AwsLambdaTransformation]
@@ -4525,6 +4533,8 @@ module Aws::S3Control
     # API only accepts the bucket name and key name as parameters, which are
     # defined in the job's manifest.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3DeleteObjectTaggingOperation AWS API Documentation
     #
     class S3DeleteObjectTaggingOperation < Aws::EmptyStructure; end
@@ -4790,6 +4800,8 @@ module Aws::S3Control
     # Directs the specified job to invoke `ReplicateObject` on every object
     # in the job's manifest.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ReplicateObjectOperation AWS API Documentation
     #
     class S3ReplicateObjectOperation < Aws::EmptyStructure; end
@@ -4974,12 +4986,16 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3 AWS API Documentation
     #
     class SSES3 < Aws::EmptyStructure; end
 
     # Configuration for the use of SSE-S3 to encrypt generated manifest
     # objects.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3Encryption AWS API Documentation
     #

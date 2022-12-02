@@ -1208,6 +1208,8 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeActiveReceiptRuleSetRequest AWS API Documentation
     #
     class DescribeActiveReceiptRuleSetRequest < Aws::EmptyStructure; end
@@ -2604,6 +2606,8 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptFiltersRequest AWS API Documentation
     #

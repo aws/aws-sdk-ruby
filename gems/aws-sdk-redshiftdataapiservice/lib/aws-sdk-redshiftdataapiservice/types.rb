@@ -647,6 +647,8 @@ module Aws::RedshiftDataAPIService
 
     # A data value in a column.
     #
+    # @note Field is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Field corresponding to the set member.
+    #
     # @!attribute [rw] blob_value
     #   A value of the BLOB data type.
     #   @return [String]

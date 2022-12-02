@@ -2139,6 +2139,8 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreferenceRequest AWS API Documentation
     #
     class GetConferencePreferenceRequest < Aws::EmptyStructure; end
@@ -2275,6 +2277,8 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfigurationRequest AWS API Documentation
     #
     class GetInvitationConfigurationRequest < Aws::EmptyStructure; end

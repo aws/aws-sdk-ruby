@@ -3075,6 +3075,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceRegistryLoginRequest AWS API Documentation
     #
     class CreateContainerServiceRegistryLoginRequest < Aws::EmptyStructure; end
@@ -5976,6 +5978,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPairRequest AWS API Documentation
     #
     class DownloadDefaultKeyPairRequest < Aws::EmptyStructure; end
@@ -6779,6 +6783,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerAPIMetadataRequest AWS API Documentation
     #
     class GetContainerAPIMetadataRequest < Aws::EmptyStructure; end
@@ -7069,6 +7075,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServicePowersRequest AWS API Documentation
     #
     class GetContainerServicePowersRequest < Aws::EmptyStructure; end
@@ -7231,6 +7239,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionBundlesRequest AWS API Documentation
     #
     class GetDistributionBundlesRequest < Aws::EmptyStructure; end
@@ -10514,6 +10524,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeeredRequest AWS API Documentation
     #
     class IsVpcPeeredRequest < Aws::EmptyStructure; end
@@ -11710,6 +11722,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpcRequest AWS API Documentation
     #
     class PeerVpcRequest < Aws::EmptyStructure; end
@@ -13607,6 +13621,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpcRequest AWS API Documentation
     #
     class UnpeerVpcRequest < Aws::EmptyStructure; end

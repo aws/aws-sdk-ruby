@@ -242,6 +242,8 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimitsInput AWS API Documentation
     #
     class DescribeLimitsInput < Aws::EmptyStructure; end

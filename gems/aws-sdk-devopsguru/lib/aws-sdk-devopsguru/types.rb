@@ -600,6 +600,8 @@ module Aws::DevOpsGuru
     #
     class DeleteInsightResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthRequest AWS API Documentation
     #
     class DescribeAccountHealthRequest < Aws::EmptyStructure; end
@@ -724,6 +726,8 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfigRequest AWS API Documentation
     #
     class DescribeEventSourcesConfigRequest < Aws::EmptyStructure; end
@@ -1106,6 +1110,8 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeServiceIntegrationRequest AWS API Documentation
     #
     class DescribeServiceIntegrationRequest < Aws::EmptyStructure; end

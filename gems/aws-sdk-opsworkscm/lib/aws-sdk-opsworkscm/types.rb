@@ -605,6 +605,8 @@ module Aws::OpsWorksCM
     #
     class DeleteServerResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributesRequest AWS API Documentation
     #
     class DescribeAccountAttributesRequest < Aws::EmptyStructure; end

@@ -3435,6 +3435,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizationsInput AWS API Documentation
     #
     class DescribeVpcPeeringAuthorizationsInput < Aws::EmptyStructure; end

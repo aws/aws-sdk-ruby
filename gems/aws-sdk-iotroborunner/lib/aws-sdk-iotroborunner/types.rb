@@ -808,6 +808,10 @@ module Aws::IoTRoboRunner
 
     # Worker orientation measured in units clockwise from north.
     #
+    # @note Orientation is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Orientation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Orientation corresponding to the set member.
+    #
     # @!attribute [rw] degrees
     #   Degrees, limited on \[0, 360)
     #   @return [Float]
@@ -824,6 +828,10 @@ module Aws::IoTRoboRunner
     end
 
     # Supported coordinates for worker position.
+    #
+    # @note PositionCoordinates is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PositionCoordinates is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PositionCoordinates corresponding to the set member.
     #
     # @!attribute [rw] cartesian_coordinates
     #   Cartesian coordinates.

@@ -831,6 +831,8 @@ module Aws::MTurk
     #
     class DisassociateQualificationFromWorkerResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalanceRequest AWS API Documentation
     #
     class GetAccountBalanceRequest < Aws::EmptyStructure; end

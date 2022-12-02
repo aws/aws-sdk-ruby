@@ -2139,6 +2139,8 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetAccountSettingsInput AWS API Documentation
     #
     class GetAccountSettingsInput < Aws::EmptyStructure; end
@@ -4622,6 +4624,8 @@ module Aws::Proton
     end
 
     # Template version source data.
+    #
+    # @note TemplateVersionSourceInput is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] s3
     #   An S3 source object that includes the template bundle S3 path and

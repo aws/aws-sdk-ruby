@@ -1581,6 +1581,8 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccountRequest AWS API Documentation
     #
     class DisassociateServiceRoleFromAccountRequest < Aws::EmptyStructure; end
@@ -2852,6 +2854,8 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountRequest AWS API Documentation
     #
     class GetServiceRoleForAccountRequest < Aws::EmptyStructure; end

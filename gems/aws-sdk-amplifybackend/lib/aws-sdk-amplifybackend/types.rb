@@ -2914,6 +2914,8 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ResourceConfig AWS API Documentation
     #
     class ResourceConfig < Aws::EmptyStructure; end

@@ -1586,6 +1586,8 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # @api private
+    #
     class DescribeLoggingOptionsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] logging_options
@@ -1900,6 +1902,8 @@ module Aws::IoTAnalytics
     end
 
     # Contains the configuration information of the JSON format.
+    #
+    # @api private
     #
     class JsonConfiguration < Aws::EmptyStructure; end
 
@@ -2740,6 +2744,8 @@ module Aws::IoTAnalytics
     # You can't change the choice of S3 storage after the data store is
     # created.
     #
+    # @api private
+    #
     class ServiceManagedChannelS3Storage < Aws::EmptyStructure; end
 
     # Used to store channel data in an S3 bucket managed by IoT Analytics.
@@ -2749,6 +2755,8 @@ module Aws::IoTAnalytics
     # Used to store data in an Amazon S3 bucket managed by IoT Analytics.
     # You can't change the choice of Amazon S3 storage after your data
     # store is created.
+    #
+    # @api private
     #
     class ServiceManagedDatastoreS3Storage < Aws::EmptyStructure; end
 

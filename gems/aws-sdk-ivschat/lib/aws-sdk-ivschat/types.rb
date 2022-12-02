@@ -389,6 +389,10 @@ module Aws::Ivschat
     # destination. For logging, you define only one type of destination (for
     # CloudWatch Logs, Kinesis Firehose, or S3).
     #
+    # @note DestinationConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DestinationConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DestinationConfiguration corresponding to the set member.
+    #
     # @!attribute [rw] cloud_watch_logs
     #   Name of the Amazon CloudWatch Logs destination where chat activity
     #   will be logged.

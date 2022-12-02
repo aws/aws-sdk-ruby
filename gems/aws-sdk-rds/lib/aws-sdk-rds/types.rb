@@ -9848,6 +9848,8 @@ module Aws::RDS
     #
     class DeregisterDBProxyTargetsResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributesMessage AWS API Documentation
     #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end

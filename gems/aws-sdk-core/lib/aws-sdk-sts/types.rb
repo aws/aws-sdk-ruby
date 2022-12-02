@@ -1043,6 +1043,8 @@ module Aws::STS
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentityRequest AWS API Documentation
     #
     class GetCallerIdentityRequest < Aws::EmptyStructure; end

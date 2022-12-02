@@ -1868,6 +1868,10 @@ module Aws::Panorama
     # document that has a single key (`PayloadData`) where the value is an
     # escaped string representation of the overrides document.
     #
+    # @note ManifestOverridesPayload is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ManifestOverridesPayload is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ManifestOverridesPayload corresponding to the set member.
+    #
     # @!attribute [rw] payload_data
     #   The overrides document.
     #   @return [String]
@@ -1889,6 +1893,10 @@ module Aws::Panorama
     # has a single key (`PayloadData`) where the value is an escaped string
     # representation of the application manifest (`graph.json`). This file
     # is located in the `graphs` folder in your application source.
+    #
+    # @note ManifestPayload is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ManifestPayload is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ManifestPayload corresponding to the set member.
     #
     # @!attribute [rw] payload_data
     #   The application manifest.

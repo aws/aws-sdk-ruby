@@ -62,6 +62,8 @@ module Aws::WAFV2
     #
     # JSON specification: `"All": \{\}`
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/All AWS API Documentation
     #
     class All < Aws::EmptyStructure; end
@@ -72,6 +74,8 @@ module Aws::WAFV2
     # request component types.
     #
     # JSON specification: `"AllQueryArguments": \{\}`
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AllQueryArguments AWS API Documentation
     #
@@ -4638,6 +4642,8 @@ module Aws::WAFV2
     #
     # JSON specification: `"Method": \{\}`
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Method AWS API Documentation
     #
     class Method < Aws::EmptyStructure; end
@@ -4690,6 +4696,8 @@ module Aws::WAFV2
     # values for RuleAction and web ACL DefaultAction.
     #
     # JSON specification: `"None": \{\}`
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/NoneAction AWS API Documentation
     #
@@ -4942,6 +4950,8 @@ module Aws::WAFV2
     # request component types.
     #
     # JSON specification: `"QueryString": \{\}`
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/QueryString AWS API Documentation
     #
@@ -6988,6 +6998,8 @@ module Aws::WAFV2
     # request component types.
     #
     # JSON specification: `"UriPath": \{\}`
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UriPath AWS API Documentation
     #

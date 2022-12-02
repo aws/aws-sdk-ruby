@@ -403,6 +403,10 @@ module Aws::IoTFleetWise
 
     # Specifies what data to collect and how often or when to collect it.
     #
+    # @note CollectionScheme is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CollectionScheme is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CollectionScheme corresponding to the set member.
+    #
     # @!attribute [rw] time_based_collection_scheme
     #   Information about a collection scheme that uses a time period to
     #   decide how often to collect data.
@@ -1236,6 +1240,8 @@ module Aws::IoTFleetWise
     # describe and model signals in vehicle networks. The JSON file collects
     # signal specificiations in a VSS format.
     #
+    # @note FormattedVss is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] vss_json
     #   Provides the VSS in JSON format.
     #   @return [String]
@@ -1472,6 +1478,8 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetLoggingOptionsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] cloud_watch_log_delivery
@@ -1537,6 +1545,8 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
+    # @api private
+    #
     class GetRegisterAccountStatusRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] customer_account_id
@@ -2550,6 +2560,8 @@ module Aws::IoTFleetWise
 
     # Specifications for defining a vehicle network.
     #
+    # @note NetworkFileDefinition is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] can_dbc
     #   Information, including CAN DBC files, about the configurations used
     #   to create a decoder manifest.
@@ -2605,6 +2617,10 @@ module Aws::IoTFleetWise
 
     # A general abstraction of a signal. A node can be specified as an
     # actuator, attribute, branch, or sensor.
+    #
+    # @note Node is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Node is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Node corresponding to the set member.
     #
     # @!attribute [rw] branch
     #   Information about a node specified as a branch.

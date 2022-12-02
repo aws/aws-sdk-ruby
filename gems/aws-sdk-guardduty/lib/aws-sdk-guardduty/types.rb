@@ -2499,6 +2499,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountRequest AWS API Documentation
     #
     class GetInvitationsCountRequest < Aws::EmptyStructure; end

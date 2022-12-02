@@ -3983,6 +3983,8 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMessagingSessionEndpointRequest AWS API Documentation
     #
     class GetMessagingSessionEndpointRequest < Aws::EmptyStructure; end

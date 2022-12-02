@@ -2336,6 +2336,8 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettingsInput AWS API Documentation
     #
     class DescribeGlobalSettingsInput < Aws::EmptyStructure; end
@@ -2631,6 +2633,8 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettingsInput AWS API Documentation
     #
     class DescribeRegionSettingsInput < Aws::EmptyStructure; end

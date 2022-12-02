@@ -583,6 +583,8 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetAuthorizationTokenRequest AWS API Documentation
     #
     class GetAuthorizationTokenRequest < Aws::EmptyStructure; end
@@ -600,6 +602,8 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetRegistryCatalogDataRequest AWS API Documentation
     #
     class GetRegistryCatalogDataRequest < Aws::EmptyStructure; end

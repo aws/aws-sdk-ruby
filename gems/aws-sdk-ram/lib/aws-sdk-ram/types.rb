@@ -614,6 +614,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/EnableSharingWithAwsOrganizationRequest AWS API Documentation
     #
     class EnableSharingWithAwsOrganizationRequest < Aws::EmptyStructure; end

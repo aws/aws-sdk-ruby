@@ -590,6 +590,8 @@ module Aws::CloudHSM
 
     # Contains the inputs for the ListAvailableZones action.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZonesRequest AWS API Documentation
     #
     class ListAvailableZonesRequest < Aws::EmptyStructure; end

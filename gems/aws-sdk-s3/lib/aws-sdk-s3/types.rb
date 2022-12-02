@@ -3977,6 +3977,8 @@ module Aws::S3
 
     # A container for specifying the configuration for Amazon EventBridge.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EventBridgeConfiguration AWS API Documentation
     #
     class EventBridgeConfiguration < Aws::EmptyStructure; end
@@ -9133,6 +9135,8 @@ module Aws::S3
 
     # Container for Parquet.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ParquetInput AWS API Documentation
     #
     class ParquetInput < Aws::EmptyStructure; end
@@ -12364,6 +12368,8 @@ module Aws::S3
     end
 
     # Specifies the use of SSE-S3 to encrypt delivered inventory reports.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSES3 AWS API Documentation
     #

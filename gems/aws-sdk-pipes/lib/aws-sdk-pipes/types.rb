@@ -1147,6 +1147,10 @@ module Aws::Pipes
 
     # The Secrets Manager secret that stores your broker credentials.
     #
+    # @note MQBrokerAccessCredentials is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MQBrokerAccessCredentials is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MQBrokerAccessCredentials corresponding to the set member.
+    #
     # @!attribute [rw] basic_auth
     #   The ARN of the Secrets Manager secret.
     #   @return [String]
@@ -1165,6 +1169,10 @@ module Aws::Pipes
     end
 
     # The Secrets Manager secret that stores your stream credentials.
+    #
+    # @note MSKAccessCredentials is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MSKAccessCredentials is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MSKAccessCredentials corresponding to the set member.
     #
     # @!attribute [rw] client_certificate_tls_auth
     #   The ARN of the Secrets Manager secret.
@@ -2327,6 +2335,10 @@ module Aws::Pipes
     end
 
     # The Secrets Manager secret that stores your stream credentials.
+    #
+    # @note SelfManagedKafkaAccessConfigurationCredentials is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SelfManagedKafkaAccessConfigurationCredentials is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SelfManagedKafkaAccessConfigurationCredentials corresponding to the set member.
     #
     # @!attribute [rw] basic_auth
     #   The ARN of the Secrets Manager secret.

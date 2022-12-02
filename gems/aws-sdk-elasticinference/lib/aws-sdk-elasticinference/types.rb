@@ -113,6 +113,8 @@ module Aws::ElasticInference
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/DescribeAcceleratorTypesRequest AWS API Documentation
     #
     class DescribeAcceleratorTypesRequest < Aws::EmptyStructure; end

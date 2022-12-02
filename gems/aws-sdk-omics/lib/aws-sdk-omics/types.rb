@@ -1054,6 +1054,10 @@ module Aws::Omics
 
     # Formatting options for a file.
     #
+    # @note FormatOptions is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FormatOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FormatOptions corresponding to the set member.
+    #
     # @!attribute [rw] tsv_options
     #   Options for a TSV file.
     #   @return [Types::TsvOptions]
@@ -3666,6 +3670,10 @@ module Aws::Omics
 
     # A genome reference.
     #
+    # @note ReferenceItem is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ReferenceItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReferenceItem corresponding to the set member.
+    #
     # @!attribute [rw] reference_arn
     #   The reference's ARN.
     #   @return [String]
@@ -4590,6 +4598,10 @@ module Aws::Omics
     end
 
     # Settings for a store.
+    #
+    # @note StoreOptions is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StoreOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StoreOptions corresponding to the set member.
     #
     # @!attribute [rw] tsv_store_options
     #   File settings for a TSV store.

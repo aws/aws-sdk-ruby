@@ -140,6 +140,10 @@ module Aws::EMRContainers
     # The information about the container used for a job run or a managed
     # endpoint.
     #
+    # @note ContainerInfo is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ContainerInfo is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContainerInfo corresponding to the set member.
+    #
     # @!attribute [rw] eks_info
     #   The information about the EKS cluster.
     #   @return [Types::EksInfo]

@@ -110,6 +110,8 @@ module Aws::ConnectWisdomService
     # The data that is input into Wisdom as a result of the assistant
     # association.
     #
+    # @note AssistantAssociationInputData is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] knowledge_base_id
     #   The identifier of the knowledge base.
     #   @return [String]
@@ -128,6 +130,8 @@ module Aws::ConnectWisdomService
     end
 
     # The data that is output as a result of the assistant association.
+    #
+    # @note AssistantAssociationOutputData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AssistantAssociationOutputData corresponding to the set member.
     #
     # @!attribute [rw] knowledge_base_association
     #   The knowledge base where output data is sent.
@@ -1729,6 +1733,8 @@ module Aws::ConnectWisdomService
 
     # A union type containing information related to the trigger.
     #
+    # @note RecommendationTriggerData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RecommendationTriggerData corresponding to the set member.
+    #
     # @!attribute [rw] query
     #   Data associated with the QUERY RecommendationTriggerType.
     #   @return [Types::QueryRecommendationTriggerData]
@@ -2040,6 +2046,10 @@ module Aws::ConnectWisdomService
     end
 
     # Configuration information about the external data source.
+    #
+    # @note SourceConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SourceConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceConfiguration corresponding to the set member.
     #
     # @!attribute [rw] app_integrations
     #   Configuration information for Amazon AppIntegrations to

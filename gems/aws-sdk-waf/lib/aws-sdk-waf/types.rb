@@ -1854,6 +1854,8 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeTokenRequest AWS API Documentation
     #
     class GetChangeTokenRequest < Aws::EmptyStructure; end

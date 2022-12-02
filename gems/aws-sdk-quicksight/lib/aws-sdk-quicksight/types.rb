@@ -898,6 +898,8 @@ module Aws::QuickSight
 
     # The options that are saved for future extension.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AxisDisplayDataDrivenRange AWS API Documentation
     #
     class AxisDisplayDataDrivenRange < Aws::EmptyStructure; end

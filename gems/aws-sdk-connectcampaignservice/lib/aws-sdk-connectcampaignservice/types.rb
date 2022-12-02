@@ -312,6 +312,10 @@ module Aws::ConnectCampaignService
 
     # The possible types of dialer config parameters
     #
+    # @note DialerConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DialerConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DialerConfig corresponding to the set member.
+    #
     # @!attribute [rw] predictive_dialer_config
     #   Predictive Dialer config
     #   @return [Types::PredictiveDialerConfig]

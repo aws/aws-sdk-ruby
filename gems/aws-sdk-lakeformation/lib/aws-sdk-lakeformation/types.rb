@@ -99,6 +99,8 @@ module Aws::LakeFormation
 
     # A structure that you pass to indicate you want all rows in a filter.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AllRowsWildcard AWS API Documentation
     #
     class AllRowsWildcard < Aws::EmptyStructure; end
@@ -335,6 +337,8 @@ module Aws::LakeFormation
     class CancelTransactionResponse < Aws::EmptyStructure; end
 
     # A structure for the catalog object.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CatalogResource AWS API Documentation
     #
@@ -2869,6 +2873,8 @@ module Aws::LakeFormation
     end
 
     # A wildcard object representing every table under a database.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TableWildcard AWS API Documentation
     #

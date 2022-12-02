@@ -17235,6 +17235,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationRequest AWS API Documentation
     #
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
@@ -17443,6 +17445,8 @@ module Aws::SecurityHub
     #
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubRequest AWS API Documentation
     #
     class DisableSecurityHubRequest < Aws::EmptyStructure; end
@@ -17451,6 +17455,8 @@ module Aws::SecurityHub
     #
     class DisableSecurityHubResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromAdministratorAccountRequest AWS API Documentation
     #
     class DisassociateFromAdministratorAccountRequest < Aws::EmptyStructure; end
@@ -17459,6 +17465,8 @@ module Aws::SecurityHub
     #
     class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromMasterAccountRequest AWS API Documentation
     #
     class DisassociateFromMasterAccountRequest < Aws::EmptyStructure; end
@@ -17812,6 +17820,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAdministratorAccountRequest AWS API Documentation
     #
     class GetAdministratorAccountRequest < Aws::EmptyStructure; end
@@ -18043,6 +18053,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetInvitationsCountRequest AWS API Documentation
     #
     class GetInvitationsCountRequest < Aws::EmptyStructure; end
@@ -18060,6 +18072,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetMasterAccountRequest AWS API Documentation
     #
     class GetMasterAccountRequest < Aws::EmptyStructure; end

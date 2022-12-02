@@ -127,6 +127,8 @@ module Aws::ConnectCases
 
     # A filter for cases. Only one value can be provided.
     #
+    # @note CaseFilter is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] and_all
     #   Provides "and all" filtering.
     #   @return [Array<Types::CaseFilter>]
@@ -195,6 +197,8 @@ module Aws::ConnectCases
     end
 
     # A filter for related items of type `Comment`.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CommentFilter AWS API Documentation
     #
@@ -642,6 +646,8 @@ module Aws::ConnectCases
 
     # A filter for fields. Only one value can be provided.
     #
+    # @note FieldFilter is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] contains
     #   Object containing field identifier and value information.
     #   @return [Types::FieldValue]
@@ -840,6 +846,10 @@ module Aws::ConnectCases
     end
 
     # Object to store union of Field values.
+    #
+    # @note FieldValueUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FieldValueUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FieldValueUnion corresponding to the set member.
     #
     # @!attribute [rw] boolean_value
     #   Can be either null, or have a Boolean value type. Only one value can
@@ -1201,6 +1211,10 @@ module Aws::ConnectCases
     end
 
     # Object to store union of different versions of layout content.
+    #
+    # @note LayoutContent is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LayoutContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LayoutContent corresponding to the set member.
     #
     # @!attribute [rw] basic
     #   Content specific to `BasicLayout` type. It configures fields in the
@@ -1576,6 +1590,8 @@ module Aws::ConnectCases
 
     # Represents the content of a particular type of related item.
     #
+    # @note RelatedItemContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RelatedItemContent corresponding to the set member.
+    #
     # @!attribute [rw] comment
     #   Represents the content of a comment to be returned to agents.
     #   @return [Types::CommentContent]
@@ -1617,6 +1633,8 @@ module Aws::ConnectCases
 
     # Represents the content of a related item to be created.
     #
+    # @note RelatedItemInputContent is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] comment
     #   Represents the content of a comment to be returned to agents.
     #   @return [Types::CommentContent]
@@ -1643,6 +1661,8 @@ module Aws::ConnectCases
 
     # The list of types of related items and their parameters to use for
     # filtering.
+    #
+    # @note RelatedItemTypeFilter is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] comment
     #   A filter for related items of type `Comment`.
@@ -1892,6 +1912,10 @@ module Aws::ConnectCases
     end
 
     # This represents a sections within a panel or tab of the page layout.
+    #
+    # @note Section is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Section is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Section corresponding to the set member.
     #
     # @!attribute [rw] field_group
     #   Consists of a group of fields and associated properties.

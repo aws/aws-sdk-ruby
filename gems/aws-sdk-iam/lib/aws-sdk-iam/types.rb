@@ -5829,6 +5829,8 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProvidersRequest AWS API Documentation
     #
     class ListOpenIDConnectProvidersRequest < Aws::EmptyStructure; end
@@ -6537,6 +6539,8 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProvidersRequest AWS API Documentation
     #
     class ListSAMLProvidersRequest < Aws::EmptyStructure; end

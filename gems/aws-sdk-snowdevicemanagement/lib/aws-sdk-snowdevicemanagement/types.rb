@@ -84,6 +84,8 @@ module Aws::SnowDeviceManagement
 
     # The command given to the device to execute.
     #
+    # @note Command is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] reboot
     #   Reboots the device.
     #   @return [Types::Reboot]
@@ -914,6 +916,8 @@ module Aws::SnowDeviceManagement
 
     # A structure used to reboot the device.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snow-device-management-2021-08-04/Reboot AWS API Documentation
     #
     class Reboot < Aws::EmptyStructure; end
@@ -1076,6 +1080,8 @@ module Aws::SnowDeviceManagement
     end
 
     # A structure used to unlock a device.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snow-device-management-2021-08-04/Unlock AWS API Documentation
     #

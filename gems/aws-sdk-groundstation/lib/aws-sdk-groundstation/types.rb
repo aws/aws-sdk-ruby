@@ -102,6 +102,8 @@ module Aws::GroundStation
 
     # Details for certain `Config` object types in a contact.
     #
+    # @note ConfigDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigDetails corresponding to the set member.
+    #
     # @!attribute [rw] antenna_demod_decode_details
     #   Details for antenna demod decode `Config` in a contact.
     #   @return [Types::AntennaDemodDecodeDetails]
@@ -185,6 +187,10 @@ module Aws::GroundStation
     # Object containing the parameters of a `Config`.
     #
     # See the subtype definitions for what each type of `Config` contains.
+    #
+    # @note ConfigTypeData is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ConfigTypeData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigTypeData corresponding to the set member.
     #
     # @!attribute [rw] antenna_downlink_config
     #   Information about how AWS Ground Station should configure an antenna
@@ -941,6 +947,8 @@ module Aws::GroundStation
 
     # Ephemeris data.
     #
+    # @note EphemerisData is a union - when making an API calls you must set exactly one of the members.
+    #
     # @!attribute [rw] oem
     #   Ephemeris data in Orbit Ephemeris Message (OEM) format.
     #   @return [Types::OEMEphemeris]
@@ -1084,6 +1092,8 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # @note EphemerisTypeDescription is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EphemerisTypeDescription corresponding to the set member.
+    #
     # @!attribute [rw] oem
     #   Description of ephemeris.
     #   @return [Types::EphemerisDescription]

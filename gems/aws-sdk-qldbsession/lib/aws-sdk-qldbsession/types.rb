@@ -12,6 +12,8 @@ module Aws::QLDBSession
 
     # Contains the details of the transaction to abort.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/AbortTransactionRequest AWS API Documentation
     #
     class AbortTransactionRequest < Aws::EmptyStructure; end
@@ -120,6 +122,8 @@ module Aws::QLDBSession
     end
 
     # Specifies a request to end the session.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/EndSessionRequest AWS API Documentation
     #
@@ -464,6 +468,8 @@ module Aws::QLDBSession
     end
 
     # Specifies a request to start a transaction.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/StartTransactionRequest AWS API Documentation
     #

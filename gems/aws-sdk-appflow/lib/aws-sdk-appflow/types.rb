@@ -71,6 +71,8 @@ module Aws::Appflow
     # The connector-specific profile properties required when using
     # Amplitude.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/AmplitudeConnectorProfileProperties AWS API Documentation
     #
     class AmplitudeConnectorProfileProperties < Aws::EmptyStructure; end
@@ -2563,6 +2565,8 @@ module Aws::Appflow
     # The connector-specific profile properties required by Google
     # Analytics.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/GoogleAnalyticsConnectorProfileProperties AWS API Documentation
     #
     class GoogleAnalyticsConnectorProfileProperties < Aws::EmptyStructure; end
@@ -2624,6 +2628,8 @@ module Aws::Appflow
 
     # The connector-specific properties required when using Amazon
     # Honeycode.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/HoneycodeConnectorProfileProperties AWS API Documentation
     #
@@ -2925,6 +2931,8 @@ module Aws::Appflow
 
     # The properties that are applied when Amazon Lookout for Metrics is
     # used as a destination.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/LookoutMetricsDestinationProperties AWS API Documentation
     #
@@ -4251,6 +4259,8 @@ module Aws::Appflow
     # The connector-specific profile properties required when using
     # Singular.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SingularConnectorProfileProperties AWS API Documentation
     #
     class SingularConnectorProfileProperties < Aws::EmptyStructure; end
@@ -4826,6 +4836,8 @@ module Aws::Appflow
 
     # The connector-specific profile properties required when using Trend
     # Micro.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/TrendmicroConnectorProfileProperties AWS API Documentation
     #

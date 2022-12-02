@@ -23,6 +23,10 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # @note AreaOfInterest is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AreaOfInterest is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AreaOfInterest corresponding to the set member.
+    #
     # @!attribute [rw] area_of_interest_geometry
     #   @return [Types::AreaOfInterestGeometry]
     #
@@ -39,6 +43,10 @@ module Aws::SageMakerGeospatial
       class Unknown < AreaOfInterest; end
     end
 
+    # @note AreaOfInterestGeometry is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AreaOfInterestGeometry is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AreaOfInterestGeometry corresponding to the set member.
+    #
     # @!attribute [rw] multi_polygon_geometry
     #   @return [Types::MultiPolygonGeometryInput]
     #
@@ -86,6 +94,8 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/CloudMaskingConfigInput AWS API Documentation
     #
     class CloudMaskingConfigInput < Aws::EmptyStructure; end
@@ -203,6 +213,10 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # @note EojDataSourceConfigInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EojDataSourceConfigInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EojDataSourceConfigInput corresponding to the set member.
+    #
     # @!attribute [rw] s3_data
     #   @return [Types::S3DataInput]
     #
@@ -892,6 +906,10 @@ module Aws::SageMakerGeospatial
 
     # The input structure for the JobConfig in an EarthObservationJob.
     #
+    # @note JobConfigInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note JobConfigInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of JobConfigInput corresponding to the set member.
+    #
     # @!attribute [rw] band_math_config
     #   @return [Types::BandMathConfigInput]
     #
@@ -962,6 +980,8 @@ module Aws::SageMakerGeospatial
       class Unknown < JobConfigInput; end
     end
 
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/LandCoverSegmentationConfigInput AWS API Documentation
     #
     class LandCoverSegmentationConfigInput < Aws::EmptyStructure; end
@@ -1412,6 +1432,10 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # @note Property is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Property is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Property corresponding to the set member.
+    #
     # @!attribute [rw] eo_cloud_cover
     #   @return [Types::EoCloudCoverInput]
     #
@@ -2137,6 +2161,10 @@ module Aws::SageMakerGeospatial
     # It contains configs such as ReverseGeocodingConfig and
     # MapMatchingConfig.
     #
+    # @note VectorEnrichmentJobConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VectorEnrichmentJobConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VectorEnrichmentJobConfig corresponding to the set member.
+    #
     # @!attribute [rw] map_matching_config
     #   @return [Types::MapMatchingConfig]
     #
@@ -2158,6 +2186,10 @@ module Aws::SageMakerGeospatial
       class Unknown < VectorEnrichmentJobConfig; end
     end
 
+    # @note VectorEnrichmentJobDataSourceConfigInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VectorEnrichmentJobDataSourceConfigInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VectorEnrichmentJobDataSourceConfigInput corresponding to the set member.
+    #
     # @!attribute [rw] s3_data
     #   @return [Types::VectorEnrichmentJobS3Data]
     #

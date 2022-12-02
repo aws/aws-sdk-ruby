@@ -551,6 +551,10 @@ module Aws::EMRServerless
 
     # The driver that the job runs on.
     #
+    # @note JobDriver is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note JobDriver is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of JobDriver corresponding to the set member.
+    #
     # @!attribute [rw] spark_submit
     #   The job driver parameters specified for Spark.
     #   @return [Types::SparkSubmit]

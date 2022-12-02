@@ -277,11 +277,15 @@ module Aws::MediaLive
 
     # Arib Destination Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribDestinationSettings AWS API Documentation
     #
     class AribDestinationSettings < Aws::EmptyStructure; end
 
     # Arib Source Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribSourceSettings AWS API Documentation
     #
@@ -1926,6 +1930,8 @@ module Aws::MediaLive
 
     # Passthrough applies no color space conversion to the output
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ColorSpacePassthroughSettings AWS API Documentation
     #
     class ColorSpacePassthroughSettings < Aws::EmptyStructure; end
@@ -3557,6 +3563,8 @@ module Aws::MediaLive
 
     # Dolby Vision Profile 8.1 Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DolbyVision81Settings AWS API Documentation
     #
     class DolbyVision81Settings < Aws::EmptyStructure; end
@@ -4053,11 +4061,15 @@ module Aws::MediaLive
 
     # Embedded Destination Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedDestinationSettings AWS API Documentation
     #
     class EmbeddedDestinationSettings < Aws::EmptyStructure; end
 
     # Embedded Plus Scte20 Destination Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedPlusScte20DestinationSettings AWS API Documentation
     #
@@ -4427,6 +4439,8 @@ module Aws::MediaLive
     end
 
     # Frame Capture Hls Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureHlsSettings AWS API Documentation
     #
@@ -5896,11 +5910,15 @@ module Aws::MediaLive
 
     # Html Motion Graphics Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HtmlMotionGraphicsSettings AWS API Documentation
     #
     class HtmlMotionGraphicsSettings < Aws::EmptyStructure; end
 
     # Settings to configure an action so that it occurs as soon as possible.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ImmediateModeScheduleActionStartSettings AWS API Documentation
     #
@@ -8109,6 +8127,8 @@ module Aws::MediaLive
 
     # Media Package Output Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputSettings AWS API Documentation
     #
     class MediaPackageOutputSettings < Aws::EmptyStructure; end
@@ -8170,6 +8190,8 @@ module Aws::MediaLive
 
     # Settings to specify the ending of rendering motion graphics into the
     # video stream.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MotionGraphicsDeactivateScheduleActionSettings AWS API Documentation
     #
@@ -8602,6 +8624,8 @@ module Aws::MediaLive
     end
 
     # Multiplex Group Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexGroupSettings AWS API Documentation
     #
@@ -9431,6 +9455,8 @@ module Aws::MediaLive
 
     # Pass Through Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PassThroughSettings AWS API Documentation
     #
     class PassThroughSettings < Aws::EmptyStructure; end
@@ -9610,6 +9636,8 @@ module Aws::MediaLive
 
     # Raw Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RawSettings AWS API Documentation
     #
     class RawSettings < Aws::EmptyStructure; end
@@ -9651,11 +9679,15 @@ module Aws::MediaLive
 
     # Rec601 Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Rec601Settings AWS API Documentation
     #
     class Rec601Settings < Aws::EmptyStructure; end
 
     # Rec709 Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Rec709Settings AWS API Documentation
     #
@@ -9903,6 +9935,8 @@ module Aws::MediaLive
     end
 
     # Rtmp Caption Info Destination Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpCaptionInfoDestinationSettings AWS API Documentation
     #
@@ -10160,6 +10194,8 @@ module Aws::MediaLive
 
     # Scte20 Plus Embedded Destination Settings
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte20PlusEmbeddedDestinationSettings AWS API Documentation
     #
     class Scte20PlusEmbeddedDestinationSettings < Aws::EmptyStructure; end
@@ -10188,6 +10224,8 @@ module Aws::MediaLive
     end
 
     # Scte27 Destination Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte27DestinationSettings AWS API Documentation
     #
@@ -10502,6 +10540,8 @@ module Aws::MediaLive
     end
 
     # Smpte Tt Destination Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SmpteTtDestinationSettings AWS API Documentation
     #
@@ -11027,6 +11067,8 @@ module Aws::MediaLive
     end
 
     # Teletext Destination Settings
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TeletextDestinationSettings AWS API Documentation
     #

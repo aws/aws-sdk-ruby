@@ -2711,6 +2711,8 @@ module Aws::DirectoryService
 
     # Contains the inputs for the GetDirectoryLimits operation.
     #
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimitsRequest AWS API Documentation
     #
     class GetDirectoryLimitsRequest < Aws::EmptyStructure; end

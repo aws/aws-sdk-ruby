@@ -187,6 +187,10 @@ module Aws::LicenseManagerUserSubscriptions
 
     # Details about an identity provider.
     #
+    # @note IdentityProvider is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note IdentityProvider is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IdentityProvider corresponding to the set member.
+    #
     # @!attribute [rw] active_directory_identity_provider
     #   An object that details an Active Directory identity provider.
     #   @return [Types::ActiveDirectoryIdentityProvider]

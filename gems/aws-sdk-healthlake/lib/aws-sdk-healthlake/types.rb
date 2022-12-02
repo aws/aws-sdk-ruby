@@ -462,6 +462,10 @@ module Aws::HealthLake
 
     # The input properties for an import job.
     #
+    # @note InputDataConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note InputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InputDataConfig corresponding to the set member.
+    #
     # @!attribute [rw] s3_uri
     #   The S3Uri is the user specified S3 location of the FHIR data to be
     #   imported into Amazon HealthLake.
@@ -720,6 +724,10 @@ module Aws::HealthLake
 
     # The output data configuration that was supplied when the export job
     # was created.
+    #
+    # @note OutputDataConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note OutputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutputDataConfig corresponding to the set member.
     #
     # @!attribute [rw] s3_configuration
     #   The output data configuration that was supplied when the export job
