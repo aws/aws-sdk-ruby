@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-12-02)
+------------------
+
+* Feature - Add language code for Finnish (fi-FI)
+
 1.61.0 (2022-11-17)
 ------------------
 

@@ -50,6 +50,9 @@ module Aws::AppSync
 
     def initialize(options = {})
       self[:region] = options[:region]
+      if self[:region].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :region"
+      end
       self[:use_dual_stack] = options[:use_dual_stack]
       self[:use_dual_stack] = false if self[:use_dual_stack].nil?
       if self[:use_dual_stack].nil?

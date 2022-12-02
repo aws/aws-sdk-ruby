@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2022-12-02)
+------------------
+
+* Feature - The AWS Elemental MediaConvert SDK has added support for configurable ID3 eMSG box attributes and the ability to signal them with InbandEventStream tags in DASH and CMAF outputs.
+
 1.95.0 (2022-11-07)
 ------------------
 

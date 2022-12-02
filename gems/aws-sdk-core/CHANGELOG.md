@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.168.3 (2022-12-02)
+------------------
+
 * Issue - Retry S3's `BadDigest` error
 
 3.168.2 (2022-11-29)

@@ -50,12 +50,15 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] coding_mode
-    #   Mono (Audio Description), Mono, Stereo, or 5.1 channel layout. Valid
-    #   values depend on rate control mode and profile. "1.0 - Audio
-    #   Description (Receiver Mix)" setting receives a stereo description
-    #   plus control track and emits a mono AAC encode of the description
-    #   track, with control data emitted in the PES header as per ETSI TS
-    #   101 154 Annex E.
+    #   The Coding mode that you specify determines the number of audio
+    #   channels and the audio channel layout metadata in your AAC output.
+    #   Valid coding modes depend on the Rate control mode and Profile that
+    #   you select. The following list shows the number of audio channels
+    #   and channel layout for each coding mode. * 1.0 Audio Description
+    #   (Receiver Mix): One channel, C. Includes audio description data from
+    #   your stereo input. For more information see ETSI TS 101 154 Annex E.
+    #   * 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. *
+    #   5.1 Surround: Five channels, C, L, R, Ls, Rs, LFE.
     #   @return [String]
     #
     # @!attribute [rw] rate_control_mode
@@ -69,8 +72,15 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in Hz. Valid values depend on rate control mode and
-    #   profile.
+    #   Specify the Sample rate in Hz. Valid sample rates depend on the
+    #   Profile and Coding mode that you select. The following list shows
+    #   valid sample rates for each Profile and Coding mode. * LC Profile,
+    #   Coding mode 1.0, 2.0, and Receiver Mix: 8000, 12000, 16000, 22050,
+    #   24000, 32000, 44100, 48000, 88200, 96000. * LC Profile, Coding mode
+    #   5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding mode 1.0
+    #   and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1
+    #   Profile, Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. *
+    #   HEV2 Profile, Coding mode 2.0: 22050, 24000, 32000, 44100, 48000.
     #   @return [Integer]
     #
     # @!attribute [rw] specification
@@ -2145,6 +2155,16 @@ module Aws::MediaConvert
     #   seconds.
     #   @return [Float]
     #
+    # @!attribute [rw] mpd_manifest_bandwidth_type
+    #   Specify how the value for bandwidth is determined for each video
+    #   Representation in your output MPD manifest. We recommend that you
+    #   choose a MPD manifest bandwidth type that is compatible with your
+    #   downstream player configuration. Max: Use the same value that you
+    #   specify for Max bitrate in the video output, in bits per second.
+    #   Average: Use the calculated average bitrate of the encoded video
+    #   output, in bits per second.
+    #   @return [String]
+    #
     # @!attribute [rw] mpd_profile
     #   Specify whether your DASH profile is on-demand or main. When you
     #   choose Main profile (MAIN\_PROFILE), the service signals
@@ -2213,6 +2233,17 @@ module Aws::MediaConvert
     #   segment is longer than the target duration.
     #   @return [String]
     #
+    # @!attribute [rw] video_composition_offsets
+    #   Specify the video sample composition time offset mode in the output
+    #   fMP4 TRUN box. For wider player compatibility, set Video composition
+    #   offsets to Unsigned or leave blank. The earliest presentation time
+    #   may be greater than zero, and sample composition time offsets will
+    #   increment using unsigned integers. For strict fMP4 video and audio
+    #   timing, set Video composition offsets to Signed. The earliest
+    #   presentation time will be equal to zero, and sample composition time
+    #   offsets will increment using signed integers.
+    #   @return [String]
+    #
     # @!attribute [rw] write_dash_manifest
     #   When set to ENABLED, a DASH MPD manifest will be generated for this
     #   output.
@@ -2251,6 +2282,7 @@ module Aws::MediaConvert
       :manifest_duration_format,
       :min_buffer_time,
       :min_final_segment_length,
+      :mpd_manifest_bandwidth_type,
       :mpd_profile,
       :pts_offset_handling_for_b_frames,
       :segment_control,
@@ -2258,6 +2290,7 @@ module Aws::MediaConvert
       :segment_length_control,
       :stream_inf_resolution,
       :target_duration_compatibility_mode,
+      :video_composition_offsets,
       :write_dash_manifest,
       :write_hls_manifest,
       :write_segment_timeline_in_representation)
@@ -2430,6 +2463,17 @@ module Aws::MediaConvert
     #   blank.
     #   @return [String]
     #
+    # @!attribute [rw] manifest_metadata_signaling
+    #   To add an InbandEventStream element in your output MPD manifest for
+    #   each type of event message, set Manifest metadata signaling to
+    #   Enabled. For ID3 event messages, the InbandEventStream element
+    #   schemeIdUri will be same value that you specify for ID3 metadata
+    #   scheme ID URI. For SCTE35 event messages, the InbandEventStream
+    #   element schemeIdUri will be "urn:scte:scte35:2013:bin". To leave
+    #   these elements out of your output MPD manifest, set Manifest
+    #   metadata signaling to Disabled.
+    #   @return [String]
+    #
     # @!attribute [rw] scte_35_esam
     #   Use this setting only when you specify SCTE-35 markers from ESAM.
     #   Choose INSERT to put SCTE-35 markers in this output at the insertion
@@ -2454,6 +2498,31 @@ module Aws::MediaConvert
     #   metadata to None (NONE) or leave blank.
     #   @return [String]
     #
+    # @!attribute [rw] timed_metadata_box_version
+    #   Specify the event message box (eMSG) version for ID3 timed metadata
+    #   in your output. For more information, see ISO/IEC 23009-1:2022
+    #   section 5.10.3.3.3 Syntax. Leave blank to use the default value
+    #   Version 0. When you specify Version 1, you must also set ID3
+    #   metadata (timedMetadata) to Passthrough.
+    #   @return [String]
+    #
+    # @!attribute [rw] timed_metadata_scheme_id_uri
+    #   Specify the event message box (eMSG) scheme ID URI (scheme\_id\_uri)
+    #   for ID3 timed metadata in your output. For more informaiton, see
+    #   ISO/IEC 23009-1:2022 section 5.10.3.3.4 Semantics. Leave blank to
+    #   use the default value: https://aomedia.org/emsg/ID3 When you specify
+    #   a value for ID3 metadata scheme ID URI, you must also set ID3
+    #   metadata (timedMetadata) to Passthrough.
+    #   @return [String]
+    #
+    # @!attribute [rw] timed_metadata_value
+    #   Specify the event message box (eMSG) value for ID3 timed metadata in
+    #   your output. For more informaiton, see ISO/IEC 23009-1:2022 section
+    #   5.10.3.3.4 Semantics. When you specify a value for ID3 Metadata
+    #   Value, you must also set ID3 metadata (timedMetadata) to
+    #   Passthrough.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmfcSettings AWS API Documentation
     #
     class CmfcSettings < Struct.new(
@@ -2464,9 +2533,13 @@ module Aws::MediaConvert
       :descriptive_video_service_flag,
       :i_frame_only_manifest,
       :klv_metadata,
+      :manifest_metadata_signaling,
       :scte_35_esam,
       :scte_35_source,
-      :timed_metadata)
+      :timed_metadata,
+      :timed_metadata_box_version,
+      :timed_metadata_scheme_id_uri,
+      :timed_metadata_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3151,6 +3224,16 @@ module Aws::MediaConvert
     #   seconds.
     #   @return [Float]
     #
+    # @!attribute [rw] mpd_manifest_bandwidth_type
+    #   Specify how the value for bandwidth is determined for each video
+    #   Representation in your output MPD manifest. We recommend that you
+    #   choose a MPD manifest bandwidth type that is compatible with your
+    #   downstream player configuration. Max: Use the same value that you
+    #   specify for Max bitrate in the video output, in bits per second.
+    #   Average: Use the calculated average bitrate of the encoded video
+    #   output, in bits per second.
+    #   @return [String]
+    #
     # @!attribute [rw] mpd_profile
     #   Specify whether your DASH profile is on-demand or main. When you
     #   choose Main profile (MAIN\_PROFILE), the service signals
@@ -3201,6 +3284,17 @@ module Aws::MediaConvert
     #   match the next GOP boundary.
     #   @return [String]
     #
+    # @!attribute [rw] video_composition_offsets
+    #   Specify the video sample composition time offset mode in the output
+    #   fMP4 TRUN box. For wider player compatibility, set Video composition
+    #   offsets to Unsigned or leave blank. The earliest presentation time
+    #   may be greater than zero, and sample composition time offsets will
+    #   increment using unsigned integers. For strict fMP4 video and audio
+    #   timing, set Video composition offsets to Signed. The earliest
+    #   presentation time will be equal to zero, and sample composition time
+    #   offsets will increment using signed integers.
+    #   @return [String]
+    #
     # @!attribute [rw] write_segment_timeline_in_representation
     #   If you get an HTTP error in the 400 range when you play back your
     #   DASH output, enable this setting and run your transcoding job again.
@@ -3227,11 +3321,13 @@ module Aws::MediaConvert
       :image_based_trick_play_settings,
       :min_buffer_time,
       :min_final_segment_length,
+      :mpd_manifest_bandwidth_type,
       :mpd_profile,
       :pts_offset_handling_for_b_frames,
       :segment_control,
       :segment_length,
       :segment_length_control,
+      :video_composition_offsets,
       :write_segment_timeline_in_representation)
       SENSITIVE = []
       include Aws::Structure
@@ -9227,6 +9323,17 @@ module Aws::MediaConvert
     #   blank.
     #   @return [String]
     #
+    # @!attribute [rw] manifest_metadata_signaling
+    #   To add an InbandEventStream element in your output MPD manifest for
+    #   each type of event message, set Manifest metadata signaling to
+    #   Enabled. For ID3 event messages, the InbandEventStream element
+    #   schemeIdUri will be same value that you specify for ID3 metadata
+    #   scheme ID URI. For SCTE35 event messages, the InbandEventStream
+    #   element schemeIdUri will be "urn:scte:scte35:2013:bin". To leave
+    #   these elements out of your output MPD manifest, set Manifest
+    #   metadata signaling to Disabled.
+    #   @return [String]
+    #
     # @!attribute [rw] scte_35_esam
     #   Use this setting only when you specify SCTE-35 markers from ESAM.
     #   Choose INSERT to put SCTE-35 markers in this output at the insertion
@@ -9251,6 +9358,31 @@ module Aws::MediaConvert
     #   metadata to None (NONE) or leave blank.
     #   @return [String]
     #
+    # @!attribute [rw] timed_metadata_box_version
+    #   Specify the event message box (eMSG) version for ID3 timed metadata
+    #   in your output. For more information, see ISO/IEC 23009-1:2022
+    #   section 5.10.3.3.3 Syntax. Leave blank to use the default value
+    #   Version 0. When you specify Version 1, you must also set ID3
+    #   metadata (timedMetadata) to Passthrough.
+    #   @return [String]
+    #
+    # @!attribute [rw] timed_metadata_scheme_id_uri
+    #   Specify the event message box (eMSG) scheme ID URI (scheme\_id\_uri)
+    #   for ID3 timed metadata in your output. For more informaiton, see
+    #   ISO/IEC 23009-1:2022 section 5.10.3.3.4 Semantics. Leave blank to
+    #   use the default value: https://aomedia.org/emsg/ID3 When you specify
+    #   a value for ID3 metadata scheme ID URI, you must also set ID3
+    #   metadata (timedMetadata) to Passthrough.
+    #   @return [String]
+    #
+    # @!attribute [rw] timed_metadata_value
+    #   Specify the event message box (eMSG) value for ID3 timed metadata in
+    #   your output. For more informaiton, see ISO/IEC 23009-1:2022 section
+    #   5.10.3.3.4 Semantics. When you specify a value for ID3 Metadata
+    #   Value, you must also set ID3 metadata (timedMetadata) to
+    #   Passthrough.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MpdSettings AWS API Documentation
     #
     class MpdSettings < Struct.new(
@@ -9258,9 +9390,13 @@ module Aws::MediaConvert
       :audio_duration,
       :caption_container_type,
       :klv_metadata,
+      :manifest_metadata_signaling,
       :scte_35_esam,
       :scte_35_source,
-      :timed_metadata)
+      :timed_metadata,
+      :timed_metadata_box_version,
+      :timed_metadata_scheme_id_uri,
+      :timed_metadata_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9561,7 +9697,7 @@ module Aws::MediaConvert
     #   Specify whether this output's video uses the D10 syntax. Keep the
     #   default value to not use the syntax. Related settings: When you
     #   choose D10 (D\_10) for your MXF profile (profile), you must also set
-    #   this value to to D10 (D\_10).
+    #   this value to D10 (D\_10).
     #   @return [String]
     #
     # @!attribute [rw] telecine

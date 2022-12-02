@@ -372,6 +372,12 @@ module Aws::SNS
     # for the specified Amazon Web Services accounts to the specified
     # actions.
     #
+    # <note markdown="1"> To remove the ability to change topic permissions, you must deny
+    # permissions to the `AddPermission`, `RemovePermission`, and
+    # `SetTopicAttributes` actions in your IAM policy.
+    #
+    #  </note>
+    #
     # @option params [required, String] :topic_arn
     #   The ARN of the topic whose access control policy you wish to modify.
     #
@@ -719,6 +725,19 @@ module Aws::SNS
     #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
+    #
+    #   * `SignatureVersion` – The signature version corresponds to the
+    #     hashing algorithm used while creating the signature of the
+    #     notifications, subscription confirmations, or unsubscribe
+    #     confirmation messages sent by Amazon SNS. By default,
+    #     `SignatureVersion` is set to 1.
+    #
+    #   * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
+    #     `TracingConfig` is set to `PassThrough`, and the topic passes
+    #     through the tracing header it receives from an Amazon SNS publisher
+    #     to its subscriptions. If set to Active, Amazon SNS will vend X-Ray
+    #     segment data to topic owner account if the sampled flag in the
+    #     tracing header is true. This is only supported on standard topics.
     #
     #   The following attribute applies only to [server-side encryption][1]\:
     #
@@ -1940,6 +1959,12 @@ module Aws::SNS
 
     # Removes a statement from a topic's access control policy.
     #
+    # <note markdown="1"> To remove the ability to change topic permissions, you must deny
+    # permissions to the `AddPermission`, `RemovePermission`, and
+    # `SetTopicAttributes` actions in your IAM policy.
+    #
+    #  </note>
+    #
     # @option params [required, String] :topic_arn
     #   The ARN of the topic whose access control policy you wish to modify.
     #
@@ -2255,6 +2280,14 @@ module Aws::SNS
     #     receive only a subset of messages, rather than receiving every
     #     message published to the topic.
     #
+    #   * `FilterPolicyScope` – This attribute lets you choose the filtering
+    #     scope by using one of the following string value types:
+    #
+    #     * `MessageAttributes` (default) – The filter is applied on the
+    #       message attributes.
+    #
+    #     * `MessageBody` – The filter is applied on the message body.
+    #
     #   * `RawMessageDelivery` – When set to `true`, enables raw message
     #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
     #     for the endpoints to process JSON formatting, which is otherwise
@@ -2310,6 +2343,12 @@ module Aws::SNS
 
     # Allows a topic owner to set an attribute of the topic to a new value.
     #
+    # <note markdown="1"> To remove the ability to change topic permissions, you must deny
+    # permissions to the `AddPermission`, `RemovePermission`, and
+    # `SetTopicAttributes` actions in your IAM policy.
+    #
+    #  </note>
+    #
     # @option params [required, String] :topic_arn
     #   The ARN of the topic to modify.
     #
@@ -2328,6 +2367,13 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
+    #   * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
+    #     `TracingConfig` is set to `PassThrough`, and the topic passes
+    #     through the tracing header it receives from an Amazon SNS publisher
+    #     to its subscriptions. If set to Active, Amazon SNS will vend X-Ray
+    #     segment data to topic owner account if the sampled flag in the
+    #     tracing header is true. This is only supported on standard topics.
+    #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
@@ -2335,7 +2381,10 @@ module Aws::SNS
     #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
     #     in the *Key Management Service API Reference*.
     #
-    #   ^
+    #   * `SignatureVersion` – The signature version corresponds to the
+    #     hashing algorithm used while creating the signature of the
+    #     notifications, subscription confirmations, or unsubscribe
+    #     confirmation messages sent by Amazon SNS.
     #
     #   The following attribute applies only to [FIFO topics][4]\:
     #
@@ -2462,6 +2511,14 @@ module Aws::SNS
     #   * `FilterPolicy` – The simple JSON object that lets your subscriber
     #     receive only a subset of messages, rather than receiving every
     #     message published to the topic.
+    #
+    #   * `FilterPolicyScope` – This attribute lets you choose the filtering
+    #     scope by using one of the following string value types:
+    #
+    #     * `MessageAttributes` (default) – The filter is applied on the
+    #       message attributes.
+    #
+    #     * `MessageBody` – The filter is applied on the message body.
     #
     #   * `RawMessageDelivery` – When set to `true`, enables raw message
     #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
@@ -2600,6 +2657,12 @@ module Aws::SNS
     # is delivered to the endpoint, so that the endpoint owner can easily
     # resubscribe to the topic if the `Unsubscribe` request was unintended.
     #
+    # <note markdown="1"> Amazon SQS queue subscriptions require authentication for deletion.
+    # Only the owner of the subscription, or the owner of the topic can
+    # unsubscribe using the required Amazon Web Services signature.
+    #
+    #  </note>
+    #
     # This action is throttled at 100 transactions per second (TPS).
     #
     # @option params [required, String] :subscription_arn
@@ -2708,7 +2771,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

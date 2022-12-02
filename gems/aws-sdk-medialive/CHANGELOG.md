@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2022-12-02)
+------------------
+
+* Feature - Updates to Event Signaling and Management (ESAM) API and documentation.
+
 1.91.0 (2022-10-25)
 ------------------
 

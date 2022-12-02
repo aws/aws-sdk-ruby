@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-12-02)
+------------------
+
+* Feature - AWS Firewall Manager now supports Fortigate Cloud Native Firewall as a Service as a third-party policy type.
+
 1.53.0 (2022-11-08)
 ------------------
 

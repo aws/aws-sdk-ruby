@@ -4193,7 +4193,11 @@ module Aws::MediaLive
     #   messages and does not apply to OOB messages.
     #   @return [Integer]
     #
-    # @!attribute [rw] password
+    # @!attribute [rw] password_param
+    #   Password if credentials are required to access the POIS endpoint.
+    #   This is a reference to an AWS parameter store name from which the
+    #   password can be retrieved. AWS Parameter store format:
+    #   "ssm://<parameter name="">"</p> </parameter>
     #   @return [String]
     #
     # @!attribute [rw] pois_endpoint
@@ -4220,7 +4224,7 @@ module Aws::MediaLive
     class Esam < Struct.new(
       :acquisition_point_id,
       :ad_avail_offset,
-      :password,
+      :password_param,
       :pois_endpoint,
       :username,
       :zone_identity)

@@ -1013,7 +1013,7 @@ module Aws::Proton
     #   to provision environment infrastructure resources in the associated
     #   environment account.
     #
-    # @option params [required, String] :role_arn
+    # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that's created
     #   in the environment account. Proton uses this role to provision
     #   infrastructure resources in the associated environment account.
@@ -1041,7 +1041,7 @@ module Aws::Proton
     #     component_role_arn: "RoleArn",
     #     environment_name: "ResourceName", # required
     #     management_account_id: "AwsAccountId", # required
-    #     role_arn: "RoleArn", # required
+    #     role_arn: "RoleArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -5236,7 +5236,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

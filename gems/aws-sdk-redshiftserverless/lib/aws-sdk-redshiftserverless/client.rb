@@ -395,6 +395,13 @@ module Aws::RedshiftServerless
     # @option params [required, String] :snapshot_name
     #   The name of the snapshot.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of [Tag objects][1] to associate with the created snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html
+    #
     # @return [Types::ConvertRecoveryPointToSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConvertRecoveryPointToSnapshotResponse#snapshot #snapshot} => Types::Snapshot
@@ -405,6 +412,12 @@ module Aws::RedshiftServerless
     #     recovery_point_id: "String", # required
     #     retention_period: 1,
     #     snapshot_name: "String", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -604,6 +617,13 @@ module Aws::RedshiftServerless
     # @option params [required, String] :snapshot_name
     #   The name of the snapshot.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of [Tag objects][1] to associate with the snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html
+    #
     # @return [Types::CreateSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSnapshotResponse#snapshot #snapshot} => Types::Snapshot
@@ -614,6 +634,12 @@ module Aws::RedshiftServerless
     #     namespace_name: "String", # required
     #     retention_period: 1,
     #     snapshot_name: "String", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -728,6 +754,10 @@ module Aws::RedshiftServerless
     # @option params [required, String] :namespace_name
     #   The name of the namespace to associate with the workgroup.
     #
+    # @option params [Integer] :port
+    #   The custom port to use when connecting to a workgroup. Valid port
+    #   ranges are 5431-5455 and 8191-8215. The default is 5439.
+    #
     # @option params [Boolean] :publicly_accessible
     #   A value that specifies whether the workgroup can be accessed from a
     #   public network.
@@ -760,6 +790,7 @@ module Aws::RedshiftServerless
     #     ],
     #     enhanced_vpc_routing: false,
     #     namespace_name: "NamespaceName", # required
+    #     port: 1,
     #     publicly_accessible: false,
     #     security_group_ids: ["SecurityGroupId"],
     #     subnet_ids: ["SubnetId"],
@@ -791,6 +822,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
     #   resp.workgroup.security_group_ids[0] #=> String
@@ -1046,6 +1078,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
     #   resp.workgroup.security_group_ids[0] #=> String
@@ -1072,7 +1105,7 @@ module Aws::RedshiftServerless
     # optionally specify a duration between 900 seconds (15 minutes) and
     # 3600 seconds (60 minutes).
     #
-    #      <p> The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources. </p> <p> If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.</p>
+    #      <p>The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.</p>
     #
     # @option params [String] :db_name
     #   The name of the database to get temporary authorization to log on to.
@@ -1081,8 +1114,8 @@ module Aws::RedshiftServerless
     #
     #   * Must be 1 to 64 alphanumeric characters or hyphens.
     #
-    #   * Must contain only lowercase letters, numbers, underscore, plus sign,
-    #     period (dot), at symbol (@), or hyphen.
+    #   * Must contain only uppercase or lowercase letters, numbers,
+    #     underscore, plus sign, period (dot), at symbol (@), or hyphen.
     #
     #   * The first character must be a letter.
     #
@@ -1236,6 +1269,7 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.recovery_point.namespace_arn #=> String
     #   resp.recovery_point.namespace_name #=> String
     #   resp.recovery_point.recovery_point_create_time #=> Time
     #   resp.recovery_point.recovery_point_id #=> String
@@ -1338,6 +1372,48 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Returns information about a `TableRestoreStatus` object.
+    #
+    # @option params [required, String] :table_restore_request_id
+    #   The ID of the `RestoreTableFromSnapshot` request to return status for.
+    #
+    # @return [Types::GetTableRestoreStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableRestoreStatusResponse#table_restore_status #table_restore_status} => Types::TableRestoreStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_restore_status({
+    #     table_restore_request_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_restore_status.message #=> String
+    #   resp.table_restore_status.namespace_name #=> String
+    #   resp.table_restore_status.new_table_name #=> String
+    #   resp.table_restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.table_restore_status.request_time #=> Time
+    #   resp.table_restore_status.snapshot_name #=> String
+    #   resp.table_restore_status.source_database_name #=> String
+    #   resp.table_restore_status.source_schema_name #=> String
+    #   resp.table_restore_status.source_table_name #=> String
+    #   resp.table_restore_status.status #=> String
+    #   resp.table_restore_status.table_restore_request_id #=> String
+    #   resp.table_restore_status.target_database_name #=> String
+    #   resp.table_restore_status.target_schema_name #=> String
+    #   resp.table_restore_status.total_data_in_mega_bytes #=> Integer
+    #   resp.table_restore_status.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetTableRestoreStatus AWS API Documentation
+    #
+    # @overload get_table_restore_status(params = {})
+    # @param [Hash] params ({})
+    def get_table_restore_status(params = {}, options = {})
+      req = build_request(:get_table_restore_status, params)
+      req.send_request(options)
+    end
+
     # Returns information about a usage limit.
     #
     # @option params [required, String] :usage_limit_id
@@ -1406,6 +1482,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
     #   resp.workgroup.security_group_ids[0] #=> String
@@ -1429,11 +1506,11 @@ module Aws::RedshiftServerless
     #
     # @option params [Integer] :max_results
     #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results.
+    #   return. You can use `nextToken` to display the next page of results.
     #
     # @option params [String] :next_token
     #   If your initial `ListEndpointAccess` operation returns a `nextToken`,
-    #   you can include the returned `nextToken` in subsequent
+    #   you can include the returned `nextToken` in following
     #   `ListEndpointAccess` operations, which returns results in the next
     #   page.
     #
@@ -1497,11 +1574,11 @@ module Aws::RedshiftServerless
     #
     # @option params [Integer] :max_results
     #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results.
+    #   return. You can use `nextToken` to display the next page of results.
     #
     # @option params [String] :next_token
     #   If your initial `ListNamespaces` operation returns a `nextToken`, you
-    #   can include the returned `nextToken` in subsequent `ListNamespaces`
+    #   can include the returned `nextToken` in following `ListNamespaces`
     #   operations, which returns results in the next page.
     #
     # @return [Types::ListNamespacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1552,14 +1629,18 @@ module Aws::RedshiftServerless
     #
     # @option params [Integer] :max_results
     #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results.
+    #   return. You can use `nextToken` to display the next page of results.
+    #
+    # @option params [String] :namespace_arn
+    #   The Amazon Resource Name (ARN) of the namespace from which to list
+    #   recovery points.
     #
     # @option params [String] :namespace_name
     #   The name of the namespace to list recovery points for.
     #
     # @option params [String] :next_token
     #   If your initial `ListRecoveryPoints` operation returns a `nextToken`,
-    #   you can include the returned `nextToken` in subsequent
+    #   you can include the returned `nextToken` in following
     #   `ListRecoveryPoints` operations, which returns results in the next
     #   page.
     #
@@ -1578,6 +1659,7 @@ module Aws::RedshiftServerless
     #   resp = client.list_recovery_points({
     #     end_time: Time.now,
     #     max_results: 1,
+    #     namespace_arn: "String",
     #     namespace_name: "NamespaceName",
     #     next_token: "String",
     #     start_time: Time.now,
@@ -1587,6 +1669,7 @@ module Aws::RedshiftServerless
     #
     #   resp.next_token #=> String
     #   resp.recovery_points #=> Array
+    #   resp.recovery_points[0].namespace_arn #=> String
     #   resp.recovery_points[0].namespace_name #=> String
     #   resp.recovery_points[0].recovery_point_create_time #=> Time
     #   resp.recovery_points[0].recovery_point_id #=> String
@@ -1609,7 +1692,7 @@ module Aws::RedshiftServerless
     #
     # @option params [Integer] :max_results
     #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results.
+    #   return. You can use `nextToken` to display the next page of results.
     #
     # @option params [String] :namespace_arn
     #   The Amazon Resource Name (ARN) of the namespace from which to list all
@@ -1684,6 +1767,71 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Returns information about an array of `TableRestoreStatus` objects.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use nextToken to display the next page of results.
+    #
+    # @option params [String] :namespace_name
+    #   The namespace from which to list all of the statuses of
+    #   `RestoreTableFromSnapshot` operations .
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListTableRestoreStatus` operation returns a
+    #   nextToken, you can include the returned `nextToken` in following
+    #   `ListTableRestoreStatus` operations. This will return results on the
+    #   next page.
+    #
+    # @option params [String] :workgroup_name
+    #   The workgroup from which to list all of the statuses of
+    #   `RestoreTableFromSnapshot` operations.
+    #
+    # @return [Types::ListTableRestoreStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTableRestoreStatusResponse#next_token #next_token} => String
+    #   * {Types::ListTableRestoreStatusResponse#table_restore_statuses #table_restore_statuses} => Array&lt;Types::TableRestoreStatus&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_table_restore_status({
+    #     max_results: 1,
+    #     namespace_name: "String",
+    #     next_token: "PaginationToken",
+    #     workgroup_name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.table_restore_statuses #=> Array
+    #   resp.table_restore_statuses[0].message #=> String
+    #   resp.table_restore_statuses[0].namespace_name #=> String
+    #   resp.table_restore_statuses[0].new_table_name #=> String
+    #   resp.table_restore_statuses[0].progress_in_mega_bytes #=> Integer
+    #   resp.table_restore_statuses[0].request_time #=> Time
+    #   resp.table_restore_statuses[0].snapshot_name #=> String
+    #   resp.table_restore_statuses[0].source_database_name #=> String
+    #   resp.table_restore_statuses[0].source_schema_name #=> String
+    #   resp.table_restore_statuses[0].source_table_name #=> String
+    #   resp.table_restore_statuses[0].status #=> String
+    #   resp.table_restore_statuses[0].table_restore_request_id #=> String
+    #   resp.table_restore_statuses[0].target_database_name #=> String
+    #   resp.table_restore_statuses[0].target_schema_name #=> String
+    #   resp.table_restore_statuses[0].total_data_in_mega_bytes #=> Integer
+    #   resp.table_restore_statuses[0].workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTableRestoreStatus AWS API Documentation
+    #
+    # @overload list_table_restore_status(params = {})
+    # @param [Hash] params ({})
+    def list_table_restore_status(params = {}, options = {})
+      req = build_request(:list_table_restore_status, params)
+      req.send_request(options)
+    end
+
     # Lists the tags assigned to a resource.
     #
     # @option params [required, String] :resource_arn
@@ -1723,7 +1871,7 @@ module Aws::RedshiftServerless
     #
     # @option params [String] :next_token
     #   If your initial `ListUsageLimits` operation returns a `nextToken`, you
-    #   can include the returned `nextToken` in subsequent `ListUsageLimits`
+    #   can include the returned `nextToken` in following `ListUsageLimits`
     #   operations, which returns results in the next page.
     #
     # @option params [String] :resource_arn
@@ -1774,11 +1922,11 @@ module Aws::RedshiftServerless
     #
     # @option params [Integer] :max_results
     #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results.
+    #   return. You can use `nextToken` to display the next page of results.
     #
     # @option params [String] :next_token
     #   If your initial ListWorkgroups operation returns a `nextToken`, you
-    #   can include the returned `nextToken` in subsequent ListNamespaces
+    #   can include the returned `nextToken` in following ListNamespaces
     #   operations, which returns results in the next page.
     #
     # @return [Types::ListWorkgroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1816,6 +1964,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroups[0].enhanced_vpc_routing #=> Boolean
     #   resp.workgroups[0].namespace_name #=> String
+    #   resp.workgroups[0].port #=> Integer
     #   resp.workgroups[0].publicly_accessible #=> Boolean
     #   resp.workgroups[0].security_group_ids #=> Array
     #   resp.workgroups[0].security_group_ids[0] #=> String
@@ -1937,9 +2086,15 @@ module Aws::RedshiftServerless
     #
     # @option params [String] :snapshot_arn
     #   The Amazon Resource Name (ARN) of the snapshot to restore from.
+    #   Required if restoring from Amazon Redshift Serverless to a provisioned
+    #   cluster. Must not be specified at the same time as `snapshotName`.
+    #
+    #   The format of the ARN is
+    #   arn:aws:redshift:&lt;region&gt;\:&lt;account\_id&gt;\:snapshot:&lt;cluster\_identifier&gt;/&lt;snapshot\_identifier&gt;.
     #
     # @option params [String] :snapshot_name
-    #   The name of the snapshot to restore from.
+    #   The name of the snapshot to restore from. Must not be specified at the
+    #   same time as `snapshotArn`.
     #
     # @option params [required, String] :workgroup_name
     #   The name of the workgroup used to restore the snapshot.
@@ -1984,6 +2139,88 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def restore_from_snapshot(params = {}, options = {})
       req = build_request(:restore_from_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Restores a table from a snapshot to your Amazon Redshift Serverless
+    # instance.
+    #
+    # @option params [Boolean] :activate_case_sensitive_identifier
+    #   Indicates whether name identifiers for database, schema, and table are
+    #   case sensitive. If true, the names are case sensitive. If false, the
+    #   names are not case sensitive. The default is false.
+    #
+    # @option params [required, String] :namespace_name
+    #   The namespace of the snapshot to restore from.
+    #
+    # @option params [required, String] :new_table_name
+    #   The name of the table to create from the restore operation.
+    #
+    # @option params [required, String] :snapshot_name
+    #   The name of the snapshot to restore the table from.
+    #
+    # @option params [required, String] :source_database_name
+    #   The name of the source database that contains the table being
+    #   restored.
+    #
+    # @option params [String] :source_schema_name
+    #   The name of the source schema that contains the table being restored.
+    #
+    # @option params [required, String] :source_table_name
+    #   The name of the source table being restored.
+    #
+    # @option params [String] :target_database_name
+    #   The name of the database to restore the table to.
+    #
+    # @option params [String] :target_schema_name
+    #   The name of the schema to restore the table to.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The workgroup to restore the table to.
+    #
+    # @return [Types::RestoreTableFromSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreTableFromSnapshotResponse#table_restore_status #table_restore_status} => Types::TableRestoreStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_table_from_snapshot({
+    #     activate_case_sensitive_identifier: false,
+    #     namespace_name: "String", # required
+    #     new_table_name: "String", # required
+    #     snapshot_name: "String", # required
+    #     source_database_name: "String", # required
+    #     source_schema_name: "String",
+    #     source_table_name: "String", # required
+    #     target_database_name: "String",
+    #     target_schema_name: "String",
+    #     workgroup_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_restore_status.message #=> String
+    #   resp.table_restore_status.namespace_name #=> String
+    #   resp.table_restore_status.new_table_name #=> String
+    #   resp.table_restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.table_restore_status.request_time #=> Time
+    #   resp.table_restore_status.snapshot_name #=> String
+    #   resp.table_restore_status.source_database_name #=> String
+    #   resp.table_restore_status.source_schema_name #=> String
+    #   resp.table_restore_status.source_table_name #=> String
+    #   resp.table_restore_status.status #=> String
+    #   resp.table_restore_status.table_restore_request_id #=> String
+    #   resp.table_restore_status.target_database_name #=> String
+    #   resp.table_restore_status.target_schema_name #=> String
+    #   resp.table_restore_status.total_data_in_mega_bytes #=> Integer
+    #   resp.table_restore_status.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreTableFromSnapshot AWS API Documentation
+    #
+    # @overload restore_table_from_snapshot(params = {})
+    # @param [Hash] params ({})
+    def restore_table_from_snapshot(params = {}, options = {})
+      req = build_request(:restore_table_from_snapshot, params)
       req.send_request(options)
     end
 
@@ -2221,7 +2458,10 @@ module Aws::RedshiftServerless
     # the usage type or period of a usage limit.
     #
     # @option params [Integer] :amount
-    #   The new limit amount. For more information about this parameter.
+    #   The new limit amount. If time-based, this amount is in Redshift
+    #   Processing Units (RPU) consumed per hour. If data-based, this amount
+    #   is in terabytes (TB) of data transferred between Regions in
+    #   cross-account sharing. The value must be a positive number.
     #
     # @option params [String] :breach_action
     #   The new action that Amazon Redshift Serverless takes when the limit is
@@ -2277,6 +2517,10 @@ module Aws::RedshiftServerless
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC.
     #
+    # @option params [Integer] :port
+    #   The custom port to use when connecting to a workgroup. Valid port
+    #   ranges are 5431-5455 and 8191-8215. The default is 5439.
+    #
     # @option params [Boolean] :publicly_accessible
     #   A value that specifies whether the workgroup can be accessible from a
     #   public network.
@@ -2305,6 +2549,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     port: 1,
     #     publicly_accessible: false,
     #     security_group_ids: ["SecurityGroupId"],
     #     subnet_ids: ["SubnetId"],
@@ -2330,6 +2575,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
     #   resp.workgroup.security_group_ids[0] #=> String
@@ -2362,7 +2608,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

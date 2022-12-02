@@ -1700,8 +1700,8 @@ module Aws::MediaLive
 
     Esam.add_member(:acquisition_point_id, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "acquisitionPointId"))
     Esam.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
-    Esam.add_member(:password, Shapes::ShapeRef.new(shape: __string, location_name: "password"))
-    Esam.add_member(:pois_endpoint, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "poisEndpoint"))
+    Esam.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
+    Esam.add_member(:pois_endpoint, Shapes::ShapeRef.new(shape: __stringMax2048, required: true, location_name: "poisEndpoint"))
     Esam.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
     Esam.add_member(:zone_identity, Shapes::ShapeRef.new(shape: __stringMax256, location_name: "zoneIdentity"))
     Esam.struct_class = Types::Esam

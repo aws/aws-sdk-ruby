@@ -92,6 +92,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::GetResourcePolicy.build(context)
           when :get_snapshot
             Aws::RedshiftServerless::Endpoints::GetSnapshot.build(context)
+          when :get_table_restore_status
+            Aws::RedshiftServerless::Endpoints::GetTableRestoreStatus.build(context)
           when :get_usage_limit
             Aws::RedshiftServerless::Endpoints::GetUsageLimit.build(context)
           when :get_workgroup
@@ -104,6 +106,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::ListRecoveryPoints.build(context)
           when :list_snapshots
             Aws::RedshiftServerless::Endpoints::ListSnapshots.build(context)
+          when :list_table_restore_status
+            Aws::RedshiftServerless::Endpoints::ListTableRestoreStatus.build(context)
           when :list_tags_for_resource
             Aws::RedshiftServerless::Endpoints::ListTagsForResource.build(context)
           when :list_usage_limits
@@ -116,6 +120,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::RestoreFromRecoveryPoint.build(context)
           when :restore_from_snapshot
             Aws::RedshiftServerless::Endpoints::RestoreFromSnapshot.build(context)
+          when :restore_table_from_snapshot
+            Aws::RedshiftServerless::Endpoints::RestoreTableFromSnapshot.build(context)
           when :tag_resource
             Aws::RedshiftServerless::Endpoints::TagResource.build(context)
           when :untag_resource

@@ -74,12 +74,21 @@ module Aws::RedshiftServerless
     #   The name of the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of [Tag objects][1] to associate with the created snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ConvertRecoveryPointToSnapshotRequest AWS API Documentation
     #
     class ConvertRecoveryPointToSnapshotRequest < Struct.new(
       :recovery_point_id,
       :retention_period,
-      :snapshot_name)
+      :snapshot_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -222,12 +231,21 @@ module Aws::RedshiftServerless
     #   The name of the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of [Tag objects][1] to associate with the snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateSnapshotRequest AWS API Documentation
     #
     class CreateSnapshotRequest < Struct.new(
       :namespace_name,
       :retention_period,
-      :snapshot_name)
+      :snapshot_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -317,6 +335,11 @@ module Aws::RedshiftServerless
     #   The name of the namespace to associate with the workgroup.
     #   @return [String]
     #
+    # @!attribute [rw] port
+    #   The custom port to use when connecting to a workgroup. Valid port
+    #   ranges are 5431-5455 and 8191-8215. The default is 5439.
+    #   @return [Integer]
+    #
     # @!attribute [rw] publicly_accessible
     #   A value that specifies whether the workgroup can be accessed from a
     #   public network.
@@ -345,6 +368,7 @@ module Aws::RedshiftServerless
       :config_parameters,
       :enhanced_vpc_routing,
       :namespace_name,
+      :port,
       :publicly_accessible,
       :security_group_ids,
       :subnet_ids,
@@ -607,8 +631,8 @@ module Aws::RedshiftServerless
     #
     #   * Must be 1 to 64 alphanumeric characters or hyphens.
     #
-    #   * Must contain only lowercase letters, numbers, underscore, plus
-    #     sign, period (dot), at symbol (@), or hyphen.
+    #   * Must contain only uppercase or lowercase letters, numbers,
+    #     underscore, plus sign, period (dot), at symbol (@), or hyphen.
     #
     #   * The first character must be a letter.
     #
@@ -807,6 +831,32 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] table_restore_request_id
+    #   The ID of the `RestoreTableFromSnapshot` request to return status
+    #   for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetTableRestoreStatusRequest AWS API Documentation
+    #
+    class GetTableRestoreStatusRequest < Struct.new(
+      :table_restore_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_restore_status
+    #   The returned `TableRestoreStatus` object that contains information
+    #   about the status of your `RestoreTableFromSnapshot` request.
+    #   @return [Types::TableRestoreStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetTableRestoreStatusResponse AWS API Documentation
+    #
+    class GetTableRestoreStatusResponse < Struct.new(
+      :table_restore_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] usage_limit_id
     #   The unique identifier of the usage limit to return information for.
     #   @return [String]
@@ -897,12 +947,13 @@ module Aws::RedshiftServerless
 
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
-    #   to return. You can use `nextToken` to get the next page of results.
+    #   to return. You can use `nextToken` to display the next page of
+    #   results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   If your initial `ListEndpointAccess` operation returns a
-    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `nextToken`, you can include the returned `nextToken` in following
     #   `ListEndpointAccess` operations, which returns results in the next
     #   page.
     #   @return [String]
@@ -950,12 +1001,13 @@ module Aws::RedshiftServerless
 
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
-    #   to return. You can use `nextToken` to get the next page of results.
+    #   to return. You can use `nextToken` to display the next page of
+    #   results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   If your initial `ListNamespaces` operation returns a `nextToken`,
-    #   you can include the returned `nextToken` in subsequent
+    #   you can include the returned `nextToken` in following
     #   `ListNamespaces` operations, which returns results in the next page.
     #   @return [String]
     #
@@ -994,8 +1046,14 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
-    #   to return. You can use `nextToken` to get the next page of results.
+    #   to return. You can use `nextToken` to display the next page of
+    #   results.
     #   @return [Integer]
+    #
+    # @!attribute [rw] namespace_arn
+    #   The Amazon Resource Name (ARN) of the namespace from which to list
+    #   recovery points.
+    #   @return [String]
     #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to list recovery points for.
@@ -1003,7 +1061,7 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] next_token
     #   If your initial `ListRecoveryPoints` operation returns a
-    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `nextToken`, you can include the returned `nextToken` in following
     #   `ListRecoveryPoints` operations, which returns results in the next
     #   page.
     #   @return [String]
@@ -1017,6 +1075,7 @@ module Aws::RedshiftServerless
     class ListRecoveryPointsRequest < Struct.new(
       :end_time,
       :max_results,
+      :namespace_arn,
       :namespace_name,
       :next_token,
       :start_time)
@@ -1050,7 +1109,8 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
-    #   to return. You can use `nextToken` to get the next page of results.
+    #   to return. You can use `nextToken` to display the next page of
+    #   results.
     #   @return [Integer]
     #
     # @!attribute [rw] namespace_arn
@@ -1111,6 +1171,60 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use nextToken to display the next page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] namespace_name
+    #   The namespace from which to list all of the statuses of
+    #   `RestoreTableFromSnapshot` operations .
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListTableRestoreStatus` operation returns a
+    #   nextToken, you can include the returned `nextToken` in following
+    #   `ListTableRestoreStatus` operations. This will return results on the
+    #   next page.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The workgroup from which to list all of the statuses of
+    #   `RestoreTableFromSnapshot` operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTableRestoreStatusRequest AWS API Documentation
+    #
+    class ListTableRestoreStatusRequest < Struct.new(
+      :max_results,
+      :namespace_name,
+      :next_token,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If your initial `ListTableRestoreStatus` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in following
+    #   `ListTableRestoreStatus` operations. This will returns results on
+    #   the next page.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_restore_statuses
+    #   The array of returned `TableRestoreStatus` objects.
+    #   @return [Array<Types::TableRestoreStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTableRestoreStatusResponse AWS API Documentation
+    #
+    class ListTableRestoreStatusResponse < Struct.new(
+      :next_token,
+      :table_restore_statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to list tags for.
     #   @return [String]
@@ -1143,7 +1257,7 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] next_token
     #   If your initial `ListUsageLimits` operation returns a `nextToken`,
-    #   you can include the returned `nextToken` in subsequent
+    #   you can include the returned `nextToken` in following
     #   `ListUsageLimits` operations, which returns results in the next
     #   page.
     #   @return [String]
@@ -1190,12 +1304,13 @@ module Aws::RedshiftServerless
 
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
-    #   to return. You can use `nextToken` to get the next page of results.
+    #   to return. You can use `nextToken` to display the next page of
+    #   results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   If your initial ListWorkgroups operation returns a `nextToken`, you
-    #   can include the returned `nextToken` in subsequent ListNamespaces
+    #   can include the returned `nextToken` in following ListNamespaces
     #   operations, which returns results in the next page.
     #   @return [String]
     #
@@ -1373,6 +1488,11 @@ module Aws::RedshiftServerless
     # The automatically created recovery point of a namespace. Recovery
     # points are created every 30 minutes and kept for 24 hours.
     #
+    # @!attribute [rw] namespace_arn
+    #   The Amazon Resource Name (ARN) of the namespace the recovery point
+    #   is associated with.
+    #   @return [String]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace the recovery point is associated with.
     #   @return [String]
@@ -1396,6 +1516,7 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RecoveryPoint AWS API Documentation
     #
     class RecoveryPoint < Struct.new(
+      :namespace_arn,
       :namespace_name,
       :recovery_point_create_time,
       :recovery_point_id,
@@ -1492,10 +1613,17 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] snapshot_arn
     #   The Amazon Resource Name (ARN) of the snapshot to restore from.
+    #   Required if restoring from Amazon Redshift Serverless to a
+    #   provisioned cluster. Must not be specified at the same time as
+    #   `snapshotName`.
+    #
+    #   The format of the ARN is
+    #   arn:aws:redshift:&lt;region&gt;\:&lt;account\_id&gt;\:snapshot:&lt;cluster\_identifier&gt;/&lt;snapshot\_identifier&gt;.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_name
-    #   The name of the snapshot to restore from.
+    #   The name of the snapshot to restore from. Must not be specified at
+    #   the same time as `snapshotArn`.
     #   @return [String]
     #
     # @!attribute [rw] workgroup_name
@@ -1533,6 +1661,80 @@ module Aws::RedshiftServerless
       :namespace,
       :owner_account,
       :snapshot_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] activate_case_sensitive_identifier
+    #   Indicates whether name identifiers for database, schema, and table
+    #   are case sensitive. If true, the names are case sensitive. If false,
+    #   the names are not case sensitive. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] namespace_name
+    #   The namespace of the snapshot to restore from.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_table_name
+    #   The name of the table to create from the restore operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_name
+    #   The name of the snapshot to restore the table from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_database_name
+    #   The name of the source database that contains the table being
+    #   restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_schema_name
+    #   The name of the source schema that contains the table being
+    #   restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_table_name
+    #   The name of the source table being restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_database_name
+    #   The name of the database to restore the table to.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_schema_name
+    #   The name of the schema to restore the table to.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The workgroup to restore the table to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreTableFromSnapshotRequest AWS API Documentation
+    #
+    class RestoreTableFromSnapshotRequest < Struct.new(
+      :activate_case_sensitive_identifier,
+      :namespace_name,
+      :new_table_name,
+      :snapshot_name,
+      :source_database_name,
+      :source_schema_name,
+      :source_table_name,
+      :target_database_name,
+      :target_schema_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_restore_status
+    #   The TableRestoreStatus object that contains the status of the
+    #   restore operation.
+    #   @return [Types::TableRestoreStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreTableFromSnapshotResponse AWS API Documentation
+    #
+    class RestoreTableFromSnapshotResponse < Struct.new(
+      :table_restore_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1661,6 +1863,97 @@ module Aws::RedshiftServerless
       :snapshot_retention_start_time,
       :status,
       :total_backup_size_in_mega_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a table restore request.
+    #
+    # @!attribute [rw] message
+    #   A description of the status of the table restore request. Status
+    #   values include `SUCCEEDED`, `FAILED`, `CANCELED`, `PENDING`,
+    #   `IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_name
+    #   The namespace of the table being restored from.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_table_name
+    #   The name of the table to create from the restore operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_in_mega_bytes
+    #   The amount of data restored to the new table so far, in megabytes
+    #   (MB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_time
+    #   The time that the table restore request was made, in Universal
+    #   Coordinated Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] snapshot_name
+    #   The name of the snapshot being restored from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_database_name
+    #   The name of the source database being restored from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_schema_name
+    #   The name of the source schema being restored from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_table_name
+    #   The name of the source table being restored from.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A value that describes the current state of the table restore
+    #   request. Possible values include `SUCCEEDED`, `FAILED`, `CANCELED`,
+    #   `PENDING`, `IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_restore_request_id
+    #   The ID of the RestoreTableFromSnapshot request.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_database_name
+    #   The name of the database to restore to.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_schema_name
+    #   The name of the schema to restore to.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_data_in_mega_bytes
+    #   The total amount of data to restore to the new table, in megabytes
+    #   (MB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup being restored from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/TableRestoreStatus AWS API Documentation
+    #
+    class TableRestoreStatus < Struct.new(
+      :message,
+      :namespace_name,
+      :new_table_name,
+      :progress_in_mega_bytes,
+      :request_time,
+      :snapshot_name,
+      :source_database_name,
+      :source_schema_name,
+      :source_table_name,
+      :status,
+      :table_restore_request_id,
+      :target_database_name,
+      :target_schema_name,
+      :total_data_in_mega_bytes,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1881,7 +2174,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute [rw] amount
-    #   The new limit amount. For more information about this parameter.
+    #   The new limit amount. If time-based, this amount is in Redshift
+    #   Processing Units (RPU) consumed per hour. If data-based, this amount
+    #   is in terabytes (TB) of data transferred between Regions in
+    #   cross-account sharing. The value must be a positive number.
     #   @return [Integer]
     #
     # @!attribute [rw] breach_action
@@ -1932,6 +2228,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] port
+    #   The custom port to use when connecting to a workgroup. Valid port
+    #   ranges are 5431-5455 and 8191-8215. The default is 5439.
+    #   @return [Integer]
+    #
     # @!attribute [rw] publicly_accessible
     #   A value that specifies whether the workgroup can be accessible from
     #   a public network.
@@ -1955,6 +2256,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :port,
       :publicly_accessible,
       :security_group_ids,
       :subnet_ids,
@@ -2117,6 +2419,11 @@ module Aws::RedshiftServerless
     #   The namespace the workgroup is associated with.
     #   @return [String]
     #
+    # @!attribute [rw] port
+    #   The custom port to use when connecting to a workgroup. Valid port
+    #   ranges are 5431-5455 and 8191-8215. The default is 5439.
+    #   @return [Integer]
+    #
     # @!attribute [rw] publicly_accessible
     #   A value that specifies whether the workgroup can be accessible from
     #   a public network
@@ -2155,6 +2462,7 @@ module Aws::RedshiftServerless
       :endpoint,
       :enhanced_vpc_routing,
       :namespace_name,
+      :port,
       :publicly_accessible,
       :security_group_ids,
       :status,

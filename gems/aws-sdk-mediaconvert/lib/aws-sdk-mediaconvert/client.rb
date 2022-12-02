@@ -745,6 +745,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
@@ -752,6 +753,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -783,11 +785,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -1048,9 +1052,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -1134,9 +1142,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -1756,6 +1768,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
@@ -1763,6 +1776,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -1794,11 +1808,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -2059,9 +2075,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -2145,9 +2165,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -2748,9 +2772,13 @@ module Aws::MediaConvert
     #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           manifest_metadata_signaling: "ENABLED", # accepts ENABLED, DISABLED
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           timed_metadata_box_version: "VERSION_0", # accepts VERSION_0, VERSION_1
+    #           timed_metadata_scheme_id_uri: "__stringMax1000",
+    #           timed_metadata_value: "__stringMax1000",
     #         },
     #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #         f4v_settings: {
@@ -2851,9 +2879,13 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #           klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
+    #           manifest_metadata_signaling: "ENABLED", # accepts ENABLED, DISABLED
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           timed_metadata_box_version: "VERSION_0", # accepts VERSION_0, VERSION_1
+    #           timed_metadata_scheme_id_uri: "__stringMax1000",
+    #           timed_metadata_value: "__stringMax1000",
     #         },
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
@@ -3437,9 +3469,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -3523,9 +3559,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.preset.settings.container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -4338,6 +4378,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
@@ -4345,6 +4386,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -4376,11 +4418,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -4641,9 +4685,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -4727,9 +4775,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -5308,6 +5360,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
@@ -5315,6 +5368,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -5346,11 +5400,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -5611,9 +5667,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -5697,9 +5757,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -6255,9 +6319,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -6341,9 +6409,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.preset.settings.container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -6971,6 +7043,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
@@ -6978,6 +7051,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -7009,11 +7083,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -7274,9 +7350,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -7360,9 +7440,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -7992,6 +8076,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
@@ -7999,6 +8084,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -8030,11 +8116,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -8295,9 +8383,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -8381,9 +8473,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -8956,9 +9052,13 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.presets[0].settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.presets[0].settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.presets[0].settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -9042,9 +9142,13 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.presets[0].settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.presets[0].settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.presets[0].settings.container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.presets[0].settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.presets[0].settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.presets[0].settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -9828,6 +9932,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
@@ -9835,6 +9940,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -9866,11 +9972,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_manifest_bandwidth_type #=> String, one of "AVERAGE", "MAX"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.video_composition_offsets #=> String, one of "SIGNED", "UNSIGNED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -10131,9 +10239,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -10217,9 +10329,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -10814,9 +10930,13 @@ module Aws::MediaConvert
     #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           manifest_metadata_signaling: "ENABLED", # accepts ENABLED, DISABLED
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           timed_metadata_box_version: "VERSION_0", # accepts VERSION_0, VERSION_1
+    #           timed_metadata_scheme_id_uri: "__stringMax1000",
+    #           timed_metadata_value: "__stringMax1000",
     #         },
     #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #         f4v_settings: {
@@ -10917,9 +11037,13 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #           klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
+    #           manifest_metadata_signaling: "ENABLED", # accepts ENABLED, DISABLED
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           timed_metadata_box_version: "VERSION_0", # accepts VERSION_0, VERSION_1
+    #           timed_metadata_scheme_id_uri: "__stringMax1000",
+    #           timed_metadata_value: "__stringMax1000",
     #         },
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
@@ -11500,9 +11624,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -11586,9 +11714,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.preset.settings.container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
@@ -11989,7 +12121,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

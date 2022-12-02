@@ -1038,8 +1038,8 @@ module Aws::MediaLive
     #           esam: {
     #             acquisition_point_id: "__stringMax256", # required
     #             ad_avail_offset: 1,
-    #             password: "__string",
-    #             pois_endpoint: "__string", # required
+    #             password_param: "__string",
+    #             pois_endpoint: "__stringMax2048", # required
     #             username: "__string",
     #             zone_identity: "__stringMax256",
     #           },
@@ -1972,7 +1972,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
-    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password_param #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
@@ -3048,7 +3048,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
-    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password_param #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
@@ -3997,7 +3997,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
-    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password_param #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
@@ -6006,7 +6006,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
-    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password_param #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
@@ -6763,7 +6763,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
-    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password_param #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
@@ -7575,8 +7575,8 @@ module Aws::MediaLive
     #           esam: {
     #             acquisition_point_id: "__stringMax256", # required
     #             ad_avail_offset: 1,
-    #             password: "__string",
-    #             pois_endpoint: "__string", # required
+    #             password_param: "__string",
+    #             pois_endpoint: "__stringMax2048", # required
     #             username: "__string",
     #             zone_identity: "__stringMax256",
     #           },
@@ -8500,7 +8500,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
-    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password_param #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
@@ -9188,7 +9188,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
-    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password_param #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
@@ -10172,7 +10172,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

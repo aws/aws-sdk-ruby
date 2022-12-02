@@ -43,10 +43,28 @@ module Aws::SNS
     # * `DisplayName` – The human-readable name used in the `From` field for
     #   notifications to `email` and `email-json` endpoints.
     #
+    # * `EffectiveDeliveryPolicy` – The JSON serialization of the effective
+    #   delivery policy, taking system defaults into account.
+    #
     # * `Owner` – The Amazon Web Services account ID of the topic's owner.
     #
     # * `Policy` – The JSON serialization of the topic's access control
     #   policy.
+    #
+    # * `SignatureVersion` – The version of the Amazon SNS signature used
+    #   for the topic.
+    #
+    #   * By default, `SignatureVersion` is set to **1**. The signature is a
+    #     Base64-encoded **SHA1withRSA** signature.
+    #
+    #   * When you set `SignatureVersion` to **2**. Amazon SNS uses a
+    #     Base64-encoded **SHA256withRSA** signature.
+    #
+    #     <note markdown="1"> If the API response does not include the `SignatureVersion`
+    #     attribute, it means that the `SignatureVersion` for the topic has
+    #     value **1**.
+    #
+    #      </note>
     #
     # * `SubscriptionsConfirmed` – The number of confirmed subscriptions for
     #   the topic.
@@ -59,8 +77,12 @@ module Aws::SNS
     #
     # * `TopicArn` – The topic's ARN.
     #
-    # * `EffectiveDeliveryPolicy` – The JSON serialization of the effective
-    #   delivery policy, taking system defaults into account.
+    # * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
+    #   `TracingConfig` is set to `PassThrough`, and the topic passes
+    #   through the tracing header it receives from an Amazon SNS publisher
+    #   to its subscriptions. If set to Active, Amazon SNS will vend X-Ray
+    #   segment data to topic owner account if the sampled flag in the
+    #   tracing header is true. This is only supported on standard topics.
     #
     # The following attribute applies only to [server-side-encryption][1]\:
     #
@@ -380,6 +402,13 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
+    #   * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
+    #     `TracingConfig` is set to `PassThrough`, and the topic passes
+    #     through the tracing header it receives from an Amazon SNS publisher
+    #     to its subscriptions. If set to Active, Amazon SNS will vend X-Ray
+    #     segment data to topic owner account if the sampled flag in the
+    #     tracing header is true. This is only supported on standard topics.
+    #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
@@ -387,7 +416,10 @@ module Aws::SNS
     #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
     #     in the *Key Management Service API Reference*.
     #
-    #   ^
+    #   * `SignatureVersion` – The signature version corresponds to the
+    #     hashing algorithm used while creating the signature of the
+    #     notifications, subscription confirmations, or unsubscribe
+    #     confirmation messages sent by Amazon SNS.
     #
     #   The following attribute applies only to [FIFO topics][4]\:
     #
@@ -496,6 +528,14 @@ module Aws::SNS
     #   * `FilterPolicy` – The simple JSON object that lets your subscriber
     #     receive only a subset of messages, rather than receiving every
     #     message published to the topic.
+    #
+    #   * `FilterPolicyScope` – This attribute lets you choose the filtering
+    #     scope by using one of the following string value types:
+    #
+    #     * `MessageAttributes` (default) – The filter is applied on the
+    #       message attributes.
+    #
+    #     * `MessageBody` – The filter is applied on the message body.
     #
     #   * `RawMessageDelivery` – When set to `true`, enables raw message
     #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need

@@ -63,6 +63,8 @@ module Aws::RedshiftServerless
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     GetSnapshotRequest = Shapes::StructureShape.new(name: 'GetSnapshotRequest')
     GetSnapshotResponse = Shapes::StructureShape.new(name: 'GetSnapshotResponse')
+    GetTableRestoreStatusRequest = Shapes::StructureShape.new(name: 'GetTableRestoreStatusRequest')
+    GetTableRestoreStatusResponse = Shapes::StructureShape.new(name: 'GetTableRestoreStatusResponse')
     GetUsageLimitRequest = Shapes::StructureShape.new(name: 'GetUsageLimitRequest')
     GetUsageLimitResponse = Shapes::StructureShape.new(name: 'GetUsageLimitResponse')
     GetWorkgroupRequest = Shapes::StructureShape.new(name: 'GetWorkgroupRequest')
@@ -86,6 +88,9 @@ module Aws::RedshiftServerless
     ListSnapshotsRequest = Shapes::StructureShape.new(name: 'ListSnapshotsRequest')
     ListSnapshotsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListSnapshotsRequestMaxResultsInteger')
     ListSnapshotsResponse = Shapes::StructureShape.new(name: 'ListSnapshotsResponse')
+    ListTableRestoreStatusRequest = Shapes::StructureShape.new(name: 'ListTableRestoreStatusRequest')
+    ListTableRestoreStatusRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListTableRestoreStatusRequestMaxResultsInteger')
+    ListTableRestoreStatusResponse = Shapes::StructureShape.new(name: 'ListTableRestoreStatusResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsageLimitsRequest = Shapes::StructureShape.new(name: 'ListUsageLimitsRequest')
@@ -116,6 +121,8 @@ module Aws::RedshiftServerless
     RestoreFromRecoveryPointResponse = Shapes::StructureShape.new(name: 'RestoreFromRecoveryPointResponse')
     RestoreFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreFromSnapshotRequest')
     RestoreFromSnapshotResponse = Shapes::StructureShape.new(name: 'RestoreFromSnapshotResponse')
+    RestoreTableFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreTableFromSnapshotRequest')
+    RestoreTableFromSnapshotResponse = Shapes::StructureShape.new(name: 'RestoreTableFromSnapshotResponse')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -126,6 +133,8 @@ module Aws::RedshiftServerless
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
+    TableRestoreStatus = Shapes::StructureShape.new(name: 'TableRestoreStatus')
+    TableRestoreStatusList = Shapes::ListShape.new(name: 'TableRestoreStatusList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -183,6 +192,7 @@ module Aws::RedshiftServerless
     ConvertRecoveryPointToSnapshotRequest.add_member(:recovery_point_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recoveryPointId"))
     ConvertRecoveryPointToSnapshotRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "retentionPeriod"))
     ConvertRecoveryPointToSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotName"))
+    ConvertRecoveryPointToSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ConvertRecoveryPointToSnapshotRequest.struct_class = Types::ConvertRecoveryPointToSnapshotRequest
 
     ConvertRecoveryPointToSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "snapshot"))
@@ -214,6 +224,7 @@ module Aws::RedshiftServerless
     CreateSnapshotRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespaceName"))
     CreateSnapshotRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "retentionPeriod"))
     CreateSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotName"))
+    CreateSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateSnapshotRequest.struct_class = Types::CreateSnapshotRequest
 
     CreateSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "snapshot"))
@@ -233,6 +244,7 @@ module Aws::RedshiftServerless
     CreateWorkgroupRequest.add_member(:config_parameters, Shapes::ShapeRef.new(shape: ConfigParameterList, location_name: "configParameters"))
     CreateWorkgroupRequest.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
     CreateWorkgroupRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
+    CreateWorkgroupRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     CreateWorkgroupRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     CreateWorkgroupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     CreateWorkgroupRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
@@ -342,6 +354,12 @@ module Aws::RedshiftServerless
     GetSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "snapshot"))
     GetSnapshotResponse.struct_class = Types::GetSnapshotResponse
 
+    GetTableRestoreStatusRequest.add_member(:table_restore_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tableRestoreRequestId"))
+    GetTableRestoreStatusRequest.struct_class = Types::GetTableRestoreStatusRequest
+
+    GetTableRestoreStatusResponse.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "tableRestoreStatus"))
+    GetTableRestoreStatusResponse.struct_class = Types::GetTableRestoreStatusResponse
+
     GetUsageLimitRequest.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "usageLimitId"))
     GetUsageLimitRequest.struct_class = Types::GetUsageLimitRequest
 
@@ -385,6 +403,7 @@ module Aws::RedshiftServerless
 
     ListRecoveryPointsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     ListRecoveryPointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecoveryPointsRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListRecoveryPointsRequest.add_member(:namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "namespaceArn"))
     ListRecoveryPointsRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
     ListRecoveryPointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListRecoveryPointsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
@@ -406,6 +425,16 @@ module Aws::RedshiftServerless
     ListSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListSnapshotsResponse.add_member(:snapshots, Shapes::ShapeRef.new(shape: SnapshotList, location_name: "snapshots"))
     ListSnapshotsResponse.struct_class = Types::ListSnapshotsResponse
+
+    ListTableRestoreStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTableRestoreStatusRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListTableRestoreStatusRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
+    ListTableRestoreStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTableRestoreStatusRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: String, location_name: "workgroupName"))
+    ListTableRestoreStatusRequest.struct_class = Types::ListTableRestoreStatusRequest
+
+    ListTableRestoreStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTableRestoreStatusResponse.add_member(:table_restore_statuses, Shapes::ShapeRef.new(shape: TableRestoreStatusList, location_name: "tableRestoreStatuses"))
+    ListTableRestoreStatusResponse.struct_class = Types::ListTableRestoreStatusResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -463,6 +492,7 @@ module Aws::RedshiftServerless
     PutResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "resourcePolicy"))
     PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
+    RecoveryPoint.add_member(:namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "namespaceArn"))
     RecoveryPoint.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
     RecoveryPoint.add_member(:recovery_point_create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "recoveryPointCreateTime"))
     RecoveryPoint.add_member(:recovery_point_id, Shapes::ShapeRef.new(shape: String, location_name: "recoveryPointId"))
@@ -501,6 +531,21 @@ module Aws::RedshiftServerless
     RestoreFromSnapshotResponse.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "snapshotName"))
     RestoreFromSnapshotResponse.struct_class = Types::RestoreFromSnapshotResponse
 
+    RestoreTableFromSnapshotRequest.add_member(:activate_case_sensitive_identifier, Shapes::ShapeRef.new(shape: Boolean, location_name: "activateCaseSensitiveIdentifier"))
+    RestoreTableFromSnapshotRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespaceName"))
+    RestoreTableFromSnapshotRequest.add_member(:new_table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "newTableName"))
+    RestoreTableFromSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotName"))
+    RestoreTableFromSnapshotRequest.add_member(:source_database_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceDatabaseName"))
+    RestoreTableFromSnapshotRequest.add_member(:source_schema_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceSchemaName"))
+    RestoreTableFromSnapshotRequest.add_member(:source_table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceTableName"))
+    RestoreTableFromSnapshotRequest.add_member(:target_database_name, Shapes::ShapeRef.new(shape: String, location_name: "targetDatabaseName"))
+    RestoreTableFromSnapshotRequest.add_member(:target_schema_name, Shapes::ShapeRef.new(shape: String, location_name: "targetSchemaName"))
+    RestoreTableFromSnapshotRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "workgroupName"))
+    RestoreTableFromSnapshotRequest.struct_class = Types::RestoreTableFromSnapshotRequest
+
+    RestoreTableFromSnapshotResponse.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "tableRestoreStatus"))
+    RestoreTableFromSnapshotResponse.struct_class = Types::RestoreTableFromSnapshotResponse
+
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -531,6 +576,25 @@ module Aws::RedshiftServerless
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot)
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    TableRestoreStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TableRestoreStatus.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
+    TableRestoreStatus.add_member(:new_table_name, Shapes::ShapeRef.new(shape: String, location_name: "newTableName"))
+    TableRestoreStatus.add_member(:progress_in_mega_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "progressInMegaBytes"))
+    TableRestoreStatus.add_member(:request_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "requestTime"))
+    TableRestoreStatus.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "snapshotName"))
+    TableRestoreStatus.add_member(:source_database_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceDatabaseName"))
+    TableRestoreStatus.add_member(:source_schema_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceSchemaName"))
+    TableRestoreStatus.add_member(:source_table_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceTableName"))
+    TableRestoreStatus.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    TableRestoreStatus.add_member(:table_restore_request_id, Shapes::ShapeRef.new(shape: String, location_name: "tableRestoreRequestId"))
+    TableRestoreStatus.add_member(:target_database_name, Shapes::ShapeRef.new(shape: String, location_name: "targetDatabaseName"))
+    TableRestoreStatus.add_member(:target_schema_name, Shapes::ShapeRef.new(shape: String, location_name: "targetSchemaName"))
+    TableRestoreStatus.add_member(:total_data_in_mega_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "totalDataInMegaBytes"))
+    TableRestoreStatus.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: String, location_name: "workgroupName"))
+    TableRestoreStatus.struct_class = Types::TableRestoreStatus
+
+    TableRestoreStatusList.member = Shapes::ShapeRef.new(shape: TableRestoreStatus)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
@@ -597,6 +661,7 @@ module Aws::RedshiftServerless
     UpdateWorkgroupRequest.add_member(:base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "baseCapacity"))
     UpdateWorkgroupRequest.add_member(:config_parameters, Shapes::ShapeRef.new(shape: ConfigParameterList, location_name: "configParameters"))
     UpdateWorkgroupRequest.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
+    UpdateWorkgroupRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     UpdateWorkgroupRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     UpdateWorkgroupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     UpdateWorkgroupRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
@@ -641,6 +706,7 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
     Workgroup.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
     Workgroup.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
+    Workgroup.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     Workgroup.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     Workgroup.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     Workgroup.add_member(:status, Shapes::ShapeRef.new(shape: WorkgroupStatus, location_name: "status"))
@@ -681,6 +747,7 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -720,6 +787,7 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -889,6 +957,16 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_table_restore_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTableRestoreStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTableRestoreStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTableRestoreStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_usage_limit, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetUsageLimit"
         o.http_method = "POST"
@@ -969,6 +1047,23 @@ module Aws::RedshiftServerless
         o.input = Shapes::ShapeRef.new(shape: ListSnapshotsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSnapshotsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_table_restore_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTableRestoreStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTableRestoreStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTableRestoreStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
@@ -1062,6 +1157,18 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:restore_table_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreTableFromSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreTableFromSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreTableFromSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

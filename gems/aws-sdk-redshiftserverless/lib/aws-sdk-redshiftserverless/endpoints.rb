@@ -263,6 +263,20 @@ module Aws::RedshiftServerless
       end
     end
 
+    class GetTableRestoreStatus
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::RedshiftServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetUsageLimit
       def self.build(context)
         unless context.config.regional_endpoint
@@ -347,6 +361,20 @@ module Aws::RedshiftServerless
       end
     end
 
+    class ListTableRestoreStatus
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::RedshiftServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListTagsForResource
       def self.build(context)
         unless context.config.regional_endpoint
@@ -418,6 +446,20 @@ module Aws::RedshiftServerless
     end
 
     class RestoreFromSnapshot
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::RedshiftServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class RestoreTableFromSnapshot
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

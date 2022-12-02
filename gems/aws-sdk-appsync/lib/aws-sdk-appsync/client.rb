@@ -763,9 +763,10 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #
     # @option params [Types::AppSyncRuntime] :runtime
-    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
-    #   AppSync function. Specifies the name and version of the runtime to
-    #   use. Note that if a runtime is specified, code must also be specified.
+    #   Describes a runtime used by an Amazon Web Services AppSync pipeline
+    #   resolver or Amazon Web Services AppSync function. Specifies the name
+    #   and version of the runtime to use. Note that if a runtime is
+    #   specified, code must also be specified.
     #
     # @option params [String] :code
     #   The `function` code that contains the request and response functions.
@@ -1022,9 +1023,10 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #
     # @option params [Types::AppSyncRuntime] :runtime
-    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
-    #   AppSync function. Specifies the name and version of the runtime to
-    #   use. Note that if a runtime is specified, code must also be specified.
+    #   Describes a runtime used by an Amazon Web Services AppSync pipeline
+    #   resolver or Amazon Web Services AppSync function. Specifies the name
+    #   and version of the runtime to use. Note that if a runtime is
+    #   specified, code must also be specified.
     #
     # @option params [String] :code
     #   The `resolver` code that contains the request and response functions.
@@ -2849,9 +2851,10 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #
     # @option params [Types::AppSyncRuntime] :runtime
-    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
-    #   AppSync function. Specifies the name and version of the runtime to
-    #   use. Note that if a runtime is specified, code must also be specified.
+    #   Describes a runtime used by an Amazon Web Services AppSync pipeline
+    #   resolver or Amazon Web Services AppSync function. Specifies the name
+    #   and version of the runtime to use. Note that if a runtime is
+    #   specified, code must also be specified.
     #
     # @option params [String] :code
     #   The `function` code that contains the request and response functions.
@@ -3103,9 +3106,10 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #
     # @option params [Types::AppSyncRuntime] :runtime
-    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
-    #   AppSync function. Specifies the name and version of the runtime to
-    #   use. Note that if a runtime is specified, code must also be specified.
+    #   Describes a runtime used by an Amazon Web Services AppSync pipeline
+    #   resolver or Amazon Web Services AppSync function. Specifies the name
+    #   and version of the runtime to use. Note that if a runtime is
+    #   specified, code must also be specified.
     #
     # @option params [String] :code
     #   The `resolver` code that contains the request and response functions.
@@ -3236,7 +3240,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -407,7 +407,7 @@ module Aws::Proton
     CreateEnvironmentAccountConnectionInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
     CreateEnvironmentAccountConnectionInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
     CreateEnvironmentAccountConnectionInput.add_member(:management_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "managementAccountId"))
-    CreateEnvironmentAccountConnectionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateEnvironmentAccountConnectionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateEnvironmentAccountConnectionInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateEnvironmentAccountConnectionInput.struct_class = Types::CreateEnvironmentAccountConnectionInput
 

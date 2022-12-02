@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-12-02)
+------------------
+
+* Feature - This release adds the message payload-filtering feature to the SNS Subscribe, SetSubscriptionAttributes, and GetSubscriptionAttributes API actions
+
 1.56.0 (2022-10-25)
 ------------------
 

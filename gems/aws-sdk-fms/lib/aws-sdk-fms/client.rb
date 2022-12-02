@@ -429,7 +429,7 @@ module Aws::FMS
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_third_party_firewall({
-    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
+    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW, FORTIGATE_CLOUD_NATIVE_FIREWALL
     #   })
     #
     # @example Response structure
@@ -692,7 +692,7 @@ module Aws::FMS
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_third_party_firewall({
-    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
+    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW, FORTIGATE_CLOUD_NATIVE_FIREWALL
     #   })
     #
     # @example Response structure
@@ -1091,7 +1091,7 @@ module Aws::FMS
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_third_party_firewall_association_status({
-    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
+    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW, FORTIGATE_CLOUD_NATIVE_FIREWALL
     #   })
     #
     # @example Response structure
@@ -1974,7 +1974,7 @@ module Aws::FMS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_third_party_firewall_firewall_policies({
-    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
+    #     third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW, FORTIGATE_CLOUD_NATIVE_FIREWALL
     #     next_token: "PaginationToken",
     #     max_results: 1, # required
     #   })
@@ -2430,7 +2430,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

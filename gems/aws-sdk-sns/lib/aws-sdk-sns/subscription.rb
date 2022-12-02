@@ -51,6 +51,14 @@ module Aws::SNS
     #   subscription. For more information, see [Amazon SNS Message
     #   Filtering][1] in the *Amazon SNS Developer Guide*.
     #
+    # * `FilterPolicyScope` – This attribute lets you choose the filtering
+    #   scope by using one of the following string value types:
+    #
+    #   * `MessageAttributes` (default) – The filter is applied on the
+    #     message attributes.
+    #
+    #   * `MessageBody` – The filter is applied on the message body.
+    #
     # * `Owner` – The Amazon Web Services account ID of the subscription's
     #   owner.
     #
@@ -164,6 +172,14 @@ module Aws::SNS
     #   * `FilterPolicy` – The simple JSON object that lets your subscriber
     #     receive only a subset of messages, rather than receiving every
     #     message published to the topic.
+    #
+    #   * `FilterPolicyScope` – This attribute lets you choose the filtering
+    #     scope by using one of the following string value types:
+    #
+    #     * `MessageAttributes` (default) – The filter is applied on the
+    #       message attributes.
+    #
+    #     * `MessageBody` – The filter is applied on the message body.
     #
     #   * `RawMessageDelivery` – When set to `true`, enables raw message
     #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need

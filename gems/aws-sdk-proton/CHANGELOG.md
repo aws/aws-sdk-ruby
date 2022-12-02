@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-12-02)
+------------------
+
+* Feature - CreateEnvironmentAccountConnection RoleArn input is now optional
+
 1.20.0 (2022-11-16)
 ------------------
 
