@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Re-release this version with far less example documentation (bug fix).
+
 1.72.0 (2022-11-29)
 ------------------
 
