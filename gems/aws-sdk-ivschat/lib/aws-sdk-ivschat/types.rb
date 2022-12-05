@@ -394,17 +394,18 @@ module Aws::Ivschat
     # @note DestinationConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DestinationConfiguration corresponding to the set member.
     #
     # @!attribute [rw] cloud_watch_logs
-    #   Name of the Amazon CloudWatch Logs destination where chat activity
-    #   will be logged.
+    #   An Amazon CloudWatch Logs destination configuration where chat
+    #   activity will be logged.
     #   @return [Types::CloudWatchLogsDestinationConfiguration]
     #
     # @!attribute [rw] firehose
-    #   Name of the Amazon Kinesis Data Firehose destination where chat
-    #   activity will be logged
+    #   An Amazon Kinesis Data Firehose destination configuration where chat
+    #   activity will be logged.
     #   @return [Types::FirehoseDestinationConfiguration]
     #
     # @!attribute [rw] s3
-    #   Name of the Amazon S3 bucket where chat activity will be logged.
+    #   An Amazon S3 destination configuration where chat activity will be
+    #   logged.
     #   @return [Types::S3DestinationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/DestinationConfiguration AWS API Documentation

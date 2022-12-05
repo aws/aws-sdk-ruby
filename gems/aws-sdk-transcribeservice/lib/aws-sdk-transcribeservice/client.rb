@@ -672,7 +672,7 @@ module Aws::TranscribeService
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_language_model({
-    #     language_code: "en-US", # required, accepts en-US, hi-IN, es-US, en-GB, en-AU
+    #     language_code: "en-US", # required, accepts en-US, hi-IN, es-US, en-GB, en-AU, de-DE, ja-JP
     #     base_model_name: "NarrowBand", # required, accepts NarrowBand, WideBand
     #     model_name: "ModelName", # required
     #     input_data_config: { # required
@@ -690,7 +690,7 @@ module Aws::TranscribeService
     #
     # @example Response structure
     #
-    #   resp.language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
+    #   resp.language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU", "de-DE", "ja-JP"
     #   resp.base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.model_name #=> String
     #   resp.input_data_config.s3_uri #=> String
@@ -1279,7 +1279,7 @@ module Aws::TranscribeService
     #   resp.language_model.model_name #=> String
     #   resp.language_model.create_time #=> Time
     #   resp.language_model.last_modified_time #=> Time
-    #   resp.language_model.language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
+    #   resp.language_model.language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU", "de-DE", "ja-JP"
     #   resp.language_model.base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.language_model.model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.language_model.upgrade_availability #=> Boolean
@@ -1949,7 +1949,7 @@ module Aws::TranscribeService
     #   resp.models[0].model_name #=> String
     #   resp.models[0].create_time #=> Time
     #   resp.models[0].last_modified_time #=> Time
-    #   resp.models[0].language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
+    #   resp.models[0].language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU", "de-DE", "ja-JP"
     #   resp.models[0].base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.models[0].model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.models[0].upgrade_availability #=> Boolean
@@ -3877,7 +3877,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

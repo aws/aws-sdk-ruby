@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-12-05)
+------------------
+
+* Feature - Adds PendingVerification error type to messaging APIs to block the resource usage for accounts identified as being fraudulent.
+
 1.6.0 (2022-11-17)
 ------------------
 

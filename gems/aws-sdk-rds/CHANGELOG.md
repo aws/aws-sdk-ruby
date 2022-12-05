@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2022-12-05)
+------------------
+
+* Feature - This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation.
+
 1.161.0 (2022-11-28)
 ------------------
 

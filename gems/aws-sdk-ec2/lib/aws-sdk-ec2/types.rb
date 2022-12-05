@@ -28625,6 +28625,10 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableReachabilityAnalyzerOrganizationSharingRequest AWS API Documentation
@@ -28636,6 +28640,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] return_value
+    #   Returns `true` if the request succeeds; otherwise, returns an error.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableReachabilityAnalyzerOrganizationSharingResult AWS API Documentation
@@ -46548,6 +46553,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] additional_accounts
+    #   The member accounts that contain resources that the path can
+    #   traverse.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_in_arns
@@ -46597,6 +46604,7 @@ module Aws::EC2
     #   @return [Array<Types::AlternatePathHint>]
     #
     # @!attribute [rw] suggested_accounts
+    #   Potential intermediate accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -46650,9 +46658,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the source.
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
+    #   The Amazon Resource Name (ARN) of the destination.
     #   @return [String]
     #
     # @!attribute [rw] source_ip
@@ -56659,6 +56669,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] additional_accounts
+    #   The member accounts that contain resources that the path can
+    #   traverse.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_in_arns

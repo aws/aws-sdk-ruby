@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2022-12-05)
+------------------
+
+* Feature - This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration.
+
 1.79.0 (2022-10-25)
 ------------------
 

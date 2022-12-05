@@ -1685,6 +1685,55 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # A request to generate a recommendation is already in progress.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GenerationExistsException AWS API Documentation
+    #
+    class GenerationExistsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the Savings Plans recommendation generation.
+    #
+    # @!attribute [rw] recommendation_id
+    #   Indicates the ID for this specific recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_status
+    #   Indicates whether the recommendation generation succeeded, is
+    #   processing, or failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_started_time
+    #   Indicates the start time of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_completion_time
+    #   Indicates the completion time of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_completion_time
+    #   Indicates the estimated time for when the recommendation generation
+    #   will complete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GenerationSummary AWS API Documentation
+    #
+    class GenerationSummary < Struct.new(
+      :recommendation_id,
+      :generation_status,
+      :generation_started_time,
+      :generation_completion_time,
+      :estimated_completion_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] monitor_arn
     #   Retrieves all of the cost anomalies detected for a specific cost
     #   anomaly monitor Amazon Resource Name (ARN).
@@ -4322,6 +4371,51 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @!attribute [rw] generation_status
+    #   The status of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_ids
+    #   The IDs for each specific recommendation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] page_size
+    #   The number of recommendations that you want returned in a single
+    #   response object.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListSavingsPlansPurchaseRecommendationGenerationRequest AWS API Documentation
+    #
+    class ListSavingsPlansPurchaseRecommendationGenerationRequest < Struct.new(
+      :generation_status,
+      :recommendation_ids,
+      :page_size,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generation_summary_list
+    #   The list of historical recommendation generations.
+    #   @return [Array<Types::GenerationSummary>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListSavingsPlansPurchaseRecommendationGenerationResponse AWS API Documentation
+    #
+    class ListSavingsPlansPurchaseRecommendationGenerationResponse < Struct.new(
+      :generation_summary_list,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For a list of
     #   supported resources, see [ResourceTag][1].
@@ -5791,6 +5885,35 @@ module Aws::CostExplorer
     class SortDefinition < Struct.new(
       :key,
       :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/StartSavingsPlansPurchaseRecommendationGenerationRequest AWS API Documentation
+    #
+    class StartSavingsPlansPurchaseRecommendationGenerationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] recommendation_id
+    #   The ID for this specific recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_started_time
+    #   The start time of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_completion_time
+    #   The estimated time for when the recommendation generation will
+    #   complete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/StartSavingsPlansPurchaseRecommendationGenerationResponse AWS API Documentation
+    #
+    class StartSavingsPlansPurchaseRecommendationGenerationResponse < Struct.new(
+      :recommendation_id,
+      :generation_started_time,
+      :estimated_completion_time)
       SENSITIVE = []
       include Aws::Structure
     end

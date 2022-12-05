@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-12-05)
+------------------
+
+* Feature - Amazon Transcribe now supports creating custom language models in the following languages: Japanese (ja-JP) and German (de-DE).
+
 1.78.0 (2022-11-28)
 ------------------
 

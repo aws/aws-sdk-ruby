@@ -5241,6 +5241,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:restore_db_cluster_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|

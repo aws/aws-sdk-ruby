@@ -472,6 +472,7 @@ module Aws::Ivschat
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -496,6 +497,7 @@ module Aws::Ivschat
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -574,6 +576,7 @@ module Aws::Ivschat
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

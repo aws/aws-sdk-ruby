@@ -19037,7 +19037,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the curent Infrastructure Performance metric subscriptions.
+    # Describes the current Infrastructure Performance metric subscriptions.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -37414,7 +37414,19 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Establishes a trust relationship between Reachability Analyzer and
+    # Organizations. This operation must be performed by the management
+    # account for the organization.
+    #
+    # After you establish a trust relationship, a user in the management
+    # account or a delegated administrator account can run a cross-account
+    # analysis using resources from the member accounts.
+    #
     # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::EnableReachabilityAnalyzerOrganizationSharingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -53235,6 +53247,7 @@ module Aws::EC2
     #   The ID of the path.
     #
     # @option params [Array<String>] :additional_accounts
+    #   The member accounts that contain resources that the path can traverse.
     #
     # @option params [Array<String>] :filter_in_arns
     #   The Amazon Resource Names (ARN) of the resources that the path must
@@ -54747,7 +54760,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.353.0'
+      context[:gem_version] = '1.354.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

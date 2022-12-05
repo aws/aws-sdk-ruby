@@ -29,6 +29,7 @@ module Aws::CostExplorer
   # ## Error Classes
   # * {BillExpirationException}
   # * {DataUnavailableException}
+  # * {GenerationExistsException}
   # * {InvalidNextTokenException}
   # * {LimitExceededException}
   # * {RequestChangedException}
@@ -65,6 +66,21 @@ module Aws::CostExplorer
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CostExplorer::Types::DataUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class GenerationExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CostExplorer::Types::GenerationExistsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -113,6 +113,10 @@ module Aws::CostExplorer
     FindingReasonCodes = Shapes::ListShape.new(name: 'FindingReasonCodes')
     ForecastResult = Shapes::StructureShape.new(name: 'ForecastResult')
     ForecastResultsByTime = Shapes::ListShape.new(name: 'ForecastResultsByTime')
+    GenerationExistsException = Shapes::StructureShape.new(name: 'GenerationExistsException')
+    GenerationStatus = Shapes::StringShape.new(name: 'GenerationStatus')
+    GenerationSummary = Shapes::StructureShape.new(name: 'GenerationSummary')
+    GenerationSummaryList = Shapes::ListShape.new(name: 'GenerationSummaryList')
     GenericBoolean = Shapes::BooleanShape.new(name: 'GenericBoolean')
     GenericDouble = Shapes::FloatShape.new(name: 'GenericDouble')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
@@ -169,6 +173,8 @@ module Aws::CostExplorer
     ListCostAllocationTagsResponse = Shapes::StructureShape.new(name: 'ListCostAllocationTagsResponse')
     ListCostCategoryDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsRequest')
     ListCostCategoryDefinitionsResponse = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsResponse')
+    ListSavingsPlansPurchaseRecommendationGenerationRequest = Shapes::StructureShape.new(name: 'ListSavingsPlansPurchaseRecommendationGenerationRequest')
+    ListSavingsPlansPurchaseRecommendationGenerationResponse = Shapes::StructureShape.new(name: 'ListSavingsPlansPurchaseRecommendationGenerationResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LookbackPeriodInDays = Shapes::StringShape.new(name: 'LookbackPeriodInDays')
@@ -209,6 +215,8 @@ module Aws::CostExplorer
     RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
     RICostForUnusedHours = Shapes::StringShape.new(name: 'RICostForUnusedHours')
     RealizedSavings = Shapes::StringShape.new(name: 'RealizedSavings')
+    RecommendationId = Shapes::StringShape.new(name: 'RecommendationId')
+    RecommendationIdList = Shapes::ListShape.new(name: 'RecommendationIdList')
     RecommendationTarget = Shapes::StringShape.new(name: 'RecommendationTarget')
     RedshiftInstanceDetails = Shapes::StructureShape.new(name: 'RedshiftInstanceDetails')
     RequestChangedException = Shapes::StructureShape.new(name: 'RequestChangedException')
@@ -272,6 +280,8 @@ module Aws::CostExplorer
     SortDefinitionKey = Shapes::StringShape.new(name: 'SortDefinitionKey')
     SortDefinitions = Shapes::ListShape.new(name: 'SortDefinitions')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StartSavingsPlansPurchaseRecommendationGenerationRequest = Shapes::StructureShape.new(name: 'StartSavingsPlansPurchaseRecommendationGenerationRequest')
+    StartSavingsPlansPurchaseRecommendationGenerationResponse = Shapes::StructureShape.new(name: 'StartSavingsPlansPurchaseRecommendationGenerationResponse')
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
     SubscriberAddress = Shapes::StringShape.new(name: 'SubscriberAddress')
     SubscriberStatus = Shapes::StringShape.new(name: 'SubscriberStatus')
@@ -645,6 +655,18 @@ module Aws::CostExplorer
 
     ForecastResultsByTime.member = Shapes::ShapeRef.new(shape: ForecastResult)
 
+    GenerationExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    GenerationExistsException.struct_class = Types::GenerationExistsException
+
+    GenerationSummary.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "RecommendationId"))
+    GenerationSummary.add_member(:generation_status, Shapes::ShapeRef.new(shape: GenerationStatus, location_name: "GenerationStatus"))
+    GenerationSummary.add_member(:generation_started_time, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "GenerationStartedTime"))
+    GenerationSummary.add_member(:generation_completion_time, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "GenerationCompletionTime"))
+    GenerationSummary.add_member(:estimated_completion_time, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EstimatedCompletionTime"))
+    GenerationSummary.struct_class = Types::GenerationSummary
+
+    GenerationSummaryList.member = Shapes::ShapeRef.new(shape: GenerationSummary)
+
     GetAnomaliesRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonitorArn"))
     GetAnomaliesRequest.add_member(:date_interval, Shapes::ShapeRef.new(shape: AnomalyDateInterval, required: true, location_name: "DateInterval"))
     GetAnomaliesRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, location_name: "Feedback"))
@@ -937,6 +959,16 @@ module Aws::CostExplorer
     ListCostCategoryDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListCostCategoryDefinitionsResponse.struct_class = Types::ListCostCategoryDefinitionsResponse
 
+    ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:generation_status, Shapes::ShapeRef.new(shape: GenerationStatus, location_name: "GenerationStatus"))
+    ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:recommendation_ids, Shapes::ShapeRef.new(shape: RecommendationIdList, location_name: "RecommendationIds"))
+    ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
+    ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    ListSavingsPlansPurchaseRecommendationGenerationRequest.struct_class = Types::ListSavingsPlansPurchaseRecommendationGenerationRequest
+
+    ListSavingsPlansPurchaseRecommendationGenerationResponse.add_member(:generation_summary_list, Shapes::ShapeRef.new(shape: GenerationSummaryList, location_name: "GenerationSummaryList"))
+    ListSavingsPlansPurchaseRecommendationGenerationResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    ListSavingsPlansPurchaseRecommendationGenerationResponse.struct_class = Types::ListSavingsPlansPurchaseRecommendationGenerationResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -984,6 +1016,8 @@ module Aws::CostExplorer
     RDSInstanceDetails.add_member(:current_generation, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "CurrentGeneration"))
     RDSInstanceDetails.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "SizeFlexEligible"))
     RDSInstanceDetails.struct_class = Types::RDSInstanceDetails
+
+    RecommendationIdList.member = Shapes::ShapeRef.new(shape: RecommendationId)
 
     RedshiftInstanceDetails.add_member(:family, Shapes::ShapeRef.new(shape: GenericString, location_name: "Family"))
     RedshiftInstanceDetails.add_member(:node_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "NodeType"))
@@ -1246,6 +1280,13 @@ module Aws::CostExplorer
     SortDefinition.struct_class = Types::SortDefinition
 
     SortDefinitions.member = Shapes::ShapeRef.new(shape: SortDefinition)
+
+    StartSavingsPlansPurchaseRecommendationGenerationRequest.struct_class = Types::StartSavingsPlansPurchaseRecommendationGenerationRequest
+
+    StartSavingsPlansPurchaseRecommendationGenerationResponse.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "RecommendationId"))
+    StartSavingsPlansPurchaseRecommendationGenerationResponse.add_member(:generation_started_time, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "GenerationStartedTime"))
+    StartSavingsPlansPurchaseRecommendationGenerationResponse.add_member(:estimated_completion_time, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EstimatedCompletionTime"))
+    StartSavingsPlansPurchaseRecommendationGenerationResponse.struct_class = Types::StartSavingsPlansPurchaseRecommendationGenerationResponse
 
     Subscriber.add_member(:address, Shapes::ShapeRef.new(shape: SubscriberAddress, location_name: "Address"))
     Subscriber.add_member(:type, Shapes::ShapeRef.new(shape: SubscriberType, location_name: "Type"))
@@ -1695,6 +1736,16 @@ module Aws::CostExplorer
         )
       end)
 
+      api.add_operation(:list_savings_plans_purchase_recommendation_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSavingsPlansPurchaseRecommendationGeneration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSavingsPlansPurchaseRecommendationGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSavingsPlansPurchaseRecommendationGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -1712,6 +1763,17 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: ProvideAnomalyFeedbackRequest)
         o.output = Shapes::ShapeRef.new(shape: ProvideAnomalyFeedbackResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_savings_plans_purchase_recommendation_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSavingsPlansPurchaseRecommendationGeneration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartSavingsPlansPurchaseRecommendationGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSavingsPlansPurchaseRecommendationGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: GenerationExistsException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

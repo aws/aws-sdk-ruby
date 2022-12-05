@@ -110,10 +110,14 @@ module Aws::CostExplorer
             Aws::CostExplorer::Endpoints::ListCostAllocationTags.build(context)
           when :list_cost_category_definitions
             Aws::CostExplorer::Endpoints::ListCostCategoryDefinitions.build(context)
+          when :list_savings_plans_purchase_recommendation_generation
+            Aws::CostExplorer::Endpoints::ListSavingsPlansPurchaseRecommendationGeneration.build(context)
           when :list_tags_for_resource
             Aws::CostExplorer::Endpoints::ListTagsForResource.build(context)
           when :provide_anomaly_feedback
             Aws::CostExplorer::Endpoints::ProvideAnomalyFeedback.build(context)
+          when :start_savings_plans_purchase_recommendation_generation
+            Aws::CostExplorer::Endpoints::StartSavingsPlansPurchaseRecommendationGeneration.build(context)
           when :tag_resource
             Aws::CostExplorer::Endpoints::TagResource.build(context)
           when :untag_resource

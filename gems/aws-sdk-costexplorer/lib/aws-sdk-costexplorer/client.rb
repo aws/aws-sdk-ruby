@@ -3292,8 +3292,10 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves your request parameters, Savings Plan Recommendations
-    # Summary and Details.
+    # Retrieves the Savings Plans recommendations for your account. First
+    # use `StartSavingsPlansPurchaseRecommendationGeneration` to generate a
+    # new set of recommendations, and then use
+    # `GetSavingsPlansPurchaseRecommendation` to retrieve them.
     #
     # @option params [required, String] :savings_plans_type
     #   The Savings Plans recommendation type that's requested.
@@ -4208,6 +4210,55 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves a list of your historical recommendation generations within
+    # the past 30 days.
+    #
+    # @option params [String] :generation_status
+    #   The status of the recommendation generation.
+    #
+    # @option params [Array<String>] :recommendation_ids
+    #   The IDs for each specific recommendation.
+    #
+    # @option params [Integer] :page_size
+    #   The number of recommendations that you want returned in a single
+    #   response object.
+    #
+    # @option params [String] :next_page_token
+    #   The token to retrieve the next set of results.
+    #
+    # @return [Types::ListSavingsPlansPurchaseRecommendationGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSavingsPlansPurchaseRecommendationGenerationResponse#generation_summary_list #generation_summary_list} => Array&lt;Types::GenerationSummary&gt;
+    #   * {Types::ListSavingsPlansPurchaseRecommendationGenerationResponse#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_savings_plans_purchase_recommendation_generation({
+    #     generation_status: "SUCCEEDED", # accepts SUCCEEDED, PROCESSING, FAILED
+    #     recommendation_ids: ["RecommendationId"],
+    #     page_size: 1,
+    #     next_page_token: "NextPageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.generation_summary_list #=> Array
+    #   resp.generation_summary_list[0].recommendation_id #=> String
+    #   resp.generation_summary_list[0].generation_status #=> String, one of "SUCCEEDED", "PROCESSING", "FAILED"
+    #   resp.generation_summary_list[0].generation_started_time #=> String
+    #   resp.generation_summary_list[0].generation_completion_time #=> String
+    #   resp.generation_summary_list[0].estimated_completion_time #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListSavingsPlansPurchaseRecommendationGeneration AWS API Documentation
+    #
+    # @overload list_savings_plans_purchase_recommendation_generation(params = {})
+    # @param [Hash] params ({})
+    def list_savings_plans_purchase_recommendation_generation(params = {}, options = {})
+      req = build_request(:list_savings_plans_purchase_recommendation_generation, params)
+      req.send_request(options)
+    end
+
     # Returns a list of resource tags associated with the resource specified
     # by the Amazon Resource Name (ARN).
     #
@@ -4274,6 +4325,39 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def provide_anomaly_feedback(params = {}, options = {})
       req = build_request(:provide_anomaly_feedback, params)
+      req.send_request(options)
+    end
+
+    # Requests a Savings Plans recommendation generation. This enables you
+    # to calculate a fresh set of Savings Plans recommendations that takes
+    # your latest usage data and current Savings Plans inventory into
+    # account. You can refresh Savings Plans recommendations up to three
+    # times daily for a consolidated billing family.
+    #
+    # <note markdown="1"> `StartSavingsPlansPurchaseRecommendationGeneration` has no request
+    # syntax because no input parameters are needed to support this
+    # operation.
+    #
+    #  </note>
+    #
+    # @return [Types::StartSavingsPlansPurchaseRecommendationGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSavingsPlansPurchaseRecommendationGenerationResponse#recommendation_id #recommendation_id} => String
+    #   * {Types::StartSavingsPlansPurchaseRecommendationGenerationResponse#generation_started_time #generation_started_time} => String
+    #   * {Types::StartSavingsPlansPurchaseRecommendationGenerationResponse#estimated_completion_time #estimated_completion_time} => String
+    #
+    # @example Response structure
+    #
+    #   resp.recommendation_id #=> String
+    #   resp.generation_started_time #=> String
+    #   resp.estimated_completion_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/StartSavingsPlansPurchaseRecommendationGeneration AWS API Documentation
+    #
+    # @overload start_savings_plans_purchase_recommendation_generation(params = {})
+    # @param [Hash] params ({})
+    def start_savings_plans_purchase_recommendation_generation(params = {}, options = {})
+      req = build_request(:start_savings_plans_purchase_recommendation_generation, params)
       req.send_request(options)
     end
 
@@ -4634,7 +4718,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
