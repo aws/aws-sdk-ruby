@@ -3659,6 +3659,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
       end)
 
       api.add_operation(:apply_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
@@ -4811,6 +4812,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
       end)
 
       api.add_operation(:modify_activity_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -5172,6 +5174,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
       end)
 
       api.add_operation(:reset_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|

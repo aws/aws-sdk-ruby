@@ -756,7 +756,7 @@ module Aws::BillingConductor
     # @option params [required, String] :type
     #   The type of pricing rule.
     #
-    # @option params [required, Float] :modifier_percentage
+    # @option params [Float] :modifier_percentage
     #   A percentage modifier that's applied on the public pricing rates.
     #
     # @option params [String] :service
@@ -772,6 +772,9 @@ module Aws::BillingConductor
     #   affiliates, or third-party providers selling services via Amazon Web
     #   Services Marketplace.
     #
+    # @option params [Types::CreateTieringInput] :tiering
+    #   The set of tiering configurations for the pricing rule.
+    #
     # @return [Types::CreatePricingRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePricingRuleOutput#arn #arn} => String
@@ -783,13 +786,18 @@ module Aws::BillingConductor
     #     name: "PricingRuleName", # required
     #     description: "PricingRuleDescription",
     #     scope: "GLOBAL", # required, accepts GLOBAL, SERVICE, BILLING_ENTITY
-    #     type: "MARKUP", # required, accepts MARKUP, DISCOUNT
-    #     modifier_percentage: 1.0, # required
+    #     type: "MARKUP", # required, accepts MARKUP, DISCOUNT, TIERING
+    #     modifier_percentage: 1.0,
     #     service: "Service",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #     billing_entity: "BillingEntity",
+    #     tiering: {
+    #       free_tier: { # required
+    #         activated: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1457,13 +1465,14 @@ module Aws::BillingConductor
     #   resp.pricing_rules[0].arn #=> String
     #   resp.pricing_rules[0].description #=> String
     #   resp.pricing_rules[0].scope #=> String, one of "GLOBAL", "SERVICE", "BILLING_ENTITY"
-    #   resp.pricing_rules[0].type #=> String, one of "MARKUP", "DISCOUNT"
+    #   resp.pricing_rules[0].type #=> String, one of "MARKUP", "DISCOUNT", "TIERING"
     #   resp.pricing_rules[0].modifier_percentage #=> Float
     #   resp.pricing_rules[0].service #=> String
     #   resp.pricing_rules[0].associated_pricing_plan_count #=> Integer
     #   resp.pricing_rules[0].creation_time #=> Integer
     #   resp.pricing_rules[0].last_modified_time #=> Integer
     #   resp.pricing_rules[0].billing_entity #=> String
+    #   resp.pricing_rules[0].tiering.free_tier.activated #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListPricingRules AWS API Documentation
@@ -1872,6 +1881,9 @@ module Aws::BillingConductor
     # @option params [Float] :modifier_percentage
     #   The new modifier to show pricing plan rates as a percentage.
     #
+    # @option params [Types::UpdateTieringInput] :tiering
+    #   The set of tiering configurations for the pricing rule.
+    #
     # @return [Types::UpdatePricingRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePricingRuleOutput#arn #arn} => String
@@ -1884,6 +1896,7 @@ module Aws::BillingConductor
     #   * {Types::UpdatePricingRuleOutput#associated_pricing_plan_count #associated_pricing_plan_count} => Integer
     #   * {Types::UpdatePricingRuleOutput#last_modified_time #last_modified_time} => Integer
     #   * {Types::UpdatePricingRuleOutput#billing_entity #billing_entity} => String
+    #   * {Types::UpdatePricingRuleOutput#tiering #tiering} => Types::UpdateTieringInput
     #
     # @example Request syntax with placeholder values
     #
@@ -1891,8 +1904,13 @@ module Aws::BillingConductor
     #     arn: "PricingRuleArn", # required
     #     name: "PricingRuleName",
     #     description: "PricingRuleDescription",
-    #     type: "MARKUP", # accepts MARKUP, DISCOUNT
+    #     type: "MARKUP", # accepts MARKUP, DISCOUNT, TIERING
     #     modifier_percentage: 1.0,
+    #     tiering: {
+    #       free_tier: { # required
+    #         activated: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1901,12 +1919,13 @@ module Aws::BillingConductor
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.scope #=> String, one of "GLOBAL", "SERVICE", "BILLING_ENTITY"
-    #   resp.type #=> String, one of "MARKUP", "DISCOUNT"
+    #   resp.type #=> String, one of "MARKUP", "DISCOUNT", "TIERING"
     #   resp.modifier_percentage #=> Float
     #   resp.service #=> String
     #   resp.associated_pricing_plan_count #=> Integer
     #   resp.last_modified_time #=> Integer
     #   resp.billing_entity #=> String
+    #   resp.tiering.free_tier.activated #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingRule AWS API Documentation
     #
@@ -1930,7 +1949,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

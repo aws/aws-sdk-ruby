@@ -775,13 +775,22 @@ module Aws::Connect
     # Amazon Web Services Region where the Amazon Connect instance or
     # traffic distribution group was created.
     #
-    # You can call the [DescribePhoneNumber][1] API to verify the status of
-    # a previous [ClaimPhoneNumber][2] operation.
+    # For more information about how to use this operation, see [Claim a
+    # phone number in your country][1] and [Claim phone numbers to traffic
+    # distribution groups][2] in the *Amazon Connect Administrator Guide*.
+    #
+    # You can call the [SearchAvailablePhoneNumbers][3] API for available
+    # phone numbers that you can claim. Call the [DescribePhoneNumber][4]
+    # API to verify the status of a previous [ClaimPhoneNumber][5]
+    # operation.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
-    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    # [5]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     #
     # @option params [required, String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
@@ -1461,6 +1470,106 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_routing_profile(params = {}, options = {})
       req = build_request(:create_routing_profile, params)
+      req.send_request(options)
+    end
+
+    # Creates a rule for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   A unique name for the rule.
+    #
+    # @option params [required, Types::RuleTriggerEventSource] :trigger_event_source
+    #   The event source to trigger the rule.
+    #
+    # @option params [required, String] :function
+    #   The conditions of the rule.
+    #
+    # @option params [required, Array<Types::RuleAction>] :actions
+    #   A list of actions to be run when the rule is triggered.
+    #
+    # @option params [required, String] :publish_status
+    #   The publish status of the rule.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRuleResponse#rule_arn #rule_arn} => String
+    #   * {Types::CreateRuleResponse#rule_id #rule_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_rule({
+    #     instance_id: "InstanceId", # required
+    #     name: "RuleName", # required
+    #     trigger_event_source: { # required
+    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate
+    #       integration_association_id: "IntegrationAssociationId",
+    #     },
+    #     function: "RuleFunction", # required
+    #     actions: [ # required
+    #       {
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION
+    #         task_action: {
+    #           name: "TaskNameExpression", # required
+    #           description: "TaskDescriptionExpression",
+    #           contact_flow_id: "ContactFlowId", # required
+    #           references: {
+    #             "ReferenceKey" => {
+    #               value: "ReferenceValue", # required
+    #               type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
+    #             },
+    #           },
+    #         },
+    #         event_bridge_action: {
+    #           name: "EventBridgeActionName", # required
+    #         },
+    #         assign_contact_category_action: {
+    #         },
+    #         send_notification_action: {
+    #           delivery_method: "EMAIL", # required, accepts EMAIL
+    #           subject: "Subject",
+    #           content: "Content", # required
+    #           content_type: "PLAIN_TEXT", # required, accepts PLAIN_TEXT
+    #           recipient: { # required
+    #             user_tags: {
+    #               "String" => "String",
+    #             },
+    #             user_ids: ["UserId"],
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     publish_status: "DRAFT", # required, accepts DRAFT, PUBLISHED
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_arn #=> String
+    #   resp.rule_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRule AWS API Documentation
+    #
+    # @overload create_rule(params = {})
+    # @param [Hash] params ({})
+    def create_rule(params = {}, options = {})
+      req = build_request(:create_rule, params)
       req.send_request(options)
     end
 
@@ -2182,6 +2291,33 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_quick_connect(params = {}, options = {})
       req = build_request(:delete_quick_connect, params)
+      req.send_request(options)
+    end
+
+    # Deletes a rule for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :rule_id
+    #   A unique identifier for the rule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_rule({
+    #     instance_id: "InstanceId", # required
+    #     rule_id: "RuleId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteRule AWS API Documentation
+    #
+    # @overload delete_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_rule(params = {}, options = {})
+      req = build_request(:delete_rule, params)
       req.send_request(options)
     end
 
@@ -2963,6 +3099,67 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_routing_profile(params = {}, options = {})
       req = build_request(:describe_routing_profile, params)
+      req.send_request(options)
+    end
+
+    # Describes a rule for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :rule_id
+    #   A unique identifier for the rule.
+    #
+    # @return [Types::DescribeRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRuleResponse#rule #rule} => Types::Rule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_rule({
+    #     instance_id: "InstanceId", # required
+    #     rule_id: "RuleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule.name #=> String
+    #   resp.rule.rule_id #=> String
+    #   resp.rule.rule_arn #=> String
+    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate"
+    #   resp.rule.trigger_event_source.integration_association_id #=> String
+    #   resp.rule.function #=> String
+    #   resp.rule.actions #=> Array
+    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION"
+    #   resp.rule.actions[0].task_action.name #=> String
+    #   resp.rule.actions[0].task_action.description #=> String
+    #   resp.rule.actions[0].task_action.contact_flow_id #=> String
+    #   resp.rule.actions[0].task_action.references #=> Hash
+    #   resp.rule.actions[0].task_action.references["ReferenceKey"].value #=> String
+    #   resp.rule.actions[0].task_action.references["ReferenceKey"].type #=> String, one of "URL", "ATTACHMENT", "NUMBER", "STRING", "DATE", "EMAIL"
+    #   resp.rule.actions[0].event_bridge_action.name #=> String
+    #   resp.rule.actions[0].send_notification_action.delivery_method #=> String, one of "EMAIL"
+    #   resp.rule.actions[0].send_notification_action.subject #=> String
+    #   resp.rule.actions[0].send_notification_action.content #=> String
+    #   resp.rule.actions[0].send_notification_action.content_type #=> String, one of "PLAIN_TEXT"
+    #   resp.rule.actions[0].send_notification_action.recipient.user_tags #=> Hash
+    #   resp.rule.actions[0].send_notification_action.recipient.user_tags["String"] #=> String
+    #   resp.rule.actions[0].send_notification_action.recipient.user_ids #=> Array
+    #   resp.rule.actions[0].send_notification_action.recipient.user_ids[0] #=> String
+    #   resp.rule.publish_status #=> String, one of "DRAFT", "PUBLISHED"
+    #   resp.rule.created_time #=> Time
+    #   resp.rule.last_updated_time #=> Time
+    #   resp.rule.last_updated_by #=> String
+    #   resp.rule.tags #=> Hash
+    #   resp.rule.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRule AWS API Documentation
+    #
+    # @overload describe_rule(params = {})
+    # @param [Hash] params ({})
+    def describe_rule(params = {}, options = {})
+      req = build_request(:describe_rule, params)
       req.send_request(options)
     end
 
@@ -5628,6 +5825,66 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_routing_profiles(params = {}, options = {})
       req = build_request(:list_routing_profiles, params)
+      req.send_request(options)
+    end
+
+    # List all rules for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :publish_status
+    #   The publish status of the rule.
+    #
+    # @option params [String] :event_source_name
+    #   The name of the event source.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRulesResponse#rule_summary_list #rule_summary_list} => Array&lt;Types::RuleSummary&gt;
+    #   * {Types::ListRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rules({
+    #     instance_id: "InstanceId", # required
+    #     publish_status: "DRAFT", # accepts DRAFT, PUBLISHED
+    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_summary_list #=> Array
+    #   resp.rule_summary_list[0].name #=> String
+    #   resp.rule_summary_list[0].rule_id #=> String
+    #   resp.rule_summary_list[0].rule_arn #=> String
+    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate"
+    #   resp.rule_summary_list[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
+    #   resp.rule_summary_list[0].action_summaries #=> Array
+    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION"
+    #   resp.rule_summary_list[0].created_time #=> Time
+    #   resp.rule_summary_list[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRules AWS API Documentation
+    #
+    # @overload list_rules(params = {})
+    # @param [Hash] params ({})
+    def list_rules(params = {}, options = {})
+      req = build_request(:list_rules, params)
       req.send_request(options)
     end
 
@@ -8758,6 +9015,84 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates a rule for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :rule_id
+    #   A unique identifier for the rule.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the rule. You can change the name only if
+    #   `TriggerEventSource` is one of the following values:
+    #   `OnZendeskTicketCreate` \| `OnZendeskTicketStatusUpdate` \|
+    #   `OnSalesforceCaseCreate`
+    #
+    # @option params [required, String] :function
+    #   The conditions of the rule.
+    #
+    # @option params [required, Array<Types::RuleAction>] :actions
+    #   A list of actions to be run when the rule is triggered.
+    #
+    # @option params [required, String] :publish_status
+    #   The publish status of the rule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_rule({
+    #     rule_id: "RuleId", # required
+    #     instance_id: "InstanceId", # required
+    #     name: "RuleName", # required
+    #     function: "RuleFunction", # required
+    #     actions: [ # required
+    #       {
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION
+    #         task_action: {
+    #           name: "TaskNameExpression", # required
+    #           description: "TaskDescriptionExpression",
+    #           contact_flow_id: "ContactFlowId", # required
+    #           references: {
+    #             "ReferenceKey" => {
+    #               value: "ReferenceValue", # required
+    #               type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
+    #             },
+    #           },
+    #         },
+    #         event_bridge_action: {
+    #           name: "EventBridgeActionName", # required
+    #         },
+    #         assign_contact_category_action: {
+    #         },
+    #         send_notification_action: {
+    #           delivery_method: "EMAIL", # required, accepts EMAIL
+    #           subject: "Subject",
+    #           content: "Content", # required
+    #           content_type: "PLAIN_TEXT", # required, accepts PLAIN_TEXT
+    #           recipient: { # required
+    #             user_tags: {
+    #               "String" => "String",
+    #             },
+    #             user_ids: ["UserId"],
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     publish_status: "DRAFT", # required, accepts DRAFT, PUBLISHED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRule AWS API Documentation
+    #
+    # @overload update_rule(params = {})
+    # @param [Hash] params ({})
+    def update_rule(params = {}, options = {})
+      req = build_request(:update_rule, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -9266,7 +9601,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

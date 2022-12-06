@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2022-12-06)
+------------------
+
+* Feature - This release adds the Tiering Pricing Rule feature.
+
 1.3.0 (2022-11-16)
 ------------------
 

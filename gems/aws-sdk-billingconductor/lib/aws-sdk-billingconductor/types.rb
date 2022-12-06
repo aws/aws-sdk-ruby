@@ -526,6 +526,20 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # The possible Amazon Web Services Free Tier configurations.
+    #
+    # @!attribute [rw] activated
+    #   Activate or deactivate Amazon Web Services Free Tier.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreateFreeTierConfig AWS API Documentation
+    #
+    class CreateFreeTierConfig < Struct.new(
+      :activated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   The token that is needed to support idempotency. Idempotency isn't
     #   currently supported, but will be implemented in a future update.
@@ -623,6 +637,10 @@ module Aws::BillingConductor
     #   Services Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tiering
+    #   The set of tiering configurations for the pricing rule.
+    #   @return [Types::CreateTieringInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreatePricingRuleInput AWS API Documentation
     #
     class CreatePricingRuleInput < Struct.new(
@@ -634,7 +652,8 @@ module Aws::BillingConductor
       :modifier_percentage,
       :service,
       :tags,
-      :billing_entity)
+      :billing_entity,
+      :tiering)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -647,6 +666,20 @@ module Aws::BillingConductor
     #
     class CreatePricingRuleOutput < Struct.new(
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The set of tiering configurations for the pricing rule.
+    #
+    # @!attribute [rw] free_tier
+    #   The possible Amazon Web Services Free Tier configurations.
+    #   @return [Types::CreateFreeTierConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreateTieringInput AWS API Documentation
+    #
+    class CreateTieringInput < Struct.new(
+      :free_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1052,6 +1085,20 @@ module Aws::BillingConductor
     class DisassociateResourceResponseElement < Struct.new(
       :arn,
       :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The possible Amazon Web Services Free Tier configurations.
+    #
+    # @!attribute [rw] activated
+    #   Activate or deactivate Amazon Web Services Free Tier application.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/FreeTierConfig AWS API Documentation
+    #
+    class FreeTierConfig < Struct.new(
+      :activated)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1985,6 +2032,10 @@ module Aws::BillingConductor
     #   Services Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tiering
+    #   The set of tiering configurations for the pricing rule.
+    #   @return [Types::Tiering]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/PricingRuleListElement AWS API Documentation
     #
     class PricingRuleListElement < Struct.new(
@@ -1998,7 +2049,8 @@ module Aws::BillingConductor
       :associated_pricing_plan_count,
       :creation_time,
       :last_modified_time,
-      :billing_entity)
+      :billing_entity,
+      :tiering)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -2095,6 +2147,20 @@ module Aws::BillingConductor
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The set of tiering configurations for the pricing rule.
+    #
+    # @!attribute [rw] free_tier
+    #   The possible Amazon Web Services Free Tier configurations.
+    #   @return [Types::FreeTierConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/Tiering AWS API Documentation
+    #
+    class Tiering < Struct.new(
+      :free_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2344,6 +2410,20 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # The possible Amazon Web Services Free Tier configurations.
+    #
+    # @!attribute [rw] activated
+    #   Activate or deactivate application of Amazon Web Services Free Tier.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateFreeTierConfig AWS API Documentation
+    #
+    class UpdateFreeTierConfig < Struct.new(
+      :activated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the pricing plan that you're
     #   updating.
@@ -2423,6 +2503,10 @@ module Aws::BillingConductor
     #   The new modifier to show pricing plan rates as a percentage.
     #   @return [Float]
     #
+    # @!attribute [rw] tiering
+    #   The set of tiering configurations for the pricing rule.
+    #   @return [Types::UpdateTieringInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingRuleInput AWS API Documentation
     #
     class UpdatePricingRuleInput < Struct.new(
@@ -2430,7 +2514,8 @@ module Aws::BillingConductor
       :name,
       :description,
       :type,
-      :modifier_percentage)
+      :modifier_percentage,
+      :tiering)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -2481,6 +2566,10 @@ module Aws::BillingConductor
     #   Services Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tiering
+    #   The set of tiering configurations for the pricing rule.
+    #   @return [Types::UpdateTieringInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingRuleOutput AWS API Documentation
     #
     class UpdatePricingRuleOutput < Struct.new(
@@ -2493,8 +2582,23 @@ module Aws::BillingConductor
       :service,
       :associated_pricing_plan_count,
       :last_modified_time,
-      :billing_entity)
+      :billing_entity,
+      :tiering)
       SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # The set of tiering configurations for the pricing rule.
+    #
+    # @!attribute [rw] free_tier
+    #   The possible Amazon Web Services Free Tier configurations.
+    #   @return [Types::UpdateFreeTierConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateTieringInput AWS API Documentation
+    #
+    class UpdateTieringInput < Struct.new(
+      :free_tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 

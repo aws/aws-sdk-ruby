@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-12-06)
+------------------
+
+* Feature - Endpoint Ruleset update: Use http instead of https for the "local" region.
+
 1.41.0 (2022-11-18)
 ------------------
 

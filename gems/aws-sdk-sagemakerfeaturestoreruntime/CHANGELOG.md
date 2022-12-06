@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-12-06)
+------------------
+
+* Feature - For online + offline Feature Groups, added ability to target PutRecord and DeleteRecord actions to only online store, or only offline store. If target store parameter is not specified, actions will apply to both stores.
+
 1.13.0 (2022-10-25)
 ------------------
 

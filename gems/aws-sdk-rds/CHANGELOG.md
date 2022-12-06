@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2022-12-06)
+------------------
+
+* Feature - This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations.
+
 1.162.0 (2022-12-05)
 ------------------
 

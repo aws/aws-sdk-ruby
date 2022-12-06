@@ -23,6 +23,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about an action.
+    #
+    # @!attribute [rw] action_type
+    #   The action type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ActionSummary AWS API Documentation
+    #
+    class ActionSummary < Struct.new(
+      :action_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the [contact][1] associated to the user.
     #
     #
@@ -214,6 +228,19 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # This action must be set if `TriggerEventSource` is one of the
+    # following values: `OnPostCallAnalysisAvailable` \|
+    # `OnRealTimeCallAnalysisAvailable` \| `OnPostChatAnalysisAvailable`.
+    # Contact is categorized using the rule name.
+    #
+    # `RuleName` is used as `ContactCategory`.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssignContactCategoryActionDefinition AWS API Documentation
+    #
+    class AssignContactCategoryActionDefinition < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -1626,6 +1653,76 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A unique name for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_event_source
+    #   The event source to trigger the rule.
+    #   @return [Types::RuleTriggerEventSource]
+    #
+    # @!attribute [rw] function
+    #   The conditions of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   A list of actions to be run when the rule is triggered.
+    #   @return [Array<Types::RuleAction>]
+    #
+    # @!attribute [rw] publish_status
+    #   The publish status of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRuleRequest AWS API Documentation
+    #
+    class CreateRuleRequest < Struct.new(
+      :instance_id,
+      :name,
+      :trigger_event_source,
+      :function,
+      :actions,
+      :publish_status,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   A unique identifier for the rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRuleResponse AWS API Documentation
+    #
+    class CreateRuleResponse < Struct.new(
+      :rule_arn,
+      :rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] security_profile_name
     #   The name of the security profile.
     #   @return [String]
@@ -2390,6 +2487,24 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] rule_id
+    #   A unique identifier for the rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteRuleRequest AWS API Documentation
+    #
+    class DeleteRuleRequest < Struct.new(
+      :instance_id,
+      :rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] security_profile_id
     #   The identifier for the security profle.
     #   @return [String]
@@ -2898,6 +3013,36 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   A unique identifier for the rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRuleRequest AWS API Documentation
+    #
+    class DescribeRuleRequest < Struct.new(
+      :instance_id,
+      :rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule
+    #   Information about the rule.
+    #   @return [Types::Rule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRuleResponse AWS API Documentation
+    #
+    class DescribeRuleResponse < Struct.new(
+      :rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] security_profile_id
     #   The identifier for the security profle.
     #   @return [String]
@@ -3397,6 +3542,20 @@ module Aws::Connect
     class EncryptionConfig < Struct.new(
       :encryption_type,
       :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The EventBridge action definition.
+    #
+    # @!attribute [rw] name
+    #   The name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EventBridgeActionDefinition AWS API Documentation
+    #
+    class EventBridgeActionDefinition < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6155,6 +6314,59 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] publish_status
+    #   The publish status of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_name
+    #   The name of the event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRulesRequest AWS API Documentation
+    #
+    class ListRulesRequest < Struct.new(
+      :instance_id,
+      :publish_status,
+      :event_source_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_summary_list
+    #   Summary information about a rule.
+    #   @return [Array<Types::RuleSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRulesResponse AWS API Documentation
+    #
+    class ListRulesResponse < Struct.new(
+      :rule_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -6646,6 +6858,28 @@ module Aws::Connect
     class MonitorContactResponse < Struct.new(
       :contact_id,
       :contact_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type of notification recipient.
+    #
+    # @!attribute [rw] user_tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}. Amazon Connect users with the specified
+    #   tags will be notified.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] user_ids
+    #   A list of user IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/NotificationRecipientType AWS API Documentation
+    #
+    class NotificationRecipientType < Struct.new(
+      :user_tags,
+      :user_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7800,6 +8034,181 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a rule.
+    #
+    # @!attribute [rw] name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   A unique identifier for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_event_source
+    #   The event source to trigger the rule.
+    #   @return [Types::RuleTriggerEventSource]
+    #
+    # @!attribute [rw] function
+    #   The conditions of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   A list of actions to be run when the rule is triggered.
+    #   @return [Array<Types::RuleAction>]
+    #
+    # @!attribute [rw] publish_status
+    #   The publish status of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp for the when the rule was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Rule AWS API Documentation
+    #
+    class Rule < Struct.new(
+      :name,
+      :rule_id,
+      :rule_arn,
+      :trigger_event_source,
+      :function,
+      :actions,
+      :publish_status,
+      :created_time,
+      :last_updated_time,
+      :last_updated_by,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the action to be performed when a rule is triggered.
+    #
+    # @!attribute [rw] action_type
+    #   The type of action that creates a rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_action
+    #   Information about the task action. This field is required if
+    #   `TriggerEventSource` is one of the following values:
+    #   `OnZendeskTicketCreate` \| `OnZendeskTicketStatusUpdate` \|
+    #   `OnSalesforceCaseCreate`
+    #   @return [Types::TaskActionDefinition]
+    #
+    # @!attribute [rw] event_bridge_action
+    #   Information about the EventBridge action.
+    #   @return [Types::EventBridgeActionDefinition]
+    #
+    # @!attribute [rw] assign_contact_category_action
+    #   Information about the contact category action.
+    #   @return [Types::AssignContactCategoryActionDefinition]
+    #
+    # @!attribute [rw] send_notification_action
+    #   Information about the send notification action.
+    #   @return [Types::SendNotificationActionDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleAction AWS API Documentation
+    #
+    class RuleAction < Struct.new(
+      :action_type,
+      :task_action,
+      :event_bridge_action,
+      :assign_contact_category_action,
+      :send_notification_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of `ActionTypes` associated with a rule.
+    #
+    # @!attribute [rw] name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   A unique identifier for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_name
+    #   The name of the event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] publish_status
+    #   The publish status of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_summaries
+    #   A list of ActionTypes associated with a rule.
+    #   @return [Array<Types::ActionSummary>]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp for when the rule was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleSummary AWS API Documentation
+    #
+    class RuleSummary < Struct.new(
+      :name,
+      :rule_id,
+      :rule_arn,
+      :event_source_name,
+      :publish_status,
+      :action_summaries,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name of the event source. This field is required if
+    # `TriggerEventSource` is one of the following values:
+    # `OnZendeskTicketCreate` \| `OnZendeskTicketStatusUpdate` \|
+    # `OnSalesforceCaseCreate`
+    #
+    # @!attribute [rw] event_source_name
+    #   The name of the event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the integration association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleTriggerEventSource AWS API Documentation
+    #
+    class RuleTriggerEventSource < Struct.new(
+      :event_source_name,
+      :integration_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the Amazon Simple Storage Service (Amazon S3)
     # storage type.
     #
@@ -8416,6 +8825,52 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the send notification action.
+    #
+    # @!attribute [rw] delivery_method
+    #   Notification delivery method.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject of the email if the delivery method is `EMAIL`. Supports
+    #   variable injection. For more information, see [JSONPath
+    #   reference][1] in the *Amazon Connect Administrators Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   Notification content. Supports variable injection. For more
+    #   information, see [JSONPath reference][1] in the *Amazon Connect
+    #   Administrators Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   Content type format.
+    #   @return [String]
+    #
+    # @!attribute [rw] recipient
+    #   Notification recipient.
+    #   @return [Types::NotificationRecipientType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SendNotificationActionDefinition AWS API Documentation
+    #
+    class SendNotificationActionDefinition < Struct.new(
+      :delivery_method,
+      :subject,
+      :content,
+      :content_type,
+      :recipient)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service quota has been exceeded.
     #
     # @!attribute [rw] message
@@ -9016,6 +9471,48 @@ module Aws::Connect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the task action.
+    #
+    # @!attribute [rw] name
+    #   The name. Supports variable injection. For more information, see
+    #   [JSONPath reference][1] in the *Amazon Connect Administrators
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description. Supports variable injection. For more information,
+    #   see [JSONPath reference][1] in the *Amazon Connect Administrators
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   Information about the reference when the `referenceType` is `URL`.
+    #   Otherwise, null. (Supports variable injection in the `Value` field.)
+    #   @return [Hash<String,Types::Reference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskActionDefinition AWS API Documentation
+    #
+    class TaskActionDefinition < Struct.new(
+      :name,
+      :description,
+      :contact_flow_id,
+      :references)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10148,6 +10645,47 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       :queue_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_id
+    #   A unique identifier for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule. You can change the name only if
+    #   `TriggerEventSource` is one of the following values:
+    #   `OnZendeskTicketCreate` \| `OnZendeskTicketStatusUpdate` \|
+    #   `OnSalesforceCaseCreate`
+    #   @return [String]
+    #
+    # @!attribute [rw] function
+    #   The conditions of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   A list of actions to be run when the rule is triggered.
+    #   @return [Array<Types::RuleAction>]
+    #
+    # @!attribute [rw] publish_status
+    #   The publish status of the rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRuleRequest AWS API Documentation
+    #
+    class UpdateRuleRequest < Struct.new(
+      :rule_id,
+      :instance_id,
+      :name,
+      :function,
+      :actions,
+      :publish_status)
       SENSITIVE = []
       include Aws::Structure
     end

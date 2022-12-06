@@ -422,9 +422,10 @@ module Aws::SageMakerFeatureStoreRuntime
       req.send_request(options)
     end
 
-    # Deletes a `Record` from a `FeatureGroup`. A new record will show up in
-    # the `OfflineStore` when the `DeleteRecord` API is called. This record
-    # will have a value of `True` in the `is_deleted` column.
+    # Deletes a `Record` from a `FeatureGroup`. When the `DeleteRecord` API
+    # is called a new record will be added to the `OfflineStore` and the
+    # `Record` will be removed from the `OnlineStore`. This record will have
+    # a value of `True` in the `is_deleted` column.
     #
     # @option params [required, String] :feature_group_name
     #   The name of the feature group to delete the record from.
@@ -437,6 +438,11 @@ module Aws::SageMakerFeatureStoreRuntime
     #   Timestamp indicating when the deletion event occurred. `EventTime` can
     #   be used to query data at a certain point in time.
     #
+    # @option params [Array<String>] :target_stores
+    #   A list of stores from which you're deleting the record. By default,
+    #   Feature Store deletes the record from all of the stores that you're
+    #   using for the `FeatureGroup`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -445,6 +451,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #     feature_group_name: "FeatureGroupName", # required
     #     record_identifier_value_as_string: "ValueAsString", # required
     #     event_time: "ValueAsString", # required
+    #     target_stores: ["OnlineStore"], # accepts OnlineStore, OfflineStore
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/DeleteRecord AWS API Documentation
@@ -462,7 +469,8 @@ module Aws::SageMakerFeatureStoreRuntime
     # returned.
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the feature group in which you want to put the records.
+    #   The name of the feature group from which you want to retrieve a
+    #   record.
     #
     # @option params [required, String] :record_identifier_value_as_string
     #   The value that corresponds to `RecordIdentifier` type and uniquely
@@ -519,6 +527,11 @@ module Aws::SageMakerFeatureStoreRuntime
     #
     #   * Use `PutRecord` to update feature values.
     #
+    # @option params [Array<String>] :target_stores
+    #   A list of stores to which you're adding the record. By default,
+    #   Feature Store adds the record to all of the stores that you're using
+    #   for the `FeatureGroup`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -531,6 +544,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #         value_as_string: "ValueAsString", # required
     #       },
     #     ],
+    #     target_stores: ["OnlineStore"], # accepts OnlineStore, OfflineStore
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/PutRecord AWS API Documentation
@@ -555,7 +569,7 @@ module Aws::SageMakerFeatureStoreRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerfeaturestoreruntime'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

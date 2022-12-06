@@ -36,6 +36,8 @@ module Aws::SageMakerFeatureStoreRuntime
     RecordIdentifiers = Shapes::ListShape.new(name: 'RecordIdentifiers')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     ServiceUnavailable = Shapes::StructureShape.new(name: 'ServiceUnavailable')
+    TargetStore = Shapes::StringShape.new(name: 'TargetStore')
+    TargetStores = Shapes::ListShape.new(name: 'TargetStores')
     UnprocessedIdentifiers = Shapes::ListShape.new(name: 'UnprocessedIdentifiers')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValueAsString = Shapes::StringShape.new(name: 'ValueAsString')
@@ -76,6 +78,7 @@ module Aws::SageMakerFeatureStoreRuntime
     DeleteRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location: "uri", location_name: "FeatureGroupName"))
     DeleteRecordRequest.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "RecordIdentifierValueAsString"))
     DeleteRecordRequest.add_member(:event_time, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "EventTime"))
+    DeleteRecordRequest.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location: "querystring", location_name: "TargetStores"))
     DeleteRecordRequest.struct_class = Types::DeleteRecordRequest
 
     FeatureNames.member = Shapes::ShapeRef.new(shape: FeatureName)
@@ -97,6 +100,7 @@ module Aws::SageMakerFeatureStoreRuntime
 
     PutRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location: "uri", location_name: "FeatureGroupName"))
     PutRecordRequest.add_member(:record, Shapes::ShapeRef.new(shape: Record, required: true, location_name: "Record"))
+    PutRecordRequest.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location_name: "TargetStores"))
     PutRecordRequest.struct_class = Types::PutRecordRequest
 
     Record.member = Shapes::ShapeRef.new(shape: FeatureValue)
@@ -108,6 +112,8 @@ module Aws::SageMakerFeatureStoreRuntime
 
     ServiceUnavailable.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ServiceUnavailable.struct_class = Types::ServiceUnavailable
+
+    TargetStores.member = Shapes::ShapeRef.new(shape: TargetStore)
 
     UnprocessedIdentifiers.member = Shapes::ShapeRef.new(shape: BatchGetRecordIdentifier)
 

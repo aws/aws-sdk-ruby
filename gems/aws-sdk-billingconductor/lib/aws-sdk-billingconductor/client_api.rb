@@ -57,10 +57,12 @@ module Aws::BillingConductor
     CreateBillingGroupOutput = Shapes::StructureShape.new(name: 'CreateBillingGroupOutput')
     CreateCustomLineItemInput = Shapes::StructureShape.new(name: 'CreateCustomLineItemInput')
     CreateCustomLineItemOutput = Shapes::StructureShape.new(name: 'CreateCustomLineItemOutput')
+    CreateFreeTierConfig = Shapes::StructureShape.new(name: 'CreateFreeTierConfig')
     CreatePricingPlanInput = Shapes::StructureShape.new(name: 'CreatePricingPlanInput')
     CreatePricingPlanOutput = Shapes::StructureShape.new(name: 'CreatePricingPlanOutput')
     CreatePricingRuleInput = Shapes::StructureShape.new(name: 'CreatePricingRuleInput')
     CreatePricingRuleOutput = Shapes::StructureShape.new(name: 'CreatePricingRuleOutput')
+    CreateTieringInput = Shapes::StructureShape.new(name: 'CreateTieringInput')
     Currency = Shapes::StringShape.new(name: 'Currency')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     CustomLineItemArn = Shapes::StringShape.new(name: 'CustomLineItemArn')
@@ -99,6 +101,7 @@ module Aws::BillingConductor
     DisassociatePricingRulesOutput = Shapes::StructureShape.new(name: 'DisassociatePricingRulesOutput')
     DisassociateResourceResponseElement = Shapes::StructureShape.new(name: 'DisassociateResourceResponseElement')
     DisassociateResourcesResponseList = Shapes::ListShape.new(name: 'DisassociateResourcesResponseList')
+    FreeTierConfig = Shapes::StructureShape.new(name: 'FreeTierConfig')
     Instant = Shapes::IntegerShape.new(name: 'Instant')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListAccountAssociationsFilter = Shapes::StructureShape.new(name: 'ListAccountAssociationsFilter')
@@ -178,6 +181,8 @@ module Aws::BillingConductor
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Tiering = Shapes::StructureShape.new(name: 'Tiering')
+    TieringActivated = Shapes::BooleanShape.new(name: 'TieringActivated')
     Token = Shapes::StringShape.new(name: 'Token')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -188,10 +193,12 @@ module Aws::BillingConductor
     UpdateCustomLineItemInput = Shapes::StructureShape.new(name: 'UpdateCustomLineItemInput')
     UpdateCustomLineItemOutput = Shapes::StructureShape.new(name: 'UpdateCustomLineItemOutput')
     UpdateCustomLineItemPercentageChargeDetails = Shapes::StructureShape.new(name: 'UpdateCustomLineItemPercentageChargeDetails')
+    UpdateFreeTierConfig = Shapes::StructureShape.new(name: 'UpdateFreeTierConfig')
     UpdatePricingPlanInput = Shapes::StructureShape.new(name: 'UpdatePricingPlanInput')
     UpdatePricingPlanOutput = Shapes::StructureShape.new(name: 'UpdatePricingPlanOutput')
     UpdatePricingRuleInput = Shapes::StructureShape.new(name: 'UpdatePricingRuleInput')
     UpdatePricingRuleOutput = Shapes::StructureShape.new(name: 'UpdatePricingRuleOutput')
+    UpdateTieringInput = Shapes::StructureShape.new(name: 'UpdateTieringInput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -314,6 +321,9 @@ module Aws::BillingConductor
     CreateCustomLineItemOutput.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, location_name: "Arn"))
     CreateCustomLineItemOutput.struct_class = Types::CreateCustomLineItemOutput
 
+    CreateFreeTierConfig.add_member(:activated, Shapes::ShapeRef.new(shape: TieringActivated, required: true, location_name: "Activated"))
+    CreateFreeTierConfig.struct_class = Types::CreateFreeTierConfig
+
     CreatePricingPlanInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
     CreatePricingPlanInput.add_member(:name, Shapes::ShapeRef.new(shape: PricingPlanName, required: true, location_name: "Name"))
     CreatePricingPlanInput.add_member(:description, Shapes::ShapeRef.new(shape: PricingPlanDescription, location_name: "Description"))
@@ -329,14 +339,18 @@ module Aws::BillingConductor
     CreatePricingRuleInput.add_member(:description, Shapes::ShapeRef.new(shape: PricingRuleDescription, location_name: "Description"))
     CreatePricingRuleInput.add_member(:scope, Shapes::ShapeRef.new(shape: PricingRuleScope, required: true, location_name: "Scope"))
     CreatePricingRuleInput.add_member(:type, Shapes::ShapeRef.new(shape: PricingRuleType, required: true, location_name: "Type"))
-    CreatePricingRuleInput.add_member(:modifier_percentage, Shapes::ShapeRef.new(shape: ModifierPercentage, required: true, location_name: "ModifierPercentage"))
+    CreatePricingRuleInput.add_member(:modifier_percentage, Shapes::ShapeRef.new(shape: ModifierPercentage, location_name: "ModifierPercentage"))
     CreatePricingRuleInput.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "Service"))
     CreatePricingRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreatePricingRuleInput.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
+    CreatePricingRuleInput.add_member(:tiering, Shapes::ShapeRef.new(shape: CreateTieringInput, location_name: "Tiering"))
     CreatePricingRuleInput.struct_class = Types::CreatePricingRuleInput
 
     CreatePricingRuleOutput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingRuleArn, location_name: "Arn"))
     CreatePricingRuleOutput.struct_class = Types::CreatePricingRuleOutput
+
+    CreateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: CreateFreeTierConfig, required: true, location_name: "FreeTier"))
+    CreateTieringInput.struct_class = Types::CreateTieringInput
 
     CustomLineItemArns.member = Shapes::ShapeRef.new(shape: CustomLineItemArn)
 
@@ -437,6 +451,9 @@ module Aws::BillingConductor
     DisassociateResourceResponseElement.struct_class = Types::DisassociateResourceResponseElement
 
     DisassociateResourcesResponseList.member = Shapes::ShapeRef.new(shape: DisassociateResourceResponseElement)
+
+    FreeTierConfig.add_member(:activated, Shapes::ShapeRef.new(shape: TieringActivated, required: true, location_name: "Activated"))
+    FreeTierConfig.struct_class = Types::FreeTierConfig
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
@@ -636,6 +653,7 @@ module Aws::BillingConductor
     PricingRuleListElement.add_member(:creation_time, Shapes::ShapeRef.new(shape: Instant, location_name: "CreationTime"))
     PricingRuleListElement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
     PricingRuleListElement.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
+    PricingRuleListElement.add_member(:tiering, Shapes::ShapeRef.new(shape: Tiering, location_name: "Tiering"))
     PricingRuleListElement.struct_class = Types::PricingRuleListElement
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
@@ -664,6 +682,9 @@ module Aws::BillingConductor
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    Tiering.add_member(:free_tier, Shapes::ShapeRef.new(shape: FreeTierConfig, required: true, location_name: "FreeTier"))
+    Tiering.struct_class = Types::Tiering
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -715,6 +736,9 @@ module Aws::BillingConductor
     UpdateCustomLineItemPercentageChargeDetails.add_member(:percentage_value, Shapes::ShapeRef.new(shape: CustomLineItemPercentageChargeValue, required: true, location_name: "PercentageValue"))
     UpdateCustomLineItemPercentageChargeDetails.struct_class = Types::UpdateCustomLineItemPercentageChargeDetails
 
+    UpdateFreeTierConfig.add_member(:activated, Shapes::ShapeRef.new(shape: TieringActivated, required: true, location_name: "Activated"))
+    UpdateFreeTierConfig.struct_class = Types::UpdateFreeTierConfig
+
     UpdatePricingPlanInput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingPlanArn, required: true, location_name: "Arn"))
     UpdatePricingPlanInput.add_member(:name, Shapes::ShapeRef.new(shape: PricingPlanName, location_name: "Name"))
     UpdatePricingPlanInput.add_member(:description, Shapes::ShapeRef.new(shape: PricingPlanDescription, location_name: "Description"))
@@ -732,6 +756,7 @@ module Aws::BillingConductor
     UpdatePricingRuleInput.add_member(:description, Shapes::ShapeRef.new(shape: PricingRuleDescription, location_name: "Description"))
     UpdatePricingRuleInput.add_member(:type, Shapes::ShapeRef.new(shape: PricingRuleType, location_name: "Type"))
     UpdatePricingRuleInput.add_member(:modifier_percentage, Shapes::ShapeRef.new(shape: ModifierPercentage, location_name: "ModifierPercentage"))
+    UpdatePricingRuleInput.add_member(:tiering, Shapes::ShapeRef.new(shape: UpdateTieringInput, location_name: "Tiering"))
     UpdatePricingRuleInput.struct_class = Types::UpdatePricingRuleInput
 
     UpdatePricingRuleOutput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingRuleArn, location_name: "Arn"))
@@ -744,7 +769,11 @@ module Aws::BillingConductor
     UpdatePricingRuleOutput.add_member(:associated_pricing_plan_count, Shapes::ShapeRef.new(shape: NumberOfPricingPlansAssociatedWith, location_name: "AssociatedPricingPlanCount"))
     UpdatePricingRuleOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
     UpdatePricingRuleOutput.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
+    UpdatePricingRuleOutput.add_member(:tiering, Shapes::ShapeRef.new(shape: UpdateTieringInput, location_name: "Tiering"))
     UpdatePricingRuleOutput.struct_class = Types::UpdatePricingRuleOutput
+
+    UpdateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: UpdateFreeTierConfig, required: true, location_name: "FreeTier"))
+    UpdateTieringInput.struct_class = Types::UpdateTieringInput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))

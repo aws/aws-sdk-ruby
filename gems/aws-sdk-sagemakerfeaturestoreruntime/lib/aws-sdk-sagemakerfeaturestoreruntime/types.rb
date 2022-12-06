@@ -38,8 +38,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #
     # @!attribute [rw] error_code
     #   The error code of an error that has occured when attempting to
-    #   retrieve a batch of Records. For more information on errors, see [
-    #   Errors][1].
+    #   retrieve a batch of Records. For more information on errors, see
+    #   [Errors][1].
     #
     #
     #
@@ -108,7 +108,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [Array<Types::BatchGetRecordResultDetail>]
     #
     # @!attribute [rw] errors
-    #   A list of errors that have occured when retrieving a batch of
+    #   A list of errors that have occurred when retrieving a batch of
     #   Records.
     #   @return [Array<Types::BatchGetRecordError>]
     #
@@ -165,12 +165,19 @@ module Aws::SageMakerFeatureStoreRuntime
     #   can be used to query data at a certain point in time.
     #   @return [String]
     #
+    # @!attribute [rw] target_stores
+    #   A list of stores from which you're deleting the record. By default,
+    #   Feature Store deletes the record from all of the stores that you're
+    #   using for the `FeatureGroup`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/DeleteRecordRequest AWS API Documentation
     #
     class DeleteRecordRequest < Struct.new(
       :feature_group_name,
       :record_identifier_value_as_string,
-      :event_time)
+      :event_time,
+      :target_stores)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -197,7 +204,8 @@ module Aws::SageMakerFeatureStoreRuntime
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group in which you want to put the records.
+    #   The name of the feature group from which you want to retrieve a
+    #   record.
     #   @return [String]
     #
     # @!attribute [rw] record_identifier_value_as_string
@@ -233,7 +241,7 @@ module Aws::SageMakerFeatureStoreRuntime
     end
 
     # An internal failure occurred. Try your request again. If the problem
-    # persists, contact AWS customer support.
+    # persists, contact Amazon Web Services customer support.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -263,11 +271,18 @@ module Aws::SageMakerFeatureStoreRuntime
     #   * Use `PutRecord` to update feature values.
     #   @return [Array<Types::FeatureValue>]
     #
+    # @!attribute [rw] target_stores
+    #   A list of stores to which you're adding the record. By default,
+    #   Feature Store adds the record to all of the stores that you're
+    #   using for the `FeatureGroup`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/PutRecordRequest AWS API Documentation
     #
     class PutRecordRequest < Struct.new(
       :feature_group_name,
-      :record)
+      :record,
+      :target_stores)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -3233,7 +3233,7 @@ module Aws::RDS
     #
     #   events = rds.events({
     #     source_identifier: "String",
-    #     source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy
+    #     source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     duration: 1,

@@ -11653,7 +11653,7 @@ module Aws::RDS
     #
     #   resp = client.describe_events({
     #     source_identifier: "String",
-    #     source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy
+    #     source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     duration: 1,
@@ -11673,7 +11673,7 @@ module Aws::RDS
     #   resp.marker #=> String
     #   resp.events #=> Array
     #   resp.events[0].source_identifier #=> String
-    #   resp.events[0].source_type #=> String, one of "db-instance", "db-parameter-group", "db-security-group", "db-snapshot", "db-cluster", "db-cluster-snapshot", "custom-engine-version", "db-proxy"
+    #   resp.events[0].source_type #=> String, one of "db-instance", "db-parameter-group", "db-security-group", "db-snapshot", "db-cluster", "db-cluster-snapshot", "custom-engine-version", "db-proxy", "blue-green-deployment"
     #   resp.events[0].message #=> String
     #   resp.events[0].event_categories #=> Array
     #   resp.events[0].event_categories[0] #=> String
@@ -23640,7 +23640,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

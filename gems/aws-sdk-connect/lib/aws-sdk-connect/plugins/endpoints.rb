@@ -96,6 +96,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateQuickConnect.build(context)
           when :create_routing_profile
             Aws::Connect::Endpoints::CreateRoutingProfile.build(context)
+          when :create_rule
+            Aws::Connect::Endpoints::CreateRule.build(context)
           when :create_security_profile
             Aws::Connect::Endpoints::CreateSecurityProfile.build(context)
           when :create_task_template
@@ -122,6 +124,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DeleteIntegrationAssociation.build(context)
           when :delete_quick_connect
             Aws::Connect::Endpoints::DeleteQuickConnect.build(context)
+          when :delete_rule
+            Aws::Connect::Endpoints::DeleteRule.build(context)
           when :delete_security_profile
             Aws::Connect::Endpoints::DeleteSecurityProfile.build(context)
           when :delete_task_template
@@ -160,6 +164,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DescribeQuickConnect.build(context)
           when :describe_routing_profile
             Aws::Connect::Endpoints::DescribeRoutingProfile.build(context)
+          when :describe_rule
+            Aws::Connect::Endpoints::DescribeRule.build(context)
           when :describe_security_profile
             Aws::Connect::Endpoints::DescribeSecurityProfile.build(context)
           when :describe_traffic_distribution_group
@@ -250,6 +256,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListRoutingProfileQueues.build(context)
           when :list_routing_profiles
             Aws::Connect::Endpoints::ListRoutingProfiles.build(context)
+          when :list_rules
+            Aws::Connect::Endpoints::ListRules.build(context)
           when :list_security_keys
             Aws::Connect::Endpoints::ListSecurityKeys.build(context)
           when :list_security_profile_permissions
@@ -362,6 +370,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateRoutingProfileName.build(context)
           when :update_routing_profile_queues
             Aws::Connect::Endpoints::UpdateRoutingProfileQueues.build(context)
+          when :update_rule
+            Aws::Connect::Endpoints::UpdateRule.build(context)
           when :update_security_profile
             Aws::Connect::Endpoints::UpdateSecurityProfile.build(context)
           when :update_task_template
