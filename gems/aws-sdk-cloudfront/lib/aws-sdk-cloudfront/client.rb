@@ -637,6 +637,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
+    #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -1148,6 +1150,8 @@ module Aws::CloudFront
     #       web_acl_id: "string",
     #       http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #       is_ipv6_enabled: false,
+    #       continuous_deployment_policy_id: "string",
+    #       staging: false,
     #     },
     #   })
     #
@@ -1332,6 +1336,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
+    #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -1614,6 +1620,8 @@ module Aws::CloudFront
     #         web_acl_id: "string",
     #         http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #         is_ipv6_enabled: false,
+    #         continuous_deployment_policy_id: "string",
+    #         staging: false,
     #       },
     #       tags: { # required
     #         items: [
@@ -1807,6 +1815,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
+    #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -3831,6 +3841,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
+    #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -4028,6 +4040,8 @@ module Aws::CloudFront
     #   resp.distribution_config.web_acl_id #=> String
     #   resp.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution_config.continuous_deployment_policy_id #=> String
+    #   resp.distribution_config.staging #=> Boolean
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionConfig AWS API Documentation
@@ -5449,6 +5463,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
+    #   resp.distribution_list.items[0].staging #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributions AWS API Documentation
     #
@@ -5839,6 +5854,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
+    #   resp.distribution_list.items[0].staging #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByRealtimeLogConfig AWS API Documentation
     #
@@ -6106,6 +6122,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
+    #   resp.distribution_list.items[0].staging #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLId AWS API Documentation
     #
@@ -7548,6 +7565,8 @@ module Aws::CloudFront
     #       web_acl_id: "string",
     #       http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #       is_ipv6_enabled: false,
+    #       continuous_deployment_policy_id: "string",
+    #       staging: false,
     #     },
     #     id: "string", # required
     #     if_match: "string",
@@ -7734,6 +7753,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
+    #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -7745,6 +7766,245 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def update_distribution(params = {}, options = {})
       req = build_request(:update_distribution, params)
+      req.send_request(options)
+    end
+
+    # Copies the staging distribution's configuration to its corresponding
+    # primary distribution. The primary distribution retains its `Aliases`
+    # (also known as alternate domain names or CNAMEs) and
+    # `ContinuousDeploymentPolicyId` value, but otherwise its configuration
+    # is overwritten to match the staging distribution.
+    #
+    # You can use this operation in a continuous deployment workflow after
+    # you have tested configuration changes on the staging distribution.
+    # After using a continuous deployment policy to move a portion of your
+    # domain name’s traffic to the staging distribution and verifying that
+    # it works as intended, you can use this operation to copy the staging
+    # distribution’s configuration to the primary distribution. This action
+    # will disable the continuous deployment policy and move your domain’s
+    # traffic back to the primary distribution.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the primary distribution to which you are copying a
+    #   staging distribution's configuration.
+    #
+    # @option params [String] :staging_distribution_id
+    #   The identifier of the staging distribution whose configuration you are
+    #   copying to the primary distribution.
+    #
+    # @option params [String] :if_match
+    #   The current versions (`ETag` values) of both primary and staging
+    #   distributions. Provide these in the following format:
+    #
+    #   `<primary ETag>, <staging ETag>`
+    #
+    # @return [Types::UpdateDistributionWithStagingConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDistributionWithStagingConfigResult#distribution #distribution} => Types::Distribution
+    #   * {Types::UpdateDistributionWithStagingConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_distribution_with_staging_config({
+    #     id: "string", # required
+    #     staging_distribution_id: "string",
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution.id #=> String
+    #   resp.distribution.arn #=> String
+    #   resp.distribution.status #=> String
+    #   resp.distribution.last_modified_time #=> Time
+    #   resp.distribution.in_progress_invalidation_batches #=> Integer
+    #   resp.distribution.domain_name #=> String
+    #   resp.distribution.active_trusted_signers.enabled #=> Boolean
+    #   resp.distribution.active_trusted_signers.quantity #=> Integer
+    #   resp.distribution.active_trusted_signers.items #=> Array
+    #   resp.distribution.active_trusted_signers.items[0].aws_account_number #=> String
+    #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.quantity #=> Integer
+    #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items #=> Array
+    #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items[0] #=> String
+    #   resp.distribution.active_trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.active_trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_group_id #=> String
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items[0] #=> String
+    #   resp.distribution.distribution_config.caller_reference #=> String
+    #   resp.distribution.distribution_config.aliases.quantity #=> Integer
+    #   resp.distribution.distribution_config.aliases.items #=> Array
+    #   resp.distribution.distribution_config.aliases.items[0] #=> String
+    #   resp.distribution.distribution_config.default_root_object #=> String
+    #   resp.distribution.distribution_config.origins.quantity #=> Integer
+    #   resp.distribution.distribution_config.origins.items #=> Array
+    #   resp.distribution.distribution_config.origins.items[0].id #=> String
+    #   resp.distribution.distribution_config.origins.items[0].domain_name #=> String
+    #   resp.distribution.distribution_config.origins.items[0].origin_path #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_headers.quantity #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_headers.items #=> Array
+    #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
+    #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
+    #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.response_headers_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.min_ttl #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].response_headers_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].min_ttl #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
+    #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
+    #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
+    #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
+    #   resp.distribution.distribution_config.custom_error_responses.items[0].response_page_path #=> String
+    #   resp.distribution.distribution_config.custom_error_responses.items[0].response_code #=> String
+    #   resp.distribution.distribution_config.custom_error_responses.items[0].error_caching_min_ttl #=> Integer
+    #   resp.distribution.distribution_config.comment #=> String
+    #   resp.distribution.distribution_config.logging.enabled #=> Boolean
+    #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
+    #   resp.distribution.distribution_config.logging.bucket #=> String
+    #   resp.distribution.distribution_config.logging.prefix #=> String
+    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution.distribution_config.enabled #=> Boolean
+    #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
+    #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
+    #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
+    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
+    #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
+    #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution.distribution_config.restrictions.geo_restriction.quantity #=> Integer
+    #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
+    #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
+    #   resp.distribution.distribution_config.web_acl_id #=> String
+    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
+    #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
+    #   resp.distribution.distribution_config.staging #=> Boolean
+    #   resp.distribution.alias_icp_recordals #=> Array
+    #   resp.distribution.alias_icp_recordals[0].cname #=> String
+    #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionWithStagingConfig AWS API Documentation
+    #
+    # @overload update_distribution_with_staging_config(params = {})
+    # @param [Hash] params ({})
+    def update_distribution_with_staging_config(params = {}, options = {})
+      req = build_request(:update_distribution_with_staging_config, params)
       req.send_request(options)
     end
 
@@ -8574,7 +8834,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

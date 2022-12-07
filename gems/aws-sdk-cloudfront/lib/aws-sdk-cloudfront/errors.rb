@@ -35,6 +35,8 @@ module Aws::CloudFront
   # * {CannotChangeImmutablePublicKeyFields}
   # * {CloudFrontOriginAccessIdentityAlreadyExists}
   # * {CloudFrontOriginAccessIdentityInUse}
+  # * {ContinuousDeploymentPolicyAlreadyExists}
+  # * {ContinuousDeploymentPolicyInUse}
   # * {DistributionAlreadyExists}
   # * {DistributionNotDisabled}
   # * {FieldLevelEncryptionConfigAlreadyExists}
@@ -81,6 +83,7 @@ module Aws::CloudFront
   # * {MonitoringSubscriptionAlreadyExists}
   # * {NoSuchCachePolicy}
   # * {NoSuchCloudFrontOriginAccessIdentity}
+  # * {NoSuchContinuousDeploymentPolicy}
   # * {NoSuchDistribution}
   # * {NoSuchFieldLevelEncryptionConfig}
   # * {NoSuchFieldLevelEncryptionProfile}
@@ -118,6 +121,7 @@ module Aws::CloudFront
   # * {TooManyCachePolicies}
   # * {TooManyCertificates}
   # * {TooManyCloudFrontOriginAccessIdentities}
+  # * {TooManyContinuousDeploymentPolicies}
   # * {TooManyCookieNamesInWhiteList}
   # * {TooManyCookiesInCachePolicy}
   # * {TooManyCookiesInOriginRequestPolicy}
@@ -283,6 +287,36 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::CloudFrontOriginAccessIdentityInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ContinuousDeploymentPolicyAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::ContinuousDeploymentPolicyAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ContinuousDeploymentPolicyInUse < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::ContinuousDeploymentPolicyInUse] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -983,6 +1017,21 @@ module Aws::CloudFront
       end
     end
 
+    class NoSuchContinuousDeploymentPolicy < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::NoSuchContinuousDeploymentPolicy] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class NoSuchDistribution < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1528,6 +1577,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyCloudFrontOriginAccessIdentities] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyContinuousDeploymentPolicies < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyContinuousDeploymentPolicies] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

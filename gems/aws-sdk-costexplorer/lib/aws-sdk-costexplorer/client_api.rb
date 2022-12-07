@@ -1161,6 +1161,7 @@ module Aws::CostExplorer
     RootCause.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
     RootCause.add_member(:linked_account, Shapes::ShapeRef.new(shape: GenericString, location_name: "LinkedAccount"))
     RootCause.add_member(:usage_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "UsageType"))
+    RootCause.add_member(:linked_account_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "LinkedAccountName"))
     RootCause.struct_class = Types::RootCause
 
     RootCauses.member = Shapes::ShapeRef.new(shape: RootCause)

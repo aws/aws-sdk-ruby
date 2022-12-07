@@ -94,6 +94,10 @@ module Aws::EKS
     #   Marketplace.
     #   @return [Types::MarketplaceInformation]
     #
+    # @!attribute [rw] configuration_values
+    #   The provided configuration values.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Addon AWS API Documentation
     #
     class Addon < Struct.new(
@@ -109,7 +113,8 @@ module Aws::EKS
       :tags,
       :publisher,
       :owner,
-      :marketplace_information)
+      :marketplace_information,
+      :configuration_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -778,6 +783,16 @@ module Aws::EKS
     #   You define both.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] configuration_values
+    #   The set of configuration values for the add-on being created.
+    #   Whatever values provided here are validated against the schema from
+    #   [ `DescribeAddonConfiguration` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddonRequest AWS API Documentation
     #
     class CreateAddonRequest < Struct.new(
@@ -787,7 +802,8 @@ module Aws::EKS
       :service_account_role_arn,
       :resolve_conflicts,
       :client_request_token,
-      :tags)
+      :tags,
+      :configuration_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1386,6 +1402,61 @@ module Aws::EKS
     #
     class DeregisterClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addon_name
+    #   The name of the add-on. The name must match one of the names
+    #   returned by [ `DescribeAddonVersions` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_version
+    #   The version of the add-on. The version must match one of the
+    #   versions returned by [ `DescribeAddonVersions` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonConfigurationRequest AWS API Documentation
+    #
+    class DescribeAddonConfigurationRequest < Struct.new(
+      :addon_name,
+      :addon_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addon_name
+    #   The name of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] addon_version
+    #   The version of the add-on. The version must match one of the
+    #   versions returned by [ `DescribeAddonVersions` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_schema
+    #   A JSON schema used to validate provided configuration values when
+    #   creating or updating an addon.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonConfigurationResponse AWS API Documentation
+    #
+    class DescribeAddonConfigurationResponse < Struct.new(
+      :addon_name,
+      :addon_version,
+      :configuration_schema)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3316,10 +3387,10 @@ module Aws::EKS
     # node group.
     #
     # @!attribute [rw] ec2_ssh_key
-    #   The Amazon EC2 SSH key that provides access for SSH communication
-    #   with the nodes in the managed node group. For more information, see
-    #   [Amazon EC2 key pairs and Linux instances][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide for Linux Instances*.
+    #   The Amazon EC2 SSH key name that provides access for SSH
+    #   communication with the nodes in the managed node group. For more
+    #   information, see [Amazon EC2 key pairs and Linux instances][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide for Linux Instances*.
     #
     #
     #
@@ -3327,7 +3398,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] source_security_groups
-    #   The security groups that are allowed SSH access (port 22) to the
+    #   The security group ids that are allowed SSH access (port 22) to the
     #   nodes. If you specify an Amazon EC2 SSH key but do not specify a
     #   source security group when you create a managed node group, then
     #   port 22 on the nodes is opened to the internet (0.0.0.0/0). For more
@@ -3703,6 +3774,16 @@ module Aws::EKS
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] configuration_values
+    #   The set of configuration values for the add-on being created.
+    #   Whatever values provided here are validated against the schema from
+    #   [DescribeAddonConfiguration][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAddonRequest AWS API Documentation
     #
     class UpdateAddonRequest < Struct.new(
@@ -3711,7 +3792,8 @@ module Aws::EKS
       :addon_version,
       :service_account_role_arn,
       :resolve_conflicts,
-      :client_request_token)
+      :client_request_token,
+      :configuration_values)
       SENSITIVE = []
       include Aws::Structure
     end

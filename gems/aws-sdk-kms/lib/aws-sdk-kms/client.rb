@@ -836,8 +836,6 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
     #
     # @option params [String] :trust_anchor_certificate
-    #   * CreateCustom
-    #
     #   Specifies the certificate for an CloudHSM key store. This parameter is
     #   required for custom key stores with a `CustomKeyStoreType` of
     #   `AWS_CLOUDHSM`.
@@ -1013,6 +1011,66 @@ module Aws::KMS
     # @return [Types::CreateCustomKeyStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomKeyStoreResponse#custom_key_store_id #custom_key_store_id} => String
+    #
+    #
+    # @example Example: To create an AWS CloudHSM key store
+    #
+    #   # This example creates a custom key store that is associated with an AWS CloudHSM cluster.
+    #
+    #   resp = client.create_custom_key_store({
+    #     cloud_hsm_cluster_id: "cluster-1a23b4cdefg", # The ID of the CloudHSM cluster.
+    #     custom_key_store_name: "ExampleKeyStore", # A friendly name for the custom key store.
+    #     key_store_password: "kmsPswd", # The password for the kmsuser CU account in the specified cluster.
+    #     trust_anchor_certificate: "<certificate-goes-here>", # The content of the customerCA.crt file that you created when you initialized the cluster.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the new custom key store.
+    #   }
+    #
+    # @example Example: To create an external key store with VPC endpoint service connectivity
+    #
+    #   # This example creates an external key store that uses an Amazon VPC endpoint service to communicate with AWS KMS.
+    #
+    #   resp = client.create_custom_key_store({
+    #     custom_key_store_name: "ExampleVPCEndpointKeyStore", # A friendly name for the custom key store
+    #     custom_key_store_type: "EXTERNAL_KEY_STORE", # For external key stores, the value must be EXTERNAL_KEY_STORE
+    #     xks_proxy_authentication_credential: {
+    #       access_key_id: "ABCDE12345670EXAMPLE", 
+    #       raw_secret_access_key: "DXjSUawnel2fr6SKC7G25CNxTyWKE5PF9XX6H/u9pSo=", 
+    #     }, # The access key ID and secret access key that KMS uses to authenticate to your external key store proxy
+    #     xks_proxy_connectivity: "VPC_ENDPOINT_SERVICE", # Indicates how AWS KMS communicates with the external key store proxy
+    #     xks_proxy_uri_endpoint: "https://myproxy-private.xks.example.com", # The URI that AWS KMS uses to connect to the external key store proxy
+    #     xks_proxy_uri_path: "/example-prefix/kms/xks/v1", # The URI path to the external key store proxy APIs
+    #     xks_proxy_vpc_endpoint_service_name: "com.amazonaws.vpce.us-east-1.vpce-svc-example1", # The VPC endpoint service that KMS uses to communicate with the external key store proxy
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the new custom key store.
+    #   }
+    #
+    # @example Example: To create an external key store with public endpoint connectivity
+    #
+    #   # This example creates an external key store with public endpoint connectivity.
+    #
+    #   resp = client.create_custom_key_store({
+    #     custom_key_store_name: "ExamplePublicEndpointKeyStore", # A friendly name for the custom key store
+    #     custom_key_store_type: "EXTERNAL_KEY_STORE", # For external key stores, the value must be EXTERNAL_KEY_STORE
+    #     xks_proxy_authentication_credential: {
+    #       access_key_id: "ABCDE12345670EXAMPLE", 
+    #       raw_secret_access_key: "DXjSUawnel2fr6SKC7G25CNxTyWKE5PF9XX6H/u9pSo=", 
+    #     }, # The access key ID and secret access key that KMS uses to authenticate to your external key store proxy
+    #     xks_proxy_connectivity: "PUBLIC_ENDPOINT", # Indicates how AWS KMS communicates with the external key store proxy
+    #     xks_proxy_uri_endpoint: "https://myproxy.xks.example.com", # The URI that AWS KMS uses to connect to the external key store proxy
+    #     xks_proxy_uri_path: "/kms/xks/v1", # The URI path to your external key store proxy API
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_key_store_id: "cks-987654321abcdef0", # The ID of the new custom key store.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2905,17 +2963,17 @@ module Aws::KMS
     # expiration date (if any) of the key material. It includes fields, like
     # `KeySpec`, that help you distinguish different types of KMS keys. It
     # also displays the key usage (encryption, signing, or generating and
-    # verifying MACs) and the algorithms that the KMS key supports. For
-    # [multi-Region
-    # keys](kms/latest/developerguide/multi-region-keys-overview.html), it
-    # displays the primary key and all related replica keys. For KMS keys in
-    # [CloudHSM key
+    # verifying MACs) and the algorithms that the KMS key supports.
+    #
+    # For [multi-Region
+    # keys](kms/latest/developerguide/multi-region-keys-overview.html),
+    # `DescribeKey` displays the primary key and all related replica keys.
+    # For KMS keys in [CloudHSM key
     # stores](kms/latest/developerguide/keystore-cloudhsm.html), it includes
-    # information about the custom key store, such as the key store ID and
-    # the CloudHSM cluster ID. For KMS key in [external key
+    # information about the key store, such as the key store ID and the
+    # CloudHSM cluster ID. For KMS keys in [external key
     # stores](kms/latest/developerguide/keystore-external.html), it includes
-    # the custom key store ID and the ID and status of the associated
-    # external key.
+    # the custom key store ID and the ID of the external key.
     #
     # `DescribeKey` does not return the following information:
     #
@@ -8331,6 +8389,20 @@ module Aws::KMS
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
+    # @example Example: To edit the friendly name of a custom key store
+    #
+    #   # This example changes the friendly name of the AWS KMS custom key store to the name that you specify. This operation does
+    #   # not return any data. To verify that the operation worked, use the DescribeCustomKeyStores operation.
+    #
+    #   resp = client.update_custom_key_store({
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the custom key store that you are updating.
+    #     new_custom_key_store_name: "DevelopmentKeys", # A new friendly name for the custom key store.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Example: To edit the password of an AWS CloudHSM key store
     #
     #   # This example tells AWS KMS the password for the kmsuser crypto user in the AWS CloudHSM cluster that is associated with
@@ -8346,20 +8418,6 @@ module Aws::KMS
     #   {
     #   }
     #
-    # @example Example: To edit the friendly name of a custom key store
-    #
-    #   # This example changes the friendly name of the AWS KMS custom key store to the name that you specify. This operation does
-    #   # not return any data. To verify that the operation worked, use the DescribeCustomKeyStores operation.
-    #
-    #   resp = client.update_custom_key_store({
-    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the custom key store that you are updating.
-    #     new_custom_key_store_name: "DevelopmentKeys", # A new friendly name for the custom key store.
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #   }
-    #
     # @example Example: To associate the custom key store with a different, but related, AWS CloudHSM cluster.
     #
     #   # This example changes the AWS CloudHSM cluster that is associated with an AWS CloudHSM key store to a related cluster,
@@ -8369,6 +8427,25 @@ module Aws::KMS
     #   resp = client.update_custom_key_store({
     #     cloud_hsm_cluster_id: "cluster-1a23b4cdefg", # The ID of the AWS CloudHSM cluster that you want to associate with the custom key store. This cluster must be related to the original CloudHSM cluster for this key store.
     #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the custom key store that you are updating.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: To update the proxy authentication credential of an external key store
+    #
+    #   # To update the proxy authentication credential for your external key store, specify both the
+    #   # <code>RawSecretAccessKey</code> and the <code>AccessKeyId</code>, even if you are changing only one of the values. You
+    #   # can use this feature to fix an invalid credential or to change the credential when the external key store proxy rotates
+    #   # it.
+    #
+    #   resp = client.update_custom_key_store({
+    #     custom_key_store_id: "cks-1234567890abcdef0", # Identifies the custom key store
+    #     xks_proxy_authentication_credential: {
+    #       access_key_id: "ABCDE12345670EXAMPLE", 
+    #       raw_secret_access_key: "DXjSUawnel2fr6SKC7G25CNxTyWKE5PF9XX6H/u9pSo=", 
+    #     }, # Specifies the values in the proxy authentication credential
     #   })
     #
     #   resp.to_h outputs the following:
@@ -8949,7 +9026,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

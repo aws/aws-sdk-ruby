@@ -246,6 +246,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::UpdateContinuousDeploymentPolicy.build(context)
           when :update_distribution
             Aws::CloudFront::Endpoints::UpdateDistribution.build(context)
+          when :update_distribution_with_staging_config
+            Aws::CloudFront::Endpoints::UpdateDistributionWithStagingConfig.build(context)
           when :update_field_level_encryption_config
             Aws::CloudFront::Endpoints::UpdateFieldLevelEncryptionConfig.build(context)
           when :update_field_level_encryption_profile

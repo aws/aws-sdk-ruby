@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2022-12-07)
+------------------
+
+* Feature - This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause
+
 1.80.0 (2022-12-05)
 ------------------
 

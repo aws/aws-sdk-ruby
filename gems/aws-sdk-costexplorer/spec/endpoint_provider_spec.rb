@@ -16,7 +16,7 @@ module Aws::CostExplorer
 
     context 'For region aws-cn-global with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"ce", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://ce.cn-northwest-1.amazonaws.com.cn"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"cn-northwest-1", "name"=>"sigv4", "signingName"=>"ce"}]}, "url"=>"https://ce.cn-northwest-1.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -30,7 +30,7 @@ module Aws::CostExplorer
 
     context 'For region aws-global with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"ce", "signingRegion"=>"us-east-1"}]}, "url"=>"https://ce.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "name"=>"sigv4", "signingName"=>"ce"}]}, "url"=>"https://ce.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

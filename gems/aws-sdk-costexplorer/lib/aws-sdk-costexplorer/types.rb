@@ -5272,8 +5272,10 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The combination of Amazon Web Service, linked account, Region, and
-    # usage type where a cost anomaly is observed.
+    # The combination of Amazon Web Service, linked account, linked account
+    # name, Region, and usage type where a cost anomaly is observed. The
+    # linked account name will only be available when the account name can
+    # be identified.
     #
     # @!attribute [rw] service
     #   The Amazon Web Service name that's associated with the cost
@@ -5293,13 +5295,19 @@ module Aws::CostExplorer
     #   The `UsageType` value that's associated with the cost anomaly.
     #   @return [String]
     #
+    # @!attribute [rw] linked_account_name
+    #   The member account name value that's associated with the cost
+    #   anomaly.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RootCause AWS API Documentation
     #
     class RootCause < Struct.new(
       :service,
       :region,
       :linked_account,
-      :usage_type)
+      :usage_type,
+      :linked_account_name)
       SENSITIVE = []
       include Aws::Structure
     end

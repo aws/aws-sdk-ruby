@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2022-12-07)
+------------------
+
+* Feature - Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function
+
 1.80.0 (2022-11-29)
 ------------------
 

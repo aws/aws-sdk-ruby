@@ -605,6 +605,15 @@ module Aws::EKS
     #   organization. Each tag consists of a key and an optional value. You
     #   define both.
     #
+    # @option params [String] :configuration_values
+    #   The set of configuration values for the add-on being created. Whatever
+    #   values provided here are validated against the schema from [
+    #   `DescribeAddonConfiguration` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html
+    #
     # @return [Types::CreateAddonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAddonResponse#addon #addon} => Types::Addon
@@ -621,6 +630,7 @@ module Aws::EKS
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     configuration_values: "String",
     #   })
     #
     # @example Response structure
@@ -644,6 +654,7 @@ module Aws::EKS
     #   resp.addon.owner #=> String
     #   resp.addon.marketplace_information.product_id #=> String
     #   resp.addon.marketplace_information.product_url #=> String
+    #   resp.addon.configuration_values #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddon AWS API Documentation
     #
@@ -1388,6 +1399,7 @@ module Aws::EKS
     #   resp.addon.owner #=> String
     #   resp.addon.marketplace_information.product_id #=> String
     #   resp.addon.marketplace_information.product_url #=> String
+    #   resp.addon.configuration_values #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAddon AWS API Documentation
     #
@@ -1755,6 +1767,7 @@ module Aws::EKS
     #   resp.addon.owner #=> String
     #   resp.addon.marketplace_information.product_id #=> String
     #   resp.addon.marketplace_information.product_url #=> String
+    #   resp.addon.configuration_values #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1768,6 +1781,52 @@ module Aws::EKS
     # @param [Hash] params ({})
     def describe_addon(params = {}, options = {})
       req = build_request(:describe_addon, params)
+      req.send_request(options)
+    end
+
+    # Returns configuration options.
+    #
+    # @option params [required, String] :addon_name
+    #   The name of the add-on. The name must match one of the names returned
+    #   by [ `DescribeAddonVersions` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #
+    # @option params [required, String] :addon_version
+    #   The version of the add-on. The version must match one of the versions
+    #   returned by [ `DescribeAddonVersions` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #
+    # @return [Types::DescribeAddonConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAddonConfigurationResponse#addon_name #addon_name} => String
+    #   * {Types::DescribeAddonConfigurationResponse#addon_version #addon_version} => String
+    #   * {Types::DescribeAddonConfigurationResponse#configuration_schema #configuration_schema} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_addon_configuration({
+    #     addon_name: "String", # required
+    #     addon_version: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.addon_name #=> String
+    #   resp.addon_version #=> String
+    #   resp.configuration_schema #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonConfiguration AWS API Documentation
+    #
+    # @overload describe_addon_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_addon_configuration(params = {}, options = {})
+      req = build_request(:describe_addon_configuration, params)
       req.send_request(options)
     end
 
@@ -2951,6 +3010,15 @@ module Aws::EKS
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :configuration_values
+    #   The set of configuration values for the add-on being created. Whatever
+    #   values provided here are validated against the schema from
+    #   [DescribeAddonConfiguration][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html
+    #
     # @return [Types::UpdateAddonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAddonResponse#update #update} => Types::Update
@@ -2964,6 +3032,7 @@ module Aws::EKS
     #     service_account_role_arn: "RoleArn",
     #     resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE, PRESERVE
     #     client_request_token: "String",
+    #     configuration_values: "String",
     #   })
     #
     # @example Response structure
@@ -3426,7 +3495,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

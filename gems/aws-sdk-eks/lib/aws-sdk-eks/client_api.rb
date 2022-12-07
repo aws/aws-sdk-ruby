@@ -71,6 +71,8 @@ module Aws::EKS
     DeleteNodegroupResponse = Shapes::StructureShape.new(name: 'DeleteNodegroupResponse')
     DeregisterClusterRequest = Shapes::StructureShape.new(name: 'DeregisterClusterRequest')
     DeregisterClusterResponse = Shapes::StructureShape.new(name: 'DeregisterClusterResponse')
+    DescribeAddonConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAddonConfigurationRequest')
+    DescribeAddonConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAddonConfigurationResponse')
     DescribeAddonRequest = Shapes::StructureShape.new(name: 'DescribeAddonRequest')
     DescribeAddonResponse = Shapes::StructureShape.new(name: 'DescribeAddonResponse')
     DescribeAddonVersionsRequest = Shapes::StructureShape.new(name: 'DescribeAddonVersionsRequest')
@@ -227,6 +229,7 @@ module Aws::EKS
     Addon.add_member(:publisher, Shapes::ShapeRef.new(shape: String, location_name: "publisher"))
     Addon.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
     Addon.add_member(:marketplace_information, Shapes::ShapeRef.new(shape: MarketplaceInformation, location_name: "marketplaceInformation"))
+    Addon.add_member(:configuration_values, Shapes::ShapeRef.new(shape: String, location_name: "configurationValues"))
     Addon.struct_class = Types::Addon
 
     AddonHealth.add_member(:issues, Shapes::ShapeRef.new(shape: AddonIssueList, location_name: "issues"))
@@ -355,6 +358,7 @@ module Aws::EKS
     CreateAddonRequest.add_member(:resolve_conflicts, Shapes::ShapeRef.new(shape: ResolveConflicts, location_name: "resolveConflicts"))
     CreateAddonRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateAddonRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateAddonRequest.add_member(:configuration_values, Shapes::ShapeRef.new(shape: String, location_name: "configurationValues"))
     CreateAddonRequest.struct_class = Types::CreateAddonRequest
 
     CreateAddonResponse.add_member(:addon, Shapes::ShapeRef.new(shape: Addon, location_name: "addon"))
@@ -443,6 +447,15 @@ module Aws::EKS
 
     DeregisterClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DeregisterClusterResponse.struct_class = Types::DeregisterClusterResponse
+
+    DescribeAddonConfigurationRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "addonName"))
+    DescribeAddonConfigurationRequest.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "addonVersion"))
+    DescribeAddonConfigurationRequest.struct_class = Types::DescribeAddonConfigurationRequest
+
+    DescribeAddonConfigurationResponse.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
+    DescribeAddonConfigurationResponse.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
+    DescribeAddonConfigurationResponse.add_member(:configuration_schema, Shapes::ShapeRef.new(shape: String, location_name: "configurationSchema"))
+    DescribeAddonConfigurationResponse.struct_class = Types::DescribeAddonConfigurationResponse
 
     DescribeAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     DescribeAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "addonName"))
@@ -837,6 +850,7 @@ module Aws::EKS
     UpdateAddonRequest.add_member(:service_account_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "serviceAccountRoleArn"))
     UpdateAddonRequest.add_member(:resolve_conflicts, Shapes::ShapeRef.new(shape: ResolveConflicts, location_name: "resolveConflicts"))
     UpdateAddonRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAddonRequest.add_member(:configuration_values, Shapes::ShapeRef.new(shape: String, location_name: "configurationValues"))
     UpdateAddonRequest.struct_class = Types::UpdateAddonRequest
 
     UpdateAddonResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1105,6 +1119,17 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:describe_addon_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAddonConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/addons/configuration-schemas"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAddonConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAddonConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:describe_addon_versions, Seahorse::Model::Operation.new.tap do |o|

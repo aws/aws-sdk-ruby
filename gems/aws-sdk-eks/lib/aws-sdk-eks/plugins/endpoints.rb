@@ -80,6 +80,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::DeregisterCluster.build(context)
           when :describe_addon
             Aws::EKS::Endpoints::DescribeAddon.build(context)
+          when :describe_addon_configuration
+            Aws::EKS::Endpoints::DescribeAddonConfiguration.build(context)
           when :describe_addon_versions
             Aws::EKS::Endpoints::DescribeAddonVersions.build(context)
           when :describe_cluster

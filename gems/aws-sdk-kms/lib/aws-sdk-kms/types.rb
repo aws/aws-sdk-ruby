@@ -334,8 +334,6 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] trust_anchor_certificate
-    #   * CreateCustom
-    #
     #   Specifies the certificate for an CloudHSM key store. This parameter
     #   is required for custom key stores with a `CustomKeyStoreType` of
     #   `AWS_CLOUDHSM`.
@@ -5646,7 +5644,7 @@ module Aws::KMS
     # Information about the [external key ][1]that is associated with a KMS
     # key in an external key store.
     #
-    # These fields appear in a CreateKey or DescribeKey response only for a
+    # This element appears in a CreateKey or DescribeKey response only for a
     # KMS key in an external key store.
     #
     # The *external key* is a symmetric encryption key that is hosted by an

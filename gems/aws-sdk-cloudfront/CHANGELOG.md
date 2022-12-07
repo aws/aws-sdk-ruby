@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-12-07)
+------------------
+
+* Feature - Introducing UpdateDistributionWithStagingConfig that can be used to promote the staging configuration to the production.
+
 1.70.0 (2022-11-18)
 ------------------
 

@@ -1374,6 +1374,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A continuous deployment policy with this configuration already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContinuousDeploymentPolicyAlreadyExists AWS API Documentation
+    #
+    class ContinuousDeploymentPolicyAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configuration for a continuous deployment policy.
     #
     # @!attribute [rw] staging_distribution_dns_names
@@ -1399,6 +1412,20 @@ module Aws::CloudFront
       :staging_distribution_dns_names,
       :enabled,
       :traffic_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You cannot delete a continuous deployment policy that is associated
+    # with a primary distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContinuousDeploymentPolicyInUse AWS API Documentation
+    #
+    class ContinuousDeploymentPolicyInUse < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1475,12 +1502,11 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # Contains the percentage of traffic to send to a staging distribution,
-    # expressed as a decimal number between 0 and 1.
+    # Contains the percentage of traffic to send to a staging distribution.
     #
     # @!attribute [rw] weight
-    #   The percentage of traffic to send to the staging distribution,
-    #   expressed as a decimal number between 0 and 1.
+    #   The percentage of traffic to send to a staging distribution,
+    #   expressed as a decimal number between 0 and .15.
     #   @return [Float]
     #
     # @!attribute [rw] session_stickiness_config
@@ -3613,6 +3639,17 @@ module Aws::CloudFront
     #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] continuous_deployment_policy_id
+    #   The identifier of a continuous deployment policy. For more
+    #   information, see `CreateContinuousDeploymentPolicy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging
+    #   A Boolean that indicates whether this is a staging distribution.
+    #   When this value is `true`, this is a staging distribution. When this
+    #   value is `false`, this is not a staging distribution.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionConfig AWS API Documentation
     #
     class DistributionConfig < Struct.new(
@@ -3632,7 +3669,9 @@ module Aws::CloudFront
       :restrictions,
       :web_acl_id,
       :http_version,
-      :is_ipv6_enabled)
+      :is_ipv6_enabled,
+      :continuous_deployment_policy_id,
+      :staging)
       SENSITIVE = [:comment]
       include Aws::Structure
     end
@@ -3876,6 +3915,10 @@ module Aws::CloudFront
     #   [1]: https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html
     #   @return [Array<Types::AliasICPRecordal>]
     #
+    # @!attribute [rw] staging
+    #   Whether the primary distribution has a staging distribution enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionSummary AWS API Documentation
     #
     class DistributionSummary < Struct.new(
@@ -3898,7 +3941,8 @@ module Aws::CloudFront
       :web_acl_id,
       :http_version,
       :is_ipv6_enabled,
-      :alias_icp_recordals)
+      :alias_icp_recordals,
+      :staging)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7546,6 +7590,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The continuous deployment policy doesn’t exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchContinuousDeploymentPolicy AWS API Documentation
+    #
+    class NoSuchContinuousDeploymentPolicy < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified distribution does not exist.
     #
     # @!attribute [rw] message
@@ -10982,6 +11039,20 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # You have reached the maximum number of continuous deployment policies
+    # for this Amazon Web Services account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyContinuousDeploymentPolicies AWS API Documentation
+    #
+    class TooManyContinuousDeploymentPolicies < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request contains more cookie names in the whitelist than are
     # allowed per cache behavior.
     #
@@ -12037,6 +12108,53 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionResult AWS API Documentation
     #
     class UpdateDistributionResult < Struct.new(
+      :distribution,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the primary distribution to which you are copying
+    #   a staging distribution's configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_distribution_id
+    #   The identifier of the staging distribution whose configuration you
+    #   are copying to the primary distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current versions (`ETag` values) of both primary and staging
+    #   distributions. Provide these in the following format:
+    #
+    #   `<primary ETag>, <staging ETag>`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionWithStagingConfigRequest AWS API Documentation
+    #
+    class UpdateDistributionWithStagingConfigRequest < Struct.new(
+      :id,
+      :staging_distribution_id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution
+    #   A distribution tells CloudFront where you want content to be
+    #   delivered from, and the details about how to track and manage
+    #   content delivery.
+    #   @return [Types::Distribution]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the primary distribution (after it’s
+    #   updated).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionWithStagingConfigResult AWS API Documentation
+    #
+    class UpdateDistributionWithStagingConfigResult < Struct.new(
       :distribution,
       :etag)
       SENSITIVE = []

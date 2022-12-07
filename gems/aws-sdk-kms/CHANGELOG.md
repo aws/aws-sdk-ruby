@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2022-12-07)
+------------------
+
+* Feature - Updated examples and exceptions for External Key Store (XKS).
+
 1.60.0 (2022-11-29)
 ------------------
 

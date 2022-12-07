@@ -930,6 +930,7 @@ module Aws::CostExplorer
     #   resp.anomalies[0].root_causes[0].region #=> String
     #   resp.anomalies[0].root_causes[0].linked_account #=> String
     #   resp.anomalies[0].root_causes[0].usage_type #=> String
+    #   resp.anomalies[0].root_causes[0].linked_account_name #=> String
     #   resp.anomalies[0].anomaly_score.max_score #=> Float
     #   resp.anomalies[0].anomaly_score.current_score #=> Float
     #   resp.anomalies[0].impact.max_impact #=> Float
@@ -4718,7 +4719,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
