@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix Sign to not sign Sigv2 requests to S3.
+
 3.168.3 (2022-12-02)
 ------------------
 
