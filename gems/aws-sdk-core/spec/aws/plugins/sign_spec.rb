@@ -43,8 +43,8 @@ module Aws
         }
       end
 
-
       let(:client) { TestClient.new(client_options) }
+
       context 'sigv4' do
         let(:auth_scheme) do
           {
@@ -222,10 +222,23 @@ module Aws
         end
 
         it 'raises an error when attempting to sign a request w/out a token' do
-          client = TestClient.new(client_options.merge(token_provider: nil) )
-          expect {
+          client = TestClient.new(client_options.merge(token_provider: nil))
+          expect do
             client.operation
-          }.to raise_error(Errors::MissingBearerTokenError)
+          end.to raise_error(Errors::MissingBearerTokenError)
+        end
+      end
+
+      context 'sigv2' do
+        before do
+          allow(Struct).to receive(:responds_to?).with(:signature_version).and_return(true)
+          allow(Struct).to receive(:signature_version).and_return('s3')
+        end
+
+        it 'skips signing' do
+          resp = client.operation
+          req = resp.context.http_request
+          expect(req.headers['authorization']).to be_nil
         end
       end
 

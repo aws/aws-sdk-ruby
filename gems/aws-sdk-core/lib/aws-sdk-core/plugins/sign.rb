@@ -37,14 +37,24 @@ module Aws
 
       class Handler < Seahorse::Client::Handler
         def call(context)
-          signer = Sign.signer_for(
-            context[:auth_scheme],
-            context.config,
-            context[:sigv4_region]
-          )
-
-          signer.sign(context)
+          # Skip signing if using sigv2 signing from s3_signer in S3
+          unless v2_signing?(context.config)
+            signer = Sign.signer_for(
+              context[:auth_scheme],
+              context.config,
+              context[:sigv4_region]
+            )
+            signer.sign(context)
+          end
           @handler.call(context)
+        end
+
+        private
+
+        def v2_signing?(config)
+          # 's3' is legacy signing, 'v4' is default
+          config.respond_to?(:signature_version) &&
+            config.signature_version == 's3'
         end
       end
 
