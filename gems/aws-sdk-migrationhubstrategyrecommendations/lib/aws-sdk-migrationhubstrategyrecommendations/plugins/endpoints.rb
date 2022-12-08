@@ -64,6 +64,8 @@ module Aws::MigrationHubStrategyRecommendations
             Aws::MigrationHubStrategyRecommendations::Endpoints::GetAssessment.build(context)
           when :get_import_file_task
             Aws::MigrationHubStrategyRecommendations::Endpoints::GetImportFileTask.build(context)
+          when :get_latest_assessment_id
+            Aws::MigrationHubStrategyRecommendations::Endpoints::GetLatestAssessmentId.build(context)
           when :get_portfolio_preferences
             Aws::MigrationHubStrategyRecommendations::Endpoints::GetPortfolioPreferences.build(context)
           when :get_portfolio_summary

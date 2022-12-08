@@ -389,12 +389,13 @@ module Aws::MigrationHubStrategyRecommendations
     #
     # @example Response structure
     #
-    #   resp.application_component_detail.analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED"
+    #   resp.application_component_detail.analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED", "ANALYSIS_PARTIAL_SUCCESS", "UNCONFIGURED", "CONFIGURED"
     #   resp.application_component_detail.antipattern_report_s3_object.s3_bucket #=> String
     #   resp.application_component_detail.antipattern_report_s3_object.s3key #=> String
     #   resp.application_component_detail.antipattern_report_status #=> String, one of "FAILED", "IN_PROGRESS", "SUCCESS"
     #   resp.application_component_detail.antipattern_report_status_message #=> String
-    #   resp.application_component_detail.app_type #=> String, one of "DotNetFramework", "Java", "SQLServer", "IIS", "Oracle", "Other"
+    #   resp.application_component_detail.app_type #=> String, one of "DotNetFramework", "Java", "SQLServer", "IIS", "Oracle", "Other", "Tomcat", "JBoss", "Spring", "Mongo DB", "DB2", "Maria DB", "MySQL", "Sybase", "PostgreSQLServer", "Cassandra", "IBM WebSphere", "Oracle WebLogic", "Visual Basic", "Unknown", "DotnetCore", "Dotnet"
+    #   resp.application_component_detail.app_unit_error.app_unit_error_category #=> String, one of "CREDENTIAL_ERROR", "CONNECTIVITY_ERROR", "PERMISSION_ERROR", "UNSUPPORTED_ERROR", "OTHER_ERROR"
     #   resp.application_component_detail.associated_server_id #=> String
     #   resp.application_component_detail.database_config_detail.secret_name #=> String
     #   resp.application_component_detail.id #=> String
@@ -408,13 +409,16 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.application_component_detail.os_driver #=> String
     #   resp.application_component_detail.os_version #=> String
     #   resp.application_component_detail.recommendation_set.strategy #=> String, one of "Rehost", "Retirement", "Refactor", "Replatform", "Retain", "Relocate", "Repurchase"
-    #   resp.application_component_detail.recommendation_set.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service"
+    #   resp.application_component_detail.recommendation_set.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service", "Babelfish for Aurora PostgreSQL"
     #   resp.application_component_detail.recommendation_set.transformation_tool.description #=> String
     #   resp.application_component_detail.recommendation_set.transformation_tool.name #=> String, one of "App2Container", "Porting Assistant For .NET", "End of Support Migration", "Windows Web Application Migration Assistant", "Application Migration Service", "Strategy Recommendation Support", "In Place Operating System Upgrade", "Schema Conversion Tool", "Database Migration Service", "Native SQL Server Backup/Restore"
     #   resp.application_component_detail.recommendation_set.transformation_tool.tranformation_tool_installation_link #=> String
     #   resp.application_component_detail.resource_sub_type #=> String, one of "Database", "Process", "DatabaseProcess"
+    #   resp.application_component_detail.runtime_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED"
+    #   resp.application_component_detail.runtime_status_message #=> String
     #   resp.application_component_detail.source_code_repositories #=> Array
     #   resp.application_component_detail.source_code_repositories[0].branch #=> String
+    #   resp.application_component_detail.source_code_repositories[0].project_name #=> String
     #   resp.application_component_detail.source_code_repositories[0].repository #=> String
     #   resp.application_component_detail.source_code_repositories[0].version_control_type #=> String
     #   resp.application_component_detail.status_message #=> String
@@ -456,11 +460,11 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.application_component_strategies #=> Array
     #   resp.application_component_strategies[0].is_preferred #=> Boolean
     #   resp.application_component_strategies[0].recommendation.strategy #=> String, one of "Rehost", "Retirement", "Refactor", "Replatform", "Retain", "Relocate", "Repurchase"
-    #   resp.application_component_strategies[0].recommendation.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service"
+    #   resp.application_component_strategies[0].recommendation.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service", "Babelfish for Aurora PostgreSQL"
     #   resp.application_component_strategies[0].recommendation.transformation_tool.description #=> String
     #   resp.application_component_strategies[0].recommendation.transformation_tool.name #=> String, one of "App2Container", "Porting Assistant For .NET", "End of Support Migration", "Windows Web Application Migration Assistant", "Application Migration Service", "Strategy Recommendation Support", "In Place Operating System Upgrade", "Schema Conversion Tool", "Database Migration Service", "Native SQL Server Backup/Restore"
     #   resp.application_component_strategies[0].recommendation.transformation_tool.tranformation_tool_installation_link #=> String
-    #   resp.application_component_strategies[0].status #=> String, one of "recommended", "viableOption", "notRecommended"
+    #   resp.application_component_strategies[0].status #=> String, one of "recommended", "viableOption", "notRecommended", "potential"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetApplicationComponentStrategies AWS API Documentation
     #
@@ -478,6 +482,7 @@ module Aws::MigrationHubStrategyRecommendations
     #
     # @return [Types::GetAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetAssessmentResponse#assessment_targets #assessment_targets} => Array&lt;Types::AssessmentTarget&gt;
     #   * {Types::GetAssessmentResponse#data_collection_details #data_collection_details} => Types::DataCollectionDetails
     #   * {Types::GetAssessmentResponse#id #id} => String
     #
@@ -489,12 +494,18 @@ module Aws::MigrationHubStrategyRecommendations
     #
     # @example Response structure
     #
+    #   resp.assessment_targets #=> Array
+    #   resp.assessment_targets[0].condition #=> String, one of "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.assessment_targets[0].name #=> String
+    #   resp.assessment_targets[0].values #=> Array
+    #   resp.assessment_targets[0].values[0] #=> String
     #   resp.data_collection_details.completion_time #=> Time
     #   resp.data_collection_details.failed #=> Integer
     #   resp.data_collection_details.in_progress #=> Integer
     #   resp.data_collection_details.servers #=> Integer
     #   resp.data_collection_details.start_time #=> Time
     #   resp.data_collection_details.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPED"
+    #   resp.data_collection_details.status_message #=> String
     #   resp.data_collection_details.success #=> Integer
     #   resp.id #=> String
     #
@@ -556,16 +567,37 @@ module Aws::MigrationHubStrategyRecommendations
       req.send_request(options)
     end
 
+    # Retrieve the latest ID of a specific assessment task.
+    #
+    # @return [Types::GetLatestAssessmentIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLatestAssessmentIdResponse#id #id} => String
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetLatestAssessmentId AWS API Documentation
+    #
+    # @overload get_latest_assessment_id(params = {})
+    # @param [Hash] params ({})
+    def get_latest_assessment_id(params = {}, options = {})
+      req = build_request(:get_latest_assessment_id, params)
+      req.send_request(options)
+    end
+
     # Retrieves your migration and modernization preferences.
     #
     # @return [Types::GetPortfolioPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetPortfolioPreferencesResponse#application_mode #application_mode} => String
     #   * {Types::GetPortfolioPreferencesResponse#application_preferences #application_preferences} => Types::ApplicationPreferences
     #   * {Types::GetPortfolioPreferencesResponse#database_preferences #database_preferences} => Types::DatabasePreferences
     #   * {Types::GetPortfolioPreferencesResponse#prioritize_business_goals #prioritize_business_goals} => Types::PrioritizeBusinessGoals
     #
     # @example Response structure
     #
+    #   resp.application_mode #=> String, one of "ALL", "KNOWN", "UNKNOWN"
     #   resp.application_preferences.management_preference.aws_managed_resources.target_destination #=> Array
     #   resp.application_preferences.management_preference.aws_managed_resources.target_destination[0] #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate"
     #   resp.application_preferences.management_preference.no_preference.target_destination #=> Array
@@ -610,12 +642,18 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.assessment_summary.list_antipattern_severity_summary #=> Array
     #   resp.assessment_summary.list_antipattern_severity_summary[0].count #=> Integer
     #   resp.assessment_summary.list_antipattern_severity_summary[0].severity #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.assessment_summary.list_application_component_status_summary #=> Array
+    #   resp.assessment_summary.list_application_component_status_summary[0].count #=> Integer
+    #   resp.assessment_summary.list_application_component_status_summary[0].src_code_or_db_analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED", "ANALYSIS_PARTIAL_SUCCESS", "UNCONFIGURED", "CONFIGURED"
     #   resp.assessment_summary.list_application_component_strategy_summary #=> Array
     #   resp.assessment_summary.list_application_component_strategy_summary[0].count #=> Integer
     #   resp.assessment_summary.list_application_component_strategy_summary[0].strategy #=> String, one of "Rehost", "Retirement", "Refactor", "Replatform", "Retain", "Relocate", "Repurchase"
     #   resp.assessment_summary.list_application_component_summary #=> Array
-    #   resp.assessment_summary.list_application_component_summary[0].app_type #=> String, one of "DotNetFramework", "Java", "SQLServer", "IIS", "Oracle", "Other"
+    #   resp.assessment_summary.list_application_component_summary[0].app_type #=> String, one of "DotNetFramework", "Java", "SQLServer", "IIS", "Oracle", "Other", "Tomcat", "JBoss", "Spring", "Mongo DB", "DB2", "Maria DB", "MySQL", "Sybase", "PostgreSQLServer", "Cassandra", "IBM WebSphere", "Oracle WebLogic", "Visual Basic", "Unknown", "DotnetCore", "Dotnet"
     #   resp.assessment_summary.list_application_component_summary[0].count #=> Integer
+    #   resp.assessment_summary.list_server_status_summary #=> Array
+    #   resp.assessment_summary.list_server_status_summary[0].count #=> Integer
+    #   resp.assessment_summary.list_server_status_summary[0].run_time_assessment_status #=> String, one of "dataCollectionTaskToBeScheduled", "dataCollectionTaskScheduled", "dataCollectionTaskStarted", "dataCollectionTaskStopped", "dataCollectionTaskSuccess", "dataCollectionTaskFailed", "dataCollectionTaskPartialSuccess"
     #   resp.assessment_summary.list_server_strategy_summary #=> Array
     #   resp.assessment_summary.list_server_strategy_summary[0].count #=> Integer
     #   resp.assessment_summary.list_server_strategy_summary[0].strategy #=> String, one of "Rehost", "Retirement", "Refactor", "Replatform", "Retain", "Relocate", "Repurchase"
@@ -723,10 +761,11 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.server_detail.list_antipattern_severity_summary[0].severity #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.server_detail.name #=> String
     #   resp.server_detail.recommendation_set.strategy #=> String, one of "Rehost", "Retirement", "Refactor", "Replatform", "Retain", "Relocate", "Repurchase"
-    #   resp.server_detail.recommendation_set.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service"
+    #   resp.server_detail.recommendation_set.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service", "Babelfish for Aurora PostgreSQL"
     #   resp.server_detail.recommendation_set.transformation_tool.description #=> String
     #   resp.server_detail.recommendation_set.transformation_tool.name #=> String, one of "App2Container", "Porting Assistant For .NET", "End of Support Migration", "Windows Web Application Migration Assistant", "Application Migration Service", "Strategy Recommendation Support", "In Place Operating System Upgrade", "Schema Conversion Tool", "Database Migration Service", "Native SQL Server Backup/Restore"
     #   resp.server_detail.recommendation_set.transformation_tool.tranformation_tool_installation_link #=> String
+    #   resp.server_detail.server_error.server_error_category #=> String, one of "CONNECTIVITY_ERROR", "CREDENTIAL_ERROR", "PERMISSION_ERROR", "ARCHITECTURE_ERROR", "OTHER_ERROR"
     #   resp.server_detail.server_type #=> String
     #   resp.server_detail.status_message #=> String
     #   resp.server_detail.system_info.cpu_architecture #=> String
@@ -769,11 +808,11 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.server_strategies[0].is_preferred #=> Boolean
     #   resp.server_strategies[0].number_of_application_components #=> Integer
     #   resp.server_strategies[0].recommendation.strategy #=> String, one of "Rehost", "Retirement", "Refactor", "Replatform", "Retain", "Relocate", "Repurchase"
-    #   resp.server_strategies[0].recommendation.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service"
+    #   resp.server_strategies[0].recommendation.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service", "Babelfish for Aurora PostgreSQL"
     #   resp.server_strategies[0].recommendation.transformation_tool.description #=> String
     #   resp.server_strategies[0].recommendation.transformation_tool.name #=> String, one of "App2Container", "Porting Assistant For .NET", "End of Support Migration", "Windows Web Application Migration Assistant", "Application Migration Service", "Strategy Recommendation Support", "In Place Operating System Upgrade", "Schema Conversion Tool", "Database Migration Service", "Native SQL Server Backup/Restore"
     #   resp.server_strategies[0].recommendation.transformation_tool.tranformation_tool_installation_link #=> String
-    #   resp.server_strategies[0].status #=> String, one of "recommended", "viableOption", "notRecommended"
+    #   resp.server_strategies[0].status #=> String, one of "recommended", "viableOption", "notRecommended", "potential"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetServerStrategies AWS API Documentation
     #
@@ -823,7 +862,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_application_components({
-    #     application_component_criteria: "NOT_DEFINED", # accepts NOT_DEFINED, APP_NAME, SERVER_ID, APP_TYPE, STRATEGY, DESTINATION
+    #     application_component_criteria: "NOT_DEFINED", # accepts NOT_DEFINED, APP_NAME, SERVER_ID, APP_TYPE, STRATEGY, DESTINATION, ANALYSIS_STATUS, ERROR_CATEGORY
     #     filter_value: "ListApplicationComponentsRequestFilterValueString",
     #     group_id_filter: [
     #       {
@@ -839,12 +878,13 @@ module Aws::MigrationHubStrategyRecommendations
     # @example Response structure
     #
     #   resp.application_component_infos #=> Array
-    #   resp.application_component_infos[0].analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED"
+    #   resp.application_component_infos[0].analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED", "ANALYSIS_PARTIAL_SUCCESS", "UNCONFIGURED", "CONFIGURED"
     #   resp.application_component_infos[0].antipattern_report_s3_object.s3_bucket #=> String
     #   resp.application_component_infos[0].antipattern_report_s3_object.s3key #=> String
     #   resp.application_component_infos[0].antipattern_report_status #=> String, one of "FAILED", "IN_PROGRESS", "SUCCESS"
     #   resp.application_component_infos[0].antipattern_report_status_message #=> String
-    #   resp.application_component_infos[0].app_type #=> String, one of "DotNetFramework", "Java", "SQLServer", "IIS", "Oracle", "Other"
+    #   resp.application_component_infos[0].app_type #=> String, one of "DotNetFramework", "Java", "SQLServer", "IIS", "Oracle", "Other", "Tomcat", "JBoss", "Spring", "Mongo DB", "DB2", "Maria DB", "MySQL", "Sybase", "PostgreSQLServer", "Cassandra", "IBM WebSphere", "Oracle WebLogic", "Visual Basic", "Unknown", "DotnetCore", "Dotnet"
+    #   resp.application_component_infos[0].app_unit_error.app_unit_error_category #=> String, one of "CREDENTIAL_ERROR", "CONNECTIVITY_ERROR", "PERMISSION_ERROR", "UNSUPPORTED_ERROR", "OTHER_ERROR"
     #   resp.application_component_infos[0].associated_server_id #=> String
     #   resp.application_component_infos[0].database_config_detail.secret_name #=> String
     #   resp.application_component_infos[0].id #=> String
@@ -858,13 +898,16 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.application_component_infos[0].os_driver #=> String
     #   resp.application_component_infos[0].os_version #=> String
     #   resp.application_component_infos[0].recommendation_set.strategy #=> String, one of "Rehost", "Retirement", "Refactor", "Replatform", "Retain", "Relocate", "Repurchase"
-    #   resp.application_component_infos[0].recommendation_set.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service"
+    #   resp.application_component_infos[0].recommendation_set.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service", "Babelfish for Aurora PostgreSQL"
     #   resp.application_component_infos[0].recommendation_set.transformation_tool.description #=> String
     #   resp.application_component_infos[0].recommendation_set.transformation_tool.name #=> String, one of "App2Container", "Porting Assistant For .NET", "End of Support Migration", "Windows Web Application Migration Assistant", "Application Migration Service", "Strategy Recommendation Support", "In Place Operating System Upgrade", "Schema Conversion Tool", "Database Migration Service", "Native SQL Server Backup/Restore"
     #   resp.application_component_infos[0].recommendation_set.transformation_tool.tranformation_tool_installation_link #=> String
     #   resp.application_component_infos[0].resource_sub_type #=> String, one of "Database", "Process", "DatabaseProcess"
+    #   resp.application_component_infos[0].runtime_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED"
+    #   resp.application_component_infos[0].runtime_status_message #=> String
     #   resp.application_component_infos[0].source_code_repositories #=> Array
     #   resp.application_component_infos[0].source_code_repositories[0].branch #=> String
+    #   resp.application_component_infos[0].source_code_repositories[0].project_name #=> String
     #   resp.application_component_infos[0].source_code_repositories[0].repository #=> String
     #   resp.application_component_infos[0].source_code_repositories[0].version_control_type #=> String
     #   resp.application_component_infos[0].status_message #=> String
@@ -912,6 +955,20 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.collectors[0].collector_health #=> String, one of "COLLECTOR_HEALTHY", "COLLECTOR_UNHEALTHY"
     #   resp.collectors[0].collector_id #=> String
     #   resp.collectors[0].collector_version #=> String
+    #   resp.collectors[0].configuration_summary.ip_address_based_remote_info_list #=> Array
+    #   resp.collectors[0].configuration_summary.ip_address_based_remote_info_list[0].auth_type #=> String, one of "NTLM", "SSH", "CERT"
+    #   resp.collectors[0].configuration_summary.ip_address_based_remote_info_list[0].ip_address_configuration_time_stamp #=> String
+    #   resp.collectors[0].configuration_summary.ip_address_based_remote_info_list[0].os_type #=> String, one of "LINUX", "WINDOWS"
+    #   resp.collectors[0].configuration_summary.pipeline_info_list #=> Array
+    #   resp.collectors[0].configuration_summary.pipeline_info_list[0].pipeline_configuration_time_stamp #=> String
+    #   resp.collectors[0].configuration_summary.pipeline_info_list[0].pipeline_type #=> String, one of "AZURE_DEVOPS"
+    #   resp.collectors[0].configuration_summary.remote_source_code_analysis_server_info.remote_source_code_analysis_server_configuration_timestamp #=> String
+    #   resp.collectors[0].configuration_summary.vcenter_based_remote_info_list #=> Array
+    #   resp.collectors[0].configuration_summary.vcenter_based_remote_info_list[0].os_type #=> String, one of "LINUX", "WINDOWS"
+    #   resp.collectors[0].configuration_summary.vcenter_based_remote_info_list[0].vcenter_configuration_time_stamp #=> String
+    #   resp.collectors[0].configuration_summary.version_control_info_list #=> Array
+    #   resp.collectors[0].configuration_summary.version_control_info_list[0].version_control_configuration_time_stamp #=> String
+    #   resp.collectors[0].configuration_summary.version_control_info_list[0].version_control_type #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "AZURE_DEVOPS_GIT"
     #   resp.collectors[0].host_name #=> String
     #   resp.collectors[0].ip_address #=> String
     #   resp.collectors[0].last_activity_time_stamp #=> String
@@ -1026,7 +1083,7 @@ module Aws::MigrationHubStrategyRecommendations
     #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     server_criteria: "NOT_DEFINED", # accepts NOT_DEFINED, OS_NAME, STRATEGY, DESTINATION, SERVER_ID
+    #     server_criteria: "NOT_DEFINED", # accepts NOT_DEFINED, OS_NAME, STRATEGY, DESTINATION, SERVER_ID, ANALYSIS_STATUS, ERROR_CATEGORY
     #     sort: "ASC", # accepts ASC, DESC
     #   })
     #
@@ -1049,10 +1106,11 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.server_infos[0].list_antipattern_severity_summary[0].severity #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.server_infos[0].name #=> String
     #   resp.server_infos[0].recommendation_set.strategy #=> String, one of "Rehost", "Retirement", "Refactor", "Replatform", "Retain", "Relocate", "Repurchase"
-    #   resp.server_infos[0].recommendation_set.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service"
+    #   resp.server_infos[0].recommendation_set.target_destination #=> String, one of "None specified", "AWS Elastic BeanStalk", "AWS Fargate", "Amazon Elastic Cloud Compute (EC2)", "Amazon Elastic Container Service (ECS)", "Amazon Elastic Kubernetes Service (EKS)", "Aurora MySQL", "Aurora PostgreSQL", "Amazon Relational Database Service on MySQL", "Amazon Relational Database Service on PostgreSQL", "Amazon DocumentDB", "Amazon DynamoDB", "Amazon Relational Database Service", "Babelfish for Aurora PostgreSQL"
     #   resp.server_infos[0].recommendation_set.transformation_tool.description #=> String
     #   resp.server_infos[0].recommendation_set.transformation_tool.name #=> String, one of "App2Container", "Porting Assistant For .NET", "End of Support Migration", "Windows Web Application Migration Assistant", "Application Migration Service", "Strategy Recommendation Support", "In Place Operating System Upgrade", "Schema Conversion Tool", "Database Migration Service", "Native SQL Server Backup/Restore"
     #   resp.server_infos[0].recommendation_set.transformation_tool.tranformation_tool_installation_link #=> String
+    #   resp.server_infos[0].server_error.server_error_category #=> String, one of "CONNECTIVITY_ERROR", "CREDENTIAL_ERROR", "PERMISSION_ERROR", "ARCHITECTURE_ERROR", "OTHER_ERROR"
     #   resp.server_infos[0].server_type #=> String
     #   resp.server_infos[0].status_message #=> String
     #   resp.server_infos[0].system_info.cpu_architecture #=> String
@@ -1076,6 +1134,9 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Saves the specified migration and modernization preferences.
     #
+    # @option params [String] :application_mode
+    #   The classification for application component types.
+    #
     # @option params [Types::ApplicationPreferences] :application_preferences
     #   The transformation preferences for non-database applications.
     #
@@ -1090,6 +1151,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_portfolio_preferences({
+    #     application_mode: "ALL", # accepts ALL, KNOWN, UNKNOWN
     #     application_preferences: {
     #       management_preference: {
     #         aws_managed_resources: {
@@ -1138,6 +1200,9 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Starts the assessment of an on-premises environment.
     #
+    # @option params [Array<Types::AssessmentTarget>] :assessment_targets
+    #   List of criteria for assessment.
+    #
     # @option params [String] :s3bucket_for_analysis_data
     #   The S3 bucket used by the collectors to send analysis data to the
     #   service. The bucket name must begin with `migrationhub-strategy-`.
@@ -1153,6 +1218,13 @@ module Aws::MigrationHubStrategyRecommendations
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_assessment({
+    #     assessment_targets: [
+    #       {
+    #         condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
     #     s3bucket_for_analysis_data: "StartAssessmentRequestS3bucketForAnalysisDataString",
     #     s3bucket_for_report_data: "StartAssessmentRequestS3bucketForReportDataString",
     #   })
@@ -1291,9 +1363,18 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Updates the configuration of an application component.
     #
+    # @option params [String] :app_type
+    #   The type of known component.
+    #
     # @option params [required, String] :application_component_id
     #   The ID of the application component. The ID is unique within an AWS
     #   account.
+    #
+    # @option params [Boolean] :configure_only
+    #   Update the configuration request of an application component. If it is
+    #   set to true, the source code and/or database credentials are updated.
+    #   If it is set to false, the source code and/or database credentials are
+    #   updated and an analysis is initiated.
     #
     # @option params [String] :inclusion_status
     #   Indicates whether the application component has been included for
@@ -1315,20 +1396,23 @@ module Aws::MigrationHubStrategyRecommendations
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_application_component_config({
+    #     app_type: "DotNetFramework", # accepts DotNetFramework, Java, SQLServer, IIS, Oracle, Other, Tomcat, JBoss, Spring, Mongo DB, DB2, Maria DB, MySQL, Sybase, PostgreSQLServer, Cassandra, IBM WebSphere, Oracle WebLogic, Visual Basic, Unknown, DotnetCore, Dotnet
     #     application_component_id: "ApplicationComponentId", # required
+    #     configure_only: false,
     #     inclusion_status: "excludeFromAssessment", # accepts excludeFromAssessment, includeInAssessment
     #     secrets_manager_key: "SecretsManagerKey",
     #     source_code_list: [
     #       {
     #         location: "Location",
+    #         project_name: "ProjectName",
     #         source_version: "SourceVersion",
-    #         version_control: "GITHUB", # accepts GITHUB, GITHUB_ENTERPRISE
+    #         version_control: "GITHUB", # accepts GITHUB, GITHUB_ENTERPRISE, AZURE_DEVOPS_GIT
     #       },
     #     ],
     #     strategy_option: {
     #       is_preferred: false,
     #       strategy: "Rehost", # accepts Rehost, Retirement, Refactor, Replatform, Retain, Relocate, Repurchase
-    #       target_destination: "None specified", # accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS), Aurora MySQL, Aurora PostgreSQL, Amazon Relational Database Service on MySQL, Amazon Relational Database Service on PostgreSQL, Amazon DocumentDB, Amazon DynamoDB, Amazon Relational Database Service
+    #       target_destination: "None specified", # accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS), Aurora MySQL, Aurora PostgreSQL, Amazon Relational Database Service on MySQL, Amazon Relational Database Service on PostgreSQL, Amazon DocumentDB, Amazon DynamoDB, Amazon Relational Database Service, Babelfish for Aurora PostgreSQL
     #       tool_name: "App2Container", # accepts App2Container, Porting Assistant For .NET, End of Support Migration, Windows Web Application Migration Assistant, Application Migration Service, Strategy Recommendation Support, In Place Operating System Upgrade, Schema Conversion Tool, Database Migration Service, Native SQL Server Backup/Restore
     #     },
     #   })
@@ -1360,7 +1444,7 @@ module Aws::MigrationHubStrategyRecommendations
     #     strategy_option: {
     #       is_preferred: false,
     #       strategy: "Rehost", # accepts Rehost, Retirement, Refactor, Replatform, Retain, Relocate, Repurchase
-    #       target_destination: "None specified", # accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS), Aurora MySQL, Aurora PostgreSQL, Amazon Relational Database Service on MySQL, Amazon Relational Database Service on PostgreSQL, Amazon DocumentDB, Amazon DynamoDB, Amazon Relational Database Service
+    #       target_destination: "None specified", # accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS), Aurora MySQL, Aurora PostgreSQL, Amazon Relational Database Service on MySQL, Amazon Relational Database Service on PostgreSQL, Amazon DocumentDB, Amazon DynamoDB, Amazon Relational Database Service, Babelfish for Aurora PostgreSQL
     #       tool_name: "App2Container", # accepts App2Container, Porting Assistant For .NET, End of Support Migration, Windows Web Application Migration Assistant, Application Migration Service, Strategy Recommendation Support, In Place Operating System Upgrade, Schema Conversion Tool, Database Migration Service, Native SQL Server Backup/Restore
     #     },
     #   })
@@ -1387,7 +1471,7 @@ module Aws::MigrationHubStrategyRecommendations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubstrategyrecommendations'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

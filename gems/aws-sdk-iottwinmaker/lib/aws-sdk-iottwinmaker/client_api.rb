@@ -32,6 +32,7 @@ module Aws::IoTTwinMaker
     ComponentRequest = Shapes::StructureShape.new(name: 'ComponentRequest')
     ComponentResponse = Shapes::StructureShape.new(name: 'ComponentResponse')
     ComponentTypeId = Shapes::StringShape.new(name: 'ComponentTypeId')
+    ComponentTypeName = Shapes::StringShape.new(name: 'ComponentTypeName')
     ComponentTypeSummaries = Shapes::ListShape.new(name: 'ComponentTypeSummaries')
     ComponentTypeSummary = Shapes::StructureShape.new(name: 'ComponentTypeSummary')
     ComponentUpdateRequest = Shapes::StructureShape.new(name: 'ComponentUpdateRequest')
@@ -49,6 +50,8 @@ module Aws::IoTTwinMaker
     CreateEntityResponse = Shapes::StructureShape.new(name: 'CreateEntityResponse')
     CreateSceneRequest = Shapes::StructureShape.new(name: 'CreateSceneRequest')
     CreateSceneResponse = Shapes::StructureShape.new(name: 'CreateSceneResponse')
+    CreateSyncJobRequest = Shapes::StructureShape.new(name: 'CreateSyncJobRequest')
+    CreateSyncJobResponse = Shapes::StructureShape.new(name: 'CreateSyncJobResponse')
     CreateWorkspaceRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceRequest')
     CreateWorkspaceResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceResponse')
     DataConnector = Shapes::StructureShape.new(name: 'DataConnector')
@@ -62,6 +65,8 @@ module Aws::IoTTwinMaker
     DeleteEntityResponse = Shapes::StructureShape.new(name: 'DeleteEntityResponse')
     DeleteSceneRequest = Shapes::StructureShape.new(name: 'DeleteSceneRequest')
     DeleteSceneResponse = Shapes::StructureShape.new(name: 'DeleteSceneResponse')
+    DeleteSyncJobRequest = Shapes::StructureShape.new(name: 'DeleteSyncJobRequest')
+    DeleteSyncJobResponse = Shapes::StructureShape.new(name: 'DeleteSyncJobResponse')
     DeleteWorkspaceRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceRequest')
     DeleteWorkspaceResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceResponse')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -99,6 +104,8 @@ module Aws::IoTTwinMaker
     GetPropertyValueResponse = Shapes::StructureShape.new(name: 'GetPropertyValueResponse')
     GetSceneRequest = Shapes::StructureShape.new(name: 'GetSceneRequest')
     GetSceneResponse = Shapes::StructureShape.new(name: 'GetSceneResponse')
+    GetSyncJobRequest = Shapes::StructureShape.new(name: 'GetSyncJobRequest')
+    GetSyncJobResponse = Shapes::StructureShape.new(name: 'GetSyncJobResponse')
     GetWorkspaceRequest = Shapes::StructureShape.new(name: 'GetWorkspaceRequest')
     GetWorkspaceResponse = Shapes::StructureShape.new(name: 'GetWorkspaceResponse')
     GroupType = Shapes::StringShape.new(name: 'GroupType')
@@ -121,6 +128,10 @@ module Aws::IoTTwinMaker
     ListEntitiesResponse = Shapes::StructureShape.new(name: 'ListEntitiesResponse')
     ListScenesRequest = Shapes::StructureShape.new(name: 'ListScenesRequest')
     ListScenesResponse = Shapes::StructureShape.new(name: 'ListScenesResponse')
+    ListSyncJobsRequest = Shapes::StructureShape.new(name: 'ListSyncJobsRequest')
+    ListSyncJobsResponse = Shapes::StructureShape.new(name: 'ListSyncJobsResponse')
+    ListSyncResourcesRequest = Shapes::StructureShape.new(name: 'ListSyncResourcesRequest')
+    ListSyncResourcesResponse = Shapes::StructureShape.new(name: 'ListSyncResourcesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListWorkspacesRequest = Shapes::StructureShape.new(name: 'ListWorkspacesRequest')
@@ -144,6 +155,7 @@ module Aws::IoTTwinMaker
     PropertyDefinitionResponse = Shapes::StructureShape.new(name: 'PropertyDefinitionResponse')
     PropertyDefinitionsRequest = Shapes::MapShape.new(name: 'PropertyDefinitionsRequest')
     PropertyDefinitionsResponse = Shapes::MapShape.new(name: 'PropertyDefinitionsResponse')
+    PropertyDisplayName = Shapes::StringShape.new(name: 'PropertyDisplayName')
     PropertyFilter = Shapes::StructureShape.new(name: 'PropertyFilter')
     PropertyFilters = Shapes::ListShape.new(name: 'PropertyFilters')
     PropertyGroupRequest = Shapes::StructureShape.new(name: 'PropertyGroupRequest')
@@ -189,6 +201,18 @@ module Aws::IoTTwinMaker
     State = Shapes::StringShape.new(name: 'State')
     Status = Shapes::StructureShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
+    SyncJobState = Shapes::StringShape.new(name: 'SyncJobState')
+    SyncJobStatus = Shapes::StructureShape.new(name: 'SyncJobStatus')
+    SyncJobSummaries = Shapes::ListShape.new(name: 'SyncJobSummaries')
+    SyncJobSummary = Shapes::StructureShape.new(name: 'SyncJobSummary')
+    SyncResourceFilter = Shapes::UnionShape.new(name: 'SyncResourceFilter')
+    SyncResourceFilters = Shapes::ListShape.new(name: 'SyncResourceFilters')
+    SyncResourceState = Shapes::StringShape.new(name: 'SyncResourceState')
+    SyncResourceStatus = Shapes::StructureShape.new(name: 'SyncResourceStatus')
+    SyncResourceSummaries = Shapes::ListShape.new(name: 'SyncResourceSummaries')
+    SyncResourceSummary = Shapes::StructureShape.new(name: 'SyncResourceSummary')
+    SyncResourceType = Shapes::StringShape.new(name: 'SyncResourceType')
+    SyncSource = Shapes::StringShape.new(name: 'SyncSource')
     TabularConditions = Shapes::StructureShape.new(name: 'TabularConditions')
     TabularPropertyValue = Shapes::ListShape.new(name: 'TabularPropertyValue')
     TabularPropertyValues = Shapes::ListShape.new(name: 'TabularPropertyValues')
@@ -280,6 +304,7 @@ module Aws::IoTTwinMaker
     ComponentResponse.add_member(:defined_in, Shapes::ShapeRef.new(shape: String, location_name: "definedIn"))
     ComponentResponse.add_member(:properties, Shapes::ShapeRef.new(shape: PropertyResponses, location_name: "properties"))
     ComponentResponse.add_member(:property_groups, Shapes::ShapeRef.new(shape: ComponentPropertyGroupResponses, location_name: "propertyGroups"))
+    ComponentResponse.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, location_name: "syncSource"))
     ComponentResponse.struct_class = Types::ComponentResponse
 
     ComponentTypeSummaries.member = Shapes::ShapeRef.new(shape: ComponentTypeSummary)
@@ -290,6 +315,7 @@ module Aws::IoTTwinMaker
     ComponentTypeSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     ComponentTypeSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     ComponentTypeSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    ComponentTypeSummary.add_member(:component_type_name, Shapes::ShapeRef.new(shape: ComponentTypeName, location_name: "componentTypeName"))
     ComponentTypeSummary.struct_class = Types::ComponentTypeSummary
 
     ComponentUpdateRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: ComponentUpdateType, location_name: "updateType"))
@@ -329,6 +355,7 @@ module Aws::IoTTwinMaker
     CreateComponentTypeRequest.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsRequest, location_name: "functions"))
     CreateComponentTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateComponentTypeRequest.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsRequest, location_name: "propertyGroups"))
+    CreateComponentTypeRequest.add_member(:component_type_name, Shapes::ShapeRef.new(shape: ComponentTypeName, location_name: "componentTypeName"))
     CreateComponentTypeRequest.struct_class = Types::CreateComponentTypeRequest
 
     CreateComponentTypeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
@@ -362,6 +389,17 @@ module Aws::IoTTwinMaker
     CreateSceneResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     CreateSceneResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     CreateSceneResponse.struct_class = Types::CreateSceneResponse
+
+    CreateSyncJobRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    CreateSyncJobRequest.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, required: true, location: "uri", location_name: "syncSource"))
+    CreateSyncJobRequest.add_member(:sync_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "syncRole"))
+    CreateSyncJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSyncJobRequest.struct_class = Types::CreateSyncJobRequest
+
+    CreateSyncJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    CreateSyncJobResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    CreateSyncJobResponse.add_member(:state, Shapes::ShapeRef.new(shape: SyncJobState, required: true, location_name: "state"))
+    CreateSyncJobResponse.struct_class = Types::CreateSyncJobResponse
 
     CreateWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     CreateWorkspaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -421,6 +459,13 @@ module Aws::IoTTwinMaker
     DeleteSceneRequest.struct_class = Types::DeleteSceneRequest
 
     DeleteSceneResponse.struct_class = Types::DeleteSceneResponse
+
+    DeleteSyncJobRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteSyncJobRequest.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, required: true, location: "uri", location_name: "syncSource"))
+    DeleteSyncJobRequest.struct_class = Types::DeleteSyncJobRequest
+
+    DeleteSyncJobResponse.add_member(:state, Shapes::ShapeRef.new(shape: SyncJobState, required: true, location_name: "state"))
+    DeleteSyncJobResponse.struct_class = Types::DeleteSyncJobResponse
 
     DeleteWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     DeleteWorkspaceRequest.struct_class = Types::DeleteWorkspaceRequest
@@ -507,6 +552,8 @@ module Aws::IoTTwinMaker
     GetComponentTypeResponse.add_member(:is_schema_initialized, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSchemaInitialized"))
     GetComponentTypeResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     GetComponentTypeResponse.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsResponse, location_name: "propertyGroups"))
+    GetComponentTypeResponse.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, location_name: "syncSource"))
+    GetComponentTypeResponse.add_member(:component_type_name, Shapes::ShapeRef.new(shape: ComponentTypeName, location_name: "componentTypeName"))
     GetComponentTypeResponse.struct_class = Types::GetComponentTypeResponse
 
     GetEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
@@ -524,6 +571,7 @@ module Aws::IoTTwinMaker
     GetEntityResponse.add_member(:has_child_entities, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "hasChildEntities"))
     GetEntityResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     GetEntityResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    GetEntityResponse.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, location_name: "syncSource"))
     GetEntityResponse.struct_class = Types::GetEntityResponse
 
     GetPricingPlanRequest.struct_class = Types::GetPricingPlanRequest
@@ -581,6 +629,19 @@ module Aws::IoTTwinMaker
     GetSceneResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetSceneResponse.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
     GetSceneResponse.struct_class = Types::GetSceneResponse
+
+    GetSyncJobRequest.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, required: true, location: "uri", location_name: "syncSource"))
+    GetSyncJobRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, location: "querystring", location_name: "workspace"))
+    GetSyncJobRequest.struct_class = Types::GetSyncJobRequest
+
+    GetSyncJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    GetSyncJobResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    GetSyncJobResponse.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, required: true, location_name: "syncSource"))
+    GetSyncJobResponse.add_member(:sync_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "syncRole"))
+    GetSyncJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: SyncJobStatus, required: true, location_name: "status"))
+    GetSyncJobResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    GetSyncJobResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    GetSyncJobResponse.struct_class = Types::GetSyncJobResponse
 
     GetWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: IdOrArn, required: true, location: "uri", location_name: "workspaceId"))
     GetWorkspaceRequest.struct_class = Types::GetWorkspaceRequest
@@ -659,6 +720,26 @@ module Aws::IoTTwinMaker
     ListScenesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListScenesResponse.struct_class = Types::ListScenesResponse
 
+    ListSyncJobsRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    ListSyncJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListSyncJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSyncJobsRequest.struct_class = Types::ListSyncJobsRequest
+
+    ListSyncJobsResponse.add_member(:sync_job_summaries, Shapes::ShapeRef.new(shape: SyncJobSummaries, location_name: "syncJobSummaries"))
+    ListSyncJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSyncJobsResponse.struct_class = Types::ListSyncJobsResponse
+
+    ListSyncResourcesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    ListSyncResourcesRequest.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, required: true, location: "uri", location_name: "syncSource"))
+    ListSyncResourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SyncResourceFilters, location_name: "filters"))
+    ListSyncResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListSyncResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSyncResourcesRequest.struct_class = Types::ListSyncResourcesRequest
+
+    ListSyncResourcesResponse.add_member(:sync_resources, Shapes::ShapeRef.new(shape: SyncResourceSummaries, location_name: "syncResources"))
+    ListSyncResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSyncResourcesResponse.struct_class = Types::ListSyncResourcesResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "resourceARN"))
     ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -703,6 +784,7 @@ module Aws::IoTTwinMaker
     PropertyDefinitionRequest.add_member(:is_time_series, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTimeSeries"))
     PropertyDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: DataValue, location_name: "defaultValue"))
     PropertyDefinitionRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
+    PropertyDefinitionRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: PropertyDisplayName, location_name: "displayName"))
     PropertyDefinitionRequest.struct_class = Types::PropertyDefinitionRequest
 
     PropertyDefinitionResponse.add_member(:data_type, Shapes::ShapeRef.new(shape: DataType, required: true, location_name: "dataType"))
@@ -715,6 +797,7 @@ module Aws::IoTTwinMaker
     PropertyDefinitionResponse.add_member(:is_inherited, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isInherited"))
     PropertyDefinitionResponse.add_member(:default_value, Shapes::ShapeRef.new(shape: DataValue, location_name: "defaultValue"))
     PropertyDefinitionResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
+    PropertyDefinitionResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: PropertyDisplayName, location_name: "displayName"))
     PropertyDefinitionResponse.struct_class = Types::PropertyDefinitionResponse
 
     PropertyDefinitionsRequest.key = Shapes::ShapeRef.new(shape: Name)
@@ -833,6 +916,47 @@ module Aws::IoTTwinMaker
     Status.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "error"))
     Status.struct_class = Types::Status
 
+    SyncJobStatus.add_member(:state, Shapes::ShapeRef.new(shape: SyncJobState, location_name: "state"))
+    SyncJobStatus.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "error"))
+    SyncJobStatus.struct_class = Types::SyncJobStatus
+
+    SyncJobSummaries.member = Shapes::ShapeRef.new(shape: SyncJobSummary)
+
+    SyncJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, location_name: "arn"))
+    SyncJobSummary.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, location_name: "workspaceId"))
+    SyncJobSummary.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, location_name: "syncSource"))
+    SyncJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: SyncJobStatus, location_name: "status"))
+    SyncJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    SyncJobSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updateDateTime"))
+    SyncJobSummary.struct_class = Types::SyncJobSummary
+
+    SyncResourceFilter.add_member(:state, Shapes::ShapeRef.new(shape: SyncResourceState, location_name: "state"))
+    SyncResourceFilter.add_member(:resource_type, Shapes::ShapeRef.new(shape: SyncResourceType, location_name: "resourceType"))
+    SyncResourceFilter.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, location_name: "resourceId"))
+    SyncResourceFilter.add_member(:external_id, Shapes::ShapeRef.new(shape: Id, location_name: "externalId"))
+    SyncResourceFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SyncResourceFilter.add_member_subclass(:state, Types::SyncResourceFilter::State)
+    SyncResourceFilter.add_member_subclass(:resource_type, Types::SyncResourceFilter::ResourceType)
+    SyncResourceFilter.add_member_subclass(:resource_id, Types::SyncResourceFilter::ResourceId)
+    SyncResourceFilter.add_member_subclass(:external_id, Types::SyncResourceFilter::ExternalId)
+    SyncResourceFilter.add_member_subclass(:unknown, Types::SyncResourceFilter::Unknown)
+    SyncResourceFilter.struct_class = Types::SyncResourceFilter
+
+    SyncResourceFilters.member = Shapes::ShapeRef.new(shape: SyncResourceFilter)
+
+    SyncResourceStatus.add_member(:state, Shapes::ShapeRef.new(shape: SyncResourceState, location_name: "state"))
+    SyncResourceStatus.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "error"))
+    SyncResourceStatus.struct_class = Types::SyncResourceStatus
+
+    SyncResourceSummaries.member = Shapes::ShapeRef.new(shape: SyncResourceSummary)
+
+    SyncResourceSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: SyncResourceType, location_name: "resourceType"))
+    SyncResourceSummary.add_member(:external_id, Shapes::ShapeRef.new(shape: Id, location_name: "externalId"))
+    SyncResourceSummary.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, location_name: "resourceId"))
+    SyncResourceSummary.add_member(:status, Shapes::ShapeRef.new(shape: SyncResourceStatus, location_name: "status"))
+    SyncResourceSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updateDateTime"))
+    SyncResourceSummary.struct_class = Types::SyncResourceSummary
+
     TabularConditions.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderByList, location_name: "orderBy"))
     TabularConditions.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "propertyFilters"))
     TabularConditions.struct_class = Types::TabularConditions
@@ -872,6 +996,7 @@ module Aws::IoTTwinMaker
     UpdateComponentTypeRequest.add_member(:extends_from, Shapes::ShapeRef.new(shape: ExtendsFrom, location_name: "extendsFrom"))
     UpdateComponentTypeRequest.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsRequest, location_name: "functions"))
     UpdateComponentTypeRequest.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsRequest, location_name: "propertyGroups"))
+    UpdateComponentTypeRequest.add_member(:component_type_name, Shapes::ShapeRef.new(shape: ComponentTypeName, location_name: "componentTypeName"))
     UpdateComponentTypeRequest.struct_class = Types::UpdateComponentTypeRequest
 
     UpdateComponentTypeResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
@@ -1016,6 +1141,23 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_sync_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSyncJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/sync-jobs/{syncSource}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateSyncJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSyncJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_workspace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateWorkspace"
         o.http_method = "POST"
@@ -1079,6 +1221,23 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_sync_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSyncJob"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/workspaces/{workspaceId}/sync-jobs/{syncSource}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteSyncJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSyncJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:delete_workspace, Seahorse::Model::Operation.new.tap do |o|
@@ -1231,6 +1390,23 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_sync_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSyncJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/sync-jobs/{syncSource}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetSyncJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSyncJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:get_workspace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetWorkspace"
         o.http_method = "GET"
@@ -1302,6 +1478,50 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sync_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSyncJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/sync-jobs-list"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListSyncJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSyncJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sync_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSyncResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/sync-jobs/{syncSource}/resources-list"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListSyncResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSyncResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

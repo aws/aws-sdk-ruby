@@ -109,10 +109,12 @@ module Aws::AutoScaling
       data[:target_group_arns]
     end
 
-    # The service to use for the health checks. The valid values are `EC2`
-    # and `ELB`. If you configure an Auto Scaling group to use `ELB` health
-    # checks, it considers the instance unhealthy if it fails either the EC2
-    # status checks or the load balancer health checks.
+    # Determines whether any additional health checks are performed on the
+    # instances in this group. Amazon EC2 health checks are always on.
+    #
+    # The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
+    # `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
+    # which is in preview release and is subject to change.
     # @return [String]
     def health_check_type
       data[:health_check_type]
@@ -228,6 +230,12 @@ module Aws::AutoScaling
     # @return [Integer]
     def default_instance_warmup
       data[:default_instance_warmup]
+    end
+
+    # The unique identifiers of the traffic sources.
+    # @return [Array<Types::TrafficSourceIdentifier>]
+    def traffic_sources
+      data[:traffic_sources]
     end
 
     # @!endgroup
@@ -651,16 +659,38 @@ module Aws::AutoScaling
     #         resource_label: "XmlStringMaxLen1023",
     #       },
     #       customized_metric_specification: {
-    #         metric_name: "MetricName", # required
-    #         namespace: "MetricNamespace", # required
+    #         metric_name: "MetricName",
+    #         namespace: "MetricNamespace",
     #         dimensions: [
     #           {
     #             name: "MetricDimensionName", # required
     #             value: "MetricDimensionValue", # required
     #           },
     #         ],
-    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #         statistic: "Average", # accepts Average, Minimum, Maximum, SampleCount, Sum
     #         unit: "MetricUnit",
+    #         metrics: [
+    #           {
+    #             id: "XmlStringMaxLen255", # required
+    #             expression: "XmlStringMaxLen2047",
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "MetricNamespace", # required
+    #                 metric_name: "MetricName", # required
+    #                 dimensions: [
+    #                   {
+    #                     name: "MetricDimensionName", # required
+    #                     value: "MetricDimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               stat: "XmlStringMetricStat", # required
+    #               unit: "MetricUnit",
+    #             },
+    #             label: "XmlStringMetricLabel",
+    #             return_data: false,
+    #           },
+    #         ],
     #       },
     #       target_value: 1.0, # required
     #       disable_scale_in: false,
@@ -1254,19 +1284,20 @@ module Aws::AutoScaling
     # @option options [Array<String>] :availability_zones
     #   One or more Availability Zones for the group.
     # @option options [String] :health_check_type
-    #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. If you configure an Auto Scaling group to use `ELB` health
-    #   checks, it considers the instance unhealthy if it fails either the EC2
-    #   status checks or the load balancer health checks.
+    #   Determines whether any additional health checks are performed on the
+    #   instances in this group. Amazon EC2 health checks are always on.
+    #
+    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
+    #   `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
+    #   which is in preview release and is subject to change.
     # @option options [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service and marking it unhealthy due to a failed Elastic Load
-    #   Balancing or custom health check. This is useful if your instances do
-    #   not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Set the health check
-    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   This is useful if your instances do not immediately pass their health
+    #   checks after they enter the `InService` state. For more information,
+    #   see [Set the health check grace period for an Auto Scaling group][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #

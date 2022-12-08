@@ -17,20 +17,29 @@ module Aws::MigrationHubStrategyRecommendations
     AntipatternReportStatus = Shapes::StringShape.new(name: 'AntipatternReportStatus')
     AntipatternSeveritySummary = Shapes::StructureShape.new(name: 'AntipatternSeveritySummary')
     AppType = Shapes::StringShape.new(name: 'AppType')
+    AppUnitError = Shapes::StructureShape.new(name: 'AppUnitError')
+    AppUnitErrorCategory = Shapes::StringShape.new(name: 'AppUnitErrorCategory')
     ApplicationComponentCriteria = Shapes::StringShape.new(name: 'ApplicationComponentCriteria')
     ApplicationComponentDetail = Shapes::StructureShape.new(name: 'ApplicationComponentDetail')
     ApplicationComponentDetails = Shapes::ListShape.new(name: 'ApplicationComponentDetails')
     ApplicationComponentId = Shapes::StringShape.new(name: 'ApplicationComponentId')
+    ApplicationComponentStatusSummary = Shapes::StructureShape.new(name: 'ApplicationComponentStatusSummary')
     ApplicationComponentStrategies = Shapes::ListShape.new(name: 'ApplicationComponentStrategies')
     ApplicationComponentStrategy = Shapes::StructureShape.new(name: 'ApplicationComponentStrategy')
     ApplicationComponentSummary = Shapes::StructureShape.new(name: 'ApplicationComponentSummary')
+    ApplicationMode = Shapes::StringShape.new(name: 'ApplicationMode')
     ApplicationPreferences = Shapes::StructureShape.new(name: 'ApplicationPreferences')
     AssessmentStatus = Shapes::StringShape.new(name: 'AssessmentStatus')
+    AssessmentStatusMessage = Shapes::StringShape.new(name: 'AssessmentStatusMessage')
     AssessmentSummary = Shapes::StructureShape.new(name: 'AssessmentSummary')
+    AssessmentTarget = Shapes::StructureShape.new(name: 'AssessmentTarget')
+    AssessmentTargetValues = Shapes::ListShape.new(name: 'AssessmentTargetValues')
+    AssessmentTargets = Shapes::ListShape.new(name: 'AssessmentTargets')
     AssociatedApplication = Shapes::StructureShape.new(name: 'AssociatedApplication')
     AssociatedApplications = Shapes::ListShape.new(name: 'AssociatedApplications')
     AssociatedServerIDs = Shapes::ListShape.new(name: 'AssociatedServerIDs')
     AsyncTaskId = Shapes::StringShape.new(name: 'AsyncTaskId')
+    AuthType = Shapes::StringShape.new(name: 'AuthType')
     AwsManagedResources = Shapes::StructureShape.new(name: 'AwsManagedResources')
     AwsManagedTargetDestination = Shapes::StringShape.new(name: 'AwsManagedTargetDestination')
     AwsManagedTargetDestinations = Shapes::ListShape.new(name: 'AwsManagedTargetDestinations')
@@ -40,6 +49,8 @@ module Aws::MigrationHubStrategyRecommendations
     Collector = Shapes::StructureShape.new(name: 'Collector')
     CollectorHealth = Shapes::StringShape.new(name: 'CollectorHealth')
     Collectors = Shapes::ListShape.new(name: 'Collectors')
+    Condition = Shapes::StringShape.new(name: 'Condition')
+    ConfigurationSummary = Shapes::StructureShape.new(name: 'ConfigurationSummary')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     DataCollectionDetails = Shapes::StructureShape.new(name: 'DataCollectionDetails')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
@@ -47,6 +58,7 @@ module Aws::MigrationHubStrategyRecommendations
     DatabaseManagementPreference = Shapes::StringShape.new(name: 'DatabaseManagementPreference')
     DatabaseMigrationPreference = Shapes::UnionShape.new(name: 'DatabaseMigrationPreference')
     DatabasePreferences = Shapes::StructureShape.new(name: 'DatabasePreferences')
+    DependencyException = Shapes::StructureShape.new(name: 'DependencyException')
     GetApplicationComponentDetailsRequest = Shapes::StructureShape.new(name: 'GetApplicationComponentDetailsRequest')
     GetApplicationComponentDetailsResponse = Shapes::StructureShape.new(name: 'GetApplicationComponentDetailsResponse')
     GetApplicationComponentStrategiesRequest = Shapes::StructureShape.new(name: 'GetApplicationComponentStrategiesRequest')
@@ -55,6 +67,8 @@ module Aws::MigrationHubStrategyRecommendations
     GetAssessmentResponse = Shapes::StructureShape.new(name: 'GetAssessmentResponse')
     GetImportFileTaskRequest = Shapes::StructureShape.new(name: 'GetImportFileTaskRequest')
     GetImportFileTaskResponse = Shapes::StructureShape.new(name: 'GetImportFileTaskResponse')
+    GetLatestAssessmentIdRequest = Shapes::StructureShape.new(name: 'GetLatestAssessmentIdRequest')
+    GetLatestAssessmentIdResponse = Shapes::StructureShape.new(name: 'GetLatestAssessmentIdResponse')
     GetPortfolioPreferencesRequest = Shapes::StructureShape.new(name: 'GetPortfolioPreferencesRequest')
     GetPortfolioPreferencesResponse = Shapes::StructureShape.new(name: 'GetPortfolioPreferencesResponse')
     GetPortfolioSummaryRequest = Shapes::StructureShape.new(name: 'GetPortfolioSummaryRequest')
@@ -75,6 +89,8 @@ module Aws::MigrationHubStrategyRecommendations
     HomogeneousTargetDatabaseEngine = Shapes::StringShape.new(name: 'HomogeneousTargetDatabaseEngine')
     HomogeneousTargetDatabaseEngines = Shapes::ListShape.new(name: 'HomogeneousTargetDatabaseEngines')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
+    IPAddressBasedRemoteInfo = Shapes::StructureShape.new(name: 'IPAddressBasedRemoteInfo')
+    IPAddressBasedRemoteInfoList = Shapes::ListShape.new(name: 'IPAddressBasedRemoteInfoList')
     ImportFileTaskInformation = Shapes::StructureShape.new(name: 'ImportFileTaskInformation')
     ImportFileTaskStatus = Shapes::StringShape.new(name: 'ImportFileTaskStatus')
     InclusionStatus = Shapes::StringShape.new(name: 'InclusionStatus')
@@ -82,6 +98,7 @@ module Aws::MigrationHubStrategyRecommendations
     InterfaceName = Shapes::StringShape.new(name: 'InterfaceName')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListAntipatternSeveritySummary = Shapes::ListShape.new(name: 'ListAntipatternSeveritySummary')
+    ListApplicationComponentStatusSummary = Shapes::ListShape.new(name: 'ListApplicationComponentStatusSummary')
     ListApplicationComponentSummary = Shapes::ListShape.new(name: 'ListApplicationComponentSummary')
     ListApplicationComponentsRequest = Shapes::StructureShape.new(name: 'ListApplicationComponentsRequest')
     ListApplicationComponentsRequestFilterValueString = Shapes::StringShape.new(name: 'ListApplicationComponentsRequestFilterValueString')
@@ -91,6 +108,7 @@ module Aws::MigrationHubStrategyRecommendations
     ListImportFileTaskInformation = Shapes::ListShape.new(name: 'ListImportFileTaskInformation')
     ListImportFileTaskRequest = Shapes::StructureShape.new(name: 'ListImportFileTaskRequest')
     ListImportFileTaskResponse = Shapes::StructureShape.new(name: 'ListImportFileTaskResponse')
+    ListServerStatusSummary = Shapes::ListShape.new(name: 'ListServerStatusSummary')
     ListServerSummary = Shapes::ListShape.new(name: 'ListServerSummary')
     ListServersRequest = Shapes::StructureShape.new(name: 'ListServersRequest')
     ListServersResponse = Shapes::StructureShape.new(name: 'ListServersResponse')
@@ -111,7 +129,11 @@ module Aws::MigrationHubStrategyRecommendations
     OSType = Shapes::StringShape.new(name: 'OSType')
     OSVersion = Shapes::StringShape.new(name: 'OSVersion')
     OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
+    PipelineInfo = Shapes::StructureShape.new(name: 'PipelineInfo')
+    PipelineInfoList = Shapes::ListShape.new(name: 'PipelineInfoList')
+    PipelineType = Shapes::StringShape.new(name: 'PipelineType')
     PrioritizeBusinessGoals = Shapes::StructureShape.new(name: 'PrioritizeBusinessGoals')
+    ProjectName = Shapes::StringShape.new(name: 'ProjectName')
     PutPortfolioPreferencesRequest = Shapes::StructureShape.new(name: 'PutPortfolioPreferencesRequest')
     PutPortfolioPreferencesResponse = Shapes::StructureShape.new(name: 'PutPortfolioPreferencesResponse')
     RecommendationReportDetails = Shapes::StructureShape.new(name: 'RecommendationReportDetails')
@@ -120,11 +142,13 @@ module Aws::MigrationHubStrategyRecommendations
     RecommendationReportTimeStamp = Shapes::TimestampShape.new(name: 'RecommendationReportTimeStamp')
     RecommendationSet = Shapes::StructureShape.new(name: 'RecommendationSet')
     RecommendationTaskId = Shapes::StringShape.new(name: 'RecommendationTaskId')
+    RemoteSourceCodeAnalysisServerInfo = Shapes::StructureShape.new(name: 'RemoteSourceCodeAnalysisServerInfo')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceSubType = Shapes::StringShape.new(name: 'ResourceSubType')
     RunTimeAssessmentStatus = Shapes::StringShape.new(name: 'RunTimeAssessmentStatus')
+    RuntimeAnalysisStatus = Shapes::StringShape.new(name: 'RuntimeAnalysisStatus')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Keys = Shapes::ListShape.new(name: 'S3Keys')
@@ -136,8 +160,11 @@ module Aws::MigrationHubStrategyRecommendations
     ServerCriteria = Shapes::StringShape.new(name: 'ServerCriteria')
     ServerDetail = Shapes::StructureShape.new(name: 'ServerDetail')
     ServerDetails = Shapes::ListShape.new(name: 'ServerDetails')
+    ServerError = Shapes::StructureShape.new(name: 'ServerError')
+    ServerErrorCategory = Shapes::StringShape.new(name: 'ServerErrorCategory')
     ServerId = Shapes::StringShape.new(name: 'ServerId')
     ServerOsType = Shapes::StringShape.new(name: 'ServerOsType')
+    ServerStatusSummary = Shapes::StructureShape.new(name: 'ServerStatusSummary')
     ServerStrategies = Shapes::ListShape.new(name: 'ServerStrategies')
     ServerStrategy = Shapes::StructureShape.new(name: 'ServerStrategy')
     ServerSummary = Shapes::StructureShape.new(name: 'ServerSummary')
@@ -184,7 +211,12 @@ module Aws::MigrationHubStrategyRecommendations
     UpdateServerConfigRequest = Shapes::StructureShape.new(name: 'UpdateServerConfigRequest')
     UpdateServerConfigResponse = Shapes::StructureShape.new(name: 'UpdateServerConfigResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VcenterBasedRemoteInfo = Shapes::StructureShape.new(name: 'VcenterBasedRemoteInfo')
+    VcenterBasedRemoteInfoList = Shapes::ListShape.new(name: 'VcenterBasedRemoteInfoList')
     VersionControl = Shapes::StringShape.new(name: 'VersionControl')
+    VersionControlInfo = Shapes::StructureShape.new(name: 'VersionControlInfo')
+    VersionControlInfoList = Shapes::ListShape.new(name: 'VersionControlInfoList')
+    VersionControlType = Shapes::StringShape.new(name: 'VersionControlType')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
     importS3Bucket = Shapes::StringShape.new(name: 'importS3Bucket')
     importS3Key = Shapes::StringShape.new(name: 'importS3Key')
@@ -196,11 +228,15 @@ module Aws::MigrationHubStrategyRecommendations
     AntipatternSeveritySummary.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "severity"))
     AntipatternSeveritySummary.struct_class = Types::AntipatternSeveritySummary
 
+    AppUnitError.add_member(:app_unit_error_category, Shapes::ShapeRef.new(shape: AppUnitErrorCategory, location_name: "appUnitErrorCategory"))
+    AppUnitError.struct_class = Types::AppUnitError
+
     ApplicationComponentDetail.add_member(:analysis_status, Shapes::ShapeRef.new(shape: SrcCodeOrDbAnalysisStatus, location_name: "analysisStatus"))
     ApplicationComponentDetail.add_member(:antipattern_report_s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "antipatternReportS3Object"))
     ApplicationComponentDetail.add_member(:antipattern_report_status, Shapes::ShapeRef.new(shape: AntipatternReportStatus, location_name: "antipatternReportStatus"))
     ApplicationComponentDetail.add_member(:antipattern_report_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "antipatternReportStatusMessage"))
     ApplicationComponentDetail.add_member(:app_type, Shapes::ShapeRef.new(shape: AppType, location_name: "appType"))
+    ApplicationComponentDetail.add_member(:app_unit_error, Shapes::ShapeRef.new(shape: AppUnitError, location_name: "appUnitError"))
     ApplicationComponentDetail.add_member(:associated_server_id, Shapes::ShapeRef.new(shape: ServerId, location_name: "associatedServerId"))
     ApplicationComponentDetail.add_member(:database_config_detail, Shapes::ShapeRef.new(shape: DatabaseConfigDetail, location_name: "databaseConfigDetail"))
     ApplicationComponentDetail.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
@@ -213,11 +249,17 @@ module Aws::MigrationHubStrategyRecommendations
     ApplicationComponentDetail.add_member(:os_version, Shapes::ShapeRef.new(shape: String, location_name: "osVersion"))
     ApplicationComponentDetail.add_member(:recommendation_set, Shapes::ShapeRef.new(shape: RecommendationSet, location_name: "recommendationSet"))
     ApplicationComponentDetail.add_member(:resource_sub_type, Shapes::ShapeRef.new(shape: ResourceSubType, location_name: "resourceSubType"))
+    ApplicationComponentDetail.add_member(:runtime_status, Shapes::ShapeRef.new(shape: RuntimeAnalysisStatus, location_name: "runtimeStatus"))
+    ApplicationComponentDetail.add_member(:runtime_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "runtimeStatusMessage"))
     ApplicationComponentDetail.add_member(:source_code_repositories, Shapes::ShapeRef.new(shape: SourceCodeRepositories, location_name: "sourceCodeRepositories"))
     ApplicationComponentDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
     ApplicationComponentDetail.struct_class = Types::ApplicationComponentDetail
 
     ApplicationComponentDetails.member = Shapes::ShapeRef.new(shape: ApplicationComponentDetail)
+
+    ApplicationComponentStatusSummary.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
+    ApplicationComponentStatusSummary.add_member(:src_code_or_db_analysis_status, Shapes::ShapeRef.new(shape: SrcCodeOrDbAnalysisStatus, location_name: "srcCodeOrDbAnalysisStatus"))
+    ApplicationComponentStatusSummary.struct_class = Types::ApplicationComponentStatusSummary
 
     ApplicationComponentStrategies.member = Shapes::ShapeRef.new(shape: ApplicationComponentStrategy)
 
@@ -238,11 +280,22 @@ module Aws::MigrationHubStrategyRecommendations
     AssessmentSummary.add_member(:antipattern_report_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "antipatternReportStatusMessage"))
     AssessmentSummary.add_member(:last_analyzed_timestamp, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "lastAnalyzedTimestamp"))
     AssessmentSummary.add_member(:list_antipattern_severity_summary, Shapes::ShapeRef.new(shape: ListAntipatternSeveritySummary, location_name: "listAntipatternSeveritySummary"))
+    AssessmentSummary.add_member(:list_application_component_status_summary, Shapes::ShapeRef.new(shape: ListApplicationComponentStatusSummary, location_name: "listApplicationComponentStatusSummary"))
     AssessmentSummary.add_member(:list_application_component_strategy_summary, Shapes::ShapeRef.new(shape: ListStrategySummary, location_name: "listApplicationComponentStrategySummary"))
     AssessmentSummary.add_member(:list_application_component_summary, Shapes::ShapeRef.new(shape: ListApplicationComponentSummary, location_name: "listApplicationComponentSummary"))
+    AssessmentSummary.add_member(:list_server_status_summary, Shapes::ShapeRef.new(shape: ListServerStatusSummary, location_name: "listServerStatusSummary"))
     AssessmentSummary.add_member(:list_server_strategy_summary, Shapes::ShapeRef.new(shape: ListStrategySummary, location_name: "listServerStrategySummary"))
     AssessmentSummary.add_member(:list_server_summary, Shapes::ShapeRef.new(shape: ListServerSummary, location_name: "listServerSummary"))
     AssessmentSummary.struct_class = Types::AssessmentSummary
+
+    AssessmentTarget.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, required: true, location_name: "condition"))
+    AssessmentTarget.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    AssessmentTarget.add_member(:values, Shapes::ShapeRef.new(shape: AssessmentTargetValues, required: true, location_name: "values"))
+    AssessmentTarget.struct_class = Types::AssessmentTarget
+
+    AssessmentTargetValues.member = Shapes::ShapeRef.new(shape: String)
+
+    AssessmentTargets.member = Shapes::ShapeRef.new(shape: AssessmentTarget)
 
     AssociatedApplication.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     AssociatedApplication.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -266,6 +319,7 @@ module Aws::MigrationHubStrategyRecommendations
     Collector.add_member(:collector_health, Shapes::ShapeRef.new(shape: CollectorHealth, location_name: "collectorHealth"))
     Collector.add_member(:collector_id, Shapes::ShapeRef.new(shape: String, location_name: "collectorId"))
     Collector.add_member(:collector_version, Shapes::ShapeRef.new(shape: String, location_name: "collectorVersion"))
+    Collector.add_member(:configuration_summary, Shapes::ShapeRef.new(shape: ConfigurationSummary, location_name: "configurationSummary"))
     Collector.add_member(:host_name, Shapes::ShapeRef.new(shape: String, location_name: "hostName"))
     Collector.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "ipAddress"))
     Collector.add_member(:last_activity_time_stamp, Shapes::ShapeRef.new(shape: String, location_name: "lastActivityTimeStamp"))
@@ -273,6 +327,13 @@ module Aws::MigrationHubStrategyRecommendations
     Collector.struct_class = Types::Collector
 
     Collectors.member = Shapes::ShapeRef.new(shape: Collector)
+
+    ConfigurationSummary.add_member(:ip_address_based_remote_info_list, Shapes::ShapeRef.new(shape: IPAddressBasedRemoteInfoList, location_name: "ipAddressBasedRemoteInfoList"))
+    ConfigurationSummary.add_member(:pipeline_info_list, Shapes::ShapeRef.new(shape: PipelineInfoList, location_name: "pipelineInfoList"))
+    ConfigurationSummary.add_member(:remote_source_code_analysis_server_info, Shapes::ShapeRef.new(shape: RemoteSourceCodeAnalysisServerInfo, location_name: "remoteSourceCodeAnalysisServerInfo"))
+    ConfigurationSummary.add_member(:vcenter_based_remote_info_list, Shapes::ShapeRef.new(shape: VcenterBasedRemoteInfoList, location_name: "vcenterBasedRemoteInfoList"))
+    ConfigurationSummary.add_member(:version_control_info_list, Shapes::ShapeRef.new(shape: VersionControlInfoList, location_name: "versionControlInfoList"))
+    ConfigurationSummary.struct_class = Types::ConfigurationSummary
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -283,6 +344,7 @@ module Aws::MigrationHubStrategyRecommendations
     DataCollectionDetails.add_member(:servers, Shapes::ShapeRef.new(shape: Integer, location_name: "servers"))
     DataCollectionDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime"))
     DataCollectionDetails.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "status"))
+    DataCollectionDetails.add_member(:status_message, Shapes::ShapeRef.new(shape: AssessmentStatusMessage, location_name: "statusMessage"))
     DataCollectionDetails.add_member(:success, Shapes::ShapeRef.new(shape: Integer, location_name: "success"))
     DataCollectionDetails.struct_class = Types::DataCollectionDetails
 
@@ -303,6 +365,9 @@ module Aws::MigrationHubStrategyRecommendations
     DatabasePreferences.add_member(:database_migration_preference, Shapes::ShapeRef.new(shape: DatabaseMigrationPreference, location_name: "databaseMigrationPreference"))
     DatabasePreferences.struct_class = Types::DatabasePreferences
 
+    DependencyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    DependencyException.struct_class = Types::DependencyException
+
     GetApplicationComponentDetailsRequest.add_member(:application_component_id, Shapes::ShapeRef.new(shape: ApplicationComponentId, required: true, location: "uri", location_name: "applicationComponentId"))
     GetApplicationComponentDetailsRequest.struct_class = Types::GetApplicationComponentDetailsRequest
 
@@ -321,6 +386,7 @@ module Aws::MigrationHubStrategyRecommendations
     GetAssessmentRequest.add_member(:id, Shapes::ShapeRef.new(shape: AsyncTaskId, required: true, location: "uri", location_name: "id"))
     GetAssessmentRequest.struct_class = Types::GetAssessmentRequest
 
+    GetAssessmentResponse.add_member(:assessment_targets, Shapes::ShapeRef.new(shape: AssessmentTargets, location_name: "assessmentTargets"))
     GetAssessmentResponse.add_member(:data_collection_details, Shapes::ShapeRef.new(shape: DataCollectionDetails, location_name: "dataCollectionDetails"))
     GetAssessmentResponse.add_member(:id, Shapes::ShapeRef.new(shape: AsyncTaskId, location_name: "id"))
     GetAssessmentResponse.struct_class = Types::GetAssessmentResponse
@@ -341,8 +407,14 @@ module Aws::MigrationHubStrategyRecommendations
     GetImportFileTaskResponse.add_member(:status_report_s3_key, Shapes::ShapeRef.new(shape: importS3Key, location_name: "statusReportS3Key"))
     GetImportFileTaskResponse.struct_class = Types::GetImportFileTaskResponse
 
+    GetLatestAssessmentIdRequest.struct_class = Types::GetLatestAssessmentIdRequest
+
+    GetLatestAssessmentIdResponse.add_member(:id, Shapes::ShapeRef.new(shape: AsyncTaskId, location_name: "id"))
+    GetLatestAssessmentIdResponse.struct_class = Types::GetLatestAssessmentIdResponse
+
     GetPortfolioPreferencesRequest.struct_class = Types::GetPortfolioPreferencesRequest
 
+    GetPortfolioPreferencesResponse.add_member(:application_mode, Shapes::ShapeRef.new(shape: ApplicationMode, location_name: "applicationMode"))
     GetPortfolioPreferencesResponse.add_member(:application_preferences, Shapes::ShapeRef.new(shape: ApplicationPreferences, location_name: "applicationPreferences"))
     GetPortfolioPreferencesResponse.add_member(:database_preferences, Shapes::ShapeRef.new(shape: DatabasePreferences, location_name: "databasePreferences"))
     GetPortfolioPreferencesResponse.add_member(:prioritize_business_goals, Shapes::ShapeRef.new(shape: PrioritizeBusinessGoals, location_name: "prioritizeBusinessGoals"))
@@ -392,6 +464,13 @@ module Aws::MigrationHubStrategyRecommendations
 
     HomogeneousTargetDatabaseEngines.member = Shapes::ShapeRef.new(shape: HomogeneousTargetDatabaseEngine)
 
+    IPAddressBasedRemoteInfo.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
+    IPAddressBasedRemoteInfo.add_member(:ip_address_configuration_time_stamp, Shapes::ShapeRef.new(shape: String, location_name: "ipAddressConfigurationTimeStamp"))
+    IPAddressBasedRemoteInfo.add_member(:os_type, Shapes::ShapeRef.new(shape: OSType, location_name: "osType"))
+    IPAddressBasedRemoteInfo.struct_class = Types::IPAddressBasedRemoteInfo
+
+    IPAddressBasedRemoteInfoList.member = Shapes::ShapeRef.new(shape: IPAddressBasedRemoteInfo)
+
     ImportFileTaskInformation.add_member(:completion_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "completionTime"))
     ImportFileTaskInformation.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     ImportFileTaskInformation.add_member(:import_name, Shapes::ShapeRef.new(shape: String, location_name: "importName"))
@@ -409,6 +488,8 @@ module Aws::MigrationHubStrategyRecommendations
     InternalServerException.struct_class = Types::InternalServerException
 
     ListAntipatternSeveritySummary.member = Shapes::ShapeRef.new(shape: AntipatternSeveritySummary)
+
+    ListApplicationComponentStatusSummary.member = Shapes::ShapeRef.new(shape: ApplicationComponentStatusSummary)
 
     ListApplicationComponentSummary.member = Shapes::ShapeRef.new(shape: ApplicationComponentSummary)
 
@@ -441,6 +522,8 @@ module Aws::MigrationHubStrategyRecommendations
     ListImportFileTaskResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListImportFileTaskResponse.add_member(:task_infos, Shapes::ShapeRef.new(shape: ListImportFileTaskInformation, location_name: "taskInfos"))
     ListImportFileTaskResponse.struct_class = Types::ListImportFileTaskResponse
+
+    ListServerStatusSummary.member = Shapes::ShapeRef.new(shape: ServerStatusSummary)
 
     ListServerSummary.member = Shapes::ShapeRef.new(shape: ServerSummary)
 
@@ -488,9 +571,16 @@ module Aws::MigrationHubStrategyRecommendations
     OSInfo.add_member(:version, Shapes::ShapeRef.new(shape: OSVersion, location_name: "version"))
     OSInfo.struct_class = Types::OSInfo
 
+    PipelineInfo.add_member(:pipeline_configuration_time_stamp, Shapes::ShapeRef.new(shape: String, location_name: "pipelineConfigurationTimeStamp"))
+    PipelineInfo.add_member(:pipeline_type, Shapes::ShapeRef.new(shape: PipelineType, location_name: "pipelineType"))
+    PipelineInfo.struct_class = Types::PipelineInfo
+
+    PipelineInfoList.member = Shapes::ShapeRef.new(shape: PipelineInfo)
+
     PrioritizeBusinessGoals.add_member(:business_goals, Shapes::ShapeRef.new(shape: BusinessGoals, location_name: "businessGoals"))
     PrioritizeBusinessGoals.struct_class = Types::PrioritizeBusinessGoals
 
+    PutPortfolioPreferencesRequest.add_member(:application_mode, Shapes::ShapeRef.new(shape: ApplicationMode, location_name: "applicationMode"))
     PutPortfolioPreferencesRequest.add_member(:application_preferences, Shapes::ShapeRef.new(shape: ApplicationPreferences, location_name: "applicationPreferences"))
     PutPortfolioPreferencesRequest.add_member(:database_preferences, Shapes::ShapeRef.new(shape: DatabasePreferences, location_name: "databasePreferences"))
     PutPortfolioPreferencesRequest.add_member(:prioritize_business_goals, Shapes::ShapeRef.new(shape: PrioritizeBusinessGoals, location_name: "prioritizeBusinessGoals"))
@@ -510,6 +600,9 @@ module Aws::MigrationHubStrategyRecommendations
     RecommendationSet.add_member(:target_destination, Shapes::ShapeRef.new(shape: TargetDestination, location_name: "targetDestination"))
     RecommendationSet.add_member(:transformation_tool, Shapes::ShapeRef.new(shape: TransformationTool, location_name: "transformationTool"))
     RecommendationSet.struct_class = Types::RecommendationSet
+
+    RemoteSourceCodeAnalysisServerInfo.add_member(:remote_source_code_analysis_server_configuration_timestamp, Shapes::ShapeRef.new(shape: String, location_name: "remoteSourceCodeAnalysisServerConfigurationTimestamp"))
+    RemoteSourceCodeAnalysisServerInfo.struct_class = Types::RemoteSourceCodeAnalysisServerInfo
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -535,12 +628,20 @@ module Aws::MigrationHubStrategyRecommendations
     ServerDetail.add_member(:list_antipattern_severity_summary, Shapes::ShapeRef.new(shape: ListAntipatternSeveritySummary, location_name: "listAntipatternSeveritySummary"))
     ServerDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ServerDetail.add_member(:recommendation_set, Shapes::ShapeRef.new(shape: RecommendationSet, location_name: "recommendationSet"))
+    ServerDetail.add_member(:server_error, Shapes::ShapeRef.new(shape: ServerError, location_name: "serverError"))
     ServerDetail.add_member(:server_type, Shapes::ShapeRef.new(shape: String, location_name: "serverType"))
     ServerDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
     ServerDetail.add_member(:system_info, Shapes::ShapeRef.new(shape: SystemInfo, location_name: "systemInfo"))
     ServerDetail.struct_class = Types::ServerDetail
 
     ServerDetails.member = Shapes::ShapeRef.new(shape: ServerDetail)
+
+    ServerError.add_member(:server_error_category, Shapes::ShapeRef.new(shape: ServerErrorCategory, location_name: "serverErrorCategory"))
+    ServerError.struct_class = Types::ServerError
+
+    ServerStatusSummary.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
+    ServerStatusSummary.add_member(:run_time_assessment_status, Shapes::ShapeRef.new(shape: RunTimeAssessmentStatus, location_name: "runTimeAssessmentStatus"))
+    ServerStatusSummary.struct_class = Types::ServerStatusSummary
 
     ServerStrategies.member = Shapes::ShapeRef.new(shape: ServerStrategy)
 
@@ -561,6 +662,7 @@ module Aws::MigrationHubStrategyRecommendations
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SourceCode.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
+    SourceCode.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, location_name: "projectName"))
     SourceCode.add_member(:source_version, Shapes::ShapeRef.new(shape: SourceVersion, location_name: "sourceVersion"))
     SourceCode.add_member(:version_control, Shapes::ShapeRef.new(shape: VersionControl, location_name: "versionControl"))
     SourceCode.struct_class = Types::SourceCode
@@ -570,10 +672,12 @@ module Aws::MigrationHubStrategyRecommendations
     SourceCodeRepositories.member = Shapes::ShapeRef.new(shape: SourceCodeRepository)
 
     SourceCodeRepository.add_member(:branch, Shapes::ShapeRef.new(shape: String, location_name: "branch"))
+    SourceCodeRepository.add_member(:project_name, Shapes::ShapeRef.new(shape: String, location_name: "projectName"))
     SourceCodeRepository.add_member(:repository, Shapes::ShapeRef.new(shape: String, location_name: "repository"))
     SourceCodeRepository.add_member(:version_control_type, Shapes::ShapeRef.new(shape: String, location_name: "versionControlType"))
     SourceCodeRepository.struct_class = Types::SourceCodeRepository
 
+    StartAssessmentRequest.add_member(:assessment_targets, Shapes::ShapeRef.new(shape: AssessmentTargets, location_name: "assessmentTargets"))
     StartAssessmentRequest.add_member(:s3bucket_for_analysis_data, Shapes::ShapeRef.new(shape: StartAssessmentRequestS3bucketForAnalysisDataString, location_name: "s3bucketForAnalysisData"))
     StartAssessmentRequest.add_member(:s3bucket_for_report_data, Shapes::ShapeRef.new(shape: StartAssessmentRequestS3bucketForReportDataString, location_name: "s3bucketForReportData"))
     StartAssessmentRequest.struct_class = Types::StartAssessmentRequest
@@ -630,7 +734,9 @@ module Aws::MigrationHubStrategyRecommendations
     TransformationTool.add_member(:tranformation_tool_installation_link, Shapes::ShapeRef.new(shape: TranformationToolInstallationLink, location_name: "tranformationToolInstallationLink"))
     TransformationTool.struct_class = Types::TransformationTool
 
+    UpdateApplicationComponentConfigRequest.add_member(:app_type, Shapes::ShapeRef.new(shape: AppType, location_name: "appType"))
     UpdateApplicationComponentConfigRequest.add_member(:application_component_id, Shapes::ShapeRef.new(shape: ApplicationComponentId, required: true, location_name: "applicationComponentId"))
+    UpdateApplicationComponentConfigRequest.add_member(:configure_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "configureOnly"))
     UpdateApplicationComponentConfigRequest.add_member(:inclusion_status, Shapes::ShapeRef.new(shape: InclusionStatus, location_name: "inclusionStatus"))
     UpdateApplicationComponentConfigRequest.add_member(:secrets_manager_key, Shapes::ShapeRef.new(shape: SecretsManagerKey, location_name: "secretsManagerKey"))
     UpdateApplicationComponentConfigRequest.add_member(:source_code_list, Shapes::ShapeRef.new(shape: SourceCodeList, location_name: "sourceCodeList"))
@@ -647,6 +753,18 @@ module Aws::MigrationHubStrategyRecommendations
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    VcenterBasedRemoteInfo.add_member(:os_type, Shapes::ShapeRef.new(shape: OSType, location_name: "osType"))
+    VcenterBasedRemoteInfo.add_member(:vcenter_configuration_time_stamp, Shapes::ShapeRef.new(shape: String, location_name: "vcenterConfigurationTimeStamp"))
+    VcenterBasedRemoteInfo.struct_class = Types::VcenterBasedRemoteInfo
+
+    VcenterBasedRemoteInfoList.member = Shapes::ShapeRef.new(shape: VcenterBasedRemoteInfo)
+
+    VersionControlInfo.add_member(:version_control_configuration_time_stamp, Shapes::ShapeRef.new(shape: String, location_name: "versionControlConfigurationTimeStamp"))
+    VersionControlInfo.add_member(:version_control_type, Shapes::ShapeRef.new(shape: VersionControlType, location_name: "versionControlType"))
+    VersionControlInfo.struct_class = Types::VersionControlInfo
+
+    VersionControlInfoList.member = Shapes::ShapeRef.new(shape: VersionControlInfo)
 
 
     # @api private
@@ -709,6 +827,18 @@ module Aws::MigrationHubStrategyRecommendations
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_latest_assessment_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLatestAssessmentId"
+        o.http_method = "GET"
+        o.http_request_uri = "/get-latest-assessment-id"
+        o.input = Shapes::ShapeRef.new(shape: GetLatestAssessmentIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLatestAssessmentIdResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

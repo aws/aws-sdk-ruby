@@ -457,7 +457,7 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Array<String>] :target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups. You can specify
+    #   The Amazon Resource Names (ARNs) of the target groups. You can specify
     #   up to 10 target groups. To get the ARN of a target group, use the
     #   Elastic Load Balancing [DescribeTargetGroups][1] API operation.
     #
@@ -554,6 +554,55 @@ module Aws::AutoScaling
     # @param [Hash] params ({})
     def attach_load_balancers(params = {}, options = {})
       req = build_request(:attach_load_balancers, params)
+      req.send_request(options)
+    end
+
+    # **Reserved for use with Amazon VPC Lattice, which is in preview and
+    # subject to change. Do not use this API for production workloads. This
+    # API is also subject to change.**
+    #
+    # Attaches one or more traffic sources to the specified Auto Scaling
+    # group.
+    #
+    # To describe the traffic sources for an Auto Scaling group, call the
+    # DescribeTrafficSources API. To detach a traffic source from the Auto
+    # Scaling group, call the DetachTrafficSources API.
+    #
+    # This operation is additive and does not detach existing traffic
+    # sources from the Auto Scaling group.
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [required, Array<Types::TrafficSourceIdentifier>] :traffic_sources
+    #   The unique identifiers of one or more traffic sources. You can specify
+    #   up to 10 traffic sources.
+    #
+    #   Currently, you must specify an Amazon Resource Name (ARN) for an
+    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
+    #   the running instances with the attached target groups. The target
+    #   groups receive incoming traffic and route requests to one or more
+    #   registered targets.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_traffic_sources({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     traffic_sources: [ # required
+    #       {
+    #         identifier: "XmlStringMaxLen511",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachTrafficSources AWS API Documentation
+    #
+    # @overload attach_traffic_sources(params = {})
+    # @param [Hash] params ({})
+    def attach_traffic_sources(params = {}, options = {})
+      req = build_request(:attach_traffic_sources, params)
       req.send_request(options)
     end
 
@@ -922,25 +971,27 @@ module Aws::AutoScaling
     #   Gateway Load Balancer, specify the `TargetGroupARNs` property instead.
     #
     # @option params [Array<String>] :target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups to associate with
-    #   the Auto Scaling group. Instances are registered as targets with the
-    #   target groups. The target groups receive incoming traffic and route
-    #   requests to one or more registered targets. For more information, see
-    #   [Use Elastic Load Balancing to distribute traffic across the instances
-    #   in your Auto Scaling group][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   The Amazon Resource Names (ARN) of the Elastic Load Balancing target
+    #   groups to associate with the Auto Scaling group. Instances are
+    #   registered as targets with the target groups. The target groups
+    #   receive incoming traffic and route requests to one or more registered
+    #   targets. For more information, see [Use Elastic Load Balancing to
+    #   distribute traffic across the instances in your Auto Scaling group][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     #
     # @option params [String] :health_check_type
-    #   The service to use for the health checks. The valid values are `EC2`
-    #   (default) and `ELB`. If you configure an Auto Scaling group to use
-    #   load balancer (ELB) health checks, it considers the instance unhealthy
-    #   if it fails either the EC2 status checks or the load balancer health
-    #   checks. For more information, see [Health checks for Auto Scaling
-    #   instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   Determines whether any additional health checks are performed on the
+    #   instances in this group. Amazon EC2 health checks are always on. For
+    #   more information, see [Health checks for Auto Scaling instances][1] in
+    #   the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
+    #   `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
+    #   which is in preview release and is subject to change.
     #
     #
     #
@@ -949,12 +1000,11 @@ module Aws::AutoScaling
     # @option params [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service and marking it unhealthy due to a failed Elastic Load
-    #   Balancing or custom health check. This is useful if your instances do
-    #   not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Set the health check
-    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   This is useful if your instances do not immediately pass their health
+    #   checks after they enter the `InService` state. For more information,
+    #   see [Set the health check grace period for an Auto Scaling group][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Default: `0` seconds
     #
@@ -1109,6 +1159,19 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
+    #
+    # @option params [Array<Types::TrafficSourceIdentifier>] :traffic_sources
+    #   **Reserved for use with Amazon VPC Lattice, which is in preview
+    #   release and is subject to change. Do not use this parameter for
+    #   production workloads. It is also subject to change.**
+    #
+    #   The unique identifiers of one or more traffic sources.
+    #
+    #   Currently, you must specify an Amazon Resource Name (ARN) for an
+    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
+    #   the running instances with the attached target groups. The target
+    #   groups receive incoming traffic and route requests to one or more
+    #   registered targets.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1320,6 +1383,11 @@ module Aws::AutoScaling
     #     context: "Context",
     #     desired_capacity_type: "XmlStringMaxLen255",
     #     default_instance_warmup: 1,
+    #     traffic_sources: [
+    #       {
+    #         identifier: "XmlStringMaxLen511",
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
@@ -2403,6 +2471,8 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].context #=> String
     #   resp.auto_scaling_groups[0].desired_capacity_type #=> String
     #   resp.auto_scaling_groups[0].default_instance_warmup #=> Integer
+    #   resp.auto_scaling_groups[0].traffic_sources #=> Array
+    #   resp.auto_scaling_groups[0].traffic_sources[0].identifier #=> String
     #   resp.next_token #=> String
     #
     #
@@ -2982,6 +3052,12 @@ module Aws::AutoScaling
     # distribute traffic across the instances in your Auto Scaling group][2]
     # in the *Amazon EC2 Auto Scaling User Guide*.
     #
+    # <note markdown="1"> You can use this operation to describe target groups that were
+    # attached by using AttachLoadBalancerTargetGroups, but not for target
+    # groups that were attached by using AttachTrafficSources.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html
@@ -3388,6 +3464,18 @@ module Aws::AutoScaling
     #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.dimensions[0].value #=> String
     #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.statistic #=> String, one of "Average", "Minimum", "Maximum", "SampleCount", "Sum"
     #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.unit #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics #=> Array
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].id #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].expression #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].metric_stat.metric.namespace #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].metric_stat.metric.metric_name #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions #=> Array
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].metric_stat.stat #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].metric_stat.unit #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].label #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metrics[0].return_data #=> Boolean
     #   resp.scaling_policies[0].target_tracking_configuration.target_value #=> Float
     #   resp.scaling_policies[0].target_tracking_configuration.disable_scale_in #=> Boolean
     #   resp.scaling_policies[0].enabled #=> Boolean
@@ -3876,6 +3964,58 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # **Reserved for use with Amazon VPC Lattice, which is in preview and
+    # subject to change. Do not use this API for production workloads. This
+    # API is also subject to change.**
+    #
+    # Gets information about the traffic sources for the specified Auto
+    # Scaling group.
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [required, String] :traffic_source_type
+    #   The type of traffic source you are describing. Currently, the only
+    #   valid value is `vpc-lattice`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of items to return with this call. The maximum
+    #   value is `50`.
+    #
+    # @return [Types::DescribeTrafficSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTrafficSourcesResponse#traffic_sources #traffic_sources} => Array&lt;Types::TrafficSourceState&gt;
+    #   * {Types::DescribeTrafficSourcesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_traffic_sources({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     traffic_source_type: "XmlStringMaxLen255", # required
+    #     next_token: "XmlString",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_sources #=> Array
+    #   resp.traffic_sources[0].traffic_source #=> String
+    #   resp.traffic_sources[0].state #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTrafficSources AWS API Documentation
+    #
+    # @overload describe_traffic_sources(params = {})
+    # @param [Hash] params ({})
+    def describe_traffic_sources(params = {}, options = {})
+      req = build_request(:describe_traffic_sources, params)
+      req.send_request(options)
+    end
+
     # Gets information about a warm pool and its instances.
     #
     # For more information, see [Warm pools for Amazon EC2 Auto Scaling][1]
@@ -4046,6 +4186,12 @@ module Aws::AutoScaling
     # the DescribeLoadBalancerTargetGroups API call. The instances remain
     # running.
     #
+    # <note markdown="1"> You can use this operation to detach target groups that were attached
+    # by using AttachLoadBalancerTargetGroups, but not for target groups
+    # that were attached by using AttachTrafficSources.
+    #
+    #  </note>
+    #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
@@ -4129,6 +4275,49 @@ module Aws::AutoScaling
     # @param [Hash] params ({})
     def detach_load_balancers(params = {}, options = {})
       req = build_request(:detach_load_balancers, params)
+      req.send_request(options)
+    end
+
+    # **Reserved for use with Amazon VPC Lattice, which is in preview and
+    # subject to change. Do not use this API for production workloads. This
+    # API is also subject to change.**
+    #
+    # Detaches one or more traffic sources from the specified Auto Scaling
+    # group.
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [required, Array<Types::TrafficSourceIdentifier>] :traffic_sources
+    #   The unique identifiers of one or more traffic sources you are
+    #   detaching. You can specify up to 10 traffic sources.
+    #
+    #   Currently, you must specify an Amazon Resource Name (ARN) for an
+    #   existing VPC Lattice target group. When you detach a target group, it
+    #   enters the `Removing` state while deregistering the instances in the
+    #   group. When all instances are deregistered, then you can no longer
+    #   describe the target group using the DescribeTrafficSources API call.
+    #   The instances continue to run.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_traffic_sources({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     traffic_sources: [ # required
+    #       {
+    #         identifier: "XmlStringMaxLen511",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachTrafficSources AWS API Documentation
+    #
+    # @overload detach_traffic_sources(params = {})
+    # @param [Hash] params ({})
+    def detach_traffic_sources(params = {}, options = {})
+      req = build_request(:detach_traffic_sources, params)
       req.send_request(options)
     end
 
@@ -5152,16 +5341,38 @@ module Aws::AutoScaling
     #         resource_label: "XmlStringMaxLen1023",
     #       },
     #       customized_metric_specification: {
-    #         metric_name: "MetricName", # required
-    #         namespace: "MetricNamespace", # required
+    #         metric_name: "MetricName",
+    #         namespace: "MetricNamespace",
     #         dimensions: [
     #           {
     #             name: "MetricDimensionName", # required
     #             value: "MetricDimensionValue", # required
     #           },
     #         ],
-    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #         statistic: "Average", # accepts Average, Minimum, Maximum, SampleCount, Sum
     #         unit: "MetricUnit",
+    #         metrics: [
+    #           {
+    #             id: "XmlStringMaxLen255", # required
+    #             expression: "XmlStringMaxLen2047",
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "MetricNamespace", # required
+    #                 metric_name: "MetricName", # required
+    #                 dimensions: [
+    #                   {
+    #                     name: "MetricDimensionName", # required
+    #                     value: "MetricDimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               stat: "XmlStringMetricStat", # required
+    #               unit: "MetricUnit",
+    #             },
+    #             label: "XmlStringMetricLabel",
+    #             return_data: false,
+    #           },
+    #         ],
     #       },
     #       target_value: 1.0, # required
     #       disable_scale_in: false,
@@ -6303,20 +6514,21 @@ module Aws::AutoScaling
     #   One or more Availability Zones for the group.
     #
     # @option params [String] :health_check_type
-    #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. If you configure an Auto Scaling group to use `ELB` health
-    #   checks, it considers the instance unhealthy if it fails either the EC2
-    #   status checks or the load balancer health checks.
+    #   Determines whether any additional health checks are performed on the
+    #   instances in this group. Amazon EC2 health checks are always on.
+    #
+    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
+    #   `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
+    #   which is in preview release and is subject to change.
     #
     # @option params [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service and marking it unhealthy due to a failed Elastic Load
-    #   Balancing or custom health check. This is useful if your instances do
-    #   not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Set the health check
-    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   This is useful if your instances do not immediately pass their health
+    #   checks after they enter the `InService` state. For more information,
+    #   see [Set the health check grace period for an Auto Scaling group][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -6591,7 +6803,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -62,6 +62,8 @@ module Aws::AutoScaling
             Aws::AutoScaling::Endpoints::AttachLoadBalancerTargetGroups.build(context)
           when :attach_load_balancers
             Aws::AutoScaling::Endpoints::AttachLoadBalancers.build(context)
+          when :attach_traffic_sources
+            Aws::AutoScaling::Endpoints::AttachTrafficSources.build(context)
           when :batch_delete_scheduled_action
             Aws::AutoScaling::Endpoints::BatchDeleteScheduledAction.build(context)
           when :batch_put_scheduled_update_group_action
@@ -130,6 +132,8 @@ module Aws::AutoScaling
             Aws::AutoScaling::Endpoints::DescribeTags.build(context)
           when :describe_termination_policy_types
             Aws::AutoScaling::Endpoints::DescribeTerminationPolicyTypes.build(context)
+          when :describe_traffic_sources
+            Aws::AutoScaling::Endpoints::DescribeTrafficSources.build(context)
           when :describe_warm_pool
             Aws::AutoScaling::Endpoints::DescribeWarmPool.build(context)
           when :detach_instances
@@ -138,6 +142,8 @@ module Aws::AutoScaling
             Aws::AutoScaling::Endpoints::DetachLoadBalancerTargetGroups.build(context)
           when :detach_load_balancers
             Aws::AutoScaling::Endpoints::DetachLoadBalancers.build(context)
+          when :detach_traffic_sources
+            Aws::AutoScaling::Endpoints::DetachTrafficSources.build(context)
           when :disable_metrics_collection
             Aws::AutoScaling::Endpoints::DisableMetricsCollection.build(context)
           when :enable_metrics_collection

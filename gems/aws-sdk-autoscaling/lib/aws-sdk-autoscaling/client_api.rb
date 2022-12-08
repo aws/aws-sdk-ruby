@@ -41,6 +41,8 @@ module Aws::AutoScaling
     AttachLoadBalancerTargetGroupsType = Shapes::StructureShape.new(name: 'AttachLoadBalancerTargetGroupsType')
     AttachLoadBalancersResultType = Shapes::StructureShape.new(name: 'AttachLoadBalancersResultType')
     AttachLoadBalancersType = Shapes::StructureShape.new(name: 'AttachLoadBalancersType')
+    AttachTrafficSourcesResultType = Shapes::StructureShape.new(name: 'AttachTrafficSourcesResultType')
+    AttachTrafficSourcesType = Shapes::StructureShape.new(name: 'AttachTrafficSourcesType')
     AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
     AutoScalingGroupDesiredCapacity = Shapes::IntegerShape.new(name: 'AutoScalingGroupDesiredCapacity')
     AutoScalingGroupMaxSize = Shapes::IntegerShape.new(name: 'AutoScalingGroupMaxSize')
@@ -119,6 +121,8 @@ module Aws::AutoScaling
     DescribeScheduledActionsType = Shapes::StructureShape.new(name: 'DescribeScheduledActionsType')
     DescribeTagsType = Shapes::StructureShape.new(name: 'DescribeTagsType')
     DescribeTerminationPolicyTypesAnswer = Shapes::StructureShape.new(name: 'DescribeTerminationPolicyTypesAnswer')
+    DescribeTrafficSourcesRequest = Shapes::StructureShape.new(name: 'DescribeTrafficSourcesRequest')
+    DescribeTrafficSourcesResponse = Shapes::StructureShape.new(name: 'DescribeTrafficSourcesResponse')
     DescribeWarmPoolAnswer = Shapes::StructureShape.new(name: 'DescribeWarmPoolAnswer')
     DescribeWarmPoolType = Shapes::StructureShape.new(name: 'DescribeWarmPoolType')
     DesiredConfiguration = Shapes::StructureShape.new(name: 'DesiredConfiguration')
@@ -128,6 +132,8 @@ module Aws::AutoScaling
     DetachLoadBalancerTargetGroupsType = Shapes::StructureShape.new(name: 'DetachLoadBalancerTargetGroupsType')
     DetachLoadBalancersResultType = Shapes::StructureShape.new(name: 'DetachLoadBalancersResultType')
     DetachLoadBalancersType = Shapes::StructureShape.new(name: 'DetachLoadBalancersType')
+    DetachTrafficSourcesResultType = Shapes::StructureShape.new(name: 'DetachTrafficSourcesResultType')
+    DetachTrafficSourcesType = Shapes::StructureShape.new(name: 'DetachTrafficSourcesType')
     DisableMetricsCollectionQuery = Shapes::StructureShape.new(name: 'DisableMetricsCollectionQuery')
     DisableScaleIn = Shapes::BooleanShape.new(name: 'DisableScaleIn')
     Ebs = Shapes::StructureShape.new(name: 'Ebs')
@@ -342,10 +348,17 @@ module Aws::AutoScaling
     TagsType = Shapes::StructureShape.new(name: 'TagsType')
     TargetGroupARNs = Shapes::ListShape.new(name: 'TargetGroupARNs')
     TargetTrackingConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingConfiguration')
+    TargetTrackingMetricDataQueries = Shapes::ListShape.new(name: 'TargetTrackingMetricDataQueries')
+    TargetTrackingMetricDataQuery = Shapes::StructureShape.new(name: 'TargetTrackingMetricDataQuery')
+    TargetTrackingMetricStat = Shapes::StructureShape.new(name: 'TargetTrackingMetricStat')
     TerminateInstanceInAutoScalingGroupType = Shapes::StructureShape.new(name: 'TerminateInstanceInAutoScalingGroupType')
     TerminationPolicies = Shapes::ListShape.new(name: 'TerminationPolicies')
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
     TotalLocalStorageGBRequest = Shapes::StructureShape.new(name: 'TotalLocalStorageGBRequest')
+    TrafficSourceIdentifier = Shapes::StructureShape.new(name: 'TrafficSourceIdentifier')
+    TrafficSourceState = Shapes::StructureShape.new(name: 'TrafficSourceState')
+    TrafficSourceStates = Shapes::ListShape.new(name: 'TrafficSourceStates')
+    TrafficSources = Shapes::ListShape.new(name: 'TrafficSources')
     UpdateAutoScalingGroupType = Shapes::StructureShape.new(name: 'UpdateAutoScalingGroupType')
     VCpuCountRequest = Shapes::StructureShape.new(name: 'VCpuCountRequest')
     Values = Shapes::ListShape.new(name: 'Values')
@@ -441,6 +454,12 @@ module Aws::AutoScaling
     AttachLoadBalancersType.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, required: true, location_name: "LoadBalancerNames"))
     AttachLoadBalancersType.struct_class = Types::AttachLoadBalancersType
 
+    AttachTrafficSourcesResultType.struct_class = Types::AttachTrafficSourcesResultType
+
+    AttachTrafficSourcesType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    AttachTrafficSourcesType.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, required: true, location_name: "TrafficSources"))
+    AttachTrafficSourcesType.struct_class = Types::AttachTrafficSourcesType
+
     AutoScalingGroup.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     AutoScalingGroup.add_member(:auto_scaling_group_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "AutoScalingGroupARN"))
     AutoScalingGroup.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchConfigurationName"))
@@ -474,6 +493,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     AutoScalingGroup.add_member(:desired_capacity_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "DesiredCapacityType"))
     AutoScalingGroup.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
+    AutoScalingGroup.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, location_name: "TrafficSources"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -589,6 +609,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     CreateAutoScalingGroupType.add_member(:desired_capacity_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "DesiredCapacityType"))
     CreateAutoScalingGroupType.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
+    CreateAutoScalingGroupType.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, location_name: "TrafficSources"))
     CreateAutoScalingGroupType.struct_class = Types::CreateAutoScalingGroupType
 
     CreateLaunchConfigurationType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
@@ -615,11 +636,12 @@ module Aws::AutoScaling
     CreateOrUpdateTagsType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     CreateOrUpdateTagsType.struct_class = Types::CreateOrUpdateTagsType
 
-    CustomizedMetricSpecification.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
-    CustomizedMetricSpecification.add_member(:namespace, Shapes::ShapeRef.new(shape: MetricNamespace, required: true, location_name: "Namespace"))
+    CustomizedMetricSpecification.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    CustomizedMetricSpecification.add_member(:namespace, Shapes::ShapeRef.new(shape: MetricNamespace, location_name: "Namespace"))
     CustomizedMetricSpecification.add_member(:dimensions, Shapes::ShapeRef.new(shape: MetricDimensions, location_name: "Dimensions"))
-    CustomizedMetricSpecification.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, required: true, location_name: "Statistic"))
+    CustomizedMetricSpecification.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, location_name: "Statistic"))
     CustomizedMetricSpecification.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, location_name: "Unit"))
+    CustomizedMetricSpecification.add_member(:metrics, Shapes::ShapeRef.new(shape: TargetTrackingMetricDataQueries, location_name: "Metrics"))
     CustomizedMetricSpecification.struct_class = Types::CustomizedMetricSpecification
 
     DeleteAutoScalingGroupType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
@@ -751,6 +773,16 @@ module Aws::AutoScaling
     DescribeTerminationPolicyTypesAnswer.add_member(:termination_policy_types, Shapes::ShapeRef.new(shape: TerminationPolicies, location_name: "TerminationPolicyTypes"))
     DescribeTerminationPolicyTypesAnswer.struct_class = Types::DescribeTerminationPolicyTypesAnswer
 
+    DescribeTrafficSourcesRequest.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    DescribeTrafficSourcesRequest.add_member(:traffic_source_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "TrafficSourceType"))
+    DescribeTrafficSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeTrafficSourcesRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeTrafficSourcesRequest.struct_class = Types::DescribeTrafficSourcesRequest
+
+    DescribeTrafficSourcesResponse.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSourceStates, location_name: "TrafficSources"))
+    DescribeTrafficSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeTrafficSourcesResponse.struct_class = Types::DescribeTrafficSourcesResponse
+
     DescribeWarmPoolAnswer.add_member(:warm_pool_configuration, Shapes::ShapeRef.new(shape: WarmPoolConfiguration, location_name: "WarmPoolConfiguration"))
     DescribeWarmPoolAnswer.add_member(:instances, Shapes::ShapeRef.new(shape: Instances, location_name: "Instances"))
     DescribeWarmPoolAnswer.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
@@ -784,6 +816,12 @@ module Aws::AutoScaling
     DetachLoadBalancersType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     DetachLoadBalancersType.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, required: true, location_name: "LoadBalancerNames"))
     DetachLoadBalancersType.struct_class = Types::DetachLoadBalancersType
+
+    DetachTrafficSourcesResultType.struct_class = Types::DetachTrafficSourcesResultType
+
+    DetachTrafficSourcesType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    DetachTrafficSourcesType.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, required: true, location_name: "TrafficSources"))
+    DetachTrafficSourcesType.struct_class = Types::DetachTrafficSourcesType
 
     DisableMetricsCollectionQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     DisableMetricsCollectionQuery.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
@@ -1402,6 +1440,20 @@ module Aws::AutoScaling
     TargetTrackingConfiguration.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: DisableScaleIn, location_name: "DisableScaleIn"))
     TargetTrackingConfiguration.struct_class = Types::TargetTrackingConfiguration
 
+    TargetTrackingMetricDataQueries.member = Shapes::ShapeRef.new(shape: TargetTrackingMetricDataQuery)
+
+    TargetTrackingMetricDataQuery.add_member(:id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "Id"))
+    TargetTrackingMetricDataQuery.add_member(:expression, Shapes::ShapeRef.new(shape: XmlStringMaxLen2047, location_name: "Expression"))
+    TargetTrackingMetricDataQuery.add_member(:metric_stat, Shapes::ShapeRef.new(shape: TargetTrackingMetricStat, location_name: "MetricStat"))
+    TargetTrackingMetricDataQuery.add_member(:label, Shapes::ShapeRef.new(shape: XmlStringMetricLabel, location_name: "Label"))
+    TargetTrackingMetricDataQuery.add_member(:return_data, Shapes::ShapeRef.new(shape: ReturnData, location_name: "ReturnData"))
+    TargetTrackingMetricDataQuery.struct_class = Types::TargetTrackingMetricDataQuery
+
+    TargetTrackingMetricStat.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
+    TargetTrackingMetricStat.add_member(:stat, Shapes::ShapeRef.new(shape: XmlStringMetricStat, required: true, location_name: "Stat"))
+    TargetTrackingMetricStat.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, location_name: "Unit"))
+    TargetTrackingMetricStat.struct_class = Types::TargetTrackingMetricStat
+
     TerminateInstanceInAutoScalingGroupType.add_member(:instance_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen19, required: true, location_name: "InstanceId"))
     TerminateInstanceInAutoScalingGroupType.add_member(:should_decrement_desired_capacity, Shapes::ShapeRef.new(shape: ShouldDecrementDesiredCapacity, required: true, location_name: "ShouldDecrementDesiredCapacity"))
     TerminateInstanceInAutoScalingGroupType.struct_class = Types::TerminateInstanceInAutoScalingGroupType
@@ -1411,6 +1463,17 @@ module Aws::AutoScaling
     TotalLocalStorageGBRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveDouble, location_name: "Min"))
     TotalLocalStorageGBRequest.add_member(:max, Shapes::ShapeRef.new(shape: NullablePositiveDouble, location_name: "Max"))
     TotalLocalStorageGBRequest.struct_class = Types::TotalLocalStorageGBRequest
+
+    TrafficSourceIdentifier.add_member(:identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, location_name: "Identifier"))
+    TrafficSourceIdentifier.struct_class = Types::TrafficSourceIdentifier
+
+    TrafficSourceState.add_member(:traffic_source, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, location_name: "TrafficSource"))
+    TrafficSourceState.add_member(:state, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "State"))
+    TrafficSourceState.struct_class = Types::TrafficSourceState
+
+    TrafficSourceStates.member = Shapes::ShapeRef.new(shape: TrafficSourceState)
+
+    TrafficSources.member = Shapes::ShapeRef.new(shape: TrafficSourceIdentifier)
 
     UpdateAutoScalingGroupType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     UpdateAutoScalingGroupType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchConfigurationName"))
@@ -1491,6 +1554,16 @@ module Aws::AutoScaling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AttachLoadBalancersType)
         o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancersResultType)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
+      end)
+
+      api.add_operation(:attach_traffic_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachTrafficSources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachTrafficSourcesType)
+        o.output = Shapes::ShapeRef.new(shape: AttachTrafficSourcesResultType)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
@@ -1881,6 +1954,16 @@ module Aws::AutoScaling
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
       end)
 
+      api.add_operation(:describe_traffic_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTrafficSources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTrafficSourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTrafficSourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+      end)
+
       api.add_operation(:describe_warm_pool, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeWarmPool"
         o.http_method = "POST"
@@ -1916,6 +1999,15 @@ module Aws::AutoScaling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetachLoadBalancersType)
         o.output = Shapes::ShapeRef.new(shape: DetachLoadBalancersResultType)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+      end)
+
+      api.add_operation(:detach_traffic_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachTrafficSources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetachTrafficSourcesType)
+        o.output = Shapes::ShapeRef.new(shape: DetachTrafficSourcesResultType)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
       end)
 

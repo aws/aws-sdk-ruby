@@ -64,6 +64,8 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::CreateEntity.build(context)
           when :create_scene
             Aws::IoTTwinMaker::Endpoints::CreateScene.build(context)
+          when :create_sync_job
+            Aws::IoTTwinMaker::Endpoints::CreateSyncJob.build(context)
           when :create_workspace
             Aws::IoTTwinMaker::Endpoints::CreateWorkspace.build(context)
           when :delete_component_type
@@ -72,6 +74,8 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::DeleteEntity.build(context)
           when :delete_scene
             Aws::IoTTwinMaker::Endpoints::DeleteScene.build(context)
+          when :delete_sync_job
+            Aws::IoTTwinMaker::Endpoints::DeleteSyncJob.build(context)
           when :delete_workspace
             Aws::IoTTwinMaker::Endpoints::DeleteWorkspace.build(context)
           when :execute_query
@@ -88,6 +92,8 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::GetPropertyValueHistory.build(context)
           when :get_scene
             Aws::IoTTwinMaker::Endpoints::GetScene.build(context)
+          when :get_sync_job
+            Aws::IoTTwinMaker::Endpoints::GetSyncJob.build(context)
           when :get_workspace
             Aws::IoTTwinMaker::Endpoints::GetWorkspace.build(context)
           when :list_component_types
@@ -96,6 +102,10 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::ListEntities.build(context)
           when :list_scenes
             Aws::IoTTwinMaker::Endpoints::ListScenes.build(context)
+          when :list_sync_jobs
+            Aws::IoTTwinMaker::Endpoints::ListSyncJobs.build(context)
+          when :list_sync_resources
+            Aws::IoTTwinMaker::Endpoints::ListSyncResources.build(context)
           when :list_tags_for_resource
             Aws::IoTTwinMaker::Endpoints::ListTagsForResource.build(context)
           when :list_workspaces

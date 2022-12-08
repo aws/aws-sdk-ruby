@@ -29,6 +29,7 @@ module Aws::MigrationHubStrategyRecommendations
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DependencyException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceLinkedRoleLockClientException}
@@ -62,6 +63,21 @@ module Aws::MigrationHubStrategyRecommendations
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MigrationHubStrategyRecommendations::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DependencyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MigrationHubStrategyRecommendations::Types::DependencyException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

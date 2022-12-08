@@ -224,6 +224,11 @@ module Aws::IoTTwinMaker
     #   The property groups.
     #   @return [Hash<String,Types::ComponentPropertyGroupResponse>]
     #
+    # @!attribute [rw] sync_source
+    #   The syncSource of the sync job, if this entity was created by a sync
+    #   job.
+    #   @return [String]
+    #
     class ComponentResponse < Struct.new(
       :component_name,
       :description,
@@ -231,7 +236,8 @@ module Aws::IoTTwinMaker
       :status,
       :defined_in,
       :properties,
-      :property_groups)
+      :property_groups,
+      :sync_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -262,13 +268,18 @@ module Aws::IoTTwinMaker
     #   The current status of the component type.
     #   @return [Types::Status]
     #
+    # @!attribute [rw] component_type_name
+    #   The component type name.
+    #   @return [String]
+    #
     class ComponentTypeSummary < Struct.new(
       :arn,
       :component_type_id,
       :creation_date_time,
       :update_date_time,
       :description,
-      :status)
+      :status,
+      :component_type_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -379,6 +390,10 @@ module Aws::IoTTwinMaker
     # @!attribute [rw] property_groups
     #   @return [Hash<String,Types::PropertyGroupRequest>]
     #
+    # @!attribute [rw] component_type_name
+    #   A friendly name for the component type.
+    #   @return [String]
+    #
     class CreateComponentTypeRequest < Struct.new(
       :workspace_id,
       :is_singleton,
@@ -388,7 +403,8 @@ module Aws::IoTTwinMaker
       :extends_from,
       :functions,
       :tags,
-      :property_groups)
+      :property_groups,
+      :component_type_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -526,6 +542,57 @@ module Aws::IoTTwinMaker
     class CreateSceneResponse < Struct.new(
       :arn,
       :creation_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
+    #   The workspace Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_source
+    #   The sync source.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_role
+    #   The SyncJob IAM role. This IAM role is used by the sync job to read
+    #   from the syncSource, and create, update or delete the corresponding
+    #   resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The SyncJob tags.
+    #   @return [Hash<String,String>]
+    #
+    class CreateSyncJobRequest < Struct.new(
+      :workspace_id,
+      :sync_source,
+      :sync_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The SyncJob ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time for the SyncJob creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The SyncJob response state.
+    #   @return [String]
+    #
+    class CreateSyncJobResponse < Struct.new(
+      :arn,
+      :creation_date_time,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -750,6 +817,35 @@ module Aws::IoTTwinMaker
     end
 
     class DeleteSceneResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] workspace_id
+    #   The workspace Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_source
+    #   The sync source.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    class DeleteSyncJobRequest < Struct.new(
+      :workspace_id,
+      :sync_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The SyncJob response state.
+    #   @return [String]
+    #
+    class DeleteSyncJobResponse < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to delete.
@@ -1039,6 +1135,15 @@ module Aws::IoTTwinMaker
     #   Valid Range: Minimum value of 1. Maximum value of 250.
     #   @return [Hash<String,Types::PropertyGroupResponse>]
     #
+    # @!attribute [rw] sync_source
+    #   The syncSource of the sync job, if this entity was created by a sync
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_type_name
+    #   The component type name.
+    #   @return [String]
+    #
     class GetComponentTypeResponse < Struct.new(
       :workspace_id,
       :is_singleton,
@@ -1053,7 +1158,9 @@ module Aws::IoTTwinMaker
       :is_abstract,
       :is_schema_initialized,
       :status,
-      :property_groups)
+      :property_groups,
+      :sync_source,
+      :component_type_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1119,6 +1226,11 @@ module Aws::IoTTwinMaker
     #   The date and time when the entity was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] sync_source
+    #   The syncSource of the sync job, if this entity was created by a sync
+    #   job.
+    #   @return [String]
+    #
     class GetEntityResponse < Struct.new(
       :entity_id,
       :entity_name,
@@ -1130,7 +1242,8 @@ module Aws::IoTTwinMaker
       :parent_entity_id,
       :has_child_entities,
       :creation_date_time,
-      :update_date_time)
+      :update_date_time,
+      :sync_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1398,6 +1511,69 @@ module Aws::IoTTwinMaker
       :update_date_time,
       :description,
       :capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sync_source
+    #   The sync soucre.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The workspace Id.
+    #   @return [String]
+    #
+    class GetSyncJobRequest < Struct.new(
+      :sync_source,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The sync job ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace that contains the sync job.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_source
+    #   The sync soucre.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_role
+    #   The sync IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The SyncJob response status.
+    #   @return [Types::SyncJobStatus]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_date_time
+    #   The update date and time.
+    #   @return [Time]
+    #
+    class GetSyncJobResponse < Struct.new(
+      :arn,
+      :workspace_id,
+      :sync_source,
+      :sync_role,
+      :status,
+      :creation_date_time,
+      :update_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1697,6 +1873,96 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace that contains the sync job.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   50.
+    #
+    #   Valid Range: Minimum value of 0. Maximum value of 200.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The string that specifies the next page of results.
+    #   @return [String]
+    #
+    class ListSyncJobsRequest < Struct.new(
+      :workspace_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sync_job_summaries
+    #   The listed SyncJob summaries.
+    #   @return [Array<Types::SyncJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The string that specifies the next page of results.
+    #   @return [String]
+    #
+    class ListSyncJobsResponse < Struct.new(
+      :sync_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace that contains the sync job.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_source
+    #   The sync soucre.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of objects that filter the request.
+    #   @return [Array<Types::SyncResourceFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   50.
+    #
+    #   Valid Range: Minimum value of 0. Maximum value of 200.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The string that specifies the next page of results.
+    #   @return [String]
+    #
+    class ListSyncResourcesRequest < Struct.new(
+      :workspace_id,
+      :sync_source,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sync_resources
+    #   The sync resources.
+    #   @return [Array<Types::SyncResourceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The string that specifies the next page of results.
+    #   @return [String]
+    #
+    class ListSyncResourcesResponse < Struct.new(
+      :sync_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1875,6 +2141,10 @@ module Aws::IoTTwinMaker
     #   and write to an external source.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] display_name
+    #   A friendly name for the property.
+    #   @return [String]
+    #
     class PropertyDefinitionRequest < Struct.new(
       :data_type,
       :is_required_in_entity,
@@ -1882,7 +2152,8 @@ module Aws::IoTTwinMaker
       :is_stored_externally,
       :is_time_series,
       :default_value,
-      :configuration)
+      :configuration,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1938,6 +2209,10 @@ module Aws::IoTTwinMaker
     #   property.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] display_name
+    #   A friendly name for the property.
+    #   @return [String]
+    #
     class PropertyDefinitionResponse < Struct.new(
       :data_type,
       :is_time_series,
@@ -1948,7 +2223,8 @@ module Aws::IoTTwinMaker
       :is_final,
       :is_inherited,
       :default_value,
-      :configuration)
+      :configuration,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2297,6 +2573,146 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
+    # The SyncJob status.
+    #
+    # @!attribute [rw] state
+    #   The SyncJob status state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The SyncJob error.
+    #   @return [Types::ErrorDetails]
+    #
+    class SyncJobStatus < Struct.new(
+      :state,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The SyncJob summary.
+    #
+    # @!attribute [rw] arn
+    #   The SyncJob summary ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace that contains the sync job.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_source
+    #   The sync source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The SyncJob summaries status.
+    #   @return [Types::SyncJobStatus]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_date_time
+    #   The update date and time.
+    #   @return [Time]
+    #
+    class SyncJobSummary < Struct.new(
+      :arn,
+      :workspace_id,
+      :sync_source,
+      :status,
+      :creation_date_time,
+      :update_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sync resource filter.
+    #
+    # @note SyncResourceFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] state
+    #   The sync resource filter's state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The sync resource filter resoucre type
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The sync resource filter resource Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external Id.
+    #   @return [String]
+    #
+    class SyncResourceFilter < Struct.new(
+      :state,
+      :resource_type,
+      :resource_id,
+      :external_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class State < SyncResourceFilter; end
+      class ResourceType < SyncResourceFilter; end
+      class ResourceId < SyncResourceFilter; end
+      class ExternalId < SyncResourceFilter; end
+      class Unknown < SyncResourceFilter; end
+    end
+
+    # The sync resource status.
+    #
+    # @!attribute [rw] state
+    #   The sync resource status state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The status error.
+    #   @return [Types::ErrorDetails]
+    #
+    class SyncResourceStatus < Struct.new(
+      :state,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sync resource summary.
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The sync resource summary status.
+    #   @return [Types::SyncResourceStatus]
+    #
+    # @!attribute [rw] update_date_time
+    #   The update date and time.
+    #   @return [Time]
+    #
+    class SyncResourceSummary < Struct.new(
+      :resource_type,
+      :external_id,
+      :resource_id,
+      :status,
+      :update_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The tabular conditions.
     #
     # @!attribute [rw] order_by
@@ -2377,7 +2793,7 @@ module Aws::IoTTwinMaker
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] workspace_id
-    #   The ID of the workspace that contains the component type.
+    #   The ID of the workspace.
     #   @return [String]
     #
     # @!attribute [rw] is_singleton
@@ -2412,6 +2828,10 @@ module Aws::IoTTwinMaker
     #   The property groups
     #   @return [Hash<String,Types::PropertyGroupRequest>]
     #
+    # @!attribute [rw] component_type_name
+    #   The component type name.
+    #   @return [String]
+    #
     class UpdateComponentTypeRequest < Struct.new(
       :workspace_id,
       :is_singleton,
@@ -2420,7 +2840,8 @@ module Aws::IoTTwinMaker
       :property_definitions,
       :extends_from,
       :functions,
-      :property_groups)
+      :property_groups,
+      :component_type_name)
       SENSITIVE = []
       include Aws::Structure
     end

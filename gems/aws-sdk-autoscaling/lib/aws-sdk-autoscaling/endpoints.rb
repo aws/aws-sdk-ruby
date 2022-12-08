@@ -53,6 +53,20 @@ module Aws::AutoScaling
       end
     end
 
+    class AttachTrafficSources
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AutoScaling::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class BatchDeleteScheduledAction
       def self.build(context)
         unless context.config.regional_endpoint
@@ -529,6 +543,20 @@ module Aws::AutoScaling
       end
     end
 
+    class DescribeTrafficSources
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AutoScaling::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeWarmPool
       def self.build(context)
         unless context.config.regional_endpoint
@@ -572,6 +600,20 @@ module Aws::AutoScaling
     end
 
     class DetachLoadBalancers
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AutoScaling::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DetachTrafficSources
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

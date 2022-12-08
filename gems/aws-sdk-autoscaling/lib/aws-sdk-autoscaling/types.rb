@@ -246,7 +246,7 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups. You can
+    #   The Amazon Resource Names (ARNs) of the target groups. You can
     #   specify up to 10 target groups. To get the ARN of a target group,
     #   use the Elastic Load Balancing [DescribeTargetGroups][1] API
     #   operation.
@@ -283,6 +283,34 @@ module Aws::AutoScaling
     class AttachLoadBalancersType < Struct.new(
       :auto_scaling_group_name,
       :load_balancer_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachTrafficSourcesResultType AWS API Documentation
+    #
+    class AttachTrafficSourcesResultType < Aws::EmptyStructure; end
+
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_sources
+    #   The unique identifiers of one or more traffic sources. You can
+    #   specify up to 10 traffic sources.
+    #
+    #   Currently, you must specify an Amazon Resource Name (ARN) for an
+    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
+    #   the running instances with the attached target groups. The target
+    #   groups receive incoming traffic and route requests to one or more
+    #   registered targets.
+    #   @return [Array<Types::TrafficSourceIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachTrafficSourcesType AWS API Documentation
+    #
+    class AttachTrafficSourcesType < Struct.new(
+      :auto_scaling_group_name,
+      :traffic_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -344,10 +372,12 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. If you configure an Auto Scaling group to use `ELB`
-    #   health checks, it considers the instance unhealthy if it fails
-    #   either the EC2 status checks or the load balancer health checks.
+    #   Determines whether any additional health checks are performed on the
+    #   instances in this group. Amazon EC2 health checks are always on.
+    #
+    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
+    #   `VPC_LATTICE` health check type is reserved for use with VPC
+    #   Lattice, which is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
@@ -436,6 +466,10 @@ module Aws::AutoScaling
     #   The duration of the default instance warmup, in seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] traffic_sources
+    #   The unique identifiers of the traffic sources.
+    #   @return [Array<Types::TrafficSourceIdentifier>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -471,7 +505,8 @@ module Aws::AutoScaling
       :warm_pool_size,
       :context,
       :desired_capacity_type,
-      :default_instance_warmup)
+      :default_instance_warmup,
+      :traffic_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -975,13 +1010,13 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups to associate
-    #   with the Auto Scaling group. Instances are registered as targets
-    #   with the target groups. The target groups receive incoming traffic
-    #   and route requests to one or more registered targets. For more
-    #   information, see [Use Elastic Load Balancing to distribute traffic
-    #   across the instances in your Auto Scaling group][1] in the *Amazon
-    #   EC2 Auto Scaling User Guide*.
+    #   The Amazon Resource Names (ARN) of the Elastic Load Balancing target
+    #   groups to associate with the Auto Scaling group. Instances are
+    #   registered as targets with the target groups. The target groups
+    #   receive incoming traffic and route requests to one or more
+    #   registered targets. For more information, see [Use Elastic Load
+    #   Balancing to distribute traffic across the instances in your Auto
+    #   Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -989,13 +1024,14 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   The service to use for the health checks. The valid values are `EC2`
-    #   (default) and `ELB`. If you configure an Auto Scaling group to use
-    #   load balancer (ELB) health checks, it considers the instance
-    #   unhealthy if it fails either the EC2 status checks or the load
-    #   balancer health checks. For more information, see [Health checks for
-    #   Auto Scaling instances][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   Determines whether any additional health checks are performed on the
+    #   instances in this group. Amazon EC2 health checks are always on. For
+    #   more information, see [Health checks for Auto Scaling instances][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
+    #   `VPC_LATTICE` health check type is reserved for use with VPC
+    #   Lattice, which is in preview release and is subject to change.
     #
     #
     #
@@ -1005,12 +1041,11 @@ module Aws::AutoScaling
     # @!attribute [rw] health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service and marking it unhealthy due to a failed Elastic Load
-    #   Balancing or custom health check. This is useful if your instances
-    #   do not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Set the health check
-    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   This is useful if your instances do not immediately pass their
+    #   health checks after they enter the `InService` state. For more
+    #   information, see [Set the health check grace period for an Auto
+    #   Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Default: `0` seconds
     #
@@ -1184,6 +1219,20 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
     #   @return [Integer]
     #
+    # @!attribute [rw] traffic_sources
+    #   **Reserved for use with Amazon VPC Lattice, which is in preview
+    #   release and is subject to change. Do not use this parameter for
+    #   production workloads. It is also subject to change.**
+    #
+    #   The unique identifiers of one or more traffic sources.
+    #
+    #   Currently, you must specify an Amazon Resource Name (ARN) for an
+    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
+    #   the running instances with the attached target groups. The target
+    #   groups receive incoming traffic and route requests to one or more
+    #   registered targets.
+    #   @return [Array<Types::TrafficSourceIdentifier>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
     class CreateAutoScalingGroupType < Struct.new(
@@ -1212,7 +1261,8 @@ module Aws::AutoScaling
       :max_instance_lifetime,
       :context,
       :desired_capacity_type,
-      :default_instance_warmup)
+      :default_instance_warmup,
+      :traffic_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1572,6 +1622,12 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #   @return [String]
     #
+    # @!attribute [rw] metrics
+    #   The metrics to include in the target tracking scaling policy, as a
+    #   metric data query. This can include both raw metric and metric math
+    #   expressions.
+    #   @return [Array<Types::TargetTrackingMetricDataQuery>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CustomizedMetricSpecification AWS API Documentation
     #
     class CustomizedMetricSpecification < Struct.new(
@@ -1579,7 +1635,8 @@ module Aws::AutoScaling
       :namespace,
       :dimensions,
       :statistic,
-      :unit)
+      :unit,
+      :metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2205,6 +2262,57 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_source_type
+    #   The type of traffic source you are describing. Currently, the only
+    #   valid value is `vpc-lattice`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of items to return with this call. The maximum
+    #   value is `50`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTrafficSourcesRequest AWS API Documentation
+    #
+    class DescribeTrafficSourcesRequest < Struct.new(
+      :auto_scaling_group_name,
+      :traffic_source_type,
+      :next_token,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_sources
+    #   Information about the traffic sources.
+    #   @return [Array<Types::TrafficSourceState>]
+    #
+    # @!attribute [rw] next_token
+    #   This string indicates that the response contains more items than can
+    #   be returned in a single response. To receive additional items,
+    #   specify this string for the `NextToken` value when requesting the
+    #   next set of items. This value is null when there are no more items
+    #   to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTrafficSourcesResponse AWS API Documentation
+    #
+    class DescribeTrafficSourcesResponse < Struct.new(
+      :traffic_sources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] warm_pool_configuration
     #   The warm pool configuration details.
     #   @return [Types::WarmPoolConfiguration]
@@ -2214,8 +2322,11 @@ module Aws::AutoScaling
     #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a previous call.)
+    #   This string indicates that the response contains more items than can
+    #   be returned in a single response. To receive additional items,
+    #   specify this string for the `NextToken` value when requesting the
+    #   next set of items. This value is null when there are no more items
+    #   to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeWarmPoolAnswer AWS API Documentation
@@ -2368,6 +2479,35 @@ module Aws::AutoScaling
     class DetachLoadBalancersType < Struct.new(
       :auto_scaling_group_name,
       :load_balancer_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachTrafficSourcesResultType AWS API Documentation
+    #
+    class DetachTrafficSourcesResultType < Aws::EmptyStructure; end
+
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_sources
+    #   The unique identifiers of one or more traffic sources you are
+    #   detaching. You can specify up to 10 traffic sources.
+    #
+    #   Currently, you must specify an Amazon Resource Name (ARN) for an
+    #   existing VPC Lattice target group. When you detach a target group,
+    #   it enters the `Removing` state while deregistering the instances in
+    #   the group. When all instances are deregistered, then you can no
+    #   longer describe the target group using the DescribeTrafficSources
+    #   API call. The instances continue to run.
+    #   @return [Array<Types::TrafficSourceIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachTrafficSourcesType AWS API Documentation
+    #
+    class DetachTrafficSourcesType < Struct.new(
+      :auto_scaling_group_name,
+      :traffic_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3757,12 +3897,9 @@ module Aws::AutoScaling
     #
     #   price-capacity-optimized (recommended)
     #
-    #   : Amazon EC2 Auto Scaling identifies the pools with the highest
-    #     capacity availability for the number of instances that are
-    #     launching. This means that we will request Spot Instances from the
-    #     pools that we believe have the lowest chance of interruption in
-    #     the near term. Amazon EC2 Auto Scaling then requests Spot
-    #     Instances from the lowest priced of these pools.
+    #   : The price and capacity optimized allocation strategy looks at both
+    #     price and capacity to select the Spot Instance pools that are the
+    #     least likely to be interrupted and have the lowest possible price.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_pools
@@ -6866,6 +7003,117 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # The metric data to return. Also defines whether this call is returning
+    # data for one metric only, or whether it is performing a math
+    # expression on the values of returned metric statistics to create a new
+    # time series. A time series is a series of data points, each of which
+    # is associated with a timestamp.
+    #
+    # @!attribute [rw] id
+    #   A short name that identifies the object's results in the response.
+    #   This name must be unique among all `TargetTrackingMetricDataQuery`
+    #   objects specified for a single scaling policy. If you are performing
+    #   math expressions on this set of data, this name represents that data
+    #   and can serve as a variable in the mathematical expression. The
+    #   valid characters are letters, numbers, and underscores. The first
+    #   character must be a lowercase letter.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The math expression to perform on the returned data, if this object
+    #   is performing a math expression. This expression can use the `Id` of
+    #   the other metrics to refer to those metrics, and can also use the
+    #   `Id` of other expressions to use the result of those expressions.
+    #
+    #   Conditional: Within each `TargetTrackingMetricDataQuery` object, you
+    #   must specify either `Expression` or `MetricStat`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_stat
+    #   Information about the metric data to return.
+    #
+    #   Conditional: Within each `TargetTrackingMetricDataQuery` object, you
+    #   must specify either `Expression` or `MetricStat`, but not both.
+    #   @return [Types::TargetTrackingMetricStat]
+    #
+    # @!attribute [rw] label
+    #   A human-readable label for this metric or expression. This is
+    #   especially useful if this is a math expression, so that you know
+    #   what the value represents.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_data
+    #   Indicates whether to return the timestamps and raw data values of
+    #   this metric.
+    #
+    #   If you use any math expressions, specify `true` for this value for
+    #   only the final math expression that the metric specification is
+    #   based on. You must specify `false` for `ReturnData` for all the
+    #   other metrics and expressions used in the metric specification.
+    #
+    #   If you are only retrieving metrics and not performing any math
+    #   expressions, do not specify anything for `ReturnData`. This sets it
+    #   to its default (`true`).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TargetTrackingMetricDataQuery AWS API Documentation
+    #
+    class TargetTrackingMetricDataQuery < Struct.new(
+      :id,
+      :expression,
+      :metric_stat,
+      :label,
+      :return_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure defines the CloudWatch metric to return, along with the
+    # statistic, period, and unit.
+    #
+    # For more information about the CloudWatch terminology below, see
+    # [Amazon CloudWatch concepts][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+    #
+    # @!attribute [rw] metric
+    #   Represents a specific metric.
+    #   @return [Types::Metric]
+    #
+    # @!attribute [rw] stat
+    #   The statistic to return. It can include any CloudWatch statistic or
+    #   extended statistic. For a list of valid values, see the table in
+    #   [Statistics][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #   The most commonly used metrics for scaling is `Average`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit to use for the returned data points. For a complete list of
+    #   the units that CloudWatch supports, see the [MetricDatum][1] data
+    #   type in the *Amazon CloudWatch API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TargetTrackingMetricStat AWS API Documentation
+    #
+    class TargetTrackingMetricStat < Struct.new(
+      :metric,
+      :stat,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
@@ -6900,6 +7148,61 @@ module Aws::AutoScaling
     class TotalLocalStorageGBRequest < Struct.new(
       :min,
       :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the identifier of a traffic source.
+    #
+    # Currently, you must specify an Amazon Resource Name (ARN) for an
+    # existing VPC Lattice target group.
+    #
+    # @!attribute [rw] identifier
+    #   The unique identifier of the traffic source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TrafficSourceIdentifier AWS API Documentation
+    #
+    class TrafficSourceIdentifier < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the state of a traffic source.
+    #
+    # @!attribute [rw] traffic_source
+    #   The unique identifier of the traffic source. Currently, this is the
+    #   Amazon Resource Name (ARN) for a VPC Lattice target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The following are the possible states for a VPC Lattice target
+    #   group:
+    #
+    #   * `Adding` - The Auto Scaling instances are being registered with
+    #     the target group.
+    #
+    #   * `Added` - All Auto Scaling instances are registered with the
+    #     target group.
+    #
+    #   * `InService` - At least one Auto Scaling instance passed the
+    #     `VPC_LATTICE` health check.
+    #
+    #   * `Removing` - The Auto Scaling instances are being deregistered
+    #     from the target group. If connection draining is enabled, VPC
+    #     Lattice waits for in-flight requests to complete before
+    #     deregistering the instances.
+    #
+    #   * `Removed` - All Auto Scaling instances are deregistered from the
+    #     target group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TrafficSourceState AWS API Documentation
+    #
+    class TrafficSourceState < Struct.new(
+      :traffic_source,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6973,21 +7276,22 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. If you configure an Auto Scaling group to use `ELB`
-    #   health checks, it considers the instance unhealthy if it fails
-    #   either the EC2 status checks or the load balancer health checks.
+    #   Determines whether any additional health checks are performed on the
+    #   instances in this group. Amazon EC2 health checks are always on.
+    #
+    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
+    #   `VPC_LATTICE` health check type is reserved for use with VPC
+    #   Lattice, which is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service and marking it unhealthy due to a failed Elastic Load
-    #   Balancing or custom health check. This is useful if your instances
-    #   do not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Set the health check
-    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   This is useful if your instances do not immediately pass their
+    #   health checks after they enter the `InService` state. For more
+    #   information, see [Set the health check grace period for an Auto
+    #   Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #

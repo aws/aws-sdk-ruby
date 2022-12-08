@@ -493,6 +493,9 @@ module Aws::IoTTwinMaker
     #
     # @option params [Hash<String,Types::PropertyGroupRequest>] :property_groups
     #
+    # @option params [String] :component_type_name
+    #   A friendly name for the component type.
+    #
     # @return [Types::CreateComponentTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateComponentTypeResponse#arn #arn} => String
@@ -570,6 +573,7 @@ module Aws::IoTTwinMaker
     #         configuration: {
     #           "Name" => "Value",
     #         },
+    #         display_name: "PropertyDisplayName",
     #       },
     #     },
     #     extends_from: ["ComponentTypeId"],
@@ -594,6 +598,7 @@ module Aws::IoTTwinMaker
     #         property_names: ["Name"],
     #       },
     #     },
+    #     component_type_name: "ComponentTypeName",
     #   })
     #
     # @example Response structure
@@ -716,6 +721,7 @@ module Aws::IoTTwinMaker
     #               configuration: {
     #                 "Name" => "Value",
     #               },
+    #               display_name: "PropertyDisplayName",
     #             },
     #             value: {
     #               boolean_value: false,
@@ -819,6 +825,56 @@ module Aws::IoTTwinMaker
     # @param [Hash] params ({})
     def create_scene(params = {}, options = {})
       req = build_request(:create_scene, params)
+      req.send_request(options)
+    end
+
+    # This action creates a SyncJob.
+    #
+    # @option params [required, String] :workspace_id
+    #   The workspace Id.
+    #
+    # @option params [required, String] :sync_source
+    #   The sync source.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :sync_role
+    #   The SyncJob IAM role. This IAM role is used by the sync job to read
+    #   from the syncSource, and create, update or delete the corresponding
+    #   resources.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The SyncJob tags.
+    #
+    # @return [Types::CreateSyncJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSyncJobResponse#arn #arn} => String
+    #   * {Types::CreateSyncJobResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateSyncJobResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sync_job({
+    #     workspace_id: "Id", # required
+    #     sync_source: "SyncSource", # required
+    #     sync_role: "RoleArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.state #=> String, one of "CREATING", "INITIALIZING", "ACTIVE", "DELETING", "ERROR"
+    #
+    # @overload create_sync_job(params = {})
+    # @param [Hash] params ({})
+    def create_sync_job(params = {}, options = {})
+      req = build_request(:create_sync_job, params)
       req.send_request(options)
     end
 
@@ -958,6 +1014,40 @@ module Aws::IoTTwinMaker
       req.send_request(options)
     end
 
+    # Delete the SyncJob.
+    #
+    # @option params [required, String] :workspace_id
+    #   The workspace Id.
+    #
+    # @option params [required, String] :sync_source
+    #   The sync source.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #
+    # @return [Types::DeleteSyncJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSyncJobResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_sync_job({
+    #     workspace_id: "Id", # required
+    #     sync_source: "SyncSource", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "CREATING", "INITIALIZING", "ACTIVE", "DELETING", "ERROR"
+    #
+    # @overload delete_sync_job(params = {})
+    # @param [Hash] params ({})
+    def delete_sync_job(params = {}, options = {})
+      req = build_request(:delete_sync_job, params)
+      req.send_request(options)
+    end
+
     # Deletes a workspace.
     #
     # @option params [required, String] :workspace_id
@@ -1053,6 +1143,8 @@ module Aws::IoTTwinMaker
     #   * {Types::GetComponentTypeResponse#is_schema_initialized #is_schema_initialized} => Boolean
     #   * {Types::GetComponentTypeResponse#status #status} => Types::Status
     #   * {Types::GetComponentTypeResponse#property_groups #property_groups} => Hash&lt;String,Types::PropertyGroupResponse&gt;
+    #   * {Types::GetComponentTypeResponse#sync_source #sync_source} => String
+    #   * {Types::GetComponentTypeResponse#component_type_name #component_type_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1106,6 +1198,7 @@ module Aws::IoTTwinMaker
     #   resp.property_definitions["Name"].default_value.expression #=> String
     #   resp.property_definitions["Name"].configuration #=> Hash
     #   resp.property_definitions["Name"].configuration["Name"] #=> String
+    #   resp.property_definitions["Name"].display_name #=> String
     #   resp.extends_from #=> Array
     #   resp.extends_from[0] #=> String
     #   resp.functions #=> Hash
@@ -1121,13 +1214,15 @@ module Aws::IoTTwinMaker
     #   resp.is_abstract #=> Boolean
     #   resp.is_schema_initialized #=> Boolean
     #   resp.status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE", "SYNC_INITIALIZING_ERROR", "SYNC_CREATING_ERROR", "SYNC_PROCESSING_ERROR"
     #   resp.status.error.message #=> String
     #   resp.property_groups #=> Hash
     #   resp.property_groups["Name"].group_type #=> String, one of "TABULAR"
     #   resp.property_groups["Name"].property_names #=> Array
     #   resp.property_groups["Name"].property_names[0] #=> String
     #   resp.property_groups["Name"].is_inherited #=> Boolean
+    #   resp.sync_source #=> String
+    #   resp.component_type_name #=> String
     #
     # @overload get_component_type(params = {})
     # @param [Hash] params ({})
@@ -1157,6 +1252,7 @@ module Aws::IoTTwinMaker
     #   * {Types::GetEntityResponse#has_child_entities #has_child_entities} => Boolean
     #   * {Types::GetEntityResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::GetEntityResponse#update_date_time #update_date_time} => Time
+    #   * {Types::GetEntityResponse#sync_source #sync_source} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1171,7 +1267,7 @@ module Aws::IoTTwinMaker
     #   resp.entity_name #=> String
     #   resp.arn #=> String
     #   resp.status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE", "SYNC_INITIALIZING_ERROR", "SYNC_CREATING_ERROR", "SYNC_PROCESSING_ERROR"
     #   resp.status.error.message #=> String
     #   resp.workspace_id #=> String
     #   resp.description #=> String
@@ -1180,7 +1276,7 @@ module Aws::IoTTwinMaker
     #   resp.components["Name"].description #=> String
     #   resp.components["Name"].component_type_id #=> String
     #   resp.components["Name"].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.components["Name"].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.components["Name"].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE", "SYNC_INITIALIZING_ERROR", "SYNC_CREATING_ERROR", "SYNC_PROCESSING_ERROR"
     #   resp.components["Name"].status.error.message #=> String
     #   resp.components["Name"].defined_in #=> String
     #   resp.components["Name"].properties #=> Hash
@@ -1222,6 +1318,7 @@ module Aws::IoTTwinMaker
     #   resp.components["Name"].properties["Name"].definition.default_value.expression #=> String
     #   resp.components["Name"].properties["Name"].definition.configuration #=> Hash
     #   resp.components["Name"].properties["Name"].definition.configuration["Name"] #=> String
+    #   resp.components["Name"].properties["Name"].definition.display_name #=> String
     #   resp.components["Name"].properties["Name"].value.boolean_value #=> Boolean
     #   resp.components["Name"].properties["Name"].value.double_value #=> Float
     #   resp.components["Name"].properties["Name"].value.integer_value #=> Integer
@@ -1239,10 +1336,12 @@ module Aws::IoTTwinMaker
     #   resp.components["Name"].property_groups["Name"].property_names #=> Array
     #   resp.components["Name"].property_groups["Name"].property_names[0] #=> String
     #   resp.components["Name"].property_groups["Name"].is_inherited #=> Boolean
+    #   resp.components["Name"].sync_source #=> String
     #   resp.parent_entity_id #=> String
     #   resp.has_child_entities #=> Boolean
     #   resp.creation_date_time #=> Time
     #   resp.update_date_time #=> Time
+    #   resp.sync_source #=> String
     #
     # @overload get_entity(params = {})
     # @param [Hash] params ({})
@@ -1622,6 +1721,54 @@ module Aws::IoTTwinMaker
       req.send_request(options)
     end
 
+    # Gets the SyncJob.
+    #
+    # @option params [required, String] :sync_source
+    #   The sync soucre.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #
+    # @option params [String] :workspace_id
+    #   The workspace Id.
+    #
+    # @return [Types::GetSyncJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSyncJobResponse#arn #arn} => String
+    #   * {Types::GetSyncJobResponse#workspace_id #workspace_id} => String
+    #   * {Types::GetSyncJobResponse#sync_source #sync_source} => String
+    #   * {Types::GetSyncJobResponse#sync_role #sync_role} => String
+    #   * {Types::GetSyncJobResponse#status #status} => Types::SyncJobStatus
+    #   * {Types::GetSyncJobResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::GetSyncJobResponse#update_date_time #update_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sync_job({
+    #     sync_source: "SyncSource", # required
+    #     workspace_id: "Id",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.workspace_id #=> String
+    #   resp.sync_source #=> String
+    #   resp.sync_role #=> String
+    #   resp.status.state #=> String, one of "CREATING", "INITIALIZING", "ACTIVE", "DELETING", "ERROR"
+    #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE", "SYNC_INITIALIZING_ERROR", "SYNC_CREATING_ERROR", "SYNC_PROCESSING_ERROR"
+    #   resp.status.error.message #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.update_date_time #=> Time
+    #
+    # @overload get_sync_job(params = {})
+    # @param [Hash] params ({})
+    def get_sync_job(params = {}, options = {})
+      req = build_request(:get_sync_job, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a workspace.
     #
     # @option params [required, String] :workspace_id
@@ -1711,8 +1858,9 @@ module Aws::IoTTwinMaker
     #   resp.component_type_summaries[0].update_date_time #=> Time
     #   resp.component_type_summaries[0].description #=> String
     #   resp.component_type_summaries[0].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.component_type_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.component_type_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE", "SYNC_INITIALIZING_ERROR", "SYNC_CREATING_ERROR", "SYNC_PROCESSING_ERROR"
     #   resp.component_type_summaries[0].status.error.message #=> String
+    #   resp.component_type_summaries[0].component_type_name #=> String
     #   resp.next_token #=> String
     #   resp.max_results #=> Integer
     #
@@ -1774,7 +1922,7 @@ module Aws::IoTTwinMaker
     #   resp.entity_summaries[0].arn #=> String
     #   resp.entity_summaries[0].parent_entity_id #=> String
     #   resp.entity_summaries[0].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.entity_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.entity_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE", "SYNC_INITIALIZING_ERROR", "SYNC_CREATING_ERROR", "SYNC_PROCESSING_ERROR"
     #   resp.entity_summaries[0].status.error.message #=> String
     #   resp.entity_summaries[0].description #=> String
     #   resp.entity_summaries[0].has_child_entities #=> Boolean
@@ -1830,6 +1978,122 @@ module Aws::IoTTwinMaker
     # @param [Hash] params ({})
     def list_scenes(params = {}, options = {})
       req = build_request(:list_scenes, params)
+      req.send_request(options)
+    end
+
+    # List all SyncJobs.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the sync job.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   50.
+    #
+    #   Valid Range: Minimum value of 0. Maximum value of 200.
+    #
+    # @option params [String] :next_token
+    #   The string that specifies the next page of results.
+    #
+    # @return [Types::ListSyncJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSyncJobsResponse#sync_job_summaries #sync_job_summaries} => Array&lt;Types::SyncJobSummary&gt;
+    #   * {Types::ListSyncJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sync_jobs({
+    #     workspace_id: "Id", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sync_job_summaries #=> Array
+    #   resp.sync_job_summaries[0].arn #=> String
+    #   resp.sync_job_summaries[0].workspace_id #=> String
+    #   resp.sync_job_summaries[0].sync_source #=> String
+    #   resp.sync_job_summaries[0].status.state #=> String, one of "CREATING", "INITIALIZING", "ACTIVE", "DELETING", "ERROR"
+    #   resp.sync_job_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE", "SYNC_INITIALIZING_ERROR", "SYNC_CREATING_ERROR", "SYNC_PROCESSING_ERROR"
+    #   resp.sync_job_summaries[0].status.error.message #=> String
+    #   resp.sync_job_summaries[0].creation_date_time #=> Time
+    #   resp.sync_job_summaries[0].update_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_sync_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_sync_jobs(params = {}, options = {})
+      req = build_request(:list_sync_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists the sync resources.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the sync job.
+    #
+    # @option params [required, String] :sync_source
+    #   The sync soucre.
+    #
+    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::SyncResourceFilter>] :filters
+    #   A list of objects that filter the request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   50.
+    #
+    #   Valid Range: Minimum value of 0. Maximum value of 200.
+    #
+    # @option params [String] :next_token
+    #   The string that specifies the next page of results.
+    #
+    # @return [Types::ListSyncResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSyncResourcesResponse#sync_resources #sync_resources} => Array&lt;Types::SyncResourceSummary&gt;
+    #   * {Types::ListSyncResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sync_resources({
+    #     workspace_id: "Id", # required
+    #     sync_source: "SyncSource", # required
+    #     filters: [
+    #       {
+    #         state: "INITIALIZING", # accepts INITIALIZING, PROCESSING, DELETED, IN_SYNC, ERROR
+    #         resource_type: "ENTITY", # accepts ENTITY, COMPONENT_TYPE
+    #         resource_id: "Id",
+    #         external_id: "Id",
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sync_resources #=> Array
+    #   resp.sync_resources[0].resource_type #=> String, one of "ENTITY", "COMPONENT_TYPE"
+    #   resp.sync_resources[0].external_id #=> String
+    #   resp.sync_resources[0].resource_id #=> String
+    #   resp.sync_resources[0].status.state #=> String, one of "INITIALIZING", "PROCESSING", "DELETED", "IN_SYNC", "ERROR"
+    #   resp.sync_resources[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE", "SYNC_INITIALIZING_ERROR", "SYNC_CREATING_ERROR", "SYNC_PROCESSING_ERROR"
+    #   resp.sync_resources[0].status.error.message #=> String
+    #   resp.sync_resources[0].update_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_sync_resources(params = {})
+    # @param [Hash] params ({})
+    def list_sync_resources(params = {}, options = {})
+      req = build_request(:list_sync_resources, params)
       req.send_request(options)
     end
 
@@ -1969,7 +2233,7 @@ module Aws::IoTTwinMaker
     # Updates information in a component type.
     #
     # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the component type.
+    #   The ID of the workspace.
     #
     # @option params [Boolean] :is_singleton
     #   A Boolean value that specifies whether an entity can have more than
@@ -1995,6 +2259,9 @@ module Aws::IoTTwinMaker
     #
     # @option params [Hash<String,Types::PropertyGroupRequest>] :property_groups
     #   The property groups
+    #
+    # @option params [String] :component_type_name
+    #   The component type name.
     #
     # @return [Types::UpdateComponentTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2074,6 +2341,7 @@ module Aws::IoTTwinMaker
     #         configuration: {
     #           "Name" => "Value",
     #         },
+    #         display_name: "PropertyDisplayName",
     #       },
     #     },
     #     extends_from: ["ComponentTypeId"],
@@ -2095,6 +2363,7 @@ module Aws::IoTTwinMaker
     #         property_names: ["Name"],
     #       },
     #     },
+    #     component_type_name: "ComponentTypeName",
     #   })
     #
     # @example Response structure
@@ -2214,6 +2483,7 @@ module Aws::IoTTwinMaker
     #               configuration: {
     #                 "Name" => "Value",
     #               },
+    #               display_name: "PropertyDisplayName",
     #             },
     #             value: {
     #               boolean_value: false,
@@ -2403,7 +2673,7 @@ module Aws::IoTTwinMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iottwinmaker'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

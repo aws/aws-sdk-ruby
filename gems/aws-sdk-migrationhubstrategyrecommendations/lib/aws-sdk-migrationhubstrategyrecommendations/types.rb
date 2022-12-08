@@ -44,6 +44,20 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # Error in the analysis of the application unit.
+    #
+    # @!attribute [rw] app_unit_error_category
+    #   The category of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/AppUnitError AWS API Documentation
+    #
+    class AppUnitError < Struct.new(
+      :app_unit_error_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains detailed information about an application component.
     #
     # @!attribute [rw] analysis_status
@@ -67,6 +81,10 @@ module Aws::MigrationHubStrategyRecommendations
     # @!attribute [rw] app_type
     #   The type of application component.
     #   @return [String]
+    #
+    # @!attribute [rw] app_unit_error
+    #   The error in the analysis of the source code or database.
+    #   @return [Types::AppUnitError]
     #
     # @!attribute [rw] associated_server_id
     #   The ID of the server that the application component is running on.
@@ -119,6 +137,14 @@ module Aws::MigrationHubStrategyRecommendations
     #   The application component subtype.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_status
+    #   The status of the application unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_status_message
+    #   The status message for the application unit.
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_repositories
     #   Details about the source code repository associated with the
     #   application component.
@@ -137,6 +163,7 @@ module Aws::MigrationHubStrategyRecommendations
       :antipattern_report_status,
       :antipattern_report_status_message,
       :app_type,
+      :app_unit_error,
       :associated_server_id,
       :database_config_detail,
       :id,
@@ -149,8 +176,30 @@ module Aws::MigrationHubStrategyRecommendations
       :os_version,
       :recommendation_set,
       :resource_sub_type,
+      :runtime_status,
+      :runtime_status_message,
       :source_code_repositories,
       :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of the analysis status of the application component.
+    #
+    # @!attribute [rw] count
+    #   The number of application components successfully analyzed,
+    #   partially successful or failed analysis.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] src_code_or_db_analysis_status
+    #   The status of database analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/ApplicationComponentStatusSummary AWS API Documentation
+    #
+    class ApplicationComponentStatusSummary < Struct.new(
+      :count,
+      :src_code_or_db_analysis_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -237,6 +286,10 @@ module Aws::MigrationHubStrategyRecommendations
     #   List of AntipatternSeveritySummary.
     #   @return [Array<Types::AntipatternSeveritySummary>]
     #
+    # @!attribute [rw] list_application_component_status_summary
+    #   List of status summaries of the analyzed application components.
+    #   @return [Array<Types::ApplicationComponentStatusSummary>]
+    #
     # @!attribute [rw] list_application_component_strategy_summary
     #   List of ApplicationComponentStrategySummary.
     #   @return [Array<Types::StrategySummary>]
@@ -244,6 +297,10 @@ module Aws::MigrationHubStrategyRecommendations
     # @!attribute [rw] list_application_component_summary
     #   List of ApplicationComponentSummary.
     #   @return [Array<Types::ApplicationComponentSummary>]
+    #
+    # @!attribute [rw] list_server_status_summary
+    #   List of status summaries of the analyzed servers.
+    #   @return [Array<Types::ServerStatusSummary>]
     #
     # @!attribute [rw] list_server_strategy_summary
     #   List of ServerStrategySummary.
@@ -261,10 +318,36 @@ module Aws::MigrationHubStrategyRecommendations
       :antipattern_report_status_message,
       :last_analyzed_timestamp,
       :list_antipattern_severity_summary,
+      :list_application_component_status_summary,
       :list_application_component_strategy_summary,
       :list_application_component_summary,
+      :list_server_status_summary,
       :list_server_strategy_summary,
       :list_server_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the criteria of assessment.
+    #
+    # @!attribute [rw] condition
+    #   Condition of an assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of an assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Values of an assessment.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/AssessmentTarget AWS API Documentation
+    #
+    class AssessmentTarget < Struct.new(
+      :condition,
+      :name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -350,6 +433,10 @@ module Aws::MigrationHubStrategyRecommendations
     #   that you specify.
     #   @return [String]
     #
+    # @!attribute [rw] configuration_summary
+    #   Summary of the collector configuration.
+    #   @return [Types::ConfigurationSummary]
+    #
     # @!attribute [rw] host_name
     #   Hostname of the server that is hosting the collector.
     #   @return [String]
@@ -372,10 +459,45 @@ module Aws::MigrationHubStrategyRecommendations
       :collector_health,
       :collector_id,
       :collector_version,
+      :configuration_summary,
       :host_name,
       :ip_address,
       :last_activity_time_stamp,
       :registered_time_stamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of the collector configuration.
+    #
+    # @!attribute [rw] ip_address_based_remote_info_list
+    #   IP address based configurations.
+    #   @return [Array<Types::IPAddressBasedRemoteInfo>]
+    #
+    # @!attribute [rw] pipeline_info_list
+    #   The list of pipeline info configurations.
+    #   @return [Array<Types::PipelineInfo>]
+    #
+    # @!attribute [rw] remote_source_code_analysis_server_info
+    #   Info about the remote server source code configuration.
+    #   @return [Types::RemoteSourceCodeAnalysisServerInfo]
+    #
+    # @!attribute [rw] vcenter_based_remote_info_list
+    #   The list of vCenter configurations.
+    #   @return [Array<Types::VcenterBasedRemoteInfo>]
+    #
+    # @!attribute [rw] version_control_info_list
+    #   The list of the version control configurations.
+    #   @return [Array<Types::VersionControlInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/ConfigurationSummary AWS API Documentation
+    #
+    class ConfigurationSummary < Struct.new(
+      :ip_address_based_remote_info_list,
+      :pipeline_info_list,
+      :remote_source_code_analysis_server_info,
+      :vcenter_based_remote_info_list,
+      :version_control_info_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -420,6 +542,10 @@ module Aws::MigrationHubStrategyRecommendations
     #   The status of the assessment.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   The status message of the assessment.
+    #   @return [String]
+    #
     # @!attribute [rw] success
     #   The number of successful servers in the assessment.
     #   @return [Integer]
@@ -433,6 +559,7 @@ module Aws::MigrationHubStrategyRecommendations
       :servers,
       :start_time,
       :status,
+      :status_message,
       :success)
       SENSITIVE = []
       include Aws::Structure
@@ -508,6 +635,19 @@ module Aws::MigrationHubStrategyRecommendations
     class DatabasePreferences < Struct.new(
       :database_management_preference,
       :database_migration_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Dependency encountered an error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/DependencyException AWS API Documentation
+    #
+    class DependencyException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -592,6 +732,10 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # @!attribute [rw] assessment_targets
+    #   List of criteria for assessment.
+    #   @return [Array<Types::AssessmentTarget>]
+    #
     # @!attribute [rw] data_collection_details
     #   Detailed information about the assessment.
     #   @return [Types::DataCollectionDetails]
@@ -603,6 +747,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetAssessmentResponse AWS API Documentation
     #
     class GetAssessmentResponse < Struct.new(
+      :assessment_targets,
       :data_collection_details,
       :id)
       SENSITIVE = []
@@ -689,10 +834,32 @@ module Aws::MigrationHubStrategyRecommendations
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetLatestAssessmentIdRequest AWS API Documentation
+    #
+    class GetLatestAssessmentIdRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] id
+    #   The latest ID for the specific assessment task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetLatestAssessmentIdResponse AWS API Documentation
+    #
+    class GetLatestAssessmentIdResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetPortfolioPreferencesRequest AWS API Documentation
     #
     class GetPortfolioPreferencesRequest < Aws::EmptyStructure; end
 
+    # @!attribute [rw] application_mode
+    #   The classification for application component types.
+    #   @return [String]
+    #
     # @!attribute [rw] application_preferences
     #   The transformation preferences for non-database applications.
     #   @return [Types::ApplicationPreferences]
@@ -708,6 +875,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetPortfolioPreferencesResponse AWS API Documentation
     #
     class GetPortfolioPreferencesResponse < Struct.new(
+      :application_mode,
       :application_preferences,
       :database_preferences,
       :prioritize_business_goals)
@@ -887,6 +1055,30 @@ module Aws::MigrationHubStrategyRecommendations
     #
     class Homogeneous < Struct.new(
       :target_database_engine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # IP address based configurations.
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_configuration_time_stamp
+    #   The time stamp of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_type
+    #   The type of the operating system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/IPAddressBasedRemoteInfo AWS API Documentation
+    #
+    class IPAddressBasedRemoteInfo < Struct.new(
+      :auth_type,
+      :ip_address_configuration_time_stamp,
+      :os_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1298,6 +1490,25 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # Detailed information of the pipeline.
+    #
+    # @!attribute [rw] pipeline_configuration_time_stamp
+    #   The time when the pipeline info was configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_type
+    #   The type of pipeline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/PipelineInfo AWS API Documentation
+    #
+    class PipelineInfo < Struct.new(
+      :pipeline_configuration_time_stamp,
+      :pipeline_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Rank of business goals based on priority.
     #
     # @!attribute [rw] business_goals
@@ -1312,6 +1523,10 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_mode
+    #   The classification for application component types.
+    #   @return [String]
+    #
     # @!attribute [rw] application_preferences
     #   The transformation preferences for non-database applications.
     #   @return [Types::ApplicationPreferences]
@@ -1327,6 +1542,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/PutPortfolioPreferencesRequest AWS API Documentation
     #
     class PutPortfolioPreferencesRequest < Struct.new(
+      :application_mode,
       :application_preferences,
       :database_preferences,
       :prioritize_business_goals)
@@ -1397,6 +1613,20 @@ module Aws::MigrationHubStrategyRecommendations
       :strategy,
       :target_destination,
       :transformation_tool)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the server configured for source code analysis.
+    #
+    # @!attribute [rw] remote_source_code_analysis_server_configuration_timestamp
+    #   The time when the remote source code server was configured.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/RemoteSourceCodeAnalysisServerInfo AWS API Documentation
+    #
+    class RemoteSourceCodeAnalysisServerInfo < Struct.new(
+      :remote_source_code_analysis_server_configuration_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1489,6 +1719,10 @@ module Aws::MigrationHubStrategyRecommendations
     #   A set of recommendations.
     #   @return [Types::RecommendationSet]
     #
+    # @!attribute [rw] server_error
+    #   The error in server analysis.
+    #   @return [Types::ServerError]
+    #
     # @!attribute [rw] server_type
     #   The type of server.
     #   @return [String]
@@ -1515,9 +1749,44 @@ module Aws::MigrationHubStrategyRecommendations
       :list_antipattern_severity_summary,
       :name,
       :recommendation_set,
+      :server_error,
       :server_type,
       :status_message,
       :system_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error in server analysis.
+    #
+    # @!attribute [rw] server_error_category
+    #   The error category of server analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/ServerError AWS API Documentation
+    #
+    class ServerError < Struct.new(
+      :server_error_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status summary of the server analysis.
+    #
+    # @!attribute [rw] count
+    #   The number of servers successfully analyzed, partially successful or
+    #   failed analysis.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] run_time_assessment_status
+    #   The status of the run time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/ServerStatusSummary AWS API Documentation
+    #
+    class ServerStatusSummary < Struct.new(
+      :count,
+      :run_time_assessment_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1606,6 +1875,10 @@ module Aws::MigrationHubStrategyRecommendations
     #   The repository name for the source code.
     #   @return [String]
     #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
     # @!attribute [rw] source_version
     #   The branch of the source code.
     #   @return [String]
@@ -1618,6 +1891,7 @@ module Aws::MigrationHubStrategyRecommendations
     #
     class SourceCode < Struct.new(
       :location,
+      :project_name,
       :source_version,
       :version_control)
       SENSITIVE = []
@@ -1629,6 +1903,10 @@ module Aws::MigrationHubStrategyRecommendations
     #
     # @!attribute [rw] branch
     #   The branch of the source code.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -1643,12 +1921,17 @@ module Aws::MigrationHubStrategyRecommendations
     #
     class SourceCodeRepository < Struct.new(
       :branch,
+      :project_name,
       :repository,
       :version_control_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] assessment_targets
+    #   List of criteria for assessment.
+    #   @return [Array<Types::AssessmentTarget>]
+    #
     # @!attribute [rw] s3bucket_for_analysis_data
     #   The S3 bucket used by the collectors to send analysis data to the
     #   service. The bucket name must begin with `migrationhub-strategy-`.
@@ -1662,6 +1945,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/StartAssessmentRequest AWS API Documentation
     #
     class StartAssessmentRequest < Struct.new(
+      :assessment_targets,
       :s3bucket_for_analysis_data,
       :s3bucket_for_report_data)
       SENSITIVE = []
@@ -1902,10 +2186,21 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # @!attribute [rw] app_type
+    #   The type of known component.
+    #   @return [String]
+    #
     # @!attribute [rw] application_component_id
     #   The ID of the application component. The ID is unique within an AWS
     #   account.
     #   @return [String]
+    #
+    # @!attribute [rw] configure_only
+    #   Update the configuration request of an application component. If it
+    #   is set to true, the source code and/or database credentials are
+    #   updated. If it is set to false, the source code and/or database
+    #   credentials are updated and an analysis is initiated.
+    #   @return [Boolean]
     #
     # @!attribute [rw] inclusion_status
     #   Indicates whether the application component has been included for
@@ -1929,7 +2224,9 @@ module Aws::MigrationHubStrategyRecommendations
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/UpdateApplicationComponentConfigRequest AWS API Documentation
     #
     class UpdateApplicationComponentConfigRequest < Struct.new(
+      :app_type,
       :application_component_id,
+      :configure_only,
       :inclusion_status,
       :secrets_manager_key,
       :source_code_list,
@@ -1973,6 +2270,45 @@ module Aws::MigrationHubStrategyRecommendations
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the server in vCenter.
+    #
+    # @!attribute [rw] os_type
+    #   The type of the operating system.
+    #   @return [String]
+    #
+    # @!attribute [rw] vcenter_configuration_time_stamp
+    #   The time when the remote server based on vCenter was last
+    #   configured.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/VcenterBasedRemoteInfo AWS API Documentation
+    #
+    class VcenterBasedRemoteInfo < Struct.new(
+      :os_type,
+      :vcenter_configuration_time_stamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the version control configuration.
+    #
+    # @!attribute [rw] version_control_configuration_time_stamp
+    #   The time when the version control system was last configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_control_type
+    #   The type of version control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/VersionControlInfo AWS API Documentation
+    #
+    class VersionControlInfo < Struct.new(
+      :version_control_configuration_time_stamp,
+      :version_control_type)
       SENSITIVE = []
       include Aws::Structure
     end

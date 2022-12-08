@@ -67,6 +67,20 @@ module Aws::MigrationHubStrategyRecommendations
       end
     end
 
+    class GetLatestAssessmentId
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::MigrationHubStrategyRecommendations::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetPortfolioPreferences
       def self.build(context)
         unless context.config.regional_endpoint
