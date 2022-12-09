@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2022-12-09)
+------------------
+
+* Feature - This release provides the approximate number of assets in a packaging group.
+
 1.39.0 (2022-11-09)
 ------------------
 

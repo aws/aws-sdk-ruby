@@ -2038,6 +2038,7 @@ module Aws::MediaLive
 
     InputDeviceConfigurableSettings.add_member(:configured_input, Shapes::ShapeRef.new(shape: InputDeviceConfiguredInput, location_name: "configuredInput"))
     InputDeviceConfigurableSettings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
+    InputDeviceConfigurableSettings.add_member(:latency_ms, Shapes::ShapeRef.new(shape: __integer, location_name: "latencyMs"))
     InputDeviceConfigurableSettings.struct_class = Types::InputDeviceConfigurableSettings
 
     InputDeviceConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -2052,6 +2053,7 @@ module Aws::MediaLive
     InputDeviceHdSettings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     InputDeviceHdSettings.add_member(:scan_type, Shapes::ShapeRef.new(shape: InputDeviceScanType, location_name: "scanType"))
     InputDeviceHdSettings.add_member(:width, Shapes::ShapeRef.new(shape: __integer, location_name: "width"))
+    InputDeviceHdSettings.add_member(:latency_ms, Shapes::ShapeRef.new(shape: __integer, location_name: "latencyMs"))
     InputDeviceHdSettings.struct_class = Types::InputDeviceHdSettings
 
     InputDeviceNetworkSettings.add_member(:dns_addresses, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "dnsAddresses"))
@@ -2089,6 +2091,7 @@ module Aws::MediaLive
     InputDeviceUhdSettings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     InputDeviceUhdSettings.add_member(:scan_type, Shapes::ShapeRef.new(shape: InputDeviceScanType, location_name: "scanType"))
     InputDeviceUhdSettings.add_member(:width, Shapes::ShapeRef.new(shape: __integer, location_name: "width"))
+    InputDeviceUhdSettings.add_member(:latency_ms, Shapes::ShapeRef.new(shape: __integer, location_name: "latencyMs"))
     InputDeviceUhdSettings.struct_class = Types::InputDeviceUhdSettings
 
     InputLocation.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
@@ -3052,8 +3055,8 @@ module Aws::MediaLive
     UdpOutputSettings.add_member(:fec_output_settings, Shapes::ShapeRef.new(shape: FecOutputSettings, location_name: "fecOutputSettings"))
     UdpOutputSettings.struct_class = Types::UdpOutputSettings
 
-    UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
-    UnprocessableEntityException.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
+    UnprocessableEntityException.add_member(:element_path, Shapes::ShapeRef.new(shape: __string, location_name: "elementPath"))
+    UnprocessableEntityException.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
 
     UpdateChannel.add_member(:cdi_input_specification, Shapes::ShapeRef.new(shape: CdiInputSpecification, location_name: "cdiInputSpecification"))

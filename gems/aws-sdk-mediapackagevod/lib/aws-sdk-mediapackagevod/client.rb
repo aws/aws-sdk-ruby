@@ -1011,6 +1011,7 @@ module Aws::MediaPackageVod
     #
     # @return [Types::DescribePackagingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribePackagingGroupResponse#approximate_asset_count #approximate_asset_count} => Integer
     #   * {Types::DescribePackagingGroupResponse#arn #arn} => String
     #   * {Types::DescribePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::DescribePackagingGroupResponse#domain_name #domain_name} => String
@@ -1026,6 +1027,7 @@ module Aws::MediaPackageVod
     #
     # @example Response structure
     #
+    #   resp.approximate_asset_count #=> Integer
     #   resp.arn #=> String
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
@@ -1228,6 +1230,7 @@ module Aws::MediaPackageVod
     #
     #   resp.next_token #=> String
     #   resp.packaging_groups #=> Array
+    #   resp.packaging_groups[0].approximate_asset_count #=> Integer
     #   resp.packaging_groups[0].arn #=> String
     #   resp.packaging_groups[0].authorization.cdn_identifier_secret #=> String
     #   resp.packaging_groups[0].authorization.secrets_role_arn #=> String
@@ -1336,6 +1339,7 @@ module Aws::MediaPackageVod
     #
     # @return [Types::UpdatePackagingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::UpdatePackagingGroupResponse#approximate_asset_count #approximate_asset_count} => Integer
     #   * {Types::UpdatePackagingGroupResponse#arn #arn} => String
     #   * {Types::UpdatePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::UpdatePackagingGroupResponse#domain_name #domain_name} => String
@@ -1355,6 +1359,7 @@ module Aws::MediaPackageVod
     #
     # @example Response structure
     #
+    #   resp.approximate_asset_count #=> Integer
     #   resp.arn #=> String
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
@@ -1386,7 +1391,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

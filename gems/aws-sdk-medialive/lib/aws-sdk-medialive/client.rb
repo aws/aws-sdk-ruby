@@ -4670,6 +4670,7 @@ module Aws::MediaLive
     #   resp.hd_device_settings.max_bitrate #=> Integer
     #   resp.hd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.hd_device_settings.width #=> Integer
+    #   resp.hd_device_settings.latency_ms #=> Integer
     #   resp.id #=> String
     #   resp.mac_address #=> String
     #   resp.name #=> String
@@ -4680,7 +4681,7 @@ module Aws::MediaLive
     #   resp.network_settings.ip_scheme #=> String, one of "STATIC", "DHCP"
     #   resp.network_settings.subnet_mask #=> String
     #   resp.serial_number #=> String
-    #   resp.type #=> String, one of "HD"
+    #   resp.type #=> String, one of "HD", "UHD"
     #   resp.uhd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.uhd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.uhd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -4689,6 +4690,7 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.max_bitrate #=> Integer
     #   resp.uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.uhd_device_settings.width #=> Integer
+    #   resp.uhd_device_settings.latency_ms #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDevice AWS API Documentation
     #
@@ -5332,6 +5334,7 @@ module Aws::MediaLive
     #   resp.input_devices[0].hd_device_settings.max_bitrate #=> Integer
     #   resp.input_devices[0].hd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.input_devices[0].hd_device_settings.width #=> Integer
+    #   resp.input_devices[0].hd_device_settings.latency_ms #=> Integer
     #   resp.input_devices[0].id #=> String
     #   resp.input_devices[0].mac_address #=> String
     #   resp.input_devices[0].name #=> String
@@ -5342,7 +5345,7 @@ module Aws::MediaLive
     #   resp.input_devices[0].network_settings.ip_scheme #=> String, one of "STATIC", "DHCP"
     #   resp.input_devices[0].network_settings.subnet_mask #=> String
     #   resp.input_devices[0].serial_number #=> String
-    #   resp.input_devices[0].type #=> String, one of "HD"
+    #   resp.input_devices[0].type #=> String, one of "HD", "UHD"
     #   resp.input_devices[0].uhd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.input_devices[0].uhd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.input_devices[0].uhd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -5351,6 +5354,7 @@ module Aws::MediaLive
     #   resp.input_devices[0].uhd_device_settings.max_bitrate #=> Integer
     #   resp.input_devices[0].uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.input_devices[0].uhd_device_settings.width #=> Integer
+    #   resp.input_devices[0].uhd_device_settings.latency_ms #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevices AWS API Documentation
@@ -9864,12 +9868,14 @@ module Aws::MediaLive
     #     hd_device_settings: {
     #       configured_input: "AUTO", # accepts AUTO, HDMI, SDI
     #       max_bitrate: 1,
+    #       latency_ms: 1,
     #     },
     #     input_device_id: "__string", # required
     #     name: "__string",
     #     uhd_device_settings: {
     #       configured_input: "AUTO", # accepts AUTO, HDMI, SDI
     #       max_bitrate: 1,
+    #       latency_ms: 1,
     #     },
     #   })
     #
@@ -9887,6 +9893,7 @@ module Aws::MediaLive
     #   resp.hd_device_settings.max_bitrate #=> Integer
     #   resp.hd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.hd_device_settings.width #=> Integer
+    #   resp.hd_device_settings.latency_ms #=> Integer
     #   resp.id #=> String
     #   resp.mac_address #=> String
     #   resp.name #=> String
@@ -9897,7 +9904,7 @@ module Aws::MediaLive
     #   resp.network_settings.ip_scheme #=> String, one of "STATIC", "DHCP"
     #   resp.network_settings.subnet_mask #=> String
     #   resp.serial_number #=> String
-    #   resp.type #=> String, one of "HD"
+    #   resp.type #=> String, one of "HD", "UHD"
     #   resp.uhd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.uhd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.uhd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -9906,6 +9913,7 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.max_bitrate #=> Integer
     #   resp.uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.uhd_device_settings.width #=> Integer
+    #   resp.uhd_device_settings.latency_ms #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
     #
@@ -10172,7 +10180,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

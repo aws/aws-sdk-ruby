@@ -583,7 +583,10 @@ module Aws::MediaPackageVod
     #   The source of scte markers used. When set to SEGMENTS, the scte
     #   markers are sourced from the segments of the ingested content. When
     #   set to MANIFEST, the scte markers are sourced from the manifest of
-    #   the ingested content.
+    #   the ingested content. The MANIFEST value is compatible with source
+    #   HLS playlists using the SCTE-35 Enhanced syntax (#EXT-OATCLS-SCTE35
+    #   tags). SCTE-35 Elemental and SCTE-35 Daterange syntaxes are not
+    #   supported with this option.
     #   @return [String]
     #
     # @!attribute [rw] stream_selection
@@ -832,6 +835,9 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # @!attribute [rw] approximate_asset_count
+    #   @return [Integer]
+    #
     # @!attribute [rw] arn
     #   @return [String]
     #
@@ -856,6 +862,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingGroupResponse AWS API Documentation
     #
     class DescribePackagingGroupResponse < Struct.new(
+      :approximate_asset_count,
       :arn,
       :authorization,
       :domain_name,
@@ -1384,6 +1391,10 @@ module Aws::MediaPackageVod
 
     # A MediaPackage VOD PackagingGroup resource.
     #
+    # @!attribute [rw] approximate_asset_count
+    #   The approximate asset count of the PackagingGroup.
+    #   @return [Integer]
+    #
     # @!attribute [rw] arn
     #   The ARN of the PackagingGroup.
     #   @return [String]
@@ -1411,6 +1422,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingGroup AWS API Documentation
     #
     class PackagingGroup < Struct.new(
+      :approximate_asset_count,
       :arn,
       :authorization,
       :domain_name,
@@ -1640,6 +1652,9 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # @!attribute [rw] approximate_asset_count
+    #   @return [Integer]
+    #
     # @!attribute [rw] arn
     #   @return [String]
     #
@@ -1664,6 +1679,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UpdatePackagingGroupResponse AWS API Documentation
     #
     class UpdatePackagingGroupResponse < Struct.new(
+      :approximate_asset_count,
       :arn,
       :authorization,
       :domain_name,

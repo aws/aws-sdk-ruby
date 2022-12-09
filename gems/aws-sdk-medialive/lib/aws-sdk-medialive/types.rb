@@ -6254,11 +6254,16 @@ module Aws::MediaLive
     #   the bitrate of the source video.
     #   @return [Integer]
     #
+    # @!attribute [rw] latency_ms
+    #   The Link device's buffer size (latency) in milliseconds (ms).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableSettings AWS API Documentation
     #
     class InputDeviceConfigurableSettings < Struct.new(
       :configured_input,
-      :max_bitrate)
+      :max_bitrate,
+      :latency_ms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6318,6 +6323,11 @@ module Aws::MediaLive
     #   The width of the video source, in pixels.
     #   @return [Integer]
     #
+    # @!attribute [rw] latency_ms
+    #   The Link device's buffer size (latency) in milliseconds (ms). You
+    #   can specify this value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceHdSettings AWS API Documentation
     #
     class InputDeviceHdSettings < Struct.new(
@@ -6328,7 +6338,8 @@ module Aws::MediaLive
       :height,
       :max_bitrate,
       :scan_type,
-      :width)
+      :width,
+      :latency_ms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6509,6 +6520,11 @@ module Aws::MediaLive
     #   The width of the video source, in pixels.
     #   @return [Integer]
     #
+    # @!attribute [rw] latency_ms
+    #   The Link device's buffer size (latency) in milliseconds (ms). You
+    #   can specify this value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdSettings AWS API Documentation
     #
     class InputDeviceUhdSettings < Struct.new(
@@ -6519,7 +6535,8 @@ module Aws::MediaLive
       :height,
       :max_bitrate,
       :scan_type,
-      :width)
+      :width,
+      :latency_ms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11358,17 +11375,17 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @!attribute [rw] message
+    # @!attribute [rw] element_path
     #   @return [String]
     #
-    # @!attribute [rw] validation_errors
-    #   @return [Array<Types::ValidationError>]
+    # @!attribute [rw] error_message
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UnprocessableEntityException AWS API Documentation
     #
     class UnprocessableEntityException < Struct.new(
-      :message,
-      :validation_errors)
+      :element_path,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end

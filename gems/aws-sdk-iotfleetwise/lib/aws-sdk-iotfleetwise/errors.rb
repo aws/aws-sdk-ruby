@@ -102,6 +102,11 @@ module Aws::IoTFleetWise
       def invalid_network_interfaces
         @data[:invalid_network_interfaces]
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class InternalServerException < ServiceError
@@ -141,6 +146,11 @@ module Aws::IoTFleetWise
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

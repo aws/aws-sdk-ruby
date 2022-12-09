@@ -173,13 +173,13 @@ module Aws::MediaLive
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def element_path
+        @data[:element_path]
       end
 
       # @return [String]
-      def validation_errors
-        @data[:validation_errors]
+      def error_message
+        @data[:error_message]
       end
     end
 

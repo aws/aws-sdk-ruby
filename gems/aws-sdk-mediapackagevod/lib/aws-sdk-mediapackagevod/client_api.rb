@@ -288,6 +288,7 @@ module Aws::MediaPackageVod
     DescribePackagingGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
     DescribePackagingGroupRequest.struct_class = Types::DescribePackagingGroupRequest
 
+    DescribePackagingGroupResponse.add_member(:approximate_asset_count, Shapes::ShapeRef.new(shape: __integer, location_name: "approximateAssetCount"))
     DescribePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     DescribePackagingGroupResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     DescribePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
@@ -404,6 +405,7 @@ module Aws::MediaPackageVod
     PackagingConfigurationList.add_member(:packaging_configurations, Shapes::ShapeRef.new(shape: __listOfPackagingConfiguration, location_name: "packagingConfigurations"))
     PackagingConfigurationList.struct_class = Types::PackagingConfigurationList
 
+    PackagingGroup.add_member(:approximate_asset_count, Shapes::ShapeRef.new(shape: __integer, location_name: "approximateAssetCount"))
     PackagingGroup.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     PackagingGroup.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     PackagingGroup.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
@@ -463,6 +465,7 @@ module Aws::MediaPackageVod
     UpdatePackagingGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
     UpdatePackagingGroupRequest.struct_class = Types::UpdatePackagingGroupRequest
 
+    UpdatePackagingGroupResponse.add_member(:approximate_asset_count, Shapes::ShapeRef.new(shape: __integer, location_name: "approximateAssetCount"))
     UpdatePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     UpdatePackagingGroupResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     UpdatePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))

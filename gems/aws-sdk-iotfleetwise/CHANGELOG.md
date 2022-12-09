@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2022-12-09)
+------------------
+
+* Feature - Deprecated assignedValue property for actuators and attributes.  Added a message to invalid nodes and invalid decoder manifest exceptions.
+
 1.2.0 (2022-10-25)
 ------------------
 

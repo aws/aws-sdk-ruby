@@ -277,7 +277,7 @@ module Aws::IoTFleetWise
     Actuator.add_member(:allowed_values, Shapes::ShapeRef.new(shape: listOfStrings, location_name: "allowedValues"))
     Actuator.add_member(:min, Shapes::ShapeRef.new(shape: double, location_name: "min"))
     Actuator.add_member(:max, Shapes::ShapeRef.new(shape: double, location_name: "max"))
-    Actuator.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, location_name: "assignedValue"))
+    Actuator.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage"=>"assignedValue is no longer in use"}))
     Actuator.struct_class = Types::Actuator
 
     AssociateVehicleFleetRequest.add_member(:vehicle_name, Shapes::ShapeRef.new(shape: vehicleName, required: true, location_name: "vehicleName"))
@@ -293,7 +293,7 @@ module Aws::IoTFleetWise
     Attribute.add_member(:allowed_values, Shapes::ShapeRef.new(shape: listOfStrings, location_name: "allowedValues"))
     Attribute.add_member(:min, Shapes::ShapeRef.new(shape: double, location_name: "min"))
     Attribute.add_member(:max, Shapes::ShapeRef.new(shape: double, location_name: "max"))
-    Attribute.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, location_name: "assignedValue"))
+    Attribute.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage"=>"assignedValue is no longer in use"}))
     Attribute.add_member(:default_value, Shapes::ShapeRef.new(shape: string, location_name: "defaultValue"))
     Attribute.struct_class = Types::Attribute
 
@@ -476,6 +476,7 @@ module Aws::IoTFleetWise
 
     DecoderManifestValidationException.add_member(:invalid_signals, Shapes::ShapeRef.new(shape: InvalidSignalDecoders, location_name: "invalidSignals"))
     DecoderManifestValidationException.add_member(:invalid_network_interfaces, Shapes::ShapeRef.new(shape: InvalidNetworkInterfaces, location_name: "invalidNetworkInterfaces"))
+    DecoderManifestValidationException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     DecoderManifestValidationException.struct_class = Types::DecoderManifestValidationException
 
     DeleteCampaignRequest.add_member(:name, Shapes::ShapeRef.new(shape: campaignName, required: true, location_name: "name"))
@@ -687,6 +688,7 @@ module Aws::IoTFleetWise
 
     InvalidNodeException.add_member(:invalid_nodes, Shapes::ShapeRef.new(shape: Nodes, location_name: "invalidNodes"))
     InvalidNodeException.add_member(:reason, Shapes::ShapeRef.new(shape: string, location_name: "reason"))
+    InvalidNodeException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     InvalidNodeException.struct_class = Types::InvalidNodeException
 
     InvalidSignal.add_member(:name, Shapes::ShapeRef.new(shape: FullyQualifiedName, location_name: "name"))

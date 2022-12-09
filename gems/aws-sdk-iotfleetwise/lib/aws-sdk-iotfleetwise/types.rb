@@ -1016,9 +1016,13 @@ module Aws::IoTFleetWise
     #   interfaces in the request.
     #   @return [Array<Types::InvalidNetworkInterface>]
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     class DecoderManifestValidationException < Struct.new(
       :invalid_signals,
-      :invalid_network_interfaces)
+      :invalid_network_interfaces,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1911,9 +1915,13 @@ module Aws::IoTFleetWise
     #   The reason the node validation failed.
     #   @return [String]
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     class InvalidNodeException < Struct.new(
       :invalid_nodes,
-      :reason)
+      :reason,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

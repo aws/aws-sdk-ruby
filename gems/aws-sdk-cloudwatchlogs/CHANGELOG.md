@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-12-09)
+------------------
+
+* Feature - Doc-only update for CloudWatch Logs, for Tagging Permissions clarifications
+
 1.57.0 (2022-11-28)
 ------------------
 
