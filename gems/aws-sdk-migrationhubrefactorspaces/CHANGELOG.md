@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2022-12-12)
+------------------
+
+* Feature - This release adds support for Lambda alias service endpoints. Lambda alias ARNs can now be passed into CreateService.
+
 1.8.0 (2022-10-25)
 ------------------
 

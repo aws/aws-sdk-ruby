@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-12-12)
+------------------
+
+* Feature - This documentation update adds kms:GenerateDataKey as a required permission to StartModelPackagingJob.
+
 1.17.0 (2022-10-25)
 ------------------
 

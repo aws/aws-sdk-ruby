@@ -64,6 +64,8 @@ module Aws::KinesisVideo
             Aws::KinesisVideo::Endpoints::DeleteSignalingChannel.build(context)
           when :delete_stream
             Aws::KinesisVideo::Endpoints::DeleteStream.build(context)
+          when :describe_edge_configuration
+            Aws::KinesisVideo::Endpoints::DescribeEdgeConfiguration.build(context)
           when :describe_image_generation_configuration
             Aws::KinesisVideo::Endpoints::DescribeImageGenerationConfiguration.build(context)
           when :describe_notification_configuration
@@ -84,6 +86,8 @@ module Aws::KinesisVideo
             Aws::KinesisVideo::Endpoints::ListTagsForResource.build(context)
           when :list_tags_for_stream
             Aws::KinesisVideo::Endpoints::ListTagsForStream.build(context)
+          when :start_edge_configuration_update
+            Aws::KinesisVideo::Endpoints::StartEdgeConfigurationUpdate.build(context)
           when :tag_resource
             Aws::KinesisVideo::Endpoints::TagResource.build(context)
           when :tag_stream

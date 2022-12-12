@@ -304,6 +304,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-sagemaker', '~> 1')
   spec.add_dependency('aws-sdk-sagemakerfeaturestoreruntime', '~> 1')
   spec.add_dependency('aws-sdk-sagemakergeospatial', '~> 1')
+  spec.add_dependency('aws-sdk-sagemakermetrics', '~> 1')
   spec.add_dependency('aws-sdk-sagemakerruntime', '~> 1')
   spec.add_dependency('aws-sdk-sagemakeredgemanager', '~> 1')
   spec.add_dependency('aws-sdk-savingsplans', '~> 1')

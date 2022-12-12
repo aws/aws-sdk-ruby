@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.675.0 (2022-12-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerMetrics`.
+
 1.674.0 (2022-12-08)
 ------------------
 

@@ -2379,7 +2379,7 @@ module Aws::Rekognition
     # To specify which attributes to return, use the `FaceAttributes` input
     # parameter for StartFaceDetection. The following Amazon Rekognition
     # Video operations return only the default attributes. The corresponding
-    # Start operations don't have a `FaceAttributes` input parameter.
+    # Start operations don't have a `FaceAttributes` input parameter:
     #
     # * GetCelebrityRecognition
     #
@@ -3007,11 +3007,17 @@ module Aws::Rekognition
     #   The default sort is by `TIMESTAMP`.
     #   @return [String]
     #
+    # @!attribute [rw] aggregate_by
+    #   Defines how to aggregate the returned results. Results can be
+    #   aggregated by timestamps or segments.
+    #   @return [String]
+    #
     class GetLabelDetectionRequest < Struct.new(
       :job_id,
       :max_results,
       :next_token,
-      :sort_by)
+      :sort_by,
+      :aggregate_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3814,9 +3820,42 @@ module Aws::Rekognition
     #   Details about the detected label.
     #   @return [Types::Label]
     #
+    # @!attribute [rw] start_timestamp_millis
+    #   The time in milliseconds defining the start of the timeline segment
+    #   containing a continuously detected label.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_timestamp_millis
+    #   The time in milliseconds defining the end of the timeline segment
+    #   containing a continuously detected label.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_millis
+    #   The time duration of a segment in milliseconds, I.e. time elapsed
+    #   from StartTimestampMillis to EndTimestampMillis.
+    #   @return [Integer]
+    #
     class LabelDetection < Struct.new(
       :timestamp,
-      :label)
+      :label,
+      :start_timestamp_millis,
+      :end_timestamp_millis,
+      :duration_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the specified filters that should be applied to a list of
+    # returned GENERAL\_LABELS.
+    #
+    # @!attribute [rw] general_labels
+    #   Contains filters for the object labels returned by DetectLabels.
+    #   Filters can be inclusive, exclusive, or a combination of both and
+    #   can be applied to individual l abels or entire label categories.
+    #   @return [Types::GeneralLabelsSettings]
+    #
+    class LabelDetectionSettings < Struct.new(
+      :general_labels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5467,7 +5506,8 @@ module Aws::Rekognition
     #   lower than this specified value.
     #
     #   If you don't specify `MinConfidence`, the operation returns labels
-    #   with confidence values greater than or equal to 50 percent.
+    #   and bounding boxes (if detected) with confidence values greater than
+    #   or equal to 50 percent.
     #   @return [Float]
     #
     # @!attribute [rw] notification_channel
@@ -5485,12 +5525,26 @@ module Aws::Rekognition
     #   jobs and identify them in the completion notification.
     #   @return [String]
     #
+    # @!attribute [rw] features
+    #   The features to return after video analysis. You can specify that
+    #   GENERAL\_LABELS are returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] settings
+    #   The settings for a StartLabelDetection request.Contains the
+    #   specified parameters for the label detection request of an
+    #   asynchronous label analysis operation. Settings can include filters
+    #   for GENERAL\_LABELS.
+    #   @return [Types::LabelDetectionSettings]
+    #
     class StartLabelDetectionRequest < Struct.new(
       :video,
       :client_request_token,
       :min_confidence,
       :notification_channel,
-      :job_tag)
+      :job_tag,
+      :features,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end

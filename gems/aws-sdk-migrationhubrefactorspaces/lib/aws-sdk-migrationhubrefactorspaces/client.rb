@@ -588,6 +588,13 @@ module Aws::MigrationHubRefactorSpaces
     # health check fails. For public URLs, a connection is opened to the
     # public endpoint. If the URL is not reachable, the health check fails.
     #
+    # Refactor Spaces automatically resolves the public Domain Name System
+    # (DNS) names that are set in CreateServiceRequest$UrlEndpoint when you
+    # create a service. The DNS names resolve when the DNS time-to-live
+    # (TTL) expires, or every 60 seconds for TTLs less than 60 seconds. This
+    # periodic DNS resolution ensures that the route configuration remains
+    # up-to-date.
+    #
     # For private URLS, a target group is created on the Elastic Load
     # Balancing and the target group health check is run. The
     # `HealthCheckProtocol`, `HealthCheckPort`, and `HealthCheckPath` are
@@ -751,7 +758,11 @@ module Aws::MigrationHubRefactorSpaces
     #   pair..
     #
     # @option params [Types::UrlEndpointInput] :url_endpoint
-    #   The configuration for the URL endpoint type.
+    #   The configuration for the URL endpoint type. When creating a route to
+    #   a service, Refactor Spaces automatically resolves the address in the
+    #   `UrlEndpointInput` object URL when the Domain Name System (DNS)
+    #   time-to-live (TTL) expires, or every 60 seconds for TTLs less than 60
+    #   seconds.
     #
     # @option params [String] :vpc_id
     #   The ID of the VPC.
@@ -1860,7 +1871,7 @@ module Aws::MigrationHubRefactorSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubrefactorspaces'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

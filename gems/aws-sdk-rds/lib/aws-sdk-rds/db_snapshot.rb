@@ -447,6 +447,7 @@ module Aws::RDS
     #     pre_signed_url: "String",
     #     option_group_name: "String",
     #     target_custom_availability_zone: "String",
+    #     copy_option_group: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -497,7 +498,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [Boolean] :copy_tags
     #   A value that indicates whether to copy all tags from the source DB
-    #   snapshot to the target DB snapshot. By default, tags are not copied.
+    #   snapshot to the target DB snapshot. By default, tags aren't copied.
     # @option options [String] :pre_signed_url
     #   When you are copying a snapshot from one Amazon Web Services GovCloud
     #   (US) Region to another, the URL that contains a Signature Version 4
@@ -584,6 +585,11 @@ module Aws::RDS
     #   CAZ.
     #
     #   Example: `rds-caz-aiqhTgQv`.
+    # @option options [Boolean] :copy_option_group
+    #   A value that indicates whether to copy the DB option group associated
+    #   with the source DB snapshot to the target Amazon Web Services account
+    #   and associate with the target DB snapshot. The associated option group
+    #   can be copied only with cross-account snapshot copy calls.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.

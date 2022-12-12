@@ -79,10 +79,30 @@ module Aws::RDS
       data[:vpc_id]
     end
 
-    # The Amazon Resource Name (ARN) for the option group.
+    # Specifies the Amazon Resource Name (ARN) for the option group.
     # @return [String]
     def option_group_arn
       data[:option_group_arn]
+    end
+
+    # Specifies the name of the option group from which this option group is
+    # copied.
+    # @return [String]
+    def source_option_group
+      data[:source_option_group]
+    end
+
+    # Specifies the Amazon Web Services account ID for the option group from
+    # which this option group is copied.
+    # @return [String]
+    def source_account_id
+      data[:source_account_id]
+    end
+
+    # Indicates when the option group was copied.
+    # @return [Time]
+    def copy_timestamp
+      data[:copy_timestamp]
     end
 
     # @!endgroup

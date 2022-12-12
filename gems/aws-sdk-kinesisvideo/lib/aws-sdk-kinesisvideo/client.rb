@@ -608,6 +608,64 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Describes a stream’s edge configuration that was set using the
+    # `StartEdgeConfigurationUpdate` API. Use this API to get the status of
+    # the configuration if the configuration is in sync with the Edge Agent.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream whose edge configuration you want to update.
+    #   Specify either the `StreamName` or the `StreamARN`.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream. Specify either the
+    #   `StreamName`or the `StreamARN`.
+    #
+    # @return [Types::DescribeEdgeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEdgeConfigurationOutput#stream_name #stream_name} => String
+    #   * {Types::DescribeEdgeConfigurationOutput#stream_arn #stream_arn} => String
+    #   * {Types::DescribeEdgeConfigurationOutput#creation_time #creation_time} => Time
+    #   * {Types::DescribeEdgeConfigurationOutput#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeEdgeConfigurationOutput#sync_status #sync_status} => String
+    #   * {Types::DescribeEdgeConfigurationOutput#failed_status_details #failed_status_details} => String
+    #   * {Types::DescribeEdgeConfigurationOutput#edge_config #edge_config} => Types::EdgeConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_edge_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #   resp.sync_status #=> String, one of "SYNCING", "ACKNOWLEDGED", "IN_SYNC", "SYNC_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.failed_status_details #=> String
+    #   resp.edge_config.hub_device_arn #=> String
+    #   resp.edge_config.recorder_config.media_source_config.media_uri_secret_arn #=> String
+    #   resp.edge_config.recorder_config.media_source_config.media_uri_type #=> String, one of "RTSP_URI", "FILE_URI"
+    #   resp.edge_config.recorder_config.schedule_config.schedule_expression #=> String
+    #   resp.edge_config.recorder_config.schedule_config.duration_in_seconds #=> Integer
+    #   resp.edge_config.uploader_config.schedule_config.schedule_expression #=> String
+    #   resp.edge_config.uploader_config.schedule_config.duration_in_seconds #=> Integer
+    #   resp.edge_config.deletion_config.edge_retention_in_hours #=> Integer
+    #   resp.edge_config.deletion_config.local_size_config.max_local_media_size_in_mb #=> Integer
+    #   resp.edge_config.deletion_config.local_size_config.strategy_on_full_size #=> String, one of "DELETE_OLDEST_MEDIA", "DENY_NEW_MEDIA"
+    #   resp.edge_config.deletion_config.delete_after_upload #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeEdgeConfiguration AWS API Documentation
+    #
+    # @overload describe_edge_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_edge_configuration(params = {}, options = {})
+      req = build_request(:describe_edge_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets the `ImageGenerationConfiguration` for a given Kinesis video
     # stream.
     #
@@ -1075,6 +1133,110 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # An asynchronous API that updates a stream’s existing edge
+    # configuration. If this API is invoked for the first time, a new edge
+    # configuration will be created for the stream, and the sync status will
+    # be set to `SYNCING`.
+    #
+    # The Kinesis Video Stream will sync the stream’s edge configuration
+    # with the Edge Agent IoT Greengrass component that runs on an IoT Hub
+    # Device setup at your premise. The time to sync can vary and depends on
+    # the connectivity of the Hub Device. The `SyncStatus` will be updated
+    # as the edge configuration is acknowledged, and synced with the Edge
+    # Agent. You will have to wait for the sync status to reach a terminal
+    # state such as: `IN_SYNC` and `SYNC_FAILED`, before using this API
+    # again.
+    #
+    # If you invoke this API during the syncing process, a
+    # `ResourceInUseException` will be thrown. The connectivity of the
+    # stream's edge configuration and the Edge Agent will be retried for 15
+    # minutes. After 15 minutes, the status will transition into the
+    # `SYNC_FAILED` state.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream whose edge configuration you want to update.
+    #   Specify either the `StreamName` or the `StreamARN`.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream. Specify either the
+    #   `StreamName` or the `StreamARN`.
+    #
+    # @option params [required, Types::EdgeConfig] :edge_config
+    #   The edge configuration details required to invoke the update process.
+    #
+    # @return [Types::StartEdgeConfigurationUpdateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartEdgeConfigurationUpdateOutput#stream_name #stream_name} => String
+    #   * {Types::StartEdgeConfigurationUpdateOutput#stream_arn #stream_arn} => String
+    #   * {Types::StartEdgeConfigurationUpdateOutput#creation_time #creation_time} => Time
+    #   * {Types::StartEdgeConfigurationUpdateOutput#last_updated_time #last_updated_time} => Time
+    #   * {Types::StartEdgeConfigurationUpdateOutput#sync_status #sync_status} => String
+    #   * {Types::StartEdgeConfigurationUpdateOutput#failed_status_details #failed_status_details} => String
+    #   * {Types::StartEdgeConfigurationUpdateOutput#edge_config #edge_config} => Types::EdgeConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_edge_configuration_update({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     edge_config: { # required
+    #       hub_device_arn: "HubDeviceArn", # required
+    #       recorder_config: { # required
+    #         media_source_config: { # required
+    #           media_uri_secret_arn: "MediaUriSecretArn", # required
+    #           media_uri_type: "RTSP_URI", # required, accepts RTSP_URI, FILE_URI
+    #         },
+    #         schedule_config: {
+    #           schedule_expression: "ScheduleExpression", # required
+    #           duration_in_seconds: 1, # required
+    #         },
+    #       },
+    #       uploader_config: {
+    #         schedule_config: { # required
+    #           schedule_expression: "ScheduleExpression", # required
+    #           duration_in_seconds: 1, # required
+    #         },
+    #       },
+    #       deletion_config: {
+    #         edge_retention_in_hours: 1,
+    #         local_size_config: {
+    #           max_local_media_size_in_mb: 1,
+    #           strategy_on_full_size: "DELETE_OLDEST_MEDIA", # accepts DELETE_OLDEST_MEDIA, DENY_NEW_MEDIA
+    #         },
+    #         delete_after_upload: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #   resp.sync_status #=> String, one of "SYNCING", "ACKNOWLEDGED", "IN_SYNC", "SYNC_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.failed_status_details #=> String
+    #   resp.edge_config.hub_device_arn #=> String
+    #   resp.edge_config.recorder_config.media_source_config.media_uri_secret_arn #=> String
+    #   resp.edge_config.recorder_config.media_source_config.media_uri_type #=> String, one of "RTSP_URI", "FILE_URI"
+    #   resp.edge_config.recorder_config.schedule_config.schedule_expression #=> String
+    #   resp.edge_config.recorder_config.schedule_config.duration_in_seconds #=> Integer
+    #   resp.edge_config.uploader_config.schedule_config.schedule_expression #=> String
+    #   resp.edge_config.uploader_config.schedule_config.duration_in_seconds #=> Integer
+    #   resp.edge_config.deletion_config.edge_retention_in_hours #=> Integer
+    #   resp.edge_config.deletion_config.local_size_config.max_local_media_size_in_mb #=> Integer
+    #   resp.edge_config.deletion_config.local_size_config.strategy_on_full_size #=> String, one of "DELETE_OLDEST_MEDIA", "DENY_NEW_MEDIA"
+    #   resp.edge_config.deletion_config.delete_after_upload #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/StartEdgeConfigurationUpdate AWS API Documentation
+    #
+    # @overload start_edge_configuration_update(params = {})
+    # @param [Hash] params ({})
+    def start_edge_configuration_update(params = {}, options = {})
+      req = build_request(:start_edge_configuration_update, params)
+      req.send_request(options)
+    end
+
     # Adds one or more tags to a signaling channel. A *tag* is a key-value
     # pair (the value is optional) that you can define and assign to Amazon
     # Web Services resources. If you specify a tag that already exists, the
@@ -1514,7 +1676,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

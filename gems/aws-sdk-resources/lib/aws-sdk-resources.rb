@@ -297,6 +297,7 @@ module Aws
   autoload :SageMaker, 'aws-sdk-sagemaker'
   autoload :SageMakerFeatureStoreRuntime, 'aws-sdk-sagemakerfeaturestoreruntime'
   autoload :SageMakerGeospatial, 'aws-sdk-sagemakergeospatial'
+  autoload :SageMakerMetrics, 'aws-sdk-sagemakermetrics'
   autoload :SageMakerRuntime, 'aws-sdk-sagemakerruntime'
   autoload :SagemakerEdgeManager, 'aws-sdk-sagemakeredgemanager'
   autoload :SavingsPlans, 'aws-sdk-savingsplans'

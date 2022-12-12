@@ -765,6 +765,12 @@ module Aws::CustomerProfiles
     # @option params [Hash<String,String>] :attributes
     #   A key value pair of attributes of a customer profile.
     #
+    # @option params [String] :party_type_string
+    #   An alternative to `PartyType` which accepts any string as input.
+    #
+    # @option params [String] :gender_string
+    #   An alternative to `Gender` which accepts any string as input.
+    #
     # @return [Types::CreateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProfileResponse#profile_id #profile_id} => String
@@ -840,6 +846,8 @@ module Aws::CustomerProfiles
     #     attributes: {
     #       "string1To255" => "string1To255",
     #     },
+    #     party_type_string: "string1To255",
+    #     gender_string: "string1To255",
     #   })
     #
     # @example Response structure
@@ -2984,6 +2992,12 @@ module Aws::CustomerProfiles
     # @option params [Hash<String,String>] :attributes
     #   A key value pair of attributes of a customer profile.
     #
+    # @option params [String] :party_type_string
+    #   An alternative to `PartyType` which accepts any string as input.
+    #
+    # @option params [String] :gender_string
+    #   An alternative to `Gender` which accepts any string as input.
+    #
     # @return [Types::UpdateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProfileResponse#profile_id #profile_id} => String
@@ -3060,6 +3074,8 @@ module Aws::CustomerProfiles
     #     attributes: {
     #       "string1To255" => "string0To255",
     #     },
+    #     party_type_string: "string0To255",
+    #     gender_string: "string0To255",
     #   })
     #
     # @example Response structure
@@ -3088,7 +3104,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

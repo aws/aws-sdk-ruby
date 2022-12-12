@@ -838,6 +838,7 @@ module Aws::RDS
     CopyDBSnapshotMessage.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: String, location_name: "PreSignedUrl"))
     CopyDBSnapshotMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, location_name: "OptionGroupName"))
     CopyDBSnapshotMessage.add_member(:target_custom_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "TargetCustomAvailabilityZone"))
+    CopyDBSnapshotMessage.add_member(:copy_option_group, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyOptionGroup"))
     CopyDBSnapshotMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CopyDBSnapshotMessage.struct_class = Types::CopyDBSnapshotMessage
 
@@ -2738,6 +2739,9 @@ module Aws::RDS
     OptionGroup.add_member(:allows_vpc_and_non_vpc_instance_memberships, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowsVpcAndNonVpcInstanceMemberships"))
     OptionGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
     OptionGroup.add_member(:option_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "OptionGroupArn"))
+    OptionGroup.add_member(:source_option_group, Shapes::ShapeRef.new(shape: String, location_name: "SourceOptionGroup"))
+    OptionGroup.add_member(:source_account_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceAccountId"))
+    OptionGroup.add_member(:copy_timestamp, Shapes::ShapeRef.new(shape: TStamp, location_name: "CopyTimestamp"))
     OptionGroup.struct_class = Types::OptionGroup
 
     OptionGroupAlreadyExistsFault.struct_class = Types::OptionGroupAlreadyExistsFault
@@ -2766,6 +2770,7 @@ module Aws::RDS
     OptionGroupOption.add_member(:supports_option_version_downgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsOptionVersionDowngrade"))
     OptionGroupOption.add_member(:option_group_option_settings, Shapes::ShapeRef.new(shape: OptionGroupOptionSettingsList, location_name: "OptionGroupOptionSettings"))
     OptionGroupOption.add_member(:option_group_option_versions, Shapes::ShapeRef.new(shape: OptionGroupOptionVersionsList, location_name: "OptionGroupOptionVersions"))
+    OptionGroupOption.add_member(:copyable_cross_account, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyableCrossAccount"))
     OptionGroupOption.struct_class = Types::OptionGroupOption
 
     OptionGroupOptionSetting.add_member(:setting_name, Shapes::ShapeRef.new(shape: String, location_name: "SettingName"))

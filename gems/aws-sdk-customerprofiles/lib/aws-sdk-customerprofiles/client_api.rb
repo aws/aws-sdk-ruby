@@ -384,6 +384,8 @@ module Aws::CustomerProfiles
     CreateProfileRequest.add_member(:mailing_address, Shapes::ShapeRef.new(shape: Address, location_name: "MailingAddress"))
     CreateProfileRequest.add_member(:billing_address, Shapes::ShapeRef.new(shape: Address, location_name: "BillingAddress"))
     CreateProfileRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    CreateProfileRequest.add_member(:party_type_string, Shapes::ShapeRef.new(shape: string1To255, location_name: "PartyTypeString"))
+    CreateProfileRequest.add_member(:gender_string, Shapes::ShapeRef.new(shape: string1To255, location_name: "GenderString"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
     CreateProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))
@@ -1082,6 +1084,8 @@ module Aws::CustomerProfiles
     UpdateProfileRequest.add_member(:mailing_address, Shapes::ShapeRef.new(shape: UpdateAddress, location_name: "MailingAddress"))
     UpdateProfileRequest.add_member(:billing_address, Shapes::ShapeRef.new(shape: UpdateAddress, location_name: "BillingAddress"))
     UpdateProfileRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: UpdateAttributes, location_name: "Attributes"))
+    UpdateProfileRequest.add_member(:party_type_string, Shapes::ShapeRef.new(shape: string0To255, location_name: "PartyTypeString"))
+    UpdateProfileRequest.add_member(:gender_string, Shapes::ShapeRef.new(shape: string0To255, location_name: "GenderString"))
     UpdateProfileRequest.struct_class = Types::UpdateProfileRequest
 
     UpdateProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))

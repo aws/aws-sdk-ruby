@@ -596,6 +596,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Route 53 Resolver                              | Aws::Route53Resolver                     | aws-sdk-route53resolver                     | 2018-04-01  |
 | Amazon S3 on Outposts                                 | Aws::S3Outposts                          | aws-sdk-s3outposts                          | 2017-07-25  |
 | Amazon SageMaker Feature Store Runtime                | Aws::SageMakerFeatureStoreRuntime        | aws-sdk-sagemakerfeaturestoreruntime        | 2020-07-01  |
+| Amazon SageMaker Metrics Service                      | Aws::SageMakerMetrics                    | aws-sdk-sagemakermetrics                    | 2022-09-30  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                    | aws-sdk-sagemakerruntime                    | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                           | aws-sdk-sagemaker                           | 2017-07-24  |
 | Amazon SageMaker geospatial capabilities              | Aws::SageMakerGeospatial                 | aws-sdk-sagemakergeospatial                 | 2020-05-27  |

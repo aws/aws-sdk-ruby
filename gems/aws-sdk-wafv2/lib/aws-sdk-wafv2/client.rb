@@ -2199,6 +2199,9 @@ module Aws::WAFV2
     #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
     #   "myotherwebsite.com" \}`
     #
+    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   or `co.uk` as token domains.
+    #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebACLResponse#summary #summary} => Types::WebACLSummary
@@ -6656,10 +6659,15 @@ module Aws::WAFV2
     #
     # 1.  Create your logging destination. You can use an Amazon CloudWatch
     #     Logs log group, an Amazon Simple Storage Service (Amazon S3)
-    #     bucket, or an Amazon Kinesis Data Firehose. For information about
-    #     configuring logging destinations and the permissions that are
-    #     required for each, see [Logging web ACL traffic information][1] in
-    #     the *WAF Developer Guide*.
+    #     bucket, or an Amazon Kinesis Data Firehose.
+    #
+    #     The name that you give the destination must start with
+    #     `aws-waf-logs-`. Depending on the type of destination, you might
+    #     need to configure additional settings or permissions.
+    #
+    #     For configuration requirements and pricing information for each
+    #     destination type, see [Logging web ACL traffic][1] in the *WAF
+    #     Developer Guide*.
     #
     # 2.  Associate your logging destination to your web ACL using a
     #     `PutLoggingConfiguration` request.
@@ -8287,6 +8295,9 @@ module Aws::WAFV2
     #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
     #   "myotherwebsite.com" \}`
     #
+    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   or `co.uk` as token domains.
+    #
     # @return [Types::UpdateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWebACLResponse#next_lock_token #next_lock_token} => String
@@ -9021,7 +9032,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

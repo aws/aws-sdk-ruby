@@ -1626,6 +1626,7 @@ module Aws::EC2
     InstanceTypeOffering = Shapes::StructureShape.new(name: 'InstanceTypeOffering')
     InstanceTypeOfferingsList = Shapes::ListShape.new(name: 'InstanceTypeOfferingsList')
     InstanceTypes = Shapes::ListShape.new(name: 'InstanceTypes')
+    InstanceTypesList = Shapes::ListShape.new(name: 'InstanceTypesList')
     InstanceUsage = Shapes::StructureShape.new(name: 'InstanceUsage')
     InstanceUsageSet = Shapes::ListShape.new(name: 'InstanceUsageSet')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -8241,6 +8242,7 @@ module Aws::EC2
     FpgaImage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     FpgaImage.add_member(:public, Shapes::ShapeRef.new(shape: Boolean, location_name: "public"))
     FpgaImage.add_member(:data_retention_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "dataRetentionSupport"))
+    FpgaImage.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypesList, location_name: "instanceTypes"))
     FpgaImage.struct_class = Types::FpgaImage
 
     FpgaImageAttribute.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageId"))
@@ -9543,6 +9545,8 @@ module Aws::EC2
     InstanceTypeOfferingsList.member = Shapes::ShapeRef.new(shape: InstanceTypeOffering, location_name: "item")
 
     InstanceTypes.member = Shapes::ShapeRef.new(shape: String)
+
+    InstanceTypesList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     InstanceUsage.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
     InstanceUsage.add_member(:used_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "usedInstanceCount"))

@@ -39,6 +39,7 @@ module Aws::KinesisVideo
   # * {NotAuthorizedException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
+  # * {StreamEdgeConfigurationNotFoundException}
   # * {TagsPerResourceExceededLimitException}
   # * {VersionMismatchException}
   #
@@ -218,6 +219,21 @@ module Aws::KinesisVideo
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::KinesisVideo::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class StreamEdgeConfigurationNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::KinesisVideo::Types::StreamEdgeConfigurationNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

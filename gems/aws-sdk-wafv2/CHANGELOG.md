@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-12-12)
+------------------
+
+* Feature - Documents the naming requirement for logging destinations that you use with web ACLs.
+
 1.45.0 (2022-11-07)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2022-12-12)
+------------------
+
+* Feature - This release adds support for public preview of Kinesis Video Stream at Edge enabling customers to provide configuration for the Kinesis Video Stream EdgeAgent running on an on-premise IoT device. Customers can now locally record from cameras and stream videos to the cloud on configured schedule.
+
 1.43.0 (2022-10-25)
 ------------------
 

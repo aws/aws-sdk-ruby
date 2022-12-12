@@ -715,6 +715,14 @@ module Aws::CustomerProfiles
     #   A key value pair of attributes of a customer profile.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] party_type_string
+    #   An alternative to `PartyType` which accepts any string as input.
+    #   @return [String]
+    #
+    # @!attribute [rw] gender_string
+    #   An alternative to `Gender` which accepts any string as input.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateProfileRequest AWS API Documentation
     #
     class CreateProfileRequest < Struct.new(
@@ -739,7 +747,9 @@ module Aws::CustomerProfiles
       :shipping_address,
       :mailing_address,
       :billing_address,
-      :attributes)
+      :attributes,
+      :party_type_string,
+      :gender_string)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4073,6 +4083,14 @@ module Aws::CustomerProfiles
     #   A key value pair of attributes of a customer profile.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] party_type_string
+    #   An alternative to `PartyType` which accepts any string as input.
+    #   @return [String]
+    #
+    # @!attribute [rw] gender_string
+    #   An alternative to `Gender` which accepts any string as input.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateProfileRequest AWS API Documentation
     #
     class UpdateProfileRequest < Struct.new(
@@ -4098,7 +4116,9 @@ module Aws::CustomerProfiles
       :shipping_address,
       :mailing_address,
       :billing_address,
-      :attributes)
+      :attributes,
+      :party_type_string,
+      :gender_string)
       SENSITIVE = []
       include Aws::Structure
     end

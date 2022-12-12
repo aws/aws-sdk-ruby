@@ -1493,7 +1493,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :copy_tags
     #   A value that indicates whether to copy all tags from the source DB
-    #   snapshot to the target DB snapshot. By default, tags are not copied.
+    #   snapshot to the target DB snapshot. By default, tags aren't copied.
     #
     # @option params [String] :pre_signed_url
     #   When you are copying a snapshot from one Amazon Web Services GovCloud
@@ -1584,6 +1584,12 @@ module Aws::RDS
     #
     #   Example: `rds-caz-aiqhTgQv`.
     #
+    # @option params [Boolean] :copy_option_group
+    #   A value that indicates whether to copy the DB option group associated
+    #   with the source DB snapshot to the target Amazon Web Services account
+    #   and associate with the target DB snapshot. The associated option group
+    #   can be copied only with cross-account snapshot copy calls.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1624,6 +1630,7 @@ module Aws::RDS
     #     pre_signed_url: "String",
     #     option_group_name: "String",
     #     target_custom_availability_zone: "String",
+    #     copy_option_group: false,
     #     source_region: "String",
     #   })
     #
@@ -1780,6 +1787,9 @@ module Aws::RDS
     #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
     #   resp.option_group.vpc_id #=> String
     #   resp.option_group.option_group_arn #=> String
+    #   resp.option_group.source_option_group #=> String
+    #   resp.option_group.source_account_id #=> String
+    #   resp.option_group.copy_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroup AWS API Documentation
     #
@@ -6758,6 +6768,9 @@ module Aws::RDS
     #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
     #   resp.option_group.vpc_id #=> String
     #   resp.option_group.option_group_arn #=> String
+    #   resp.option_group.source_option_group #=> String
+    #   resp.option_group.source_account_id #=> String
+    #   resp.option_group.copy_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroup AWS API Documentation
     #
@@ -12019,6 +12032,7 @@ module Aws::RDS
     #   resp.option_group_options[0].option_group_option_versions #=> Array
     #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
     #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
+    #   resp.option_group_options[0].copyable_cross_account #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptions AWS API Documentation
@@ -12158,6 +12172,9 @@ module Aws::RDS
     #   resp.option_groups_list[0].allows_vpc_and_non_vpc_instance_memberships #=> Boolean
     #   resp.option_groups_list[0].vpc_id #=> String
     #   resp.option_groups_list[0].option_group_arn #=> String
+    #   resp.option_groups_list[0].source_option_group #=> String
+    #   resp.option_groups_list[0].source_account_id #=> String
+    #   resp.option_groups_list[0].copy_timestamp #=> Time
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups AWS API Documentation
@@ -16855,6 +16872,9 @@ module Aws::RDS
     #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
     #   resp.option_group.vpc_id #=> String
     #   resp.option_group.option_group_arn #=> String
+    #   resp.option_group.source_option_group #=> String
+    #   resp.option_group.source_account_id #=> String
+    #   resp.option_group.copy_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroup AWS API Documentation
     #
@@ -23640,7 +23660,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

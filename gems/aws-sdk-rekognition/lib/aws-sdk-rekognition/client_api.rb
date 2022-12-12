@@ -242,6 +242,10 @@ module Aws::Rekognition
     LabelCategories = Shapes::ListShape.new(name: 'LabelCategories')
     LabelCategory = Shapes::StructureShape.new(name: 'LabelCategory')
     LabelDetection = Shapes::StructureShape.new(name: 'LabelDetection')
+    LabelDetectionAggregateBy = Shapes::StringShape.new(name: 'LabelDetectionAggregateBy')
+    LabelDetectionFeatureList = Shapes::ListShape.new(name: 'LabelDetectionFeatureList')
+    LabelDetectionFeatureName = Shapes::StringShape.new(name: 'LabelDetectionFeatureName')
+    LabelDetectionSettings = Shapes::StructureShape.new(name: 'LabelDetectionSettings')
     LabelDetectionSortBy = Shapes::StringShape.new(name: 'LabelDetectionSortBy')
     LabelDetections = Shapes::ListShape.new(name: 'LabelDetections')
     Labels = Shapes::ListShape.new(name: 'Labels')
@@ -1056,6 +1060,7 @@ module Aws::Rekognition
     GetLabelDetectionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetLabelDetectionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetLabelDetectionRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: LabelDetectionSortBy, location_name: "SortBy"))
+    GetLabelDetectionRequest.add_member(:aggregate_by, Shapes::ShapeRef.new(shape: LabelDetectionAggregateBy, location_name: "AggregateBy"))
     GetLabelDetectionRequest.struct_class = Types::GetLabelDetectionRequest
 
     GetLabelDetectionResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: VideoJobStatus, location_name: "JobStatus"))
@@ -1207,7 +1212,15 @@ module Aws::Rekognition
 
     LabelDetection.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     LabelDetection.add_member(:label, Shapes::ShapeRef.new(shape: Label, location_name: "Label"))
+    LabelDetection.add_member(:start_timestamp_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "StartTimestampMillis"))
+    LabelDetection.add_member(:end_timestamp_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "EndTimestampMillis"))
+    LabelDetection.add_member(:duration_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "DurationMillis"))
     LabelDetection.struct_class = Types::LabelDetection
+
+    LabelDetectionFeatureList.member = Shapes::ShapeRef.new(shape: LabelDetectionFeatureName)
+
+    LabelDetectionSettings.add_member(:general_labels, Shapes::ShapeRef.new(shape: GeneralLabelsSettings, location_name: "GeneralLabels"))
+    LabelDetectionSettings.struct_class = Types::LabelDetectionSettings
 
     LabelDetections.member = Shapes::ShapeRef.new(shape: LabelDetection)
 
@@ -1557,6 +1570,8 @@ module Aws::Rekognition
     StartLabelDetectionRequest.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
     StartLabelDetectionRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
     StartLabelDetectionRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
+    StartLabelDetectionRequest.add_member(:features, Shapes::ShapeRef.new(shape: LabelDetectionFeatureList, location_name: "Features"))
+    StartLabelDetectionRequest.add_member(:settings, Shapes::ShapeRef.new(shape: LabelDetectionSettings, location_name: "Settings"))
     StartLabelDetectionRequest.struct_class = Types::StartLabelDetectionRequest
 
     StartLabelDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))

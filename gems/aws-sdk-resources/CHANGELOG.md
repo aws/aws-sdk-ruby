@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.153.0 (2022-12-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakermetrics` gem.
+
 3.152.0 (2022-12-01)
 ------------------
 

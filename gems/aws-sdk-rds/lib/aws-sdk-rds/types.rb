@@ -1443,7 +1443,7 @@ module Aws::RDS
     #
     # @!attribute [rw] copy_tags
     #   A value that indicates whether to copy all tags from the source DB
-    #   snapshot to the target DB snapshot. By default, tags are not copied.
+    #   snapshot to the target DB snapshot. By default, tags aren't copied.
     #   @return [Boolean]
     #
     # @!attribute [rw] pre_signed_url
@@ -1539,6 +1539,14 @@ module Aws::RDS
     #   Example: `rds-caz-aiqhTgQv`.
     #   @return [String]
     #
+    # @!attribute [rw] copy_option_group
+    #   A value that indicates whether to copy the DB option group
+    #   associated with the source DB snapshot to the target Amazon Web
+    #   Services account and associate with the target DB snapshot. The
+    #   associated option group can be copied only with cross-account
+    #   snapshot copy calls.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1555,6 +1563,7 @@ module Aws::RDS
       :pre_signed_url,
       :option_group_name,
       :target_custom_availability_zone,
+      :copy_option_group,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -16418,8 +16427,22 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] option_group_arn
-    #   The Amazon Resource Name (ARN) for the option group.
+    #   Specifies the Amazon Resource Name (ARN) for the option group.
     #   @return [String]
+    #
+    # @!attribute [rw] source_option_group
+    #   Specifies the name of the option group from which this option group
+    #   is copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account_id
+    #   Specifies the Amazon Web Services account ID for the option group
+    #   from which this option group is copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_timestamp
+    #   Indicates when the option group was copied.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroup AWS API Documentation
     #
@@ -16431,7 +16454,10 @@ module Aws::RDS
       :options,
       :allows_vpc_and_non_vpc_instance_memberships,
       :vpc_id,
-      :option_group_arn)
+      :option_group_arn,
+      :source_option_group,
+      :source_account_id,
+      :copy_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16550,6 +16576,11 @@ module Aws::RDS
     #   The versions that are available for the option.
     #   @return [Array<Types::OptionVersion>]
     #
+    # @!attribute [rw] copyable_cross_account
+    #   Specifies whether the option can be copied across Amazon Web
+    #   Services accounts.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOption AWS API Documentation
     #
     class OptionGroupOption < Struct.new(
@@ -16568,7 +16599,8 @@ module Aws::RDS
       :vpc_only,
       :supports_option_version_downgrade,
       :option_group_option_settings,
-      :option_group_option_versions)
+      :option_group_option_versions,
+      :copyable_cross_account)
       SENSITIVE = []
       include Aws::Structure
     end

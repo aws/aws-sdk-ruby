@@ -1088,6 +1088,9 @@ module Aws::WAFV2
     #
     #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
     #   "myotherwebsite.com" \}`
+    #
+    #   Public suffixes aren't allowed. For example, you can't use
+    #   `usa.gov` or `co.uk` as token domains.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateWebACLRequest AWS API Documentation
@@ -4102,10 +4105,15 @@ module Aws::WAFV2
     #
     # 1.  Create your logging destination. You can use an Amazon CloudWatch
     #     Logs log group, an Amazon Simple Storage Service (Amazon S3)
-    #     bucket, or an Amazon Kinesis Data Firehose. For information about
-    #     configuring logging destinations and the permissions that are
-    #     required for each, see [Logging web ACL traffic information][1] in
-    #     the *WAF Developer Guide*.
+    #     bucket, or an Amazon Kinesis Data Firehose.
+    #
+    #     The name that you give the destination must start with
+    #     `aws-waf-logs-`. Depending on the type of destination, you might
+    #     need to configure additional settings or permissions.
+    #
+    #     For configuration requirements and pricing information for each
+    #     destination type, see [Logging web ACL traffic][1] in the *WAF
+    #     Developer Guide*.
     #
     # 2.  Associate your logging destination to your web ACL using a
     #     `PutLoggingConfiguration` request.
@@ -6955,6 +6963,9 @@ module Aws::WAFV2
     #
     #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
     #   "myotherwebsite.com" \}`
+    #
+    #   Public suffixes aren't allowed. For example, you can't use
+    #   `usa.gov` or `co.uk` as token domains.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateWebACLRequest AWS API Documentation

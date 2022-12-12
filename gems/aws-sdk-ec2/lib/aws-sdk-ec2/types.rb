@@ -30825,6 +30825,9 @@ module Aws::EC2
     #   Indicates whether data retention support is enabled for the AFI.
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_types
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImage AWS API Documentation
     #
     class FpgaImage < Struct.new(
@@ -30842,7 +30845,8 @@ module Aws::EC2
       :product_codes,
       :tags,
       :public,
-      :data_retention_support)
+      :data_retention_support,
+      :instance_types)
       SENSITIVE = []
       include Aws::Structure
     end

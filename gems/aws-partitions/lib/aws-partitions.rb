@@ -534,6 +534,7 @@ module Aws
             'SageMaker' => 'api.sagemaker',
             'SageMakerFeatureStoreRuntime' => 'featurestore-runtime.sagemaker',
             'SageMakerGeospatial' => 'sagemaker-geospatial',
+            'SageMakerMetrics' => 'metrics.sagemaker',
             'SageMakerRuntime' => 'runtime.sagemaker',
             'SagemakerEdgeManager' => 'edge.sagemaker',
             'SavingsPlans' => 'savingsplans',

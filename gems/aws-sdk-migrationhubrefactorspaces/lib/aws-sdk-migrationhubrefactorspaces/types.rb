@@ -653,7 +653,11 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] url_endpoint
-    #   The configuration for the URL endpoint type.
+    #   The configuration for the URL endpoint type. When creating a route
+    #   to a service, Refactor Spaces automatically resolves the address in
+    #   the `UrlEndpointInput` object URL when the Domain Name System (DNS)
+    #   time-to-live (TTL) expires, or every 60 seconds for TTLs less than
+    #   60 seconds.
     #   @return [Types::UrlEndpointInput]
     #
     # @!attribute [rw] vpc_id
@@ -1680,7 +1684,7 @@ module Aws::MigrationHubRefactorSpaces
     # The input for the Lambda endpoint type.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the Lambda endpoint.
+    #   The Amazon Resource Name (ARN) of the Lambda function or alias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/LambdaEndpointInput AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2022-12-12)
+------------------
+
+* Feature - Update the RDS API model to support copying option groups during the CopyDBSnapshot operation
+
 1.163.0 (2022-12-06)
 ------------------
 

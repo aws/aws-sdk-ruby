@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-12-12)
+------------------
+
+* Feature - This release allows custom strings in PartyType and Gender through 2 new attributes in the CreateProfile and UpdateProfile APIs: PartyTypeString and GenderString.
+
 1.24.0 (2022-11-14)
 ------------------
 
