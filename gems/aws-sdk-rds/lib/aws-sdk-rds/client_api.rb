@@ -66,6 +66,7 @@ module Aws::RDS
     CertificateMessage = Shapes::StructureShape.new(name: 'CertificateMessage')
     CertificateNotFoundFault = Shapes::StructureShape.new(name: 'CertificateNotFoundFault')
     CharacterSet = Shapes::StructureShape.new(name: 'CharacterSet')
+    ClientPasswordAuthType = Shapes::StringShape.new(name: 'ClientPasswordAuthType')
     CloudwatchLogsExportConfiguration = Shapes::StructureShape.new(name: 'CloudwatchLogsExportConfiguration')
     ClusterPendingModifiedValues = Shapes::StructureShape.new(name: 'ClusterPendingModifiedValues')
     ConnectionPoolConfiguration = Shapes::StructureShape.new(name: 'ConnectionPoolConfiguration')
@@ -3563,6 +3564,7 @@ module Aws::RDS
     UserAuthConfig.add_member(:auth_scheme, Shapes::ShapeRef.new(shape: AuthScheme, location_name: "AuthScheme"))
     UserAuthConfig.add_member(:secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretArn"))
     UserAuthConfig.add_member(:iam_auth, Shapes::ShapeRef.new(shape: IAMAuthMode, location_name: "IAMAuth"))
+    UserAuthConfig.add_member(:client_password_auth_type, Shapes::ShapeRef.new(shape: ClientPasswordAuthType, location_name: "ClientPasswordAuthType"))
     UserAuthConfig.struct_class = Types::UserAuthConfig
 
     UserAuthConfigInfo.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -3570,6 +3572,7 @@ module Aws::RDS
     UserAuthConfigInfo.add_member(:auth_scheme, Shapes::ShapeRef.new(shape: AuthScheme, location_name: "AuthScheme"))
     UserAuthConfigInfo.add_member(:secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretArn"))
     UserAuthConfigInfo.add_member(:iam_auth, Shapes::ShapeRef.new(shape: IAMAuthMode, location_name: "IAMAuth"))
+    UserAuthConfigInfo.add_member(:client_password_auth_type, Shapes::ShapeRef.new(shape: ClientPasswordAuthType, location_name: "ClientPasswordAuthType"))
     UserAuthConfigInfo.struct_class = Types::UserAuthConfigInfo
 
     UserAuthConfigInfoList.member = Shapes::ShapeRef.new(shape: UserAuthConfigInfo)

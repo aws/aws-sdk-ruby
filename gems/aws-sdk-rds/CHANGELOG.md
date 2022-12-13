@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2022-12-13)
+------------------
+
+* Feature - This deployment adds ClientPasswordAuthType field to the Auth structure of the DBProxy.
+
 1.164.0 (2022-12-12)
 ------------------
 

@@ -2006,7 +2006,7 @@ module Aws::CloudTrail
     #     lookup_attributes: [
     #       {
     #         attribute_key: "EventId", # required, accepts EventId, EventName, ReadOnly, Username, ResourceType, ResourceName, EventSource, AccessKeyId
-    #         attribute_value: "String", # required
+    #         attribute_value: "LookupAttributeValue", # required
     #       },
     #     ],
     #     start_time: Time.now,
@@ -2985,7 +2985,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

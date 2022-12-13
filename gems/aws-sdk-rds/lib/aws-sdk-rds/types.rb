@@ -22689,6 +22689,11 @@ module Aws::RDS
     #   SQL Server.
     #   @return [String]
     #
+    # @!attribute [rw] client_password_auth_type
+    #   The type of authentication the proxy uses for connections from
+    #   clients.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UserAuthConfig AWS API Documentation
     #
     class UserAuthConfig < Struct.new(
@@ -22696,7 +22701,8 @@ module Aws::RDS
       :user_name,
       :auth_scheme,
       :secret_arn,
-      :iam_auth)
+      :iam_auth,
+      :client_password_auth_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22731,6 +22737,11 @@ module Aws::RDS
     #   SQL Server.
     #   @return [String]
     #
+    # @!attribute [rw] client_password_auth_type
+    #   The type of authentication the proxy uses for connections from
+    #   clients.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UserAuthConfigInfo AWS API Documentation
     #
     class UserAuthConfigInfo < Struct.new(
@@ -22738,7 +22749,8 @@ module Aws::RDS
       :user_name,
       :auth_scheme,
       :secret_arn,
-      :iam_auth)
+      :iam_auth,
+      :client_password_auth_type)
       SENSITIVE = []
       include Aws::Structure
     end

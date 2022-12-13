@@ -5935,6 +5935,7 @@ module Aws::RDS
     #         auth_scheme: "SECRETS", # accepts SECRETS
     #         secret_arn: "String",
     #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
+    #         client_password_auth_type: "MYSQL_NATIVE_PASSWORD", # accepts MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, SQL_SERVER_AUTHENTICATION
     #       },
     #     ],
     #     role_arn: "String", # required
@@ -5968,6 +5969,7 @@ module Aws::RDS
     #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
     #   resp.db_proxy.auth[0].secret_arn #=> String
     #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED", "ENABLED"
+    #   resp.db_proxy.auth[0].client_password_auth_type #=> String, one of "MYSQL_NATIVE_PASSWORD", "POSTGRES_SCRAM_SHA_256", "POSTGRES_MD5", "SQL_SERVER_AUTHENTICATION"
     #   resp.db_proxy.role_arn #=> String
     #   resp.db_proxy.endpoint #=> String
     #   resp.db_proxy.require_tls #=> Boolean
@@ -7798,6 +7800,7 @@ module Aws::RDS
     #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
     #   resp.db_proxy.auth[0].secret_arn #=> String
     #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED", "ENABLED"
+    #   resp.db_proxy.auth[0].client_password_auth_type #=> String, one of "MYSQL_NATIVE_PASSWORD", "POSTGRES_SCRAM_SHA_256", "POSTGRES_MD5", "SQL_SERVER_AUTHENTICATION"
     #   resp.db_proxy.role_arn #=> String
     #   resp.db_proxy.endpoint #=> String
     #   resp.db_proxy.require_tls #=> Boolean
@@ -10377,6 +10380,7 @@ module Aws::RDS
     #   resp.db_proxies[0].auth[0].auth_scheme #=> String, one of "SECRETS"
     #   resp.db_proxies[0].auth[0].secret_arn #=> String
     #   resp.db_proxies[0].auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED", "ENABLED"
+    #   resp.db_proxies[0].auth[0].client_password_auth_type #=> String, one of "MYSQL_NATIVE_PASSWORD", "POSTGRES_SCRAM_SHA_256", "POSTGRES_MD5", "SQL_SERVER_AUTHENTICATION"
     #   resp.db_proxies[0].role_arn #=> String
     #   resp.db_proxies[0].endpoint #=> String
     #   resp.db_proxies[0].require_tls #=> Boolean
@@ -16073,6 +16077,7 @@ module Aws::RDS
     #         auth_scheme: "SECRETS", # accepts SECRETS
     #         secret_arn: "String",
     #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
+    #         client_password_auth_type: "MYSQL_NATIVE_PASSWORD", # accepts MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, SQL_SERVER_AUTHENTICATION
     #       },
     #     ],
     #     require_tls: false,
@@ -16099,6 +16104,7 @@ module Aws::RDS
     #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
     #   resp.db_proxy.auth[0].secret_arn #=> String
     #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED", "ENABLED"
+    #   resp.db_proxy.auth[0].client_password_auth_type #=> String, one of "MYSQL_NATIVE_PASSWORD", "POSTGRES_SCRAM_SHA_256", "POSTGRES_MD5", "SQL_SERVER_AUTHENTICATION"
     #   resp.db_proxy.role_arn #=> String
     #   resp.db_proxy.endpoint #=> String
     #   resp.db_proxy.require_tls #=> Boolean
@@ -23660,7 +23666,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

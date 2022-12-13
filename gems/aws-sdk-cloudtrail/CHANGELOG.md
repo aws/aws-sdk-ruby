@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-12-13)
+------------------
+
+* Feature - Merging mainline branch for service model into mainline release branch. There are no new APIs.
+
 1.54.0 (2022-11-07)
 ------------------
 

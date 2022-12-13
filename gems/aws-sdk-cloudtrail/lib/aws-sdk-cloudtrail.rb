@@ -52,6 +52,6 @@ require_relative 'aws-sdk-cloudtrail/customizations'
 # @!group service
 module Aws::CloudTrail
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end
