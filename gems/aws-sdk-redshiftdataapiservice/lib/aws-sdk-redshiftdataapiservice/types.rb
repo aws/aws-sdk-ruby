@@ -41,6 +41,14 @@ module Aws::RedshiftDataAPIService
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier. This parameter is required when connecting
     #   to a cluster and authenticating using either Secrets Manager or
@@ -65,7 +73,12 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] sqls
-    #   One or more SQL statements to run.
+    #   One or more SQL statements to run.      The SQL statements are run
+    #   as a single transaction. They run serially in the order of the
+    #   array. Subsequent SQL statements don't start until the previous
+    #   statement in the array completes. If any SQL statement fails, then
+    #   because they are run as one transaction, all work is rolled
+    #   back.</p>
     #   @return [Array<String>]
     #
     # @!attribute [rw] statement_name
@@ -87,6 +100,7 @@ module Aws::RedshiftDataAPIService
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatementInput AWS API Documentation
     #
     class BatchExecuteStatementInput < Struct.new(
+      :client_token,
       :cluster_identifier,
       :database,
       :db_user,
@@ -536,6 +550,14 @@ module Aws::RedshiftDataAPIService
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier. This parameter is required when connecting
     #   to a cluster and authenticating using either Secrets Manager or
@@ -586,6 +608,7 @@ module Aws::RedshiftDataAPIService
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatementInput AWS API Documentation
     #
     class ExecuteStatementInput < Struct.new(
+      :client_token,
       :cluster_identifier,
       :database,
       :db_user,
@@ -1168,7 +1191,7 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] value
     #   The value of the parameter. Amazon Redshift implicitly converts to
-    #   the proper data type. For more inforation, see [Data types][1] in
+    #   the proper data type. For more information, see [Data types][1] in
     #   the *Amazon Redshift Database Developer Guide*.
     #
     #

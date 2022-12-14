@@ -98,6 +98,7 @@ module Aws::CloudWatch
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EvaluateLowSampleCountPercentile = Shapes::StringShape.new(name: 'EvaluateLowSampleCountPercentile')
     EvaluationPeriods = Shapes::IntegerShape.new(name: 'EvaluationPeriods')
+    EvaluationState = Shapes::StringShape.new(name: 'EvaluationState')
     ExceptionType = Shapes::StringShape.new(name: 'ExceptionType')
     ExtendedStatistic = Shapes::StringShape.new(name: 'ExtendedStatistic')
     ExtendedStatistics = Shapes::ListShape.new(name: 'ExtendedStatistics')
@@ -744,6 +745,8 @@ module Aws::CloudWatch
     MetricAlarm.add_member(:evaluate_low_sample_count_percentile, Shapes::ShapeRef.new(shape: EvaluateLowSampleCountPercentile, location_name: "EvaluateLowSampleCountPercentile"))
     MetricAlarm.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: "Metrics"))
     MetricAlarm.add_member(:threshold_metric_id, Shapes::ShapeRef.new(shape: MetricId, location_name: "ThresholdMetricId"))
+    MetricAlarm.add_member(:evaluation_state, Shapes::ShapeRef.new(shape: EvaluationState, location_name: "EvaluationState"))
+    MetricAlarm.add_member(:state_transitioned_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateTransitionedTimestamp"))
     MetricAlarm.struct_class = Types::MetricAlarm
 
     MetricAlarms.member = Shapes::ShapeRef.new(shape: MetricAlarm)

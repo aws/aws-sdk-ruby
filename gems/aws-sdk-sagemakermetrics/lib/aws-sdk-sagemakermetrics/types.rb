@@ -16,14 +16,14 @@ module Aws::SageMakerMetrics
     #   The error code of an error that occured when attempting to put
     #   metrics.
     #
-    #   * `METRIC_LIMIT_EXCEEDED` - The max amount of metrics per resource
-    #     has been exceeded.
+    #   * `METRIC_LIMIT_EXCEEDED`\: The maximum amount of metrics per
+    #     resource is exceeded.
     #
-    #   * `INTERNAL_ERROR` - An internal error occured.
+    #   * `INTERNAL_ERROR`\: An internal error occured.
     #
-    #   * `VALIDATION_ERROR` - The metric data failed validation.
+    #   * `VALIDATION_ERROR`\: The metric data failed validation.
     #
-    #   * `CONFLICT_ERROR` - Multiple requests attempted to modify the same
+    #   * `CONFLICT_ERROR`\: Multiple requests attempted to modify the same
     #     data simultaneously.
     #   @return [String]
     #
@@ -41,7 +41,7 @@ module Aws::SageMakerMetrics
     end
 
     # @!attribute [rw] trial_component_name
-    #   The name of Trial Component to associate the metrics with.
+    #   The name of the Trial Component to associate with the metrics.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
@@ -58,8 +58,7 @@ module Aws::SageMakerMetrics
     end
 
     # @!attribute [rw] errors
-    #   Any errors that occur when inserting metric data will appear in
-    #   this.
+    #   Lists any errors that occur when inserting metric data.
     #   @return [Array<Types::BatchPutMetricsError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-metrics-2022-09-30/BatchPutMetricsResponse AWS API Documentation
@@ -77,11 +76,11 @@ module Aws::SageMakerMetrics
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   The time when the metric was recorded.
+    #   The time that the metric was recorded.
     #   @return [Time]
     #
     # @!attribute [rw] step
-    #   Metric step (aka Epoch).
+    #   The metric step (epoch).
     #   @return [Integer]
     #
     # @!attribute [rw] value

@@ -886,6 +886,8 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].period #=> Integer
     #   resp.metric_alarms[0].metrics[0].account_id #=> String
     #   resp.metric_alarms[0].threshold_metric_id #=> String
+    #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA"
+    #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
     #   resp.next_token #=> String
     #
     #
@@ -1006,6 +1008,8 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].period #=> Integer
     #   resp.metric_alarms[0].metrics[0].account_id #=> String
     #   resp.metric_alarms[0].threshold_metric_id #=> String
+    #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA"
+    #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
     #
@@ -2897,7 +2901,10 @@ module Aws::CloudWatch
     end
 
     # Creates or updates an alarm and associates it with the specified
-    # metric, metric math expression, or anomaly detection model.
+    # metric, metric math expression, anomaly detection model, or Metrics
+    # Insights query. For more information about using a Metrics Insights
+    # query for an alarm, see [Create alarms on Metrics Insights
+    # queries][1].
     #
     # Alarms based on anomaly detection models cannot have Auto Scaling
     # actions.
@@ -2924,7 +2931,7 @@ module Aws::CloudWatch
     # CloudWatch creates the necessary service-linked role for you. The
     # service-linked roles are called `AWSServiceRoleForCloudWatchEvents`
     # and `AWSServiceRoleForCloudWatchAlarms_ActionSSM`. For more
-    # information, see [Amazon Web Services service-linked role][1].
+    # information, see [Amazon Web Services service-linked role][2].
     #
     # **Cross-account alarms**
     #
@@ -2938,7 +2945,7 @@ module Aws::CloudWatch
     #   **CloudWatch-CrossAccountSharingRole**. If it does not already have
     #   this role, you must create it using the instructions in **Set up a
     #   sharing account** in [ Cross-account cross-Region CloudWatch
-    #   console][2]. The policy for that role must grant access to the ID of
+    #   console][3]. The policy for that role must grant access to the ID of
     #   the account where you are creating the alarm.
     #
     # * The account where you are creating the alarm (the *monitoring
@@ -2946,12 +2953,13 @@ module Aws::CloudWatch
     #   **AWSServiceRoleForCloudWatchCrossAccount** to allow CloudWatch to
     #   assume the sharing role in the sharing account. If it does not, you
     #   must create it following the directions in **Set up a monitoring
-    #   account** in [ Cross-account cross-Region CloudWatch console][2].
+    #   account** in [ Cross-account cross-Region CloudWatch console][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region
     #
     # @option params [required, String] :alarm_name
     #   The name for the alarm. This name must be unique within the Region.
@@ -3813,7 +3821,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

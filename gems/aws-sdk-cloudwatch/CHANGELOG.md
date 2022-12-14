@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-12-14)
+------------------
+
+* Feature - Adding support for Metrics Insights Alarms
+
 1.69.0 (2022-11-28)
 ------------------
 

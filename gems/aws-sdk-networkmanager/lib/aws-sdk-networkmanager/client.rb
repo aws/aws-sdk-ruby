@@ -1474,6 +1474,7 @@ module Aws::NetworkManager
     #     subnet_arns: ["SubnetArn"], # required
     #     options: {
     #       ipv_6_support: false,
+    #       appliance_mode_support: false,
     #     },
     #     tags: [
     #       {
@@ -1509,6 +1510,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.subnet_arns #=> Array
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
+    #   resp.vpc_attachment.options.appliance_mode_support #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateVpcAttachment AWS API Documentation
     #
@@ -3867,6 +3869,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.subnet_arns #=> Array
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
+    #   resp.vpc_attachment.options.appliance_mode_support #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetVpcAttachment AWS API Documentation
     #
@@ -4449,7 +4452,7 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
-    # Enables for the Network Manager service for an Amazon Web Services
+    # Enables the Network Manager service for an Amazon Web Services
     # Organization. This can only be called by a management account within
     # the organization.
     #
@@ -5089,6 +5092,7 @@ module Aws::NetworkManager
     #     remove_subnet_arns: ["SubnetArn"],
     #     options: {
     #       ipv_6_support: false,
+    #       appliance_mode_support: false,
     #     },
     #   })
     #
@@ -5117,6 +5121,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.subnet_arns #=> Array
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
+    #   resp.vpc_attachment.options.appliance_mode_support #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateVpcAttachment AWS API Documentation
     #
@@ -5140,7 +5145,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

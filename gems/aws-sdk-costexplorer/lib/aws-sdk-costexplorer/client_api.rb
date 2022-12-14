@@ -371,9 +371,10 @@ module Aws::CostExplorer
     AnomalySubscription.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
     AnomalySubscription.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: MonitorArnList, required: true, location_name: "MonitorArnList"))
     AnomalySubscription.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, required: true, location_name: "Subscribers"))
-    AnomalySubscription.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, required: true, location_name: "Threshold"))
+    AnomalySubscription.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage"=>"Threshold has been deprecated in favor of ThresholdExpression"}))
     AnomalySubscription.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, required: true, location_name: "Frequency"))
     AnomalySubscription.add_member(:subscription_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionName"))
+    AnomalySubscription.add_member(:threshold_expression, Shapes::ShapeRef.new(shape: Expression, location_name: "ThresholdExpression"))
     AnomalySubscription.struct_class = Types::AnomalySubscription
 
     AnomalySubscriptions.member = Shapes::ShapeRef.new(shape: AnomalySubscription)
@@ -922,6 +923,9 @@ module Aws::CostExplorer
 
     Impact.add_member(:max_impact, Shapes::ShapeRef.new(shape: GenericDouble, required: true, location_name: "MaxImpact"))
     Impact.add_member(:total_impact, Shapes::ShapeRef.new(shape: GenericDouble, location_name: "TotalImpact"))
+    Impact.add_member(:total_actual_spend, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, location_name: "TotalActualSpend"))
+    Impact.add_member(:total_expected_spend, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, location_name: "TotalExpectedSpend"))
+    Impact.add_member(:total_impact_percentage, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, location_name: "TotalImpactPercentage"))
     Impact.struct_class = Types::Impact
 
     InstanceDetails.add_member(:ec2_instance_details, Shapes::ShapeRef.new(shape: EC2InstanceDetails, location_name: "EC2InstanceDetails"))
@@ -1358,11 +1362,12 @@ module Aws::CostExplorer
     UpdateAnomalyMonitorResponse.struct_class = Types::UpdateAnomalyMonitorResponse
 
     UpdateAnomalySubscriptionRequest.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
-    UpdateAnomalySubscriptionRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, location_name: "Threshold"))
+    UpdateAnomalySubscriptionRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage"=>"Threshold has been deprecated in favor of ThresholdExpression"}))
     UpdateAnomalySubscriptionRequest.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, location_name: "Frequency"))
     UpdateAnomalySubscriptionRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: MonitorArnList, location_name: "MonitorArnList"))
     UpdateAnomalySubscriptionRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, location_name: "Subscribers"))
     UpdateAnomalySubscriptionRequest.add_member(:subscription_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubscriptionName"))
+    UpdateAnomalySubscriptionRequest.add_member(:threshold_expression, Shapes::ShapeRef.new(shape: Expression, location_name: "ThresholdExpression"))
     UpdateAnomalySubscriptionRequest.struct_class = Types::UpdateAnomalySubscriptionRequest
 
     UpdateAnomalySubscriptionResponse.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))

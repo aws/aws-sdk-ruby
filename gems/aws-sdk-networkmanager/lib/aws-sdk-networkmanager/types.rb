@@ -5734,10 +5734,18 @@ module Aws::NetworkManager
     #   Indicates whether IPv6 is supported.
     #   @return [Boolean]
     #
+    # @!attribute [rw] appliance_mode_support
+    #   Indicates whether appliance mode is supported. If enabled, traffic
+    #   flow between a source and destination use the same Availability Zone
+    #   for the VPC attachment for the lifetime of that flow. The default
+    #   value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/VpcOptions AWS API Documentation
     #
     class VpcOptions < Struct.new(
-      :ipv_6_support)
+      :ipv_6_support,
+      :appliance_mode_support)
       SENSITIVE = []
       include Aws::Structure
     end

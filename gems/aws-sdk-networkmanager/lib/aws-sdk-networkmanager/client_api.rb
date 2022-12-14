@@ -1691,6 +1691,7 @@ module Aws::NetworkManager
     VpcAttachment.struct_class = Types::VpcAttachment
 
     VpcOptions.add_member(:ipv_6_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "Ipv6Support"))
+    VpcOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplianceModeSupport"))
     VpcOptions.struct_class = Types::VpcOptions
 
 

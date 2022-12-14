@@ -2411,7 +2411,8 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] state_updated_timestamp
-    #   The time stamp of the last update to the alarm state.
+    #   The time stamp of the last update to the value of either the
+    #   `StateValue` or `EvaluationState` parameters.
     #   @return [Time]
     #
     # @!attribute [rw] metric_name
@@ -2501,6 +2502,22 @@ module Aws::CloudWatch
     #   alarm.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_state
+    #   If the value of this field is `PARTIAL_DATA`, the alarm is being
+    #   evaluated based on only partial data. This happens if the query used
+    #   for the alarm returns more than 10,000 metrics. For more
+    #   information, see [Create alarms on Metrics Insights queries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transitioned_timestamp
+    #   The date and time that the alarm's `StateValue` most recently
+    #   changed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm AWS API Documentation
     #
     class MetricAlarm < Struct.new(
@@ -2530,7 +2547,9 @@ module Aws::CloudWatch
       :treat_missing_data,
       :evaluate_low_sample_count_percentile,
       :metrics,
-      :threshold_metric_id)
+      :threshold_metric_id,
+      :evaluation_state,
+      :state_transitioned_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end

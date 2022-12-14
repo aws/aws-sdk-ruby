@@ -102,7 +102,8 @@ module Aws::CloudWatch
       data[:state_reason_data]
     end
 
-    # The time stamp of the last update to the alarm state.
+    # The time stamp of the last update to the value of either the
+    # `StateValue` or `EvaluationState` parameters.
     # @return [Time]
     def state_updated_timestamp
       data[:state_updated_timestamp]
@@ -221,6 +222,26 @@ module Aws::CloudWatch
     # @return [String]
     def threshold_metric_id
       data[:threshold_metric_id]
+    end
+
+    # If the value of this field is `PARTIAL_DATA`, the alarm is being
+    # evaluated based on only partial data. This happens if the query used
+    # for the alarm returns more than 10,000 metrics. For more information,
+    # see [Create alarms on Metrics Insights queries][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html
+    # @return [String]
+    def evaluation_state
+      data[:evaluation_state]
+    end
+
+    # The date and time that the alarm's `StateValue` most recently
+    # changed.
+    # @return [Time]
+    def state_transitioned_timestamp
+      data[:state_transitioned_timestamp]
     end
 
     # @!endgroup

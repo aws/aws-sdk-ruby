@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2022-12-14)
+------------------
+
+* Feature - Appliance Mode support for AWS Cloud WAN.
+
 1.26.0 (2022-10-25)
 ------------------
 

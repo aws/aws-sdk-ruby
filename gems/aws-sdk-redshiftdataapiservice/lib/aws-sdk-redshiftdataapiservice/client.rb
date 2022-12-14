@@ -396,6 +396,21 @@ module Aws::RedshiftDataAPIService
     #   specify the workgroup name and database name. Also, permission to
     #   call the `redshift-serverless:GetCredentials` operation is required.
     #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [String] :cluster_identifier
     #   The cluster identifier. This parameter is required when connecting to
     #   a cluster and authenticating using either Secrets Manager or temporary
@@ -414,7 +429,11 @@ module Aws::RedshiftDataAPIService
     #   This parameter is required when authenticating using Secrets Manager.
     #
     # @option params [required, Array<String>] :sqls
-    #   One or more SQL statements to run.
+    #   One or more SQL statements to run.      The SQL statements are run as
+    #   a single transaction. They run serially in the order of the array.
+    #   Subsequent SQL statements don't start until the previous statement in
+    #   the array completes. If any SQL statement fails, then because they are
+    #   run as one transaction, all work is rolled back.</p>
     #
     # @option params [String] :statement_name
     #   The name of the SQL statements. You can name the SQL statements when
@@ -442,6 +461,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_execute_statement({
+    #     client_token: "ClientToken",
     #     cluster_identifier: "Location",
     #     database: "String", # required
     #     db_user: "String",
@@ -472,6 +492,14 @@ module Aws::RedshiftDataAPIService
     end
 
     # Cancels a running query. To be canceled, a query must be running.
+    #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
     # @option params [required, String] :id
     #   The identifier of the SQL statement to cancel. This value is a
@@ -506,6 +534,14 @@ module Aws::RedshiftDataAPIService
     # by the Amazon Redshift Data API. The information includes when the
     # query started, when it finished, the query status, the number of rows
     # returned, and the SQL statement.
+    #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
     # @option params [required, String] :id
     #   The identifier of the SQL statement to describe. This value is a
@@ -605,6 +641,14 @@ module Aws::RedshiftDataAPIService
     #   operation is required. When connecting to a serverless workgroup,
     #   specify the workgroup name and database name. Also, permission to
     #   call the `redshift-serverless:GetCredentials` operation is required.
+    #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
     # @option params [String] :cluster_identifier
     #   The cluster identifier. This parameter is required when connecting to
@@ -724,6 +768,21 @@ module Aws::RedshiftDataAPIService
     #   specify the workgroup name and database name. Also, permission to
     #   call the `redshift-serverless:GetCredentials` operation is required.
     #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [String] :cluster_identifier
     #   The cluster identifier. This parameter is required when connecting to
     #   a cluster and authenticating using either Secrets Manager or temporary
@@ -773,6 +832,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.execute_statement({
+    #     client_token: "ClientToken",
     #     cluster_identifier: "Location",
     #     database: "String", # required
     #     db_user: "String",
@@ -810,6 +870,14 @@ module Aws::RedshiftDataAPIService
 
     # Fetches the temporarily cached result of an SQL statement. A token is
     # returned to page through the statement results.
+    #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
     # @option params [required, String] :id
     #   The identifier of the SQL statement whose results are to be fetched.
@@ -897,6 +965,14 @@ module Aws::RedshiftDataAPIService
     #   specify the workgroup name and database name. Also, permission to
     #   call the `redshift-serverless:GetCredentials` operation is required.
     #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+    #
     # @option params [String] :cluster_identifier
     #   The cluster identifier. This parameter is required when connecting to
     #   a cluster and authenticating using either Secrets Manager or temporary
@@ -983,6 +1059,14 @@ module Aws::RedshiftDataAPIService
     #   specify the workgroup name and database name. Also, permission to
     #   call the `redshift-serverless:GetCredentials` operation is required.
     #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+    #
     # @option params [String] :cluster_identifier
     #   The cluster identifier. This parameter is required when connecting to
     #   a cluster and authenticating using either Secrets Manager or temporary
@@ -1067,6 +1151,14 @@ module Aws::RedshiftDataAPIService
 
     # List of SQL statements. By default, only finished statements are
     # shown. A token is returned to page through the statement list.
+    #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of SQL statements to return in the response. If
@@ -1178,6 +1270,14 @@ module Aws::RedshiftDataAPIService
     #   specify the workgroup name and database name. Also, permission to
     #   call the `redshift-serverless:GetCredentials` operation is required.
     #
+    # For more information about the Amazon Redshift Data API and CLI usage
+    # examples, see [Using the Amazon Redshift Data API][1] in the *Amazon
+    # Redshift Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+    #
     # @option params [String] :cluster_identifier
     #   The cluster identifier. This parameter is required when connecting to
     #   a cluster and authenticating using either Secrets Manager or temporary
@@ -1288,7 +1388,7 @@ module Aws::RedshiftDataAPIService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2022-12-14)
+------------------
+
+* Feature - This release supports percentage-based thresholds on Cost Anomaly Detection alert subscriptions.
+
 1.81.0 (2022-12-07)
 ------------------
 

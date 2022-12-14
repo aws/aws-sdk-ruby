@@ -120,46 +120,84 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] monitor_specification
-    #   Use `Expression` to filter by cost or by usage. There are two
-    #   patterns:
+    #   Use `Expression` to filter in various Cost Explorer APIs.
     #
-    #   * Simple dimension values - You can set the dimension name and
-    #     values for the filters that you plan to use. For example, you can
-    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. For
-    #     `GetRightsizingRecommendation`, the Region is a full name (for
-    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     is as follows:
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
     #
-    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #     “us-west-1” ] \} \}`
+    #   There are two patterns:
     #
-    #     The list of dimension values are OR'd together to retrieve cost
-    #     or usage data. You can create `Expression` and `DimensionValues`
-    #     objects using either `with*` methods or `set*` methods in multiple
-    #     lines.
+    #   * Simple dimension values.
     #
-    #   * Compound dimension values with logical operations - You can use
-    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. By doing
-    #     this, you can filter on more advanced options. For example, you
-    #     can filter on `((REGION == us-east-1 OR REGION == us-west-1) OR
-    #     (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
-    #     `Expression` for that is as follows:
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
     #
-    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
-    #     "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
-    #     "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
-    #     \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-    #     \}\}\} ] \} `
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #         “us-west-1” ] \} \}`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with “a”.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
+    #       "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
+    #       "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
+    #       \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values":
+    #       ["DataTransfer"] \}\}\} ] \} `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error.
+    #     example shows an `Expression` object that creates an error: ` \{
+    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] \} \} `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
     #
     #      </note>
-    #
-    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
-    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
     #   and NOT isn't supported. OR isn't supported between different
@@ -172,6 +210,10 @@ module Aws::CostExplorer
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] dimensional_value_count
@@ -236,8 +278,17 @@ module Aws::CostExplorer
     #   @return [Array<Types::Subscriber>]
     #
     # @!attribute [rw] threshold
+    #   (deprecated)
+    #
     #   The dollar value that triggers a notification if the threshold is
     #   exceeded.
+    #
+    #   This field has been deprecated. To specify a threshold, use
+    #   ThresholdExpression. Continued use of Threshold will be treated as
+    #   shorthand syntax for a ThresholdExpression.
+    #
+    #   One of Threshold or ThresholdExpression is required for this
+    #   resource.
     #   @return [Float]
     #
     # @!attribute [rw] frequency
@@ -248,6 +299,47 @@ module Aws::CostExplorer
     #   The name for the subscription.
     #   @return [String]
     #
+    # @!attribute [rw] threshold_expression
+    #   An [Expression][1] object used to specify the anomalies that you
+    #   want to generate alerts for. This supports dimensions and nested
+    #   expressions. The supported dimensions are
+    #   `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and
+    #   `ANOMALY_TOTAL_IMPACT_PERCENTAGE`. The supported nested expression
+    #   types are `AND` and `OR`. The match option `GREATER_THAN_OR_EQUAL`
+    #   is required. Values must be numbers between 0 and 10,000,000,000.
+    #
+    #   One of Threshold or ThresholdExpression is required for this
+    #   resource.
+    #
+    #   The following are examples of valid ThresholdExpressions:
+    #
+    #   * Absolute threshold: `\{ "Dimensions": \{ "Key":
+    #     "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}`
+    #
+    #   * Percentage threshold: `\{ "Dimensions": \{ "Key":
+    #     "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}`
+    #
+    #   * `AND` two thresholds together: `\{ "And": [ \{ "Dimensions": \{
+    #     "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}, \{
+    #     "Dimensions": \{ "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE",
+    #     "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ]
+    #     \} \} ] \}`
+    #
+    #   * `OR` two thresholds together: `\{ "Or": [ \{ "Dimensions": \{
+    #     "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}, \{
+    #     "Dimensions": \{ "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE",
+    #     "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ]
+    #     \} \} ] \}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   @return [Types::Expression]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/AnomalySubscription AWS API Documentation
     #
     class AnomalySubscription < Struct.new(
@@ -257,7 +349,8 @@ module Aws::CostExplorer
       :subscribers,
       :threshold,
       :frequency,
-      :subscription_name)
+      :subscription_name,
+      :threshold_expression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1208,12 +1301,22 @@ module Aws::CostExplorer
     # @!attribute [rw] key
     #   The names of the metadata types that you can use to filter and group
     #   your results. For example, `AZ` returns a list of Availability
-    #   Zones. `LINK_ACCOUNT_NAME` and `SERVICE_CODE` can only be used in
+    #   Zones.
+    #
+    #   Not all dimensions are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
+    #
+    #   `LINK_ACCOUNT_NAME` and `SERVICE_CODE` can only be used in
     #   [CostCategoryRule][1].
     #
+    #   `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and
+    #   `ANOMALY_TOTAL_IMPACT_PERCENTAGE` can only be used in
+    #   [AnomalySubscriptions][2].
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1223,8 +1326,12 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] match_options
     #   The match options that you can use to filter your results.
+    #
     #   `MatchOptions` is only applicable for actions related to Cost
-    #   Category. The default values for `MatchOptions` are `EQUALS` and
+    #   Category and Anomaly Subscriptions. Refer to the documentation for
+    #   each specific API to see what is supported.
+    #
+    #   The default values for `MatchOptions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
     #   @return [Array<String>]
     #
@@ -1567,45 +1674,81 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Use `Expression` to filter by cost or by usage. There are two
-    # patterns:
+    # Use `Expression` to filter in various Cost Explorer APIs.
     #
-    # * Simple dimension values - You can set the dimension name and values
-    #   for the filters that you plan to use. For example, you can filter
-    #   for `REGION==us-east-1 OR REGION==us-west-1`. For
-    #   `GetRightsizingRecommendation`, the Region is a full name (for
-    #   example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #   is as follows:
+    # Not all `Expression` types are supported in each API. Refer to the
+    # documentation for each specific API to see what is supported.
     #
-    #   `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #   “us-west-1” ] \} \}`
+    # There are two patterns:
     #
-    #   The list of dimension values are OR'd together to retrieve cost or
-    #   usage data. You can create `Expression` and `DimensionValues`
-    #   objects using either `with*` methods or `set*` methods in multiple
-    #   lines.
+    # * Simple dimension values.
     #
-    # * Compound dimension values with logical operations - You can use
-    #   multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #   to create a list of one or more `Expression` objects. By doing this,
-    #   you can filter on more advanced options. For example, you can filter
-    #   on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
-    #   Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
-    #   is as follows:
+    #   * There are three types of simple dimension values:
+    #     `CostCategories`, `Tags`, and `Dimensions`.
     #
-    #   `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
-    #   [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
-    #   "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
-    #   "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #     * Specify the `CostCategories` field to define a filter that acts
+    #       on Cost Categories.
+    #
+    #     * Specify the `Tags` field to define a filter that acts on Cost
+    #       Allocation Tags.
+    #
+    #     * Specify the `Dimensions` field to define a filter that acts on
+    #       the [ `DimensionValues` ][1].
+    #
+    #   * For each filter type, you can set the dimension name and values
+    #     for the filters that you plan to use.
+    #
+    #     * For example, you can filter for `REGION==us-east-1 OR
+    #       REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #       Region is a full name (for example, `REGION==US East (N.
+    #       Virginia)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #       “us-west-1” ] \} \}`
+    #
+    #     * As shown in the previous example, lists of dimension values are
+    #       combined with `OR` when applying the filter.
+    #
+    #   * You can also set different match options to further control how
+    #     the filter behaves. Not all APIs support match options. Refer to
+    #     the documentation for each specific API to see what is supported.
+    #
+    #     * For example, you can filter for linked account names that start
+    #       with “a”.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
+    #       "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #
+    # * Compound `Expression` types with logical operations.
+    #
+    #   * You can use multiple `Expression` types and the logical operators
+    #     `AND/OR/NOT` to create a list of one or more `Expression` objects.
+    #     By doing this, you can filter by more advanced options.
+    #
+    #   * For example, you can filter by `((REGION == us-east-1 OR REGION ==
+    #     us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #     DataTransfer)`.
+    #
+    #   * The corresponding `Expression` for this example is as follows: `\{
+    #     "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values": [
+    #     "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
+    #     "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
+    #     "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
     #
     #   <note markdown="1"> Because each `Expression` can have only one operator, the service
     #   returns an error if more than one is specified. The following
-    #   example shows an `Expression` object that creates an error.
+    #   example shows an `Expression` object that creates an error: ` \{
+    #   "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
+    #   "DataTransfer" ] \} \} `
+    #
+    #    The following is an example of the corresponding error message:
+    #   `"Expression has more than one roots. Only one root operator is
+    #   allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #   CostCategories"`
     #
     #    </note>
-    #
-    #   ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
-    #   "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     # <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR and
     # NOT isn't supported. OR isn't supported between different
@@ -1618,6 +1761,10 @@ module Aws::CostExplorer
     # `LINKED_ACCOUNT`.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
     #
     # @!attribute [rw] or
     #   Return results that match either `Dimension` object.
@@ -2156,46 +2303,84 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   Use `Expression` to filter by cost or by usage. There are two
-    #   patterns:
+    #   Use `Expression` to filter in various Cost Explorer APIs.
     #
-    #   * Simple dimension values - You can set the dimension name and
-    #     values for the filters that you plan to use. For example, you can
-    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. For
-    #     `GetRightsizingRecommendation`, the Region is a full name (for
-    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     is as follows:
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
     #
-    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #     “us-west-1” ] \} \}`
+    #   There are two patterns:
     #
-    #     The list of dimension values are OR'd together to retrieve cost
-    #     or usage data. You can create `Expression` and `DimensionValues`
-    #     objects using either `with*` methods or `set*` methods in multiple
-    #     lines.
+    #   * Simple dimension values.
     #
-    #   * Compound dimension values with logical operations - You can use
-    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. By doing
-    #     this, you can filter on more advanced options. For example, you
-    #     can filter on `((REGION == us-east-1 OR REGION == us-west-1) OR
-    #     (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
-    #     `Expression` for that is as follows:
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
     #
-    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
-    #     "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
-    #     "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
-    #     \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-    #     \}\}\} ] \} `
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #         “us-west-1” ] \} \}`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with “a”.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
+    #       "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
+    #       "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
+    #       \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values":
+    #       ["DataTransfer"] \}\}\} ] \} `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error.
+    #     example shows an `Expression` object that creates an error: ` \{
+    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] \} \} `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
     #
     #      </note>
-    #
-    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
-    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
     #   and NOT isn't supported. OR isn't supported between different
@@ -2208,6 +2393,10 @@ module Aws::CostExplorer
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
@@ -2611,46 +2800,84 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   Use `Expression` to filter by cost or by usage. There are two
-    #   patterns:
+    #   Use `Expression` to filter in various Cost Explorer APIs.
     #
-    #   * Simple dimension values - You can set the dimension name and
-    #     values for the filters that you plan to use. For example, you can
-    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. For
-    #     `GetRightsizingRecommendation`, the Region is a full name (for
-    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     is as follows:
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
     #
-    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #     “us-west-1” ] \} \}`
+    #   There are two patterns:
     #
-    #     The list of dimension values are OR'd together to retrieve cost
-    #     or usage data. You can create `Expression` and `DimensionValues`
-    #     objects using either `with*` methods or `set*` methods in multiple
-    #     lines.
+    #   * Simple dimension values.
     #
-    #   * Compound dimension values with logical operations - You can use
-    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. By doing
-    #     this, you can filter on more advanced options. For example, you
-    #     can filter on `((REGION == us-east-1 OR REGION == us-west-1) OR
-    #     (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
-    #     `Expression` for that is as follows:
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
     #
-    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
-    #     "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
-    #     "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
-    #     \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-    #     \}\}\} ] \} `
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #         “us-west-1” ] \} \}`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with “a”.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
+    #       "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
+    #       "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
+    #       \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values":
+    #       ["DataTransfer"] \}\}\} ] \} `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error.
+    #     example shows an `Expression` object that creates an error: ` \{
+    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] \} \} `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
     #
     #      </note>
-    #
-    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
-    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
     #   and NOT isn't supported. OR isn't supported between different
@@ -2663,6 +2890,10 @@ module Aws::CostExplorer
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
@@ -3044,46 +3275,84 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   Use `Expression` to filter by cost or by usage. There are two
-    #   patterns:
+    #   Use `Expression` to filter in various Cost Explorer APIs.
     #
-    #   * Simple dimension values - You can set the dimension name and
-    #     values for the filters that you plan to use. For example, you can
-    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. For
-    #     `GetRightsizingRecommendation`, the Region is a full name (for
-    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     is as follows:
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
     #
-    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #     “us-west-1” ] \} \}`
+    #   There are two patterns:
     #
-    #     The list of dimension values are OR'd together to retrieve cost
-    #     or usage data. You can create `Expression` and `DimensionValues`
-    #     objects using either `with*` methods or `set*` methods in multiple
-    #     lines.
+    #   * Simple dimension values.
     #
-    #   * Compound dimension values with logical operations - You can use
-    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. By doing
-    #     this, you can filter on more advanced options. For example, you
-    #     can filter on `((REGION == us-east-1 OR REGION == us-west-1) OR
-    #     (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
-    #     `Expression` for that is as follows:
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
     #
-    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
-    #     "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
-    #     "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
-    #     \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-    #     \}\}\} ] \} `
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #         “us-west-1” ] \} \}`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with “a”.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
+    #       "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
+    #       "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
+    #       \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values":
+    #       ["DataTransfer"] \}\}\} ] \} `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error.
+    #     example shows an `Expression` object that creates an error: ` \{
+    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] \} \} `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
     #
     #      </note>
-    #
-    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
-    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
     #   and NOT isn't supported. OR isn't supported between different
@@ -3096,6 +3365,10 @@ module Aws::CostExplorer
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] account_scope
@@ -3330,46 +3603,84 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] filter
-    #   Use `Expression` to filter by cost or by usage. There are two
-    #   patterns:
+    #   Use `Expression` to filter in various Cost Explorer APIs.
     #
-    #   * Simple dimension values - You can set the dimension name and
-    #     values for the filters that you plan to use. For example, you can
-    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. For
-    #     `GetRightsizingRecommendation`, the Region is a full name (for
-    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     is as follows:
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
     #
-    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #     “us-west-1” ] \} \}`
+    #   There are two patterns:
     #
-    #     The list of dimension values are OR'd together to retrieve cost
-    #     or usage data. You can create `Expression` and `DimensionValues`
-    #     objects using either `with*` methods or `set*` methods in multiple
-    #     lines.
+    #   * Simple dimension values.
     #
-    #   * Compound dimension values with logical operations - You can use
-    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. By doing
-    #     this, you can filter on more advanced options. For example, you
-    #     can filter on `((REGION == us-east-1 OR REGION == us-west-1) OR
-    #     (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
-    #     `Expression` for that is as follows:
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
     #
-    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
-    #     "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
-    #     "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
-    #     \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-    #     \}\}\} ] \} `
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #         “us-west-1” ] \} \}`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with “a”.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
+    #       "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
+    #       "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
+    #       \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values":
+    #       ["DataTransfer"] \}\}\} ] \} `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error.
+    #     example shows an `Expression` object that creates an error: ` \{
+    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] \} \} `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
     #
     #      </note>
-    #
-    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
-    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
     #   and NOT isn't supported. OR isn't supported between different
@@ -3382,6 +3693,10 @@ module Aws::CostExplorer
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] configuration
@@ -3882,46 +4197,84 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   Use `Expression` to filter by cost or by usage. There are two
-    #   patterns:
+    #   Use `Expression` to filter in various Cost Explorer APIs.
     #
-    #   * Simple dimension values - You can set the dimension name and
-    #     values for the filters that you plan to use. For example, you can
-    #     filter for `REGION==us-east-1 OR REGION==us-west-1`. For
-    #     `GetRightsizingRecommendation`, the Region is a full name (for
-    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     is as follows:
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
     #
-    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #     “us-west-1” ] \} \}`
+    #   There are two patterns:
     #
-    #     The list of dimension values are OR'd together to retrieve cost
-    #     or usage data. You can create `Expression` and `DimensionValues`
-    #     objects using either `with*` methods or `set*` methods in multiple
-    #     lines.
+    #   * Simple dimension values.
     #
-    #   * Compound dimension values with logical operations - You can use
-    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. By doing
-    #     this, you can filter on more advanced options. For example, you
-    #     can filter on `((REGION == us-east-1 OR REGION == us-west-1) OR
-    #     (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)`. The
-    #     `Expression` for that is as follows:
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
     #
-    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
-    #     "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
-    #     "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
-    #     \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-    #     \}\}\} ] \} `
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #         “us-west-1” ] \} \}`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with “a”.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION",
+    #       "Values": [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key":
+    #       "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not":
+    #       \{"Dimensions": \{ "Key": "USAGE_TYPE", "Values":
+    #       ["DataTransfer"] \}\}\} ] \} `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error.
+    #     example shows an `Expression` object that creates an error: ` \{
+    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] \} \} `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
     #
     #      </note>
-    #
-    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
-    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
     #   and NOT isn't supported. OR isn't supported between different
@@ -3934,6 +4287,10 @@ module Aws::CostExplorer
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
@@ -4188,14 +4545,39 @@ module Aws::CostExplorer
     #   @return [Float]
     #
     # @!attribute [rw] total_impact
-    #   The cumulative dollar value that's observed for an anomaly.
+    #   The cumulative dollar difference between the total actual spend and
+    #   total expected spend. It is calculated as `TotalActualSpend -
+    #   TotalExpectedSpend`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_actual_spend
+    #   The cumulative dollar amount that was actually spent during the
+    #   anomaly.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_expected_spend
+    #   The cumulative dollar amount that was expected to be spent during
+    #   the anomaly. It is calculated using advanced machine learning models
+    #   to determine the typical spending pattern based on historical data
+    #   for a customer.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_impact_percentage
+    #   The cumulative percentage difference between the total actual spend
+    #   and total expected spend. It is calculated as `(TotalImpact /
+    #   TotalExpectedSpend) * 100`. When `TotalExpectedSpend` is zero, this
+    #   field is omitted. Expected spend can be zero in situations such as
+    #   when you start to use a service for the first time.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Impact AWS API Documentation
     #
     class Impact < Struct.new(
       :max_impact,
-      :total_impact)
+      :total_impact,
+      :total_actual_spend,
+      :total_expected_spend,
+      :total_impact_percentage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6251,7 +6633,13 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] threshold
+    #   (deprecated)
+    #
     #   The update to the threshold value for receiving notifications.
+    #
+    #   This field has been deprecated. To update a threshold, use
+    #   ThresholdExpression. Continued use of Threshold will be treated as
+    #   shorthand syntax for a ThresholdExpression.
     #   @return [Float]
     #
     # @!attribute [rw] frequency
@@ -6271,6 +6659,44 @@ module Aws::CostExplorer
     #   The new name of the subscription.
     #   @return [String]
     #
+    # @!attribute [rw] threshold_expression
+    #   The update to the [Expression][1] object used to specify the
+    #   anomalies that you want to generate alerts for. This supports
+    #   dimensions and nested expressions. The supported dimensions are
+    #   `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and
+    #   `ANOMALY_TOTAL_IMPACT_PERCENTAGE`. The supported nested expression
+    #   types are `AND` and `OR`. The match option `GREATER_THAN_OR_EQUAL`
+    #   is required. Values must be numbers between 0 and 10,000,000,000.
+    #
+    #   The following are examples of valid ThresholdExpressions:
+    #
+    #   * Absolute threshold: `\{ "Dimensions": \{ "Key":
+    #     "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}`
+    #
+    #   * Percentage threshold: `\{ "Dimensions": \{ "Key":
+    #     "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}`
+    #
+    #   * `AND` two thresholds together: `\{ "And": [ \{ "Dimensions": \{
+    #     "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}, \{
+    #     "Dimensions": \{ "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE",
+    #     "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ]
+    #     \} \} ] \}`
+    #
+    #   * `OR` two thresholds together: `\{ "Or": [ \{ "Dimensions": \{
+    #     "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}, \{
+    #     "Dimensions": \{ "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE",
+    #     "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ]
+    #     \} \} ] \}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   @return [Types::Expression]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateAnomalySubscriptionRequest AWS API Documentation
     #
     class UpdateAnomalySubscriptionRequest < Struct.new(
@@ -6279,7 +6705,8 @@ module Aws::CostExplorer
       :frequency,
       :monitor_arn_list,
       :subscribers,
-      :subscription_name)
+      :subscription_name,
+      :threshold_expression)
       SENSITIVE = []
       include Aws::Structure
     end

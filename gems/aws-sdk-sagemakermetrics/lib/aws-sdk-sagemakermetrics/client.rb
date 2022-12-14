@@ -368,11 +368,12 @@ module Aws::SageMakerMetrics
 
     # @!group API Operations
 
-    # Used to ingest training metrics into SageMaker which can be visualized
-    # in SageMaker Studio and retrieved with the `GetMetrics` API.
+    # Used to ingest training metrics into SageMaker. These metrics can be
+    # visualized in SageMaker Studio and retrieved with the `GetMetrics`
+    # API.
     #
     # @option params [required, String] :trial_component_name
-    #   The name of Trial Component to associate the metrics with.
+    #   The name of the Trial Component to associate with the metrics.
     #
     # @option params [required, Array<Types::RawMetricData>] :metric_data
     #   A list of raw metric values to put.
@@ -423,7 +424,7 @@ module Aws::SageMakerMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakermetrics'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
