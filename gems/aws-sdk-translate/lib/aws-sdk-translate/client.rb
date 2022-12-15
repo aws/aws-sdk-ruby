@@ -1044,21 +1044,16 @@ module Aws::Translate
 
     # Starts an asynchronous batch translation job. Use batch translation
     # jobs to translate large volumes of text across multiple documents at
-    # once. For batch translation, the input documents must share the same
-    # source language. You can specify one or more target languages. Batch
-    # translation translates each input document into each of the target
-    # languages. For more information, see [Asynchronous batch
-    # processing][1]
+    # once. For batch translation, you can input documents with different
+    # source languages (specify `auto` as the source language). You can
+    # specify one or more target languages. Batch translation translates
+    # each input document into each of the target languages. For more
+    # information, see [Asynchronous batch processing][1].
     #
     # Batch translation jobs can be described with the
     # DescribeTextTranslationJob operation, listed with the
     # ListTextTranslationJobs operation, and stopped with the
     # StopTextTranslationJob operation.
-    #
-    # <note markdown="1"> Amazon Translate does not support batch translation of multiple source
-    # languages at once.
-    #
-    #  </note>
     #
     #
     #
@@ -1085,11 +1080,12 @@ module Aws::Translate
     #   [1]: https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html
     #
     # @option params [required, String] :source_language_code
-    #   The language code of the input language. For a list of language codes,
-    #   see [Supported languages][1].
-    #
-    #   Amazon Translate does not automatically detect a source language
-    #   during batch translation jobs.
+    #   The language code of the input language. Specify the language if all
+    #   input documents share the same language. If you don't know the
+    #   language of the source files, or your input documents contains
+    #   different source languages, select `auto`. Amazon Translate auto
+    #   detects the source language for each input document. For a list of
+    #   supported language codes, see [Supported languages][1].
     #
     #
     #
@@ -1099,8 +1095,8 @@ module Aws::Translate
     #   The target languages of the translation job. Enter up to 10 language
     #   codes. Each input file is translated into each target language.
     #
-    #   Each language code is two or five characters long. For a list of
-    #   language codes, see [Supported languages][1].
+    #   Each language code is 2 or 5 characters long. For a list of language
+    #   codes, see [Supported languages][1].
     #
     #
     #
@@ -1302,9 +1298,9 @@ module Aws::Translate
     # [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #
     # @option params [required, String] :text
-    #   The text to translate. The text string can be a maximum of 5,000 bytes
-    #   long. Depending on your character set, this may be fewer than 5,000
-    #   characters.
+    #   The text to translate. The text string can be a maximum of 10,000
+    #   bytes long. Depending on your character set, this may be fewer than
+    #   10,000 characters.
     #
     # @option params [Array<String>] :terminology_names
     #   The name of the terminology list file to be used in the TranslateText
@@ -1486,7 +1482,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

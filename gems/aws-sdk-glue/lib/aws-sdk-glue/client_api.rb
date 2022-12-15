@@ -2444,6 +2444,7 @@ module Aws::Glue
     DeltaTarget.add_member(:delta_tables, Shapes::ShapeRef.new(shape: PathList, location_name: "DeltaTables"))
     DeltaTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     DeltaTarget.add_member(:write_manifest, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "WriteManifest"))
+    DeltaTarget.add_member(:create_native_delta_table, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "CreateNativeDeltaTable"))
     DeltaTarget.struct_class = Types::DeltaTarget
 
     DeltaTargetList.member = Shapes::ShapeRef.new(shape: DeltaTarget)

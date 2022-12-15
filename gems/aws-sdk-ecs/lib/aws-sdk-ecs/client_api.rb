@@ -1165,6 +1165,8 @@ module Aws::ECS
     NetworkBinding.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
     NetworkBinding.add_member(:host_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "hostPort"))
     NetworkBinding.add_member(:protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "protocol"))
+    NetworkBinding.add_member(:container_port_range, Shapes::ShapeRef.new(shape: String, location_name: "containerPortRange"))
+    NetworkBinding.add_member(:host_port_range, Shapes::ShapeRef.new(shape: String, location_name: "hostPortRange"))
     NetworkBinding.struct_class = Types::NetworkBinding
 
     NetworkBindings.member = Shapes::ShapeRef.new(shape: NetworkBinding)
@@ -1208,6 +1210,7 @@ module Aws::ECS
     PortMapping.add_member(:protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "protocol"))
     PortMapping.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     PortMapping.add_member(:app_protocol, Shapes::ShapeRef.new(shape: ApplicationProtocol, location_name: "appProtocol"))
+    PortMapping.add_member(:container_port_range, Shapes::ShapeRef.new(shape: String, location_name: "containerPortRange"))
     PortMapping.struct_class = Types::PortMapping
 
     PortMappingList.member = Shapes::ShapeRef.new(shape: PortMapping)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2022-12-15)
+------------------
+
+* Feature - SageMaker Inference Recommender now allows customers to load tests their models on various instance types using private VPC.
+
 1.154.0 (2022-11-30)
 ------------------
 

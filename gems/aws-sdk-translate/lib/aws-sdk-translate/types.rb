@@ -450,17 +450,9 @@ module Aws::Translate
     #
     # @!attribute [rw] s3_uri
     #   The URI of the AWS S3 folder that contains the input files. Amazon
-    #   Translate translates all the files in the folder. The folder must be
-    #   in the same Region as the API endpoint you are calling.
-    #
-    #   <note markdown="1"> The URI can also point to a single input document, or it can provide
-    #   the prefix for a collection of input documents. For example. if you
-    #   use the URI `S3://bucketName/prefix` and the prefix is a single
-    #   file, Amazon Translate uses that files as input. If more than one
-    #   file begins with the prefix, Amazon Translate uses all of them as
-    #   input.
-    #
-    #    </note>
+    #   Translate translates all the files in the folder and all its
+    #   sub-folders. The folder must be in the same Region as the API
+    #   endpoint you are calling.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -1059,11 +1051,12 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] source_language_code
-    #   The language code of the input language. For a list of language
-    #   codes, see [Supported languages][1].
-    #
-    #   Amazon Translate does not automatically detect a source language
-    #   during batch translation jobs.
+    #   The language code of the input language. Specify the language if all
+    #   input documents share the same language. If you don't know the
+    #   language of the source files, or your input documents contains
+    #   different source languages, select `auto`. Amazon Translate auto
+    #   detects the source language for each input document. For a list of
+    #   supported language codes, see [Supported languages][1].
     #
     #
     #
@@ -1074,8 +1067,8 @@ module Aws::Translate
     #   The target languages of the translation job. Enter up to 10 language
     #   codes. Each input file is translated into each target language.
     #
-    #   Each language code is two or five characters long. For a list of
-    #   language codes, see [Supported languages][1].
+    #   Each language code is 2 or 5 characters long. For a list of language
+    #   codes, see [Supported languages][1].
     #
     #
     #
@@ -1662,9 +1655,9 @@ module Aws::Translate
     end
 
     # @!attribute [rw] text
-    #   The text to translate. The text string can be a maximum of 5,000
+    #   The text to translate. The text string can be a maximum of 10,000
     #   bytes long. Depending on your character set, this may be fewer than
-    #   5,000 characters.
+    #   10,000 characters.
     #   @return [String]
     #
     # @!attribute [rw] terminology_names
@@ -1767,13 +1760,13 @@ module Aws::Translate
     #   If you specify multiple target languages for the job, translate
     #   ignores the formality setting for any unsupported target language.
     #
-    #   For a list of target languages that support formality, see [Setting
-    #   Formality][2] in the Amazon Translate Developer Guide.
+    #   For a list of target languages that support formality, see
+    #   [Supported languages][2] in the Amazon Translate Developer Guide.
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Register_(sociolinguistics)
-    #   [2]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html
+    #   [2]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages
     #   @return [String]
     #
     # @!attribute [rw] profanity
@@ -1786,8 +1779,9 @@ module Aws::Translate
     #   of words.
     #
     #   Amazon Translate doesn't detect profanity in all of its supported
-    #   languages. For languages that support profanity detection, see
-    #   [Masking profanity][1] in the Amazon Translate Developer Guide.
+    #   languages. For languages that don't support profanity detection,
+    #   see [Unsupported languages][1] in the Amazon Translate Developer
+    #   Guide.
     #
     #   If you specify multiple target languages for the job, all the target
     #   languages must support profanity masking. If any of the target
@@ -1796,7 +1790,7 @@ module Aws::Translate
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslationSettings AWS API Documentation

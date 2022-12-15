@@ -2428,10 +2428,27 @@ module Aws::LocationService
     #     `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \| `Noto Sans CJK JP
     #     Light` \| `Noto Sans CJK JP Regular`
     #
+    #   Valid font stacks for [Open Data (Preview)][3] styles:
+    #
+    #   * VectorOpenDataStandardLight – `Amazon Ember Regular,Noto Sans
+    #     Regular` \| `Amazon Ember Bold,Noto Sans Bold` \| `Amazon Ember
+    #     Medium,Noto Sans Medium` \| `Amazon Ember Regular Italic,Noto Sans
+    #     Italic` \| `Amazon Ember Condensed RC Regular,Noto Sans Regular` \|
+    #     `Amazon Ember Condensed RC Bold,Noto Sans Bold`
+    #
+    #   ^
+    #
+    #   <note markdown="1"> The fonts used by `VectorOpenDataStandardLight` are combined fonts
+    #   that use `Amazon Ember` for most glyphs but `Noto Sans` for glyphs
+    #   unsupported by `Amazon Ember`.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
     #
     # @option params [required, String] :font_unicode_range
     #   A Unicode range of characters to download glyphs for. Each response
@@ -3933,7 +3950,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

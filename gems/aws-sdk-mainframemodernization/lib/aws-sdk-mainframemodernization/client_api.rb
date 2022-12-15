@@ -264,6 +264,7 @@ module Aws::MainframeModernization
     CreateApplicationRequest.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     CreateApplicationRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
+    CreateApplicationRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
@@ -296,6 +297,7 @@ module Aws::MainframeModernization
     CreateEnvironmentRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "engineVersion"))
     CreateEnvironmentRequest.add_member(:high_availability_config, Shapes::ShapeRef.new(shape: HighAvailabilityConfig, location_name: "highAvailabilityConfig"))
     CreateEnvironmentRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String20, required: true, location_name: "instanceType"))
+    CreateEnvironmentRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     CreateEnvironmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
     CreateEnvironmentRequest.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String50, location_name: "preferredMaintenanceWindow"))
     CreateEnvironmentRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
@@ -469,6 +471,7 @@ module Aws::MainframeModernization
     GetApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     GetApplicationResponse.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
     GetApplicationResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: Identifier, location_name: "environmentId"))
+    GetApplicationResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     GetApplicationResponse.add_member(:last_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStartTime"))
     GetApplicationResponse.add_member(:latest_version, Shapes::ShapeRef.new(shape: ApplicationVersionSummary, required: true, location_name: "latestVersion"))
     GetApplicationResponse.add_member(:listener_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "listenerArns"))
@@ -559,10 +562,11 @@ module Aws::MainframeModernization
     GetEnvironmentResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "environmentId"))
     GetEnvironmentResponse.add_member(:high_availability_config, Shapes::ShapeRef.new(shape: HighAvailabilityConfig, location_name: "highAvailabilityConfig"))
     GetEnvironmentResponse.add_member(:instance_type, Shapes::ShapeRef.new(shape: String20, required: true, location_name: "instanceType"))
+    GetEnvironmentResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     GetEnvironmentResponse.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: String, location_name: "loadBalancerArn"))
     GetEnvironmentResponse.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
     GetEnvironmentResponse.add_member(:pending_maintenance, Shapes::ShapeRef.new(shape: PendingMaintenance, location_name: "pendingMaintenance"))
-    GetEnvironmentResponse.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "preferredMaintenanceWindow"))
+    GetEnvironmentResponse.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String50, location_name: "preferredMaintenanceWindow"))
     GetEnvironmentResponse.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     GetEnvironmentResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: String50List, required: true, location_name: "securityGroupIds"))
     GetEnvironmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: EnvironmentLifecycle, required: true, location_name: "status"))
@@ -583,7 +587,7 @@ module Aws::MainframeModernization
     InternalServerException.struct_class = Types::InternalServerException
 
     ListApplicationVersionsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
-    ListApplicationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListApplicationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListApplicationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListApplicationVersionsRequest.struct_class = Types::ListApplicationVersionsRequest
 
@@ -592,7 +596,7 @@ module Aws::MainframeModernization
     ListApplicationVersionsResponse.struct_class = Types::ListApplicationVersionsResponse
 
     ListApplicationsRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Identifier, location: "querystring", location_name: "environmentId"))
-    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListApplicationsRequest.add_member(:names, Shapes::ShapeRef.new(shape: EntityNameList, location: "querystring", location_name: "names"))
     ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
@@ -602,7 +606,7 @@ module Aws::MainframeModernization
     ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
 
     ListBatchJobDefinitionsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
-    ListBatchJobDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListBatchJobDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBatchJobDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListBatchJobDefinitionsRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "prefix"))
     ListBatchJobDefinitionsRequest.struct_class = Types::ListBatchJobDefinitionsRequest
@@ -614,7 +618,7 @@ module Aws::MainframeModernization
     ListBatchJobExecutionsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
     ListBatchJobExecutionsRequest.add_member(:execution_ids, Shapes::ShapeRef.new(shape: IdentifierList, location: "querystring", location_name: "executionIds"))
     ListBatchJobExecutionsRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: String100, location: "querystring", location_name: "jobName"))
-    ListBatchJobExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListBatchJobExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBatchJobExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListBatchJobExecutionsRequest.add_member(:started_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "startedAfter"))
     ListBatchJobExecutionsRequest.add_member(:started_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "startedBefore"))
@@ -626,7 +630,7 @@ module Aws::MainframeModernization
     ListBatchJobExecutionsResponse.struct_class = Types::ListBatchJobExecutionsResponse
 
     ListDataSetImportHistoryRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
-    ListDataSetImportHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListDataSetImportHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListDataSetImportHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListDataSetImportHistoryRequest.struct_class = Types::ListDataSetImportHistoryRequest
 
@@ -635,7 +639,7 @@ module Aws::MainframeModernization
     ListDataSetImportHistoryResponse.struct_class = Types::ListDataSetImportHistoryResponse
 
     ListDataSetsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
-    ListDataSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListDataSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListDataSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListDataSetsRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: String200, location: "querystring", location_name: "prefix"))
     ListDataSetsRequest.struct_class = Types::ListDataSetsRequest
@@ -645,7 +649,7 @@ module Aws::MainframeModernization
     ListDataSetsResponse.struct_class = Types::ListDataSetsResponse
 
     ListDeploymentsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
-    ListDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListDeploymentsRequest.struct_class = Types::ListDeploymentsRequest
 
@@ -654,7 +658,7 @@ module Aws::MainframeModernization
     ListDeploymentsResponse.struct_class = Types::ListDeploymentsResponse
 
     ListEngineVersionsRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location: "querystring", location_name: "engineType"))
-    ListEngineVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListEngineVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListEngineVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListEngineVersionsRequest.struct_class = Types::ListEngineVersionsRequest
 
@@ -663,7 +667,7 @@ module Aws::MainframeModernization
     ListEngineVersionsResponse.struct_class = Types::ListEngineVersionsResponse
 
     ListEnvironmentsRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location: "querystring", location_name: "engineType"))
-    ListEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListEnvironmentsRequest.add_member(:names, Shapes::ShapeRef.new(shape: EntityNameList, location: "querystring", location_name: "names"))
     ListEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListEnvironmentsRequest.struct_class = Types::ListEnvironmentsRequest
@@ -785,7 +789,7 @@ module Aws::MainframeModernization
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
 
     UpdateEnvironmentRequest.add_member(:apply_during_maintenance_window, Shapes::ShapeRef.new(shape: Boolean, location_name: "applyDuringMaintenanceWindow"))
-    UpdateEnvironmentRequest.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: CapacityValue, location_name: "desiredCapacity", metadata: {"box"=>true}))
+    UpdateEnvironmentRequest.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: CapacityValue, location_name: "desiredCapacity"))
     UpdateEnvironmentRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "engineVersion"))
     UpdateEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "environmentId"))
     UpdateEnvironmentRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String20, location_name: "instanceType"))

@@ -4766,7 +4766,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] production_variants
-    #   An list of `ProductionVariant` objects, one for each model that you
+    #   An array of `ProductionVariant` objects, one for each model that you
     #   want to host at this endpoint.
     #   @return [Array<Types::ProductionVariant>]
     #
@@ -4848,12 +4848,11 @@ module Aws::SageMaker
     #   @return [Types::ExplainerConfig]
     #
     # @!attribute [rw] shadow_production_variants
-    #   Array of `ProductionVariant` objects. There is one for each model
-    #   that you want to host at this endpoint in shadow mode with
-    #   production traffic replicated from the model specified on
-    #   `ProductionVariants`.If you use this field, you can only specify one
-    #   variant for `ProductionVariants` and one variant for
-    #   `ShadowProductionVariants`.
+    #   An array of `ProductionVariant` objects, one for each model that you
+    #   want to host at this endpoint in shadow mode with production traffic
+    #   replicated from the model specified on `ProductionVariants`. If you
+    #   use this field, you can only specify one variant for
+    #   `ProductionVariants` and one variant for `ShadowProductionVariants`.
     #   @return [Array<Types::ProductionVariant>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
@@ -5067,11 +5066,15 @@ module Aws::SageMaker
     #     defining your [bucket-level key][1] for SSE, you can reduce Amazon
     #     Web Services KMS requests costs by up to 99 percent.
     #
+    #   * Format for the offline store table. Supported formats are Glue
+    #     (Default) and [Apache Iceberg][2].
+    #
     #   To learn more about this parameter, see OfflineStoreConfig.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
+    #   [2]: https://iceberg.apache.org/
     #   @return [Types::OfflineStoreConfig]
     #
     # @!attribute [rw] role_arn
@@ -5472,8 +5475,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] schedule
     #   The duration for which you want the inference experiment to run. If
-    #   you don't specify this field, the experiment automatically
-    #   concludes after 7 days.
+    #   you don't specify this field, the experiment automatically starts
+    #   immediately upon creation and concludes after 7 days.
     #   @return [Types::InferenceExperimentSchedule]
     #
     # @!attribute [rw] description
@@ -5482,7 +5485,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that Amazon SageMaker can assume to access
-    #   model artifacts and container images.
+    #   model artifacts and container images, and manage Amazon SageMaker
+    #   Inference endpoints for model deployment.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_name
@@ -5491,16 +5495,18 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] model_variants
-    #   Array of `ModelVariantConfigSummary` objects. There is one for each
-    #   variant in the inference experiment. Each
-    #   `ModelVariantConfigSummary` object in the array describes the
-    #   infrastructure configuration for the corresponding variant.
+    #   An array of `ModelVariantConfig` objects. There is one for each
+    #   variant in the inference experiment. Each `ModelVariantConfig`
+    #   object in the array describes the infrastructure configuration for
+    #   the corresponding variant.
     #   @return [Array<Types::ModelVariantConfig>]
     #
     # @!attribute [rw] data_storage_config
-    #   The storage configuration for the inference experiment. This is an
-    #   optional parameter that you can use for data capture. For more
-    #   information, see [Capture data][1].
+    #   The Amazon S3 location and configuration for storing inference
+    #   request and response data.
+    #
+    #   This is an optional parameter that you can use for data capture. For
+    #   more information, see [Capture data][1].
     #
     #
     #
@@ -5508,9 +5514,12 @@ module Aws::SageMaker
     #   @return [Types::InferenceExperimentDataStorageConfig]
     #
     # @!attribute [rw] shadow_mode_config
-    #   Shows which variant is the production variant and which variant is
-    #   the shadow variant. For the shadow variant, also shows the sampling
-    #   percentage.
+    #   The configuration of `ShadowMode` inference experiment type. Use
+    #   this field to specify a production variant which takes all the
+    #   inference requests, and a shadow variant to which Amazon SageMaker
+    #   replicates a percentage of the inference requests. For the shadow
+    #   variant also specify the percentage of requests that Amazon
+    #   SageMaker replicates.
     #   @return [Types::ShadowModeConfig]
     #
     # @!attribute [rw] kms_key
@@ -8008,9 +8017,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
-    #   Management Service key that SageMaker uses to encrypt data on the
-    #   storage volume attached to the ML compute instance that hosts the
-    #   endpoint.
+    #   Management Service key that SageMaker uses to encrypt the captured
+    #   data at rest using Amazon S3 server-side encryption.
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -10818,12 +10826,9 @@ module Aws::SageMaker
     #   @return [Types::ExplainerConfig]
     #
     # @!attribute [rw] shadow_production_variants
-    #   Array of `ProductionVariant` objects. There is one for each model
-    #   that you want to host at this endpoint in shadow mode with
-    #   production traffic replicated from the model specified on
-    #   `ProductionVariants`.If you use this field, you can only specify one
-    #   variant for `ProductionVariants` and one variant for
-    #   `ShadowProductionVariants`.
+    #   An array of `ProductionVariant` objects, one for each model that you
+    #   want to host at this endpoint in shadow mode with production traffic
+    #   replicated from the model specified on `ProductionVariants`.
     #   @return [Array<Types::ProductionVariant>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput AWS API Documentation
@@ -10949,12 +10954,10 @@ module Aws::SageMaker
     #   @return [Types::ExplainerConfig]
     #
     # @!attribute [rw] shadow_production_variants
-    #   Array of `ProductionVariant` objects. There is one for each model
+    #   An array of ProductionVariantSummary objects, one for each model
     #   that you want to host at this endpoint in shadow mode with
     #   production traffic replicated from the model specified on
-    #   `ProductionVariants`.If you use this field, you can only specify one
-    #   variant for `ProductionVariants` and one variant for
-    #   `ShadowProductionVariants`.
+    #   `ProductionVariants`.
     #   @return [Array<Types::ProductionVariantSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput AWS API Documentation
@@ -11103,14 +11106,24 @@ module Aws::SageMaker
     #   @return [Types::OnlineStoreConfig]
     #
     # @!attribute [rw] offline_store_config
-    #   The configuration of the `OfflineStore`, inducing the S3 location of
-    #   the `OfflineStore`, Amazon Web Services Glue or Amazon Web Services
-    #   Hive data catalogue configurations, and the security configuration.
+    #   The configuration of the offline store. It includes the following
+    #   configurations:
+    #
+    #   * Amazon S3 location of the offline store.
+    #
+    #   * Configuration of the Glue data catalog.
+    #
+    #   * Table format of the offline store.
+    #
+    #   * Option to disable the automatic creation of a Glue table for the
+    #     offline store.
+    #
+    #   * Encryption configuration.
     #   @return [Types::OfflineStoreConfig]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM execution role used to
-    #   persist data into the `OfflineStore` if an `OfflineStoreConfig` is
+    #   persist data into the OfflineStore if an OfflineStoreConfig is
     #   provided.
     #   @return [String]
     #
@@ -11830,8 +11843,8 @@ module Aws::SageMaker
     #
     #   * `Creating` - Amazon SageMaker is creating your experiment.
     #
-    #   * `Created` - Amazon SageMaker has finished creating your experiment
-    #     and it will begin at the scheduled time.
+    #   * `Created` - Amazon SageMaker has finished the creation of your
+    #     experiment and will begin the experiment at the scheduled time.
     #
     #   * `Updating` - When you make changes to your experiment, your
     #     experiment shows as updating.
@@ -11844,12 +11857,15 @@ module Aws::SageMaker
     #
     #   * `Completed` - Your experiment has completed.
     #
-    #   * `Cancelled` - When you conclude your experiment early, it shows as
-    #     canceled.
+    #   * `Cancelled` - When you conclude your experiment early using the
+    #     StopInferenceExperiment API, or if any operation fails with an
+    #     unexpected error, it shows as cancelled.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
-    #   The error message for the inference experiment status result.
+    #   The error message or client-specified `Reason` from the
+    #   StopInferenceExperiment API, that explains the status of the
+    #   inference experiment.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -11861,8 +11877,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] completion_time
-    #   The timestamp at which the inference experiment was completed or
-    #   will complete.
+    #   The timestamp at which the inference experiment was completed.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -11871,7 +11886,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that Amazon SageMaker can assume to access
-    #   model artifacts and container images.
+    #   model artifacts and container images, and manage Amazon SageMaker
+    #   Inference endpoints for model deployment.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_metadata
@@ -11879,21 +11895,24 @@ module Aws::SageMaker
     #   @return [Types::EndpointMetadata]
     #
     # @!attribute [rw] model_variants
-    #   Array of `ModelVariantConfigSummary` objects. There is one for each
-    #   variant in the inference experiment. Each
+    #   An array of `ModelVariantConfigSummary` objects. There is one for
+    #   each variant in the inference experiment. Each
     #   `ModelVariantConfigSummary` object in the array describes the
     #   infrastructure configuration for deploying the corresponding
     #   variant.
     #   @return [Array<Types::ModelVariantConfigSummary>]
     #
     # @!attribute [rw] data_storage_config
-    #   The Amazon S3 storage configuration for the inference experiment.
+    #   The Amazon S3 location and configuration for storing inference
+    #   request and response data.
     #   @return [Types::InferenceExperimentDataStorageConfig]
     #
     # @!attribute [rw] shadow_mode_config
-    #   Shows which variant is a production variant and which variant is a
-    #   shadow variant. For shadow variants, also shows the sampling
-    #   percentage.
+    #   The configuration of `ShadowMode` inference experiment type, which
+    #   shows the production variant that takes all the inference requests,
+    #   and the shadow variant to which Amazon SageMaker replicates a
+    #   percentage of the inference requests. For the shadow variant it also
+    #   shows the percentage of requests that Amazon SageMaker replicates.
     #   @return [Types::ShadowModeConfig]
     #
     # @!attribute [rw] kms_key
@@ -15742,11 +15761,9 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] shadow_production_variants
-    #   Array of `ProductionVariant` objects, one for each model that you
-    #   want to host at this endpoint in shadow mode with production traffic
-    #   replicated from the model specified on `ProductionVariants`.If you
-    #   use this field, you can only specify one variant for
-    #   `ProductionVariants` and one variant for `ShadowProductionVariants`.
+    #   A list of the shadow variants hosted on the endpoint. Each shadow
+    #   variant is a model in shadow mode with production traffic replicated
+    #   from the proudction variant.
     #   @return [Array<Types::ProductionVariantSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Endpoint AWS API Documentation
@@ -15927,8 +15944,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   If the status of the endpoint is `Failed`, this provides the reason
-    #   why it failed.
+    #   If the status of the endpoint is `Failed`, or the status is
+    #   `InService` but update operation fails, this provides the reason why
+    #   it failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointMetadata AWS API Documentation
@@ -19228,12 +19246,16 @@ module Aws::SageMaker
 
     # The configuration of resources, including compute instances and
     # storage volumes for use in training jobs launched by hyperparameter
-    # tuning jobs. Specify one or more instance type and count and the
-    # allocation strategy for instance selection.
+    # tuning jobs. `HyperParameterTuningResourceConfig` is similar to
+    # `ResourceConfig`, but has the additional `InstanceConfigs` and
+    # `AllocationStrategy` fields to allow for flexible instance management.
+    # Specify one or more instance types, count, and the allocation strategy
+    # for instance selection.
     #
-    # <note markdown="1"> `HyperParameterTuningResourceConfig` supports all of the capabilities
-    # of ResourceConfig with added functionality for flexible instance
-    # management.
+    # <note markdown="1"> `HyperParameterTuningResourceConfig` supports the capabilities of
+    # `ResourceConfig` with the exception of `KeepAlivePeriodInSeconds`.
+    # Hyperparameter tuning jobs use warm pools by default, which reuse
+    # clusters between training jobs.
     #
     #  </note>
     #
@@ -19629,17 +19651,18 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The Amazon S3 location and configuration for storing inference
-    # experiment data.
+    # The Amazon S3 location and configuration for storing inference request
+    # and response data.
     #
     # @!attribute [rw] destination
-    #   The Amazon S3 bucket where the inference experiment data is stored.
+    #   The Amazon S3 bucket where the inference request and response data
+    #   is stored.
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
-    #   Management Service key that Amazon SageMaker uses to encrypt
-    #   captured data when uploading to Amazon S3.
+    #   The Amazon Web Services Key Management Service key that Amazon
+    #   SageMaker uses to encrypt captured data at rest using Amazon S3
+    #   server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -19724,7 +19747,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that Amazon SageMaker can assume to access
-    #   model artifacts and container images.
+    #   model artifacts and container images, and manage Amazon SageMaker
+    #   Inference endpoints for model deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceExperimentSummary AWS API Documentation
@@ -27865,7 +27889,7 @@ module Aws::SageMaker
     # Contains information about the deployment options of a model.
     #
     # @!attribute [rw] model_name
-    #   The name of the model.
+    #   The name of the Amazon SageMaker Model entity.
     #   @return [String]
     #
     # @!attribute [rw] variant_name
@@ -27890,7 +27914,7 @@ module Aws::SageMaker
     # Summary of the deployment configuration of a model.
     #
     # @!attribute [rw] model_name
-    #   The name of the model.
+    #   The name of the Amazon SageMaker Model entity.
     #   @return [String]
     #
     # @!attribute [rw] variant_name
@@ -27903,7 +27927,24 @@ module Aws::SageMaker
     #   @return [Types::ModelInfrastructureConfig]
     #
     # @!attribute [rw] status
-    #   The status of the deployment.
+    #   The status of deployment for the model variant on the hosted
+    #   inference endpoint.
+    #
+    #   * `Creating` - Amazon SageMaker is preparing the model variant on
+    #     the hosted inference endpoint.
+    #
+    #   * `InService` - The model variant is running on the hosted inference
+    #     endpoint.
+    #
+    #   * `Updating` - Amazon SageMaker is updating the model variant on the
+    #     hosted inference endpoint.
+    #
+    #   * `Deleting` - Amazon SageMaker is deleting the model variant on the
+    #     hosted inference endpoint.
+    #
+    #   * `Deleted` - The model variant has been deleted on the hosted
+    #     inference endpoint. This can only happen after stopping the
+    #     experiment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelVariantConfigSummary AWS API Documentation
@@ -29049,8 +29090,12 @@ module Aws::SageMaker
     #   @return [Types::DataCatalogConfig]
     #
     # @!attribute [rw] table_format
-    #   Format for the offline store feature group. `Iceberg` is the optimal
-    #   format for feature groups shared between offline and online stores.
+    #   Format for the offline store table. Supported formats are Glue
+    #   (Default) and [Apache Iceberg][1].
+    #
+    #
+    #
+    #   [1]: https://iceberg.apache.org/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OfflineStoreConfig AWS API Documentation
@@ -29723,7 +29768,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] production_variants
-    #   List of `PendingProductionVariantSummary` objects.
+    #   An array of PendingProductionVariantSummary objects, one for each
+    #   model hosted behind this endpoint for the in-progress deployment.
     #   @return [Array<Types::PendingProductionVariantSummary>]
     #
     # @!attribute [rw] start_time
@@ -29731,11 +29777,10 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] shadow_production_variants
-    #   Array of `ProductionVariant` objects, one for each model that you
-    #   want to host at this endpoint in shadow mode with production traffic
-    #   replicated from the model specified on `ProductionVariants`.If you
-    #   use this field, you can only specify one variant for
-    #   `ProductionVariants` and one variant for `ShadowProductionVariants`.
+    #   An array of PendingProductionVariantSummary objects, one for each
+    #   model hosted behind this endpoint in shadow mode with production
+    #   traffic replicated from the model specified on `ProductionVariants`
+    #   for the in-progress deployment.
     #   @return [Array<Types::PendingProductionVariantSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PendingDeploymentSummary AWS API Documentation
@@ -32069,15 +32114,15 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The infrastructure configuration for deploying the model to real-time
-    # inference.
+    # The infrastructure configuration for deploying the model to a
+    # real-time inference endpoint.
     #
     # @!attribute [rw] instance_type
-    #   The number of instances of the type specified by `InstanceType`.
+    #   The instance type the model is deployed to.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
-    #   The instance type the model is deployed to.
+    #   The number of instances of the type specified by `InstanceType`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RealTimeInferenceConfig AWS API Documentation
@@ -32282,6 +32327,11 @@ module Aws::SageMaker
     #   job.
     #   @return [Array<Types::EndpointInfo>]
     #
+    # @!attribute [rw] vpc_config
+    #   Inference Recommender provisions SageMaker endpoints with access to
+    #   VPC in the inference recommendation job.
+    #   @return [Types::RecommendationJobVpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
     #
     class RecommendationJobInputConfig < Struct.new(
@@ -32292,7 +32342,8 @@ module Aws::SageMaker
       :endpoint_configurations,
       :volume_kms_key_id,
       :container_config,
-      :endpoints)
+      :endpoints,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32409,6 +32460,29 @@ module Aws::SageMaker
     class RecommendationJobStoppingConditions < Struct.new(
       :max_invocations,
       :model_latency_thresholds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Inference Recommender provisions SageMaker endpoints with access to
+    # VPC in the inference recommendation job.
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security group IDs. IDs have the form of `sg-xxxxxxxx`.
+    #   Specify the security groups for the VPC that is specified in the
+    #   `Subnets` field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID of the subnets in the VPC to which you want to connect your
+    #   model.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobVpcConfig AWS API Documentation
+    #
+    class RecommendationJobVpcConfig < Struct.new(
+      :security_group_ids,
+      :subnets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32681,11 +32755,37 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Describes the resources, including ML compute instances and ML storage
-    # volumes, to use for model training.
+    # Describes the resources, including machine learning (ML) compute
+    # instances and ML storage volumes, to use for model training.
     #
     # @!attribute [rw] instance_type
     #   The ML compute instance type.
+    #
+    #   <note markdown="1"> SageMaker Training on Amazon Elastic Compute Cloud (EC2) P4de
+    #   instances is in preview release starting December 9th, 2022.
+    #
+    #    [Amazon EC2 P4de instances][1] (currently in preview) are powered by
+    #   8 NVIDIA A100 GPUs with 80GB high-performance HBM2e GPU memory,
+    #   which accelerate the speed of training ML models that need to be
+    #   trained on large datasets of high-resolution data. In this preview
+    #   release, Amazon SageMaker supports ML training jobs on P4de
+    #   instances (`ml.p4de.24xlarge`) to reduce model training time. The
+    #   `ml.p4de.24xlarge` instances are available in the following Amazon
+    #   Web Services Regions.
+    #
+    #    * US East (N. Virginia) (us-east-1)
+    #
+    #   * US West (Oregon) (us-west-2)
+    #
+    #    To request quota limit increase and start using P4de instances,
+    #   contact the SageMaker Training service team through your account
+    #   team.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/ec2/instance-types/p4/
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -33700,12 +33800,15 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Shows which variant is a production variant and which variant is a
-    # shadow variant. For shadow variants, also shows the sampling
-    # percentages.
+    # The configuration of `ShadowMode` inference experiment type, which
+    # specifies a production variant to take all the inference requests, and
+    # a shadow variant to which Amazon SageMaker replicates a percentage of
+    # the inference requests. For the shadow variant it also specifies the
+    # percentage of requests that Amazon SageMaker replicates.
     #
     # @!attribute [rw] source_model_variant_name
-    #   The name of the production variant.
+    #   The name of the production variant, which takes all the inference
+    #   requests.
     #   @return [String]
     #
     # @!attribute [rw] shadow_model_variants
@@ -33728,8 +33831,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sampling_percentage
-    #   The percentage of inference requests that are replicated to the
-    #   shadow variant.
+    #   The percentage of inference requests that Amazon SageMaker
+    #   replicates from the production variant to the shadow variant.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ShadowModelVariantConfig AWS API Documentation
@@ -34135,10 +34238,10 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] desired_model_variants
-    #   Array of `ModelVariantConfig` objects. There is one for each variant
-    #   that you want to deploy after the inference experiment stops. Each
-    #   `ModelVariantConfig` describes the infrastructure configuration for
-    #   deploying the corresponding variant.
+    #   An array of `ModelVariantConfig` objects. There is one for each
+    #   variant that you want to deploy after the inference experiment
+    #   stops. Each `ModelVariantConfig` describes the infrastructure
+    #   configuration for deploying the corresponding variant.
     #   @return [Array<Types::ModelVariantConfig>]
     #
     # @!attribute [rw] desired_state
@@ -37156,16 +37259,22 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] model_variants
-    #   Array of `ModelVariantConfigSummary` objects. There is one for each
+    #   An array of `ModelVariantConfig` objects. There is one for each
     #   variant, whose infrastructure configuration you want to update.
     #   @return [Array<Types::ModelVariantConfig>]
     #
     # @!attribute [rw] data_storage_config
-    #   The Amazon S3 storage configuration for the inference experiment.
+    #   The Amazon S3 location and configuration for storing inference
+    #   request and response data.
     #   @return [Types::InferenceExperimentDataStorageConfig]
     #
     # @!attribute [rw] shadow_mode_config
-    #   The Amazon S3 storage configuration for the inference experiment.
+    #   The configuration of `ShadowMode` inference experiment type. Use
+    #   this field to specify a production variant which takes all the
+    #   inference requests, and a shadow variant to which Amazon SageMaker
+    #   replicates a percentage of the inference requests. For the shadow
+    #   variant also specify the percentage of requests that Amazon
+    #   SageMaker replicates.
     #   @return [Types::ShadowModeConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateInferenceExperimentRequest AWS API Documentation

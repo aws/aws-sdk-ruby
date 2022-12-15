@@ -66,8 +66,14 @@ module Aws::BackupGateway
             Aws::BackupGateway::Endpoints::DeleteHypervisor.build(context)
           when :disassociate_gateway_from_server
             Aws::BackupGateway::Endpoints::DisassociateGatewayFromServer.build(context)
+          when :get_bandwidth_rate_limit_schedule
+            Aws::BackupGateway::Endpoints::GetBandwidthRateLimitSchedule.build(context)
           when :get_gateway
             Aws::BackupGateway::Endpoints::GetGateway.build(context)
+          when :get_hypervisor
+            Aws::BackupGateway::Endpoints::GetHypervisor.build(context)
+          when :get_hypervisor_property_mappings
+            Aws::BackupGateway::Endpoints::GetHypervisorPropertyMappings.build(context)
           when :get_virtual_machine
             Aws::BackupGateway::Endpoints::GetVirtualMachine.build(context)
           when :import_hypervisor_configuration
@@ -80,8 +86,14 @@ module Aws::BackupGateway
             Aws::BackupGateway::Endpoints::ListTagsForResource.build(context)
           when :list_virtual_machines
             Aws::BackupGateway::Endpoints::ListVirtualMachines.build(context)
+          when :put_bandwidth_rate_limit_schedule
+            Aws::BackupGateway::Endpoints::PutBandwidthRateLimitSchedule.build(context)
+          when :put_hypervisor_property_mappings
+            Aws::BackupGateway::Endpoints::PutHypervisorPropertyMappings.build(context)
           when :put_maintenance_start_time
             Aws::BackupGateway::Endpoints::PutMaintenanceStartTime.build(context)
+          when :start_virtual_machines_metadata_sync
+            Aws::BackupGateway::Endpoints::StartVirtualMachinesMetadataSync.build(context)
           when :tag_resource
             Aws::BackupGateway::Endpoints::TagResource.build(context)
           when :test_hypervisor_configuration

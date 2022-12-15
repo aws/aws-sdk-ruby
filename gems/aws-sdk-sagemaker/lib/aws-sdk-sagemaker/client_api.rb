@@ -1546,6 +1546,11 @@ module Aws::SageMaker
     RecommendationJobSupportedContentTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedContentTypes')
     RecommendationJobSupportedInstanceTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedInstanceTypes')
     RecommendationJobType = Shapes::StringShape.new(name: 'RecommendationJobType')
+    RecommendationJobVpcConfig = Shapes::StructureShape.new(name: 'RecommendationJobVpcConfig')
+    RecommendationJobVpcSecurityGroupId = Shapes::StringShape.new(name: 'RecommendationJobVpcSecurityGroupId')
+    RecommendationJobVpcSecurityGroupIds = Shapes::ListShape.new(name: 'RecommendationJobVpcSecurityGroupIds')
+    RecommendationJobVpcSubnetId = Shapes::StringShape.new(name: 'RecommendationJobVpcSubnetId')
+    RecommendationJobVpcSubnets = Shapes::ListShape.new(name: 'RecommendationJobVpcSubnets')
     RecommendationMetrics = Shapes::StructureShape.new(name: 'RecommendationMetrics')
     RecommendationStepType = Shapes::StringShape.new(name: 'RecommendationStepType')
     RecordWrapper = Shapes::StringShape.new(name: 'RecordWrapper')
@@ -7541,6 +7546,7 @@ module Aws::SageMaker
     RecommendationJobInputConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     RecommendationJobInputConfig.add_member(:container_config, Shapes::ShapeRef.new(shape: RecommendationJobContainerConfig, location_name: "ContainerConfig"))
     RecommendationJobInputConfig.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
+    RecommendationJobInputConfig.add_member(:vpc_config, Shapes::ShapeRef.new(shape: RecommendationJobVpcConfig, location_name: "VpcConfig"))
     RecommendationJobInputConfig.struct_class = Types::RecommendationJobInputConfig
 
     RecommendationJobOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -7562,6 +7568,14 @@ module Aws::SageMaker
     RecommendationJobSupportedContentTypes.member = Shapes::ShapeRef.new(shape: String)
 
     RecommendationJobSupportedInstanceTypes.member = Shapes::ShapeRef.new(shape: String)
+
+    RecommendationJobVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: RecommendationJobVpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
+    RecommendationJobVpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: RecommendationJobVpcSubnets, required: true, location_name: "Subnets"))
+    RecommendationJobVpcConfig.struct_class = Types::RecommendationJobVpcConfig
+
+    RecommendationJobVpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: RecommendationJobVpcSecurityGroupId)
+
+    RecommendationJobVpcSubnets.member = Shapes::ShapeRef.new(shape: RecommendationJobVpcSubnetId)
 
     RecommendationMetrics.add_member(:cost_per_hour, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "CostPerHour"))
     RecommendationMetrics.add_member(:cost_per_inference, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "CostPerInference"))

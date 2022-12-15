@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-12-15)
+------------------
+
+* Feature - Raised the input byte size limit of the Text field in the TranslateText API to 10000 bytes.
+
 1.48.0 (2022-10-25)
 ------------------
 

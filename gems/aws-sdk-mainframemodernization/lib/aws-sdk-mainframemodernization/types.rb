@@ -79,8 +79,8 @@ module Aws::MainframeModernization
     #   @return [Time]
     #
     # @!attribute [rw] deployment_status
-    #   Indicates whether there is an ongoing deployment or if the
-    #   application has ever deployed successfully.
+    #   Indicates either an ongoing deployment or if the application has
+    #   ever deployed successfully.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -97,8 +97,8 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] last_start_time
-    #   The timestamp when the application was last started. Null until the
-    #   application has started running for the first time.
+    #   The timestamp when you last started the application. Null until the
+    #   application runs for the first time.
     #   @return [Time]
     #
     # @!attribute [rw] name
@@ -336,6 +336,10 @@ module Aws::MainframeModernization
     #   The type of the target platform for this application.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of a customer managed key.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The unique identifier of the application.
     #   @return [String]
@@ -351,6 +355,7 @@ module Aws::MainframeModernization
       :definition,
       :description,
       :engine_type,
+      :kms_key_id,
       :name,
       :tags)
       SENSITIVE = []
@@ -445,8 +450,8 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] environment_id
-    #   The identifier of the environment where this application will be
-    #   deployed.
+    #   The identifier of the runtime environment where you want to deploy
+    #   this application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/CreateDeploymentRequest AWS API Documentation
@@ -485,15 +490,15 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the environment.
+    #   The description of the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
-    #   The engine type for the environment.
+    #   The engine type for the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version of the engine type for the environment.
+    #   The version of the engine type for the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] high_availability_config
@@ -502,38 +507,44 @@ module Aws::MainframeModernization
     #   @return [Types::HighAvailabilityConfig]
     #
     # @!attribute [rw] instance_type
-    #   The type of instance for the environment.
+    #   The type of instance for the runtime environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of a customer managed key.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The unique identifier of the environment.
+    #   The name of the runtime environment. Must be unique within the
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
-    #   Configures a desired maintenance window for the environment. If you
-    #   do not provide a value, a random system-generated value will be
-    #   assigned.
+    #   Configures the maintenance window you want for the runtime
+    #   environment. If you do not provide a value, a random
+    #   system-generated value will be assigned.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
-    #   Specifies whether the environment is publicly accessible.
+    #   Specifies whether the runtime environment is publicly accessible.
     #   @return [Boolean]
     #
     # @!attribute [rw] security_group_ids
-    #   The list of security groups for the VPC associated with this
+    #   The list of security groups for the VPC associated with this runtime
     #   environment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] storage_configurations
-    #   Optional. The storage configurations for this environment.
+    #   Optional. The storage configurations for this runtime environment.
     #   @return [Array<Types::StorageConfiguration>]
     #
     # @!attribute [rw] subnet_ids
-    #   The list of subnets associated with the VPC for this environment.
+    #   The list of subnets associated with the VPC for this runtime
+    #   environment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags for the environment.
+    #   The tags for the runtime environment.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/CreateEnvironmentRequest AWS API Documentation
@@ -545,6 +556,7 @@ module Aws::MainframeModernization
       :engine_version,
       :high_availability_config,
       :instance_type,
+      :kms_key_id,
       :name,
       :preferred_maintenance_window,
       :publicly_accessible,
@@ -557,7 +569,7 @@ module Aws::MainframeModernization
     end
 
     # @!attribute [rw] environment_id
-    #   The identifier of this environment.
+    #   The unique identifier of the runtime environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/CreateEnvironmentResponse AWS API Documentation
@@ -576,8 +588,7 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] dataset_org
-    #   The type of dataset. Possible values include VSAM, IS, PS, GDG, PO,
-    #   PS, UNKNOWN etc.
+    #   The type of dataset. The only supported value is VSAM.
     #   @return [Types::DatasetOrgAttributes]
     #
     # @!attribute [rw] record_length
@@ -724,8 +735,7 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] data_set_org
-    #   The type of data set. Possible values include VSAM, IS, PS, GDG, PO,
-    #   PS, or unknown.
+    #   The type of data set. The only supported value is VSAM.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -937,7 +947,7 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] environment_id
-    #   The unique identifier of the environment.
+    #   The unique identifier of the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1001,15 +1011,15 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # Contains a subset of the possible environment attributes. Used in the
-    # environment list.
+    # Contains a subset of the possible runtime environment attributes. Used
+    # in the environment list.
     #
     # @!attribute [rw] creation_time
-    #   The timestamp when the environment was created.
+    #   The timestamp when the runtime environment was created.
     #   @return [Time]
     #
     # @!attribute [rw] engine_type
-    #   The target platform for the environment.
+    #   The target platform for the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -1025,15 +1035,15 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type of the environment.
+    #   The instance type of the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the environment.
+    #   The name of the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the environment
+    #   The status of the runtime environment
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/EnvironmentSummary AWS API Documentation
@@ -1221,13 +1231,17 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] environment_id
-    #   The identifier of the environment where the application will be
-    #   deployed.
+    #   The identifier of the runtime environment where you want to deploy
+    #   the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of a customer managed key.
     #   @return [String]
     #
     # @!attribute [rw] last_start_time
-    #   The timestamp when the application was last started. Null until the
-    #   application has started running for the first time.
+    #   The timestamp when you last started the application. Null until the
+    #   application runs for the first time.
     #   @return [Time]
     #
     # @!attribute [rw] latest_version
@@ -1237,8 +1251,8 @@ module Aws::MainframeModernization
     # @!attribute [rw] listener_arns
     #   The Amazon Resource Name (ARN) for the network load balancer
     #   listener created in your Amazon Web Services account. Amazon Web
-    #   Services Mainframe Modernization creates this listener on your
-    #   behalf the first time you deploy an application.
+    #   Services Mainframe Modernization creates this listener for you the
+    #   first time you deploy an application.
     #   @return [Array<String>]
     #
     # @!attribute [rw] listener_ports
@@ -1253,9 +1267,9 @@ module Aws::MainframeModernization
     #
     # @!attribute [rw] log_groups
     #   The list of log summaries. Each log summary includes the log type as
-    #   well as the log group identifier. These are CloudWatch logs. The
-    #   Amazon Web Services Mainframe Modernization application log is
-    #   pushed to CloudWatch under the customer's account.
+    #   well as the log group identifier. These are CloudWatch logs. Amazon
+    #   Web Services Mainframe Modernization pushes the application log to
+    #   CloudWatch under the customer's account.
     #   @return [Array<Types::LogGroupSummary>]
     #
     # @!attribute [rw] name
@@ -1289,6 +1303,7 @@ module Aws::MainframeModernization
       :description,
       :engine_type,
       :environment_id,
+      :kms_key_id,
       :last_start_time,
       :latest_version,
       :listener_arns,
@@ -1331,8 +1346,8 @@ module Aws::MainframeModernization
     #
     # @!attribute [rw] definition_content
     #   The content of the application definition. This is a JSON object
-    #   that contains the resource configuration/definitions that identify
-    #   an application.
+    #   that contains the resource configuration and definitions that
+    #   identify an application.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1470,8 +1485,7 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] data_set_org
-    #   The type of data set. Possible values include VSAM, IS, PS, GDG, PO,
-    #   PS, or unknown.
+    #   The type of data set. The only supported value is VSAM.
     #   @return [Types::DatasetDetailOrgAttributes]
     #
     # @!attribute [rw] last_referenced_time
@@ -1483,7 +1497,7 @@ module Aws::MainframeModernization
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   The locaion where the data set is stored.
+    #   The location where the data set is stored.
     #   @return [String]
     #
     # @!attribute [rw] record_length
@@ -1656,13 +1670,18 @@ module Aws::MainframeModernization
     #   The type of instance underlying the runtime environment.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of a customer managed key.
+    #   @return [String]
+    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) for the load balancer used with the
     #   runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the runtime environment.
+    #   The name of the runtime environment. Must be unique within the
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] pending_maintenance
@@ -1670,9 +1689,9 @@ module Aws::MainframeModernization
     #   @return [Types::PendingMaintenance]
     #
     # @!attribute [rw] preferred_maintenance_window
-    #   Configures a desired maintenance window for the environment. If you
-    #   do not provide a value, a random system-generated value will be
-    #   assigned.
+    #   Configures the maintenance window you want for the runtime
+    #   environment. If you do not provide a value, a random
+    #   system-generated value will be assigned.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -1723,6 +1742,7 @@ module Aws::MainframeModernization
       :environment_id,
       :high_availability_config,
       :instance_type,
+      :kms_key_id,
       :load_balancer_arn,
       :name,
       :pending_maintenance,
@@ -1844,8 +1864,8 @@ module Aws::MainframeModernization
     end
 
     # @!attribute [rw] applications
-    #   Returns a list of summary details for all the applications in an
-    #   environment.
+    #   Returns a list of summary details for all the applications in a
+    #   runtime environment.
     #   @return [Array<Types::ApplicationSummary>]
     #
     # @!attribute [rw] next_token
@@ -2052,10 +2072,9 @@ module Aws::MainframeModernization
     end
 
     # @!attribute [rw] data_sets
-    #   The list of data sets, containing ionformation including the
-    #   creating time, the data set name, the data set organization, the
-    #   data set format, and the last time the data set was referenced or
-    #   updated.
+    #   The list of data sets, containing information including the creation
+    #   time, the data set name, the data set organization, the data set
+    #   format, and the last time the data set was referenced or updated.
     #   @return [Array<Types::DataSetSummary>]
     #
     # @!attribute [rw] next_token
@@ -2160,20 +2179,21 @@ module Aws::MainframeModernization
     end
 
     # @!attribute [rw] engine_type
-    #   The engine type for the environment.
+    #   The engine type for the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of environments to return.
+    #   The maximum number of runtime environments to return.
     #   @return [Integer]
     #
     # @!attribute [rw] names
-    #   The name of the environment.
+    #   The names of the runtime environments. Must be unique within the
+    #   account.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   A pagination token to control the number of environments displayed
-    #   in the list.
+    #   A pagination token to control the number of runtime environments
+    #   displayed in the list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListEnvironmentsRequest AWS API Documentation
@@ -2188,13 +2208,13 @@ module Aws::MainframeModernization
     end
 
     # @!attribute [rw] environments
-    #   Returns a list of summary details for all the environments in your
-    #   account.
+    #   Returns a list of summary details for all the runtime environments
+    #   in your account.
     #   @return [Array<Types::EnvironmentSummary>]
     #
     # @!attribute [rw] next_token
     #   A pagination token that's returned when the response doesn't
-    #   contain all the environments.
+    #   contain all the runtime environments.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListEnvironmentsResponse AWS API Documentation
@@ -2230,8 +2250,8 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # A subset of the attributes about a log group. In CloudWatch a log
-    # group is a group of log streams that share the same retention,
+    # A subset of the attributes that describe a log group. In CloudWatch a
+    # log group is a group of log streams that share the same retention,
     # monitoring, and access control settings.
     #
     # @!attribute [rw] log_group_name
@@ -2278,7 +2298,7 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The maintenance schedule for the engine version.
+    #   The maintenance schedule for the runtime engine version.
     #   @return [Types::MaintenanceSchedule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/PendingMaintenance AWS API Documentation
@@ -2504,7 +2524,7 @@ module Aws::MainframeModernization
     #
     class StopApplicationResponse < Aws::EmptyStructure; end
 
-    # Defines the storage configuration for an environment.
+    # Defines the storage configuration for a runtime environment.
     #
     # @note StorageConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -2645,20 +2665,21 @@ module Aws::MainframeModernization
     end
 
     # @!attribute [rw] apply_during_maintenance_window
-    #   Indicates whether to update the environment during the maintenance
-    #   window. The default is false. Currently, Amazon Web Services
-    #   Mainframe Modernization accepts the `engineVersion` parameter only
-    #   if `applyDuringMaintenanceWindow` is true. If any parameter other
-    #   than `engineVersion` is provided in `UpdateEnvironmentRequest`, it
-    #   will fail if `applyDuringMaintenanceWindow` is set to true.
+    #   Indicates whether to update the runtime environment during the
+    #   maintenance window. The default is false. Currently, Amazon Web
+    #   Services Mainframe Modernization accepts the `engineVersion`
+    #   parameter only if `applyDuringMaintenanceWindow` is true. If any
+    #   parameter other than `engineVersion` is provided in
+    #   `UpdateEnvironmentRequest`, it will fail if
+    #   `applyDuringMaintenanceWindow` is set to true.
     #   @return [Boolean]
     #
     # @!attribute [rw] desired_capacity
-    #   The desired capacity for the environment to update.
+    #   The desired capacity for the runtime environment to update.
     #   @return [Integer]
     #
     # @!attribute [rw] engine_version
-    #   The version of the runtime engine for the environment.
+    #   The version of the runtime engine for the runtime environment.
     #   @return [String]
     #
     # @!attribute [rw] environment_id
@@ -2667,13 +2688,13 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type for the environment to update.
+    #   The instance type for the runtime environment to update.
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
-    #   Configures a desired maintenance window for the environment. If you
-    #   do not provide a value, a random system-generated value will be
-    #   assigned.
+    #   Configures the maintenance window you want for the runtime
+    #   environment. If you do not provide a value, a random
+    #   system-generated value will be assigned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/UpdateEnvironmentRequest AWS API Documentation

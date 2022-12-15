@@ -395,7 +395,7 @@ module Aws::MainframeModernization
     end
 
     # Creates a new application with given parameters. Requires an existing
-    # environment and application definition file.
+    # runtime environment and application definition file.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier the service generates to ensure the
@@ -417,6 +417,9 @@ module Aws::MainframeModernization
     #
     # @option params [required, String] :engine_type
     #   The type of the target platform for this application.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier of a customer managed key.
     #
     # @option params [required, String] :name
     #   The unique identifier of the application.
@@ -440,6 +443,7 @@ module Aws::MainframeModernization
     #     },
     #     description: "EntityDescription",
     #     engine_type: "microfocus", # required, accepts microfocus, bluage
+    #     kms_key_id: "String",
     #     name: "EntityName", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -548,8 +552,8 @@ module Aws::MainframeModernization
       req.send_request(options)
     end
 
-    # Creates and starts a deployment to deploy an application into an
-    # environment.
+    # Creates and starts a deployment to deploy an application into a
+    # runtime environment.
     #
     # @option params [required, String] :application_id
     #   The application identifier.
@@ -569,8 +573,8 @@ module Aws::MainframeModernization
     #   not need to pass this option.**
     #
     # @option params [required, String] :environment_id
-    #   The identifier of the environment where this application will be
-    #   deployed.
+    #   The identifier of the runtime environment where you want to deploy
+    #   this application.
     #
     # @return [Types::CreateDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -612,43 +616,49 @@ module Aws::MainframeModernization
     #   not need to pass this option.**
     #
     # @option params [String] :description
-    #   The description of the environment.
+    #   The description of the runtime environment.
     #
     # @option params [required, String] :engine_type
-    #   The engine type for the environment.
+    #   The engine type for the runtime environment.
     #
     # @option params [String] :engine_version
-    #   The version of the engine type for the environment.
+    #   The version of the engine type for the runtime environment.
     #
     # @option params [Types::HighAvailabilityConfig] :high_availability_config
     #   The details of a high availability configuration for this runtime
     #   environment.
     #
     # @option params [required, String] :instance_type
-    #   The type of instance for the environment.
+    #   The type of instance for the runtime environment.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier of a customer managed key.
     #
     # @option params [required, String] :name
-    #   The unique identifier of the environment.
+    #   The name of the runtime environment. Must be unique within the
+    #   account.
     #
     # @option params [String] :preferred_maintenance_window
-    #   Configures a desired maintenance window for the environment. If you do
-    #   not provide a value, a random system-generated value will be assigned.
+    #   Configures the maintenance window you want for the runtime
+    #   environment. If you do not provide a value, a random system-generated
+    #   value will be assigned.
     #
     # @option params [Boolean] :publicly_accessible
-    #   Specifies whether the environment is publicly accessible.
+    #   Specifies whether the runtime environment is publicly accessible.
     #
     # @option params [Array<String>] :security_group_ids
-    #   The list of security groups for the VPC associated with this
+    #   The list of security groups for the VPC associated with this runtime
     #   environment.
     #
     # @option params [Array<Types::StorageConfiguration>] :storage_configurations
-    #   Optional. The storage configurations for this environment.
+    #   Optional. The storage configurations for this runtime environment.
     #
     # @option params [Array<String>] :subnet_ids
-    #   The list of subnets associated with the VPC for this environment.
+    #   The list of subnets associated with the VPC for this runtime
+    #   environment.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags for the environment.
+    #   The tags for the runtime environment.
     #
     # @return [Types::CreateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -665,6 +675,7 @@ module Aws::MainframeModernization
     #       desired_capacity: 1, # required
     #     },
     #     instance_type: "String20", # required
+    #     kms_key_id: "String",
     #     name: "EntityName", # required
     #     preferred_maintenance_window: "String50",
     #     publicly_accessible: false,
@@ -723,11 +734,12 @@ module Aws::MainframeModernization
       req.send_request(options)
     end
 
-    # Deletes a specific application from a specified environment where it
-    # has been previously deployed. You cannot delete an environment using
-    # DeleteEnvironment, if any application has ever been deployed to it.
-    # This API removes the association of the application with the
-    # environment so you can delete the environment smoothly.
+    # Deletes a specific application from the specific runtime environment
+    # where it was previously deployed. You cannot delete a runtime
+    # environment using DeleteEnvironment if any application has ever been
+    # deployed to it. This API removes the association of the application
+    # with the runtime environment so you can delete the environment
+    # smoothly.
     #
     # @option params [required, String] :application_id
     #   The unique identifier of the application you want to delete.
@@ -754,7 +766,7 @@ module Aws::MainframeModernization
       req.send_request(options)
     end
 
-    # Deletes a specific environment. The environment cannot contain
+    # Deletes a specific runtime environment. The environment cannot contain
     # deployed applications. If it does, you must delete those applications
     # before you delete the environment.
     #
@@ -792,6 +804,7 @@ module Aws::MainframeModernization
     #   * {Types::GetApplicationResponse#description #description} => String
     #   * {Types::GetApplicationResponse#engine_type #engine_type} => String
     #   * {Types::GetApplicationResponse#environment_id #environment_id} => String
+    #   * {Types::GetApplicationResponse#kms_key_id #kms_key_id} => String
     #   * {Types::GetApplicationResponse#last_start_time #last_start_time} => Time
     #   * {Types::GetApplicationResponse#latest_version #latest_version} => Types::ApplicationVersionSummary
     #   * {Types::GetApplicationResponse#listener_arns #listener_arns} => Array&lt;String&gt;
@@ -821,6 +834,7 @@ module Aws::MainframeModernization
     #   resp.description #=> String
     #   resp.engine_type #=> String, one of "microfocus", "bluage"
     #   resp.environment_id #=> String
+    #   resp.kms_key_id #=> String
     #   resp.last_start_time #=> Time
     #   resp.latest_version.application_version #=> Integer
     #   resp.latest_version.creation_time #=> Time
@@ -835,7 +849,7 @@ module Aws::MainframeModernization
     #   resp.log_groups[0].log_group_name #=> String
     #   resp.log_groups[0].log_type #=> String
     #   resp.name #=> String
-    #   resp.status #=> String, one of "Creating", "Created", "Available", "Ready", "Starting", "Running", "Stopping", "Stopped", "Failed", "Deleting"
+    #   resp.status #=> String, one of "Creating", "Created", "Available", "Ready", "Starting", "Running", "Stopping", "Stopped", "Failed", "Deleting", "Deleting From Environment"
     #   resp.status_reason #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -1108,6 +1122,7 @@ module Aws::MainframeModernization
     #   * {Types::GetEnvironmentResponse#environment_id #environment_id} => String
     #   * {Types::GetEnvironmentResponse#high_availability_config #high_availability_config} => Types::HighAvailabilityConfig
     #   * {Types::GetEnvironmentResponse#instance_type #instance_type} => String
+    #   * {Types::GetEnvironmentResponse#kms_key_id #kms_key_id} => String
     #   * {Types::GetEnvironmentResponse#load_balancer_arn #load_balancer_arn} => String
     #   * {Types::GetEnvironmentResponse#name #name} => String
     #   * {Types::GetEnvironmentResponse#pending_maintenance #pending_maintenance} => Types::PendingMaintenance
@@ -1138,6 +1153,7 @@ module Aws::MainframeModernization
     #   resp.environment_id #=> String
     #   resp.high_availability_config.desired_capacity #=> Integer
     #   resp.instance_type #=> String
+    #   resp.kms_key_id #=> String
     #   resp.load_balancer_arn #=> String
     #   resp.name #=> String
     #   resp.pending_maintenance.engine_version #=> String
@@ -1147,7 +1163,7 @@ module Aws::MainframeModernization
     #   resp.publicly_accessible #=> Boolean
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
-    #   resp.status #=> String, one of "Creating", "Available", "Deleting", "Failed"
+    #   resp.status #=> String, one of "Creating", "Available", "Deleting", "Failed", "Updating"
     #   resp.status_reason #=> String
     #   resp.storage_configurations #=> Array
     #   resp.storage_configurations[0].efs.file_system_id #=> String
@@ -1216,7 +1232,7 @@ module Aws::MainframeModernization
     end
 
     # Lists the applications associated with a specific Amazon Web Services
-    # account. You can provide the unique identifier of a specific
+    # account. You can provide the unique identifier of a specific runtime
     # environment in a query parameter to see all applications associated
     # with that environment.
     #
@@ -1263,7 +1279,7 @@ module Aws::MainframeModernization
     #   resp.applications[0].environment_id #=> String
     #   resp.applications[0].last_start_time #=> Time
     #   resp.applications[0].name #=> String
-    #   resp.applications[0].status #=> String, one of "Creating", "Created", "Available", "Ready", "Starting", "Running", "Stopping", "Stopped", "Failed", "Deleting"
+    #   resp.applications[0].status #=> String, one of "Creating", "Created", "Available", "Ready", "Starting", "Running", "Stopping", "Stopped", "Failed", "Deleting", "Deleting From Environment"
     #   resp.applications[0].version_status #=> String, one of "Creating", "Available", "Failed"
     #   resp.next_token #=> String
     #
@@ -1277,8 +1293,8 @@ module Aws::MainframeModernization
     end
 
     # Lists all the available batch job definitions based on the batch job
-    # resources uploaded during the application creation. The listed batch
-    # job definitions can then be used to start a batch job.
+    # resources uploaded during the application creation. You can use the
+    # batch job definitions in the list to start a batch job.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application.
@@ -1449,9 +1465,10 @@ module Aws::MainframeModernization
 
     # Lists the data sets imported for a specific application. In Amazon Web
     # Services Mainframe Modernization, data sets are associated with
-    # applications deployed on environments. This is known as importing data
-    # sets. Currently, Amazon Web Services Mainframe Modernization can
-    # import data sets into catalogs using [CreateDataSetImportTask][1].
+    # applications deployed on runtime environments. This is known as
+    # importing data sets. Currently, Amazon Web Services Mainframe
+    # Modernization can import data sets into catalogs using
+    # [CreateDataSetImportTask][1].
     #
     #
     #
@@ -1608,17 +1625,18 @@ module Aws::MainframeModernization
     # Lists the runtime environments.
     #
     # @option params [String] :engine_type
-    #   The engine type for the environment.
+    #   The engine type for the runtime environment.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of environments to return.
+    #   The maximum number of runtime environments to return.
     #
     # @option params [Array<String>] :names
-    #   The name of the environment.
+    #   The names of the runtime environments. Must be unique within the
+    #   account.
     #
     # @option params [String] :next_token
-    #   A pagination token to control the number of environments displayed in
-    #   the list.
+    #   A pagination token to control the number of runtime environments
+    #   displayed in the list.
     #
     # @return [Types::ListEnvironmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1646,7 +1664,7 @@ module Aws::MainframeModernization
     #   resp.environments[0].environment_id #=> String
     #   resp.environments[0].instance_type #=> String
     #   resp.environments[0].name #=> String
-    #   resp.environments[0].status #=> String, one of "Creating", "Available", "Deleting", "Failed"
+    #   resp.environments[0].status #=> String, one of "Creating", "Available", "Deleting", "Failed", "Updating"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListEnvironments AWS API Documentation
@@ -1890,32 +1908,33 @@ module Aws::MainframeModernization
       req.send_request(options)
     end
 
-    # Updates the configuration details for a specific environment.
+    # Updates the configuration details for a specific runtime environment.
     #
     # @option params [Boolean] :apply_during_maintenance_window
-    #   Indicates whether to update the environment during the maintenance
-    #   window. The default is false. Currently, Amazon Web Services Mainframe
-    #   Modernization accepts the `engineVersion` parameter only if
-    #   `applyDuringMaintenanceWindow` is true. If any parameter other than
-    #   `engineVersion` is provided in `UpdateEnvironmentRequest`, it will
-    #   fail if `applyDuringMaintenanceWindow` is set to true.
+    #   Indicates whether to update the runtime environment during the
+    #   maintenance window. The default is false. Currently, Amazon Web
+    #   Services Mainframe Modernization accepts the `engineVersion` parameter
+    #   only if `applyDuringMaintenanceWindow` is true. If any parameter other
+    #   than `engineVersion` is provided in `UpdateEnvironmentRequest`, it
+    #   will fail if `applyDuringMaintenanceWindow` is set to true.
     #
     # @option params [Integer] :desired_capacity
-    #   The desired capacity for the environment to update.
+    #   The desired capacity for the runtime environment to update.
     #
     # @option params [String] :engine_version
-    #   The version of the runtime engine for the environment.
+    #   The version of the runtime engine for the runtime environment.
     #
     # @option params [required, String] :environment_id
     #   The unique identifier of the runtime environment that you want to
     #   update.
     #
     # @option params [String] :instance_type
-    #   The instance type for the environment to update.
+    #   The instance type for the runtime environment to update.
     #
     # @option params [String] :preferred_maintenance_window
-    #   Configures a desired maintenance window for the environment. If you do
-    #   not provide a value, a random system-generated value will be assigned.
+    #   Configures the maintenance window you want for the runtime
+    #   environment. If you do not provide a value, a random system-generated
+    #   value will be assigned.
     #
     # @return [Types::UpdateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1958,7 +1977,7 @@ module Aws::MainframeModernization
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mainframemodernization'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2703,10 +2703,27 @@ module Aws::LocationService
     #     `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \| `Noto Sans CJK JP
     #     Light` \| `Noto Sans CJK JP Regular`
     #
+    #   Valid font stacks for [Open Data (Preview)][3] styles:
+    #
+    #   * VectorOpenDataStandardLight – `Amazon Ember Regular,Noto Sans
+    #     Regular` \| `Amazon Ember Bold,Noto Sans Bold` \| `Amazon Ember
+    #     Medium,Noto Sans Medium` \| `Amazon Ember Regular Italic,Noto Sans
+    #     Italic` \| `Amazon Ember Condensed RC Regular,Noto Sans Regular`
+    #     \| `Amazon Ember Condensed RC Bold,Noto Sans Bold`
+    #
+    #   ^
+    #
+    #   <note markdown="1"> The fonts used by `VectorOpenDataStandardLight` are combined fonts
+    #   that use `Amazon Ember` for most glyphs but `Noto Sans` for glyphs
+    #   unsupported by `Amazon Ember`.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
     #   @return [String]
     #
     # @!attribute [rw] font_unicode_range
@@ -3901,10 +3918,25 @@ module Aws::LocationService
     #
     #      </note>
     #
+    #   Valid [Open Data (Preview) map styles][3]\:
+    #
+    #   * `VectorOpenDataStandardLight` – The Open Data Standard Light
+    #     (preview) map style provides a detailed basemap for the world
+    #     suitable for website and mobile application use. The map includes
+    #     highways major roads, minor roads, railways, water features,
+    #     cities, parks, landmarks, building footprints, and administrative
+    #     boundaries.
+    #
+    #     Open Data maps is in preview. We may add, change, or remove
+    #     features before announcing general availability. For more
+    #     information, see [Open Data is in preview release][4].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html#open-data-preview
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation

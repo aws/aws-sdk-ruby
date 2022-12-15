@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2022-12-15)
+------------------
+
+* Feature - This release adds support for AWS Glue Crawler with native DeltaLake tables, allowing Crawlers to classify Delta Lake format tables and catalog them for query engines to query against.
+
 1.126.0 (2022-11-30)
 ------------------
 

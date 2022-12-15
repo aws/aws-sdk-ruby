@@ -1017,7 +1017,7 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
     #
     # @!attribute [rw] id
     #   The identifier of the flow.
@@ -1758,7 +1758,9 @@ module Aws::Connect
     #
     # @!attribute [rw] tag_restricted_resources
     #   The list of resources that a security profile applies tag
-    #   restrictions to in Amazon Connect.
+    #   restrictions to in Amazon Connect. Following are acceptable
+    #   ResourceNames: `User` \| `SecurityProfile` \| `Queue` \|
+    #   `RoutingProfile`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileRequest AWS API Documentation
@@ -10019,12 +10021,11 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents flow's content. For an example, see
-    #   [Example contact flow in Amazon Connect Flow language][1] in the
-    #   *Amazon Connect Administrator Guide*.
+    #   [Example contact flow in Amazon Connect Flow language][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language-example.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowContentRequest AWS API Documentation

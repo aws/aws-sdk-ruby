@@ -61,6 +61,62 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
+    # Describes a bandwidth rate limit interval for a gateway. A bandwidth
+    # rate limit schedule consists of one or more bandwidth rate limit
+    # intervals. A bandwidth rate limit interval defines a period of time on
+    # one or more days of the week, during which bandwidth rate limits are
+    # specified for uploading, downloading, or both.
+    #
+    # @!attribute [rw] average_upload_rate_limit_in_bits_per_sec
+    #   The average upload rate limit component of the bandwidth rate limit
+    #   interval, in bits per second. This field does not appear in the
+    #   response if the upload rate limit is not set.
+    #
+    #   <note markdown="1"> For Backup Gateway, the minimum value is `(Value)`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] days_of_week
+    #   The days of the week component of the bandwidth rate limit interval,
+    #   represented as ordinal numbers from 0 to 6, where 0 represents
+    #   Sunday and 6 represents Saturday.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] end_hour_of_day
+    #   The hour of the day to end the bandwidth rate limit interval.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_minute_of_hour
+    #   The minute of the hour to end the bandwidth rate limit interval.
+    #
+    #   The bandwidth rate limit interval ends at the end of the minute. To
+    #   end an interval at the end of an hour, use the value `59`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_hour_of_day
+    #   The hour of the day to start the bandwidth rate limit interval.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_minute_of_hour
+    #   The minute of the hour to start the bandwidth rate limit interval.
+    #   The interval begins at the start of that minute. To begin an
+    #   interval exactly at the start of the hour, use the value `0`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/BandwidthRateLimitInterval AWS API Documentation
+    #
+    class BandwidthRateLimitInterval < Struct.new(
+      :average_upload_rate_limit_in_bits_per_sec,
+      :days_of_week,
+      :end_hour_of_day,
+      :end_minute_of_hour,
+      :start_hour_of_day,
+      :start_minute_of_hour)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation cannot proceed because it is not supported.
     #
     # @!attribute [rw] error_code
@@ -286,6 +342,49 @@ module Aws::BackupGateway
     end
 
     # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the [
+    #   `ListGateways` ][1] operation to return a list of gateways for your
+    #   account and Amazon Web Services Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetBandwidthRateLimitScheduleInput AWS API Documentation
+    #
+    class GetBandwidthRateLimitScheduleInput < Struct.new(
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #   @return [Array<Types::BandwidthRateLimitInterval>]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the [
+    #   `ListGateways` ][1] operation to return a list of gateways for your
+    #   account and Amazon Web Services Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetBandwidthRateLimitScheduleOutput AWS API Documentation
+    #
+    class GetBandwidthRateLimitScheduleOutput < Struct.new(
+      :bandwidth_rate_limit_intervals,
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway.
     #   @return [String]
     #
@@ -306,6 +405,65 @@ module Aws::BackupGateway
     #
     class GetGatewayOutput < Struct.new(
       :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisorInput AWS API Documentation
+    #
+    class GetHypervisorInput < Struct.new(
+      :hypervisor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hypervisor
+    #   Details about the requested hypervisor.
+    #   @return [Types::HypervisorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisorOutput AWS API Documentation
+    #
+    class GetHypervisorOutput < Struct.new(
+      :hypervisor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisorPropertyMappingsInput AWS API Documentation
+    #
+    class GetHypervisorPropertyMappingsInput < Struct.new(
+      :hypervisor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] vmware_to_aws_tag_mappings
+    #   This is a display of the mappings of on-premises VMware tags to the
+    #   Amazon Web Services tags.
+    #   @return [Array<Types::VmwareToAwsTagMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisorPropertyMappingsOutput AWS API Documentation
+    #
+    class GetHypervisorPropertyMappingsOutput < Struct.new(
+      :hypervisor_arn,
+      :iam_role_arn,
+      :vmware_to_aws_tag_mappings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -369,6 +527,68 @@ module Aws::BackupGateway
       :host,
       :hypervisor_arn,
       :kms_key_arn,
+      :name,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # These are the details of the specified hypervisor. A hypervisor is
+    # hardware, software, or firmware that creates and manages virtual
+    # machines, and allocates resources to them.
+    #
+    # @!attribute [rw] host
+    #   The server host of the hypervisor. This can be either an IP address
+    #   or a fully-qualified domain name (FQDN).
+    #   @return [String]
+    #
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS used to encrypt the
+    #   hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_successful_metadata_sync_time
+    #   This is the time when the most recent successful sync of metadata
+    #   occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_metadata_sync_status
+    #   This is the most recent status for the indicated metadata sync.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_metadata_sync_status_message
+    #   This is the most recent status for the indicated metadata sync.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the group of gateways within the
+    #   requested log.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   This is the name of the specified hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   This is the current state of the specified hypervisor.
+    #
+    #   The possible states are `PENDING`, `ONLINE`, `OFFLINE`, or `ERROR`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/HypervisorDetails AWS API Documentation
+    #
+    class HypervisorDetails < Struct.new(
+      :host,
+      :hypervisor_arn,
+      :kms_key_arn,
+      :last_successful_metadata_sync_time,
+      :latest_metadata_sync_status,
+      :latest_metadata_sync_status_message,
+      :log_group_arn,
       :name,
       :state)
       SENSITIVE = []
@@ -642,6 +862,84 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
+    # @!attribute [rw] bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #   @return [Array<Types::BandwidthRateLimitInterval>]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the [
+    #   `ListGateways` ][1] operation to return a list of gateways for your
+    #   account and Amazon Web Services Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutBandwidthRateLimitScheduleInput AWS API Documentation
+    #
+    class PutBandwidthRateLimitScheduleInput < Struct.new(
+      :bandwidth_rate_limit_intervals,
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the [
+    #   `ListGateways` ][1] operation to return a list of gateways for your
+    #   account and Amazon Web Services Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutBandwidthRateLimitScheduleOutput AWS API Documentation
+    #
+    class PutBandwidthRateLimitScheduleOutput < Struct.new(
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] vmware_to_aws_tag_mappings
+    #   This action requests the mappings of on-premises VMware tags to the
+    #   Amazon Web Services tags.
+    #   @return [Array<Types::VmwareToAwsTagMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutHypervisorPropertyMappingsInput AWS API Documentation
+    #
+    class PutHypervisorPropertyMappingsInput < Struct.new(
+      :hypervisor_arn,
+      :iam_role_arn,
+      :vmware_to_aws_tag_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutHypervisorPropertyMappingsOutput AWS API Documentation
+    #
+    class PutHypervisorPropertyMappingsOutput < Struct.new(
+      :hypervisor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] day_of_month
     #   The day of the month start maintenance on a gateway.
     #
@@ -704,6 +1002,30 @@ module Aws::BackupGateway
     class ResourceNotFoundException < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/StartVirtualMachinesMetadataSyncInput AWS API Documentation
+    #
+    class StartVirtualMachinesMetadataSyncInput < Struct.new(
+      :hypervisor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/StartVirtualMachinesMetadataSyncOutput AWS API Documentation
+    #
+    class StartVirtualMachinesMetadataSyncOutput < Struct.new(
+      :hypervisor_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -905,6 +1227,11 @@ module Aws::BackupGateway
     #   The Amazon Resource Name (ARN) of the hypervisor to update.
     #   @return [String]
     #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the group of gateways within the
+    #   requested log.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The updated name for the hypervisor
     #   @return [String]
@@ -922,6 +1249,7 @@ module Aws::BackupGateway
     class UpdateHypervisorInput < Struct.new(
       :host,
       :hypervisor_arn,
+      :log_group_arn,
       :name,
       :password,
       :username)
@@ -1029,6 +1357,11 @@ module Aws::BackupGateway
     #   `arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL`.
     #   @return [String]
     #
+    # @!attribute [rw] vmware_tags
+    #   These are the details of the VMware tags associated with the
+    #   specified virtual machine.
+    #   @return [Array<Types::VmwareTag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VirtualMachineDetails AWS API Documentation
     #
     class VirtualMachineDetails < Struct.new(
@@ -1037,7 +1370,70 @@ module Aws::BackupGateway
       :last_backup_date,
       :name,
       :path,
-      :resource_arn)
+      :resource_arn,
+      :vmware_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A VMware tag is a tag attached to a specific virtual machine. A
+    # [tag][1] is a key-value pair you can use to manage, filter, and search
+    # for your resources.
+    #
+    # The content of VMware tags can be matched to Amazon Web Services tags.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html
+    #
+    # @!attribute [rw] vmware_category
+    #   The is the category of VMware.
+    #   @return [String]
+    #
+    # @!attribute [rw] vmware_tag_description
+    #   This is a user-defined description of a VMware tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] vmware_tag_name
+    #   This is the user-defined name of a VMware tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VmwareTag AWS API Documentation
+    #
+    class VmwareTag < Struct.new(
+      :vmware_category,
+      :vmware_tag_description,
+      :vmware_tag_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This displays the mapping of on-premises VMware tags to the
+    # corresponding Amazon Web Services tags.
+    #
+    # @!attribute [rw] aws_tag_key
+    #   The key part of the Amazon Web Services tag's key-value pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_tag_value
+    #   The value part of the Amazon Web Services tag's key-value pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] vmware_category
+    #   The is the category of VMware.
+    #   @return [String]
+    #
+    # @!attribute [rw] vmware_tag_name
+    #   This is the user-defined name of a VMware tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VmwareToAwsTagMapping AWS API Documentation
+    #
+    class VmwareToAwsTagMapping < Struct.new(
+      :aws_tag_key,
+      :aws_tag_value,
+      :vmware_category,
+      :vmware_tag_name)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -118,6 +118,7 @@ module Aws::Translate
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TranslateTextRequest = Shapes::StructureShape.new(name: 'TranslateTextRequest')
     TranslateTextResponse = Shapes::StructureShape.new(name: 'TranslateTextResponse')
+    TranslatedTextString = Shapes::StringShape.new(name: 'TranslatedTextString')
     TranslationSettings = Shapes::StructureShape.new(name: 'TranslationSettings')
     UnboundedLengthString = Shapes::StringShape.new(name: 'UnboundedLengthString')
     UnsupportedDisplayLanguageCodeException = Shapes::StructureShape.new(name: 'UnsupportedDisplayLanguageCodeException')
@@ -433,7 +434,7 @@ module Aws::Translate
     TranslateTextRequest.add_member(:settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
     TranslateTextRequest.struct_class = Types::TranslateTextRequest
 
-    TranslateTextResponse.add_member(:translated_text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TranslatedText"))
+    TranslateTextResponse.add_member(:translated_text, Shapes::ShapeRef.new(shape: TranslatedTextString, required: true, location_name: "TranslatedText"))
     TranslateTextResponse.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
     TranslateTextResponse.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "TargetLanguageCode"))
     TranslateTextResponse.add_member(:applied_terminologies, Shapes::ShapeRef.new(shape: AppliedTerminologyList, location_name: "AppliedTerminologies"))

@@ -465,7 +465,7 @@ module Aws::Connect
     #
     #   resp = client.associate_default_vocabulary({
     #     instance_id: "InstanceId", # required
-    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA
     #     vocabulary_id: "VocabularyId",
     #   })
     #
@@ -920,7 +920,7 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1475,6 +1475,12 @@ module Aws::Connect
 
     # Creates a rule for the specified Amazon Connect instance.
     #
+    # Use the [Rules Function language][1] to code conditions for the rule.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -1607,7 +1613,8 @@ module Aws::Connect
     #
     # @option params [Array<String>] :tag_restricted_resources
     #   The list of resources that a security profile applies tag restrictions
-    #   to in Amazon Connect.
+    #   to in Amazon Connect. Following are acceptable ResourceNames: `User`
+    #   \| `SecurityProfile` \| `Queue` \| `RoutingProfile`
     #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2099,7 +2106,7 @@ module Aws::Connect
     #     client_token: "ClientToken",
     #     instance_id: "InstanceId", # required
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA
     #     content: "VocabularyContent", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -2650,7 +2657,7 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -3423,7 +3430,7 @@ module Aws::Connect
     #   resp.vocabulary.name #=> String
     #   resp.vocabulary.id #=> String
     #   resp.vocabulary.arn #=> String
-    #   resp.vocabulary.language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN"
+    #   resp.vocabulary.language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA"
     #   resp.vocabulary.state #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "DELETE_IN_PROGRESS"
     #   resp.vocabulary.last_modified_time #=> Time
     #   resp.vocabulary.failure_reason #=> String
@@ -4786,7 +4793,7 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html
     #
     # @option params [required, String] :instance_id
@@ -4942,7 +4949,7 @@ module Aws::Connect
     #
     #   resp = client.list_default_vocabularies({
     #     instance_id: "InstanceId", # required
-    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA
     #     max_results: 1,
     #     next_token: "VocabularyNextToken",
     #   })
@@ -4951,7 +4958,7 @@ module Aws::Connect
     #
     #   resp.default_vocabulary_list #=> Array
     #   resp.default_vocabulary_list[0].instance_id #=> String
-    #   resp.default_vocabulary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN"
+    #   resp.default_vocabulary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA"
     #   resp.default_vocabulary_list[0].vocabulary_id #=> String
     #   resp.default_vocabulary_list[0].vocabulary_name #=> String
     #   resp.next_token #=> String
@@ -7163,7 +7170,7 @@ module Aws::Connect
     #     next_token: "VocabularyNextToken",
     #     state: "CREATION_IN_PROGRESS", # accepts CREATION_IN_PROGRESS, ACTIVE, CREATION_FAILED, DELETE_IN_PROGRESS
     #     name_starts_with: "VocabularyName",
-    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA
     #   })
     #
     # @example Response structure
@@ -7172,7 +7179,7 @@ module Aws::Connect
     #   resp.vocabulary_summary_list[0].name #=> String
     #   resp.vocabulary_summary_list[0].id #=> String
     #   resp.vocabulary_summary_list[0].arn #=> String
-    #   resp.vocabulary_summary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN"
+    #   resp.vocabulary_summary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA"
     #   resp.vocabulary_summary_list[0].state #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "DELETE_IN_PROGRESS"
     #   resp.vocabulary_summary_list[0].last_modified_time #=> Time
     #   resp.vocabulary_summary_list[0].failure_reason #=> String
@@ -8142,7 +8149,7 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -8152,12 +8159,11 @@ module Aws::Connect
     #
     # @option params [required, String] :content
     #   The JSON string that represents flow's content. For an example, see
-    #   [Example contact flow in Amazon Connect Flow language][1] in the
-    #   *Amazon Connect Administrator Guide*.
+    #   [Example contact flow in Amazon Connect Flow language][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language-example.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8295,7 +8301,7 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -9017,6 +9023,12 @@ module Aws::Connect
 
     # Updates a rule for the specified Amazon Connect instance.
     #
+    # Use the [Rules Function language][1] to code conditions for the rule.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html
+    #
     # @option params [required, String] :rule_id
     #   A unique identifier for the rule.
     #
@@ -9601,7 +9613,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

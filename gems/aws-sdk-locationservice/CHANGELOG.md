@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-12-15)
+------------------
+
+* Feature - This release adds support for a new style, "VectorOpenDataStandardLight" which can be used with the new data source, "Open Data Maps (Preview)".
+
 1.25.0 (2022-10-25)
 ------------------
 

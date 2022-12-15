@@ -6462,13 +6462,83 @@ module Aws::ECS
     #   The protocol used for the network binding.
     #   @return [String]
     #
+    # @!attribute [rw] container_port_range
+    #   The port number range on the container that's bound to the
+    #   dynamically mapped host port range.
+    #
+    #   The following rules apply when you specify a `containerPortRange`\:
+    #
+    #   * You must use either the `bridge` network mode or the `awsvpc`
+    #     network mode.
+    #
+    #   * This parameter is available for both the EC2 and Fargate launch
+    #     types.
+    #
+    #   * This parameter is available for both the Linux and Windows
+    #     operating systems.
+    #
+    #   * The container instance must have at least version 1.67.0 of the
+    #     container agent and at least version 1.67.0-1 of the `ecs-init`
+    #     package
+    #
+    #   * You can specify a maximum of 100 port ranges per container.
+    #
+    #   * You do not specify a `hostPortRange`. The value of the
+    #     `hostPortRange` is set as follows:
+    #
+    #     * For containers in a task with the `awsvpc` network mode, the
+    #       `hostPort` is set to the same value as the `containerPort`. This
+    #       is a static mapping strategy.
+    #
+    #     * For containers in a task with the `bridge` network mode, the
+    #       Amazon ECS agent finds open host ports from the default
+    #       ephemeral range and passes it to docker to bind them to the
+    #       container ports.
+    #
+    #   * The `containerPortRange` valid values are between 1 and 65535.
+    #
+    #   * A port can only be included in one port mapping per container.
+    #
+    #   * You cannot specify overlapping port ranges.
+    #
+    #   * The first port in the range must be less than last port in the
+    #     range.
+    #
+    #   * Docker recommends that you turn off the docker-proxy in the Docker
+    #     daemon config file when you have a large number of ports.
+    #
+    #     For more information, see [ Issue #11185][1] on the Github
+    #     website.
+    #
+    #     For information about how to turn off the docker-proxy in the
+    #     Docker daemon config file, see [Docker daemon][2] in the *Amazon
+    #     ECS Developer Guide*.
+    #
+    #   You can call [ `DescribeTasks` ][3] to view the `hostPortRange`
+    #   which are the host ports that are bound to the container ports.
+    #
+    #
+    #
+    #   [1]: https://github.com/moby/moby/issues/11185
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
+    #   @return [String]
+    #
+    # @!attribute [rw] host_port_range
+    #   The port number range on the host that's used with the network
+    #   binding. This is assigned is assigned by Docker and delivered by the
+    #   Amazon ECS agent.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkBinding AWS API Documentation
     #
     class NetworkBinding < Struct.new(
       :bind_ip,
       :container_port,
       :host_port,
-      :protocol)
+      :protocol,
+      :container_port_range,
+      :host_port_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6678,6 +6748,18 @@ module Aws::ECS
     #   The port number on the container instance to reserve for your
     #   container.
     #
+    #   If you specify a `containerPortRange`, leave this field empty and
+    #   the value of the `hostPort` is set as follows:
+    #
+    #   * For containers in a task with the `awsvpc` network mode, the
+    #     `hostPort` is set to the same value as the `containerPort`. This
+    #     is a static mapping strategy.
+    #
+    #   * For containers in a task with the `bridge` network mode, the
+    #     Amazon ECS agent finds open ports on the host and automaticaly
+    #     binds them to the container ports. This is a dynamic mapping
+    #     strategy.
+    #
     #   If you use containers in a task with the `awsvpc` or `host` network
     #   mode, the `hostPort` can either be left blank or set to the same
     #   value as the `containerPort`.
@@ -6757,6 +6839,68 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
     #   @return [String]
     #
+    # @!attribute [rw] container_port_range
+    #   The port number range on the container that's bound to the
+    #   dynamically mapped host port range.
+    #
+    #   The following rules apply when you specify a `containerPortRange`\:
+    #
+    #   * You must use either the `bridge` network mode or the `awsvpc`
+    #     network mode.
+    #
+    #   * This parameter is available for both the EC2 and Fargate launch
+    #     types.
+    #
+    #   * This parameter is available for both the Linux and Windows
+    #     operating systems.
+    #
+    #   * The container instance must have at least version 1.67.0 of the
+    #     container agent and at least version 1.67.0-1 of the `ecs-init`
+    #     package
+    #
+    #   * You can specify a maximum of 100 port ranges per container.
+    #
+    #   * You do not specify a `hostPortRange`. The value of the
+    #     `hostPortRange` is set as follows:
+    #
+    #     * For containers in a task with the `awsvpc` network mode, the
+    #       `hostPort` is set to the same value as the `containerPort`. This
+    #       is a static mapping strategy.
+    #
+    #     * For containers in a task with the `bridge` network mode, the
+    #       Amazon ECS agent finds open host ports from the default
+    #       ephemeral range and passes it to docker to bind them to the
+    #       container ports.
+    #
+    #   * The `containerPortRange` valid values are between 1 and 65535.
+    #
+    #   * A port can only be included in one port mapping per container.
+    #
+    #   * You cannot specify overlapping port ranges.
+    #
+    #   * The first port in the range must be less than last port in the
+    #     range.
+    #
+    #   * Docker recommends that you turn off the docker-proxy in the Docker
+    #     daemon config file when you have a large number of ports.
+    #
+    #     For more information, see [ Issue #11185][1] on the Github
+    #     website.
+    #
+    #     For information about how to turn off the docker-proxy in the
+    #     Docker daemon config file, see [Docker daemon][2] in the *Amazon
+    #     ECS Developer Guide*.
+    #
+    #   You can call [ `DescribeTasks` ][3] to view the `hostPortRange`
+    #   which are the host ports that are bound to the container ports.
+    #
+    #
+    #
+    #   [1]: https://github.com/moby/moby/issues/11185
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PortMapping AWS API Documentation
     #
     class PortMapping < Struct.new(
@@ -6764,7 +6908,8 @@ module Aws::ECS
       :host_port,
       :protocol,
       :name,
-      :app_protocol)
+      :app_protocol,
+      :container_port_range)
       SENSITIVE = []
       include Aws::Structure
     end

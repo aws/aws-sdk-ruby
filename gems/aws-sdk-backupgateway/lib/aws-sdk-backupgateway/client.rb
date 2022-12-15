@@ -549,6 +549,52 @@ module Aws::BackupGateway
       req.send_request(options)
     end
 
+    # Retrieves the bandwidth rate limit schedule for a specified gateway.
+    # By default, gateways do not have bandwidth rate limit schedules, which
+    # means no bandwidth rate limiting is in effect. Use this to get a
+    # gateway's bandwidth rate limit schedule.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the [
+    #   `ListGateways` ][1] operation to return a list of gateways for your
+    #   account and Amazon Web Services Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
+    #
+    # @return [Types::GetBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBandwidthRateLimitScheduleOutput#bandwidth_rate_limit_intervals #bandwidth_rate_limit_intervals} => Array&lt;Types::BandwidthRateLimitInterval&gt;
+    #   * {Types::GetBandwidthRateLimitScheduleOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bandwidth_rate_limit_schedule({
+    #     gateway_arn: "GatewayArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bandwidth_rate_limit_intervals #=> Array
+    #   resp.bandwidth_rate_limit_intervals[0].average_upload_rate_limit_in_bits_per_sec #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].days_of_week #=> Array
+    #   resp.bandwidth_rate_limit_intervals[0].days_of_week[0] #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].end_hour_of_day #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].end_minute_of_hour #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].start_hour_of_day #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].start_minute_of_hour #=> Integer
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetBandwidthRateLimitSchedule AWS API Documentation
+    #
+    # @overload get_bandwidth_rate_limit_schedule(params = {})
+    # @param [Hash] params ({})
+    def get_bandwidth_rate_limit_schedule(params = {}, options = {})
+      req = build_request(:get_bandwidth_rate_limit_schedule, params)
+      req.send_request(options)
+    end
+
     # By providing the ARN (Amazon Resource Name), this API returns the
     # gateway.
     #
@@ -588,6 +634,84 @@ module Aws::BackupGateway
       req.send_request(options)
     end
 
+    # This action requests information about the specified hypervisor to
+    # which the gateway will connect. A hypervisor is hardware, software, or
+    # firmware that creates and manages virtual machines, and allocates
+    # resources to them.
+    #
+    # @option params [required, String] :hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #
+    # @return [Types::GetHypervisorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHypervisorOutput#hypervisor #hypervisor} => Types::HypervisorDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_hypervisor({
+    #     hypervisor_arn: "ServerArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hypervisor.host #=> String
+    #   resp.hypervisor.hypervisor_arn #=> String
+    #   resp.hypervisor.kms_key_arn #=> String
+    #   resp.hypervisor.last_successful_metadata_sync_time #=> Time
+    #   resp.hypervisor.latest_metadata_sync_status #=> String, one of "CREATED", "RUNNING", "FAILED", "PARTIALLY_FAILED", "SUCCEEDED"
+    #   resp.hypervisor.latest_metadata_sync_status_message #=> String
+    #   resp.hypervisor.log_group_arn #=> String
+    #   resp.hypervisor.name #=> String
+    #   resp.hypervisor.state #=> String, one of "PENDING", "ONLINE", "OFFLINE", "ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisor AWS API Documentation
+    #
+    # @overload get_hypervisor(params = {})
+    # @param [Hash] params ({})
+    def get_hypervisor(params = {}, options = {})
+      req = build_request(:get_hypervisor, params)
+      req.send_request(options)
+    end
+
+    # This action retrieves the property mappings for the specified
+    # hypervisor. A hypervisor property mapping displays the relationship of
+    # entity properties available from the on-premises hypervisor to the
+    # properties available in Amazon Web Services.
+    #
+    # @option params [required, String] :hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #
+    # @return [Types::GetHypervisorPropertyMappingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHypervisorPropertyMappingsOutput#hypervisor_arn #hypervisor_arn} => String
+    #   * {Types::GetHypervisorPropertyMappingsOutput#iam_role_arn #iam_role_arn} => String
+    #   * {Types::GetHypervisorPropertyMappingsOutput#vmware_to_aws_tag_mappings #vmware_to_aws_tag_mappings} => Array&lt;Types::VmwareToAwsTagMapping&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_hypervisor_property_mappings({
+    #     hypervisor_arn: "ServerArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hypervisor_arn #=> String
+    #   resp.iam_role_arn #=> String
+    #   resp.vmware_to_aws_tag_mappings #=> Array
+    #   resp.vmware_to_aws_tag_mappings[0].aws_tag_key #=> String
+    #   resp.vmware_to_aws_tag_mappings[0].aws_tag_value #=> String
+    #   resp.vmware_to_aws_tag_mappings[0].vmware_category #=> String
+    #   resp.vmware_to_aws_tag_mappings[0].vmware_tag_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisorPropertyMappings AWS API Documentation
+    #
+    # @overload get_hypervisor_property_mappings(params = {})
+    # @param [Hash] params ({})
+    def get_hypervisor_property_mappings(params = {}, options = {})
+      req = build_request(:get_hypervisor_property_mappings, params)
+      req.send_request(options)
+    end
+
     # By providing the ARN (Amazon Resource Name), this API returns the
     # virtual machine.
     #
@@ -612,6 +736,10 @@ module Aws::BackupGateway
     #   resp.virtual_machine.name #=> String
     #   resp.virtual_machine.path #=> String
     #   resp.virtual_machine.resource_arn #=> String
+    #   resp.virtual_machine.vmware_tags #=> Array
+    #   resp.virtual_machine.vmware_tags[0].vmware_category #=> String
+    #   resp.virtual_machine.vmware_tags[0].vmware_tag_description #=> String
+    #   resp.virtual_machine.vmware_tags[0].vmware_tag_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetVirtualMachine AWS API Documentation
     #
@@ -849,6 +977,105 @@ module Aws::BackupGateway
       req.send_request(options)
     end
 
+    # This action sets the bandwidth rate limit schedule for a specified
+    # gateway. By default, gateways do not have a bandwidth rate limit
+    # schedule, which means no bandwidth rate limiting is in effect. Use
+    # this to initiate a gateway's bandwidth rate limit schedule.
+    #
+    # @option params [required, Array<Types::BandwidthRateLimitInterval>] :bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the [
+    #   `ListGateways` ][1] operation to return a list of gateways for your
+    #   account and Amazon Web Services Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
+    #
+    # @return [Types::PutBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutBandwidthRateLimitScheduleOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bandwidth_rate_limit_schedule({
+    #     bandwidth_rate_limit_intervals: [ # required
+    #       {
+    #         average_upload_rate_limit_in_bits_per_sec: 1,
+    #         days_of_week: [1], # required
+    #         end_hour_of_day: 1, # required
+    #         end_minute_of_hour: 1, # required
+    #         start_hour_of_day: 1, # required
+    #         start_minute_of_hour: 1, # required
+    #       },
+    #     ],
+    #     gateway_arn: "GatewayArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutBandwidthRateLimitSchedule AWS API Documentation
+    #
+    # @overload put_bandwidth_rate_limit_schedule(params = {})
+    # @param [Hash] params ({})
+    def put_bandwidth_rate_limit_schedule(params = {}, options = {})
+      req = build_request(:put_bandwidth_rate_limit_schedule, params)
+      req.send_request(options)
+    end
+
+    # This action sets the property mappings for the specified hypervisor. A
+    # hypervisor property mapping displays the relationship of entity
+    # properties available from the on-premises hypervisor to the properties
+    # available in Amazon Web Services.
+    #
+    # @option params [required, String] :hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role.
+    #
+    # @option params [required, Array<Types::VmwareToAwsTagMapping>] :vmware_to_aws_tag_mappings
+    #   This action requests the mappings of on-premises VMware tags to the
+    #   Amazon Web Services tags.
+    #
+    # @return [Types::PutHypervisorPropertyMappingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutHypervisorPropertyMappingsOutput#hypervisor_arn #hypervisor_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_hypervisor_property_mappings({
+    #     hypervisor_arn: "ServerArn", # required
+    #     iam_role_arn: "IamRoleArn", # required
+    #     vmware_to_aws_tag_mappings: [ # required
+    #       {
+    #         aws_tag_key: "TagKey", # required
+    #         aws_tag_value: "TagValue", # required
+    #         vmware_category: "VmwareCategory", # required
+    #         vmware_tag_name: "VmwareTagName", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hypervisor_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutHypervisorPropertyMappings AWS API Documentation
+    #
+    # @overload put_hypervisor_property_mappings(params = {})
+    # @param [Hash] params ({})
+    def put_hypervisor_property_mappings(params = {}, options = {})
+      req = build_request(:put_hypervisor_property_mappings, params)
+      req.send_request(options)
+    end
+
     # Set the maintenance start time for a gateway.
     #
     # @option params [Integer] :day_of_month
@@ -893,6 +1120,35 @@ module Aws::BackupGateway
     # @param [Hash] params ({})
     def put_maintenance_start_time(params = {}, options = {})
       req = build_request(:put_maintenance_start_time, params)
+      req.send_request(options)
+    end
+
+    # This action sends a request to sync metadata across the specified
+    # virtual machines.
+    #
+    # @option params [required, String] :hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor.
+    #
+    # @return [Types::StartVirtualMachinesMetadataSyncOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartVirtualMachinesMetadataSyncOutput#hypervisor_arn #hypervisor_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_virtual_machines_metadata_sync({
+    #     hypervisor_arn: "ServerArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hypervisor_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/StartVirtualMachinesMetadataSync AWS API Documentation
+    #
+    # @overload start_virtual_machines_metadata_sync(params = {})
+    # @param [Hash] params ({})
+    def start_virtual_machines_metadata_sync(params = {}, options = {})
+      req = build_request(:start_virtual_machines_metadata_sync, params)
       req.send_request(options)
     end
 
@@ -1082,6 +1338,10 @@ module Aws::BackupGateway
     # @option params [required, String] :hypervisor_arn
     #   The Amazon Resource Name (ARN) of the hypervisor to update.
     #
+    # @option params [String] :log_group_arn
+    #   The Amazon Resource Name (ARN) of the group of gateways within the
+    #   requested log.
+    #
     # @option params [String] :name
     #   The updated name for the hypervisor
     #
@@ -1100,6 +1360,7 @@ module Aws::BackupGateway
     #   resp = client.update_hypervisor({
     #     host: "Host",
     #     hypervisor_arn: "ServerArn", # required
+    #     log_group_arn: "LogGroupArn",
     #     name: "Name",
     #     password: "Password",
     #     username: "Username",
@@ -1131,7 +1392,7 @@ module Aws::BackupGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backupgateway'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

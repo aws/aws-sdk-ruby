@@ -21,6 +21,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -35,6 +38,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: nil,
+          operation_type: nil,
+          consumer_arn: nil,
         )
       end
     end
@@ -49,6 +55,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -63,6 +72,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -77,6 +89,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: context.params[:consumer_arn],
         )
       end
     end
@@ -91,6 +106,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: nil,
+          operation_type: nil,
+          consumer_arn: nil,
         )
       end
     end
@@ -105,6 +123,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -119,6 +140,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: context.params[:consumer_arn],
         )
       end
     end
@@ -133,6 +157,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -147,6 +174,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -161,6 +191,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -175,6 +208,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "data",
+          consumer_arn: nil,
         )
       end
     end
@@ -189,6 +225,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "data",
+          consumer_arn: nil,
         )
       end
     end
@@ -203,6 +242,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -217,6 +259,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -231,6 +276,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -245,6 +293,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: nil,
+          operation_type: nil,
+          consumer_arn: nil,
         )
       end
     end
@@ -259,6 +310,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -273,6 +327,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -287,6 +344,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "data",
+          consumer_arn: nil,
         )
       end
     end
@@ -301,6 +361,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "data",
+          consumer_arn: nil,
         )
       end
     end
@@ -315,6 +378,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -329,6 +395,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -343,6 +412,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -357,6 +429,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -371,6 +446,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -385,6 +463,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: nil,
+          operation_type: "data",
+          consumer_arn: context.params[:consumer_arn],
         )
       end
     end
@@ -399,6 +480,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end
@@ -413,6 +497,9 @@ module Aws::Kinesis
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          stream_arn: context.params[:stream_arn],
+          operation_type: "control",
+          consumer_arn: nil,
         )
       end
     end

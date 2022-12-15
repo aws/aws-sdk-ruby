@@ -4470,6 +4470,1267 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about a block device mapping for an Amazon Elastic Compute
+    # Cloud (Amazon EC2) launch template.
+    #
+    # @!attribute [rw] device_name
+    #   The device name.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs
+    #   Parameters used to automatically set up Amazon EBS volumes when the
+    #   instance is launched.
+    #   @return [Types::AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails]
+    #
+    # @!attribute [rw] no_device
+    #   Omits the device from the block device mapping when an empty string
+    #   is specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_name
+    #   The virtual device name (ephemeralN). Instance store volumes are
+    #   numbered starting from 0. An instance type with 2 available instance
+    #   store volumes can specify mappings for `ephemeral0` and
+    #   `ephemeral1`. The number of available instance store volumes depends
+    #   on the instance type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails < Struct.new(
+      :device_name,
+      :ebs,
+      :no_device,
+      :virtual_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameters for a block device for an Amazon Elastic Block Store
+    # (Amazon EBS) volume in an Amazon EC2 launch template.
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the EBS volume is deleted on instance termination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the EBS volume is encrypted. Encrypted volumes can
+    #   only be attached to instances that support Amazon EBS encryption. If
+    #   you're creating a volume from a snapshot, you can't specify an
+    #   encryption value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] iops
+    #   The number of I/O operations per second (IOPS).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the symmetric Key Management
+    #   Service (KMS) customer managed key used for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the EBS snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] throughput
+    #   The throughput to provision for a gp3 volume, with a maximum of
+    #   1,000 MiB/s.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_size
+    #   The size of the volume, in GiBs. You must specify either a snapshot
+    #   ID or a volume size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_type
+    #   The volume type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails < Struct.new(
+      :delete_on_termination,
+      :encrypted,
+      :iops,
+      :kms_key_id,
+      :snapshot_id,
+      :throughput,
+      :volume_size,
+      :volume_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the target Capacity Reservation or Capacity
+    # Reservation group in which to run an Amazon EC2 instance.
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation in which to run the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_resource_group_arn
+    #   The Amazon Resource Name (ARN) of the Capacity Reservation resource
+    #   group in which to run the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails < Struct.new(
+      :capacity_reservation_id,
+      :capacity_reservation_resource_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Capacity Reservation targeting option of an Amazon EC2
+    # instance.
+    #
+    # @!attribute [rw] capacity_reservation_preference
+    #   Indicates the instance's Capacity Reservation preferences. If equal
+    #   to `open`, the instance can run in any open Capacity Reservation
+    #   that has matching attributes (instance type, platform, Availability
+    #   Zone). If equal to `none`, the instance avoids running in a Capacity
+    #   Reservation even if one is available. The instance runs in On-Demand
+    #   capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_target
+    #   Specifies a target Capacity Reservation.
+    #   @return [Types::AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails < Struct.new(
+      :capacity_reservation_preference,
+      :capacity_reservation_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the CPU options for an Amazon EC2 instance. For more
+    # information, see [Optimize CPU options][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads per CPU core. A value of `1` disables
+    #   multithreading for the instance, The default value is `2`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataCpuOptionsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataCpuOptionsDetails < Struct.new(
+      :core_count,
+      :threads_per_core)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the credit option for CPU usage of a T2, T3, or T3a Amazon
+    # EC2 instance.
+    #
+    # @!attribute [rw] cpu_credits
+    #   The credit option for CPU usage of a T instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataCreditSpecificationDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataCreditSpecificationDetails < Struct.new(
+      :cpu_credits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information to include in an Amazon Elastic Compute Cloud (Amazon
+    # EC2) launch template.
+    #
+    # @!attribute [rw] block_device_mapping_set
+    #   Information about a block device mapping for an Amazon EC2 launch
+    #   template.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails>]
+    #
+    # @!attribute [rw] capacity_reservation_specification
+    #   Specifies an instance's Capacity Reservation targeting option. You
+    #   can specify only one option at a time.
+    #   @return [Types::AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails]
+    #
+    # @!attribute [rw] cpu_options
+    #   Specifies the CPU options for an instance. For more information, see
+    #   [Optimize CPU options][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #   @return [Types::AwsEc2LaunchTemplateDataCpuOptionsDetails]
+    #
+    # @!attribute [rw] credit_specification
+    #   Specifies the credit option for CPU usage of a T2, T3, or T3a
+    #   instance.
+    #   @return [Types::AwsEc2LaunchTemplateDataCreditSpecificationDetails]
+    #
+    # @!attribute [rw] disable_api_stop
+    #   Indicates whether to enable the instance for stop protection. For
+    #   more information, see [Enable stop protection][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disable_api_termination
+    #   If you set this parameter to `true`, you can't terminate the
+    #   instance using the Amazon EC2 console, CLI, or API. If set to
+    #   `true`, you can.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ebs_optimized
+    #   Indicates whether the instance is optimized for Amazon EBS I/O.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] elastic_gpu_specification_set
+    #   Provides details about Elastic Graphics accelerators to associate
+    #   with the instance.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails>]
+    #
+    # @!attribute [rw] elastic_inference_accelerator_set
+    #   The Amazon Elastic Inference accelerator for the instance.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails>]
+    #
+    # @!attribute [rw] enclave_options
+    #   Indicates whether the Amazon EC2 instance is enabled for Amazon Web
+    #   Services Nitro Enclaves.
+    #   @return [Types::AwsEc2LaunchTemplateDataEnclaveOptionsDetails]
+    #
+    # @!attribute [rw] hibernation_options
+    #   Specifies whether your Amazon EC2 instance is configured for
+    #   hibernation.
+    #   @return [Types::AwsEc2LaunchTemplateDataHibernationOptionsDetails]
+    #
+    # @!attribute [rw] iam_instance_profile
+    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
+    #   @return [Types::AwsEc2LaunchTemplateDataIamInstanceProfileDetails]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the Amazon Machine Image (AMI).
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_initiated_shutdown_behavior
+    #   Provides the options for specifying the instance initiated shutdown
+    #   behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_market_options
+    #   Specifies the market (purchasing) option for an instance.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with these
+    #   attributes. If you specify `InstanceRequirements`, you can't
+    #   specify `InstanceType`.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsDetails]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type. For more information, see [Instance types][1] in
+    #   the *Amazon EC2 User Guide*. If you specify `InstanceType`, you
+    #   can't specify `InstanceRequirements`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair that allows users to connect to the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_set
+    #   Specifies a license configuration for an instance.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataLicenseSetDetails>]
+    #
+    # @!attribute [rw] maintenance_options
+    #   The maintenance options of your instance.
+    #   @return [Types::AwsEc2LaunchTemplateDataMaintenanceOptionsDetails]
+    #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instance. For more information, see
+    #   [Instance metadata and user data][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   @return [Types::AwsEc2LaunchTemplateDataMetadataOptionsDetails]
+    #
+    # @!attribute [rw] monitoring
+    #   The monitoring for the instance.
+    #   @return [Types::AwsEc2LaunchTemplateDataMonitoringDetails]
+    #
+    # @!attribute [rw] network_interface_set
+    #   Specifies the parameters for a network interface that is attached to
+    #   the instance.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails>]
+    #
+    # @!attribute [rw] placement
+    #   Specifies the placement of an instance.
+    #   @return [Types::AwsEc2LaunchTemplateDataPlacementDetails]
+    #
+    # @!attribute [rw] private_dns_name_options
+    #   The options for the instance hostname.
+    #   @return [Types::AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails]
+    #
+    # @!attribute [rw] ram_disk_id
+    #   The ID of the RAM disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_id_set
+    #   One or more security group IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_set
+    #   One or more security group names. For a nondefault VPC, you must use
+    #   security group IDs instead. You cannot specify both a security group
+    #   ID and security name in the same request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_data
+    #   The user data to make available to the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataDetails < Struct.new(
+      :block_device_mapping_set,
+      :capacity_reservation_specification,
+      :cpu_options,
+      :credit_specification,
+      :disable_api_stop,
+      :disable_api_termination,
+      :ebs_optimized,
+      :elastic_gpu_specification_set,
+      :elastic_inference_accelerator_set,
+      :enclave_options,
+      :hibernation_options,
+      :iam_instance_profile,
+      :image_id,
+      :instance_initiated_shutdown_behavior,
+      :instance_market_options,
+      :instance_requirements,
+      :instance_type,
+      :kernel_id,
+      :key_name,
+      :license_set,
+      :maintenance_options,
+      :metadata_options,
+      :monitoring,
+      :network_interface_set,
+      :placement,
+      :private_dns_name_options,
+      :ram_disk_id,
+      :security_group_id_set,
+      :security_group_set,
+      :user_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Elastic Graphics specification for an Amazon
+    # EC2 launch template.
+    #
+    # @!attribute [rw] type
+    #   The type of Elastic Graphics accelerator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details for an Amazon Elastic Inference accelerator.
+    #
+    # @!attribute [rw] count
+    #   The number of Elastic Inference accelerators to attach to the
+    #   instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The type of Elastic Inference accelerator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails < Struct.new(
+      :count,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether the instance is enabled for Amazon Web Services
+    # Nitro Enclaves.
+    #
+    # @!attribute [rw] enabled
+    #   If this parameter is set to `true`, the instance is enabled for
+    #   Amazon Web Services Nitro Enclaves.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataEnclaveOptionsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataEnclaveOptionsDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether your Amazon EC2 instance is configured for
+    # hibernation.
+    #
+    # @!attribute [rw] configured
+    #   If you set this parameter to `true`, the instance is enabled for
+    #   hibernation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataHibernationOptionsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataHibernationOptionsDetails < Struct.new(
+      :configured)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details for an Identity and Access Management (IAM) instance
+    # profile, which is a container for an IAM role for your instance.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the instance profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataIamInstanceProfileDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataIamInstanceProfileDetails < Struct.new(
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the market (purchasing) option for an Amazon
+    # EC2 instance.
+    #
+    # @!attribute [rw] market_type
+    #   The market type.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_options
+    #   The options for Spot Instances.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails < Struct.new(
+      :market_type,
+      :spot_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the market (purchasing) options for Spot
+    # Instances.
+    #
+    # @!attribute [rw] block_duration_minutes
+    #   Deprecated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_price
+    #   The maximum hourly price you're willing to pay for the Spot
+    #   Instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_instance_type
+    #   The Spot Instance request type.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ),
+    #   for persistent requests.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails < Struct.new(
+      :block_duration_minutes,
+      :instance_interruption_behavior,
+      :max_price,
+      :spot_instance_type,
+      :valid_until)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon
+    # Web Services Inferentia chips) on an Amazon EC2 instance.
+    #
+    # @!attribute [rw] max
+    #   The maximum number of accelerators. If this parameter isn't
+    #   specified, there's no maximum limit. To exclude accelerator-enabled
+    #   instance types, set `Max` to `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min
+    #   The minimum number of accelerators. If this parameter isn't
+    #   specified, there's no minimum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails < Struct.new(
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of memory, in MiB, for the accelerators
+    # on an Amazon EC2 instance.
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory, in MiB. If this parameter isn't
+    #   specified, there's no maximum limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory, in MiB. If `0` is specified, there's
+    #   no maximum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails < Struct.new(
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum baseline bandwidth to Amazon Elastic Block
+    # Store (Amazon EBS), in Mbps. For more information, see [Amazon
+    # EBS–optimized instances ][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    #
+    # @!attribute [rw] max
+    #   The maximum baseline bandwidth, in Mbps. If this parameter is
+    #   omitted, there's no maximum limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min
+    #   The minimum baseline bandwidth, in Mbps. If this parameter is
+    #   omitted, there's no minimum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails < Struct.new(
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The attributes for the Amazon EC2 instance types.
+    #
+    # @!attribute [rw] accelerator_count
+    #   The minimum and maximum number of accelerators (GPUs, FPGAs, or
+    #   Amazon Web Services Inferentia chips) on an instance.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails]
+    #
+    # @!attribute [rw] accelerator_manufacturers
+    #   Indicates whether instance types must have accelerators by specific
+    #   manufacturers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_names
+    #   The accelerators that must be on the instance type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_total_memory_mi_b
+    #   The minimum and maximum amount of total accelerator memory, in MiB.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails]
+    #
+    # @!attribute [rw] accelerator_types
+    #   The accelerator types that must be on the instance type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bare_metal
+    #   Indicates whether bare metal instance types must be included,
+    #   excluded, or required.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_ebs_bandwidth_mbps
+    #   The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps.
+    #   For more information, see [Amazon EBS optimized instances][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails]
+    #
+    # @!attribute [rw] burstable_performance
+    #   Indicates whether burstable performance T instance types are
+    #   included, excluded, or required. For more information, [Burstable
+    #   performance instances][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cpu_manufacturers
+    #   The CPU manufacturers to include.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_instance_types
+    #   The instance types to exclude.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_generations
+    #   Indicates whether current or previous generation instance types are
+    #   included.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] local_storage
+    #   Indicates whether instance types with instance store volumes are
+    #   included, excluded, or required. For more information, see [Amazon
+    #   EC2 instance store][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    #   @return [String]
+    #
+    # @!attribute [rw] local_storage_types
+    #   The type of local storage that is required.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] memory_gi_b_per_v_cpu
+    #   The minimum and maximum amount of memory per vCPU, in GiB.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails]
+    #
+    # @!attribute [rw] memory_mi_b
+    #   The minimum and maximum amount of memory, in MiB.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails]
+    #
+    # @!attribute [rw] network_interface_count
+    #   The minimum and maximum number of network interfaces.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails]
+    #
+    # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
+    #   The price protection threshold for On-Demand Instances. This is the
+    #   maximum you’ll pay for an On-Demand Instance, expressed as a
+    #   percentage above the least expensive current generation M, C, or R
+    #   instance type with your specified attributes. When Amazon EC2
+    #   selects instance types with your attributes, it excludes instance
+    #   types priced above your threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   A high value, such as `999999`, turns off price protection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] require_hibernate_support
+    #   Indicates whether instance types must support hibernation for
+    #   On-Demand Instances.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] spot_max_price_percentage_over_lowest_price
+    #   The price protection threshold for Spot Instances. This is the
+    #   maximum you’ll pay for a Spot Instance, expressed as a percentage
+    #   above the least expensive current generation M, C, or R instance
+    #   type with your specified attributes. When Amazon EC2 selects
+    #   instance types with your attributes, it excludes instance types
+    #   priced above your threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   A high value, such as `999999`, turns off price protection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_local_storage_gb
+    #   The minimum and maximum amount of total local storage, in GB.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails]
+    #
+    # @!attribute [rw] v_cpu_count
+    #   The minimum and maximum number of vCPUs.
+    #   @return [Types::AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsDetails < Struct.new(
+      :accelerator_count,
+      :accelerator_manufacturers,
+      :accelerator_names,
+      :accelerator_total_memory_mi_b,
+      :accelerator_types,
+      :bare_metal,
+      :baseline_ebs_bandwidth_mbps,
+      :burstable_performance,
+      :cpu_manufacturers,
+      :excluded_instance_types,
+      :instance_generations,
+      :local_storage,
+      :local_storage_types,
+      :memory_gi_b_per_v_cpu,
+      :memory_mi_b,
+      :network_interface_count,
+      :on_demand_max_price_percentage_over_lowest_price,
+      :require_hibernate_support,
+      :spot_max_price_percentage_over_lowest_price,
+      :total_local_storage_gb,
+      :v_cpu_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of memory per vCPU, in GiB.
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory per vCPU, in GiB. If this parameter is
+    #   omitted, there's no maximum limit.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory per vCPU, in GiB. If this parameter is
+    #   omitted, there's no maximum limit.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails < Struct.new(
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of memory, in MiB, for an Amazon EC2
+    # instance.
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory, in MiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails < Struct.new(
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of network interfaces to be attached to
+    # an Amazon EC2 instance.
+    #
+    # @!attribute [rw] max
+    #   The maximum number of network interfaces.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min
+    #   The minimum number of network interfaces.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails < Struct.new(
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of total local storage, in GB, that an
+    # Amazon EC2 instance uses.
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of total local storage, in GB.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of total local storage, in GB.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails < Struct.new(
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of vCPUs for an Amazon EC2 instance.
+    #
+    # @!attribute [rw] max
+    #   The maximum number of vCPUs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min
+    #   The minimum number of vCPUs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails < Struct.new(
+      :max,
+      :min)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the license configuration for an Amazon EC2
+    # instance.
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   The Amazon Resource Name (ARN) of the license configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataLicenseSetDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataLicenseSetDetails < Struct.new(
+      :license_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maintenance options of an Amazon EC2 instance.
+    #
+    # @!attribute [rw] auto_recovery
+    #   Disables the automatic recovery behavior of your instance or sets it
+    #   to default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataMaintenanceOptionsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataMaintenanceOptionsDetails < Struct.new(
+      :auto_recovery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the metadata options for an Amazon EC2 instance.
+    #
+    # @!attribute [rw] http_endpoint
+    #   Enables or disables the HTTP metadata endpoint on your instances. If
+    #   the parameter is not specified, the default state is enabled, and
+    #   you won’t be able to access your instance metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_protocol_ipv_6
+    #   Enables or disables the IPv6 endpoint for the instance metadata
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_metadata_tags
+    #   When set to `enabled`, this parameter allows access to instance tags
+    #   from the instance metadata. When set to `disabled`, it turns off
+    #   access to instance tags from the instance metadata. For more
+    #   information, see [Work with instance tags in instance metadata][1]
+    #   in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataMetadataOptionsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataMetadataOptionsDetails < Struct.new(
+      :http_endpoint,
+      :http_protocol_ipv_6,
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :instance_metadata_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The monitoring for an Amazon EC2 instance.
+    #
+    # @!attribute [rw] enabled
+    #   Enables detailed monitoring when `true` is specified. Otherwise,
+    #   basic monitoring is enabled. For more information about detailed
+    #   monitoring, see [Enable or turn off detailed monitoring for your
+    #   instances][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataMonitoringDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataMonitoringDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One or more network interfaces to attach to an Amazon EC2 instance. If
+    # you specify a network interface, you must specify security groups and
+    # subnets as part of the network interface.
+    #
+    # @!attribute [rw] associate_carrier_ip_address
+    #   Indicates whether to associate a Carrier IP address with eth0 for a
+    #   new network interface. You use this option when you launch an
+    #   instance in a Wavelength Zone and want to associate a Carrier IP
+    #   address with the network interface. For more information, see
+    #   [Carrier IP address][1] in the *Wavelength Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] associate_public_ip_address
+    #   Associates a public IPv4 address with eth0 for a new network
+    #   interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the network interface is deleted when the instance
+    #   is terminated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description for the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_index
+    #   The device index for the network interface attachment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] groups
+    #   The IDs of one or more security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_4_prefix_count
+    #   The number of IPv4 prefixes to be automatically assigned to the
+    #   network interface. You cannot use this option if you use the
+    #   `Ipv4Prefixes` option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_4_prefixes
+    #   One or more IPv4 prefixes to be assigned to the network interface.
+    #   You cannot use this option if you use the `Ipv4PrefixCount` option.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails>]
+    #
+    # @!attribute [rw] ipv_6_address_count
+    #   The number of IPv6 addresses to assign to a network interface.
+    #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
+    #   range. You can't use this option if you use `Ipv6Addresses`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   One or more specific IPv6 addresses from the IPv6 CIDR block range
+    #   of your subnet. You can't use this option if you use
+    #   `Ipv6AddressCount`.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails>]
+    #
+    # @!attribute [rw] ipv_6_prefix_count
+    #   The number of IPv6 prefixes to be automatically assigned to the
+    #   network interface. You cannot use this option if you use the
+    #   `Ipv6Prefix` option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_prefixes
+    #   One or more IPv6 prefixes to be assigned to the network interface.
+    #   You cannot use this option if you use the `Ipv6PrefixCount` option.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails>]
+    #
+    # @!attribute [rw] network_card_index
+    #   The index of the network card. Some instance types support multiple
+    #   network cards. The primary network interface must be assigned to
+    #   network card index `0`. The default is network card index `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The primary private IPv4 address of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   One or more private IPv4 addresses.
+    #   @return [Array<Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails>]
+    #
+    # @!attribute [rw] secondary_private_ip_address_count
+    #   The number of secondary private IPv4 addresses to assign to a
+    #   network interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet for the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails < Struct.new(
+      :associate_carrier_ip_address,
+      :associate_public_ip_address,
+      :delete_on_termination,
+      :description,
+      :device_index,
+      :groups,
+      :interface_type,
+      :ipv_4_prefix_count,
+      :ipv_4_prefixes,
+      :ipv_6_address_count,
+      :ipv_6_addresses,
+      :ipv_6_prefix_count,
+      :ipv_6_prefixes,
+      :network_card_index,
+      :network_interface_id,
+      :private_ip_address,
+      :private_ip_addresses,
+      :secondary_private_ip_address_count,
+      :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details on one or more IPv4 prefixes for a network interface.
+    #
+    # @!attribute [rw] ipv_4_prefix
+    #   The IPv4 prefix. For more information, see [Assigning prefixes to
+    #   Amazon EC2 network interfaces][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails < Struct.new(
+      :ipv_4_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an IPv6 address in an Amazon EC2 launch template.
+    #
+    # @!attribute [rw] ipv_6_address
+    #   One or more specific IPv6 addresses from the IPv6 CIDR block range
+    #   of your subnet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails < Struct.new(
+      :ipv_6_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details on one or more IPv6 prefixes to be assigned to the
+    # network interface.
+    #
+    # @!attribute [rw] ipv_6_prefix
+    #   The IPv6 prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails < Struct.new(
+      :ipv_6_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One or more private IPv4 addresses.
+    #
+    # @!attribute [rw] primary
+    #   Indicates whether the private IPv4 address is the primary private
+    #   IPv4 address. Only one IPv4 address can be designated as primary.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails < Struct.new(
+      :primary,
+      :private_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the placement of an Amazon EC2 instance.
+    #
+    # @!attribute [rw] affinity
+    #   The affinity setting for an instance on an EC2 Dedicated Host.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the placement group for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_id
+    #   The ID of the Dedicated Host for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_resource_group_arn
+    #   The Amazon Resource Name (ARN) of the host resource group in which
+    #   to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_number
+    #   The number of the partition the instance should launch in.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spread_domain
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the instance (if the instance is running in a VPC).
+    #   An instance with a tenancy of dedicated runs on single-tenant
+    #   hardware.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataPlacementDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataPlacementDetails < Struct.new(
+      :affinity,
+      :availability_zone,
+      :group_name,
+      :host_id,
+      :host_resource_group_arn,
+      :partition_number,
+      :spread_domain,
+      :tenancy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the options for Amazon EC2 instance hostnames.
+    #
+    # @!attribute [rw] enable_resource_name_dns_aaaa_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_resource_name_dns_a_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] hostname_type
+    #   The type of hostname for EC2 instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails < Struct.new(
+      :enable_resource_name_dns_aaaa_record,
+      :enable_resource_name_dns_a_record,
+      :hostname_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the properties for creating an Amazon Elastic Compute Cloud
+    # (Amazon EC2) launch template.
+    #
+    # @!attribute [rw] launch_template_name
+    #   A name for the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An ID for the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_data
+    #   The information to include in the launch template.
+    #   @return [Types::AwsEc2LaunchTemplateDataDetails]
+    #
+    # @!attribute [rw] default_version_number
+    #   The default version of the launch template.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_version_number
+    #   The latest version of the launch template.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2LaunchTemplateDetails AWS API Documentation
+    #
+    class AwsEc2LaunchTemplateDetails < Struct.new(
+      :launch_template_name,
+      :id,
+      :launch_template_data,
+      :default_version_number,
+      :latest_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An association between the network ACL and a subnet.
     #
     # @!attribute [rw] network_acl_association_id
@@ -14122,6 +15383,177 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Amazon SageMaker notebook instance.
+    #
+    # @!attribute [rw] accelerator_types
+    #   A list of Amazon Elastic Inference instance types to associate with
+    #   the notebook instance. Currently, only one instance type can be
+    #   associated with a notebook instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_code_repositories
+    #   An array of up to three Git repositories associated with the
+    #   notebook instance. These can be either the names of Git repositories
+    #   stored as resources in your account, or the URL of Git repositories
+    #   in [AWS CodeCommit][1] or in any other Git repository. These
+    #   repositories are cloned at the same level as the default repository
+    #   of your notebook instance. For more information, see [Associating
+    #   Git repositories with SageMaker notebook instances][2] in the
+    #   *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_code_repository
+    #   The Git repository associated with the notebook instance as its
+    #   default code repository. This can be either the name of a Git
+    #   repository stored as a resource in your account, or the URL of a Git
+    #   repository in [AWS CodeCommit][1] or in any other Git repository.
+    #   When you open a notebook instance, it opens in the directory that
+    #   contains this repository. For more information, see [Associating Git
+    #   repositories with SageMaker notebook instances][2] in the *Amazon
+    #   SageMaker Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_internet_access
+    #   Sets whether SageMaker provides internet access to the notebook
+    #   instance. If you set this to `Disabled`, this notebook instance is
+    #   able to access resources only in your VPC, and is not be able to
+    #   connect to SageMaker training and endpoint services unless you
+    #   configure a Network Address Translation (NAT) Gateway in your VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If status of the instance is `Failed`, the reason it failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_metadata_service_configuration
+    #   Information on the IMDS configuration of the notebook instance.
+    #   @return [Types::AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of machine learning (ML) compute instance to launch for the
+    #   notebook instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of an Key Management Service (KMS)
+    #   key that SageMaker uses to encrypt data on the storage volume
+    #   attached to your notebook instance. The KMS key you provide must be
+    #   enabled. For information, see [Enabling and disabling keys][1] in
+    #   the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID that SageMaker created when the instance
+    #   was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_arn
+    #   The Amazon Resource Name (ARN) of the notebook instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   The name of a notebook instance lifecycle configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_name
+    #   The name of the new notebook instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_status
+    #   The status of the notebook instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_identifier
+    #   The platform identifier of the notebook instance runtime
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   The VPC security group IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the VPC subnet to which you have a connectivity from your
+    #   ML compute instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL that you use to connect to the Jupyter notebook that is
+    #   running in your notebook instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size, in GB, of the ML storage volume to attach to the notebook
+    #   instance.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSageMakerNotebookInstanceDetails AWS API Documentation
+    #
+    class AwsSageMakerNotebookInstanceDetails < Struct.new(
+      :accelerator_types,
+      :additional_code_repositories,
+      :default_code_repository,
+      :direct_internet_access,
+      :failure_reason,
+      :instance_metadata_service_configuration,
+      :instance_type,
+      :kms_key_id,
+      :network_interface_id,
+      :notebook_instance_arn,
+      :notebook_instance_lifecycle_config_name,
+      :notebook_instance_name,
+      :notebook_instance_status,
+      :platform_identifier,
+      :role_arn,
+      :root_access,
+      :security_groups,
+      :subnet_id,
+      :url,
+      :volume_size_in_gb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information on the instance metadata service (IMDS) configuration of
+    # the notebook instance.
+    #
+    # @!attribute [rw] minimum_instance_metadata_service_version
+    #   Indicates the minimum IMDS version that the notebook instance
+    #   supports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails AWS API Documentation
+    #
+    class AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails < Struct.new(
+      :minimum_instance_metadata_service_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about an Secrets Manager secret.
     #
     # @!attribute [rw] rotation_rules
@@ -16098,6 +17530,444 @@ module Aws::SecurityHub
       :priority,
       :rule_id,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that WAF should allow the request and optionally defines
+    # additional custom handling for the request.
+    #
+    # @!attribute [rw] custom_request_handling
+    #   Defines custom handling for the web request. For information about
+    #   customizing web requests and responses, see [Customizing web
+    #   requests and responses in WAF][1] in the *WAF Developer Guide.*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2ActionAllowDetails AWS API Documentation
+    #
+    class AwsWafv2ActionAllowDetails < Struct.new(
+      :custom_request_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that WAF should block the request and optionally defines
+    # additional custom handling for the response to the web request.
+    #
+    # @!attribute [rw] custom_response
+    #   Defines a custom response for the web request. For information, see
+    #   [Customizing web requests and responses in WAF][1] in the *WAF
+    #   Developer Guide.*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   @return [Types::AwsWafv2CustomResponseDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2ActionBlockDetails AWS API Documentation
+    #
+    class AwsWafv2ActionBlockDetails < Struct.new(
+      :custom_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom header for custom request and response handling.
+    #
+    # @!attribute [rw] name
+    #   The name of the custom header.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the custom header.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2CustomHttpHeader AWS API Documentation
+    #
+    class AwsWafv2CustomHttpHeader < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Custom request handling behavior that inserts custom headers into a
+    # web request. WAF uses custom request handling when the rule action
+    # doesn't block the request.
+    #
+    # @!attribute [rw] insert_headers
+    #   The HTTP headers to insert into the request.
+    #   @return [Array<Types::AwsWafv2CustomHttpHeader>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2CustomRequestHandlingDetails AWS API Documentation
+    #
+    class AwsWafv2CustomRequestHandlingDetails < Struct.new(
+      :insert_headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom response to send to the client. You can define a custom
+    # response for rule actions and default web ACL actions that are set to
+    # block.
+    #
+    # @!attribute [rw] custom_response_body_key
+    #   References the response body that you want WAF to return to the web
+    #   request client. You can define a custom response for a rule action
+    #   or a default web ACL action that is set to block.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_code
+    #   The HTTP status code to return to the client. For a list of status
+    #   codes that you can use in your custom responses, see [Supported
+    #   status codes for custom response][1] in the *WAF Developer Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] response_headers
+    #   The HTTP headers to use in the response.
+    #   @return [Array<Types::AwsWafv2CustomHttpHeader>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2CustomResponseDetails AWS API Documentation
+    #
+    class AwsWafv2CustomResponseDetails < Struct.new(
+      :custom_response_body_key,
+      :response_code,
+      :response_headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an WAFv2 rule group.
+    #
+    # @!attribute [rw] capacity
+    #   The web ACL capacity units (WCUs) required for this rule group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule group that helps with identification.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule group. You cannot change the name of a rule
+    #   group after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   The Rule statements used to identify the web requests that you want
+    #   to allow, block, or count. Each rule includes one top-level
+    #   statement that WAF uses to identify matching web requests, and
+    #   parameters that govern how WAF handles them.
+    #   @return [Array<Types::AwsWafv2RulesDetails>]
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether the rule group is for an Amazon CloudFront
+    #   distribution or for a regional application. A regional application
+    #   can be an Application Load Balancer (ALB), an Amazon API Gateway
+    #   REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility_config
+    #   Defines and enables Amazon CloudWatch metrics and web request sample
+    #   collection.
+    #   @return [Types::AwsWafv2VisibilityConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2RuleGroupDetails AWS API Documentation
+    #
+    class AwsWafv2RuleGroupDetails < Struct.new(
+      :capacity,
+      :description,
+      :id,
+      :name,
+      :arn,
+      :rules,
+      :scope,
+      :visibility_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that WAF should run a CAPTCHA check against the request.
+    #
+    # @!attribute [rw] custom_request_handling
+    #   Defines custom handling for the web request, used when the CAPTCHA
+    #   inspection determines that the request's token is valid and
+    #   unexpired. For more information, see [Customizing web requests and
+    #   responses in WAF][1] in the *WAF Developer Guide.*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2RulesActionCaptchaDetails AWS API Documentation
+    #
+    class AwsWafv2RulesActionCaptchaDetails < Struct.new(
+      :custom_request_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that WAF should count the request.
+    #
+    # @!attribute [rw] custom_request_handling
+    #   Defines custom handling for the web request. For more information,
+    #   see [Customizing web requests and responses in WAF][1] in the *WAF
+    #   Developer Guide.*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   @return [Types::AwsWafv2CustomRequestHandlingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2RulesActionCountDetails AWS API Documentation
+    #
+    class AwsWafv2RulesActionCountDetails < Struct.new(
+      :custom_request_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The action that WAF should take on a web request when it matches a
+    # rule's statement. Settings at the web ACL level can override the rule
+    # action setting.
+    #
+    # @!attribute [rw] allow
+    #   Instructs WAF to allow the web request.
+    #   @return [Types::AwsWafv2ActionAllowDetails]
+    #
+    # @!attribute [rw] block
+    #   Instructs WAF to block the web request.
+    #   @return [Types::AwsWafv2ActionBlockDetails]
+    #
+    # @!attribute [rw] captcha
+    #   Instructs WAF to run a CAPTCHA check against the web request.
+    #   @return [Types::AwsWafv2RulesActionCaptchaDetails]
+    #
+    # @!attribute [rw] count
+    #   Instructs WAF to count the web request and then continue evaluating
+    #   the request using the remaining rules in the web ACL.
+    #   @return [Types::AwsWafv2RulesActionCountDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2RulesActionDetails AWS API Documentation
+    #
+    class AwsWafv2RulesActionDetails < Struct.new(
+      :allow,
+      :block,
+      :captcha,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about rules in a rule group. A rule identifies web
+    # requests that you want to allow, block, or count. Each rule includes
+    # one top-level Statement that AWS WAF uses to identify matching web
+    # requests, and parameters that govern how AWS WAF handles them.
+    #
+    # @!attribute [rw] action
+    #   The action that WAF should take on a web request when it matches the
+    #   rule statement. Settings at the web ACL level can override the rule
+    #   action setting.
+    #   @return [Types::AwsWafv2RulesActionDetails]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] override_action
+    #   The action to use in the place of the action that results from the
+    #   rule group evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   If you define more than one Rule in a WebACL, WAF evaluates each
+    #   request against the Rules in order based on the value of `Priority`.
+    #   WAF processes rules with lower priority first. The priorities don't
+    #   need to be consecutive, but they must all be different.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] visibility_config
+    #   Defines and enables Amazon CloudWatch metrics and web request sample
+    #   collection.
+    #   @return [Types::AwsWafv2VisibilityConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2RulesDetails AWS API Documentation
+    #
+    class AwsWafv2RulesDetails < Struct.new(
+      :action,
+      :name,
+      :override_action,
+      :priority,
+      :visibility_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines and enables Amazon CloudWatch metrics and web request sample
+    # collection.
+    #
+    # @!attribute [rw] cloud_watch_metrics_enabled
+    #   A boolean indicating whether the associated resource sends metrics
+    #   to Amazon CloudWatch. For the list of available metrics, see [WAF
+    #   metrics and dimensions][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] metric_name
+    #   A name of the Amazon CloudWatch metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] sampled_requests_enabled
+    #   A boolean indicating whether WAF should store a sampling of the web
+    #   requests that match the rules. You can view the sampled requests
+    #   through the WAF console.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2VisibilityConfigDetails AWS API Documentation
+    #
+    class AwsWafv2VisibilityConfigDetails < Struct.new(
+      :cloud_watch_metrics_enabled,
+      :metric_name,
+      :sampled_requests_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the action that Amazon CloudFront or WAF takes when a web
+    # request matches the conditions in the rule.
+    #
+    # @!attribute [rw] allow
+    #   Specifies that WAF should allow requests by default.
+    #   @return [Types::AwsWafv2ActionAllowDetails]
+    #
+    # @!attribute [rw] block
+    #   Specifies that WAF should block requests by default.
+    #   @return [Types::AwsWafv2ActionBlockDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2WebAclActionDetails AWS API Documentation
+    #
+    class AwsWafv2WebAclActionDetails < Struct.new(
+      :allow,
+      :block)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how WAF should handle CAPTCHA evaluations for rules that
+    # don't have their own `CaptchaConfig` settings.
+    #
+    # @!attribute [rw] immunity_time_property
+    #   Determines how long a CAPTCHA timestamp in the token remains valid
+    #   after the client successfully solves a CAPTCHA puzzle.
+    #   @return [Types::AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2WebAclCaptchaConfigDetails AWS API Documentation
+    #
+    class AwsWafv2WebAclCaptchaConfigDetails < Struct.new(
+      :immunity_time_property)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used for CAPTCHA and challenge token settings. Determines how long a
+    # CAPTCHA or challenge timestamp remains valid after WAF updates it for
+    # a successful CAPTCHA or challenge response.
+    #
+    # @!attribute [rw] immunity_time
+    #   The amount of time, in seconds, that a CAPTCHA or challenge
+    #   timestamp is considered valid by WAF.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails AWS API Documentation
+    #
+    class AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails < Struct.new(
+      :immunity_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an WAFv2 web Access Control List (ACL).
+    #
+    # @!attribute [rw] name
+    #   The name of the web ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the web ACL that you want to
+    #   associate with the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] managedby_firewall_manager
+    #   Indicates whether this web ACL is managed by Firewall Manager.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the web ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity
+    #   The web ACL capacity units (WCUs) currently being used by this web
+    #   ACL.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] captcha_config
+    #   Specifies how WAF should handle CAPTCHA evaluations for rules that
+    #   don't have their own `CaptchaConfig` settings.
+    #   @return [Types::AwsWafv2WebAclCaptchaConfigDetails]
+    #
+    # @!attribute [rw] default_action
+    #   The action to perform if none of the Rules contained in the web ACL
+    #   match.
+    #   @return [Types::AwsWafv2WebAclActionDetails]
+    #
+    # @!attribute [rw] description
+    #   A description of the web ACL that helps with identification.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   The Rule statements used to identify the web requests that you want
+    #   to allow, block, or count. Each rule includes one top-level
+    #   statement that WAF uses to identify matching web requests, and
+    #   parameters that govern how WAF handles them.
+    #   @return [Array<Types::AwsWafv2RulesDetails>]
+    #
+    # @!attribute [rw] visibility_config
+    #   Defines and enables Amazon CloudWatch metrics and web request sample
+    #   collection.
+    #   @return [Types::AwsWafv2VisibilityConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafv2WebAclDetails AWS API Documentation
+    #
+    class AwsWafv2WebAclDetails < Struct.new(
+      :name,
+      :arn,
+      :managedby_firewall_manager,
+      :id,
+      :capacity,
+      :captcha_config,
+      :default_action,
+      :description,
+      :rules,
+      :visibility_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18272,9 +20142,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # There is an issue with the account used to make the request. Either
-    # Security Hub is not enabled for the account, or the account does not
-    # have permission to perform this action.
+    # The account doesn't have permission to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -20080,6 +21948,23 @@ module Aws::SecurityHub
     #   Provides details about an Backup backup, or recovery point.
     #   @return [Types::AwsBackupRecoveryPointDetails]
     #
+    # @!attribute [rw] aws_ec2_launch_template
+    #   Specifies the properties for creating an Amazon Elastic Compute
+    #   Cloud (Amazon EC2) launch template.
+    #   @return [Types::AwsEc2LaunchTemplateDetails]
+    #
+    # @!attribute [rw] aws_sage_maker_notebook_instance
+    #   Provides details about an Amazon SageMaker notebook instance.
+    #   @return [Types::AwsSageMakerNotebookInstanceDetails]
+    #
+    # @!attribute [rw] aws_wafv_2_web_acl
+    #   Details about an WAFv2 web Access Control List (ACL).
+    #   @return [Types::AwsWafv2WebAclDetails]
+    #
+    # @!attribute [rw] aws_wafv_2_rule_group
+    #   Details about an WAFv2 rule group.
+    #   @return [Types::AwsWafv2RuleGroupDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -20161,7 +22046,11 @@ module Aws::SecurityHub
       :aws_ecs_task,
       :aws_backup_backup_vault,
       :aws_backup_backup_plan,
-      :aws_backup_recovery_point)
+      :aws_backup_recovery_point,
+      :aws_ec2_launch_template,
+      :aws_sage_maker_notebook_instance,
+      :aws_wafv_2_web_acl,
+      :aws_wafv_2_rule_group)
       SENSITIVE = []
       include Aws::Structure
     end

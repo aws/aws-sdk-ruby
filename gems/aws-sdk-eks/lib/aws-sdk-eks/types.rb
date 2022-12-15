@@ -54,7 +54,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] health
-    #   An object representing the health of the add-on.
+    #   An object that represents the health of the add-on.
     #   @return [Types::AddonHealth]
     #
     # @!attribute [rw] addon_arn
@@ -70,8 +70,8 @@ module Aws::EKS
     #   @return [Time]
     #
     # @!attribute [rw] service_account_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that is bound to the
-    #   Kubernetes service account used by the add-on.
+    #   The Amazon Resource Name (ARN) of the IAM role that's bound to the
+    #   Kubernetes service account that the add-on uses.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -95,7 +95,7 @@ module Aws::EKS
     #   @return [Types::MarketplaceInformation]
     #
     # @!attribute [rw] configuration_values
-    #   The provided configuration values.
+    #   The configuration values that you provided.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Addon AWS API Documentation
@@ -705,8 +705,8 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] addon_name
-    #   The name of the add-on. The name must match one of the names
-    #   returned by [ `DescribeAddonVersions` ][1].
+    #   The name of the add-on. The name must match one of the names that [
+    #   `DescribeAddonVersions` ][1] returns.
     #
     #
     #
@@ -784,9 +784,9 @@ module Aws::EKS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] configuration_values
-    #   The set of configuration values for the add-on being created.
-    #   Whatever values provided here are validated against the schema from
-    #   [ `DescribeAddonConfiguration` ][1].
+    #   The set of configuration values for the add-on that's created. The
+    #   values that you provide are validated against the schema in [
+    #   `DescribeAddonConfiguration` ][1].
     #
     #
     #
@@ -1042,11 +1042,12 @@ module Aws::EKS
     #
     # @!attribute [rw] disk_size
     #   The root device disk size (in GiB) for your node group instances.
-    #   The default disk size is 20 GiB. If you specify `launchTemplate`,
-    #   then don't specify `diskSize`, or the node group deployment will
-    #   fail. For more information about using launch templates with Amazon
-    #   EKS, see [Launch template support][1] in the *Amazon EKS User
-    #   Guide*.
+    #   The default disk size is 20 GiB for Linux and Bottlerocket. The
+    #   default disk size is 50 GiB for Windows. If you specify
+    #   `launchTemplate`, then don't specify `diskSize`, or the node group
+    #   deployment will fail. For more information about using launch
+    #   templates with Amazon EKS, see [Launch template support][1] in the
+    #   *Amazon EKS User Guide*.
     #
     #
     #
@@ -1069,13 +1070,13 @@ module Aws::EKS
     #
     # @!attribute [rw] instance_types
     #   Specify the instance types for a node group. If you specify a GPU
-    #   instance type, be sure to specify `AL2_x86_64_GPU` with the
-    #   `amiType` parameter. If you specify `launchTemplate`, then you can
-    #   specify zero or one instance type in your launch template *or* you
-    #   can specify 0-20 instance types for `instanceTypes`. If however, you
-    #   specify an instance type in your launch template *and* specify any
-    #   `instanceTypes`, the node group deployment will fail. If you don't
-    #   specify an instance type in a launch template or for
+    #   instance type, make sure to also specify an applicable GPU AMI type
+    #   with the `amiType` parameter. If you specify `launchTemplate`, then
+    #   you can specify zero or one instance type in your launch template
+    #   *or* you can specify 0-20 instance types for `instanceTypes`. If
+    #   however, you specify an instance type in your launch template *and*
+    #   specify any `instanceTypes`, the node group deployment will fail. If
+    #   you don't specify an instance type in a launch template or for
     #   `instanceTypes`, then `t3.medium` is used, by default. If you
     #   specify `Spot` for `capacityType`, then we recommend specifying
     #   multiple values for `instanceTypes`. For more information, see
@@ -1089,15 +1090,14 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] ami_type
-    #   The AMI type for your node group. GPU instance types should use the
-    #   `AL2_x86_64_GPU` AMI type. Non-GPU instances should use the
-    #   `AL2_x86_64` AMI type. Arm instances should use the `AL2_ARM_64` AMI
-    #   type. All types use the Amazon EKS optimized Amazon Linux 2 AMI. If
-    #   you specify `launchTemplate`, and your launch template uses a custom
-    #   AMI, then don't specify `amiType`, or the node group deployment
-    #   will fail. For more information about using launch templates with
-    #   Amazon EKS, see [Launch template support][1] in the *Amazon EKS User
-    #   Guide*.
+    #   The AMI type for your node group. If you specify `launchTemplate`,
+    #   and your launch template uses a custom AMI, then don't specify
+    #   `amiType`, or the node group deployment will fail. If your launch
+    #   template uses a Windows custom AMI, then add
+    #   `eks:kube-proxy-windows` to your Windows nodes `rolearn` in the
+    #   `aws-auth` `ConfigMap`. For more information about using launch
+    #   templates with Amazon EKS, see [Launch template support][1] in the
+    #   *Amazon EKS User Guide*.
     #
     #
     #
@@ -1105,11 +1105,12 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] remote_access
-    #   The remote access (SSH) configuration to use with your node group.
-    #   If you specify `launchTemplate`, then don't specify `remoteAccess`,
-    #   or the node group deployment will fail. For more information about
-    #   using launch templates with Amazon EKS, see [Launch template
-    #   support][1] in the *Amazon EKS User Guide*.
+    #   The remote access configuration to use with your node group. For
+    #   Linux, the protocol is SSH. For Windows, the protocol is RDP. If you
+    #   specify `launchTemplate`, then don't specify `remoteAccess`, or the
+    #   node group deployment will fail. For more information about using
+    #   launch templates with Amazon EKS, see [Launch template support][1]
+    #   in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1200,19 +1201,24 @@ module Aws::EKS
     # @!attribute [rw] release_version
     #   The AMI version of the Amazon EKS optimized AMI to use with your
     #   node group. By default, the latest available AMI version for the
-    #   node group's current Kubernetes version is used. For more
-    #   information, see [Amazon EKS optimized Amazon Linux 2 AMI
-    #   versions][1] in the *Amazon EKS User Guide*. If you specify
-    #   `launchTemplate`, and your launch template uses a custom AMI, then
-    #   don't specify `releaseVersion`, or the node group deployment will
-    #   fail. For more information about using launch templates with Amazon
-    #   EKS, see [Launch template support][2] in the *Amazon EKS User
-    #   Guide*.
+    #   node group's current Kubernetes version is used. For information
+    #   about Linux versions, see [Amazon EKS optimized Amazon Linux AMI
+    #   versions][1] in the *Amazon EKS User Guide*. Amazon EKS managed node
+    #   groups support the November 2022 and later releases of the Windows
+    #   AMIs. For information about Windows versions, see [Amazon EKS
+    #   optimized Windows AMI versions][2] in the *Amazon EKS User Guide*.
+    #
+    #   If you specify `launchTemplate`, and your launch template uses a
+    #   custom AMI, then don't specify `releaseVersion`, or the node group
+    #   deployment will fail. For more information about using launch
+    #   templates with Amazon EKS, see [Launch template support][3] in the
+    #   *Amazon EKS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
-    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html
+    #   [3]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateNodegroupRequest AWS API Documentation
@@ -1407,8 +1413,8 @@ module Aws::EKS
     end
 
     # @!attribute [rw] addon_name
-    #   The name of the add-on. The name must match one of the names
-    #   returned by [ `DescribeAddonVersions` ][1].
+    #   The name of the add-on. The name must match one of the names that [
+    #   `DescribeAddonVersions` ][1] returns.
     #
     #
     #
@@ -1447,8 +1453,8 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] configuration_schema
-    #   A JSON schema used to validate provided configuration values when
-    #   creating or updating an addon.
+    #   A JSON schema that's used to validate the configuration values that
+    #   you provide when an addon is created or updated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonConfigurationResponse AWS API Documentation
@@ -2215,7 +2221,7 @@ module Aws::EKS
     #   assigned from. Kubernetes assigns addresses from an IPv4 CIDR block
     #   assigned to a subnet that the node is in. If you didn't specify a
     #   CIDR block when you created the cluster, then Kubernetes assigns
-    #   addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR
+    #   addresses from either the `10.100.0.0/16` or `172.20.0.0/16` CIDR
     #   blocks. If this was specified, then it was specified when the
     #   cluster was created and it can't be changed.
     #   @return [String]
@@ -3391,19 +3397,24 @@ module Aws::EKS
     #   communication with the nodes in the managed node group. For more
     #   information, see [Amazon EC2 key pairs and Linux instances][1] in
     #   the *Amazon Elastic Compute Cloud User Guide for Linux Instances*.
+    #   For Windows, an Amazon EC2 SSH key is used to obtain the RDP
+    #   password. For more information, see [Amazon EC2 key pairs and
+    #   Windows instances][2] in the *Amazon Elastic Compute Cloud User
+    #   Guide for Windows Instances*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key-pairs.html
     #   @return [String]
     #
     # @!attribute [rw] source_security_groups
-    #   The security group ids that are allowed SSH access (port 22) to the
-    #   nodes. If you specify an Amazon EC2 SSH key but do not specify a
-    #   source security group when you create a managed node group, then
-    #   port 22 on the nodes is opened to the internet (0.0.0.0/0). For more
-    #   information, see [Security Groups for Your VPC][1] in the *Amazon
-    #   Virtual Private Cloud User Guide*.
+    #   The security group IDs that are allowed SSH access (port 22) to the
+    #   nodes. For Windows, the port is 3389. If you specify an Amazon EC2
+    #   SSH key but don't specify a source security group when you create a
+    #   managed node group, then the port on the nodes is opened to the
+    #   internet (`0.0.0.0/0`). For more information, see [Security Groups
+    #   for Your VPC][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -3775,9 +3786,9 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] configuration_values
-    #   The set of configuration values for the add-on being created.
-    #   Whatever values provided here are validated against the schema from
-    #   [DescribeAddonConfiguration][1]
+    #   The set of configuration values for the add-on that's created. The
+    #   values that you provide are validated against the schema in
+    #   [DescribeAddonConfiguration][1].
     #
     #
     #
@@ -4022,18 +4033,24 @@ module Aws::EKS
     # @!attribute [rw] release_version
     #   The AMI version of the Amazon EKS optimized AMI to use for the
     #   update. By default, the latest available AMI version for the node
-    #   group's Kubernetes version is used. For more information, see
-    #   [Amazon EKS optimized Amazon Linux 2 AMI versions ][1] in the
-    #   *Amazon EKS User Guide*. If you specify `launchTemplate`, and your
-    #   launch template uses a custom AMI, then don't specify
-    #   `releaseVersion`, or the node group update will fail. For more
-    #   information about using launch templates with Amazon EKS, see
-    #   [Launch template support][2] in the *Amazon EKS User Guide*.
+    #   group's Kubernetes version is used. For information about Linux
+    #   versions, see [Amazon EKS optimized Amazon Linux AMI versions][1] in
+    #   the *Amazon EKS User Guide*. Amazon EKS managed node groups support
+    #   the November 2022 and later releases of the Windows AMIs. For
+    #   information about Windows versions, see [Amazon EKS optimized
+    #   Windows AMI versions][2] in the *Amazon EKS User Guide*.
+    #
+    #   If you specify `launchTemplate`, and your launch template uses a
+    #   custom AMI, then don't specify `releaseVersion`, or the node group
+    #   update will fail. For more information about using launch templates
+    #   with Amazon EKS, see [Launch template support][3] in the *Amazon EKS
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
-    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html
+    #   [3]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @!attribute [rw] launch_template

@@ -30,11 +30,29 @@ module Aws::Kinesis
   #
   #   @return [String]
   #
+  # @!attribute stream_arn
+  #   The ARN of the Kinesis stream
+  #
+  #   @return [String]
+  #
+  # @!attribute operation_type
+  #   Internal parameter to distinguish between Control/Data plane API and accordingly generate control/data plane endpoint
+  #
+  #   @return [String]
+  #
+  # @!attribute consumer_arn
+  #   The ARN of the Kinesis consumer
+  #
+  #   @return [String]
+  #
   EndpointParameters = Struct.new(
     :region,
     :use_dual_stack,
     :use_fips,
     :endpoint,
+    :stream_arn,
+    :operation_type,
+    :consumer_arn,
   ) do
     include Aws::Structure
 
@@ -45,11 +63,17 @@ module Aws::Kinesis
         'UseDualStack' => :use_dual_stack,
         'UseFIPS' => :use_fips,
         'Endpoint' => :endpoint,
+        'StreamARN' => :stream_arn,
+        'OperationType' => :operation_type,
+        'ConsumerARN' => :consumer_arn,
       }.freeze
     end
 
     def initialize(options = {})
       self[:region] = options[:region]
+      if self[:region].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :region"
+      end
       self[:use_dual_stack] = options[:use_dual_stack]
       self[:use_dual_stack] = false if self[:use_dual_stack].nil?
       if self[:use_dual_stack].nil?
@@ -61,6 +85,9 @@ module Aws::Kinesis
         raise ArgumentError, "Missing required EndpointParameter: :use_fips"
       end
       self[:endpoint] = options[:endpoint]
+      self[:stream_arn] = options[:stream_arn]
+      self[:operation_type] = options[:operation_type]
+      self[:consumer_arn] = options[:consumer_arn]
     end
   end
 end

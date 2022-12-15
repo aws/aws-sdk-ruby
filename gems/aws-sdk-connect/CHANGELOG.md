@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2022-12-15)
+------------------
+
+* Feature - Added support for "English - New Zealand" and "English - South African" to be used with Amazon Connect Custom Vocabulary APIs.
+
 1.86.0 (2022-12-06)
 ------------------
 

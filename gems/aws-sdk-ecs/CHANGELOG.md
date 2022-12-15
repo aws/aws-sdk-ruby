@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2022-12-15)
+------------------
+
+* Feature - This release adds support for container port ranges in ECS, a new capability that allows customers to provide container port ranges to simplify use cases where multiple ports are in use in a container. This release updates TaskDefinition mutation APIs and the Task description APIs.
+
 1.107.0 (2022-12-02)
 ------------------
 

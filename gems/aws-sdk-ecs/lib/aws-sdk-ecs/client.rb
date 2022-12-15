@@ -2570,6 +2570,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].protocol #=> String, one of "tcp", "udp"
     #   resp.task_definition.container_definitions[0].port_mappings[0].name #=> String
     #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
+    #   resp.task_definition.container_definitions[0].port_mappings[0].container_port_range #=> String
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
@@ -3481,6 +3482,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].protocol #=> String, one of "tcp", "udp"
     #   resp.task_definition.container_definitions[0].port_mappings[0].name #=> String
     #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
+    #   resp.task_definition.container_definitions[0].port_mappings[0].container_port_range #=> String
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
@@ -3855,6 +3857,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_bindings[0].container_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.tasks[0].containers[0].network_bindings[0].container_port_range #=> String
+    #   resp.tasks[0].containers[0].network_bindings[0].host_port_range #=> String
     #   resp.tasks[0].containers[0].network_interfaces #=> Array
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
@@ -3999,6 +4003,14 @@ module Aws::ECS
     # cluster, you receive an `AccessDeniedException` when there is a
     # mismatch between the condition key value and the corresponding
     # parameter value.
+    #
+    # For information about required permissions and considerations, see
+    # [Using Amazon ECS Exec for debugging][1] in the *Amazon ECS Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.htm
     #
     # @option params [String] :cluster
     #   The Amazon Resource Name (ARN) or short name of the cluster the task
@@ -6147,6 +6159,7 @@ module Aws::ECS
     #             protocol: "tcp", # accepts tcp, udp
     #             name: "String",
     #             app_protocol: "http", # accepts http, http2, grpc
+    #             container_port_range: "String",
     #           },
     #         ],
     #         essential: false,
@@ -6378,6 +6391,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].protocol #=> String, one of "tcp", "udp"
     #   resp.task_definition.container_definitions[0].port_mappings[0].name #=> String
     #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
+    #   resp.task_definition.container_definitions[0].port_mappings[0].container_port_range #=> String
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
@@ -6950,6 +6964,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_bindings[0].container_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.tasks[0].containers[0].network_bindings[0].container_port_range #=> String
+    #   resp.tasks[0].containers[0].network_bindings[0].host_port_range #=> String
     #   resp.tasks[0].containers[0].network_interfaces #=> Array
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
@@ -7258,6 +7274,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_bindings[0].container_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.tasks[0].containers[0].network_bindings[0].container_port_range #=> String
+    #   resp.tasks[0].containers[0].network_bindings[0].host_port_range #=> String
     #   resp.tasks[0].containers[0].network_interfaces #=> Array
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
@@ -7424,6 +7442,8 @@ module Aws::ECS
     #   resp.task.containers[0].network_bindings[0].container_port #=> Integer
     #   resp.task.containers[0].network_bindings[0].host_port #=> Integer
     #   resp.task.containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.task.containers[0].network_bindings[0].container_port_range #=> String
+    #   resp.task.containers[0].network_bindings[0].host_port_range #=> String
     #   resp.task.containers[0].network_interfaces #=> Array
     #   resp.task.containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.task.containers[0].network_interfaces[0].private_ipv_4_address #=> String
@@ -7598,6 +7618,8 @@ module Aws::ECS
     #         container_port: 1,
     #         host_port: 1,
     #         protocol: "tcp", # accepts tcp, udp
+    #         container_port_range: "String",
+    #         host_port_range: "String",
     #       },
     #     ],
     #   })
@@ -7677,6 +7699,8 @@ module Aws::ECS
     #             container_port: 1,
     #             host_port: 1,
     #             protocol: "tcp", # accepts tcp, udp
+    #             container_port_range: "String",
+    #             host_port_range: "String",
     #           },
     #         ],
     #         reason: "String",
@@ -9349,7 +9373,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

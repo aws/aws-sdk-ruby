@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2022-12-15)
+------------------
+
+* Feature - Adds an optional create-only `KmsKeyId` property to Environment and Application resources.
+
 1.1.0 (2022-10-25)
 ------------------
 

@@ -157,6 +157,50 @@ module Aws::SecurityHub
     AwsEc2InstanceMetadataOptions = Shapes::StructureShape.new(name: 'AwsEc2InstanceMetadataOptions')
     AwsEc2InstanceNetworkInterfacesDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceNetworkInterfacesDetails')
     AwsEc2InstanceNetworkInterfacesList = Shapes::ListShape.new(name: 'AwsEc2InstanceNetworkInterfacesList')
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails')
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails')
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataBlockDeviceMappingSetList')
+    AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails')
+    AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails')
+    AwsEc2LaunchTemplateDataCpuOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataCpuOptionsDetails')
+    AwsEc2LaunchTemplateDataCreditSpecificationDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataCreditSpecificationDetails')
+    AwsEc2LaunchTemplateDataDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataDetails')
+    AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails')
+    AwsEc2LaunchTemplateDataElasticGpuSpecificationSetList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataElasticGpuSpecificationSetList')
+    AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails')
+    AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList')
+    AwsEc2LaunchTemplateDataEnclaveOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataEnclaveOptionsDetails')
+    AwsEc2LaunchTemplateDataHibernationOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataHibernationOptionsDetails')
+    AwsEc2LaunchTemplateDataIamInstanceProfileDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataIamInstanceProfileDetails')
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails')
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails')
+    AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails')
+    AwsEc2LaunchTemplateDataLicenseSetDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataLicenseSetDetails')
+    AwsEc2LaunchTemplateDataLicenseSetList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataLicenseSetList')
+    AwsEc2LaunchTemplateDataMaintenanceOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataMaintenanceOptionsDetails')
+    AwsEc2LaunchTemplateDataMetadataOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataMetadataOptionsDetails')
+    AwsEc2LaunchTemplateDataMonitoringDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataMonitoringDetails')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetList')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails')
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList = Shapes::ListShape.new(name: 'AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList')
+    AwsEc2LaunchTemplateDataPlacementDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataPlacementDetails')
+    AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails')
+    AwsEc2LaunchTemplateDetails = Shapes::StructureShape.new(name: 'AwsEc2LaunchTemplateDetails')
     AwsEc2NetworkAclAssociation = Shapes::StructureShape.new(name: 'AwsEc2NetworkAclAssociation')
     AwsEc2NetworkAclAssociationList = Shapes::ListShape.new(name: 'AwsEc2NetworkAclAssociationList')
     AwsEc2NetworkAclDetails = Shapes::StructureShape.new(name: 'AwsEc2NetworkAclDetails')
@@ -491,6 +535,8 @@ module Aws::SecurityHub
     AwsS3BucketWebsiteConfigurationRoutingRuleRedirect = Shapes::StructureShape.new(name: 'AwsS3BucketWebsiteConfigurationRoutingRuleRedirect')
     AwsS3BucketWebsiteConfigurationRoutingRules = Shapes::ListShape.new(name: 'AwsS3BucketWebsiteConfigurationRoutingRules')
     AwsS3ObjectDetails = Shapes::StructureShape.new(name: 'AwsS3ObjectDetails')
+    AwsSageMakerNotebookInstanceDetails = Shapes::StructureShape.new(name: 'AwsSageMakerNotebookInstanceDetails')
+    AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails = Shapes::StructureShape.new(name: 'AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails')
     AwsSecretsManagerSecretDetails = Shapes::StructureShape.new(name: 'AwsSecretsManagerSecretDetails')
     AwsSecretsManagerSecretRotationRules = Shapes::StructureShape.new(name: 'AwsSecretsManagerSecretRotationRules')
     AwsSecurityFinding = Shapes::StructureShape.new(name: 'AwsSecurityFinding')
@@ -533,6 +579,23 @@ module Aws::SecurityHub
     AwsWafWebAclDetails = Shapes::StructureShape.new(name: 'AwsWafWebAclDetails')
     AwsWafWebAclRule = Shapes::StructureShape.new(name: 'AwsWafWebAclRule')
     AwsWafWebAclRuleList = Shapes::ListShape.new(name: 'AwsWafWebAclRuleList')
+    AwsWafv2ActionAllowDetails = Shapes::StructureShape.new(name: 'AwsWafv2ActionAllowDetails')
+    AwsWafv2ActionBlockDetails = Shapes::StructureShape.new(name: 'AwsWafv2ActionBlockDetails')
+    AwsWafv2CustomHttpHeader = Shapes::StructureShape.new(name: 'AwsWafv2CustomHttpHeader')
+    AwsWafv2CustomRequestHandlingDetails = Shapes::StructureShape.new(name: 'AwsWafv2CustomRequestHandlingDetails')
+    AwsWafv2CustomResponseDetails = Shapes::StructureShape.new(name: 'AwsWafv2CustomResponseDetails')
+    AwsWafv2InsertHeadersList = Shapes::ListShape.new(name: 'AwsWafv2InsertHeadersList')
+    AwsWafv2RuleGroupDetails = Shapes::StructureShape.new(name: 'AwsWafv2RuleGroupDetails')
+    AwsWafv2RulesActionCaptchaDetails = Shapes::StructureShape.new(name: 'AwsWafv2RulesActionCaptchaDetails')
+    AwsWafv2RulesActionCountDetails = Shapes::StructureShape.new(name: 'AwsWafv2RulesActionCountDetails')
+    AwsWafv2RulesActionDetails = Shapes::StructureShape.new(name: 'AwsWafv2RulesActionDetails')
+    AwsWafv2RulesDetails = Shapes::StructureShape.new(name: 'AwsWafv2RulesDetails')
+    AwsWafv2RulesList = Shapes::ListShape.new(name: 'AwsWafv2RulesList')
+    AwsWafv2VisibilityConfigDetails = Shapes::StructureShape.new(name: 'AwsWafv2VisibilityConfigDetails')
+    AwsWafv2WebAclActionDetails = Shapes::StructureShape.new(name: 'AwsWafv2WebAclActionDetails')
+    AwsWafv2WebAclCaptchaConfigDetails = Shapes::StructureShape.new(name: 'AwsWafv2WebAclCaptchaConfigDetails')
+    AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails = Shapes::StructureShape.new(name: 'AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails')
+    AwsWafv2WebAclDetails = Shapes::StructureShape.new(name: 'AwsWafv2WebAclDetails')
     AwsXrayEncryptionConfigDetails = Shapes::StructureShape.new(name: 'AwsXrayEncryptionConfigDetails')
     BatchDisableStandardsRequest = Shapes::StructureShape.new(name: 'BatchDisableStandardsRequest')
     BatchDisableStandardsResponse = Shapes::StructureShape.new(name: 'BatchDisableStandardsResponse')
@@ -1671,6 +1734,242 @@ module Aws::SecurityHub
     AwsEc2InstanceNetworkInterfacesDetails.struct_class = Types::AwsEc2InstanceNetworkInterfacesDetails
 
     AwsEc2InstanceNetworkInterfacesList.member = Shapes::ShapeRef.new(shape: AwsEc2InstanceNetworkInterfacesDetails)
+
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails.add_member(:device_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeviceName"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails.add_member(:ebs, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails, location_name: "Ebs"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails.add_member(:no_device, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NoDevice"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails.add_member(:virtual_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VirtualName"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails.struct_class = Types::AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails
+
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteOnTermination"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnapshotId"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "VolumeSize"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:volume_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VolumeType"))
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.struct_class = Types::AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails
+
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails)
+
+    AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CapacityReservationId"))
+    AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails.add_member(:capacity_reservation_resource_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CapacityReservationResourceGroupArn"))
+    AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails.struct_class = Types::AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails
+
+    AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails.add_member(:capacity_reservation_preference, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CapacityReservationPreference"))
+    AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails.add_member(:capacity_reservation_target, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails, location_name: "CapacityReservationTarget"))
+    AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails.struct_class = Types::AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails
+
+    AwsEc2LaunchTemplateDataCpuOptionsDetails.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CoreCount"))
+    AwsEc2LaunchTemplateDataCpuOptionsDetails.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
+    AwsEc2LaunchTemplateDataCpuOptionsDetails.struct_class = Types::AwsEc2LaunchTemplateDataCpuOptionsDetails
+
+    AwsEc2LaunchTemplateDataCreditSpecificationDetails.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CpuCredits"))
+    AwsEc2LaunchTemplateDataCreditSpecificationDetails.struct_class = Types::AwsEc2LaunchTemplateDataCreditSpecificationDetails
+
+    AwsEc2LaunchTemplateDataDetails.add_member(:block_device_mapping_set, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataBlockDeviceMappingSetList, location_name: "BlockDeviceMappingSet"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails, location_name: "CapacityReservationSpecification"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:cpu_options, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataCpuOptionsDetails, location_name: "CpuOptions"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:credit_specification, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataCreditSpecificationDetails, location_name: "CreditSpecification"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:disable_api_stop, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableApiStop"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:disable_api_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableApiTermination"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsOptimized"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:elastic_gpu_specification_set, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataElasticGpuSpecificationSetList, location_name: "ElasticGpuSpecificationSet"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:elastic_inference_accelerator_set, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList, location_name: "ElasticInferenceAcceleratorSet"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:enclave_options, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataEnclaveOptionsDetails, location_name: "EnclaveOptions"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:hibernation_options, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataHibernationOptionsDetails, location_name: "HibernationOptions"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataIamInstanceProfileDetails, location_name: "IamInstanceProfile"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:image_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ImageId"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:instance_initiated_shutdown_behavior, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceInitiatedShutdownBehavior"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails, location_name: "InstanceMarketOptions"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsDetails, location_name: "InstanceRequirements"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceType"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:kernel_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KernelId"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:key_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KeyName"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:license_set, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataLicenseSetList, location_name: "LicenseSet"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataMaintenanceOptionsDetails, location_name: "MaintenanceOptions"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:metadata_options, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataMetadataOptionsDetails, location_name: "MetadataOptions"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:monitoring, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataMonitoringDetails, location_name: "Monitoring"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:network_interface_set, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetList, location_name: "NetworkInterfaceSet"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:placement, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataPlacementDetails, location_name: "Placement"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails, location_name: "PrivateDnsNameOptions"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:ram_disk_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RamDiskId"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:security_group_id_set, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "SecurityGroupIdSet"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:security_group_set, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "SecurityGroupSet"))
+    AwsEc2LaunchTemplateDataDetails.add_member(:user_data, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserData"))
+    AwsEc2LaunchTemplateDataDetails.struct_class = Types::AwsEc2LaunchTemplateDataDetails
+
+    AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails.struct_class = Types::AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails
+
+    AwsEc2LaunchTemplateDataElasticGpuSpecificationSetList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails)
+
+    AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "Count"))
+    AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails.struct_class = Types::AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails
+
+    AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails)
+
+    AwsEc2LaunchTemplateDataEnclaveOptionsDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsEc2LaunchTemplateDataEnclaveOptionsDetails.struct_class = Types::AwsEc2LaunchTemplateDataEnclaveOptionsDetails
+
+    AwsEc2LaunchTemplateDataHibernationOptionsDetails.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "Configured"))
+    AwsEc2LaunchTemplateDataHibernationOptionsDetails.struct_class = Types::AwsEc2LaunchTemplateDataHibernationOptionsDetails
+
+    AwsEc2LaunchTemplateDataIamInstanceProfileDetails.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsEc2LaunchTemplateDataIamInstanceProfileDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEc2LaunchTemplateDataIamInstanceProfileDetails.struct_class = Types::AwsEc2LaunchTemplateDataIamInstanceProfileDetails
+
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails.add_member(:market_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MarketType"))
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails.add_member(:spot_options, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails, location_name: "SpotOptions"))
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails
+
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails.add_member(:block_duration_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "BlockDurationMinutes"))
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceInterruptionBehavior"))
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails.add_member(:max_price, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MaxPrice"))
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails.add_member(:spot_instance_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SpotInstanceType"))
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails.add_member(:valid_until, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ValidUntil"))
+    AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "Min"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "Min"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "Min"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:accelerator_count, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails, location_name: "AcceleratorCount"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:accelerator_manufacturers, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AcceleratorManufacturers"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:accelerator_names, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AcceleratorNames"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:accelerator_total_memory_mi_b, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails, location_name: "AcceleratorTotalMemoryMiB"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:accelerator_types, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AcceleratorTypes"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:bare_metal, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BareMetal"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:baseline_ebs_bandwidth_mbps, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails, location_name: "BaselineEbsBandwidthMbps"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:burstable_performance, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BurstablePerformance"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:cpu_manufacturers, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "CpuManufacturers"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:excluded_instance_types, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "ExcludedInstanceTypes"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:instance_generations, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "InstanceGenerations"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:local_storage, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LocalStorage"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:local_storage_types, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "LocalStorageTypes"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:memory_gi_b_per_v_cpu, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails, location_name: "MemoryGiBPerVCpu"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:memory_mi_b, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails, location_name: "MemoryMiB"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:network_interface_count, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails, location_name: "NetworkInterfaceCount"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:on_demand_max_price_percentage_over_lowest_price, Shapes::ShapeRef.new(shape: Integer, location_name: "OnDemandMaxPricePercentageOverLowestPrice"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:require_hibernate_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequireHibernateSupport"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:spot_max_price_percentage_over_lowest_price, Shapes::ShapeRef.new(shape: Integer, location_name: "SpotMaxPricePercentageOverLowestPrice"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:total_local_storage_gb, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails, location_name: "TotalLocalStorageGB"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.add_member(:v_cpu_count, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails, location_name: "VCpuCount"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "Max"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "Min"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "Min"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "Min"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "Max"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "Min"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails
+
+    AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "Min"))
+    AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails.struct_class = Types::AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails
+
+    AwsEc2LaunchTemplateDataLicenseSetDetails.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LicenseConfigurationArn"))
+    AwsEc2LaunchTemplateDataLicenseSetDetails.struct_class = Types::AwsEc2LaunchTemplateDataLicenseSetDetails
+
+    AwsEc2LaunchTemplateDataLicenseSetList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataLicenseSetDetails)
+
+    AwsEc2LaunchTemplateDataMaintenanceOptionsDetails.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AutoRecovery"))
+    AwsEc2LaunchTemplateDataMaintenanceOptionsDetails.struct_class = Types::AwsEc2LaunchTemplateDataMaintenanceOptionsDetails
+
+    AwsEc2LaunchTemplateDataMetadataOptionsDetails.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpEndpoint"))
+    AwsEc2LaunchTemplateDataMetadataOptionsDetails.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpProtocolIpv6"))
+    AwsEc2LaunchTemplateDataMetadataOptionsDetails.add_member(:http_tokens, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpTokens"))
+    AwsEc2LaunchTemplateDataMetadataOptionsDetails.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
+    AwsEc2LaunchTemplateDataMetadataOptionsDetails.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceMetadataTags"))
+    AwsEc2LaunchTemplateDataMetadataOptionsDetails.struct_class = Types::AwsEc2LaunchTemplateDataMetadataOptionsDetails
+
+    AwsEc2LaunchTemplateDataMonitoringDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsEc2LaunchTemplateDataMonitoringDetails.struct_class = Types::AwsEc2LaunchTemplateDataMonitoringDetails
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:associate_carrier_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociateCarrierIpAddress"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociatePublicIpAddress"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteOnTermination"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "DeviceIndex"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:groups, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Groups"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:interface_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InterfaceType"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv4PrefixCount"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList, location_name: "Ipv4Prefixes"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6AddressCount"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList, location_name: "Ipv6Addresses"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList, location_name: "Ipv6Prefixes"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "NetworkCardIndex"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkInterfaceId"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PrivateIpAddress"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList, location_name: "PrivateIpAddresses"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SecondaryPrivateIpAddressCount"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubnetId"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.struct_class = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails.add_member(:ipv_4_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Ipv4Prefix"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails.struct_class = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails)
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Ipv6Address"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails.struct_class = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails)
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails.add_member(:ipv_6_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Ipv6Prefix"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails.struct_class = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails)
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails)
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails.add_member(:primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "Primary"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PrivateIpAddress"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails.struct_class = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails
+
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList.member = Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails)
+
+    AwsEc2LaunchTemplateDataPlacementDetails.add_member(:affinity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Affinity"))
+    AwsEc2LaunchTemplateDataPlacementDetails.add_member(:availability_zone, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AvailabilityZone"))
+    AwsEc2LaunchTemplateDataPlacementDetails.add_member(:group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GroupName"))
+    AwsEc2LaunchTemplateDataPlacementDetails.add_member(:host_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HostId"))
+    AwsEc2LaunchTemplateDataPlacementDetails.add_member(:host_resource_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HostResourceGroupArn"))
+    AwsEc2LaunchTemplateDataPlacementDetails.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionNumber"))
+    AwsEc2LaunchTemplateDataPlacementDetails.add_member(:spread_domain, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SpreadDomain"))
+    AwsEc2LaunchTemplateDataPlacementDetails.add_member(:tenancy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Tenancy"))
+    AwsEc2LaunchTemplateDataPlacementDetails.struct_class = Types::AwsEc2LaunchTemplateDataPlacementDetails
+
+    AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails.add_member(:enable_resource_name_dns_aaaa_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableResourceNameDnsAAAARecord"))
+    AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails.add_member(:enable_resource_name_dns_a_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableResourceNameDnsARecord"))
+    AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails.add_member(:hostname_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HostnameType"))
+    AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails.struct_class = Types::AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails
+
+    AwsEc2LaunchTemplateDetails.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchTemplateName"))
+    AwsEc2LaunchTemplateDetails.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
+    AwsEc2LaunchTemplateDetails.add_member(:launch_template_data, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDataDetails, location_name: "LaunchTemplateData"))
+    AwsEc2LaunchTemplateDetails.add_member(:default_version_number, Shapes::ShapeRef.new(shape: Long, location_name: "DefaultVersionNumber"))
+    AwsEc2LaunchTemplateDetails.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: Long, location_name: "LatestVersionNumber"))
+    AwsEc2LaunchTemplateDetails.struct_class = Types::AwsEc2LaunchTemplateDetails
 
     AwsEc2NetworkAclAssociation.add_member(:network_acl_association_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkAclAssociationId"))
     AwsEc2NetworkAclAssociation.add_member(:network_acl_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkAclId"))
@@ -3505,6 +3804,31 @@ module Aws::SecurityHub
     AwsS3ObjectDetails.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SSEKMSKeyId"))
     AwsS3ObjectDetails.struct_class = Types::AwsS3ObjectDetails
 
+    AwsSageMakerNotebookInstanceDetails.add_member(:accelerator_types, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AcceleratorTypes"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:additional_code_repositories, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AdditionalCodeRepositories"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:default_code_repository, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultCodeRepository"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:direct_internet_access, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DirectInternetAccess"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:failure_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FailureReason"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:instance_metadata_service_configuration, Shapes::ShapeRef.new(shape: AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails, location_name: "InstanceMetadataServiceConfiguration"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceType"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkInterfaceId"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:notebook_instance_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NotebookInstanceArn"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:notebook_instance_lifecycle_config_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NotebookInstanceLifecycleConfigName"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:notebook_instance_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NotebookInstanceName"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:notebook_instance_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NotebookInstanceStatus"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:platform_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PlatformIdentifier"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleArn"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:root_access, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RootAccess"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:security_groups, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "SecurityGroups"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubnetId"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Url"))
+    AwsSageMakerNotebookInstanceDetails.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: Integer, location_name: "VolumeSizeInGB"))
+    AwsSageMakerNotebookInstanceDetails.struct_class = Types::AwsSageMakerNotebookInstanceDetails
+
+    AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails.add_member(:minimum_instance_metadata_service_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MinimumInstanceMetadataServiceVersion"))
+    AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails.struct_class = Types::AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails
+
     AwsSecretsManagerSecretDetails.add_member(:rotation_rules, Shapes::ShapeRef.new(shape: AwsSecretsManagerSecretRotationRules, location_name: "RotationRules"))
     AwsSecretsManagerSecretDetails.add_member(:rotation_occurred_within_frequency, Shapes::ShapeRef.new(shape: Boolean, location_name: "RotationOccurredWithinFrequency"))
     AwsSecretsManagerSecretDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
@@ -3844,6 +4168,84 @@ module Aws::SecurityHub
     AwsWafWebAclRule.struct_class = Types::AwsWafWebAclRule
 
     AwsWafWebAclRuleList.member = Shapes::ShapeRef.new(shape: AwsWafWebAclRule)
+
+    AwsWafv2ActionAllowDetails.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: AwsWafv2CustomRequestHandlingDetails, location_name: "CustomRequestHandling"))
+    AwsWafv2ActionAllowDetails.struct_class = Types::AwsWafv2ActionAllowDetails
+
+    AwsWafv2ActionBlockDetails.add_member(:custom_response, Shapes::ShapeRef.new(shape: AwsWafv2CustomResponseDetails, location_name: "CustomResponse"))
+    AwsWafv2ActionBlockDetails.struct_class = Types::AwsWafv2ActionBlockDetails
+
+    AwsWafv2CustomHttpHeader.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafv2CustomHttpHeader.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsWafv2CustomHttpHeader.struct_class = Types::AwsWafv2CustomHttpHeader
+
+    AwsWafv2CustomRequestHandlingDetails.add_member(:insert_headers, Shapes::ShapeRef.new(shape: AwsWafv2InsertHeadersList, location_name: "InsertHeaders"))
+    AwsWafv2CustomRequestHandlingDetails.struct_class = Types::AwsWafv2CustomRequestHandlingDetails
+
+    AwsWafv2CustomResponseDetails.add_member(:custom_response_body_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CustomResponseBodyKey"))
+    AwsWafv2CustomResponseDetails.add_member(:response_code, Shapes::ShapeRef.new(shape: Integer, location_name: "ResponseCode"))
+    AwsWafv2CustomResponseDetails.add_member(:response_headers, Shapes::ShapeRef.new(shape: AwsWafv2InsertHeadersList, location_name: "ResponseHeaders"))
+    AwsWafv2CustomResponseDetails.struct_class = Types::AwsWafv2CustomResponseDetails
+
+    AwsWafv2InsertHeadersList.member = Shapes::ShapeRef.new(shape: AwsWafv2CustomHttpHeader)
+
+    AwsWafv2RuleGroupDetails.add_member(:capacity, Shapes::ShapeRef.new(shape: Long, location_name: "Capacity"))
+    AwsWafv2RuleGroupDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsWafv2RuleGroupDetails.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
+    AwsWafv2RuleGroupDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafv2RuleGroupDetails.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsWafv2RuleGroupDetails.add_member(:rules, Shapes::ShapeRef.new(shape: AwsWafv2RulesList, location_name: "Rules"))
+    AwsWafv2RuleGroupDetails.add_member(:scope, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Scope"))
+    AwsWafv2RuleGroupDetails.add_member(:visibility_config, Shapes::ShapeRef.new(shape: AwsWafv2VisibilityConfigDetails, location_name: "VisibilityConfig"))
+    AwsWafv2RuleGroupDetails.struct_class = Types::AwsWafv2RuleGroupDetails
+
+    AwsWafv2RulesActionCaptchaDetails.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: AwsWafv2CustomRequestHandlingDetails, location_name: "CustomRequestHandling"))
+    AwsWafv2RulesActionCaptchaDetails.struct_class = Types::AwsWafv2RulesActionCaptchaDetails
+
+    AwsWafv2RulesActionCountDetails.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: AwsWafv2CustomRequestHandlingDetails, location_name: "CustomRequestHandling"))
+    AwsWafv2RulesActionCountDetails.struct_class = Types::AwsWafv2RulesActionCountDetails
+
+    AwsWafv2RulesActionDetails.add_member(:allow, Shapes::ShapeRef.new(shape: AwsWafv2ActionAllowDetails, location_name: "Allow"))
+    AwsWafv2RulesActionDetails.add_member(:block, Shapes::ShapeRef.new(shape: AwsWafv2ActionBlockDetails, location_name: "Block"))
+    AwsWafv2RulesActionDetails.add_member(:captcha, Shapes::ShapeRef.new(shape: AwsWafv2RulesActionCaptchaDetails, location_name: "Captcha"))
+    AwsWafv2RulesActionDetails.add_member(:count, Shapes::ShapeRef.new(shape: AwsWafv2RulesActionCountDetails, location_name: "Count"))
+    AwsWafv2RulesActionDetails.struct_class = Types::AwsWafv2RulesActionDetails
+
+    AwsWafv2RulesDetails.add_member(:action, Shapes::ShapeRef.new(shape: AwsWafv2RulesActionDetails, location_name: "Action"))
+    AwsWafv2RulesDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafv2RulesDetails.add_member(:override_action, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OverrideAction"))
+    AwsWafv2RulesDetails.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "Priority"))
+    AwsWafv2RulesDetails.add_member(:visibility_config, Shapes::ShapeRef.new(shape: AwsWafv2VisibilityConfigDetails, location_name: "VisibilityConfig"))
+    AwsWafv2RulesDetails.struct_class = Types::AwsWafv2RulesDetails
+
+    AwsWafv2RulesList.member = Shapes::ShapeRef.new(shape: AwsWafv2RulesDetails)
+
+    AwsWafv2VisibilityConfigDetails.add_member(:cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CloudWatchMetricsEnabled"))
+    AwsWafv2VisibilityConfigDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MetricName"))
+    AwsWafv2VisibilityConfigDetails.add_member(:sampled_requests_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SampledRequestsEnabled"))
+    AwsWafv2VisibilityConfigDetails.struct_class = Types::AwsWafv2VisibilityConfigDetails
+
+    AwsWafv2WebAclActionDetails.add_member(:allow, Shapes::ShapeRef.new(shape: AwsWafv2ActionAllowDetails, location_name: "Allow"))
+    AwsWafv2WebAclActionDetails.add_member(:block, Shapes::ShapeRef.new(shape: AwsWafv2ActionBlockDetails, location_name: "Block"))
+    AwsWafv2WebAclActionDetails.struct_class = Types::AwsWafv2WebAclActionDetails
+
+    AwsWafv2WebAclCaptchaConfigDetails.add_member(:immunity_time_property, Shapes::ShapeRef.new(shape: AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails, location_name: "ImmunityTimeProperty"))
+    AwsWafv2WebAclCaptchaConfigDetails.struct_class = Types::AwsWafv2WebAclCaptchaConfigDetails
+
+    AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails.add_member(:immunity_time, Shapes::ShapeRef.new(shape: Long, location_name: "ImmunityTime"))
+    AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails.struct_class = Types::AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails
+
+    AwsWafv2WebAclDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsWafv2WebAclDetails.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsWafv2WebAclDetails.add_member(:managedby_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedbyFirewallManager"))
+    AwsWafv2WebAclDetails.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
+    AwsWafv2WebAclDetails.add_member(:capacity, Shapes::ShapeRef.new(shape: Long, location_name: "Capacity"))
+    AwsWafv2WebAclDetails.add_member(:captcha_config, Shapes::ShapeRef.new(shape: AwsWafv2WebAclCaptchaConfigDetails, location_name: "CaptchaConfig"))
+    AwsWafv2WebAclDetails.add_member(:default_action, Shapes::ShapeRef.new(shape: AwsWafv2WebAclActionDetails, location_name: "DefaultAction"))
+    AwsWafv2WebAclDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsWafv2WebAclDetails.add_member(:rules, Shapes::ShapeRef.new(shape: AwsWafv2RulesList, location_name: "Rules"))
+    AwsWafv2WebAclDetails.add_member(:visibility_config, Shapes::ShapeRef.new(shape: AwsWafv2VisibilityConfigDetails, location_name: "VisibilityConfig"))
+    AwsWafv2WebAclDetails.struct_class = Types::AwsWafv2WebAclDetails
 
     AwsXrayEncryptionConfigDetails.add_member(:key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KeyId"))
     AwsXrayEncryptionConfigDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
@@ -4685,6 +5087,10 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_backup_backup_vault, Shapes::ShapeRef.new(shape: AwsBackupBackupVaultDetails, location_name: "AwsBackupBackupVault"))
     ResourceDetails.add_member(:aws_backup_backup_plan, Shapes::ShapeRef.new(shape: AwsBackupBackupPlanDetails, location_name: "AwsBackupBackupPlan"))
     ResourceDetails.add_member(:aws_backup_recovery_point, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointDetails, location_name: "AwsBackupRecoveryPoint"))
+    ResourceDetails.add_member(:aws_ec2_launch_template, Shapes::ShapeRef.new(shape: AwsEc2LaunchTemplateDetails, location_name: "AwsEc2LaunchTemplate"))
+    ResourceDetails.add_member(:aws_sage_maker_notebook_instance, Shapes::ShapeRef.new(shape: AwsSageMakerNotebookInstanceDetails, location_name: "AwsSageMakerNotebookInstance"))
+    ResourceDetails.add_member(:aws_wafv_2_web_acl, Shapes::ShapeRef.new(shape: AwsWafv2WebAclDetails, location_name: "AwsWafv2WebAcl"))
+    ResourceDetails.add_member(:aws_wafv_2_rule_group, Shapes::ShapeRef.new(shape: AwsWafv2RuleGroupDetails, location_name: "AwsWafv2RuleGroup"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)

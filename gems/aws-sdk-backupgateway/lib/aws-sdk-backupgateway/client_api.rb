@@ -17,11 +17,15 @@ module Aws::BackupGateway
     ActivationKey = Shapes::StringShape.new(name: 'ActivationKey')
     AssociateGatewayToServerInput = Shapes::StructureShape.new(name: 'AssociateGatewayToServerInput')
     AssociateGatewayToServerOutput = Shapes::StructureShape.new(name: 'AssociateGatewayToServerOutput')
+    AverageUploadRateLimit = Shapes::IntegerShape.new(name: 'AverageUploadRateLimit')
+    BandwidthRateLimitInterval = Shapes::StructureShape.new(name: 'BandwidthRateLimitInterval')
+    BandwidthRateLimitIntervals = Shapes::ListShape.new(name: 'BandwidthRateLimitIntervals')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateGatewayInput = Shapes::StructureShape.new(name: 'CreateGatewayInput')
     CreateGatewayOutput = Shapes::StructureShape.new(name: 'CreateGatewayOutput')
     DayOfMonth = Shapes::IntegerShape.new(name: 'DayOfMonth')
     DayOfWeek = Shapes::IntegerShape.new(name: 'DayOfWeek')
+    DaysOfWeek = Shapes::ListShape.new(name: 'DaysOfWeek')
     DeleteGatewayInput = Shapes::StructureShape.new(name: 'DeleteGatewayInput')
     DeleteGatewayOutput = Shapes::StructureShape.new(name: 'DeleteGatewayOutput')
     DeleteHypervisorInput = Shapes::StructureShape.new(name: 'DeleteHypervisorInput')
@@ -33,16 +37,24 @@ module Aws::BackupGateway
     GatewayDetails = Shapes::StructureShape.new(name: 'GatewayDetails')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     Gateways = Shapes::ListShape.new(name: 'Gateways')
+    GetBandwidthRateLimitScheduleInput = Shapes::StructureShape.new(name: 'GetBandwidthRateLimitScheduleInput')
+    GetBandwidthRateLimitScheduleOutput = Shapes::StructureShape.new(name: 'GetBandwidthRateLimitScheduleOutput')
     GetGatewayInput = Shapes::StructureShape.new(name: 'GetGatewayInput')
     GetGatewayOutput = Shapes::StructureShape.new(name: 'GetGatewayOutput')
+    GetHypervisorInput = Shapes::StructureShape.new(name: 'GetHypervisorInput')
+    GetHypervisorOutput = Shapes::StructureShape.new(name: 'GetHypervisorOutput')
+    GetHypervisorPropertyMappingsInput = Shapes::StructureShape.new(name: 'GetHypervisorPropertyMappingsInput')
+    GetHypervisorPropertyMappingsOutput = Shapes::StructureShape.new(name: 'GetHypervisorPropertyMappingsOutput')
     GetVirtualMachineInput = Shapes::StructureShape.new(name: 'GetVirtualMachineInput')
     GetVirtualMachineOutput = Shapes::StructureShape.new(name: 'GetVirtualMachineOutput')
     Host = Shapes::StringShape.new(name: 'Host')
     HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
     Hypervisor = Shapes::StructureShape.new(name: 'Hypervisor')
+    HypervisorDetails = Shapes::StructureShape.new(name: 'HypervisorDetails')
     HypervisorId = Shapes::StringShape.new(name: 'HypervisorId')
     HypervisorState = Shapes::StringShape.new(name: 'HypervisorState')
     Hypervisors = Shapes::ListShape.new(name: 'Hypervisors')
+    IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     ImportHypervisorConfigurationInput = Shapes::StructureShape.new(name: 'ImportHypervisorConfigurationInput')
     ImportHypervisorConfigurationOutput = Shapes::StructureShape.new(name: 'ImportHypervisorConfigurationOutput')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -55,6 +67,7 @@ module Aws::BackupGateway
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListVirtualMachinesInput = Shapes::StructureShape.new(name: 'ListVirtualMachinesInput')
     ListVirtualMachinesOutput = Shapes::StructureShape.new(name: 'ListVirtualMachinesOutput')
+    LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
     MaintenanceStartTime = Shapes::StructureShape.new(name: 'MaintenanceStartTime')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MinuteOfHour = Shapes::IntegerShape.new(name: 'MinuteOfHour')
@@ -62,11 +75,18 @@ module Aws::BackupGateway
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Password = Shapes::StringShape.new(name: 'Password')
     Path = Shapes::StringShape.new(name: 'Path')
+    PutBandwidthRateLimitScheduleInput = Shapes::StructureShape.new(name: 'PutBandwidthRateLimitScheduleInput')
+    PutBandwidthRateLimitScheduleOutput = Shapes::StructureShape.new(name: 'PutBandwidthRateLimitScheduleOutput')
+    PutHypervisorPropertyMappingsInput = Shapes::StructureShape.new(name: 'PutHypervisorPropertyMappingsInput')
+    PutHypervisorPropertyMappingsOutput = Shapes::StructureShape.new(name: 'PutHypervisorPropertyMappingsOutput')
     PutMaintenanceStartTimeInput = Shapes::StructureShape.new(name: 'PutMaintenanceStartTimeInput')
     PutMaintenanceStartTimeOutput = Shapes::StructureShape.new(name: 'PutMaintenanceStartTimeOutput')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServerArn = Shapes::StringShape.new(name: 'ServerArn')
+    StartVirtualMachinesMetadataSyncInput = Shapes::StructureShape.new(name: 'StartVirtualMachinesMetadataSyncInput')
+    StartVirtualMachinesMetadataSyncOutput = Shapes::StructureShape.new(name: 'StartVirtualMachinesMetadataSyncOutput')
+    SyncMetadataStatus = Shapes::StringShape.new(name: 'SyncMetadataStatus')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
@@ -91,6 +111,12 @@ module Aws::BackupGateway
     VirtualMachine = Shapes::StructureShape.new(name: 'VirtualMachine')
     VirtualMachineDetails = Shapes::StructureShape.new(name: 'VirtualMachineDetails')
     VirtualMachines = Shapes::ListShape.new(name: 'VirtualMachines')
+    VmwareCategory = Shapes::StringShape.new(name: 'VmwareCategory')
+    VmwareTag = Shapes::StructureShape.new(name: 'VmwareTag')
+    VmwareTagName = Shapes::StringShape.new(name: 'VmwareTagName')
+    VmwareTags = Shapes::ListShape.new(name: 'VmwareTags')
+    VmwareToAwsTagMapping = Shapes::StructureShape.new(name: 'VmwareToAwsTagMapping')
+    VmwareToAwsTagMappings = Shapes::ListShape.new(name: 'VmwareToAwsTagMappings')
     VpcEndpoint = Shapes::StringShape.new(name: 'VpcEndpoint')
     string = Shapes::StringShape.new(name: 'string')
 
@@ -105,6 +131,16 @@ module Aws::BackupGateway
     AssociateGatewayToServerOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
     AssociateGatewayToServerOutput.struct_class = Types::AssociateGatewayToServerOutput
 
+    BandwidthRateLimitInterval.add_member(:average_upload_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: AverageUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
+    BandwidthRateLimitInterval.add_member(:days_of_week, Shapes::ShapeRef.new(shape: DaysOfWeek, required: true, location_name: "DaysOfWeek"))
+    BandwidthRateLimitInterval.add_member(:end_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "EndHourOfDay"))
+    BandwidthRateLimitInterval.add_member(:end_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "EndMinuteOfHour"))
+    BandwidthRateLimitInterval.add_member(:start_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "StartHourOfDay"))
+    BandwidthRateLimitInterval.add_member(:start_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "StartMinuteOfHour"))
+    BandwidthRateLimitInterval.struct_class = Types::BandwidthRateLimitInterval
+
+    BandwidthRateLimitIntervals.member = Shapes::ShapeRef.new(shape: BandwidthRateLimitInterval)
+
     ConflictException.add_member(:error_code, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ErrorCode"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -117,6 +153,8 @@ module Aws::BackupGateway
 
     CreateGatewayOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
     CreateGatewayOutput.struct_class = Types::CreateGatewayOutput
+
+    DaysOfWeek.member = Shapes::ShapeRef.new(shape: DayOfWeek)
 
     DeleteGatewayInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
     DeleteGatewayInput.struct_class = Types::DeleteGatewayInput
@@ -155,11 +193,32 @@ module Aws::BackupGateway
 
     Gateways.member = Shapes::ShapeRef.new(shape: Gateway)
 
+    GetBandwidthRateLimitScheduleInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
+    GetBandwidthRateLimitScheduleInput.struct_class = Types::GetBandwidthRateLimitScheduleInput
+
+    GetBandwidthRateLimitScheduleOutput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals"))
+    GetBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
+    GetBandwidthRateLimitScheduleOutput.struct_class = Types::GetBandwidthRateLimitScheduleOutput
+
     GetGatewayInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
     GetGatewayInput.struct_class = Types::GetGatewayInput
 
     GetGatewayOutput.add_member(:gateway, Shapes::ShapeRef.new(shape: GatewayDetails, location_name: "Gateway"))
     GetGatewayOutput.struct_class = Types::GetGatewayOutput
+
+    GetHypervisorInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, required: true, location_name: "HypervisorArn"))
+    GetHypervisorInput.struct_class = Types::GetHypervisorInput
+
+    GetHypervisorOutput.add_member(:hypervisor, Shapes::ShapeRef.new(shape: HypervisorDetails, location_name: "Hypervisor"))
+    GetHypervisorOutput.struct_class = Types::GetHypervisorOutput
+
+    GetHypervisorPropertyMappingsInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, required: true, location_name: "HypervisorArn"))
+    GetHypervisorPropertyMappingsInput.struct_class = Types::GetHypervisorPropertyMappingsInput
+
+    GetHypervisorPropertyMappingsOutput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
+    GetHypervisorPropertyMappingsOutput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "IamRoleArn"))
+    GetHypervisorPropertyMappingsOutput.add_member(:vmware_to_aws_tag_mappings, Shapes::ShapeRef.new(shape: VmwareToAwsTagMappings, location_name: "VmwareToAwsTagMappings"))
+    GetHypervisorPropertyMappingsOutput.struct_class = Types::GetHypervisorPropertyMappingsOutput
 
     GetVirtualMachineInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     GetVirtualMachineInput.struct_class = Types::GetVirtualMachineInput
@@ -173,6 +232,17 @@ module Aws::BackupGateway
     Hypervisor.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Hypervisor.add_member(:state, Shapes::ShapeRef.new(shape: HypervisorState, location_name: "State"))
     Hypervisor.struct_class = Types::Hypervisor
+
+    HypervisorDetails.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
+    HypervisorDetails.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
+    HypervisorDetails.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    HypervisorDetails.add_member(:last_successful_metadata_sync_time, Shapes::ShapeRef.new(shape: Time, location_name: "LastSuccessfulMetadataSyncTime"))
+    HypervisorDetails.add_member(:latest_metadata_sync_status, Shapes::ShapeRef.new(shape: SyncMetadataStatus, location_name: "LatestMetadataSyncStatus"))
+    HypervisorDetails.add_member(:latest_metadata_sync_status_message, Shapes::ShapeRef.new(shape: string, location_name: "LatestMetadataSyncStatusMessage"))
+    HypervisorDetails.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
+    HypervisorDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    HypervisorDetails.add_member(:state, Shapes::ShapeRef.new(shape: HypervisorState, location_name: "State"))
+    HypervisorDetails.struct_class = Types::HypervisorDetails
 
     Hypervisors.member = Shapes::ShapeRef.new(shape: Hypervisor)
 
@@ -229,6 +299,21 @@ module Aws::BackupGateway
     MaintenanceStartTime.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "MinuteOfHour"))
     MaintenanceStartTime.struct_class = Types::MaintenanceStartTime
 
+    PutBandwidthRateLimitScheduleInput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, required: true, location_name: "BandwidthRateLimitIntervals"))
+    PutBandwidthRateLimitScheduleInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
+    PutBandwidthRateLimitScheduleInput.struct_class = Types::PutBandwidthRateLimitScheduleInput
+
+    PutBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
+    PutBandwidthRateLimitScheduleOutput.struct_class = Types::PutBandwidthRateLimitScheduleOutput
+
+    PutHypervisorPropertyMappingsInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, required: true, location_name: "HypervisorArn"))
+    PutHypervisorPropertyMappingsInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "IamRoleArn"))
+    PutHypervisorPropertyMappingsInput.add_member(:vmware_to_aws_tag_mappings, Shapes::ShapeRef.new(shape: VmwareToAwsTagMappings, required: true, location_name: "VmwareToAwsTagMappings"))
+    PutHypervisorPropertyMappingsInput.struct_class = Types::PutHypervisorPropertyMappingsInput
+
+    PutHypervisorPropertyMappingsOutput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
+    PutHypervisorPropertyMappingsOutput.struct_class = Types::PutHypervisorPropertyMappingsOutput
+
     PutMaintenanceStartTimeInput.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
     PutMaintenanceStartTimeInput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
     PutMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
@@ -242,6 +327,12 @@ module Aws::BackupGateway
     ResourceNotFoundException.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "ErrorCode"))
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    StartVirtualMachinesMetadataSyncInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, required: true, location_name: "HypervisorArn"))
+    StartVirtualMachinesMetadataSyncInput.struct_class = Types::StartVirtualMachinesMetadataSyncInput
+
+    StartVirtualMachinesMetadataSyncOutput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
+    StartVirtualMachinesMetadataSyncOutput.struct_class = Types::StartVirtualMachinesMetadataSyncOutput
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -292,6 +383,7 @@ module Aws::BackupGateway
 
     UpdateHypervisorInput.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     UpdateHypervisorInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, required: true, location_name: "HypervisorArn"))
+    UpdateHypervisorInput.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
     UpdateHypervisorInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     UpdateHypervisorInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     UpdateHypervisorInput.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
@@ -318,9 +410,25 @@ module Aws::BackupGateway
     VirtualMachineDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     VirtualMachineDetails.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     VirtualMachineDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    VirtualMachineDetails.add_member(:vmware_tags, Shapes::ShapeRef.new(shape: VmwareTags, location_name: "VmwareTags"))
     VirtualMachineDetails.struct_class = Types::VirtualMachineDetails
 
     VirtualMachines.member = Shapes::ShapeRef.new(shape: VirtualMachine)
+
+    VmwareTag.add_member(:vmware_category, Shapes::ShapeRef.new(shape: VmwareCategory, location_name: "VmwareCategory"))
+    VmwareTag.add_member(:vmware_tag_description, Shapes::ShapeRef.new(shape: string, location_name: "VmwareTagDescription"))
+    VmwareTag.add_member(:vmware_tag_name, Shapes::ShapeRef.new(shape: VmwareTagName, location_name: "VmwareTagName"))
+    VmwareTag.struct_class = Types::VmwareTag
+
+    VmwareTags.member = Shapes::ShapeRef.new(shape: VmwareTag)
+
+    VmwareToAwsTagMapping.add_member(:aws_tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "AwsTagKey"))
+    VmwareToAwsTagMapping.add_member(:aws_tag_value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "AwsTagValue"))
+    VmwareToAwsTagMapping.add_member(:vmware_category, Shapes::ShapeRef.new(shape: VmwareCategory, required: true, location_name: "VmwareCategory"))
+    VmwareToAwsTagMapping.add_member(:vmware_tag_name, Shapes::ShapeRef.new(shape: VmwareTagName, required: true, location_name: "VmwareTagName"))
+    VmwareToAwsTagMapping.struct_class = Types::VmwareToAwsTagMapping
+
+    VmwareToAwsTagMappings.member = Shapes::ShapeRef.new(shape: VmwareToAwsTagMapping)
 
 
     # @api private
@@ -383,6 +491,7 @@ module Aws::BackupGateway
         o.input = Shapes::ShapeRef.new(shape: DeleteHypervisorInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteHypervisorOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -402,12 +511,48 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_bandwidth_rate_limit_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBandwidthRateLimitSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBandwidthRateLimitScheduleInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBandwidthRateLimitScheduleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetGateway"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetGatewayInput)
         o.output = Shapes::ShapeRef.new(shape: GetGatewayOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_hypervisor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetHypervisor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetHypervisorInput)
+        o.output = Shapes::ShapeRef.new(shape: GetHypervisorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_hypervisor_property_mappings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetHypervisorPropertyMappings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetHypervisorPropertyMappingsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetHypervisorPropertyMappingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -433,6 +578,7 @@ module Aws::BackupGateway
         o.input = Shapes::ShapeRef.new(shape: ImportHypervisorConfigurationInput)
         o.output = Shapes::ShapeRef.new(shape: ImportHypervisorConfigurationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -501,6 +647,32 @@ module Aws::BackupGateway
         )
       end)
 
+      api.add_operation(:put_bandwidth_rate_limit_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBandwidthRateLimitSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutBandwidthRateLimitScheduleInput)
+        o.output = Shapes::ShapeRef.new(shape: PutBandwidthRateLimitScheduleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_hypervisor_property_mappings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutHypervisorPropertyMappings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutHypervisorPropertyMappingsInput)
+        o.output = Shapes::ShapeRef.new(shape: PutHypervisorPropertyMappingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:put_maintenance_start_time, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutMaintenanceStartTime"
         o.http_method = "POST"
@@ -510,6 +682,19 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_virtual_machines_metadata_sync, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartVirtualMachinesMetadataSync"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartVirtualMachinesMetadataSyncInput)
+        o.output = Shapes::ShapeRef.new(shape: StartVirtualMachinesMetadataSyncOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -583,6 +768,7 @@ module Aws::BackupGateway
         o.input = Shapes::ShapeRef.new(shape: UpdateHypervisorInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateHypervisorOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

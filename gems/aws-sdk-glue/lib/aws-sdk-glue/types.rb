@@ -6492,12 +6492,19 @@ module Aws::Glue
     #   path.
     #   @return [Boolean]
     #
+    # @!attribute [rw] create_native_delta_table
+    #   Specifies whether the crawler will create native tables, to allow
+    #   integration with query engines that support querying of the Delta
+    #   transaction log directly.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeltaTarget AWS API Documentation
     #
     class DeltaTarget < Struct.new(
       :delta_tables,
       :connection_name,
-      :write_manifest)
+      :write_manifest,
+      :create_native_delta_table)
       SENSITIVE = []
       include Aws::Structure
     end
