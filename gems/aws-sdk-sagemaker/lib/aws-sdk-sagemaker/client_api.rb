@@ -1528,6 +1528,7 @@ module Aws::SageMaker
     RStudioServerProDomainSettings = Shapes::StructureShape.new(name: 'RStudioServerProDomainSettings')
     RStudioServerProDomainSettingsForUpdate = Shapes::StructureShape.new(name: 'RStudioServerProDomainSettingsForUpdate')
     RStudioServerProUserGroup = Shapes::StringShape.new(name: 'RStudioServerProUserGroup')
+    RandomSeed = Shapes::IntegerShape.new(name: 'RandomSeed')
     RealTimeInferenceConfig = Shapes::StructureShape.new(name: 'RealTimeInferenceConfig')
     RealtimeInferenceInstanceTypes = Shapes::ListShape.new(name: 'RealtimeInferenceInstanceTypes')
     RecommendationFailureReason = Shapes::StringShape.new(name: 'RecommendationFailureReason')
@@ -5111,6 +5112,7 @@ module Aws::SageMaker
     HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, location_name: "ParameterRanges"))
     HyperParameterTuningJobConfig.add_member(:training_job_early_stopping_type, Shapes::ShapeRef.new(shape: TrainingJobEarlyStoppingType, location_name: "TrainingJobEarlyStoppingType"))
     HyperParameterTuningJobConfig.add_member(:tuning_job_completion_criteria, Shapes::ShapeRef.new(shape: TuningJobCompletionCriteria, location_name: "TuningJobCompletionCriteria"))
+    HyperParameterTuningJobConfig.add_member(:random_seed, Shapes::ShapeRef.new(shape: RandomSeed, location_name: "RandomSeed"))
     HyperParameterTuningJobConfig.struct_class = Types::HyperParameterTuningJobConfig
 
     HyperParameterTuningJobObjective.add_member(:type, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjectiveType, required: true, location_name: "Type"))

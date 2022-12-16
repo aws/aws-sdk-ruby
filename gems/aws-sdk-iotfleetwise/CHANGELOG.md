@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2022-12-16)
+------------------
+
+* Feature - Updated error handling for empty resource names in "UpdateSignalCatalog" and "GetModelManifest" operations.
+
 1.3.0 (2022-12-09)
 ------------------
 

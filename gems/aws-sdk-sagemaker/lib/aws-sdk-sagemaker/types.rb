@@ -4011,7 +4011,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] user_profile_name
-    #   The user profile name.
+    #   The user profile name. If this value is not set, then `SpaceName`
+    #   must be set.
     #   @return [String]
     #
     # @!attribute [rw] app_type
@@ -4042,7 +4043,8 @@ module Aws::SageMaker
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] space_name
-    #   The name of the space.
+    #   The name of the space. If this value is not set, then
+    #   `UserProfileName` must be set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppRequest AWS API Documentation
@@ -8576,7 +8578,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] user_profile_name
-    #   The user profile name.
+    #   The user profile name. If this value is not set, then `SpaceName`
+    #   must be set.
     #   @return [String]
     #
     # @!attribute [rw] app_type
@@ -8588,7 +8591,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] space_name
-    #   The name of the space.
+    #   The name of the space. If this value is not set, then
+    #   `UserProfileName` must be set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAppRequest AWS API Documentation
@@ -9658,7 +9662,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] user_profile_name
-    #   The user profile name.
+    #   The user profile name. If this value is not set, then `SpaceName`
+    #   must be set.
     #   @return [String]
     #
     # @!attribute [rw] app_type
@@ -9734,7 +9739,8 @@ module Aws::SageMaker
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] space_name
-    #   The name of the space.
+    #   The name of the space. If this value is not set, then
+    #   `UserProfileName` must be set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppResponse AWS API Documentation
@@ -18879,18 +18885,22 @@ module Aws::SageMaker
     #   @return [Types::HyperParameterTuningJobStrategyConfig]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_objective
-    #   The HyperParameterTuningJobObjective object that specifies the
-    #   objective metric for this tuning job.
+    #   The HyperParameterTuningJobObjective specifies the objective metric
+    #   used to evaluate the performance of training jobs launched by this
+    #   tuning job.
     #   @return [Types::HyperParameterTuningJobObjective]
     #
     # @!attribute [rw] resource_limits
     #   The ResourceLimits object that specifies the maximum number of
-    #   training jobs and parallel training jobs for this tuning job.
+    #   training and parallel training jobs that can be used for this
+    #   hyperparameter tuning job.
     #   @return [Types::ResourceLimits]
     #
     # @!attribute [rw] parameter_ranges
     #   The ParameterRanges object that specifies the ranges of
-    #   hyperparameters that this tuning job searches.
+    #   hyperparameters that this tuning job searches over to find the
+    #   optimal configuration for the highest model performance against
+    #   .your chosen objective metric.
     #   @return [Types::ParameterRanges]
     #
     # @!attribute [rw] training_job_early_stopping_type
@@ -18922,6 +18932,13 @@ module Aws::SageMaker
     #   The tuning job's completion criteria.
     #   @return [Types::TuningJobCompletionCriteria]
     #
+    # @!attribute [rw] random_seed
+    #   A value used to initialize a pseudo-random number generator. Setting
+    #   a random seed and using the same seed later for the same tuning job
+    #   will allow hyperparameter optimization to find more a consistent
+    #   hyperparameter configuration between the two runs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobConfig AWS API Documentation
     #
     class HyperParameterTuningJobConfig < Struct.new(
@@ -18931,7 +18948,8 @@ module Aws::SageMaker
       :resource_limits,
       :parameter_ranges,
       :training_job_early_stopping_type,
-      :tuning_job_completion_criteria)
+      :tuning_job_completion_criteria,
+      :random_seed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21247,11 +21265,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] user_profile_name_equals
-    #   A parameter to search by user profile name.
+    #   A parameter to search by user profile name. If `SpaceNameEquals` is
+    #   set, then this value cannot be set.
     #   @return [String]
     #
     # @!attribute [rw] space_name_equals
-    #   A parameter to search by space name.
+    #   A parameter to search by space name. If `UserProfileNameEquals` is
+    #   set, then this value cannot be set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAppsRequest AWS API Documentation

@@ -213,7 +213,7 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] target_distribution_id
-    #   The ID of the distribution that you’re associating the alias with.
+    #   The ID of the distribution that you're associating the alias with.
     #   @return [String]
     #
     # @!attribute [rw] alias
@@ -269,9 +269,9 @@ module Aws::CloudFront
     # behaviors that you can add to a distribution, see [Quotas][1] in the
     # *Amazon CloudFront Developer Guide*.
     #
-    # If you don’t want to specify any cache behaviors, include only an
-    # empty `CacheBehaviors` element. Don’t include an empty `CacheBehavior`
-    # element because this is invalid.
+    # If you don't want to specify any cache behaviors, include only an
+    # empty `CacheBehaviors` element. Don't include an empty
+    # `CacheBehavior` element because this is invalid.
     #
     # To delete all cache behaviors in an existing distribution, update the
     # distribution configuration and include only an empty `CacheBehaviors`
@@ -328,7 +328,7 @@ module Aws::CloudFront
     #   When a cache behavior contains trusted signers, CloudFront requires
     #   signed URLs or signed cookies for all requests that match the cache
     #   behavior. The URLs or cookies must be signed with the private key of
-    #   a CloudFront key pair in the trusted signer’s Amazon Web Services
+    #   a CloudFront key pair in the trusted signer's Amazon Web Services
     #   account. The signed URL or cookie contains information about which
     #   public key CloudFront should use to verify the signature. For more
     #   information, see [Serving private content][1] in the *Amazon
@@ -379,7 +379,7 @@ module Aws::CloudFront
     #   <note markdown="1"> The only way to guarantee that viewers retrieve an object that was
     #   fetched from the origin using HTTPS is never to use any other
     #   protocol to fetch the object. If you have recently changed from HTTP
-    #   to HTTPS, we recommend that you clear your objects’ cache because
+    #   to HTTPS, we recommend that you clear your objects' cache because
     #   cached objects are protocol agnostic. That means that an edge
     #   location will return an object from the cache regardless of whether
     #   the current request protocol matches the protocol used previously.
@@ -637,7 +637,7 @@ module Aws::CloudFront
 
     # A cache policy.
     #
-    # When it’s attached to a cache behavior, the cache policy determines
+    # When it's attached to a cache behavior, the cache policy determines
     # the following:
     #
     # * The values that CloudFront includes in the cache key. These values
@@ -650,8 +650,8 @@ module Aws::CloudFront
     #
     # The headers, cookies, and query strings that are included in the cache
     # key are automatically included in requests that CloudFront sends to
-    # the origin. CloudFront sends a request when it can’t find a valid
-    # object in its cache that matches the request’s cache key. If you want
+    # the origin. CloudFront sends a request when it can't find a valid
+    # object in its cache that matches the request's cache key. If you want
     # to send values to the origin but *not* include them in the cache key,
     # use `OriginRequestPolicy`.
     #
@@ -706,8 +706,8 @@ module Aws::CloudFront
     #
     # The headers, cookies, and query strings that are included in the cache
     # key are automatically included in requests that CloudFront sends to
-    # the origin. CloudFront sends a request when it can’t find a valid
-    # object in its cache that matches the request’s cache key. If you want
+    # the origin. CloudFront sends a request when it can't find a valid
+    # object in its cache that matches the request's cache key. If you want
     # to send values to the origin but *not* include them in the cache key,
     # use `OriginRequestPolicy`.
     #
@@ -724,7 +724,7 @@ module Aws::CloudFront
     #   The default amount of time, in seconds, that you want objects to
     #   stay in the CloudFront cache before CloudFront sends another request
     #   to the origin to see if the object has been updated. CloudFront uses
-    #   this value as the object’s time to live (TTL) only when the origin
+    #   this value as the object's time to live (TTL) only when the origin
     #   does *not* send `Cache-Control` or `Expires` headers with the
     #   object. For more information, see [Managing How Long Content Stays
     #   in an Edge Cache (Expiration)][1] in the *Amazon CloudFront
@@ -1213,10 +1213,10 @@ module Aws::CloudFront
     end
 
     # An alias (also called a CNAME) and the CloudFront distribution and
-    # Amazon Web Services account ID that it’s associated with. The
+    # Amazon Web Services account ID that it's associated with. The
     # distribution and account IDs are partially hidden, which allows you to
     # identify the distributions and accounts that you own, but helps to
-    # protect the information of ones that you don’t own.
+    # protect the information of ones that you don't own.
     #
     # @!attribute [rw] alias
     #   An alias (also called a CNAME).
@@ -1229,7 +1229,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] account_id
     #   The (partially hidden) ID of the Amazon Web Services account that
-    #   owns the distribution that’s associated with the alias.
+    #   owns the distribution that's associated with the alias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConflictingAlias AWS API Documentation
@@ -1247,7 +1247,7 @@ module Aws::CloudFront
     # associated with. In the list, the distribution and account IDs are
     # partially hidden, which allows you to identify the distributions and
     # accounts that you own, but helps to protect the information of ones
-    # that you don’t own.
+    # that you don't own.
     #
     # @!attribute [rw] next_marker
     #   If there are more items in the list than are in this response, this
@@ -1486,7 +1486,8 @@ module Aws::CloudFront
     #
     # @!attribute [rw] header
     #   The request header name that you want CloudFront to send to your
-    #   staging distribution.
+    #   staging distribution. The header must contain the prefix
+    #   `aws-cf-cd-`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1967,7 +1968,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] function_config
     #   Configuration information about the function, including an optional
-    #   comment and the function’s runtime.
+    #   comment and the function's runtime.
     #   @return [Types::FunctionConfig]
     #
     # @!attribute [rw] function_code
@@ -2594,7 +2595,7 @@ module Aws::CloudFront
     #   Specifies how long, in seconds, CloudFront waits for a response from
     #   the origin. This is also known as the *origin response timeout*. The
     #   minimum timeout is 1 second, the maximum is 60 seconds, and the
-    #   default (if you don’t specify otherwise) is 30 seconds.
+    #   default (if you don't specify otherwise) is 30 seconds.
     #
     #   For more information, see [Origin Response Timeout][1] in the
     #   *Amazon CloudFront Developer Guide*.
@@ -2607,7 +2608,7 @@ module Aws::CloudFront
     # @!attribute [rw] origin_keepalive_timeout
     #   Specifies how long, in seconds, CloudFront persists its connection
     #   to the origin. The minimum timeout is 1 second, the maximum is 60
-    #   seconds, and the default (if you don’t specify otherwise) is 5
+    #   seconds, and the default (if you don't specify otherwise) is 5
     #   seconds.
     #
     #   For more information, see [Origin Keep-alive Timeout][1] in the
@@ -2631,8 +2632,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that describes the default cache behavior if you don’t
-    # specify a `CacheBehavior` element or if request URLs don’t match any
+    # A complex type that describes the default cache behavior if you don't
+    # specify a `CacheBehavior` element or if request URLs don't match any
     # of the values of `PathPattern` in `CacheBehavior` elements. You must
     # create exactly one default cache behavior.
     #
@@ -2650,7 +2651,7 @@ module Aws::CloudFront
     #   When a cache behavior contains trusted signers, CloudFront requires
     #   signed URLs or signed cookies for all requests that match the cache
     #   behavior. The URLs or cookies must be signed with the private key of
-    #   a CloudFront key pair in a trusted signer’s Amazon Web Services
+    #   a CloudFront key pair in a trusted signer's Amazon Web Services
     #   account. The signed URL or cookie contains information about which
     #   public key CloudFront should use to verify the signature. For more
     #   information, see [Serving private content][1] in the *Amazon
@@ -2701,7 +2702,7 @@ module Aws::CloudFront
     #   <note markdown="1"> The only way to guarantee that viewers retrieve an object that was
     #   fetched from the origin using HTTPS is never to use any other
     #   protocol to fetch the object. If you have recently changed from HTTP
-    #   to HTTPS, we recommend that you clear your objects’ cache because
+    #   to HTTPS, we recommend that you clear your objects' cache because
     #   cached objects are protocol agnostic. That means that an edge
     #   location will return an object from the cache regardless of whether
     #   the current request protocol matches the protocol used previously.
@@ -2943,7 +2944,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] if_match
     #   The version of the cache policy that you are deleting. The version
-    #   is the cache policy’s `ETag` value, which you can get using
+    #   is the cache policy's `ETag` value, which you can get using
     #   `ListCachePolicies`, `GetCachePolicy`, or `GetCachePolicyConfig`.
     #   @return [String]
     #
@@ -3118,7 +3119,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] if_match
     #   The version of the key group that you are deleting. The version is
-    #   the key group’s `ETag` value. To get the `ETag`, use `GetKeyGroup`
+    #   the key group's `ETag` value. To get the `ETag`, use `GetKeyGroup`
     #   or `GetKeyGroupConfig`.
     #   @return [String]
     #
@@ -3174,7 +3175,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] if_match
     #   The version of the origin request policy that you are deleting. The
-    #   version is the origin request policy’s `ETag` value, which you can
+    #   version is the origin request policy's `ETag` value, which you can
     #   get using `ListOriginRequestPolicies`, `GetOriginRequestPolicy`, or
     #   `GetOriginRequestPolicyConfig`.
     #   @return [String]
@@ -3234,8 +3235,8 @@ module Aws::CloudFront
     # @!attribute [rw] if_match
     #   The version of the response headers policy that you are deleting.
     #
-    #   The version is the response headers policy’s `ETag` value, which you
-    #   can get using `ListResponseHeadersPolicies`,
+    #   The version is the response headers policy's `ETag` value, which
+    #   you can get using `ListResponseHeadersPolicies`,
     #   `GetResponseHeadersPolicy`, or `GetResponseHeadersPolicyConfig`.
     #   @return [String]
     #
@@ -3273,7 +3274,7 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] stage
-    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #   The function's stage, either `DEVELOPMENT` or `LIVE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeFunctionRequest AWS API Documentation
@@ -3308,16 +3309,16 @@ module Aws::CloudFront
     # from, and the details about how to track and manage content delivery.
     #
     # @!attribute [rw] id
-    #   The distribution’s identifier. For example: `E1U5RQF7T870K0`.
+    #   The distribution's identifier. For example: `E1U5RQF7T870K0`.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The distribution’s Amazon Resource Name (ARN).
+    #   The distribution's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The distribution’s status. When the status is `Deployed`, the
-    #   distribution’s information is fully propagated to all CloudFront
+    #   The distribution's status. When the status is `Deployed`, the
+    #   distribution's information is fully propagated to all CloudFront
     #   edge locations.
     #   @return [String]
     #
@@ -3330,31 +3331,26 @@ module Aws::CloudFront
     #   @return [Integer]
     #
     # @!attribute [rw] domain_name
-    #   The distribution’s CloudFront domain name. For example:
+    #   The distribution's CloudFront domain name. For example:
     #   `d111111abcdef8.cloudfront.net`.
     #   @return [String]
     #
     # @!attribute [rw] active_trusted_signers
     #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
-    #   CloudFront automatically adds this field to the response if you’ve
-    #   configured a cache behavior in this distribution to serve private
-    #   content using trusted signers. This field contains a list of Amazon
-    #   Web Services account IDs and the active CloudFront key pairs in each
-    #   account that CloudFront can use to verify the signatures of signed
-    #   URLs or signed cookies.
+    #   This field contains a list of Amazon Web Services account IDs and
+    #   the active CloudFront key pairs in each account that CloudFront can
+    #   use to verify the signatures of signed URLs or signed cookies.
     #   @return [Types::ActiveTrustedSigners]
     #
     # @!attribute [rw] active_trusted_key_groups
-    #   CloudFront automatically adds this field to the response if you’ve
-    #   configured a cache behavior in this distribution to serve private
-    #   content using key groups. This field contains a list of key groups
-    #   and the public keys in each key group that CloudFront can use to
-    #   verify the signatures of signed URLs or signed cookies.
+    #   This field contains a list of key groups and the public keys in each
+    #   key group that CloudFront can use to verify the signatures of signed
+    #   URLs or signed cookies.
     #   @return [Types::ActiveTrustedKeyGroups]
     #
     # @!attribute [rw] distribution_config
-    #   The distribution’s configuration.
+    #   The distribution's configuration.
     #   @return [Types::DistributionConfig]
     #
     # @!attribute [rw] alias_icp_recordals
@@ -3494,8 +3490,8 @@ module Aws::CloudFront
     #   @return [Types::CustomErrorResponses]
     #
     # @!attribute [rw] comment
-    #   An optional comment to describe the distribution. The comment cannot
-    #   be longer than 128 characters.
+    #   A comment to describe the distribution. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -3540,7 +3536,7 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] viewer_certificate
-    #   A complex type that determines the distribution’s SSL/TLS
+    #   A complex type that determines the distribution's SSL/TLS
     #   configuration for communicating with viewers.
     #   @return [Types::ViewerCertificate]
     #
@@ -3874,7 +3870,7 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] viewer_certificate
-    #   A complex type that determines the distribution’s SSL/TLS
+    #   A complex type that determines the distribution's SSL/TLS
     #   configuration for communicating with viewers.
     #   @return [Types::ViewerCertificate]
     #
@@ -4592,7 +4588,7 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The function’s runtime environment. The only valid value is
+    #   The function's runtime environment. The only valid value is
     #   `cloudfront-js-1.0`.
     #   @return [String]
     #
@@ -4605,7 +4601,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # Cannot delete the function because it’s attached to one or more cache
+    # Cannot delete the function because it's attached to one or more cache
     # behaviors.
     #
     # @!attribute [rw] message
@@ -4665,7 +4661,7 @@ module Aws::CloudFront
     #   function with `TestFunction`, and update it with `UpdateFunction`.
     #
     #   When a function is in the `LIVE` stage, you can attach the function
-    #   to a distribution’s cache behavior, using the function’s ARN.
+    #   to a distribution's cache behavior, using the function's ARN.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -4787,8 +4783,8 @@ module Aws::CloudFront
 
     # @!attribute [rw] id
     #   The unique identifier for the cache policy. If the cache policy is
-    #   attached to a distribution’s cache behavior, you can get the
-    #   policy’s identifier using `ListDistributions` or `GetDistribution`.
+    #   attached to a distribution's cache behavior, you can get the
+    #   policy's identifier using `ListDistributions` or `GetDistribution`.
     #   If the cache policy is not attached to a cache behavior, you can get
     #   the identifier using `ListCachePolicies`.
     #   @return [String]
@@ -4820,8 +4816,8 @@ module Aws::CloudFront
 
     # @!attribute [rw] id
     #   The unique identifier for the cache policy. If the cache policy is
-    #   attached to a distribution’s cache behavior, you can get the
-    #   policy’s identifier using `ListDistributions` or `GetDistribution`.
+    #   attached to a distribution's cache behavior, you can get the
+    #   policy's identifier using `ListDistributions` or `GetDistribution`.
     #   If the cache policy is not attached to a cache behavior, you can get
     #   the identifier using `ListCachePolicies`.
     #   @return [String]
@@ -5184,7 +5180,7 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] stage
-    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #   The function's stage, either `DEVELOPMENT` or `LIVE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFunctionRequest AWS API Documentation
@@ -5407,8 +5403,8 @@ module Aws::CloudFront
 
     # @!attribute [rw] id
     #   The unique identifier for the origin request policy. If the origin
-    #   request policy is attached to a distribution’s cache behavior, you
-    #   can get the policy’s identifier using `ListDistributions` or
+    #   request policy is attached to a distribution's cache behavior, you
+    #   can get the policy's identifier using `ListDistributions` or
     #   `GetDistribution`. If the origin request policy is not attached to a
     #   cache behavior, you can get the identifier using
     #   `ListOriginRequestPolicies`.
@@ -5441,8 +5437,8 @@ module Aws::CloudFront
 
     # @!attribute [rw] id
     #   The unique identifier for the origin request policy. If the origin
-    #   request policy is attached to a distribution’s cache behavior, you
-    #   can get the policy’s identifier using `ListDistributions` or
+    #   request policy is attached to a distribution's cache behavior, you
+    #   can get the policy's identifier using `ListDistributions` or
     #   `GetDistribution`. If the origin request policy is not attached to a
     #   cache behavior, you can get the identifier using
     #   `ListOriginRequestPolicies`.
@@ -5565,8 +5561,8 @@ module Aws::CloudFront
     # @!attribute [rw] id
     #   The identifier for the response headers policy.
     #
-    #   If the response headers policy is attached to a distribution’s cache
-    #   behavior, you can get the policy’s identifier using
+    #   If the response headers policy is attached to a distribution's
+    #   cache behavior, you can get the policy's identifier using
     #   `ListDistributions` or `GetDistribution`. If the response headers
     #   policy is not attached to a cache behavior, you can get the
     #   identifier using `ListResponseHeadersPolicies`.
@@ -5601,8 +5597,8 @@ module Aws::CloudFront
     # @!attribute [rw] id
     #   The identifier for the response headers policy.
     #
-    #   If the response headers policy is attached to a distribution’s cache
-    #   behavior, you can get the policy’s identifier using
+    #   If the response headers policy is attached to a distribution's
+    #   cache behavior, you can get the policy's identifier using
     #   `ListDistributions` or `GetDistribution`. If the response headers
     #   policy is not attached to a cache behavior, you can get the
     #   identifier using `ListResponseHeadersPolicies`.
@@ -6587,8 +6583,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of cache policies. The response includes cache policies in
     #   the list that occur after the marker. To get the next page of the
-    #   list, set this field’s value to the value of `NextMarker` from the
-    #   current page’s response.
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6669,8 +6665,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   the list of conflicting aliases. The response includes conflicting
     #   aliases in the list that occur after the marker. To get the next
-    #   page of the list, set this field’s value to the value of
-    #   `NextMarker` from the current page’s response.
+    #   page of the list, set this field's value to the value of
+    #   `NextMarker` from the current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6705,8 +6701,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of continuous deployment policies. The response includes
     #   policies in the list that occur after the marker. To get the next
-    #   page of the list, set this field’s value to the value of
-    #   `NextMarker` from the current page’s response.
+    #   page of the list, set this field's value to the value of
+    #   `NextMarker` from the current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6739,8 +6735,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distribution IDs. The response includes distribution
     #   IDs in the list that occur after the marker. To get the next page of
-    #   the list, set this field’s value to the value of `NextMarker` from
-    #   the current page’s response.
+    #   the list, set this field's value to the value of `NextMarker` from
+    #   the current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6779,8 +6775,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distribution IDs. The response includes distribution
     #   IDs in the list that occur after the marker. To get the next page of
-    #   the list, set this field’s value to the value of `NextMarker` from
-    #   the current page’s response.
+    #   the list, set this field's value to the value of `NextMarker` from
+    #   the current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6819,8 +6815,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distribution IDs. The response includes distribution
     #   IDs in the list that occur after the marker. To get the next page of
-    #   the list, set this field’s value to the value of `NextMarker` from
-    #   the current page’s response.
+    #   the list, set this field's value to the value of `NextMarker` from
+    #   the current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6859,8 +6855,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distributions. The response includes distributions in
     #   the list that occur after the marker. To get the next page of the
-    #   list, set this field’s value to the value of `NextMarker` from the
-    #   current page’s response.
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6904,8 +6900,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distribution IDs. The response includes distribution
     #   IDs in the list that occur after the marker. To get the next page of
-    #   the list, set this field’s value to the value of `NextMarker` from
-    #   the current page’s response.
+    #   the list, set this field's value to the value of `NextMarker` from
+    #   the current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -7103,8 +7099,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of functions. The response includes functions in the list
     #   that occur after the marker. To get the next page of the list, set
-    #   this field’s value to the value of `NextMarker` from the current
-    #   page’s response.
+    #   this field's value to the value of `NextMarker` from the current
+    #   page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -7188,8 +7184,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of key groups. The response includes key groups in the
     #   list that occur after the marker. To get the next page of the list,
-    #   set this field’s value to the value of `NextMarker` from the current
-    #   page’s response.
+    #   set this field's value to the value of `NextMarker` from the
+    #   current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -7266,8 +7262,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of origin request policies. The response includes origin
     #   request policies in the list that occur after the marker. To get the
-    #   next page of the list, set this field’s value to the value of
-    #   `NextMarker` from the current page’s response.
+    #   next page of the list, set this field's value to the value of
+    #   `NextMarker` from the current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -7341,8 +7337,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of real-time log configurations. The response includes
     #   real-time log configurations in the list that occur after the
-    #   marker. To get the next page of the list, set this field’s value to
-    #   the value of `NextMarker` from the current page’s response.
+    #   marker. To get the next page of the list, set this field's value to
+    #   the value of `NextMarker` from the current page's response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListRealtimeLogConfigsRequest AWS API Documentation
@@ -7381,8 +7377,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of response headers policies. The response includes
     #   response headers policies in the list that occur after the marker.
-    #   To get the next page of the list, set this field’s value to the
-    #   value of `NextMarker` from the current page’s response.
+    #   To get the next page of the list, set this field's value to the
+    #   value of `NextMarker` from the current page's response.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -7590,7 +7586,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The continuous deployment policy doesn’t exist.
+    # The continuous deployment policy doesn't exist.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -7879,12 +7875,12 @@ module Aws::CloudFront
     # @!attribute [rw] connection_attempts
     #   The number of times that CloudFront attempts to connect to the
     #   origin. The minimum number is 1, the maximum is 3, and the default
-    #   (if you don’t specify otherwise) is 3.
+    #   (if you don't specify otherwise) is 3.
     #
-    #   For a custom origin (including an Amazon S3 bucket that’s configured
-    #   with static website hosting), this value also specifies the number
-    #   of times that CloudFront attempts to get a response from the origin,
-    #   in the case of an [Origin Response Timeout][1].
+    #   For a custom origin (including an Amazon S3 bucket that's
+    #   configured with static website hosting), this value also specifies
+    #   the number of times that CloudFront attempts to get a response from
+    #   the origin, in the case of an [Origin Response Timeout][1].
     #
     #   For more information, see [Origin Connection Attempts][2] in the
     #   *Amazon CloudFront Developer Guide*.
@@ -7898,7 +7894,7 @@ module Aws::CloudFront
     # @!attribute [rw] connection_timeout
     #   The number of seconds that CloudFront waits when trying to establish
     #   a connection to the origin. The minimum timeout is 1 second, the
-    #   maximum is 10 seconds, and the default (if you don’t specify
+    #   maximum is 10 seconds, and the default (if you don't specify
     #   otherwise) is 10 seconds.
     #
     #   For more information, see [Origin Connection Timeout][1] in the
@@ -8287,7 +8283,7 @@ module Aws::CloudFront
 
     # An origin request policy.
     #
-    # When it’s attached to a cache behavior, the origin request policy
+    # When it's attached to a cache behavior, the origin request policy
     # determines the values that CloudFront includes in requests that it
     # sends to the origin. Each request that CloudFront sends to the origin
     # includes the following:
@@ -8303,7 +8299,7 @@ module Aws::CloudFront
     #   items from the viewer request and, in the case of headers,
     #   additional ones that are added by CloudFront.
     #
-    # CloudFront sends a request when it can’t find an object in its cache
+    # CloudFront sends a request when it can't find an object in its cache
     # that matches the request. If you want to send values to the origin and
     # also include them in the cache key, use `CachePolicy`.
     #
@@ -8361,7 +8357,7 @@ module Aws::CloudFront
     #   items from the viewer request and, in the case of headers,
     #   additional ones that are added by CloudFront.
     #
-    # CloudFront sends a request when it can’t find an object in its cache
+    # CloudFront sends a request when it can't find an object in its cache
     # that matches the request. If you want to send values to the origin and
     # also include them in the cache key, use `CachePolicy`.
     #
@@ -8589,8 +8585,8 @@ module Aws::CloudFront
     # @!attribute [rw] enabled
     #   A flag that specifies whether Origin Shield is enabled.
     #
-    #   When it’s enabled, CloudFront routes all requests through Origin
-    #   Shield, which can help protect your origin. When it’s disabled,
+    #   When it's enabled, CloudFront routes all requests through Origin
+    #   Shield, which can help protect your origin. When it's disabled,
     #   CloudFront might send requests directly to your origin from multiple
     #   edge locations or regional edge caches.
     #   @return [Boolean]
@@ -8673,9 +8669,9 @@ module Aws::CloudFront
     #
     # The headers, cookies, and query strings that are included in the cache
     # key are automatically included in requests that CloudFront sends to
-    # the origin. CloudFront sends a request when it can’t find an object in
-    # its cache that matches the request’s cache key. If you want to send
-    # values to the origin but *not* include them in the cache key, use
+    # the origin. CloudFront sends a request when it can't find an object
+    # in its cache that matches the request's cache key. If you want to
+    # send values to the origin but *not* include them in the cache key, use
     # `OriginRequestPolicy`.
     #
     # @!attribute [rw] enable_accept_encoding_gzip
@@ -8688,7 +8684,7 @@ module Aws::CloudFront
     #   includes the `Accept-Encoding` header, then CloudFront does the
     #   following:
     #
-    #   * Normalizes the value of the viewer’s `Accept-Encoding` header
+    #   * Normalizes the value of the viewer's `Accept-Encoding` header
     #
     #   * Includes the normalized header in the cache key
     #
@@ -8707,10 +8703,10 @@ module Aws::CloudFront
     #
     #   If both of these fields are `false`, then CloudFront treats the
     #   `Accept-Encoding` header the same as any other HTTP header in the
-    #   viewer request. By default, it’s not included in the cache key and
-    #   it’s not included in origin requests. In this case, you can manually
-    #   add `Accept-Encoding` to the headers whitelist like any other HTTP
-    #   header.
+    #   viewer request. By default, it's not included in the cache key and
+    #   it's not included in origin requests. In this case, you can
+    #   manually add `Accept-Encoding` to the headers whitelist like any
+    #   other HTTP header.
     #
     #
     #
@@ -8727,7 +8723,7 @@ module Aws::CloudFront
     #   includes the `Accept-Encoding` header, then CloudFront does the
     #   following:
     #
-    #   * Normalizes the value of the viewer’s `Accept-Encoding` header
+    #   * Normalizes the value of the viewer's `Accept-Encoding` header
     #
     #   * Includes the normalized header in the cache key
     #
@@ -8746,10 +8742,10 @@ module Aws::CloudFront
     #
     #   If both of these fields are `false`, then CloudFront treats the
     #   `Accept-Encoding` header the same as any other HTTP header in the
-    #   viewer request. By default, it’s not included in the cache key and
-    #   it’s not included in origin requests. In this case, you can manually
-    #   add `Accept-Encoding` to the headers whitelist like any other HTTP
-    #   header.
+    #   viewer request. By default, it's not included in the cache key and
+    #   it's not included in origin requests. In this case, you can
+    #   manually add `Accept-Encoding` to the headers whitelist like any
+    #   other HTTP header.
     #
     #
     #
@@ -8890,7 +8886,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] caller_reference
     #   A string included in the request to help make sure that the request
-    #   can’t be replayed.
+    #   can't be replayed.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -9335,9 +9331,9 @@ module Aws::CloudFront
     #
     # After you create a response headers policy, you can use its ID to
     # attach it to one or more cache behaviors in a CloudFront distribution.
-    # When it’s attached to a cache behavior, CloudFront adds the headers in
-    # the policy to HTTP responses that it sends for requests that match the
-    # cache behavior.
+    # When it's attached to a cache behavior, CloudFront adds the headers
+    # in the policy to HTTP responses that it sends for requests that match
+    # the cache behavior.
     #
     # For more information, see [Adding HTTP headers to CloudFront
     # responses][1] in the *Amazon CloudFront Developer Guide*.
@@ -9361,7 +9357,7 @@ module Aws::CloudFront
     #   A response headers policy contains information about a set of HTTP
     #   response headers and their values. CloudFront adds the headers in
     #   the policy to HTTP responses that it sends for requests that match a
-    #   cache behavior that’s associated with the policy.
+    #   cache behavior that's associated with the policy.
     #   @return [Types::ResponseHeadersPolicyConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicy AWS API Documentation
@@ -9740,7 +9736,7 @@ module Aws::CloudFront
 
     # An HTTP response header name and its value. CloudFront includes this
     # header in HTTP responses that it sends for requests that match a cache
-    # behavior that’s associated with this response headers policy.
+    # behavior that's associated with this response headers policy.
     #
     # @!attribute [rw] header
     #   The HTTP response header name.
@@ -9768,7 +9764,7 @@ module Aws::CloudFront
 
     # A list of HTTP response header names and their values. CloudFront
     # includes these headers in HTTP responses that it sends for requests
-    # that match a cache behavior that’s associated with this response
+    # that match a cache behavior that's associated with this response
     # headers policy.
     #
     # @!attribute [rw] quantity
@@ -9789,7 +9785,7 @@ module Aws::CloudFront
     end
 
     # Determines whether CloudFront includes the `X-Frame-Options` HTTP
-    # response header and the header’s value.
+    # response header and the header's value.
     #
     # For more information about the `X-Frame-Options` HTTP response header,
     # see [X-Frame-Options][1] in the MDN Web Docs.
@@ -9872,7 +9868,7 @@ module Aws::CloudFront
     end
 
     # Determines whether CloudFront includes the `Referrer-Policy` HTTP
-    # response header and the header’s value.
+    # response header and the header's value.
     #
     # For more information about the `Referrer-Policy` HTTP response header,
     # see [Referrer-Policy][1] in the MDN Web Docs.
@@ -9931,7 +9927,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] xss_protection
     #   Determines whether CloudFront includes the `X-XSS-Protection` HTTP
-    #   response header and the header’s value.
+    #   response header and the header's value.
     #
     #   For more information about the `X-XSS-Protection` HTTP response
     #   header, see [X-XSS-Protection][1] in the MDN Web Docs.
@@ -9943,7 +9939,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] frame_options
     #   Determines whether CloudFront includes the `X-Frame-Options` HTTP
-    #   response header and the header’s value.
+    #   response header and the header's value.
     #
     #   For more information about the `X-Frame-Options` HTTP response
     #   header, see [X-Frame-Options][1] in the MDN Web Docs.
@@ -9955,7 +9951,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] referrer_policy
     #   Determines whether CloudFront includes the `Referrer-Policy` HTTP
-    #   response header and the header’s value.
+    #   response header and the header's value.
     #
     #   For more information about the `Referrer-Policy` HTTP response
     #   header, see [Referrer-Policy][1] in the MDN Web Docs.
@@ -9993,7 +9989,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] strict_transport_security
     #   Determines whether CloudFront includes the
-    #   `Strict-Transport-Security` HTTP response header and the header’s
+    #   `Strict-Transport-Security` HTTP response header and the header's
     #   value.
     #
     #   For more information about the `Strict-Transport-Security` HTTP
@@ -10065,7 +10061,7 @@ module Aws::CloudFront
     end
 
     # Determines whether CloudFront includes the `Strict-Transport-Security`
-    # HTTP response header and the header’s value.
+    # HTTP response header and the header's value.
     #
     # For more information about the `Strict-Transport-Security` HTTP
     # response header, see [Strict-Transport-Security][1] in the MDN Web
@@ -10130,7 +10126,7 @@ module Aws::CloudFront
     end
 
     # Determines whether CloudFront includes the `X-XSS-Protection` HTTP
-    # response header and the header’s value.
+    # response header and the header's value.
     #
     # For more information about the `X-XSS-Protection` HTTP response
     # header, see [X-XSS-Protection][1] in the MDN Web Docs.
@@ -10308,7 +10304,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] idle_ttl
     #   The amount of time after which you want sessions to cease if no
-    #   requests are received. Allowed values are 300–3600 seconds (5–60
+    #   requests are received. Allowed values are 300–3600 seconds (5–60
     #   minutes).
     #
     #   The value must be less than or equal to `MaximumTTL`.
@@ -11945,13 +11941,13 @@ module Aws::CloudFront
     #
     # @!attribute [rw] id
     #   The unique identifier for the cache policy that you are updating.
-    #   The identifier is returned in a cache behavior’s `CachePolicyId`
+    #   The identifier is returned in a cache behavior's `CachePolicyId`
     #   field in the response to `GetDistributionConfig`.
     #   @return [String]
     #
     # @!attribute [rw] if_match
     #   The version of the cache policy that you are updating. The version
-    #   is returned in the cache policy’s `ETag` field in the response to
+    #   is returned in the cache policy's `ETag` field in the response to
     #   `GetCachePolicyConfig`.
     #   @return [String]
     #
@@ -12148,7 +12144,7 @@ module Aws::CloudFront
     #   @return [Types::Distribution]
     #
     # @!attribute [rw] etag
-    #   The current version of the primary distribution (after it’s
+    #   The current version of the primary distribution (after it's
     #   updated).
     #   @return [String]
     #
@@ -12305,7 +12301,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] if_match
     #   The version of the key group that you are updating. The version is
-    #   the key group’s `ETag` value.
+    #   the key group's `ETag` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyGroupRequest AWS API Documentation
@@ -12383,14 +12379,14 @@ module Aws::CloudFront
     #
     # @!attribute [rw] id
     #   The unique identifier for the origin request policy that you are
-    #   updating. The identifier is returned in a cache behavior’s
+    #   updating. The identifier is returned in a cache behavior's
     #   `OriginRequestPolicyId` field in the response to
     #   `GetDistributionConfig`.
     #   @return [String]
     #
     # @!attribute [rw] if_match
     #   The version of the origin request policy that you are updating. The
-    #   version is returned in the origin request policy’s `ETag` field in
+    #   version is returned in the origin request policy's `ETag` field in
     #   the response to `GetOriginRequestPolicyConfig`.
     #   @return [String]
     #
@@ -12528,7 +12524,7 @@ module Aws::CloudFront
     # @!attribute [rw] if_match
     #   The version of the response headers policy that you are updating.
     #
-    #   The version is returned in the cache policy’s `ETag` field in the
+    #   The version is returned in the cache policy's `ETag` field in the
     #   response to `GetResponseHeadersPolicyConfig`.
     #   @return [String]
     #
@@ -12605,10 +12601,10 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that determines the distribution’s SSL/TLS
+    # A complex type that determines the distribution's SSL/TLS
     # configuration for communicating with viewers.
     #
-    # If the distribution doesn’t use `Aliases` (also known as alternate
+    # If the distribution doesn't use `Aliases` (also known as alternate
     # domain names or CNAMEs)—that is, if the distribution uses the
     # CloudFront domain name such as `d111111abcdef8.cloudfront.net`—set
     # `CloudFrontDefaultCertificate` to `true` and leave all other fields
@@ -12619,7 +12615,7 @@ module Aws::CloudFront
     #
     # * Which viewers the distribution accepts HTTPS connections from: only
     #   viewers that support [server name indication (SNI)][1]
-    #   (recommended), or all viewers including those that don’t support
+    #   (recommended), or all viewers including those that don't support
     #   SNI.
     #
     #   * To accept HTTPS connections from only viewers that support SNI,
@@ -12627,7 +12623,7 @@ module Aws::CloudFront
     #     browsers and clients support SNI.
     #
     #   * To accept HTTPS connections from all viewers, including those that
-    #     don’t support SNI, set `SSLSupportMethod` to `vip`. This is not
+    #     don't support SNI, set `SSLSupportMethod` to `vip`. This is not
     #     recommended, and results in additional monthly charges from
     #     CloudFront.
     #
@@ -12718,7 +12714,7 @@ module Aws::CloudFront
     #     recommended. Most browsers and clients support SNI.
     #
     #   * `vip` – The distribution accepts HTTPS connections from all
-    #     viewers including those that don’t support SNI. This is not
+    #     viewers including those that don't support SNI. This is not
     #     recommended, and results in additional monthly charges from
     #     CloudFront.
     #
@@ -12729,7 +12725,7 @@ module Aws::CloudFront
     #     Support Center][2].
     #
     #   If the distribution uses the CloudFront domain name such as
-    #   `d111111abcdef8.cloudfront.net`, don’t set a value for this field.
+    #   `d111111abcdef8.cloudfront.net`, don't set a value for this field.
     #
     #
     #
@@ -12758,7 +12754,7 @@ module Aws::CloudFront
     #
     #    </note>
     #
-    #   When you’re using SNI only (you set `SSLSupportMethod` to
+    #   When you're using SNI only (you set `SSLSupportMethod` to
     #   `sni-only`), you must specify `TLSv1` or higher.
     #
     #   If the distribution uses the CloudFront domain name such as

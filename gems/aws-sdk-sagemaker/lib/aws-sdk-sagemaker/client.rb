@@ -967,7 +967,8 @@ module Aws::SageMaker
     #   The domain ID.
     #
     # @option params [String] :user_profile_name
-    #   The user profile name.
+    #   The user profile name. If this value is not set, then `SpaceName` must
+    #   be set.
     #
     # @option params [required, String] :app_type
     #   The type of app.
@@ -993,7 +994,8 @@ module Aws::SageMaker
     #    </note>
     #
     # @option params [String] :space_name
-    #   The name of the space.
+    #   The name of the space. If this value is not set, then
+    #   `UserProfileName` must be set.
     #
     # @return [Types::CreateAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3286,6 +3288,7 @@ module Aws::SageMaker
     #       tuning_job_completion_criteria: {
     #         target_objective_metric_value: 1.0, # required
     #       },
+    #       random_seed: 1,
     #     },
     #     training_job_definition: {
     #       definition_name: "HyperParameterTrainingJobDefinitionName",
@@ -7821,7 +7824,8 @@ module Aws::SageMaker
     #   The domain ID.
     #
     # @option params [String] :user_profile_name
-    #   The user profile name.
+    #   The user profile name. If this value is not set, then `SpaceName` must
+    #   be set.
     #
     # @option params [required, String] :app_type
     #   The type of app.
@@ -7830,7 +7834,8 @@ module Aws::SageMaker
     #   The name of the app.
     #
     # @option params [String] :space_name
-    #   The name of the space.
+    #   The name of the space. If this value is not set, then
+    #   `UserProfileName` must be set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9266,7 +9271,8 @@ module Aws::SageMaker
     #   The domain ID.
     #
     # @option params [String] :user_profile_name
-    #   The user profile name.
+    #   The user profile name. If this value is not set, then `SpaceName` must
+    #   be set.
     #
     # @option params [required, String] :app_type
     #   The type of app.
@@ -10913,6 +10919,7 @@ module Aws::SageMaker
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
     #   resp.hyper_parameter_tuning_job_config.training_job_early_stopping_type #=> String, one of "Off", "Auto"
     #   resp.hyper_parameter_tuning_job_config.tuning_job_completion_criteria.target_objective_metric_value #=> Float
+    #   resp.hyper_parameter_tuning_job_config.random_seed #=> Integer
     #   resp.training_job_definition.definition_name #=> String
     #   resp.training_job_definition.tuning_objective.type #=> String, one of "Maximize", "Minimize"
     #   resp.training_job_definition.tuning_objective.metric_name #=> String
@@ -14165,10 +14172,12 @@ module Aws::SageMaker
     #   A parameter to search for the domain ID.
     #
     # @option params [String] :user_profile_name_equals
-    #   A parameter to search by user profile name.
+    #   A parameter to search by user profile name. If `SpaceNameEquals` is
+    #   set, then this value cannot be set.
     #
     # @option params [String] :space_name_equals
-    #   A parameter to search by space name.
+    #   A parameter to search by space name. If `UserProfileNameEquals` is
+    #   set, then this value cannot be set.
     #
     # @return [Types::ListAppsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -22463,7 +22472,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

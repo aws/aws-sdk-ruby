@@ -545,12 +545,14 @@ module Aws::GuardDuty
     #   want to create a filter for.
     #
     # @option params [required, String] :name
-    #   The name of the filter. Minimum length of 3. Maximum length of 64.
-    #   Valid characters include alphanumeric characters, dot (.), underscore
-    #   (\_), and dash (-). Spaces are not allowed.
+    #   The name of the filter. Valid characters include period (.),
+    #   underscore (\_), dash (-), and alphanumeric characters. A whitespace
+    #   is considered to be an invalid character.
     #
     # @option params [String] :description
-    #   The description of the filter.
+    #   The description of the filter. Valid special characters include period
+    #   (.), underscore (\_), dash (-), and whitespace. The new line character
+    #   is considered to be an invalid input for description.
     #
     # @option params [String] :action
     #   Specifies the action that is to be applied to the findings that match
@@ -3333,7 +3335,9 @@ module Aws::GuardDuty
     #   The name of the filter.
     #
     # @option params [String] :description
-    #   The description of the filter.
+    #   The description of the filter. Valid special characters include period
+    #   (.), underscore (\_), dash (-), and whitespace. The new line character
+    #   is considered to be an invalid input for description.
     #
     # @option params [String] :action
     #   Specifies the action that is to be applied to the findings that match
@@ -3711,7 +3715,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

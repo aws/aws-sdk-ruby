@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2022-12-16)
+------------------
+
+* Feature - This release updates the ListConnectorEntities API action so that it returns paginated responses that customers can retrieve with next tokens.
+
 1.32.0 (2022-11-22)
 ------------------
 

@@ -1323,7 +1323,7 @@ module Aws::DataSync
     #   resp = client.create_location_s3({
     #     subdirectory: "S3Subdirectory",
     #     s3_bucket_arn: "S3BucketArn", # required
-    #     s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #     s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_INSTANT_RETRIEVAL
     #     s3_config: { # required
     #       bucket_access_role_arn: "IamRoleArn", # required
     #     },
@@ -1455,21 +1455,6 @@ module Aws::DataSync
     # preferences for how and when you want to transfer your data (such as
     # bandwidth limits, scheduling, among other options).
     #
-    # When you create a task that transfers data between Amazon Web Services
-    # services in different Amazon Web Services Regions, one of your
-    # locations must reside in the Region where you're using DataSync.
-    #
-    # For more information, see the following topics:
-    #
-    # * [Working with DataSync locations][1]
-    #
-    # * [Configure DataSync task settings][2]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html
-    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html
-    #
     # @option params [required, String] :source_location_arn
     #   The Amazon Resource Name (ARN) of the source location for the task.
     #
@@ -1486,25 +1471,25 @@ module Aws::DataSync
     #   identify the task in the console.
     #
     # @option params [Types::Options] :options
-    #   The set of configuration options that control the behavior of a single
-    #   execution of the task that occurs when you call `StartTaskExecution`.
-    #   You can configure these options to preserve metadata such as user ID
-    #   (UID) and group ID (GID), file permissions, data integrity
-    #   verification, and so on.
+    #   Specifies the configuration options for a task. Some options include
+    #   preserving file or object metadata and verifying data integrity.
     #
-    #   For each individual task execution, you can override these options by
-    #   specifying the `OverrideOptions` before starting the task execution.
-    #   For more information, see the [StartTaskExecution][1] operation.
+    #   You can also override these options before starting an individual run
+    #   of a task (also known as a *task execution*). For more information,
+    #   see [StartTaskExecution][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   A list of filter rules that determines which files to exclude from a
-    #   task. The list should contain a single filter string that consists of
-    #   the patterns to exclude. The patterns are delimited by "\|" (that
-    #   is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that exclude specific data during
+    #   your transfer. For more information and examples, see [Filtering data
+    #   transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
     # @option params [Types::TaskSchedule] :schedule
     #   Specifies a schedule used to periodically transfer files from a source
@@ -1516,14 +1501,20 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @option params [Array<Types::TagListEntry>] :tags
-    #   The key-value pair that represents the tag that you want to add to the
-    #   resource. The value can be an empty string.
+    #   Specifies the tags that you want to apply to the Amazon Resource Name
+    #   (ARN) representing the task.
+    #
+    #   *Tags* are key-value pairs that help you manage, filter, and search
+    #   for your DataSync resources.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern contains a single filter string that
-    #   consists of the patterns to include. The patterns are delimited by
-    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that include specific data during
+    #   your transfer. For more information and examples, see [Filtering data
+    #   transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
     # @return [Types::CreateTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1639,10 +1630,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Deletes a task.
+    # Deletes an DataSync task.
     #
     # @option params [required, String] :task_arn
-    #   The Amazon Resource Name (ARN) of the task to delete.
+    #   Specifies the Amazon Resource Name (ARN) of the task that you want to
+    #   delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2095,7 +2087,7 @@ module Aws::DataSync
     #
     #   resp.location_arn #=> String
     #   resp.location_uri #=> String
-    #   resp.s3_storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
+    #   resp.s3_storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_INSTANT_RETRIEVAL"
     #   resp.s3_config.bucket_access_role_arn #=> String
     #   resp.agent_arns #=> Array
     #   resp.agent_arns[0] #=> String
@@ -2416,17 +2408,18 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns all the tags associated with a specified resource.
+    # Returns all the tags associated with an Amazon Web Services resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource whose tags to list.
+    #   Specifies the Amazon Resource Name (ARN) of the resource that you want
+    #   tag information on.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of locations to return.
+    #   Specifies how many results that you want in the response.
     #
     # @option params [String] :next_token
-    #   An opaque string that indicates the position at which to begin the
-    #   next list of locations.
+    #   Specifies an opaque string that indicates the position to begin the
+    #   next list of results in the response.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2556,46 +2549,48 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Starts a specific invocation of a task. A `TaskExecution` value
-    # represents an individual run of a task. Each task can have at most one
-    # `TaskExecution` at a time.
+    # Starts an DataSync task. For each task, you can only run one task
+    # execution at a time.
     #
-    # `TaskExecution` has the following transition phases: INITIALIZING \|
-    # PREPARING \| TRANSFERRING \| VERIFYING \| SUCCESS/FAILURE.
+    # There are several phases to a task execution. For more information,
+    # see [Task execution statuses][1].
     #
-    # For detailed information, see the Task Execution section in the
-    # Components and Terminology topic in the *DataSync User Guide*.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses
     #
     # @option params [required, String] :task_arn
-    #   The Amazon Resource Name (ARN) of the task to start.
+    #   Specifies the Amazon Resource Name (ARN) of the task that you want to
+    #   start.
     #
     # @option params [Types::Options] :override_options
-    #   Represents the options that are available to control the behavior of a
-    #   [StartTaskExecution][1] operation. Behavior includes preserving
-    #   metadata such as user ID (UID), group ID (GID), and file permissions,
-    #   and also overwriting files in the destination, data integrity
-    #   verification, and so on.
+    #   Configures your DataSync task settings. These options include how
+    #   DataSync handles files, objects, and their associated metadata. You
+    #   also can specify how DataSync verifies data integrity, set bandwidth
+    #   limits for your task, among other options.
     #
-    #   A task has a set of default options associated with it. If you don't
-    #   specify an option in [StartTaskExecution][1], the default value is
-    #   used. You can override the defaults options on each task execution by
-    #   specifying an overriding `Options` value to [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Each task setting has a default value. Unless you need to, you don't
+    #   have to configure any of these `Options` before starting your task.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern should contain a single filter string that
-    #   consists of the patterns to include. The patterns are delimited by
-    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that determines which files to
+    #   include when running a task. The pattern should contain a single
+    #   filter string that consists of the patterns to include. The patterns
+    #   are delimited by "\|" (that is, a pipe), for example,
+    #   `"/folder1|/folder2"`.
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   A list of filter rules that determines which files to exclude from a
-    #   task. The list contains a single filter string that consists of the
-    #   patterns to exclude. The patterns are delimited by "\|" (that is, a
-    #   pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that determines which files to
+    #   exclude from a task. The list contains a single filter string that
+    #   consists of the patterns to exclude. The patterns are delimited by
+    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   Specifies the tags that you want to apply to the Amazon Resource Name
+    #   (ARN) representing the task execution.
+    #
+    #   *Tags* are key-value pairs that help you manage, filter, and search
+    #   for your DataSync resources.
     #
     # @return [Types::StartTaskExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2634,6 +2629,12 @@ module Aws::DataSync
     #         value: "FilterValue",
     #       },
     #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2649,13 +2650,18 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Applies a key-value pair to an Amazon Web Services resource.
+    # Applies a *tag* to an Amazon Web Services resource. Tags are key-value
+    # pairs that can help you manage, filter, and search for your resources.
+    #
+    # These include DataSync resources, such as locations, tasks, and task
+    # executions.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to apply the tag to.
+    #   Specifies the Amazon Resource Name (ARN) of the resource to apply the
+    #   tag to.
     #
     # @option params [required, Array<Types::TagListEntry>] :tags
-    #   The tags to apply.
+    #   Specifies the tags that you want to apply to the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2680,13 +2686,14 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Removes a tag from an Amazon Web Services resource.
+    # Removes tags from an Amazon Web Services resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to remove the tag from.
+    #   Specifies the Amazon Resource Name (ARN) of the resource to remove the
+    #   tags from.
     #
     # @option params [required, Array<String>] :keys
-    #   The keys in the key-value pair in the tag to remove.
+    #   Specifies the keys in the tags that you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3064,26 +3071,22 @@ module Aws::DataSync
     #   update.
     #
     # @option params [Types::Options] :options
-    #   Represents the options that are available to control the behavior of a
-    #   [StartTaskExecution][1] operation. Behavior includes preserving
-    #   metadata such as user ID (UID), group ID (GID), and file permissions,
-    #   and also overwriting files in the destination, data integrity
-    #   verification, and so on.
+    #   Configures your DataSync task settings. These options include how
+    #   DataSync handles files, objects, and their associated metadata. You
+    #   also can specify how DataSync verifies data integrity, set bandwidth
+    #   limits for your task, among other options.
     #
-    #   A task has a set of default options associated with it. If you don't
-    #   specify an option in [StartTaskExecution][1], the default value is
-    #   used. You can override the defaults options on each task execution by
-    #   specifying an overriding `Options` value to [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Each task setting has a default value. Unless you need to, you don't
+    #   have to configure any of these `Options` before starting your task.
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   A list of filter rules that determines which files to exclude from a
-    #   task. The list should contain a single filter string that consists of
-    #   the patterns to exclude. The patterns are delimited by "\|" (that
-    #   is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that exclude specific data during
+    #   your transfer. For more information and examples, see [Filtering data
+    #   transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
     # @option params [Types::TaskSchedule] :schedule
     #   Specifies a schedule used to periodically transfer files from a source
@@ -3105,10 +3108,13 @@ module Aws::DataSync
     #   CloudWatch log group.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern contains a single filter string that
-    #   consists of the patterns to include. The patterns are delimited by
-    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that include specific data during
+    #   your transfer. For more information and examples, see [Filtering data
+    #   transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3181,20 +3187,13 @@ module Aws::DataSync
     #   being updated.
     #
     # @option params [required, Types::Options] :options
-    #   Represents the options that are available to control the behavior of a
-    #   [StartTaskExecution][1] operation. Behavior includes preserving
-    #   metadata such as user ID (UID), group ID (GID), and file permissions,
-    #   and also overwriting files in the destination, data integrity
-    #   verification, and so on.
+    #   Configures your DataSync task settings. These options include how
+    #   DataSync handles files, objects, and their associated metadata. You
+    #   also can specify how DataSync verifies data integrity, set bandwidth
+    #   limits for your task, among other options.
     #
-    #   A task has a set of default options associated with it. If you don't
-    #   specify an option in [StartTaskExecution][1], the default value is
-    #   used. You can override the defaults options on each task execution by
-    #   specifying an overriding `Options` value to [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Each task setting has a default value. Unless you need to, you don't
+    #   have to configure any of these `Options` before starting your task.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3243,7 +3242,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

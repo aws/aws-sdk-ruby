@@ -689,13 +689,15 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the filter. Minimum length of 3. Maximum length of 64.
-    #   Valid characters include alphanumeric characters, dot (.),
-    #   underscore (\_), and dash (-). Spaces are not allowed.
+    #   The name of the filter. Valid characters include period (.),
+    #   underscore (\_), dash (-), and alphanumeric characters. A whitespace
+    #   is considered to be an invalid character.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the filter.
+    #   The description of the filter. Valid special characters include
+    #   period (.), underscore (\_), dash (-), and whitespace. The new line
+    #   character is considered to be an invalid input for description.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -4762,7 +4764,7 @@ module Aws::GuardDuty
     #   @return [Time]
     #
     # @!attribute [rw] trigger_details
-    #   Represents the reason the scan was triggered.
+    #   Specifies the reason why the scan was initiated.
     #   @return [Types::TriggerDetails]
     #
     # @!attribute [rw] resource_details
@@ -5506,7 +5508,9 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the filter.
+    #   The description of the filter. Valid special characters include
+    #   period (.), underscore (\_), dash (-), and whitespace. The new line
+    #   character is considered to be an invalid input for description.
     #   @return [String]
     #
     # @!attribute [rw] action

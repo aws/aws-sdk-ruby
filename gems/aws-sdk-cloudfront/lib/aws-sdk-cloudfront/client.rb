@@ -371,7 +371,7 @@ module Aws::CloudFront
     # Associates an alias (also known as a CNAME or an alternate domain
     # name) with a CloudFront distribution.
     #
-    # With this operation you can move an alias that’s already in use on a
+    # With this operation you can move an alias that's already in use on a
     # CloudFront distribution to a different distribution in one step. This
     # prevents the downtime that could occur if you first remove the alias
     # from one distribution and then separately add the alias to another
@@ -389,7 +389,7 @@ module Aws::CloudFront
     # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
     #
     # @option params [required, String] :target_distribution_id
-    #   The ID of the distribution that you’re associating the alias with.
+    #   The ID of the distribution that you're associating the alias with.
     #
     # @option params [required, String] :alias
     #   The alias (also known as a CNAME) to add to the target distribution.
@@ -418,7 +418,7 @@ module Aws::CloudFront
     # continuous deployment workflow.
     #
     # After you create a staging distribution, you can use
-    # `UpdateDistribution` to modify the staging distribution’s
+    # `UpdateDistribution` to modify the staging distribution's
     # configuration. Then you can use `CreateContinuousDeploymentPolicy` to
     # incrementally move traffic to the staging distribution.
     #
@@ -657,7 +657,7 @@ module Aws::CloudFront
     # Creates a cache policy.
     #
     # After you create a cache policy, you can attach it to one or more
-    # cache behaviors. When it’s attached to a cache behavior, the cache
+    # cache behaviors. When it's attached to a cache behavior, the cache
     # policy determines the following:
     #
     # * The values that CloudFront includes in the *cache key*. These values
@@ -670,9 +670,9 @@ module Aws::CloudFront
     #
     # The headers, cookies, and query strings that are included in the cache
     # key are automatically included in requests that CloudFront sends to
-    # the origin. CloudFront sends a request when it can’t find an object in
-    # its cache that matches the request’s cache key. If you want to send
-    # values to the origin but *not* include them in the cache key, use
+    # the origin. CloudFront sends a request when it can't find an object
+    # in its cache that matches the request's cache key. If you want to
+    # send values to the origin but *not* include them in the cache key, use
     # `OriginRequestPolicy`.
     #
     # For more information about cache policies, see [Controlling the cache
@@ -815,12 +815,12 @@ module Aws::CloudFront
     #
     # To use a continuous deployment policy, first use `CopyDistribution` to
     # create a staging distribution, then use `UpdateDistribution` to modify
-    # the staging distribution’s configuration.
+    # the staging distribution's configuration.
     #
     # After you create and update a staging distribution, you can use a
     # continuous deployment policy to incrementally move traffic to the
     # staging distribution. This workflow enables you to test changes to a
-    # distribution’s configuration before moving all of your domain’s
+    # distribution's configuration before moving all of your domain's
     # production traffic to the new configuration.
     #
     # @option params [required, Types::ContinuousDeploymentPolicyConfig] :continuous_deployment_policy_config
@@ -1972,21 +1972,22 @@ module Aws::CloudFront
     # configuration information about the function. The response contains an
     # Amazon Resource Name (ARN) that uniquely identifies the function.
     #
-    # When you create a function, it’s in the `DEVELOPMENT` stage. In this
+    # When you create a function, it's in the `DEVELOPMENT` stage. In this
     # stage, you can test the function with `TestFunction`, and update it
     # with `UpdateFunction`.
     #
-    # When you’re ready to use your function with a CloudFront distribution,
-    # use `PublishFunction` to copy the function from the `DEVELOPMENT`
-    # stage to `LIVE`. When it’s live, you can attach the function to a
-    # distribution’s cache behavior, using the function’s ARN.
+    # When you're ready to use your function with a CloudFront
+    # distribution, use `PublishFunction` to copy the function from the
+    # `DEVELOPMENT` stage to `LIVE`. When it's live, you can attach the
+    # function to a distribution's cache behavior, using the function's
+    # ARN.
     #
     # @option params [required, String] :name
     #   A name to identify the function.
     #
     # @option params [required, Types::FunctionConfig] :function_config
     #   Configuration information about the function, including an optional
-    #   comment and the function’s runtime.
+    #   comment and the function's runtime.
     #
     # @option params [required, String, StringIO, File] :function_code
     #   The function code. For more information about writing a CloudFront
@@ -2246,7 +2247,7 @@ module Aws::CloudFront
     # Creates an origin request policy.
     #
     # After you create an origin request policy, you can attach it to one or
-    # more cache behaviors. When it’s attached to a cache behavior, the
+    # more cache behaviors. When it's attached to a cache behavior, the
     # origin request policy determines the values that CloudFront includes
     # in requests that it sends to the origin. Each request that CloudFront
     # sends to the origin includes the following:
@@ -2262,7 +2263,7 @@ module Aws::CloudFront
     #   items from the viewer request and, in the case of headers,
     #   additional ones that are added by CloudFront.
     #
-    # CloudFront sends a request when it can’t find a valid object in its
+    # CloudFront sends a request when it can't find a valid object in its
     # cache that matches the request. If you want to send values to the
     # origin and also include them in the cache key, use `CachePolicy`.
     #
@@ -2477,9 +2478,9 @@ module Aws::CloudFront
     #
     # After you create a response headers policy, you can use its ID to
     # attach it to one or more cache behaviors in a CloudFront distribution.
-    # When it’s attached to a cache behavior, CloudFront adds the headers in
-    # the policy to HTTP responses that it sends for requests that match the
-    # cache behavior.
+    # When it's attached to a cache behavior, CloudFront adds the headers
+    # in the policy to HTTP responses that it sends for requests that match
+    # the cache behavior.
     #
     # @option params [required, Types::ResponseHeadersPolicyConfig] :response_headers_policy_config
     #   Contains metadata about the response headers policy, and a set of
@@ -2809,12 +2810,12 @@ module Aws::CloudFront
 
     # Deletes a cache policy.
     #
-    # You cannot delete a cache policy if it’s attached to a cache behavior.
-    # First update your distributions to remove the cache policy from all
-    # cache behaviors, then delete the cache policy.
+    # You cannot delete a cache policy if it's attached to a cache
+    # behavior. First update your distributions to remove the cache policy
+    # from all cache behaviors, then delete the cache policy.
     #
-    # To delete a cache policy, you must provide the policy’s identifier and
-    # version. To get these values, you can use `ListCachePolicies` or
+    # To delete a cache policy, you must provide the policy's identifier
+    # and version. To get these values, you can use `ListCachePolicies` or
     # `GetCachePolicy`.
     #
     # @option params [required, String] :id
@@ -2823,7 +2824,7 @@ module Aws::CloudFront
     #
     # @option params [String] :if_match
     #   The version of the cache policy that you are deleting. The version is
-    #   the cache policy’s `ETag` value, which you can get using
+    #   the cache policy's `ETag` value, which you can get using
     #   `ListCachePolicies`, `GetCachePolicy`, or `GetCachePolicyConfig`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2873,7 +2874,7 @@ module Aws::CloudFront
 
     # Deletes a continuous deployment policy.
     #
-    # You cannot delete a continuous deployment policy that’s attached to a
+    # You cannot delete a continuous deployment policy that's attached to a
     # primary distribution. First update your distribution to remove the
     # continuous deployment policy, then you can delete the policy.
     #
@@ -2986,13 +2987,13 @@ module Aws::CloudFront
 
     # Deletes a CloudFront function.
     #
-    # You cannot delete a function if it’s associated with a cache behavior.
-    # First, update your distributions to remove the function association
-    # from all cache behaviors, then delete the function.
+    # You cannot delete a function if it's associated with a cache
+    # behavior. First, update your distributions to remove the function
+    # association from all cache behaviors, then delete the function.
     #
-    # To delete a function, you must provide the function’s name and version
-    # (`ETag` value). To get these values, you can use `ListFunctions` and
-    # `DescribeFunction`.
+    # To delete a function, you must provide the function's name and
+    # version (`ETag` value). To get these values, you can use
+    # `ListFunctions` and `DescribeFunction`.
     #
     # @option params [required, String] :name
     #   The name of the function that you are deleting.
@@ -3025,8 +3026,8 @@ module Aws::CloudFront
     # First update your distributions to remove the key group from all cache
     # behaviors, then delete the key group.
     #
-    # To delete a key group, you must provide the key group’s identifier and
-    # version. To get these values, use `ListKeyGroups` followed by
+    # To delete a key group, you must provide the key group's identifier
+    # and version. To get these values, use `ListKeyGroups` followed by
     # `GetKeyGroup` or `GetKeyGroupConfig`.
     #
     # @option params [required, String] :id
@@ -3035,7 +3036,7 @@ module Aws::CloudFront
     #
     # @option params [String] :if_match
     #   The version of the key group that you are deleting. The version is the
-    #   key group’s `ETag` value. To get the `ETag`, use `GetKeyGroup` or
+    #   key group's `ETag` value. To get the `ETag`, use `GetKeyGroup` or
     #   `GetKeyGroupConfig`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3113,12 +3114,12 @@ module Aws::CloudFront
 
     # Deletes an origin request policy.
     #
-    # You cannot delete an origin request policy if it’s attached to any
+    # You cannot delete an origin request policy if it's attached to any
     # cache behaviors. First update your distributions to remove the origin
     # request policy from all cache behaviors, then delete the origin
     # request policy.
     #
-    # To delete an origin request policy, you must provide the policy’s
+    # To delete an origin request policy, you must provide the policy's
     # identifier and version. To get the identifier, you can use
     # `ListOriginRequestPolicies` or `GetOriginRequestPolicy`.
     #
@@ -3129,8 +3130,8 @@ module Aws::CloudFront
     #
     # @option params [String] :if_match
     #   The version of the origin request policy that you are deleting. The
-    #   version is the origin request policy’s `ETag` value, which you can get
-    #   using `ListOriginRequestPolicies`, `GetOriginRequestPolicy`, or
+    #   version is the origin request policy's `ETag` value, which you can
+    #   get using `ListOriginRequestPolicies`, `GetOriginRequestPolicy`, or
     #   `GetOriginRequestPolicyConfig`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3180,13 +3181,13 @@ module Aws::CloudFront
 
     # Deletes a real-time log configuration.
     #
-    # You cannot delete a real-time log configuration if it’s attached to a
+    # You cannot delete a real-time log configuration if it's attached to a
     # cache behavior. First update your distributions to remove the
     # real-time log configuration from all cache behaviors, then delete the
     # real-time log configuration.
     #
     # To delete a real-time log configuration, you can provide the
-    # configuration’s name or its Amazon Resource Name (ARN). You must
+    # configuration's name or its Amazon Resource Name (ARN). You must
     # provide at least one. If you provide both, CloudFront uses the name to
     # identify the real-time log configuration to delete.
     #
@@ -3217,12 +3218,12 @@ module Aws::CloudFront
 
     # Deletes a response headers policy.
     #
-    # You cannot delete a response headers policy if it’s attached to a
+    # You cannot delete a response headers policy if it's attached to a
     # cache behavior. First update your distributions to remove the response
     # headers policy from all cache behaviors, then delete the response
     # headers policy.
     #
-    # To delete a response headers policy, you must provide the policy’s
+    # To delete a response headers policy, you must provide the policy's
     # identifier and version. To get these values, you can use
     # `ListResponseHeadersPolicies` or `GetResponseHeadersPolicy`.
     #
@@ -3234,7 +3235,7 @@ module Aws::CloudFront
     # @option params [String] :if_match
     #   The version of the response headers policy that you are deleting.
     #
-    #   The version is the response headers policy’s `ETag` value, which you
+    #   The version is the response headers policy's `ETag` value, which you
     #   can get using `ListResponseHeadersPolicies`,
     #   `GetResponseHeadersPolicy`, or `GetResponseHeadersPolicyConfig`.
     #
@@ -3327,18 +3328,18 @@ module Aws::CloudFront
     end
 
     # Gets configuration information and metadata about a CloudFront
-    # function, but not the function’s code. To get a function’s code, use
+    # function, but not the function's code. To get a function's code, use
     # `GetFunction`.
     #
     # To get configuration information and metadata about a function, you
-    # must provide the function’s name and stage. To get these values, you
+    # must provide the function's name and stage. To get these values, you
     # can use `ListFunctions`.
     #
     # @option params [required, String] :name
     #   The name of the function that you are getting information about.
     #
     # @option params [String] :stage
-    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #   The function's stage, either `DEVELOPMENT` or `LIVE`.
     #
     # @return [Types::DescribeFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3375,22 +3376,22 @@ module Aws::CloudFront
 
     # Gets a cache policy, including the following metadata:
     #
-    # * The policy’s identifier.
+    # * The policy's identifier.
     #
     # * The date and time when the policy was last modified.
     #
-    # To get a cache policy, you must provide the policy’s identifier. If
-    # the cache policy is attached to a distribution’s cache behavior, you
-    # can get the policy’s identifier using `ListDistributions` or
+    # To get a cache policy, you must provide the policy's identifier. If
+    # the cache policy is attached to a distribution's cache behavior, you
+    # can get the policy's identifier using `ListDistributions` or
     # `GetDistribution`. If the cache policy is not attached to a cache
     # behavior, you can get the identifier using `ListCachePolicies`.
     #
     # @option params [required, String] :id
     #   The unique identifier for the cache policy. If the cache policy is
-    #   attached to a distribution’s cache behavior, you can get the policy’s
-    #   identifier using `ListDistributions` or `GetDistribution`. If the
-    #   cache policy is not attached to a cache behavior, you can get the
-    #   identifier using `ListCachePolicies`.
+    #   attached to a distribution's cache behavior, you can get the
+    #   policy's identifier using `ListDistributions` or `GetDistribution`.
+    #   If the cache policy is not attached to a cache behavior, you can get
+    #   the identifier using `ListCachePolicies`.
     #
     # @return [Types::GetCachePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3439,19 +3440,19 @@ module Aws::CloudFront
 
     # Gets a cache policy configuration.
     #
-    # To get a cache policy configuration, you must provide the policy’s
-    # identifier. If the cache policy is attached to a distribution’s cache
-    # behavior, you can get the policy’s identifier using
+    # To get a cache policy configuration, you must provide the policy's
+    # identifier. If the cache policy is attached to a distribution's cache
+    # behavior, you can get the policy's identifier using
     # `ListDistributions` or `GetDistribution`. If the cache policy is not
     # attached to a cache behavior, you can get the identifier using
     # `ListCachePolicies`.
     #
     # @option params [required, String] :id
     #   The unique identifier for the cache policy. If the cache policy is
-    #   attached to a distribution’s cache behavior, you can get the policy’s
-    #   identifier using `ListDistributions` or `GetDistribution`. If the
-    #   cache policy is not attached to a cache behavior, you can get the
-    #   identifier using `ListCachePolicies`.
+    #   attached to a distribution's cache behavior, you can get the
+    #   policy's identifier using `ListDistributions` or `GetDistribution`.
+    #   If the cache policy is not attached to a cache behavior, you can get
+    #   the identifier using `ListCachePolicies`.
     #
     # @return [Types::GetCachePolicyConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3560,7 +3561,7 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a continuous deployment policy, including metadata (the policy’s
+    # Gets a continuous deployment policy, including metadata (the policy's
     # identifier and the date and time when the policy was last modified).
     #
     # @option params [required, String] :id
@@ -4225,14 +4226,14 @@ module Aws::CloudFront
     # Gets the code of a CloudFront function. To get configuration
     # information and metadata about a function, use `DescribeFunction`.
     #
-    # To get a function’s code, you must provide the function’s name and
+    # To get a function's code, you must provide the function's name and
     # stage. To get these values, you can use `ListFunctions`.
     #
     # @option params [required, String] :name
     #   The name of the function whose code you are getting.
     #
     # @option params [String] :stage
-    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #   The function's stage, either `DEVELOPMENT` or `LIVE`.
     #
     # @return [Types::GetFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4309,9 +4310,9 @@ module Aws::CloudFront
     # Gets a key group, including the date and time when the key group was
     # last modified.
     #
-    # To get a key group, you must provide the key group’s identifier. If
-    # the key group is referenced in a distribution’s cache behavior, you
-    # can get the key group’s identifier using `ListDistributions` or
+    # To get a key group, you must provide the key group's identifier. If
+    # the key group is referenced in a distribution's cache behavior, you
+    # can get the key group's identifier using `ListDistributions` or
     # `GetDistribution`. If the key group is not referenced in a cache
     # behavior, you can get the identifier using `ListKeyGroups`.
     #
@@ -4351,9 +4352,9 @@ module Aws::CloudFront
 
     # Gets a key group configuration.
     #
-    # To get a key group configuration, you must provide the key group’s
-    # identifier. If the key group is referenced in a distribution’s cache
-    # behavior, you can get the key group’s identifier using
+    # To get a key group configuration, you must provide the key group's
+    # identifier. If the key group is referenced in a distribution's cache
+    # behavior, you can get the key group's identifier using
     # `ListDistributions` or `GetDistribution`. If the key group is not
     # referenced in a cache behavior, you can get the identifier using
     # `ListKeyGroups`.
@@ -4492,21 +4493,21 @@ module Aws::CloudFront
 
     # Gets an origin request policy, including the following metadata:
     #
-    # * The policy’s identifier.
+    # * The policy's identifier.
     #
     # * The date and time when the policy was last modified.
     #
-    # To get an origin request policy, you must provide the policy’s
+    # To get an origin request policy, you must provide the policy's
     # identifier. If the origin request policy is attached to a
-    # distribution’s cache behavior, you can get the policy’s identifier
+    # distribution's cache behavior, you can get the policy's identifier
     # using `ListDistributions` or `GetDistribution`. If the origin request
     # policy is not attached to a cache behavior, you can get the identifier
     # using `ListOriginRequestPolicies`.
     #
     # @option params [required, String] :id
     #   The unique identifier for the origin request policy. If the origin
-    #   request policy is attached to a distribution’s cache behavior, you can
-    #   get the policy’s identifier using `ListDistributions` or
+    #   request policy is attached to a distribution's cache behavior, you
+    #   can get the policy's identifier using `ListDistributions` or
     #   `GetDistribution`. If the origin request policy is not attached to a
     #   cache behavior, you can get the identifier using
     #   `ListOriginRequestPolicies`.
@@ -4554,16 +4555,16 @@ module Aws::CloudFront
     # Gets an origin request policy configuration.
     #
     # To get an origin request policy configuration, you must provide the
-    # policy’s identifier. If the origin request policy is attached to a
-    # distribution’s cache behavior, you can get the policy’s identifier
+    # policy's identifier. If the origin request policy is attached to a
+    # distribution's cache behavior, you can get the policy's identifier
     # using `ListDistributions` or `GetDistribution`. If the origin request
     # policy is not attached to a cache behavior, you can get the identifier
     # using `ListOriginRequestPolicies`.
     #
     # @option params [required, String] :id
     #   The unique identifier for the origin request policy. If the origin
-    #   request policy is attached to a distribution’s cache behavior, you can
-    #   get the policy’s identifier using `ListDistributions` or
+    #   request policy is attached to a distribution's cache behavior, you
+    #   can get the policy's identifier using `ListDistributions` or
     #   `GetDistribution`. If the origin request policy is not attached to a
     #   cache behavior, you can get the identifier using
     #   `ListOriginRequestPolicies`.
@@ -4677,7 +4678,7 @@ module Aws::CloudFront
     # Gets a real-time log configuration.
     #
     # To get a real-time log configuration, you can provide the
-    # configuration’s name or its Amazon Resource Name (ARN). You must
+    # configuration's name or its Amazon Resource Name (ARN). You must
     # provide at least one. If you provide both, CloudFront uses the name to
     # identify the real-time log configuration to get.
     #
@@ -4720,12 +4721,12 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a response headers policy, including metadata (the policy’s
+    # Gets a response headers policy, including metadata (the policy's
     # identifier and the date and time when the policy was last modified).
     #
-    # To get a response headers policy, you must provide the policy’s
+    # To get a response headers policy, you must provide the policy's
     # identifier. If the response headers policy is attached to a
-    # distribution’s cache behavior, you can get the policy’s identifier
+    # distribution's cache behavior, you can get the policy's identifier
     # using `ListDistributions` or `GetDistribution`. If the response
     # headers policy is not attached to a cache behavior, you can get the
     # identifier using `ListResponseHeadersPolicies`.
@@ -4733,8 +4734,8 @@ module Aws::CloudFront
     # @option params [required, String] :id
     #   The identifier for the response headers policy.
     #
-    #   If the response headers policy is attached to a distribution’s cache
-    #   behavior, you can get the policy’s identifier using
+    #   If the response headers policy is attached to a distribution's cache
+    #   behavior, you can get the policy's identifier using
     #   `ListDistributions` or `GetDistribution`. If the response headers
     #   policy is not attached to a cache behavior, you can get the identifier
     #   using `ListResponseHeadersPolicies`.
@@ -4807,8 +4808,8 @@ module Aws::CloudFront
     # Gets a response headers policy configuration.
     #
     # To get a response headers policy configuration, you must provide the
-    # policy’s identifier. If the response headers policy is attached to a
-    # distribution’s cache behavior, you can get the policy’s identifier
+    # policy's identifier. If the response headers policy is attached to a
+    # distribution's cache behavior, you can get the policy's identifier
     # using `ListDistributions` or `GetDistribution`. If the response
     # headers policy is not attached to a cache behavior, you can get the
     # identifier using `ListResponseHeadersPolicies`.
@@ -4816,8 +4817,8 @@ module Aws::CloudFront
     # @option params [required, String] :id
     #   The identifier for the response headers policy.
     #
-    #   If the response headers policy is attached to a distribution’s cache
-    #   behavior, you can get the policy’s identifier using
+    #   If the response headers policy is attached to a distribution's cache
+    #   behavior, you can get the policy's identifier using
     #   `ListDistributions` or `GetDistribution`. If the response headers
     #   policy is not attached to a cache behavior, you can get the identifier
     #   using `ListResponseHeadersPolicies`.
@@ -5020,8 +5021,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of cache policies. The response includes cache policies in
     #   the list that occur after the marker. To get the next page of the
-    #   list, set this field’s value to the value of `NextMarker` from the
-    #   current page’s response.
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of cache policies that you want in the response.
@@ -5130,7 +5131,7 @@ module Aws::CloudFront
     # conflicting alias. In the returned list, the distribution and account
     # IDs are partially hidden, which allows you to identify the
     # distributions and accounts that you own, but helps to protect the
-    # information of ones that you don’t own.
+    # information of ones that you don't own.
     #
     # Use this operation to find aliases that are in use in CloudFront that
     # conflict or overlap with the provided alias. For example, if you
@@ -5170,8 +5171,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   the list of conflicting aliases. The response includes conflicting
     #   aliases in the list that occur after the marker. To get the next page
-    #   of the list, set this field’s value to the value of `NextMarker` from
-    #   the current page’s response.
+    #   of the list, set this field's value to the value of `NextMarker` from
+    #   the current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of conflicting aliases that you want in the
@@ -5223,8 +5224,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of continuous deployment policies. The response includes
     #   policies in the list that occur after the marker. To get the next page
-    #   of the list, set this field’s value to the value of `NextMarker` from
-    #   the current page’s response.
+    #   of the list, set this field's value to the value of `NextMarker` from
+    #   the current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of continuous deployment policies that you want
@@ -5475,7 +5476,7 @@ module Aws::CloudFront
     end
 
     # Gets a list of distribution IDs for distributions that have a cache
-    # behavior that’s associated with the specified cache policy.
+    # behavior that's associated with the specified cache policy.
     #
     # You can optionally specify the maximum number of items to receive in
     # the response. If the total number of items in the list exceeds the
@@ -5488,8 +5489,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distribution IDs. The response includes distribution IDs
     #   in the list that occur after the marker. To get the next page of the
-    #   list, set this field’s value to the value of `NextMarker` from the
-    #   current page’s response.
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of distribution IDs that you want in the response.
@@ -5543,8 +5544,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distribution IDs. The response includes distribution IDs
     #   in the list that occur after the marker. To get the next page of the
-    #   list, set this field’s value to the value of `NextMarker` from the
-    #   current page’s response.
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of distribution IDs that you want in the response.
@@ -5585,7 +5586,7 @@ module Aws::CloudFront
     end
 
     # Gets a list of distribution IDs for distributions that have a cache
-    # behavior that’s associated with the specified origin request policy.
+    # behavior that's associated with the specified origin request policy.
     #
     # You can optionally specify the maximum number of items to receive in
     # the response. If the total number of items in the list exceeds the
@@ -5598,8 +5599,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distribution IDs. The response includes distribution IDs
     #   in the list that occur after the marker. To get the next page of the
-    #   list, set this field’s value to the value of `NextMarker` from the
-    #   current page’s response.
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of distribution IDs that you want in the response.
@@ -5639,7 +5640,7 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a list of distributions that have a cache behavior that’s
+    # Gets a list of distributions that have a cache behavior that's
     # associated with the specified real-time log configuration.
     #
     # You can specify the real-time log configuration by its name or its
@@ -5658,8 +5659,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distributions. The response includes distributions in the
     #   list that occur after the marker. To get the next page of the list,
-    #   set this field’s value to the value of `NextMarker` from the current
-    #   page’s response.
+    #   set this field's value to the value of `NextMarker` from the current
+    #   page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of distributions that you want in the response.
@@ -5866,7 +5867,8 @@ module Aws::CloudFront
     end
 
     # Gets a list of distribution IDs for distributions that have a cache
-    # behavior that’s associated with the specified response headers policy.
+    # behavior that's associated with the specified response headers
+    # policy.
     #
     # You can optionally specify the maximum number of items to receive in
     # the response. If the total number of items in the list exceeds the
@@ -5879,8 +5881,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of distribution IDs. The response includes distribution IDs
     #   in the list that occur after the marker. To get the next page of the
-    #   list, set this field’s value to the value of `NextMarker` from the
-    #   current page’s response.
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of distribution IDs that you want to get in the
@@ -6258,8 +6260,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of functions. The response includes functions in the list
     #   that occur after the marker. To get the next page of the list, set
-    #   this field’s value to the value of `NextMarker` from the current
-    #   page’s response.
+    #   this field's value to the value of `NextMarker` from the current
+    #   page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of functions that you want in the response.
@@ -6371,8 +6373,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of key groups. The response includes key groups in the list
     #   that occur after the marker. To get the next page of the list, set
-    #   this field’s value to the value of `NextMarker` from the current
-    #   page’s response.
+    #   this field's value to the value of `NextMarker` from the current
+    #   page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of key groups that you want in the response.
@@ -6493,8 +6495,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of origin request policies. The response includes origin
     #   request policies in the list that occur after the marker. To get the
-    #   next page of the list, set this field’s value to the value of
-    #   `NextMarker` from the current page’s response.
+    #   next page of the list, set this field's value to the value of
+    #   `NextMarker` from the current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of origin request policies that you want in the
@@ -6607,8 +6609,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of real-time log configurations. The response includes
     #   real-time log configurations in the list that occur after the marker.
-    #   To get the next page of the list, set this field’s value to the value
-    #   of `NextMarker` from the current page’s response.
+    #   To get the next page of the list, set this field's value to the value
+    #   of `NextMarker` from the current page's response.
     #
     # @return [Types::ListRealtimeLogConfigsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6674,8 +6676,8 @@ module Aws::CloudFront
     #   Use this field when paginating results to indicate where to begin in
     #   your list of response headers policies. The response includes response
     #   headers policies in the list that occur after the marker. To get the
-    #   next page of the list, set this field’s value to the value of
-    #   `NextMarker` from the current page’s response.
+    #   next page of the list, set this field's value to the value of
+    #   `NextMarker` from the current page's response.
     #
     # @option params [Integer] :max_items
     #   The maximum number of response headers policies that you want to get
@@ -6843,10 +6845,10 @@ module Aws::CloudFront
     # in the `LIVE` stage.
     #
     # When a function is published to the `LIVE` stage, you can attach the
-    # function to a distribution’s cache behavior, using the function’s
+    # function to a distribution's cache behavior, using the function's
     # Amazon Resource Name (ARN).
     #
-    # To publish a function, you must provide the function’s name and
+    # To publish a function, you must provide the function's name and
     # version (`ETag` value). To get these values, you can use
     # `ListFunctions` and `DescribeFunction`.
     #
@@ -6926,15 +6928,15 @@ module Aws::CloudFront
     # To test a function, you provide an *event object* that represents an
     # HTTP request or response that your CloudFront distribution could
     # receive in production. CloudFront runs the function, passing it the
-    # event object that you provided, and returns the function’s result (the
-    # modified event object) in the response. The response also contains
-    # function logs and error messages, if any exist. For more information
-    # about testing functions, see [Testing functions][1] in the *Amazon
-    # CloudFront Developer Guide*.
+    # event object that you provided, and returns the function's result
+    # (the modified event object) in the response. The response also
+    # contains function logs and error messages, if any exist. For more
+    # information about testing functions, see [Testing functions][1] in the
+    # *Amazon CloudFront Developer Guide*.
     #
-    # To test a function, you provide the function’s name and version
-    # (`ETag` value) along with the event object. To get the function’s name
-    # and version, you can use `ListFunctions` and `DescribeFunction`.
+    # To test a function, you provide the function's name and version
+    # (`ETag` value) along with the event object. To get the function's
+    # name and version, you can use `ListFunctions` and `DescribeFunction`.
     #
     #
     #
@@ -7040,19 +7042,19 @@ module Aws::CloudFront
     #
     # 3.  Call `UpdateCachePolicy` by providing the entire cache policy
     #     configuration, including the fields that you modified and those
-    #     that you didn’t.
+    #     that you didn't.
     #
     # @option params [required, Types::CachePolicyConfig] :cache_policy_config
     #   A cache policy configuration.
     #
     # @option params [required, String] :id
     #   The unique identifier for the cache policy that you are updating. The
-    #   identifier is returned in a cache behavior’s `CachePolicyId` field in
+    #   identifier is returned in a cache behavior's `CachePolicyId` field in
     #   the response to `GetDistributionConfig`.
     #
     # @option params [String] :if_match
     #   The version of the cache policy that you are updating. The version is
-    #   returned in the cache policy’s `ETag` field in the response to
+    #   returned in the cache policy's `ETag` field in the response to
     #   `GetCachePolicyConfig`.
     #
     # @return [Types::UpdateCachePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7196,7 +7198,7 @@ module Aws::CloudFront
     #
     # 3.  Use `UpdateContinuousDeploymentPolicy`, providing the entire
     #     continuous deployment policy configuration, including the fields
-    #     that you modified and those that you didn’t.
+    #     that you modified and those that you didn't.
     #
     # @option params [required, Types::ContinuousDeploymentPolicyConfig] :continuous_deployment_policy_config
     #   The continuous deployment policy configuration.
@@ -7286,14 +7288,14 @@ module Aws::CloudFront
     #       unchanged. (Set the value of `IfMatch` to the value of `ETag`,
     #       then remove the `ETag` field.)
     #
-    #     * You can’t change the value of `CallerReference`.
+    #     * You can't change the value of `CallerReference`.
     #
     # 3.  Submit an `UpdateDistribution` request, providing the distribution
     #     configuration. The new configuration replaces the existing
     #     configuration. The values that you specify in an
     #     `UpdateDistribution` request are not merged into your existing
     #     configuration. Make sure to include all fields: the ones that you
-    #     modified and also the ones that you didn’t.
+    #     modified and also the ones that you didn't.
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -7778,10 +7780,10 @@ module Aws::CloudFront
     # You can use this operation in a continuous deployment workflow after
     # you have tested configuration changes on the staging distribution.
     # After using a continuous deployment policy to move a portion of your
-    # domain name’s traffic to the staging distribution and verifying that
+    # domain name's traffic to the staging distribution and verifying that
     # it works as intended, you can use this operation to copy the staging
-    # distribution’s configuration to the primary distribution. This action
-    # will disable the continuous deployment policy and move your domain’s
+    # distribution's configuration to the primary distribution. This action
+    # will disable the continuous deployment policy and move your domain's
     # traffic back to the primary distribution.
     #
     # @option params [required, String] :id
@@ -8158,10 +8160,10 @@ module Aws::CloudFront
 
     # Updates a CloudFront function.
     #
-    # You can update a function’s code or the comment that describes the
-    # function. You cannot update a function’s name.
+    # You can update a function's code or the comment that describes the
+    # function. You cannot update a function's name.
     #
-    # To update a function, you provide the function’s name and version
+    # To update a function, you provide the function's name and version
     # (`ETag` value) along with the updated function code. To get the name
     # and version, you can use `ListFunctions` and `DescribeFunction`.
     #
@@ -8235,7 +8237,7 @@ module Aws::CloudFront
     #     update. For example, add or remove public key IDs.
     #
     # 3.  Call `UpdateKeyGroup` with the entire key group object, including
-    #     the fields that you modified and those that you didn’t.
+    #     the fields that you modified and those that you didn't.
     #
     # @option params [required, Types::KeyGroupConfig] :key_group_config
     #   The key group configuration.
@@ -8245,7 +8247,7 @@ module Aws::CloudFront
     #
     # @option params [String] :if_match
     #   The version of the key group that you are updating. The version is the
-    #   key group’s `ETag` value.
+    #   key group's `ETag` value.
     #
     # @return [Types::UpdateKeyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8349,21 +8351,21 @@ module Aws::CloudFront
     #
     # 3.  Call `UpdateOriginRequestPolicy` by providing the entire origin
     #     request policy configuration, including the fields that you
-    #     modified and those that you didn’t.
+    #     modified and those that you didn't.
     #
     # @option params [required, Types::OriginRequestPolicyConfig] :origin_request_policy_config
     #   An origin request policy configuration.
     #
     # @option params [required, String] :id
     #   The unique identifier for the origin request policy that you are
-    #   updating. The identifier is returned in a cache behavior’s
+    #   updating. The identifier is returned in a cache behavior's
     #   `OriginRequestPolicyId` field in the response to
     #   `GetDistributionConfig`.
     #
     # @option params [String] :if_match
     #   The version of the origin request policy that you are updating. The
-    #   version is returned in the origin request policy’s `ETag` field in the
-    #   response to `GetOriginRequestPolicyConfig`.
+    #   version is returned in the origin request policy's `ETag` field in
+    #   the response to `GetOriginRequestPolicyConfig`.
     #
     # @return [Types::UpdateOriginRequestPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8496,9 +8498,9 @@ module Aws::CloudFront
     #
     # 3.  Call this API (`UpdateRealtimeLogConfig`) by providing the entire
     #     real-time log configuration, including the parameters that you
-    #     modified and those that you didn’t.
+    #     modified and those that you didn't.
     #
-    # You cannot update a real-time log configuration’s `Name` or `ARN`.
+    # You cannot update a real-time log configuration's `Name` or `ARN`.
     #
     # @option params [Array<Types::EndPoint>] :end_points
     #   Contains information about the Amazon Kinesis data stream where you
@@ -8575,7 +8577,7 @@ module Aws::CloudFront
     # replaced. You cannot update some policy fields independent of others.
     # To update a response headers policy configuration:
     #
-    # 1.  Use `GetResponseHeadersPolicyConfig` to get the current policy’s
+    # 1.  Use `GetResponseHeadersPolicyConfig` to get the current policy's
     #     configuration.
     #
     # 2.  Modify the fields in the response headers policy configuration
@@ -8583,7 +8585,7 @@ module Aws::CloudFront
     #
     # 3.  Call `UpdateResponseHeadersPolicy`, providing the entire response
     #     headers policy configuration, including the fields that you
-    #     modified and those that you didn’t.
+    #     modified and those that you didn't.
     #
     # @option params [required, Types::ResponseHeadersPolicyConfig] :response_headers_policy_config
     #   A response headers policy configuration.
@@ -8594,7 +8596,7 @@ module Aws::CloudFront
     # @option params [String] :if_match
     #   The version of the response headers policy that you are updating.
     #
-    #   The version is returned in the cache policy’s `ETag` field in the
+    #   The version is returned in the cache policy's `ETag` field in the
     #   response to `GetResponseHeadersPolicyConfig`.
     #
     # @return [Types::UpdateResponseHeadersPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -8834,7 +8836,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

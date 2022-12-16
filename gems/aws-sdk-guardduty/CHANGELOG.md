@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-12-16)
+------------------
+
+* Feature - This release provides the valid characters for the Description and Name field.
+
 1.61.0 (2022-10-25)
 ------------------
 

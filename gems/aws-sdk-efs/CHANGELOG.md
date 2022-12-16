@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-12-16)
+------------------
+
+* Feature - General documentation updates for EFS.
+
 1.56.0 (2022-11-28)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-12-16)
+------------------
+
+* Feature - AWS DataSync now supports the use of tags with task executions. With this new feature, you can apply tags each time you execute a task, giving you greater control and management over your task executions.
+
 1.51.0 (2022-10-25)
 ------------------
 

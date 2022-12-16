@@ -214,6 +214,7 @@ module Aws::Appflow
     ListConnectorEntitiesResponse = Shapes::StructureShape.new(name: 'ListConnectorEntitiesResponse')
     ListConnectorsRequest = Shapes::StructureShape.new(name: 'ListConnectorsRequest')
     ListConnectorsResponse = Shapes::StructureShape.new(name: 'ListConnectorsResponse')
+    ListEntitiesMaxResults = Shapes::IntegerShape.new(name: 'ListEntitiesMaxResults')
     ListFlowsRequest = Shapes::StructureShape.new(name: 'ListFlowsRequest')
     ListFlowsResponse = Shapes::StructureShape.new(name: 'ListFlowsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -995,9 +996,12 @@ module Aws::Appflow
     ListConnectorEntitiesRequest.add_member(:connector_type, Shapes::ShapeRef.new(shape: ConnectorType, location_name: "connectorType"))
     ListConnectorEntitiesRequest.add_member(:entities_path, Shapes::ShapeRef.new(shape: EntitiesPath, location_name: "entitiesPath"))
     ListConnectorEntitiesRequest.add_member(:api_version, Shapes::ShapeRef.new(shape: ApiVersion, location_name: "apiVersion"))
+    ListConnectorEntitiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEntitiesMaxResults, location_name: "maxResults"))
+    ListConnectorEntitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListConnectorEntitiesRequest.struct_class = Types::ListConnectorEntitiesRequest
 
     ListConnectorEntitiesResponse.add_member(:connector_entity_map, Shapes::ShapeRef.new(shape: ConnectorEntityMap, required: true, location_name: "connectorEntityMap"))
+    ListConnectorEntitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListConnectorEntitiesResponse.struct_class = Types::ListConnectorEntitiesResponse
 
     ListConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))

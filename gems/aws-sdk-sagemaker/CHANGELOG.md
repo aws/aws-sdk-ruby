@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2022-12-16)
+------------------
+
+* Feature - AWS sagemaker - Features: This release adds support for random seed, it's an integer value used to initialize a pseudo-random number generator. Setting a random seed will allow the hyperparameter tuning search strategies to produce more consistent configurations for the same tuning job.
+
 1.155.0 (2022-12-15)
 ------------------
 

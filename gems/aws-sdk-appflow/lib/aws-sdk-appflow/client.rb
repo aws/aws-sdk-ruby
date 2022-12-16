@@ -1805,9 +1805,19 @@ module Aws::Appflow
     # @option params [String] :api_version
     #   The version of the API that's used by the connector.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of items that the operation returns in the
+    #   response.
+    #
+    # @option params [String] :next_token
+    #   A token that was provided by your prior `ListConnectorEntities`
+    #   operation if the response was too big for the page size. You specify
+    #   this token to get the next page of results in paginated response.
+    #
     # @return [Types::ListConnectorEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListConnectorEntitiesResponse#connector_entity_map #connector_entity_map} => Hash&lt;String,Array&lt;Types::ConnectorEntity&gt;&gt;
+    #   * {Types::ListConnectorEntitiesResponse#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1816,6 +1826,8 @@ module Aws::Appflow
     #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
     #     entities_path: "EntitiesPath",
     #     api_version: "ApiVersion",
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1825,6 +1837,7 @@ module Aws::Appflow
     #   resp.connector_entity_map["Group"][0].name #=> String
     #   resp.connector_entity_map["Group"][0].label #=> String
     #   resp.connector_entity_map["Group"][0].has_nested_entities #=> Boolean
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListConnectorEntities AWS API Documentation
     #
@@ -2811,7 +2824,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

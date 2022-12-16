@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-12-16)
+------------------
+
+* Feature - Updated documentation for CloudFront
+
 1.71.0 (2022-12-07)
 ------------------
 

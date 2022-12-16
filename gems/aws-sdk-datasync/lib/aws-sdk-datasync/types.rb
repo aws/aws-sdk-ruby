@@ -1019,16 +1019,12 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] options
-    #   The set of configuration options that control the behavior of a
-    #   single execution of the task that occurs when you call
-    #   `StartTaskExecution`. You can configure these options to preserve
-    #   metadata such as user ID (UID) and group ID (GID), file permissions,
-    #   data integrity verification, and so on.
+    #   Specifies the configuration options for a task. Some options include
+    #   preserving file or object metadata and verifying data integrity.
     #
-    #   For each individual task execution, you can override these options
-    #   by specifying the `OverrideOptions` before starting the task
-    #   execution. For more information, see the [StartTaskExecution][1]
-    #   operation.
+    #   You can also override these options before starting an individual
+    #   run of a task (also known as a *task execution*). For more
+    #   information, see [StartTaskExecution][1].
     #
     #
     #
@@ -1036,10 +1032,13 @@ module Aws::DataSync
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
-    #   A list of filter rules that determines which files to exclude from a
-    #   task. The list should contain a single filter string that consists
-    #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that exclude specific data during
+    #   your transfer. For more information and examples, see [Filtering
+    #   data transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
@@ -1053,15 +1052,21 @@ module Aws::DataSync
     #   @return [Types::TaskSchedule]
     #
     # @!attribute [rw] tags
-    #   The key-value pair that represents the tag that you want to add to
-    #   the resource. The value can be an empty string.
+    #   Specifies the tags that you want to apply to the Amazon Resource
+    #   Name (ARN) representing the task.
+    #
+    #   *Tags* are key-value pairs that help you manage, filter, and search
+    #   for your DataSync resources.
     #   @return [Array<Types::TagListEntry>]
     #
     # @!attribute [rw] includes
-    #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern contains a single filter string that
-    #   consists of the patterns to include. The patterns are delimited by
-    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that include specific data during
+    #   your transfer. For more information and examples, see [Filtering
+    #   data transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateTaskRequest AWS API Documentation
@@ -1135,7 +1140,8 @@ module Aws::DataSync
     # DeleteTask
     #
     # @!attribute [rw] task_arn
-    #   The Amazon Resource Name (ARN) of the task to delete.
+    #   Specifies the Amazon Resource Name (ARN) of the task that you want
+    #   to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteTaskRequest AWS API Documentation
@@ -1865,35 +1871,34 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] options
-    #   Represents the options that are available to control the behavior of
-    #   a [StartTaskExecution][1] operation. Behavior includes preserving
-    #   metadata such as user ID (UID), group ID (GID), and file
-    #   permissions, and also overwriting files in the destination, data
-    #   integrity verification, and so on.
+    #   Configures your DataSync task settings. These options include how
+    #   DataSync handles files, objects, and their associated metadata. You
+    #   also can specify how DataSync verifies data integrity, set bandwidth
+    #   limits for your task, among other options.
     #
-    #   A task has a set of default options associated with it. If you
-    #   don't specify an option in [StartTaskExecution][1], the default
-    #   value is used. You can override the defaults options on each task
-    #   execution by specifying an overriding `Options` value to
-    #   [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Each task setting has a default value. Unless you need to, you
+    #   don't have to configure any of these `Options` before starting your
+    #   task.
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
-    #   A list of filter rules that determines which files to exclude from a
-    #   task. The list should contain a single filter string that consists
-    #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example: `"/folder1|/folder2"`
+    #   A list of filter rules that exclude specific data during your
+    #   transfer. For more information and examples, see [Filtering data
+    #   transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] includes
-    #   A list of filter rules that determines which files to include when
-    #   running a task. The list should contain a single filter string that
-    #   consists of the patterns to include. The patterns are delimited by
-    #   "\|" (that is, a pipe), for example: `"/folder1|/folder2"`
+    #   A list of filter rules that include specific data during your
+    #   transfer. For more information and examples, see [Filtering data
+    #   transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] start_time
@@ -1902,11 +1907,11 @@ module Aws::DataSync
     #
     # @!attribute [rw] estimated_files_to_transfer
     #   The expected number of files that is to be transferred over the
-    #   network. This value is calculated during the PREPARING phase, before
-    #   the TRANSFERRING phase. This value is the expected number of files
-    #   to be transferred. It's calculated based on comparing the content
-    #   of the source and destination locations and finding the delta that
-    #   needs to be transferred.
+    #   network. This value is calculated during the `PREPARING` phase
+    #   before the `TRANSFERRING` phase of the task execution. This value is
+    #   the expected number of files to be transferred. It's calculated
+    #   based on comparing the content of the source and destination
+    #   locations and finding the delta that needs to be transferred.
     #   @return [Integer]
     #
     # @!attribute [rw] estimated_bytes_to_transfer
@@ -1917,12 +1922,13 @@ module Aws::DataSync
     # @!attribute [rw] files_transferred
     #   The actual number of files that was transferred over the network.
     #   This value is calculated and updated on an ongoing basis during the
-    #   TRANSFERRING phase. It's updated periodically when each file is
-    #   read from the source and sent over the network.
+    #   `TRANSFERRING` phase of the task execution. It's updated
+    #   periodically when each file is read from the source and sent over
+    #   the network.
     #
     #   If failures occur during a transfer, this value can be less than
-    #   `EstimatedFilesToTransfer`. This value can also be greater than
-    #   `EstimatedFilesTransferred` in some cases. This element is
+    #   `EstimatedFilesToTransfer`. In some cases, this value can also be
+    #   greater than `EstimatedFilesToTransfer`. This element is
     #   implementation-specific for some location types, so don't use it as
     #   an indicator for a correct file number or to monitor your task
     #   execution.
@@ -1934,7 +1940,8 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_transferred
-    #   The physical number of bytes transferred over the network.
+    #   The total number of bytes that are involved in the transfer. For the
+    #   number of bytes sent over the network, see `BytesCompressed`.
     #   @return [Integer]
     #
     # @!attribute [rw] result
@@ -1944,7 +1951,7 @@ module Aws::DataSync
     # @!attribute [rw] bytes_compressed
     #   The physical number of bytes transferred over the network after
     #   compression was applied. In most cases, this number is less than
-    #   `BytesTransferred`.
+    #   `BytesTransferred` unless the data isn't compressible.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskExecutionResponse AWS API Documentation
@@ -1999,8 +2006,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] current_task_execution_arn
-    #   The Amazon Resource Name (ARN) of the task execution that is syncing
-    #   files.
+    #   The Amazon Resource Name (ARN) of the task execution that is
+    #   transferring files.
     #   @return [String]
     #
     # @!attribute [rw] source_location_arn
@@ -2022,25 +2029,32 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] source_network_interface_arns
-    #   The Amazon Resource Names (ARNs) of the source elastic network
-    #   interfaces (ENIs) that were created for your subnet.
+    #   The Amazon Resource Names (ARNs) of the network interfaces created
+    #   for your source location. For more information, see [Network
+    #   interface requirements][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
     #   @return [Array<String>]
     #
     # @!attribute [rw] destination_network_interface_arns
-    #   The Amazon Resource Names (ARNs) of the destination elastic network
-    #   interfaces (ENIs) that were created for your subnet.
+    #   The Amazon Resource Names (ARNs) of the network interfaces created
+    #   for your destination location. For more information, see [Network
+    #   interface requirements][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
     #   @return [Array<String>]
     #
     # @!attribute [rw] options
-    #   The set of configuration options that control the behavior of a
-    #   single execution of the task that occurs when you call
-    #   `StartTaskExecution`. You can configure these options to preserve
-    #   metadata such as user ID (UID) and group (GID), file permissions,
-    #   data integrity verification, and so on.
+    #   The configuration options that control the behavior of the
+    #   `StartTaskExecution` operation. Some options include preserving file
+    #   or object metadata and verifying data integrity.
     #
-    #   For each individual task execution, you can override these options
-    #   by specifying the overriding `OverrideOptions` value to
-    #   [StartTaskExecution][1] operation.
+    #   You can override these options for each task execution. For more
+    #   information, see [StartTaskExecution][1].
     #
     #
     #
@@ -2048,10 +2062,13 @@ module Aws::DataSync
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
-    #   A list of filter rules that determines which files to exclude from a
-    #   task. The list should contain a single filter string that consists
-    #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   A list of filter rules that exclude specific data during your
+    #   transfer. For more information and examples, see [Filtering data
+    #   transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
@@ -2075,10 +2092,13 @@ module Aws::DataSync
     #   @return [Time]
     #
     # @!attribute [rw] includes
-    #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern contains a single filter string that
-    #   consists of the patterns to include. The patterns are delimited by
-    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2`".
+    #   A list of filter rules that include specific data during your
+    #   transfer. For more information and examples, see [Filtering data
+    #   transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskResponse AWS API Documentation
@@ -2427,16 +2447,17 @@ module Aws::DataSync
     # ListTagsForResourceRequest
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource whose tags to list.
+    #   Specifies the Amazon Resource Name (ARN) of the resource that you
+    #   want tag information on.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of locations to return.
+    #   Specifies how many results that you want in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   An opaque string that indicates the position at which to begin the
-    #   next list of locations.
+    #   Specifies an opaque string that indicates the position to begin the
+    #   next list of results in the response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTagsForResourceRequest AWS API Documentation
@@ -2452,12 +2473,12 @@ module Aws::DataSync
     # ListTagsForResourceResponse
     #
     # @!attribute [rw] tags
-    #   Array of resource tags.
+    #   An array of tags applied to the specified resource.
     #   @return [Array<Types::TagListEntry>]
     #
     # @!attribute [rw] next_token
-    #   An opaque string that indicates the position at which to begin
-    #   returning the next list of resource tags.
+    #   The opaque string that indicates the position to begin the next list
+    #   of results in the response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTagsForResourceResponse AWS API Documentation
@@ -2701,59 +2722,60 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Represents the options that are available to control the behavior of a
-    # [StartTaskExecution][1] operation. Behavior includes preserving
-    # metadata such as user ID (UID), group ID (GID), and file permissions,
-    # and also overwriting files in the destination, data integrity
-    # verification, and so on.
+    # Configures your DataSync task settings. These options include how
+    # DataSync handles files, objects, and their associated metadata. You
+    # also can specify how DataSync verifies data integrity, set bandwidth
+    # limits for your task, among other options.
     #
-    # A task has a set of default options associated with it. If you don't
-    # specify an option in [StartTaskExecution][1], the default value is
-    # used. You can override the defaults options on each task execution by
-    # specifying an overriding `Options` value to [StartTaskExecution][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    # Each task setting has a default value. Unless you need to, you don't
+    # have to configure any of these `Options` before starting your task.
     #
     # @!attribute [rw] verify_mode
-    #   A value that determines whether a data integrity verification should
-    #   be performed at the end of a task execution after all data and
-    #   metadata have been transferred. For more information, see [Configure
-    #   task settings][1].
+    #   Specifies how and when DataSync checks the integrity of your data
+    #   during a transfer.
     #
     #   Default value: `POINT_IN_TIME_CONSISTENT`
     #
-    #   `ONLY_FILES_TRANSFERRED` (recommended): Perform verification only on
-    #   files that were transferred.
+    #   `ONLY_FILES_TRANSFERRED` (recommended): DataSync calculates the
+    #   checksum of transferred files and metadata at the source location.
+    #   At the end of the transfer, DataSync then compares this checksum to
+    #   the checksum calculated on those files at the destination.
     #
-    #   `POINT_IN_TIME_CONSISTENT`\: Scan the entire source and entire
-    #   destination at the end of the transfer to verify that source and
-    #   destination are fully synchronized. This option isn't supported
-    #   when transferring to S3 Glacier Flexible Retrieval or S3 Glacier
-    #   Deep Archive storage classes.
+    #   We recommend this option when transferring to S3 Glacier Flexible
+    #   Retrieval or S3 Glacier Deep Archive storage classes. For more
+    #   information, see [Storage class considerations with Amazon S3
+    #   locations][1].
     #
-    #   `NONE`\: No additional verification is done at the end of the
-    #   transfer, but all data transmissions are integrity-checked with
-    #   checksum verification during the transfer.
+    #   `POINT_IN_TIME_CONSISTENT`\: At the end of the transfer, DataSync
+    #   scans the entire source and destination to verify that both
+    #   locations are fully synchronized.
+    #
+    #   You can't use this option when transferring to S3 Glacier Flexible
+    #   Retrieval or S3 Glacier Deep Archive storage classes. For more
+    #   information, see [Storage class considerations with Amazon S3
+    #   locations][1].
+    #
+    #   `NONE`\: DataSync doesn't run additional verification at the end of
+    #   the transfer. All data transmissions are still integrity-checked
+    #   with checksum verification during the transfer.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #   @return [String]
     #
     # @!attribute [rw] overwrite_mode
-    #   A value that determines whether files at the destination should be
-    #   overwritten or preserved when copying files. If set to `NEVER` a
-    #   destination file will not be replaced by a source file, even if the
-    #   destination file differs from the source file. If you modify files
+    #   Specifies whether data at the destination location should be
+    #   overwritten or preserved. If set to `NEVER`, a destination file for
+    #   example will not be replaced by a source file (even if the
+    #   destination file differs from the source file). If you modify files
     #   in the destination and you sync the files, you can use this value to
     #   protect against overwriting those changes.
     #
-    #   Some storage classes have specific behaviors that can affect your S3
-    #   storage cost. For detailed information, see [Considerations when
-    #   working with Amazon S3 storage classes in DataSync ][1] in the
-    #   *DataSync User Guide*.
+    #   Some storage classes have specific behaviors that can affect your
+    #   Amazon S3 storage cost. For detailed information, see
+    #   [Considerations when working with Amazon S3 storage classes in
+    #   DataSync ][1].
     #
     #
     #
@@ -2761,13 +2783,16 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] atime
-    #   A file metadata value that shows the last time a file was accessed
-    #   (that is, when the file was read or written to). If you set `Atime`
-    #   to `BEST_EFFORT`, DataSync attempts to preserve the original `Atime`
-    #   attribute on all source files (that is, the version before the
-    #   `PREPARING` phase). However, `Atime`'s behavior is not fully
-    #   standard across platforms, so DataSync can only do this on a
-    #   best-effort basis.
+    #   Specifies whether to preserve metadata indicating the last time a
+    #   file was read or written to. If you set `Atime` to `BEST_EFFORT`,
+    #   DataSync attempts to preserve the original `Atime` attribute on all
+    #   source files (that is, the version before the `PREPARING` phase of
+    #   the task execution).
+    #
+    #   <note markdown="1"> The behavior of `Atime` isn't fully standard across platforms, so
+    #   DataSync can only do this on a best-effort basis.
+    #
+    #    </note>
     #
     #   Default value: `BEST_EFFORT`
     #
@@ -2785,10 +2810,10 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] mtime
-    #   A value that indicates the last time that a file was modified (that
-    #   is, a file was written to) before the `PREPARING` phase. This option
-    #   is required for cases when you need to run the same task more than
-    #   one time.
+    #   Specifies whether to preserve metadata indicating the last time that
+    #   a file was written to before the `PREPARING` phase of your task
+    #   execution. This option is required when you need to run the a task
+    #   more than once.
     #
     #   Default Value: `PRESERVE`
     #
@@ -2805,7 +2830,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] uid
-    #   The POSIX user ID (UID) of the file's owner.
+    #   Specifies the POSIX user ID (UID) of the file's owner.
     #
     #   For more information, see [Metadata copied by DataSync][1].
     #
@@ -2823,7 +2848,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] gid
-    #   The POSIX group ID (GID) of the file's owners.
+    #   Specifies the POSIX group ID (GID) of the file's owners.
     #
     #   For more information, see [Metadata copied by DataSync][1].
     #
@@ -2841,13 +2866,12 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] preserve_deleted_files
-    #   A value that specifies whether files in the destination that don't
-    #   exist in the source file system should be preserved. This option can
-    #   affect your storage cost. If your task deletes objects, you might
+    #   Specifies whether files in the destination location that don't
+    #   exist in the source should be preserved. This option can affect your
+    #   Amazon S3 storage cost. If your task deletes objects, you might
     #   incur minimum storage duration charges for certain storage classes.
     #   For detailed information, see [Considerations when working with
-    #   Amazon S3 storage classes in DataSync ][1] in the *DataSync User
-    #   Guide*.
+    #   Amazon S3 storage classes in DataSync ][1].
     #
     #   Default value: `PRESERVE`
     #
@@ -2862,14 +2886,13 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] preserve_devices
-    #   A value that determines whether DataSync should preserve the
-    #   metadata of block and character devices in the source file system,
-    #   and re-create the files with that device name and metadata on the
-    #   destination. DataSync does not copy the contents of such devices,
-    #   only the name and metadata.
+    #   Specifies whether DataSync should preserve the metadata of block and
+    #   character devices in the source location and recreate the files with
+    #   that device name and metadata on the destination. DataSync copies
+    #   only the name and metadata of such devices.
     #
-    #   <note markdown="1"> DataSync can't sync the actual contents of such devices, because
-    #   they are nonterminal and don't return an end-of-file (EOF) marker.
+    #   <note markdown="1"> DataSync can't copy the actual contents of these devices because
+    #   they're nonterminal and don't return an end-of-file (EOF) marker.
     #
     #    </note>
     #
@@ -2878,13 +2901,12 @@ module Aws::DataSync
     #   `NONE`\: Ignore special devices (recommended).
     #
     #   `PRESERVE`\: Preserve character and block device metadata. This
-    #   option isn't currently supported for Amazon EFS.
+    #   option currently isn't supported for Amazon EFS.
     #   @return [String]
     #
     # @!attribute [rw] posix_permissions
-    #   A value that determines which users or groups can access a file for
-    #   a specific purpose such as reading, writing, or execution of the
-    #   file.
+    #   Specifies which users or groups can access a file for a specific
+    #   purpose such as reading, writing, or execution of the file.
     #
     #   For more information, see [Metadata copied by DataSync][1].
     #
@@ -2904,15 +2926,14 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] bytes_per_second
-    #   A value that limits the bandwidth used by DataSync. For example, if
-    #   you want DataSync to use a maximum of 1 MB, set this value to
-    #   `1048576` (`=1024*1024`).
+    #   Limits the bandwidth used by a DataSync task. For example, if you
+    #   want DataSync to use a maximum of 1 MB, set this value to `1048576`
+    #   (`=1024*1024`).
     #   @return [Integer]
     #
     # @!attribute [rw] task_queueing
-    #   A value that determines whether tasks should be queued before
-    #   executing the tasks. If set to `ENABLED`, the tasks will be queued.
-    #   The default is `ENABLED`.
+    #   Specifies whether tasks should be queued before executing the tasks.
+    #   The default is `ENABLED`, which means the tasks will be queued.
     #
     #   If you use the same agent to run multiple tasks, you can enable the
     #   tasks to run in series. For more information, see [Queueing task
@@ -2924,12 +2945,13 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   A value that determines the type of logs that DataSync publishes to
-    #   a log stream in the Amazon CloudWatch log group that you provide.
-    #   For more information about providing a log group for DataSync, see
-    #   [CloudWatchLogGroupArn][1]. If set to `OFF`, no logs are published.
-    #   `BASIC` publishes logs on errors for individual files transferred,
-    #   and `TRANSFER` publishes logs for every file or object that is
+    #   Specifies the type of logs that DataSync publishes to a Amazon
+    #   CloudWatch Logs log group. To specify the log group, see
+    #   [CloudWatchLogGroupArn][1].
+    #
+    #   If you set `LogLevel` to `OFF`, no logs are published. `BASIC`
+    #   publishes logs on errors for individual files transferred.
+    #   `TRANSFER` publishes logs for every file or object that is
     #   transferred and integrity checked.
     #
     #
@@ -2938,60 +2960,57 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] transfer_mode
-    #   A value that determines whether DataSync transfers only the data and
-    #   metadata that differ between the source and the destination
-    #   location, or whether DataSync transfers all the content from the
-    #   source, without comparing to the destination location.
+    #   Determines whether DataSync transfers only the data and metadata
+    #   that differ between the source and the destination location or
+    #   transfers all the content from the source (without comparing what's
+    #   in the destination).
     #
     #   `CHANGED`\: DataSync copies only data or metadata that is new or
     #   different content from the source location to the destination
     #   location.
     #
     #   `ALL`\: DataSync copies all source location content to the
-    #   destination, without comparing to existing content on the
-    #   destination.
+    #   destination (without comparing what's in the destination).
     #   @return [String]
     #
     # @!attribute [rw] security_descriptor_copy_flags
-    #   A value that determines which components of the SMB security
-    #   descriptor are copied from source to destination objects.
+    #   Specifies which components of the SMB security descriptor are copied
+    #   from source to destination objects.
     #
     #   This value is only used for transfers between SMB and Amazon FSx for
-    #   Windows File Server locations, or between two Amazon FSx for Windows
-    #   File Server locations. For more information about how DataSync
-    #   handles metadata, see [How DataSync Handles Metadata and Special
-    #   Files][1].
+    #   Windows File Server locations or between two FSx for Windows File
+    #   Server locations. For more information, see [how DataSync handles
+    #   metadata][1].
     #
     #   Default value: `OWNER_DACL`
     #
     #   `OWNER_DACL`\: For each copied object, DataSync copies the following
     #   metadata:
     #
-    #   * Object owner.
+    #   * The object owner.
     #
     #   * NTFS discretionary access control lists (DACLs), which determine
     #     whether to grant access to an object.
     #
-    #   When choosing this option, DataSync does NOT copy the NTFS system
-    #   access control lists (SACLs), which are used by administrators to
-    #   log attempts to access a secured object.
+    #     DataSync won't copy NTFS system access control lists (SACLs) with
+    #     this option.
     #
     #   `OWNER_DACL_SACL`\: For each copied object, DataSync copies the
     #   following metadata:
     #
-    #   * Object owner.
+    #   * The object owner.
     #
     #   * NTFS discretionary access control lists (DACLs), which determine
     #     whether to grant access to an object.
     #
-    #   * NTFS system access control lists (SACLs), which are used by
-    #     administrators to log attempts to access a secured object.
+    #   * SACLs, which are used by administrators to log attempts to access
+    #     a secured object.
     #
-    #   Copying SACLs requires granting additional permissions to the
-    #   Windows user that DataSync uses to access your SMB location. For
-    #   information about choosing a user that ensures sufficient
-    #   permissions to files, folders, and metadata, see
-    #   [user](create-smb-location.html#SMBuser).
+    #     Copying SACLs requires granting additional permissions to the
+    #     Windows user that DataSync uses to access your SMB location. For
+    #     information about choosing a user that ensures sufficient
+    #     permissions to files, folders, and metadata, see
+    #     [user](create-smb-location.html#SMBuser).
     #
     #   `NONE`\: None of the SMB security descriptor components are copied.
     #   Destination objects are owned by the user that was provided for
@@ -3004,7 +3023,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] object_tags
-    #   Specifies whether object tags are maintained when transferring
+    #   Specifies whether object tags are preserved when transferring
     #   between object storage systems. If you want your DataSync task to
     #   ignore object tags, specify the `NONE` value.
     #
@@ -3138,40 +3157,43 @@ module Aws::DataSync
     # StartTaskExecutionRequest
     #
     # @!attribute [rw] task_arn
-    #   The Amazon Resource Name (ARN) of the task to start.
+    #   Specifies the Amazon Resource Name (ARN) of the task that you want
+    #   to start.
     #   @return [String]
     #
     # @!attribute [rw] override_options
-    #   Represents the options that are available to control the behavior of
-    #   a [StartTaskExecution][1] operation. Behavior includes preserving
-    #   metadata such as user ID (UID), group ID (GID), and file
-    #   permissions, and also overwriting files in the destination, data
-    #   integrity verification, and so on.
+    #   Configures your DataSync task settings. These options include how
+    #   DataSync handles files, objects, and their associated metadata. You
+    #   also can specify how DataSync verifies data integrity, set bandwidth
+    #   limits for your task, among other options.
     #
-    #   A task has a set of default options associated with it. If you
-    #   don't specify an option in [StartTaskExecution][1], the default
-    #   value is used. You can override the defaults options on each task
-    #   execution by specifying an overriding `Options` value to
-    #   [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Each task setting has a default value. Unless you need to, you
+    #   don't have to configure any of these `Options` before starting your
+    #   task.
     #   @return [Types::Options]
     #
     # @!attribute [rw] includes
-    #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern should contain a single filter string
-    #   that consists of the patterns to include. The patterns are delimited
-    #   by "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that determines which files to
+    #   include when running a task. The pattern should contain a single
+    #   filter string that consists of the patterns to include. The patterns
+    #   are delimited by "\|" (that is, a pipe), for example,
+    #   `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] excludes
-    #   A list of filter rules that determines which files to exclude from a
-    #   task. The list contains a single filter string that consists of the
-    #   patterns to exclude. The patterns are delimited by "\|" (that is,
-    #   a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that determines which files to
+    #   exclude from a task. The list contains a single filter string that
+    #   consists of the patterns to exclude. The patterns are delimited by
+    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
+    #
+    # @!attribute [rw] tags
+    #   Specifies the tags that you want to apply to the Amazon Resource
+    #   Name (ARN) representing the task execution.
+    #
+    #   *Tags* are key-value pairs that help you manage, filter, and search
+    #   for your DataSync resources.
+    #   @return [Array<Types::TagListEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecutionRequest AWS API Documentation
     #
@@ -3179,7 +3201,8 @@ module Aws::DataSync
       :task_arn,
       :override_options,
       :includes,
-      :excludes)
+      :excludes,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3187,8 +3210,7 @@ module Aws::DataSync
     # StartTaskExecutionResponse
     #
     # @!attribute [rw] task_execution_arn
-    #   The Amazon Resource Name (ARN) of the specific task execution that
-    #   was started.
+    #   The ARN of the running task execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecutionResponse AWS API Documentation
@@ -3199,13 +3221,8 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Represents a single entry in a list of Amazon Web Services resource
-    # tags. `TagListEntry` returns an array that contains a list of tasks
-    # when the [ListTagsForResource][1] operation is called.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html
+    # A key-value pair representing a single tag that's been applied to an
+    # Amazon Web Services resource.
     #
     # @!attribute [rw] key
     #   The key for an Amazon Web Services resource tag.
@@ -3227,11 +3244,12 @@ module Aws::DataSync
     # TagResourceRequest
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to apply the tag to.
+    #   Specifies the Amazon Resource Name (ARN) of the resource to apply
+    #   the tag to.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to apply.
+    #   Specifies the tags that you want to apply to the resource.
     #   @return [Array<Types::TagListEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TagResourceRequest AWS API Documentation
@@ -3428,12 +3446,12 @@ module Aws::DataSync
     # UntagResourceRequest
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to remove the tag
-    #   from.
+    #   Specifies the Amazon Resource Name (ARN) of the resource to remove
+    #   the tags from.
     #   @return [String]
     #
     # @!attribute [rw] keys
-    #   The keys in the key-value pair in the tag to remove.
+    #   Specifies the keys in the tags that you want to remove.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UntagResourceRequest AWS API Documentation
@@ -3774,21 +3792,14 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] options
-    #   Represents the options that are available to control the behavior of
-    #   a [StartTaskExecution][1] operation. Behavior includes preserving
-    #   metadata such as user ID (UID), group ID (GID), and file
-    #   permissions, and also overwriting files in the destination, data
-    #   integrity verification, and so on.
+    #   Configures your DataSync task settings. These options include how
+    #   DataSync handles files, objects, and their associated metadata. You
+    #   also can specify how DataSync verifies data integrity, set bandwidth
+    #   limits for your task, among other options.
     #
-    #   A task has a set of default options associated with it. If you
-    #   don't specify an option in [StartTaskExecution][1], the default
-    #   value is used. You can override the defaults options on each task
-    #   execution by specifying an overriding `Options` value to
-    #   [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Each task setting has a default value. Unless you need to, you
+    #   don't have to configure any of these `Options` before starting your
+    #   task.
     #   @return [Types::Options]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskExecutionRequest AWS API Documentation
@@ -3812,28 +3823,24 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] options
-    #   Represents the options that are available to control the behavior of
-    #   a [StartTaskExecution][1] operation. Behavior includes preserving
-    #   metadata such as user ID (UID), group ID (GID), and file
-    #   permissions, and also overwriting files in the destination, data
-    #   integrity verification, and so on.
+    #   Configures your DataSync task settings. These options include how
+    #   DataSync handles files, objects, and their associated metadata. You
+    #   also can specify how DataSync verifies data integrity, set bandwidth
+    #   limits for your task, among other options.
     #
-    #   A task has a set of default options associated with it. If you
-    #   don't specify an option in [StartTaskExecution][1], the default
-    #   value is used. You can override the defaults options on each task
-    #   execution by specifying an overriding `Options` value to
-    #   [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Each task setting has a default value. Unless you need to, you
+    #   don't have to configure any of these `Options` before starting your
+    #   task.
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
-    #   A list of filter rules that determines which files to exclude from a
-    #   task. The list should contain a single filter string that consists
-    #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that exclude specific data during
+    #   your transfer. For more information and examples, see [Filtering
+    #   data transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
@@ -3859,10 +3866,13 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] includes
-    #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern contains a single filter string that
-    #   consists of the patterns to include. The patterns are delimited by
-    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   Specifies a list of filter rules that include specific data during
+    #   your transfer. For more information and examples, see [Filtering
+    #   data transferred by DataSync][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskRequest AWS API Documentation

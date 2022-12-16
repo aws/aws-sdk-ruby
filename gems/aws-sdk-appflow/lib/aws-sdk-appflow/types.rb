@@ -2807,13 +2807,26 @@ module Aws::Appflow
     #   The version of the API that's used by the connector.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of items that the operation returns in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that was provided by your prior `ListConnectorEntities`
+    #   operation if the response was too big for the page size. You specify
+    #   this token to get the next page of results in paginated response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListConnectorEntitiesRequest AWS API Documentation
     #
     class ListConnectorEntitiesRequest < Struct.new(
       :connector_profile_name,
       :connector_type,
       :entities_path,
-      :api_version)
+      :api_version,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2824,10 +2837,18 @@ module Aws::Appflow
     #   contains the list of entities belonging to that group.
     #   @return [Hash<String,Array<Types::ConnectorEntity>>]
     #
+    # @!attribute [rw] next_token
+    #   A token that you specify in your next `ListConnectorEntities`
+    #   operation to get the next page of results in paginated response. The
+    #   `ListConnectorEntities` operation provides this token if the
+    #   response is too big for the page size.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListConnectorEntitiesResponse AWS API Documentation
     #
     class ListConnectorEntitiesResponse < Struct.new(
-      :connector_entity_map)
+      :connector_entity_map,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
