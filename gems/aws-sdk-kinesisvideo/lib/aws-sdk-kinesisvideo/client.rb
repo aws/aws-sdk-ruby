@@ -712,6 +712,91 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Returns the most current information about the stream. Either
+    # streamName or streamARN should be provided in the input.
+    #
+    # Returns the most current information about the stream. The
+    # `streamName` or `streamARN` should be provided in the input.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   The token to provide in your next request, to get another batch of
+    #   results.
+    #
+    # @return [Types::DescribeMappedResourceConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMappedResourceConfigurationOutput#mapped_resource_configuration_list #mapped_resource_configuration_list} => Array&lt;Types::MappedResourceConfigurationListItem&gt;
+    #   * {Types::DescribeMappedResourceConfigurationOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_mapped_resource_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mapped_resource_configuration_list #=> Array
+    #   resp.mapped_resource_configuration_list[0].type #=> String
+    #   resp.mapped_resource_configuration_list[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeMappedResourceConfiguration AWS API Documentation
+    #
+    # @overload describe_mapped_resource_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_mapped_resource_configuration(params = {}, options = {})
+      req = build_request(:describe_mapped_resource_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns the most current information about the channel. Specify the
+    # `ChannelName` or `ChannelARN` in the input.
+    #
+    # @option params [String] :channel_name
+    #   The name of the channel.
+    #
+    # @option params [String] :channel_arn
+    #   The Amazon Resource Name (ARN) of the channel.
+    #
+    # @return [Types::DescribeMediaStorageConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMediaStorageConfigurationOutput#media_storage_configuration #media_storage_configuration} => Types::MediaStorageConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_media_storage_configuration({
+    #     channel_name: "ChannelName",
+    #     channel_arn: "ResourceARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_storage_configuration.stream_arn #=> String
+    #   resp.media_storage_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeMediaStorageConfiguration AWS API Documentation
+    #
+    # @overload describe_media_storage_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_media_storage_configuration(params = {}, options = {})
+      req = build_request(:describe_media_storage_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets the `NotificationConfiguration` for a given Kinesis video stream.
     #
     # @option params [String] :stream_name
@@ -913,7 +998,7 @@ module Aws::KinesisVideo
     #   resp = client.get_signaling_channel_endpoint({
     #     channel_arn: "ResourceARN", # required
     #     single_master_channel_endpoint_configuration: {
-    #       protocols: ["WSS"], # accepts WSS, HTTPS
+    #       protocols: ["WSS"], # accepts WSS, HTTPS, WEBRTC
     #       role: "MASTER", # accepts MASTER, VIEWER
     #     },
     #   })
@@ -921,7 +1006,7 @@ module Aws::KinesisVideo
     # @example Response structure
     #
     #   resp.resource_endpoint_list #=> Array
-    #   resp.resource_endpoint_list[0].protocol #=> String, one of "WSS", "HTTPS"
+    #   resp.resource_endpoint_list[0].protocol #=> String, one of "WSS", "HTTPS", "WEBRTC"
     #   resp.resource_endpoint_list[0].resource_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetSignalingChannelEndpoint AWS API Documentation
@@ -1134,22 +1219,20 @@ module Aws::KinesisVideo
     end
 
     # An asynchronous API that updates a stream’s existing edge
-    # configuration. If this API is invoked for the first time, a new edge
-    # configuration will be created for the stream, and the sync status will
-    # be set to `SYNCING`.
+    # configuration. The Kinesis Video Stream will sync the stream’s edge
+    # configuration with the Edge Agent IoT Greengrass component that runs
+    # on an IoT Hub Device, setup at your premise. The time to sync can vary
+    # and depends on the connectivity of the Hub Device. The `SyncStatus`
+    # will be updated as the edge configuration is acknowledged, and synced
+    # with the Edge Agent.
     #
-    # The Kinesis Video Stream will sync the stream’s edge configuration
-    # with the Edge Agent IoT Greengrass component that runs on an IoT Hub
-    # Device setup at your premise. The time to sync can vary and depends on
-    # the connectivity of the Hub Device. The `SyncStatus` will be updated
-    # as the edge configuration is acknowledged, and synced with the Edge
-    # Agent. You will have to wait for the sync status to reach a terminal
-    # state such as: `IN_SYNC` and `SYNC_FAILED`, before using this API
-    # again.
-    #
-    # If you invoke this API during the syncing process, a
+    # If this API is invoked for the first time, a new edge configuration
+    # will be created for the stream, and the sync status will be set to
+    # `SYNCING`. You will have to wait for the sync status to reach a
+    # terminal state such as: `IN_SYNC`, or `SYNC_FAILED`, before using this
+    # API again. If you invoke this API during the syncing process, a
     # `ResourceInUseException` will be thrown. The connectivity of the
-    # stream's edge configuration and the Edge Agent will be retried for 15
+    # stream’s edge configuration and the Edge Agent will be retried for 15
     # minutes. After 15 minutes, the status will transition into the
     # `SYNC_FAILED` state.
     #
@@ -1512,6 +1595,43 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Associates a `SignalingChannel` to a stream to store the media. There
+    # are two signaling modes that can specified :
+    #
+    # * If the `StorageStatus` is disabled, no data will be stored, and the
+    #   `StreamARN` parameter will not be needed.
+    #
+    # * If the `StorageStatus` is enabled, the data will be stored in the
+    #   `StreamARN` provided.
+    #
+    # @option params [required, String] :channel_arn
+    #   The Amazon Resource Name (ARN) of the channel.
+    #
+    # @option params [required, Types::MediaStorageConfiguration] :media_storage_configuration
+    #   A structure that encapsulates, or contains, the media storage
+    #   configuration properties.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_media_storage_configuration({
+    #     channel_arn: "ResourceARN", # required
+    #     media_storage_configuration: { # required
+    #       stream_arn: "ResourceARN",
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateMediaStorageConfiguration AWS API Documentation
+    #
+    # @overload update_media_storage_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_media_storage_configuration(params = {}, options = {})
+      req = build_request(:update_media_storage_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the notification information for a stream.
     #
     # @option params [String] :stream_name
@@ -1676,7 +1796,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

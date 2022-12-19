@@ -195,6 +195,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-kinesisvideoarchivedmedia', '~> 1')
   spec.add_dependency('aws-sdk-kinesisvideomedia', '~> 1')
   spec.add_dependency('aws-sdk-kinesisvideosignalingchannels', '~> 1')
+  spec.add_dependency('aws-sdk-kinesisvideowebrtcstorage', '~> 1')
   spec.add_dependency('aws-sdk-lakeformation', '~> 1')
   spec.add_dependency('aws-sdk-lambda', '~> 1')
   spec.add_dependency('aws-sdk-lambdapreview', '~> 1')

@@ -1490,8 +1490,11 @@ module Aws::Athena
 
     # Returns query execution runtime statistics related to a single
     # execution of a query if you have access to the workgroup in which the
-    # query ran. The query execution runtime statistics is returned only
-    # when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+    # query ran. Query execution runtime statistics are returned only when
+    # QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+    # Stage-level input and output row count and data size statistics are
+    # not shown when a query has row-level filters defined in Lake
+    # Formation.
     #
     # @option params [required, String] :query_execution_id
     #   The unique ID of the query execution.
@@ -3112,10 +3115,10 @@ module Aws::Athena
     # @option params [required, String] :notebook_id
     #   The ID of the notebook to update.
     #
-    # @option params [String] :payload
+    # @option params [required, String] :payload
     #   The updated content for the notebook.
     #
-    # @option params [String] :type
+    # @option params [required, String] :type
     #   The notebook content type. Currently, the only valid type is `IPYNB`.
     #
     # @option params [String] :session_id
@@ -3137,8 +3140,8 @@ module Aws::Athena
     #
     #   resp = client.update_notebook({
     #     notebook_id: "NotebookId", # required
-    #     payload: "Payload",
-    #     type: "IPYNB", # accepts IPYNB
+    #     payload: "Payload", # required
+    #     type: "IPYNB", # required, accepts IPYNB
     #     session_id: "SessionId",
     #     client_request_token: "ClientRequestToken",
     #   })
@@ -3306,7 +3309,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

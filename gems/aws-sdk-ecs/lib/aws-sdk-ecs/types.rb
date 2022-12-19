@@ -3453,6 +3453,51 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # One of the methods which provide a way for you to quickly identify
+    # when a deployment has failed, and then to optionally roll back the
+    # failure to the last working deployment.
+    #
+    # When the alarms are generated, Amazon ECS sets the service deployment
+    # to failed. Set the rollback parameter to have Amazon ECS to roll back
+    # your service to the last completed deployment after a failure.
+    #
+    # You can only use the `DeploymentAlarms` method to detect failures when
+    # the `DeploymentController` is set to `ECS` (rolling update).
+    #
+    # For more information, see [Rolling update][1] in the <i> <i>Amazon
+    # Elastic Container Service Developer Guide</i> </i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
+    #
+    # @!attribute [rw] alarm_names
+    #   One or more CloudWatch alarm names. Use a "," to separate the
+    #   alarms.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enable
+    #   Determines whether to use the CloudWatch alarm option in the service
+    #   deployment process.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rollback
+    #   Determines whether to configure Amazon ECS to roll back the service
+    #   if a service deployment fails. If rollback is used, when a service
+    #   deployment fails, the service is rolled back to the last deployment
+    #   that completed successfully.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentAlarms AWS API Documentation
+    #
+    class DeploymentAlarms < Struct.new(
+      :alarm_names,
+      :enable,
+      :rollback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # <note markdown="1"> The deployment circuit breaker can only be used for services using the
     # rolling update (`ECS`) deployment type that aren't behind a Classic
     # Load Balancer.
@@ -3478,9 +3523,9 @@ module Aws::ECS
     #
     # @!attribute [rw] rollback
     #   Determines whether to configure Amazon ECS to roll back the service
-    #   if a service deployment fails. If rollback is enabled, when a
-    #   service deployment fails, the service is rolled back to the last
-    #   deployment that completed successfully.
+    #   if a service deployment fails. If rollback is on, when a service
+    #   deployment fails, the service is rolled back to the last deployment
+    #   that completed successfully.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentCircuitBreaker AWS API Documentation
@@ -3590,12 +3635,17 @@ module Aws::ECS
     #   when describing your service.
     #   @return [Integer]
     #
+    # @!attribute [rw] alarms
+    #   Information about the CloudWatch alarms.
+    #   @return [Types::DeploymentAlarms]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
     #
     class DeploymentConfiguration < Struct.new(
       :deployment_circuit_breaker,
       :maximum_percent,
-      :minimum_healthy_percent)
+      :minimum_healthy_percent,
+      :alarms)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -99,6 +99,7 @@ module Aws::ECS
     DeleteTaskSetRequest = Shapes::StructureShape.new(name: 'DeleteTaskSetRequest')
     DeleteTaskSetResponse = Shapes::StructureShape.new(name: 'DeleteTaskSetResponse')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
+    DeploymentAlarms = Shapes::StructureShape.new(name: 'DeploymentAlarms')
     DeploymentCircuitBreaker = Shapes::StructureShape.new(name: 'DeploymentCircuitBreaker')
     DeploymentConfiguration = Shapes::StructureShape.new(name: 'DeploymentConfiguration')
     DeploymentController = Shapes::StructureShape.new(name: 'DeploymentController')
@@ -747,6 +748,11 @@ module Aws::ECS
     Deployment.add_member(:service_connect_resources, Shapes::ShapeRef.new(shape: ServiceConnectServiceResourceList, location_name: "serviceConnectResources"))
     Deployment.struct_class = Types::Deployment
 
+    DeploymentAlarms.add_member(:alarm_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "alarmNames"))
+    DeploymentAlarms.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
+    DeploymentAlarms.add_member(:rollback, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "rollback"))
+    DeploymentAlarms.struct_class = Types::DeploymentAlarms
+
     DeploymentCircuitBreaker.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
     DeploymentCircuitBreaker.add_member(:rollback, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "rollback"))
     DeploymentCircuitBreaker.struct_class = Types::DeploymentCircuitBreaker
@@ -754,6 +760,7 @@ module Aws::ECS
     DeploymentConfiguration.add_member(:deployment_circuit_breaker, Shapes::ShapeRef.new(shape: DeploymentCircuitBreaker, location_name: "deploymentCircuitBreaker"))
     DeploymentConfiguration.add_member(:maximum_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maximumPercent"))
     DeploymentConfiguration.add_member(:minimum_healthy_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "minimumHealthyPercent"))
+    DeploymentConfiguration.add_member(:alarms, Shapes::ShapeRef.new(shape: DeploymentAlarms, location_name: "alarms"))
     DeploymentConfiguration.struct_class = Types::DeploymentConfiguration
 
     DeploymentController.add_member(:type, Shapes::ShapeRef.new(shape: DeploymentControllerType, required: true, location_name: "type"))

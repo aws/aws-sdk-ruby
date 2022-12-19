@@ -584,6 +584,9 @@
   "KinesisVideoSignalingChannels": {
     "models": "kinesis-video-signaling/2019-12-04"
   },
+  "KinesisVideoWebRTCStorage": {
+    "models": "kinesis-video-webrtc-storage/2018-05-10"
+  },
   "LakeFormation": {
     "models": "lakeformation/2017-03-31"
   },

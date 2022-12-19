@@ -1043,6 +1043,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     CreateDBInstanceReadReplicaMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     CreateDBInstanceReadReplicaMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    CreateDBInstanceReadReplicaMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 

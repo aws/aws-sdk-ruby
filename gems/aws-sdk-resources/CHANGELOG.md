@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.154.0 (2022-12-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-kinesisvideowebrtcstorage` gem.
+
 3.153.0 (2022-12-12)
 ------------------
 

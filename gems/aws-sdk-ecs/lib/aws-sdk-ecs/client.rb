@@ -1324,6 +1324,11 @@ module Aws::ECS
     #       },
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
+    #       alarms: {
+    #         alarm_names: ["String"], # required
+    #         enable: false, # required
+    #         rollback: false, # required
+    #       },
     #     },
     #     placement_constraints: [
     #       {
@@ -1420,6 +1425,10 @@ module Aws::ECS
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
+    #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
+    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
+    #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -2162,6 +2171,10 @@ module Aws::ECS
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
+    #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
+    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
+    #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -3237,6 +3250,10 @@ module Aws::ECS
     #   resp.services[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.services[0].deployment_configuration.maximum_percent #=> Integer
     #   resp.services[0].deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.services[0].deployment_configuration.alarms.alarm_names #=> Array
+    #   resp.services[0].deployment_configuration.alarms.alarm_names[0] #=> String
+    #   resp.services[0].deployment_configuration.alarms.enable #=> Boolean
+    #   resp.services[0].deployment_configuration.alarms.rollback #=> Boolean
     #   resp.services[0].task_sets #=> Array
     #   resp.services[0].task_sets[0].id #=> String
     #   resp.services[0].task_sets[0].task_set_arn #=> String
@@ -8778,6 +8795,11 @@ module Aws::ECS
     #       },
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
+    #       alarms: {
+    #         alarm_names: ["String"], # required
+    #         enable: false, # required
+    #         rollback: false, # required
+    #       },
     #     },
     #     network_configuration: {
     #       awsvpc_configuration: {
@@ -8882,6 +8904,10 @@ module Aws::ECS
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
+    #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
+    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
+    #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -9373,7 +9399,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

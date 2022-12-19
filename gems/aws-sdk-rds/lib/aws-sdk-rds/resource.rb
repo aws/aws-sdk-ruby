@@ -1992,7 +1992,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     # @option options [String] :custom_iam_instance_profile
     #   The instance profile associated with the underlying Amazon EC2
     #   instance of an RDS Custom DB instance. The instance profile must meet

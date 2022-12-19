@@ -4058,7 +4058,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_iam_instance_profile
@@ -4768,6 +4768,29 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts read replica.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in
+    #   your Outpost subnets through your on-premises network. For some use
+    #   cases, a CoIP can provide lower latency for connections to the read
+    #   replica from outside of its virtual private cloud (VPC) on your
+    #   local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on Amazon Web Services Outposts][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP
+    #   addresses][2] in the *Amazon Web Services Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -4811,6 +4834,7 @@ module Aws::RDS
       :custom_iam_instance_profile,
       :network_type,
       :storage_throughput,
+      :enable_customer_owned_ip,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -7589,7 +7613,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_backup_recovery_point_arn
@@ -14746,14 +14770,14 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
-    #   instance classes][2] in the *Amazon Aurora User Guide*.
+    #   Instance Class][1] in the *Amazon RDS User Guide* or [Aurora DB
+    #   instance classes][2] in the *Amazon Aurora User Guide*. For RDS
+    #   Custom, see [DB instance class support for RDS Custom for Oracle][3]
+    #   and [ DB instance class support for RDS Custom for SQL Server][4].
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
-    #   unless `ApplyImmediately` is enabled for this request.
-    #
-    #   This setting doesn't apply to RDS Custom for Oracle.
+    #   unless you specify `ApplyImmediately` in your request.
     #
     #   Default: Uses existing setting
     #
@@ -14761,6 +14785,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
@@ -15553,7 +15579,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_backup_recovery_point_arn
@@ -20128,7 +20154,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_iam_instance_profile
@@ -21233,7 +21259,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_iam_instance_profile

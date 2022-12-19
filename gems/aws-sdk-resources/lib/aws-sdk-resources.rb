@@ -185,6 +185,7 @@ module Aws
   autoload :KinesisVideoArchivedMedia, 'aws-sdk-kinesisvideoarchivedmedia'
   autoload :KinesisVideoMedia, 'aws-sdk-kinesisvideomedia'
   autoload :KinesisVideoSignalingChannels, 'aws-sdk-kinesisvideosignalingchannels'
+  autoload :KinesisVideoWebRTCStorage, 'aws-sdk-kinesisvideowebrtcstorage'
   autoload :LakeFormation, 'aws-sdk-lakeformation'
   autoload :Lambda, 'aws-sdk-lambda'
   autoload :LambdaPreview, 'aws-sdk-lambdapreview'

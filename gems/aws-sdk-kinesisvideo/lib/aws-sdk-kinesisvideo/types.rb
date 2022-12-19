@@ -464,6 +464,83 @@ module Aws::KinesisVideo
     end
 
     # @!attribute [rw] stream_name
+    #   The name of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to provide in your next request, to get another batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeMappedResourceConfigurationInput AWS API Documentation
+    #
+    class DescribeMappedResourceConfigurationInput < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mapped_resource_configuration_list
+    #   A structure that encapsulates, or contains, the media storage
+    #   configuration properties.
+    #   @return [Array<Types::MappedResourceConfigurationListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that was used in the `NextToken`request to fetch the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeMappedResourceConfigurationOutput AWS API Documentation
+    #
+    class DescribeMappedResourceConfigurationOutput < Struct.new(
+      :mapped_resource_configuration_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_name
+    #   The name of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_arn
+    #   The Amazon Resource Name (ARN) of the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeMediaStorageConfigurationInput AWS API Documentation
+    #
+    class DescribeMediaStorageConfigurationInput < Struct.new(
+      :channel_name,
+      :channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media_storage_configuration
+    #   A structure that encapsulates, or contains, the media storage
+    #   configuration properties.
+    #   @return [Types::MediaStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeMediaStorageConfigurationOutput AWS API Documentation
+    #
+    class DescribeMediaStorageConfigurationOutput < Struct.new(
+      :media_storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_name
     #   The name of the stream from which to retrieve the notification
     #   configuration. You must specify either the `StreamName` or the
     #   `StreamARN`.
@@ -586,8 +663,8 @@ module Aws::KinesisVideo
     #
     # @!attribute [rw] uploader_config
     #   The uploader configuration contains the `ScheduleExpression` details
-    #   that are used, to schedule upload jobs for the recorded media files
-    #   from the Edge Agent, to a Kinesis Video Stream.
+    #   that are used to schedule upload jobs for the recorded media files
+    #   from the Edge Agent to a Kinesis Video Stream.
     #   @return [Types::UploaderConfig]
     #
     # @!attribute [rw] deletion_config
@@ -1021,6 +1098,27 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # A structure that encapsulates, or contains, the media storage
+    # configuration properties.
+    #
+    # @!attribute [rw] type
+    #   The type of the associated resource for the kinesis video stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Kinesis Video Stream resource,
+    #   associated with the stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/MappedResourceConfigurationListItem AWS API Documentation
+    #
+    class MappedResourceConfigurationListItem < Struct.new(
+      :type,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details that consist of the credentials required
     # (`MediaUriSecretArn` and `MediaUriType`) to access the media files
     # that are streamed to the camera.
@@ -1031,8 +1129,12 @@ module Aws::KinesisVideo
     #   @return [String]
     #
     # @!attribute [rw] media_uri_type
-    #   The Uniform Resource Identifier (Uri) type. The `FILE_URI` value can
+    #   The Uniform Resource Identifier (URI) type. The `FILE_URI` value can
     #   be used to stream local media files.
+    #
+    #   <note markdown="1"> Preview only supports the `RTSP_URI` media source URI format .
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/MediaSourceConfig AWS API Documentation
@@ -1041,6 +1143,26 @@ module Aws::KinesisVideo
       :media_uri_secret_arn,
       :media_uri_type)
       SENSITIVE = [:media_uri_secret_arn]
+      include Aws::Structure
+    end
+
+    # A structure that encapsulates, or contains, the media storage
+    # configuration properties.
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the media storage configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/MediaStorageConfiguration AWS API Documentation
+    #
+    class MediaStorageConfiguration < Struct.new(
+      :stream_arn,
+      :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,15 +1279,19 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # The resource is currently not available for this operation. New
-    # resources cannot be created with the same name as existing resources.
-    # Also, resources cannot be updated or deleted unless they are in an
-    # `ACTIVE` state.
+    # When the input `StreamARN` or `ChannelARN` in `CLOUD_STORAGE_MODE` is
+    # already mapped to a different Kinesis Video Stream resource, or if the
+    # provided input `StreamARN` or `ChannelARN` is not in Active status,
+    # try one of the following :
     #
-    # If this exception is returned, do not use it to determine whether the
-    # requested resource already exists. Instead, it is recommended you use
-    # the resource-specific describe API, for example, `DescribeStream` for
-    # video streams.
+    # 1.  The `DescribeMediaStorageConfiguration` API to determine what the
+    #     stream given channel is mapped to.
+    #
+    # 2.  The `DescribeMappedResourceConfiguration` API to determine the
+    #     channel that the given stream is mapped to.
+    #
+    # 3.  The `DescribeStream` or `DescribeSignalingChannel` API to
+    #     determine the status of the resource.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1653,6 +1779,28 @@ module Aws::KinesisVideo
     #
     class UpdateImageGenerationConfigurationOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] channel_arn
+    #   The Amazon Resource Name (ARN) of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_storage_configuration
+    #   A structure that encapsulates, or contains, the media storage
+    #   configuration properties.
+    #   @return [Types::MediaStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateMediaStorageConfigurationInput AWS API Documentation
+    #
+    class UpdateMediaStorageConfigurationInput < Struct.new(
+      :channel_arn,
+      :media_storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateMediaStorageConfigurationOutput AWS API Documentation
+    #
+    class UpdateMediaStorageConfigurationOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] stream_name
     #   The name of the stream from which to update the notification
     #   configuration. You must specify either the `StreamName` or the
@@ -1770,9 +1918,11 @@ module Aws::KinesisVideo
     #
     class UpdateStreamOutput < Aws::EmptyStructure; end
 
-    # The configuration that consists of the `ScheduleConfig` attribute
-    # that's required, to schedule the jobs to upload the recorded media
-    # files onto the Edge Agent in a Kinesis Video Stream.
+    # The configuration that consists of the `ScheduleExpression` and the
+    # `DurationInMinutesdetails`, that specify the scheduling to record from
+    # a camera, or local media file, onto the Edge Agent. If the
+    # `ScheduleExpression` is not provided, then the Edge Agent will always
+    # be in upload mode.
     #
     # @!attribute [rw] schedule_config
     #   The configuration that consists of the `ScheduleExpression` and the

@@ -68,6 +68,10 @@ module Aws::KinesisVideo
             Aws::KinesisVideo::Endpoints::DescribeEdgeConfiguration.build(context)
           when :describe_image_generation_configuration
             Aws::KinesisVideo::Endpoints::DescribeImageGenerationConfiguration.build(context)
+          when :describe_mapped_resource_configuration
+            Aws::KinesisVideo::Endpoints::DescribeMappedResourceConfiguration.build(context)
+          when :describe_media_storage_configuration
+            Aws::KinesisVideo::Endpoints::DescribeMediaStorageConfiguration.build(context)
           when :describe_notification_configuration
             Aws::KinesisVideo::Endpoints::DescribeNotificationConfiguration.build(context)
           when :describe_signaling_channel
@@ -100,6 +104,8 @@ module Aws::KinesisVideo
             Aws::KinesisVideo::Endpoints::UpdateDataRetention.build(context)
           when :update_image_generation_configuration
             Aws::KinesisVideo::Endpoints::UpdateImageGenerationConfiguration.build(context)
+          when :update_media_storage_configuration
+            Aws::KinesisVideo::Endpoints::UpdateMediaStorageConfiguration.build(context)
           when :update_notification_configuration
             Aws::KinesisVideo::Endpoints::UpdateNotificationConfiguration.build(context)
           when :update_signaling_channel

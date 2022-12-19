@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.680.0 (2022-12-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::KinesisVideoWebRTCStorage`.
+
 1.679.0 (2022-12-16)
 ------------------
 

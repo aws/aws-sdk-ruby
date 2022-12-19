@@ -1136,8 +1136,8 @@ module Aws::Athena
     UpdateNamedQueryOutput.struct_class = Types::UpdateNamedQueryOutput
 
     UpdateNotebookInput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "NotebookId"))
-    UpdateNotebookInput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "Payload"))
-    UpdateNotebookInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "Type"))
+    UpdateNotebookInput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, required: true, location_name: "Payload"))
+    UpdateNotebookInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, required: true, location_name: "Type"))
     UpdateNotebookInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
     UpdateNotebookInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     UpdateNotebookInput.struct_class = Types::UpdateNotebookInput
@@ -1400,6 +1400,7 @@ module Aws::Athena
         o.input = Shapes::ShapeRef.new(shape: GetCalculationExecutionCodeRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCalculationExecutionCodeResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -1837,6 +1838,7 @@ module Aws::Athena
         o.input = Shapes::ShapeRef.new(shape: StopCalculationExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: StopCalculationExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

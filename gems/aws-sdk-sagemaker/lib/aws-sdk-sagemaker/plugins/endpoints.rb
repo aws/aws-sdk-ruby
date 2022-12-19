@@ -398,6 +398,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListActions.build(context)
           when :list_algorithms
             Aws::SageMaker::Endpoints::ListAlgorithms.build(context)
+          when :list_aliases
+            Aws::SageMaker::Endpoints::ListAliases.build(context)
           when :list_app_image_configs
             Aws::SageMaker::Endpoints::ListAppImageConfigs.build(context)
           when :list_apps
@@ -618,6 +620,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::UpdateHub.build(context)
           when :update_image
             Aws::SageMaker::Endpoints::UpdateImage.build(context)
+          when :update_image_version
+            Aws::SageMaker::Endpoints::UpdateImageVersion.build(context)
           when :update_inference_experiment
             Aws::SageMaker::Endpoints::UpdateInferenceExperiment.build(context)
           when :update_model_card

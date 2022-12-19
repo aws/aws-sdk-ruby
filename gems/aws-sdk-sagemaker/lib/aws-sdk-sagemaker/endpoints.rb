@@ -2405,6 +2405,20 @@ module Aws::SageMaker
       end
     end
 
+    class ListAliases
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SageMaker::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListAppImageConfigs
       def self.build(context)
         unless context.config.regional_endpoint
@@ -3932,6 +3946,20 @@ module Aws::SageMaker
     end
 
     class UpdateImage
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SageMaker::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateImageVersion
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

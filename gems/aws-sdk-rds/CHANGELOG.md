@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2022-12-19)
+------------------
+
+* Feature - Add support for --enable-customer-owned-ip to RDS create-db-instance-read-replica API for RDS on Outposts.
+
 1.165.0 (2022-12-13)
 ------------------
 

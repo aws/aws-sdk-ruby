@@ -44,6 +44,10 @@ module Aws::KinesisVideo
     DescribeEdgeConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeEdgeConfigurationOutput')
     DescribeImageGenerationConfigurationInput = Shapes::StructureShape.new(name: 'DescribeImageGenerationConfigurationInput')
     DescribeImageGenerationConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeImageGenerationConfigurationOutput')
+    DescribeMappedResourceConfigurationInput = Shapes::StructureShape.new(name: 'DescribeMappedResourceConfigurationInput')
+    DescribeMappedResourceConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeMappedResourceConfigurationOutput')
+    DescribeMediaStorageConfigurationInput = Shapes::StructureShape.new(name: 'DescribeMediaStorageConfigurationInput')
+    DescribeMediaStorageConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeMediaStorageConfigurationOutput')
     DescribeNotificationConfigurationInput = Shapes::StructureShape.new(name: 'DescribeNotificationConfigurationInput')
     DescribeNotificationConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeNotificationConfigurationOutput')
     DescribeSignalingChannelInput = Shapes::StructureShape.new(name: 'DescribeSignalingChannelInput')
@@ -87,8 +91,13 @@ module Aws::KinesisVideo
     ListTagsForStreamInput = Shapes::StructureShape.new(name: 'ListTagsForStreamInput')
     ListTagsForStreamOutput = Shapes::StructureShape.new(name: 'ListTagsForStreamOutput')
     LocalSizeConfig = Shapes::StructureShape.new(name: 'LocalSizeConfig')
+    MappedResourceConfigurationList = Shapes::ListShape.new(name: 'MappedResourceConfigurationList')
+    MappedResourceConfigurationListItem = Shapes::StructureShape.new(name: 'MappedResourceConfigurationListItem')
+    MappedResourceConfigurationListLimit = Shapes::IntegerShape.new(name: 'MappedResourceConfigurationListLimit')
     MaxLocalMediaSizeInMB = Shapes::IntegerShape.new(name: 'MaxLocalMediaSizeInMB')
     MediaSourceConfig = Shapes::StructureShape.new(name: 'MediaSourceConfig')
+    MediaStorageConfiguration = Shapes::StructureShape.new(name: 'MediaStorageConfiguration')
+    MediaStorageConfigurationStatus = Shapes::StringShape.new(name: 'MediaStorageConfigurationStatus')
     MediaType = Shapes::StringShape.new(name: 'MediaType')
     MediaUriSecretArn = Shapes::StringShape.new(name: 'MediaUriSecretArn')
     MediaUriType = Shapes::StringShape.new(name: 'MediaUriType')
@@ -133,6 +142,7 @@ module Aws::KinesisVideo
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsPerResourceExceededLimitException = Shapes::StructureShape.new(name: 'TagsPerResourceExceededLimitException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UntagStreamInput = Shapes::StructureShape.new(name: 'UntagStreamInput')
@@ -142,6 +152,8 @@ module Aws::KinesisVideo
     UpdateDataRetentionOutput = Shapes::StructureShape.new(name: 'UpdateDataRetentionOutput')
     UpdateImageGenerationConfigurationInput = Shapes::StructureShape.new(name: 'UpdateImageGenerationConfigurationInput')
     UpdateImageGenerationConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateImageGenerationConfigurationOutput')
+    UpdateMediaStorageConfigurationInput = Shapes::StructureShape.new(name: 'UpdateMediaStorageConfigurationInput')
+    UpdateMediaStorageConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateMediaStorageConfigurationOutput')
     UpdateNotificationConfigurationInput = Shapes::StructureShape.new(name: 'UpdateNotificationConfigurationInput')
     UpdateNotificationConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateNotificationConfigurationOutput')
     UpdateSignalingChannelInput = Shapes::StructureShape.new(name: 'UpdateSignalingChannelInput')
@@ -236,6 +248,23 @@ module Aws::KinesisVideo
 
     DescribeImageGenerationConfigurationOutput.add_member(:image_generation_configuration, Shapes::ShapeRef.new(shape: ImageGenerationConfiguration, location_name: "ImageGenerationConfiguration"))
     DescribeImageGenerationConfigurationOutput.struct_class = Types::DescribeImageGenerationConfigurationOutput
+
+    DescribeMappedResourceConfigurationInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    DescribeMappedResourceConfigurationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
+    DescribeMappedResourceConfigurationInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MappedResourceConfigurationListLimit, location_name: "MaxResults"))
+    DescribeMappedResourceConfigurationInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeMappedResourceConfigurationInput.struct_class = Types::DescribeMappedResourceConfigurationInput
+
+    DescribeMappedResourceConfigurationOutput.add_member(:mapped_resource_configuration_list, Shapes::ShapeRef.new(shape: MappedResourceConfigurationList, location_name: "MappedResourceConfigurationList"))
+    DescribeMappedResourceConfigurationOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeMappedResourceConfigurationOutput.struct_class = Types::DescribeMappedResourceConfigurationOutput
+
+    DescribeMediaStorageConfigurationInput.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "ChannelName"))
+    DescribeMediaStorageConfigurationInput.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ChannelARN"))
+    DescribeMediaStorageConfigurationInput.struct_class = Types::DescribeMediaStorageConfigurationInput
+
+    DescribeMediaStorageConfigurationOutput.add_member(:media_storage_configuration, Shapes::ShapeRef.new(shape: MediaStorageConfiguration, location_name: "MediaStorageConfiguration"))
+    DescribeMediaStorageConfigurationOutput.struct_class = Types::DescribeMediaStorageConfigurationOutput
 
     DescribeNotificationConfigurationInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     DescribeNotificationConfigurationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
@@ -349,9 +378,19 @@ module Aws::KinesisVideo
     LocalSizeConfig.add_member(:strategy_on_full_size, Shapes::ShapeRef.new(shape: StrategyOnFullSize, location_name: "StrategyOnFullSize"))
     LocalSizeConfig.struct_class = Types::LocalSizeConfig
 
+    MappedResourceConfigurationList.member = Shapes::ShapeRef.new(shape: MappedResourceConfigurationListItem)
+
+    MappedResourceConfigurationListItem.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
+    MappedResourceConfigurationListItem.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ARN"))
+    MappedResourceConfigurationListItem.struct_class = Types::MappedResourceConfigurationListItem
+
     MediaSourceConfig.add_member(:media_uri_secret_arn, Shapes::ShapeRef.new(shape: MediaUriSecretArn, required: true, location_name: "MediaUriSecretArn"))
     MediaSourceConfig.add_member(:media_uri_type, Shapes::ShapeRef.new(shape: MediaUriType, required: true, location_name: "MediaUriType"))
     MediaSourceConfig.struct_class = Types::MediaSourceConfig
+
+    MediaStorageConfiguration.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
+    MediaStorageConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: MediaStorageConfigurationStatus, required: true, location_name: "Status"))
+    MediaStorageConfiguration.struct_class = Types::MediaStorageConfiguration
 
     NoDataRetentionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     NoDataRetentionException.struct_class = Types::NoDataRetentionException
@@ -485,6 +524,12 @@ module Aws::KinesisVideo
 
     UpdateImageGenerationConfigurationOutput.struct_class = Types::UpdateImageGenerationConfigurationOutput
 
+    UpdateMediaStorageConfigurationInput.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ChannelARN"))
+    UpdateMediaStorageConfigurationInput.add_member(:media_storage_configuration, Shapes::ShapeRef.new(shape: MediaStorageConfiguration, required: true, location_name: "MediaStorageConfiguration"))
+    UpdateMediaStorageConfigurationInput.struct_class = Types::UpdateMediaStorageConfigurationInput
+
+    UpdateMediaStorageConfigurationOutput.struct_class = Types::UpdateMediaStorageConfigurationOutput
+
     UpdateNotificationConfigurationInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     UpdateNotificationConfigurationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
     UpdateNotificationConfigurationInput.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
@@ -611,6 +656,36 @@ module Aws::KinesisVideo
         o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_mapped_resource_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMappedResourceConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeMappedResourceConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMappedResourceConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMappedResourceConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_media_storage_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMediaStorageConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeMediaStorageConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMediaStorageConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMediaStorageConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
       end)
 
       api.add_operation(:describe_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -823,6 +898,20 @@ module Aws::KinesisVideo
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: NoDataRetentionException)
+      end)
+
+      api.add_operation(:update_media_storage_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMediaStorageConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/updateMediaStorageConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMediaStorageConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMediaStorageConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoDataRetentionException)
       end)
 

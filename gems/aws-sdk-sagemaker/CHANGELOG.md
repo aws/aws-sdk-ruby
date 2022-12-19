@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.157.0 (2022-12-19)
+------------------
+
+* Feature - AWS Sagemaker - Sagemaker Images now supports Aliases as secondary identifiers for ImageVersions. SageMaker Images now supports additional metadata for ImageVersions for better images management.
+
 1.156.0 (2022-12-16)
 ------------------
 

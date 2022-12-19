@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2022-12-19)
+------------------
+
+* Feature - This release adds support for alarm-based rollbacks in ECS, a new feature that allows customers to add automated safeguards for Amazon ECS service rolling updates.
+
 1.108.0 (2022-12-15)
 ------------------
 

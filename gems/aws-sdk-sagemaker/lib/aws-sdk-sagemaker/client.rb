@@ -3587,8 +3587,8 @@ module Aws::SageMaker
     #   The name of the image. Must be unique to your account.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
-    #   SageMaker to perform tasks on your behalf.
+    #   The ARN of an IAM role that enables Amazon SageMaker to perform tasks
+    #   on your behalf.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to apply to the image.
@@ -3648,6 +3648,55 @@ module Aws::SageMaker
     # @option params [required, String] :image_name
     #   The `ImageName` of the `Image` to create a version of.
     #
+    # @option params [Array<String>] :aliases
+    #   A list of aliases created with the image version.
+    #
+    # @option params [String] :vendor_guidance
+    #   The stability of the image version, specified by the maintainer.
+    #
+    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for image
+    #     version stability.
+    #
+    #   * `STABLE`\: The image version is stable.
+    #
+    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #     image versions that are set to be archived are automatically
+    #     archived after three months.
+    #
+    #   * `ARCHIVED`\: The image version is archived. Archived image versions
+    #     are not searchable and are no longer actively supported.
+    #
+    # @option params [String] :job_type
+    #   Indicates SageMaker job type compatibility.
+    #
+    #   * `TRAINING`\: The image version is compatible with SageMaker training
+    #     jobs.
+    #
+    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #     inference jobs.
+    #
+    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #     notebook kernels.
+    #
+    # @option params [String] :ml_framework
+    #   The machine learning framework vended in the image version.
+    #
+    # @option params [String] :programming_lang
+    #   The supported programming language and its version.
+    #
+    # @option params [String] :processor
+    #   Indicates CPU or GPU compatibility.
+    #
+    #   * `CPU`\: The image version is compatible with CPU.
+    #
+    #   * `GPU`\: The image version is compatible with GPU.
+    #
+    # @option params [Boolean] :horovod
+    #   Indicates Horovod compatibility.
+    #
+    # @option params [String] :release_notes
+    #   The maintainer description of the image version.
+    #
     # @return [Types::CreateImageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImageVersionResponse#image_version_arn #image_version_arn} => String
@@ -3658,6 +3707,14 @@ module Aws::SageMaker
     #     base_image: "ImageBaseImage", # required
     #     client_token: "ClientToken", # required
     #     image_name: "ImageName", # required
+    #     aliases: ["SageMakerImageVersionAlias"],
+    #     vendor_guidance: "NOT_PROVIDED", # accepts NOT_PROVIDED, STABLE, TO_BE_ARCHIVED, ARCHIVED
+    #     job_type: "TRAINING", # accepts TRAINING, INFERENCE, NOTEBOOK_KERNEL
+    #     ml_framework: "MLFramework",
+    #     programming_lang: "ProgrammingLang",
+    #     processor: "CPU", # accepts CPU, GPU
+    #     horovod: false,
+    #     release_notes: "ReleaseNotes",
     #   })
     #
     # @example Response structure
@@ -8394,10 +8451,13 @@ module Aws::SageMaker
     # version represents isn't deleted.
     #
     # @option params [required, String] :image_name
-    #   The name of the image.
+    #   The name of the image to delete.
     #
-    # @option params [required, Integer] :version
+    # @option params [Integer] :version
     #   The version to delete.
+    #
+    # @option params [String] :alias
+    #   The alias of the image to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8405,7 +8465,8 @@ module Aws::SageMaker
     #
     #   resp = client.delete_image_version({
     #     image_name: "ImageName", # required
-    #     version: 1, # required
+    #     version: 1,
+    #     alias: "SageMakerImageVersionAlias",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteImageVersion AWS API Documentation
@@ -11189,6 +11250,9 @@ module Aws::SageMaker
     #   The version of the image. If not specified, the latest version is
     #   described.
     #
+    # @option params [String] :alias
+    #   The alias of the image version.
+    #
     # @return [Types::DescribeImageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeImageVersionResponse#base_image #base_image} => String
@@ -11200,12 +11264,20 @@ module Aws::SageMaker
     #   * {Types::DescribeImageVersionResponse#image_version_status #image_version_status} => String
     #   * {Types::DescribeImageVersionResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeImageVersionResponse#version #version} => Integer
+    #   * {Types::DescribeImageVersionResponse#vendor_guidance #vendor_guidance} => String
+    #   * {Types::DescribeImageVersionResponse#job_type #job_type} => String
+    #   * {Types::DescribeImageVersionResponse#ml_framework #ml_framework} => String
+    #   * {Types::DescribeImageVersionResponse#programming_lang #programming_lang} => String
+    #   * {Types::DescribeImageVersionResponse#processor #processor} => String
+    #   * {Types::DescribeImageVersionResponse#horovod #horovod} => Boolean
+    #   * {Types::DescribeImageVersionResponse#release_notes #release_notes} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_image_version({
     #     image_name: "ImageName", # required
     #     version: 1,
+    #     alias: "SageMakerImageVersionAlias",
     #   })
     #
     # @example Response structure
@@ -11219,6 +11291,13 @@ module Aws::SageMaker
     #   resp.image_version_status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.version #=> Integer
+    #   resp.vendor_guidance #=> String, one of "NOT_PROVIDED", "STABLE", "TO_BE_ARCHIVED", "ARCHIVED"
+    #   resp.job_type #=> String, one of "TRAINING", "INFERENCE", "NOTEBOOK_KERNEL"
+    #   resp.ml_framework #=> String
+    #   resp.programming_lang #=> String
+    #   resp.processor #=> String, one of "CPU", "GPU"
+    #   resp.horovod #=> Boolean
+    #   resp.release_notes #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -14064,6 +14143,58 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_algorithms(params = {}, options = {})
       req = build_request(:list_algorithms, params)
+      req.send_request(options)
+    end
+
+    # Lists the aliases of a specified image or image version.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image.
+    #
+    # @option params [String] :alias
+    #   The alias of the image version.
+    #
+    # @option params [Integer] :version
+    #   The version of the image. If image version is not specified, the
+    #   aliases of all versions of the image are listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of aliases to return.
+    #
+    # @option params [String] :next_token
+    #   If the previous call to `ListAliases` didn't return the full set of
+    #   aliases, the call returns a token for retrieving the next set of
+    #   aliases.
+    #
+    # @return [Types::ListAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAliasesResponse#sage_maker_image_version_aliases #sage_maker_image_version_aliases} => Array&lt;String&gt;
+    #   * {Types::ListAliasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_aliases({
+    #     image_name: "ImageName", # required
+    #     alias: "SageMakerImageVersionAlias",
+    #     version: 1,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sage_maker_image_version_aliases #=> Array
+    #   resp.sage_maker_image_version_aliases[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAliases AWS API Documentation
+    #
+    # @overload list_aliases(params = {})
+    # @param [Hash] params ({})
+    def list_aliases(params = {}, options = {})
+      req = build_request(:list_aliases, params)
       req.send_request(options)
     end
 
@@ -21060,8 +21191,8 @@ module Aws::SageMaker
     #   The name of the image to update.
     #
     # @option params [String] :role_arn
-    #   The new Amazon Resource Name (ARN) for the IAM role that enables
-    #   Amazon SageMaker to perform tasks on your behalf.
+    #   The new ARN for the IAM role that enables Amazon SageMaker to perform
+    #   tasks on your behalf.
     #
     # @return [Types::UpdateImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21087,6 +21218,103 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_image(params = {}, options = {})
       req = build_request(:update_image, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of a SageMaker image version.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the image.
+    #
+    # @option params [String] :alias
+    #   The alias of the image version.
+    #
+    # @option params [Integer] :version
+    #   The version of the image.
+    #
+    # @option params [Array<String>] :aliases_to_add
+    #   A list of aliases to add.
+    #
+    # @option params [Array<String>] :aliases_to_delete
+    #   A list of aliases to delete.
+    #
+    # @option params [String] :vendor_guidance
+    #   The availability of the image version specified by the maintainer.
+    #
+    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for image
+    #     version stability.
+    #
+    #   * `STABLE`\: The image version is stable.
+    #
+    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #     image versions that are set to be archived are automatically
+    #     archived after three months.
+    #
+    #   * `ARCHIVED`\: The image version is archived. Archived image versions
+    #     are not searchable and are no longer actively supported.
+    #
+    # @option params [String] :job_type
+    #   Indicates SageMaker job type compatibility.
+    #
+    #   * `TRAINING`\: The image version is compatible with SageMaker training
+    #     jobs.
+    #
+    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #     inference jobs.
+    #
+    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #     notebook kernels.
+    #
+    # @option params [String] :ml_framework
+    #   The machine learning framework vended in the image version.
+    #
+    # @option params [String] :programming_lang
+    #   The supported programming language and its version.
+    #
+    # @option params [String] :processor
+    #   Indicates CPU or GPU compatibility.
+    #
+    #   * `CPU`\: The image version is compatible with CPU.
+    #
+    #   * `GPU`\: The image version is compatible with GPU.
+    #
+    # @option params [Boolean] :horovod
+    #   Indicates Horovod compatibility.
+    #
+    # @option params [String] :release_notes
+    #   The maintainer description of the image version.
+    #
+    # @return [Types::UpdateImageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateImageVersionResponse#image_version_arn #image_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_image_version({
+    #     image_name: "ImageName", # required
+    #     alias: "SageMakerImageVersionAlias",
+    #     version: 1,
+    #     aliases_to_add: ["SageMakerImageVersionAlias"],
+    #     aliases_to_delete: ["SageMakerImageVersionAlias"],
+    #     vendor_guidance: "NOT_PROVIDED", # accepts NOT_PROVIDED, STABLE, TO_BE_ARCHIVED, ARCHIVED
+    #     job_type: "TRAINING", # accepts TRAINING, INFERENCE, NOTEBOOK_KERNEL
+    #     ml_framework: "MLFramework",
+    #     programming_lang: "ProgrammingLang",
+    #     processor: "CPU", # accepts CPU, GPU
+    #     horovod: false,
+    #     release_notes: "ReleaseNotes",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateImageVersion AWS API Documentation
+    #
+    # @overload update_image_version(params = {})
+    # @param [Hash] params ({})
+    def update_image_version(params = {}, options = {})
+      req = build_request(:update_image_version, params)
       req.send_request(options)
     end
 
@@ -22472,7 +22700,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.157.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5381,8 +5381,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
-    #   SageMaker to perform tasks on your behalf.
+    #   The ARN of an IAM role that enables Amazon SageMaker to perform
+    #   tasks on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5402,7 +5402,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] image_arn
-    #   The Amazon Resource Name (ARN) of the image.
+    #   The ARN of the image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImageResponse AWS API Documentation
@@ -5435,18 +5435,83 @@ module Aws::SageMaker
     #   The `ImageName` of the `Image` to create a version of.
     #   @return [String]
     #
+    # @!attribute [rw] aliases
+    #   A list of aliases created with the image version.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vendor_guidance
+    #   The stability of the image version, specified by the maintainer.
+    #
+    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for
+    #     image version stability.
+    #
+    #   * `STABLE`\: The image version is stable.
+    #
+    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #     image versions that are set to be archived are automatically
+    #     archived after three months.
+    #
+    #   * `ARCHIVED`\: The image version is archived. Archived image
+    #     versions are not searchable and are no longer actively supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_type
+    #   Indicates SageMaker job type compatibility.
+    #
+    #   * `TRAINING`\: The image version is compatible with SageMaker
+    #     training jobs.
+    #
+    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #     inference jobs.
+    #
+    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #     notebook kernels.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_framework
+    #   The machine learning framework vended in the image version.
+    #   @return [String]
+    #
+    # @!attribute [rw] programming_lang
+    #   The supported programming language and its version.
+    #   @return [String]
+    #
+    # @!attribute [rw] processor
+    #   Indicates CPU or GPU compatibility.
+    #
+    #   * `CPU`\: The image version is compatible with CPU.
+    #
+    #   * `GPU`\: The image version is compatible with GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] horovod
+    #   Indicates Horovod compatibility.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] release_notes
+    #   The maintainer description of the image version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImageVersionRequest AWS API Documentation
     #
     class CreateImageVersionRequest < Struct.new(
       :base_image,
       :client_token,
-      :image_name)
+      :image_name,
+      :aliases,
+      :vendor_guidance,
+      :job_type,
+      :ml_framework,
+      :programming_lang,
+      :processor,
+      :horovod,
+      :release_notes)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] image_version_arn
-    #   The Amazon Resource Name (ARN) of the image version.
+    #   The ARN of the image version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateImageVersionResponse AWS API Documentation
@@ -8931,18 +8996,23 @@ module Aws::SageMaker
     class DeleteImageResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] image_name
-    #   The name of the image.
+    #   The name of the image to delete.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The version to delete.
     #   @return [Integer]
     #
+    # @!attribute [rw] alias
+    #   The alias of the image to delete.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteImageVersionRequest AWS API Documentation
     #
     class DeleteImageVersionRequest < Struct.new(
       :image_name,
-      :version)
+      :version,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11707,7 +11777,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] image_arn
-    #   The Amazon Resource Name (ARN) of the image.
+    #   The ARN of the image.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -11723,8 +11793,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that enables Amazon
-    #   SageMaker to perform tasks on your behalf.
+    #   The ARN of the IAM role that enables Amazon SageMaker to perform
+    #   tasks on your behalf.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImageResponse AWS API Documentation
@@ -11752,11 +11822,16 @@ module Aws::SageMaker
     #   described.
     #   @return [Integer]
     #
+    # @!attribute [rw] alias
+    #   The alias of the image version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImageVersionRequest AWS API Documentation
     #
     class DescribeImageVersionRequest < Struct.new(
       :image_name,
-      :version)
+      :version,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11780,7 +11855,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] image_arn
-    #   The Amazon Resource Name (ARN) of the image the version is based on.
+    #   The ARN of the image the version is based on.
     #   @return [String]
     #
     # @!attribute [rw] image_version_arn
@@ -11799,6 +11874,59 @@ module Aws::SageMaker
     #   The version number.
     #   @return [Integer]
     #
+    # @!attribute [rw] vendor_guidance
+    #   The stability of the image version specified by the maintainer.
+    #
+    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for
+    #     image version stability.
+    #
+    #   * `STABLE`\: The image version is stable.
+    #
+    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #     image versions that are set to be archived are automatically
+    #     archived after three months.
+    #
+    #   * `ARCHIVED`\: The image version is archived. Archived image
+    #     versions are not searchable and are no longer actively supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_type
+    #   Indicates SageMaker job type compatibility.
+    #
+    #   * `TRAINING`\: The image version is compatible with SageMaker
+    #     training jobs.
+    #
+    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #     inference jobs.
+    #
+    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #     notebook kernels.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_framework
+    #   The machine learning framework vended in the image version.
+    #   @return [String]
+    #
+    # @!attribute [rw] programming_lang
+    #   The supported programming language and its version.
+    #   @return [String]
+    #
+    # @!attribute [rw] processor
+    #   Indicates CPU or GPU compatibility.
+    #
+    #   * `CPU`\: The image version is compatible with CPU.
+    #
+    #   * `GPU`\: The image version is compatible with GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] horovod
+    #   Indicates Horovod compatibility.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] release_notes
+    #   The maintainer description of the image version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeImageVersionResponse AWS API Documentation
     #
     class DescribeImageVersionResponse < Struct.new(
@@ -11810,7 +11938,14 @@ module Aws::SageMaker
       :image_version_arn,
       :image_version_status,
       :last_modified_time,
-      :version)
+      :version,
+      :vendor_guidance,
+      :job_type,
+      :ml_framework,
+      :programming_lang,
+      :processor,
+      :horovod,
+      :release_notes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19464,7 +19599,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] image_arn
-    #   The Amazon Resource Name (ARN) of the image.
+    #   The ARN of the image.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -19536,7 +19671,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] image_arn
-    #   The Amazon Resource Name (ARN) of the image the version is based on.
+    #   The ARN of the image the version is based on.
     #   @return [String]
     #
     # @!attribute [rw] image_version_arn
@@ -21158,6 +21293,58 @@ module Aws::SageMaker
     #
     class ListAlgorithmsOutput < Struct.new(
       :algorithm_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The alias of the image version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the image. If image version is not specified, the
+    #   aliases of all versions of the image are listed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of aliases to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous call to `ListAliases` didn't return the full set of
+    #   aliases, the call returns a token for retrieving the next set of
+    #   aliases.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAliasesRequest AWS API Documentation
+    #
+    class ListAliasesRequest < Struct.new(
+      :image_name,
+      :alias,
+      :version,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sage_maker_image_version_aliases
+    #   A list of SageMaker image version aliases.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of aliases, if more aliases exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAliasesResponse AWS API Documentation
+    #
+    class ListAliasesResponse < Struct.new(
+      :sage_maker_image_version_aliases,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -37235,8 +37422,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The new Amazon Resource Name (ARN) for the IAM role that enables
-    #   Amazon SageMaker to perform tasks on your behalf.
+    #   The new ARN for the IAM role that enables Amazon SageMaker to
+    #   perform tasks on your behalf.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateImageRequest AWS API Documentation
@@ -37252,13 +37439,117 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] image_arn
-    #   The Amazon Resource Name (ARN) of the image.
+    #   The ARN of the image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateImageResponse AWS API Documentation
     #
     class UpdateImageResponse < Struct.new(
       :image_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The alias of the image version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the image.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aliases_to_add
+    #   A list of aliases to add.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aliases_to_delete
+    #   A list of aliases to delete.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vendor_guidance
+    #   The availability of the image version specified by the maintainer.
+    #
+    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for
+    #     image version stability.
+    #
+    #   * `STABLE`\: The image version is stable.
+    #
+    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #     image versions that are set to be archived are automatically
+    #     archived after three months.
+    #
+    #   * `ARCHIVED`\: The image version is archived. Archived image
+    #     versions are not searchable and are no longer actively supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_type
+    #   Indicates SageMaker job type compatibility.
+    #
+    #   * `TRAINING`\: The image version is compatible with SageMaker
+    #     training jobs.
+    #
+    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #     inference jobs.
+    #
+    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #     notebook kernels.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_framework
+    #   The machine learning framework vended in the image version.
+    #   @return [String]
+    #
+    # @!attribute [rw] programming_lang
+    #   The supported programming language and its version.
+    #   @return [String]
+    #
+    # @!attribute [rw] processor
+    #   Indicates CPU or GPU compatibility.
+    #
+    #   * `CPU`\: The image version is compatible with CPU.
+    #
+    #   * `GPU`\: The image version is compatible with GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] horovod
+    #   Indicates Horovod compatibility.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] release_notes
+    #   The maintainer description of the image version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateImageVersionRequest AWS API Documentation
+    #
+    class UpdateImageVersionRequest < Struct.new(
+      :image_name,
+      :alias,
+      :version,
+      :aliases_to_add,
+      :aliases_to_delete,
+      :vendor_guidance,
+      :job_type,
+      :ml_framework,
+      :programming_lang,
+      :processor,
+      :horovod,
+      :release_notes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_version_arn
+    #   The ARN of the image version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateImageVersionResponse AWS API Documentation
+    #
+    class UpdateImageVersionResponse < Struct.new(
+      :image_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
