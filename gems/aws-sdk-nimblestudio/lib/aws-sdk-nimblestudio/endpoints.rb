@@ -305,6 +305,20 @@ module Aws::NimbleStudio
       end
     end
 
+    class GetStreamingSessionBackup
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::NimbleStudio::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetStreamingSessionStream
       def self.build(context)
         unless context.config.regional_endpoint
@@ -418,6 +432,20 @@ module Aws::NimbleStudio
     end
 
     class ListStreamingImages
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::NimbleStudio::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListStreamingSessionBackups
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

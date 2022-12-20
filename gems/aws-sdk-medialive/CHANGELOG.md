@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2022-12-20)
+------------------
+
+* Feature - This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input.
+
 1.93.0 (2022-12-09)
 ------------------
 

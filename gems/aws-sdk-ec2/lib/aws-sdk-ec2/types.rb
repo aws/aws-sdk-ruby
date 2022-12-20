@@ -5719,7 +5719,7 @@ module Aws::EC2
     #   snapshot. The default KMS key for Amazon EBS is used unless you
     #   specify a non-default Key Management Service (KMS) KMS key using
     #   `KmsKeyId`. For more information, see [Amazon EBS encryption][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -5774,8 +5774,7 @@ module Aws::EC2
     #   Region, from one Outpost to another, or within the same Outpost.
     #
     #   For more information, see [ Copy AMIs from an Amazon Web Services
-    #   Region to an Outpost][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   Region to an Outpost][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -18031,6 +18030,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesRequest AWS API Documentation
     #
     class DescribeImagesRequest < Struct.new(
@@ -18039,7 +18048,9 @@ module Aws::EC2
       :image_ids,
       :owners,
       :include_deprecated,
-      :dry_run)
+      :dry_run,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18048,10 +18059,16 @@ module Aws::EC2
     #   Information about the images.
     #   @return [Array<Types::Image>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesResult AWS API Documentation
     #
     class DescribeImagesResult < Struct.new(
-      :images)
+      :images,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33831,7 +33848,7 @@ module Aws::EC2
     # @!attribute [rw] platform_details
     #   The platform details associated with the billing code of the AMI.
     #   For more information, see [Understand AMI billing information][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -33924,7 +33941,7 @@ module Aws::EC2
     #
     # @!attribute [rw] boot_mode
     #   The boot mode of the image. For more information, see [Boot
-    #   modes][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   modes][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -33933,8 +33950,8 @@ module Aws::EC2
     #
     # @!attribute [rw] tpm_support
     #   If the image is configured for NitroTPM support, the value is
-    #   `v2.0`. For more information, see [NitroTPM][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   `v2.0`. For more information, see [NitroTPM][1] in the *Amazon EC2
+    #   User Guide*.
     #
     #
     #
@@ -33953,8 +33970,8 @@ module Aws::EC2
     #   automatically set to `required` so that, by default, the instance
     #   requires that IMDSv2 is used when requesting instance metadata. In
     #   addition, `HttpPutResponseHopLimit` is set to `2`. For more
-    #   information, see [Configure the AMI][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   information, see [Configure the AMI][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -34047,7 +34064,7 @@ module Aws::EC2
     #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command.
     #   You can inspect and modify the UEFI data by using the
     #   [python-uefivars tool][2] on GitHub. For more information, see [UEFI
-    #   Secure Boot][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Secure Boot][3] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -34077,8 +34094,8 @@ module Aws::EC2
     #   automatically set to `required` so that, by default, the instance
     #   requires that IMDSv2 is used when requesting instance metadata. In
     #   addition, `HttpPutResponseHopLimit` is set to `2`. For more
-    #   information, see [Configure the AMI][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   information, see [Configure the AMI][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -49223,9 +49240,8 @@ module Aws::EC2
     #   If you create an AMI on an Outpost, then all backing snapshots must
     #   be on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
-    #   on the same Outpost only. For more information, [ Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   on the same Outpost only. For more information, [Amazon EBS local
+    #   snapshots on Outposts][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -49265,8 +49281,19 @@ module Aws::EC2
     #
     # @!attribute [rw] billing_products
     #   The billing product codes. Your account must be authorized to
-    #   specify billing product codes. Otherwise, you can use the Amazon Web
-    #   Services Marketplace to bill for the use of an AMI.
+    #   specify billing product codes.
+    #
+    #   If your account is not authorized to specify billing product codes,
+    #   you can publish AMIs that include billable software and list them on
+    #   the Amazon Web Services Marketplace. You must first register as a
+    #   seller on the Amazon Web Services Marketplace. For more information,
+    #   see [Getting started as a seller][1] and [AMI-based products][2] in
+    #   the *Amazon Web Services Marketplace Seller Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html
+    #   [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] ramdisk_id
@@ -49297,7 +49324,7 @@ module Aws::EC2
     #
     # @!attribute [rw] boot_mode
     #   The boot mode of the AMI. For more information, see [Boot modes][1]
-    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #   in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -49306,8 +49333,7 @@ module Aws::EC2
     #
     # @!attribute [rw] tpm_support
     #   Set to `v2.0` to enable Trusted Platform Module (TPM) support. For
-    #   more information, see [NitroTPM][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   more information, see [NitroTPM][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -49319,7 +49345,7 @@ module Aws::EC2
     #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command.
     #   You can inspect and modify the UEFI data by using the
     #   [python-uefivars tool][2] on GitHub. For more information, see [UEFI
-    #   Secure Boot][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Secure Boot][3] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -49334,8 +49360,8 @@ module Aws::EC2
     #   automatically set to `required` so that, by default, the instance
     #   requires that IMDSv2 is used when requesting instance metadata. In
     #   addition, `HttpPutResponseHopLimit` is set to `2`. For more
-    #   information, see [Configure the AMI][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   information, see [Configure the AMI][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #   <note markdown="1"> If you set the value to `v2.0`, make sure that your AMI software can
     #   support IMDSv2.

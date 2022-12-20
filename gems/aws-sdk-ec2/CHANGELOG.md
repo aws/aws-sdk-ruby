@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.356.0 (2022-12-20)
+------------------
+
+* Feature - Adds support for pagination in the EC2 DescribeImages API.
+
 1.355.0 (2022-12-12)
 ------------------
 

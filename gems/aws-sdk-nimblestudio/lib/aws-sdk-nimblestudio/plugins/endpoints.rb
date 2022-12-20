@@ -98,6 +98,8 @@ module Aws::NimbleStudio
             Aws::NimbleStudio::Endpoints::GetStreamingImage.build(context)
           when :get_streaming_session
             Aws::NimbleStudio::Endpoints::GetStreamingSession.build(context)
+          when :get_streaming_session_backup
+            Aws::NimbleStudio::Endpoints::GetStreamingSessionBackup.build(context)
           when :get_streaming_session_stream
             Aws::NimbleStudio::Endpoints::GetStreamingSessionStream.build(context)
           when :get_studio
@@ -116,6 +118,8 @@ module Aws::NimbleStudio
             Aws::NimbleStudio::Endpoints::ListLaunchProfiles.build(context)
           when :list_streaming_images
             Aws::NimbleStudio::Endpoints::ListStreamingImages.build(context)
+          when :list_streaming_session_backups
+            Aws::NimbleStudio::Endpoints::ListStreamingSessionBackups.build(context)
           when :list_streaming_sessions
             Aws::NimbleStudio::Endpoints::ListStreamingSessions.build(context)
           when :list_studio_components

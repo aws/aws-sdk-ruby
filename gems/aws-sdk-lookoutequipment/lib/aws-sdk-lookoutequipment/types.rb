@@ -2143,13 +2143,18 @@ module Aws::LookoutEquipment
     #   listed.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Specifies the current status of the inference schedulers to list.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListInferenceSchedulersRequest AWS API Documentation
     #
     class ListInferenceSchedulersRequest < Struct.new(
       :next_token,
       :max_results,
       :inference_scheduler_name_begins_with,
-      :model_name)
+      :model_name,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

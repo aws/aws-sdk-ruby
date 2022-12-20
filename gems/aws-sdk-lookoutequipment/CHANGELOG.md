@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-12-20)
+------------------
+
+* Feature - This release adds support for listing inference schedulers by status.
+
 1.14.0 (2022-10-25)
 ------------------
 

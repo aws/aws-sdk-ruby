@@ -1769,9 +1769,8 @@ module Aws::EC2
     #   If you create an AMI on an Outpost, then all backing snapshots must be
     #   on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
-    #   on the same Outpost only. For more information, [ Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   on the same Outpost only. For more information, [Amazon EBS local
+    #   snapshots on Outposts][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -1799,8 +1798,19 @@ module Aws::EC2
     #   single quotes ('), at-signs (@), or underscores(\_)
     # @option options [Array<String>] :billing_products
     #   The billing product codes. Your account must be authorized to specify
-    #   billing product codes. Otherwise, you can use the Amazon Web Services
-    #   Marketplace to bill for the use of an AMI.
+    #   billing product codes.
+    #
+    #   If your account is not authorized to specify billing product codes,
+    #   you can publish AMIs that include billable software and list them on
+    #   the Amazon Web Services Marketplace. You must first register as a
+    #   seller on the Amazon Web Services Marketplace. For more information,
+    #   see [Getting started as a seller][1] and [AMI-based products][2] in
+    #   the *Amazon Web Services Marketplace Seller Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html
+    #   [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html
     # @option options [String] :ramdisk_id
     #   The ID of the RAM disk.
     # @option options [String] :root_device_name
@@ -1820,15 +1830,14 @@ module Aws::EC2
     #   Default: `paravirtual`
     # @option options [String] :boot_mode
     #   The boot mode of the AMI. For more information, see [Boot modes][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     # @option options [String] :tpm_support
     #   Set to `v2.0` to enable Trusted Platform Module (TPM) support. For
-    #   more information, see [NitroTPM][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   more information, see [NitroTPM][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -1838,7 +1847,7 @@ module Aws::EC2
     #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command. You
     #   can inspect and modify the UEFI data by using the [python-uefivars
     #   tool][2] on GitHub. For more information, see [UEFI Secure Boot][3] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -1851,8 +1860,7 @@ module Aws::EC2
     #   set to `required` so that, by default, the instance requires that
     #   IMDSv2 is used when requesting instance metadata. In addition,
     #   `HttpPutResponseHopLimit` is set to `2`. For more information, see
-    #   [Configure the AMI][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Configure the AMI][1] in the *Amazon EC2 User Guide*.
     #
     #   <note markdown="1"> If you set the value to `v2.0`, make sure that your AMI software can
     #   support IMDSv2.
@@ -2192,16 +2200,18 @@ module Aws::EC2
     # @return [Image::Collection]
     def images(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_images(options)
-        resp.data.images.each do |i|
-          batch << Image.new(
-            id: i.image_id,
-            data: i,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.images.each do |i|
+            batch << Image.new(
+              id: i.image_id,
+              data: i,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Image::Collection.new(batches)
     end

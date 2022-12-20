@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2022-12-20)
+------------------
+
+* Feature - Amazon SageMaker Autopilot adds support for new objective metrics in CreateAutoMLJob API.
+
 1.157.0 (2022-12-19)
 ------------------
 

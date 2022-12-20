@@ -437,6 +437,26 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Dolby EDecode
+    #
+    # @!attribute [rw] program_selection
+    #   Applies only to Dolby E. Enter the program ID (according to the
+    #   metadata in the audio) of the Dolby E program to extract from the
+    #   specified track. One program extracted per audio selector. To select
+    #   multiple programs, create multiple selectors with the same Track and
+    #   different Program numbers. “All channels” means to ignore the
+    #   program IDs and include all the channels in this selector; useful if
+    #   metadata is known to be incorrect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioDolbyEDecode AWS API Documentation
+    #
+    class AudioDolbyEDecode < Struct.new(
+      :program_selection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Audio Hls Rendition Selection
     #
     # @!attribute [rw] group_id
@@ -663,10 +683,16 @@ module Aws::MediaLive
     #   Selects one or more unique audio tracks from within a source.
     #   @return [Array<Types::AudioTrack>]
     #
+    # @!attribute [rw] dolby_e_decode
+    #   Configure decoding options for Dolby E streams - these should be
+    #   Dolby E frames carried in PCM streams tagged with SMPTE-337
+    #   @return [Types::AudioDolbyEDecode]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioTrackSelection AWS API Documentation
     #
     class AudioTrackSelection < Struct.new(
-      :tracks)
+      :tracks,
+      :dolby_e_decode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3561,7 +3587,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Dolby Vision Profile 8.1 Settings
+    # Dolby Vision81 Settings
     #
     # @api private
     #
@@ -4194,10 +4220,10 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] password_param
-    #   Password if credentials are required to access the POIS endpoint.
-    #   This is a reference to an AWS parameter store name from which the
-    #   password can be retrieved. AWS Parameter store format:
-    #   "ssm://<parameter name="">"</p> </parameter>
+    #   Reference to an AWS parameter store name from which the password can
+    #   be retrieved if credentials are required to access the POIS
+    #   endpoint. AWS Parameter store format: "ssm://<parameter
+    #   name="">"</p> </parameter>
     #   @return [String]
     #
     # @!attribute [rw] pois_endpoint
@@ -4492,11 +4518,16 @@ module Aws::MediaLive
     #   Unit for the frame capture interval.
     #   @return [String]
     #
+    # @!attribute [rw] timecode_burnin_settings
+    #   Timecode burn-in settings
+    #   @return [Types::TimecodeBurninSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureSettings AWS API Documentation
     #
     class FrameCaptureSettings < Struct.new(
       :capture_interval,
-      :capture_interval_units)
+      :capture_interval_units,
+      :timecode_burnin_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4901,6 +4932,10 @@ module Aws::MediaLive
     #   source specified in Timecode Config
     #   @return [String]
     #
+    # @!attribute [rw] timecode_burnin_settings
+    #   Timecode burn-in settings
+    #   @return [Types::TimecodeBurninSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264Settings AWS API Documentation
     #
     class H264Settings < Struct.new(
@@ -4944,7 +4979,8 @@ module Aws::MediaLive
       :subgop_length,
       :syntax,
       :temporal_aq,
-      :timecode_insertion)
+      :timecode_insertion,
+      :timecode_burnin_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4956,7 +4992,7 @@ module Aws::MediaLive
     #   @return [Types::ColorSpacePassthroughSettings]
     #
     # @!attribute [rw] dolby_vision_81_settings
-    #   Dolby Vision Profile 8.1 Settings
+    #   Dolby Vision81 Settings
     #   @return [Types::DolbyVision81Settings]
     #
     # @!attribute [rw] hdr_10_settings
@@ -5166,6 +5202,10 @@ module Aws::MediaLive
     #   source specified in Timecode Config
     #   @return [String]
     #
+    # @!attribute [rw] timecode_burnin_settings
+    #   Timecode burn-in settings
+    #   @return [Types::TimecodeBurninSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265Settings AWS API Documentation
     #
     class H265Settings < Struct.new(
@@ -5197,7 +5237,8 @@ module Aws::MediaLive
       :scene_change_detect,
       :slices,
       :tier,
-      :timecode_insertion)
+      :timecode_insertion,
+      :timecode_burnin_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5526,7 +5567,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] min_segment_length
-    #   When set, minimumSegmentLength is enforced by looking ahead and back
+    #   Minimum length of MPEG-2 Transport Stream segments in seconds. When
+    #   set, minimum segment length is enforced by looking ahead and back
     #   within the specified range for a nearby avail and extending the
     #   segment size if needed.
     #   @return [Integer]
@@ -5587,9 +5629,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] segment_length
-    #   Length of MPEG-2 Transport Stream segments to create (in seconds).
-    #   Note that segments will end on the next keyframe after this number
-    #   of seconds, so actual segment length may be longer.
+    #   Length of MPEG-2 Transport Stream segments to create in seconds.
+    #   Note that segments will end on the next keyframe after this
+    #   duration, so actual segment length may be longer.
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_mode
@@ -8388,6 +8430,10 @@ module Aws::MediaLive
     #   GOP header.
     #   @return [String]
     #
+    # @!attribute [rw] timecode_burnin_settings
+    #   Timecode burn-in settings
+    #   @return [Types::TimecodeBurninSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Mpeg2Settings AWS API Documentation
     #
     class Mpeg2Settings < Struct.new(
@@ -8406,7 +8452,8 @@ module Aws::MediaLive
       :gop_size_units,
       :scan_type,
       :subgop_length,
-      :timecode_insertion)
+      :timecode_insertion,
+      :timecode_burnin_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10120,7 +10167,7 @@ module Aws::MediaLive
     #   @return [Types::PauseStateScheduleActionSettings]
     #
     # @!attribute [rw] scte_35_input_settings
-    #   Action to get scte35 input
+    #   Action to specify scte35 input
     #   @return [Types::Scte35InputScheduleActionSettings]
     #
     # @!attribute [rw] scte_35_return_to_network_settings
@@ -10340,7 +10387,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Settings for the "scte35 input" action
+    # Scte35Input Schedule Action Settings
     #
     # @!attribute [rw] input_attachment_name_reference
     #   In fixed mode, enter the name of the input attachment that you want
@@ -11155,6 +11202,30 @@ module Aws::MediaLive
     #
     class ThumbnailData < Struct.new(
       :body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Timecode Burnin Settings
+    #
+    # @!attribute [rw] font_size
+    #   Choose a timecode burn-in font size
+    #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   Choose a timecode burn-in output position
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   Create a timecode burn-in prefix (optional)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TimecodeBurninSettings AWS API Documentation
+    #
+    class TimecodeBurninSettings < Struct.new(
+      :font_size,
+      :position,
+      :prefix)
       SENSITIVE = []
       include Aws::Structure
     end

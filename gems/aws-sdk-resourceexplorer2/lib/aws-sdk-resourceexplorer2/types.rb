@@ -401,23 +401,24 @@ module Aws::ResourceExplorer2
     #   @return [Time]
     #
     # @!attribute [rw] replicating_from
-    #   If this index is `Type=AGGREGATOR`, then this response value
-    #   contains a list of the Amazon Web Services Regions that replicate
-    #   their content to the index in this Region. Not present for a local
-    #   index.
+    #   This response value is present only if this index is
+    #   `Type=AGGREGATOR`.
+    #
+    #   A list of the Amazon Web Services Regions that replicate their
+    #   content to the index in this Region.
     #   @return [Array<String>]
     #
     # @!attribute [rw] replicating_to
-    #   Identifies the Amazon Web Services Region that has an index set to
-    #   `Type=AGGREGATOR`, if one exists. If it does, then the Region you
-    #   called this operation in replicates its index information to the
-    #   Region specified in this response value. Not present if there isn't
-    #   an aggregator index in the account.
+    #   This response value is present only if this index is `Type=LOCAL`.
+    #
+    #   The Amazon Web Services Region that contains the aggregator index,
+    #   if one exists. If an aggregator index does exist then the Region in
+    #   which you called this operation replicates its index information to
+    #   the Region specified in this response value.
     #   @return [Array<String>]
     #
     # @!attribute [rw] state
-    #   Indicates the current state of the index in this Amazon Web Services
-    #   Region.
+    #   The current state of the index in this Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -425,10 +426,9 @@ module Aws::ResourceExplorer2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
-    #   Specifies the type of the index in this Region. For information
-    #   about the aggregator index and how it differs from a local index,
-    #   see [Turning on cross-Region search by creating an aggregator
-    #   index][1].
+    #   The type of the index in this Region. For information about the
+    #   aggregator index and how it differs from a local index, see [Turning
+    #   on cross-Region search by creating an aggregator index][1].
     #
     #
     #

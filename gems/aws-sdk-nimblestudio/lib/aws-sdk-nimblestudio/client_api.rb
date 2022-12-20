@@ -24,6 +24,7 @@ module Aws::NimbleStudio
     ActiveDirectoryDnsIpAddress = Shapes::StringShape.new(name: 'ActiveDirectoryDnsIpAddress')
     ActiveDirectoryDnsIpAddressList = Shapes::ListShape.new(name: 'ActiveDirectoryDnsIpAddressList')
     ActiveDirectoryOrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'ActiveDirectoryOrganizationalUnitDistinguishedName')
+    AutomaticTerminationMode = Shapes::StringShape.new(name: 'AutomaticTerminationMode')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ComputeFarmConfiguration = Shapes::StructureShape.new(name: 'ComputeFarmConfiguration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -78,6 +79,8 @@ module Aws::NimbleStudio
     GetLaunchProfileResponse = Shapes::StructureShape.new(name: 'GetLaunchProfileResponse')
     GetStreamingImageRequest = Shapes::StructureShape.new(name: 'GetStreamingImageRequest')
     GetStreamingImageResponse = Shapes::StructureShape.new(name: 'GetStreamingImageResponse')
+    GetStreamingSessionBackupRequest = Shapes::StructureShape.new(name: 'GetStreamingSessionBackupRequest')
+    GetStreamingSessionBackupResponse = Shapes::StructureShape.new(name: 'GetStreamingSessionBackupResponse')
     GetStreamingSessionRequest = Shapes::StructureShape.new(name: 'GetStreamingSessionRequest')
     GetStreamingSessionResponse = Shapes::StructureShape.new(name: 'GetStreamingSessionResponse')
     GetStreamingSessionStreamRequest = Shapes::StructureShape.new(name: 'GetStreamingSessionStreamRequest')
@@ -126,6 +129,8 @@ module Aws::NimbleStudio
     ListLaunchProfilesResponse = Shapes::StructureShape.new(name: 'ListLaunchProfilesResponse')
     ListStreamingImagesRequest = Shapes::StructureShape.new(name: 'ListStreamingImagesRequest')
     ListStreamingImagesResponse = Shapes::StructureShape.new(name: 'ListStreamingImagesResponse')
+    ListStreamingSessionBackupsRequest = Shapes::StructureShape.new(name: 'ListStreamingSessionBackupsRequest')
+    ListStreamingSessionBackupsResponse = Shapes::StructureShape.new(name: 'ListStreamingSessionBackupsResponse')
     ListStreamingSessionsRequest = Shapes::StructureShape.new(name: 'ListStreamingSessionsRequest')
     ListStreamingSessionsResponse = Shapes::StructureShape.new(name: 'ListStreamingSessionsResponse')
     ListStudioComponentsRequest = Shapes::StructureShape.new(name: 'ListStudioComponentsRequest')
@@ -154,6 +159,8 @@ module Aws::NimbleStudio
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionBackupMode = Shapes::StringShape.new(name: 'SessionBackupMode')
+    SessionPersistenceMode = Shapes::StringShape.new(name: 'SessionPersistenceMode')
     SharedFileSystemConfiguration = Shapes::StructureShape.new(name: 'SharedFileSystemConfiguration')
     StartStreamingSessionRequest = Shapes::StructureShape.new(name: 'StartStreamingSessionRequest')
     StartStreamingSessionResponse = Shapes::StructureShape.new(name: 'StartStreamingSessionResponse')
@@ -163,8 +170,10 @@ module Aws::NimbleStudio
     StopStreamingSessionResponse = Shapes::StructureShape.new(name: 'StopStreamingSessionResponse')
     StreamConfiguration = Shapes::StructureShape.new(name: 'StreamConfiguration')
     StreamConfigurationCreate = Shapes::StructureShape.new(name: 'StreamConfigurationCreate')
+    StreamConfigurationMaxBackupsToRetain = Shapes::IntegerShape.new(name: 'StreamConfigurationMaxBackupsToRetain')
     StreamConfigurationMaxSessionLengthInMinutes = Shapes::IntegerShape.new(name: 'StreamConfigurationMaxSessionLengthInMinutes')
     StreamConfigurationMaxStoppedSessionLengthInMinutes = Shapes::IntegerShape.new(name: 'StreamConfigurationMaxStoppedSessionLengthInMinutes')
+    StreamConfigurationSessionBackup = Shapes::StructureShape.new(name: 'StreamConfigurationSessionBackup')
     StreamConfigurationSessionStorage = Shapes::StructureShape.new(name: 'StreamConfigurationSessionStorage')
     StreamingClipboardMode = Shapes::StringShape.new(name: 'StreamingClipboardMode')
     StreamingImage = Shapes::StructureShape.new(name: 'StreamingImage')
@@ -183,6 +192,8 @@ module Aws::NimbleStudio
     StreamingInstanceType = Shapes::StringShape.new(name: 'StreamingInstanceType')
     StreamingInstanceTypeList = Shapes::ListShape.new(name: 'StreamingInstanceTypeList')
     StreamingSession = Shapes::StructureShape.new(name: 'StreamingSession')
+    StreamingSessionBackup = Shapes::StructureShape.new(name: 'StreamingSessionBackup')
+    StreamingSessionBackupList = Shapes::ListShape.new(name: 'StreamingSessionBackupList')
     StreamingSessionId = Shapes::StringShape.new(name: 'StreamingSessionId')
     StreamingSessionList = Shapes::ListShape.new(name: 'StreamingSessionList')
     StreamingSessionState = Shapes::StringShape.new(name: 'StreamingSessionState')
@@ -250,6 +261,11 @@ module Aws::NimbleStudio
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationResult = Shapes::StructureShape.new(name: 'ValidationResult')
     ValidationResults = Shapes::ListShape.new(name: 'ValidationResults')
+    VolumeConfiguration = Shapes::StructureShape.new(name: 'VolumeConfiguration')
+    VolumeIops = Shapes::IntegerShape.new(name: 'VolumeIops')
+    VolumeRetentionMode = Shapes::StringShape.new(name: 'VolumeRetentionMode')
+    VolumeSizeInGiB = Shapes::IntegerShape.new(name: 'VolumeSizeInGiB')
+    VolumeThroughputInMiBs = Shapes::IntegerShape.new(name: 'VolumeThroughputInMiBs')
     WindowsMountDrive = Shapes::StringShape.new(name: 'WindowsMountDrive')
 
     AcceptEulasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
@@ -314,7 +330,7 @@ module Aws::NimbleStudio
 
     CreateStreamingSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
     CreateStreamingSessionRequest.add_member(:ec2_instance_type, Shapes::ShapeRef.new(shape: StreamingInstanceType, location_name: "ec2InstanceType"))
-    CreateStreamingSessionRequest.add_member(:launch_profile_id, Shapes::ShapeRef.new(shape: String, location_name: "launchProfileId"))
+    CreateStreamingSessionRequest.add_member(:launch_profile_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "launchProfileId"))
     CreateStreamingSessionRequest.add_member(:owned_by, Shapes::ShapeRef.new(shape: String, location_name: "ownedBy"))
     CreateStreamingSessionRequest.add_member(:streaming_image_id, Shapes::ShapeRef.new(shape: StreamingImageId, location_name: "streamingImageId"))
     CreateStreamingSessionRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
@@ -489,6 +505,13 @@ module Aws::NimbleStudio
     GetStreamingImageResponse.add_member(:streaming_image, Shapes::ShapeRef.new(shape: StreamingImage, location_name: "streamingImage"))
     GetStreamingImageResponse.struct_class = Types::GetStreamingImageResponse
 
+    GetStreamingSessionBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "backupId"))
+    GetStreamingSessionBackupRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
+    GetStreamingSessionBackupRequest.struct_class = Types::GetStreamingSessionBackupRequest
+
+    GetStreamingSessionBackupResponse.add_member(:streaming_session_backup, Shapes::ShapeRef.new(shape: StreamingSessionBackup, location_name: "streamingSessionBackup"))
+    GetStreamingSessionBackupResponse.struct_class = Types::GetStreamingSessionBackupResponse
+
     GetStreamingSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "sessionId"))
     GetStreamingSessionRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
     GetStreamingSessionRequest.struct_class = Types::GetStreamingSessionRequest
@@ -645,6 +668,15 @@ module Aws::NimbleStudio
     ListStreamingImagesResponse.add_member(:streaming_images, Shapes::ShapeRef.new(shape: StreamingImageList, location_name: "streamingImages"))
     ListStreamingImagesResponse.struct_class = Types::ListStreamingImagesResponse
 
+    ListStreamingSessionBackupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListStreamingSessionBackupsRequest.add_member(:owned_by, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "ownedBy"))
+    ListStreamingSessionBackupsRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
+    ListStreamingSessionBackupsRequest.struct_class = Types::ListStreamingSessionBackupsRequest
+
+    ListStreamingSessionBackupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListStreamingSessionBackupsResponse.add_member(:streaming_session_backups, Shapes::ShapeRef.new(shape: StreamingSessionBackupList, location_name: "streamingSessionBackups"))
+    ListStreamingSessionBackupsResponse.struct_class = Types::ListStreamingSessionBackupsResponse
+
     ListStreamingSessionsRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "createdBy"))
     ListStreamingSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListStreamingSessionsRequest.add_member(:owned_by, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "ownedBy"))
@@ -739,6 +771,7 @@ module Aws::NimbleStudio
     SharedFileSystemConfiguration.add_member(:windows_mount_drive, Shapes::ShapeRef.new(shape: WindowsMountDrive, location_name: "windowsMountDrive"))
     SharedFileSystemConfiguration.struct_class = Types::SharedFileSystemConfiguration
 
+    StartStreamingSessionRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: String, location_name: "backupId"))
     StartStreamingSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
     StartStreamingSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "sessionId"))
     StartStreamingSessionRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
@@ -757,26 +790,39 @@ module Aws::NimbleStudio
     StopStreamingSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
     StopStreamingSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "sessionId"))
     StopStreamingSessionRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
+    StopStreamingSessionRequest.add_member(:volume_retention_mode, Shapes::ShapeRef.new(shape: VolumeRetentionMode, location_name: "volumeRetentionMode"))
     StopStreamingSessionRequest.struct_class = Types::StopStreamingSessionRequest
 
     StopStreamingSessionResponse.add_member(:session, Shapes::ShapeRef.new(shape: StreamingSession, location_name: "session"))
     StopStreamingSessionResponse.struct_class = Types::StopStreamingSessionResponse
 
+    StreamConfiguration.add_member(:automatic_termination_mode, Shapes::ShapeRef.new(shape: AutomaticTerminationMode, location_name: "automaticTerminationMode"))
     StreamConfiguration.add_member(:clipboard_mode, Shapes::ShapeRef.new(shape: StreamingClipboardMode, required: true, location_name: "clipboardMode"))
     StreamConfiguration.add_member(:ec2_instance_types, Shapes::ShapeRef.new(shape: StreamingInstanceTypeList, required: true, location_name: "ec2InstanceTypes"))
     StreamConfiguration.add_member(:max_session_length_in_minutes, Shapes::ShapeRef.new(shape: StreamConfigurationMaxSessionLengthInMinutes, location_name: "maxSessionLengthInMinutes"))
     StreamConfiguration.add_member(:max_stopped_session_length_in_minutes, Shapes::ShapeRef.new(shape: StreamConfigurationMaxStoppedSessionLengthInMinutes, location_name: "maxStoppedSessionLengthInMinutes"))
+    StreamConfiguration.add_member(:session_backup, Shapes::ShapeRef.new(shape: StreamConfigurationSessionBackup, location_name: "sessionBackup"))
+    StreamConfiguration.add_member(:session_persistence_mode, Shapes::ShapeRef.new(shape: SessionPersistenceMode, location_name: "sessionPersistenceMode"))
     StreamConfiguration.add_member(:session_storage, Shapes::ShapeRef.new(shape: StreamConfigurationSessionStorage, location_name: "sessionStorage"))
     StreamConfiguration.add_member(:streaming_image_ids, Shapes::ShapeRef.new(shape: StreamingImageIdList, required: true, location_name: "streamingImageIds"))
+    StreamConfiguration.add_member(:volume_configuration, Shapes::ShapeRef.new(shape: VolumeConfiguration, location_name: "volumeConfiguration"))
     StreamConfiguration.struct_class = Types::StreamConfiguration
 
+    StreamConfigurationCreate.add_member(:automatic_termination_mode, Shapes::ShapeRef.new(shape: AutomaticTerminationMode, location_name: "automaticTerminationMode"))
     StreamConfigurationCreate.add_member(:clipboard_mode, Shapes::ShapeRef.new(shape: StreamingClipboardMode, required: true, location_name: "clipboardMode"))
     StreamConfigurationCreate.add_member(:ec2_instance_types, Shapes::ShapeRef.new(shape: StreamingInstanceTypeList, required: true, location_name: "ec2InstanceTypes"))
     StreamConfigurationCreate.add_member(:max_session_length_in_minutes, Shapes::ShapeRef.new(shape: StreamConfigurationMaxSessionLengthInMinutes, location_name: "maxSessionLengthInMinutes"))
     StreamConfigurationCreate.add_member(:max_stopped_session_length_in_minutes, Shapes::ShapeRef.new(shape: StreamConfigurationMaxStoppedSessionLengthInMinutes, location_name: "maxStoppedSessionLengthInMinutes"))
+    StreamConfigurationCreate.add_member(:session_backup, Shapes::ShapeRef.new(shape: StreamConfigurationSessionBackup, location_name: "sessionBackup"))
+    StreamConfigurationCreate.add_member(:session_persistence_mode, Shapes::ShapeRef.new(shape: SessionPersistenceMode, location_name: "sessionPersistenceMode"))
     StreamConfigurationCreate.add_member(:session_storage, Shapes::ShapeRef.new(shape: StreamConfigurationSessionStorage, location_name: "sessionStorage"))
     StreamConfigurationCreate.add_member(:streaming_image_ids, Shapes::ShapeRef.new(shape: StreamingImageIdList, required: true, location_name: "streamingImageIds"))
+    StreamConfigurationCreate.add_member(:volume_configuration, Shapes::ShapeRef.new(shape: VolumeConfiguration, location_name: "volumeConfiguration"))
     StreamConfigurationCreate.struct_class = Types::StreamConfigurationCreate
+
+    StreamConfigurationSessionBackup.add_member(:max_backups_to_retain, Shapes::ShapeRef.new(shape: StreamConfigurationMaxBackupsToRetain, location_name: "maxBackupsToRetain"))
+    StreamConfigurationSessionBackup.add_member(:mode, Shapes::ShapeRef.new(shape: SessionBackupMode, location_name: "mode"))
+    StreamConfigurationSessionBackup.struct_class = Types::StreamConfigurationSessionBackup
 
     StreamConfigurationSessionStorage.add_member(:mode, Shapes::ShapeRef.new(shape: StreamingSessionStorageModeList, required: true, location_name: "mode"))
     StreamConfigurationSessionStorage.add_member(:root, Shapes::ShapeRef.new(shape: StreamingSessionStorageRoot, location_name: "root"))
@@ -808,14 +854,19 @@ module Aws::NimbleStudio
     StreamingInstanceTypeList.member = Shapes::ShapeRef.new(shape: StreamingInstanceType)
 
     StreamingSession.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    StreamingSession.add_member(:automatic_termination_mode, Shapes::ShapeRef.new(shape: AutomaticTerminationMode, location_name: "automaticTerminationMode"))
+    StreamingSession.add_member(:backup_mode, Shapes::ShapeRef.new(shape: SessionBackupMode, location_name: "backupMode"))
     StreamingSession.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     StreamingSession.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
     StreamingSession.add_member(:ec2_instance_type, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceType"))
     StreamingSession.add_member(:launch_profile_id, Shapes::ShapeRef.new(shape: String, location_name: "launchProfileId"))
+    StreamingSession.add_member(:max_backups_to_retain, Shapes::ShapeRef.new(shape: StreamConfigurationMaxBackupsToRetain, location_name: "maxBackupsToRetain"))
     StreamingSession.add_member(:owned_by, Shapes::ShapeRef.new(shape: String, location_name: "ownedBy"))
     StreamingSession.add_member(:session_id, Shapes::ShapeRef.new(shape: StreamingSessionId, location_name: "sessionId"))
+    StreamingSession.add_member(:session_persistence_mode, Shapes::ShapeRef.new(shape: SessionPersistenceMode, location_name: "sessionPersistenceMode"))
     StreamingSession.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
     StreamingSession.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
+    StreamingSession.add_member(:started_from_backup_id, Shapes::ShapeRef.new(shape: String, location_name: "startedFromBackupId"))
     StreamingSession.add_member(:state, Shapes::ShapeRef.new(shape: StreamingSessionState, location_name: "state"))
     StreamingSession.add_member(:status_code, Shapes::ShapeRef.new(shape: StreamingSessionStatusCode, location_name: "statusCode"))
     StreamingSession.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
@@ -827,7 +878,23 @@ module Aws::NimbleStudio
     StreamingSession.add_member(:terminate_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "terminateAt"))
     StreamingSession.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     StreamingSession.add_member(:updated_by, Shapes::ShapeRef.new(shape: String, location_name: "updatedBy"))
+    StreamingSession.add_member(:volume_configuration, Shapes::ShapeRef.new(shape: VolumeConfiguration, location_name: "volumeConfiguration"))
+    StreamingSession.add_member(:volume_retention_mode, Shapes::ShapeRef.new(shape: VolumeRetentionMode, location_name: "volumeRetentionMode"))
     StreamingSession.struct_class = Types::StreamingSession
+
+    StreamingSessionBackup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    StreamingSessionBackup.add_member(:backup_id, Shapes::ShapeRef.new(shape: String, location_name: "backupId"))
+    StreamingSessionBackup.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    StreamingSessionBackup.add_member(:launch_profile_id, Shapes::ShapeRef.new(shape: String, location_name: "launchProfileId"))
+    StreamingSessionBackup.add_member(:owned_by, Shapes::ShapeRef.new(shape: String, location_name: "ownedBy"))
+    StreamingSessionBackup.add_member(:session_id, Shapes::ShapeRef.new(shape: StreamingSessionId, location_name: "sessionId"))
+    StreamingSessionBackup.add_member(:state, Shapes::ShapeRef.new(shape: StreamingSessionState, location_name: "state"))
+    StreamingSessionBackup.add_member(:status_code, Shapes::ShapeRef.new(shape: StreamingSessionStatusCode, location_name: "statusCode"))
+    StreamingSessionBackup.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    StreamingSessionBackup.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    StreamingSessionBackup.struct_class = Types::StreamingSessionBackup
+
+    StreamingSessionBackupList.member = Shapes::ShapeRef.new(shape: StreamingSessionBackup)
 
     StreamingSessionList.member = Shapes::ShapeRef.new(shape: StreamingSession)
 
@@ -1039,6 +1106,11 @@ module Aws::NimbleStudio
     ValidationResult.struct_class = Types::ValidationResult
 
     ValidationResults.member = Shapes::ShapeRef.new(shape: ValidationResult)
+
+    VolumeConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: VolumeIops, location_name: "iops"))
+    VolumeConfiguration.add_member(:size, Shapes::ShapeRef.new(shape: VolumeSizeInGiB, location_name: "size"))
+    VolumeConfiguration.add_member(:throughput, Shapes::ShapeRef.new(shape: VolumeThroughputInMiBs, location_name: "throughput"))
+    VolumeConfiguration.struct_class = Types::VolumeConfiguration
 
 
     # @api private
@@ -1373,6 +1445,20 @@ module Aws::NimbleStudio
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:get_streaming_session_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStreamingSessionBackup"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-08-01/studios/{studioId}/streaming-session-backups/{backupId}"
+        o.input = Shapes::ShapeRef.new(shape: GetStreamingSessionBackupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStreamingSessionBackupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:get_streaming_session_stream, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStreamingSessionStream"
         o.http_method = "GET"
@@ -1528,6 +1614,25 @@ module Aws::NimbleStudio
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_streaming_session_backups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStreamingSessionBackups"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-08-01/studios/{studioId}/streaming-session-backups"
+        o.input = Shapes::ShapeRef.new(shape: ListStreamingSessionBackupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStreamingSessionBackupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"

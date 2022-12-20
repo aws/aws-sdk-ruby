@@ -591,6 +591,7 @@ module Aws::LookoutEquipment
     ListInferenceSchedulersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListInferenceSchedulersRequest.add_member(:inference_scheduler_name_begins_with, Shapes::ShapeRef.new(shape: InferenceSchedulerIdentifier, location_name: "InferenceSchedulerNameBeginsWith"))
     ListInferenceSchedulersRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    ListInferenceSchedulersRequest.add_member(:status, Shapes::ShapeRef.new(shape: InferenceSchedulerStatus, location_name: "Status"))
     ListInferenceSchedulersRequest.struct_class = Types::ListInferenceSchedulersRequest
 
     ListInferenceSchedulersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -876,6 +877,7 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_inference_scheduler, Seahorse::Model::Operation.new.tap do |o|
@@ -903,6 +905,7 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_label_group, Seahorse::Model::Operation.new.tap do |o|
@@ -916,6 +919,7 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_model, Seahorse::Model::Operation.new.tap do |o|
@@ -929,6 +933,7 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_data_ingestion_job, Seahorse::Model::Operation.new.tap do |o|

@@ -1560,6 +1560,7 @@ module Aws::EC2
     InstanceGenerationSet = Shapes::ListShape.new(name: 'InstanceGenerationSet')
     InstanceHealthStatus = Shapes::StringShape.new(name: 'InstanceHealthStatus')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
+    InstanceIdForResolver = Shapes::StringShape.new(name: 'InstanceIdForResolver')
     InstanceIdList = Shapes::ListShape.new(name: 'InstanceIdList')
     InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
     InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
@@ -2830,6 +2831,7 @@ module Aws::EC2
     VolumeDetail = Shapes::StructureShape.new(name: 'VolumeDetail')
     VolumeId = Shapes::StringShape.new(name: 'VolumeId')
     VolumeIdStringList = Shapes::ListShape.new(name: 'VolumeIdStringList')
+    VolumeIdWithResolver = Shapes::StringShape.new(name: 'VolumeIdWithResolver')
     VolumeList = Shapes::ListShape.new(name: 'VolumeList')
     VolumeModification = Shapes::StructureShape.new(name: 'VolumeModification')
     VolumeModificationList = Shapes::ListShape.new(name: 'VolumeModificationList')
@@ -6200,9 +6202,12 @@ module Aws::EC2
     DescribeImagesRequest.add_member(:owners, Shapes::ShapeRef.new(shape: OwnerStringList, location_name: "Owner"))
     DescribeImagesRequest.add_member(:include_deprecated, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeDeprecated"))
     DescribeImagesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    DescribeImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeImagesRequest.struct_class = Types::DescribeImagesRequest
 
     DescribeImagesResult.add_member(:images, Shapes::ShapeRef.new(shape: ImageList, location_name: "imagesSet"))
+    DescribeImagesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeImagesResult.struct_class = Types::DescribeImagesResult
 
     DescribeImportImageTasksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -7335,8 +7340,8 @@ module Aws::EC2
 
     DetachVolumeRequest.add_member(:device, Shapes::ShapeRef.new(shape: String, location_name: "Device"))
     DetachVolumeRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
-    DetachVolumeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
-    DetachVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    DetachVolumeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdForResolver, location_name: "InstanceId"))
+    DetachVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeIdWithResolver, required: true, location_name: "VolumeId"))
     DetachVolumeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DetachVolumeRequest.struct_class = Types::DetachVolumeRequest
 
@@ -16629,6 +16634,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeImagesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeImagesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_import_image_tasks, Seahorse::Model::Operation.new.tap do |o|

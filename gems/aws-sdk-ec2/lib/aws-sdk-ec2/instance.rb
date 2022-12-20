@@ -930,7 +930,7 @@ module Aws::EC2
     #   instance.detach_volume({
     #     device: "String",
     #     force: false,
-    #     volume_id: "VolumeId", # required
+    #     volume_id: "VolumeIdWithResolver", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

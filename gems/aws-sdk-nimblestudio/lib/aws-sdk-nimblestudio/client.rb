@@ -373,8 +373,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -420,8 +420,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -452,7 +452,7 @@ module Aws::NimbleStudio
     #   The studio ID.
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of labels, in the form of key:value pairs, that apply to
+    #   A collection of labels, in the form of key-value pairs, that apply to
     #   this resource.
     #
     # @return [Types::CreateLaunchProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -468,10 +468,16 @@ module Aws::NimbleStudio
     #     launch_profile_protocol_versions: ["LaunchProfileProtocolVersion"], # required
     #     name: "LaunchProfileName", # required
     #     stream_configuration: { # required
+    #       automatic_termination_mode: "DEACTIVATED", # accepts DEACTIVATED, ACTIVATED
     #       clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
     #       ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #       max_session_length_in_minutes: 1,
     #       max_stopped_session_length_in_minutes: 1,
+    #       session_backup: {
+    #         max_backups_to_retain: 1,
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, DEACTIVATED
+    #       },
+    #       session_persistence_mode: "DEACTIVATED", # accepts DEACTIVATED, ACTIVATED
     #       session_storage: {
     #         mode: ["UPLOAD"], # required, accepts UPLOAD
     #         root: {
@@ -480,6 +486,11 @@ module Aws::NimbleStudio
     #         },
     #       },
     #       streaming_image_ids: ["StreamingImageId"], # required
+    #       volume_configuration: {
+    #         iops: 1,
+    #         size: 1,
+    #         throughput: 1,
+    #       },
     #     },
     #     studio_component_ids: ["String"], # required
     #     studio_id: "String", # required
@@ -503,17 +514,24 @@ module Aws::NimbleStudio
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
+    #   resp.launch_profile.stream_configuration.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.max_backups_to_retain #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
+    #   resp.launch_profile.stream_configuration.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
     #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
     #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
     #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
+    #   resp.launch_profile.stream_configuration.volume_configuration.iops #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.size #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.throughput #=> Integer
     #   resp.launch_profile.studio_component_ids #=> Array
     #   resp.launch_profile.studio_component_ids[0] #=> String
     #   resp.launch_profile.tags #=> Hash
@@ -540,8 +558,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -560,7 +578,7 @@ module Aws::NimbleStudio
     #   The studio ID.
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of labels, in the form of key:value pairs, that apply to
+    #   A collection of labels, in the form of key-value pairs, that apply to
     #   this resource.
     #
     # @return [Types::CreateStreamingImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -611,13 +629,13 @@ module Aws::NimbleStudio
     # Creates a streaming session in a studio.
     #
     # After invoking this operation, you must poll GetStreamingSession until
-    # the streaming session is in state READY.
+    # the streaming session is in the `READY` state.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -625,8 +643,9 @@ module Aws::NimbleStudio
     # @option params [String] :ec2_instance_type
     #   The EC2 Instance type used for the streaming session.
     #
-    # @option params [String] :launch_profile_id
-    #   The launch profile ID.
+    # @option params [required, String] :launch_profile_id
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [String] :owned_by
     #   The user ID of the user that owns the streaming session. The user that
@@ -640,7 +659,7 @@ module Aws::NimbleStudio
     #   The studio ID.
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of labels, in the form of key:value pairs, that apply to
+    #   A collection of labels, in the form of key-value pairs, that apply to
     #   this resource.
     #
     # @return [Types::CreateStreamingSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -652,7 +671,7 @@ module Aws::NimbleStudio
     #   resp = client.create_streaming_session({
     #     client_token: "ClientToken",
     #     ec2_instance_type: "g4dn.xlarge", # accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
-    #     launch_profile_id: "String",
+    #     launch_profile_id: "String", # required
     #     owned_by: "String",
     #     streaming_image_id: "StreamingImageId",
     #     studio_id: "String", # required
@@ -664,14 +683,19 @@ module Aws::NimbleStudio
     # @example Response structure
     #
     #   resp.session.arn #=> String
+    #   resp.session.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
+    #   resp.session.backup_mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
     #   resp.session.created_at #=> Time
     #   resp.session.created_by #=> String
     #   resp.session.ec2_instance_type #=> String
     #   resp.session.launch_profile_id #=> String
+    #   resp.session.max_backups_to_retain #=> Integer
     #   resp.session.owned_by #=> String
     #   resp.session.session_id #=> String
+    #   resp.session.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
+    #   resp.session.started_from_backup_id #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
     #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
@@ -684,6 +708,10 @@ module Aws::NimbleStudio
     #   resp.session.terminate_at #=> Time
     #   resp.session.updated_at #=> Time
     #   resp.session.updated_by #=> String
+    #   resp.session.volume_configuration.iops #=> Integer
+    #   resp.session.volume_configuration.size #=> Integer
+    #   resp.session.volume_configuration.throughput #=> Integer
+    #   resp.session.volume_retention_mode #=> String, one of "RETAIN", "DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/CreateStreamingSession AWS API Documentation
     #
@@ -697,13 +725,14 @@ module Aws::NimbleStudio
     # Creates a streaming session stream for a streaming session.
     #
     # After invoking this API, invoke GetStreamingSessionStream with the
-    # returned streamId to poll the resource until it is in state READY.
+    # returned streamId to poll the resource until it is in the `READY`
+    # state.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -750,26 +779,26 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # Create a new Studio.
+    # Create a new studio.
     #
-    # When creating a Studio, two IAM roles must be provided: the admin role
-    # and the user Role. These roles are assumed by your users when they log
+    # When creating a studio, two IAM roles must be provided: the admin role
+    # and the user role. These roles are assumed by your users when they log
     # in to the Nimble Studio portal.
     #
-    # The user role must have the AmazonNimbleStudio-StudioUser managed
+    # The user role must have the `AmazonNimbleStudio-StudioUser` managed
     # policy attached for the portal to function properly.
     #
-    # The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed
+    # The admin role must have the `AmazonNimbleStudio-StudioAdmin` managed
     # policy attached for the portal to function properly.
     #
     # You may optionally specify a KMS key in the
-    # StudioEncryptionConfiguration.
+    # `StudioEncryptionConfiguration`.
     #
     # In Nimble Studio, resource names, descriptions, initialization
     # scripts, and other data you provide are always encrypted at rest using
     # an KMS key. By default, this key is owned by Amazon Web Services and
     # managed on your behalf. You may provide your own KMS key when calling
-    # CreateStudio to encrypt this data using a key you own and manage.
+    # `CreateStudio` to encrypt this data using a key you own and manage.
     #
     # When providing an KMS key during studio creation, Nimble Studio
     # creates KMS grants in your account to provide your studio user and
@@ -782,14 +811,14 @@ module Aws::NimbleStudio
     # accessible.
     #
     # @option params [required, String] :admin_role_arn
-    #   The IAM role that Studio Admins will assume when logging in to the
+    #   The IAM role that studio admins will assume when logging in to the
     #   Nimble Studio portal.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -805,11 +834,11 @@ module Aws::NimbleStudio
     #   when accessed by Nimble Studio users.
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of labels, in the form of key:value pairs, that apply to
+    #   A collection of labels, in the form of key-value pairs, that apply to
     #   this resource.
     #
     # @option params [required, String] :user_role_arn
-    #   The IAM role that Studio Users will assume when logging in to the
+    #   The IAM role that studio users will assume when logging in to the
     #   Nimble Studio portal.
     #
     # @return [Types::CreateStudioResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -842,7 +871,7 @@ module Aws::NimbleStudio
     #   resp.studio.home_region #=> String
     #   resp.studio.sso_client_id #=> String
     #   resp.studio.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"
+    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS", "AWS_STS_REGION_DISABLED"
     #   resp.studio.status_message #=> String
     #   resp.studio.studio_encryption_configuration.key_arn #=> String
     #   resp.studio.studio_encryption_configuration.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
@@ -868,8 +897,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -891,8 +920,8 @@ module Aws::NimbleStudio
     #
     # @option params [String] :runtime_role_arn
     #   An IAM role attached to a Studio Component that gives the studio
-    #   component access to AWS resources at anytime while the instance is
-    #   running.
+    #   component access to Amazon Web Services resources at anytime while the
+    #   instance is running.
     #
     # @option params [Array<Types::ScriptParameterKeyValue>] :script_parameters
     #   Parameters for the studio component scripts.
@@ -900,7 +929,8 @@ module Aws::NimbleStudio
     # @option params [String] :secure_initialization_role_arn
     #   An IAM role attached to Studio Component when the system
     #   initialization script runs which give the studio component access to
-    #   AWS resources when the system initialization script runs.
+    #   Amazon Web Services resources when the system initialization script
+    #   runs.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -909,7 +939,7 @@ module Aws::NimbleStudio
     #   The specific subtype of a studio component.
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of labels, in the form of key:value pairs, that apply to
+    #   A collection of labels, in the form of key-value pairs, that apply to
     #   this resource.
     #
     # @option params [required, String] :type
@@ -1033,14 +1063,15 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -1072,17 +1103,24 @@ module Aws::NimbleStudio
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
+    #   resp.launch_profile.stream_configuration.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.max_backups_to_retain #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
+    #   resp.launch_profile.stream_configuration.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
     #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
     #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
     #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
+    #   resp.launch_profile.stream_configuration.volume_configuration.iops #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.size #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.throughput #=> Integer
     #   resp.launch_profile.studio_component_ids #=> Array
     #   resp.launch_profile.studio_component_ids[0] #=> String
     #   resp.launch_profile.tags #=> Hash
@@ -1109,14 +1147,15 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [required, String] :principal_id
     #   The principal ID. This currently supports a IAM Identity Center
@@ -1150,8 +1189,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1205,16 +1244,16 @@ module Aws::NimbleStudio
     # Deletes streaming session resource.
     #
     # After invoking this operation, use GetStreamingSession to poll the
-    # resource until it transitions to a DELETED state.
+    # resource until it transitions to a `DELETED` state.
     #
     # A streaming session will count against your streaming session quota
-    # until it is marked DELETED.
+    # until it is marked `DELETED`.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1240,14 +1279,19 @@ module Aws::NimbleStudio
     # @example Response structure
     #
     #   resp.session.arn #=> String
+    #   resp.session.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
+    #   resp.session.backup_mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
     #   resp.session.created_at #=> Time
     #   resp.session.created_by #=> String
     #   resp.session.ec2_instance_type #=> String
     #   resp.session.launch_profile_id #=> String
+    #   resp.session.max_backups_to_retain #=> Integer
     #   resp.session.owned_by #=> String
     #   resp.session.session_id #=> String
+    #   resp.session.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
+    #   resp.session.started_from_backup_id #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
     #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
@@ -1260,6 +1304,10 @@ module Aws::NimbleStudio
     #   resp.session.terminate_at #=> Time
     #   resp.session.updated_at #=> Time
     #   resp.session.updated_by #=> String
+    #   resp.session.volume_configuration.iops #=> Integer
+    #   resp.session.volume_configuration.size #=> Integer
+    #   resp.session.volume_configuration.throughput #=> Integer
+    #   resp.session.volume_retention_mode #=> String, one of "RETAIN", "DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/DeleteStreamingSession AWS API Documentation
     #
@@ -1275,8 +1323,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1304,7 +1352,7 @@ module Aws::NimbleStudio
     #   resp.studio.home_region #=> String
     #   resp.studio.sso_client_id #=> String
     #   resp.studio.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"
+    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS", "AWS_STS_REGION_DISABLED"
     #   resp.studio.status_message #=> String
     #   resp.studio.studio_encryption_configuration.key_arn #=> String
     #   resp.studio.studio_encryption_configuration.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
@@ -1330,8 +1378,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1411,8 +1459,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1443,7 +1491,7 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # Get Eula.
+    # Get EULA.
     #
     # @option params [required, String] :eula_id
     #   The EULA ID.
@@ -1478,7 +1526,8 @@ module Aws::NimbleStudio
     # Get a launch profile.
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -1509,17 +1558,24 @@ module Aws::NimbleStudio
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
+    #   resp.launch_profile.stream_configuration.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.max_backups_to_retain #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
+    #   resp.launch_profile.stream_configuration.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
     #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
     #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
     #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
+    #   resp.launch_profile.stream_configuration.volume_configuration.iops #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.size #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.throughput #=> Integer
     #   resp.launch_profile.studio_component_ids #=> Array
     #   resp.launch_profile.studio_component_ids[0] #=> String
     #   resp.launch_profile.tags #=> Hash
@@ -1554,7 +1610,8 @@ module Aws::NimbleStudio
     # of streaming images that can be used with this launch profile.
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -1587,17 +1644,24 @@ module Aws::NimbleStudio
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
+    #   resp.launch_profile.stream_configuration.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.max_backups_to_retain #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
+    #   resp.launch_profile.stream_configuration.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
     #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
     #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
     #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
+    #   resp.launch_profile.stream_configuration.volume_configuration.iops #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.size #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.throughput #=> Integer
     #   resp.launch_profile.studio_component_ids #=> Array
     #   resp.launch_profile.studio_component_ids[0] #=> String
     #   resp.launch_profile.tags #=> Hash
@@ -1649,7 +1713,8 @@ module Aws::NimbleStudio
     # Get a launch profile initialization.
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [required, Array<String>] :launch_profile_protocol_versions
     #   The launch profile protocol versions supported by the client.
@@ -1658,8 +1723,8 @@ module Aws::NimbleStudio
     #   The launch purpose.
     #
     # @option params [required, String] :platform
-    #   The platform where this Launch Profile will be used, either WINDOWS or
-    #   LINUX.
+    #   The platform where this Launch Profile will be used, either Windows or
+    #   Linux.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -1722,7 +1787,8 @@ module Aws::NimbleStudio
     # Get a user persona in launch profile membership.
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [required, String] :principal_id
     #   The principal ID. This currently supports a IAM Identity Center
@@ -1837,14 +1903,19 @@ module Aws::NimbleStudio
     # @example Response structure
     #
     #   resp.session.arn #=> String
+    #   resp.session.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
+    #   resp.session.backup_mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
     #   resp.session.created_at #=> Time
     #   resp.session.created_by #=> String
     #   resp.session.ec2_instance_type #=> String
     #   resp.session.launch_profile_id #=> String
+    #   resp.session.max_backups_to_retain #=> Integer
     #   resp.session.owned_by #=> String
     #   resp.session.session_id #=> String
+    #   resp.session.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
+    #   resp.session.started_from_backup_id #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
     #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
@@ -1857,6 +1928,10 @@ module Aws::NimbleStudio
     #   resp.session.terminate_at #=> Time
     #   resp.session.updated_at #=> Time
     #   resp.session.updated_by #=> String
+    #   resp.session.volume_configuration.iops #=> Integer
+    #   resp.session.volume_configuration.size #=> Integer
+    #   resp.session.volume_configuration.throughput #=> Integer
+    #   resp.session.volume_retention_mode #=> String, one of "RETAIN", "DELETE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1874,13 +1949,58 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
+    # Gets `StreamingSessionBackup` resource.
+    #
+    # Invoke this operation to poll for a streaming session backup while
+    # stopping a streaming session.
+    #
+    # @option params [required, String] :backup_id
+    #   The ID of the backup.
+    #
+    # @option params [required, String] :studio_id
+    #   The studio ID.
+    #
+    # @return [Types::GetStreamingSessionBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStreamingSessionBackupResponse#streaming_session_backup #streaming_session_backup} => Types::StreamingSessionBackup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_streaming_session_backup({
+    #     backup_id: "String", # required
+    #     studio_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_session_backup.arn #=> String
+    #   resp.streaming_session_backup.backup_id #=> String
+    #   resp.streaming_session_backup.created_at #=> Time
+    #   resp.streaming_session_backup.launch_profile_id #=> String
+    #   resp.streaming_session_backup.owned_by #=> String
+    #   resp.streaming_session_backup.session_id #=> String
+    #   resp.streaming_session_backup.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
+    #   resp.streaming_session_backup.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
+    #   resp.streaming_session_backup.status_message #=> String
+    #   resp.streaming_session_backup.tags #=> Hash
+    #   resp.streaming_session_backup.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/GetStreamingSessionBackup AWS API Documentation
+    #
+    # @overload get_streaming_session_backup(params = {})
+    # @param [Hash] params ({})
+    def get_streaming_session_backup(params = {}, options = {})
+      req = build_request(:get_streaming_session_backup, params)
+      req.send_request(options)
+    end
+
     # Gets a StreamingSessionStream for a streaming session.
     #
     # Invoke this operation to poll the resource after invoking
-    # CreateStreamingSessionStream.
+    # `CreateStreamingSessionStream`.
     #
-    # After the StreamingSessionStream changes to the state READY, the url
-    # property will contain a stream to be used with the DCV streaming
+    # After the `StreamingSessionStream` changes to the `READY` state, the
+    # url property will contain a stream to be used with the DCV streaming
     # client.
     #
     # @option params [required, String] :session_id
@@ -1929,7 +2049,7 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # Get a Studio resource.
+    # Get a studio resource.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -1953,7 +2073,7 @@ module Aws::NimbleStudio
     #   resp.studio.home_region #=> String
     #   resp.studio.sso_client_id #=> String
     #   resp.studio.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"
+    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS", "AWS_STS_REGION_DISABLED"
     #   resp.studio.status_message #=> String
     #   resp.studio.studio_encryption_configuration.key_arn #=> String
     #   resp.studio.studio_encryption_configuration.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
@@ -2093,13 +2213,14 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # List Eula Acceptances.
+    # List EULA acceptances.
     #
     # @option params [Array<String>] :eula_ids
     #   The list of EULA IDs that have been previously accepted.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -2138,13 +2259,14 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # List Eulas.
+    # List EULAs.
     #
     # @option params [Array<String>] :eula_ids
     #   The list of EULA IDs that should be returned
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @return [Types::ListEulasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2182,13 +2304,15 @@ module Aws::NimbleStudio
     # Get all users in a given launch profile membership.
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [Integer] :max_results
     #   The max number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -2233,7 +2357,8 @@ module Aws::NimbleStudio
     #   The max number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @option params [String] :principal_id
     #   The principal ID. This currently supports a IAM Identity Center
@@ -2278,17 +2403,24 @@ module Aws::NimbleStudio
     #   resp.launch_profiles[0].state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.launch_profiles[0].status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profiles[0].status_message #=> String
+    #   resp.launch_profiles[0].stream_configuration.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profiles[0].stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profiles[0].stream_configuration.ec2_instance_types #=> Array
     #   resp.launch_profiles[0].stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profiles[0].stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profiles[0].stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profiles[0].stream_configuration.session_backup.max_backups_to_retain #=> Integer
+    #   resp.launch_profiles[0].stream_configuration.session_backup.mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
+    #   resp.launch_profiles[0].stream_configuration.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profiles[0].stream_configuration.session_storage.mode #=> Array
     #   resp.launch_profiles[0].stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
     #   resp.launch_profiles[0].stream_configuration.session_storage.root.linux #=> String
     #   resp.launch_profiles[0].stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profiles[0].stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profiles[0].stream_configuration.streaming_image_ids[0] #=> String
+    #   resp.launch_profiles[0].stream_configuration.volume_configuration.iops #=> Integer
+    #   resp.launch_profiles[0].stream_configuration.volume_configuration.size #=> Integer
+    #   resp.launch_profiles[0].stream_configuration.volume_configuration.throughput #=> Integer
     #   resp.launch_profiles[0].studio_component_ids #=> Array
     #   resp.launch_profiles[0].studio_component_ids[0] #=> String
     #   resp.launch_profiles[0].tags #=> Hash
@@ -2317,7 +2449,8 @@ module Aws::NimbleStudio
     # well as streaming images that you have created in your studio.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @option params [String] :owner
     #   Filter this request to streaming images with the given owner
@@ -2370,13 +2503,66 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
+    # Lists the backups of a streaming session in a studio.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [String] :owned_by
+    #   The user ID of the user that owns the streaming session.
+    #
+    # @option params [required, String] :studio_id
+    #   The studio ID.
+    #
+    # @return [Types::ListStreamingSessionBackupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStreamingSessionBackupsResponse#next_token #next_token} => String
+    #   * {Types::ListStreamingSessionBackupsResponse#streaming_session_backups #streaming_session_backups} => Array&lt;Types::StreamingSessionBackup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_streaming_session_backups({
+    #     next_token: "String",
+    #     owned_by: "String",
+    #     studio_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.streaming_session_backups #=> Array
+    #   resp.streaming_session_backups[0].arn #=> String
+    #   resp.streaming_session_backups[0].backup_id #=> String
+    #   resp.streaming_session_backups[0].created_at #=> Time
+    #   resp.streaming_session_backups[0].launch_profile_id #=> String
+    #   resp.streaming_session_backups[0].owned_by #=> String
+    #   resp.streaming_session_backups[0].session_id #=> String
+    #   resp.streaming_session_backups[0].state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
+    #   resp.streaming_session_backups[0].status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
+    #   resp.streaming_session_backups[0].status_message #=> String
+    #   resp.streaming_session_backups[0].tags #=> Hash
+    #   resp.streaming_session_backups[0].tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/ListStreamingSessionBackups AWS API Documentation
+    #
+    # @overload list_streaming_session_backups(params = {})
+    # @param [Hash] params ({})
+    def list_streaming_session_backups(params = {}, options = {})
+      req = build_request(:list_streaming_session_backups, params)
+      req.send_request(options)
+    end
+
     # Lists the streaming sessions in a studio.
     #
     # @option params [String] :created_by
     #   Filters the request to streaming sessions created by the given user.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @option params [String] :owned_by
     #   Filters the request to streaming session owned by the given user
@@ -2409,14 +2595,19 @@ module Aws::NimbleStudio
     #   resp.next_token #=> String
     #   resp.sessions #=> Array
     #   resp.sessions[0].arn #=> String
+    #   resp.sessions[0].automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
+    #   resp.sessions[0].backup_mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
     #   resp.sessions[0].created_at #=> Time
     #   resp.sessions[0].created_by #=> String
     #   resp.sessions[0].ec2_instance_type #=> String
     #   resp.sessions[0].launch_profile_id #=> String
+    #   resp.sessions[0].max_backups_to_retain #=> Integer
     #   resp.sessions[0].owned_by #=> String
     #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.sessions[0].started_at #=> Time
     #   resp.sessions[0].started_by #=> String
+    #   resp.sessions[0].started_from_backup_id #=> String
     #   resp.sessions[0].state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
     #   resp.sessions[0].status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.sessions[0].status_message #=> String
@@ -2429,6 +2620,10 @@ module Aws::NimbleStudio
     #   resp.sessions[0].terminate_at #=> Time
     #   resp.sessions[0].updated_at #=> Time
     #   resp.sessions[0].updated_by #=> String
+    #   resp.sessions[0].volume_configuration.iops #=> Integer
+    #   resp.sessions[0].volume_configuration.size #=> Integer
+    #   resp.sessions[0].volume_configuration.throughput #=> Integer
+    #   resp.sessions[0].volume_retention_mode #=> String, one of "RETAIN", "DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/ListStreamingSessions AWS API Documentation
     #
@@ -2439,13 +2634,14 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # Lists the StudioComponents in a studio.
+    # Lists the `StudioComponents` in a studio.
     #
     # @option params [Integer] :max_results
     #   The max number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @option params [Array<String>] :states
     #   Filters the request to studio components that are in one of the given
@@ -2539,7 +2735,8 @@ module Aws::NimbleStudio
     #   The max number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @option params [required, String] :studio_id
     #   The studio ID.
@@ -2577,11 +2774,12 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # List studios in your Amazon Web Services account in the requested
+    # List studios in your Amazon Web Services accounts in the requested
     # Amazon Web Services Region.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #
     # @return [Types::ListStudiosResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2607,7 +2805,7 @@ module Aws::NimbleStudio
     #   resp.studios[0].home_region #=> String
     #   resp.studios[0].sso_client_id #=> String
     #   resp.studios[0].state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.studios[0].status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"
+    #   resp.studios[0].status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS", "AWS_STS_REGION_DISABLED"
     #   resp.studios[0].status_message #=> String
     #   resp.studios[0].studio_encryption_configuration.key_arn #=> String
     #   resp.studios[0].studio_encryption_configuration.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
@@ -2669,8 +2867,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2679,7 +2877,8 @@ module Aws::NimbleStudio
     #   The ID of the identity store.
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [required, Array<Types::NewLaunchProfileMember>] :members
     #   A list of members.
@@ -2718,8 +2917,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2758,21 +2957,24 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # Transitions sessions from the STOPPED state into the READY state. The
-    # START\_IN\_PROGRESS state is the intermediate state between the
-    # STOPPED and READY states.
+    # Transitions sessions from the `STOPPED` state into the `READY` state.
+    # The `START_IN_PROGRESS` state is the intermediate state between the
+    # `STOPPED` and `READY` states.
+    #
+    # @option params [String] :backup_id
+    #   The ID of the backup.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :session_id
-    #   The streaming session ID for the StartStreamingSessionRequest.
+    #   The streaming session ID for the `StartStreamingSessionRequest`.
     #
     # @option params [required, String] :studio_id
     #   The studio ID for the StartStreamingSessionRequest.
@@ -2784,6 +2986,7 @@ module Aws::NimbleStudio
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_streaming_session({
+    #     backup_id: "String",
     #     client_token: "ClientToken",
     #     session_id: "String", # required
     #     studio_id: "String", # required
@@ -2792,14 +2995,19 @@ module Aws::NimbleStudio
     # @example Response structure
     #
     #   resp.session.arn #=> String
+    #   resp.session.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
+    #   resp.session.backup_mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
     #   resp.session.created_at #=> Time
     #   resp.session.created_by #=> String
     #   resp.session.ec2_instance_type #=> String
     #   resp.session.launch_profile_id #=> String
+    #   resp.session.max_backups_to_retain #=> Integer
     #   resp.session.owned_by #=> String
     #   resp.session.session_id #=> String
+    #   resp.session.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
+    #   resp.session.started_from_backup_id #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
     #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
@@ -2812,6 +3020,10 @@ module Aws::NimbleStudio
     #   resp.session.terminate_at #=> Time
     #   resp.session.updated_at #=> Time
     #   resp.session.updated_by #=> String
+    #   resp.session.volume_configuration.iops #=> Integer
+    #   resp.session.volume_configuration.size #=> Integer
+    #   resp.session.volume_configuration.throughput #=> Integer
+    #   resp.session.volume_retention_mode #=> String, one of "RETAIN", "DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StartStreamingSession AWS API Documentation
     #
@@ -2830,7 +3042,7 @@ module Aws::NimbleStudio
     # If the studio does not have a valid IAM Identity Center configuration
     # currently associated with it, then a new IAM Identity Center
     # application is created for the studio and the studio is changed to the
-    # READY state.
+    # `READY` state.
     #
     # After the IAM Identity Center application is repaired, you must use
     # the Amazon Nimble Studio console to add administrators and users to
@@ -2839,8 +3051,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2868,7 +3080,7 @@ module Aws::NimbleStudio
     #   resp.studio.home_region #=> String
     #   resp.studio.sso_client_id #=> String
     #   resp.studio.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"
+    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS", "AWS_STS_REGION_DISABLED"
     #   resp.studio.status_message #=> String
     #   resp.studio.studio_encryption_configuration.key_arn #=> String
     #   resp.studio.studio_encryption_configuration.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
@@ -2889,24 +3101,28 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # Transitions sessions from the READY state into the STOPPED state. The
-    # STOP\_IN\_PROGRESS state is the intermediate state between the READY
-    # and STOPPED states.
+    # Transitions sessions from the `READY` state into the `STOPPED` state.
+    # The `STOP_IN_PROGRESS` state is the intermediate state between the
+    # `READY` and `STOPPED` states.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :session_id
-    #   The streaming session ID for the StopStreamingSessionRequest.
+    #   The streaming session ID for the `StopStreamingSessionRequest`.
     #
     # @option params [required, String] :studio_id
     #   The studioId for the StopStreamingSessionRequest.
+    #
+    # @option params [String] :volume_retention_mode
+    #   Adds additional instructions to a streaming session stop action to
+    #   either retain the EBS volumes or delete the EBS volumes.
     #
     # @return [Types::StopStreamingSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2918,19 +3134,25 @@ module Aws::NimbleStudio
     #     client_token: "ClientToken",
     #     session_id: "String", # required
     #     studio_id: "String", # required
+    #     volume_retention_mode: "RETAIN", # accepts RETAIN, DELETE
     #   })
     #
     # @example Response structure
     #
     #   resp.session.arn #=> String
+    #   resp.session.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
+    #   resp.session.backup_mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
     #   resp.session.created_at #=> Time
     #   resp.session.created_by #=> String
     #   resp.session.ec2_instance_type #=> String
     #   resp.session.launch_profile_id #=> String
+    #   resp.session.max_backups_to_retain #=> Integer
     #   resp.session.owned_by #=> String
     #   resp.session.session_id #=> String
+    #   resp.session.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
+    #   resp.session.started_from_backup_id #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
     #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
@@ -2943,6 +3165,10 @@ module Aws::NimbleStudio
     #   resp.session.terminate_at #=> Time
     #   resp.session.updated_at #=> Time
     #   resp.session.updated_by #=> String
+    #   resp.session.volume_configuration.iops #=> Integer
+    #   resp.session.volume_configuration.size #=> Integer
+    #   resp.session.volume_configuration.throughput #=> Integer
+    #   resp.session.volume_retention_mode #=> String, one of "RETAIN", "DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StopStreamingSession AWS API Documentation
     #
@@ -2960,7 +3186,7 @@ module Aws::NimbleStudio
     #   to.
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of labels, in the form of key:value pairs, that apply to
+    #   A collection of labels, in the form of key-value pairs, that apply to
     #   this resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3015,8 +3241,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3025,7 +3251,8 @@ module Aws::NimbleStudio
     #   The description.
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [Array<String>] :launch_profile_protocol_versions
     #   The version number of the protocol that is used by the launch profile.
@@ -3057,10 +3284,16 @@ module Aws::NimbleStudio
     #     launch_profile_protocol_versions: ["LaunchProfileProtocolVersion"],
     #     name: "LaunchProfileName",
     #     stream_configuration: {
+    #       automatic_termination_mode: "DEACTIVATED", # accepts DEACTIVATED, ACTIVATED
     #       clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
     #       ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #       max_session_length_in_minutes: 1,
     #       max_stopped_session_length_in_minutes: 1,
+    #       session_backup: {
+    #         max_backups_to_retain: 1,
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, DEACTIVATED
+    #       },
+    #       session_persistence_mode: "DEACTIVATED", # accepts DEACTIVATED, ACTIVATED
     #       session_storage: {
     #         mode: ["UPLOAD"], # required, accepts UPLOAD
     #         root: {
@@ -3069,6 +3302,11 @@ module Aws::NimbleStudio
     #         },
     #       },
     #       streaming_image_ids: ["StreamingImageId"], # required
+    #       volume_configuration: {
+    #         iops: 1,
+    #         size: 1,
+    #         throughput: 1,
+    #       },
     #     },
     #     studio_component_ids: ["String"],
     #     studio_id: "String", # required
@@ -3089,17 +3327,24 @@ module Aws::NimbleStudio
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
+    #   resp.launch_profile.stream_configuration.automatic_termination_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.max_backups_to_retain #=> Integer
+    #   resp.launch_profile.stream_configuration.session_backup.mode #=> String, one of "AUTOMATIC", "DEACTIVATED"
+    #   resp.launch_profile.stream_configuration.session_persistence_mode #=> String, one of "DEACTIVATED", "ACTIVATED"
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
     #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
     #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
     #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
+    #   resp.launch_profile.stream_configuration.volume_configuration.iops #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.size #=> Integer
+    #   resp.launch_profile.stream_configuration.volume_configuration.throughput #=> Integer
     #   resp.launch_profile.studio_component_ids #=> Array
     #   resp.launch_profile.studio_component_ids[0] #=> String
     #   resp.launch_profile.tags #=> Hash
@@ -3126,14 +3371,15 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the streaming
+    #   session.
     #
     # @option params [required, String] :persona
     #   The persona.
@@ -3180,8 +3426,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3252,8 +3498,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3291,7 +3537,7 @@ module Aws::NimbleStudio
     #   resp.studio.home_region #=> String
     #   resp.studio.sso_client_id #=> String
     #   resp.studio.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"
+    #   resp.studio.status_code #=> String, one of "STUDIO_CREATED", "STUDIO_DELETED", "STUDIO_UPDATED", "STUDIO_CREATE_IN_PROGRESS", "STUDIO_UPDATE_IN_PROGRESS", "STUDIO_DELETE_IN_PROGRESS", "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED", "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED", "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED", "AWS_SSO_NOT_ENABLED", "AWS_SSO_ACCESS_DENIED", "ROLE_NOT_OWNED_BY_STUDIO_OWNER", "ROLE_COULD_NOT_BE_ASSUMED", "INTERNAL_ERROR", "ENCRYPTION_KEY_NOT_FOUND", "ENCRYPTION_KEY_ACCESS_DENIED", "AWS_SSO_CONFIGURATION_REPAIRED", "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS", "AWS_STS_REGION_DISABLED"
     #   resp.studio.status_message #=> String
     #   resp.studio.studio_encryption_configuration.key_arn #=> String
     #   resp.studio.studio_encryption_configuration.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
@@ -3317,8 +3563,8 @@ module Aws::NimbleStudio
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3340,8 +3586,8 @@ module Aws::NimbleStudio
     #
     # @option params [String] :runtime_role_arn
     #   An IAM role attached to a Studio Component that gives the studio
-    #   component access to AWS resources at anytime while the instance is
-    #   running.
+    #   component access to Amazon Web Services resources at anytime while the
+    #   instance is running.
     #
     # @option params [Array<Types::ScriptParameterKeyValue>] :script_parameters
     #   Parameters for the studio component scripts.
@@ -3349,7 +3595,8 @@ module Aws::NimbleStudio
     # @option params [String] :secure_initialization_role_arn
     #   An IAM role attached to Studio Component when the system
     #   initialization script runs which give the studio component access to
-    #   AWS resources when the system initialization script runs.
+    #   Amazon Web Services resources when the system initialization script
+    #   runs.
     #
     # @option params [required, String] :studio_component_id
     #   The studio component ID.
@@ -3487,7 +3734,7 @@ module Aws::NimbleStudio
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-nimblestudio'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2022-12-20)
+------------------
+
+* Feature - Documentation updates for AWS Resource Explorer.
+
 1.1.0 (2022-11-10)
 ------------------
 

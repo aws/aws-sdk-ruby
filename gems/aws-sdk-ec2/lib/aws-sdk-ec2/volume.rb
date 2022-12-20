@@ -550,7 +550,7 @@ module Aws::EC2
     #   volume.detach_from_instance({
     #     device: "String",
     #     force: false,
-    #     instance_id: "InstanceId",
+    #     instance_id: "InstanceIdForResolver",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

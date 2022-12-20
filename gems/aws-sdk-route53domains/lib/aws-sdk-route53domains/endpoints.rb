@@ -25,6 +25,20 @@ module Aws::Route53Domains
       end
     end
 
+    class AssociateDelegationSignerToDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Route53Domains::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CancelDomainTransferToAnotherAwsAccount
       def self.build(context)
         unless context.config.regional_endpoint
@@ -110,6 +124,20 @@ module Aws::Route53Domains
     end
 
     class DisableDomainTransferLock
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Route53Domains::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DisassociateDelegationSignerFromDomain
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -263,6 +291,20 @@ module Aws::Route53Domains
       end
     end
 
+    class PushDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Route53Domains::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class RegisterDomain
       def self.build(context)
         unless context.config.regional_endpoint
@@ -306,6 +348,20 @@ module Aws::Route53Domains
     end
 
     class ResendContactReachabilityEmail
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Route53Domains::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ResendOperationAuthorization
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

@@ -3737,8 +3737,8 @@ module Aws::EC2
 
     # Removes your Amazon Web Services account from the launch permissions
     # for the specified AMI. For more information, see [Cancel having an AMI
-    # shared with your Amazon Web Services account][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # shared with your Amazon Web Services account][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -4173,11 +4173,10 @@ module Aws::EC2
     # encryption key for the Region, or a different key that you specify in
     # the request using **KmsKeyId**. Outposts do not support unencrypted
     # snapshots. For more information, [ Amazon EBS local snapshots on
-    # Outposts][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Outposts][2] in the *Amazon EC2 User Guide*.
     #
     # For more information about the prerequisites and limits when copying
-    # an AMI, see [Copy an AMI][3] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # an AMI, see [Copy an AMI][3] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -4203,8 +4202,8 @@ module Aws::EC2
     #   you cannot create an unencrypted copy of an encrypted snapshot. The
     #   default KMS key for Amazon EBS is used unless you specify a
     #   non-default Key Management Service (KMS) KMS key using `KmsKeyId`. For
-    #   more information, see [Amazon EBS encryption][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   more information, see [Amazon EBS encryption][1] in the *Amazon EC2
+    #   User Guide*.
     #
     #
     #
@@ -4254,8 +4253,7 @@ module Aws::EC2
     #   Region, from one Outpost to another, or within the same Outpost.
     #
     #   For more information, see [ Copy AMIs from an Amazon Web Services
-    #   Region to an Outpost][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   Region to an Outpost][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -10264,10 +10262,10 @@ module Aws::EC2
     #
     # To use this API, you must have the required permissions. For more
     # information, see [Permissions for storing and restoring AMIs using
-    # Amazon S3][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Amazon S3][2] in the *Amazon EC2 User Guide*.
     #
     # For more information, see [Store and restore an AMI using Amazon
-    # S3][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    # S3][3] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -11103,10 +11101,10 @@ module Aws::EC2
     #
     # To use this API, you must have the required permissions. For more
     # information, see [Permissions for storing and restoring AMIs using
-    # Amazon S3][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Amazon S3][1] in the *Amazon EC2 User Guide*.
     #
     # For more information, see [Store and restore an AMI using Amazon
-    # S3][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # S3][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -18152,8 +18150,8 @@ module Aws::EC2
     #
     # If you deregister an AMI that matches a Recycle Bin retention rule,
     # the AMI is retained in the Recycle Bin for the specified retention
-    # period. For more information, see [Recycle Bin][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # period. For more information, see [Recycle Bin][1] in the *Amazon EC2
+    # User Guide*.
     #
     # When you deregister an AMI, it doesn't affect any instances that
     # you've already launched from the AMI. You'll continue to incur usage
@@ -22459,9 +22457,20 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
     # @return [Types::DescribeImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeImagesResult#images #images} => Array&lt;Types::Image&gt;
+    #   * {Types::DescribeImagesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe an AMI
@@ -22521,6 +22530,8 @@ module Aws::EC2
     #     owners: ["String"],
     #     include_deprecated: false,
     #     dry_run: false,
+    #     max_results: 1,
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -22573,6 +22584,7 @@ module Aws::EC2
     #   resp.images[0].tpm_support #=> String, one of "v2.0"
     #   resp.images[0].deprecation_time #=> String
     #   resp.images[0].imds_support #=> String, one of "v2.0"
+    #   resp.next_token #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -31379,10 +31391,10 @@ module Aws::EC2
     #
     # To use this API, you must have the required permissions. For more
     # information, see [Permissions for storing and restoring AMIs using
-    # Amazon S3][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Amazon S3][1] in the *Amazon EC2 User Guide*.
     #
     # For more information, see [Store and restore an AMI using Amazon
-    # S3][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # S3][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -35738,8 +35750,8 @@ module Aws::EC2
     #   resp = client.detach_volume({
     #     device: "String",
     #     force: false,
-    #     instance_id: "InstanceId",
-    #     volume_id: "VolumeId", # required
+    #     instance_id: "InstanceIdForResolver",
+    #     volume_id: "VolumeIdWithResolver", # required
     #     dry_run: false,
     #   })
     #
@@ -36071,8 +36083,8 @@ module Aws::EC2
 
     # Cancels the deprecation of the specified AMI.
     #
-    # For more information, see [Deprecate an AMI][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Deprecate an AMI][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -37323,8 +37335,8 @@ module Aws::EC2
     # Enables deprecation of the specified AMI at the specified date and
     # time.
     #
-    # For more information, see [Deprecate an AMI][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Deprecate an AMI][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -41908,8 +41920,7 @@ module Aws::EC2
     end
 
     # Lists one or more AMIs that are currently in the Recycle Bin. For more
-    # information, see [Recycle Bin][1] in the Amazon Elastic Compute Cloud
-    # User Guide.
+    # information, see [Recycle Bin][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -48469,7 +48480,7 @@ module Aws::EC2
     # code, the Reserved Instance will not be applied to the On-Demand
     # Instance. For information about how to obtain the platform details and
     # billing information of an AMI, see [Understand AMI billing
-    # information][4] in the *Amazon Elastic Compute Cloud User Guide*.
+    # information][4] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -48503,9 +48514,8 @@ module Aws::EC2
     #   If you create an AMI on an Outpost, then all backing snapshots must be
     #   on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
-    #   on the same Outpost only. For more information, [ Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   on the same Outpost only. For more information, [Amazon EBS local
+    #   snapshots on Outposts][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -48539,8 +48549,19 @@ module Aws::EC2
     #
     # @option params [Array<String>] :billing_products
     #   The billing product codes. Your account must be authorized to specify
-    #   billing product codes. Otherwise, you can use the Amazon Web Services
-    #   Marketplace to bill for the use of an AMI.
+    #   billing product codes.
+    #
+    #   If your account is not authorized to specify billing product codes,
+    #   you can publish AMIs that include billable software and list them on
+    #   the Amazon Web Services Marketplace. You must first register as a
+    #   seller on the Amazon Web Services Marketplace. For more information,
+    #   see [Getting started as a seller][1] and [AMI-based products][2] in
+    #   the *Amazon Web Services Marketplace Seller Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html
+    #   [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html
     #
     # @option params [String] :ramdisk_id
     #   The ID of the RAM disk.
@@ -48565,7 +48586,7 @@ module Aws::EC2
     #
     # @option params [String] :boot_mode
     #   The boot mode of the AMI. For more information, see [Boot modes][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -48573,8 +48594,7 @@ module Aws::EC2
     #
     # @option params [String] :tpm_support
     #   Set to `v2.0` to enable Trusted Platform Module (TPM) support. For
-    #   more information, see [NitroTPM][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   more information, see [NitroTPM][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -48585,7 +48605,7 @@ module Aws::EC2
     #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command. You
     #   can inspect and modify the UEFI data by using the [python-uefivars
     #   tool][2] on GitHub. For more information, see [UEFI Secure Boot][3] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -48599,8 +48619,7 @@ module Aws::EC2
     #   set to `required` so that, by default, the instance requires that
     #   IMDSv2 is used when requesting instance metadata. In addition,
     #   `HttpPutResponseHopLimit` is set to `2`. For more information, see
-    #   [Configure the AMI][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Configure the AMI][1] in the *Amazon EC2 User Guide*.
     #
     #   <note markdown="1"> If you set the value to `v2.0`, make sure that your AMI software can
     #   support IMDSv2.
@@ -51105,7 +51124,7 @@ module Aws::EC2
     end
 
     # Restores an AMI from the Recycle Bin. For more information, see
-    # [Recycle Bin][1] in the Amazon Elastic Compute Cloud User Guide.
+    # [Recycle Bin][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -54762,7 +54781,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.355.0'
+      context[:gem_version] = '1.356.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -47,6 +47,7 @@ module Aws::MediaLive
     AudioDescription = Shapes::StructureShape.new(name: 'AudioDescription')
     AudioDescriptionAudioTypeControl = Shapes::StringShape.new(name: 'AudioDescriptionAudioTypeControl')
     AudioDescriptionLanguageCodeControl = Shapes::StringShape.new(name: 'AudioDescriptionLanguageCodeControl')
+    AudioDolbyEDecode = Shapes::StructureShape.new(name: 'AudioDolbyEDecode')
     AudioHlsRenditionSelection = Shapes::StructureShape.new(name: 'AudioHlsRenditionSelection')
     AudioLanguageSelection = Shapes::StructureShape.new(name: 'AudioLanguageSelection')
     AudioLanguageSelectionPolicy = Shapes::StringShape.new(name: 'AudioLanguageSelectionPolicy')
@@ -185,6 +186,7 @@ module Aws::MediaLive
     DescribeScheduleResponse = Shapes::StructureShape.new(name: 'DescribeScheduleResponse')
     DeviceSettingsSyncState = Shapes::StringShape.new(name: 'DeviceSettingsSyncState')
     DeviceUpdateStatus = Shapes::StringShape.new(name: 'DeviceUpdateStatus')
+    DolbyEProgramSelection = Shapes::StringShape.new(name: 'DolbyEProgramSelection')
     DolbyVision81Settings = Shapes::StructureShape.new(name: 'DolbyVision81Settings')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtOutputSdt = Shapes::StringShape.new(name: 'DvbSdtOutputSdt')
@@ -636,6 +638,9 @@ module Aws::MediaLive
     TemporalFilterSettings = Shapes::StructureShape.new(name: 'TemporalFilterSettings')
     TemporalFilterStrength = Shapes::StringShape.new(name: 'TemporalFilterStrength')
     ThumbnailData = Shapes::StructureShape.new(name: 'ThumbnailData')
+    TimecodeBurninFontSize = Shapes::StringShape.new(name: 'TimecodeBurninFontSize')
+    TimecodeBurninPosition = Shapes::StringShape.new(name: 'TimecodeBurninPosition')
+    TimecodeBurninSettings = Shapes::StructureShape.new(name: 'TimecodeBurninSettings')
     TimecodeConfig = Shapes::StructureShape.new(name: 'TimecodeConfig')
     TimecodeConfigSource = Shapes::StringShape.new(name: 'TimecodeConfigSource')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -914,6 +919,9 @@ module Aws::MediaLive
     AudioDescription.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
     AudioDescription.struct_class = Types::AudioDescription
 
+    AudioDolbyEDecode.add_member(:program_selection, Shapes::ShapeRef.new(shape: DolbyEProgramSelection, required: true, location_name: "programSelection"))
+    AudioDolbyEDecode.struct_class = Types::AudioDolbyEDecode
+
     AudioHlsRenditionSelection.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "groupId"))
     AudioHlsRenditionSelection.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "name"))
     AudioHlsRenditionSelection.struct_class = Types::AudioHlsRenditionSelection
@@ -954,6 +962,7 @@ module Aws::MediaLive
     AudioTrack.struct_class = Types::AudioTrack
 
     AudioTrackSelection.add_member(:tracks, Shapes::ShapeRef.new(shape: __listOfAudioTrack, required: true, location_name: "tracks"))
+    AudioTrackSelection.add_member(:dolby_e_decode, Shapes::ShapeRef.new(shape: AudioDolbyEDecode, location_name: "dolbyEDecode"))
     AudioTrackSelection.struct_class = Types::AudioTrackSelection
 
     AudioWatermarkSettings.add_member(:nielsen_watermarks_settings, Shapes::ShapeRef.new(shape: NielsenWatermarksSettings, location_name: "nielsenWatermarksSettings"))
@@ -1754,6 +1763,7 @@ module Aws::MediaLive
 
     FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600000, location_name: "captureInterval"))
     FrameCaptureSettings.add_member(:capture_interval_units, Shapes::ShapeRef.new(shape: FrameCaptureIntervalUnit, location_name: "captureIntervalUnits"))
+    FrameCaptureSettings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
     FrameCaptureSettings.struct_class = Types::FrameCaptureSettings
 
     GatewayTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1816,6 +1826,7 @@ module Aws::MediaLive
     H264Settings.add_member(:syntax, Shapes::ShapeRef.new(shape: H264Syntax, location_name: "syntax"))
     H264Settings.add_member(:temporal_aq, Shapes::ShapeRef.new(shape: H264TemporalAq, location_name: "temporalAq"))
     H264Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: H264TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
+    H264Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
     H264Settings.struct_class = Types::H264Settings
 
     H265ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
@@ -1857,6 +1868,7 @@ module Aws::MediaLive
     H265Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max16, location_name: "slices"))
     H265Settings.add_member(:tier, Shapes::ShapeRef.new(shape: H265Tier, location_name: "tier"))
     H265Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: H265TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
+    H265Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
     H265Settings.struct_class = Types::H265Settings
 
     Hdr10Settings.add_member(:max_cll, Shapes::ShapeRef.new(shape: __integerMin0Max32768, location_name: "maxCll"))
@@ -2454,6 +2466,7 @@ module Aws::MediaLive
     Mpeg2Settings.add_member(:scan_type, Shapes::ShapeRef.new(shape: Mpeg2ScanType, location_name: "scanType"))
     Mpeg2Settings.add_member(:subgop_length, Shapes::ShapeRef.new(shape: Mpeg2SubGopLength, location_name: "subgopLength"))
     Mpeg2Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: Mpeg2TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
+    Mpeg2Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
     Mpeg2Settings.struct_class = Types::Mpeg2Settings
 
     MsSmoothGroupSettings.add_member(:acquisition_point_id, Shapes::ShapeRef.new(shape: __string, location_name: "acquisitionPointId"))
@@ -3011,6 +3024,11 @@ module Aws::MediaLive
 
     ThumbnailData.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "body"))
     ThumbnailData.struct_class = Types::ThumbnailData
+
+    TimecodeBurninSettings.add_member(:font_size, Shapes::ShapeRef.new(shape: TimecodeBurninFontSize, required: true, location_name: "fontSize"))
+    TimecodeBurninSettings.add_member(:position, Shapes::ShapeRef.new(shape: TimecodeBurninPosition, required: true, location_name: "position"))
+    TimecodeBurninSettings.add_member(:prefix, Shapes::ShapeRef.new(shape: __stringMax255, location_name: "prefix"))
+    TimecodeBurninSettings.struct_class = Types::TimecodeBurninSettings
 
     TimecodeConfig.add_member(:source, Shapes::ShapeRef.new(shape: TimecodeConfigSource, required: true, location_name: "source"))
     TimecodeConfig.add_member(:sync_threshold, Shapes::ShapeRef.new(shape: __integerMin1Max1000000, location_name: "syncThreshold"))

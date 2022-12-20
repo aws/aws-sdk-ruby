@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2022-12-20)
+------------------
+
+* Feature - Enable our batch transcription jobs for Swedish and Vietnamese.
+
 1.79.0 (2022-12-05)
 ------------------
 

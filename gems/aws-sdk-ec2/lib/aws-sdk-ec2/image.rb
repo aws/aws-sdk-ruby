@@ -89,7 +89,7 @@ module Aws::EC2
 
     # The platform details associated with the billing code of the AMI. For
     # more information, see [Understand AMI billing information][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -215,7 +215,7 @@ module Aws::EC2
     end
 
     # The boot mode of the image. For more information, see [Boot modes][1]
-    # in the *Amazon Elastic Compute Cloud User Guide*.
+    # in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -226,8 +226,8 @@ module Aws::EC2
     end
 
     # If the image is configured for NitroTPM support, the value is `v2.0`.
-    # For more information, see [NitroTPM][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # For more information, see [NitroTPM][1] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
@@ -250,8 +250,7 @@ module Aws::EC2
     # `required` so that, by default, the instance requires that IMDSv2 is
     # used when requesting instance metadata. In addition,
     # `HttpPutResponseHopLimit` is set to `2`. For more information, see
-    # [Configure the AMI][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # [Configure the AMI][1] in the *Amazon EC2 User Guide*.
     #
     #
     #

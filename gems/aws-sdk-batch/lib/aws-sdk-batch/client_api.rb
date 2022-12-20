@@ -706,6 +706,8 @@ module Aws::Batch
     JobDetail.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
     JobDetail.add_member(:eks_properties, Shapes::ShapeRef.new(shape: EksPropertiesDetail, location_name: "eksProperties"))
     JobDetail.add_member(:eks_attempts, Shapes::ShapeRef.new(shape: EksAttemptDetails, location_name: "eksAttempts"))
+    JobDetail.add_member(:is_cancelled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCancelled"))
+    JobDetail.add_member(:is_terminated, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTerminated"))
     JobDetail.struct_class = Types::JobDetail
 
     JobDetailList.member = Shapes::ShapeRef.new(shape: JobDetail)

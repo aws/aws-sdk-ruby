@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-12-20)
+------------------
+
+* Feature - Adds isCancelled and isTerminated to DescribeJobs response.
+
 1.65.0 (2022-11-16)
 ------------------
 

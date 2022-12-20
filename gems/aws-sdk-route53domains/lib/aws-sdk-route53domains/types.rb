@@ -61,6 +61,41 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_attributes
+    #   The information about a key, including the algorithm, public
+    #   key-value, and flags.
+    #   @return [Types::DnssecSigningAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/AssociateDelegationSignerToDomainRequest AWS API Documentation
+    #
+    class AssociateDelegationSignerToDomainRequest < Struct.new(
+      :domain_name,
+      :signing_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The identifier for tracking the progress of the request. To query
+    #   the operation status, use [GetOperationDetail][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/AssociateDelegationSignerToDomainResponse AWS API Documentation
+    #
+    class AssociateDelegationSignerToDomainResponse < Struct.new(
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information for one billing record.
     #
     # @!attribute [rw] domain_name
@@ -305,6 +340,25 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # Customer's consent for the owner change request.
+    #
+    # @!attribute [rw] max_price
+    #   Maximum amount the customer agreed to accept.
+    #   @return [Float]
+    #
+    # @!attribute [rw] currency
+    #   Currency for the `MaxPrice`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/Consent AWS API Documentation
+    #
+    class Consent < Struct.new(
+      :max_price,
+      :currency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # ContactDetail includes the following elements.
     #
     # @!attribute [rw] first_name
@@ -514,6 +568,188 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   Name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An internal identification number assigned to each DS record after
+    #   it’s created. You can retrieve it as part of DNSSEC information
+    #   returned by [GetDomainDetail][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetDomainDetail.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisassociateDelegationSignerFromDomainRequest AWS API Documentation
+    #
+    class DisassociateDelegationSignerFromDomainRequest < Struct.new(
+      :domain_name,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   Identifier for tracking the progress of the request. To query the
+    #   operation status, use [GetOperationDetail][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisassociateDelegationSignerFromDomainResponse AWS API Documentation
+    #
+    class DisassociateDelegationSignerFromDomainResponse < Struct.new(
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the DNSSEC key.
+    #
+    # You get this from your DNS provider and then give it to Route 53 (by
+    # using [AssociateDelegationSignerToDomain][1]) to pass it to the
+    # registry to establish the chain of trust.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html
+    #
+    # @!attribute [rw] algorithm
+    #   The number of the public key’s cryptographic algorithm according to
+    #   an [IANA][1] assignment.
+    #
+    #   If Route 53 is your DNS service, set this to 13.
+    #
+    #   For more information about enabling DNSSEC signing, see [Enabling
+    #   DNSSEC signing and establishing a chain of trust][2].
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xml
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec-enable-signing.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] flags
+    #   Defines the type of key. It can be either a KSK (key-signing-key,
+    #   value 257) or ZSK (zone-signing-key, value 256). Using KSK is always
+    #   encouraged. Only use ZSK if your DNS provider isn't Route 53 and
+    #   you don’t have KSK available.
+    #
+    #   If you have KSK and ZSK keys, always use KSK to create a delegations
+    #   signer (DS) record. If you have ZSK keys only – use ZSK to create a
+    #   DS record.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] public_key
+    #   The base64-encoded public key part of the key pair that is passed to
+    #   the registry .
+    #   @return [String]
+    #
+    # @!attribute [rw] digest_type
+    #   The number of the DS digest algorithm according to an IANA
+    #   assignment.
+    #
+    #   For more information, see [IANA][1] for DNSSEC Delegation Signer
+    #   (DS) Resource Record (RR) Type Digest Algorithms.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml
+    #   @return [Integer]
+    #
+    # @!attribute [rw] digest
+    #   The delegation signer digest.
+    #
+    #   Digest is calculated from the public key provided using specified
+    #   digest algorithm and this digest is the actual value returned from
+    #   the registry nameservers as the value of DS records.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_tag
+    #   A numeric identification of the DNSKEY record referred to by this DS
+    #   record.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] id
+    #   An ID assigned to each DS record created by
+    #   [AssociateDelegationSignerToDomain][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DnssecKey AWS API Documentation
+    #
+    class DnssecKey < Struct.new(
+      :algorithm,
+      :flags,
+      :public_key,
+      :digest_type,
+      :digest,
+      :key_tag,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This error is returned if you call `AssociateDelegationSignerToDomain`
+    # when the specified domain has reached the maximum number of DS
+    # records. You can't add any additional DS records unless you delete an
+    # existing one first.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DnssecLimitExceeded AWS API Documentation
+    #
+    class DnssecLimitExceeded < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a delegation signer (DS) record that was created in
+    # the registry by [AssociateDelegationSignerToDomain][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html
+    #
+    # @!attribute [rw] algorithm
+    #   Algorithm which was used to generate the digest from the public key.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] flags
+    #   Defines the type of key. It can be either a KSK (key-signing-key,
+    #   value 257) or ZSK (zone-signing-key, value 256). Using KSK is always
+    #   encouraged. Only use ZSK if your DNS provider isn't Route 53 and
+    #   you don’t have KSK available.
+    #
+    #   If you have KSK and ZSK keys, always use KSK to create a delegations
+    #   signer (DS) record. If you have ZSK keys only – use ZSK to create a
+    #   DS record.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] public_key
+    #   The base64-encoded public key part of the key pair that is passed to
+    #   the registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DnssecSigningAttributes AWS API Documentation
+    #
+    class DnssecSigningAttributes < Struct.new(
+      :algorithm,
+      :flags,
+      :public_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The number of domains has exceeded the allowed threshold for the
     # account.
     #
@@ -675,8 +911,8 @@ module Aws::Route53Domains
     # @!attribute [rw] transferable
     #   Whether the domain name can be transferred to Route 53.
     #
-    #   <note markdown="1"> You can transfer only domains that have a value of `TRANSFERABLE`
-    #   for `Transferable`.
+    #   <note markdown="1"> You can transfer only domains that have a value of `TRANSFERABLE` or
+    #   `Transferable`.
     #
     #    </note>
     #
@@ -693,6 +929,19 @@ module Aws::Route53Domains
     #   DONT\_KNOW
     #
     #   : Reserved for future use.
+    #
+    #   DOMAIN\_IN\_OWN\_ACCOUNT
+    #
+    #   : The domain already exists in the current Amazon Web Services
+    #     account.
+    #
+    #   DOMAIN\_IN\_ANOTHER\_ACCOUNT
+    #
+    #   : the domain exists in another Amazon Web Services account.
+    #
+    #   PREMIUM\_DOMAIN
+    #
+    #   : Premium domain transfer is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainTransferability AWS API Documentation
@@ -1109,7 +1358,7 @@ module Aws::Route53Domains
     #
     #     ^
     #
-    #   .co.uk, .me.uk, and .org.uk
+    #   .uk, .co.uk, .me.uk, and .org.uk
     #   : * `UK_CONTACT_TYPE`
     #
     #       Valid values include the following:
@@ -1273,7 +1522,7 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] nameservers
-    #   The name of the domain.
+    #   The name servers of the domain.
     #   @return [Array<Types::Nameserver>]
     #
     # @!attribute [rw] auto_renew
@@ -1400,6 +1649,11 @@ module Aws::Route53Domains
     #   [1]: https://www.icann.org/
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dnssec_keys
+    #   A complex type that contains information about the DNSSEC
+    #   configuration.
+    #   @return [Array<Types::DnssecKey>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetailResponse AWS API Documentation
     #
     class GetDomainDetailResponse < Struct.new(
@@ -1423,7 +1677,8 @@ module Aws::Route53Domains
       :expiration_date,
       :reseller,
       :dns_sec,
-      :status_list)
+      :status_list,
+      :dnssec_keys)
       SENSITIVE = [:admin_contact, :registrant_contact, :tech_contact]
       include Aws::Structure
     end
@@ -1540,6 +1795,35 @@ module Aws::Route53Domains
     #   The date when the request was submitted.
     #   @return [Time]
     #
+    # @!attribute [rw] last_updated_date
+    #   The date when the operation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_flag
+    #   Lists any outstanding operations that require customer action. Valid
+    #   values are:
+    #
+    #   * `PENDING_ACCEPTANCE`\: The operation is waiting for acceptance
+    #     from the account that is receiving the domain.
+    #
+    #   * `PENDING_CUSTOMER_ACTION`\: The operation is waiting for customer
+    #     action, for example, returning an email.
+    #
+    #   * `PENDING_AUTHORIZATION`\: The operation is waiting for the form of
+    #     authorization. For more information, see
+    #     [ResendOperationAuthorization][1].
+    #
+    #   * `PENDING_PAYMENT_VERIFICATION`\: The operation is waiting for the
+    #     payment method to validate.
+    #
+    #   * `PENDING_SUPPORT_CASE`\: The operation includes a support case and
+    #     is waiting for its resolution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetailResponse AWS API Documentation
     #
     class GetOperationDetailResponse < Struct.new(
@@ -1548,7 +1832,9 @@ module Aws::Route53Domains
       :message,
       :domain_name,
       :type,
-      :submitted_date)
+      :submitted_date,
+      :last_updated_date,
+      :status_flag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1663,12 +1949,32 @@ module Aws::Route53Domains
     #   Default: 20
     #   @return [Integer]
     #
+    # @!attribute [rw] status
+    #   The status of the operations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   An arrays of the domains operation types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sort_by
+    #   The sort type for returned values.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order ofr returned values, either ascending or descending.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsRequest AWS API Documentation
     #
     class ListOperationsRequest < Struct.new(
       :submitted_since,
       :marker,
-      :max_items)
+      :max_items,
+      :status,
+      :type,
+      :sort_by,
+      :sort_order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1782,7 +2088,7 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # Nameserver includes the following elements.
+    # Name server includes the following elements.
     #
     # @!attribute [rw] name
     #   The fully qualified host name of the name server.
@@ -1844,13 +2150,57 @@ module Aws::Route53Domains
     #   The date when the request was submitted.
     #   @return [Time]
     #
+    # @!attribute [rw] domain_name
+    #   Name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Message about the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_flag
+    #   Automatically checks whether there are no outstanding operations on
+    #   domains that need customer attention.
+    #
+    #   Valid values are:
+    #
+    #   * `PENDING_ACCEPTANCE`\: The operation is waiting for acceptance
+    #     from the account that is receiving the domain.
+    #
+    #   * `PENDING_CUSTOMER_ACTION`\: The operation is waiting for customer
+    #     action, for example, returning an email.
+    #
+    #   * `PENDING_AUTHORIZATION`\: The operation is waiting for the form of
+    #     authorization. For more information, see
+    #     [ResendOperationAuthorization][1].
+    #
+    #   * `PENDING_PAYMENT_VERIFICATION`\: The operation is waiting for the
+    #     payment method to validate.
+    #
+    #   * `PENDING_SUPPORT_CASE`\: The operation includes a support case and
+    #     is waiting for its resolution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date
+    #   The date when the last change was made in Unix time format and
+    #   Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/OperationSummary AWS API Documentation
     #
     class OperationSummary < Struct.new(
       :operation_id,
       :status,
       :type,
-      :submitted_date)
+      :submitted_date,
+      :domain_name,
+      :message,
+      :status_flag,
+      :last_updated_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1870,6 +2220,23 @@ module Aws::Route53Domains
     class PriceWithCurrency < Struct.new(
       :price,
       :currency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   Name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   New IPS tag for the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/PushDomainRequest AWS API Documentation
+    #
+    class PushDomainRequest < Struct.new(
+      :domain_name,
+      :target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1926,8 +2293,8 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] auto_renew
     #   Indicates whether the domain will be automatically renewed (`true`)
-    #   or not (`false`). Autorenewal only takes effect after the account is
-    #   charged.
+    #   or not (`false`). Auto renewal only takes effect after the account
+    #   is charged.
     #
     #   Default: `true`
     #   @return [Boolean]
@@ -2173,6 +2540,18 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # @!attribute [rw] operation_id
+    #   Operation ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendOperationAuthorizationRequest AWS API Documentation
+    #
+    class ResendOperationAuthorizationRequest < Struct.new(
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request for the authorization code for the specified domain. To
     # transfer a domain to another registrar, you provide this value to the
     # new registrar.
@@ -2322,7 +2701,7 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] auto_renew
     #   Indicates whether the domain will be automatically renewed (true) or
-    #   not (false). Autorenewal only takes effect after the account is
+    #   not (false). Auto renewal only takes effect after the account is
     #   charged.
     #
     #   Default: true
@@ -2591,13 +2970,18 @@ module Aws::Route53Domains
     #   Provides detailed contact information.
     #   @return [Types::ContactDetail]
     #
+    # @!attribute [rw] consent
+    #   Customer's consent for the owner change request.
+    #   @return [Types::Consent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactRequest AWS API Documentation
     #
     class UpdateDomainContactRequest < Struct.new(
       :domain_name,
       :admin_contact,
       :registrant_contact,
-      :tech_contact)
+      :tech_contact,
+      :consent)
       SENSITIVE = [:admin_contact, :registrant_contact, :tech_contact]
       include Aws::Structure
     end

@@ -1566,6 +1566,9 @@ module Aws::LookoutEquipment
     # @option params [String] :model_name
     #   The name of the ML model used by the inference scheduler to be listed.
     #
+    # @option params [String] :status
+    #   Specifies the current status of the inference schedulers to list.
+    #
     # @return [Types::ListInferenceSchedulersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListInferenceSchedulersResponse#next_token #next_token} => String
@@ -1580,6 +1583,7 @@ module Aws::LookoutEquipment
     #     max_results: 1,
     #     inference_scheduler_name_begins_with: "InferenceSchedulerIdentifier",
     #     model_name: "ModelName",
+    #     status: "PENDING", # accepts PENDING, RUNNING, STOPPING, STOPPED
     #   })
     #
     # @example Response structure
@@ -2186,7 +2190,7 @@ module Aws::LookoutEquipment
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

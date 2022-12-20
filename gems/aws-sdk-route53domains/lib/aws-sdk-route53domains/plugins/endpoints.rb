@@ -58,6 +58,8 @@ module Aws::Route53Domains
           case context.operation_name
           when :accept_domain_transfer_from_another_aws_account
             Aws::Route53Domains::Endpoints::AcceptDomainTransferFromAnotherAwsAccount.build(context)
+          when :associate_delegation_signer_to_domain
+            Aws::Route53Domains::Endpoints::AssociateDelegationSignerToDomain.build(context)
           when :cancel_domain_transfer_to_another_aws_account
             Aws::Route53Domains::Endpoints::CancelDomainTransferToAnotherAwsAccount.build(context)
           when :check_domain_availability
@@ -72,6 +74,8 @@ module Aws::Route53Domains
             Aws::Route53Domains::Endpoints::DisableDomainAutoRenew.build(context)
           when :disable_domain_transfer_lock
             Aws::Route53Domains::Endpoints::DisableDomainTransferLock.build(context)
+          when :disassociate_delegation_signer_from_domain
+            Aws::Route53Domains::Endpoints::DisassociateDelegationSignerFromDomain.build(context)
           when :enable_domain_auto_renew
             Aws::Route53Domains::Endpoints::EnableDomainAutoRenew.build(context)
           when :enable_domain_transfer_lock
@@ -92,6 +96,8 @@ module Aws::Route53Domains
             Aws::Route53Domains::Endpoints::ListPrices.build(context)
           when :list_tags_for_domain
             Aws::Route53Domains::Endpoints::ListTagsForDomain.build(context)
+          when :push_domain
+            Aws::Route53Domains::Endpoints::PushDomain.build(context)
           when :register_domain
             Aws::Route53Domains::Endpoints::RegisterDomain.build(context)
           when :reject_domain_transfer_from_another_aws_account
@@ -100,6 +106,8 @@ module Aws::Route53Domains
             Aws::Route53Domains::Endpoints::RenewDomain.build(context)
           when :resend_contact_reachability_email
             Aws::Route53Domains::Endpoints::ResendContactReachabilityEmail.build(context)
+          when :resend_operation_authorization
+            Aws::Route53Domains::Endpoints::ResendOperationAuthorization.build(context)
           when :retrieve_domain_auth_code
             Aws::Route53Domains::Endpoints::RetrieveDomainAuthCode.build(context)
           when :transfer_domain

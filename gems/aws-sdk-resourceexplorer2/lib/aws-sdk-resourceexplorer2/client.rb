@@ -505,7 +505,7 @@ module Aws::ResourceExplorer2
     #   This permission is required only the first time you create an index
     #   to turn on Resource Explorer in the account. Resource Explorer uses
     #   this to create the [service-linked role needed to index the
-    #   resources in your account][4]. Resource Explorer uses the same
+    #   resources in your account][3]. Resource Explorer uses the same
     #   service-linked role for all additional indexes you create
     #   afterwards.
     #
@@ -513,8 +513,7 @@ module Aws::ResourceExplorer2
     #
     # [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html
     # [2]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-activate.html
-    # [3]: https://docs.aws.amazon.com/arexug/mainline/security_iam_service-linked-roles.html
-    # [4]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html
+    # [3]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html
     #
     # @option params [String] :client_token
     #   This value helps ensure idempotency. Resource Explorer uses this value
@@ -577,7 +576,7 @@ module Aws::ResourceExplorer2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/arexug/mainline/manage-views.html
+    # [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-views.html
     # [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :client_token
@@ -683,6 +682,14 @@ module Aws::ResourceExplorer2
     # Region. These actions occur as asynchronous background tasks. You can
     # check to see when the actions are complete by using the GetIndex
     # operation and checking the `Status` response value.
+    #
+    # <note markdown="1"> If the index you delete is the aggregator index for the Amazon Web
+    # Services account, you must wait 24 hours before you can promote
+    # another local index to be the aggregator index for the account. Users
+    # can't perform account-wide searches using Resource Explorer until
+    # another aggregator index is configured.
+    #
+    #  </note>
     #
     # @option params [required, String] :arn
     #   The [Amazon resource name (ARN)][1] of the index that you want to
@@ -1343,7 +1350,7 @@ module Aws::ResourceExplorer2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/arexug/mainline/manage-aggregator-region.html
+    # [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html
     #
     # @option params [required, String] :arn
     #   The [Amazon resource name (ARN)][1] of the index that you want to
@@ -1485,7 +1492,7 @@ module Aws::ResourceExplorer2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1983,6 +1983,8 @@ module Aws::Batch
     #   resp.jobs[0].eks_attempts[0].started_at #=> Integer
     #   resp.jobs[0].eks_attempts[0].stopped_at #=> Integer
     #   resp.jobs[0].eks_attempts[0].status_reason #=> String
+    #   resp.jobs[0].is_cancelled #=> Boolean
+    #   resp.jobs[0].is_terminated #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
     #
@@ -3592,7 +3594,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

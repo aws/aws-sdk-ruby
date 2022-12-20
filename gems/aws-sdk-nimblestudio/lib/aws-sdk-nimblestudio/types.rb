@@ -13,8 +13,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -95,8 +95,8 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # The configuration for a Microsoft Active Directory (Microsoft AD)
-    # studio resource.
+    # The configuration for a Directory Service for Microsoft Active
+    # Directory studio resource.
     #
     # @!attribute [rw] computer_attributes
     #   A collection of custom attributes for an Active Directory computer.
@@ -171,8 +171,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -211,7 +211,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -246,8 +246,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -271,7 +271,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -303,8 +303,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -315,7 +315,8 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_id
-    #   The launch profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] owned_by
@@ -333,7 +334,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -366,8 +367,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -411,8 +412,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -440,8 +441,8 @@ module Aws::NimbleStudio
     #
     # @!attribute [rw] runtime_role_arn
     #   An IAM role attached to a Studio Component that gives the studio
-    #   component access to AWS resources at anytime while the instance is
-    #   running.
+    #   component access to Amazon Web Services resources at anytime while
+    #   the instance is running.
     #   @return [String]
     #
     # @!attribute [rw] script_parameters
@@ -451,7 +452,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] secure_initialization_role_arn
     #   An IAM role attached to Studio Component when the system
     #   initialization script runs which give the studio component access to
-    #   AWS resources when the system initialization script runs.
+    #   Amazon Web Services resources when the system initialization script
+    #   runs.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -463,7 +465,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -504,15 +506,15 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] admin_role_arn
-    #   The IAM role that Studio Admins will assume when logging in to the
+    #   The IAM role that studio admins will assume when logging in to the
     #   Nimble Studio portal.
     #   @return [String]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -532,12 +534,12 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_role_arn
-    #   The IAM role that Studio Users will assume when logging in to the
+    #   The IAM role that studio users will assume when logging in to the
     #   Nimble Studio portal.
     #   @return [String]
     #
@@ -570,15 +572,16 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -608,15 +611,16 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -648,8 +652,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -688,8 +692,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -728,8 +732,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -768,8 +772,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -801,8 +805,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -840,8 +844,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   created.
+    #   The ISO timestamp in seconds for when the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] eula_id
@@ -853,8 +856,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   updated.
+    #   The ISO timestamp in seconds for when the resource was updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/Eula AWS API Documentation
@@ -873,7 +875,7 @@ module Aws::NimbleStudio
     # images.
     #
     # @!attribute [rw] accepted_at
-    #   The Unix epoch timestamp in seconds for when the EULA was accepted.
+    #   The ISO timestamp in seconds for when the EULA was accepted.
     #   @return [Time]
     #
     # @!attribute [rw] accepted_by
@@ -929,7 +931,8 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -968,7 +971,8 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_protocol_versions
@@ -980,8 +984,8 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform where this Launch Profile will be used, either WINDOWS
-    #   or LINUX.
+    #   The platform where this Launch Profile will be used, either Windows
+    #   or Linux.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -1013,7 +1017,8 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -1048,7 +1053,8 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -1101,6 +1107,35 @@ module Aws::NimbleStudio
     #
     class GetStreamingImageResponse < Struct.new(
       :streaming_image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_id
+    #   The ID of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_id
+    #   The studio ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/GetStreamingSessionBackupRequest AWS API Documentation
+    #
+    class GetStreamingSessionBackupRequest < Struct.new(
+      :backup_id,
+      :studio_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] streaming_session_backup
+    #   Information about the streaming session backup.
+    #   @return [Types::StreamingSessionBackup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/GetStreamingSessionBackupResponse AWS API Documentation
+    #
+    class GetStreamingSessionBackupResponse < Struct.new(
+      :streaming_session_backup)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1280,15 +1315,19 @@ module Aws::NimbleStudio
     # systems, and license server configurations, as well as instance types
     # and Amazon Machine Images (AMIs).
     #
-    #      <p>Studio administrators create launch profiles in the Nimble Studio console. Artists can use their launch profiles to launch an instance from the Nimble Studio portal. Each user’s launch profile defines how they can launch a streaming session. By default, studio admins can use all launch profiles.</p>
+    # Studio administrators create launch profiles in the Nimble Studio
+    # console. Artists can use their launch profiles to launch an instance
+    # from the Nimble Studio portal. Each user’s launch profile defines how
+    # they can launch a streaming session. By default, studio admins can use
+    # all launch profiles.
     #
     # @!attribute [rw] arn
-    #   The ARN of the resource.
+    #   The Amazon Resource Name (ARN) that is assigned to a studio resource
+    #   and uniquely identifies it. ARNs are unique across all Regions.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   created.
+    #   The ISO timestamp in seconds for when the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -1304,7 +1343,8 @@ module Aws::NimbleStudio
     #   @return [Array<String>]
     #
     # @!attribute [rw] launch_profile_id
-    #   The launch profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_protocol_versions
@@ -1338,13 +1378,12 @@ module Aws::NimbleStudio
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] updated_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   updated.
+    #   The ISO timestamp in seconds for when the resource was updated.
     #   @return [Time]
     #
     # @!attribute [rw] updated_by
@@ -1379,14 +1418,14 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # A Launch Profile Initialization contains information required for a
+    # A launch profile initialization contains information required for a
     # workstation or server to connect to a launch profile.
     #
     # This includes scripts, endpoints, security groups, subnets, and other
     # configuration.
     #
     # @!attribute [rw] active_directory
-    #   A LaunchProfileInitializationActiveDirectory resource.
+    #   A `LaunchProfileInitializationActiveDirectory` resource.
     #   @return [Types::LaunchProfileInitializationActiveDirectory]
     #
     # @!attribute [rw] ec2_security_group_ids
@@ -1394,7 +1433,8 @@ module Aws::NimbleStudio
     #   @return [Array<String>]
     #
     # @!attribute [rw] launch_profile_id
-    #   The launch profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_protocol_version
@@ -1411,7 +1451,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the launch platform, either WINDOWS or LINUX.
+    #   The platform of the launch platform, either Windows or Linux.
     #   @return [String]
     #
     # @!attribute [rw] system_initialization_scripts
@@ -1438,7 +1478,7 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # The Launch Profile Initialization Active Directory contains
+    # The launch profile initialization Active Directory contains
     # information required for the launch profile to connect to the Active
     # Directory.
     #
@@ -1485,13 +1525,13 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # The Launch Profile Initialization Script is used when start streaming
+    # The launch profile initialization script is used when start streaming
     # session runs.
     #
     # @!attribute [rw] runtime_role_arn
     #   An IAM role attached to a Studio Component that gives the studio
-    #   component access to AWS resources at anytime while the instance is
-    #   running.
+    #   component access to Amazon Web Services resources at anytime while
+    #   the instance is running.
     #   @return [String]
     #
     # @!attribute [rw] script
@@ -1501,7 +1541,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] secure_initialization_role_arn
     #   An IAM role attached to Studio Component when the system
     #   initialization script runs which give the studio component access to
-    #   AWS resources when the system initialization script runs.
+    #   Amazon Web Services resources when the system initialization script
+    #   runs.
     #   @return [String]
     #
     # @!attribute [rw] studio_component_id
@@ -1524,11 +1565,11 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # Launch profile membership enables your studio admins to delegate
-    # launch profile access to other studio users in the Nimble Studio
-    # portal without needing to write or maintain complex IAM policies. A
-    # launch profile member is a user association from your studio identity
-    # source who is granted permissions to a launch profile.
+    # Studio admins can use launch profile membership to delegate launch
+    # profile access to studio users in the Nimble Studio portal without
+    # writing or maintaining complex IAM policies. A launch profile member
+    # is a user association from your studio identity source who is granted
+    # permissions to a launch profile.
     #
     # A launch profile member (type USER) provides the following permissions
     # to that launch profile:
@@ -1594,7 +1635,8 @@ module Aws::NimbleStudio
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -1634,7 +1676,8 @@ module Aws::NimbleStudio
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/ListEulasRequest AWS API Documentation
@@ -1665,7 +1708,8 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1673,7 +1717,8 @@ module Aws::NimbleStudio
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -1714,7 +1759,8 @@ module Aws::NimbleStudio
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -1761,7 +1807,8 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] owner
@@ -1800,12 +1847,54 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] owned_by
+    #   The user ID of the user that owns the streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_id
+    #   The studio ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/ListStreamingSessionBackupsRequest AWS API Documentation
+    #
+    class ListStreamingSessionBackupsRequest < Struct.new(
+      :next_token,
+      :owned_by,
+      :studio_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] streaming_session_backups
+    #   Information about the streaming session backups.
+    #   @return [Array<Types::StreamingSessionBackup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/ListStreamingSessionBackupsResponse AWS API Documentation
+    #
+    class ListStreamingSessionBackupsResponse < Struct.new(
+      :next_token,
+      :streaming_session_backups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] created_by
     #   Filters the request to streaming sessions created by the given user.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] owned_by
@@ -1855,7 +1944,8 @@ module Aws::NimbleStudio
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] states
@@ -1907,7 +1997,8 @@ module Aws::NimbleStudio
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -1943,7 +2034,8 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token for the next set of results, or null if there are no more
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/ListStudiosRequest AWS API Documentation
@@ -1986,7 +2078,7 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -2039,8 +2131,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2051,7 +2143,8 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] members
@@ -2081,8 +2174,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2139,7 +2232,7 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # A parameter for a studio component script, in the form of a key:value
+    # A parameter for a studio component script, in the form of a key-value
     # pair.
     #
     # @!attribute [rw] key
@@ -2163,7 +2256,7 @@ module Aws::NimbleStudio
     # You can request increases for some quotas, and other quotas cannot be
     # increased.
     #
-    # Please use AWS Service Quotas to request an increase.
+    # Please use Amazon Web Services Service Quotas to request an increase.
     #
     # @!attribute [rw] code
     #   A more specific error code.
@@ -2225,18 +2318,22 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_id
+    #   The ID of the backup.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] session_id
-    #   The streaming session ID for the StartStreamingSessionRequest.
+    #   The streaming session ID for the `StartStreamingSessionRequest`.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
@@ -2246,6 +2343,7 @@ module Aws::NimbleStudio
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StartStreamingSessionRequest AWS API Documentation
     #
     class StartStreamingSessionRequest < Struct.new(
+      :backup_id,
       :client_token,
       :session_id,
       :studio_id)
@@ -2269,8 +2367,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2304,19 +2402,24 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] session_id
-    #   The streaming session ID for the StopStreamingSessionRequest.
+    #   The streaming session ID for the `StopStreamingSessionRequest`.
     #   @return [String]
     #
     # @!attribute [rw] studio_id
     #   The studioId for the StopStreamingSessionRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_retention_mode
+    #   Adds additional instructions to a streaming session stop action to
+    #   either retain the EBS volumes or delete the EBS volumes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StopStreamingSessionRequest AWS API Documentation
@@ -2324,7 +2427,8 @@ module Aws::NimbleStudio
     class StopStreamingSessionRequest < Struct.new(
       :client_token,
       :session_id,
-      :studio_id)
+      :studio_id,
+      :volume_retention_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2344,9 +2448,26 @@ module Aws::NimbleStudio
 
     # A configuration for a streaming session.
     #
+    # @!attribute [rw] automatic_termination_mode
+    #   Indicates if a streaming session created from this launch profile
+    #   should be terminated automatically or retained without termination
+    #   after being in a `STOPPED` state.
+    #
+    #   * When `ACTIVATED`, the streaming session is scheduled for
+    #     termination after being in the `STOPPED` state for the time
+    #     specified in `maxStoppedSessionLengthInMinutes`.
+    #
+    #   * When `DEACTIVATED`, the streaming session can remain in the
+    #     `STOPPED` state indefinitely.
+    #
+    #   This parameter is only allowed when `sessionPersistenceMode` is
+    #   `ACTIVATED`. When allowed, the default value for this parameter is
+    #   `DEACTIVATED`.
+    #   @return [String]
+    #
     # @!attribute [rw] clipboard_mode
-    #   Enable or disable the use of the system clipboard to copy and paste
-    #   between the streaming session and streaming client.
+    #   Allows or deactivates the use of the system clipboard to copy and
+    #   paste between the streaming session and streaming client.
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_types
@@ -2364,24 +2485,37 @@ module Aws::NimbleStudio
     #
     # @!attribute [rw] max_stopped_session_length_in_minutes
     #   Integer that determines if you can start and stop your sessions and
-    #   how long a session can stay in the STOPPED state. The default value
-    #   is 0. The maximum value is 5760.
+    #   how long a session can stay in the `STOPPED` state. The default
+    #   value is 0. The maximum value is 5760.
     #
-    #   If the value is missing or set to 0, your sessions can’t be stopped.
-    #   If you then call `StopStreamingSession`, the session fails. If the
-    #   time that a session stays in the READY state exceeds the
+    #   This field is allowed only when `sessionPersistenceMode` is
+    #   `ACTIVATED` and `automaticTerminationMode` is `ACTIVATED`.
+    #
+    #   If the value is set to 0, your sessions can’t be `STOPPED`. If you
+    #   then call `StopStreamingSession`, the session fails. If the time
+    #   that a session stays in the `READY` state exceeds the
     #   `maxSessionLengthInMinutes` value, the session will automatically be
-    #   terminated (instead of stopped).
+    #   terminated (instead of `STOPPED`).
     #
     #   If the value is set to a positive number, the session can be
     #   stopped. You can call `StopStreamingSession` to stop sessions in the
-    #   READY state. If the time that a session stays in the READY state
+    #   `READY` state. If the time that a session stays in the `READY` state
     #   exceeds the `maxSessionLengthInMinutes` value, the session will
     #   automatically be stopped (instead of terminated).
     #   @return [Integer]
     #
+    # @!attribute [rw] session_backup
+    #   Information about the streaming session backup.
+    #   @return [Types::StreamConfigurationSessionBackup]
+    #
+    # @!attribute [rw] session_persistence_mode
+    #   Determine if a streaming session created from this launch profile
+    #   can configure persistent storage. This means that
+    #   `volumeConfiguration` and `automaticTerminationMode` are configured.
+    #   @return [String]
+    #
     # @!attribute [rw] session_storage
-    #   (Optional) The upload storage for a streaming session.
+    #   The upload storage for a streaming session.
     #   @return [Types::StreamConfigurationSessionStorage]
     #
     # @!attribute [rw] streaming_image_ids
@@ -2389,15 +2523,27 @@ module Aws::NimbleStudio
     #   streaming session with this launch profile.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] volume_configuration
+    #   Custom volume configuration for the root volumes that are attached
+    #   to streaming sessions.
+    #
+    #   This parameter is only allowed when `sessionPersistenceMode` is
+    #   `ACTIVATED`.
+    #   @return [Types::VolumeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StreamConfiguration AWS API Documentation
     #
     class StreamConfiguration < Struct.new(
+      :automatic_termination_mode,
       :clipboard_mode,
       :ec2_instance_types,
       :max_session_length_in_minutes,
       :max_stopped_session_length_in_minutes,
+      :session_backup,
+      :session_persistence_mode,
       :session_storage,
-      :streaming_image_ids)
+      :streaming_image_ids,
+      :volume_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2405,9 +2551,26 @@ module Aws::NimbleStudio
     # Configuration for streaming workstations created using this launch
     # profile.
     #
+    # @!attribute [rw] automatic_termination_mode
+    #   Indicates if a streaming session created from this launch profile
+    #   should be terminated automatically or retained without termination
+    #   after being in a `STOPPED` state.
+    #
+    #   * When `ACTIVATED`, the streaming session is scheduled for
+    #     termination after being in the `STOPPED` state for the time
+    #     specified in `maxStoppedSessionLengthInMinutes`.
+    #
+    #   * When `DEACTIVATED`, the streaming session can remain in the
+    #     `STOPPED` state indefinitely.
+    #
+    #   This parameter is only allowed when `sessionPersistenceMode` is
+    #   `ACTIVATED`. When allowed, the default value for this parameter is
+    #   `DEACTIVATED`.
+    #   @return [String]
+    #
     # @!attribute [rw] clipboard_mode
-    #   Enable or disable the use of the system clipboard to copy and paste
-    #   between the streaming session and streaming client.
+    #   Allows or deactivates the use of the system clipboard to copy and
+    #   paste between the streaming session and streaming client.
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_types
@@ -2425,25 +2588,39 @@ module Aws::NimbleStudio
     #
     # @!attribute [rw] max_stopped_session_length_in_minutes
     #   Integer that determines if you can start and stop your sessions and
-    #   how long a session can stay in the STOPPED state. The default value
-    #   is 0. The maximum value is 5760.
+    #   how long a session can stay in the `STOPPED` state. The default
+    #   value is 0. The maximum value is 5760.
     #
-    #   If the value is missing or set to 0, your sessions can’t be stopped.
-    #   If you then call `StopStreamingSession`, the session fails. If the
-    #   time that a session stays in the READY state exceeds the
+    #   This field is allowed only when `sessionPersistenceMode` is
+    #   `ACTIVATED` and `automaticTerminationMode` is `ACTIVATED`.
+    #
+    #   If the value is set to 0, your sessions can’t be `STOPPED`. If you
+    #   then call `StopStreamingSession`, the session fails. If the time
+    #   that a session stays in the `READY` state exceeds the
     #   `maxSessionLengthInMinutes` value, the session will automatically be
-    #   terminated (instead of stopped).
+    #   terminated (instead of `STOPPED`).
     #
     #   If the value is set to a positive number, the session can be
     #   stopped. You can call `StopStreamingSession` to stop sessions in the
-    #   READY state. If the time that a session stays in the READY state
+    #   `READY` state. If the time that a session stays in the `READY` state
     #   exceeds the `maxSessionLengthInMinutes` value, the session will
     #   automatically be stopped (instead of terminated).
     #   @return [Integer]
     #
+    # @!attribute [rw] session_backup
+    #   Configures how streaming sessions are backed up when launched from
+    #   this launch profile.
+    #   @return [Types::StreamConfigurationSessionBackup]
+    #
+    # @!attribute [rw] session_persistence_mode
+    #   Determine if a streaming session created from this launch profile
+    #   can configure persistent storage. This means that
+    #   `volumeConfiguration` and `automaticTerminationMode` are configured.
+    #   @return [String]
+    #
     # @!attribute [rw] session_storage
-    #   (Optional) The upload storage for a streaming workstation that is
-    #   created using this launch profile.
+    #   The upload storage for a streaming workstation that is created using
+    #   this launch profile.
     #   @return [Types::StreamConfigurationSessionStorage]
     #
     # @!attribute [rw] streaming_image_ids
@@ -2451,15 +2628,53 @@ module Aws::NimbleStudio
     #   streaming session with this launch profile.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] volume_configuration
+    #   Custom volume configuration for the root volumes that are attached
+    #   to streaming sessions.
+    #
+    #   This parameter is only allowed when `sessionPersistenceMode` is
+    #   `ACTIVATED`.
+    #   @return [Types::VolumeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StreamConfigurationCreate AWS API Documentation
     #
     class StreamConfigurationCreate < Struct.new(
+      :automatic_termination_mode,
       :clipboard_mode,
       :ec2_instance_types,
       :max_session_length_in_minutes,
       :max_stopped_session_length_in_minutes,
+      :session_backup,
+      :session_persistence_mode,
       :session_storage,
-      :streaming_image_ids)
+      :streaming_image_ids,
+      :volume_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures how streaming sessions are backed up when launched from
+    # this launch profile.
+    #
+    # @!attribute [rw] max_backups_to_retain
+    #   The maximum number of backups that each streaming session created
+    #   from this launch profile can have.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   Specifies how artists sessions are backed up.
+    #
+    #   Configures backups for streaming sessions launched with this launch
+    #   profile. The default value is `DEACTIVATED`, which means that
+    #   backups are deactivated. To allow backups, set this value to
+    #   `AUTOMATIC`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StreamConfigurationSessionBackup AWS API Documentation
+    #
+    class StreamConfigurationSessionBackup < Struct.new(
+      :max_backups_to_retain,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2494,12 +2709,13 @@ module Aws::NimbleStudio
     # Amazon provides a number of streaming images that include popular
     # 3rd-party software.
     #
-    # You can create your own streaming images using an Amazon Elastic
-    # Compute Cloud (Amazon EC2) machine image that you create for this
-    # purpose. You can also include software that your users require.
+    # You can create your own streaming images using an Amazon EC2 machine
+    # image that you create for this purpose. You can also include software
+    # that your users require.
     #
     # @!attribute [rw] arn
-    #   The ARN of the resource.
+    #   The Amazon Resource Name (ARN) that is assigned to a studio resource
+    #   and uniquely identifies it. ARNs are unique across all Regions.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2525,13 +2741,13 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The owner of the streaming image, either the studioId that contains
-    #   the streaming image, or 'amazon' for images that are provided by
-    #   Amazon Nimble Studio.
+    #   The owner of the streaming image, either the `studioId` that
+    #   contains the streaming image, or `amazon` for images that are
+    #   provided by Amazon Nimble Studio.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the streaming image, either WINDOWS or LINUX.
+    #   The platform of the streaming image, either Windows or Linux.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -2551,7 +2767,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -2598,12 +2814,33 @@ module Aws::NimbleStudio
     # particular launch profile.
     #
     # @!attribute [rw] arn
-    #   The ARN of the resource.
+    #   The Amazon Resource Name (ARN) that is assigned to a studio resource
+    #   and uniquely identifies it. ARNs are unique across all Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_termination_mode
+    #   Indicates if a streaming session created from this launch profile
+    #   should be terminated automatically or retained without termination
+    #   after being in a `STOPPED` state.
+    #
+    #   * When `ACTIVATED`, the streaming session is scheduled for
+    #     termination after being in the `STOPPED` state for the time
+    #     specified in `maxStoppedSessionLengthInMinutes`.
+    #
+    #   * When `DEACTIVATED`, the streaming session can remain in the
+    #     `STOPPED` state indefinitely.
+    #
+    #   This parameter is only allowed when `sessionPersistenceMode` is
+    #   `ACTIVATED`. When allowed, the default value for this parameter is
+    #   `DEACTIVATED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_mode
+    #   Shows the current backup setting of the session.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   created.
+    #   The ISO timestamp in seconds for when the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -2619,6 +2856,12 @@ module Aws::NimbleStudio
     #   streaming session.
     #   @return [String]
     #
+    # @!attribute [rw] max_backups_to_retain
+    #   The maximum number of backups of a streaming session that you can
+    #   have. When the maximum number of backups is reached, the oldest
+    #   backup is deleted.
+    #   @return [Integer]
+    #
     # @!attribute [rw] owned_by
     #   The user ID of the user that owns the streaming session. The user
     #   that owns the session will be logging into the session and
@@ -2629,12 +2872,22 @@ module Aws::NimbleStudio
     #   The session ID.
     #   @return [String]
     #
+    # @!attribute [rw] session_persistence_mode
+    #   Determine if a streaming session created from this launch profile
+    #   can configure persistent storage. This means that
+    #   `volumeConfiguration` and `automaticTerminationMode` are configured.
+    #   @return [String]
+    #
     # @!attribute [rw] started_at
-    #   The time the session entered START\_IN\_PROGRESS state.
+    #   The time the session entered `START_IN_PROGRESS` state.
     #   @return [Time]
     #
     # @!attribute [rw] started_by
     #   The user ID of the user that started the streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_from_backup_id
+    #   The backup ID used to restore a streaming session.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -2655,7 +2908,7 @@ module Aws::NimbleStudio
     #   @return [Time]
     #
     # @!attribute [rw] stopped_at
-    #   The time the session entered STOP\_IN\_PROGRESS state.
+    #   The time the session entered `STOP_IN_PROGRESS` state.
     #   @return [Time]
     #
     # @!attribute [rw] stopped_by
@@ -2667,7 +2920,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -2677,26 +2930,43 @@ module Aws::NimbleStudio
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   updated.
+    #   The ISO timestamp in seconds for when the resource was updated.
     #   @return [Time]
     #
     # @!attribute [rw] updated_by
     #   The user ID of the user that most recently updated the resource.
     #   @return [String]
     #
+    # @!attribute [rw] volume_configuration
+    #   Custom volume configuration for the root volumes that are attached
+    #   to streaming sessions.
+    #
+    #   This parameter is only allowed when `sessionPersistenceMode` is
+    #   `ACTIVATED`.
+    #   @return [Types::VolumeConfiguration]
+    #
+    # @!attribute [rw] volume_retention_mode
+    #   Determine if an EBS volume created from this streaming session will
+    #   be backed up.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StreamingSession AWS API Documentation
     #
     class StreamingSession < Struct.new(
       :arn,
+      :automatic_termination_mode,
+      :backup_mode,
       :created_at,
       :created_by,
       :ec2_instance_type,
       :launch_profile_id,
+      :max_backups_to_retain,
       :owned_by,
       :session_id,
+      :session_persistence_mode,
       :started_at,
       :started_by,
+      :started_from_backup_id,
       :state,
       :status_code,
       :status_message,
@@ -2707,7 +2977,71 @@ module Aws::NimbleStudio
       :tags,
       :terminate_at,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :volume_configuration,
+      :volume_retention_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the streaming session backup.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) that is assigned to a studio resource
+    #   and uniquely identifies it. ARNs are unique across all Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The ISO timestamp in for when the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] launch_profile_id
+    #   The ID of the launch profile which allowed the backups for the
+    #   streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] owned_by
+    #   The user ID of the user that owns the streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The streaming session ID for the `StreamingSessionBackup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The streaming session state.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the streaming session backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of labels, in the form of key-value pairs, that apply
+    #   to this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StreamingSessionBackup AWS API Documentation
+    #
+    class StreamingSessionBackup < Struct.new(
+      :arn,
+      :backup_id,
+      :created_at,
+      :launch_profile_id,
+      :owned_by,
+      :session_id,
+      :state,
+      :status_code,
+      :status_message,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2739,8 +3073,7 @@ module Aws::NimbleStudio
     # client.
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   created.
+    #   The ISO timestamp in seconds for when the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -2748,7 +3081,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] expires_at
-    #   The Unix epoch timestamp in seconds for when the resource expires.
+    #   The ISO timestamp in seconds for when the resource expires.
     #   @return [Time]
     #
     # @!attribute [rw] owned_by
@@ -2800,14 +3133,14 @@ module Aws::NimbleStudio
     # they log in to the Nimble Studio portal via IAM Identity Center and
     # your identity source.
     #
-    # The user role must have the AmazonNimbleStudio-StudioUser managed
+    # The user role must have the `AmazonNimbleStudio-StudioUser` managed
     # policy attached for the portal to function properly.
     #
-    # The admin role must have the AmazonNimbleStudio-StudioAdmin managed
+    # The admin role must have the `AmazonNimbleStudio-StudioAdmin` managed
     # policy attached for the portal to function properly.
     #
-    # Your studio roles must trust the identity.nimble.amazonaws.com service
-    # principal to function properly.
+    # Your studio roles must trust the `identity.nimble.amazonaws.com`
+    # service principal to function properly.
     #
     # @!attribute [rw] admin_role_arn
     #   The IAM role that studio admins assume when logging in to the Nimble
@@ -2820,8 +3153,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   created.
+    #   The ISO timestamp in seconds for when the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] display_name
@@ -2834,8 +3166,8 @@ module Aws::NimbleStudio
     #
     # @!attribute [rw] sso_client_id
     #   The IAM Identity Center application client ID used to integrate with
-    #   IAM Identity Center to enable IAM Identity Center users to log in to
-    #   Nimble Studio portal.
+    #   IAM Identity Center. This ID allows IAM Identity Center users to log
+    #   in to Nimble Studio portal.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -2869,13 +3201,12 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] updated_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   updated.
+    #   The ISO timestamp in seconds for when the resource was updated.
     #   @return [Time]
     #
     # @!attribute [rw] user_role_arn
@@ -2921,7 +3252,8 @@ module Aws::NimbleStudio
     # configured on a streaming session.
     #
     # @!attribute [rw] arn
-    #   The ARN of the resource.
+    #   The Amazon Resource Name (ARN) that is assigned to a studio resource
+    #   and uniquely identifies it. ARNs are unique across all Regions.
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -2929,8 +3261,7 @@ module Aws::NimbleStudio
     #   @return [Types::StudioComponentConfiguration]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   created.
+    #   The ISO timestamp in seconds for when the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -2955,8 +3286,8 @@ module Aws::NimbleStudio
     #
     # @!attribute [rw] runtime_role_arn
     #   An IAM role attached to a Studio Component that gives the studio
-    #   component access to AWS resources at anytime while the instance is
-    #   running.
+    #   component access to Amazon Web Services resources at anytime while
+    #   the instance is running.
     #   @return [String]
     #
     # @!attribute [rw] script_parameters
@@ -2966,7 +3297,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] secure_initialization_role_arn
     #   An IAM role attached to Studio Component when the system
     #   initialization script runs which give the studio component access to
-    #   AWS resources when the system initialization script runs.
+    #   Amazon Web Services resources when the system initialization script
+    #   runs.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -2990,7 +3322,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -2999,8 +3331,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   updated.
+    #   The ISO timestamp in seconds for when the resource was updated.
     #   @return [Time]
     #
     # @!attribute [rw] updated_by
@@ -3041,8 +3372,8 @@ module Aws::NimbleStudio
     # @note StudioComponentConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StudioComponentConfiguration corresponding to the set member.
     #
     # @!attribute [rw] active_directory_configuration
-    #   The configuration for a Microsoft Active Directory (Microsoft AD)
-    #   studio resource.
+    #   The configuration for a Directory Service for Microsoft Active
+    #   Directory studio resource.
     #   @return [Types::ActiveDirectoryConfiguration]
     #
     # @!attribute [rw] compute_farm_configuration
@@ -3087,7 +3418,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the initialization script, either WINDOWS or LINUX.
+    #   The platform of the initialization script, either Windows or Linux.
     #   @return [String]
     #
     # @!attribute [rw] run_context
@@ -3112,8 +3443,7 @@ module Aws::NimbleStudio
     # The studio component's summary.
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   created.
+    #   The ISO timestamp in seconds for when the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -3141,8 +3471,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix epoch timestamp in seconds for when the resource was
-    #   updated.
+    #   The ISO timestamp in seconds for when the resource was updated.
     #   @return [Time]
     #
     # @!attribute [rw] updated_by
@@ -3194,7 +3523,7 @@ module Aws::NimbleStudio
     # do not appear in the studio membership collection. Only studio admins
     # appear in studio membership.
     #
-    # When you add a user to studio membership with the persona ADMIN, upon
+    # When you add a user to studio membership with the ADMIN persona, upon
     # logging in to the Nimble Studio portal, they are granted permissions
     # specified by the Studio's Admin IAM role.
     #
@@ -3232,7 +3561,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of labels, in the form of key:value pairs, that apply
+    #   A collection of labels, in the form of key-value pairs, that apply
     #   to this resource.
     #   @return [Hash<String,String>]
     #
@@ -3298,15 +3627,16 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] persona
@@ -3349,8 +3679,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3361,7 +3691,8 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_id
-    #   The Launch Profile ID.
+    #   The ID of the launch profile used to control access from the
+    #   streaming session.
     #   @return [String]
     #
     # @!attribute [rw] launch_profile_protocol_versions
@@ -3416,8 +3747,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3461,9 +3792,9 @@ module Aws::NimbleStudio
     #   Amazon provides a number of streaming images that include popular
     #   3rd-party software.
     #
-    #   You can create your own streaming images using an Amazon Elastic
-    #   Compute Cloud (Amazon EC2) machine image that you create for this
-    #   purpose. You can also include software that your users require.
+    #   You can create your own streaming images using an Amazon EC2 machine
+    #   image that you create for this purpose. You can also include
+    #   software that your users require.
     #   @return [Types::StreamingImage]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/UpdateStreamingImageResponse AWS API Documentation
@@ -3477,8 +3808,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3506,8 +3837,8 @@ module Aws::NimbleStudio
     #
     # @!attribute [rw] runtime_role_arn
     #   An IAM role attached to a Studio Component that gives the studio
-    #   component access to AWS resources at anytime while the instance is
-    #   running.
+    #   component access to Amazon Web Services resources at anytime while
+    #   the instance is running.
     #   @return [String]
     #
     # @!attribute [rw] script_parameters
@@ -3517,7 +3848,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] secure_initialization_role_arn
     #   An IAM role attached to Studio Component when the system
     #   initialization script runs which give the studio component access to
-    #   AWS resources when the system initialization script runs.
+    #   Amazon Web Services resources when the system initialization script
+    #   runs.
     #   @return [String]
     #
     # @!attribute [rw] studio_component_id
@@ -3576,8 +3908,8 @@ module Aws::NimbleStudio
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
-    #   AWS SDK automatically generates a client token and uses it for the
-    #   request to ensure idempotency.
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3670,6 +4002,37 @@ module Aws::NimbleStudio
       :status_code,
       :status_message,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Custom volume configuration for the root volumes that are attached to
+    # streaming sessions.
+    #
+    # This parameter is only allowed when `sessionPersistenceMode` is
+    # `ACTIVATED`.
+    #
+    # @!attribute [rw] iops
+    #   The number of I/O operations per second for the root volume that is
+    #   attached to streaming session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size
+    #   The size of the root volume that is attached to the streaming
+    #   session. The root volume size is measured in GiBs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput
+    #   The throughput to provision for the root volume that is attached to
+    #   the streaming session. The throughput is measured in MiB/s.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/VolumeConfiguration AWS API Documentation
+    #
+    class VolumeConfiguration < Struct.new(
+      :iops,
+      :size,
+      :throughput)
       SENSITIVE = []
       include Aws::Structure
     end

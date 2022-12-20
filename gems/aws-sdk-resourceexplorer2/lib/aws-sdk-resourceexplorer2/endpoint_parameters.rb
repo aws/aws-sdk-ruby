@@ -43,6 +43,9 @@ module Aws::ResourceExplorer2
 
     def initialize(options = {})
       self[:region] = options[:region]
+      if self[:region].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :region"
+      end
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
       if self[:use_fips].nil?
