@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-12-21)
+------------------
+
+* Feature - Documentation updates for the AWS Support API
+
 1.42.0 (2022-10-25)
 ------------------
 

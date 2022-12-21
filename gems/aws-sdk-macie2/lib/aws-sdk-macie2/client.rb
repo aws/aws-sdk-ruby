@@ -2012,7 +2012,7 @@ module Aws::Macie2
     #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_object.server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_object.size #=> Integer
-    #   resp.findings[0].resources_affected.s3_object.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "ONEZONE_IA", "GLACIER"
+    #   resp.findings[0].resources_affected.s3_object.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "ONEZONE_IA", "GLACIER", "GLACIER_IR", "OUTPOSTS"
     #   resp.findings[0].resources_affected.s3_object.tags #=> Array
     #   resp.findings[0].resources_affected.s3_object.tags[0].key #=> String
     #   resp.findings[0].resources_affected.s3_object.tags[0].value #=> String
@@ -3842,7 +3842,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

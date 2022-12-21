@@ -14906,8 +14906,8 @@ module Aws::SSM
     end
 
     # @!attribute [rw] resource_arn
-    #   Amazon Resource Name (ARN) of the resource to which the policies are
-    #   attached.
+    #   Amazon Resource Name (ARN) of the resource to which you want to
+    #   attach a policy.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -14920,7 +14920,8 @@ module Aws::SSM
     #
     # @!attribute [rw] policy_hash
     #   ID of the current policy version. The hash helps to prevent a
-    #   situation where multiple users attempt to overwrite a policy.
+    #   situation where multiple users attempt to overwrite a policy. You
+    #   must provide this hash when updating or deleting a policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutResourcePolicyRequest AWS API Documentation
@@ -14940,9 +14941,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] policy_hash
-    #   ID of the current policy version. The hash helps to prevent a
-    #   situation where multiple users attempt to overwrite a policy. You
-    #   must provide this hash when updating or deleting a policy.
+    #   ID of the current policy version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutResourcePolicyResponse AWS API Documentation

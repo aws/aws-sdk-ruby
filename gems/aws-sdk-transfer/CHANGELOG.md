@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-12-21)
+------------------
+
+* Feature - This release adds support for Decrypt as a workflow step type.
+
 1.63.0 (2022-11-18)
 ------------------
 

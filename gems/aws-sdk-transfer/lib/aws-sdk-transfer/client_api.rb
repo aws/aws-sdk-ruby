@@ -57,6 +57,7 @@ module Aws::Transfer
     CustomStepTarget = Shapes::StringShape.new(name: 'CustomStepTarget')
     CustomStepTimeoutSeconds = Shapes::IntegerShape.new(name: 'CustomStepTimeoutSeconds')
     DateImported = Shapes::TimestampShape.new(name: 'DateImported')
+    DecryptStepDetails = Shapes::StructureShape.new(name: 'DecryptStepDetails')
     DeleteAccessRequest = Shapes::StructureShape.new(name: 'DeleteAccessRequest')
     DeleteAgreementRequest = Shapes::StructureShape.new(name: 'DeleteAgreementRequest')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
@@ -108,6 +109,7 @@ module Aws::Transfer
     EfsFileSystemId = Shapes::StringShape.new(name: 'EfsFileSystemId')
     EfsPath = Shapes::StringShape.new(name: 'EfsPath')
     EncryptionAlg = Shapes::StringShape.new(name: 'EncryptionAlg')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EndpointDetails = Shapes::StructureShape.new(name: 'EndpointDetails')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     ExecutionError = Shapes::StructureShape.new(name: 'ExecutionError')
@@ -433,6 +435,13 @@ module Aws::Transfer
     CustomStepDetails.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: CustomStepTimeoutSeconds, location_name: "TimeoutSeconds"))
     CustomStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     CustomStepDetails.struct_class = Types::CustomStepDetails
+
+    DecryptStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
+    DecryptStepDetails.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
+    DecryptStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
+    DecryptStepDetails.add_member(:overwrite_existing, Shapes::ShapeRef.new(shape: OverwriteExisting, location_name: "OverwriteExisting"))
+    DecryptStepDetails.add_member(:destination_file_location, Shapes::ShapeRef.new(shape: InputFileLocation, required: true, location_name: "DestinationFileLocation"))
+    DecryptStepDetails.struct_class = Types::DecryptStepDetails
 
     DeleteAccessRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     DeleteAccessRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, required: true, location_name: "ExternalId"))
@@ -1201,6 +1210,7 @@ module Aws::Transfer
     WorkflowStep.add_member(:custom_step_details, Shapes::ShapeRef.new(shape: CustomStepDetails, location_name: "CustomStepDetails"))
     WorkflowStep.add_member(:delete_step_details, Shapes::ShapeRef.new(shape: DeleteStepDetails, location_name: "DeleteStepDetails"))
     WorkflowStep.add_member(:tag_step_details, Shapes::ShapeRef.new(shape: TagStepDetails, location_name: "TagStepDetails"))
+    WorkflowStep.add_member(:decrypt_step_details, Shapes::ShapeRef.new(shape: DecryptStepDetails, location_name: "DecryptStepDetails"))
     WorkflowStep.struct_class = Types::WorkflowStep
 
     WorkflowSteps.member = Shapes::ShapeRef.new(shape: WorkflowStep)
@@ -1249,7 +1259,6 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_connector, Seahorse::Model::Operation.new.tap do |o|
@@ -1263,7 +1272,6 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1276,7 +1284,6 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_server, Seahorse::Model::Operation.new.tap do |o|
@@ -1935,7 +1942,6 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_agreement, Seahorse::Model::Operation.new.tap do |o|
@@ -1949,7 +1955,6 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -1962,7 +1967,6 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_connector, Seahorse::Model::Operation.new.tap do |o|
@@ -1976,7 +1980,6 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_host_key, Seahorse::Model::Operation.new.tap do |o|
@@ -2002,7 +2005,6 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_server, Seahorse::Model::Operation.new.tap do |o|

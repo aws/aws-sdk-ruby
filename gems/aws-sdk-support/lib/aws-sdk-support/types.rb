@@ -253,10 +253,11 @@ module Aws::Support
     # * **displayId** - The identifier for the case on pages in the Amazon
     #   Web Services Support Center.
     #
-    # * **language** - The ISO 639-1 code for the language in which Amazon
-    #   Web Services provides support. Amazon Web Services Support currently
-    #   supports English ("en") and Japanese ("ja"). Language parameters
-    #   must be passed explicitly for operations that take them.
+    # * **language** - The language in which Amazon Web Services Support
+    #   handles the case. Amazon Web Services Support currently supports
+    #   English ("en") and Japanese ("ja"). You must specify the ISO
+    #   639-1 code for the `language` parameter if you want support in that
+    #   language.
     #
     # * **nextToken** - A resumption point for pagination.
     #
@@ -366,10 +367,10 @@ module Aws::Support
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseDetails AWS API Documentation
@@ -537,9 +538,9 @@ module Aws::Support
     #
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
-    #   You must specify the ISO 639-1 code for the `language` parameter if
-    #   you want support in that language. Currently, English ("en") and
-    #   Japanese ("ja") are supported.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @!attribute [rw] issue_type
@@ -672,10 +673,10 @@ module Aws::Support
     #   @return [Integer]
     #
     # @!attribute [rw] language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @!attribute [rw] include_communications
@@ -786,10 +787,10 @@ module Aws::Support
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServicesRequest AWS API Documentation
@@ -817,10 +818,10 @@ module Aws::Support
     end
 
     # @!attribute [rw] language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevelsRequest AWS API Documentation
@@ -885,10 +886,33 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The ISO 639-1 code for the language that you want your check results
+    #   to appear in.
+    #
+    #   The Amazon Web Services Support API currently supports the following
+    #   languages for Trusted Advisor:
+    #
+    #   * Chinese, Simplified - `zh`
+    #
+    #   * Chinese, Traditional - `zh_TW`
+    #
+    #   * English - `en`
+    #
+    #   * French - `fr`
+    #
+    #   * German - `de`
+    #
+    #   * Indonesian - `id`
+    #
+    #   * Italian - `it`
+    #
+    #   * Japanese - `ja`
+    #
+    #   * Korean - `ko`
+    #
+    #   * Portuguese, Brazilian - `pt_BR`
+    #
+    #   * Spanish - `es`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResultRequest AWS API Documentation
@@ -943,10 +967,33 @@ module Aws::Support
     end
 
     # @!attribute [rw] language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The ISO 639-1 code for the language that you want your checks to
+    #   appear in.
+    #
+    #   The Amazon Web Services Support API currently supports the following
+    #   languages for Trusted Advisor:
+    #
+    #   * Chinese, Simplified - `zh`
+    #
+    #   * Chinese, Traditional - `zh_TW`
+    #
+    #   * English - `en`
+    #
+    #   * French - `fr`
+    #
+    #   * German - `de`
+    #
+    #   * Indonesian - `id`
+    #
+    #   * Italian - `it`
+    #
+    #   * Japanese - `ja`
+    #
+    #   * Korean - `ko`
+    #
+    #   * Portuguese, Brazilian - `pt_BR`
+    #
+    #   * Spanish - `es`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorChecksRequest AWS API Documentation

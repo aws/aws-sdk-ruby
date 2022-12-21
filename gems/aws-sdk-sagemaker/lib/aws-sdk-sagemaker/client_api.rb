@@ -4593,6 +4593,7 @@ module Aws::SageMaker
 
     DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: "RStudioServerProDomainSettingsForUpdate"))
     DomainSettingsForUpdate.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
+    DomainSettingsForUpdate.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
     DomainSettingsForUpdate.struct_class = Types::DomainSettingsForUpdate
 
     DriftCheckBaselines.add_member(:bias, Shapes::ShapeRef.new(shape: DriftCheckBias, location_name: "Bias"))
@@ -7555,6 +7556,8 @@ module Aws::SageMaker
 
     RStudioServerProDomainSettingsForUpdate.add_member(:domain_execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "DomainExecutionRoleArn"))
     RStudioServerProDomainSettingsForUpdate.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    RStudioServerProDomainSettingsForUpdate.add_member(:r_studio_connect_url, Shapes::ShapeRef.new(shape: String, location_name: "RStudioConnectUrl"))
+    RStudioServerProDomainSettingsForUpdate.add_member(:r_studio_package_manager_url, Shapes::ShapeRef.new(shape: String, location_name: "RStudioPackageManagerUrl"))
     RStudioServerProDomainSettingsForUpdate.struct_class = Types::RStudioServerProDomainSettingsForUpdate
 
     RealTimeInferenceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "InstanceType"))
@@ -8363,6 +8366,7 @@ module Aws::SageMaker
     UpdateDomainRequest.add_member(:default_user_settings, Shapes::ShapeRef.new(shape: UserSettings, location_name: "DefaultUserSettings"))
     UpdateDomainRequest.add_member(:domain_settings_for_update, Shapes::ShapeRef.new(shape: DomainSettingsForUpdate, location_name: "DomainSettingsForUpdate"))
     UpdateDomainRequest.add_member(:default_space_settings, Shapes::ShapeRef.new(shape: DefaultSpaceSettings, location_name: "DefaultSpaceSettings"))
+    UpdateDomainRequest.add_member(:app_security_group_management, Shapes::ShapeRef.new(shape: AppSecurityGroupManagement, location_name: "AppSecurityGroupManagement"))
     UpdateDomainRequest.struct_class = Types::UpdateDomainRequest
 
     UpdateDomainResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))

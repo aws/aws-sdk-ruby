@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-12-21)
+------------------
+
+* Feature - Amazon Connect Chat now allows for JSON (application/json) message types to be sent in the SendMessage API.
+
 1.23.0 (2022-10-25)
 ------------------
 

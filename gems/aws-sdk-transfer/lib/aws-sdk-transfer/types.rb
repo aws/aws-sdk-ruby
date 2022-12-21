@@ -46,11 +46,6 @@ module Aws::Transfer
     #
     # @!attribute [rw] encryption_algorithm
     #   The algorithm that is used to encrypt the file.
-    #
-    #   <note markdown="1"> You can only specify `NONE` if the URL for your connector uses
-    #   HTTPS. This ensures that no traffic is sent in clear text.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] signing_algorithm
@@ -62,7 +57,7 @@ module Aws::Transfer
     #   The signing algorithm for the MDN response.
     #
     #   <note markdown="1"> If set to DEFAULT (or not set at all), the value for
-    #   `SigningAlgorithm` is used.
+    #   `SigningAlogorithm` is used.
     #
     #    </note>
     #   @return [String]
@@ -758,8 +753,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In addition to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDetails` can also contain a workflow ID (and
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -899,19 +894,7 @@ module Aws::Transfer
     #   The public portion of the Secure Shell (SSH) key used to
     #   authenticate the user to the server.
     #
-    #   The three standard SSH public key format elements are `<key type>`,
-    #   `<body base64>`, and an optional `<comment>`, with spaces between
-    #   each element.
-    #
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
-    #
-    #   * For RSA keys, the key type is `ssh-rsa`.
-    #
-    #   * For ED25519 keys, the key type is `ssh-ed25519`.
-    #
-    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
-    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
-    #     size of the key you generated.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1063,6 +1046,35 @@ module Aws::Transfer
       :target,
       :timeout_seconds,
       :source_file_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] source_file_location
+    #   @return [String]
+    #
+    # @!attribute [rw] overwrite_existing
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_file_location
+    #   Specifies the location for the file being copied. Only applicable
+    #   for the Copy type of workflow steps.
+    #   @return [Types::InputFileLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DecryptStepDetails AWS API Documentation
+    #
+    class DecryptStepDetails < Struct.new(
+      :name,
+      :type,
+      :source_file_location,
+      :overwrite_existing,
+      :destination_file_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2336,8 +2348,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In addition to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDetails` can also contain a workflow ID (and
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -5378,8 +5390,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In addition to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDetails` can also contain a workflow ID (and
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -5598,8 +5610,8 @@ module Aws::Transfer
     # Specifies the workflow ID for the workflow to assign and the execution
     # role that's used for executing the workflow.
     #
-    # In addition to a workflow to execute when a file is uploaded
-    # completely, `WorkflowDetails` can also contain a workflow ID (and
+    # In additon to a workflow to execute when a file is uploaded
+    # completely, `WorkflowDeatails` can also contain a workflow ID (and
     # execution role) for a workflow to execute on partial upload. A partial
     # upload occurs when a file is open when the session disconnects.
     #
@@ -5698,6 +5710,9 @@ module Aws::Transfer
     #   You specify one or more tags: each tag contains a key/value pair.
     #   @return [Types::TagStepDetails]
     #
+    # @!attribute [rw] decrypt_step_details
+    #   @return [Types::DecryptStepDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/WorkflowStep AWS API Documentation
     #
     class WorkflowStep < Struct.new(
@@ -5705,7 +5720,8 @@ module Aws::Transfer
       :copy_step_details,
       :custom_step_details,
       :delete_step_details,
-      :tag_step_details)
+      :tag_step_details,
+      :decrypt_step_details)
       SENSITIVE = []
       include Aws::Structure
     end

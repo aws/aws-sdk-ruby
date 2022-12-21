@@ -8785,8 +8785,8 @@ module Aws::SSM
     # OpsCenter operational work items (OpsItems).
     #
     # @option params [required, String] :resource_arn
-    #   Amazon Resource Name (ARN) of the resource to which the policies are
-    #   attached.
+    #   Amazon Resource Name (ARN) of the resource to which you want to attach
+    #   a policy.
     #
     # @option params [required, String] :policy
     #   A policy you want to associate with a resource.
@@ -8796,7 +8796,8 @@ module Aws::SSM
     #
     # @option params [String] :policy_hash
     #   ID of the current policy version. The hash helps to prevent a
-    #   situation where multiple users attempt to overwrite a policy.
+    #   situation where multiple users attempt to overwrite a policy. You must
+    #   provide this hash when updating or deleting a policy.
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12118,7 +12119,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

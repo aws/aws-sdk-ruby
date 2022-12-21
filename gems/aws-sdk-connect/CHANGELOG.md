@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2022-12-21)
+------------------
+
+* Feature - Amazon Connect Chat now allows for JSON (application/json) message types to be sent as part of the initial message in the StartChatContact API.
+
 1.87.0 (2022-12-15)
 ------------------
 

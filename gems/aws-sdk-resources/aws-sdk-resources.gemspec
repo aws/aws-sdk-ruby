@@ -204,6 +204,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-lexmodelsv2', '~> 1')
   spec.add_dependency('aws-sdk-lexruntimev2', '~> 1')
   spec.add_dependency('aws-sdk-licensemanager', '~> 1')
+  spec.add_dependency('aws-sdk-licensemanagerlinuxsubscriptions', '~> 1')
   spec.add_dependency('aws-sdk-licensemanagerusersubscriptions', '~> 1')
   spec.add_dependency('aws-sdk-lightsail', '~> 1')
   spec.add_dependency('aws-sdk-locationservice', '~> 1')

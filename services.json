@@ -611,6 +611,9 @@
   "LicenseManager": {
     "models": "license-manager/2018-08-01"
   },
+  "LicenseManagerLinuxSubscriptions": {
+    "models": "license-manager-linux-subscriptions/2018-05-10"
+  },
   "LicenseManagerUserSubscriptions": {
     "models": "license-manager-user-subscriptions/2018-05-10"
   },

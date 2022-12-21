@@ -1014,8 +1014,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role that's used for executing the workflow.
     #
-    #   In addition to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDetails` can also contain a workflow ID (and
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A partial
     #   upload occurs when a file is open when the session disconnects.
     #
@@ -1191,19 +1191,7 @@ module Aws::Transfer
     #   The public portion of the Secure Shell (SSH) key used to authenticate
     #   the user to the server.
     #
-    #   The three standard SSH public key format elements are `<key type>`,
-    #   `<body base64>`, and an optional `<comment>`, with spaces between each
-    #   element.
-    #
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
-    #
-    #   * For RSA keys, the key type is `ssh-rsa`.
-    #
-    #   * For ED25519 keys, the key type is `ssh-ed25519`.
-    #
-    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
-    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
-    #     size of the key you generated.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for users. Tags
@@ -1320,7 +1308,7 @@ module Aws::Transfer
     #     description: "WorkflowDescription",
     #     steps: [ # required
     #       {
-    #         type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE
+    #         type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE, DECRYPT
     #         copy_step_details: {
     #           name: "WorkflowStepName",
     #           destination_file_location: {
@@ -1355,12 +1343,28 @@ module Aws::Transfer
     #             },
     #           ],
     #           source_file_location: "SourceFileLocation",
+    #         },
+    #         decrypt_step_details: {
+    #           name: "WorkflowStepName",
+    #           type: "PGP", # required, accepts PGP
+    #           source_file_location: "SourceFileLocation",
+    #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #           destination_file_location: { # required
+    #             s3_file_location: {
+    #               bucket: "S3Bucket",
+    #               key: "S3Key",
+    #             },
+    #             efs_file_location: {
+    #               file_system_id: "EfsFileSystemId",
+    #               path: "EfsPath",
+    #             },
+    #           },
     #         },
     #       },
     #     ],
     #     on_exception_steps: [
     #       {
-    #         type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE
+    #         type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE, DECRYPT
     #         copy_step_details: {
     #           name: "WorkflowStepName",
     #           destination_file_location: {
@@ -1395,6 +1399,22 @@ module Aws::Transfer
     #             },
     #           ],
     #           source_file_location: "SourceFileLocation",
+    #         },
+    #         decrypt_step_details: {
+    #           name: "WorkflowStepName",
+    #           type: "PGP", # required, accepts PGP
+    #           source_file_location: "SourceFileLocation",
+    #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #           destination_file_location: { # required
+    #             s3_file_location: {
+    #               bucket: "S3Bucket",
+    #               key: "S3Key",
+    #             },
+    #             efs_file_location: {
+    #               file_system_id: "EfsFileSystemId",
+    #               path: "EfsPath",
+    #             },
+    #           },
     #         },
     #       },
     #     ],
@@ -1939,12 +1959,12 @@ module Aws::Transfer
     #   resp.execution.posix_profile.secondary_gids[0] #=> Integer
     #   resp.execution.status #=> String, one of "IN_PROGRESS", "COMPLETED", "EXCEPTION", "HANDLING_EXCEPTION"
     #   resp.execution.results.steps #=> Array
-    #   resp.execution.results.steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
+    #   resp.execution.results.steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE", "DECRYPT"
     #   resp.execution.results.steps[0].outputs #=> String
     #   resp.execution.results.steps[0].error.type #=> String, one of "PERMISSION_DENIED", "CUSTOM_STEP_FAILED", "THROTTLED", "ALREADY_EXISTS", "NOT_FOUND", "BAD_REQUEST", "TIMEOUT", "INTERNAL_SERVER_ERROR"
     #   resp.execution.results.steps[0].error.message #=> String
     #   resp.execution.results.on_exception_steps #=> Array
-    #   resp.execution.results.on_exception_steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
+    #   resp.execution.results.on_exception_steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE", "DECRYPT"
     #   resp.execution.results.on_exception_steps[0].outputs #=> String
     #   resp.execution.results.on_exception_steps[0].error.type #=> String, one of "PERMISSION_DENIED", "CUSTOM_STEP_FAILED", "THROTTLED", "ALREADY_EXISTS", "NOT_FOUND", "BAD_REQUEST", "TIMEOUT", "INTERNAL_SERVER_ERROR"
     #   resp.execution.results.on_exception_steps[0].error.message #=> String
@@ -2241,7 +2261,7 @@ module Aws::Transfer
     #   resp.workflow.arn #=> String
     #   resp.workflow.description #=> String
     #   resp.workflow.steps #=> Array
-    #   resp.workflow.steps[0].type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
+    #   resp.workflow.steps[0].type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE", "DECRYPT"
     #   resp.workflow.steps[0].copy_step_details.name #=> String
     #   resp.workflow.steps[0].copy_step_details.destination_file_location.s3_file_location.bucket #=> String
     #   resp.workflow.steps[0].copy_step_details.destination_file_location.s3_file_location.key #=> String
@@ -2260,8 +2280,16 @@ module Aws::Transfer
     #   resp.workflow.steps[0].tag_step_details.tags[0].key #=> String
     #   resp.workflow.steps[0].tag_step_details.tags[0].value #=> String
     #   resp.workflow.steps[0].tag_step_details.source_file_location #=> String
+    #   resp.workflow.steps[0].decrypt_step_details.name #=> String
+    #   resp.workflow.steps[0].decrypt_step_details.type #=> String, one of "PGP"
+    #   resp.workflow.steps[0].decrypt_step_details.source_file_location #=> String
+    #   resp.workflow.steps[0].decrypt_step_details.overwrite_existing #=> String, one of "TRUE", "FALSE"
+    #   resp.workflow.steps[0].decrypt_step_details.destination_file_location.s3_file_location.bucket #=> String
+    #   resp.workflow.steps[0].decrypt_step_details.destination_file_location.s3_file_location.key #=> String
+    #   resp.workflow.steps[0].decrypt_step_details.destination_file_location.efs_file_location.file_system_id #=> String
+    #   resp.workflow.steps[0].decrypt_step_details.destination_file_location.efs_file_location.path #=> String
     #   resp.workflow.on_exception_steps #=> Array
-    #   resp.workflow.on_exception_steps[0].type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
+    #   resp.workflow.on_exception_steps[0].type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE", "DECRYPT"
     #   resp.workflow.on_exception_steps[0].copy_step_details.name #=> String
     #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.s3_file_location.bucket #=> String
     #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.s3_file_location.key #=> String
@@ -2280,6 +2308,14 @@ module Aws::Transfer
     #   resp.workflow.on_exception_steps[0].tag_step_details.tags[0].key #=> String
     #   resp.workflow.on_exception_steps[0].tag_step_details.tags[0].value #=> String
     #   resp.workflow.on_exception_steps[0].tag_step_details.source_file_location #=> String
+    #   resp.workflow.on_exception_steps[0].decrypt_step_details.name #=> String
+    #   resp.workflow.on_exception_steps[0].decrypt_step_details.type #=> String, one of "PGP"
+    #   resp.workflow.on_exception_steps[0].decrypt_step_details.source_file_location #=> String
+    #   resp.workflow.on_exception_steps[0].decrypt_step_details.overwrite_existing #=> String, one of "TRUE", "FALSE"
+    #   resp.workflow.on_exception_steps[0].decrypt_step_details.destination_file_location.s3_file_location.bucket #=> String
+    #   resp.workflow.on_exception_steps[0].decrypt_step_details.destination_file_location.s3_file_location.key #=> String
+    #   resp.workflow.on_exception_steps[0].decrypt_step_details.destination_file_location.efs_file_location.file_system_id #=> String
+    #   resp.workflow.on_exception_steps[0].decrypt_step_details.destination_file_location.efs_file_location.path #=> String
     #   resp.workflow.workflow_id #=> String
     #   resp.workflow.tags #=> Array
     #   resp.workflow.tags[0].key #=> String
@@ -4004,8 +4040,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role that's used for executing the workflow.
     #
-    #   In addition to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDetails` can also contain a workflow ID (and
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A partial
     #   upload occurs when a file is open when the session disconnects.
     #
@@ -4237,7 +4273,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

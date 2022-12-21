@@ -15388,11 +15388,18 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] security_group_ids
+    #   The security groups for the Amazon Virtual Private Cloud that the
+    #   `Domain` uses for communication between Domain-level apps and user
+    #   apps.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
     #
     class DomainSettingsForUpdate < Struct.new(
       :r_studio_server_pro_domain_settings_for_update,
-      :execution_role_identity_config)
+      :execution_role_identity_config,
+      :security_group_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19089,7 +19096,7 @@ module Aws::SageMaker
     #   The number of instances of the type specified by `InstanceType`.
     #   Choose an instance count larger than 1 for distributed training
     #   algorithms. See [SageMaker distributed training jobs][1] for more
-    #   information.
+    #   informcration.
     #
     #
     #
@@ -32423,11 +32430,21 @@ module Aws::SageMaker
     #   version, and the instance type that the version runs on.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] r_studio_connect_url
+    #   A URL pointing to an RStudio Connect server.
+    #   @return [String]
+    #
+    # @!attribute [rw] r_studio_package_manager_url
+    #   A URL pointing to an RStudio Package Manager server.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RStudioServerProDomainSettingsForUpdate AWS API Documentation
     #
     class RStudioServerProDomainSettingsForUpdate < Struct.new(
       :domain_execution_role_arn,
-      :default_resource_spec)
+      :default_resource_spec,
+      :r_studio_connect_url,
+      :r_studio_package_manager_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37253,13 +37270,22 @@ module Aws::SageMaker
     #   The default settings used to create a space within the Domain.
     #   @return [Types::DefaultSpaceSettings]
     #
+    # @!attribute [rw] app_security_group_management
+    #   The entity that creates and manages the required security groups for
+    #   inter-app communication in `VPCOnly` mode. Required when
+    #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
+    #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
+    #   is provided.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDomainRequest AWS API Documentation
     #
     class UpdateDomainRequest < Struct.new(
       :domain_id,
       :default_user_settings,
       :domain_settings_for_update,
-      :default_space_settings)
+      :default_space_settings,
+      :app_security_group_management)
       SENSITIVE = []
       include Aws::Structure
     end

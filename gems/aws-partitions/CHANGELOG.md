@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.682.0 (2022-12-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LicenseManagerLinuxSubscriptions`.
+
 1.681.0 (2022-12-20)
 ------------------
 

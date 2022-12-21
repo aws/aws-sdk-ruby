@@ -389,7 +389,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
@@ -457,7 +457,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
@@ -538,7 +538,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][4].
@@ -610,9 +610,9 @@ module Aws::Support
     #
     # @option params [String] :language
     #   The language in which Amazon Web Services Support handles the case.
-    #   You must specify the ISO 639-1 code for the `language` parameter if
-    #   you want support in that language. Currently, English ("en") and
-    #   Japanese ("ja") are supported.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #
     # @option params [String] :issue_type
     #   The type of issue for the case. You can specify `customer-service` or
@@ -665,7 +665,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
@@ -724,7 +724,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][2].
@@ -765,10 +765,10 @@ module Aws::Support
     #   The maximum number of results to return before paginating.
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #
     # @option params [Boolean] :include_communications
     #   Specifies whether to include communications in the `DescribeCases`
@@ -848,7 +848,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
@@ -935,7 +935,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][2].
@@ -952,10 +952,10 @@ module Aws::Support
     #   Services services.
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #
     # @return [Types::DescribeServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -994,7 +994,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
@@ -1006,10 +1006,10 @@ module Aws::Support
     # [1]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports English ("en") and
+    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #
     # @return [Types::DescribeSeverityLevelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1050,16 +1050,24 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
     #
     #  </note>
     #
+    # To call the Trusted Advisor operations in the Amazon Web Services
+    # Support API, you must use the US East (N. Virginia) endpoint.
+    # Currently, the US West (Oregon) and Europe (Ireland) endpoints don't
+    # support the Trusted Advisor operations. For more information, see
+    # [About the Amazon Web Services Support API][2] in the *Amazon Web
+    # Services Support User Guide*.
+    #
     #
     #
     # [1]: http://aws.amazon.com/premiumsupport/
+    # [2]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
     #
     # @option params [required, Array<String>] :check_ids
     #   The IDs of the Trusted Advisor checks to get the status.
@@ -1121,25 +1129,56 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
     #
     #  </note>
     #
+    # To call the Trusted Advisor operations in the Amazon Web Services
+    # Support API, you must use the US East (N. Virginia) endpoint.
+    # Currently, the US West (Oregon) and Europe (Ireland) endpoints don't
+    # support the Trusted Advisor operations. For more information, see
+    # [About the Amazon Web Services Support API][2] in the *Amazon Web
+    # Services Support User Guide*.
+    #
     #
     #
     # [1]: http://aws.amazon.com/premiumsupport/
+    # [2]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
     #
     # @option params [required, String] :check_id
     #   The unique identifier for the Trusted Advisor check.
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The ISO 639-1 code for the language that you want your check results
+    #   to appear in.
+    #
+    #   The Amazon Web Services Support API currently supports the following
+    #   languages for Trusted Advisor:
+    #
+    #   * Chinese, Simplified - `zh`
+    #
+    #   * Chinese, Traditional - `zh_TW`
+    #
+    #   * English - `en`
+    #
+    #   * French - `fr`
+    #
+    #   * German - `de`
+    #
+    #   * Indonesian - `id`
+    #
+    #   * Italian - `it`
+    #
+    #   * Japanese - `ja`
+    #
+    #   * Korean - `ko`
+    #
+    #   * Portuguese, Brazilian - `pt_BR`
+    #
+    #   * Spanish - `es`
     #
     # @return [Types::DescribeTrustedAdvisorCheckResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1190,16 +1229,24 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
     #
     #  </note>
     #
+    # To call the Trusted Advisor operations in the Amazon Web Services
+    # Support API, you must use the US East (N. Virginia) endpoint.
+    # Currently, the US West (Oregon) and Europe (Ireland) endpoints don't
+    # support the Trusted Advisor operations. For more information, see
+    # [About the Amazon Web Services Support API][2] in the *Amazon Web
+    # Services Support User Guide*.
+    #
     #
     #
     # [1]: http://aws.amazon.com/premiumsupport/
+    # [2]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
     #
     # @option params [required, Array<String>] :check_ids
     #   The IDs of the Trusted Advisor checks.
@@ -1239,16 +1286,16 @@ module Aws::Support
 
     # Returns information about all available Trusted Advisor checks,
     # including the name, ID, category, description, and metadata. You must
-    # specify a language code. The Amazon Web Services Support API currently
-    # supports English ("en") and Japanese ("ja"). The response contains
-    # a TrustedAdvisorCheckDescription object for each check. You must set
-    # the Amazon Web Services Region to us-east-1.
+    # specify a language code.
+    #
+    # The response contains a TrustedAdvisorCheckDescription object for each
+    # check. You must set the Amazon Web Services Region to us-east-1.
     #
     # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
@@ -1259,15 +1306,46 @@ module Aws::Support
     #
     #  </note>
     #
+    # To call the Trusted Advisor operations in the Amazon Web Services
+    # Support API, you must use the US East (N. Virginia) endpoint.
+    # Currently, the US West (Oregon) and Europe (Ireland) endpoints don't
+    # support the Trusted Advisor operations. For more information, see
+    # [About the Amazon Web Services Support API][2] in the *Amazon Web
+    # Services Support User Guide*.
+    #
     #
     #
     # [1]: http://aws.amazon.com/premiumsupport/
+    # [2]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
     #
     # @option params [required, String] :language
-    #   The ISO 639-1 code for the language in which Amazon Web Services
-    #   provides support. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). Language parameters must be
-    #   passed explicitly for operations that take them.
+    #   The ISO 639-1 code for the language that you want your checks to
+    #   appear in.
+    #
+    #   The Amazon Web Services Support API currently supports the following
+    #   languages for Trusted Advisor:
+    #
+    #   * Chinese, Simplified - `zh`
+    #
+    #   * Chinese, Traditional - `zh_TW`
+    #
+    #   * English - `en`
+    #
+    #   * French - `fr`
+    #
+    #   * German - `de`
+    #
+    #   * Indonesian - `id`
+    #
+    #   * Italian - `it`
+    #
+    #   * Japanese - `ja`
+    #
+    #   * Korean - `ko`
+    #
+    #   * Portuguese, Brazilian - `pt_BR`
+    #
+    #   * Spanish - `es`
     #
     # @return [Types::DescribeTrustedAdvisorChecksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1302,11 +1380,9 @@ module Aws::Support
     # ID. You can get the check IDs by calling the
     # DescribeTrustedAdvisorChecks operation.
     #
-    # <note markdown="1"> Some checks are refreshed automatically. If you call the
+    # Some checks are refreshed automatically. If you call the
     # `RefreshTrustedAdvisorCheck` operation to refresh them, you might see
     # the `InvalidParameterValue` error.
-    #
-    #  </note>
     #
     # The response contains a TrustedAdvisorCheckRefreshStatus object.
     #
@@ -1314,16 +1390,24 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
     #
     #  </note>
     #
+    # To call the Trusted Advisor operations in the Amazon Web Services
+    # Support API, you must use the US East (N. Virginia) endpoint.
+    # Currently, the US West (Oregon) and Europe (Ireland) endpoints don't
+    # support the Trusted Advisor operations. For more information, see
+    # [About the Amazon Web Services Support API][2] in the *Amazon Web
+    # Services Support User Guide*.
+    #
     #
     #
     # [1]: http://aws.amazon.com/premiumsupport/
+    # [2]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
     #
     # @option params [required, String] :check_id
     #   The unique identifier for the Trusted Advisor check to refresh.
@@ -1365,7 +1449,7 @@ module Aws::Support
     #   plan to use the Amazon Web Services Support API.
     #
     # * If you call the Amazon Web Services Support API from an account that
-    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
     #   plan, the `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [Amazon Web
     #   Services Support][1].
@@ -1419,7 +1503,7 @@ module Aws::Support
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-support'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

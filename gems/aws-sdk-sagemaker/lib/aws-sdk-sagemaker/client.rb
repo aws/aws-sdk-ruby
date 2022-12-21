@@ -20717,6 +20717,13 @@ module Aws::SageMaker
     # @option params [Types::DefaultSpaceSettings] :default_space_settings
     #   The default settings used to create a space within the Domain.
     #
+    # @option params [String] :app_security_group_management
+    #   The entity that creates and manages the required security groups for
+    #   inter-app communication in `VPCOnly` mode. Required when
+    #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
+    #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
+    #   is provided.
+    #
     # @return [Types::UpdateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainResponse#domain_arn #domain_arn} => String
@@ -20806,8 +20813,11 @@ module Aws::SageMaker
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
+    #         r_studio_connect_url: "String",
+    #         r_studio_package_manager_url: "String",
     #       },
     #       execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
+    #       security_group_ids: ["SecurityGroupId"],
     #     },
     #     default_space_settings: {
     #       execution_role: "RoleArn",
@@ -20843,6 +20853,7 @@ module Aws::SageMaker
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #       },
     #     },
+    #     app_security_group_management: "Service", # accepts Service, Customer
     #   })
     #
     # @example Response structure
@@ -22705,7 +22716,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.159.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
