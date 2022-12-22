@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-12-22)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for ecs services running on Fargate.
+
 1.35.0 (2022-11-29)
 ------------------
 

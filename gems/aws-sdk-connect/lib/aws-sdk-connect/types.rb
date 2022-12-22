@@ -562,11 +562,18 @@ module Aws::Connect
     # A chat message.
     #
     # @!attribute [rw] content_type
-    #   The type of the content. Supported types are `text/plain`.
+    #   The type of the content. Supported types are `text/plain`,
+    #   `text/markdown`, and `application/json`.
     #   @return [String]
     #
     # @!attribute [rw] content
     #   The content of the chat message.
+    #
+    #   * For `text/plain` and `text/markdown`, the Length Constraints are
+    #     Minimum of 1, Maximum of 1024.
+    #
+    #   * For `application/json`, the Length Constraints are Minimum of 1,
+    #     Maximum of 12000.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ChatMessage AWS API Documentation
@@ -574,6 +581,22 @@ module Aws::Connect
     class ChatMessage < Struct.new(
       :content_type,
       :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for the chat participant role.
+    #
+    # @!attribute [rw] participant_timer_config_list
+    #   A list of participant timers. You can specify any unique combination
+    #   of role and timer type. Duplicate entries error out the request with
+    #   a 400.
+    #   @return [Array<Types::ParticipantTimerConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ChatParticipantRoleConfig AWS API Documentation
+    #
+    class ChatParticipantRoleConfig < Struct.new(
+      :participant_timer_config_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6958,6 +6981,81 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Configuration information for the timer. After the timer configuration
+    # is set, it persists for the duration of the chat. It persists across
+    # new contacts in the chain, for example, transfer contacts.
+    #
+    # For more information about how chat timeouts work, see [Set up chat
+    # timeouts for human participants][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html
+    #
+    # @!attribute [rw] participant_role
+    #   The role of the participant in the chat conversation.
+    #   @return [String]
+    #
+    # @!attribute [rw] timer_type
+    #   The type of timer. `IDLE` indicates the timer applies for
+    #   considering a human chat participant as idle.
+    #   `DISCONNECT_NONCUSTOMER` indicates the timer applies to
+    #   automatically disconnecting a chat participant due to idleness.
+    #   @return [String]
+    #
+    # @!attribute [rw] timer_value
+    #   The value of the timer. Either the timer action (Unset to delete the
+    #   timer), or the duration of the timer in minutes. Only one value can
+    #   be set.
+    #   @return [Types::ParticipantTimerValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ParticipantTimerConfiguration AWS API Documentation
+    #
+    class ParticipantTimerConfiguration < Struct.new(
+      :participant_role,
+      :timer_type,
+      :timer_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The value of the timer. Either the timer action (`Unset` to delete the
+    # timer), or the duration of the timer in minutes. Only one value can be
+    # set.
+    #
+    # For more information about how chat timeouts work, see [Set up chat
+    # timeouts for human participants][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html
+    #
+    # @note ParticipantTimerValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] participant_timer_action
+    #   The timer action. Currently only one value is allowed: `Unset`. It
+    #   deletes a timer.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_timer_duration_in_minutes
+    #   The duration of a timer, in minutes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ParticipantTimerValue AWS API Documentation
+    #
+    class ParticipantTimerValue < Struct.new(
+      :participant_timer_action,
+      :participant_timer_duration_in_minutes,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ParticipantTimerAction < ParticipantTimerValue; end
+      class ParticipantTimerDurationInMinutes < ParticipantTimerValue; end
+      class Unknown < ParticipantTimerValue; end
+    end
+
     # Contains information about a phone number for a quick connect.
     #
     # @!attribute [rw] phone_number
@@ -8942,8 +9040,12 @@ module Aws::Connect
     #   @return [Integer]
     #
     # @!attribute [rw] supported_messaging_content_types
-    #   The supported chat message content types. Content types can be
-    #   text/plain or both text/plain and text/markdown.
+    #   The supported chat message content types. Content types must always
+    #   contain `text/plain`. You can then put any other supported type in
+    #   the list. For example, all the following lists are valid because
+    #   they contain `text/plain`\: `[text/plain, text/markdown,
+    #   application/json]`, `[text/markdown, text/plain]`, `[text/plain,
+    #   application/json]`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
@@ -10325,6 +10427,54 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Configuration information for the chat participant role.
+    #
+    # @note UpdateParticipantRoleConfigChannelInfo is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] chat
+    #   Configuration information for the chat participant role.
+    #   @return [Types::ChatParticipantRoleConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateParticipantRoleConfigChannelInfo AWS API Documentation
+    #
+    class UpdateParticipantRoleConfigChannelInfo < Struct.new(
+      :chat,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Chat < UpdateParticipantRoleConfigChannelInfo; end
+      class Unknown < UpdateParticipantRoleConfigChannelInfo; end
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_configuration
+    #   The Amazon Connect channel you want to configure.
+    #   @return [Types::UpdateParticipantRoleConfigChannelInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateParticipantRoleConfigRequest AWS API Documentation
+    #
+    class UpdateParticipantRoleConfigRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :channel_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateParticipantRoleConfigResponse AWS API Documentation
+    #
+    class UpdateParticipantRoleConfigResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.

@@ -346,6 +346,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateInstanceAttribute.build(context)
           when :update_instance_storage_config
             Aws::Connect::Endpoints::UpdateInstanceStorageConfig.build(context)
+          when :update_participant_role_config
+            Aws::Connect::Endpoints::UpdateParticipantRoleConfig.build(context)
           when :update_phone_number
             Aws::Connect::Endpoints::UpdatePhoneNumber.build(context)
           when :update_queue_hours_of_operation

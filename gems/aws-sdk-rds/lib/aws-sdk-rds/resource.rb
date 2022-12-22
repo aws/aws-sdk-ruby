@@ -100,6 +100,8 @@ module Aws::RDS
     #     },
     #     network_type: "String",
     #     db_system_id: "String",
+    #     manage_master_user_password: false,
+    #     master_user_secret_kms_key_id: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -293,7 +295,11 @@ module Aws::RDS
     #   The password for the master database user. This password can contain
     #   any printable ASCII character except "/", """, or "@".
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Constraints:
+    #
+    #   * Must contain from 8 to 41 characters.
+    #
+    #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :option_group_name
@@ -826,6 +832,52 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [String] :db_system_id
     #   Reserved for future use.
+    # @option options [Boolean] :manage_master_user_password
+    #   A value that indicates whether to manage the master user password with
+    #   Amazon Web Services Secrets Manager.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide* and
+    #   [Password management with Amazon Web Services Secrets Manager][2] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * Can't manage the master user password with Amazon Web Services
+    #     Secrets Manager if `MasterUserPassword` is specified.
+    #
+    #   ^
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
+    # @option options [String] :master_user_secret_kms_key_id
+    #   The Amazon Web Services KMS key identifier to encrypt a secret that is
+    #   automatically generated and managed in Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   This setting is valid only if the master user password is managed by
+    #   RDS in Amazon Web Services Secrets Manager for the DB cluster.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key. To use a KMS key in a
+    #   different Amazon Web Services account, specify the key ARN or alias
+    #   ARN.
+    #
+    #   If you don't specify `MasterUserSecretKmsKeyId`, then the
+    #   `aws/secretsmanager` KMS key is used to encrypt the secret. If the
+    #   secret is in a different Amazon Web Services account, then you can't
+    #   use the `aws/secretsmanager` KMS key to encrypt the secret, and you
+    #   must use a customer managed KMS key.
+    #
+    #   There is a default KMS key for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default KMS key for each
+    #   Amazon Web Services Region.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -996,6 +1048,8 @@ module Aws::RDS
     #     backup_target: "String",
     #     network_type: "String",
     #     storage_throughput: 1,
+    #     manage_master_user_password: false,
+    #     master_user_secret_kms_key_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1309,6 +1363,9 @@ module Aws::RDS
     #
     #   Not applicable. The password for the master user is managed by the DB
     #   cluster.
+    #
+    #   Constraints: Can't be specified if `ManageMasterUserPassword` is
+    #   turned on.
     #
     #   **MariaDB**
     #
@@ -2051,6 +2108,45 @@ module Aws::RDS
     #   This setting applies only to the `gp3` storage type.
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    # @option options [Boolean] :manage_master_user_password
+    #   A value that indicates whether to manage the master user password with
+    #   Amazon Web Services Secrets Manager.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * Can't manage the master user password with Amazon Web Services
+    #     Secrets Manager if `MasterUserPassword` is specified.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    # @option options [String] :master_user_secret_kms_key_id
+    #   The Amazon Web Services KMS key identifier to encrypt a secret that is
+    #   automatically generated and managed in Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   This setting is valid only if the master user password is managed by
+    #   RDS in Amazon Web Services Secrets Manager for the DB instance.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key. To use a KMS key in a
+    #   different Amazon Web Services account, specify the key ARN or alias
+    #   ARN.
+    #
+    #   If you don't specify `MasterUserSecretKmsKeyId`, then the
+    #   `aws/secretsmanager` KMS key is used to encrypt the secret. If the
+    #   secret is in a different Amazon Web Services account, then you can't
+    #   use the `aws/secretsmanager` KMS key to encrypt the secret, and you
+    #   must use a customer managed KMS key.
+    #
+    #   There is a default KMS key for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default KMS key for each
+    #   Amazon Web Services Region.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)

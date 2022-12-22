@@ -1552,7 +1552,16 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] rotation_lambda_arn
-    #   The ARN of the Lambda rotation function that can rotate the secret.
+    #   For secrets that use a Lambda rotation function to rotate, the ARN
+    #   of the Lambda rotation function.
+    #
+    #   For secrets that use *managed rotation*, omit this field. For more
+    #   information, see [Managed rotation][1] in the *Secrets Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_managed.html
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
@@ -1564,10 +1573,11 @@ module Aws::SecretsManager
     #   next scheduled rotation window. The rotation schedule is defined in
     #   RotateSecretRequest$RotationRules.
     #
-    #   If you don't immediately rotate the secret, Secrets Manager tests
-    #   the rotation configuration by running the [ `testSecret` step][1] of
-    #   the Lambda rotation function. The test creates an `AWSPENDING`
-    #   version of the secret and then removes it.
+    #   For secrets that use a Lambda rotation function to rotate, if you
+    #   don't immediately rotate the secret, Secrets Manager tests the
+    #   rotation configuration by running the [ `testSecret` step][1] of the
+    #   Lambda rotation function. The test creates an `AWSPENDING` version
+    #   of the secret and then removes it.
     #
     #   If you don't specify this value, then by default, Secrets Manager
     #   rotates the secret immediately.

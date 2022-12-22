@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2022-12-22)
+------------------
+
+* Feature - Amazon Connect Chat introduces the Idle Participant/Autodisconnect feature, which allows users to set timeouts relating to the activity of chat participants, using the new UpdateParticipantRoleConfig API.
+
 1.88.0 (2022-12-21)
 ------------------
 

@@ -10,15 +10,7 @@
 module Aws::KinesisVideoWebRTCStorage
   module Types
 
-    # 1.  You do not have required permissions to perform this operation
-    #
-    # ^
-    # ^
-    #
-    # 1.  The `AccessDeniedException` can be thrown for operation access as
-    #     well as tokens or resource access
-    #
-    # ^
+    # You do not have required permissions to perform this operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -45,14 +37,7 @@ module Aws::KinesisVideoWebRTCStorage
       include Aws::Structure
     end
 
-    # 1.  The value for this input parameter is invalid.
-    #
-    # ^
-    # ^
-    #
-    # 1.  Additional details may **not**be returned.
-    #
-    # ^
+    # The value for this input parameter is invalid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -69,23 +54,6 @@ module Aws::KinesisVideoWebRTCStorage
     #   The Amazon Resource Name (ARN) of the signaling channel.
     #   @return [String]
     #
-    # @!attribute [rw] client_id
-    #   The unique identifier for the sender client.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-webrtc-storage-2018-05-10/JoinStorageSessionAsViewerInput AWS API Documentation
-    #
-    class JoinStorageSessionAsViewerInput < Struct.new(
-      :channel_arn,
-      :client_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] channel_arn
-    #   The Amazon Resource Name (ARN) of the signaling channel.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-webrtc-storage-2018-05-10/JoinStorageSessionInput AWS API Documentation
     #
     class JoinStorageSessionInput < Struct.new(
@@ -94,14 +62,7 @@ module Aws::KinesisVideoWebRTCStorage
       include Aws::Structure
     end
 
-    # 1.  The specified resource is not found
-    #
-    # ^
-    # ^
-    #
-    # 1.  You have not specified a channel in this API call.
-    #
-    # ^
+    # The specified resource is not found.
     #
     # @!attribute [rw] message
     #   @return [String]

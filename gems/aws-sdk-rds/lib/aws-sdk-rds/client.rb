@@ -2382,7 +2382,11 @@ module Aws::RDS
     #   The password for the master database user. This password can contain
     #   any printable ASCII character except "/", """, or "@".
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Constraints:
+    #
+    #   * Must contain from 8 to 41 characters.
+    #
+    #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -2950,6 +2954,54 @@ module Aws::RDS
     # @option params [String] :db_system_id
     #   Reserved for future use.
     #
+    # @option params [Boolean] :manage_master_user_password
+    #   A value that indicates whether to manage the master user password with
+    #   Amazon Web Services Secrets Manager.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide* and
+    #   [Password management with Amazon Web Services Secrets Manager][2] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * Can't manage the master user password with Amazon Web Services
+    #     Secrets Manager if `MasterUserPassword` is specified.
+    #
+    #   ^
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
+    #
+    # @option params [String] :master_user_secret_kms_key_id
+    #   The Amazon Web Services KMS key identifier to encrypt a secret that is
+    #   automatically generated and managed in Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   This setting is valid only if the master user password is managed by
+    #   RDS in Amazon Web Services Secrets Manager for the DB cluster.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key. To use a KMS key in a
+    #   different Amazon Web Services account, specify the key ARN or alias
+    #   ARN.
+    #
+    #   If you don't specify `MasterUserSecretKmsKeyId`, then the
+    #   `aws/secretsmanager` KMS key is used to encrypt the secret. If the
+    #   secret is in a different Amazon Web Services account, then you can't
+    #   use the `aws/secretsmanager` KMS key to encrypt the secret, and you
+    #   must use a customer managed KMS key.
+    #
+    #   There is a default KMS key for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default KMS key for each
+    #   Amazon Web Services Region.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3050,6 +3102,8 @@ module Aws::RDS
     #     },
     #     network_type: "String",
     #     db_system_id: "String",
+    #     manage_master_user_password: false,
+    #     master_user_secret_kms_key_id: "String",
     #     source_region: "String",
     #   })
     #
@@ -3162,6 +3216,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -3877,6 +3934,9 @@ module Aws::RDS
     #
     #   Not applicable. The password for the master user is managed by the DB
     #   cluster.
+    #
+    #   Constraints: Can't be specified if `ManageMasterUserPassword` is
+    #   turned on.
     #
     #   **MariaDB**
     #
@@ -4665,6 +4725,47 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
+    # @option params [Boolean] :manage_master_user_password
+    #   A value that indicates whether to manage the master user password with
+    #   Amazon Web Services Secrets Manager.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * Can't manage the master user password with Amazon Web Services
+    #     Secrets Manager if `MasterUserPassword` is specified.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #
+    # @option params [String] :master_user_secret_kms_key_id
+    #   The Amazon Web Services KMS key identifier to encrypt a secret that is
+    #   automatically generated and managed in Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   This setting is valid only if the master user password is managed by
+    #   RDS in Amazon Web Services Secrets Manager for the DB instance.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key. To use a KMS key in a
+    #   different Amazon Web Services account, specify the key ARN or alias
+    #   ARN.
+    #
+    #   If you don't specify `MasterUserSecretKmsKeyId`, then the
+    #   `aws/secretsmanager` KMS key is used to encrypt the secret. If the
+    #   secret is in a different Amazon Web Services account, then you can't
+    #   use the `aws/secretsmanager` KMS key to encrypt the secret, and you
+    #   must use a customer managed KMS key.
+    #
+    #   There is a default KMS key for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default KMS key for each
+    #   Amazon Web Services Region.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -4754,6 +4855,8 @@ module Aws::RDS
     #     backup_target: "String",
     #     network_type: "String",
     #     storage_throughput: 1,
+    #     manage_master_user_password: false,
+    #     master_user_secret_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -4901,6 +5004,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -5723,6 +5829,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7202,6 +7311,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -7672,6 +7784,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -9407,6 +9522,9 @@ module Aws::RDS
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_clusters[0].network_type #=> String
     #   resp.db_clusters[0].db_system_id #=> String
+    #   resp.db_clusters[0].master_user_secret.secret_arn #=> String
+    #   resp.db_clusters[0].master_user_secret.secret_status #=> String
+    #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10038,6 +10156,9 @@ module Aws::RDS
     #   resp.db_instances[0].activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instances[0].storage_throughput #=> Integer
     #   resp.db_instances[0].db_system_id #=> String
+    #   resp.db_instances[0].master_user_secret.secret_arn #=> String
+    #   resp.db_instances[0].master_user_secret.secret_status #=> String
+    #   resp.db_instances[0].master_user_secret.kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13246,6 +13367,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -13902,7 +14026,11 @@ module Aws::RDS
     #   The new password for the master database user. This password can
     #   contain any printable ASCII character except "/", """, or "@".
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Constraints:
+    #
+    #   * Must contain from 8 to 41 characters.
+    #
+    #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -14343,6 +14471,96 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Boolean] :manage_master_user_password
+    #   A value that indicates whether to manage the master user password with
+    #   Amazon Web Services Secrets Manager.
+    #
+    #   If the DB cluster doesn't manage the master user password with Amazon
+    #   Web Services Secrets Manager, you can turn on this management. In this
+    #   case, you can't specify `MasterUserPassword`.
+    #
+    #   If the DB cluster already manages the master user password with Amazon
+    #   Web Services Secrets Manager, and you specify that the master user
+    #   password is not managed with Amazon Web Services Secrets Manager, then
+    #   you must specify `MasterUserPassword`. In this case, RDS deletes the
+    #   secret and uses the new password for the master user specified by
+    #   `MasterUserPassword`.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide* and
+    #   [Password management with Amazon Web Services Secrets Manager][2] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
+    #
+    # @option params [Boolean] :rotate_master_user_password
+    #   A value that indicates whether to rotate the secret managed by Amazon
+    #   Web Services Secrets Manager for the master user password.
+    #
+    #   This setting is valid only if the master user password is managed by
+    #   RDS in Amazon Web Services Secrets Manager for the DB cluster. The
+    #   secret value contains the updated password.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide* and
+    #   [Password management with Amazon Web Services Secrets Manager][2] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * You must apply the change immediately when rotating the master user
+    #     password.
+    #
+    #   ^
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
+    #
+    # @option params [String] :master_user_secret_kms_key_id
+    #   The Amazon Web Services KMS key identifier to encrypt a secret that is
+    #   automatically generated and managed in Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   This setting is valid only if both of the following conditions are
+    #   met:
+    #
+    #   * The DB cluster doesn't manage the master user password in Amazon
+    #     Web Services Secrets Manager.
+    #
+    #     If the DB cluster already manages the master user password in Amazon
+    #     Web Services Secrets Manager, you can't change the KMS key that is
+    #     used to encrypt the secret.
+    #
+    #   * You are turning on `ManageMasterUserPassword` to manage the master
+    #     user password in Amazon Web Services Secrets Manager.
+    #
+    #     If you are turning on `ManageMasterUserPassword` and don't specify
+    #     `MasterUserSecretKmsKeyId`, then the `aws/secretsmanager` KMS key is
+    #     used to encrypt the secret. If the secret is in a different Amazon
+    #     Web Services account, then you can't use the `aws/secretsmanager`
+    #     KMS key to encrypt the secret, and you must use a customer managed
+    #     KMS key.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key. To use a KMS key in a
+    #   different Amazon Web Services account, specify the key ARN or alias
+    #   ARN.
+    #
+    #   There is a default KMS key for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default KMS key for each
+    #   Amazon Web Services Region.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -14419,6 +14637,9 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     manage_master_user_password: false,
+    #     rotate_master_user_password: false,
+    #     master_user_secret_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -14530,6 +14751,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -14985,6 +15209,9 @@ module Aws::RDS
     #   cluster. For more information, see `ModifyDBCluster`.
     #
     #   Default: Uses existing setting
+    #
+    #   Constraints: Can't be specified if `ManageMasterUserPassword` is
+    #   turned on.
     #
     #   **MariaDB**
     #
@@ -15681,6 +15908,91 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
+    # @option params [Boolean] :manage_master_user_password
+    #   A value that indicates whether to manage the master user password with
+    #   Amazon Web Services Secrets Manager.
+    #
+    #   If the DB cluster doesn't manage the master user password with Amazon
+    #   Web Services Secrets Manager, you can turn on this management. In this
+    #   case, you can't specify `MasterUserPassword`.
+    #
+    #   If the DB cluster already manages the master user password with Amazon
+    #   Web Services Secrets Manager, and you specify that the master user
+    #   password is not managed with Amazon Web Services Secrets Manager, then
+    #   you must specify `MasterUserPassword`. In this case, RDS deletes the
+    #   secret and uses the new password for the master user specified by
+    #   `MasterUserPassword`.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * Can't manage the master user password with Amazon Web Services
+    #     Secrets Manager if `MasterUserPassword` is specified.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #
+    # @option params [Boolean] :rotate_master_user_password
+    #   A value that indicates whether to rotate the secret managed by Amazon
+    #   Web Services Secrets Manager for the master user password.
+    #
+    #   This setting is valid only if the master user password is managed by
+    #   RDS in Amazon Web Services Secrets Manager for the DB cluster. The
+    #   secret value contains the updated password.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * You must apply the change immediately when rotating the master user
+    #     password.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #
+    # @option params [String] :master_user_secret_kms_key_id
+    #   The Amazon Web Services KMS key identifier to encrypt a secret that is
+    #   automatically generated and managed in Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   This setting is valid only if both of the following conditions are
+    #   met:
+    #
+    #   * The DB instance doesn't manage the master user password in Amazon
+    #     Web Services Secrets Manager.
+    #
+    #     If the DB instance already manages the master user password in
+    #     Amazon Web Services Secrets Manager, you can't change the KMS key
+    #     used to encrypt the secret.
+    #
+    #   * You are turning on `ManageMasterUserPassword` to manage the master
+    #     user password in Amazon Web Services Secrets Manager.
+    #
+    #     If you are turning on `ManageMasterUserPassword` and don't specify
+    #     `MasterUserSecretKmsKeyId`, then the `aws/secretsmanager` KMS key is
+    #     used to encrypt the secret. If the secret is in a different Amazon
+    #     Web Services account, then you can't use the `aws/secretsmanager`
+    #     KMS key to encrypt the secret, and you must use a customer managed
+    #     KMS key.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key. To use a KMS key in a
+    #   different Amazon Web Services account, specify the key ARN or alias
+    #   ARN.
+    #
+    #   There is a default KMS key for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default KMS key for each
+    #   Amazon Web Services Region.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -15767,6 +16079,9 @@ module Aws::RDS
     #     resume_full_automation_mode_minutes: 1,
     #     network_type: "String",
     #     storage_throughput: 1,
+    #     manage_master_user_password: false,
+    #     rotate_master_user_password: false,
+    #     master_user_secret_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -15914,6 +16229,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -17154,6 +17472,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -17297,6 +17618,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -17544,6 +17868,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -17764,6 +18091,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -18409,11 +18739,15 @@ module Aws::RDS
     #
     #   * Can't be a reserved word for the chosen database engine.
     #
-    # @option params [required, String] :master_user_password
+    # @option params [String] :master_user_password
     #   The password for the master database user. This password can contain
     #   any printable ASCII character except "/", """, or "@".
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   Constraints:
+    #
+    #   * Must contain from 8 to 41 characters.
+    #
+    #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     # @option params [String] :option_group_name
     #   A value that indicates that the restored DB cluster should be
@@ -18629,6 +18963,50 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Boolean] :manage_master_user_password
+    #   A value that indicates whether to manage the master user password with
+    #   Amazon Web Services Secrets Manager.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide* and
+    #   [Password management with Amazon Web Services Secrets Manager][2] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * Can't manage the master user password with Amazon Web Services
+    #     Secrets Manager if `MasterUserPassword` is specified.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
+    #
+    # @option params [String] :master_user_secret_kms_key_id
+    #   The Amazon Web Services KMS key identifier to encrypt a secret that is
+    #   automatically generated and managed in Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   This setting is valid only if the master user password is managed by
+    #   RDS in Amazon Web Services Secrets Manager for the DB cluster.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key. To use a KMS key in a
+    #   different Amazon Web Services account, specify the key ARN or alias
+    #   ARN.
+    #
+    #   If you don't specify `MasterUserSecretKmsKeyId`, then the
+    #   `aws/secretsmanager` KMS key is used to encrypt the secret. If the
+    #   secret is in a different Amazon Web Services account, then you can't
+    #   use the `aws/secretsmanager` KMS key to encrypt the secret, and you
+    #   must use a customer managed KMS key.
+    #
+    #   There is a default KMS key for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default KMS key for each
+    #   Amazon Web Services Region.
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -18648,7 +19026,7 @@ module Aws::RDS
     #     engine_version: "String",
     #     port: 1,
     #     master_username: "String", # required
-    #     master_user_password: "String", # required
+    #     master_user_password: "String",
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
@@ -18677,6 +19055,8 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     manage_master_user_password: false,
+    #     master_user_secret_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -18788,6 +19168,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -19426,6 +19809,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -20033,6 +20419,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -20797,6 +21186,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -20882,7 +21274,28 @@ module Aws::RDS
     #   The password for the master user. The password can include any
     #   printable ASCII character except "/", """, or "@".
     #
+    #   Constraints: Can't be specified if `ManageMasterUserPassword` is
+    #   turned on.
+    #
+    #   **MariaDB**
+    #
     #   Constraints: Must contain from 8 to 41 characters.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
+    #
+    #   **MySQL**
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
+    #
+    #   **Oracle**
+    #
+    #   Constraints: Must contain from 8 to 30 characters.
+    #
+    #   **PostgreSQL**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
     #
     # @option params [Array<String>] :db_security_groups
     #   A list of DB security groups to associate with this DB instance.
@@ -21244,6 +21657,47 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
+    # @option params [Boolean] :manage_master_user_password
+    #   A value that indicates whether to manage the master user password with
+    #   Amazon Web Services Secrets Manager.
+    #
+    #   For more information, see [Password management with Amazon Web
+    #   Services Secrets Manager][1] in the *Amazon RDS User Guide.*
+    #
+    #   Constraints:
+    #
+    #   * Can't manage the master user password with Amazon Web Services
+    #     Secrets Manager if `MasterUserPassword` is specified.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
+    #
+    # @option params [String] :master_user_secret_kms_key_id
+    #   The Amazon Web Services KMS key identifier to encrypt a secret that is
+    #   automatically generated and managed in Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   This setting is valid only if the master user password is managed by
+    #   RDS in Amazon Web Services Secrets Manager for the DB instance.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key. To use a KMS key in a
+    #   different Amazon Web Services account, specify the key ARN or alias
+    #   ARN.
+    #
+    #   If you don't specify `MasterUserSecretKmsKeyId`, then the
+    #   `aws/secretsmanager` KMS key is used to encrypt the secret. If the
+    #   secret is in a different Amazon Web Services account, then you can't
+    #   use the `aws/secretsmanager` KMS key to encrypt the secret, and you
+    #   must use a customer managed KMS key.
+    #
+    #   There is a default KMS key for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default KMS key for each
+    #   Amazon Web Services Region.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -21307,6 +21761,8 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     network_type: "String",
     #     storage_throughput: 1,
+    #     manage_master_user_password: false,
+    #     master_user_secret_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -21454,6 +21910,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -22202,6 +22661,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -22525,6 +22987,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -22709,6 +23174,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -23154,6 +23622,9 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
+    #   resp.db_cluster.master_user_secret.secret_arn #=> String
+    #   resp.db_cluster.master_user_secret.secret_status #=> String
+    #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -23345,6 +23816,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -23667,6 +24141,9 @@ module Aws::RDS
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.db_system_id #=> String
+    #   resp.db_instance.master_user_secret.secret_arn #=> String
+    #   resp.db_instance.master_user_secret.secret_status #=> String
+    #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -23690,7 +24167,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.166.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

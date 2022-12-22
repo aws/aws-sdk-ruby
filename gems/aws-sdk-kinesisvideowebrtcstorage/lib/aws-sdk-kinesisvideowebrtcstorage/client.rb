@@ -414,50 +414,6 @@ module Aws::KinesisVideoWebRTCStorage
       req.send_request(options)
     end
 
-    # Join the ongoing one way-video and/or multi-way audio WebRTC session
-    # as a viewer for an input channel. If there’s no existing session for
-    # the channel, create a new streaming session and provide the Amazon
-    # Resource Name (ARN) of the signaling channel (`channelArn`) and client
-    # id (`clientId`).
-    #
-    # Currently for `SINGLE_MASTER` type, a video producing device is able
-    # to ingest both audio and video media into a stream, while viewers can
-    # only ingest audio. Both a video producing device and viewers can join
-    # a session first and wait for other participants. While participants
-    # are having peer to peer conversations through webRTC, the ingested
-    # media session will be stored into the Kinesis Video Stream. Multiple
-    # viewers are able to playback real-time media.
-    #
-    # Customers can also use existing Kinesis Video Streams features like
-    # `HLS` or `DASH` playback, Image generation, and more with ingested
-    # WebRTC media. If there’s an existing session with the same `clientId`
-    # that's found in the join session request, the new request takes
-    # precedence.
-    #
-    # @option params [required, String] :channel_arn
-    #   The Amazon Resource Name (ARN) of the signaling channel.
-    #
-    # @option params [required, String] :client_id
-    #   The unique identifier for the sender client.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.join_storage_session_as_viewer({
-    #     channel_arn: "ChannelArn", # required
-    #     client_id: "ClientId", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-webrtc-storage-2018-05-10/JoinStorageSessionAsViewer AWS API Documentation
-    #
-    # @overload join_storage_session_as_viewer(params = {})
-    # @param [Hash] params ({})
-    def join_storage_session_as_viewer(params = {}, options = {})
-      req = build_request(:join_storage_session_as_viewer, params)
-      req.send_request(options)
-    end
-
     # @!endgroup
 
     # @param params ({})
@@ -471,7 +427,7 @@ module Aws::KinesisVideoWebRTCStorage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideowebrtcstorage'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

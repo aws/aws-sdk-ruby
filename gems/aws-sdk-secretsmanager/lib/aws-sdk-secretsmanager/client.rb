@@ -471,8 +471,12 @@ module Aws::SecretsManager
     # secret in Secrets Manager consists of both the protected secret data
     # and the important information needed to manage the secret.
     #
+    # For secrets that use *managed rotation*, you need to create the secret
+    # through the managing service. For more information, see [Secrets
+    # Manager secrets managed by other Amazon Web Services services][1].
+    #
     # For information about creating a secret in the console, see [Create a
-    # secret][1].
+    # secret][2].
     #
     # To create a secret, you can provide the secret value to be encrypted
     # in either the `SecretString` parameter or the `SecretBinary`
@@ -483,7 +487,7 @@ module Aws::SecretsManager
     # For database credentials you want to rotate, for Secrets Manager to be
     # able to rotate the secret, you must make sure the JSON you store in
     # the `SecretString` matches the [JSON structure of a database
-    # secret][2].
+    # secret][3].
     #
     # If you don't specify an KMS encryption key, Secrets Manager uses the
     # Amazon Web Services managed key `aws/secretsmanager`. If this key
@@ -502,13 +506,13 @@ module Aws::SecretsManager
     # action. Do not include sensitive information in request parameters
     # except `SecretBinary` or `SecretString` because it might be logged.
     # For more information, see [Logging Secrets Manager events with
-    # CloudTrail][3].
+    # CloudTrail][4].
     #
     # <b>Required permissions: </b> `secretsmanager:CreateSecret`. If you
     # include tags in the secret, you also need
     # `secretsmanager:TagResource`. For more information, see [ IAM policy
-    # actions for Secrets Manager][4] and [Authentication and access control
-    # in Secrets Manager][5].
+    # actions for Secrets Manager][5] and [Authentication and access control
+    # in Secrets Manager][6].
     #
     # To encrypt the secret with a KMS key other than `aws/secretsmanager`,
     # you need `kms:GenerateDataKey` and `kms:Decrypt` permission to the
@@ -516,11 +520,12 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_secret_json_structure.html
-    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
-    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_secret_json_structure.html
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [6]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :name
     #   The name of the new secret.
@@ -2139,66 +2144,42 @@ module Aws::SecretsManager
     end
 
     # Configures and starts the asynchronous process of rotating the secret.
-    # For more information about rotation, see [Rotate secrets][1].
-    #
-    # If you include the configuration parameters, the operation sets the
-    # values for the secret and then immediately starts a rotation. If you
-    # don't include the configuration parameters, the operation starts a
-    # rotation with the values already stored in the secret.
-    #
-    # For database credentials you want to rotate, for Secrets Manager to be
-    # able to rotate the secret, you must make sure the secret value is in
-    # the [ JSON structure of a database secret][2]. In particular, if you
-    # want to use the [ alternating users strategy][3], your secret must
-    # contain the ARN of a superuser secret.
-    #
-    # To configure rotation, you also need the ARN of an Amazon Web Services
-    # Lambda function and the schedule for the rotation. The Lambda rotation
-    # function creates a new version of the secret and creates or updates
-    # the credentials on the database or service to match. After testing the
-    # new credentials, the function marks the new secret version with the
-    # staging label `AWSCURRENT`. Then anyone who retrieves the secret gets
-    # the new version. For more information, see [How rotation works][4].
-    #
-    # You can create the Lambda rotation function based on the [rotation
-    # function templates][5] that Secrets Manager provides. Choose a
-    # template that matches your [Rotation strategy][6].
+    # For information about rotation, see [Rotate secrets][1] in the
+    # *Secrets Manager User Guide*. If you include the configuration
+    # parameters, the operation sets the values for the secret and then
+    # immediately starts a rotation. If you don't include the configuration
+    # parameters, the operation starts a rotation with the values already
+    # stored in the secret.
     #
     # When rotation is successful, the `AWSPENDING` staging label might be
     # attached to the same version as the `AWSCURRENT` version, or it might
     # not be attached to any version. If the `AWSPENDING` staging label is
     # present but not attached to the same version as `AWSCURRENT`, then any
     # later invocation of `RotateSecret` assumes that a previous rotation
-    # request is still in progress and returns an error.
-    #
-    # When rotation is unsuccessful, the `AWSPENDING` staging label might be
-    # attached to an empty secret version. For more information, see
-    # [Troubleshoot rotation][7] in the *Secrets Manager User Guide*.
+    # request is still in progress and returns an error. When rotation is
+    # unsuccessful, the `AWSPENDING` staging label might be attached to an
+    # empty secret version. For more information, see [Troubleshoot
+    # rotation][2] in the *Secrets Manager User Guide*.
     #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
     # because it might be logged. For more information, see [Logging Secrets
-    # Manager events with CloudTrail][8].
+    # Manager events with CloudTrail][3].
     #
     # <b>Required permissions: </b> `secretsmanager:RotateSecret`. For more
-    # information, see [ IAM policy actions for Secrets Manager][9] and
-    # [Authentication and access control in Secrets Manager][10]. You also
+    # information, see [ IAM policy actions for Secrets Manager][4] and
+    # [Authentication and access control in Secrets Manager][5]. You also
     # need `lambda:InvokeFunction` permissions on the rotation function. For
-    # more information, see [ Permissions for rotation][11].
+    # more information, see [ Permissions for rotation][6].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_secret_json_structure.html
-    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets_strategies.html#rotating-secrets-two-users
-    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
-    # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_available-rotation-templates.html
-    # [6]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets_strategies.html
-    # [7]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot_rotation.html
-    # [8]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
-    # [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [10]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
-    # [11]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot_rotation.html
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [6]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to rotate.
@@ -2238,7 +2219,16 @@ module Aws::SecretsManager
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [String] :rotation_lambda_arn
-    #   The ARN of the Lambda rotation function that can rotate the secret.
+    #   For secrets that use a Lambda rotation function to rotate, the ARN of
+    #   the Lambda rotation function.
+    #
+    #   For secrets that use *managed rotation*, omit this field. For more
+    #   information, see [Managed rotation][1] in the *Secrets Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_managed.html
     #
     # @option params [Types::RotationRulesType] :rotation_rules
     #   A structure that defines the rotation configuration for this secret.
@@ -2248,7 +2238,8 @@ module Aws::SecretsManager
     #   next scheduled rotation window. The rotation schedule is defined in
     #   RotateSecretRequest$RotationRules.
     #
-    #   If you don't immediately rotate the secret, Secrets Manager tests the
+    #   For secrets that use a Lambda rotation function to rotate, if you
+    #   don't immediately rotate the secret, Secrets Manager tests the
     #   rotation configuration by running the [ `testSecret` step][1] of the
     #   Lambda rotation function. The test creates an `AWSPENDING` version of
     #   the secret and then removes it.
@@ -2584,6 +2575,10 @@ module Aws::SecretsManager
     # To change the rotation configuration of a secret, use RotateSecret
     # instead.
     #
+    # To change a secret so that it is managed by another service, you need
+    # to recreate the secret in that service. See [Secrets Manager secrets
+    # managed by other Amazon Web Services services][1].
+    #
     # We recommend you avoid calling `UpdateSecret` at a sustained rate of
     # more than once every 10 minutes. When you call `UpdateSecret` to
     # update the secret value, Secrets Manager creates a new version of the
@@ -2608,21 +2603,22 @@ module Aws::SecretsManager
     # action. Do not include sensitive information in request parameters
     # except `SecretBinary` or `SecretString` because it might be logged.
     # For more information, see [Logging Secrets Manager events with
-    # CloudTrail][1].
+    # CloudTrail][2].
     #
     # <b>Required permissions: </b> `secretsmanager:UpdateSecret`. For more
-    # information, see [ IAM policy actions for Secrets Manager][2] and
-    # [Authentication and access control in Secrets Manager][3]. If you use
+    # information, see [ IAM policy actions for Secrets Manager][3] and
+    # [Authentication and access control in Secrets Manager][4]. If you use
     # a customer managed key, you must also have `kms:GenerateDataKey` and
     # `kms:Decrypt` permissions on the key. For more information, see [
-    # Secret encryption and decryption][4].
+    # Secret encryption and decryption][5].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
-    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
@@ -3046,7 +3042,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

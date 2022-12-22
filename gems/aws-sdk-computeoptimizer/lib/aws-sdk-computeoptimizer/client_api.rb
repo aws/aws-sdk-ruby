@@ -18,6 +18,7 @@ module Aws::ComputeOptimizer
     AccountEnrollmentStatuses = Shapes::ListShape.new(name: 'AccountEnrollmentStatuses')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
+    AutoScalingConfiguration = Shapes::StringShape.new(name: 'AutoScalingConfiguration')
     AutoScalingGroupArn = Shapes::StringShape.new(name: 'AutoScalingGroupArn')
     AutoScalingGroupArns = Shapes::ListShape.new(name: 'AutoScalingGroupArns')
     AutoScalingGroupConfiguration = Shapes::StructureShape.new(name: 'AutoScalingGroupConfiguration')
@@ -27,6 +28,12 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendationOptions = Shapes::ListShape.new(name: 'AutoScalingGroupRecommendationOptions')
     AutoScalingGroupRecommendations = Shapes::ListShape.new(name: 'AutoScalingGroupRecommendations')
     Code = Shapes::StringShape.new(name: 'Code')
+    ContainerConfiguration = Shapes::StructureShape.new(name: 'ContainerConfiguration')
+    ContainerConfigurations = Shapes::ListShape.new(name: 'ContainerConfigurations')
+    ContainerName = Shapes::StringShape.new(name: 'ContainerName')
+    ContainerRecommendation = Shapes::StructureShape.new(name: 'ContainerRecommendation')
+    ContainerRecommendations = Shapes::ListShape.new(name: 'ContainerRecommendations')
+    CpuSize = Shapes::IntegerShape.new(name: 'CpuSize')
     CpuVendorArchitecture = Shapes::StringShape.new(name: 'CpuVendorArchitecture')
     CpuVendorArchitectures = Shapes::ListShape.new(name: 'CpuVendorArchitectures')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
@@ -49,6 +56,27 @@ module Aws::ComputeOptimizer
     EBSMetricName = Shapes::StringShape.new(name: 'EBSMetricName')
     EBSUtilizationMetric = Shapes::StructureShape.new(name: 'EBSUtilizationMetric')
     EBSUtilizationMetrics = Shapes::ListShape.new(name: 'EBSUtilizationMetrics')
+    ECSServiceLaunchType = Shapes::StringShape.new(name: 'ECSServiceLaunchType')
+    ECSServiceMetricName = Shapes::StringShape.new(name: 'ECSServiceMetricName')
+    ECSServiceMetricStatistic = Shapes::StringShape.new(name: 'ECSServiceMetricStatistic')
+    ECSServiceProjectedMetric = Shapes::StructureShape.new(name: 'ECSServiceProjectedMetric')
+    ECSServiceProjectedMetrics = Shapes::ListShape.new(name: 'ECSServiceProjectedMetrics')
+    ECSServiceProjectedUtilizationMetric = Shapes::StructureShape.new(name: 'ECSServiceProjectedUtilizationMetric')
+    ECSServiceProjectedUtilizationMetrics = Shapes::ListShape.new(name: 'ECSServiceProjectedUtilizationMetrics')
+    ECSServiceRecommendation = Shapes::StructureShape.new(name: 'ECSServiceRecommendation')
+    ECSServiceRecommendationFilter = Shapes::StructureShape.new(name: 'ECSServiceRecommendationFilter')
+    ECSServiceRecommendationFilterName = Shapes::StringShape.new(name: 'ECSServiceRecommendationFilterName')
+    ECSServiceRecommendationFilters = Shapes::ListShape.new(name: 'ECSServiceRecommendationFilters')
+    ECSServiceRecommendationFinding = Shapes::StringShape.new(name: 'ECSServiceRecommendationFinding')
+    ECSServiceRecommendationFindingReasonCode = Shapes::StringShape.new(name: 'ECSServiceRecommendationFindingReasonCode')
+    ECSServiceRecommendationFindingReasonCodes = Shapes::ListShape.new(name: 'ECSServiceRecommendationFindingReasonCodes')
+    ECSServiceRecommendationOption = Shapes::StructureShape.new(name: 'ECSServiceRecommendationOption')
+    ECSServiceRecommendationOptions = Shapes::ListShape.new(name: 'ECSServiceRecommendationOptions')
+    ECSServiceRecommendations = Shapes::ListShape.new(name: 'ECSServiceRecommendations')
+    ECSServiceRecommendedOptionProjectedMetric = Shapes::StructureShape.new(name: 'ECSServiceRecommendedOptionProjectedMetric')
+    ECSServiceRecommendedOptionProjectedMetrics = Shapes::ListShape.new(name: 'ECSServiceRecommendedOptionProjectedMetrics')
+    ECSServiceUtilizationMetric = Shapes::StructureShape.new(name: 'ECSServiceUtilizationMetric')
+    ECSServiceUtilizationMetrics = Shapes::ListShape.new(name: 'ECSServiceUtilizationMetrics')
     EffectiveRecommendationPreferences = Shapes::StructureShape.new(name: 'EffectiveRecommendationPreferences')
     EnhancedInfrastructureMetrics = Shapes::StringShape.new(name: 'EnhancedInfrastructureMetrics')
     EnrollmentFilter = Shapes::StructureShape.new(name: 'EnrollmentFilter')
@@ -63,10 +91,14 @@ module Aws::ComputeOptimizer
     ExportEBSVolumeRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportEBSVolumeRecommendationsResponse')
     ExportEC2InstanceRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportEC2InstanceRecommendationsRequest')
     ExportEC2InstanceRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportEC2InstanceRecommendationsResponse')
+    ExportECSServiceRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportECSServiceRecommendationsRequest')
+    ExportECSServiceRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportECSServiceRecommendationsResponse')
     ExportLambdaFunctionRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportLambdaFunctionRecommendationsRequest')
     ExportLambdaFunctionRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportLambdaFunctionRecommendationsResponse')
     ExportableAutoScalingGroupField = Shapes::StringShape.new(name: 'ExportableAutoScalingGroupField')
     ExportableAutoScalingGroupFields = Shapes::ListShape.new(name: 'ExportableAutoScalingGroupFields')
+    ExportableECSServiceField = Shapes::StringShape.new(name: 'ExportableECSServiceField')
+    ExportableECSServiceFields = Shapes::ListShape.new(name: 'ExportableECSServiceFields')
     ExportableInstanceField = Shapes::StringShape.new(name: 'ExportableInstanceField')
     ExportableInstanceFields = Shapes::ListShape.new(name: 'ExportableInstanceFields')
     ExportableLambdaFunctionField = Shapes::StringShape.new(name: 'ExportableLambdaFunctionField')
@@ -95,6 +127,10 @@ module Aws::ComputeOptimizer
     GetEC2InstanceRecommendationsResponse = Shapes::StructureShape.new(name: 'GetEC2InstanceRecommendationsResponse')
     GetEC2RecommendationProjectedMetricsRequest = Shapes::StructureShape.new(name: 'GetEC2RecommendationProjectedMetricsRequest')
     GetEC2RecommendationProjectedMetricsResponse = Shapes::StructureShape.new(name: 'GetEC2RecommendationProjectedMetricsResponse')
+    GetECSServiceRecommendationProjectedMetricsRequest = Shapes::StructureShape.new(name: 'GetECSServiceRecommendationProjectedMetricsRequest')
+    GetECSServiceRecommendationProjectedMetricsResponse = Shapes::StructureShape.new(name: 'GetECSServiceRecommendationProjectedMetricsResponse')
+    GetECSServiceRecommendationsRequest = Shapes::StructureShape.new(name: 'GetECSServiceRecommendationsRequest')
+    GetECSServiceRecommendationsResponse = Shapes::StructureShape.new(name: 'GetECSServiceRecommendationsResponse')
     GetEffectiveRecommendationPreferencesRequest = Shapes::StructureShape.new(name: 'GetEffectiveRecommendationPreferencesRequest')
     GetEffectiveRecommendationPreferencesResponse = Shapes::StructureShape.new(name: 'GetEffectiveRecommendationPreferencesResponse')
     GetEnrollmentStatusRequest = Shapes::StructureShape.new(name: 'GetEnrollmentStatusRequest')
@@ -155,11 +191,13 @@ module Aws::ComputeOptimizer
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LookBackPeriodInDays = Shapes::FloatShape.new(name: 'LookBackPeriodInDays')
     Low = Shapes::IntegerShape.new(name: 'Low')
+    LowerBoundValue = Shapes::FloatShape.new(name: 'LowerBoundValue')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxSize = Shapes::IntegerShape.new(name: 'MaxSize')
     Medium = Shapes::IntegerShape.new(name: 'Medium')
     MemberAccountsEnrolled = Shapes::BooleanShape.new(name: 'MemberAccountsEnrolled')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
+    MemorySizeConfiguration = Shapes::StructureShape.new(name: 'MemorySizeConfiguration')
     Message = Shapes::StringShape.new(name: 'Message')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -170,6 +208,9 @@ module Aws::ComputeOptimizer
     MinSize = Shapes::IntegerShape.new(name: 'MinSize')
     MissingAuthenticationToken = Shapes::StructureShape.new(name: 'MissingAuthenticationToken')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NullableCpu = Shapes::IntegerShape.new(name: 'NullableCpu')
+    NullableMemory = Shapes::IntegerShape.new(name: 'NullableMemory')
+    NullableMemoryReservation = Shapes::IntegerShape.new(name: 'NullableMemoryReservation')
     NumberOfInvocations = Shapes::IntegerShape.new(name: 'NumberOfInvocations')
     NumberOfMemberAccountsOptedIn = Shapes::IntegerShape.new(name: 'NumberOfMemberAccountsOptedIn')
     OptInRequiredException = Shapes::StructureShape.new(name: 'OptInRequiredException')
@@ -212,17 +253,22 @@ module Aws::ComputeOptimizer
     Scope = Shapes::StructureShape.new(name: 'Scope')
     ScopeName = Shapes::StringShape.new(name: 'ScopeName')
     ScopeValue = Shapes::StringShape.new(name: 'ScopeValue')
+    ServiceArn = Shapes::StringShape.new(name: 'ServiceArn')
+    ServiceArns = Shapes::ListShape.new(name: 'ServiceArns')
+    ServiceConfiguration = Shapes::StructureShape.new(name: 'ServiceConfiguration')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     Summaries = Shapes::ListShape.new(name: 'Summaries')
     Summary = Shapes::StructureShape.new(name: 'Summary')
     SummaryValue = Shapes::FloatShape.new(name: 'SummaryValue')
+    TaskDefinitionArn = Shapes::StringShape.new(name: 'TaskDefinitionArn')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     UpdateEnrollmentStatusRequest = Shapes::StructureShape.new(name: 'UpdateEnrollmentStatusRequest')
     UpdateEnrollmentStatusResponse = Shapes::StructureShape.new(name: 'UpdateEnrollmentStatusResponse')
+    UpperBoundValue = Shapes::FloatShape.new(name: 'UpperBoundValue')
     UtilizationMetric = Shapes::StructureShape.new(name: 'UtilizationMetric')
     UtilizationMetrics = Shapes::ListShape.new(name: 'UtilizationMetrics')
     Value = Shapes::FloatShape.new(name: 'Value')
@@ -288,6 +334,20 @@ module Aws::ComputeOptimizer
 
     AutoScalingGroupRecommendations.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendation)
 
+    ContainerConfiguration.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, location_name: "containerName"))
+    ContainerConfiguration.add_member(:memory_size_configuration, Shapes::ShapeRef.new(shape: MemorySizeConfiguration, location_name: "memorySizeConfiguration"))
+    ContainerConfiguration.add_member(:cpu, Shapes::ShapeRef.new(shape: NullableCpu, location_name: "cpu"))
+    ContainerConfiguration.struct_class = Types::ContainerConfiguration
+
+    ContainerConfigurations.member = Shapes::ShapeRef.new(shape: ContainerConfiguration)
+
+    ContainerRecommendation.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, location_name: "containerName"))
+    ContainerRecommendation.add_member(:memory_size_configuration, Shapes::ShapeRef.new(shape: MemorySizeConfiguration, location_name: "memorySizeConfiguration"))
+    ContainerRecommendation.add_member(:cpu, Shapes::ShapeRef.new(shape: NullableCpu, location_name: "cpu"))
+    ContainerRecommendation.struct_class = Types::ContainerRecommendation
+
+    ContainerRecommendations.member = Shapes::ShapeRef.new(shape: ContainerRecommendation)
+
     CpuVendorArchitectures.member = Shapes::ShapeRef.new(shape: CpuVendorArchitecture)
 
     CurrentPerformanceRiskRatings.add_member(:high, Shapes::ShapeRef.new(shape: High, location_name: "high"))
@@ -325,6 +385,68 @@ module Aws::ComputeOptimizer
     EBSUtilizationMetric.struct_class = Types::EBSUtilizationMetric
 
     EBSUtilizationMetrics.member = Shapes::ShapeRef.new(shape: EBSUtilizationMetric)
+
+    ECSServiceProjectedMetric.add_member(:name, Shapes::ShapeRef.new(shape: ECSServiceMetricName, location_name: "name"))
+    ECSServiceProjectedMetric.add_member(:timestamps, Shapes::ShapeRef.new(shape: Timestamps, location_name: "timestamps"))
+    ECSServiceProjectedMetric.add_member(:upper_bound_values, Shapes::ShapeRef.new(shape: MetricValues, location_name: "upperBoundValues"))
+    ECSServiceProjectedMetric.add_member(:lower_bound_values, Shapes::ShapeRef.new(shape: MetricValues, location_name: "lowerBoundValues"))
+    ECSServiceProjectedMetric.struct_class = Types::ECSServiceProjectedMetric
+
+    ECSServiceProjectedMetrics.member = Shapes::ShapeRef.new(shape: ECSServiceProjectedMetric)
+
+    ECSServiceProjectedUtilizationMetric.add_member(:name, Shapes::ShapeRef.new(shape: ECSServiceMetricName, location_name: "name"))
+    ECSServiceProjectedUtilizationMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: ECSServiceMetricStatistic, location_name: "statistic"))
+    ECSServiceProjectedUtilizationMetric.add_member(:lower_bound_value, Shapes::ShapeRef.new(shape: LowerBoundValue, location_name: "lowerBoundValue"))
+    ECSServiceProjectedUtilizationMetric.add_member(:upper_bound_value, Shapes::ShapeRef.new(shape: UpperBoundValue, location_name: "upperBoundValue"))
+    ECSServiceProjectedUtilizationMetric.struct_class = Types::ECSServiceProjectedUtilizationMetric
+
+    ECSServiceProjectedUtilizationMetrics.member = Shapes::ShapeRef.new(shape: ECSServiceProjectedUtilizationMetric)
+
+    ECSServiceRecommendation.add_member(:service_arn, Shapes::ShapeRef.new(shape: ServiceArn, location_name: "serviceArn"))
+    ECSServiceRecommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    ECSServiceRecommendation.add_member(:current_service_configuration, Shapes::ShapeRef.new(shape: ServiceConfiguration, location_name: "currentServiceConfiguration"))
+    ECSServiceRecommendation.add_member(:utilization_metrics, Shapes::ShapeRef.new(shape: ECSServiceUtilizationMetrics, location_name: "utilizationMetrics"))
+    ECSServiceRecommendation.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookBackPeriodInDays, location_name: "lookbackPeriodInDays"))
+    ECSServiceRecommendation.add_member(:launch_type, Shapes::ShapeRef.new(shape: ECSServiceLaunchType, location_name: "launchType"))
+    ECSServiceRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
+    ECSServiceRecommendation.add_member(:finding, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFinding, location_name: "finding"))
+    ECSServiceRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFindingReasonCodes, location_name: "findingReasonCodes"))
+    ECSServiceRecommendation.add_member(:service_recommendation_options, Shapes::ShapeRef.new(shape: ECSServiceRecommendationOptions, location_name: "serviceRecommendationOptions"))
+    ECSServiceRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
+    ECSServiceRecommendation.struct_class = Types::ECSServiceRecommendation
+
+    ECSServiceRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFilterName, location_name: "name"))
+    ECSServiceRecommendationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
+    ECSServiceRecommendationFilter.struct_class = Types::ECSServiceRecommendationFilter
+
+    ECSServiceRecommendationFilters.member = Shapes::ShapeRef.new(shape: ECSServiceRecommendationFilter)
+
+    ECSServiceRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: ECSServiceRecommendationFindingReasonCode)
+
+    ECSServiceRecommendationOption.add_member(:memory, Shapes::ShapeRef.new(shape: NullableMemory, location_name: "memory"))
+    ECSServiceRecommendationOption.add_member(:cpu, Shapes::ShapeRef.new(shape: NullableCpu, location_name: "cpu"))
+    ECSServiceRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    ECSServiceRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: ECSServiceProjectedUtilizationMetrics, location_name: "projectedUtilizationMetrics"))
+    ECSServiceRecommendationOption.add_member(:container_recommendations, Shapes::ShapeRef.new(shape: ContainerRecommendations, location_name: "containerRecommendations"))
+    ECSServiceRecommendationOption.struct_class = Types::ECSServiceRecommendationOption
+
+    ECSServiceRecommendationOptions.member = Shapes::ShapeRef.new(shape: ECSServiceRecommendationOption)
+
+    ECSServiceRecommendations.member = Shapes::ShapeRef.new(shape: ECSServiceRecommendation)
+
+    ECSServiceRecommendedOptionProjectedMetric.add_member(:recommended_cpu_units, Shapes::ShapeRef.new(shape: CpuSize, location_name: "recommendedCpuUnits"))
+    ECSServiceRecommendedOptionProjectedMetric.add_member(:recommended_memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "recommendedMemorySize"))
+    ECSServiceRecommendedOptionProjectedMetric.add_member(:projected_metrics, Shapes::ShapeRef.new(shape: ECSServiceProjectedMetrics, location_name: "projectedMetrics"))
+    ECSServiceRecommendedOptionProjectedMetric.struct_class = Types::ECSServiceRecommendedOptionProjectedMetric
+
+    ECSServiceRecommendedOptionProjectedMetrics.member = Shapes::ShapeRef.new(shape: ECSServiceRecommendedOptionProjectedMetric)
+
+    ECSServiceUtilizationMetric.add_member(:name, Shapes::ShapeRef.new(shape: ECSServiceMetricName, location_name: "name"))
+    ECSServiceUtilizationMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: ECSServiceMetricStatistic, location_name: "statistic"))
+    ECSServiceUtilizationMetric.add_member(:value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "value"))
+    ECSServiceUtilizationMetric.struct_class = Types::ECSServiceUtilizationMetric
+
+    ECSServiceUtilizationMetrics.member = Shapes::ShapeRef.new(shape: ECSServiceUtilizationMetric)
 
     EffectiveRecommendationPreferences.add_member(:cpu_vendor_architectures, Shapes::ShapeRef.new(shape: CpuVendorArchitectures, location_name: "cpuVendorArchitectures"))
     EffectiveRecommendationPreferences.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
@@ -383,6 +505,18 @@ module Aws::ComputeOptimizer
     ExportEC2InstanceRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
     ExportEC2InstanceRecommendationsResponse.struct_class = Types::ExportEC2InstanceRecommendationsResponse
 
+    ExportECSServiceRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    ExportECSServiceRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFilters, location_name: "filters"))
+    ExportECSServiceRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableECSServiceFields, location_name: "fieldsToExport"))
+    ExportECSServiceRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
+    ExportECSServiceRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
+    ExportECSServiceRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportECSServiceRecommendationsRequest.struct_class = Types::ExportECSServiceRecommendationsRequest
+
+    ExportECSServiceRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    ExportECSServiceRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    ExportECSServiceRecommendationsResponse.struct_class = Types::ExportECSServiceRecommendationsResponse
+
     ExportLambdaFunctionRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
     ExportLambdaFunctionRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFilters, location_name: "filters"))
     ExportLambdaFunctionRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableLambdaFunctionFields, location_name: "fieldsToExport"))
@@ -396,6 +530,8 @@ module Aws::ComputeOptimizer
     ExportLambdaFunctionRecommendationsResponse.struct_class = Types::ExportLambdaFunctionRecommendationsResponse
 
     ExportableAutoScalingGroupFields.member = Shapes::ShapeRef.new(shape: ExportableAutoScalingGroupField)
+
+    ExportableECSServiceFields.member = Shapes::ShapeRef.new(shape: ExportableECSServiceField)
 
     ExportableInstanceFields.member = Shapes::ShapeRef.new(shape: ExportableInstanceField)
 
@@ -464,6 +600,28 @@ module Aws::ComputeOptimizer
 
     GetEC2RecommendationProjectedMetricsResponse.add_member(:recommended_option_projected_metrics, Shapes::ShapeRef.new(shape: RecommendedOptionProjectedMetrics, location_name: "recommendedOptionProjectedMetrics"))
     GetEC2RecommendationProjectedMetricsResponse.struct_class = Types::GetEC2RecommendationProjectedMetricsResponse
+
+    GetECSServiceRecommendationProjectedMetricsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: ServiceArn, required: true, location_name: "serviceArn"))
+    GetECSServiceRecommendationProjectedMetricsRequest.add_member(:stat, Shapes::ShapeRef.new(shape: MetricStatistic, required: true, location_name: "stat"))
+    GetECSServiceRecommendationProjectedMetricsRequest.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "period"))
+    GetECSServiceRecommendationProjectedMetricsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    GetECSServiceRecommendationProjectedMetricsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    GetECSServiceRecommendationProjectedMetricsRequest.struct_class = Types::GetECSServiceRecommendationProjectedMetricsRequest
+
+    GetECSServiceRecommendationProjectedMetricsResponse.add_member(:recommended_option_projected_metrics, Shapes::ShapeRef.new(shape: ECSServiceRecommendedOptionProjectedMetrics, location_name: "recommendedOptionProjectedMetrics"))
+    GetECSServiceRecommendationProjectedMetricsResponse.struct_class = Types::GetECSServiceRecommendationProjectedMetricsResponse
+
+    GetECSServiceRecommendationsRequest.add_member(:service_arns, Shapes::ShapeRef.new(shape: ServiceArns, location_name: "serviceArns"))
+    GetECSServiceRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetECSServiceRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetECSServiceRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFilters, location_name: "filters"))
+    GetECSServiceRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetECSServiceRecommendationsRequest.struct_class = Types::GetECSServiceRecommendationsRequest
+
+    GetECSServiceRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetECSServiceRecommendationsResponse.add_member(:ecs_service_recommendations, Shapes::ShapeRef.new(shape: ECSServiceRecommendations, location_name: "ecsServiceRecommendations"))
+    GetECSServiceRecommendationsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: GetRecommendationErrors, location_name: "errors"))
+    GetECSServiceRecommendationsResponse.struct_class = Types::GetECSServiceRecommendationsResponse
 
     GetEffectiveRecommendationPreferencesRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     GetEffectiveRecommendationPreferencesRequest.struct_class = Types::GetEffectiveRecommendationPreferencesRequest
@@ -623,6 +781,10 @@ module Aws::ComputeOptimizer
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    MemorySizeConfiguration.add_member(:memory, Shapes::ShapeRef.new(shape: NullableMemory, location_name: "memory"))
+    MemorySizeConfiguration.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: NullableMemoryReservation, location_name: "memoryReservation"))
+    MemorySizeConfiguration.struct_class = Types::MemorySizeConfiguration
+
     MetricValues.member = Shapes::ShapeRef.new(shape: MetricValue)
 
     MissingAuthenticationToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -725,6 +887,15 @@ module Aws::ComputeOptimizer
     Scope.add_member(:name, Shapes::ShapeRef.new(shape: ScopeName, location_name: "name"))
     Scope.add_member(:value, Shapes::ShapeRef.new(shape: ScopeValue, location_name: "value"))
     Scope.struct_class = Types::Scope
+
+    ServiceArns.member = Shapes::ShapeRef.new(shape: ServiceArn)
+
+    ServiceConfiguration.add_member(:memory, Shapes::ShapeRef.new(shape: NullableMemory, location_name: "memory"))
+    ServiceConfiguration.add_member(:cpu, Shapes::ShapeRef.new(shape: NullableCpu, location_name: "cpu"))
+    ServiceConfiguration.add_member(:container_configurations, Shapes::ShapeRef.new(shape: ContainerConfigurations, location_name: "containerConfigurations"))
+    ServiceConfiguration.add_member(:auto_scaling_configuration, Shapes::ShapeRef.new(shape: AutoScalingConfiguration, location_name: "autoScalingConfiguration"))
+    ServiceConfiguration.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: TaskDefinitionArn, location_name: "taskDefinitionArn"))
+    ServiceConfiguration.struct_class = Types::ServiceConfiguration
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -836,6 +1007,12 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:export_auto_scaling_group_recommendations, Seahorse::Model::Operation.new.tap do |o|
@@ -876,6 +1053,22 @@ module Aws::ComputeOptimizer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ExportEC2InstanceRecommendationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportEC2InstanceRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:export_ecs_service_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportECSServiceRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportECSServiceRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportECSServiceRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -966,6 +1159,38 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_ecs_service_recommendation_projected_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetECSServiceRecommendationProjectedMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetECSServiceRecommendationProjectedMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetECSServiceRecommendationProjectedMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_ecs_service_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetECSServiceRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetECSServiceRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetECSServiceRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_effective_recommendation_preferences, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEffectiveRecommendationPreferences"
         o.http_method = "POST"
@@ -1008,6 +1233,12 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_lambda_function_recommendations, Seahorse::Model::Operation.new.tap do |o|
@@ -1024,6 +1255,12 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_recommendation_preferences, Seahorse::Model::Operation.new.tap do |o|
@@ -1040,6 +1277,12 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_recommendation_summaries, Seahorse::Model::Operation.new.tap do |o|
@@ -1055,6 +1298,12 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_recommendation_preferences, Seahorse::Model::Operation.new.tap do |o|

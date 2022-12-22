@@ -66,6 +66,8 @@ module Aws::ComputeOptimizer
             Aws::ComputeOptimizer::Endpoints::ExportEBSVolumeRecommendations.build(context)
           when :export_ec2_instance_recommendations
             Aws::ComputeOptimizer::Endpoints::ExportEC2InstanceRecommendations.build(context)
+          when :export_ecs_service_recommendations
+            Aws::ComputeOptimizer::Endpoints::ExportECSServiceRecommendations.build(context)
           when :export_lambda_function_recommendations
             Aws::ComputeOptimizer::Endpoints::ExportLambdaFunctionRecommendations.build(context)
           when :get_auto_scaling_group_recommendations
@@ -76,6 +78,10 @@ module Aws::ComputeOptimizer
             Aws::ComputeOptimizer::Endpoints::GetEC2InstanceRecommendations.build(context)
           when :get_ec2_recommendation_projected_metrics
             Aws::ComputeOptimizer::Endpoints::GetEC2RecommendationProjectedMetrics.build(context)
+          when :get_ecs_service_recommendation_projected_metrics
+            Aws::ComputeOptimizer::Endpoints::GetECSServiceRecommendationProjectedMetrics.build(context)
+          when :get_ecs_service_recommendations
+            Aws::ComputeOptimizer::Endpoints::GetECSServiceRecommendations.build(context)
           when :get_effective_recommendation_preferences
             Aws::ComputeOptimizer::Endpoints::GetEffectiveRecommendationPreferences.build(context)
           when :get_enrollment_status

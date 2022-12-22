@@ -39,20 +39,20 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] suite_definition_id
-    #   Creates a Device Advisor test suite with suite UUID.
+    #   The UUID of the test suite created.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_arn
-    #   Creates a Device Advisor test suite with Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the test suite.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_name
-    #   Creates a Device Advisor test suite with suite definition name.
+    #   The suite definition name of the test suite. This is a required
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Creates a Device Advisor test suite with TimeStamp of when it was
-    #   created.
+    #   The timestamp of when the test suite was created.
     #   @return [Time]
     #
     class CreateSuiteDefinitionResponse < Struct.new(
@@ -389,7 +389,8 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the IoT Device Advisor resource.
+    #   The resource ARN of the IoT Device Advisor resource. This can be
+    #   SuiteDefinition ARN or SuiteRun ARN.
     #   @return [String]
     #
     class ListTagsForResourceRequest < Struct.new(
@@ -457,10 +458,15 @@ module Aws::IoTDeviceAdvisor
     #   Starts a Device Advisor test suite run based on suite create time.
     #   @return [Time]
     #
+    # @!attribute [rw] endpoint
+    #   The response of an Device Advisor test endpoint.
+    #   @return [String]
+    #
     class StartSuiteRunResponse < Struct.new(
       :suite_run_id,
       :suite_run_arn,
-      :created_at)
+      :created_at,
+      :endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -482,10 +488,10 @@ module Aws::IoTDeviceAdvisor
 
     class StopSuiteRunResponse < Aws::EmptyStructure; end
 
-    # Gets Suite Definition Configuration.
+    # Gets the suite definition configuration.
     #
     # @!attribute [rw] suite_definition_name
-    #   Gets Suite Definition Configuration name.
+    #   Gets the suite definition name. This is a required parameter.
     #   @return [String]
     #
     # @!attribute [rw] devices
@@ -501,15 +507,15 @@ module Aws::IoTDeviceAdvisor
     #   @return [Boolean]
     #
     # @!attribute [rw] root_group
-    #   Gets test suite root group.
+    #   Gets the test suite root group. This is a required parameter.
     #   @return [String]
     #
     # @!attribute [rw] device_permission_role_arn
-    #   Gets the device permission ARN.
+    #   Gets the device permission ARN. This is a required parameter.
     #   @return [String]
     #
     # @!attribute [rw] protocol
-    #   Gets the MQTT protocol that is configured in the suite definition.
+    #   Sets the MQTT protocol that is configured in the suite definition.
     #   @return [String]
     #
     class SuiteDefinitionConfiguration < Struct.new(
@@ -569,11 +575,12 @@ module Aws::IoTDeviceAdvisor
     # Gets suite run configuration.
     #
     # @!attribute [rw] primary_device
-    #   Gets the primary device for suite run.
+    #   Sets the primary device for the test suite run. This requires a
+    #   thing ARN or a certificate ARN.
     #   @return [Types::DeviceUnderTest]
     #
     # @!attribute [rw] selected_test_list
-    #   Gets test case list.
+    #   Sets test case list.
     #   @return [Array<String>]
     #
     # @!attribute [rw] parallel_run
@@ -652,7 +659,8 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] resource_arn
-    #   The resource ARN of an IoT Device Advisor resource.
+    #   The resource ARN of an IoT Device Advisor resource. This can be
+    #   SuiteDefinition ARN or SuiteRun ARN.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -812,7 +820,8 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] resource_arn
-    #   The resource ARN of an IoT Device Advisor resource.
+    #   The resource ARN of an IoT Device Advisor resource. This can be
+    #   SuiteDefinition ARN or SuiteRun ARN.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -853,7 +862,7 @@ module Aws::IoTDeviceAdvisor
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_name
-    #   Suite definition name of the updated test suite.
+    #   Updates the suite definition name. This is a required parameter.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version

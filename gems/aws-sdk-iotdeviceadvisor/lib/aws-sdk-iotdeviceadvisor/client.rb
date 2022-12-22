@@ -376,7 +376,7 @@ module Aws::IoTDeviceAdvisor
     #
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
-    # @option params [Types::SuiteDefinitionConfiguration] :suite_definition_configuration
+    # @option params [required, Types::SuiteDefinitionConfiguration] :suite_definition_configuration
     #   Creates a Device Advisor test suite with suite definition
     #   configuration.
     #
@@ -393,8 +393,8 @@ module Aws::IoTDeviceAdvisor
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_suite_definition({
-    #     suite_definition_configuration: {
-    #       suite_definition_name: "SuiteDefinitionName",
+    #     suite_definition_configuration: { # required
+    #       suite_definition_name: "SuiteDefinitionName", # required
     #       devices: [
     #         {
     #           thing_arn: "AmazonResourceName",
@@ -403,8 +403,8 @@ module Aws::IoTDeviceAdvisor
     #       ],
     #       intended_for_qualification: false,
     #       is_long_duration_test: false,
-    #       root_group: "RootGroup",
-    #       device_permission_role_arn: "AmazonResourceName",
+    #       root_group: "RootGroup", # required
+    #       device_permission_role_arn: "AmazonResourceName", # required
     #       protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
     #     },
     #     tags: {
@@ -777,7 +777,8 @@ module Aws::IoTDeviceAdvisor
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the IoT Device Advisor resource.
+    #   The resource ARN of the IoT Device Advisor resource. This can be
+    #   SuiteDefinition ARN or SuiteRun ARN.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -815,7 +816,7 @@ module Aws::IoTDeviceAdvisor
     # @option params [String] :suite_definition_version
     #   Suite definition version of the test suite.
     #
-    # @option params [Types::SuiteRunConfiguration] :suite_run_configuration
+    # @option params [required, Types::SuiteRunConfiguration] :suite_run_configuration
     #   Suite run configuration.
     #
     # @option params [Hash<String,String>] :tags
@@ -826,14 +827,15 @@ module Aws::IoTDeviceAdvisor
     #   * {Types::StartSuiteRunResponse#suite_run_id #suite_run_id} => String
     #   * {Types::StartSuiteRunResponse#suite_run_arn #suite_run_arn} => String
     #   * {Types::StartSuiteRunResponse#created_at #created_at} => Time
+    #   * {Types::StartSuiteRunResponse#endpoint #endpoint} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_suite_run({
     #     suite_definition_id: "UUID", # required
     #     suite_definition_version: "SuiteDefinitionVersion",
-    #     suite_run_configuration: {
-    #       primary_device: {
+    #     suite_run_configuration: { # required
+    #       primary_device: { # required
     #         thing_arn: "AmazonResourceName",
     #         certificate_arn: "AmazonResourceName",
     #       },
@@ -850,6 +852,7 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_run_id #=> String
     #   resp.suite_run_arn #=> String
     #   resp.created_at #=> Time
+    #   resp.endpoint #=> String
     #
     # @overload start_suite_run(params = {})
     # @param [Hash] params ({})
@@ -897,7 +900,8 @@ module Aws::IoTDeviceAdvisor
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :resource_arn
-    #   The resource ARN of an IoT Device Advisor resource.
+    #   The resource ARN of an IoT Device Advisor resource. This can be
+    #   SuiteDefinition ARN or SuiteRun ARN.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags to be attached to the IoT Device Advisor resource.
@@ -929,7 +933,8 @@ module Aws::IoTDeviceAdvisor
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :resource_arn
-    #   The resource ARN of an IoT Device Advisor resource.
+    #   The resource ARN of an IoT Device Advisor resource. This can be
+    #   SuiteDefinition ARN or SuiteRun ARN.
     #
     # @option params [required, Array<String>] :tag_keys
     #   List of tag keys to remove from the IoT Device Advisor resource.
@@ -961,7 +966,7 @@ module Aws::IoTDeviceAdvisor
     # @option params [required, String] :suite_definition_id
     #   Suite definition ID of the test suite to be updated.
     #
-    # @option params [Types::SuiteDefinitionConfiguration] :suite_definition_configuration
+    # @option params [required, Types::SuiteDefinitionConfiguration] :suite_definition_configuration
     #   Updates a Device Advisor test suite with suite definition
     #   configuration.
     #
@@ -978,8 +983,8 @@ module Aws::IoTDeviceAdvisor
     #
     #   resp = client.update_suite_definition({
     #     suite_definition_id: "UUID", # required
-    #     suite_definition_configuration: {
-    #       suite_definition_name: "SuiteDefinitionName",
+    #     suite_definition_configuration: { # required
+    #       suite_definition_name: "SuiteDefinitionName", # required
     #       devices: [
     #         {
     #           thing_arn: "AmazonResourceName",
@@ -988,8 +993,8 @@ module Aws::IoTDeviceAdvisor
     #       ],
     #       intended_for_qualification: false,
     #       is_long_duration_test: false,
-    #       root_group: "RootGroup",
-    #       device_permission_role_arn: "AmazonResourceName",
+    #       root_group: "RootGroup", # required
+    #       device_permission_role_arn: "AmazonResourceName", # required
     #       protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
     #     },
     #   })
@@ -1023,7 +1028,7 @@ module Aws::IoTDeviceAdvisor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdeviceadvisor'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

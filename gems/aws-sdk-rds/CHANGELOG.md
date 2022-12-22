@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2022-12-22)
+------------------
+
+* Feature - Add support for managing master user password in AWS Secrets Manager for the DBInstance and DBCluster.
+
 1.166.0 (2022-12-19)
 ------------------
 

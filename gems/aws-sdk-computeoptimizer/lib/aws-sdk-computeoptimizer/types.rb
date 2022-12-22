@@ -286,6 +286,56 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes the container configurations within the tasks of your Amazon
+    # ECS service.
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_size_configuration
+    #   The memory size configurations for the container.
+    #   @return [Types::MemorySizeConfiguration]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units reserved for the container.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ContainerConfiguration AWS API Documentation
+    #
+    class ContainerConfiguration < Struct.new(
+      :container_name,
+      :memory_size_configuration,
+      :cpu)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CPU and memory recommendations for a container within the tasks of
+    # your Amazon ECS service.
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_size_configuration
+    #   The recommended memory size configurations for the container.
+    #   @return [Types::MemorySizeConfiguration]
+    #
+    # @!attribute [rw] cpu
+    #   The recommended number of CPU units reserved for the container.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ContainerRecommendation AWS API Documentation
+    #
+    class ContainerRecommendation < Struct.new(
+      :container_name,
+      :memory_size_configuration,
+      :cpu)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the performance risk ratings for a given resource type.
     #
     # Resources with a `high` or `medium` rating are at risk of not meeting
@@ -521,6 +571,401 @@ module Aws::ComputeOptimizer
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EBSUtilizationMetric AWS API Documentation
     #
     class EBSUtilizationMetric < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the projected metrics of an Amazon ECS service
+    # recommendation option.
+    #
+    # To determine the performance difference between your current ECS
+    # service and the recommended option, compare the metric data of your
+    # service against its projected metric data.
+    #
+    # @!attribute [rw] name
+    #   The name of the projected metric.
+    #
+    #   The following metrics are available:
+    #
+    #   * `CPU` — The percentage of allocated compute units that are
+    #     currently in use on the ECS service tasks.
+    #
+    #   * `Memory` — The percentage of memory that is currently in use on
+    #     the ECS service tasks.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamps
+    #   The timestamps of the projected metric.
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] upper_bound_values
+    #   The upper bound values for the projected metric.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] lower_bound_values
+    #   The lower bound values for the projected metric.
+    #   @return [Array<Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceProjectedMetric AWS API Documentation
+    #
+    class ECSServiceProjectedMetric < Struct.new(
+      :name,
+      :timestamps,
+      :upper_bound_values,
+      :lower_bound_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the projected utilization metrics of an Amazon ECS service
+    # recommendation option.
+    #
+    # To determine the performance difference between your current ECS
+    # service and the recommended option, compare the utilization metric
+    # data of your service against its projected utilization metric data.
+    #
+    # @!attribute [rw] name
+    #   The name of the projected utilization metric.
+    #
+    #   The following utilization metrics are available:
+    #
+    #   * `CPU` — The percentage of allocated compute units that are
+    #     currently in use on the ECS service tasks.
+    #
+    #   * `Memory` — The percentage of memory that is currently in use on
+    #     the ECS service tasks.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic of the projected utilization metric.
+    #
+    #   The Compute Optimizer API, Command Line Interface (CLI), and SDKs
+    #   return utilization metrics using only the `Maximum` statistic, which
+    #   is the highest value observed during the specified period.
+    #
+    #   The Compute Optimizer console displays graphs for some utilization
+    #   metrics using the `Average` statistic, which is the value of `Sum` /
+    #   `SampleCount` during the specified period. For more information, see
+    #   [Viewing resource recommendations][1] in the *Compute Optimizer User
+    #   Guide*. You can also get averaged utilization metric data for your
+    #   resources using Amazon CloudWatch. For more information, see the
+    #   [Amazon CloudWatch User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
+    #   @return [String]
+    #
+    # @!attribute [rw] lower_bound_value
+    #   The lower bound values for the projected utilization metrics.
+    #   @return [Float]
+    #
+    # @!attribute [rw] upper_bound_value
+    #   The upper bound values for the projected utilization metrics.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceProjectedUtilizationMetric AWS API Documentation
+    #
+    class ECSServiceProjectedUtilizationMetric < Struct.new(
+      :name,
+      :statistic,
+      :lower_bound_value,
+      :upper_bound_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon ECS service recommendation.
+    #
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the current ECS service.
+    #
+    #   The following is the format of the ARN:
+    #
+    #   `arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name`
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the ECS service.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_service_configuration
+    #   The configuration of the current ECS service.
+    #   @return [Types::ServiceConfiguration]
+    #
+    # @!attribute [rw] utilization_metrics
+    #   An array of objects that describe the utilization metrics of the ECS
+    #   service.
+    #   @return [Array<Types::ECSServiceUtilizationMetric>]
+    #
+    # @!attribute [rw] lookback_period_in_days
+    #   The number of days the ECS service utilization metrics were
+    #   analyzed.
+    #   @return [Float]
+    #
+    # @!attribute [rw] launch_type
+    #   The launch type the ECS service is using.
+    #
+    #   <note markdown="1"> Compute Optimizer only supports the Fargate launch type.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] last_refresh_timestamp
+    #   The timestamp of when the ECS service recommendation was last
+    #   generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding
+    #   The finding classification of an ECS service.
+    #
+    #   Findings for ECS services include:
+    #
+    #   * <b> <code>Underprovisioned</code> </b> — When Compute Optimizer
+    #     detects that there’s not enough memory or CPU, an ECS service is
+    #     considered under-provisioned. An under-provisioned ECS service
+    #     might result in poor application performance.
+    #
+    #   * <b> <code>Overprovisioned</code> </b> — When Compute Optimizer
+    #     detects that there’s excessive memory or CPU, an ECS service is
+    #     considered over-provisioned. An over-provisioned ECS service might
+    #     result in additional infrastructure costs.
+    #
+    #   * <b> <code>Optimized</code> </b> — When both the CPU and memory of
+    #     your ECS service meet the performance requirements of your
+    #     workload, the service is considered optimized.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_reason_codes
+    #   The reason for the finding classification of an ECS service.
+    #
+    #   Finding reason codes for ECS services include:
+    #
+    #   * <b> <code>CPUUnderprovisioned</code> </b> — The ECS service CPU
+    #     configuration can be sized up to enhance the performance of your
+    #     workload. This is identified by analyzing the `CPUUtilization`
+    #     metric of the current service during the look-back period.
+    #
+    #   * <b> <code>CPUOverprovisioned</code> </b> — The ECS service CPU
+    #     configuration can be sized down while still meeting the
+    #     performance requirements of your workload. This is identified by
+    #     analyzing the `CPUUtilization` metric of the current service
+    #     during the look-back period.
+    #
+    #   * <b> <code>MemoryUnderprovisioned</code> </b> — The ECS service
+    #     memory configuration can be sized up to enhance the performance of
+    #     your workload. This is identified by analyzing the
+    #     `MemoryUtilization` metric of the current service during the
+    #     look-back period.
+    #
+    #   * <b> <code>MemoryOverprovisioned</code> </b> — The ECS service
+    #     memory configuration can be sized down while still meeting the
+    #     performance requirements of your workload. This is identified by
+    #     analyzing the `MemoryUtilization` metric of the current service
+    #     during the look-back period.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_recommendation_options
+    #   An array of objects that describe the recommendation options for the
+    #   ECS service.
+    #   @return [Array<Types::ECSServiceRecommendationOption>]
+    #
+    # @!attribute [rw] current_performance_risk
+    #   The risk of the current ECS service not meeting the performance
+    #   needs of its workloads. The higher the risk, the more likely the
+    #   current service can't meet the performance requirements of its
+    #   workload.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceRecommendation AWS API Documentation
+    #
+    class ECSServiceRecommendation < Struct.new(
+      :service_arn,
+      :account_id,
+      :current_service_configuration,
+      :utilization_metrics,
+      :lookback_period_in_days,
+      :launch_type,
+      :last_refresh_timestamp,
+      :finding,
+      :finding_reason_codes,
+      :service_recommendation_options,
+      :current_performance_risk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a filter that returns a more specific list of Amazon ECS
+    # service recommendations. Use this filter with the
+    # GetECSServiceRecommendations action.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #
+    #   Specify `Finding` to return recommendations with a specific finding
+    #   classification.
+    #
+    #   Specify `FindingReasonCode` to return recommendations with a
+    #   specific finding reason code.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value of the filter.
+    #
+    #   The valid values for this parameter are as follows:
+    #
+    #   * If you specify the `name` parameter as `Finding`, specify
+    #     `Optimized`, `NotOptimized`, or `Unavailable`.
+    #
+    #   * If you specify the `name` parameter as `FindingReasonCode`,
+    #     specify `CPUUnderprovisioned`, `CPUOverprovisioned`,
+    #     `MemoryUnderprovisioned`, or `MemoryOverprovisioned`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceRecommendationFilter AWS API Documentation
+    #
+    class ECSServiceRecommendationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the recommendation options for an Amazon ECS service.
+    #
+    # @!attribute [rw] memory
+    #   The memory size of the ECS service recommendation option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cpu
+    #   The CPU size of the ECS service recommendation option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] savings_opportunity
+    #   Describes the savings opportunity for recommendations of a given
+    #   resource type or for the recommendation option of an individual
+    #   resource.
+    #
+    #   Savings opportunity represents the estimated monthly savings you can
+    #   achieve by implementing a given Compute Optimizer recommendation.
+    #
+    #   Savings opportunity data requires that you opt in to Cost Explorer,
+    #   as well as activate **Receive Amazon EC2 resource recommendations**
+    #   in the Cost Explorer preferences page. That creates a connection
+    #   between Cost Explorer and Compute Optimizer. With this connection,
+    #   Cost Explorer generates savings estimates considering the price of
+    #   existing resources, the price of recommended resources, and
+    #   historical usage data. Estimated monthly savings reflects the
+    #   projected dollar savings associated with each of the recommendations
+    #   generated. For more information, see [Enabling Cost Explorer][1] and
+    #   [Optimizing your cost with Rightsizing Recommendations][2] in the
+    #   *Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+    #   [2]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+    #   @return [Types::SavingsOpportunity]
+    #
+    # @!attribute [rw] projected_utilization_metrics
+    #   An array of objects that describe the projected utilization metrics
+    #   of the ECS service recommendation option.
+    #   @return [Array<Types::ECSServiceProjectedUtilizationMetric>]
+    #
+    # @!attribute [rw] container_recommendations
+    #   The CPU and memory size recommendations for the containers within
+    #   the task of your ECS service.
+    #   @return [Array<Types::ContainerRecommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceRecommendationOption AWS API Documentation
+    #
+    class ECSServiceRecommendationOption < Struct.new(
+      :memory,
+      :cpu,
+      :savings_opportunity,
+      :projected_utilization_metrics,
+      :container_recommendations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the projected metrics of an Amazon ECS service
+    # recommendation option.
+    #
+    # To determine the performance difference between your current ECS
+    # service and the recommended option, compare the metric data of your
+    # service against its projected metric data.
+    #
+    # @!attribute [rw] recommended_cpu_units
+    #   The recommended CPU size for the ECS service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] recommended_memory_size
+    #   The recommended memory size for the ECS service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] projected_metrics
+    #   An array of objects that describe the projected metric.
+    #   @return [Array<Types::ECSServiceProjectedMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceRecommendedOptionProjectedMetric AWS API Documentation
+    #
+    class ECSServiceRecommendedOptionProjectedMetric < Struct.new(
+      :recommended_cpu_units,
+      :recommended_memory_size,
+      :projected_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the utilization metric of an Amazon ECS service.
+    #
+    # To determine the performance difference between your current ECS
+    # service and the recommended option, compare the utilization metric
+    # data of your service against its projected utilization metric data.
+    #
+    # @!attribute [rw] name
+    #   The name of the utilization metric.
+    #
+    #   The following utilization metrics are available:
+    #
+    #   * `Cpu` — The amount of CPU units that are used in the service.
+    #
+    #   * `Memory` — The amount of memory that is used in the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic of the utilization metric.
+    #
+    #   The Compute Optimizer API, Command Line Interface (CLI), and SDKs
+    #   return utilization metrics using only the `Maximum` statistic, which
+    #   is the highest value observed during the specified period.
+    #
+    #   The Compute Optimizer console displays graphs for some utilization
+    #   metrics using the `Average` statistic, which is the value of `Sum` /
+    #   `SampleCount` during the specified period. For more information, see
+    #   [Viewing resource recommendations][1] in the *Compute Optimizer User
+    #   Guide*. You can also get averaged utilization metric data for your
+    #   resources using Amazon CloudWatch. For more information, see the
+    #   [Amazon CloudWatch User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the utilization metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceUtilizationMetric AWS API Documentation
+    #
+    class ECSServiceUtilizationMetric < Struct.new(
       :name,
       :statistic,
       :value)
@@ -1023,6 +1468,122 @@ module Aws::ComputeOptimizer
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEC2InstanceRecommendationsResponse AWS API Documentation
     #
     class ExportEC2InstanceRecommendationsResponse < Struct.new(
+      :job_id,
+      :s3_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs for the export ECS service
+    #   recommendations.
+    #
+    #   If your account is the management account or the delegated
+    #   administrator of an organization, use this parameter to specify the
+    #   member account you want to export recommendations to.
+    #
+    #   This parameter can't be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   If this parameter or the include member accounts parameter is
+    #   omitted, the recommendations for member accounts aren't included in
+    #   the export.
+    #
+    #   You can specify multiple account IDs per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects to specify a filter that exports a more specific
+    #   set of ECS service recommendations.
+    #   @return [Array<Types::ECSServiceRecommendationFilter>]
+    #
+    # @!attribute [rw] fields_to_export
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_destination_config
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and key prefix for a recommendations export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create
+    #   the S3 bucket, ensure that it has the required permission policy to
+    #   allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3
+    #   bucket. For more information, see [Amazon S3 Bucket Policy for
+    #   Compute Optimizer][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #   @return [Types::S3DestinationConfig]
+    #
+    # @!attribute [rw] file_format
+    #   The format of the export file.
+    #
+    #   The CSV file is the only export file format currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_member_accounts
+    #   If your account is the management account or the delegated
+    #   administrator of an organization, this parameter indicates whether
+    #   to include recommendations for resources in all member accounts of
+    #   the organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer
+    #   and Amazon Web Services Organizations trusted access][1] in the
+    #   *Compute Optimizer User Guide*.
+    #
+    #   If this parameter is omitted, recommendations for member accounts of
+    #   the organization aren't included in the export file.
+    #
+    #   If this parameter or the account ID parameter is omitted,
+    #   recommendations for member accounts aren't included in the export.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportECSServiceRecommendationsRequest AWS API Documentation
+    #
+    class ExportECSServiceRecommendationsRequest < Struct.new(
+      :account_ids,
+      :filters,
+      :fields_to_export,
+      :s3_destination_config,
+      :file_format,
+      :include_member_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identification number of the export job.
+    #
+    #   To view the status of an export job, use the
+    #   DescribeRecommendationExportJobs action and specify the job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and object keys of a recommendations export file, and
+    #   its associated metadata file.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportECSServiceRecommendationsResponse AWS API Documentation
+    #
+    class ExportECSServiceRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination)
       SENSITIVE = []
@@ -1582,6 +2143,126 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_arn
+    #   The ARN that identifies the ECS service.
+    #
+    #   The following is the format of the ARN:
+    #
+    #   `arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name`
+    #   @return [String]
+    #
+    # @!attribute [rw] stat
+    #   The statistic of the projected metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The granularity, in seconds, of the projected metrics data points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp of the first projected metrics data point to return.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp of the last projected metrics data point to return.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetECSServiceRecommendationProjectedMetricsRequest AWS API Documentation
+    #
+    class GetECSServiceRecommendationProjectedMetricsRequest < Struct.new(
+      :service_arn,
+      :stat,
+      :period,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommended_option_projected_metrics
+    #   An array of objects that describes the projected metrics.
+    #   @return [Array<Types::ECSServiceRecommendedOptionProjectedMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetECSServiceRecommendationProjectedMetricsResponse AWS API Documentation
+    #
+    class GetECSServiceRecommendationProjectedMetricsResponse < Struct.new(
+      :recommended_option_projected_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arns
+    #   The ARN that identifies the ECS service.
+    #
+    #   The following is the format of the ARN:
+    #
+    #   `arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of ECS service
+    #   recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of ECS service recommendations to return with a
+    #   single request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of ECS service recommendations.
+    #   @return [Array<Types::ECSServiceRecommendationFilter>]
+    #
+    # @!attribute [rw] account_ids
+    #   Return the ECS service recommendations to the specified Amazon Web
+    #   Services account IDs.
+    #
+    #   If your account is the management account or the delegated
+    #   administrator of an organization, use this parameter to return the
+    #   ECS service recommendations to specific member accounts.
+    #
+    #   You can only specify one account ID per request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetECSServiceRecommendationsRequest AWS API Documentation
+    #
+    class GetECSServiceRecommendationsRequest < Struct.new(
+      :service_arns,
+      :next_token,
+      :max_results,
+      :filters,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of ECS service
+    #   recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] ecs_service_recommendations
+    #   An array of objects that describe the ECS service recommendations.
+    #   @return [Array<Types::ECSServiceRecommendation>]
+    #
+    # @!attribute [rw] errors
+    #   An array of objects that describe errors of the request.
+    #   @return [Array<Types::GetRecommendationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetECSServiceRecommendationsResponse AWS API Documentation
+    #
+    class GetECSServiceRecommendationsResponse < Struct.new(
+      :next_token,
+      :ecs_service_recommendations,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which to confirm
     #   effective recommendation preferences. Only EC2 instance and Auto
@@ -1639,7 +2320,7 @@ module Aws::ComputeOptimizer
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html
     #   @return [Types::ExternalMetricsPreference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEffectiveRecommendationPreferencesResponse AWS API Documentation
@@ -2812,6 +3493,25 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # The memory size configurations of a container.
+    #
+    # @!attribute [rw] memory
+    #   The amount of memory in the container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_reservation
+    #   The limit of memory reserve for the container.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/MemorySizeConfiguration AWS API Documentation
+    #
+    class MemorySizeConfiguration < Struct.new(
+      :memory,
+      :memory_reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request must contain either a valid (registered) Amazon Web
     # Services access key ID or X.509 certificate.
     #
@@ -3489,6 +4189,63 @@ module Aws::ComputeOptimizer
     class Scope < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon ECS service configurations used for recommendations.
+    #
+    # @!attribute [rw] memory
+    #   The amount of memory used by the tasks in the ECS service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units used by the tasks in the ECS service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_configurations
+    #   The container configurations within a task of an ECS service.
+    #   @return [Array<Types::ContainerConfiguration>]
+    #
+    # @!attribute [rw] auto_scaling_configuration
+    #   Describes the Auto Scaling configuration methods for an Amazon ECS
+    #   service. This affects the generated recommendations. For example, if
+    #   Auto Scaling is configured on a ECS service’s CPU, then Compute
+    #   Optimizer doesn’t generate CPU size recommendations.
+    #
+    #   The Auto Scaling configuration methods include:
+    #
+    #   * `TARGET_TRACKING_SCALING_CPU` — If the ECS service is configured
+    #     to use target scaling on CPU, Compute Optimizer doesn't generate
+    #     CPU recommendations.
+    #
+    #   * `TARGET_TRACKING_SCALING_MEMORY` — If the ECS service is
+    #     configured to use target scaling on memory, Compute Optimizer
+    #     doesn't generate memory recommendations.
+    #
+    #   For more information about step scaling and target scaling, see [
+    #   Step scaling policies for Application Auto Scaling][1] and [ Target
+    #   tracking scaling policies for Application Auto Scaling][2] in the
+    #   *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
+    #   @return [String]
+    #
+    # @!attribute [rw] task_definition_arn
+    #   The task definition ARN used by the tasks in the ECS service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ServiceConfiguration AWS API Documentation
+    #
+    class ServiceConfiguration < Struct.new(
+      :memory,
+      :cpu,
+      :container_configurations,
+      :auto_scaling_configuration,
+      :task_definition_arn)
       SENSITIVE = []
       include Aws::Structure
     end

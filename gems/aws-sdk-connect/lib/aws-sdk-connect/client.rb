@@ -6356,7 +6356,7 @@ module Aws::Connect
 
     # Initiates silent monitoring of a contact. The Contact Control Panel
     # (CCP) of the user specified by *userId* will be set to silent
-    # monitoring mode on the contact.
+    # monitoring mode on the contact. Supports voice and chat contacts.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -7276,8 +7276,12 @@ module Aws::Connect
     #   10,080 minutes (7 days).
     #
     # @option params [Array<String>] :supported_messaging_content_types
-    #   The supported chat message content types. Content types can be
-    #   text/plain or both text/plain and text/markdown.
+    #   The supported chat message content types. Content types must always
+    #   contain `text/plain`. You can then put any other supported type in the
+    #   list. For example, all the following lists are valid because they
+    #   contain `text/plain`\: `[text/plain, text/markdown,
+    #   application/json]`, `[text/markdown, text/plain]`, `[text/plain,
+    #   application/json]`.
     #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8532,6 +8536,67 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates timeouts for when human chat participants are to be considered
+    # idle, and when agents are automatically disconnected from a chat due
+    # to idleness. You can set four timers:
+    #
+    # * Customer idle timeout
+    #
+    # * Customer auto-disconnect timeout
+    #
+    # * Agent idle timeout
+    #
+    # * Agent auto-disconnect timeout
+    #
+    # For more information about how chat timeouts work, see [Set up chat
+    # timeouts for human participants][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [required, Types::UpdateParticipantRoleConfigChannelInfo] :channel_configuration
+    #   The Amazon Connect channel you want to configure.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_participant_role_config({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     channel_configuration: { # required
+    #       chat: {
+    #         participant_timer_config_list: [ # required
+    #           {
+    #             participant_role: "CUSTOMER", # required, accepts CUSTOMER, AGENT
+    #             timer_type: "IDLE", # required, accepts IDLE, DISCONNECT_NONCUSTOMER
+    #             timer_value: { # required
+    #               participant_timer_action: "Unset", # accepts Unset
+    #               participant_timer_duration_in_minutes: 1,
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateParticipantRoleConfig AWS API Documentation
+    #
+    # @overload update_participant_role_config(params = {})
+    # @param [Hash] params ({})
+    def update_participant_role_config(params = {}, options = {})
+      req = build_request(:update_participant_role_config, params)
+      req.send_request(options)
+    end
+
     # Updates your claimed phone number from its current Amazon Connect
     # instance or traffic distribution group to another Amazon Connect
     # instance or traffic distribution group in the same Amazon Web Services
@@ -9613,7 +9678,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

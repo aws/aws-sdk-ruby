@@ -97,7 +97,7 @@ module Aws::IoTDeviceAdvisor
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateSuiteDefinitionRequest.add_member(:suite_definition_configuration, Shapes::ShapeRef.new(shape: SuiteDefinitionConfiguration, location_name: "suiteDefinitionConfiguration"))
+    CreateSuiteDefinitionRequest.add_member(:suite_definition_configuration, Shapes::ShapeRef.new(shape: SuiteDefinitionConfiguration, required: true, location_name: "suiteDefinitionConfiguration"))
     CreateSuiteDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSuiteDefinitionRequest.struct_class = Types::CreateSuiteDefinitionRequest
 
@@ -204,13 +204,14 @@ module Aws::IoTDeviceAdvisor
 
     StartSuiteRunRequest.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "suiteDefinitionId"))
     StartSuiteRunRequest.add_member(:suite_definition_version, Shapes::ShapeRef.new(shape: SuiteDefinitionVersion, location_name: "suiteDefinitionVersion"))
-    StartSuiteRunRequest.add_member(:suite_run_configuration, Shapes::ShapeRef.new(shape: SuiteRunConfiguration, location_name: "suiteRunConfiguration"))
+    StartSuiteRunRequest.add_member(:suite_run_configuration, Shapes::ShapeRef.new(shape: SuiteRunConfiguration, required: true, location_name: "suiteRunConfiguration"))
     StartSuiteRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartSuiteRunRequest.struct_class = Types::StartSuiteRunRequest
 
     StartSuiteRunResponse.add_member(:suite_run_id, Shapes::ShapeRef.new(shape: UUID, location_name: "suiteRunId"))
     StartSuiteRunResponse.add_member(:suite_run_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "suiteRunArn"))
     StartSuiteRunResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    StartSuiteRunResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
     StartSuiteRunResponse.struct_class = Types::StartSuiteRunResponse
 
     StopSuiteRunRequest.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "suiteDefinitionId"))
@@ -219,12 +220,12 @@ module Aws::IoTDeviceAdvisor
 
     StopSuiteRunResponse.struct_class = Types::StopSuiteRunResponse
 
-    SuiteDefinitionConfiguration.add_member(:suite_definition_name, Shapes::ShapeRef.new(shape: SuiteDefinitionName, location_name: "suiteDefinitionName"))
+    SuiteDefinitionConfiguration.add_member(:suite_definition_name, Shapes::ShapeRef.new(shape: SuiteDefinitionName, required: true, location_name: "suiteDefinitionName"))
     SuiteDefinitionConfiguration.add_member(:devices, Shapes::ShapeRef.new(shape: DeviceUnderTestList, location_name: "devices"))
     SuiteDefinitionConfiguration.add_member(:intended_for_qualification, Shapes::ShapeRef.new(shape: IntendedForQualificationBoolean, location_name: "intendedForQualification"))
     SuiteDefinitionConfiguration.add_member(:is_long_duration_test, Shapes::ShapeRef.new(shape: IsLongDurationTestBoolean, location_name: "isLongDurationTest"))
-    SuiteDefinitionConfiguration.add_member(:root_group, Shapes::ShapeRef.new(shape: RootGroup, location_name: "rootGroup"))
-    SuiteDefinitionConfiguration.add_member(:device_permission_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "devicePermissionRoleArn"))
+    SuiteDefinitionConfiguration.add_member(:root_group, Shapes::ShapeRef.new(shape: RootGroup, required: true, location_name: "rootGroup"))
+    SuiteDefinitionConfiguration.add_member(:device_permission_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "devicePermissionRoleArn"))
     SuiteDefinitionConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     SuiteDefinitionConfiguration.struct_class = Types::SuiteDefinitionConfiguration
 
@@ -239,7 +240,7 @@ module Aws::IoTDeviceAdvisor
 
     SuiteDefinitionInformationList.member = Shapes::ShapeRef.new(shape: SuiteDefinitionInformation)
 
-    SuiteRunConfiguration.add_member(:primary_device, Shapes::ShapeRef.new(shape: DeviceUnderTest, location_name: "primaryDevice"))
+    SuiteRunConfiguration.add_member(:primary_device, Shapes::ShapeRef.new(shape: DeviceUnderTest, required: true, location_name: "primaryDevice"))
     SuiteRunConfiguration.add_member(:selected_test_list, Shapes::ShapeRef.new(shape: SelectedTestList, location_name: "selectedTestList"))
     SuiteRunConfiguration.add_member(:parallel_run, Shapes::ShapeRef.new(shape: ParallelRun, location_name: "parallelRun"))
     SuiteRunConfiguration.struct_class = Types::SuiteRunConfiguration
@@ -302,7 +303,7 @@ module Aws::IoTDeviceAdvisor
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateSuiteDefinitionRequest.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "suiteDefinitionId"))
-    UpdateSuiteDefinitionRequest.add_member(:suite_definition_configuration, Shapes::ShapeRef.new(shape: SuiteDefinitionConfiguration, location_name: "suiteDefinitionConfiguration"))
+    UpdateSuiteDefinitionRequest.add_member(:suite_definition_configuration, Shapes::ShapeRef.new(shape: SuiteDefinitionConfiguration, required: true, location_name: "suiteDefinitionConfiguration"))
     UpdateSuiteDefinitionRequest.struct_class = Types::UpdateSuiteDefinitionRequest
 
     UpdateSuiteDefinitionResponse.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, location_name: "suiteDefinitionId"))

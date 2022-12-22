@@ -78,6 +78,7 @@ module Aws::Connect
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
     ChatDurationInMinutes = Shapes::IntegerShape.new(name: 'ChatDurationInMinutes')
     ChatMessage = Shapes::StructureShape.new(name: 'ChatMessage')
+    ChatParticipantRoleConfig = Shapes::StructureShape.new(name: 'ChatParticipantRoleConfig')
     ChatStreamingConfiguration = Shapes::StructureShape.new(name: 'ChatStreamingConfiguration')
     ChatStreamingEndpointARN = Shapes::StringShape.new(name: 'ChatStreamingEndpointARN')
     ClaimPhoneNumberRequest = Shapes::StructureShape.new(name: 'ClaimPhoneNumberRequest')
@@ -442,6 +443,12 @@ module Aws::Connect
     PEM = Shapes::StringShape.new(name: 'PEM')
     ParticipantDetails = Shapes::StructureShape.new(name: 'ParticipantDetails')
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
+    ParticipantTimerAction = Shapes::StringShape.new(name: 'ParticipantTimerAction')
+    ParticipantTimerConfigList = Shapes::ListShape.new(name: 'ParticipantTimerConfigList')
+    ParticipantTimerConfiguration = Shapes::StructureShape.new(name: 'ParticipantTimerConfiguration')
+    ParticipantTimerDurationInMinutes = Shapes::IntegerShape.new(name: 'ParticipantTimerDurationInMinutes')
+    ParticipantTimerType = Shapes::StringShape.new(name: 'ParticipantTimerType')
+    ParticipantTimerValue = Shapes::UnionShape.new(name: 'ParticipantTimerValue')
     ParticipantToken = Shapes::StringShape.new(name: 'ParticipantToken')
     Password = Shapes::StringShape.new(name: 'Password')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
@@ -656,6 +663,7 @@ module Aws::Connect
     ThresholdValue = Shapes::FloatShape.new(name: 'ThresholdValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeZone = Shapes::StringShape.new(name: 'TimeZone')
+    TimerEligibleParticipantRoles = Shapes::StringShape.new(name: 'TimerEligibleParticipantRoles')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TrafficDistributionGroup = Shapes::StructureShape.new(name: 'TrafficDistributionGroup')
     TrafficDistributionGroupArn = Shapes::StringShape.new(name: 'TrafficDistributionGroupArn')
@@ -689,6 +697,9 @@ module Aws::Connect
     UpdateHoursOfOperationRequest = Shapes::StructureShape.new(name: 'UpdateHoursOfOperationRequest')
     UpdateInstanceAttributeRequest = Shapes::StructureShape.new(name: 'UpdateInstanceAttributeRequest')
     UpdateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'UpdateInstanceStorageConfigRequest')
+    UpdateParticipantRoleConfigChannelInfo = Shapes::UnionShape.new(name: 'UpdateParticipantRoleConfigChannelInfo')
+    UpdateParticipantRoleConfigRequest = Shapes::StructureShape.new(name: 'UpdateParticipantRoleConfigRequest')
+    UpdateParticipantRoleConfigResponse = Shapes::StructureShape.new(name: 'UpdateParticipantRoleConfigResponse')
     UpdatePhoneNumberRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequest')
     UpdatePhoneNumberResponse = Shapes::StructureShape.new(name: 'UpdatePhoneNumberResponse')
     UpdateQueueHoursOfOperationRequest = Shapes::StructureShape.new(name: 'UpdateQueueHoursOfOperationRequest')
@@ -899,6 +910,9 @@ module Aws::Connect
     ChatMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
     ChatMessage.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, required: true, location_name: "Content"))
     ChatMessage.struct_class = Types::ChatMessage
+
+    ChatParticipantRoleConfig.add_member(:participant_timer_config_list, Shapes::ShapeRef.new(shape: ParticipantTimerConfigList, required: true, location_name: "ParticipantTimerConfigList"))
+    ChatParticipantRoleConfig.struct_class = Types::ChatParticipantRoleConfig
 
     ChatStreamingConfiguration.add_member(:streaming_endpoint_arn, Shapes::ShapeRef.new(shape: ChatStreamingEndpointARN, required: true, location_name: "StreamingEndpointArn"))
     ChatStreamingConfiguration.struct_class = Types::ChatStreamingConfiguration
@@ -2170,6 +2184,21 @@ module Aws::Connect
     ParticipantDetails.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "DisplayName"))
     ParticipantDetails.struct_class = Types::ParticipantDetails
 
+    ParticipantTimerConfigList.member = Shapes::ShapeRef.new(shape: ParticipantTimerConfiguration)
+
+    ParticipantTimerConfiguration.add_member(:participant_role, Shapes::ShapeRef.new(shape: TimerEligibleParticipantRoles, required: true, location_name: "ParticipantRole"))
+    ParticipantTimerConfiguration.add_member(:timer_type, Shapes::ShapeRef.new(shape: ParticipantTimerType, required: true, location_name: "TimerType"))
+    ParticipantTimerConfiguration.add_member(:timer_value, Shapes::ShapeRef.new(shape: ParticipantTimerValue, required: true, location_name: "TimerValue"))
+    ParticipantTimerConfiguration.struct_class = Types::ParticipantTimerConfiguration
+
+    ParticipantTimerValue.add_member(:participant_timer_action, Shapes::ShapeRef.new(shape: ParticipantTimerAction, location_name: "ParticipantTimerAction"))
+    ParticipantTimerValue.add_member(:participant_timer_duration_in_minutes, Shapes::ShapeRef.new(shape: ParticipantTimerDurationInMinutes, location_name: "ParticipantTimerDurationInMinutes"))
+    ParticipantTimerValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ParticipantTimerValue.add_member_subclass(:participant_timer_action, Types::ParticipantTimerValue::ParticipantTimerAction)
+    ParticipantTimerValue.add_member_subclass(:participant_timer_duration_in_minutes, Types::ParticipantTimerValue::ParticipantTimerDurationInMinutes)
+    ParticipantTimerValue.add_member_subclass(:unknown, Types::ParticipantTimerValue::Unknown)
+    ParticipantTimerValue.struct_class = Types::ParticipantTimerValue
+
     PermissionsList.member = Shapes::ShapeRef.new(shape: SecurityProfilePermission)
 
     PhoneNumberCountryCodes.member = Shapes::ShapeRef.new(shape: PhoneNumberCountryCode)
@@ -2886,6 +2915,19 @@ module Aws::Connect
     UpdateInstanceStorageConfigRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: InstanceStorageResourceType, required: true, location: "querystring", location_name: "resourceType"))
     UpdateInstanceStorageConfigRequest.add_member(:storage_config, Shapes::ShapeRef.new(shape: InstanceStorageConfig, required: true, location_name: "StorageConfig"))
     UpdateInstanceStorageConfigRequest.struct_class = Types::UpdateInstanceStorageConfigRequest
+
+    UpdateParticipantRoleConfigChannelInfo.add_member(:chat, Shapes::ShapeRef.new(shape: ChatParticipantRoleConfig, location_name: "Chat"))
+    UpdateParticipantRoleConfigChannelInfo.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateParticipantRoleConfigChannelInfo.add_member_subclass(:chat, Types::UpdateParticipantRoleConfigChannelInfo::Chat)
+    UpdateParticipantRoleConfigChannelInfo.add_member_subclass(:unknown, Types::UpdateParticipantRoleConfigChannelInfo::Unknown)
+    UpdateParticipantRoleConfigChannelInfo.struct_class = Types::UpdateParticipantRoleConfigChannelInfo
+
+    UpdateParticipantRoleConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateParticipantRoleConfigRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
+    UpdateParticipantRoleConfigRequest.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: UpdateParticipantRoleConfigChannelInfo, required: true, location_name: "ChannelConfiguration"))
+    UpdateParticipantRoleConfigRequest.struct_class = Types::UpdateParticipantRoleConfigRequest
+
+    UpdateParticipantRoleConfigResponse.struct_class = Types::UpdateParticipantRoleConfigResponse
 
     UpdatePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, required: true, location: "uri", location_name: "PhoneNumberId"))
     UpdatePhoneNumberRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "TargetArn"))
@@ -5356,6 +5398,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_participant_role_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateParticipantRoleConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact/participant-role-config/{InstanceId}/{ContactId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateParticipantRoleConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateParticipantRoleConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_phone_number, Seahorse::Model::Operation.new.tap do |o|
