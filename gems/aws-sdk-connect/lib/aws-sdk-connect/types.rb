@@ -170,11 +170,16 @@ module Aws::Connect
     #   The Amazon Resource Name (ARN) of the agent's status.
     #   @return [String]
     #
+    # @!attribute [rw] status_name
+    #   The name of the agent status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatusReference AWS API Documentation
     #
     class AgentStatusReference < Struct.new(
       :status_start_timestamp,
-      :status_arn)
+      :status_arn,
+      :status_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2344,6 +2349,27 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The way to sort the resulting response based on metrics. By default
+    # resources are sorted based on `AGENTS_ONLINE`, `DESCENDING`. The
+    # metric collection is sorted based on the input metrics.
+    #
+    # @!attribute [rw] sort_by_metric
+    #   The current metric names.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The way to sort.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricSortCriteria AWS API Documentation
+    #
+    class CurrentMetricSortCriteria < Struct.new(
+      :sort_by_metric,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a reference when the `referenceType` is `DATE`.
     # Otherwise, null.
     #
@@ -3267,11 +3293,16 @@ module Aws::Connect
     #   The channel used for grouping and filters.
     #   @return [String]
     #
+    # @!attribute [rw] routing_profile
+    #   Information about the routing profile assigned to the user.
+    #   @return [Types::RoutingProfileReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
     #
     class Dimensions < Struct.new(
       :queue,
-      :channel)
+      :channel,
+      :routing_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3598,11 +3629,16 @@ module Aws::Connect
     #   The channel to use to filter the metrics.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] routing_profiles
+    #   A list of up to 100 routing profile IDs or ARNs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters AWS API Documentation
     #
     class Filters < Struct.new(
       :queues,
-      :channels)
+      :channels,
+      :routing_profiles)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3642,11 +3678,22 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The queues, up to 100, or channels, to use to filter the metrics
-    #   returned. Metric data is retrieved only for the resources associated
-    #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
-    #   TASK channels are supported.
+    #   The filters to apply to returned metrics. You can filter up to the
+    #   following limits:
+    #
+    #   * Queues: 100
+    #
+    #   * Routing profiles: 100
+    #
+    #   * Channels: 3 (VOICE, CHAT, and TASK channels are supported.)
+    #
+    #   Metric data is retrieved only for the resources associated with the
+    #   queues or routing profiles, and by any channels included in the
+    #   filter. (You cannot filter by both queue AND routing profile.) You
+    #   can include both resource IDs and resource ARNs in the same request.
+    #
+    #   Currently tagging is only supported on the resources that are passed
+    #   in the filter.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
@@ -3658,7 +3705,9 @@ module Aws::Connect
     #     VOICE, CHAT, and TASK channels are supported.
     #
     #   * If you group by `ROUTING_PROFILE`, you must include either a queue
-    #     or routing profile filter.
+    #     or routing profile filter. In addition, a routing profile filter
+    #     is required for metrics `CONTACTS_SCHEDULED`, `CONTACTS_IN_QUEUE`,
+    #     and ` OLDEST_CONTACT_AGE`.
     #
     #   * If no `Grouping` is included in the request, a summary of metrics
     #     is returned.
@@ -3791,6 +3840,19 @@ module Aws::Connect
     #   The maximum number of results to return per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] sort_criteria
+    #   The way to sort the resulting response based on metrics. You can
+    #   enter one sort criteria. By default resources are sorted based on
+    #   `AGENTS_ONLINE`, `DESCENDING`. The metric collection is sorted based
+    #   on the input metrics.
+    #
+    #   Note the following:
+    #
+    #   * Sorting on `SLOTS_ACTIVE` and `SLOTS_AVAILABLE` is not supported.
+    #
+    #   ^
+    #   @return [Array<Types::CurrentMetricSortCriteria>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataRequest AWS API Documentation
     #
     class GetCurrentMetricDataRequest < Struct.new(
@@ -3799,7 +3861,8 @@ module Aws::Connect
       :groupings,
       :current_metrics,
       :next_token,
-      :max_results)
+      :max_results,
+      :sort_criteria)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3822,12 +3885,17 @@ module Aws::Connect
     #   pagination.
     #   @return [Time]
     #
+    # @!attribute [rw] approximate_total_count
+    #   The total count of the result, regardless of the current page size.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataResponse AWS API Documentation
     #
     class GetCurrentMetricDataResponse < Struct.new(
       :next_token,
       :metric_results,
-      :data_snapshot_time)
+      :data_snapshot_time,
+      :approximate_total_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3838,9 +3906,25 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Filters up to 100 `Queues`, or up to 9 `ContactStates`. The user
-    #   data is retrieved only for those users who are associated with the
-    #   queues and have contacts that are in the specified `ContactState`.
+    #   The filters to apply to returned user data. You can filter up to the
+    #   following limits:
+    #
+    #   * Queues: 100
+    #
+    #   * Routing profiles: 100
+    #
+    #   * Agents: 100
+    #
+    #   * Contact states: 9
+    #
+    #   * User hierarchy groups: 1
+    #
+    #   The user data is retrieved for only the specified values/resources
+    #   in the filter. A maximum of one filter can be passed from queues,
+    #   routing profiles, agents, and user hierarchy groups.
+    #
+    #   Currently tagging is only supported on the resources that are passed
+    #   in the filter.
     #   @return [Types::UserDataFilters]
     #
     # @!attribute [rw] next_token
@@ -3873,11 +3957,16 @@ module Aws::Connect
     #   A list of the user data that is returned.
     #   @return [Array<Types::UserData>]
     #
+    # @!attribute [rw] approximate_total_count
+    #   The total count of the result, regardless of the current page size.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentUserDataResponse AWS API Documentation
     #
     class GetCurrentUserDataResponse < Struct.new(
       :next_token,
-      :user_data_list)
+      :user_data_list,
+      :approximate_total_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11351,6 +11440,10 @@ module Aws::Connect
     #   A list of contact reference information.
     #   @return [Array<Types::AgentContactReference>]
     #
+    # @!attribute [rw] next_status
+    #   The Next status of the agent.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserData AWS API Documentation
     #
     class UserData < Struct.new(
@@ -11361,7 +11454,8 @@ module Aws::Connect
       :available_slots_by_channel,
       :max_slots_by_channel,
       :active_slots_by_channel,
-      :contacts)
+      :contacts,
+      :next_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11369,8 +11463,7 @@ module Aws::Connect
     # A filter for the user data.
     #
     # @!attribute [rw] queues
-    #   Contains information about a queue resource for which metrics are
-    #   returned.
+    #   A list of up to 100 queues or ARNs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] contact_filter
@@ -11378,11 +11471,26 @@ module Aws::Connect
     #   associated to the user. It contains a list of contact states.
     #   @return [Types::ContactFilter]
     #
+    # @!attribute [rw] routing_profiles
+    #   A list of up to 100 routing profile IDs or ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] agents
+    #   A list of up to 100 agent IDs or ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_hierarchy_groups
+    #   A UserHierarchyGroup ID or ARN.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserDataFilters AWS API Documentation
     #
     class UserDataFilters < Struct.new(
       :queues,
-      :contact_filter)
+      :contact_filter,
+      :routing_profiles,
+      :agents,
+      :user_hierarchy_groups)
       SENSITIVE = []
       include Aws::Structure
     end

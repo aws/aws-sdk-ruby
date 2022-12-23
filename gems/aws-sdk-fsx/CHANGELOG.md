@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2022-12-23)
+------------------
+
+* Feature - Fix a bug where a recent release might break certain existing SDKs.
+
 1.62.0 (2022-11-29)
 ------------------
 

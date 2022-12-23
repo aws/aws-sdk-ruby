@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-12-23)
+------------------
+
+* Feature - Amazon Connect Chat introduces the Message Receipts feature. This feature allows agents and customers to receive message delivered and read receipts after they send a chat message.
+
 1.24.0 (2022-12-21)
 ------------------
 

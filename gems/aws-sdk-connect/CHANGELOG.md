@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2022-12-23)
+------------------
+
+* Feature - Support for Routing Profile filter, SortCriteria, and grouping by Routing Profiles for GetCurrentMetricData API. Support for RoutingProfiles, UserHierarchyGroups, and Agents as filters, NextStatus and AgentStatusName for GetCurrentUserData. Adds ApproximateTotalCount to both APIs.
+
 1.89.0 (2022-12-22)
 ------------------
 

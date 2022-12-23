@@ -50,6 +50,7 @@ module Aws::ConnectParticipant
     Item = Shapes::StructureShape.new(name: 'Item')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
+    MessageMetadata = Shapes::StructureShape.new(name: 'MessageMetadata')
     MostRecent = Shapes::IntegerShape.new(name: 'MostRecent')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyClientToken = Shapes::StringShape.new(name: 'NonEmptyClientToken')
@@ -59,6 +60,8 @@ module Aws::ConnectParticipant
     PreSignedAttachmentUrl = Shapes::StringShape.new(name: 'PreSignedAttachmentUrl')
     PreSignedConnectionUrl = Shapes::StringShape.new(name: 'PreSignedConnectionUrl')
     Reason = Shapes::StringShape.new(name: 'Reason')
+    Receipt = Shapes::StructureShape.new(name: 'Receipt')
+    Receipts = Shapes::ListShape.new(name: 'Receipts')
     ScanDirection = Shapes::StringShape.new(name: 'ScanDirection')
     SendEventRequest = Shapes::StructureShape.new(name: 'SendEventRequest')
     SendEventResponse = Shapes::StructureShape.new(name: 'SendEventResponse')
@@ -108,7 +111,7 @@ module Aws::ConnectParticipant
 
     ConnectionTypeList.member = Shapes::ShapeRef.new(shape: ConnectionType)
 
-    CreateParticipantConnectionRequest.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionTypeList, required: true, location_name: "Type"))
+    CreateParticipantConnectionRequest.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionTypeList, location_name: "Type"))
     CreateParticipantConnectionRequest.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
     CreateParticipantConnectionRequest.add_member(:connect_participant, Shapes::ShapeRef.new(shape: Bool, location_name: "ConnectParticipant"))
     CreateParticipantConnectionRequest.struct_class = Types::CreateParticipantConnectionRequest
@@ -157,7 +160,19 @@ module Aws::ConnectParticipant
     Item.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     Item.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
     Item.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "Attachments"))
+    Item.add_member(:message_metadata, Shapes::ShapeRef.new(shape: MessageMetadata, location_name: "MessageMetadata"))
     Item.struct_class = Types::Item
+
+    MessageMetadata.add_member(:message_id, Shapes::ShapeRef.new(shape: ChatItemId, location_name: "MessageId"))
+    MessageMetadata.add_member(:receipts, Shapes::ShapeRef.new(shape: Receipts, location_name: "Receipts"))
+    MessageMetadata.struct_class = Types::MessageMetadata
+
+    Receipt.add_member(:delivered_timestamp, Shapes::ShapeRef.new(shape: Instant, location_name: "DeliveredTimestamp"))
+    Receipt.add_member(:read_timestamp, Shapes::ShapeRef.new(shape: Instant, location_name: "ReadTimestamp"))
+    Receipt.add_member(:recipient_participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "RecipientParticipantId"))
+    Receipt.struct_class = Types::Receipt
+
+    Receipts.member = Shapes::ShapeRef.new(shape: Receipt)
 
     SendEventRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
     SendEventRequest.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, location_name: "Content"))

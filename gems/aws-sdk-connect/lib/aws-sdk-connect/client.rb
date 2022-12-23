@@ -3847,11 +3847,22 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, Types::Filters] :filters
-    #   The queues, up to 100, or channels, to use to filter the metrics
-    #   returned. Metric data is retrieved only for the resources associated
-    #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
-    #   TASK channels are supported.
+    #   The filters to apply to returned metrics. You can filter up to the
+    #   following limits:
+    #
+    #   * Queues: 100
+    #
+    #   * Routing profiles: 100
+    #
+    #   * Channels: 3 (VOICE, CHAT, and TASK channels are supported.)
+    #
+    #   Metric data is retrieved only for the resources associated with the
+    #   queues or routing profiles, and by any channels included in the
+    #   filter. (You cannot filter by both queue AND routing profile.) You can
+    #   include both resource IDs and resource ARNs in the same request.
+    #
+    #   Currently tagging is only supported on the resources that are passed
+    #   in the filter.
     #
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
@@ -3862,7 +3873,9 @@ module Aws::Connect
     #     VOICE, CHAT, and TASK channels are supported.
     #
     #   * If you group by `ROUTING_PROFILE`, you must include either a queue
-    #     or routing profile filter.
+    #     or routing profile filter. In addition, a routing profile filter is
+    #     required for metrics `CONTACTS_SCHEDULED`, `CONTACTS_IN_QUEUE`, and
+    #     ` OLDEST_CONTACT_AGE`.
     #
     #   * If no `Grouping` is included in the request, a summary of metrics is
     #     returned.
@@ -3991,11 +4004,24 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
     #
+    # @option params [Array<Types::CurrentMetricSortCriteria>] :sort_criteria
+    #   The way to sort the resulting response based on metrics. You can enter
+    #   one sort criteria. By default resources are sorted based on
+    #   `AGENTS_ONLINE`, `DESCENDING`. The metric collection is sorted based
+    #   on the input metrics.
+    #
+    #   Note the following:
+    #
+    #   * Sorting on `SLOTS_ACTIVE` and `SLOTS_AVAILABLE` is not supported.
+    #
+    #   ^
+    #
     # @return [Types::GetCurrentMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetCurrentMetricDataResponse#next_token #next_token} => String
     #   * {Types::GetCurrentMetricDataResponse#metric_results #metric_results} => Array&lt;Types::CurrentMetricResult&gt;
     #   * {Types::GetCurrentMetricDataResponse#data_snapshot_time #data_snapshot_time} => Time
+    #   * {Types::GetCurrentMetricDataResponse#approximate_total_count #approximate_total_count} => Integer
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -4006,8 +4032,9 @@ module Aws::Connect
     #     filters: { # required
     #       queues: ["QueueId"],
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
+    #       routing_profiles: ["RoutingProfileId"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE
     #     current_metrics: [ # required
     #       {
     #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
@@ -4016,6 +4043,12 @@ module Aws::Connect
     #     ],
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     sort_criteria: [
+    #       {
+    #         sort_by_metric: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4025,11 +4058,14 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.queue.id #=> String
     #   resp.metric_results[0].dimensions.queue.arn #=> String
     #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.metric_results[0].dimensions.routing_profile.id #=> String
+    #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
     #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
     #   resp.metric_results[0].collections[0].value #=> Float
     #   resp.data_snapshot_time #=> Time
+    #   resp.approximate_total_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricData AWS API Documentation
     #
@@ -4048,9 +4084,25 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, Types::UserDataFilters] :filters
-    #   Filters up to 100 `Queues`, or up to 9 `ContactStates`. The user data
-    #   is retrieved only for those users who are associated with the queues
-    #   and have contacts that are in the specified `ContactState`.
+    #   The filters to apply to returned user data. You can filter up to the
+    #   following limits:
+    #
+    #   * Queues: 100
+    #
+    #   * Routing profiles: 100
+    #
+    #   * Agents: 100
+    #
+    #   * Contact states: 9
+    #
+    #   * User hierarchy groups: 1
+    #
+    #   The user data is retrieved for only the specified values/resources in
+    #   the filter. A maximum of one filter can be passed from queues, routing
+    #   profiles, agents, and user hierarchy groups.
+    #
+    #   Currently tagging is only supported on the resources that are passed
+    #   in the filter.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -4064,6 +4116,7 @@ module Aws::Connect
     #
     #   * {Types::GetCurrentUserDataResponse#next_token #next_token} => String
     #   * {Types::GetCurrentUserDataResponse#user_data_list #user_data_list} => Array&lt;Types::UserData&gt;
+    #   * {Types::GetCurrentUserDataResponse#approximate_total_count #approximate_total_count} => Integer
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -4076,6 +4129,9 @@ module Aws::Connect
     #       contact_filter: {
     #         contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
     #       },
+    #       routing_profiles: ["RoutingProfileId"],
+    #       agents: ["UserId"],
+    #       user_hierarchy_groups: ["HierarchyGroupId"],
     #     },
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -4101,6 +4157,7 @@ module Aws::Connect
     #   resp.user_data_list[0].hierarchy_path.level_five.arn #=> String
     #   resp.user_data_list[0].status.status_start_timestamp #=> Time
     #   resp.user_data_list[0].status.status_arn #=> String
+    #   resp.user_data_list[0].status.status_name #=> String
     #   resp.user_data_list[0].available_slots_by_channel #=> Hash
     #   resp.user_data_list[0].available_slots_by_channel["Channel"] #=> Integer
     #   resp.user_data_list[0].max_slots_by_channel #=> Hash
@@ -4116,6 +4173,8 @@ module Aws::Connect
     #   resp.user_data_list[0].contacts[0].connected_to_agent_timestamp #=> Time
     #   resp.user_data_list[0].contacts[0].queue.id #=> String
     #   resp.user_data_list[0].contacts[0].queue.arn #=> String
+    #   resp.user_data_list[0].next_status #=> String
+    #   resp.approximate_total_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentUserData AWS API Documentation
     #
@@ -4421,8 +4480,9 @@ module Aws::Connect
     #     filters: { # required
     #       queues: ["QueueId"],
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
+    #       routing_profiles: ["RoutingProfileId"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE
     #     historical_metrics: [ # required
     #       {
     #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
@@ -4445,6 +4505,8 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.queue.id #=> String
     #   resp.metric_results[0].dimensions.queue.arn #=> String
     #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.metric_results[0].dimensions.routing_profile.id #=> String
+    #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
     #   resp.metric_results[0].collections[0].metric.threshold.comparison #=> String, one of "LT"
@@ -6356,7 +6418,7 @@ module Aws::Connect
 
     # Initiates silent monitoring of a contact. The Contact Control Panel
     # (CCP) of the user specified by *userId* will be set to silent
-    # monitoring mode on the contact. Supports voice and chat contacts.
+    # monitoring mode on the contact.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -9678,7 +9740,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

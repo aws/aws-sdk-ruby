@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2022-12-23)
+------------------
+
+* Feature - Amazon Inspector adds support for scanning NodeJS 18.x and Go 1.x AWS Lambda function runtimes.
+
 1.8.0 (2022-11-29)
 ------------------
 

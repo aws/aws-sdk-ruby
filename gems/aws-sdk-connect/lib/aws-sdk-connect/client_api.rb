@@ -37,6 +37,7 @@ module Aws::Connect
     AgentStatusType = Shapes::StringShape.new(name: 'AgentStatusType')
     AgentStatusTypes = Shapes::ListShape.new(name: 'AgentStatusTypes')
     AgentUsername = Shapes::StringShape.new(name: 'AgentUsername')
+    AgentsMinOneMaxHundred = Shapes::ListShape.new(name: 'AgentsMinOneMaxHundred')
     AliasArn = Shapes::StringShape.new(name: 'AliasArn')
     AllowedAccessControlTags = Shapes::MapShape.new(name: 'AllowedAccessControlTags')
     AllowedMonitorCapabilities = Shapes::ListShape.new(name: 'AllowedMonitorCapabilities')
@@ -160,6 +161,8 @@ module Aws::Connect
     CurrentMetricName = Shapes::StringShape.new(name: 'CurrentMetricName')
     CurrentMetricResult = Shapes::StructureShape.new(name: 'CurrentMetricResult')
     CurrentMetricResults = Shapes::ListShape.new(name: 'CurrentMetricResults')
+    CurrentMetricSortCriteria = Shapes::StructureShape.new(name: 'CurrentMetricSortCriteria')
+    CurrentMetricSortCriteriaMaxOne = Shapes::ListShape.new(name: 'CurrentMetricSortCriteriaMaxOne')
     CurrentMetrics = Shapes::ListShape.new(name: 'CurrentMetrics')
     DateReference = Shapes::StructureShape.new(name: 'DateReference')
     DefaultVocabulary = Shapes::StructureShape.new(name: 'DefaultVocabulary')
@@ -550,6 +553,7 @@ module Aws::Connect
     RoutingProfileSearchFilter = Shapes::StructureShape.new(name: 'RoutingProfileSearchFilter')
     RoutingProfileSummary = Shapes::StructureShape.new(name: 'RoutingProfileSummary')
     RoutingProfileSummaryList = Shapes::ListShape.new(name: 'RoutingProfileSummaryList')
+    RoutingProfiles = Shapes::ListShape.new(name: 'RoutingProfiles')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleAction = Shapes::StructureShape.new(name: 'RuleAction')
     RuleActions = Shapes::ListShape.new(name: 'RuleActions')
@@ -596,6 +600,7 @@ module Aws::Connect
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SingleSelectOptions = Shapes::ListShape.new(name: 'SingleSelectOptions')
     SnapshotVersion = Shapes::StringShape.new(name: 'SnapshotVersion')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SourceApplicationName = Shapes::StringShape.new(name: 'SourceApplicationName')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartChatContactRequest = Shapes::StructureShape.new(name: 'StartChatContactRequest')
@@ -736,6 +741,7 @@ module Aws::Connect
     User = Shapes::StructureShape.new(name: 'User')
     UserData = Shapes::StructureShape.new(name: 'UserData')
     UserDataFilters = Shapes::StructureShape.new(name: 'UserDataFilters')
+    UserDataHierarchyGroups = Shapes::ListShape.new(name: 'UserDataHierarchyGroups')
     UserDataList = Shapes::ListShape.new(name: 'UserDataList')
     UserId = Shapes::StringShape.new(name: 'UserId')
     UserIdList = Shapes::ListShape.new(name: 'UserIdList')
@@ -804,6 +810,7 @@ module Aws::Connect
 
     AgentStatusReference.add_member(:status_start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StatusStartTimestamp"))
     AgentStatusReference.add_member(:status_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "StatusArn"))
+    AgentStatusReference.add_member(:status_name, Shapes::ShapeRef.new(shape: AgentStatusName, location_name: "StatusName"))
     AgentStatusReference.struct_class = Types::AgentStatusReference
 
     AgentStatusSummary.add_member(:id, Shapes::ShapeRef.new(shape: AgentStatusId, location_name: "Id"))
@@ -815,6 +822,8 @@ module Aws::Connect
     AgentStatusSummaryList.member = Shapes::ShapeRef.new(shape: AgentStatusSummary)
 
     AgentStatusTypes.member = Shapes::ShapeRef.new(shape: AgentStatusType)
+
+    AgentsMinOneMaxHundred.member = Shapes::ShapeRef.new(shape: UserId)
 
     AllowedAccessControlTags.key = Shapes::ShapeRef.new(shape: SecurityProfilePolicyKey)
     AllowedAccessControlTags.value = Shapes::ShapeRef.new(shape: SecurityProfilePolicyValue)
@@ -1247,6 +1256,12 @@ module Aws::Connect
 
     CurrentMetricResults.member = Shapes::ShapeRef.new(shape: CurrentMetricResult)
 
+    CurrentMetricSortCriteria.add_member(:sort_by_metric, Shapes::ShapeRef.new(shape: CurrentMetricName, location_name: "SortByMetric"))
+    CurrentMetricSortCriteria.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    CurrentMetricSortCriteria.struct_class = Types::CurrentMetricSortCriteria
+
+    CurrentMetricSortCriteriaMaxOne.member = Shapes::ShapeRef.new(shape: CurrentMetricSortCriteria)
+
     CurrentMetrics.member = Shapes::ShapeRef.new(shape: CurrentMetric)
 
     DateReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
@@ -1462,6 +1477,7 @@ module Aws::Connect
 
     Dimensions.add_member(:queue, Shapes::ShapeRef.new(shape: QueueReference, location_name: "Queue"))
     Dimensions.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
+    Dimensions.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: "RoutingProfile"))
     Dimensions.struct_class = Types::Dimensions
 
     DisassociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -1534,6 +1550,7 @@ module Aws::Connect
 
     Filters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
     Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
+    Filters.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: "RoutingProfiles"))
     Filters.struct_class = Types::Filters
 
     FunctionArnsList.member = Shapes::ShapeRef.new(shape: FunctionArn)
@@ -1551,11 +1568,13 @@ module Aws::Connect
     GetCurrentMetricDataRequest.add_member(:current_metrics, Shapes::ShapeRef.new(shape: CurrentMetrics, required: true, location_name: "CurrentMetrics"))
     GetCurrentMetricDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetCurrentMetricDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetCurrentMetricDataRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: CurrentMetricSortCriteriaMaxOne, location_name: "SortCriteria"))
     GetCurrentMetricDataRequest.struct_class = Types::GetCurrentMetricDataRequest
 
     GetCurrentMetricDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetCurrentMetricDataResponse.add_member(:metric_results, Shapes::ShapeRef.new(shape: CurrentMetricResults, location_name: "MetricResults"))
     GetCurrentMetricDataResponse.add_member(:data_snapshot_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "DataSnapshotTime"))
+    GetCurrentMetricDataResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     GetCurrentMetricDataResponse.struct_class = Types::GetCurrentMetricDataResponse
 
     GetCurrentUserDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -1566,6 +1585,7 @@ module Aws::Connect
 
     GetCurrentUserDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetCurrentUserDataResponse.add_member(:user_data_list, Shapes::ShapeRef.new(shape: UserDataList, location_name: "UserDataList"))
+    GetCurrentUserDataResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     GetCurrentUserDataResponse.struct_class = Types::GetCurrentUserDataResponse
 
     GetFederationTokenRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -2452,6 +2472,8 @@ module Aws::Connect
 
     RoutingProfileSummaryList.member = Shapes::ShapeRef.new(shape: RoutingProfileSummary)
 
+    RoutingProfiles.member = Shapes::ShapeRef.new(shape: RoutingProfileId)
+
     Rule.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     Rule.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "RuleId"))
     Rule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RuleArn"))
@@ -3108,11 +3130,17 @@ module Aws::Connect
     UserData.add_member(:max_slots_by_channel, Shapes::ShapeRef.new(shape: ChannelToCountMap, location_name: "MaxSlotsByChannel"))
     UserData.add_member(:active_slots_by_channel, Shapes::ShapeRef.new(shape: ChannelToCountMap, location_name: "ActiveSlotsByChannel"))
     UserData.add_member(:contacts, Shapes::ShapeRef.new(shape: AgentContactReferenceList, location_name: "Contacts"))
+    UserData.add_member(:next_status, Shapes::ShapeRef.new(shape: AgentStatusName, location_name: "NextStatus"))
     UserData.struct_class = Types::UserData
 
     UserDataFilters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
     UserDataFilters.add_member(:contact_filter, Shapes::ShapeRef.new(shape: ContactFilter, location_name: "ContactFilter"))
+    UserDataFilters.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: "RoutingProfiles"))
+    UserDataFilters.add_member(:agents, Shapes::ShapeRef.new(shape: AgentsMinOneMaxHundred, location_name: "Agents"))
+    UserDataFilters.add_member(:user_hierarchy_groups, Shapes::ShapeRef.new(shape: UserDataHierarchyGroups, location_name: "UserHierarchyGroups"))
     UserDataFilters.struct_class = Types::UserDataFilters
+
+    UserDataHierarchyGroups.member = Shapes::ShapeRef.new(shape: HierarchyGroupId)
 
     UserDataList.member = Shapes::ShapeRef.new(shape: UserData)
 

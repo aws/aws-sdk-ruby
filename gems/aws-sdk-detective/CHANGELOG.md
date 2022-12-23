@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2022-12-23)
+------------------
+
+* Feature - This release adds a missed AccessDeniedException type to several endpoints.
+
 1.30.0 (2022-10-25)
 ------------------
 

@@ -1839,14 +1839,14 @@ module Aws::FSx
     #     available only in the US East (N. Virginia), US East (Ohio), US
     #     West (Oregon), and Europe (Ireland) Amazon Web Services Regions.
     #
-    #   For more information, see: [Deployment type availability][1] and [
-    #   File system performance][2]in the*Amazon FSx for OpenZFS User
+    #   For more information, see: [Deployment type availability][1] and
+    #   [File system performance][2] in the *Amazon FSx for OpenZFS User
     #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/available-aws-regions.html
-    #   [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/zfs-fs-performance.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
@@ -7217,6 +7217,10 @@ module Aws::FSx
     #   The SVM's system generated unique ID.
     #   @return [String]
     #
+    # @!attribute [rw] subtype
+    #   Describes the SVM's subtype.
+    #   @return [String]
+    #
     # @!attribute [rw] uuid
     #   The SVM's UUID (universally unique identifier).
     #   @return [String]
@@ -7244,6 +7248,7 @@ module Aws::FSx
       :name,
       :resource_arn,
       :storage_virtual_machine_id,
+      :subtype,
       :uuid,
       :tags,
       :lifecycle_transition_reason,

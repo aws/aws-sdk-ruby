@@ -25,6 +25,41 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # The request issuer does not have permission to access this resource or
+    # perform this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The SDK default error code associated with the access denied
+    #   exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code_reason
+    #   The SDK default explanation of why access was denied.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_error_code
+    #   The error code associated with the access denied exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_error_code_reason
+    #   An explanation of why access was denied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :error_code,
+      :error_code_reason,
+      :sub_error_code,
+      :sub_error_code_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An Amazon Web Services account that is the administrator account of or
     # a member of a behavior graph.
     #

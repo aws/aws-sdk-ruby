@@ -14,6 +14,7 @@ module Aws::Detective
     include Seahorse::Model
 
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Account = Shapes::StructureShape.new(name: 'Account')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdExtendedList = Shapes::ListShape.new(name: 'AccountIdExtendedList')
@@ -111,6 +112,13 @@ module Aws::Detective
 
     AcceptInvitationRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
     AcceptInvitationRequest.struct_class = Types::AcceptInvitationRequest
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    AccessDeniedException.add_member(:error_code_reason, Shapes::ShapeRef.new(shape: ErrorCodeReason, location_name: "ErrorCodeReason"))
+    AccessDeniedException.add_member(:sub_error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "SubErrorCode"))
+    AccessDeniedException.add_member(:sub_error_code_reason, Shapes::ShapeRef.new(shape: ErrorCodeReason, location_name: "SubErrorCodeReason"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     Account.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     Account.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "EmailAddress"))
@@ -393,6 +401,7 @@ module Aws::Detective
         o.http_request_uri = "/invitation"
         o.input = Shapes::ShapeRef.new(shape: AcceptInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -405,6 +414,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/datasources/get"
         o.input = Shapes::ShapeRef.new(shape: BatchGetGraphMemberDatasourcesRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchGetGraphMemberDatasourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -416,6 +426,7 @@ module Aws::Detective
         o.http_request_uri = "/membership/datasources/get"
         o.input = Shapes::ShapeRef.new(shape: BatchGetMembershipDatasourcesRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchGetMembershipDatasourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -427,6 +438,7 @@ module Aws::Detective
         o.http_request_uri = "/graph"
         o.input = Shapes::ShapeRef.new(shape: CreateGraphRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateGraphResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -438,6 +450,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/members"
         o.input = Shapes::ShapeRef.new(shape: CreateMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -450,6 +463,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/removal"
         o.input = Shapes::ShapeRef.new(shape: DeleteGraphRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -461,6 +475,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/members/removal"
         o.input = Shapes::ShapeRef.new(shape: DeleteMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -473,6 +488,7 @@ module Aws::Detective
         o.http_request_uri = "/orgs/describeOrganizationConfiguration"
         o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -484,6 +500,7 @@ module Aws::Detective
         o.http_request_uri = "/orgs/disableAdminAccount"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -495,6 +512,7 @@ module Aws::Detective
         o.http_request_uri = "/membership/removal"
         o.input = Shapes::ShapeRef.new(shape: DisassociateMembershipRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -507,6 +525,7 @@ module Aws::Detective
         o.http_request_uri = "/orgs/enableAdminAccount"
         o.input = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -518,6 +537,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/members/get"
         o.input = Shapes::ShapeRef.new(shape: GetMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -529,6 +549,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/datasources/list"
         o.input = Shapes::ShapeRef.new(shape: ListDatasourcePackagesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDatasourcePackagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -546,6 +567,7 @@ module Aws::Detective
         o.http_request_uri = "/graphs/list"
         o.input = Shapes::ShapeRef.new(shape: ListGraphsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListGraphsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
@@ -562,6 +584,7 @@ module Aws::Detective
         o.http_request_uri = "/invitations/list"
         o.input = Shapes::ShapeRef.new(shape: ListInvitationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInvitationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
@@ -578,6 +601,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/members/list"
         o.input = Shapes::ShapeRef.new(shape: ListMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -595,6 +619,7 @@ module Aws::Detective
         o.http_request_uri = "/orgs/adminAccountslist"
         o.input = Shapes::ShapeRef.new(shape: ListOrganizationAdminAccountsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListOrganizationAdminAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -612,6 +637,7 @@ module Aws::Detective
         o.http_request_uri = "/tags/{ResourceArn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -623,6 +649,7 @@ module Aws::Detective
         o.http_request_uri = "/invitation/removal"
         o.input = Shapes::ShapeRef.new(shape: RejectInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -635,6 +662,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/member/monitoringstate"
         o.input = Shapes::ShapeRef.new(shape: StartMonitoringMemberRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -648,6 +676,7 @@ module Aws::Detective
         o.http_request_uri = "/tags/{ResourceArn}"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -659,6 +688,7 @@ module Aws::Detective
         o.http_request_uri = "/tags/{ResourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -670,6 +700,7 @@ module Aws::Detective
         o.http_request_uri = "/graph/datasources/update"
         o.input = Shapes::ShapeRef.new(shape: UpdateDatasourcePackagesRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -682,6 +713,7 @@ module Aws::Detective
         o.http_request_uri = "/orgs/updateOrganizationConfiguration"
         o.input = Shapes::ShapeRef.new(shape: UpdateOrganizationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)

@@ -3376,6 +3376,7 @@ module Aws::FSx
     #   resp.storage_virtual_machine.name #=> String
     #   resp.storage_virtual_machine.resource_arn #=> String
     #   resp.storage_virtual_machine.storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machine.subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
     #   resp.storage_virtual_machine.uuid #=> String
     #   resp.storage_virtual_machine.tags #=> Array
     #   resp.storage_virtual_machine.tags[0].key #=> String
@@ -5723,6 +5724,7 @@ module Aws::FSx
     #   resp.storage_virtual_machines[0].name #=> String
     #   resp.storage_virtual_machines[0].resource_arn #=> String
     #   resp.storage_virtual_machines[0].storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machines[0].subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
     #   resp.storage_virtual_machines[0].uuid #=> String
     #   resp.storage_virtual_machines[0].tags #=> Array
     #   resp.storage_virtual_machines[0].tags[0].key #=> String
@@ -7447,6 +7449,7 @@ module Aws::FSx
     #   resp.storage_virtual_machine.name #=> String
     #   resp.storage_virtual_machine.resource_arn #=> String
     #   resp.storage_virtual_machine.storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machine.subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
     #   resp.storage_virtual_machine.uuid #=> String
     #   resp.storage_virtual_machine.tags #=> Array
     #   resp.storage_virtual_machine.tags[0].key #=> String
@@ -7720,7 +7723,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -371,6 +371,11 @@ module Aws::ConnectParticipant
     # Allows you to confirm that the attachment has been uploaded using the
     # pre-signed URL provided in StartAttachmentUpload API.
     #
+    # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
+    # `ParticipantToken`.
+    #
+    #  </note>
+    #
     # The Amazon Connect Participant Service APIs do not use [Signature
     # Version 4 authentication][1].
     #
@@ -383,10 +388,16 @@ module Aws::ConnectParticipant
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :connection_token
     #   The authentication token associated with the participant's
@@ -411,8 +422,12 @@ module Aws::ConnectParticipant
       req.send_request(options)
     end
 
-    # Creates the participant's connection. Note that ParticipantToken is
-    # used for invoking this API instead of ConnectionToken.
+    # Creates the participant's connection.
+    #
+    # <note markdown="1"> `ParticipantToken` is used for invoking this API instead of
+    # `ConnectionToken`.
+    #
+    #  </note>
     #
     # The participant token is valid for the lifetime of the participant –
     # until they are part of a contact.
@@ -453,8 +468,9 @@ module Aws::ConnectParticipant
     # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
     # [4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
-    # @option params [required, Array<String>] :type
-    #   Type of connection information required.
+    # @option params [Array<String>] :type
+    #   Type of connection information required. This can be omitted if
+    #   `ConnectParticipant` is `true`.
     #
     # @option params [required, String] :participant_token
     #   This is a header parameter.
@@ -478,7 +494,7 @@ module Aws::ConnectParticipant
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_participant_connection({
-    #     type: ["WEBSOCKET"], # required, accepts WEBSOCKET, CONNECTION_CREDENTIALS
+    #     type: ["WEBSOCKET"], # accepts WEBSOCKET, CONNECTION_CREDENTIALS
     #     participant_token: "ParticipantToken", # required
     #     connect_participant: false,
     #   })
@@ -499,8 +515,12 @@ module Aws::ConnectParticipant
       req.send_request(options)
     end
 
-    # Disconnects a participant. Note that ConnectionToken is used for
-    # invoking this API instead of ParticipantToken.
+    # Disconnects a participant.
+    #
+    # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
+    # `ParticipantToken`.
+    #
+    #  </note>
     #
     # The Amazon Connect Participant Service APIs do not use [Signature
     # Version 4 authentication][1].
@@ -511,10 +531,16 @@ module Aws::ConnectParticipant
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :connection_token
     #   The authentication token associated with the participant's
@@ -540,6 +566,11 @@ module Aws::ConnectParticipant
 
     # Provides a pre-signed URL for download of a completed attachment. This
     # is an asynchronous API for use with active contacts.
+    #
+    # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
+    # `ParticipantToken`.
+    #
+    #  </note>
     #
     # The Amazon Connect Participant Service APIs do not use [Signature
     # Version 4 authentication][1].
@@ -582,8 +613,12 @@ module Aws::ConnectParticipant
     end
 
     # Retrieves a transcript of the session, including details about any
-    # attachments. Note that ConnectionToken is used for invoking this API
-    # instead of ParticipantToken.
+    # attachments.
+    #
+    # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
+    # `ParticipantToken`.
+    #
+    #  </note>
     #
     # The Amazon Connect Participant Service APIs do not use [Signature
     # Version 4 authentication][1].
@@ -650,7 +685,7 @@ module Aws::ConnectParticipant
     #   resp.transcript[0].content #=> String
     #   resp.transcript[0].content_type #=> String
     #   resp.transcript[0].id #=> String
-    #   resp.transcript[0].type #=> String, one of "TYPING", "PARTICIPANT_JOINED", "PARTICIPANT_LEFT", "CHAT_ENDED", "TRANSFER_SUCCEEDED", "TRANSFER_FAILED", "MESSAGE", "EVENT", "ATTACHMENT", "CONNECTION_ACK"
+    #   resp.transcript[0].type #=> String, one of "TYPING", "PARTICIPANT_JOINED", "PARTICIPANT_LEFT", "CHAT_ENDED", "TRANSFER_SUCCEEDED", "TRANSFER_FAILED", "MESSAGE", "EVENT", "ATTACHMENT", "CONNECTION_ACK", "MESSAGE_DELIVERED", "MESSAGE_READ"
     #   resp.transcript[0].participant_id #=> String
     #   resp.transcript[0].display_name #=> String
     #   resp.transcript[0].participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM"
@@ -659,6 +694,11 @@ module Aws::ConnectParticipant
     #   resp.transcript[0].attachments[0].attachment_id #=> String
     #   resp.transcript[0].attachments[0].attachment_name #=> String
     #   resp.transcript[0].attachments[0].status #=> String, one of "APPROVED", "REJECTED", "IN_PROGRESS"
+    #   resp.transcript[0].message_metadata.message_id #=> String
+    #   resp.transcript[0].message_metadata.receipts #=> Array
+    #   resp.transcript[0].message_metadata.receipts[0].delivered_timestamp #=> String
+    #   resp.transcript[0].message_metadata.receipts[0].read_timestamp #=> String
+    #   resp.transcript[0].message_metadata.receipts[0].recipient_participant_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetTranscript AWS API Documentation
@@ -670,8 +710,12 @@ module Aws::ConnectParticipant
       req.send_request(options)
     end
 
-    # Sends an event. Note that ConnectionToken is used for invoking this
-    # API instead of ParticipantToken.
+    # Sends an event.
+    #
+    # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
+    # `ParticipantToken`.
+    #
+    #  </note>
     #
     # The Amazon Connect Participant Service APIs do not use [Signature
     # Version 4 authentication][1].
@@ -687,16 +731,30 @@ module Aws::ConnectParticipant
     #
     #   * application/vnd.amazonaws.connect.event.connection.acknowledged
     #
+    #   * application/vnd.amazonaws.connect.event.message.delivered
+    #
+    #   * application/vnd.amazonaws.connect.event.message.read
+    #
     # @option params [String] :content
-    #   The content of the event to be sent (for example, message text). This
-    #   is not yet supported.
+    #   The content of the event to be sent (for example, message text). For
+    #   content related to message receipts, this is supported in the form of
+    #   a JSON string.
+    #
+    #   Sample Content:
+    #   "\\\{\\"messageId\\":\\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\\"\\}"
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :connection_token
     #   The authentication token associated with the participant's
@@ -730,8 +788,12 @@ module Aws::ConnectParticipant
       req.send_request(options)
     end
 
-    # Sends a message. Note that ConnectionToken is used for invoking this
-    # API instead of ParticipantToken.
+    # Sends a message.
+    #
+    # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
+    # `ParticipantToken`.
+    #
+    #  </note>
     #
     # The Amazon Connect Participant Service APIs do not use [Signature
     # Version 4 authentication][1].
@@ -741,17 +803,30 @@ module Aws::ConnectParticipant
     # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, String] :content_type
-    #   The type of the content. Supported types are text/plain.
+    #   The type of the content. Supported types are `text/plain`,
+    #   `text/markdown`, and `application/json`.
     #
     # @option params [required, String] :content
     #   The content of the message.
     #
+    #   * For `text/plain` and `text/markdown`, the Length Constraints are
+    #     Minimum of 1, Maximum of 1024.
+    #
+    #   * For `application/json`, the Length Constraints are Minimum of 1,
+    #     Maximum of 12000.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :connection_token
     #   The authentication token associated with the connection.
@@ -787,6 +862,11 @@ module Aws::ConnectParticipant
     # Provides a pre-signed Amazon S3 URL in response for uploading the file
     # directly to S3.
     #
+    # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
+    # `ParticipantToken`.
+    #
+    #  </note>
+    #
     # The Amazon Connect Participant Service APIs do not use [Signature
     # Version 4 authentication][1].
     #
@@ -801,7 +881,7 @@ module Aws::ConnectParticipant
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html
     #
     # @option params [required, Integer] :attachment_size_in_bytes
     #   The size of the attachment in bytes.
@@ -810,10 +890,17 @@ module Aws::ConnectParticipant
     #   A case-sensitive name of the attachment being uploaded.
     #
     # @option params [required, String] :client_token
-    #   A unique case sensitive identifier to support idempotency of request.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :connection_token
     #   The authentication token associated with the participant's
@@ -864,7 +951,7 @@ module Aws::ConnectParticipant
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
