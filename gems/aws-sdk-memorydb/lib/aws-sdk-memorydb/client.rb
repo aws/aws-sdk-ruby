@@ -1381,6 +1381,8 @@ module Aws::MemoryDB
     #   * {Types::DescribeACLsResponse#acls #acls} => Array&lt;Types::ACL&gt;
     #   * {Types::DescribeACLsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_acls({
@@ -1442,6 +1444,8 @@ module Aws::MemoryDB
     #
     #   * {Types::DescribeClustersResponse#next_token #next_token} => String
     #   * {Types::DescribeClustersResponse#clusters #clusters} => Array&lt;Types::Cluster&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1539,6 +1543,8 @@ module Aws::MemoryDB
     #   * {Types::DescribeEngineVersionsResponse#next_token #next_token} => String
     #   * {Types::DescribeEngineVersionsResponse#engine_versions #engine_versions} => Array&lt;Types::EngineVersionInfo&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_engine_versions({
@@ -1609,6 +1615,8 @@ module Aws::MemoryDB
     #   * {Types::DescribeEventsResponse#next_token #next_token} => String
     #   * {Types::DescribeEventsResponse#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -1663,6 +1671,8 @@ module Aws::MemoryDB
     #   * {Types::DescribeParameterGroupsResponse#next_token #next_token} => String
     #   * {Types::DescribeParameterGroupsResponse#parameter_groups #parameter_groups} => Array&lt;Types::ParameterGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_parameter_groups({
@@ -1711,6 +1721,8 @@ module Aws::MemoryDB
     #   * {Types::DescribeParametersResponse#next_token #next_token} => String
     #   * {Types::DescribeParametersResponse#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_parameters({
@@ -1736,6 +1748,169 @@ module Aws::MemoryDB
     # @param [Hash] params ({})
     def describe_parameters(params = {}, options = {})
       req = build_request(:describe_parameters, params)
+      req.send_request(options)
+    end
+
+    # Returns information about reserved nodes for this account, or about a
+    # specified reserved node.
+    #
+    # @option params [String] :reservation_id
+    #   The reserved node identifier filter value. Use this parameter to show
+    #   only the reservation that matches the specified reservation ID.
+    #
+    # @option params [String] :reserved_nodes_offering_id
+    #   The offering identifier filter value. Use this parameter to show only
+    #   purchased reservations matching the specified offering identifier.
+    #
+    # @option params [String] :node_type
+    #   The node type filter value. Use this parameter to show only those
+    #   reservations matching the specified node type. For more information,
+    #   see [Supported node types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported
+    #
+    # @option params [String] :duration
+    #   The duration filter value, specified in years or seconds. Use this
+    #   parameter to show only reservations for this duration.
+    #
+    # @option params [String] :offering_type
+    #   The offering type filter value. Use this parameter to show only the
+    #   available offerings matching the specified offering type. Valid
+    #   values: "All Upfront"\|"Partial Upfront"\| "No Upfront"
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #
+    # @option params [String] :next_token
+    #   An optional marker returned from a prior request. Use this marker for
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by MaxRecords.
+    #
+    # @return [Types::DescribeReservedNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReservedNodesResponse#next_token #next_token} => String
+    #   * {Types::DescribeReservedNodesResponse#reserved_nodes #reserved_nodes} => Array&lt;Types::ReservedNode&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_reserved_nodes({
+    #     reservation_id: "String",
+    #     reserved_nodes_offering_id: "String",
+    #     node_type: "String",
+    #     duration: "String",
+    #     offering_type: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reserved_nodes #=> Array
+    #   resp.reserved_nodes[0].reservation_id #=> String
+    #   resp.reserved_nodes[0].reserved_nodes_offering_id #=> String
+    #   resp.reserved_nodes[0].node_type #=> String
+    #   resp.reserved_nodes[0].start_time #=> Time
+    #   resp.reserved_nodes[0].duration #=> Integer
+    #   resp.reserved_nodes[0].fixed_price #=> Float
+    #   resp.reserved_nodes[0].node_count #=> Integer
+    #   resp.reserved_nodes[0].offering_type #=> String
+    #   resp.reserved_nodes[0].state #=> String
+    #   resp.reserved_nodes[0].recurring_charges #=> Array
+    #   resp.reserved_nodes[0].recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.reserved_nodes[0].recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_nodes[0].arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeReservedNodes AWS API Documentation
+    #
+    # @overload describe_reserved_nodes(params = {})
+    # @param [Hash] params ({})
+    def describe_reserved_nodes(params = {}, options = {})
+      req = build_request(:describe_reserved_nodes, params)
+      req.send_request(options)
+    end
+
+    # Lists available reserved node offerings.
+    #
+    # @option params [String] :reserved_nodes_offering_id
+    #   The offering identifier filter value. Use this parameter to show only
+    #   the available offering that matches the specified reservation
+    #   identifier.
+    #
+    # @option params [String] :node_type
+    #   The node type for the reserved nodes. For more information, see
+    #   [Supported node types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported
+    #
+    # @option params [String] :duration
+    #   Duration filter value, specified in years or seconds. Use this
+    #   parameter to show only reservations for a given duration.
+    #
+    # @option params [String] :offering_type
+    #   The offering type filter value. Use this parameter to show only the
+    #   available offerings matching the specified offering type. Valid
+    #   values: "All Upfront"\|"Partial Upfront"\| "No Upfront"
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #
+    # @option params [String] :next_token
+    #   An optional marker returned from a prior request. Use this marker for
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by MaxRecords.
+    #
+    # @return [Types::DescribeReservedNodesOfferingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReservedNodesOfferingsResponse#next_token #next_token} => String
+    #   * {Types::DescribeReservedNodesOfferingsResponse#reserved_nodes_offerings #reserved_nodes_offerings} => Array&lt;Types::ReservedNodesOffering&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_reserved_nodes_offerings({
+    #     reserved_nodes_offering_id: "String",
+    #     node_type: "String",
+    #     duration: "String",
+    #     offering_type: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reserved_nodes_offerings #=> Array
+    #   resp.reserved_nodes_offerings[0].reserved_nodes_offering_id #=> String
+    #   resp.reserved_nodes_offerings[0].node_type #=> String
+    #   resp.reserved_nodes_offerings[0].duration #=> Integer
+    #   resp.reserved_nodes_offerings[0].fixed_price #=> Float
+    #   resp.reserved_nodes_offerings[0].offering_type #=> String
+    #   resp.reserved_nodes_offerings[0].recurring_charges #=> Array
+    #   resp.reserved_nodes_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.reserved_nodes_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeReservedNodesOfferings AWS API Documentation
+    #
+    # @overload describe_reserved_nodes_offerings(params = {})
+    # @param [Hash] params ({})
+    def describe_reserved_nodes_offerings(params = {}, options = {})
+      req = build_request(:describe_reserved_nodes_offerings, params)
       req.send_request(options)
     end
 
@@ -1766,6 +1941,8 @@ module Aws::MemoryDB
     #
     #   * {Types::DescribeServiceUpdatesResponse#next_token #next_token} => String
     #   * {Types::DescribeServiceUpdatesResponse#service_updates #service_updates} => Array&lt;Types::ServiceUpdate&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1838,6 +2015,8 @@ module Aws::MemoryDB
     #
     #   * {Types::DescribeSnapshotsResponse#next_token #next_token} => String
     #   * {Types::DescribeSnapshotsResponse#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1912,6 +2091,8 @@ module Aws::MemoryDB
     #   * {Types::DescribeSubnetGroupsResponse#next_token #next_token} => String
     #   * {Types::DescribeSubnetGroupsResponse#subnet_groups #subnet_groups} => Array&lt;Types::SubnetGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_subnet_groups({
@@ -1965,6 +2146,8 @@ module Aws::MemoryDB
     #
     #   * {Types::DescribeUsersResponse#users #users} => Array&lt;Types::User&gt;
     #   * {Types::DescribeUsersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2155,6 +2338,66 @@ module Aws::MemoryDB
     # @param [Hash] params ({})
     def list_tags(params = {}, options = {})
       req = build_request(:list_tags, params)
+      req.send_request(options)
+    end
+
+    # Allows you to purchase a reserved node offering. Reserved nodes are
+    # not eligible for cancellation and are non-refundable.
+    #
+    # @option params [required, String] :reserved_nodes_offering_id
+    #   The ID of the reserved node offering to purchase.
+    #
+    # @option params [String] :reservation_id
+    #   A customer-specified identifier to track this reservation.
+    #
+    # @option params [Integer] :node_count
+    #   The number of node instances to reserve.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
+    # @return [Types::PurchaseReservedNodesOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PurchaseReservedNodesOfferingResponse#reserved_node #reserved_node} => Types::ReservedNode
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.purchase_reserved_nodes_offering({
+    #     reserved_nodes_offering_id: "String", # required
+    #     reservation_id: "String",
+    #     node_count: 1,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reserved_node.reservation_id #=> String
+    #   resp.reserved_node.reserved_nodes_offering_id #=> String
+    #   resp.reserved_node.node_type #=> String
+    #   resp.reserved_node.start_time #=> Time
+    #   resp.reserved_node.duration #=> Integer
+    #   resp.reserved_node.fixed_price #=> Float
+    #   resp.reserved_node.node_count #=> Integer
+    #   resp.reserved_node.offering_type #=> String
+    #   resp.reserved_node.state #=> String
+    #   resp.reserved_node.recurring_charges #=> Array
+    #   resp.reserved_node.recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.reserved_node.recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_node.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/PurchaseReservedNodesOffering AWS API Documentation
+    #
+    # @overload purchase_reserved_nodes_offering(params = {})
+    # @param [Hash] params ({})
+    def purchase_reserved_nodes_offering(params = {}, options = {})
+      req = build_request(:purchase_reserved_nodes_offering, params)
       req.send_request(options)
     end
 
@@ -2657,7 +2900,7 @@ module Aws::MemoryDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

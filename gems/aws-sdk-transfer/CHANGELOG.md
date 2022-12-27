@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-12-27)
+------------------
+
+* Feature - Add additional operations to throw ThrottlingExceptions
+
 1.64.0 (2022-12-21)
 ------------------
 

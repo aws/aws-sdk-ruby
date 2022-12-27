@@ -56,6 +56,10 @@ module Aws::MemoryDB
   # * {ParameterGroupAlreadyExistsFault}
   # * {ParameterGroupNotFoundFault}
   # * {ParameterGroupQuotaExceededFault}
+  # * {ReservedNodeAlreadyExistsFault}
+  # * {ReservedNodeNotFoundFault}
+  # * {ReservedNodeQuotaExceededFault}
+  # * {ReservedNodesOfferingNotFoundFault}
   # * {ServiceLinkedRoleNotFoundFault}
   # * {ServiceUpdateNotFoundFault}
   # * {ShardNotFoundFault}
@@ -378,6 +382,46 @@ module Aws::MemoryDB
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MemoryDB::Types::ParameterGroupQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ReservedNodeAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MemoryDB::Types::ReservedNodeAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ReservedNodeNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MemoryDB::Types::ReservedNodeNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ReservedNodeQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MemoryDB::Types::ReservedNodeQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ReservedNodesOfferingNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MemoryDB::Types::ReservedNodesOfferingNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

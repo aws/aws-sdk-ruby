@@ -96,6 +96,10 @@ module Aws::MemoryDB
             Aws::MemoryDB::Endpoints::DescribeParameterGroups.build(context)
           when :describe_parameters
             Aws::MemoryDB::Endpoints::DescribeParameters.build(context)
+          when :describe_reserved_nodes
+            Aws::MemoryDB::Endpoints::DescribeReservedNodes.build(context)
+          when :describe_reserved_nodes_offerings
+            Aws::MemoryDB::Endpoints::DescribeReservedNodesOfferings.build(context)
           when :describe_service_updates
             Aws::MemoryDB::Endpoints::DescribeServiceUpdates.build(context)
           when :describe_snapshots
@@ -110,6 +114,8 @@ module Aws::MemoryDB
             Aws::MemoryDB::Endpoints::ListAllowedNodeTypeUpdates.build(context)
           when :list_tags
             Aws::MemoryDB::Endpoints::ListTags.build(context)
+          when :purchase_reserved_nodes_offering
+            Aws::MemoryDB::Endpoints::PurchaseReservedNodesOffering.build(context)
           when :reset_parameter_group
             Aws::MemoryDB::Endpoints::ResetParameterGroup.build(context)
           when :tag_resource

@@ -1422,6 +1422,160 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # @!attribute [rw] reserved_nodes_offering_id
+    #   The offering identifier filter value. Use this parameter to show
+    #   only the available offering that matches the specified reservation
+    #   identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The node type for the reserved nodes. For more information, see
+    #   [Supported node types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   Duration filter value, specified in years or seconds. Use this
+    #   parameter to show only reservations for a given duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   The offering type filter value. Use this parameter to show only the
+    #   available offerings matching the specified offering type. Valid
+    #   values: "All Upfront"\|"Partial Upfront"\| "No Upfront"
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeReservedNodesOfferingsRequest AWS API Documentation
+    #
+    class DescribeReservedNodesOfferingsRequest < Struct.new(
+      :reserved_nodes_offering_id,
+      :node_type,
+      :duration,
+      :offering_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_nodes_offerings
+    #   Lists available reserved node offerings.
+    #   @return [Array<Types::ReservedNodesOffering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeReservedNodesOfferingsResponse AWS API Documentation
+    #
+    class DescribeReservedNodesOfferingsResponse < Struct.new(
+      :next_token,
+      :reserved_nodes_offerings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reservation_id
+    #   The reserved node identifier filter value. Use this parameter to
+    #   show only the reservation that matches the specified reservation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_nodes_offering_id
+    #   The offering identifier filter value. Use this parameter to show
+    #   only purchased reservations matching the specified offering
+    #   identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The node type filter value. Use this parameter to show only those
+    #   reservations matching the specified node type. For more information,
+    #   see [Supported node types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The duration filter value, specified in years or seconds. Use this
+    #   parameter to show only reservations for this duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   The offering type filter value. Use this parameter to show only the
+    #   available offerings matching the specified offering type. Valid
+    #   values: "All Upfront"\|"Partial Upfront"\| "No Upfront"
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeReservedNodesRequest AWS API Documentation
+    #
+    class DescribeReservedNodesRequest < Struct.new(
+      :reservation_id,
+      :reserved_nodes_offering_id,
+      :node_type,
+      :duration,
+      :offering_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_nodes
+    #   Returns information about reserved nodes for this account, or about
+    #   a specified reserved node.
+    #   @return [Array<Types::ReservedNode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeReservedNodesResponse AWS API Documentation
+    #
+    class DescribeReservedNodesResponse < Struct.new(
+      :next_token,
+      :reserved_nodes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_update_name
     #   The unique ID of the service update to describe.
     #   @return [String]
@@ -2100,6 +2254,68 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # @!attribute [rw] reserved_nodes_offering_id
+    #   The ID of the reserved node offering to purchase.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_id
+    #   A customer-specified identifier to track this reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_count
+    #   The number of node instances to reserve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/PurchaseReservedNodesOfferingRequest AWS API Documentation
+    #
+    class PurchaseReservedNodesOfferingRequest < Struct.new(
+      :reserved_nodes_offering_id,
+      :reservation_id,
+      :node_count,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reserved_node
+    #   Represents the output of a `PurchaseReservedNodesOffering`
+    #   operation.
+    #   @return [Types::ReservedNode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/PurchaseReservedNodesOfferingResponse AWS API Documentation
+    #
+    class PurchaseReservedNodesOfferingResponse < Struct.new(
+      :reserved_node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recurring charge to run this reserved node.
+    #
+    # @!attribute [rw] recurring_charge_amount
+    #   The amount of the recurring charge to run this reserved node.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recurring_charge_frequency
+    #   The frequency of the recurring price charged to run this reserved
+    #   node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/RecurringCharge AWS API Documentation
+    #
+    class RecurringCharge < Struct.new(
+      :recurring_charge_amount,
+      :recurring_charge_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to configure the number of replicas in a shard
     #
     # @!attribute [rw] replica_count
@@ -2113,6 +2329,139 @@ module Aws::MemoryDB
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Represents the output of a `PurchaseReservedNodesOffering` operation.
+    #
+    # @!attribute [rw] reservation_id
+    #   A customer-specified identifier to track this reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_nodes_offering_id
+    #   The ID of the reserved node offering to purchase.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The node type for the reserved nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time the reservation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] duration
+    #   The duration of the reservation in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fixed_price
+    #   The fixed price charged for this reserved node.
+    #   @return [Float]
+    #
+    # @!attribute [rw] node_count
+    #   The number of nodes that have been reserved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] offering_type
+    #   The offering type of this reserved node.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the reserved node.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurring_charges
+    #   The recurring price charged to run this reserved node.
+    #   @return [Array<Types::RecurringCharge>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the reserved node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ReservedNode AWS API Documentation
+    #
+    class ReservedNode < Struct.new(
+      :reservation_id,
+      :reserved_nodes_offering_id,
+      :node_type,
+      :start_time,
+      :duration,
+      :fixed_price,
+      :node_count,
+      :offering_type,
+      :state,
+      :recurring_charges,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You already have a reservation with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ReservedNodeAlreadyExistsFault AWS API Documentation
+    #
+    class ReservedNodeAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The requested node does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ReservedNodeNotFoundFault AWS API Documentation
+    #
+    class ReservedNodeNotFoundFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the user's
+    # node quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ReservedNodeQuotaExceededFault AWS API Documentation
+    #
+    class ReservedNodeQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The offering type of this node.
+    #
+    # @!attribute [rw] reserved_nodes_offering_id
+    #   The offering identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The node type for the reserved nodes. For more information, see
+    #   [Supported node types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The duration of the reservation in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fixed_price
+    #   The fixed price charged for this reserved node.
+    #   @return [Float]
+    #
+    # @!attribute [rw] offering_type
+    #   The offering type of this reserved node.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurring_charges
+    #   The recurring price charged to run this reserved node.
+    #   @return [Array<Types::RecurringCharge>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ReservedNodesOffering AWS API Documentation
+    #
+    class ReservedNodesOffering < Struct.new(
+      :reserved_nodes_offering_id,
+      :node_type,
+      :duration,
+      :fixed_price,
+      :offering_type,
+      :recurring_charges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested node offering does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ReservedNodesOfferingNotFoundFault AWS API Documentation
+    #
+    class ReservedNodesOfferingNotFoundFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] parameter_group_name
     #   The name of the parameter group to reset.

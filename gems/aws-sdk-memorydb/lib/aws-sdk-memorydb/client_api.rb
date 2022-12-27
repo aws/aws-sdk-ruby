@@ -83,6 +83,10 @@ module Aws::MemoryDB
     DescribeParameterGroupsResponse = Shapes::StructureShape.new(name: 'DescribeParameterGroupsResponse')
     DescribeParametersRequest = Shapes::StructureShape.new(name: 'DescribeParametersRequest')
     DescribeParametersResponse = Shapes::StructureShape.new(name: 'DescribeParametersResponse')
+    DescribeReservedNodesOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeReservedNodesOfferingsRequest')
+    DescribeReservedNodesOfferingsResponse = Shapes::StructureShape.new(name: 'DescribeReservedNodesOfferingsResponse')
+    DescribeReservedNodesRequest = Shapes::StructureShape.new(name: 'DescribeReservedNodesRequest')
+    DescribeReservedNodesResponse = Shapes::StructureShape.new(name: 'DescribeReservedNodesResponse')
     DescribeServiceUpdatesRequest = Shapes::StructureShape.new(name: 'DescribeServiceUpdatesRequest')
     DescribeServiceUpdatesResponse = Shapes::StructureShape.new(name: 'DescribeServiceUpdatesResponse')
     DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
@@ -147,7 +151,19 @@ module Aws::MemoryDB
     PasswordListInput = Shapes::ListShape.new(name: 'PasswordListInput')
     PendingModifiedServiceUpdate = Shapes::StructureShape.new(name: 'PendingModifiedServiceUpdate')
     PendingModifiedServiceUpdateList = Shapes::ListShape.new(name: 'PendingModifiedServiceUpdateList')
+    PurchaseReservedNodesOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedNodesOfferingRequest')
+    PurchaseReservedNodesOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseReservedNodesOfferingResponse')
+    RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
+    RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
     ReplicaConfigurationRequest = Shapes::StructureShape.new(name: 'ReplicaConfigurationRequest')
+    ReservedNode = Shapes::StructureShape.new(name: 'ReservedNode')
+    ReservedNodeAlreadyExistsFault = Shapes::StructureShape.new(name: 'ReservedNodeAlreadyExistsFault')
+    ReservedNodeList = Shapes::ListShape.new(name: 'ReservedNodeList')
+    ReservedNodeNotFoundFault = Shapes::StructureShape.new(name: 'ReservedNodeNotFoundFault')
+    ReservedNodeQuotaExceededFault = Shapes::StructureShape.new(name: 'ReservedNodeQuotaExceededFault')
+    ReservedNodesOffering = Shapes::StructureShape.new(name: 'ReservedNodesOffering')
+    ReservedNodesOfferingList = Shapes::ListShape.new(name: 'ReservedNodesOfferingList')
+    ReservedNodesOfferingNotFoundFault = Shapes::StructureShape.new(name: 'ReservedNodesOfferingNotFoundFault')
     ResetParameterGroupRequest = Shapes::StructureShape.new(name: 'ResetParameterGroupRequest')
     ResetParameterGroupResponse = Shapes::StructureShape.new(name: 'ResetParameterGroupResponse')
     ReshardingStatus = Shapes::StructureShape.new(name: 'ReshardingStatus')
@@ -512,6 +528,31 @@ module Aws::MemoryDB
     DescribeParametersResponse.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersList, location_name: "Parameters"))
     DescribeParametersResponse.struct_class = Types::DescribeParametersResponse
 
+    DescribeReservedNodesOfferingsRequest.add_member(:reserved_nodes_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId"))
+    DescribeReservedNodesOfferingsRequest.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    DescribeReservedNodesOfferingsRequest.add_member(:duration, Shapes::ShapeRef.new(shape: String, location_name: "Duration"))
+    DescribeReservedNodesOfferingsRequest.add_member(:offering_type, Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
+    DescribeReservedNodesOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
+    DescribeReservedNodesOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReservedNodesOfferingsRequest.struct_class = Types::DescribeReservedNodesOfferingsRequest
+
+    DescribeReservedNodesOfferingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReservedNodesOfferingsResponse.add_member(:reserved_nodes_offerings, Shapes::ShapeRef.new(shape: ReservedNodesOfferingList, location_name: "ReservedNodesOfferings"))
+    DescribeReservedNodesOfferingsResponse.struct_class = Types::DescribeReservedNodesOfferingsResponse
+
+    DescribeReservedNodesRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservationId"))
+    DescribeReservedNodesRequest.add_member(:reserved_nodes_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId"))
+    DescribeReservedNodesRequest.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    DescribeReservedNodesRequest.add_member(:duration, Shapes::ShapeRef.new(shape: String, location_name: "Duration"))
+    DescribeReservedNodesRequest.add_member(:offering_type, Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
+    DescribeReservedNodesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
+    DescribeReservedNodesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReservedNodesRequest.struct_class = Types::DescribeReservedNodesRequest
+
+    DescribeReservedNodesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReservedNodesResponse.add_member(:reserved_nodes, Shapes::ShapeRef.new(shape: ReservedNodeList, location_name: "ReservedNodes"))
+    DescribeReservedNodesResponse.struct_class = Types::DescribeReservedNodesResponse
+
     DescribeServiceUpdatesRequest.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     DescribeServiceUpdatesRequest.add_member(:cluster_names, Shapes::ShapeRef.new(shape: ClusterNameList, location_name: "ClusterNames"))
     DescribeServiceUpdatesRequest.add_member(:status, Shapes::ShapeRef.new(shape: ServiceUpdateStatusList, location_name: "Status"))
@@ -692,8 +733,56 @@ module Aws::MemoryDB
 
     PendingModifiedServiceUpdateList.member = Shapes::ShapeRef.new(shape: PendingModifiedServiceUpdate)
 
+    PurchaseReservedNodesOfferingRequest.add_member(:reserved_nodes_offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReservedNodesOfferingId"))
+    PurchaseReservedNodesOfferingRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservationId"))
+    PurchaseReservedNodesOfferingRequest.add_member(:node_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NodeCount"))
+    PurchaseReservedNodesOfferingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PurchaseReservedNodesOfferingRequest.struct_class = Types::PurchaseReservedNodesOfferingRequest
+
+    PurchaseReservedNodesOfferingResponse.add_member(:reserved_node, Shapes::ShapeRef.new(shape: ReservedNode, location_name: "ReservedNode"))
+    PurchaseReservedNodesOfferingResponse.struct_class = Types::PurchaseReservedNodesOfferingResponse
+
+    RecurringCharge.add_member(:recurring_charge_amount, Shapes::ShapeRef.new(shape: Double, location_name: "RecurringChargeAmount"))
+    RecurringCharge.add_member(:recurring_charge_frequency, Shapes::ShapeRef.new(shape: String, location_name: "RecurringChargeFrequency"))
+    RecurringCharge.struct_class = Types::RecurringCharge
+
+    RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge)
+
     ReplicaConfigurationRequest.add_member(:replica_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ReplicaCount"))
     ReplicaConfigurationRequest.struct_class = Types::ReplicaConfigurationRequest
+
+    ReservedNode.add_member(:reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservationId"))
+    ReservedNode.add_member(:reserved_nodes_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId"))
+    ReservedNode.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    ReservedNode.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
+    ReservedNode.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "Duration"))
+    ReservedNode.add_member(:fixed_price, Shapes::ShapeRef.new(shape: Double, location_name: "FixedPrice"))
+    ReservedNode.add_member(:node_count, Shapes::ShapeRef.new(shape: Integer, location_name: "NodeCount"))
+    ReservedNode.add_member(:offering_type, Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
+    ReservedNode.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
+    ReservedNode.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedNode.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ReservedNode.struct_class = Types::ReservedNode
+
+    ReservedNodeAlreadyExistsFault.struct_class = Types::ReservedNodeAlreadyExistsFault
+
+    ReservedNodeList.member = Shapes::ShapeRef.new(shape: ReservedNode)
+
+    ReservedNodeNotFoundFault.struct_class = Types::ReservedNodeNotFoundFault
+
+    ReservedNodeQuotaExceededFault.struct_class = Types::ReservedNodeQuotaExceededFault
+
+    ReservedNodesOffering.add_member(:reserved_nodes_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId"))
+    ReservedNodesOffering.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    ReservedNodesOffering.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "Duration"))
+    ReservedNodesOffering.add_member(:fixed_price, Shapes::ShapeRef.new(shape: Double, location_name: "FixedPrice"))
+    ReservedNodesOffering.add_member(:offering_type, Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
+    ReservedNodesOffering.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedNodesOffering.struct_class = Types::ReservedNodesOffering
+
+    ReservedNodesOfferingList.member = Shapes::ShapeRef.new(shape: ReservedNodesOffering)
+
+    ReservedNodesOfferingNotFoundFault.struct_class = Types::ReservedNodesOfferingNotFoundFault
 
     ResetParameterGroupRequest.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
     ResetParameterGroupRequest.add_member(:all_parameters, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllParameters"))
@@ -1146,6 +1235,12 @@ module Aws::MemoryDB
         o.output = Shapes::ShapeRef.new(shape: DescribeACLsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ACLNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -1158,6 +1253,12 @@ module Aws::MemoryDB
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_engine_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -1169,6 +1270,12 @@ module Aws::MemoryDB
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_events, Seahorse::Model::Operation.new.tap do |o|
@@ -1180,6 +1287,12 @@ module Aws::MemoryDB
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_parameter_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1192,6 +1305,12 @@ module Aws::MemoryDB
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -1204,6 +1323,48 @@ module Aws::MemoryDB
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_reserved_nodes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReservedNodes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReservedNodesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReservedNodesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_reserved_nodes_offerings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReservedNodesOfferings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReservedNodesOfferingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReservedNodesOfferingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodesOfferingNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_service_updates, Seahorse::Model::Operation.new.tap do |o|
@@ -1214,6 +1375,12 @@ module Aws::MemoryDB
         o.output = Shapes::ShapeRef.new(shape: DescribeServiceUpdatesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_snapshots, Seahorse::Model::Operation.new.tap do |o|
@@ -1226,6 +1393,12 @@ module Aws::MemoryDB
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_subnet_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1236,6 +1409,12 @@ module Aws::MemoryDB
         o.output = Shapes::ShapeRef.new(shape: DescribeSubnetGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_users, Seahorse::Model::Operation.new.tap do |o|
@@ -1246,6 +1425,12 @@ module Aws::MemoryDB
         o.output = Shapes::ShapeRef.new(shape: DescribeUsersResponse)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:failover_shard, Seahorse::Model::Operation.new.tap do |o|
@@ -1291,6 +1476,21 @@ module Aws::MemoryDB
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ACLNotFoundFault)
+      end)
+
+      api.add_operation(:purchase_reserved_nodes_offering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PurchaseReservedNodesOffering"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PurchaseReservedNodesOfferingRequest)
+        o.output = Shapes::ShapeRef.new(shape: PurchaseReservedNodesOfferingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodesOfferingNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
       api.add_operation(:reset_parameter_group, Seahorse::Model::Operation.new.tap do |o|
