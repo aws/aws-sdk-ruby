@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Oga Java requires JRuby.runtime
+require 'jruby' if RUBY_PLATFORM == 'java'
 require 'oga'
 
 module Aws

@@ -18,24 +18,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [2.3, 2.4, 2.5, 2.6, 2.7, '3.0', 3.1, jruby-9.1, jruby-9.2, jruby-9.3]
-        env: [PURE_RUBY, KITCHEN_SINK, CRT]
+        ruby: [2.3, 2.4, 2.5, 2.6, 2.7, '3.0', 3.1, 3.2, jruby-9.1, jruby-9.2, jruby-9.3, jruby-9.4]
+        env: [KITCHEN_SINK, CRT]
         exclude:
-          - ruby: jruby-9.1
-            env: KITCHEN_SINK
-          - ruby: jruby-9.2
-            env: KITCHEN_SINK
-          - ruby: jruby-9.3
-            env: KITCHEN_SINK
+          # CRT supports Ruby >= 2.5
           - ruby: 2.3
             env: CRT
           - ruby: 2.4
             env: CRT
           - ruby: jruby-9.1
-            env: CRT
-          - ruby: jruby-9.2
-            env: CRT
-          - ruby: jruby-9.3
             env: CRT
 
     steps:
@@ -51,8 +42,8 @@ jobs:
 
       - name: Install gems
         run: |
-          echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK CRT=$CRT
-          bundle install --without docs repl
+          echo KITCHEN_SINK=$KITCHEN_SINK CRT=$CRT
+          bundle install --without docs repl development
 
       - name: SDK Build
         run: bundle exec rake build

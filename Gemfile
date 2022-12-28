@@ -4,23 +4,23 @@ source 'https://rubygems.org'
 
 gem 'rake', require: false
 
+# SDK feature dependencies
+gem 'aws-crt' if ENV['CRT']
 gem 'http-2'
 gem 'jmespath'
-gem 'aws-crt' if ENV['CRT']
 
-# faster xml libraries
-unless ENV['PURE_RUBY']
-  gem 'nokogiri', '>= 1.6.8.1'
-  gem 'oga'
+# json and xml parsers
+gem 'json'
+gem 'nokogiri', '>= 1.6.8.1'
+gem 'oga'
+gem 'rexml'
 
-  unless defined?(JRUBY_VERSION)
-    gem 'libxml-ruby'
-    gem 'ox'
-  end
+# These json and xml parsers do not have java gems
+unless defined?(JRUBY_VERSION)
+  gem 'libxml-ruby'
+  gem 'oj'
+  gem 'ox'
 end
-
-# faster json library
-gem 'oj' unless ENV['PURE_RUBY'] && defined?(JRUBY_VERSION)
 
 group :test do
   gem 'addressable'
