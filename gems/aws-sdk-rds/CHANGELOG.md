@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2022-12-28)
+------------------
+
+* Feature - This release adds support for Custom Engine Version (CEV) on RDS Custom SQL Server.
+
 1.167.0 (2022-12-22)
 ------------------
 

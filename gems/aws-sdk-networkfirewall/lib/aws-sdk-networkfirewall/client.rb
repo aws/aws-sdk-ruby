@@ -660,6 +660,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
@@ -1152,6 +1153,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
@@ -1359,6 +1361,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
@@ -3004,7 +3007,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

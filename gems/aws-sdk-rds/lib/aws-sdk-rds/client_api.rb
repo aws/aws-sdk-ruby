@@ -114,6 +114,7 @@ module Aws::RDS
     CreateOptionGroupMessage = Shapes::StructureShape.new(name: 'CreateOptionGroupMessage')
     CreateOptionGroupResult = Shapes::StructureShape.new(name: 'CreateOptionGroupResult')
     CustomAvailabilityZoneNotFoundFault = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneNotFoundFault')
+    CustomDBEngineVersionAMI = Shapes::StructureShape.new(name: 'CustomDBEngineVersionAMI')
     CustomDBEngineVersionAlreadyExistsFault = Shapes::StructureShape.new(name: 'CustomDBEngineVersionAlreadyExistsFault')
     CustomDBEngineVersionManifest = Shapes::StringShape.new(name: 'CustomDBEngineVersionManifest')
     CustomDBEngineVersionNotFoundFault = Shapes::StructureShape.new(name: 'CustomDBEngineVersionNotFoundFault')
@@ -337,6 +338,7 @@ module Aws::RDS
     DownloadDBLogFilePortionMessage = Shapes::StructureShape.new(name: 'DownloadDBLogFilePortionMessage')
     EC2SecurityGroup = Shapes::StructureShape.new(name: 'EC2SecurityGroup')
     EC2SecurityGroupList = Shapes::ListShape.new(name: 'EC2SecurityGroupList')
+    Ec2ImagePropertiesNotSupportedFault = Shapes::StructureShape.new(name: 'Ec2ImagePropertiesNotSupportedFault')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EngineDefaults = Shapes::StructureShape.new(name: 'EngineDefaults')
     EngineFamily = Shapes::StringShape.new(name: 'EngineFamily')
@@ -869,11 +871,12 @@ module Aws::RDS
 
     CreateCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
     CreateCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
-    CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "DatabaseInstallationFilesS3BucketName"))
+    CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "DatabaseInstallationFilesS3BucketName"))
     CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_prefix, Shapes::ShapeRef.new(shape: String255, location_name: "DatabaseInstallationFilesS3Prefix"))
-    CreateCustomDBEngineVersionMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyIdOrArn, required: true, location_name: "KMSKeyId"))
+    CreateCustomDBEngineVersionMessage.add_member(:image_id, Shapes::ShapeRef.new(shape: String255, location_name: "ImageId"))
+    CreateCustomDBEngineVersionMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyIdOrArn, location_name: "KMSKeyId"))
     CreateCustomDBEngineVersionMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateCustomDBEngineVersionMessage.add_member(:manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, required: true, location_name: "Manifest"))
+    CreateCustomDBEngineVersionMessage.add_member(:manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, location_name: "Manifest"))
     CreateCustomDBEngineVersionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCustomDBEngineVersionMessage.struct_class = Types::CreateCustomDBEngineVersionMessage
 
@@ -1154,6 +1157,10 @@ module Aws::RDS
 
     CustomAvailabilityZoneNotFoundFault.struct_class = Types::CustomAvailabilityZoneNotFoundFault
 
+    CustomDBEngineVersionAMI.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "ImageId"))
+    CustomDBEngineVersionAMI.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    CustomDBEngineVersionAMI.struct_class = Types::CustomDBEngineVersionAMI
+
     CustomDBEngineVersionAlreadyExistsFault.struct_class = Types::CustomDBEngineVersionAlreadyExistsFault
 
     CustomDBEngineVersionNotFoundFault.struct_class = Types::CustomDBEngineVersionNotFoundFault
@@ -1391,6 +1398,8 @@ module Aws::RDS
     DBEngineVersion.add_member(:db_engine_description, Shapes::ShapeRef.new(shape: String, location_name: "DBEngineDescription"))
     DBEngineVersion.add_member(:db_engine_version_description, Shapes::ShapeRef.new(shape: String, location_name: "DBEngineVersionDescription"))
     DBEngineVersion.add_member(:default_character_set, Shapes::ShapeRef.new(shape: CharacterSet, location_name: "DefaultCharacterSet"))
+    DBEngineVersion.add_member(:image, Shapes::ShapeRef.new(shape: CustomDBEngineVersionAMI, location_name: "Image"))
+    DBEngineVersion.add_member(:db_engine_media_type, Shapes::ShapeRef.new(shape: String, location_name: "DBEngineMediaType"))
     DBEngineVersion.add_member(:supported_character_sets, Shapes::ShapeRef.new(shape: SupportedCharacterSetsList, location_name: "SupportedCharacterSets"))
     DBEngineVersion.add_member(:supported_nchar_character_sets, Shapes::ShapeRef.new(shape: SupportedCharacterSetsList, location_name: "SupportedNcharCharacterSets"))
     DBEngineVersion.add_member(:valid_upgrade_target, Shapes::ShapeRef.new(shape: ValidUpgradeTargetList, location_name: "ValidUpgradeTarget"))
@@ -2248,6 +2257,8 @@ module Aws::RDS
     EC2SecurityGroup.struct_class = Types::EC2SecurityGroup
 
     EC2SecurityGroupList.member = Shapes::ShapeRef.new(shape: EC2SecurityGroup, location_name: "EC2SecurityGroup")
+
+    Ec2ImagePropertiesNotSupportedFault.struct_class = Types::Ec2ImagePropertiesNotSupportedFault
 
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
@@ -3824,6 +3835,7 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: DBEngineVersion)
         o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: Ec2ImagePropertiesNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 

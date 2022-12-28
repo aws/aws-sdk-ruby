@@ -185,6 +185,7 @@ module Aws::NetworkFirewall
     StatelessRuleGroupReferences = Shapes::ListShape.new(name: 'StatelessRuleGroupReferences')
     StatelessRules = Shapes::ListShape.new(name: 'StatelessRules')
     StatelessRulesAndCustomActions = Shapes::StructureShape.new(name: 'StatelessRulesAndCustomActions')
+    StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     StreamExceptionPolicy = Shapes::StringShape.new(name: 'StreamExceptionPolicy')
     SubnetMapping = Shapes::StructureShape.new(name: 'SubnetMapping')
     SubnetMappings = Shapes::ListShape.new(name: 'SubnetMappings')
@@ -265,6 +266,7 @@ module Aws::NetworkFirewall
     Attachment.add_member(:subnet_id, Shapes::ShapeRef.new(shape: AzSubnet, location_name: "SubnetId"))
     Attachment.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
     Attachment.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "Status"))
+    Attachment.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
     Attachment.struct_class = Types::Attachment
 
     AzSubnets.member = Shapes::ShapeRef.new(shape: AzSubnet)

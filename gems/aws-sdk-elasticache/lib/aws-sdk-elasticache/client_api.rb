@@ -348,6 +348,7 @@ module Aws::ElastiCache
     TestFailoverNotAvailableFault = Shapes::StructureShape.new(name: 'TestFailoverNotAvailableFault')
     TestFailoverResult = Shapes::StructureShape.new(name: 'TestFailoverResult')
     TimeRangeFilter = Shapes::StructureShape.new(name: 'TimeRangeFilter')
+    TransitEncryptionMode = Shapes::StringShape.new(name: 'TransitEncryptionMode')
     UGReplicationGroupIdList = Shapes::ListShape.new(name: 'UGReplicationGroupIdList')
     UnprocessedUpdateAction = Shapes::StructureShape.new(name: 'UnprocessedUpdateAction')
     UnprocessedUpdateActionList = Shapes::ListShape.new(name: 'UnprocessedUpdateActionList')
@@ -454,6 +455,7 @@ module Aws::ElastiCache
     CacheCluster.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationList, location_name: "LogDeliveryConfigurations"))
     CacheCluster.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CacheCluster.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
+    CacheCluster.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
     CacheCluster.struct_class = Types::CacheCluster
 
     CacheClusterAlreadyExistsFault.struct_class = Types::CacheClusterAlreadyExistsFault
@@ -744,6 +746,7 @@ module Aws::ElastiCache
     CreateReplicationGroupMessage.add_member(:data_tiering_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DataTieringEnabled"))
     CreateReplicationGroupMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateReplicationGroupMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
+    CreateReplicationGroupMessage.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
     CreateReplicationGroupMessage.struct_class = Types::CreateReplicationGroupMessage
 
     CreateReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -1244,6 +1247,8 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:remove_user_groups, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RemoveUserGroups"))
     ModifyReplicationGroupMessage.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationRequestList, location_name: "LogDeliveryConfigurations"))
     ModifyReplicationGroupMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
+    ModifyReplicationGroupMessage.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
+    ModifyReplicationGroupMessage.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
     ModifyReplicationGroupMessage.struct_class = Types::ModifyReplicationGroupMessage
 
     ModifyReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -1393,6 +1398,8 @@ module Aws::ElastiCache
     PendingModifiedValues.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
     PendingModifiedValues.add_member(:auth_token_status, Shapes::ShapeRef.new(shape: AuthTokenUpdateStatus, location_name: "AuthTokenStatus"))
     PendingModifiedValues.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: PendingLogDeliveryConfigurationList, location_name: "LogDeliveryConfigurations"))
+    PendingModifiedValues.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
+    PendingModifiedValues.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PreferredAvailabilityZoneList.member = Shapes::ShapeRef.new(shape: String, location_name: "PreferredAvailabilityZone")
@@ -1480,6 +1487,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoMinorVersionUpgrade"))
     ReplicationGroup.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     ReplicationGroup.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
+    ReplicationGroup.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault
@@ -1506,6 +1514,8 @@ module Aws::ElastiCache
     ReplicationGroupPendingModifiedValues.add_member(:auth_token_status, Shapes::ShapeRef.new(shape: AuthTokenUpdateStatus, location_name: "AuthTokenStatus"))
     ReplicationGroupPendingModifiedValues.add_member(:user_groups, Shapes::ShapeRef.new(shape: UserGroupsUpdateStatus, location_name: "UserGroups"))
     ReplicationGroupPendingModifiedValues.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: PendingLogDeliveryConfigurationList, location_name: "LogDeliveryConfigurations"))
+    ReplicationGroupPendingModifiedValues.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
+    ReplicationGroupPendingModifiedValues.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
     ReplicationGroupPendingModifiedValues.struct_class = Types::ReplicationGroupPendingModifiedValues
 
     ReservedCacheNode.add_member(:reserved_cache_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedCacheNodeId"))

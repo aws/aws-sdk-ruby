@@ -1918,54 +1918,7 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates a custom DB engine version (CEV). A CEV is a binary volume
-    # snapshot of a database engine and specific AMI. The supported engines
-    # are the following:
-    #
-    # * Oracle Database 12.1 Enterprise Edition with the January 2021 or
-    #   later RU/RUR
-    #
-    # * Oracle Database 19c Enterprise Edition with the January 2021 or
-    #   later RU/RUR
-    #
-    # Amazon RDS, which is a fully managed service, supplies the Amazon
-    # Machine Image (AMI) and database software. The Amazon RDS database
-    # software is preinstalled, so you need only select a DB engine and
-    # version, and create your database. With Amazon RDS Custom for Oracle,
-    # you upload your database installation files in Amazon S3.
-    #
-    # When you create a custom engine version, you specify the files in a
-    # JSON document called a CEV manifest. This document describes
-    # installation .zip files stored in Amazon S3. RDS Custom creates your
-    # CEV from the installation files that you provided. This service model
-    # is called Bring Your Own Media (BYOM).
-    #
-    # Creation takes approximately two hours. If creation fails, RDS Custom
-    # issues `RDS-EVENT-0196` with the message `Creation failed for custom
-    # engine version`, and includes details about the failure. For example,
-    # the event prints missing files.
-    #
-    # After you create the CEV, it is available for use. You can create
-    # multiple CEVs, and create multiple RDS Custom instances from any CEV.
-    # You can also change the status of a CEV to make it available or
-    # inactive.
-    #
-    # <note markdown="1"> The MediaImport service that imports files from Amazon S3 to create
-    # CEVs isn't integrated with Amazon Web Services CloudTrail. If you
-    # turn on data logging for Amazon RDS in CloudTrail, calls to the
-    # `CreateCustomDbEngineVersion` event aren't logged. However, you might
-    # see calls from the API gateway that accesses your Amazon S3 bucket.
-    # These calls originate from the MediaImport service for the
-    # `CreateCustomDbEngineVersion` event.
-    #
-    #  </note>
-    #
-    # For more information, see [ Creating a CEV][1] in the *Amazon RDS User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.create
+    # Creates a custom DB engine version (CEV).
     #
     # @option params [required, String] :engine
     #   The database engine to use for your custom engine version (CEV). The
@@ -1978,7 +1931,7 @@ module Aws::RDS
     #   combination of `Engine` and `EngineVersion` is unique per customer per
     #   Region.
     #
-    # @option params [required, String] :database_installation_files_s3_bucket_name
+    # @option params [String] :database_installation_files_s3_bucket_name
     #   The name of an Amazon S3 bucket that contains database installation
     #   files for your CEV. For example, a valid bucket name is
     #   `my-custom-installation-files`.
@@ -1988,7 +1941,11 @@ module Aws::RDS
     #   for your CEV. For example, a valid bucket name is `123456789012/cev1`.
     #   If this setting isn't specified, no prefix is assumed.
     #
-    # @option params [required, String] :kms_key_id
+    # @option params [String] :image_id
+    #   The ID of the AMI. An AMI ID is required to create a CEV for RDS
+    #   Custom for SQL Server.
+    #
+    # @option params [String] :kms_key_id
     #   The Amazon Web Services KMS key identifier for an encrypted CEV. A
     #   symmetric encryption KMS key is required for RDS Custom, but optional
     #   for Amazon RDS.
@@ -2010,7 +1967,7 @@ module Aws::RDS
     # @option params [String] :description
     #   An optional description of your CEV.
     #
-    # @option params [required, String] :manifest
+    # @option params [String] :manifest
     #   The CEV manifest, which is a JSON document that describes the
     #   installation .zip files stored in Amazon S3. Specify the name/value
     #   pairs in a file or a quoted string. RDS Custom applies the patches in
@@ -2062,6 +2019,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
+    #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
+    #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
     #   * {Types::DBEngineVersion#supported_character_sets #supported_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#supported_nchar_character_sets #supported_nchar_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#valid_upgrade_target #valid_upgrade_target} => Array&lt;Types::UpgradeTarget&gt;
@@ -2089,11 +2048,12 @@ module Aws::RDS
     #   resp = client.create_custom_db_engine_version({
     #     engine: "CustomEngineName", # required
     #     engine_version: "CustomEngineVersion", # required
-    #     database_installation_files_s3_bucket_name: "BucketName", # required
+    #     database_installation_files_s3_bucket_name: "BucketName",
     #     database_installation_files_s3_prefix: "String255",
-    #     kms_key_id: "KmsKeyIdOrArn", # required
+    #     image_id: "String255",
+    #     kms_key_id: "KmsKeyIdOrArn",
     #     description: "Description",
-    #     manifest: "CustomDBEngineVersionManifest", # required
+    #     manifest: "CustomDBEngineVersionManifest",
     #     tags: [
     #       {
     #         key: "String",
@@ -2111,6 +2071,9 @@ module Aws::RDS
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
+    #   resp.image.image_id #=> String
+    #   resp.image.status #=> String
+    #   resp.db_engine_media_type #=> String
     #   resp.supported_character_sets #=> Array
     #   resp.supported_character_sets[0].character_set_name #=> String
     #   resp.supported_character_sets[0].character_set_description #=> String
@@ -7027,6 +6990,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
+    #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
+    #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
     #   * {Types::DBEngineVersion#supported_character_sets #supported_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#supported_nchar_character_sets #supported_nchar_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#valid_upgrade_target #valid_upgrade_target} => Array&lt;Types::UpgradeTarget&gt;
@@ -7065,6 +7030,9 @@ module Aws::RDS
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
+    #   resp.image.image_id #=> String
+    #   resp.image.status #=> String
+    #   resp.db_engine_media_type #=> String
     #   resp.supported_character_sets #=> Array
     #   resp.supported_character_sets[0].character_set_name #=> String
     #   resp.supported_character_sets[0].character_set_description #=> String
@@ -9733,6 +9701,9 @@ module Aws::RDS
     #   resp.db_engine_versions[0].db_engine_version_description #=> String
     #   resp.db_engine_versions[0].default_character_set.character_set_name #=> String
     #   resp.db_engine_versions[0].default_character_set.character_set_description #=> String
+    #   resp.db_engine_versions[0].image.image_id #=> String
+    #   resp.db_engine_versions[0].image.status #=> String
+    #   resp.db_engine_versions[0].db_engine_media_type #=> String
     #   resp.db_engine_versions[0].supported_character_sets #=> Array
     #   resp.db_engine_versions[0].supported_character_sets[0].character_set_name #=> String
     #   resp.db_engine_versions[0].supported_character_sets[0].character_set_description #=> String
@@ -13837,6 +13808,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
+    #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
+    #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
     #   * {Types::DBEngineVersion#supported_character_sets #supported_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#supported_nchar_character_sets #supported_nchar_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#valid_upgrade_target #valid_upgrade_target} => Array&lt;Types::UpgradeTarget&gt;
@@ -13877,6 +13850,9 @@ module Aws::RDS
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
+    #   resp.image.image_id #=> String
+    #   resp.image.status #=> String
+    #   resp.db_engine_media_type #=> String
     #   resp.supported_character_sets #=> Array
     #   resp.supported_character_sets[0].character_set_name #=> String
     #   resp.supported_character_sets[0].character_set_description #=> String
@@ -24167,7 +24143,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

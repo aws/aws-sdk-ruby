@@ -1753,6 +1753,11 @@ module Aws::RDS
     #   assumed.
     #   @return [String]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI. An AMI ID is required to create a CEV for RDS
+    #   Custom for SQL Server.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services KMS key identifier for an encrypted CEV. A
     #   symmetric encryption KMS key is required for RDS Custom, but
@@ -1831,6 +1836,7 @@ module Aws::RDS
       :engine_version,
       :database_installation_files_s3_bucket_name,
       :database_installation_files_s3_prefix,
+      :image_id,
       :kms_key_id,
       :description,
       :manifest,
@@ -5669,6 +5675,25 @@ module Aws::RDS
     #
     class CustomAvailabilityZoneNotFoundFault < Aws::EmptyStructure; end
 
+    # A value that indicates the AMI information.
+    #
+    # @!attribute [rw] image_id
+    #   A value that indicates the ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A value that indicates the status of a custom engine version (CEV).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomDBEngineVersionAMI AWS API Documentation
+    #
+    class CustomDBEngineVersionAMI < Struct.new(
+      :image_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A CEV with the specified name already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomDBEngineVersionAlreadyExistsFault AWS API Documentation
@@ -7088,6 +7113,15 @@ module Aws::RDS
     #   isn't specified.
     #   @return [Types::CharacterSet]
     #
+    # @!attribute [rw] image
+    #   The EC2 image
+    #   @return [Types::CustomDBEngineVersionAMI]
+    #
+    # @!attribute [rw] db_engine_media_type
+    #   A value that indicates the source media provider of the AMI based on
+    #   the usage operation. Applicable for RDS Custom for SQL Server.
+    #   @return [String]
+    #
     # @!attribute [rw] supported_character_sets
     #   A list of the character sets supported by this engine for the
     #   `CharacterSetName` parameter of the `CreateDBInstance` operation.
@@ -7229,6 +7263,8 @@ module Aws::RDS
       :db_engine_description,
       :db_engine_version_description,
       :default_character_set,
+      :image,
+      :db_engine_media_type,
       :supported_character_sets,
       :supported_nchar_character_sets,
       :valid_upgrade_target,
@@ -12825,6 +12861,12 @@ module Aws::RDS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The AMI configuration prerequisite has not been met.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Ec2ImagePropertiesNotSupportedFault AWS API Documentation
+    #
+    class Ec2ImagePropertiesNotSupportedFault < Aws::EmptyStructure; end
 
     # This data type represents the information you need to connect to an
     # Amazon RDS DB instance. This data type is used as a response element

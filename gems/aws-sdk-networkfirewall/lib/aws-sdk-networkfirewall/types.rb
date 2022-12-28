@@ -272,7 +272,21 @@ module Aws::NetworkFirewall
     #   settings. When this value is `READY`, the endpoint is available and
     #   configured properly to handle network traffic. When the endpoint
     #   isn't available for traffic, this value will reflect its state, for
-    #   example `CREATING`, `DELETING`, or `FAILED`.
+    #   example `CREATING` or `DELETING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If Network Firewall fails to create or delete the firewall endpoint
+    #   in the subnet, it populates this with the reason for the failure and
+    #   how to resolve it. Depending on the error, it can take as many as 15
+    #   minutes to populate this field. For more information about the
+    #   errors and solutions available for this field, see [Troubleshooting
+    #   firewall endpoint failures][1] in the *Network Firewall Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/Attachment AWS API Documentation
@@ -280,7 +294,8 @@ module Aws::NetworkFirewall
     class Attachment < Struct.new(
       :subnet_id,
       :endpoint_id,
-      :status)
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end

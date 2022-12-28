@@ -28,7 +28,7 @@ module Aws::Route53RecoveryControlConfig
     # state, that the criteria that you set in the rule configuration is
     # met. Otherwise, the change to the routing control is not accepted. For
     # example, the criteria might be that at least one routing control state
-    # is On after the transation so that traffic continues to flow to at
+    # is On after the transaction so that traffic continues to flow to at
     # least one cell for the application. This ensures that you avoid a
     # fail-open scenario.
     #
@@ -52,7 +52,7 @@ module Aws::Route53RecoveryControlConfig
     #   The criteria that you set for specific assertion routing controls
     #   (AssertedControls) that designate how many routing control states
     #   must be ON as the result of a transaction. For example, if you have
-    #   three assertion routing controls, you might specify atleast 2 for
+    #   three assertion routing controls, you might specify ATLEAST 2 for
     #   your rule configuration. This means that at least two assertion
     #   routing control states must be ON, so that at least two Amazon Web
     #   Services Regions have traffic flowing to them.
@@ -613,7 +613,7 @@ module Aws::Route53RecoveryControlConfig
     end
 
     # A gating rule verifies that a gating routing control or set of gating
-    # rounting controls, evaluates as true, based on a rule configuration
+    # routing controls, evaluates as true, based on a rule configuration
     # that you specify, which allows a set of routing control state changes
     # to complete.
     #
@@ -642,9 +642,9 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     #
     # @!attribute [rw] rule_config
-    #   The criteria that you set for gating routing controls that
-    #   designates how many of the routing control states must be ON to
-    #   allow you to update target routing control states.
+    #   The criteria that you set for gating routing controls that designate
+    #   how many of the routing control states must be ON to allow you to
+    #   update target routing control states.
     #   @return [Types::RuleConfig]
     #
     # @!attribute [rw] safety_rule_arn
@@ -662,7 +662,7 @@ module Aws::Route53RecoveryControlConfig
     #   you specify evaluates to true for the gating routing control. As a
     #   simple example, if you have a single gating control, it acts as an
     #   overall "on/off" switch for a set of target routing controls. You
-    #   can use this to manually override automated fail over, for example.
+    #   can use this to manually override automated failover, for example.
     #   @return [Array<String>]
     #
     # @!attribute [rw] wait_period_ms
@@ -964,7 +964,7 @@ module Aws::Route53RecoveryControlConfig
     #   The criteria that you set for specific assertion controls (routing
     #   controls) that designate how many control states must be ON as the
     #   result of a transaction. For example, if you have three assertion
-    #   controls, you might specify ATLEAST 2for your rule configuration.
+    #   controls, you might specify ATLEAST 2 for your rule configuration.
     #   This means that at least two assertion controls must be ON, so that
     #   at least two Amazon Web Services Regions have traffic flowing to
     #   them.
@@ -1007,15 +1007,15 @@ module Aws::Route53RecoveryControlConfig
     #
     # @!attribute [rw] rule_config
     #   The criteria that you set for specific gating controls (routing
-    #   controls) that designates how many control states must be ON to
-    #   allow you to change (set or unset) the target control states.
+    #   controls) that designate how many control states must be ON to allow
+    #   you to change (set or unset) the target control states.
     #   @return [Types::RuleConfig]
     #
     # @!attribute [rw] target_controls
     #   Routing controls that can only be set or unset if the specified
     #   RuleConfig evaluates to true for the specified GatingControls. For
     #   example, say you have three gating controls, one for each of three
-    #   Amazon Web Services Regions. Now you specify AtLeast 2 as your
+    #   Amazon Web Services Regions. Now you specify ATLEAST 2 as your
     #   RuleConfig. With these settings, you can only change (set or unset)
     #   the routing controls that you have specified as TargetControls if
     #   that rule evaluates to true.
@@ -1046,7 +1046,7 @@ module Aws::Route53RecoveryControlConfig
     end
 
     # 404 response - MalformedQueryString. The query string contains a
-    # syntax error or resource not found..
+    # syntax error or resource not found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1100,14 +1100,14 @@ module Aws::Route53RecoveryControlConfig
     #   changed, the criteria set by the rule configuration is met.
     #   Otherwise, the change to the routing control state is not accepted.
     #   For example, the criteria might be that at least one routing control
-    #   state is On after the transation so that traffic continues to flow
+    #   state is On after the transaction so that traffic continues to flow
     #   to at least one cell for the application. This ensures that you
     #   avoid a fail-open scenario.
     #   @return [Types::AssertionRule]
     #
     # @!attribute [rw] gating
     #   A gating rule verifies that a gating routing control or set of
-    #   gating rounting controls, evaluates as true, based on a rule
+    #   gating routing controls, evaluates as true, based on a rule
     #   configuration that you specify, which allows a set of routing
     #   control state changes to complete.
     #

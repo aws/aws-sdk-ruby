@@ -545,8 +545,8 @@ module Aws::Route53RecoveryControlConfig
     # Assertion rule: An assertion rule enforces that, when you change a
     # routing control state, that a certain criteria is met. For example,
     # the criteria might be that at least one routing control state is On
-    # after the transation so that traffic continues to flow to at least one
-    # cell for the application. This ensures that you avoid a fail-open
+    # after the transaction so that traffic continues to flow to at least
+    # one cell for the application. This ensures that you avoid a fail-open
     # scenario.
     #
     # Gating rule: A gating rule lets you configure a gating routing control
@@ -1363,7 +1363,7 @@ module Aws::Route53RecoveryControlConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53recoverycontrolconfig'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

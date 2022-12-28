@@ -70,6 +70,19 @@ module Aws::RDS
       data[:default_character_set]
     end
 
+    # The EC2 image
+    # @return [Types::CustomDBEngineVersionAMI]
+    def image
+      data[:image]
+    end
+
+    # A value that indicates the source media provider of the AMI based on
+    # the usage operation. Applicable for RDS Custom for SQL Server.
+    # @return [String]
+    def db_engine_media_type
+      data[:db_engine_media_type]
+    end
+
     # A list of the character sets supported by this engine for the
     # `CharacterSetName` parameter of the `CreateDBInstance` operation.
     # @return [Array<Types::CharacterSet>]

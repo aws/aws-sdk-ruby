@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2022-12-28)
+------------------
+
+* Feature - Added support for Python paginators in the route53-recovery-control-config List* APIs.
+
 1.11.0 (2022-10-25)
 ------------------
 

@@ -85,6 +85,7 @@ module Aws::RDS
   # * {DBSubnetQuotaExceededFault}
   # * {DBUpgradeDependencyFailureFault}
   # * {DomainNotFoundFault}
+  # * {Ec2ImagePropertiesNotSupportedFault}
   # * {EventSubscriptionQuotaExceededFault}
   # * {ExportTaskAlreadyExistsFault}
   # * {ExportTaskNotFoundFault}
@@ -732,6 +733,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::DomainNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class Ec2ImagePropertiesNotSupportedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::Ec2ImagePropertiesNotSupportedFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

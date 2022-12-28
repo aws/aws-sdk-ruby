@@ -685,6 +685,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -735,6 +737,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -1331,10 +1334,7 @@ module Aws::ElastiCache
     #   Specifies the destination, format and type of the logs.
     #
     # @option params [Boolean] :transit_encryption_enabled
-    #   A flag that enables in-transit encryption when set to true. You cannot
-    #   modify the value of TransitEncryptionEnabled after the cluster is
-    #   created. To enable in-transit encryption on a cluster you must set
-    #   `TransitEncryptionEnabled` to true when you create a cluster.
+    #   A flag that enables in-transit encryption when set to true.
     #
     #   Only available when creating a cache cluster in an Amazon VPC using
     #   Memcached version 1.6.12 or later.
@@ -1533,6 +1533,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_cluster.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -1576,6 +1578,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
     #   resp.cache_cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.cache_cluster.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.cache_cluster.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster AWS API Documentation
     #
@@ -2217,7 +2220,7 @@ module Aws::ElastiCache
     #
     # @option params [String] :engine
     #   The name of the cache engine to be used for the clusters in this
-    #   replication group. Must be Redis.
+    #   replication group. The value must be set to `Redis`.
     #
     # @option params [String] :engine_version
     #   The version number of the cache engine to be used for the clusters in
@@ -2391,11 +2394,6 @@ module Aws::ElastiCache
     # @option params [Boolean] :transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
-    #   You cannot modify the value of `TransitEncryptionEnabled` after the
-    #   cluster is created. To enable in-transit encryption on a cluster you
-    #   must set `TransitEncryptionEnabled` to `true` when you create a
-    #   cluster.
-    #
     #   This parameter is valid only if the `Engine` parameter is `redis`, the
     #   `EngineVersion` parameter is `3.2.6`, `4.x` or later, and the cluster
     #   is being created in an Amazon VPC.
@@ -2460,6 +2458,21 @@ module Aws::ElastiCache
     #
     #
     #   [1]: https://aws.amazon.com/ec2/nitro/
+    #
+    # @option params [String] :transit_encryption_mode
+    #   A setting that allows you to migrate your clients to use in-transit
+    #   encryption, with no downtime.
+    #
+    #   When setting `TransitEncryptionEnabled` to `true`, you can set your
+    #   `TransitEncryptionMode` to `preferred` in the same request, to allow
+    #   both encrypted and unencrypted connections at the same time. Once you
+    #   migrate all your Redis clients to use encrypted connections you can
+    #   modify the value to `required` to allow encrypted connections only.
+    #
+    #   Setting `TransitEncryptionMode` to `required` is a two-step process
+    #   that requires you to first set the `TransitEncryptionMode` to
+    #   `preferred` first, after that you can set `TransitEncryptionMode` to
+    #   `required`.
     #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2625,6 +2638,7 @@ module Aws::ElastiCache
     #     data_tiering_enabled: false,
     #     network_type: "ipv4", # accepts ipv4, ipv6, dual_stack
     #     ip_discovery: "ipv4", # accepts ipv4, ipv6
+    #     transit_encryption_mode: "preferred", # accepts preferred, required
     #   })
     #
     # @example Response structure
@@ -2648,6 +2662,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2698,6 +2714,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -3251,6 +3268,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -3301,6 +3320,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -3421,6 +3441,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_cluster.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -3464,6 +3486,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
     #   resp.cache_cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.cache_cluster.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.cache_cluster.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster AWS API Documentation
     #
@@ -3745,6 +3768,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -3795,6 +3820,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -4240,6 +4266,8 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_clusters[0].pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.cache_clusters[0].pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.cache_clusters[0].notification_configuration.topic_arn #=> String
     #   resp.cache_clusters[0].notification_configuration.topic_status #=> String
     #   resp.cache_clusters[0].cache_security_groups #=> Array
@@ -4283,6 +4311,7 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].log_delivery_configurations[0].message #=> String
     #   resp.cache_clusters[0].network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.cache_clusters[0].ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.cache_clusters[0].transit_encryption_mode #=> String, one of "preferred", "required"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4315,7 +4344,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
-    #   \| `redis6.x` \| `redis6.2`
+    #   \| `redis6.x` \| `redis6.2` \| `redis7`
     #
     #   Constraints:
     #
@@ -5302,7 +5331,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
-    #   \| `redis6.x` \| `redis6.2`
+    #   \| `redis6.x` \| `redis6.2` \| `redis7`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -6369,6 +6398,8 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_groups[0].pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_groups[0].pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_groups[0].member_clusters #=> Array
     #   resp.replication_groups[0].member_clusters[0] #=> String
     #   resp.replication_groups[0].node_groups #=> Array
@@ -6419,6 +6450,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].auto_minor_version_upgrade #=> Boolean
     #   resp.replication_groups[0].network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_groups[0].ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_groups[0].transit_encryption_mode #=> String, one of "preferred", "required"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -7891,6 +7923,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -7941,6 +7975,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -8553,6 +8588,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_cluster.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -8596,6 +8633,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
     #   resp.cache_cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.cache_cluster.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.cache_cluster.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster AWS API Documentation
     #
@@ -9082,6 +9120,27 @@ module Aws::ElastiCache
     #
     #   [1]: https://aws.amazon.com/ec2/nitro/
     #
+    # @option params [Boolean] :transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to true. If you are
+    #   enabling in-transit encryption for an existing cluster, you must also
+    #   set `TransitEncryptionMode` to `preferred`.
+    #
+    # @option params [String] :transit_encryption_mode
+    #   A setting that allows you to migrate your clients to use in-transit
+    #   encryption, with no downtime.
+    #
+    #   You must set `TransitEncryptionEnabled` to `true`, for your existing
+    #   cluster, and set `TransitEncryptionMode` to `preferred` in the same
+    #   request to allow both encrypted and unencrypted connections at the
+    #   same time. Once you migrate all your Redis clients to use encrypted
+    #   connections you can set the value to `required` to allow encrypted
+    #   connections only.
+    #
+    #   Setting `TransitEncryptionMode` to `required` is a two-step process
+    #   that requires you to first set the `TransitEncryptionMode` to
+    #   `preferred` first, after that you can set `TransitEncryptionMode` to
+    #   `required`.
+    #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
@@ -9201,6 +9260,8 @@ module Aws::ElastiCache
     #       },
     #     ],
     #     ip_discovery: "ipv4", # accepts ipv4, ipv6
+    #     transit_encryption_enabled: false,
+    #     transit_encryption_mode: "preferred", # accepts preferred, required
     #   })
     #
     # @example Response structure
@@ -9224,6 +9285,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -9274,6 +9337,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -9371,6 +9435,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -9421,6 +9487,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -9812,6 +9879,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.cache_cluster.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.cache_cluster.notification_configuration.topic_arn #=> String
     #   resp.cache_cluster.notification_configuration.topic_status #=> String
     #   resp.cache_cluster.cache_security_groups #=> Array
@@ -9855,6 +9924,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
     #   resp.cache_cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.cache_cluster.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.cache_cluster.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster AWS API Documentation
     #
@@ -10132,6 +10202,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -10182,6 +10254,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -10293,6 +10366,8 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -10343,6 +10418,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -10366,7 +10442,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -504,11 +504,6 @@ module Aws::ElastiCache
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
-    #   You cannot modify the value of `TransitEncryptionEnabled` after the
-    #   cluster is created. To enable in-transit encryption on a cluster you
-    #   must set `TransitEncryptionEnabled` to `true` when you create a
-    #   cluster.
-    #
     #   **Required:** Only available when creating a replication group in an
     #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
@@ -564,6 +559,11 @@ module Aws::ElastiCache
     #   [1]: https://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
+    # @!attribute [rw] transit_encryption_mode
+    #   A setting that allows you to migrate your clients to use in-transit
+    #   encryption, with no downtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheCluster AWS API Documentation
     #
     class CacheCluster < Struct.new(
@@ -598,7 +598,8 @@ module Aws::ElastiCache
       :replication_group_log_delivery_enabled,
       :log_delivery_configurations,
       :network_type,
-      :ip_discovery)
+      :ip_discovery,
+      :transit_encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1914,11 +1915,7 @@ module Aws::ElastiCache
     #   @return [Array<Types::LogDeliveryConfigurationRequest>]
     #
     # @!attribute [rw] transit_encryption_enabled
-    #   A flag that enables in-transit encryption when set to true. You
-    #   cannot modify the value of TransitEncryptionEnabled after the
-    #   cluster is created. To enable in-transit encryption on a cluster you
-    #   must set `TransitEncryptionEnabled` to true when you create a
-    #   cluster.
+    #   A flag that enables in-transit encryption when set to true.
     #
     #   Only available when creating a cache cluster in an Amazon VPC using
     #   Memcached version 1.6.12 or later.
@@ -2437,7 +2434,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] engine
     #   The name of the cache engine to be used for the clusters in this
-    #   replication group. Must be Redis.
+    #   replication group. The value must be set to `Redis`.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -2629,11 +2626,6 @@ module Aws::ElastiCache
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
-    #   You cannot modify the value of `TransitEncryptionEnabled` after the
-    #   cluster is created. To enable in-transit encryption on a cluster you
-    #   must set `TransitEncryptionEnabled` to `true` when you create a
-    #   cluster.
-    #
     #   This parameter is valid only if the `Engine` parameter is `redis`,
     #   the `EngineVersion` parameter is `3.2.6`, `4.x` or later, and the
     #   cluster is being created in an Amazon VPC.
@@ -2708,6 +2700,23 @@ module Aws::ElastiCache
     #   [1]: https://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
+    # @!attribute [rw] transit_encryption_mode
+    #   A setting that allows you to migrate your clients to use in-transit
+    #   encryption, with no downtime.
+    #
+    #   When setting `TransitEncryptionEnabled` to `true`, you can set your
+    #   `TransitEncryptionMode` to `preferred` in the same request, to allow
+    #   both encrypted and unencrypted connections at the same time. Once
+    #   you migrate all your Redis clients to use encrypted connections you
+    #   can modify the value to `required` to allow encrypted connections
+    #   only.
+    #
+    #   Setting `TransitEncryptionMode` to `required` is a two-step process
+    #   that requires you to first set the `TransitEncryptionMode` to
+    #   `preferred` first, after that you can set `TransitEncryptionMode` to
+    #   `required`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
     #
     class CreateReplicationGroupMessage < Struct.new(
@@ -2746,7 +2755,8 @@ module Aws::ElastiCache
       :log_delivery_configurations,
       :data_tiering_enabled,
       :network_type,
-      :ip_discovery)
+      :ip_discovery,
+      :transit_encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3345,7 +3355,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \| `redis6.2`
+    #   `redis5.0` \| `redis6.x` \| `redis6.2` \| `redis7`
     #
     #   Constraints:
     #
@@ -3542,7 +3552,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \| `redis6.2`
+    #   `redis5.0` \| `redis6.x` \| `redis6.2` \| `redis7`
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4725,11 +4735,7 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] transit_encryption_enabled
-    #   A flag that enables in-transit encryption when set to true. You
-    #   cannot modify the value of `TransitEncryptionEnabled` after the
-    #   cluster is created. To enable in-transit encryption on a cluster you
-    #   must set `TransitEncryptionEnabled` to true when you create a
-    #   cluster.
+    #   A flag that enables in-transit encryption when set to true.
     #
     #   **Required:** Only available when creating a replication group in an
     #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
@@ -5976,6 +5982,29 @@ module Aws::ElastiCache
     #   [1]: https://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
+    # @!attribute [rw] transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to true. If you
+    #   are enabling in-transit encryption for an existing cluster, you must
+    #   also set `TransitEncryptionMode` to `preferred`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transit_encryption_mode
+    #   A setting that allows you to migrate your clients to use in-transit
+    #   encryption, with no downtime.
+    #
+    #   You must set `TransitEncryptionEnabled` to `true`, for your existing
+    #   cluster, and set `TransitEncryptionMode` to `preferred` in the same
+    #   request to allow both encrypted and unencrypted connections at the
+    #   same time. Once you migrate all your Redis clients to use encrypted
+    #   connections you can set the value to `required` to allow encrypted
+    #   connections only.
+    #
+    #   Setting `TransitEncryptionMode` to `required` is a two-step process
+    #   that requires you to first set the `TransitEncryptionMode` to
+    #   `preferred` first, after that you can set `TransitEncryptionMode` to
+    #   `required`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
     #
     class ModifyReplicationGroupMessage < Struct.new(
@@ -6004,7 +6033,9 @@ module Aws::ElastiCache
       :user_group_ids_to_remove,
       :remove_user_groups,
       :log_delivery_configurations,
-      :ip_discovery)
+      :ip_discovery,
+      :transit_encryption_enabled,
+      :transit_encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6633,6 +6664,15 @@ module Aws::ElastiCache
     #   The log delivery configurations being modified
     #   @return [Array<Types::PendingLogDeliveryConfiguration>]
     #
+    # @!attribute [rw] transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transit_encryption_mode
+    #   A setting that allows you to migrate your clients to use in-transit
+    #   encryption, with no downtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -6641,7 +6681,9 @@ module Aws::ElastiCache
       :engine_version,
       :cache_node_type,
       :auth_token_status,
-      :log_delivery_configurations)
+      :log_delivery_configurations,
+      :transit_encryption_enabled,
+      :transit_encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6995,11 +7037,6 @@ module Aws::ElastiCache
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
-    #   You cannot modify the value of `TransitEncryptionEnabled` after the
-    #   cluster is created. To enable in-transit encryption on a cluster you
-    #   must set `TransitEncryptionEnabled` to `true` when you create a
-    #   cluster.
-    #
     #   **Required:** Only available when creating a replication group in an
     #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
@@ -7055,10 +7092,10 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   If you are running Redis engine version 6.0 or later, set this
+    #    If you are running Redis engine version 6.0 or later, set this
     #   parameter to yes if you want to opt-in to the next auto minor
     #   version upgrade campaign. This parameter is disabled for previous
-    #   versions.
+    #   versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] network_type
@@ -7081,6 +7118,11 @@ module Aws::ElastiCache
     #
     #
     #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption_mode
+    #   A setting that allows you to migrate your clients to use in-transit
+    #   encryption, with no downtime.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
@@ -7114,7 +7156,8 @@ module Aws::ElastiCache
       :data_tiering,
       :auto_minor_version_upgrade,
       :network_type,
-      :ip_discovery)
+      :ip_discovery,
+      :transit_encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7193,6 +7236,15 @@ module Aws::ElastiCache
     #   The log delivery configurations being modified
     #   @return [Array<Types::PendingLogDeliveryConfiguration>]
     #
+    # @!attribute [rw] transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transit_encryption_mode
+    #   A setting that allows you to migrate your clients to use in-transit
+    #   encryption, with no downtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
@@ -7201,7 +7253,9 @@ module Aws::ElastiCache
       :resharding,
       :auth_token_status,
       :user_groups,
-      :log_delivery_configurations)
+      :log_delivery_configurations,
+      :transit_encryption_enabled,
+      :transit_encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
