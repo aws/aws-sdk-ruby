@@ -260,14 +260,21 @@ module Aws
     end
 
     describe '.apply' do
-
+      # see https://github.com/aws/aws-sdk-ruby/pull/2670
       it 'does not bump RubyVM.stat(:global_constant_state)' do
-        skip "Only applies to MRI"  unless defined? RubyVM.stat
+        skip 'Only applies to MRI'  unless defined? RubyVM.stat
+
+        key = :global_constant_state
+        # Ruby 3.2 removed global_constant_state
+        # see https://github.com/ruby/ruby/pull/5766
+        if RUBY_VERSION >= 3.2
+          key = :constant_cache_invalidations
+        end
 
         object = Object.new
         expect {
           PageableResponse.apply(object)
-        }.to_not change { RubyVM.stat(:global_constant_state) }
+        }.to_not change { RubyVM.stat(key) }
       end
     end
 
