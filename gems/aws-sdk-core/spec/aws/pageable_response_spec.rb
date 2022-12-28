@@ -267,9 +267,7 @@ module Aws
         key = :global_constant_state
         # Ruby 3.2 removed global_constant_state
         # see https://github.com/ruby/ruby/pull/5766
-        if RUBY_VERSION >= 3.2
-          key = :constant_cache_invalidations
-        end
+        key = :constant_cache_invalidations if RUBY_VERSION >= '3.2'
 
         object = Object.new
         expect {
