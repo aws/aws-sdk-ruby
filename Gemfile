@@ -15,8 +15,8 @@ gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
 gem 'rexml'
 
-# faster json and xml parsers
-if ENV['NATIVE_EXTENSION'] && !defined?(JRUBY_VERSION)
+# These json and xml parsers do not have java gems
+unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
   gem 'oj'
   gem 'ox'
