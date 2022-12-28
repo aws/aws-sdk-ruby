@@ -35,6 +35,8 @@ jobs:
             env: CRT
           - ruby: 2.4
             env: CRT
+          - ruby: jruby-9.1
+            env: CRT
 
     steps:
       - name: Setup Ruby

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'jruby' if RUBY_PLATFORM == 'java'
 require 'oga'
 
 module Aws
