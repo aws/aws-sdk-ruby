@@ -70,6 +70,7 @@ module Aws::EMR
     CreateStudioInput = Shapes::StructureShape.new(name: 'CreateStudioInput')
     CreateStudioOutput = Shapes::StructureShape.new(name: 'CreateStudioOutput')
     CreateStudioSessionMappingInput = Shapes::StructureShape.new(name: 'CreateStudioSessionMappingInput')
+    Credentials = Shapes::UnionShape.new(name: 'Credentials')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeleteSecurityConfigurationInput = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationInput')
     DeleteSecurityConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationOutput')
@@ -108,6 +109,8 @@ module Aws::EMR
     GetAutoTerminationPolicyOutput = Shapes::StructureShape.new(name: 'GetAutoTerminationPolicyOutput')
     GetBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationInput')
     GetBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationOutput')
+    GetClusterSessionCredentialsInput = Shapes::StructureShape.new(name: 'GetClusterSessionCredentialsInput')
+    GetClusterSessionCredentialsOutput = Shapes::StructureShape.new(name: 'GetClusterSessionCredentialsOutput')
     GetManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'GetManagedScalingPolicyInput')
     GetManagedScalingPolicyOutput = Shapes::StructureShape.new(name: 'GetManagedScalingPolicyOutput')
     GetStudioSessionMappingInput = Shapes::StructureShape.new(name: 'GetStudioSessionMappingInput')
@@ -312,6 +315,7 @@ module Aws::EMR
     Unit = Shapes::StringShape.new(name: 'Unit')
     UpdateStudioInput = Shapes::StructureShape.new(name: 'UpdateStudioInput')
     UpdateStudioSessionMappingInput = Shapes::StructureShape.new(name: 'UpdateStudioSessionMappingInput')
+    UsernamePassword = Shapes::StructureShape.new(name: 'UsernamePassword')
     VolumeSpecification = Shapes::StructureShape.new(name: 'VolumeSpecification')
     WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
     XmlString = Shapes::StringShape.new(name: 'XmlString')
@@ -538,6 +542,12 @@ module Aws::EMR
     CreateStudioSessionMappingInput.add_member(:session_policy_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "SessionPolicyArn"))
     CreateStudioSessionMappingInput.struct_class = Types::CreateStudioSessionMappingInput
 
+    Credentials.add_member(:username_password, Shapes::ShapeRef.new(shape: UsernamePassword, location_name: "UsernamePassword"))
+    Credentials.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Credentials.add_member_subclass(:username_password, Types::Credentials::UsernamePassword)
+    Credentials.add_member_subclass(:unknown, Types::Credentials::Unknown)
+    Credentials.struct_class = Types::Credentials
+
     DeleteSecurityConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
     DeleteSecurityConfigurationInput.struct_class = Types::DeleteSecurityConfigurationInput
 
@@ -665,6 +675,14 @@ module Aws::EMR
     GetBlockPublicAccessConfigurationOutput.add_member(:block_public_access_configuration, Shapes::ShapeRef.new(shape: BlockPublicAccessConfiguration, required: true, location_name: "BlockPublicAccessConfiguration"))
     GetBlockPublicAccessConfigurationOutput.add_member(:block_public_access_configuration_metadata, Shapes::ShapeRef.new(shape: BlockPublicAccessConfigurationMetadata, required: true, location_name: "BlockPublicAccessConfigurationMetadata"))
     GetBlockPublicAccessConfigurationOutput.struct_class = Types::GetBlockPublicAccessConfigurationOutput
+
+    GetClusterSessionCredentialsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "ClusterId"))
+    GetClusterSessionCredentialsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "ExecutionRoleArn"))
+    GetClusterSessionCredentialsInput.struct_class = Types::GetClusterSessionCredentialsInput
+
+    GetClusterSessionCredentialsOutput.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
+    GetClusterSessionCredentialsOutput.add_member(:expires_at, Shapes::ShapeRef.new(shape: Date, location_name: "ExpiresAt"))
+    GetClusterSessionCredentialsOutput.struct_class = Types::GetClusterSessionCredentialsOutput
 
     GetManagedScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     GetManagedScalingPolicyInput.struct_class = Types::GetManagedScalingPolicyInput
@@ -1455,6 +1473,10 @@ module Aws::EMR
     UpdateStudioSessionMappingInput.add_member(:session_policy_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "SessionPolicyArn"))
     UpdateStudioSessionMappingInput.struct_class = Types::UpdateStudioSessionMappingInput
 
+    UsernamePassword.add_member(:username, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Username"))
+    UsernamePassword.add_member(:password, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Password"))
+    UsernamePassword.struct_class = Types::UsernamePassword
+
     VolumeSpecification.add_member(:volume_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeType"))
     VolumeSpecification.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
     VolumeSpecification.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SizeInGB"))
@@ -1677,6 +1699,16 @@ module Aws::EMR
         o.input = Shapes::ShapeRef.new(shape: GetBlockPublicAccessConfigurationInput)
         o.output = Shapes::ShapeRef.new(shape: GetBlockPublicAccessConfigurationOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:get_cluster_session_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetClusterSessionCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetClusterSessionCredentialsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetClusterSessionCredentialsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 

@@ -565,7 +565,7 @@ module Aws::ConnectWisdomService
     #       "TagKey" => "TagValue",
     #     },
     #     title: "ContentTitle",
-    #     upload_id: "NonEmptyString", # required
+    #     upload_id: "UploadId", # required
     #   })
     #
     # @example Response structure
@@ -1871,7 +1871,7 @@ module Aws::ConnectWisdomService
     #     remove_override_link_out_uri: false,
     #     revision_id: "NonEmptyString",
     #     title: "ContentTitle",
-    #     upload_id: "NonEmptyString",
+    #     upload_id: "UploadId",
     #   })
     #
     # @example Response structure
@@ -1966,7 +1966,7 @@ module Aws::ConnectWisdomService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectwisdomservice'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

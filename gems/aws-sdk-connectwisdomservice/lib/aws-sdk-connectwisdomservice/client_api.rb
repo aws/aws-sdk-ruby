@@ -159,6 +159,7 @@ module Aws::ConnectWisdomService
     UpdateContentResponse = Shapes::StructureShape.new(name: 'UpdateContentResponse')
     UpdateKnowledgeBaseTemplateUriRequest = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriRequest')
     UpdateKnowledgeBaseTemplateUriResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriResponse')
+    UploadId = Shapes::StringShape.new(name: 'UploadId')
     Uri = Shapes::StringShape.new(name: 'Uri')
     Url = Shapes::StringShape.new(name: 'Url')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
@@ -298,7 +299,7 @@ module Aws::ConnectWisdomService
     CreateContentRequest.add_member(:override_link_out_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "overrideLinkOutUri"))
     CreateContentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateContentRequest.add_member(:title, Shapes::ShapeRef.new(shape: ContentTitle, location_name: "title"))
-    CreateContentRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "uploadId"))
+    CreateContentRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
     CreateContentRequest.struct_class = Types::CreateContentRequest
 
     CreateContentResponse.add_member(:content, Shapes::ShapeRef.new(shape: ContentData, location_name: "content"))
@@ -628,7 +629,7 @@ module Aws::ConnectWisdomService
     StartContentUploadRequest.struct_class = Types::StartContentUploadRequest
 
     StartContentUploadResponse.add_member(:headers_to_include, Shapes::ShapeRef.new(shape: Headers, required: true, location_name: "headersToInclude"))
-    StartContentUploadResponse.add_member(:upload_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "uploadId"))
+    StartContentUploadResponse.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
     StartContentUploadResponse.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "url"))
     StartContentUploadResponse.add_member(:url_expiry, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "urlExpiry"))
     StartContentUploadResponse.struct_class = Types::StartContentUploadResponse
@@ -661,7 +662,7 @@ module Aws::ConnectWisdomService
     UpdateContentRequest.add_member(:remove_override_link_out_uri, Shapes::ShapeRef.new(shape: Boolean, location_name: "removeOverrideLinkOutUri"))
     UpdateContentRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "revisionId"))
     UpdateContentRequest.add_member(:title, Shapes::ShapeRef.new(shape: ContentTitle, location_name: "title"))
-    UpdateContentRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "uploadId"))
+    UpdateContentRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId"))
     UpdateContentRequest.struct_class = Types::UpdateContentRequest
 
     UpdateContentResponse.add_member(:content, Shapes::ShapeRef.new(shape: ContentData, location_name: "content"))

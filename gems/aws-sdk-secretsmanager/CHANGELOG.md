@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-12-29)
+------------------
+
+* Feature - Added owning service filter, include planned deletion flag, and next rotation date response parameter in ListSecrets.
+
 1.69.0 (2022-12-22)
 ------------------
 

@@ -654,8 +654,12 @@ module Aws::APIGateway
     #   Enables a cache cluster for the Stage resource specified in the input.
     #
     # @option params [String] :cache_cluster_size
-    #   Specifies the cache cluster size for the Stage resource specified in
-    #   the input, if a cache cluster is enabled.
+    #   The stage's cache capacity in GB. For more information about choosing
+    #   a cache size, see [Enabling API caching to enhance responsiveness][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
     #
     # @option params [Hash<String,String>] :variables
     #   A map that defines the stage variables for the Stage resource that is
@@ -1277,7 +1281,12 @@ module Aws::APIGateway
     #   Whether cache clustering is enabled for the stage.
     #
     # @option params [String] :cache_cluster_size
-    #   The stage's cache cluster size.
+    #   The stage's cache capacity in GB. For more information about choosing
+    #   a cache size, see [Enabling API caching to enhance responsiveness][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
     #
     # @option params [Hash<String,String>] :variables
     #   A map that defines the stage variables for the new Stage resource.
@@ -7026,7 +7035,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

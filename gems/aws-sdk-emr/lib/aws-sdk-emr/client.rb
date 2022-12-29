@@ -591,9 +591,7 @@ module Aws::EMR
     # complex, you may require more than 256 steps to process your data. You
     # can bypass the 256-step limitation in various ways, including using
     # SSH to connect to the master node and submitting queries directly to
-    # the software running on the master node, such as Hive and Hadoop. For
-    # more information on how to do this, see [Add More than 256 Steps to a
-    # Cluster][1] in the *Amazon EMR Management Guide*.
+    # the software running on the master node, such as Hive and Hadoop.
     #
     # A step specifies the location of a JAR file stored either on the
     # master node of the cluster or in Amazon S3. Each step is performed by
@@ -613,10 +611,6 @@ module Aws::EMR
     # total of 10240 characters.
     #
     #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :job_flow_id
     #   A string that uniquely identifies the job flow. This identifier is
@@ -819,8 +813,8 @@ module Aws::EMR
     #   A detailed description of the Amazon EMR Studio.
     #
     # @option params [required, String] :auth_mode
-    #   Specifies whether the Studio authenticates users using IAM or Amazon
-    #   Web Services SSO.
+    #   Specifies whether the Studio authenticates users using IAM or IAM
+    #   Identity Center.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate
@@ -839,10 +833,9 @@ module Aws::EMR
     #
     # @option params [String] :user_role
     #   The IAM user role that users and groups assume when logged in to an
-    #   Amazon EMR Studio. Only specify a `UserRole` when you use Amazon Web
-    #   Services SSO authentication. The permissions attached to the
-    #   `UserRole` can be scoped down for each user or group using session
-    #   policies.
+    #   Amazon EMR Studio. Only specify a `UserRole` when you use IAM Identity
+    #   Center authentication. The permissions attached to the `UserRole` can
+    #   be scoped down for each user or group using session policies.
     #
     # @option params [required, String] :workspace_security_group_id
     #   The ID of the Amazon EMR Studio Workspace security group. The
@@ -924,7 +917,7 @@ module Aws::EMR
     # Maps a user or group to the Amazon EMR Studio specified by `StudioId`,
     # and applies a session policy to refine Studio permissions for that
     # user or group. Use `CreateStudioSessionMapping` to assign users to a
-    # Studio when you use Amazon Web Services SSO authentication. For
+    # Studio when you use IAM Identity Center authentication. For
     # instructions on how to assign users to a Studio when you use IAM
     # authentication, see [Assign a user or group to your EMR Studio][1].
     #
@@ -938,8 +931,8 @@ module Aws::EMR
     #
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group from the
-    #   Amazon Web Services SSO Identity Store. For more information, see
-    #   [UserId][1] and [GroupId][2] in the *Amazon Web Services SSO Identity
+    #   IAM Identity Center Identity Store. For more information, see
+    #   [UserId][1] and [GroupId][2] in the *IAM Identity Center Identity
     #   Store API Reference*. Either `IdentityName` or `IdentityId` must be
     #   specified, but not both.
     #
@@ -950,9 +943,9 @@ module Aws::EMR
     #
     # @option params [String] :identity_name
     #   The name of the user or group. For more information, see [UserName][1]
-    #   and [DisplayName][2] in the *Amazon Web Services SSO Identity Store
-    #   API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified, but not both.
+    #   and [DisplayName][2] in the *IAM Identity Center Identity Store API
+    #   Reference*. Either `IdentityName` or `IdentityId` must be specified,
+    #   but not both.
     #
     #
     #
@@ -1047,7 +1040,7 @@ module Aws::EMR
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group to remove
     #   from the Amazon EMR Studio. For more information, see [UserId][1] and
-    #   [GroupId][2] in the *Amazon Web Services SSO Identity Store API
+    #   [GroupId][2] in the *IAM Identity Center Identity Store API
     #   Reference*. Either `IdentityName` or `IdentityId` must be specified.
     #
     #
@@ -1058,7 +1051,7 @@ module Aws::EMR
     # @option params [String] :identity_name
     #   The name of the user name or group to remove from the Amazon EMR
     #   Studio. For more information, see [UserName][1] and [DisplayName][2]
-    #   in the *Amazon Web Services SSO Store API Reference*. Either
+    #   in the *IAM Identity Center Store API Reference*. Either
     #   `IdentityName` or `IdentityId` must be specified.
     #
     #
@@ -1609,6 +1602,49 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Provides Temporary, basic HTTP credentials that are associated with a
+    # given runtime IAM role and used by a cluster with fine-grained access
+    # control activated. You can use these credentials to connect to cluster
+    # endpoints that support username-based and password-based
+    # authentication.
+    #
+    # @option params [required, String] :cluster_id
+    #   The unique identifier of the cluster.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for interactive
+    #   workload submission on the cluster. The runtime role can be a
+    #   cross-account IAM role. The runtime role ARN is a combination of
+    #   account ID, role name, and role type using the following format:
+    #   `arn:partition:service:region:account:resource`.
+    #
+    # @return [Types::GetClusterSessionCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetClusterSessionCredentialsOutput#credentials #credentials} => Types::Credentials
+    #   * {Types::GetClusterSessionCredentialsOutput#expires_at #expires_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cluster_session_credentials({
+    #     cluster_id: "XmlStringMaxLen256", # required
+    #     execution_role_arn: "ArnType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.username_password.username #=> String
+    #   resp.credentials.username_password.password #=> String
+    #   resp.expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetClusterSessionCredentials AWS API Documentation
+    #
+    # @overload get_cluster_session_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_cluster_session_credentials(params = {}, options = {})
+      req = build_request(:get_cluster_session_credentials, params)
+      req.send_request(options)
+    end
+
     # Fetches the attached managed scaling policy for an Amazon EMR cluster.
     #
     # @option params [required, String] :cluster_id
@@ -1650,8 +1686,8 @@ module Aws::EMR
     #
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
-    #   information, see [UserId][1] and [GroupId][2] in the *Amazon Web
-    #   Services SSO Identity Store API Reference*. Either `IdentityName` or
+    #   information, see [UserId][1] and [GroupId][2] in the *IAM Identity
+    #   Center Identity Store API Reference*. Either `IdentityName` or
     #   `IdentityId` must be specified.
     #
     #
@@ -1661,7 +1697,7 @@ module Aws::EMR
     #
     # @option params [String] :identity_name
     #   The name of the user or group to fetch. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   [UserName][1] and [DisplayName][2] in the *IAM Identity Center
     #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
     #   must be specified.
     #
@@ -2923,10 +2959,9 @@ module Aws::EMR
     # can bypass the 256-step limitation in various ways, including using
     # the SSH shell to connect to the master node and submitting queries
     # directly to the software running on the master node, such as Hive and
-    # Hadoop. For more information on how to do this, see [Add More than 256
-    # Steps to a Cluster][1] in the *Amazon EMR Management Guide*.
+    # Hadoop.
     #
-    # For long running clusters, we recommend that you periodically store
+    # For long-running clusters, we recommend that you periodically store
     # your results.
     #
     # <note markdown="1"> The instance fleets configuration is available only in Amazon EMR
@@ -2935,10 +2970,6 @@ module Aws::EMR
     # parameters, but not both.
     #
     #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :name
     #   The name of the job flow.
@@ -3084,7 +3115,9 @@ module Aws::EMR
     #
     # @option params [String] :service_role
     #   The IAM role that Amazon EMR assumes in order to access Amazon Web
-    #   Services resources on your behalf.
+    #   Services resources on your behalf. If you've created a custom service
+    #   role path, you must specify it for the service role when you launch
+    #   your cluster.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with a cluster and propagate to Amazon EC2
@@ -3751,8 +3784,8 @@ module Aws::EMR
     #
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
-    #   information, see [UserId][1] and [GroupId][2] in the *Amazon Web
-    #   Services SSO Identity Store API Reference*. Either `IdentityName` or
+    #   information, see [UserId][1] and [GroupId][2] in the *IAM Identity
+    #   Center Identity Store API Reference*. Either `IdentityName` or
     #   `IdentityId` must be specified.
     #
     #
@@ -3762,7 +3795,7 @@ module Aws::EMR
     #
     # @option params [String] :identity_name
     #   The name of the user or group to update. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   [UserName][1] and [DisplayName][2] in the *IAM Identity Center
     #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
     #   must be specified.
     #
@@ -3812,7 +3845,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

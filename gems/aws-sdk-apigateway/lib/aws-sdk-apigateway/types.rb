@@ -683,8 +683,13 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] cache_cluster_size
-    #   Specifies the cache cluster size for the Stage resource specified in
-    #   the input, if a cache cluster is enabled.
+    #   The stage's cache capacity in GB. For more information about
+    #   choosing a cache size, see [Enabling API caching to enhance
+    #   responsiveness][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
     #   @return [String]
     #
     # @!attribute [rw] variables
@@ -1059,7 +1064,13 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] cache_cluster_size
-    #   The stage's cache cluster size.
+    #   The stage's cache capacity in GB. For more information about
+    #   choosing a cache size, see [Enabling API caching to enhance
+    #   responsiveness][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
     #   @return [String]
     #
     # @!attribute [rw] variables
@@ -4748,7 +4759,13 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] cache_cluster_size
-    #   The size of the cache cluster for the stage, if enabled.
+    #   The stage's cache capacity in GB. For more information about
+    #   choosing a cache size, see [Enabling API caching to enhance
+    #   responsiveness][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_status

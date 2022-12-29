@@ -96,6 +96,8 @@ module Aws::EMR
             Aws::EMR::Endpoints::GetAutoTerminationPolicy.build(context)
           when :get_block_public_access_configuration
             Aws::EMR::Endpoints::GetBlockPublicAccessConfiguration.build(context)
+          when :get_cluster_session_credentials
+            Aws::EMR::Endpoints::GetClusterSessionCredentials.build(context)
           when :get_managed_scaling_policy
             Aws::EMR::Endpoints::GetManagedScalingPolicy.build(context)
           when :get_studio_session_mapping

@@ -1092,8 +1092,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] auth_mode
-    #   Specifies whether the Studio authenticates users using IAM or Amazon
-    #   Web Services SSO.
+    #   Specifies whether the Studio authenticates users using IAM or IAM
+    #   Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -1116,8 +1116,8 @@ module Aws::EMR
     #
     # @!attribute [rw] user_role
     #   The IAM user role that users and groups assume when logged in to an
-    #   Amazon EMR Studio. Only specify a `UserRole` when you use Amazon Web
-    #   Services SSO authentication. The permissions attached to the
+    #   Amazon EMR Studio. Only specify a `UserRole` when you use IAM
+    #   Identity Center authentication. The permissions attached to the
     #   `UserRole` can be scoped down for each user or group using session
     #   policies.
     #   @return [String]
@@ -1207,10 +1207,10 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group from the
-    #   Amazon Web Services SSO Identity Store. For more information, see
-    #   [UserId][1] and [GroupId][2] in the *Amazon Web Services SSO
-    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
-    #   must be specified, but not both.
+    #   IAM Identity Center Identity Store. For more information, see
+    #   [UserId][1] and [GroupId][2] in the *IAM Identity Center Identity
+    #   Store API Reference*. Either `IdentityName` or `IdentityId` must be
+    #   specified, but not both.
     #
     #
     #
@@ -1220,7 +1220,7 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   [UserName][1] and [DisplayName][2] in the *IAM Identity Center
     #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
     #   must be specified, but not both.
     #
@@ -1259,6 +1259,29 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # The credentials that you can use to connect to cluster endpoints.
+    # Credentials consist of a username and a password.
+    #
+    # @note Credentials is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Credentials corresponding to the set member.
+    #
+    # @!attribute [rw] username_password
+    #   The username and password that you use to connect to cluster
+    #   endpoints.
+    #   @return [Types::UsernamePassword]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Credentials AWS API Documentation
+    #
+    class Credentials < Struct.new(
+      :username_password,
+      :unknown)
+      SENSITIVE = [:username_password]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UsernamePassword < Credentials; end
+      class Unknown < Credentials; end
+    end
+
     # @!attribute [rw] name
     #   The name of the security configuration.
     #   @return [String]
@@ -1294,7 +1317,7 @@ module Aws::EMR
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group to remove
     #   from the Amazon EMR Studio. For more information, see [UserId][1]
-    #   and [GroupId][2] in the *Amazon Web Services SSO Identity Store API
+    #   and [GroupId][2] in the *IAM Identity Center Identity Store API
     #   Reference*. Either `IdentityName` or `IdentityId` must be specified.
     #
     #
@@ -1306,7 +1329,7 @@ module Aws::EMR
     # @!attribute [rw] identity_name
     #   The name of the user name or group to remove from the Amazon EMR
     #   Studio. For more information, see [UserName][1] and [DisplayName][2]
-    #   in the *Amazon Web Services SSO Store API Reference*. Either
+    #   in the *IAM Identity Center Store API Reference*. Either
     #   `IdentityName` or `IdentityId` must be specified.
     #
     #
@@ -1895,6 +1918,46 @@ module Aws::EMR
     end
 
     # @!attribute [rw] cluster_id
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for interactive
+    #   workload submission on the cluster. The runtime role can be a
+    #   cross-account IAM role. The runtime role ARN is a combination of
+    #   account ID, role name, and role type using the following format:
+    #   `arn:partition:service:region:account:resource`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetClusterSessionCredentialsInput AWS API Documentation
+    #
+    class GetClusterSessionCredentialsInput < Struct.new(
+      :cluster_id,
+      :execution_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credentials
+    #   The credentials that you can use to connect to cluster endpoints
+    #   that support username-based and password-based authentication.
+    #   @return [Types::Credentials]
+    #
+    # @!attribute [rw] expires_at
+    #   The time when the credentials that are returned by the
+    #   `GetClusterSessionCredentials` API expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetClusterSessionCredentialsOutput AWS API Documentation
+    #
+    class GetClusterSessionCredentialsOutput < Struct.new(
+      :credentials,
+      :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
     #   Specifies the ID of the cluster for which the managed scaling policy
     #   will be fetched.
     #   @return [String]
@@ -1926,8 +1989,8 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
-    #   information, see [UserId][1] and [GroupId][2] in the *Amazon Web
-    #   Services SSO Identity Store API Reference*. Either `IdentityName` or
+    #   information, see [UserId][1] and [GroupId][2] in the *IAM Identity
+    #   Center Identity Store API Reference*. Either `IdentityName` or
     #   `IdentityId` must be specified.
     #
     #
@@ -1938,7 +2001,7 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group to fetch. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   [UserName][1] and [DisplayName][2] in the *IAM Identity Center
     #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
     #   must be specified.
     #
@@ -5040,7 +5103,9 @@ module Aws::EMR
     #
     # @!attribute [rw] service_role
     #   The IAM role that Amazon EMR assumes in order to access Amazon Web
-    #   Services resources on your behalf.
+    #   Services resources on your behalf. If you've created a custom
+    #   service role path, you must specify it for the service role when you
+    #   launch your cluster.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5363,7 +5428,7 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   [UserName][1] and [DisplayName][2] in the *IAM Identity Center
     #   Identity Store API Reference*.
     #
     #
@@ -5413,12 +5478,12 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group from the
-    #   Amazon Web Services SSO Identity Store.
+    #   IAM Identity Center Identity Store.
     #   @return [String]
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   [UserName][1] and [DisplayName][2] in the *IAM Identity Center
     #   Identity Store API Reference*.
     #
     #
@@ -6048,7 +6113,7 @@ module Aws::EMR
     #
     # @!attribute [rw] auth_mode
     #   Specifies whether the Amazon EMR Studio authenticates users using
-    #   IAM or Amazon Web Services SSO.
+    #   IAM or IAM Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -6160,8 +6225,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] auth_mode
-    #   Specifies whether the Studio authenticates users using IAM or Amazon
-    #   Web Services SSO.
+    #   Specifies whether the Studio authenticates users using IAM or IAM
+    #   Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -6297,8 +6362,8 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
-    #   information, see [UserId][1] and [GroupId][2] in the *Amazon Web
-    #   Services SSO Identity Store API Reference*. Either `IdentityName` or
+    #   information, see [UserId][1] and [GroupId][2] in the *IAM Identity
+    #   Center Identity Store API Reference*. Either `IdentityName` or
     #   `IdentityId` must be specified.
     #
     #
@@ -6309,7 +6374,7 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group to update. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   [UserName][1] and [DisplayName][2] in the *IAM Identity Center
     #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
     #   must be specified.
     #
@@ -6340,12 +6405,35 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # The username and password that you use to connect to cluster
+    # endpoints.
+    #
+    # @!attribute [rw] username
+    #   The username associated with the temporary credentials that you use
+    #   to connect to cluster endpoints.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password associated with the temporary credentials that you use
+    #   to connect to cluster endpoints.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UsernamePassword AWS API Documentation
+    #
+    class UsernamePassword < Struct.new(
+      :username,
+      :password)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # EBS volume specifications such as volume type, IOPS, size (GiB) and
     # throughput (MiB/s) that are requested for the EBS volume attached to
     # an EC2 instance in the cluster.
     #
     # @!attribute [rw] volume_type
-    #   The volume type. Volume types supported are gp2, io1, and standard.
+    #   The volume type. Volume types supported are gp3, gp2, io1, st1, sc1,
+    #   and standard.
     #   @return [String]
     #
     # @!attribute [rw] iops

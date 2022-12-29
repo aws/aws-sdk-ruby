@@ -69,6 +69,7 @@ module Aws::SecretsManager
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     MaxResultsType = Shapes::IntegerShape.new(name: 'MaxResultsType')
     NameType = Shapes::StringShape.new(name: 'NameType')
+    NextRotationDateType = Shapes::TimestampShape.new(name: 'NextRotationDateType')
     NextTokenType = Shapes::StringShape.new(name: 'NextTokenType')
     NonEmptyResourcePolicyType = Shapes::StringShape.new(name: 'NonEmptyResourcePolicyType')
     OwningServiceType = Shapes::StringShape.new(name: 'OwningServiceType')
@@ -197,6 +198,7 @@ module Aws::SecretsManager
     DescribeSecretResponse.add_member(:last_changed_date, Shapes::ShapeRef.new(shape: LastChangedDateType, location_name: "LastChangedDate", metadata: {"box"=>true}))
     DescribeSecretResponse.add_member(:last_accessed_date, Shapes::ShapeRef.new(shape: LastAccessedDateType, location_name: "LastAccessedDate", metadata: {"box"=>true}))
     DescribeSecretResponse.add_member(:deleted_date, Shapes::ShapeRef.new(shape: DeletedDateType, location_name: "DeletedDate", metadata: {"box"=>true}))
+    DescribeSecretResponse.add_member(:next_rotation_date, Shapes::ShapeRef.new(shape: NextRotationDateType, location_name: "NextRotationDate"))
     DescribeSecretResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
     DescribeSecretResponse.add_member(:version_ids_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "VersionIdsToStages"))
     DescribeSecretResponse.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
@@ -280,6 +282,7 @@ module Aws::SecretsManager
     ListSecretVersionIdsResponse.add_member(:name, Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
     ListSecretVersionIdsResponse.struct_class = Types::ListSecretVersionIdsResponse
 
+    ListSecretsRequest.add_member(:include_planned_deletion, Shapes::ShapeRef.new(shape: BooleanType, location_name: "IncludePlannedDeletion", metadata: {"box"=>true}))
     ListSecretsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "MaxResults", metadata: {"box"=>true}))
     ListSecretsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
     ListSecretsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FiltersListType, location_name: "Filters"))
@@ -394,6 +397,7 @@ module Aws::SecretsManager
     SecretListEntry.add_member(:last_changed_date, Shapes::ShapeRef.new(shape: LastChangedDateType, location_name: "LastChangedDate", metadata: {"box"=>true}))
     SecretListEntry.add_member(:last_accessed_date, Shapes::ShapeRef.new(shape: LastAccessedDateType, location_name: "LastAccessedDate", metadata: {"box"=>true}))
     SecretListEntry.add_member(:deleted_date, Shapes::ShapeRef.new(shape: DeletedDateType, location_name: "DeletedDate"))
+    SecretListEntry.add_member(:next_rotation_date, Shapes::ShapeRef.new(shape: NextRotationDateType, location_name: "NextRotationDate"))
     SecretListEntry.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
     SecretListEntry.add_member(:secret_versions_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "SecretVersionsToStages"))
     SecretListEntry.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))

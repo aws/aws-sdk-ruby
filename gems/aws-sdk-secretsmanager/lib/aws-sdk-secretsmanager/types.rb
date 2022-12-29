@@ -493,6 +493,9 @@ module Aws::SecretsManager
     #   deletion and restore access to the secret, use RestoreSecret.
     #   @return [Time]
     #
+    # @!attribute [rw] next_rotation_date
+    #   @return [Time]
+    #
     # @!attribute [rw] tags
     #   The list of tags attached to the secret. To add tags to a secret,
     #   use TagResource. To remove tags, use UntagResource.
@@ -572,6 +575,7 @@ module Aws::SecretsManager
       :last_changed_date,
       :last_accessed_date,
       :deleted_date,
+      :next_rotation_date,
       :tags,
       :version_ids_to_stages,
       :owning_service,
@@ -1029,6 +1033,9 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] include_planned_deletion
+    #   @return [Boolean]
+    #
     # @!attribute [rw] max_results
     #   The number of results to include in the response.
     #
@@ -1054,6 +1061,7 @@ module Aws::SecretsManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecretsRequest AWS API Documentation
     #
     class ListSecretsRequest < Struct.new(
+      :include_planned_deletion,
       :max_results,
       :next_token,
       :filters,
@@ -1552,16 +1560,7 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] rotation_lambda_arn
-    #   For secrets that use a Lambda rotation function to rotate, the ARN
-    #   of the Lambda rotation function.
-    #
-    #   For secrets that use *managed rotation*, omit this field. For more
-    #   information, see [Managed rotation][1] in the *Secrets Manager User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_managed.html
+    #   The ARN of the Lambda rotation function that can rotate the secret.
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
@@ -1573,11 +1572,10 @@ module Aws::SecretsManager
     #   next scheduled rotation window. The rotation schedule is defined in
     #   RotateSecretRequest$RotationRules.
     #
-    #   For secrets that use a Lambda rotation function to rotate, if you
-    #   don't immediately rotate the secret, Secrets Manager tests the
-    #   rotation configuration by running the [ `testSecret` step][1] of the
-    #   Lambda rotation function. The test creates an `AWSPENDING` version
-    #   of the secret and then removes it.
+    #   If you don't immediately rotate the secret, Secrets Manager tests
+    #   the rotation configuration by running the [ `testSecret` step][1] of
+    #   the Lambda rotation function. The test creates an `AWSPENDING`
+    #   version of the secret and then removes it.
     #
     #   If you don't specify this value, then by default, Secrets Manager
     #   rotates the secret immediately.
@@ -1769,6 +1767,9 @@ module Aws::SecretsManager
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_DeleteSecret.html
     #   @return [Time]
     #
+    # @!attribute [rw] next_rotation_date
+    #   @return [Time]
+    #
     # @!attribute [rw] tags
     #   The list of user-defined tags associated with the secret. To add
     #   tags to a secret, use [ `TagResource` ][1]. To remove tags, use [
@@ -1819,6 +1820,7 @@ module Aws::SecretsManager
       :last_changed_date,
       :last_accessed_date,
       :deleted_date,
+      :next_rotation_date,
       :tags,
       :secret_versions_to_stages,
       :owning_service,
