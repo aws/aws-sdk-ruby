@@ -472,6 +472,9 @@ module Aws::CloudFront
     ResponseHeadersPolicyInUse = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyInUse')
     ResponseHeadersPolicyList = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyList')
     ResponseHeadersPolicyReferrerPolicy = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyReferrerPolicy')
+    ResponseHeadersPolicyRemoveHeader = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyRemoveHeader')
+    ResponseHeadersPolicyRemoveHeaderList = Shapes::ListShape.new(name: 'ResponseHeadersPolicyRemoveHeaderList')
+    ResponseHeadersPolicyRemoveHeadersConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyRemoveHeadersConfig')
     ResponseHeadersPolicySecurityHeadersConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicySecurityHeadersConfig')
     ResponseHeadersPolicyServerTimingHeadersConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyServerTimingHeadersConfig')
     ResponseHeadersPolicyStrictTransportSecurity = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyStrictTransportSecurity')
@@ -562,6 +565,7 @@ module Aws::CloudFront
     TooManyQueryStringsInCachePolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInCachePolicy')
     TooManyQueryStringsInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInOriginRequestPolicy')
     TooManyRealtimeLogConfigs = Shapes::StructureShape.new(name: 'TooManyRealtimeLogConfigs')
+    TooManyRemoveHeadersInResponseHeadersPolicy = Shapes::StructureShape.new(name: 'TooManyRemoveHeadersInResponseHeadersPolicy')
     TooManyResponseHeadersPolicies = Shapes::StructureShape.new(name: 'TooManyResponseHeadersPolicies')
     TooManyStreamingDistributionCNAMEs = Shapes::StructureShape.new(name: 'TooManyStreamingDistributionCNAMEs')
     TooManyStreamingDistributions = Shapes::StructureShape.new(name: 'TooManyStreamingDistributions')
@@ -2418,6 +2422,7 @@ module Aws::CloudFront
     ResponseHeadersPolicyConfig.add_member(:security_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicySecurityHeadersConfig, location_name: "SecurityHeadersConfig"))
     ResponseHeadersPolicyConfig.add_member(:server_timing_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyServerTimingHeadersConfig, location_name: "ServerTimingHeadersConfig"))
     ResponseHeadersPolicyConfig.add_member(:custom_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyCustomHeadersConfig, location_name: "CustomHeadersConfig"))
+    ResponseHeadersPolicyConfig.add_member(:remove_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyRemoveHeadersConfig, location_name: "RemoveHeadersConfig"))
     ResponseHeadersPolicyConfig.struct_class = Types::ResponseHeadersPolicyConfig
 
     ResponseHeadersPolicyContentSecurityPolicy.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
@@ -2463,6 +2468,15 @@ module Aws::CloudFront
     ResponseHeadersPolicyReferrerPolicy.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
     ResponseHeadersPolicyReferrerPolicy.add_member(:referrer_policy, Shapes::ShapeRef.new(shape: ReferrerPolicyList, required: true, location_name: "ReferrerPolicy"))
     ResponseHeadersPolicyReferrerPolicy.struct_class = Types::ResponseHeadersPolicyReferrerPolicy
+
+    ResponseHeadersPolicyRemoveHeader.add_member(:header, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Header"))
+    ResponseHeadersPolicyRemoveHeader.struct_class = Types::ResponseHeadersPolicyRemoveHeader
+
+    ResponseHeadersPolicyRemoveHeaderList.member = Shapes::ShapeRef.new(shape: ResponseHeadersPolicyRemoveHeader, location_name: "ResponseHeadersPolicyRemoveHeader")
+
+    ResponseHeadersPolicyRemoveHeadersConfig.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    ResponseHeadersPolicyRemoveHeadersConfig.add_member(:items, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyRemoveHeaderList, location_name: "Items"))
+    ResponseHeadersPolicyRemoveHeadersConfig.struct_class = Types::ResponseHeadersPolicyRemoveHeadersConfig
 
     ResponseHeadersPolicySecurityHeadersConfig.add_member(:xss_protection, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyXSSProtection, location_name: "XSSProtection"))
     ResponseHeadersPolicySecurityHeadersConfig.add_member(:frame_options, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyFrameOptions, location_name: "FrameOptions"))
@@ -2769,6 +2783,9 @@ module Aws::CloudFront
 
     TooManyRealtimeLogConfigs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyRealtimeLogConfigs.struct_class = Types::TooManyRealtimeLogConfigs
+
+    TooManyRemoveHeadersInResponseHeadersPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyRemoveHeadersInResponseHeadersPolicy.struct_class = Types::TooManyRemoveHeadersInResponseHeadersPolicy
 
     TooManyResponseHeadersPolicies.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyResponseHeadersPolicies.struct_class = Types::TooManyResponseHeadersPolicies
@@ -3464,6 +3481,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyResponseHeadersPolicies)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCustomHeadersInResponseHeadersPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooLongCSPInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRemoveHeadersInResponseHeadersPolicy)
       end)
 
       api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -4671,6 +4689,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCustomHeadersInResponseHeadersPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooLongCSPInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRemoveHeadersInResponseHeadersPolicy)
       end)
 
       api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|

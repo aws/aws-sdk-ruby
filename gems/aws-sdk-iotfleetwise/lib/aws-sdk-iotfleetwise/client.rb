@@ -560,7 +560,7 @@ module Aws::IoTFleetWise
     #   (January 1, 1970 at midnight UTC time). Vehicle data won't be
     #   collected after the campaign expires.
     #
-    #   Default: 253402243200 (December 31, 9999, 00:00:00 UTC)
+    #   Default: 253402214400 (December 31, 9999, 00:00:00 UTC)
     #
     # @option params [Integer] :post_trigger_collection_duration
     #   (Optional) How long (in milliseconds) to collect raw data after a
@@ -3145,7 +3145,7 @@ module Aws::IoTFleetWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

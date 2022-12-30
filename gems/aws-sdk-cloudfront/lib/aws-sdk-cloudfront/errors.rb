@@ -163,6 +163,7 @@ module Aws::CloudFront
   # * {TooManyQueryStringsInCachePolicy}
   # * {TooManyQueryStringsInOriginRequestPolicy}
   # * {TooManyRealtimeLogConfigs}
+  # * {TooManyRemoveHeadersInResponseHeadersPolicy}
   # * {TooManyResponseHeadersPolicies}
   # * {TooManyStreamingDistributionCNAMEs}
   # * {TooManyStreamingDistributions}
@@ -2207,6 +2208,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyRealtimeLogConfigs] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyRemoveHeadersInResponseHeadersPolicy < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyRemoveHeadersInResponseHeadersPolicy] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

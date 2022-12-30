@@ -2472,19 +2472,28 @@ module Aws::CloudFront
     # Creates a response headers policy.
     #
     # A response headers policy contains information about a set of HTTP
-    # response headers and their values. To create a response headers
-    # policy, you provide some metadata about the policy, and a set of
-    # configurations that specify the response headers.
+    # headers. To create a response headers policy, you provide some
+    # metadata about the policy and a set of configurations that specify the
+    # headers.
     #
     # After you create a response headers policy, you can use its ID to
     # attach it to one or more cache behaviors in a CloudFront distribution.
-    # When it's attached to a cache behavior, CloudFront adds the headers
-    # in the policy to HTTP responses that it sends for requests that match
-    # the cache behavior.
+    # When it's attached to a cache behavior, the response headers policy
+    # affects the HTTP headers that CloudFront includes in HTTP responses to
+    # requests that match the cache behavior. CloudFront adds or removes
+    # response headers according to the configuration of the response
+    # headers policy.
+    #
+    # For more information, see [Adding or removing HTTP headers in
+    # CloudFront responses][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/modifying-response-headers.html
     #
     # @option params [required, Types::ResponseHeadersPolicyConfig] :response_headers_policy_config
     #   Contains metadata about the response headers policy, and a set of
-    #   configurations that specify the response headers.
+    #   configurations that specify the HTTP headers.
     #
     # @return [Types::CreateResponseHeadersPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2562,6 +2571,14 @@ module Aws::CloudFront
     #           },
     #         ],
     #       },
+    #       remove_headers_config: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             header: "string", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #   })
     #
@@ -2608,6 +2625,9 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.items[0].header #=> String
     #   resp.location #=> String
     #   resp.etag #=> String
     #
@@ -4794,6 +4814,9 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.items[0].header #=> String
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetResponseHeadersPolicy AWS API Documentation
@@ -4875,6 +4898,9 @@ module Aws::CloudFront
     #   resp.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy_config.remove_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy_config.remove_headers_config.items #=> Array
+    #   resp.response_headers_policy_config.remove_headers_config.items[0].header #=> String
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetResponseHeadersPolicyConfig AWS API Documentation
@@ -6743,6 +6769,9 @@ module Aws::CloudFront
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.remove_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.remove_headers_config.items #=> Array
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.remove_headers_config.items[0].header #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListResponseHeadersPolicies AWS API Documentation
     #
@@ -8674,6 +8703,14 @@ module Aws::CloudFront
     #           },
     #         ],
     #       },
+    #       remove_headers_config: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             header: "string", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     id: "string", # required
     #     if_match: "string",
@@ -8722,6 +8759,9 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.remove_headers_config.items[0].header #=> String
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateResponseHeadersPolicy AWS API Documentation
@@ -8836,7 +8876,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

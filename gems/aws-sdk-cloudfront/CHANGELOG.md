@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-12-30)
+------------------
+
+* Feature - Extend response headers policy to support removing headers from viewer responses
+
 1.72.0 (2022-12-16)
 ------------------
 

@@ -2277,7 +2277,7 @@ module Aws::CloudFront
 
     # @!attribute [rw] response_headers_policy_config
     #   Contains metadata about the response headers policy, and a set of
-    #   configurations that specify the response headers.
+    #   configurations that specify the HTTP headers.
     #   @return [Types::ResponseHeadersPolicyConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateResponseHeadersPolicyRequest AWS API Documentation
@@ -9327,20 +9327,22 @@ module Aws::CloudFront
     # A response headers policy.
     #
     # A response headers policy contains information about a set of HTTP
-    # response headers and their values.
+    # response headers.
     #
     # After you create a response headers policy, you can use its ID to
     # attach it to one or more cache behaviors in a CloudFront distribution.
-    # When it's attached to a cache behavior, CloudFront adds the headers
-    # in the policy to HTTP responses that it sends for requests that match
-    # the cache behavior.
+    # When it's attached to a cache behavior, the response headers policy
+    # affects the HTTP headers that CloudFront includes in HTTP responses to
+    # requests that match the cache behavior. CloudFront adds or removes
+    # response headers according to the configuration of the response
+    # headers policy.
     #
-    # For more information, see [Adding HTTP headers to CloudFront
-    # responses][1] in the *Amazon CloudFront Developer Guide*.
+    # For more information, see [Adding or removing HTTP headers in
+    # CloudFront responses][1] in the *Amazon CloudFront Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/adding-response-headers.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/modifying-response-headers.html
     #
     # @!attribute [rw] id
     #   The identifier for the response headers policy.
@@ -9353,11 +9355,6 @@ module Aws::CloudFront
     #
     # @!attribute [rw] response_headers_policy_config
     #   A response headers policy configuration.
-    #
-    #   A response headers policy contains information about a set of HTTP
-    #   response headers and their values. CloudFront adds the headers in
-    #   the policy to HTTP responses that it sends for requests that match a
-    #   cache behavior that's associated with the policy.
     #   @return [Types::ResponseHeadersPolicyConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicy AWS API Documentation
@@ -9522,9 +9519,7 @@ module Aws::CloudFront
     #
     # A response headers policy configuration contains metadata about the
     # response headers policy, and configurations for sets of HTTP response
-    # headers and their values. CloudFront adds the headers in the policy to
-    # HTTP responses that it sends for requests that match a cache behavior
-    # associated with the policy.
+    # headers.
     #
     # @!attribute [rw] comment
     #   A comment to describe the response headers policy.
@@ -9557,6 +9552,11 @@ module Aws::CloudFront
     #   A configuration for a set of custom HTTP response headers.
     #   @return [Types::ResponseHeadersPolicyCustomHeadersConfig]
     #
+    # @!attribute [rw] remove_headers_config
+    #   A configuration for a set of HTTP headers to remove from the HTTP
+    #   response.
+    #   @return [Types::ResponseHeadersPolicyRemoveHeadersConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicyConfig AWS API Documentation
     #
     class ResponseHeadersPolicyConfig < Struct.new(
@@ -9565,7 +9565,8 @@ module Aws::CloudFront
       :cors_config,
       :security_headers_config,
       :server_timing_headers_config,
-      :custom_headers_config)
+      :custom_headers_config,
+      :remove_headers_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9916,6 +9917,43 @@ module Aws::CloudFront
     class ResponseHeadersPolicyReferrerPolicy < Struct.new(
       :override,
       :referrer_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name of an HTTP header that CloudFront removes from HTTP responses
+    # to requests that match the cache behavior that this response headers
+    # policy is attached to.
+    #
+    # @!attribute [rw] header
+    #   The HTTP header name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicyRemoveHeader AWS API Documentation
+    #
+    class ResponseHeadersPolicyRemoveHeader < Struct.new(
+      :header)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of HTTP header names that CloudFront removes from HTTP
+    # responses to requests that match the cache behavior that this response
+    # headers policy is attached to.
+    #
+    # @!attribute [rw] quantity
+    #   The number of HTTP header names in the list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   The list of HTTP header names.
+    #   @return [Array<Types::ResponseHeadersPolicyRemoveHeader>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicyRemoveHeadersConfig AWS API Documentation
+    #
+    class ResponseHeadersPolicyRemoveHeadersConfig < Struct.new(
+      :quantity,
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11731,6 +11769,27 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyRealtimeLogConfigs AWS API Documentation
     #
     class TooManyRealtimeLogConfigs < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of headers in `RemoveHeadersConfig` in the response headers
+    # policy exceeds the maximum.
+    #
+    # For more information, see [Quotas][1] (formerly known as limits) in
+    # the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyRemoveHeadersInResponseHeadersPolicy AWS API Documentation
+    #
+    class TooManyRemoveHeadersInResponseHeadersPolicy < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

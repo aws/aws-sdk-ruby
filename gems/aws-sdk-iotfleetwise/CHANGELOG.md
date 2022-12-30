@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2022-12-30)
+------------------
+
+* Feature - Update documentation - correct the epoch constant value of default value for expiryTime field in CreateCampaign request.
+
 1.4.0 (2022-12-16)
 ------------------
 
