@@ -67,6 +67,7 @@ module Aws::SecurityLake
     DeleteSubscriberResponse = Shapes::StructureShape.new(name: 'DeleteSubscriberResponse')
     DeleteSubscriptionNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionNotificationConfigurationRequest')
     DeleteSubscriptionNotificationConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteSubscriptionNotificationConfigurationResponse')
+    DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
     DimensionSet = Shapes::ListShape.new(name: 'DimensionSet')
     EndpointProtocol = Shapes::StringShape.new(name: 'EndpointProtocol')
@@ -251,7 +252,7 @@ module Aws::SecurityLake
     CreateSubscriberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "accountId"))
     CreateSubscriberRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "externalId"))
     CreateSubscriberRequest.add_member(:source_types, Shapes::ShapeRef.new(shape: SourceTypeList, required: true, location_name: "sourceTypes"))
-    CreateSubscriberRequest.add_member(:subscriber_description, Shapes::ShapeRef.new(shape: SafeString, location_name: "subscriberDescription"))
+    CreateSubscriberRequest.add_member(:subscriber_description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "subscriberDescription"))
     CreateSubscriberRequest.add_member(:subscriber_name, Shapes::ShapeRef.new(shape: CreateSubscriberRequestSubscriberNameString, required: true, location_name: "subscriberName"))
     CreateSubscriberRequest.struct_class = Types::CreateSubscriberRequest
 
@@ -424,10 +425,10 @@ module Aws::SecurityLake
     ListLogSourcesResponse.struct_class = Types::ListLogSourcesResponse
 
     ListSubscribersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
-    ListSubscribersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SafeString, location: "querystring", location_name: "nextToken"))
+    ListSubscribersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListSubscribersRequest.struct_class = Types::ListSubscribersRequest
 
-    ListSubscribersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SafeString, location_name: "nextToken"))
+    ListSubscribersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListSubscribersResponse.add_member(:subscribers, Shapes::ShapeRef.new(shape: SubscriberList, required: true, location_name: "subscribers"))
     ListSubscribersResponse.struct_class = Types::ListSubscribersResponse
 
@@ -525,8 +526,8 @@ module Aws::SecurityLake
 
     UpdateSubscriberRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: SafeString, location_name: "externalId"))
     UpdateSubscriberRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
-    UpdateSubscriberRequest.add_member(:source_types, Shapes::ShapeRef.new(shape: SourceTypeList, location_name: "sourceTypes"))
-    UpdateSubscriberRequest.add_member(:subscriber_description, Shapes::ShapeRef.new(shape: SafeString, location_name: "subscriberDescription"))
+    UpdateSubscriberRequest.add_member(:source_types, Shapes::ShapeRef.new(shape: SourceTypeList, required: true, location_name: "sourceTypes"))
+    UpdateSubscriberRequest.add_member(:subscriber_description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "subscriberDescription"))
     UpdateSubscriberRequest.add_member(:subscriber_name, Shapes::ShapeRef.new(shape: UpdateSubscriberRequestSubscriberNameString, location_name: "subscriberName"))
     UpdateSubscriberRequest.struct_class = Types::UpdateSubscriberRequest
 

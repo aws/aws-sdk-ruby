@@ -28,7 +28,7 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Amazon Security Lake can't find an Amazon Web Services account with
+    # Amazon Security Lake cannot find an Amazon Web Services account with
     # the accountID that you specified, or the account whose credentials you
     # used to make this request isn't a member of an organization.
     #
@@ -43,12 +43,16 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Security Lake can collect logs and events from supported Amazon Web
-    # Services services and custom sources.
+    # Amazon Security Lake collects logs and events from supported Amazon
+    # Web Services and custom sources. For the list of supported Amazon Web
+    # Services, see the [Amazon Security Lake User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
     #
     # @!attribute [rw] account
-    #   Account ID of the Security Lake account for which logs are
-    #   collected.
+    #   The ID of the Security Lake account for which logs are collected.
     #   @return [String]
     #
     # @!attribute [rw] event_class
@@ -56,14 +60,13 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] logs_status
-    #   Log status for the Security Lake account.
+    #   The log status for the Security Lake account.
     #   @return [Array<Types::LogsStatus>]
     #
     # @!attribute [rw] source_type
-    #   The supported Amazon Web Services services from which logs and
-    #   events are collected. Amazon Security Lake supports logs and events
-    #   collection for natively-supported Amazon Web Services services. For
-    #   more information, see the Amazon Security Lake User Guide.
+    #   The supported Amazon Web Services from which logs and events are
+    #   collected. Amazon Security Lake supports log and event collection
+    #   for natively supported Amazon Web Services.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/AccountSources AWS API Documentation
@@ -78,15 +81,16 @@ module Aws::SecurityLake
     end
 
     # Automatically enable new organization accounts as member accounts from
-    # a Security Lake administrator account.
+    # an Amazon Security Lake administrator account.
     #
     # @!attribute [rw] region
-    #   The Regions where Security Lake is auto enabled
+    #   The Amazon Web Services Regions where Security Lake is automatically
+    #   enabled.
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   The Amazon Web Services sources which are auto enabled in Security
-    #   Lake.
+    #   The Amazon Web Services sources that are automatically enabled in
+    #   Security Lake.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/AutoEnableNewRegionConfiguration AWS API Documentation
@@ -180,20 +184,23 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] enable_all_dimensions
-    #   Enables specific sources in all Regions and source types.
+    #   Enables data collection from specific Amazon Web Services sources in
+    #   all specific accounts and specific Regions.
     #   @return [Hash<String,Hash<String,Array<String>>>]
     #
     # @!attribute [rw] enable_single_dimension
-    #   Enables all sources in specific accounts or Regions.
+    #   Enables data collection from all Amazon Web Services sources in
+    #   specific accounts or Regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] enable_two_dimensions
-    #   Enables specific service sources in specific accounts or Regions.
+    #   Enables data collection from specific Amazon Web Services sources in
+    #   specific accounts or Regions.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] input_order
     #   Specifies the input order to enable dimensions in Security Lake,
-    #   namely region, source type, and member account.
+    #   namely Region, source type, and member account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateAwsLogSourceRequest AWS API Documentation
@@ -208,14 +215,14 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] failed
-    #   List of all accounts in which enabling a natively-supported Amazon
-    #   Web Services service as a Security Lake failed. The failure occurred
-    #   as these accounts are not part of an organization.
+    #   Lists all accounts in which enabling a natively supported Amazon Web
+    #   Service as a Security Lake source failed. The failure occurred as
+    #   these accounts are not part of an organization.
     #   @return [Array<String>]
     #
     # @!attribute [rw] processing
-    #   List of all accounts which are in the process of enabling a
-    #   natively-supported Amazon Web Services service as a Security Lake.
+    #   Lists the accounts that are in the process of enabling a natively
+    #   supported Amazon Web Service as a Security Lake source.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateAwsLogSourceResponse AWS API Documentation
@@ -228,25 +235,29 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] custom_source_name
-    #   The custom source name for a third-party custom source.
+    #   The name for a third-party custom source. This must be a Regionally
+    #   unique value.
     #   @return [String]
     #
     # @!attribute [rw] event_class
-    #   The Open Cybersecurity Schema Framework (OCSF) event class.
+    #   The Open Cybersecurity Schema Framework (OCSF) event class which
+    #   describes the type of data that the custom source will send to
+    #   Security Lake.
     #   @return [String]
     #
     # @!attribute [rw] glue_invocation_role_arn
-    #   The IAM Role ARN to be used by the Glue Crawler. The recommended IAM
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be used by the Glue crawler. The recommended IAM
     #   policies are:
     #
     #   * The managed policy `AWSGlueServiceRole`
     #
-    #   * A custom policy granting access to your S3 Data Lake
+    #   * A custom policy granting access to your Amazon S3 Data Lake
     #   @return [String]
     #
     # @!attribute [rw] log_provider_account_id
-    #   The Account ID that will assume the above Role to put logs into the
-    #   Data Lake.
+    #   The Amazon Web Services account ID of the custom source that will
+    #   write logs and events into the Amazon S3 Data Lake.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateCustomLogSourceRequest AWS API Documentation
@@ -261,7 +272,8 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] custom_data_location
-    #   The location of the partition in the Security Lake S3 bucket.
+    #   The location of the partition in the Amazon S3 bucket for Security
+    #   Lake.
     #   @return [String]
     #
     # @!attribute [rw] glue_crawler_name
@@ -278,12 +290,12 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] log_provider_access_role_arn
-    #   IAM Role ARN to be used by the entity putting logs into your Custom
-    #   Source partition. Security Lake will apply the correct access
-    #   policies to this Role, but this Role must have the trust policy
-    #   created manually. This Role's name must start with the text
-    #   'Security Lake'. It must trust the `logProviderAccountId` to
-    #   assume it.
+    #   The ARN of the IAM role to be used by the entity putting logs into
+    #   your custom source partition. Security Lake will apply the correct
+    #   access policies to this role, but you must first manually create the
+    #   trust policy for this role. The IAM role name must start with the
+    #   text 'Security Lake'. The IAM role must trust the
+    #   `logProviderAccountId` to assume the role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateCustomLogSourceResponse AWS API Documentation
@@ -299,9 +311,9 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] configuration_for_new_accounts
-    #   Enable Amazon Security Lake with the specified configurations
-    #   settings to begin ingesting security data for new accounts in
-    #   Security Lake.
+    #   Enable Security Lake with the specified configuration settings to
+    #   begin collecting security data for new accounts in your
+    #   organization.
     #   @return [Array<Types::AutoEnableNewRegionConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDatalakeAutoEnableRequest AWS API Documentation
@@ -317,7 +329,8 @@ module Aws::SecurityLake
     class CreateDatalakeAutoEnableResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] account
-    #   Account ID of the Security Lake delegated administrator.
+    #   The Amazon Web Services account ID of the Security Lake delegated
+    #   administrator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDatalakeDelegatedAdminRequest AWS API Documentation
@@ -333,12 +346,13 @@ module Aws::SecurityLake
     class CreateDatalakeDelegatedAdminResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] notification_endpoint
-    #   The account in which the exception notifications subscription is
-    #   created.
+    #   The Amazon Web Services account where you want to receive exception
+    #   notifications.
     #   @return [String]
     #
     # @!attribute [rw] subscription_protocol
-    #   The subscription protocol to which exception messages are posted.
+    #   The subscription protocol to which exception notifications are
+    #   posted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDatalakeExceptionsSubscriptionRequest AWS API Documentation
@@ -355,31 +369,30 @@ module Aws::SecurityLake
     class CreateDatalakeExceptionsSubscriptionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] configurations
-    #   Enable Security Lake with the specified configurations settings to
-    #   begin ingesting security data.
+    #   Specify the Region or Regions that will contribute data to the
+    #   rollup region.
     #   @return [Hash<String,Types::LakeConfigurationRequest>]
     #
     # @!attribute [rw] enable_all
-    #   Enable Security Lake in all Regions to begin ingesting security
-    #   data.
+    #   Enable Security Lake in all Regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] meta_store_manager_role_arn
-    #   The Role ARN used to create and update the Glue table with
-    #   partitions generated by ingestion and normalization of Amazon Web
-    #   Services log sources and custom sources.
+    #   The Amazon Resource Name (ARN) used to create and update the Glue
+    #   table. This table contains partitions generated by the ingestion and
+    #   normalization of Amazon Web Services log sources and custom sources.
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   Enable Security Lake in the specified Regions to begin ingesting
-    #   security data. To enable Security Lake in specific Amazon Web
-    #   Services Regions, such as us-east-1 or ap-northeast-3, provide the
-    #   Region codes. For a list of Region codes, see [Region codes][1] in
-    #   the Amazon Web Services General Reference.
+    #   Enable Security Lake in the specified Regions. To enable Security
+    #   Lake in specific Amazon Web Services Regions, such as us-east-1 or
+    #   ap-northeast-3, provide the Region codes. For a list of Region
+    #   codes, see [Amazon Security Lake endpoints][1] in the Amazon Web
+    #   Services General Reference.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/securitylake.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDatalakeRequest AWS API Documentation
@@ -402,30 +415,28 @@ module Aws::SecurityLake
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_id
-    #   The third party Amazon Web Services account ID used to access your
-    #   data.
+    #   The Amazon Web Services account ID used to access your data.
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   The external ID of the subscriber. External ID allows the user that
-    #   is assuming the role to assert the circumstances in which they are
+    #   The external ID of the subscriber. This lets the user that is
+    #   assuming the role assert the circumstances in which they are
     #   operating. It also provides a way for the account owner to permit
     #   the role to be assumed only under specific circumstances.
     #   @return [String]
     #
     # @!attribute [rw] source_types
-    #   The supported Amazon Web Services services from which logs and
-    #   events are collected. Amazon Security Lake supports logs and events
-    #   collection for natively-supported Amazon Web Services services.
+    #   The supported Amazon Web Services from which logs and events are
+    #   collected. Security Lake supports log and event collection for
+    #   natively supported Amazon Web Services.
     #   @return [Array<Types::SourceType>]
     #
     # @!attribute [rw] subscriber_description
-    #   The subscriber descriptions for the subscriber account in Amazon
-    #   Security Lake.
+    #   The description for your subscriber account in Security Lake.
     #   @return [String]
     #
     # @!attribute [rw] subscriber_name
-    #   The name of your Amazon Security Lake subscriber account.
+    #   The name of your Security Lake subscriber account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriberRequest AWS API Documentation
@@ -442,23 +453,26 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) created by the user to provide to the
+    #   The Amazon Resource Name (ARN) created by you to provide to the
     #   subscriber. For more information about ARNs and how to use them in
-    #   policies, see IAM identifiers in the IAM User Guide.
+    #   policies, see [IAM identifiers in the Identity and Access Management
+    #   (IAM) User Guide][1]. .
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
-    #   The Amazon Resource Name (ARN) for the Amazon S3 bucket.
+    #   The ARN for the Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] sns_arn
-    #   The Amazon Resource Name (ARN) for the Amazon Simple Notification
-    #   Service.
+    #   The ARN for the Amazon Simple Notification Service.
     #   @return [String]
     #
     # @!attribute [rw] subscription_id
-    #   The `subscriptionId` that was created by the `CreateSubscriber` API
-    #   call.
+    #   The `subscriptionId` created by the `CreateSubscriber` API call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriberResponse AWS API Documentation
@@ -473,34 +487,33 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] create_sqs
-    #   Create a new subscription notification for the specified
-    #   subscription ID in Security Lake.
+    #   Create an Amazon Simple Queue Service queue.
     #   @return [Boolean]
     #
     # @!attribute [rw] https_api_key_name
-    #   The key name for the subscription notification.
+    #   The key name for the notification subscription.
     #   @return [String]
     #
     # @!attribute [rw] https_api_key_value
-    #   The key value for the subscription notification.
+    #   The key value for the notification subscription.
     #   @return [String]
     #
     # @!attribute [rw] https_method
-    #   The HTTPS method used for the subscription notification.
+    #   The HTTPS method used for the notification subscription.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) specifying the role of the
-    #   subscriber.
+    #   The Amazon Resource Name (ARN) of the EventBridge API destinations
+    #   IAM role that you created.
     #   @return [String]
     #
     # @!attribute [rw] subscription_endpoint
-    #   The subscription endpoint in Security Lake.
+    #   The subscription endpoint in Security Lake. If you prefer
+    #   notification with an HTTPs endpoint, populate this field.
     #   @return [String]
     #
     # @!attribute [rw] subscription_id
-    #   The subscription ID for which the subscription notification is
-    #   specified.
+    #   The subscription ID for the notification subscription/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriptionNotificationConfigurationRequest AWS API Documentation
@@ -518,7 +531,7 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] queue_arn
-    #   Returns the Amazon resource name (ARN) of the queue.
+    #   Returns the Amazon Resource Name (ARN) of the queue.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriptionNotificationConfigurationResponse AWS API Documentation
@@ -530,8 +543,8 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] disable_all_dimensions
-    #   Removes the specific Amazon Web Services sources from all Regions
-    #   and source types.
+    #   Removes the specific Amazon Web Services sources from specific
+    #   accounts and specific Regions.
     #   @return [Hash<String,Hash<String,Array<String>>>]
     #
     # @!attribute [rw] disable_single_dimension
@@ -545,8 +558,10 @@ module Aws::SecurityLake
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] input_order
-    #   This is a mandatory input. Specifies the input order to disable
-    #   dimensions in Security Lake, namely Region, source type, and member.
+    #   This is a mandatory input. Specify the input order to disable
+    #   dimensions in Security Lake, namely Region (Amazon Web Services
+    #   Region code, source type, and member (account ID of a specific
+    #   Amazon Web Services account).
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteAwsLogSourceRequest AWS API Documentation
@@ -566,7 +581,7 @@ module Aws::SecurityLake
     #   @return [Array<String>]
     #
     # @!attribute [rw] processing
-    #   Deletion of the Amazon Web Services sources is in-progress.
+    #   Deletion of the Amazon Web Services sources is in progress.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteAwsLogSourceResponse AWS API Documentation
@@ -579,7 +594,7 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] custom_source_name
-    #   The custom source name for the custome log source.
+    #   The custom source name for the custom log source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteCustomLogSourceRequest AWS API Documentation
@@ -591,7 +606,8 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] custom_data_location
-    #   The location of the partition in the Security Lake S3 bucket.
+    #   The location of the partition in the Amazon S3 bucket for Security
+    #   Lake.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteCustomLogSourceResponse AWS API Documentation
@@ -603,7 +619,7 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] remove_from_configuration_for_new_accounts
-    #   Delete Amazon Security Lake with the specified configurations
+    #   Delete Amazon Security Lake with the specified configuration
     #   settings to stop ingesting security data for new accounts in
     #   Security Lake.
     #   @return [Array<Types::AutoEnableNewRegionConfiguration>]
@@ -621,7 +637,7 @@ module Aws::SecurityLake
     class DeleteDatalakeAutoEnableResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] account
-    #   Account ID the Security Lake delegated administrator.
+    #   The account ID the Security Lake delegated administrator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeDelegatedAdminRequest AWS API Documentation
@@ -683,7 +699,7 @@ module Aws::SecurityLake
     class DeleteSubscriberResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] subscription_id
-    #   The subscription ID of the Amazon Security Lake subscriber account.
+    #   The ID of the Security Lake subscriber account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteSubscriptionNotificationConfigurationRequest AWS API Documentation
@@ -737,7 +753,7 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Response element for actions which make changes namely create, update,
+    # Response element for actions that make changes, namely create, update,
     # or delete actions.
     #
     # @!attribute [rw] failures
@@ -745,7 +761,7 @@ module Aws::SecurityLake
     #   @return [Array<Types::Failures>]
     #
     # @!attribute [rw] region
-    #   List of Regions where the failure occurred.
+    #   List of Amazon Web Services Regions where the failure occurred.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/FailuresResponse AWS API Documentation
@@ -830,23 +846,25 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] account_set
-    #   The account IDs for which a static snapshot of the current Region,
-    #   including enabled accounts and log sources is retrieved.
+    #   The Amazon Web Services account ID for which a static snapshot of
+    #   the current Amazon Web Services Region, including enabled accounts
+    #   and log sources, is retrieved.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_account_results
     #   The maximum limit of accounts for which the static snapshot of the
-    #   current Region including enabled accounts and log sources is
+    #   current Region, including enabled accounts and log sources, is
     #   retrieved.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If nextToken is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
-    #   the call again using the returned token to retrieve the next page.
-    #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 24 hours. Using an expired pagination token will return an
-    #   HTTP 400 InvalidToken error.
+    #   Lists if there are more results available. The value of nextToken is
+    #   a unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return an HTTP 400 InvalidToken error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeStatusRequest AWS API Documentation
@@ -864,12 +882,13 @@ module Aws::SecurityLake
     #   @return [Array<Types::AccountSources>]
     #
     # @!attribute [rw] next_token
-    #   If nextToken is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
-    #   the call again using the returned token to retrieve the next page.
-    #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 24 hours. Using an expired pagination token will return an
-    #   HTTP 400 InvalidToken error.
+    #   Lists if there are more results available. The value of nextToken is
+    #   a unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return an HTTP 400 InvalidToken error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeStatusResponse AWS API Documentation
@@ -882,8 +901,8 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] id
-    #   A value created by Security Lake that uniquely identifies your
-    #   `GetSubscriber` API request.
+    #   A value created by Amazon Security Lake that uniquely identifies
+    #   your `GetSubscriber` API request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetSubscriberRequest AWS API Documentation
@@ -895,7 +914,7 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] subscriber
-    #   Subscription information for the specified subscription ID
+    #   The subscription information for the specified subscription ID.
     #   @return [Types::SubscriberResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetSubscriberResponse AWS API Documentation
@@ -925,8 +944,8 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # The request was rejected because an invalid or out-of-range value was
-    # supplied for an input parameter.
+    # The request was rejected because a value that's not valid or is out
+    # of range was supplied for an input parameter.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -939,11 +958,11 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Provides details of lake configuration object in Amazon Security Lake.
+    # Provides details of Amazon Security Lake configuration object.
     #
     # @!attribute [rw] encryption_key
-    #   The type of encryption key used by Security Lake to encrypt the lake
-    #   configuration object.
+    #   The type of encryption key used by Amazon Security Lake to encrypt
+    #   the Security Lake configuration object.
     #   @return [String]
     #
     # @!attribute [rw] replication_destination_regions
@@ -961,8 +980,9 @@ module Aws::SecurityLake
     #
     # @!attribute [rw] replication_role_arn
     #   Replication settings for the Amazon S3 buckets. This parameter uses
-    #   the IAM role created by you that is managed by Security Lake, to
-    #   ensure the replication setting is correct.
+    #   the Identity and Access Management (IAM) role you created that is
+    #   managed by Security Lake, to ensure the replication setting is
+    #   correct.
     #   @return [String]
     #
     # @!attribute [rw] retention_settings
@@ -987,19 +1007,19 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Provides details of lake configuration object in Amazon Security Lake.
+    # Provides details of Amazon Security Lake lake configuration object.
     #
     # @!attribute [rw] encryption_key
-    #   The type of encryption key used by Security Lake to encrypt the lake
-    #   configuration
+    #   The type of encryption key used by secure the Security Lake
+    #   configuration object.
     #   @return [String]
     #
     # @!attribute [rw] replication_destination_regions
     #   Replication enables automatic, asynchronous copying of objects
     #   across Amazon S3 buckets. Amazon S3 buckets that are configured for
-    #   object replication can be owned by the same AWS account or by
-    #   different accounts. You can replicate objects to a single
-    #   destination bucket or to multiple destination buckets. The
+    #   object replication can be owned by the same Amazon Web Services
+    #   account or by different accounts. You can replicate objects to a
+    #   single destination bucket or to multiple destination buckets. The
     #   destination buckets can be in different Amazon Web Services Regions
     #   or within the same Region as the source bucket.
     #
@@ -1009,8 +1029,8 @@ module Aws::SecurityLake
     #
     # @!attribute [rw] replication_role_arn
     #   Replication settings for the Amazon S3 buckets. This parameter uses
-    #   the IAM role created by you that is managed by Security Lake, to
-    #   ensure the replication setting is correct.
+    #   the IAM role you created that is managed by Security Lake, to ensure
+    #   the replication setting is correct.
     #   @return [String]
     #
     # @!attribute [rw] retention_settings
@@ -1055,13 +1075,18 @@ module Aws::SecurityLake
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   List if there are more results available. if nextToken is returned,
-    #   You can make the call again using the returned token to retrieve the
-    #   next page
+    #   List if there are more results available. The value of nextToken is
+    #   a unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return an HTTP 400 InvalidToken error.
     #   @return [String]
     #
     # @!attribute [rw] region_set
-    #   List the regions from which exceptions are retrieved.
+    #   List the Amazon Web Services Regions from which exceptions are
+    #   retrieved.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDatalakeExceptionsRequest AWS API Documentation
@@ -1075,13 +1100,17 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] next_token
-    #   List if there are more results available. if nextToken is returned,
-    #   You can make the call again using the returned token to retrieve the
-    #   next page
+    #   List if there are more results available. The value of nextToken is
+    #   a unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return an HTTP 400 InvalidToken error.
     #   @return [String]
     #
     # @!attribute [rw] non_retryable_failures
-    #   Lists the non-retryable failures in the current region.
+    #   Lists the failures that cannot be retried in the current Region.
     #   @return [Array<Types::FailuresResponse>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDatalakeExceptionsResponse AWS API Documentation
@@ -1099,30 +1128,31 @@ module Aws::SecurityLake
     #   @return [Array<String>]
     #
     # @!attribute [rw] list_all_dimensions
-    #   List the view of log sources for enabled Security Lake accounts in
-    #   all Regions and source types.
+    #   List the view of log sources for enabled Amazon Security Lake
+    #   accounts for specific Amazon Web Services sources from specific
+    #   accounts and specific Regions.
     #   @return [Hash<String,Hash<String,Array<String>>>]
     #
     # @!attribute [rw] list_single_dimension
     #   List the view of log sources for enabled Security Lake accounts for
-    #   the entire region.
+    #   all Amazon Web Services sources from specific accounts or specific
+    #   Regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] list_two_dimensions
-    #   Lists the log sources for the specified source types in enabled
-    #   Security Lake accounts for the entire Region, for selected member
-    #   accounts.
+    #   Lists the view of log sources for enabled Security Lake accounts for
+    #   specific Amazon Web Services sources from specific accounts or
+    #   specific Regions.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of accounts for which the configuration is
+    #   The maximum number of accounts for which the log sources are
     #   displayed.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   If nextToken is returned, there are more results available. You can
-    #   make the call again using the returned token to retrieve the next
-    #   page.
+    #   repeat the call using the returned token to retrieve the next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListLogSourcesRequest AWS API Documentation
@@ -1140,13 +1170,11 @@ module Aws::SecurityLake
 
     # @!attribute [rw] next_token
     #   If nextToken is returned, there are more results available. You can
-    #   make the call again using the returned token to retrieve the next
-    #   page.
+    #   repeat the call using the returned token to retrieve the next page.
     #   @return [String]
     #
     # @!attribute [rw] region_source_types_accounts_list
-    #   Lists the log sources in the Regions for enabled Security Lake
-    #   accounts.
+    #   Lists the log sources by Regions for enabled Security Lake accounts.
     #   @return [Array<Hash<String,Hash<String,Array<String>>>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListLogSourcesResponse AWS API Documentation
@@ -1165,8 +1193,7 @@ module Aws::SecurityLake
     #
     # @!attribute [rw] next_token
     #   If nextToken is returned, there are more results available. You can
-    #   make the call again using the returned token to retrieve the next
-    #   page.
+    #   repeat the call using the returned token to retrieve the next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListSubscribersRequest AWS API Documentation
@@ -1180,12 +1207,12 @@ module Aws::SecurityLake
 
     # @!attribute [rw] next_token
     #   If nextToken is returned, there are more results available. You can
-    #   make the call again using the returned token to retrieve the next
-    #   page.
+    #   repeat the call using the returned token to retrieve the next page.
     #   @return [String]
     #
     # @!attribute [rw] subscribers
-    #   The subscribers available in the specified Security Lake account ID.
+    #   The subscribers available for the specified Security Lake account
+    #   ID.
     #   @return [Array<Types::SubscriberResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListSubscribersResponse AWS API Documentation
@@ -1197,10 +1224,10 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Log status for the Security Lake account.
+    # Retrieves the Logs status for the Amazon Security Lake account.
     #
     # @!attribute [rw] health_status
-    #   Health status of services including error codes and patterns.
+    #   The health status of services, including error codes and patterns.
     #   @return [String]
     #
     # @!attribute [rw] path_to_logs
@@ -1217,11 +1244,11 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Notifications in Security Lake which dictates how notifications are
-    # posted at the endpoint.
+    # Protocol used in Amazon Security Lake that dictates how notifications
+    # are posted at the endpoint.
     #
     # @!attribute [rw] endpoint
-    #   The account which is subscribed to receive exception notifications.
+    #   The account that is subscribed to receive exception notifications.
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -1261,13 +1288,13 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Retention settings for the destination Amazon S3 buckets in Security
-    # Lake.
+    # Retention settings for the destination Amazon S3 buckets in Amazon
+    # Security Lake.
     #
     # @!attribute [rw] retention_period
     #   The retention period specifies a fixed period of time during which
     #   the Security Lake object remains locked. You can specify the
-    #   retention period for one or more source in days.
+    #   retention period in days for one or more sources.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
@@ -1286,10 +1313,9 @@ module Aws::SecurityLake
 
     # Provides an extension of the AmazonServiceException for errors
     # reported by Amazon S3 while processing a request. In particular, this
-    # class provides access to Amazon S3's extended request ID. This ID is
-    # required debugging information in the case the user needs to contact
-    # Amazon about an issue where Amazon S3 is incorrectly handling a
-    # request.
+    # class provides access to the Amazon S3 extended request ID. If Amazon
+    # S3 is incorrectly handling a request and you need to contact Amazon,
+    # this extended request ID may provide useful debugging information.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1339,20 +1365,24 @@ module Aws::SecurityLake
     end
 
     # The supported source types from which logs and events are collected in
-    # Amazon Security Lake.
+    # Amazon Security Lake. For the list of supported Amazon Web Services,
+    # see the [Amazon Security Lake User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
     #
     # @note SourceType is a union - when making an API calls you must set exactly one of the members.
     #
     # @note SourceType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceType corresponding to the set member.
     #
     # @!attribute [rw] aws_source_type
-    #   Amazon Security Lake supports logs and events collection for
-    #   natively-supported Amazon Web Services services. For more
-    #   information, see the Amazon Security Lake User Guide.
+    #   Amazon Security Lake supports log and event collection for natively
+    #   supported Amazon Web Services.
     #   @return [String]
     #
     # @!attribute [rw] custom_source_type
-    #   Amazon Security Lake supports custom source types. For the detailed
+    #   Amazon Security Lake supports custom source types. For a detailed
     #   list, see the Amazon Security Lake User Guide.
     #   @return [String]
     #
@@ -1371,9 +1401,9 @@ module Aws::SecurityLake
       class Unknown < SourceType; end
     end
 
-    # Provides details of the Amazon Security Lake account subscription.
+    # Provides details about the Amazon Security Lake account subscription.
     # Subscribers are notified of new objects for a source as the data is
-    # written to your Amazon Security Lake S3 bucket.
+    # written to your Amazon S3 bucket for Security Lake.
     #
     # @!attribute [rw] access_types
     #   You can choose to notify subscribers of new objects with an Amazon
@@ -1381,13 +1411,13 @@ module Aws::SecurityLake
     #   HTTPS endpoint provided by the subscriber.
     #
     #   Subscribers can consume data by directly querying Lake Formation
-    #   tables in your S3 bucket via services like Amazon Athena. This
-    #   subscription type is defined as `LAKEFORMATION`.
+    #   tables in your Amazon S3 bucket through services like Amazon Athena.
+    #   This subscription type is defined as `LAKEFORMATION`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account ID of the account that you are using
-    #   to create your Amazon Security Lake account.
+    #   The Amazon Web Services account ID you are using to create your
+    #   Amazon Security Lake account.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1395,8 +1425,8 @@ module Aws::SecurityLake
     #   @return [Time]
     #
     # @!attribute [rw] external_id
-    #   The external ID of the subscriber. External ID allows the user that
-    #   is assuming the role to assert the circumstances in which they are
+    #   The external ID of the subscriber. The external ID lets the user
+    #   that is assuming the role assert the circumstances in which they are
     #   operating. It also provides a way for the account owner to permit
     #   the role to be assumed only under specific circumstances.
     #   @return [String]
@@ -1407,18 +1437,17 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
-    #   The Amazon Resource Name (ARN) for the Amazon S3 bucket.
+    #   The ARN for the Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] sns_arn
-    #   The Amazon Resource Name (ARN) for the Amazon Simple Notification
-    #   Service.
+    #   The ARN for the Amazon Simple Notification Service.
     #   @return [String]
     #
     # @!attribute [rw] source_types
-    #   Amazon Security Lake supports logs and events collection for the
-    #   natively-supported Amazon Web Services services. For more
-    #   information, see the Amazon Security Lake User Guide.
+    #   Amazon Security Lake supports log and event collection for natively
+    #   supported Amazon Web Services. For more information, see the Amazon
+    #   Security Lake User Guide.
     #   @return [Array<Types::SourceType>]
     #
     # @!attribute [rw] subscriber_description
@@ -1444,7 +1473,8 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] subscription_status
-    #   Subscription status of the Amazon Security Lake subscriber account.
+    #   The subscription status of the Amazon Security Lake subscriber
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
@@ -1519,7 +1549,7 @@ module Aws::SecurityLake
     class UpdateDatalakeExceptionsExpiryResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] notification_endpoint
-    #   The account which is subscribed to receive exception notifications.
+    #   The account that is subscribed to receive exception notifications.
     #   @return [String]
     #
     # @!attribute [rw] subscription_protocol
@@ -1540,7 +1570,8 @@ module Aws::SecurityLake
     class UpdateDatalakeExceptionsSubscriptionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] configurations
-    #   The configuration object
+    #   Specify the Region or Regions that will contribute data to the
+    #   rollup region.
     #   @return [Hash<String,Types::LakeConfigurationRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateDatalakeRequest AWS API Documentation
@@ -1556,28 +1587,30 @@ module Aws::SecurityLake
     class UpdateDatalakeResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] external_id
-    #   External ID of the Security Lake account.
+    #   The external ID of the Security Lake account.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   A value created by Security Lake that uniquely identifies your
-    #   `UpdateSubscriber` API request.
+    #   subscription.
     #   @return [String]
     #
     # @!attribute [rw] source_types
-    #   The supported Amazon Web Services services from which logs and
-    #   events are collected. Amazon Security Lake supports logs and events
-    #   collection for the following natively-supported Amazon Web Services
-    #   services. For more information, see the Amazon Security Lake User
-    #   Guide.
+    #   The supported Amazon Web Services from which logs and events are
+    #   collected. For the list of supported Amazon Web Services, see the
+    #   [Amazon Security Lake User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
     #   @return [Array<Types::SourceType>]
     #
     # @!attribute [rw] subscriber_description
-    #   Description of the Security Lake account subscriber.
+    #   The description of the Security Lake account subscriber.
     #   @return [String]
     #
     # @!attribute [rw] subscriber_name
-    #   Name of the Security Lake account subscriber.
+    #   The name of the Security Lake account subscriber.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateSubscriberRequest AWS API Documentation
@@ -1593,7 +1626,7 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] subscriber
-    #   The account subscriber in Amazon Security Lake.
+    #   The account of the subscriber.
     #   @return [Types::SubscriberResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateSubscriberResponse AWS API Documentation
@@ -1606,7 +1639,7 @@ module Aws::SecurityLake
 
     # @!attribute [rw] create_sqs
     #   Create a new subscription notification for the specified
-    #   subscription ID in Security Lake.
+    #   subscription ID in Amazon Security Lake.
     #   @return [Boolean]
     #
     # @!attribute [rw] https_api_key_name
@@ -1650,7 +1683,7 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] queue_arn
-    #   Returns the Amazon resource name (ARN) of the queue.
+    #   Returns the ARN of the queue.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateSubscriptionNotificationConfigurationResponse AWS API Documentation
@@ -1685,7 +1718,7 @@ module Aws::SecurityLake
     end
 
     # The input fails to meet the constraints specified in Amazon Security
-    # Lake
+    # Lake.
     #
     # @!attribute [rw] message
     #   Describes the error encountered.

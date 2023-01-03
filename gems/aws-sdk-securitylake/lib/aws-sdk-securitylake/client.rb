@@ -368,38 +368,41 @@ module Aws::SecurityLake
 
     # @!group API Operations
 
-    # Adds a natively-supported Amazon Web Services service as a Security
+    # Adds a natively supported Amazon Web Service as an Amazon Security
     # Lake source. Enables source types for member accounts in required
-    # Regions, based on specified parameters. You can choose any source type
-    # in any Region for accounts that are either part of a trusted
-    # organization or standalone accounts. At least one of the three
-    # dimensions is a mandatory input to this API. However, any combination
-    # of the three dimensions can be supplied to this API.
+    # Amazon Web Services Regions, based on the parameters you specify. You
+    # can choose any source type in any Region for either accounts that are
+    # part of a trusted organization or standalone accounts. At least one of
+    # the three dimensions is a mandatory input to this API. However, you
+    # can supply any combination of the three dimensions to this API.
     #
-    # By default, dimension refers to the entire set. When you don't
+    # By default, a dimension refers to the entire set. When you don't
     # provide a dimension, Security Lake assumes that the missing dimension
     # refers to the entire set. This is overridden when you supply any one
-    # of the inputs. For instance, when members is not specified, the API
-    # disables all Security Lake member accounts for sources. Similarly,
-    # when Regions are not specified, Security Lake is disabled for all the
+    # of the inputs. For instance, when you do not specify members, the API
+    # enables all Security Lake member accounts for all sources. Similarly,
+    # when you do not specify Regions, Security Lake is enabled for all the
     # Regions where Security Lake is available as a service.
     #
-    # You can use this API only to enable a natively-supported Amazon Web
-    # Services services as a source. Use `CreateCustomLogSource` to enable
-    # data collection from a custom source.
+    # You can use this API only to enable natively supported Amazon Web
+    # Services as a source. Use `CreateCustomLogSource` to enable data
+    # collection from a custom source.
     #
     # @option params [Hash<String,Hash>] :enable_all_dimensions
-    #   Enables specific sources in all Regions and source types.
+    #   Enables data collection from specific Amazon Web Services sources in
+    #   all specific accounts and specific Regions.
     #
     # @option params [Array<String>] :enable_single_dimension
-    #   Enables all sources in specific accounts or Regions.
+    #   Enables data collection from all Amazon Web Services sources in
+    #   specific accounts or Regions.
     #
     # @option params [Hash<String,Array>] :enable_two_dimensions
-    #   Enables specific service sources in specific accounts or Regions.
+    #   Enables data collection from specific Amazon Web Services sources in
+    #   specific accounts or Regions.
     #
     # @option params [required, Array<String>] :input_order
     #   Specifies the input order to enable dimensions in Security Lake,
-    #   namely region, source type, and member account.
+    #   namely Region, source type, and member account.
     #
     # @return [Types::CreateAwsLogSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -438,30 +441,35 @@ module Aws::SecurityLake
     end
 
     # Adds a third-party custom source in Amazon Security Lake, from the
-    # Region where you want to create a custom source. Security Lake can
-    # collect logs and events from third-party custom sources. After
-    # creating the appropriate API roles, use this API to add a custom
-    # source name in Security Lake. This operation creates a partition in
-    # the Security Lake S3 bucket as the target location for log files from
-    # the custom source, an associated Glue table, and an Glue crawler.
+    # Amazon Web Services Region where you want to create a custom source.
+    # Security Lake can collect logs and events from third-party custom
+    # sources. After creating the appropriate IAM role to invoke Glue
+    # crawler, use this API to add a custom source name in Security Lake.
+    # This operation creates a partition in the Amazon S3 bucket for
+    # Security Lake as the target location for log files from the custom
+    # source in addition to an associated Glue table and an Glue crawler.
     #
     # @option params [required, String] :custom_source_name
-    #   The custom source name for a third-party custom source.
+    #   The name for a third-party custom source. This must be a Regionally
+    #   unique value.
     #
     # @option params [required, String] :event_class
-    #   The Open Cybersecurity Schema Framework (OCSF) event class.
+    #   The Open Cybersecurity Schema Framework (OCSF) event class which
+    #   describes the type of data that the custom source will send to
+    #   Security Lake.
     #
     # @option params [required, String] :glue_invocation_role_arn
-    #   The IAM Role ARN to be used by the Glue Crawler. The recommended IAM
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be used by the Glue crawler. The recommended IAM
     #   policies are:
     #
     #   * The managed policy `AWSGlueServiceRole`
     #
-    #   * A custom policy granting access to your S3 Data Lake
+    #   * A custom policy granting access to your Amazon S3 Data Lake
     #
     # @option params [required, String] :log_provider_account_id
-    #   The Account ID that will assume the above Role to put logs into the
-    #   Data Lake.
+    #   The Amazon Web Services account ID of the custom source that will
+    #   write logs and events into the Amazon S3 Data Lake.
     #
     # @return [Types::CreateCustomLogSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -498,47 +506,52 @@ module Aws::SecurityLake
     end
 
     # Initializes an Amazon Security Lake instance with the provided (or
-    # default) configuration. You can enable Security Lake in Regions with
-    # customized settings in advance before enabling log collection in
-    # Regions. You can either use the `enableAll` parameter to specify all
-    # Regions or you can specify the Regions you want to enable Security
-    # Lake using the `Regions` parameter and configure these Regions using
-    # the `configurations` parameter. When the `CreateDataLake` API is
-    # called multiple times, if that Region is already enabled, it will
-    # update the Region if configuration for that Region is provided. If
-    # that Region is a new Region, it will be set up with the customized
-    # configurations if it is specified.
+    # default) configuration. You can enable Security Lake in Amazon Web
+    # Services Regions with customized settings before enabling log
+    # collection in Regions. You can either use the `enableAll` parameter to
+    # specify all Regions or specify the Regions where you want to enable
+    # Security Lake. To specify particular Regions, use the `Regions`
+    # parameter and then configure these Regions using the `configurations`
+    # parameter. If you have already enabled Security Lake in a Region when
+    # you call this command, the command will update the Region if you
+    # provide new configuration parameters. If you have not already enabled
+    # Security Lake in the Region when you call this API, it will set up the
+    # data lake in the Region with the specified configurations.
     #
     # When you enable Security Lake, it starts ingesting security data after
     # the `CreateAwsLogSource` call. This includes ingesting security data
     # from sources, storing data, and making data accessible to subscribers.
     # Security Lake also enables all the existing settings and resources
-    # that it stores or maintains for your account in the current Region,
-    # including security log and event data. For more information, see the
-    # Amazon Security Lake User Guide.
+    # that it stores or maintains for your Amazon Web Services account in
+    # the current Region, including security log and event data. For more
+    # information, see the [Amazon Security Lake User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html
     #
     # @option params [Hash<String,Types::LakeConfigurationRequest>] :configurations
-    #   Enable Security Lake with the specified configurations settings to
-    #   begin ingesting security data.
+    #   Specify the Region or Regions that will contribute data to the rollup
+    #   region.
     #
     # @option params [Boolean] :enable_all
-    #   Enable Security Lake in all Regions to begin ingesting security data.
+    #   Enable Security Lake in all Regions.
     #
     # @option params [String] :meta_store_manager_role_arn
-    #   The Role ARN used to create and update the Glue table with partitions
-    #   generated by ingestion and normalization of Amazon Web Services log
-    #   sources and custom sources.
+    #   The Amazon Resource Name (ARN) used to create and update the Glue
+    #   table. This table contains partitions generated by the ingestion and
+    #   normalization of Amazon Web Services log sources and custom sources.
     #
     # @option params [Array<String>] :regions
-    #   Enable Security Lake in the specified Regions to begin ingesting
-    #   security data. To enable Security Lake in specific Amazon Web Services
-    #   Regions, such as us-east-1 or ap-northeast-3, provide the Region
-    #   codes. For a list of Region codes, see [Region codes][1] in the Amazon
-    #   Web Services General Reference.
+    #   Enable Security Lake in the specified Regions. To enable Security Lake
+    #   in specific Amazon Web Services Regions, such as us-east-1 or
+    #   ap-northeast-3, provide the Region codes. For a list of Region codes,
+    #   see [Amazon Security Lake endpoints][1] in the Amazon Web Services
+    #   General Reference.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/securitylake.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -575,16 +588,13 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Automatically enable Security Lake in the specified Regions to begin
-    # ingesting security data. When you choose to enable organization
-    # accounts automatically, then Security Lake begins to enable new
-    # accounts as member accounts as they are added to the organization.
-    # Security Lake does not enable existing organization accounts that are
-    # not yet enabled.
+    # Automatically enables Amazon Security Lake for new member accounts in
+    # your organization. Security Lake is not automatically enabled for any
+    # existing member accounts in your organization.
     #
     # @option params [required, Array<Types::AutoEnableNewRegionConfiguration>] :configuration_for_new_accounts
-    #   Enable Amazon Security Lake with the specified configurations settings
-    #   to begin ingesting security data for new accounts in Security Lake.
+    #   Enable Security Lake with the specified configuration settings to
+    #   begin collecting security data for new accounts in your organization.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -608,13 +618,14 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Designates the Security Lake administrator account for the
-    # organization. This API can only be called by the organization
+    # Designates the Amazon Security Lake delegated administrator account
+    # for the organization. This API can only be called by the organization
     # management account. The organization management account cannot be the
     # delegated administrator account.
     #
     # @option params [required, String] :account
-    #   Account ID of the Security Lake delegated administrator.
+    #   The Amazon Web Services account ID of the Security Lake delegated
+    #   administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -633,16 +644,15 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Creates the specified notification subscription in Security Lake.
-    # Creates the specified subscription notifications in the specified
-    # organization.
+    # Creates the specified notification subscription in Amazon Security
+    # Lake for the organization you specify.
     #
     # @option params [required, String] :notification_endpoint
-    #   The account in which the exception notifications subscription is
-    #   created.
+    #   The Amazon Web Services account where you want to receive exception
+    #   notifications.
     #
     # @option params [required, String] :subscription_protocol
-    #   The subscription protocol to which exception messages are posted.
+    #   The subscription protocol to which exception notifications are posted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -663,32 +673,31 @@ module Aws::SecurityLake
     end
 
     # Creates a subscription permission for accounts that are already
-    # enabled in Security Lake.
+    # enabled in Amazon Security Lake. You can create a subscriber with
+    # access to data in the current Amazon Web Services Region.
     #
     # @option params [Array<String>] :access_types
     #   The Amazon S3 or Lake Formation access type.
     #
     # @option params [required, String] :account_id
-    #   The third party Amazon Web Services account ID used to access your
-    #   data.
+    #   The Amazon Web Services account ID used to access your data.
     #
     # @option params [required, String] :external_id
-    #   The external ID of the subscriber. External ID allows the user that is
-    #   assuming the role to assert the circumstances in which they are
-    #   operating. It also provides a way for the account owner to permit the
-    #   role to be assumed only under specific circumstances.
+    #   The external ID of the subscriber. This lets the user that is assuming
+    #   the role assert the circumstances in which they are operating. It also
+    #   provides a way for the account owner to permit the role to be assumed
+    #   only under specific circumstances.
     #
     # @option params [required, Array<Types::SourceType>] :source_types
-    #   The supported Amazon Web Services services from which logs and events
-    #   are collected. Amazon Security Lake supports logs and events
-    #   collection for natively-supported Amazon Web Services services.
+    #   The supported Amazon Web Services from which logs and events are
+    #   collected. Security Lake supports log and event collection for
+    #   natively supported Amazon Web Services.
     #
     # @option params [String] :subscriber_description
-    #   The subscriber descriptions for the subscriber account in Amazon
-    #   Security Lake.
+    #   The description for your subscriber account in Security Lake.
     #
     # @option params [required, String] :subscriber_name
-    #   The name of your Amazon Security Lake subscriber account.
+    #   The name of your Security Lake subscriber account.
     #
     # @return [Types::CreateSubscriberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -709,7 +718,7 @@ module Aws::SecurityLake
     #         custom_source_type: "CustomSourceType",
     #       },
     #     ],
-    #     subscriber_description: "SafeString",
+    #     subscriber_description: "DescriptionString",
     #     subscriber_name: "CreateSubscriberRequestSubscriberNameString", # required
     #   })
     #
@@ -729,32 +738,31 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Creates the specified notification subscription in Security Lake.
-    # Creates the specified subscription notifications from the specified
-    # organization.
+    # Notifies the subscriber when new data is written to the data lake for
+    # the sources that the subscriber consumes in Security Lake.
     #
     # @option params [Boolean] :create_sqs
-    #   Create a new subscription notification for the specified subscription
-    #   ID in Security Lake.
+    #   Create an Amazon Simple Queue Service queue.
     #
     # @option params [String] :https_api_key_name
-    #   The key name for the subscription notification.
+    #   The key name for the notification subscription.
     #
     # @option params [String] :https_api_key_value
-    #   The key value for the subscription notification.
+    #   The key value for the notification subscription.
     #
     # @option params [String] :https_method
-    #   The HTTPS method used for the subscription notification.
+    #   The HTTPS method used for the notification subscription.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) specifying the role of the subscriber.
+    #   The Amazon Resource Name (ARN) of the EventBridge API destinations IAM
+    #   role that you created.
     #
     # @option params [String] :subscription_endpoint
-    #   The subscription endpoint in Security Lake.
+    #   The subscription endpoint in Security Lake. If you prefer notification
+    #   with an HTTPs endpoint, populate this field.
     #
     # @option params [required, String] :subscription_id
-    #   The subscription ID for which the subscription notification is
-    #   specified.
+    #   The subscription ID for the notification subscription/
     #
     # @return [Types::CreateSubscriptionNotificationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -785,28 +793,24 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Removes a natively-supported Amazon Web Services service as a Amazon
-    # Security Lake source. When you remove the source, Security Lake stops
+    # Removes a natively supported Amazon Web Service as an Amazon Security
+    # Lake source. When you remove the source, Security Lake stops
     # collecting data from that source, and subscribers can no longer
     # consume new data from the source. Subscribers can still consume data
-    # that Amazon Security Lake collected from the source before
-    # disablement.
+    # that Security Lake collected from the source before disablement.
     #
-    # You can choose any source type in any Region for accounts that are
-    # either part of a trusted organization or standalone accounts. At least
-    # one of the three dimensions is a mandatory input to this API. However,
-    # any combination of the three dimensions can be supplied to this API.
+    # You can choose any source type in any Amazon Web Services Region for
+    # either accounts that are part of a trusted organization or standalone
+    # accounts. At least one of the three dimensions is a mandatory input to
+    # this API. However, you can supply any combination of the three
+    # dimensions to this API.
     #
-    # By default, dimension refers to the entire set. This is overridden
-    # when you supply any one of the inputs. For instance, when members is
-    # not specified, the API disables all Security Lake member accounts for
-    # sources. Similarly, when Regions are not specified, Security Lake is
-    # disabled for all the Regions where Security Lake is available as a
+    # By default, a dimension refers to the entire set. This is overridden
+    # when you supply any one of the inputs. For instance, when you do not
+    # specify members, the API disables all Security Lake member accounts
+    # for sources. Similarly, when you do not specify Regions, Security Lake
+    # is disabled for all the Regions where Security Lake is available as a
     # service.
-    #
-    # You can use this API to remove a natively-supported Amazon Web
-    # Services service as a source. Use `DeregisterCustomData` to remove a
-    # custom source.
     #
     # When you don't provide a dimension, Security Lake assumes that the
     # missing dimension refers to the entire set. For example, if you don't
@@ -814,8 +818,8 @@ module Aws::SecurityLake
     # accounts in your organization.
     #
     # @option params [Hash<String,Hash>] :disable_all_dimensions
-    #   Removes the specific Amazon Web Services sources from all Regions and
-    #   source types.
+    #   Removes the specific Amazon Web Services sources from specific
+    #   accounts and specific Regions.
     #
     # @option params [Array<String>] :disable_single_dimension
     #   Removes all Amazon Web Services sources from specific accounts or
@@ -826,8 +830,10 @@ module Aws::SecurityLake
     #   Regions.
     #
     # @option params [required, Array<String>] :input_order
-    #   This is a mandatory input. Specifies the input order to disable
-    #   dimensions in Security Lake, namely Region, source type, and member.
+    #   This is a mandatory input. Specify the input order to disable
+    #   dimensions in Security Lake, namely Region (Amazon Web Services Region
+    #   code, source type, and member (account ID of a specific Amazon Web
+    #   Services account).
     #
     # @return [Types::DeleteAwsLogSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -865,10 +871,10 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Removes a custom log source from Security Lake.
+    # Removes a custom log source from Amazon Security Lake.
     #
     # @option params [required, String] :custom_source_name
-    #   The custom source name for the custome log source.
+    #   The custom source name for the custom log source.
     #
     # @return [Types::DeleteCustomLogSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -894,15 +900,21 @@ module Aws::SecurityLake
     end
 
     # When you delete Amazon Security Lake from your account, Security Lake
-    # is disabled in all Regions. Also, this API automatically performs the
-    # off-boarding steps to off-board the account from Security Lake . This
-    # includes ingesting security data from sources, storing data, and
-    # making data accessible to subscribers. Security Lake also deletes all
-    # the existing settings and resources that it stores or maintains for
-    # your account in the current Region, including security log and event
-    # data. `DeleteDatalake` does not delete the S3 bucket which is owned by
-    # the Amazon Web Services account. For more information, see the Amazon
-    # Security Lake User Guide.
+    # is disabled in all Amazon Web Services Regions. Also, this API
+    # automatically takes steps to remove the account from Security Lake .
+    #
+    # This operation disables security data collection from sources, deletes
+    # data stored, and stops making data accessible to subscribers. Security
+    # Lake also deletes all the existing settings and resources that it
+    # stores or maintains for your Amazon Web Services account in the
+    # current Region, including security log and event data. The
+    # `DeleteDatalake` operation does not delete the Amazon S3 bucket, which
+    # is owned by your Amazon Web Services account. For more information,
+    # see the [Amazon Security Lake User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -915,19 +927,26 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Automatically delete Security Lake in the specified Regions to stop
-    # ingesting security data. When you delete Amazon Security Lake from
-    # your account, Security Lake is disabled in all Regions. Also, this API
-    # automatically performs the off-boarding steps to off-board the account
-    # from Security Lake . This includes ingesting security data from
-    # sources, storing data, and making data accessible to subscribers.
-    # Security Lake also deletes all the existing settings and resources
-    # that it stores or maintains for your account in the current Region,
-    # including security log and event data. For more information, see the
-    # Amazon Security Lake User Guide.
+    # Automatically deletes Amazon Security Lake to stop collecting security
+    # data. When you delete Amazon Security Lake from your account, Security
+    # Lake is disabled in all Regions. Also, this API automatically takes
+    # steps to remove the account from Security Lake .
+    #
+    # This operation disables security data collection from sources, deletes
+    # data stored, and stops making data accessible to subscribers. Security
+    # Lake also deletes all the existing settings and resources that it
+    # stores or maintains for your Amazon Web Services account in the
+    # current Region, including security log and event data. The
+    # `DeleteDatalake` operation does not delete the Amazon S3 bucket, which
+    # is owned by your Amazon Web Services account. For more information,
+    # see the [Amazon Security Lake User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html
     #
     # @option params [required, Array<Types::AutoEnableNewRegionConfiguration>] :remove_from_configuration_for_new_accounts
-    #   Delete Amazon Security Lake with the specified configurations settings
+    #   Delete Amazon Security Lake with the specified configuration settings
     #   to stop ingesting security data for new accounts in Security Lake.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -952,13 +971,13 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Deletes the Security Lake administrator account for the organization.
-    # This API can only be called by the organization management account.
-    # The organization management account cannot be the delegated
-    # administrator account.
+    # Deletes the Amazon Security Lake delegated administrator account for
+    # the organization. This API can only be called by the organization
+    # management account. The organization management account cannot be the
+    # delegated administrator account.
     #
     # @option params [required, String] :account
-    #   Account ID the Security Lake delegated administrator.
+    #   The account ID the Security Lake delegated administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -977,9 +996,8 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Deletes the specified notification subscription in Security Lake.
-    # Deletes the specified subscription notifications in the specified
-    # organization.
+    # Deletes the specified notification subscription in Amazon Security
+    # Lake for the organization you specify.
     #
     # @return [Types::DeleteDatalakeExceptionsSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -998,9 +1016,9 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Deletes the specified subscription permissions to Security Lake.
-    # Deletes the specified subscription permissions from the specified
-    # organization.
+    # Deletes the subscription permission for accounts that are already
+    # enabled in Amazon Security Lake. You can delete a subscriber and
+    # remove access to data in the current Amazon Web Services Region.
     #
     # @option params [required, String] :id
     #   A value created by Security Lake that uniquely identifies your
@@ -1023,12 +1041,11 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Deletes the specified notification subscription in Security Lake.
-    # Deletes the specified subscription notifications from the specified
-    # organization.
+    # Deletes the specified notification subscription in Amazon Security
+    # Lake for the organization you specify.
     #
     # @option params [required, String] :subscription_id
-    #   The subscription ID of the Amazon Security Lake subscriber account.
+    #   The ID of the Security Lake subscriber account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1047,8 +1064,10 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Retrieve the Security Lake configuration object for the specified
-    # account ID. This API does not take input parameters.
+    # Retrieves the Amazon Security Lake configuration object for the
+    # specified Amazon Web Services account ID. You can use the
+    # `GetDatalake` API to know whether Security Lake is enabled for the
+    # current Region. This API does not take input parameters.
     #
     # @return [Types::GetDatalakeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1079,8 +1098,8 @@ module Aws::SecurityLake
     end
 
     # Retrieves the configuration that will be automatically set up for
-    # accounts added to the organization after the organization has on
-    # boarded to Amazon Security Lake. This API does not take input
+    # accounts added to the organization after the organization has
+    # onboarded to Amazon Security Lake. This API does not take input
     # parameters.
     #
     # @return [Types::GetDatalakeAutoEnableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1104,10 +1123,9 @@ module Aws::SecurityLake
     end
 
     # Retrieves the expiration period and time-to-live (TTL) for which the
-    # exception message will remain. Exceptions are stored by default, for a
-    # 2 week period of time from when a record was created in Security Lake.
-    # This API does not take input parameters. This API does not take input
-    # parameters.
+    # exception message will remain. Exceptions are stored by default, for 2
+    # weeks from when a record was created in Amazon Security Lake. This API
+    # does not take input parameters.
     #
     # @return [Types::GetDatalakeExceptionsExpiryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1147,25 +1165,28 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Retrieve the Security Lake configuration object for the specified
-    # account ID. This API does not take input parameters.
+    # Retrieves a snapshot of the current Region, including whether Amazon
+    # Security Lake is enabled for those accounts and which sources Security
+    # Lake is collecting data from.
     #
     # @option params [Array<String>] :account_set
-    #   The account IDs for which a static snapshot of the current Region,
-    #   including enabled accounts and log sources is retrieved.
+    #   The Amazon Web Services account ID for which a static snapshot of the
+    #   current Amazon Web Services Region, including enabled accounts and log
+    #   sources, is retrieved.
     #
     # @option params [Integer] :max_account_results
     #   The maximum limit of accounts for which the static snapshot of the
-    #   current Region including enabled accounts and log sources is
+    #   current Region, including enabled accounts and log sources, is
     #   retrieved.
     #
     # @option params [String] :next_token
-    #   If nextToken is returned, there are more results available. The value
-    #   of nextToken is a unique pagination token for each page. Make the call
-    #   again using the returned token to retrieve the next page. Keep all
-    #   other arguments unchanged. Each pagination token expires after 24
-    #   hours. Using an expired pagination token will return an HTTP 400
-    #   InvalidToken error.
+    #   Lists if there are more results available. The value of nextToken is a
+    #   unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return an HTTP 400 InvalidToken error.
     #
     # @return [Types::GetDatalakeStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1202,10 +1223,11 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Retrieves subscription information for the specified subscription ID.
+    # Retrieves the subscription information for the specified subscription
+    # ID. You can get information about a specific subscriber.
     #
     # @option params [required, String] :id
-    #   A value created by Security Lake that uniquely identifies your
+    #   A value created by Amazon Security Lake that uniquely identifies your
     #   `GetSubscriber` API request.
     #
     # @return [Types::GetSubscriberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1248,19 +1270,24 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # List the Amazon Security Lake exceptions that you can use to find the
+    # Lists the Amazon Security Lake exceptions that you can use to find the
     # source of problems and fix them.
     #
     # @option params [Integer] :max_failures
     #   List the maximum number of failures in Security Lake.
     #
     # @option params [String] :next_token
-    #   List if there are more results available. if nextToken is returned,
-    #   You can make the call again using the returned token to retrieve the
-    #   next page
+    #   List if there are more results available. The value of nextToken is a
+    #   unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return an HTTP 400 InvalidToken error.
     #
     # @option params [Array<String>] :region_set
-    #   List the regions from which exceptions are retrieved.
+    #   List the Amazon Web Services Regions from which exceptions are
+    #   retrieved.
     #
     # @return [Types::ListDatalakeExceptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1296,33 +1323,34 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Lists the log sources in the current region.
+    # Retrieves the log sources in the current Amazon Web Services Region.
     #
     # @option params [Array<String>] :input_order
     #   Lists the log sources in input order, namely Region, source type, and
     #   member account.
     #
     # @option params [Hash<String,Hash>] :list_all_dimensions
-    #   List the view of log sources for enabled Security Lake accounts in all
-    #   Regions and source types.
+    #   List the view of log sources for enabled Amazon Security Lake accounts
+    #   for specific Amazon Web Services sources from specific accounts and
+    #   specific Regions.
     #
     # @option params [Array<String>] :list_single_dimension
     #   List the view of log sources for enabled Security Lake accounts for
-    #   the entire region.
+    #   all Amazon Web Services sources from specific accounts or specific
+    #   Regions.
     #
     # @option params [Hash<String,Array>] :list_two_dimensions
-    #   Lists the log sources for the specified source types in enabled
-    #   Security Lake accounts for the entire Region, for selected member
-    #   accounts.
+    #   Lists the view of log sources for enabled Security Lake accounts for
+    #   specific Amazon Web Services sources from specific accounts or
+    #   specific Regions.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of accounts for which the configuration is
+    #   The maximum number of accounts for which the log sources are
     #   displayed.
     #
     # @option params [String] :next_token
     #   If nextToken is returned, there are more results available. You can
-    #   make the call again using the returned token to retrieve the next
-    #   page.
+    #   repeat the call using the returned token to retrieve the next page.
     #
     # @return [Types::ListLogSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1366,7 +1394,9 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # List all subscribers for the specific Security Lake account ID.
+    # List all subscribers for the specific Amazon Security Lake account ID.
+    # You can retrieve a list of subscriptions associated with a specific
+    # organization or Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of accounts for which the configuration is
@@ -1374,8 +1404,7 @@ module Aws::SecurityLake
     #
     # @option params [String] :next_token
     #   If nextToken is returned, there are more results available. You can
-    #   make the call again using the returned token to retrieve the next
-    #   page.
+    #   repeat the call using the returned token to retrieve the next page.
     #
     # @return [Types::ListSubscribersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1388,7 +1417,7 @@ module Aws::SecurityLake
     #
     #   resp = client.list_subscribers({
     #     max_results: 1,
-    #     next_token: "SafeString",
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -1423,15 +1452,13 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Amazon Security Lake allows you to specify where to store your
-    # security data and for how long. You can specify a rollup Region to
-    # consolidate data from multiple regions.
-    #
-    # You can update the properties of a Region or source. Input can either
-    # be directly specified to the API.
+    # Specifies where to store your security data and for how long. You can
+    # add a rollup Region to consolidate data from multiple Amazon Web
+    # Services Regions.
     #
     # @option params [required, Hash<String,Types::LakeConfigurationRequest>] :configurations
-    #   The configuration object
+    #   Specify the Region or Regions that will contribute data to the rollup
+    #   region.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1467,8 +1494,8 @@ module Aws::SecurityLake
 
     # Update the expiration period for the exception message to your
     # preferred time, and control the time-to-live (TTL) for the exception
-    # message to remain. Exceptions are stored by default, for a 2 week
-    # period of time from when a record was created in Security Lake.
+    # message to remain. Exceptions are stored by default for 2 weeks from
+    # when a record was created in Amazon Security Lake.
     #
     # @option params [required, Integer] :exception_message_expiry
     #   The time-to-live (TTL) for the exception message to remain.
@@ -1490,10 +1517,11 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Update the subscription notification for exception notification.
+    # Updates the specified notification subscription in Amazon Security
+    # Lake for the organization you specify.
     #
     # @option params [required, String] :notification_endpoint
-    #   The account which is subscribed to receive exception notifications.
+    #   The account that is subscribed to receive exception notifications.
     #
     # @option params [required, String] :subscription_protocol
     #   The subscription protocol to which exception messages are posted.
@@ -1516,28 +1544,31 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Update the subscription permission for the given Security Lake account
-    # ID.
+    # Updates an existing subscription for the given Amazon Security Lake
+    # account ID. You can update a subscriber by changing the sources that
+    # the subscriber consumes data from.
     #
     # @option params [String] :external_id
-    #   External ID of the Security Lake account.
+    #   The external ID of the Security Lake account.
     #
     # @option params [required, String] :id
     #   A value created by Security Lake that uniquely identifies your
-    #   `UpdateSubscriber` API request.
+    #   subscription.
     #
-    # @option params [Array<Types::SourceType>] :source_types
-    #   The supported Amazon Web Services services from which logs and events
-    #   are collected. Amazon Security Lake supports logs and events
-    #   collection for the following natively-supported Amazon Web Services
-    #   services. For more information, see the Amazon Security Lake User
-    #   Guide.
+    # @option params [required, Array<Types::SourceType>] :source_types
+    #   The supported Amazon Web Services from which logs and events are
+    #   collected. For the list of supported Amazon Web Services, see the
+    #   [Amazon Security Lake User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
     #
     # @option params [String] :subscriber_description
-    #   Description of the Security Lake account subscriber.
+    #   The description of the Security Lake account subscriber.
     #
     # @option params [String] :subscriber_name
-    #   Name of the Security Lake account subscriber.
+    #   The name of the Security Lake account subscriber.
     #
     # @return [Types::UpdateSubscriberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1548,13 +1579,13 @@ module Aws::SecurityLake
     #   resp = client.update_subscriber({
     #     external_id: "SafeString",
     #     id: "String", # required
-    #     source_types: [
+    #     source_types: [ # required
     #       {
     #         aws_source_type: "ROUTE53", # accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
     #         custom_source_type: "CustomSourceType",
     #       },
     #     ],
-    #     subscriber_description: "SafeString",
+    #     subscriber_description: "DescriptionString",
     #     subscriber_name: "UpdateSubscriberRequestSubscriberNameString",
     #   })
     #
@@ -1588,12 +1619,12 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Create a new subscription notification or add the existing
+    # Creates a new subscription notification or adds the existing
     # subscription notification setting for the specified subscription ID.
     #
     # @option params [Boolean] :create_sqs
     #   Create a new subscription notification for the specified subscription
-    #   ID in Security Lake.
+    #   ID in Amazon Security Lake.
     #
     # @option params [String] :https_api_key_name
     #   The key name for the subscription notification.
@@ -1656,7 +1687,7 @@ module Aws::SecurityLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
