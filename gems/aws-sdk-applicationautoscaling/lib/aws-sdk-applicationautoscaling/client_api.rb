@@ -36,6 +36,7 @@ module Aws::ApplicationAutoScaling
     DisableScaleIn = Shapes::BooleanShape.new(name: 'DisableScaleIn')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailedResourceAccessException = Shapes::StructureShape.new(name: 'FailedResourceAccessException')
+    IncludeNotScaledActivities = Shapes::BooleanShape.new(name: 'IncludeNotScaledActivities')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -52,6 +53,8 @@ module Aws::ApplicationAutoScaling
     MetricType = Shapes::StringShape.new(name: 'MetricType')
     MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
     MinAdjustmentMagnitude = Shapes::IntegerShape.new(name: 'MinAdjustmentMagnitude')
+    NotScaledReason = Shapes::StructureShape.new(name: 'NotScaledReason')
+    NotScaledReasons = Shapes::ListShape.new(name: 'NotScaledReasons')
     ObjectNotFoundException = Shapes::StructureShape.new(name: 'ObjectNotFoundException')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyType = Shapes::StringShape.new(name: 'PolicyType')
@@ -146,6 +149,7 @@ module Aws::ApplicationAutoScaling
     DescribeScalingActivitiesRequest.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
     DescribeScalingActivitiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     DescribeScalingActivitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScalingActivitiesRequest.add_member(:include_not_scaled_activities, Shapes::ShapeRef.new(shape: IncludeNotScaledActivities, location_name: "IncludeNotScaledActivities"))
     DescribeScalingActivitiesRequest.struct_class = Types::DescribeScalingActivitiesRequest
 
     DescribeScalingActivitiesResponse.add_member(:scaling_activities, Shapes::ShapeRef.new(shape: ScalingActivities, location_name: "ScalingActivities"))
@@ -193,6 +197,14 @@ module Aws::ApplicationAutoScaling
     MetricDimension.struct_class = Types::MetricDimension
 
     MetricDimensions.member = Shapes::ShapeRef.new(shape: MetricDimension)
+
+    NotScaledReason.add_member(:code, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Code"))
+    NotScaledReason.add_member(:max_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MaxCapacity"))
+    NotScaledReason.add_member(:min_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity"))
+    NotScaledReason.add_member(:current_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "CurrentCapacity"))
+    NotScaledReason.struct_class = Types::NotScaledReason
+
+    NotScaledReasons.member = Shapes::ShapeRef.new(shape: NotScaledReason)
 
     ObjectNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ObjectNotFoundException.struct_class = Types::ObjectNotFoundException
@@ -269,6 +281,7 @@ module Aws::ApplicationAutoScaling
     ScalingActivity.add_member(:status_code, Shapes::ShapeRef.new(shape: ScalingActivityStatusCode, required: true, location_name: "StatusCode"))
     ScalingActivity.add_member(:status_message, Shapes::ShapeRef.new(shape: XmlString, location_name: "StatusMessage"))
     ScalingActivity.add_member(:details, Shapes::ShapeRef.new(shape: XmlString, location_name: "Details"))
+    ScalingActivity.add_member(:not_scaled_reasons, Shapes::ShapeRef.new(shape: NotScaledReasons, location_name: "NotScaledReasons"))
     ScalingActivity.struct_class = Types::ScalingActivity
 
     ScalingPolicies.member = Shapes::ShapeRef.new(shape: ScalingPolicy)

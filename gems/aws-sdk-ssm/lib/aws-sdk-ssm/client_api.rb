@@ -991,6 +991,7 @@ module Aws::SSM
     RemainingCount = Shapes::IntegerShape.new(name: 'RemainingCount')
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
+    RequireType = Shapes::StringShape.new(name: 'RequireType')
     ResetServiceSettingRequest = Shapes::StructureShape.new(name: 'ResetServiceSettingRequest')
     ResetServiceSettingResult = Shapes::StructureShape.new(name: 'ResetServiceSettingResult')
     ResolvedTargets = Shapes::StructureShape.new(name: 'ResolvedTargets')
@@ -2376,6 +2377,8 @@ module Aws::SSM
 
     DocumentRequires.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
     DocumentRequires.add_member(:version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "Version"))
+    DocumentRequires.add_member(:require_type, Shapes::ShapeRef.new(shape: RequireType, location_name: "RequireType"))
+    DocumentRequires.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DocumentRequires.struct_class = Types::DocumentRequires
 
     DocumentRequiresList.member = Shapes::ShapeRef.new(shape: DocumentRequires)

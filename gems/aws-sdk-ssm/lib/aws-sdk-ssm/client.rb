@@ -1405,6 +1405,8 @@ module Aws::SSM
     #       {
     #         name: "DocumentARN", # required
     #         version: "DocumentVersion",
+    #         require_type: "RequireType",
+    #         version_name: "DocumentVersionName",
     #       },
     #     ],
     #     attachments: [
@@ -1417,7 +1419,7 @@ module Aws::SSM
     #     name: "DocumentName", # required
     #     display_name: "DocumentDisplayName",
     #     version_name: "DocumentVersionName",
-    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate, CloudFormation, ConformancePackTemplate
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate, CloudFormation, ConformancePackTemplate, QuickSetup
     #     document_format: "YAML", # accepts YAML, JSON, TEXT
     #     target_type: "TargetType",
     #     tags: [
@@ -1449,7 +1451,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -1463,6 +1465,8 @@ module Aws::SSM
     #   resp.document_description.requires #=> Array
     #   resp.document_description.requires[0].name #=> String
     #   resp.document_description.requires[0].version #=> String
+    #   resp.document_description.requires[0].require_type #=> String
+    #   resp.document_description.requires[0].version_name #=> String
     #   resp.document_description.author #=> String
     #   resp.document_description.review_information #=> Array
     #   resp.document_description.review_information[0].reviewed_time #=> Time
@@ -3439,7 +3443,7 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
@@ -3453,6 +3457,8 @@ module Aws::SSM
     #   resp.document.requires #=> Array
     #   resp.document.requires[0].name #=> String
     #   resp.document.requires[0].version #=> String
+    #   resp.document.requires[0].require_type #=> String
+    #   resp.document.requires[0].version_name #=> String
     #   resp.document.author #=> String
     #   resp.document.review_information #=> Array
     #   resp.document.review_information[0].reviewed_time #=> Time
@@ -5793,11 +5799,13 @@ module Aws::SSM
     #   resp.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
     #   resp.status_information #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
     #   resp.document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.requires #=> Array
     #   resp.requires[0].name #=> String
     #   resp.requires[0].version #=> String
+    #   resp.requires[0].require_type #=> String
+    #   resp.requires[0].version_name #=> String
     #   resp.attachments_content #=> Array
     #   resp.attachments_content[0].name #=> String
     #   resp.attachments_content[0].size #=> Integer
@@ -7795,7 +7803,7 @@ module Aws::SSM
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document_identifiers[0].target_type #=> String
@@ -7805,6 +7813,8 @@ module Aws::SSM
     #   resp.document_identifiers[0].requires #=> Array
     #   resp.document_identifiers[0].requires[0].name #=> String
     #   resp.document_identifiers[0].requires[0].version #=> String
+    #   resp.document_identifiers[0].requires[0].require_type #=> String
+    #   resp.document_identifiers[0].requires[0].version_name #=> String
     #   resp.document_identifiers[0].review_status #=> String, one of "APPROVED", "NOT_REVIEWED", "PENDING", "REJECTED"
     #   resp.document_identifiers[0].author #=> String
     #   resp.next_token #=> String
@@ -10816,7 +10826,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -10830,6 +10840,8 @@ module Aws::SSM
     #   resp.document_description.requires #=> Array
     #   resp.document_description.requires[0].name #=> String
     #   resp.document_description.requires[0].version #=> String
+    #   resp.document_description.requires[0].require_type #=> String
+    #   resp.document_description.requires[0].version_name #=> String
     #   resp.document_description.author #=> String
     #   resp.document_description.review_information #=> Array
     #   resp.document_description.review_information[0].reviewed_time #=> Time
@@ -12119,7 +12131,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

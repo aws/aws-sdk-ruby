@@ -507,7 +507,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -701,7 +701,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -879,7 +879,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -1066,7 +1066,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -1188,6 +1188,14 @@ module Aws::ApplicationAutoScaling
     #
     # You can filter the results using `ResourceId` and `ScalableDimension`.
     #
+    # For information about viewing scaling activities using the Amazon Web
+    # Services CLI, see [Scaling activities for Application Auto
+    # Scaling][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html
+    #
     # @option params [required, String] :service_namespace
     #   The namespace of the Amazon Web Services service that provides the
     #   resource. For a resource provided by your own application or service,
@@ -1299,7 +1307,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -1346,6 +1354,18 @@ module Aws::ApplicationAutoScaling
     # @option params [String] :next_token
     #   The token for the next set of results.
     #
+    # @option params [Boolean] :include_not_scaled_activities
+    #   Specifies whether to include activities that aren't scaled (*not
+    #   scaled activities*) in the response. Not scaled activities are
+    #   activities that aren't completed or started for various reasons, such
+    #   as preventing infinite scaling loops. For help interpreting the not
+    #   scaled reason details in the response, see [Scaling activities for
+    #   Application Auto Scaling][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html
+    #
     # @return [Types::DescribeScalingActivitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeScalingActivitiesResponse#scaling_activities #scaling_activities} => Array&lt;Types::ScalingActivity&gt;
@@ -1391,6 +1411,7 @@ module Aws::ApplicationAutoScaling
     #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #     max_results: 1,
     #     next_token: "XmlString",
+    #     include_not_scaled_activities: false,
     #   })
     #
     # @example Response structure
@@ -1407,6 +1428,11 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_activities[0].status_code #=> String, one of "Pending", "InProgress", "Successful", "Overridden", "Unfulfilled", "Failed"
     #   resp.scaling_activities[0].status_message #=> String
     #   resp.scaling_activities[0].details #=> String
+    #   resp.scaling_activities[0].not_scaled_reasons #=> Array
+    #   resp.scaling_activities[0].not_scaled_reasons[0].code #=> String
+    #   resp.scaling_activities[0].not_scaled_reasons[0].max_capacity #=> Integer
+    #   resp.scaling_activities[0].not_scaled_reasons[0].min_capacity #=> Integer
+    #   resp.scaling_activities[0].not_scaled_reasons[0].current_capacity #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivities AWS API Documentation
@@ -1547,7 +1573,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -1826,7 +1852,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -1964,6 +1990,10 @@ module Aws::ApplicationAutoScaling
     # @option params [required, String] :policy_name
     #   The name of the scaling policy.
     #
+    #   You cannot change the name of a scaling policy, but you can delete the
+    #   original scaling policy and create a new scaling policy with the same
+    #   settings and a different name.
+    #
     # @option params [required, String] :service_namespace
     #   The namespace of the Amazon Web Services service that provides the
     #   resource. For a resource provided by your own application or service,
@@ -2074,7 +2104,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -2109,8 +2139,8 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     # @option params [String] :policy_type
-    #   The policy type. This parameter is required if you are creating a
-    #   scaling policy.
+    #   The scaling policy type. This parameter is required if you are
+    #   creating a scaling policy.
     #
     #   The following policy types are supported:
     #
@@ -2434,7 +2464,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -2509,17 +2539,23 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Registers or updates a scalable target.
+    # Registers or updates a scalable target, the resource that you want to
+    # scale.
     #
-    # A scalable target is a resource that Application Auto Scaling can
-    # scale out and scale in. Scalable targets are uniquely identified by
-    # the combination of resource ID, scalable dimension, and namespace.
+    # Scalable targets are uniquely identified by the combination of
+    # resource ID, scalable dimension, and namespace, which represents some
+    # capacity dimension of the underlying service.
     #
     # When you register a new scalable target, you must specify values for
-    # minimum and maximum capacity. Current capacity will be adjusted within
-    # the specified range when scaling starts. Application Auto Scaling
-    # scaling policies will not scale capacity to values that are outside of
-    # this range.
+    # the minimum and maximum capacity. If the specified resource is not
+    # active in the target service, this operation does not change the
+    # resource's current capacity. Otherwise, it changes the resource's
+    # current capacity to a value that is inside of this range.
+    #
+    # If you choose to add a scaling policy, current capacity is adjustable
+    # within the specified range when scaling starts. Application Auto
+    # Scaling scaling policies will not scale capacity to values that are
+    # outside of the minimum and maximum range.
     #
     # After you register a scalable target, you do not need to register it
     # again to use other Application Auto Scaling operations. To see which
@@ -2659,7 +2695,7 @@ module Aws::ApplicationAutoScaling
     #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an SageMaker model endpoint variant.
+    #     instances for a SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension for
     #     a custom resource provided by your own application or service.
@@ -2699,10 +2735,34 @@ module Aws::ApplicationAutoScaling
     #   needed to the minimum capacity limit in response to changing demand.
     #   This property is required when registering a new scalable target.
     #
-    #   For certain resources, the minimum value allowed is 0. This includes
-    #   Lambda provisioned concurrency, Spot Fleet, ECS services, Aurora DB
-    #   clusters, EMR clusters, and custom resources. For all other resources,
-    #   the minimum value allowed is 1.
+    #   For the following resources, the minimum value allowed is 0.
+    #
+    #   * AppStream 2.0 fleets
+    #
+    #   * Aurora DB clusters
+    #
+    #   * ECS services
+    #
+    #   * EMR clusters
+    #
+    #   * Lambda provisioned concurrency
+    #
+    #   * SageMaker endpoint variants
+    #
+    #   * Spot Fleets
+    #
+    #   * custom resources
+    #
+    #   It's strongly recommended that you specify a value greater than 0. A
+    #   value greater than 0 means that data points are continuously reported
+    #   to CloudWatch that scaling policies can use to scale on a metric like
+    #   average CPU utilization.
+    #
+    #   For all other resources, the minimum allowed value depends on the type
+    #   of resource that you are using. If you provide a value that is lower
+    #   than what a resource can accept, an error occurs. In which case, the
+    #   error message will provide the minimum value that the resource can
+    #   accept.
     #
     # @option params [Integer] :max_capacity
     #   The maximum value that you plan to scale out to. When a scaling policy
@@ -2716,7 +2776,7 @@ module Aws::ApplicationAutoScaling
     #   specify a higher limit, you can request an increase. For more
     #   information, consult the documentation for that service. For
     #   information about the default quotas for each service, see [Service
-    #   Endpoints and Quotas][1] in the *Amazon Web Services General
+    #   endpoints and quotas][1] in the *Amazon Web Services General
     #   Reference*.
     #
     #
@@ -2818,7 +2878,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

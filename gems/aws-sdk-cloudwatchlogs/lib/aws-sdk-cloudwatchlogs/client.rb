@@ -2290,11 +2290,6 @@ module Aws::CloudWatchLogs
     # used to authorize claims to register a subscription filter against a
     # given destination.
     #
-    # If multiple Amazon Web Services accounts are sending logs to this
-    # destination, each sender account must be listed separately in the
-    # policy. The policy does not support specifying `*` as the Principal or
-    # the use of the `aws:PrincipalOrgId` global key.
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html
@@ -2345,13 +2340,11 @@ module Aws::CloudWatchLogs
 
     # Uploads a batch of log events to the specified log stream.
     #
-    # You must include the sequence token obtained from the response of the
-    # previous call. An upload in a newly created log stream does not
-    # require a sequence token. You can also get the sequence token in the
-    # `expectedSequenceToken` field from `InvalidSequenceTokenException`. If
-    # you call `PutLogEvents` twice within a narrow time period using the
-    # same value for `sequenceToken`, both calls might be successful or one
-    # might be rejected.
+    # The sequence token is now ignored in `PutLogEvents` actions.
+    # `PutLogEvents` actions are always accepted and never return
+    # `InvalidSequenceTokenException` or `DataAlreadyAcceptedException` even
+    # if the sequence token is not valid. You can use parallel
+    # `PutLogEvents` actions on the same log stream.
     #
     # The batch of events must satisfy the following constraints:
     #
@@ -2378,8 +2371,10 @@ module Aws::CloudWatchLogs
     #
     # * The maximum number of log events in a batch is 10,000.
     #
-    # * There is a quota of five requests per second per log stream.
-    #   Additional requests are throttled. This quota can't be changed.
+    # * The quota of five requests per second per log stream has been
+    #   removed. Instead, `PutLogEvents` actions are throttled based on a
+    #   per-second per-account quota. You can request an increase to the
+    #   per-second throttling quota by using the Service Quotas service.
     #
     # If a call to `PutLogEvents` returns "UnrecognizedClientException"
     # the most likely cause is a non-valid Amazon Web Services access key ID
@@ -2396,15 +2391,12 @@ module Aws::CloudWatchLogs
     #
     # @option params [String] :sequence_token
     #   The sequence token obtained from the response of the previous
-    #   `PutLogEvents` call. An upload in a newly created log stream does not
-    #   require a sequence token. You can also get the sequence token using
-    #   [DescribeLogStreams][1]. If you call `PutLogEvents` twice within a
-    #   narrow time period using the same value for `sequenceToken`, both
-    #   calls might be successful or one might be rejected.
+    #   `PutLogEvents` call.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html
+    #   The `sequenceToken` parameter is now ignored in `PutLogEvents`
+    #   actions. `PutLogEvents` actions are now accepted and never return
+    #   `InvalidSequenceTokenException` or `DataAlreadyAcceptedException` even
+    #   if the sequence token is not valid.
     #
     # @return [Types::PutLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3209,7 +3201,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

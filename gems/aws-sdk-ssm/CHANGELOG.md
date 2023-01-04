@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2023-01-04)
+------------------
+
+* Feature - Adding support for QuickSetup Document Type in Systems Manager
+
 1.146.0 (2022-12-21)
 ------------------
 

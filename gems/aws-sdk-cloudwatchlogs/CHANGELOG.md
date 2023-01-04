@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-01-04)
+------------------
+
+* Feature - Update to remove sequenceToken as a required field in PutLogEvents calls.
+
 1.58.0 (2022-12-09)
 ------------------
 

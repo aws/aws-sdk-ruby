@@ -171,6 +171,10 @@ module Aws::CloudWatchLogs
 
     # The event was already logged.
     #
+    # `PutLogEvents` actions are now always accepted and never return
+    # `DataAlreadyAcceptedException` regardless of whether a given batch of
+    # log events has already been accepted.
+    #
     # @!attribute [rw] expected_sequence_token
     #   @return [String]
     #
@@ -1480,6 +1484,10 @@ module Aws::CloudWatchLogs
     # token in the `expectedSequenceToken` field in the
     # `InvalidSequenceTokenException` message.
     #
+    # `PutLogEvents` actions are now always accepted and never return
+    # `InvalidSequenceTokenException` regardless of receiving an invalid
+    # sequence token.
+    #
     # @!attribute [rw] expected_sequence_token
     #   @return [String]
     #
@@ -1673,11 +1681,18 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] last_ingestion_time
     #   The ingestion time, expressed as the number of milliseconds after
-    #   `Jan 1, 1970 00:00:00 UTC`.
+    #   `Jan 1, 1970 00:00:00 UTC` The `lastIngestionTime` value updates on
+    #   an eventual consistency basis. It typically updates in less than an
+    #   hour after ingestion, but in rare situations might take longer.
     #   @return [Integer]
     #
     # @!attribute [rw] upload_sequence_token
     #   The sequence token.
+    #
+    #   The sequence token is now ignored in `PutLogEvents` actions.
+    #   `PutLogEvents` actions are always accepted regardless of receiving
+    #   an invalid sequence token. You don't need to obtain
+    #   `uploadSequenceToken` to use a `PutLogEvents` action.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2073,16 +2088,12 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] sequence_token
     #   The sequence token obtained from the response of the previous
-    #   `PutLogEvents` call. An upload in a newly created log stream does
-    #   not require a sequence token. You can also get the sequence token
-    #   using [DescribeLogStreams][1]. If you call `PutLogEvents` twice
-    #   within a narrow time period using the same value for
-    #   `sequenceToken`, both calls might be successful or one might be
-    #   rejected.
+    #   `PutLogEvents` call.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html
+    #   The `sequenceToken` parameter is now ignored in `PutLogEvents`
+    #   actions. `PutLogEvents` actions are now accepted and never return
+    #   `InvalidSequenceTokenException` or `DataAlreadyAcceptedException`
+    #   even if the sequence token is not valid.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsRequest AWS API Documentation
@@ -2098,6 +2109,15 @@ module Aws::CloudWatchLogs
 
     # @!attribute [rw] next_sequence_token
     #   The next sequence token.
+    #
+    #   This field has been deprecated.
+    #
+    #    The sequence token is now ignored in `PutLogEvents` actions.
+    #   `PutLogEvents` actions are always accepted even if the sequence
+    #   token is not valid. You can use parallel `PutLogEvents` actions on
+    #   the same log stream and you do not need to wait for the response of
+    #   a previous `PutLogEvents` action to obtain the `nextSequenceToken`
+    #   value.
     #   @return [String]
     #
     # @!attribute [rw] rejected_log_events_info

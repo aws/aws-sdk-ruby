@@ -6795,11 +6795,23 @@ module Aws::SSM
     #   The document version required by the current document.
     #   @return [String]
     #
+    # @!attribute [rw] require_type
+    #   The document type of the required SSM document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and can't be changed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentRequires AWS API Documentation
     #
     class DocumentRequires < Struct.new(
       :name,
-      :version)
+      :version,
+      :require_type,
+      :version_name)
       SENSITIVE = []
       include Aws::Structure
     end
