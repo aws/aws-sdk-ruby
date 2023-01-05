@@ -316,8 +316,26 @@ module Aws::AppRunner
     #
     # @!attribute [rw] runtime_environment_variables
     #   The environment variables that are available to your running App
-    #   Runner service. An array of key-value pairs. Keys with a prefix of
-    #   `AWSAPPRUNNER` are reserved for system use and aren't valid.
+    #   Runner service. An array of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] runtime_environment_secrets
+    #   An array of key-value pairs representing the secrets and parameters
+    #   that get referenced to your service as an environment variable. The
+    #   supported values are either the full Amazon Resource Name (ARN) of
+    #   the Secrets Manager secret or the full ARN of the parameter in the
+    #   Amazon Web Services Systems Manager Parameter Store.
+    #
+    #   <note markdown="1"> * If the Amazon Web Services Systems Manager Parameter Store
+    #     parameter exists in the same Amazon Web Services Region as the
+    #     service that you're launching, you can use either the full ARN or
+    #     name of the secret. If the parameter exists in a different Region,
+    #     then the full ARN must be specified.
+    #
+    #   * Currently, cross account referencing of Amazon Web Services
+    #     Systems Manager Parameter Store parameter is not supported.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CodeConfigurationValues AWS API Documentation
@@ -327,7 +345,8 @@ module Aws::AppRunner
       :build_command,
       :start_command,
       :port,
-      :runtime_environment_variables)
+      :runtime_environment_variables,
+      :runtime_environment_secrets)
       SENSITIVE = [:build_command, :start_command]
       include Aws::Structure
     end
@@ -1372,8 +1391,7 @@ module Aws::AppRunner
     #
     # @!attribute [rw] runtime_environment_variables
     #   Environment variables that are available to your running App Runner
-    #   service. An array of key-value pairs. Keys with a prefix of
-    #   `AWSAPPRUNNER` are reserved for system use and aren't valid.
+    #   service. An array of key-value pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] start_command
@@ -1388,12 +1406,32 @@ module Aws::AppRunner
     #   Default: `8080`
     #   @return [String]
     #
+    # @!attribute [rw] runtime_environment_secrets
+    #   An array of key-value pairs representing the secrets and parameters
+    #   that get referenced to your service as an environment variable. The
+    #   supported values are either the full Amazon Resource Name (ARN) of
+    #   the Secrets Manager secret or the full ARN of the parameter in the
+    #   Amazon Web Services Systems Manager Parameter Store.
+    #
+    #   <note markdown="1"> * If the Amazon Web Services Systems Manager Parameter Store
+    #     parameter exists in the same Amazon Web Services Region as the
+    #     service that you're launching, you can use either the full ARN or
+    #     name of the secret. If the parameter exists in a different Region,
+    #     then the full ARN must be specified.
+    #
+    #   * Currently, cross account referencing of Amazon Web Services
+    #     Systems Manager Parameter Store parameter is not supported.
+    #
+    #    </note>
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ImageConfiguration AWS API Documentation
     #
     class ImageConfiguration < Struct.new(
       :runtime_environment_variables,
       :start_command,
-      :port)
+      :port,
+      :runtime_environment_secrets)
       SENSITIVE = [:start_command]
       include Aws::Structure
     end

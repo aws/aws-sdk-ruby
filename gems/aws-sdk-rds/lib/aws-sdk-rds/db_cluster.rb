@@ -1822,7 +1822,7 @@ module Aws::RDS
     #
     #   Example: `my-cluster2`
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :apply_immediately
     #   A value that indicates whether the modifications in this request and
     #   any pending modifications are asynchronously applied as soon as

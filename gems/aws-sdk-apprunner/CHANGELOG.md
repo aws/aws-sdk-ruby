@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-01-05)
+------------------
+
+* Feature - This release adds support of securely referencing secrets and configuration data that are stored in Secrets Manager and SSM Parameter Store by adding them as environment secrets in your App Runner service.
+
 1.18.0 (2022-10-31)
 ------------------
 

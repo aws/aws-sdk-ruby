@@ -147,6 +147,9 @@ module Aws::AppRunner
     ResumeServiceResponse = Shapes::StructureShape.new(name: 'ResumeServiceResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
+    RuntimeEnvironmentSecrets = Shapes::MapShape.new(name: 'RuntimeEnvironmentSecrets')
+    RuntimeEnvironmentSecretsName = Shapes::StringShape.new(name: 'RuntimeEnvironmentSecretsName')
+    RuntimeEnvironmentSecretsValue = Shapes::StringShape.new(name: 'RuntimeEnvironmentSecretsValue')
     RuntimeEnvironmentVariables = Shapes::MapShape.new(name: 'RuntimeEnvironmentVariables')
     RuntimeEnvironmentVariablesKey = Shapes::StringShape.new(name: 'RuntimeEnvironmentVariablesKey')
     RuntimeEnvironmentVariablesValue = Shapes::StringShape.new(name: 'RuntimeEnvironmentVariablesValue')
@@ -247,6 +250,7 @@ module Aws::AppRunner
     CodeConfigurationValues.add_member(:start_command, Shapes::ShapeRef.new(shape: StartCommand, location_name: "StartCommand"))
     CodeConfigurationValues.add_member(:port, Shapes::ShapeRef.new(shape: String, location_name: "Port"))
     CodeConfigurationValues.add_member(:runtime_environment_variables, Shapes::ShapeRef.new(shape: RuntimeEnvironmentVariables, location_name: "RuntimeEnvironmentVariables"))
+    CodeConfigurationValues.add_member(:runtime_environment_secrets, Shapes::ShapeRef.new(shape: RuntimeEnvironmentSecrets, location_name: "RuntimeEnvironmentSecrets"))
     CodeConfigurationValues.struct_class = Types::CodeConfigurationValues
 
     CodeRepository.add_member(:repository_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RepositoryUrl"))
@@ -444,6 +448,7 @@ module Aws::AppRunner
     ImageConfiguration.add_member(:runtime_environment_variables, Shapes::ShapeRef.new(shape: RuntimeEnvironmentVariables, location_name: "RuntimeEnvironmentVariables"))
     ImageConfiguration.add_member(:start_command, Shapes::ShapeRef.new(shape: StartCommand, location_name: "StartCommand"))
     ImageConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: String, location_name: "Port"))
+    ImageConfiguration.add_member(:runtime_environment_secrets, Shapes::ShapeRef.new(shape: RuntimeEnvironmentSecrets, location_name: "RuntimeEnvironmentSecrets"))
     ImageConfiguration.struct_class = Types::ImageConfiguration
 
     ImageRepository.add_member(:image_identifier, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "ImageIdentifier"))
@@ -593,6 +598,9 @@ module Aws::AppRunner
     ResumeServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     ResumeServiceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, location_name: "OperationId"))
     ResumeServiceResponse.struct_class = Types::ResumeServiceResponse
+
+    RuntimeEnvironmentSecrets.key = Shapes::ShapeRef.new(shape: RuntimeEnvironmentSecretsName)
+    RuntimeEnvironmentSecrets.value = Shapes::ShapeRef.new(shape: RuntimeEnvironmentSecretsValue)
 
     RuntimeEnvironmentVariables.key = Shapes::ShapeRef.new(shape: RuntimeEnvironmentVariablesKey)
     RuntimeEnvironmentVariables.value = Shapes::ShapeRef.new(shape: RuntimeEnvironmentVariablesValue)

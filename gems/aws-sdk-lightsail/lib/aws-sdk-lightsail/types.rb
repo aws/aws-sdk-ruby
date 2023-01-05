@@ -3600,14 +3600,6 @@ module Aws::Lightsail
 
     # @!attribute [rw] domain_name
     #   The domain name to manage (e.g., `example.com`).
-    #
-    #   <note markdown="1"> You cannot register a new domain name using Lightsail. You must
-    #   register a domain name using Amazon Route 53 or another domain name
-    #   registrar. If you have already registered your domain, you can enter
-    #   its name in this parameter to manage the DNS records for that domain
-    #   using Lightsail.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4863,8 +4855,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] force_delete_add_ons
-    #   A Boolean value to indicate whether to delete the enabled add-ons
-    #   for the disk.
+    #   A Boolean value to indicate whether to delete all add-ons for the
+    #   disk.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskRequest AWS API Documentation
@@ -5009,8 +5001,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] force_delete_add_ons
-    #   A Boolean value to indicate whether to delete the enabled add-ons
-    #   for the disk.
+    #   A Boolean value to indicate whether to delete all add-ons for the
+    #   instance.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceRequest AWS API Documentation

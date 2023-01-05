@@ -1210,7 +1210,8 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Generates a model schema for existing backend API resource.
+    # Gets a model introspection schema for an existing backend API
+    # resource.
     #
     # @option params [required, String] :app_id
     #
@@ -1222,6 +1223,7 @@ module Aws::AmplifyBackend
     #
     #   * {Types::GetBackendAPIModelsResponse#models #models} => String
     #   * {Types::GetBackendAPIModelsResponse#status #status} => String
+    #   * {Types::GetBackendAPIModelsResponse#model_introspection_schema #model_introspection_schema} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1235,6 +1237,7 @@ module Aws::AmplifyBackend
     #
     #   resp.models #=> String
     #   resp.status #=> String, one of "LATEST", "STALE"
+    #   resp.model_introspection_schema #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendAPIModels AWS API Documentation
     #
@@ -2058,7 +2061,7 @@ module Aws::AmplifyBackend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

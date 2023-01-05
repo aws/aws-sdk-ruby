@@ -419,8 +419,9 @@ module Aws::MWAA
     # @option params [String] :airflow_version
     #   The Apache Airflow version for your environment. If no value is
     #   specified, it defaults to the latest version. Valid values: `1.10.12`,
-    #   `2.0.2`, and `2.2.2`. To learn more, see [Apache Airflow versions on
-    #   Amazon Managed Workflows for Apache Airflow (MWAA)][1].
+    #   `2.0.2`, `2.2.2`, and `2.4.3`. For more information, see [Apache
+    #   Airflow versions on Amazon Managed Workflows for Apache Airflow
+    #   (MWAA)][1].
     #
     #
     #
@@ -990,7 +991,7 @@ module Aws::MWAA
     # @option params [String] :airflow_version
     #   The Apache Airflow version for your environment. If no value is
     #   specified, defaults to the latest version. Valid values: `1.10.12`,
-    #   `2.0.2`, and `2.2.2`.
+    #   `2.0.2`, `2.2.2`, and `2.4.3`.
     #
     # @option params [String] :dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
@@ -1195,7 +1196,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

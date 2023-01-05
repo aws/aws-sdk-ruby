@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.169.0 (2023-01-05)
+------------------
+
+* Feature - This release adds support for specifying which certificate authority (CA) to use for a DB instance's server certificate during DB instance creation, as well as other CA enhancements.
+
 1.168.0 (2022-12-28)
 ------------------
 

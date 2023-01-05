@@ -56,6 +56,10 @@ module Aws::EMRServerless
     Hive = Shapes::StructureShape.new(name: 'Hive')
     HiveCliParameters = Shapes::StringShape.new(name: 'HiveCliParameters')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
+    ImageConfiguration = Shapes::StructureShape.new(name: 'ImageConfiguration')
+    ImageConfigurationInput = Shapes::StructureShape.new(name: 'ImageConfigurationInput')
+    ImageDigest = Shapes::StringShape.new(name: 'ImageDigest')
+    ImageUri = Shapes::StringShape.new(name: 'ImageUri')
     InitScriptPath = Shapes::StringShape.new(name: 'InitScriptPath')
     InitialCapacityConfig = Shapes::StructureShape.new(name: 'InitialCapacityConfig')
     InitialCapacityConfigMap = Shapes::MapShape.new(name: 'InitialCapacityConfigMap')
@@ -122,6 +126,10 @@ module Aws::EMRServerless
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WorkerCounts = Shapes::IntegerShape.new(name: 'WorkerCounts')
     WorkerResourceConfig = Shapes::StructureShape.new(name: 'WorkerResourceConfig')
+    WorkerTypeSpecification = Shapes::StructureShape.new(name: 'WorkerTypeSpecification')
+    WorkerTypeSpecificationInput = Shapes::StructureShape.new(name: 'WorkerTypeSpecificationInput')
+    WorkerTypeSpecificationInputMap = Shapes::MapShape.new(name: 'WorkerTypeSpecificationInputMap')
+    WorkerTypeSpecificationMap = Shapes::MapShape.new(name: 'WorkerTypeSpecificationMap')
     WorkerTypeString = Shapes::StringShape.new(name: 'WorkerTypeString')
 
     Application.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -140,6 +148,8 @@ module Aws::EMRServerless
     Application.add_member(:auto_stop_configuration, Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
     Application.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     Application.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
+    Application.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "imageConfiguration"))
+    Application.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationMap, location_name: "workerTypeSpecifications"))
     Application.struct_class = Types::Application
 
     ApplicationList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
@@ -198,6 +208,8 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:auto_stop_configuration, Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
     CreateApplicationRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     CreateApplicationRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
+    CreateApplicationRequest.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfigurationInput, location_name: "imageConfiguration"))
+    CreateApplicationRequest.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -236,6 +248,13 @@ module Aws::EMRServerless
     Hive.add_member(:init_query_file, Shapes::ShapeRef.new(shape: InitScriptPath, location_name: "initQueryFile"))
     Hive.add_member(:parameters, Shapes::ShapeRef.new(shape: HiveCliParameters, location_name: "parameters"))
     Hive.struct_class = Types::Hive
+
+    ImageConfiguration.add_member(:image_uri, Shapes::ShapeRef.new(shape: ImageUri, required: true, location_name: "imageUri"))
+    ImageConfiguration.add_member(:resolved_image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "resolvedImageDigest"))
+    ImageConfiguration.struct_class = Types::ImageConfiguration
+
+    ImageConfigurationInput.add_member(:image_uri, Shapes::ShapeRef.new(shape: ImageUri, location_name: "imageUri"))
+    ImageConfigurationInput.struct_class = Types::ImageConfigurationInput
 
     InitialCapacityConfig.add_member(:worker_count, Shapes::ShapeRef.new(shape: WorkerCounts, required: true, location_name: "workerCount"))
     InitialCapacityConfig.add_member(:worker_configuration, Shapes::ShapeRef.new(shape: WorkerResourceConfig, location_name: "workerConfiguration"))
@@ -413,6 +432,8 @@ module Aws::EMRServerless
     UpdateApplicationRequest.add_member(:auto_stop_configuration, Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
     UpdateApplicationRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     UpdateApplicationRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
+    UpdateApplicationRequest.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfigurationInput, location_name: "imageConfiguration"))
+    UpdateApplicationRequest.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application, Shapes::ShapeRef.new(shape: Application, required: true, location_name: "application"))
@@ -425,6 +446,18 @@ module Aws::EMRServerless
     WorkerResourceConfig.add_member(:memory, Shapes::ShapeRef.new(shape: MemorySize, required: true, location_name: "memory"))
     WorkerResourceConfig.add_member(:disk, Shapes::ShapeRef.new(shape: DiskSize, location_name: "disk"))
     WorkerResourceConfig.struct_class = Types::WorkerResourceConfig
+
+    WorkerTypeSpecification.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "imageConfiguration"))
+    WorkerTypeSpecification.struct_class = Types::WorkerTypeSpecification
+
+    WorkerTypeSpecificationInput.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfigurationInput, location_name: "imageConfiguration"))
+    WorkerTypeSpecificationInput.struct_class = Types::WorkerTypeSpecificationInput
+
+    WorkerTypeSpecificationInputMap.key = Shapes::ShapeRef.new(shape: WorkerTypeString)
+    WorkerTypeSpecificationInputMap.value = Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInput)
+
+    WorkerTypeSpecificationMap.key = Shapes::ShapeRef.new(shape: WorkerTypeString)
+    WorkerTypeSpecificationMap.value = Shapes::ShapeRef.new(shape: WorkerTypeSpecification)
 
 
     # @api private
@@ -462,6 +495,7 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: CreateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)

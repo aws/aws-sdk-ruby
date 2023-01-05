@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-01-05)
+------------------
+
+* Feature - Documentation updates for Amazon Lightsail.
+
 1.71.0 (2022-11-08)
 ------------------
 

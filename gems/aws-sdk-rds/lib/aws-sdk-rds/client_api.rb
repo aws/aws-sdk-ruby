@@ -60,8 +60,10 @@ module Aws::RDS
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
+    CACertificateIdentifiersList = Shapes::ListShape.new(name: 'CACertificateIdentifiersList')
     CancelExportTaskMessage = Shapes::StructureShape.new(name: 'CancelExportTaskMessage')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
+    CertificateDetails = Shapes::StructureShape.new(name: 'CertificateDetails')
     CertificateList = Shapes::ListShape.new(name: 'CertificateList')
     CertificateMessage = Shapes::StructureShape.new(name: 'CertificateMessage')
     CertificateNotFoundFault = Shapes::StructureShape.new(name: 'CertificateNotFoundFault')
@@ -751,6 +753,8 @@ module Aws::RDS
 
     BlueGreenDeploymentTaskList.member = Shapes::ShapeRef.new(shape: BlueGreenDeploymentTask)
 
+    CACertificateIdentifiersList.member = Shapes::ShapeRef.new(shape: String)
+
     CancelExportTaskMessage.add_member(:export_task_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExportTaskIdentifier"))
     CancelExportTaskMessage.struct_class = Types::CancelExportTaskMessage
 
@@ -763,6 +767,10 @@ module Aws::RDS
     Certificate.add_member(:customer_override, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CustomerOverride"))
     Certificate.add_member(:customer_override_valid_till, Shapes::ShapeRef.new(shape: TStamp, location_name: "CustomerOverrideValidTill"))
     Certificate.struct_class = Types::Certificate
+
+    CertificateDetails.add_member(:ca_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CAIdentifier"))
+    CertificateDetails.add_member(:valid_till, Shapes::ShapeRef.new(shape: TStamp, location_name: "ValidTill"))
+    CertificateDetails.struct_class = Types::CertificateDetails
 
     CertificateList.member = Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate")
 
@@ -1014,6 +1022,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     CreateDBInstanceMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     CreateDBInstanceMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    CreateDBInstanceMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1421,6 +1430,8 @@ module Aws::RDS
     DBEngineVersion.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBEngineVersion.add_member(:supports_babelfish, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsBabelfish"))
     DBEngineVersion.add_member(:custom_db_engine_version_manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, location_name: "CustomDBEngineVersionManifest"))
+    DBEngineVersion.add_member(:supports_certificate_rotation_without_restart, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsCertificateRotationWithoutRestart"))
+    DBEngineVersion.add_member(:supported_ca_certificate_identifiers, Shapes::ShapeRef.new(shape: CACertificateIdentifiersList, location_name: "SupportedCACertificateIdentifiers"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -1508,6 +1519,7 @@ module Aws::RDS
     DBInstance.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     DBInstance.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
     DBInstance.add_member(:master_user_secret, Shapes::ShapeRef.new(shape: MasterUserSecret, location_name: "MasterUserSecret"))
+    DBInstance.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -3928,6 +3940,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
       end)
 
       api.add_operation(:create_db_instance_read_replica, Seahorse::Model::Operation.new.tap do |o|

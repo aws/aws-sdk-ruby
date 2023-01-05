@@ -1763,25 +1763,6 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
-    # The response object for this operation.
-    #
-    # @!attribute [rw] models
-    #   Stringified JSON of the datastore model.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The current status of the request.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendAPICodegenRespObj AWS API Documentation
-    #
-    class GetBackendAPICodegenRespObj < Struct.new(
-      :models,
-      :status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @!attribute [rw] app_id
     #   @return [String]
     #
@@ -1801,17 +1782,27 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # The response object for this operation.
+    #
     # @!attribute [rw] models
+    #   Stringified JSON of the datastore model.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The current status of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_introspection_schema
+    #   Stringified JSON of the model introspection schema for an existing
+    #   backend API resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendAPIModelsResponse AWS API Documentation
     #
     class GetBackendAPIModelsResponse < Struct.new(
       :models,
-      :status)
+      :status,
+      :model_introspection_schema)
       SENSITIVE = []
       include Aws::Structure
     end

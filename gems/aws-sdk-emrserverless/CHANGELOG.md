@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2023-01-05)
+------------------
+
+* Feature - Adds support for customized images. You can now provide runtime images when creating or updating EMR Serverless Applications.
+
 1.3.0 (2022-11-17)
 ------------------
 

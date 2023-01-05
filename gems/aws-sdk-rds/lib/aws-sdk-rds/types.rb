@@ -704,6 +704,16 @@ module Aws::RDS
 
     # A CA certificate for an Amazon Web Services account.
     #
+    # For more information, see [Using SSL/TLS to encrypt a connection to a
+    # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    # encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #
     # @!attribute [rw] certificate_identifier
     #   The unique key that identifies a certificate.
     #   @return [String]
@@ -748,6 +758,36 @@ module Aws::RDS
       :certificate_arn,
       :customer_override,
       :customer_override_valid_till)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the details of the DB instance’s server certificate.
+    #
+    # For more information, see [Using SSL/TLS to encrypt a connection to a
+    # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    # encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #
+    # @!attribute [rw] ca_identifier
+    #   The CA identifier of the CA certificate used for the DB instance's
+    #   server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_till
+    #   The expiration date of the DB instance’s server certificate.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CertificateDetails AWS API Documentation
+    #
+    class CertificateDetails < Struct.new(
+      :ca_identifier,
+      :valid_till)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4235,6 +4275,23 @@ module Aws::RDS
     #   each Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   Specifies the CA certificate identifier to use for the DB instance’s
+    #   server certificate.
+    #
+    #   This setting doesn't apply to RDS Custom.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -4291,7 +4348,8 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :manage_master_user_password,
-      :master_user_secret_kms_key_id)
+      :master_user_secret_kms_key_id,
+      :ca_certificate_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7254,6 +7312,25 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields
     #   @return [String]
     #
+    # @!attribute [rw] supports_certificate_rotation_without_restart
+    #   A value that indicates whether the engine version supports rotating
+    #   the server certificate without rebooting the DB instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supported_ca_certificate_identifiers
+    #   A list of the supported CA certificate identifiers.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -7285,7 +7362,9 @@ module Aws::RDS
       :create_time,
       :tag_list,
       :supports_babelfish,
-      :custom_db_engine_version_manifest)
+      :custom_db_engine_version_manifest,
+      :supports_certificate_rotation_without_restart,
+      :supported_ca_certificate_identifiers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7588,6 +7667,16 @@ module Aws::RDS
     #
     # @!attribute [rw] ca_certificate_identifier
     #   The identifier of the CA certificate for this DB instance.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #   @return [String]
     #
     # @!attribute [rw] domain_memberships
@@ -7894,6 +7983,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
     #   @return [Types::MasterUserSecret]
     #
+    # @!attribute [rw] certificate_details
+    #   The details of the DB instance's server certificate.
+    #   @return [Types::CertificateDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -7975,7 +8068,8 @@ module Aws::RDS
       :activity_stream_policy_status,
       :storage_throughput,
       :db_system_id,
-      :master_user_secret)
+      :master_user_secret,
+      :certificate_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14071,6 +14165,16 @@ module Aws::RDS
 
     # @!attribute [rw] certificate
     #   A CA certificate for an Amazon Web Services account.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #   @return [Types::Certificate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCertificatesResult AWS API Documentation
@@ -14242,7 +14346,7 @@ module Aws::RDS
     #
     #   Example: `my-cluster2`
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
     #
     # @!attribute [rw] apply_immediately
@@ -15547,9 +15651,20 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
-    #   Specifies the certificate to associate with the DB instance.
+    #   Specifies the CA certificate identifier to use for the DB instance’s
+    #   server certificate.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -17731,6 +17846,16 @@ module Aws::RDS
     #
     # @!attribute [rw] ca_certificate_identifier
     #   The identifier of the CA certificate for the DB instance.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
@@ -22623,27 +22748,27 @@ module Aws::RDS
     #   The ID of the Amazon Web Services KMS key to use to encrypt the
     #   snapshot exported to Amazon S3. The Amazon Web Services KMS key
     #   identifier is the key ARN, key ID, alias ARN, or alias name for the
-    #   KMS key. The caller of this operation must be authorized to execute
-    #   the following operations. These can be set in the Amazon Web
-    #   Services KMS key policy:
+    #   KMS key. The caller of this operation must be authorized to run the
+    #   following operations. These can be set in the Amazon Web Services
+    #   KMS key policy:
     #
-    #   * GrantOperation.Encrypt
+    #   * kms:Encrypt
     #
-    #   * GrantOperation.Decrypt
+    #   * kms:Decrypt
     #
-    #   * GrantOperation.GenerateDataKey
+    #   * kms:GenerateDataKey
     #
-    #   * GrantOperation.GenerateDataKeyWithoutPlaintext
+    #   * kms:GenerateDataKeyWithoutPlaintext
     #
-    #   * GrantOperation.ReEncryptFrom
+    #   * kms:ReEncryptFrom
     #
-    #   * GrantOperation.ReEncryptTo
+    #   * kms:ReEncryptTo
     #
-    #   * GrantOperation.CreateGrant
+    #   * kms:CreateGrant
     #
-    #   * GrantOperation.DescribeKey
+    #   * kms:DescribeKey
     #
-    #   * GrantOperation.RetireGrant
+    #   * kms:RetireGrant
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix

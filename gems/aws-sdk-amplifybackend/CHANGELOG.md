@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-01-05)
+------------------
+
+* Feature - Updated GetBackendAPIModels response to include ModelIntrospectionSchema json string
+
 1.18.0 (2022-10-25)
 ------------------
 

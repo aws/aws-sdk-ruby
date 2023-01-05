@@ -408,7 +408,7 @@ module Aws::EMRServerless
     #   The name of the application.
     #
     # @option params [required, String] :release_label
-    #   The EMR release version associated with the application.
+    #   The EMR release associated with the application.
     #
     # @option params [required, String] :type
     #   The type of application you want to start, such as Spark or Hive.
@@ -445,6 +445,20 @@ module Aws::EMRServerless
     #
     # @option params [String] :architecture
     #   The CPU architecture of an application.
+    #
+    # @option params [Types::ImageConfigurationInput] :image_configuration
+    #   The image configuration for all worker types. You can either set this
+    #   parameter or `imageConfiguration` for each worker type in
+    #   `workerTypeSpecifications`.
+    #
+    # @option params [Hash<String,Types::WorkerTypeSpecificationInput>] :worker_type_specifications
+    #   The key-value pairs that specify worker type to
+    #   `WorkerTypeSpecificationInput`. This parameter must contain all valid
+    #   worker types for a Spark or Hive application. Valid worker types
+    #   include `Driver` and `Executor` for Spark applications and
+    #   `HiveDriver` and `TezTask` for Hive applications. You can either set
+    #   image details in this parameter for each worker type, or in
+    #   `imageConfiguration` for all worker types.
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -489,6 +503,16 @@ module Aws::EMRServerless
     #       security_group_ids: ["SecurityGroupString"],
     #     },
     #     architecture: "ARM64", # accepts ARM64, X86_64
+    #     image_configuration: {
+    #       image_uri: "ImageUri",
+    #     },
+    #     worker_type_specifications: {
+    #       "WorkerTypeString" => {
+    #         image_configuration: {
+    #           image_uri: "ImageUri",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -573,6 +597,11 @@ module Aws::EMRServerless
     #   resp.application.network_configuration.security_group_ids #=> Array
     #   resp.application.network_configuration.security_group_ids[0] #=> String
     #   resp.application.architecture #=> String, one of "ARM64", "X86_64"
+    #   resp.application.image_configuration.image_uri #=> String
+    #   resp.application.image_configuration.resolved_image_digest #=> String
+    #   resp.application.worker_type_specifications #=> Hash
+    #   resp.application.worker_type_specifications["WorkerTypeString"].image_configuration.image_uri #=> String
+    #   resp.application.worker_type_specifications["WorkerTypeString"].image_configuration.resolved_image_digest #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -1078,6 +1107,20 @@ module Aws::EMRServerless
     # @option params [String] :architecture
     #   The CPU architecture of an application.
     #
+    # @option params [Types::ImageConfigurationInput] :image_configuration
+    #   The image configuration to be used for all worker types. You can
+    #   either set this parameter or `imageConfiguration` for each worker type
+    #   in `WorkerTypeSpecificationInput`.
+    #
+    # @option params [Hash<String,Types::WorkerTypeSpecificationInput>] :worker_type_specifications
+    #   The key-value pairs that specify worker type to
+    #   `WorkerTypeSpecificationInput`. This parameter must contain all valid
+    #   worker types for a Spark or Hive application. Valid worker types
+    #   include `Driver` and `Executor` for Spark applications and
+    #   `HiveDriver` and `TezTask` for Hive applications. You can either set
+    #   image details in this parameter for each worker type, or in
+    #   `imageConfiguration` for all worker types.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application #application} => Types::Application
@@ -1114,6 +1157,16 @@ module Aws::EMRServerless
     #       security_group_ids: ["SecurityGroupString"],
     #     },
     #     architecture: "ARM64", # accepts ARM64, X86_64
+    #     image_configuration: {
+    #       image_uri: "ImageUri",
+    #     },
+    #     worker_type_specifications: {
+    #       "WorkerTypeString" => {
+    #         image_configuration: {
+    #           image_uri: "ImageUri",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1145,6 +1198,11 @@ module Aws::EMRServerless
     #   resp.application.network_configuration.security_group_ids #=> Array
     #   resp.application.network_configuration.security_group_ids[0] #=> String
     #   resp.application.architecture #=> String, one of "ARM64", "X86_64"
+    #   resp.application.image_configuration.image_uri #=> String
+    #   resp.application.image_configuration.resolved_image_digest #=> String
+    #   resp.application.worker_type_specifications #=> Hash
+    #   resp.application.worker_type_specifications["WorkerTypeString"].image_configuration.image_uri #=> String
+    #   resp.application.worker_type_specifications["WorkerTypeString"].image_configuration.resolved_image_digest #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1168,7 +1226,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

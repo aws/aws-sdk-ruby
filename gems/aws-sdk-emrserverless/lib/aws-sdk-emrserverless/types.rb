@@ -26,7 +26,7 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release version associated with the application.
+    #   The EMR release associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -83,6 +83,14 @@ module Aws::EMRServerless
     #   The CPU architecture of an application.
     #   @return [String]
     #
+    # @!attribute [rw] image_configuration
+    #   The image configuration applied to all worker types.
+    #   @return [Types::ImageConfiguration]
+    #
+    # @!attribute [rw] worker_type_specifications
+    #   The specification applied to each worker type.
+    #   @return [Hash<String,Types::WorkerTypeSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -101,7 +109,9 @@ module Aws::EMRServerless
       :auto_start_configuration,
       :auto_stop_configuration,
       :network_configuration,
-      :architecture)
+      :architecture,
+      :image_configuration,
+      :worker_type_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -121,7 +131,7 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release version associated with the application.
+    #   The EMR release associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -306,7 +316,7 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release version associated with the application.
+    #   The EMR release associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -354,6 +364,22 @@ module Aws::EMRServerless
     #   The CPU architecture of an application.
     #   @return [String]
     #
+    # @!attribute [rw] image_configuration
+    #   The image configuration for all worker types. You can either set
+    #   this parameter or `imageConfiguration` for each worker type in
+    #   `workerTypeSpecifications`.
+    #   @return [Types::ImageConfigurationInput]
+    #
+    # @!attribute [rw] worker_type_specifications
+    #   The key-value pairs that specify worker type to
+    #   `WorkerTypeSpecificationInput`. This parameter must contain all
+    #   valid worker types for a Spark or Hive application. Valid worker
+    #   types include `Driver` and `Executor` for Spark applications and
+    #   `HiveDriver` and `TezTask` for Hive applications. You can either set
+    #   image details in this parameter for each worker type, or in
+    #   `imageConfiguration` for all worker types.
+    #   @return [Hash<String,Types::WorkerTypeSpecificationInput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -367,7 +393,9 @@ module Aws::EMRServerless
       :auto_start_configuration,
       :auto_stop_configuration,
       :network_configuration,
-      :architecture)
+      :architecture,
+      :image_configuration,
+      :worker_type_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -516,6 +544,43 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
+    # The applied image configuration.
+    #
+    # @!attribute [rw] image_uri
+    #   The image URI.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_image_digest
+    #   The SHA256 digest of the image URI. This indicates which specific
+    #   image the application is configured for. The image digest doesn't
+    #   exist until an application has started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ImageConfiguration AWS API Documentation
+    #
+    class ImageConfiguration < Struct.new(
+      :image_uri,
+      :resolved_image_digest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The image configuration.
+    #
+    # @!attribute [rw] image_uri
+    #   The URI of an image in the Amazon ECR registry. This field is
+    #   required when you create a new application. If you leave this field
+    #   blank in an update, Amazon EMR will remove the image configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ImageConfigurationInput AWS API Documentation
+    #
+    class ImageConfigurationInput < Struct.new(
+      :image_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The initial capacity configuration per worker.
     #
     # @!attribute [rw] worker_count
@@ -623,8 +688,8 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release version associated with the application your job is
-    #   running on.
+    #   The EMR release associated with the application your job is running
+    #   on.
     #   @return [String]
     #
     # @!attribute [rw] configuration_overrides
@@ -723,8 +788,8 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release version associated with the application your job is
-    #   running on.
+    #   The EMR release associated with the application your job is running
+    #   on.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1256,6 +1321,22 @@ module Aws::EMRServerless
     #   The CPU architecture of an application.
     #   @return [String]
     #
+    # @!attribute [rw] image_configuration
+    #   The image configuration to be used for all worker types. You can
+    #   either set this parameter or `imageConfiguration` for each worker
+    #   type in `WorkerTypeSpecificationInput`.
+    #   @return [Types::ImageConfigurationInput]
+    #
+    # @!attribute [rw] worker_type_specifications
+    #   The key-value pairs that specify worker type to
+    #   `WorkerTypeSpecificationInput`. This parameter must contain all
+    #   valid worker types for a Spark or Hive application. Valid worker
+    #   types include `Driver` and `Executor` for Spark applications and
+    #   `HiveDriver` and `TezTask` for Hive applications. You can either set
+    #   image details in this parameter for each worker type, or in
+    #   `imageConfiguration` for all worker types.
+    #   @return [Hash<String,Types::WorkerTypeSpecificationInput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1266,7 +1347,9 @@ module Aws::EMRServerless
       :auto_start_configuration,
       :auto_stop_configuration,
       :network_configuration,
-      :architecture)
+      :architecture,
+      :image_configuration,
+      :worker_type_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1319,6 +1402,34 @@ module Aws::EMRServerless
       :cpu,
       :memory,
       :disk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specifications for a worker type.
+    #
+    # @!attribute [rw] image_configuration
+    #   The image configuration for a worker type.
+    #   @return [Types::ImageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/WorkerTypeSpecification AWS API Documentation
+    #
+    class WorkerTypeSpecification < Struct.new(
+      :image_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specifications for a worker type.
+    #
+    # @!attribute [rw] image_configuration
+    #   The image configuration for a worker type.
+    #   @return [Types::ImageConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/WorkerTypeSpecificationInput AWS API Documentation
+    #
+    class WorkerTypeSpecificationInput < Struct.new(
+      :image_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

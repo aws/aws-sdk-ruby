@@ -2628,7 +2628,7 @@ module Aws::Connect
     #   resp.contact.id #=> String
     #   resp.contact.initial_contact_id #=> String
     #   resp.contact.previous_contact_id #=> String
-    #   resp.contact.initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API"
+    #   resp.contact.initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR"
     #   resp.contact.name #=> String
     #   resp.contact.description #=> String
     #   resp.contact.channel #=> String, one of "VOICE", "CHAT", "TASK"
@@ -4167,7 +4167,7 @@ module Aws::Connect
     #   resp.user_data_list[0].contacts #=> Array
     #   resp.user_data_list[0].contacts[0].contact_id #=> String
     #   resp.user_data_list[0].contacts[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
-    #   resp.user_data_list[0].contacts[0].initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API"
+    #   resp.user_data_list[0].contacts[0].initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR"
     #   resp.user_data_list[0].contacts[0].agent_contact_state #=> String, one of "INCOMING", "PENDING", "CONNECTING", "CONNECTED", "CONNECTED_ONHOLD", "MISSED", "ERROR", "ENDED", "REJECTED"
     #   resp.user_data_list[0].contacts[0].state_start_timestamp #=> Time
     #   resp.user_data_list[0].contacts[0].connected_to_agent_timestamp #=> Time
@@ -9740,7 +9740,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

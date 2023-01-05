@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-01-05)
+------------------
+
+* Feature - Documentation update for a new Initiation Method value in DescribeContact API
+
 1.90.0 (2022-12-23)
 ------------------
 

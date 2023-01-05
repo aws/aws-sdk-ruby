@@ -81,8 +81,9 @@ module Aws::MWAA
     # @!attribute [rw] airflow_version
     #   The Apache Airflow version for your environment. If no value is
     #   specified, it defaults to the latest version. Valid values:
-    #   `1.10.12`, `2.0.2`, and `2.2.2`. To learn more, see [Apache Airflow
-    #   versions on Amazon Managed Workflows for Apache Airflow (MWAA)][1].
+    #   `1.10.12`, `2.0.2`, `2.2.2`, and `2.4.3`. For more information, see
+    #   [Apache Airflow versions on Amazon Managed Workflows for Apache
+    #   Airflow (MWAA)][1].
     #
     #
     #
@@ -387,7 +388,7 @@ module Aws::MWAA
     #
     # @!attribute [rw] airflow_version
     #   The Apache Airflow version on your environment. Valid values:
-    #   `1.10.12`, `2.0.2`, and `2.2.2`.
+    #   `1.10.12`, `2.0.2`, `2.2.2`, and `2.4.3`.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -1120,7 +1121,7 @@ module Aws::MWAA
     # @!attribute [rw] airflow_version
     #   The Apache Airflow version for your environment. If no value is
     #   specified, defaults to the latest version. Valid values: `1.10.12`,
-    #   `2.0.2`, and `2.2.2`.
+    #   `2.0.2`, `2.2.2`, and `2.4.3`.
     #   @return [String]
     #
     # @!attribute [rw] dag_s3_path

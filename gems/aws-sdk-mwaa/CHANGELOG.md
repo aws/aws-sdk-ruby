@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2023-01-05)
+------------------
+
+* Feature - MWAA supports Apache Airflow version 2.4.3.
+
 1.17.0 (2022-10-25)
 ------------------
 

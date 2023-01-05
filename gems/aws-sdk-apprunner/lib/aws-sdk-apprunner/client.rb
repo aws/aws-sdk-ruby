@@ -784,6 +784,9 @@ module Aws::AppRunner
     #             runtime_environment_variables: {
     #               "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #             },
+    #             runtime_environment_secrets: {
+    #               "RuntimeEnvironmentSecretsName" => "RuntimeEnvironmentSecretsValue",
+    #             },
     #           },
     #         },
     #       },
@@ -795,6 +798,9 @@ module Aws::AppRunner
     #           },
     #           start_command: "StartCommand",
     #           port: "String",
+    #           runtime_environment_secrets: {
+    #             "RuntimeEnvironmentSecretsName" => "RuntimeEnvironmentSecretsValue",
+    #           },
     #         },
     #         image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
     #       },
@@ -862,11 +868,15 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.start_command #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.port #=> String
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_repository_type #=> String, one of "ECR", "ECR_PUBLIC"
     #   resp.service.source_configuration.auto_deployments_enabled #=> Boolean
     #   resp.service.source_configuration.authentication_configuration.connection_arn #=> String
@@ -1201,11 +1211,15 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.start_command #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.port #=> String
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_repository_type #=> String, one of "ECR", "ECR_PUBLIC"
     #   resp.service.source_configuration.auto_deployments_enabled #=> Boolean
     #   resp.service.source_configuration.authentication_configuration.connection_arn #=> String
@@ -1517,11 +1531,15 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.start_command #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.port #=> String
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_repository_type #=> String, one of "ECR", "ECR_PUBLIC"
     #   resp.service.source_configuration.auto_deployments_enabled #=> Boolean
     #   resp.service.source_configuration.authentication_configuration.connection_arn #=> String
@@ -2203,11 +2221,15 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.start_command #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.port #=> String
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_repository_type #=> String, one of "ECR", "ECR_PUBLIC"
     #   resp.service.source_configuration.auto_deployments_enabled #=> Boolean
     #   resp.service.source_configuration.authentication_configuration.connection_arn #=> String
@@ -2283,11 +2305,15 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.start_command #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.port #=> String
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_repository_type #=> String, one of "ECR", "ECR_PUBLIC"
     #   resp.service.source_configuration.auto_deployments_enabled #=> Boolean
     #   resp.service.source_configuration.authentication_configuration.connection_arn #=> String
@@ -2504,6 +2530,9 @@ module Aws::AppRunner
     #             runtime_environment_variables: {
     #               "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #             },
+    #             runtime_environment_secrets: {
+    #               "RuntimeEnvironmentSecretsName" => "RuntimeEnvironmentSecretsValue",
+    #             },
     #           },
     #         },
     #       },
@@ -2515,6 +2544,9 @@ module Aws::AppRunner
     #           },
     #           start_command: "StartCommand",
     #           port: "String",
+    #           runtime_environment_secrets: {
+    #             "RuntimeEnvironmentSecretsName" => "RuntimeEnvironmentSecretsValue",
+    #           },
     #         },
     #         image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
     #       },
@@ -2573,11 +2605,15 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.port #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.start_command #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.port #=> String
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets #=> Hash
+    #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
     #   resp.service.source_configuration.image_repository.image_repository_type #=> String, one of "ECR", "ECR_PUBLIC"
     #   resp.service.source_configuration.auto_deployments_enabled #=> Boolean
     #   resp.service.source_configuration.authentication_configuration.connection_arn #=> String
@@ -2679,7 +2715,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

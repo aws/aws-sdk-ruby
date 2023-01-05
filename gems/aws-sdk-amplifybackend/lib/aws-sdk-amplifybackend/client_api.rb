@@ -83,7 +83,6 @@ module Aws::AmplifyBackend
     GatewayTimeoutException = Shapes::StructureShape.new(name: 'GatewayTimeoutException')
     GenerateBackendAPIModelsRequest = Shapes::StructureShape.new(name: 'GenerateBackendAPIModelsRequest')
     GenerateBackendAPIModelsResponse = Shapes::StructureShape.new(name: 'GenerateBackendAPIModelsResponse')
-    GetBackendAPICodegenRespObj = Shapes::StructureShape.new(name: 'GetBackendAPICodegenRespObj')
     GetBackendAPIModelsRequest = Shapes::StructureShape.new(name: 'GetBackendAPIModelsRequest')
     GetBackendAPIModelsResponse = Shapes::StructureShape.new(name: 'GetBackendAPIModelsResponse')
     GetBackendAPIRequest = Shapes::StructureShape.new(name: 'GetBackendAPIRequest')
@@ -575,10 +574,6 @@ module Aws::AmplifyBackend
     GenerateBackendAPIModelsResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
     GenerateBackendAPIModelsResponse.struct_class = Types::GenerateBackendAPIModelsResponse
 
-    GetBackendAPICodegenRespObj.add_member(:models, Shapes::ShapeRef.new(shape: __string, location_name: "models"))
-    GetBackendAPICodegenRespObj.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
-    GetBackendAPICodegenRespObj.struct_class = Types::GetBackendAPICodegenRespObj
-
     GetBackendAPIModelsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
     GetBackendAPIModelsRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "backendEnvironmentName"))
     GetBackendAPIModelsRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
@@ -586,6 +581,7 @@ module Aws::AmplifyBackend
 
     GetBackendAPIModelsResponse.add_member(:models, Shapes::ShapeRef.new(shape: __string, location_name: "models"))
     GetBackendAPIModelsResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    GetBackendAPIModelsResponse.add_member(:model_introspection_schema, Shapes::ShapeRef.new(shape: __string, location_name: "modelIntrospectionSchema"))
     GetBackendAPIModelsResponse.struct_class = Types::GetBackendAPIModelsResponse
 
     GetBackendAPIRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))

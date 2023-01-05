@@ -2042,6 +2042,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
+    #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2115,6 +2117,9 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_certificate_rotation_without_restart #=> Boolean
+    #   resp.supported_ca_certificate_identifiers #=> Array
+    #   resp.supported_ca_certificate_identifiers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -4729,6 +4734,22 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [String] :ca_certificate_identifier
+    #   Specifies the CA certificate identifier to use for the DB instance’s
+    #   server certificate.
+    #
+    #   This setting doesn't apply to RDS Custom.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -4820,6 +4841,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     ca_certificate_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -4970,6 +4992,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -5795,6 +5819,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7013,6 +7039,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
+    #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7074,6 +7102,9 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_certificate_rotation_without_restart #=> Boolean
+    #   resp.supported_ca_certificate_identifiers #=> Array
+    #   resp.supported_ca_certificate_identifiers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -7755,6 +7786,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -8495,6 +8528,16 @@ module Aws::RDS
 
     # Lists the set of CA certificates provided by Amazon RDS for this
     # Amazon Web Services account.
+    #
+    # For more information, see [Using SSL/TLS to encrypt a connection to a
+    # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    # encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
     # @option params [String] :certificate_identifier
     #   The user-supplied certificate identifier. If this parameter is
@@ -9745,6 +9788,9 @@ module Aws::RDS
     #   resp.db_engine_versions[0].tag_list[0].value #=> String
     #   resp.db_engine_versions[0].supports_babelfish #=> Boolean
     #   resp.db_engine_versions[0].custom_db_engine_version_manifest #=> String
+    #   resp.db_engine_versions[0].supports_certificate_rotation_without_restart #=> Boolean
+    #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
+    #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -10130,6 +10176,8 @@ module Aws::RDS
     #   resp.db_instances[0].master_user_secret.secret_arn #=> String
     #   resp.db_instances[0].master_user_secret.secret_status #=> String
     #   resp.db_instances[0].master_user_secret.kms_key_id #=> String
+    #   resp.db_instances[0].certificate_details.ca_identifier #=> String
+    #   resp.db_instances[0].certificate_details.valid_till #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13831,6 +13879,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
+    #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -13894,6 +13944,9 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_certificate_rotation_without_restart #=> Boolean
+    #   resp.supported_ca_certificate_identifiers #=> Array
+    #   resp.supported_ca_certificate_identifiers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -13943,7 +13996,7 @@ module Aws::RDS
     #
     #   Example: `my-cluster2`
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :apply_immediately
     #   A value that indicates whether the modifications in this request and
@@ -15498,9 +15551,20 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [String] :ca_certificate_identifier
-    #   Specifies the certificate to associate with the DB instance.
+    #   Specifies the CA certificate identifier to use for the DB instance’s
+    #   server certificate.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
     # @option params [String] :domain
     #   The Active Directory directory ID to move the DB instance to. Specify
@@ -16208,6 +16272,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -17451,6 +17517,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -18070,6 +18138,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -21165,6 +21235,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -21889,6 +21961,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -22640,6 +22714,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -23153,6 +23229,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -23305,27 +23383,27 @@ module Aws::RDS
     #   The ID of the Amazon Web Services KMS key to use to encrypt the
     #   snapshot exported to Amazon S3. The Amazon Web Services KMS key
     #   identifier is the key ARN, key ID, alias ARN, or alias name for the
-    #   KMS key. The caller of this operation must be authorized to execute
-    #   the following operations. These can be set in the Amazon Web Services
-    #   KMS key policy:
+    #   KMS key. The caller of this operation must be authorized to run the
+    #   following operations. These can be set in the Amazon Web Services KMS
+    #   key policy:
     #
-    #   * GrantOperation.Encrypt
+    #   * kms:Encrypt
     #
-    #   * GrantOperation.Decrypt
+    #   * kms:Decrypt
     #
-    #   * GrantOperation.GenerateDataKey
+    #   * kms:GenerateDataKey
     #
-    #   * GrantOperation.GenerateDataKeyWithoutPlaintext
+    #   * kms:GenerateDataKeyWithoutPlaintext
     #
-    #   * GrantOperation.ReEncryptFrom
+    #   * kms:ReEncryptFrom
     #
-    #   * GrantOperation.ReEncryptTo
+    #   * kms:ReEncryptTo
     #
-    #   * GrantOperation.CreateGrant
+    #   * kms:CreateGrant
     #
-    #   * GrantOperation.DescribeKey
+    #   * kms:DescribeKey
     #
-    #   * GrantOperation.RetireGrant
+    #   * kms:RetireGrant
     #
     # @option params [String] :s3_prefix
     #   The Amazon S3 bucket prefix to use as the file name and path of the
@@ -23795,6 +23873,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -24120,6 +24200,8 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -24143,7 +24225,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.168.0'
+      context[:gem_version] = '1.169.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

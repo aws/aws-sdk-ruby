@@ -254,6 +254,29 @@ module Aws::RDS
       data[:custom_db_engine_version_manifest]
     end
 
+    # A value that indicates whether the engine version supports rotating
+    # the server certificate without rebooting the DB instance.
+    # @return [Boolean]
+    def supports_certificate_rotation_without_restart
+      data[:supports_certificate_rotation_without_restart]
+    end
+
+    # A list of the supported CA certificate identifiers.
+    #
+    # For more information, see [Using SSL/TLS to encrypt a connection to a
+    # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    # encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    # @return [Array<String>]
+    def supported_ca_certificate_identifiers
+      data[:supported_ca_certificate_identifiers]
+    end
+
     # @!endgroup
 
     # @return [Client]

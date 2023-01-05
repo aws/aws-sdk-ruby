@@ -375,6 +375,16 @@ module Aws::RDS
     end
 
     # The identifier of the CA certificate for this DB instance.
+    #
+    # For more information, see [Using SSL/TLS to encrypt a connection to a
+    # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    # encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     # @return [String]
     def ca_certificate_identifier
       data[:ca_certificate_identifier]
@@ -755,6 +765,12 @@ module Aws::RDS
       data[:master_user_secret]
     end
 
+    # The details of the DB instance's server certificate.
+    # @return [Types::CertificateDetails]
+    def certificate_details
+      data[:certificate_details]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -955,6 +971,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     ca_certificate_identifier: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -2039,6 +2056,21 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
+    # @option options [String] :ca_certificate_identifier
+    #   Specifies the CA certificate identifier to use for the DB instance’s
+    #   server certificate.
+    #
+    #   This setting doesn't apply to RDS Custom.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -3187,9 +3219,20 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [String] :ca_certificate_identifier
-    #   Specifies the certificate to associate with the DB instance.
+    #   Specifies the CA certificate identifier to use for the DB instance’s
+    #   server certificate.
     #
     #   This setting doesn't apply to RDS Custom.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     # @option options [String] :domain
     #   The Active Directory directory ID to move the DB instance to. Specify
     #   `none` to remove the instance from its current domain. You must create

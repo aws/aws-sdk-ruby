@@ -2376,14 +2376,6 @@ module Aws::Lightsail
     # @option params [required, String] :domain_name
     #   The domain name to manage (e.g., `example.com`).
     #
-    #   <note markdown="1"> You cannot register a new domain name using Lightsail. You must
-    #   register a domain name using Amazon Route 53 or another domain name
-    #   registrar. If you have already registered your domain, you can enter
-    #   its name in this parameter to manage the DNS records for that domain
-    #   using Lightsail.
-    #
-    #    </note>
-    #
     # @option params [Array<Types::Tag>] :tags
     #   The tag keys and optional values to add to the resource during create.
     #
@@ -4115,8 +4107,8 @@ module Aws::Lightsail
     #   The unique name of the disk you want to delete (e.g., `my-disk`).
     #
     # @option params [Boolean] :force_delete_add_ons
-    #   A Boolean value to indicate whether to delete the enabled add-ons for
-    #   the disk.
+    #   A Boolean value to indicate whether to delete all add-ons for the
+    #   disk.
     #
     # @return [Types::DeleteDiskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4382,8 +4374,8 @@ module Aws::Lightsail
     #   The name of the instance to delete.
     #
     # @option params [Boolean] :force_delete_add_ons
-    #   A Boolean value to indicate whether to delete the enabled add-ons for
-    #   the disk.
+    #   A Boolean value to indicate whether to delete all add-ons for the
+    #   instance.
     #
     # @return [Types::DeleteInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11887,7 +11879,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
