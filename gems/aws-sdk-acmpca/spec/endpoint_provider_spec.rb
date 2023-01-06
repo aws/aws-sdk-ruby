@@ -14,6 +14,62 @@ module Aws::ACMPCA
   describe EndpointProvider do
     subject { Aws::ACMPCA::EndpointProvider.new }
 
+    context 'For region ap-south-2 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca-fips.ap-south-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :region=>"ap-south-2", :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ap-south-2 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca-fips.ap-south-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :region=>"ap-south-2", :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ap-south-2 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca.ap-south-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :region=>"ap-south-2", :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ap-south-2 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca.ap-south-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :region=>"ap-south-2", :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context 'For region ap-south-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://acm-pca-fips.ap-south-1.api.aws"}}
@@ -119,6 +175,62 @@ module Aws::ACMPCA
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:use_fips=>false, :region=>"eu-south-1", :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region eu-south-2 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca-fips.eu-south-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :region=>"eu-south-2", :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region eu-south-2 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca-fips.eu-south-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :region=>"eu-south-2", :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region eu-south-2 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca.eu-south-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :region=>"eu-south-2", :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region eu-south-2 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca.eu-south-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :region=>"eu-south-2", :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -343,6 +455,62 @@ module Aws::ACMPCA
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:use_fips=>false, :region=>"eu-central-1", :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region eu-central-2 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca-fips.eu-central-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :region=>"eu-central-2", :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region eu-central-2 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca-fips.eu-central-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :region=>"eu-central-2", :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region eu-central-2 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca.eu-central-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :region=>"eu-central-2", :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region eu-central-2 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca.eu-central-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :region=>"eu-central-2", :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1405,6 +1573,62 @@ module Aws::ACMPCA
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:use_fips=>false, :region=>"ap-southeast-3", :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ap-southeast-4 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca-fips.ap-southeast-4.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :region=>"ap-southeast-4", :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ap-southeast-4 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca-fips.ap-southeast-4.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :region=>"ap-southeast-4", :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ap-southeast-4 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca.ap-southeast-4.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :region=>"ap-southeast-4", :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ap-southeast-4 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://acm-pca.ap-southeast-4.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :region=>"ap-southeast-4", :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})

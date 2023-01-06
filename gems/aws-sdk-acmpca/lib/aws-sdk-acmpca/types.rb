@@ -184,12 +184,12 @@ module Aws::ACMPCA
     # variant must be selected, or else this parameter is ignored.
     #
     # If conflicting or duplicate certificate information is supplied from
-    # other sources, ACM Private CA applies [order of operation rules][1] to
-    # determine what information is used.
+    # other sources, Amazon Web Services Private CA applies [order of
+    # operation rules][1] to determine what information is used.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
+    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations
     #
     # @!attribute [rw] extensions
     #   Specifies X.509 extension information for a certificate.
@@ -222,16 +222,16 @@ module Aws::ACMPCA
     # [CreateCertificateAuthority][1] action to create your private CA. You
     # must then call the [GetCertificateAuthorityCertificate][2] action to
     # retrieve a private CA certificate signing request (CSR). Sign the CSR
-    # with your ACM Private CA-hosted or on-premises root or subordinate CA
-    # certificate. Call the [ImportCertificateAuthorityCertificate][3]
-    # action to import the signed certificate into Certificate Manager
-    # (ACM).
+    # with your Amazon Web Services Private CA-hosted or on-premises root or
+    # subordinate CA certificate. Call the
+    # [ImportCertificateAuthorityCertificate][3] action to import the signed
+    # certificate into Certificate Manager (ACM).
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
-    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html
-    # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html
+    # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
+    # [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificateAuthorityCertificate.html
+    # [3]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html
     #
     # @!attribute [rw] arn
     #   Amazon Resource Name (ARN) for your private certificate authority
@@ -292,7 +292,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html
     #   @return [Time]
     #
     # @!attribute [rw] key_storage_security_standard
@@ -350,7 +350,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #
     # @!attribute [rw] key_algorithm
     #   Type of the public key algorithm and size, in bits, of the key pair
@@ -469,14 +469,36 @@ module Aws::ACMPCA
     #   Contains information to enable Online Certificate Status Protocol
     #   (OCSP) support, to enable a certificate revocation list (CRL), to
     #   enable both, or to enable neither. The default is for both
-    #   certificate validation mechanisms to be disabled. For more
-    #   information, see the [OcspConfiguration][1] and
-    #   [CrlConfiguration][2] types.
+    #   certificate validation mechanisms to be disabled.
+    #
+    #   <note markdown="1"> The following requirements apply to revocation configurations.
+    #
+    #    * A configuration disabling CRLs or OCSP must contain only the
+    #     `Enabled=False` parameter, and will fail if other parameters such
+    #     as `CustomCname` or `ExpirationInDays` are included.
+    #
+    #   * In a CRL configuration, the `S3BucketName` parameter must conform
+    #     to [Amazon S3 bucket naming rules][1].
+    #
+    #   * A configuration containing a custom Canonical Name (CNAME)
+    #     parameter for CRLs or OCSP must conform to [RFC2396][2]
+    #     restrictions on the use of special characters in a CNAME.
+    #
+    #   * In a CRL or OCSP configuration, the value of a CNAME parameter
+    #     must not include a protocol prefix such as "http://" or
+    #     "https://".
+    #
+    #    </note>
+    #
+    #   For more information, see the [OcspConfiguration][3] and
+    #   [CrlConfiguration][4] types.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
+    #   [2]: https://www.ietf.org/rfc/rfc2396.txt
+    #   [3]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html
+    #   [4]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html
     #   @return [Types::RevocationConfiguration]
     #
     # @!attribute [rw] certificate_authority_type
@@ -488,11 +510,11 @@ module Aws::ACMPCA
     #   **CreateCertificateAuthority** action. Idempotency tokens for
     #   **CreateCertificateAuthority** time out after five minutes.
     #   Therefore, if you call **CreateCertificateAuthority** multiple times
-    #   with the same idempotency token within five minutes, ACM Private CA
-    #   recognizes that you are requesting only certificate authority and
-    #   will issue only one. If you change the idempotency token for each
-    #   call, PCA recognizes that you are requesting multiple certificate
-    #   authorities.
+    #   with the same idempotency token within five minutes, Amazon Web
+    #   Services Private CA recognizes that you are requesting only
+    #   certificate authority and will issue only one. If you change the
+    #   idempotency token for each call, Amazon Web Services Private CA
+    #   recognizes that you are requesting multiple certificate authorities.
     #   @return [String]
     #
     # @!attribute [rw] key_storage_security_standard
@@ -577,7 +599,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -616,10 +638,11 @@ module Aws::ACMPCA
     # specifying a value for the **CustomCname** parameter. Your private CA
     # copies the CNAME or the S3 bucket name to the **CRL Distribution
     # Points** extension of each certificate it issues. Your S3 bucket
-    # policy must give write permission to ACM Private CA.
+    # policy must give write permission to Amazon Web Services Private CA.
     #
-    # ACM Private CA assets that are stored in Amazon S3 can be protected
-    # with encryption. For more information, see [Encrypting Your CRLs][1].
+    # Amazon Web Services Private CA assets that are stored in Amazon S3 can
+    # be protected with encryption. For more information, see [Encrypting
+    # Your CRLs][1].
     #
     # Your private CA uses the value in the **ExpirationInDays** parameter
     # to calculate the **nextUpdate** field in the CRL. The CRL is refreshed
@@ -629,8 +652,8 @@ module Aws::ACMPCA
     # expiration, and it always appears in the audit report.
     #
     # A CRL is typically updated approximately 30 minutes after a
-    # certificate is revoked. If for any reason a CRL update fails, ACM
-    # Private CA makes further attempts every 15 minutes.
+    # certificate is revoked. If for any reason a CRL update fails, Amazon
+    # Web Services Private CA makes further attempts every 15 minutes.
     #
     # CRLs contain the following fields:
     #
@@ -674,18 +697,20 @@ module Aws::ACMPCA
     #
     # * **Signature Value**\: Signature computed over the CRL.
     #
-    # Certificate revocation lists created by ACM Private CA are
-    # DER-encoded. You can use the following OpenSSL command to list a CRL.
+    # Certificate revocation lists created by Amazon Web Services Private CA
+    # are DER-encoded. You can use the following OpenSSL command to list a
+    # CRL.
     #
     # `openssl crl -inform DER -text -in crl_path -noout`
     #
     # For more information, see [Planning a certificate revocation list
-    # (CRL)][2] in the *Private Certificate Authority (PCA) User Guide*
+    # (CRL)][2] in the *Amazon Web Services Private Certificate Authority
+    # User Guide*
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption
-    # [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html
+    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption
+    # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html
     #
     # @!attribute [rw] enabled
     #   Boolean value that specifies whether certificate revocation lists
@@ -696,8 +721,8 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
-    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
     #   @return [Boolean]
     #
     # @!attribute [rw] expiration_in_days
@@ -709,6 +734,17 @@ module Aws::ACMPCA
     #   extension that enables the use of an alias for the CRL distribution
     #   point. Use this value if you don't want the name of your S3 bucket
     #   to be public.
+    #
+    #   <note markdown="1"> The content of a Canonical Name (CNAME) record must conform to
+    #   [RFC2396][1] restrictions on the use of special characters in URIs.
+    #   Additionally, the value of the CNAME must not include a protocol
+    #   prefix such as "http://" or "https://".
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://www.ietf.org/rfc/rfc2396.txt
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
@@ -717,13 +753,19 @@ module Aws::ACMPCA
     #   is placed into the **CRL Distribution Points** extension of the
     #   issued certificate. You can change the name of your bucket by
     #   calling the [UpdateCertificateAuthority][1] operation. You must
-    #   specify a [bucket policy][2] that allows ACM Private CA to write the
-    #   CRL to your bucket.
+    #   specify a [bucket policy][2] that allows Amazon Web Services Private
+    #   CA to write the CRL to your bucket.
+    #
+    #   <note markdown="1"> The `S3BucketName` parameter must conform to the [S3 bucket naming
+    #   rules][3].
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html
-    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
+    #   [2]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-policies
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #   @return [String]
     #
     # @!attribute [rw] s3_object_acl
@@ -749,7 +791,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CrlConfiguration AWS API Documentation
@@ -818,7 +860,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
+    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations
     #
     # @!attribute [rw] object_identifier
     #   Specifies the object identifier (OID) of the X.509 extension. For
@@ -856,7 +898,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] permanent_deletion_time_in_days
@@ -885,7 +927,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -917,7 +959,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DeletePolicyRequest AWS API Documentation
@@ -942,7 +984,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthorityAuditReportRequest AWS API Documentation
@@ -992,7 +1034,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthorityRequest AWS API Documentation
@@ -1009,7 +1051,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CertificateAuthority.html
     #   @return [Types::CertificateAuthority]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthorityResponse AWS API Documentation
@@ -1240,7 +1282,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetCertificateAuthorityCsrRequest AWS API Documentation
@@ -1273,7 +1315,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -1347,7 +1389,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -1359,9 +1401,9 @@ module Aws::ACMPCA
     # @!attribute [rw] certificate_chain
     #   A PEM-encoded file that contains all of your certificates, other
     #   than the certificate you're importing, chaining up to your root CA.
-    #   Your ACM Private CA-hosted or on-premises root certificate is the
-    #   last in the chain, and each certificate in the chain signs the one
-    #   preceding.
+    #   Your Amazon Web Services Private CA-hosted or on-premises root
+    #   certificate is the last in the chain, and each certificate in the
+    #   chain signs the one preceding.
     #
     #   This parameter must be supplied when you import a subordinate CA.
     #   When you import a root CA, there is no chain.
@@ -1410,7 +1452,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
+    # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1490,13 +1532,13 @@ module Aws::ACMPCA
     #   Certificate Templates][1].
     #
     #   If conflicting or duplicate certificate information is supplied
-    #   during certificate issuance, ACM Private CA applies [order of
-    #   operation rules][2] to determine what information is used.
+    #   during certificate issuance, Amazon Web Services Private CA applies
+    #   [order of operation rules][2] to determine what information is used.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html
-    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html
+    #   [2]: https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations
     #   @return [Types::ApiPassthrough]
     #
     # @!attribute [rw] certificate_authority_arn
@@ -1508,7 +1550,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] csr
@@ -1547,22 +1589,22 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] template_arn
     #   Specifies a custom configuration template to use when issuing a
-    #   certificate. If this parameter is not provided, ACM Private CA
-    #   defaults to the `EndEntityCertificate/V1` template. For CA
-    #   certificates, you should choose the shortest path length that meets
-    #   your needs. The path length is indicated by the PathLen*N* portion
-    #   of the ARN, where *N* is the [CA depth][1].
+    #   certificate. If this parameter is not provided, Amazon Web Services
+    #   Private CA defaults to the `EndEntityCertificate/V1` template. For
+    #   CA certificates, you should choose the shortest path length that
+    #   meets your needs. The path length is indicated by the PathLen*N*
+    #   portion of the ARN, where *N* is the [CA depth][1].
     #
     #   Note: The CA depth configured on a subordinate CA certificate must
     #   not exceed the limit set by its parents in the CA hierarchy.
     #
-    #   For a list of `TemplateArn` values supported by ACM Private CA, see
-    #   [Understanding Certificate Templates][2].
+    #   For a list of `TemplateArn` values supported by Amazon Web Services
+    #   Private CA, see [Understanding Certificate Templates][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth
-    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaTerms.html#terms-cadepth
+    #   [2]: https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html
     #   @return [String]
     #
     # @!attribute [rw] validity
@@ -1594,11 +1636,11 @@ module Aws::ACMPCA
     #   certificate. This parameter sets the “Not Before" date for the
     #   certificate.
     #
-    #   By default, when issuing a certificate, ACM Private CA sets the
-    #   "Not Before" date to the issuance time minus 60 minutes. This
-    #   compensates for clock inconsistencies across computer systems. The
-    #   `ValidityNotBefore` parameter can be used to customize the “Not
-    #   Before” value.
+    #   By default, when issuing a certificate, Amazon Web Services Private
+    #   CA sets the "Not Before" date to the issuance time minus 60
+    #   minutes. This compensates for clock inconsistencies across computer
+    #   systems. The `ValidityNotBefore` parameter can be used to customize
+    #   the “Not Before” value.
     #
     #   Unlike the `Validity` parameter, the `ValidityNotBefore` parameter
     #   is optional.
@@ -1619,10 +1661,11 @@ module Aws::ACMPCA
     #   the **IssueCertificate** action. Idempotency tokens for
     #   **IssueCertificate** time out after one minute. Therefore, if you
     #   call **IssueCertificate** multiple times with the same idempotency
-    #   token within one minute, ACM Private CA recognizes that you are
-    #   requesting only one certificate and will issue only one. If you
-    #   change the idempotency token for each call, PCA recognizes that you
-    #   are requesting multiple certificates.
+    #   token within one minute, Amazon Web Services Private CA recognizes
+    #   that you are requesting only one certificate and will issue only
+    #   one. If you change the idempotency token for each call, Amazon Web
+    #   Services Private CA recognizes that you are requesting multiple
+    #   certificates.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/IssueCertificateRequest AWS API Documentation
@@ -1711,8 +1754,8 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # An ACM Private CA quota has been exceeded. See the exception message
-    # returned to determine the quota that was exceeded.
+    # An Amazon Web Services Private CA quota has been exceeded. See the
+    # exception message returned to determine the quota that was exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1784,7 +1827,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1840,7 +1883,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1939,21 +1982,26 @@ module Aws::ACMPCA
     #   @return [Boolean]
     #
     # @!attribute [rw] ocsp_custom_cname
-    #   By default, ACM Private CA injects an Amazon Web Services domain
-    #   into certificates being validated by the Online Certificate Status
-    #   Protocol (OCSP). A customer can alternatively use this object to
-    #   define a CNAME specifying a customized OCSP domain.
+    #   By default, Amazon Web Services Private CA injects an Amazon Web
+    #   Services domain into certificates being validated by the Online
+    #   Certificate Status Protocol (OCSP). A customer can alternatively use
+    #   this object to define a CNAME specifying a customized OCSP domain.
     #
-    #   Note: The value of the CNAME must not include a protocol prefix such
-    #   as "http://" or "https://".
+    #   <note markdown="1"> The content of a Canonical Name (CNAME) record must conform to
+    #   [RFC2396][1] restrictions on the use of special characters in URIs.
+    #   Additionally, the value of the CNAME must not include a protocol
+    #   prefix such as "http://" or "https://".
+    #
+    #    </note>
     #
     #   For more information, see [Customizing Online Certificate Status
-    #   Protocol (OCSP) ][1] in the *Private Certificate Authority (PCA)
-    #   User Guide*.
+    #   Protocol (OCSP) ][2] in the *Amazon Web Services Private Certificate
+    #   Authority User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/ocsp-customize.html
+    #   [1]: https://www.ietf.org/rfc/rfc2396.txt
+    #   [2]: https://docs.aws.amazon.com/privateca/latest/userguide/ocsp-customize.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/OcspConfiguration AWS API Documentation
@@ -2002,9 +2050,9 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html
-    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html
-    # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html
+    # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html
+    # [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePermission.html
+    # [3]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA from which the
@@ -2072,8 +2120,9 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] policy_qualifiers
-    #   Modifies the given `CertPolicyId` with a qualifier. ACM Private CA
-    #   supports the certification practice statement (CPS) qualifier.
+    #   Modifies the given `CertPolicyId` with a qualifier. Amazon Web
+    #   Services Private CA supports the certification practice statement
+    #   (CPS) qualifier.
     #   @return [Array<Types::PolicyQualifierInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/PolicyInformation AWS API Documentation
@@ -2086,16 +2135,16 @@ module Aws::ACMPCA
     end
 
     # Modifies the `CertPolicyId` of a `PolicyInformation` object with a
-    # qualifier. ACM Private CA supports the certification practice
-    # statement (CPS) qualifier.
+    # qualifier. Amazon Web Services Private CA supports the certification
+    # practice statement (CPS) qualifier.
     #
     # @!attribute [rw] policy_qualifier_id
     #   Identifies the qualifier modifying a `CertPolicyId`.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   Defines the qualifier type. ACM Private CA supports the use of a URI
-    #   for a CPS qualifier in this field.
+    #   Defines the qualifier type. Amazon Web Services Private CA supports
+    #   the use of a URI for a CPS qualifier in this field.
     #   @return [Types::Qualifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/PolicyQualifierInfo AWS API Documentation
@@ -2116,7 +2165,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -2141,9 +2190,9 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # Defines a `PolicyInformation` qualifier. ACM Private CA supports the
-    # [certification practice statement (CPS) qualifier][1] defined in RFC
-    # 5280.
+    # Defines a `PolicyInformation` qualifier. Amazon Web Services Private
+    # CA supports the [certification practice statement (CPS) qualifier][1]
+    # defined in RFC 5280.
     #
     #
     #
@@ -2224,7 +2273,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RestoreCertificateAuthorityRequest AWS API Documentation
@@ -2243,21 +2292,22 @@ module Aws::ACMPCA
     # about certificates as requested by clients, and a CRL contains an
     # updated list of certificates revoked by your CA. For more information,
     # see [RevokeCertificate][3] and [Setting up a certificate revocation
-    # method][4] in the *Private Certificate Authority (PCA) User Guide*.
+    # method][4] in the *Amazon Web Services Private Certificate Authority
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
-    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html
-    # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html
-    # [4]: https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html
+    # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
+    # [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
+    # [3]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html
+    # [4]: https://docs.aws.amazon.com/privateca/latest/userguide/revocation-setup.html
     #
     # @!attribute [rw] crl_configuration
     #   Configuration of the certificate revocation list (CRL), if any,
     #   maintained by your private CA. A CRL is typically updated
     #   approximately 30 minutes after a certificate is revoked. If for any
-    #   reason a CRL update fails, ACM Private CA makes further attempts
-    #   every 15 minutes.
+    #   reason a CRL update fails, Amazon Web Services Private CA makes
+    #   further attempts every 15 minutes.
     #   @return [Types::CrlConfiguration]
     #
     # @!attribute [rw] ocsp_configuration
@@ -2301,7 +2351,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificate.html
     #   [2]: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
     #   @return [String]
     #
@@ -2327,8 +2377,8 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html
-    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html
+    # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html
+    # [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html
     #
     # @!attribute [rw] key
     #   Key (name) of the tag.
@@ -2356,7 +2406,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2395,7 +2445,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2427,10 +2477,31 @@ module Aws::ACMPCA
     #   information, see the [OcspConfiguration][1] and
     #   [CrlConfiguration][2] types.
     #
+    #   <note markdown="1"> The following requirements apply to revocation configurations.
+    #
+    #    * A configuration disabling CRLs or OCSP must contain only the
+    #     `Enabled=False` parameter, and will fail if other parameters such
+    #     as `CustomCname` or `ExpirationInDays` are included.
+    #
+    #   * In a CRL configuration, the `S3BucketName` parameter must conform
+    #     to [Amazon S3 bucket naming rules][3].
+    #
+    #   * A configuration containing a custom Canonical Name (CNAME)
+    #     parameter for CRLs or OCSP must conform to [RFC2396][4]
+    #     restrictions on the use of special characters in a CNAME.
+    #
+    #   * In a CRL or OCSP configuration, the value of a CNAME parameter
+    #     must not include a protocol prefix such as "http://" or
+    #     "https://".
+    #
+    #    </note>
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
+    #
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
+    #   [4]: https://www.ietf.org/rfc/rfc2396.txt
     #   @return [Types::RevocationConfiguration]
     #
     # @!attribute [rw] status
@@ -2453,12 +2524,12 @@ module Aws::ACMPCA
     # after issuance, stated in days, months, or years. For more
     # information, see [Validity][1] in RFC 5280.
     #
-    # ACM Private CA API consumes the `Validity` data type differently in
-    # two distinct parameters of the `IssueCertificate` action. The required
-    # parameter `IssueCertificate`\:`Validity` specifies the end of a
-    # certificate's validity period. The optional parameter
-    # `IssueCertificate`\:`ValidityNotBefore` specifies a customized
-    # starting time for the validity period.
+    # Amazon Web Services Private CA API consumes the `Validity` data type
+    # differently in two distinct parameters of the `IssueCertificate`
+    # action. The required parameter `IssueCertificate`\:`Validity`
+    # specifies the end of a certificate's validity period. The optional
+    # parameter `IssueCertificate`\:`ValidityNotBefore` specifies a
+    # customized starting time for the validity period.
     #
     #
     #
@@ -2469,10 +2540,10 @@ module Aws::ACMPCA
     #   @return [Integer]
     #
     # @!attribute [rw] type
-    #   Determines how *ACM Private CA* interprets the `Value` parameter, an
-    #   integer. Supported validity types include those listed below. Type
-    #   definitions with values include a sample input value and the
-    #   resulting output.
+    #   Determines how *Amazon Web Services Private CA* interprets the
+    #   `Value` parameter, an integer. Supported validity types include
+    #   those listed below. Type definitions with values include a sample
+    #   input value and the resulting output.
     #
     #   `END_DATE`\: The specific date and time when the certificate will
     #   expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime

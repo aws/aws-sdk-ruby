@@ -42,6 +42,7 @@ module Aws::ACMPCA
     CertificateChainBlob = Shapes::BlobShape.new(name: 'CertificateChainBlob')
     CertificateMismatchException = Shapes::StructureShape.new(name: 'CertificateMismatchException')
     CertificatePolicyList = Shapes::ListShape.new(name: 'CertificatePolicyList')
+    CnameString = Shapes::StringShape.new(name: 'CnameString')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CountryCodeString = Shapes::StringShape.new(name: 'CountryCodeString')
     CreateCertificateAuthorityAuditReportRequest = Shapes::StructureShape.new(name: 'CreateCertificateAuthorityAuditReportRequest')
@@ -132,6 +133,7 @@ module Aws::ACMPCA
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
     RevokeCertificateRequest = Shapes::StructureShape.new(name: 'RevokeCertificateRequest')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3BucketName3To255 = Shapes::StringShape.new(name: 'S3BucketName3To255')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3ObjectAcl = Shapes::StringShape.new(name: 'S3ObjectAcl')
     SigningAlgorithm = Shapes::StringShape.new(name: 'SigningAlgorithm')
@@ -143,7 +145,6 @@ module Aws::ACMPCA
     String256 = Shapes::StringShape.new(name: 'String256')
     String3 = Shapes::StringShape.new(name: 'String3')
     String39 = Shapes::StringShape.new(name: 'String39')
-    String3To255 = Shapes::StringShape.new(name: 'String3To255')
     String40 = Shapes::StringShape.new(name: 'String40')
     String5 = Shapes::StringShape.new(name: 'String5')
     String64 = Shapes::StringShape.new(name: 'String64')
@@ -254,8 +255,8 @@ module Aws::ACMPCA
 
     CrlConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled", metadata: {"box"=>true}))
     CrlConfiguration.add_member(:expiration_in_days, Shapes::ShapeRef.new(shape: Integer1To5000, location_name: "ExpirationInDays", metadata: {"box"=>true}))
-    CrlConfiguration.add_member(:custom_cname, Shapes::ShapeRef.new(shape: String253, location_name: "CustomCname"))
-    CrlConfiguration.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String3To255, location_name: "S3BucketName"))
+    CrlConfiguration.add_member(:custom_cname, Shapes::ShapeRef.new(shape: CnameString, location_name: "CustomCname"))
+    CrlConfiguration.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName3To255, location_name: "S3BucketName"))
     CrlConfiguration.add_member(:s3_object_acl, Shapes::ShapeRef.new(shape: S3ObjectAcl, location_name: "S3ObjectAcl"))
     CrlConfiguration.struct_class = Types::CrlConfiguration
 
@@ -450,7 +451,7 @@ module Aws::ACMPCA
     MalformedCertificateException.struct_class = Types::MalformedCertificateException
 
     OcspConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled", metadata: {"box"=>true}))
-    OcspConfiguration.add_member(:ocsp_custom_cname, Shapes::ShapeRef.new(shape: String253, location_name: "OcspCustomCname"))
+    OcspConfiguration.add_member(:ocsp_custom_cname, Shapes::ShapeRef.new(shape: CnameString, location_name: "OcspCustomCname"))
     OcspConfiguration.struct_class = Types::OcspConfiguration
 
     OtherName.add_member(:type_id, Shapes::ShapeRef.new(shape: CustomObjectIdentifier, required: true, location_name: "TypeId"))

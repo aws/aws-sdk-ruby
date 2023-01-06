@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2023-01-06)
+------------------
+
+* Feature - This release introduces a new data retention option in your Audit Manager settings. You can now use the DeregistrationPolicy parameter to specify if you want to delete your data when you deregister Audit Manager.
+
 1.28.0 (2022-11-18)
 ------------------
 

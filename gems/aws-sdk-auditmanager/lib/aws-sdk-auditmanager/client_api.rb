@@ -139,10 +139,12 @@ module Aws::AuditManager
     DeleteAssessmentResponse = Shapes::StructureShape.new(name: 'DeleteAssessmentResponse')
     DeleteControlRequest = Shapes::StructureShape.new(name: 'DeleteControlRequest')
     DeleteControlResponse = Shapes::StructureShape.new(name: 'DeleteControlResponse')
+    DeleteResources = Shapes::StringShape.new(name: 'DeleteResources')
     DeregisterAccountRequest = Shapes::StructureShape.new(name: 'DeregisterAccountRequest')
     DeregisterAccountResponse = Shapes::StructureShape.new(name: 'DeregisterAccountResponse')
     DeregisterOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DeregisterOrganizationAdminAccountRequest')
     DeregisterOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'DeregisterOrganizationAdminAccountResponse')
+    DeregistrationPolicy = Shapes::StructureShape.new(name: 'DeregistrationPolicy')
     DisassociateAssessmentReportEvidenceFolderRequest = Shapes::StructureShape.new(name: 'DisassociateAssessmentReportEvidenceFolderRequest')
     DisassociateAssessmentReportEvidenceFolderResponse = Shapes::StructureShape.new(name: 'DisassociateAssessmentReportEvidenceFolderResponse')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
@@ -787,6 +789,9 @@ module Aws::AuditManager
 
     DeregisterOrganizationAdminAccountResponse.struct_class = Types::DeregisterOrganizationAdminAccountResponse
 
+    DeregistrationPolicy.add_member(:delete_resources, Shapes::ShapeRef.new(shape: DeleteResources, location_name: "deleteResources"))
+    DeregistrationPolicy.struct_class = Types::DeregistrationPolicy
+
     DisassociateAssessmentReportEvidenceFolderRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "assessmentId"))
     DisassociateAssessmentReportEvidenceFolderRequest.add_member(:evidence_folder_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "evidenceFolderId"))
     DisassociateAssessmentReportEvidenceFolderRequest.struct_class = Types::DisassociateAssessmentReportEvidenceFolderRequest
@@ -1177,6 +1182,7 @@ module Aws::AuditManager
     Settings.add_member(:default_process_owners, Shapes::ShapeRef.new(shape: Roles, location_name: "defaultProcessOwners"))
     Settings.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "kmsKey"))
     Settings.add_member(:evidence_finder_enablement, Shapes::ShapeRef.new(shape: EvidenceFinderEnablement, location_name: "evidenceFinderEnablement"))
+    Settings.add_member(:deregistration_policy, Shapes::ShapeRef.new(shape: DeregistrationPolicy, location_name: "deregistrationPolicy"))
     Settings.struct_class = Types::Settings
 
     SourceKeyword.add_member(:keyword_input_type, Shapes::ShapeRef.new(shape: KeywordInputType, location_name: "keywordInputType"))
@@ -1295,6 +1301,7 @@ module Aws::AuditManager
     UpdateSettingsRequest.add_member(:default_process_owners, Shapes::ShapeRef.new(shape: Roles, location_name: "defaultProcessOwners"))
     UpdateSettingsRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "kmsKey"))
     UpdateSettingsRequest.add_member(:evidence_finder_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "evidenceFinderEnabled"))
+    UpdateSettingsRequest.add_member(:deregistration_policy, Shapes::ShapeRef.new(shape: DeregistrationPolicy, location_name: "deregistrationPolicy"))
     UpdateSettingsRequest.struct_class = Types::UpdateSettingsRequest
 
     UpdateSettingsResponse.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "settings"))

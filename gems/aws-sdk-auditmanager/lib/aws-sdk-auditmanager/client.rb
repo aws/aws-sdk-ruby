@@ -368,7 +368,7 @@ module Aws::AuditManager
 
     # @!group API Operations
 
-    # Associates an evidence folder to an assessment report in a Audit
+    # Associates an evidence folder to an assessment report in an Audit
     # Manager assessment.
     #
     # @option params [required, String] :assessment_id
@@ -925,14 +925,14 @@ module Aws::AuditManager
     #   must be `ENABLED`.
     #
     #   For examples and help resolving `queryStatement` validation
-    #   exceptions, see [Troubleshooting evidence finder issues][4] in the AWS
-    #   Audit Manager User Guide.
+    #   exceptions, see [Troubleshooting evidence finder issues][4] in the
+    #   *Audit Manager User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence
-    #   [2]: https://docs.aws.amazon.com/APIReference-evidenceFinder/API_BatchAssociateAssessmentReportEvidence.html
-    #   [3]: https://docs.aws.amazon.com/APIReference-evidenceFinder/API_EvidenceFinderSetup.html#auditmanager-Type-EvidenceFinderSetup-enablementStatus
+    #   [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence
+    #   [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_BatchAssociateAssessmentReportEvidence.html
+    #   [3]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_EvidenceFinderEnablement.html#auditmanager-Type-EvidenceFinderEnablement-enablementStatus
     #   [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions
     #
     # @return [Types::CreateAssessmentReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1209,47 +1209,21 @@ module Aws::AuditManager
 
     # Deregisters an account in Audit Manager.
     #
-    # <note markdown="1"> When you deregister your account from Audit Manager, your data isn’t
-    # deleted. If you want to delete your resource data, you must perform
-    # that task separately before you deregister your account. Either, you
-    # can do this in the Audit Manager console. Or, you can use one of the
-    # delete API operations that are provided by Audit Manager.
+    # <note markdown="1"> Before you deregister, you can use the [UpdateSettings][1] API
+    # operation to set your preferred data retention policy. By default,
+    # Audit Manager retains your data. If you want to delete your data, you
+    # can use the `DeregistrationPolicy` attribute to request the deletion
+    # of your data.
     #
-    #  To delete your Audit Manager resource data, see the following
-    # instructions:
-    #
-    #  * [DeleteAssessment][1] (see also: [Deleting an assessment][2] in the
-    #   *Audit Manager User Guide*)
-    #
-    # * [DeleteAssessmentFramework][3] (see also: [Deleting a custom
-    #   framework][4] in the *Audit Manager User Guide*)
-    #
-    # * [DeleteAssessmentFrameworkShare][5] (see also: [Deleting a share
-    #   request][6] in the *Audit Manager User Guide*)
-    #
-    # * [DeleteAssessmentReport][7] (see also: [Deleting an assessment
-    #   report][8] in the *Audit Manager User Guide*)
-    #
-    # * [DeleteControl][9] (see also: [Deleting a custom control][10] in the
-    #   *Audit Manager User Guide*)
-    #
-    #  At this time, Audit Manager doesn't provide an option to delete
-    # evidence. All available delete operations are listed above.
+    #  For more information about data retention, see [Data Protection][2] in
+    # the *Audit Manager User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html
-    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html
-    # [3]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html
-    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html
-    # [5]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html
-    # [6]: https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html
-    # [7]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html
-    # [8]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps
-    # [9]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html
-    # [10]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_UpdateSettings.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html
     #
     # @return [Types::DeregisterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1275,7 +1249,7 @@ module Aws::AuditManager
     # settings, you continue to have access to the evidence that you
     # previously collected under that account. This is also the case when
     # you deregister a delegated administrator from Organizations. However,
-    # Audit Manager will stop collecting and attaching evidence to that
+    # Audit Manager stops collecting and attaching evidence to that
     # delegated administrator account moving forward.
     #
     # Keep in mind the following cleanup task if you use evidence finder:
@@ -1291,10 +1265,10 @@ module Aws::AuditManager
     # data store][1].
     #
     #  This cleanup task is necessary to ensure that you don't end up with
-    # multiple event data stores. Audit Manager will ignore an unused event
-    # data store after you remove or change a delegated administrator
-    # account. However, the unused event data store continues to incur
-    # storage costs from CloudTrail Lake if you don't delete it.
+    # multiple event data stores. Audit Manager ignores an unused event data
+    # store after you remove or change a delegated administrator account.
+    # However, the unused event data store continues to incur storage costs
+    # from CloudTrail Lake if you don't delete it.
     #
     # When you deregister a delegated administrator account for Audit
     # Manager, the data for that account isn’t deleted. If you want to
@@ -1322,11 +1296,14 @@ module Aws::AuditManager
     #   the *Audit Manager User Guide*)
     #
     # At this time, Audit Manager doesn't provide an option to delete
-    # evidence. All available delete operations are listed above.
+    # evidence for a specific delegated administrator. Instead, when your
+    # management account deregisters Audit Manager, we perform a cleanup for
+    # the current delegated administrator account at the time of
+    # deregistration.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/userguide/awscloudtrail/latest/userguide/query-eds-disable-termination.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-eds-disable-termination.html
     # [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html
     # [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html
     # [4]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html
@@ -2006,7 +1983,7 @@ module Aws::AuditManager
     end
 
     # Returns a list of evidence folders that are associated with a
-    # specified control of an assessment in Audit Manager.
+    # specified control in an Audit Manager assessment.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the assessment.
@@ -2188,7 +2165,7 @@ module Aws::AuditManager
     # Returns the settings for the specified Amazon Web Services account.
     #
     # @option params [required, String] :attribute
-    #   The list of `SettingAttribute` enum values.
+    #   The list of setting attribute enum values.
     #
     # @return [Types::GetSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2197,7 +2174,7 @@ module Aws::AuditManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_settings({
-    #     attribute: "ALL", # required, accepts ALL, IS_AWS_ORG_ENABLED, SNS_TOPIC, DEFAULT_ASSESSMENT_REPORTS_DESTINATION, DEFAULT_PROCESS_OWNERS, EVIDENCE_FINDER_ENABLEMENT
+    #     attribute: "ALL", # required, accepts ALL, IS_AWS_ORG_ENABLED, SNS_TOPIC, DEFAULT_ASSESSMENT_REPORTS_DESTINATION, DEFAULT_PROCESS_OWNERS, EVIDENCE_FINDER_ENABLEMENT, DEREGISTRATION_POLICY
     #   })
     #
     # @example Response structure
@@ -2214,6 +2191,7 @@ module Aws::AuditManager
     #   resp.settings.evidence_finder_enablement.enablement_status #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS"
     #   resp.settings.evidence_finder_enablement.backfill_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
     #   resp.settings.evidence_finder_enablement.error #=> String
+    #   resp.settings.deregistration_policy.delete_resources #=> String, one of "ALL", "DEFAULT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetSettings AWS API Documentation
     #
@@ -3694,15 +3672,15 @@ module Aws::AuditManager
     #   again. Your only alternative is to [deregister][1] and then
     #   [re-register][2] Audit Manager.
     #
-    #    Disabling evidence finder is permanent, so consider this decision
-    #   carefully before you proceed. If you’re using Audit Manager as a
-    #   delegated administrator, keep in mind that this action applies to all
-    #   member accounts in your organization.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html
     #   [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html
+    #
+    # @option params [Types::DeregistrationPolicy] :deregistration_policy
+    #   The deregistration policy for your Audit Manager data. You can use
+    #   this attribute to determine how your data is handled when you
+    #   deregister Audit Manager.
     #
     # @return [Types::UpdateSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3724,6 +3702,9 @@ module Aws::AuditManager
     #     ],
     #     kms_key: "KmsKey",
     #     evidence_finder_enabled: false,
+    #     deregistration_policy: {
+    #       delete_resources: "ALL", # accepts ALL, DEFAULT
+    #     },
     #   })
     #
     # @example Response structure
@@ -3740,6 +3721,7 @@ module Aws::AuditManager
     #   resp.settings.evidence_finder_enablement.enablement_status #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS"
     #   resp.settings.evidence_finder_enablement.backfill_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
     #   resp.settings.evidence_finder_enablement.error #=> String
+    #   resp.settings.deregistration_policy.delete_resources #=> String, one of "ALL", "DEFAULT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateSettings AWS API Documentation
     #
@@ -3801,7 +3783,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

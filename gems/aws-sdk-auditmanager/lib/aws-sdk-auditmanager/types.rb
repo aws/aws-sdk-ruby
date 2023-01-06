@@ -133,7 +133,7 @@ module Aws::AuditManager
     #   @return [Array<String>]
     #
     # @!attribute [rw] evidence_count
-    #   The amount of evidence that's generated for the control.
+    #   The amount of evidence that's collected for the control.
     #   @return [Integer]
     #
     # @!attribute [rw] assessment_report_evidence_count
@@ -168,7 +168,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Specifies the current status of the control set.
+    #   The current status of the control set.
     #   @return [String]
     #
     # @!attribute [rw] roles
@@ -387,11 +387,11 @@ module Aws::AuditManager
     #   @return [Integer]
     #
     # @!attribute [rw] created_at
-    #   Specifies when the framework was created.
+    #   The time when the framework was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   Specifies when the framework was most recently updated.
+    #   The time when the framework was most recently updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentFrameworkMetadata AWS API Documentation
@@ -1146,11 +1146,11 @@ module Aws::AuditManager
     #   @return [Array<Types::ControlMappingSource>]
     #
     # @!attribute [rw] created_at
-    #   Specifies when the control was created.
+    #   The time when the control was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   Specifies when the control was most recently updated.
+    #   The time when the control was most recently updated.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -1351,8 +1351,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] source_type
-    #   Specifies one of the five types of data sources for evidence
-    #   collection.
+    #   Specifies one of the five data source types for evidence collection.
     #   @return [String]
     #
     # @!attribute [rw] source_keyword
@@ -1423,11 +1422,11 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Specifies when the control was created.
+    #   The time when the control was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   Specifies when the control was most recently updated.
+    #   The time when the control was most recently updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ControlMetadata AWS API Documentation
@@ -1578,13 +1577,13 @@ module Aws::AuditManager
     #
     #   For examples and help resolving `queryStatement` validation
     #   exceptions, see [Troubleshooting evidence finder issues][4] in the
-    #   AWS Audit Manager User Guide.
+    #   *Audit Manager User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence
-    #   [2]: https://docs.aws.amazon.com/APIReference-evidenceFinder/API_BatchAssociateAssessmentReportEvidence.html
-    #   [3]: https://docs.aws.amazon.com/APIReference-evidenceFinder/API_EvidenceFinderSetup.html#auditmanager-Type-EvidenceFinderSetup-enablementStatus
+    #   [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence
+    #   [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_BatchAssociateAssessmentReportEvidence.html
+    #   [3]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_EvidenceFinderEnablement.html#auditmanager-Type-EvidenceFinderEnablement-enablementStatus
     #   [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions
     #   @return [String]
     #
@@ -2078,6 +2077,52 @@ module Aws::AuditManager
     #
     class DeregisterOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
+    # The deregistration policy for the data that's stored in Audit
+    # Manager. You can use this attribute to determine how your data is
+    # handled when you [deregister Audit Manager][1].
+    #
+    # By default, Audit Manager retains evidence data for two years from the
+    # time of its creation. Other Audit Manager resources (including
+    # assessments, custom controls, and custom frameworks) remain in Audit
+    # Manager indefinitely, and are available if you [re-register Audit
+    # Manager][2] in the future. For more information about data retention,
+    # see [Data Protection][3] in the *Audit Manager User Guide*.
+    #
+    # If you choose to delete all data, this action permanently deletes all
+    # evidence data in your account within seven days. It also deletes all
+    # of the Audit Manager resources that you created, including
+    # assessments, custom controls, and custom frameworks. Your data will
+    # not be available if you re-register Audit Manager in the future.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html
+    #
+    # @!attribute [rw] delete_resources
+    #   Specifies which Audit Manager data will be deleted when you
+    #   deregister Audit Manager.
+    #
+    #   * If you set the value to `ALL`, all of your data is deleted within
+    #     seven days of deregistration.
+    #
+    #   * If you set the value to `DEFAULT`, none of your data is deleted at
+    #     the time of deregistration. However, keep in mind that the Audit
+    #     Manager data retention policy still applies. As a result, any
+    #     evidence data will be deleted two years after its creation date.
+    #     Your other Audit Manager resources will continue to exist
+    #     indefinitely.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeregistrationPolicy AWS API Documentation
+    #
+    class DeregistrationPolicy < Struct.new(
+      :delete_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -2101,7 +2146,7 @@ module Aws::AuditManager
 
     # A record that contains the information needed to demonstrate
     # compliance with the requirements specified by a control. Examples of
-    # evidence include change activity triggered by a user, or a system
+    # evidence include change activity invoked by a user, or a system
     # configuration snapshot.
     #
     # @!attribute [rw] data_source
@@ -2227,10 +2272,11 @@ module Aws::AuditManager
     #     evidence finder queries.
     #
     #   * `ENABLED` means that an event data store was successfully created
-    #     and evidence finder is enabled. We recommend that you wait 24
-    #     hours until the event data store is backfilled with your past
-    #     evidence data. You can use evidence finder in the meantime, but
-    #     not all data might be available until the backfill is complete.
+    #     and evidence finder is enabled. We recommend that you wait 7 days
+    #     until the event data store is backfilled with your past two years’
+    #     worth of evidence data. You can use evidence finder in the
+    #     meantime, but not all data might be available until the backfill
+    #     is complete.
     #
     #   * `DISABLE_IN_PROGRESS` means that you requested to disable evidence
     #     finder, and your request is pending the deletion of the event data
@@ -2245,14 +2291,14 @@ module Aws::AuditManager
     #   The current status of the evidence data backfill process.
     #
     #   The backfill starts after you enable evidence finder. During this
-    #   task, Audit Manager populates an event data store with your past
-    #   evidence data so that your evidence can be queried.
+    #   task, Audit Manager populates an event data store with your past two
+    #   years’ worth of evidence data so that your evidence can be queried.
     #
     #   * `NOT_STARTED` means that the backfill hasn’t started yet.
     #
     #   * `IN_PROGRESS` means that the backfill is in progress. This can
-    #     take up to 24 hours to complete, depending on the amount of
-    #     evidence data.
+    #     take up to 7 days to complete, depending on the amount of evidence
+    #     data.
     #
     #   * `COMPLETED` means that the backfill is complete. All of your past
     #     evidence is now queryable.
@@ -2359,11 +2405,11 @@ module Aws::AuditManager
     #   @return [Array<Types::ControlSet>]
     #
     # @!attribute [rw] created_at
-    #   Specifies when the framework was created.
+    #   The time when the framework was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   Specifies when the framework was most recently updated.
+    #   The time when the framework was most recently updated.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -2848,7 +2894,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] evidence
-    #   The evidence that the `GetEvidenceResponse` API returned.
+    #   The evidence that the `GetEvidence` API returned.
     #   @return [Types::Evidence]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceResponse AWS API Documentation
@@ -2944,7 +2990,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] attribute
-    #   The list of `SettingAttribute` enum values.
+    #   The list of setting attribute enum values.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetSettingsRequest AWS API Documentation
@@ -3931,6 +3977,12 @@ module Aws::AuditManager
     #   The current evidence finder status and event data store details.
     #   @return [Types::EvidenceFinderEnablement]
     #
+    # @!attribute [rw] deregistration_policy
+    #   The deregistration policy for your Audit Manager data. You can use
+    #   this attribute to determine how your data is handled when you
+    #   deregister Audit Manager.
+    #   @return [Types::DeregistrationPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Settings AWS API Documentation
     #
     class Settings < Struct.new(
@@ -3939,7 +3991,8 @@ module Aws::AuditManager
       :default_assessment_reports_destination,
       :default_process_owners,
       :kms_key,
-      :evidence_finder_enablement)
+      :evidence_finder_enablement,
+      :deregistration_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4373,8 +4426,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] assessment
-    #   The response object for the `UpdateAssessmentRequest` API. This is
-    #   the name of the updated assessment.
+    #   The response object for the `UpdateAssessment` API. This is the name
+    #   of the updated assessment.
     #   @return [Types::Assessment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentResponse AWS API Documentation
@@ -4498,16 +4551,17 @@ module Aws::AuditManager
     #   use the feature again. Your only alternative is to [deregister][1]
     #   and then [re-register][2] Audit Manager.
     #
-    #    Disabling evidence finder is permanent, so consider this decision
-    #   carefully before you proceed. If you’re using Audit Manager as a
-    #   delegated administrator, keep in mind that this action applies to
-    #   all member accounts in your organization.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html
     #   [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] deregistration_policy
+    #   The deregistration policy for your Audit Manager data. You can use
+    #   this attribute to determine how your data is handled when you
+    #   deregister Audit Manager.
+    #   @return [Types::DeregistrationPolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateSettingsRequest AWS API Documentation
     #
@@ -4516,7 +4570,8 @@ module Aws::AuditManager
       :default_assessment_reports_destination,
       :default_process_owners,
       :kms_key,
-      :evidence_finder_enabled)
+      :evidence_finder_enabled,
+      :deregistration_policy)
       SENSITIVE = []
       include Aws::Structure
     end

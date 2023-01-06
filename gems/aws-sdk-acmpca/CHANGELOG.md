@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-01-06)
+------------------
+
+* Feature - Added revocation parameter validation: bucket names must match S3 bucket naming rules and CNAMEs conform to RFC2396 restrictions on the use of special characters in URIs.
+
 1.51.0 (2022-10-25)
 ------------------
 
