@@ -26,6 +26,7 @@ module Aws::WorkSpacesWeb
     AssociateUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'AssociateUserAccessLoggingSettingsResponse')
     AssociateUserSettingsRequest = Shapes::StructureShape.new(name: 'AssociateUserSettingsRequest')
     AssociateUserSettingsResponse = Shapes::StructureShape.new(name: 'AssociateUserSettingsResponse')
+    AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     BrowserPolicy = Shapes::StringShape.new(name: 'BrowserPolicy')
     BrowserSettings = Shapes::StructureShape.new(name: 'BrowserSettings')
     BrowserSettingsList = Shapes::ListShape.new(name: 'BrowserSettingsList')
@@ -310,6 +311,7 @@ module Aws::WorkSpacesWeb
     CreateNetworkSettingsResponse.struct_class = Types::CreateNetworkSettingsResponse
 
     CreatePortalRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
+    CreatePortalRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     CreatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreatePortalRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     CreatePortalRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
@@ -576,6 +578,7 @@ module Aws::WorkSpacesWeb
     NetworkSettingsSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     NetworkSettingsSummary.struct_class = Types::NetworkSettingsSummary
 
+    Portal.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     Portal.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "browserSettingsArn"))
     Portal.add_member(:browser_type, Shapes::ShapeRef.new(shape: BrowserType, location_name: "browserType"))
     Portal.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
@@ -593,6 +596,7 @@ module Aws::WorkSpacesWeb
 
     PortalList.member = Shapes::ShapeRef.new(shape: PortalSummary)
 
+    PortalSummary.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     PortalSummary.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "browserSettingsArn"))
     PortalSummary.add_member(:browser_type, Shapes::ShapeRef.new(shape: BrowserType, location_name: "browserType"))
     PortalSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
@@ -691,6 +695,7 @@ module Aws::WorkSpacesWeb
     UpdateNetworkSettingsResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: NetworkSettings, required: true, location_name: "networkSettings"))
     UpdateNetworkSettingsResponse.struct_class = Types::UpdateNetworkSettingsResponse
 
+    UpdatePortalRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     UpdatePortalRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     UpdatePortalRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
     UpdatePortalRequest.struct_class = Types::UpdatePortalRequest

@@ -414,6 +414,7 @@ module Aws
             'Kafka' => 'kafka',
             'KafkaConnect' => 'kafkaconnect',
             'Kendra' => 'kendra',
+            'KendraRanking' => 'kendra-ranking',
             'Keyspaces' => 'cassandra',
             'Kinesis' => 'kinesis',
             'KinesisAnalytics' => 'kinesisanalytics',

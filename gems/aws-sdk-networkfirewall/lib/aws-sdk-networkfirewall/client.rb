@@ -961,7 +961,7 @@ module Aws::NetworkFirewall
     #         },
     #         stateful_rules: [
     #           {
-    #             action: "PASS", # required, accepts PASS, DROP, ALERT
+    #             action: "PASS", # required, accepts PASS, DROP, ALERT, REJECT
     #             header: { # required
     #               protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
     #               source: "Source", # required
@@ -1579,7 +1579,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group.rules_source.rules_source_list.target_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST"
     #   resp.rule_group.rules_source.rules_source_list.generated_rules_type #=> String, one of "ALLOWLIST", "DENYLIST"
     #   resp.rule_group.rules_source.stateful_rules #=> Array
-    #   resp.rule_group.rules_source.stateful_rules[0].action #=> String, one of "PASS", "DROP", "ALERT"
+    #   resp.rule_group.rules_source.stateful_rules[0].action #=> String, one of "PASS", "DROP", "ALERT", "REJECT"
     #   resp.rule_group.rules_source.stateful_rules[0].header.protocol #=> String, one of "IP", "TCP", "UDP", "ICMP", "HTTP", "FTP", "TLS", "SMB", "DNS", "DCERPC", "SSH", "SMTP", "IMAP", "MSN", "KRB5", "IKEV2", "TFTP", "NTP", "DHCP"
     #   resp.rule_group.rules_source.stateful_rules[0].header.source #=> String
     #   resp.rule_group.rules_source.stateful_rules[0].header.source_port #=> String
@@ -2803,7 +2803,7 @@ module Aws::NetworkFirewall
     #         },
     #         stateful_rules: [
     #           {
-    #             action: "PASS", # required, accepts PASS, DROP, ALERT
+    #             action: "PASS", # required, accepts PASS, DROP, ALERT, REJECT
     #             header: { # required
     #               protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
     #               source: "Source", # required
@@ -3007,7 +3007,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

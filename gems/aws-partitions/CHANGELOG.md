@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.690.0 (2023-01-09)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::KendraRanking`.
+
 1.689.0 (2023-01-06)
 ------------------
 

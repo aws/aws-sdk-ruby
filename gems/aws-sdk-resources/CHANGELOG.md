@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.156.0 (2023-01-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-kendraranking` gem.
+
 3.155.0 (2022-12-21)
 ------------------
 

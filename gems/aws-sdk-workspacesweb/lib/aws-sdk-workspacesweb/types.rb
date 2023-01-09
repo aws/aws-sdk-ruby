@@ -568,6 +568,24 @@ module Aws::WorkSpacesWeb
     #   The additional encryption context of the portal.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] authentication_type
+    #   The type of authentication integration points used when signing into
+    #   the web portal. Defaults to `Standard`.
+    #
+    #   `Standard` web portals are authenticated directly through your
+    #   identity provider. You need to call `CreateIdentityProvider` to
+    #   integrate your identity provider with your web portal. User and
+    #   group access to your web portal is controlled through your identity
+    #   provider.
+    #
+    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
+    #   Identity Center (successor to AWS Single Sign-On). They provide
+    #   additional features, such as IdP-initiated authentication. Identity
+    #   sources (including external identity provider integration), plus
+    #   user and group access to your web portal, can be configured in the
+    #   IAM Identity Center.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -600,6 +618,7 @@ module Aws::WorkSpacesWeb
     #
     class CreatePortalRequest < Struct.new(
       :additional_encryption_context,
+      :authentication_type,
       :client_token,
       :customer_managed_key,
       :display_name,
@@ -1743,6 +1762,24 @@ module Aws::WorkSpacesWeb
 
     # The web portal.
     #
+    # @!attribute [rw] authentication_type
+    #   The type of authentication integration points used when signing into
+    #   the web portal. Defaults to `Standard`.
+    #
+    #   `Standard` web portals are authenticated directly through your
+    #   identity provider. You need to call `CreateIdentityProvider` to
+    #   integrate your identity provider with your web portal. User and
+    #   group access to your web portal is controlled through your identity
+    #   provider.
+    #
+    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
+    #   Identity Center (successor to AWS Single Sign-On). They provide
+    #   additional features, such as IdP-initiated authentication. Identity
+    #   sources (including external identity provider integration), plus
+    #   user and group access to your web portal, can be configured in the
+    #   IAM Identity Center.
+    #   @return [String]
+    #
     # @!attribute [rw] browser_settings_arn
     #   The ARN of the browser settings that is associated with this web
     #   portal.
@@ -1802,6 +1839,7 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/Portal AWS API Documentation
     #
     class Portal < Struct.new(
+      :authentication_type,
       :browser_settings_arn,
       :browser_type,
       :creation_date,
@@ -1820,6 +1858,24 @@ module Aws::WorkSpacesWeb
     end
 
     # The summary of the portal.
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of authentication integration points used when signing into
+    #   the web portal. Defaults to `Standard`.
+    #
+    #   `Standard` web portals are authenticated directly through your
+    #   identity provider. You need to call `CreateIdentityProvider` to
+    #   integrate your identity provider with your web portal. User and
+    #   group access to your web portal is controlled through your identity
+    #   provider.
+    #
+    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
+    #   Identity Center (successor to AWS Single Sign-On). They provide
+    #   additional features, such as IdP-initiated authentication. Identity
+    #   sources (including external identity provider integration), plus
+    #   user and group access to your web portal, can be configured in the
+    #   IAM Identity Center.
+    #   @return [String]
     #
     # @!attribute [rw] browser_settings_arn
     #   The ARN of the browser settings that is associated with the web
@@ -1876,6 +1932,7 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/PortalSummary AWS API Documentation
     #
     class PortalSummary < Struct.new(
+      :authentication_type,
       :browser_settings_arn,
       :browser_type,
       :creation_date,
@@ -2327,6 +2384,24 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @!attribute [rw] authentication_type
+    #   The type of authentication integration points used when signing into
+    #   the web portal. Defaults to `Standard`.
+    #
+    #   `Standard` web portals are authenticated directly through your
+    #   identity provider. You need to call `CreateIdentityProvider` to
+    #   integrate your identity provider with your web portal. User and
+    #   group access to your web portal is controlled through your identity
+    #   provider.
+    #
+    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
+    #   Identity Center (successor to AWS Single Sign-On). They provide
+    #   additional features, such as IdP-initiated authentication. Identity
+    #   sources (including external identity provider integration), plus
+    #   user and group access to your web portal, can be configured in the
+    #   IAM Identity Center.
+    #   @return [String]
+    #
     # @!attribute [rw] display_name
     #   The name of the web portal. This is not visible to users who log
     #   into the web portal.
@@ -2339,6 +2414,7 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdatePortalRequest AWS API Documentation
     #
     class UpdatePortalRequest < Struct.new(
+      :authentication_type,
       :display_name,
       :portal_arn)
       SENSITIVE = [:display_name]

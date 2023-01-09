@@ -187,6 +187,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-kafka', '~> 1')
   spec.add_dependency('aws-sdk-kafkaconnect', '~> 1')
   spec.add_dependency('aws-sdk-kendra', '~> 1')
+  spec.add_dependency('aws-sdk-kendraranking', '~> 1')
   spec.add_dependency('aws-sdk-keyspaces', '~> 1')
   spec.add_dependency('aws-sdk-kinesis', '~> 1')
   spec.add_dependency('aws-sdk-kinesisanalytics', '~> 1')

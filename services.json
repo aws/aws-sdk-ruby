@@ -560,6 +560,9 @@
   "Kendra": {
     "models": "kendra/2019-02-03"
   },
+  "KendraRanking": {
+    "models": "kendra-ranking/2022-10-19"
+  },
   "Keyspaces": {
     "models": "keyspaces/2022-02-10"
   },

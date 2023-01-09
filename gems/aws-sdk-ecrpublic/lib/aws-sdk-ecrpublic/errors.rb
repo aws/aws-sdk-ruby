@@ -43,6 +43,7 @@ module Aws::ECRPublic
   # * {ReferencedImagesNotFoundException}
   # * {RegistryNotFoundException}
   # * {RepositoryAlreadyExistsException}
+  # * {RepositoryCatalogDataNotFoundException}
   # * {RepositoryNotEmptyException}
   # * {RepositoryNotFoundException}
   # * {RepositoryPolicyNotFoundException}
@@ -307,6 +308,21 @@ module Aws::ECRPublic
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECRPublic::Types::RepositoryAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RepositoryCatalogDataNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECRPublic::Types::RepositoryCatalogDataNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

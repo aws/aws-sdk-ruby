@@ -792,6 +792,23 @@ module Aws::WorkSpacesWeb
     # @option params [Hash<String,String>] :additional_encryption_context
     #   The additional encryption context of the portal.
     #
+    # @option params [String] :authentication_type
+    #   The type of authentication integration points used when signing into
+    #   the web portal. Defaults to `Standard`.
+    #
+    #   `Standard` web portals are authenticated directly through your
+    #   identity provider. You need to call `CreateIdentityProvider` to
+    #   integrate your identity provider with your web portal. User and group
+    #   access to your web portal is controlled through your identity
+    #   provider.
+    #
+    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
+    #   Identity Center (successor to AWS Single Sign-On). They provide
+    #   additional features, such as IdP-initiated authentication. Identity
+    #   sources (including external identity provider integration), plus user
+    #   and group access to your web portal, can be configured in the IAM
+    #   Identity Center.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -826,6 +843,7 @@ module Aws::WorkSpacesWeb
     #     additional_encryption_context: {
     #       "StringType" => "StringType",
     #     },
+    #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
     #     client_token: "ClientToken",
     #     customer_managed_key: "keyArn",
     #     display_name: "DisplayName",
@@ -1426,6 +1444,7 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.portal.authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
     #   resp.portal.browser_settings_arn #=> String
     #   resp.portal.browser_type #=> String, one of "Chrome"
     #   resp.portal.creation_date #=> Time
@@ -1764,6 +1783,7 @@ module Aws::WorkSpacesWeb
     #
     #   resp.next_token #=> String
     #   resp.portals #=> Array
+    #   resp.portals[0].authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
     #   resp.portals[0].browser_settings_arn #=> String
     #   resp.portals[0].browser_type #=> String, one of "Chrome"
     #   resp.portals[0].creation_date #=> Time
@@ -2294,6 +2314,23 @@ module Aws::WorkSpacesWeb
 
     # Updates a web portal.
     #
+    # @option params [String] :authentication_type
+    #   The type of authentication integration points used when signing into
+    #   the web portal. Defaults to `Standard`.
+    #
+    #   `Standard` web portals are authenticated directly through your
+    #   identity provider. You need to call `CreateIdentityProvider` to
+    #   integrate your identity provider with your web portal. User and group
+    #   access to your web portal is controlled through your identity
+    #   provider.
+    #
+    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
+    #   Identity Center (successor to AWS Single Sign-On). They provide
+    #   additional features, such as IdP-initiated authentication. Identity
+    #   sources (including external identity provider integration), plus user
+    #   and group access to your web portal, can be configured in the IAM
+    #   Identity Center.
+    #
     # @option params [String] :display_name
     #   The name of the web portal. This is not visible to users who log into
     #   the web portal.
@@ -2308,12 +2345,14 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_portal({
+    #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
     #     display_name: "DisplayName",
     #     portal_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.portal.authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
     #   resp.portal.browser_settings_arn #=> String
     #   resp.portal.browser_type #=> String, one of "Chrome"
     #   resp.portal.creation_date #=> Time
@@ -2535,7 +2574,7 @@ module Aws::WorkSpacesWeb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

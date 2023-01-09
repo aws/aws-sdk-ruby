@@ -378,7 +378,7 @@ module Aws::ECRPublic
 
     # @!group API Operations
 
-    # Checks the availability of one or more image layers within a
+    # Checks the availability of one or more image layers that are within a
     # repository in a public registry. When an image is pushed to a
     # repository, each image layer is checked to verify if it has been
     # uploaded before. If it has been uploaded, then the image layer is
@@ -391,12 +391,12 @@ module Aws::ECRPublic
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the public registry that contains
-    #   the image layers to check. If you do not specify a registry, the
-    #   default public registry is assumed.
+    #   The Amazon Web Services account ID, or registry alias, associated with
+    #   the public registry that contains the image layers to check. If you do
+    #   not specify a registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository that is associated with the image layers to
+    #   The name of the repository that's associated with the image layers to
     #   check.
     #
     # @option params [required, Array<String>] :layer_digests
@@ -436,8 +436,8 @@ module Aws::ECRPublic
       req.send_request(options)
     end
 
-    # Deletes a list of specified images within a repository in a public
-    # registry. Images are specified with either an `imageTag` or
+    # Deletes a list of specified images that are within a repository in a
+    # public registry. Images are specified with either an `imageTag` or
     # `imageDigest`.
     #
     # You can remove a tag from an image by specifying the image's tag in
@@ -445,12 +445,12 @@ module Aws::ECRPublic
     # deleted from your repository.
     #
     # You can completely delete an image (and all of its tags) by specifying
-    # the image's digest in your request.
+    # the digest of the image in your request.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   image to delete. If you do not specify a registry, the default public
-    #   registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the
+    #   registry that contains the image to delete. If you do not specify a
+    #   registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The repository in a public registry that contains the image to delete.
@@ -498,13 +498,13 @@ module Aws::ECRPublic
       req.send_request(options)
     end
 
-    # Informs Amazon ECR that the image layer upload has completed for a
+    # Informs Amazon ECR that the image layer upload is complete for a
     # specified public registry, repository name, and upload ID. You can
     # optionally provide a `sha256` digest of the image layer for data
     # validation purposes.
     #
     # When an image is pushed, the CompleteLayerUpload API is called once
-    # per each new image layer to verify that the upload has completed.
+    # for each new image layer to verify that the upload is complete.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
     # used by customers for pulling and pushing images. In most cases, you
@@ -513,9 +513,9 @@ module Aws::ECRPublic
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry to which to upload
-    #   layers. If you do not specify a registry, the default public registry
-    #   is assumed.
+    #   The Amazon Web Services account ID, or registry alias, associated with
+    #   the registry where layers are uploaded. If you do not specify a
+    #   registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository in a public registry to associate with the
@@ -570,9 +570,9 @@ module Aws::ECRPublic
     #
     # @option params [required, String] :repository_name
     #   The name to use for the repository. This appears publicly in the
-    #   Amazon ECR Public Gallery. The repository name may be specified on its
-    #   own (such as `nginx-web-app`) or it can be prepended with a namespace
-    #   to group the repository into a category (such as
+    #   Amazon ECR Public Gallery. The repository name can be specified on its
+    #   own (for example `nginx-web-app`) or prepended with a namespace to
+    #   group the repository into a category (for example
     #   `project-a/nginx-web-app`).
     #
     # @option params [Types::RepositoryCatalogDataInput] :catalog_data
@@ -580,11 +580,11 @@ module Aws::ECRPublic
     #   Amazon ECR Public Gallery.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The metadata that you apply to the repository to help you categorize
-    #   and organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character length
-    #   of 128 characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   The metadata that you apply to each repository to help categorize and
+    #   organize your repositories. Each tag consists of a key and an optional
+    #   value. You define both of them. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length of
+    #   256 characters.
     #
     # @return [Types::CreateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -638,20 +638,22 @@ module Aws::ECRPublic
     end
 
     # Deletes a repository in a public registry. If the repository contains
-    # images, you must either delete all images in the repository or use the
-    # `force` option which deletes all images on your behalf before deleting
-    # the repository.
+    # images, you must either manually delete all images in the repository
+    # or use the `force` option. This option deletes all images on your
+    # behalf before deleting the repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the public registry that contains
-    #   the repository to delete. If you do not specify a registry, the
-    #   default public registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the public
+    #   registry that contains the repository to delete. If you do not specify
+    #   a registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to delete.
     #
     # @option params [Boolean] :force
-    #   If a repository contains images, forces the deletion.
+    #   The force option can be used to delete a repository that contains
+    #   images. If the force option is not used, the repository must be empty
+    #   prior to deletion.
     #
     # @return [Types::DeleteRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -682,16 +684,16 @@ module Aws::ECRPublic
       req.send_request(options)
     end
 
-    # Deletes the repository policy associated with the specified
+    # Deletes the repository policy that's associated with the specified
     # repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the public registry that contains
-    #   the repository policy to delete. If you do not specify a registry, the
-    #   default public registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the public
+    #   registry that contains the repository policy to delete. If you do not
+    #   specify a registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository that is associated with the repository
+    #   The name of the repository that's associated with the repository
     #   policy to delete.
     #
     # @return [Types::DeleteRepositoryPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -725,32 +727,32 @@ module Aws::ECRPublic
     # Returns the image tag details for a repository in a public registry.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the public registry that contains
-    #   the repository in which to describe images. If you do not specify a
-    #   registry, the default public registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the public
+    #   registry that contains the repository where images are described. If
+    #   you do not specify a registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository that contains the image tag details to
     #   describe.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
+    #   The `nextToken` value that's returned from a previous paginated
     #   `DescribeImageTags` request where `maxResults` was used and the
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
-    #   value. This value is `null` when there are no more results to return.
-    #   This option cannot be used when you specify images with `imageIds`.
+    #   value. If there are no more results to return, this value is `null`.
+    #   If you specify images with `imageIds`, you can't use this option.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of repository results returned by
+    #   The maximum number of repository results that's returned by
     #   `DescribeImageTags` in paginated output. When this parameter is used,
     #   `DescribeImageTags` only returns `maxResults` results in a single page
-    #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another `DescribeImageTags`
+    #   along with a `nextToken` response element. You can see the remaining
+    #   results of the initial request by sending another `DescribeImageTags`
     #   request with the returned `nextToken` value. This value can be between
-    #   1 and 1000. If this parameter is not used, then `DescribeImageTags`
-    #   returns up to 100 results and a `nextToken` value, if applicable. This
-    #   option cannot be used when you specify images with `imageIds`.
+    #   1 and 1000. If this parameter isn't used, then `DescribeImageTags`
+    #   returns up to 100 results and a `nextToken` value, if applicable. If
+    #   you specify images with `imageIds`, you can't use this option.
     #
     # @return [Types::DescribeImageTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -789,21 +791,21 @@ module Aws::ECRPublic
       req.send_request(options)
     end
 
-    # Returns metadata about the images in a repository in a public
-    # registry.
+    # Returns metadata that's related to the images in a repository in a
+    # public registry.
     #
     # <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses image
     # layers before pushing them to a V2 Docker registry. The output of the
-    # `docker images` command shows the uncompressed image size, so it may
-    # return a larger image size than the image sizes returned by
-    # DescribeImages.
+    # `docker images` command shows the uncompressed image size. Therefore,
+    # it might return a larger image size than the image sizes that are
+    # returned by DescribeImages.
     #
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the public registry that contains
-    #   the repository in which to describe images. If you do not specify a
-    #   registry, the default public registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the public
+    #   registry that contains the repository where images are described. If
+    #   you do not specify a registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The repository that contains the images to describe.
@@ -812,23 +814,23 @@ module Aws::ECRPublic
     #   The list of image IDs for the requested repository.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
+    #   The `nextToken` value that's returned from a previous paginated
     #   `DescribeImages` request where `maxResults` was used and the results
     #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value. This
-    #   value is `null` when there are no more results to return. This option
-    #   cannot be used when you specify images with `imageIds`.
+    #   end of the previous results that returned the `nextToken` value. If
+    #   there are no more results to return, this value is `null`. If you
+    #   specify images with `imageIds`, you can't use this option.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of repository results returned by `DescribeImages`
-    #   in paginated output. When this parameter is used, `DescribeImages`
-    #   only returns `maxResults` results in a single page along with a
-    #   `nextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `DescribeImages` request with
-    #   the returned `nextToken` value. This value can be between 1 and 1000.
-    #   If this parameter is not used, then `DescribeImages` returns up to 100
-    #   results and a `nextToken` value, if applicable. This option cannot be
-    #   used when you specify images with `imageIds`.
+    #   The maximum number of repository results that's returned by
+    #   `DescribeImages` in paginated output. When this parameter is used,
+    #   `DescribeImages` only returns `maxResults` results in a single page
+    #   along with a `nextToken` response element. You can see the remaining
+    #   results of the initial request by sending another `DescribeImages`
+    #   request with the returned `nextToken` value. This value can be between
+    #   1 and 1000. If this parameter isn't used, then `DescribeImages`
+    #   returns up to 100 results and a `nextToken` value, if applicable. If
+    #   you specify images with `imageIds`, you can't use this option.
     #
     # @return [Types::DescribeImagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -878,11 +880,11 @@ module Aws::ECRPublic
     # Returns details for a public registry.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
+    #   The `nextToken` value that's returned from a previous paginated
     #   `DescribeRegistries` request where `maxResults` was used and the
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
-    #   value. This value is `null` when there are no more results to return.
+    #   value. If there are no more results to return, this value is `null`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -891,13 +893,13 @@ module Aws::ECRPublic
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of repository results returned by
+    #   The maximum number of repository results that's returned by
     #   `DescribeRegistries` in paginated output. When this parameter is used,
     #   `DescribeRegistries` only returns `maxResults` results in a single
     #   page along with a `nextToken` response element. The remaining results
     #   of the initial request can be seen by sending another
     #   `DescribeRegistries` request with the returned `nextToken` value. This
-    #   value can be between 1 and 1000. If this parameter is not used, then
+    #   value can be between 1 and 1000. If this parameter isn't used, then
     #   `DescribeRegistries` returns up to 100 results and a `nextToken`
     #   value, if applicable.
     #
@@ -938,25 +940,25 @@ module Aws::ECRPublic
       req.send_request(options)
     end
 
-    # Describes repositories in a public registry.
+    # Describes repositories that are in a public registry.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repositories to be described. If you do not specify a registry, the
-    #   default public registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the
+    #   registry that contains the repositories to be described. If you do not
+    #   specify a registry, the default public registry is assumed.
     #
     # @option params [Array<String>] :repository_names
     #   A list of repositories to describe. If this parameter is omitted, then
     #   all repositories in a registry are described.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
+    #   The `nextToken` value that's returned from a previous paginated
     #   `DescribeRepositories` request where `maxResults` was used and the
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
-    #   value. This value is `null` when there are no more results to return.
-    #   This option cannot be used when you specify repositories with
-    #   `repositoryNames`.
+    #   value. If there are no more results to return, this value is `null`.
+    #   If you specify repositories with `repositoryNames`, you can't use
+    #   this option.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -965,16 +967,16 @@ module Aws::ECRPublic
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of repository results returned by
+    #   The maximum number of repository results that's returned by
     #   `DescribeRepositories` in paginated output. When this parameter is
     #   used, `DescribeRepositories` only returns `maxResults` results in a
-    #   single page along with a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
+    #   single page along with a `nextToken` response element. You can see the
+    #   remaining results of the initial request by sending another
     #   `DescribeRepositories` request with the returned `nextToken` value.
-    #   This value can be between 1 and 1000. If this parameter is not used,
+    #   This value can be between 1 and 1000. If this parameter isn't used,
     #   then `DescribeRepositories` returns up to 100 results and a
-    #   `nextToken` value, if applicable. This option cannot be used when you
-    #   specify repositories with `repositoryNames`.
+    #   `nextToken` value, if applicable. If you specify repositories with
+    #   `repositoryNames`, you can't use this option.
     #
     # @return [Types::DescribeRepositoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1012,7 +1014,7 @@ module Aws::ECRPublic
     end
 
     # Retrieves an authorization token. An authorization token represents
-    # your IAM authentication credentials and can be used to access any
+    # your IAM authentication credentials. You can use it to access any
     # Amazon ECR registry that your IAM principal has access to. The
     # authorization token is valid for 12 hours. This API requires the
     # `ecr-public:GetAuthorizationToken` and `sts:GetServiceBearerToken`
@@ -1059,9 +1061,9 @@ module Aws::ECRPublic
     # metadata is displayed publicly in the Amazon ECR Public Gallery.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repositories to be described. If you do not specify a registry, the
-    #   default public registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the
+    #   registry that contains the repositories to be described. If you do not
+    #   specify a registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to retrieve the catalog metadata for.
@@ -1101,9 +1103,9 @@ module Aws::ECRPublic
     # Retrieves the repository policy for the specified repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the public registry that contains
-    #   the repository. If you do not specify a registry, the default public
-    #   registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the public
+    #   registry that contains the repository. If you do not specify a
+    #   registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository with the policy to retrieve.
@@ -1139,9 +1141,9 @@ module Aws::ECRPublic
     # Notifies Amazon ECR that you intend to upload an image layer.
     #
     # When an image is pushed, the InitiateLayerUpload API is called once
-    # per image layer that has not already been uploaded. Whether or not an
-    # image layer has been uploaded is determined by the
-    # BatchCheckLayerAvailability API action.
+    # for each image layer that hasn't already been uploaded. Whether an
+    # image layer uploads is determined by the BatchCheckLayerAvailability
+    # API action.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
     # used by customers for pulling and pushing images. In most cases, you
@@ -1150,12 +1152,12 @@ module Aws::ECRPublic
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry to which you intend to
-    #   upload layers. If you do not specify a registry, the default public
-    #   registry is assumed.
+    #   The Amazon Web Services account ID, or registry alias, that's
+    #   associated with the registry to which you intend to upload layers. If
+    #   you do not specify a registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository to which you intend to upload layers.
+    #   The name of the repository that you want to upload layers to.
     #
     # @return [Types::InitiateLayerUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1186,8 +1188,8 @@ module Aws::ECRPublic
     # List the tags for an Amazon ECR Public resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) that identifies the resource for which
-    #   to list the tags. Currently, the supported resource is an Amazon ECR
+    #   The Amazon Resource Name (ARN) that identifies the resource to list
+    #   the tags for. Currently, the supported resource is an Amazon ECR
     #   Public repository.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1215,12 +1217,12 @@ module Aws::ECRPublic
       req.send_request(options)
     end
 
-    # Creates or updates the image manifest and tags associated with an
-    # image.
+    # Creates or updates the image manifest and tags that are associated
+    # with an image.
     #
     # When an image is pushed and all new image layers have been uploaded,
     # the PutImage API is called once to create or update the image manifest
-    # and the tags associated with the image.
+    # and the tags that are associated with the image.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
     # used by customers for pulling and pushing images. In most cases, you
@@ -1229,19 +1231,20 @@ module Aws::ECRPublic
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the public registry that contains
-    #   the repository in which to put the image. If you do not specify a
-    #   registry, the default public registry is assumed.
+    #   The Amazon Web Services account ID, or registry alias, that's
+    #   associated with the public registry that contains the repository where
+    #   the image is put. If you do not specify a registry, the default public
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository in which to put the image.
+    #   The name of the repository where the image is put.
     #
     # @option params [required, String] :image_manifest
-    #   The image manifest corresponding to the image to be uploaded.
+    #   The image manifest that corresponds to the image to be uploaded.
     #
     # @option params [String] :image_manifest_media_type
     #   The media type of the image manifest. If you push an image manifest
-    #   that does not contain the `mediaType` field, you must specify the
+    #   that doesn't contain the `mediaType` field, you must specify the
     #   `imageManifestMediaType` in the request.
     #
     # @option params [String] :image_tag
@@ -1250,7 +1253,7 @@ module Aws::ECRPublic
     #   Container Initiative (OCI) formats.
     #
     # @option params [String] :image_digest
-    #   The image digest of the image manifest corresponding to the image.
+    #   The image digest of the image manifest that corresponds to the image.
     #
     # @return [Types::PutImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1285,7 +1288,7 @@ module Aws::ECRPublic
       req.send_request(options)
     end
 
-    # Create or updates the catalog data for a public registry.
+    # Create or update the catalog data for a public registry.
     #
     # @option params [String] :display_name
     #   The display name for a public registry. The display name is shown as
@@ -1323,9 +1326,9 @@ module Aws::ECRPublic
     # registry.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the public registry the repository
-    #   is in. If you do not specify a registry, the default public registry
-    #   is assumed.
+    #   The Amazon Web Services account ID that's associated with the public
+    #   registry the repository is in. If you do not specify a registry, the
+    #   default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to create or update the catalog data for.
@@ -1384,9 +1387,9 @@ module Aws::ECRPublic
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default public
-    #   registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the
+    #   registry that contains the repository. If you do not specify a
+    #   registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to receive the policy.
@@ -1401,10 +1404,10 @@ module Aws::ECRPublic
     #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html
     #
     # @option params [Boolean] :force
-    #   If the policy you are attempting to set on a repository policy would
+    #   If the policy that you want to set on a repository policy would
     #   prevent you from setting another policy in the future, you must force
-    #   the SetRepositoryPolicy operation. This is intended to prevent
-    #   accidental repository lock outs.
+    #   the SetRepositoryPolicy operation. This prevents accidental repository
+    #   lockouts.
     #
     # @return [Types::SetRepositoryPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1437,12 +1440,12 @@ module Aws::ECRPublic
     end
 
     # Associates the specified tags to a resource with the specified
-    # `resourceArn`. If existing tags on a resource are not specified in the
-    # request parameters, they are not changed. When a resource is deleted,
-    # the tags associated with that resource are deleted as well.
+    # `resourceArn`. If existing tags on a resource aren't specified in the
+    # request parameters, they aren't changed. When a resource is deleted,
+    # the tags associated with that resource are also deleted.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   The Amazon Resource Name (ARN) of the resource to add tags to.
     #   Currently, the supported resource is an Amazon ECR Public repository.
     #
     # @option params [required, Array<Types::Tag>] :tags
@@ -1476,9 +1479,8 @@ module Aws::ECRPublic
     # Deletes specified tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. Currently, the supported resource is an Amazon ECR Public
-    #   repository.
+    #   The Amazon Resource Name (ARN) of the resource to delete tags from.
+    #   Currently, the supported resource is an Amazon ECR Public repository.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
@@ -1504,9 +1506,9 @@ module Aws::ECRPublic
     # Uploads an image layer part to Amazon ECR.
     #
     # When an image is pushed, each new image layer is uploaded in parts.
-    # The maximum size of each image layer part can be 20971520 bytes (or
-    # about 20MB). The UploadLayerPart API is called once per each new image
-    # layer part.
+    # The maximum size of each image layer part can be 20971520 bytes (about
+    # 20MB). The UploadLayerPart API is called once for each new image layer
+    # part.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
     # used by customers for pulling and pushing images. In most cases, you
@@ -1515,12 +1517,12 @@ module Aws::ECRPublic
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry to which you are
-    #   uploading layer parts. If you do not specify a registry, the default
-    #   public registry is assumed.
+    #   The Amazon Web Services account ID, or registry alias, that's
+    #   associated with the registry that you're uploading layer parts to. If
+    #   you do not specify a registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository to which you are uploading layer parts.
+    #   The name of the repository that you're uploading layer parts to.
     #
     # @option params [required, String] :upload_id
     #   The upload ID from a previous InitiateLayerUpload operation to
@@ -1584,7 +1586,7 @@ module Aws::ECRPublic
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecrpublic'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

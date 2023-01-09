@@ -132,6 +132,7 @@ module Aws::ECRPublic
     RepositoryAlreadyExistsException = Shapes::StructureShape.new(name: 'RepositoryAlreadyExistsException')
     RepositoryCatalogData = Shapes::StructureShape.new(name: 'RepositoryCatalogData')
     RepositoryCatalogDataInput = Shapes::StructureShape.new(name: 'RepositoryCatalogDataInput')
+    RepositoryCatalogDataNotFoundException = Shapes::StructureShape.new(name: 'RepositoryCatalogDataNotFoundException')
     RepositoryDescription = Shapes::StringShape.new(name: 'RepositoryDescription')
     RepositoryList = Shapes::ListShape.new(name: 'RepositoryList')
     RepositoryName = Shapes::StringShape.new(name: 'RepositoryName')
@@ -493,6 +494,9 @@ module Aws::ECRPublic
     RepositoryCatalogDataInput.add_member(:usage_text, Shapes::ShapeRef.new(shape: UsageText, location_name: "usageText"))
     RepositoryCatalogDataInput.struct_class = Types::RepositoryCatalogDataInput
 
+    RepositoryCatalogDataNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryCatalogDataNotFoundException.struct_class = Types::RepositoryCatalogDataNotFoundException
+
     RepositoryList.member = Shapes::ShapeRef.new(shape: Repository)
 
     RepositoryNameList.member = Shapes::ShapeRef.new(shape: RepositoryName)
@@ -593,6 +597,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: RegistryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:batch_delete_image, Seahorse::Model::Operation.new.tap do |o|
@@ -604,6 +609,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:complete_layer_upload, Seahorse::Model::Operation.new.tap do |o|
@@ -636,6 +642,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:delete_repository, Seahorse::Model::Operation.new.tap do |o|
@@ -648,6 +655,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotEmptyException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:delete_repository_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -660,6 +668,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:describe_image_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -671,6 +680,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -689,6 +699,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -723,6 +734,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -739,6 +751,7 @@ module Aws::ECRPublic
         o.output = Shapes::ShapeRef.new(shape: GetAuthorizationTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:get_registry_catalog_data, Seahorse::Model::Operation.new.tap do |o|
@@ -759,7 +772,9 @@ module Aws::ECRPublic
         o.output = Shapes::ShapeRef.new(shape: GetRepositoryCatalogDataResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryCatalogDataNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:get_repository_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -772,6 +787,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:initiate_layer_upload, Seahorse::Model::Operation.new.tap do |o|
@@ -795,6 +811,7 @@ module Aws::ECRPublic
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
@@ -837,6 +854,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:set_repository_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -848,6 +866,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -860,6 +879,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
@@ -873,6 +893,7 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 

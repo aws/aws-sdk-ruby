@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-01-09)
+------------------
+
+* Feature - Network Firewall now supports the Suricata rule action reject, in addition to the actions pass, drop, and alert.
+
 1.21.0 (2022-12-28)
 ------------------
 

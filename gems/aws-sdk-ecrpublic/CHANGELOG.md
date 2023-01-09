@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-01-09)
+------------------
+
+* Feature - This release for Amazon ECR Public makes several change to bring the SDK into sync with the API.
+
 1.13.0 (2022-10-25)
 ------------------
 

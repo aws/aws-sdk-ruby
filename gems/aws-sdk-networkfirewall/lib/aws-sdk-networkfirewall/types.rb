@@ -3054,6 +3054,16 @@ module Aws::NetworkFirewall
     #     drop traffic. You can enable the rule with `ALERT` action, verify
     #     in the logs that the rule is filtering as you want, then change
     #     the action to `DROP`.
+    #
+    #   * **REJECT** - Drops TCP traffic that matches the conditions of the
+    #     stateful rule, and sends a TCP reset packet back to sender of the
+    #     packet. A TCP reset packet is a packet with no payload and a `RST`
+    #     bit contained in the TCP header flags. Also sends an alert log
+    #     mesage if alert logging is configured in the Firewall
+    #     LoggingConfiguration.
+    #
+    #     `REJECT` isn't currently available for use with IMAP and FTP
+    #     protocols.
     #   @return [String]
     #
     # @!attribute [rw] header

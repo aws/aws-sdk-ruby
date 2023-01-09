@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2023-01-09)
+------------------
+
+* Feature - This release adds support for a new portal authentication type: AWS IAM Identity Center (successor to AWS Single Sign-On).
+
 1.6.0 (2022-10-25)
 ------------------
 
