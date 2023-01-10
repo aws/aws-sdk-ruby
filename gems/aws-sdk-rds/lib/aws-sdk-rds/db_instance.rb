@@ -2130,6 +2130,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     enable_customer_owned_ip: false,
+    #     allocated_storage: 1,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -2616,6 +2617,16 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
+    # @option options [Integer] :allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the
+    #   read replica. Follow the allocation rules specified in
+    #   `CreateDBInstance`.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your read replica so that the
+    #   create operation can succeed. You can also allocate additional memory
+    #   for future growth.
+    #
+    #    </note>
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3809,6 +3820,7 @@ module Aws::RDS
     #     backup_target: "String",
     #     network_type: "String",
     #     storage_throughput: 1,
+    #     allocated_storage: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -4186,6 +4198,15 @@ module Aws::RDS
     #   Specifies the storage throughput value for the DB instance.
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    # @option options [Integer] :allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the DB
+    #   instance. Follow the allocation rules specified in `CreateDBInstance`.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that the
+    #   restore operation can succeed. You can also allocate additional memory
+    #   for future growth.
+    #
+    #    </note>
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

@@ -884,7 +884,19 @@ module Aws::LocationService
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility. You can choose
-    #   `Car`, `Truck`, or `Walking` as options for the `TravelMode`.
+    #   `Car`, `Truck`, `Walking`, `Bicycle` or `Motorcycle` as options for
+    #   the `TravelMode`.
+    #
+    #   <note markdown="1"> `Bicycle` and `Motorcycle` are only valid when using Grab as a data
+    #   provider, and only within Southeast Asia.
+    #
+    #    `Truck` is not available for Grab.
+    #
+    #    For more details on the using Grab for routing, including areas of
+    #   coverage, see [GrabMaps][1] in the *Amazon Location Service Developer
+    #   Guide*.
+    #
+    #    </note>
     #
     #   The `TravelMode` you specify also determines how you specify route
     #   preferences:
@@ -894,6 +906,10 @@ module Aws::LocationService
     #   * If traveling by `Truck` use the `TruckModeOptions` parameter.
     #
     #   Default Value: `Car`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
     #
     # @option params [Types::CalculateRouteTruckModeOptions] :truck_mode_options
     #   Specifies route preferences when traveling by `Truck`, such as
@@ -950,7 +966,7 @@ module Aws::LocationService
     #     destination_position: [1.0], # required
     #     distance_unit: "Kilometers", # accepts Kilometers, Miles
     #     include_leg_geometry: false,
-    #     travel_mode: "Car", # accepts Car, Truck, Walking
+    #     travel_mode: "Car", # accepts Car, Truck, Walking, Bicycle, Motorcycle
     #     truck_mode_options: {
     #       avoid_ferries: false,
     #       avoid_tolls: false,
@@ -1158,7 +1174,21 @@ module Aws::LocationService
     #
     #   * If traveling by `Truck` use the `TruckModeOptions` parameter.
     #
+    #   <note markdown="1"> `Bicycle` or `Motorcycle` are only valid when using `Grab` as a data
+    #   provider, and only within Southeast Asia.
+    #
+    #    `Truck` is not available for Grab.
+    #
+    #    For more information about using Grab as a data provider, see
+    #   [GrabMaps][1] in the *Amazon Location Service Developer Guide*.
+    #
+    #    </note>
+    #
     #   Default Value: `Car`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
     #
     # @option params [Types::CalculateRouteTruckModeOptions] :truck_mode_options
     #   Specifies route preferences when traveling by `Truck`, such as
@@ -1191,7 +1221,7 @@ module Aws::LocationService
     #       [1.0],
     #     ],
     #     distance_unit: "Kilometers", # accepts Kilometers, Miles
-    #     travel_mode: "Car", # accepts Car, Truck, Walking
+    #     travel_mode: "Car", # accepts Car, Truck, Walking, Bicycle, Motorcycle
     #     truck_mode_options: {
     #       avoid_ferries: false,
     #       avoid_tolls: false,
@@ -1328,8 +1358,8 @@ module Aws::LocationService
     # of different styles sourced from global location data providers.
     #
     # <note markdown="1"> If your application is tracking or routing assets you use in your
-    # business, such as delivery vehicles or employees, you may only use
-    # HERE as your geolocation provider. See section 82 of the [AWS service
+    # business, such as delivery vehicles or employees, you must not use
+    # Esri as your geolocation provider. See section 82 of the [AWS service
     # terms][1] for more details.
     #
     #  </note>
@@ -1427,8 +1457,8 @@ module Aws::LocationService
     # operation.
     #
     # <note markdown="1"> If your application is tracking or routing assets you use in your
-    # business, such as delivery vehicles or employees, you may only use
-    # HERE as your geolocation provider. See section 82 of the [AWS service
+    # business, such as delivery vehicles or employees, you must not use
+    # Esri as your geolocation provider. See section 82 of the [AWS service
     # terms][1] for more details.
     #
     #  </note>
@@ -1451,27 +1481,33 @@ module Aws::LocationService
     #     your region of interest, see [Esri details on geocoding
     #     coverage][2].
     #
-    #   * `Here` – For additional information about [HERE Technologies][3]'
+    #   * `Grab` – Grab provides place index functionality for Southeast Asia.
+    #     For additional information about [GrabMaps][3]' coverage, see
+    #     [GrabMaps countries and areas covered][4].
+    #
+    #   * `Here` – For additional information about [HERE Technologies][5]'
     #     coverage in your region of interest, see [HERE details on goecoding
-    #     coverage][4].
+    #     coverage][6].
     #
     #     If you specify HERE Technologies (`Here`) as the data provider, you
-    #     may not [store results][5] for locations in Japan. For more
-    #     information, see the [AWS Service Terms][6] for Amazon Location
+    #     may not [store results][7] for locations in Japan. For more
+    #     information, see the [AWS Service Terms][8] for Amazon Location
     #     Service.
     #
-    #   For additional information , see [Data providers][7] on the *Amazon
+    #   For additional information , see [Data providers][9] on the *Amazon
     #   Location Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [4]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
-    #   [5]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
-    #   [6]: https://aws.amazon.com/service-terms/
-    #   [7]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [6]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
+    #   [7]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
+    #   [8]: https://aws.amazon.com/service-terms/
+    #   [9]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #
     # @option params [Types::DataSourceConfiguration] :data_source_configuration
     #   Specifies the data storage option requesting Places.
@@ -1561,8 +1597,8 @@ module Aws::LocationService
     # traffic and road network data from your chosen data provider.
     #
     # <note markdown="1"> If your application is tracking or routing assets you use in your
-    # business, such as delivery vehicles or employees, you may only use
-    # HERE as your geolocation provider. See section 82 of the [AWS service
+    # business, such as delivery vehicles or employees, you must not use
+    # Esri as your geolocation provider. See section 82 of the [AWS service
     # terms][1] for more details.
     #
     #  </note>
@@ -1587,9 +1623,7 @@ module Aws::LocationService
     #   Specifies the data provider of traffic and road network data.
     #
     #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
-    #   example, entering `HERE` returns an error. Route calculators that use
-    #   Esri as a data source only calculate routes that are shorter than 400
-    #   km.
+    #   example, entering `HERE` returns an error.
     #
     #    </note>
     #
@@ -1599,21 +1633,30 @@ module Aws::LocationService
     #     your region of interest, see [Esri details on street networks and
     #     traffic coverage][2].
     #
-    #   * `Here` – For additional information about [HERE Technologies][3]'
-    #     coverage in your region of interest, see [HERE car routing
-    #     coverage][4] and [HERE truck routing coverage][5].
+    #     Route calculators that use Esri as a data source only calculate
+    #     routes that are shorter than 400 km.
     #
-    #   For additional information , see [Data providers][6] on the *Amazon
+    #   * `Grab` – Grab provides routing functionality for Southeast Asia. For
+    #     additional information about [GrabMaps][3]' coverage, see [GrabMaps
+    #     countries and areas covered][4].
+    #
+    #   * `Here` – For additional information about [HERE Technologies][5]'
+    #     coverage in your region of interest, see [HERE car routing
+    #     coverage][6] and [HERE truck routing coverage][7].
+    #
+    #   For additional information , see [Data providers][8] on the *Amazon
     #   Location Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [4]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
-    #   [5]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
-    #   [6]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [6]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
+    #   [7]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
+    #   [8]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #
     # @option params [String] :description
     #   The optional description for the route calculator resource.
@@ -2428,7 +2471,14 @@ module Aws::LocationService
     #     `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \| `Noto Sans CJK JP
     #     Light` \| `Noto Sans CJK JP Regular`
     #
-    #   Valid font stacks for [Open Data (Preview)][3] styles:
+    #   Valid font stacks for [GrabMaps][3] styles:
+    #
+    #   * VectorGrabStandardLight, VectorGrabStandardDark – `Noto Sans
+    #     Regular` \| `Noto Sans Medium` \| `Noto Sans Bold`
+    #
+    #   ^
+    #
+    #   Valid font stacks for [Open Data (Preview)][4] styles:
     #
     #   * VectorOpenDataStandardLight – `Amazon Ember Regular,Noto Sans
     #     Regular` \| `Amazon Ember Bold,Noto Sans Bold` \| `Amazon Ember
@@ -2448,7 +2498,8 @@ module Aws::LocationService
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
     #
     # @option params [required, String] :font_unicode_range
     #   A Unicode range of characters to download glyphs for. Each response
@@ -3602,7 +3653,18 @@ module Aws::LocationService
     # Assigns one or more tags (key-value pairs) to the specified Amazon
     # Location Service resource.
     #
-    #      <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>You can use the <code>TagResource</code> operation with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that's already associated with the resource, the new tag value that you specify replaces the previous value for that tag. </p> <p>You can associate up to 50 tags with a resource.</p>
+    # Tags can help you organize and categorize your resources. You can also
+    # use them to scope user permissions, by granting a user permission to
+    # access or change only resources with certain tag values.
+    #
+    # You can use the `TagResource` operation with an Amazon Location
+    # Service resource that already has tags. If you specify a new tag key
+    # for the resource, this tag is appended to the tags already associated
+    # with the resource. If you specify a tag key that's already associated
+    # with the resource, the new tag value that you specify replaces the
+    # previous value for that tag.
+    #
+    # You can associate up to 50 tags with a resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want to
@@ -3950,7 +4012,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

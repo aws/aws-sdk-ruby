@@ -5584,6 +5584,17 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #
+    # @option params [Integer] :allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the
+    #   read replica. Follow the allocation rules specified in
+    #   `CreateDBInstance`.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your read replica so that the
+    #   create operation can succeed. You can also allocate additional memory
+    #   for future growth.
+    #
+    #    </note>
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5668,6 +5679,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     enable_customer_owned_ip: false,
+    #     allocated_storage: 1,
     #     source_region: "String",
     #   })
     #
@@ -20939,6 +20951,16 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
     #
+    # @option params [Integer] :allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the DB
+    #   instance. Follow the allocation rules specified in CreateDBInstance.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that the
+    #   restore operation can succeed. You can also allocate additional memory
+    #   for future growth.
+    #
+    #    </note>
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -21085,6 +21107,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     db_cluster_snapshot_identifier: "String",
+    #     allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -21279,7 +21302,7 @@ module Aws::RDS
     #   Example: `mydbinstance`
     #
     # @option params [Integer] :allocated_storage
-    #   The amount of storage (in gigabytes) to allocate initially for the DB
+    #   The amount of storage (in gibibytes) to allocate initially for the DB
     #   instance. Follow the allocation rules specified in `CreateDBInstance`.
     #
     #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that the
@@ -22413,6 +22436,16 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
+    # @option params [Integer] :allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the DB
+    #   instance. Follow the allocation rules specified in `CreateDBInstance`.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that the
+    #   restore operation can succeed. You can also allocate additional memory
+    #   for future growth.
+    #
+    #    </note>
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -22564,6 +22597,7 @@ module Aws::RDS
     #     backup_target: "String",
     #     network_type: "String",
     #     storage_throughput: 1,
+    #     allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -22831,12 +22865,15 @@ module Aws::RDS
     end
 
     # Starts a database activity stream to monitor activity on the database.
-    # For more information, see [Database Activity Streams][1] in the
-    # *Amazon Aurora User Guide*.
+    # For more information, see [ Monitoring Amazon Aurora with Database
+    # Activity Streams][1] in the *Amazon Aurora User Guide* or [ Monitoring
+    # Amazon RDS with Database Activity Streams][2] in the *Amazon RDS User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the DB cluster, for example,
@@ -23492,12 +23529,15 @@ module Aws::RDS
     # Services console, the `start-activity-stream` CLI command, or the
     # `StartActivityStream` action.
     #
-    # For more information, see [Database Activity Streams][1] in the
-    # *Amazon Aurora User Guide*.
+    # For more information, see [ Monitoring Amazon Aurora with Database
+    # Activity Streams][1] in the *Amazon Aurora User Guide* or [ Monitoring
+    # Amazon RDS with Database Activity Streams][2] in the *Amazon RDS User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the DB cluster for the database
@@ -24225,7 +24265,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.169.0'
+      context[:gem_version] = '1.170.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

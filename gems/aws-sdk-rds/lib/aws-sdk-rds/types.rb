@@ -4959,6 +4959,18 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #   @return [Boolean]
     #
+    # @!attribute [rw] allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the
+    #   read replica. Follow the allocation rules specified in
+    #   `CreateDBInstance`.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your read replica so that the
+    #   create operation can succeed. You can also allocate additional
+    #   memory for future growth.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5003,6 +5015,7 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :enable_customer_owned_ip,
+      :allocated_storage,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -20854,6 +20867,18 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
     #   @return [String]
     #
+    # @!attribute [rw] allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the
+    #   DB instance. Follow the allocation rules specified in
+    #   CreateDBInstance.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that
+    #   the restore operation can succeed. You can also allocate additional
+    #   memory for future growth.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -20890,7 +20915,8 @@ module Aws::RDS
       :backup_target,
       :network_type,
       :storage_throughput,
-      :db_cluster_snapshot_identifier)
+      :db_cluster_snapshot_identifier,
+      :allocated_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20936,7 +20962,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   The amount of storage (in gigabytes) to allocate initially for the
+    #   The amount of storage (in gibibytes) to allocate initially for the
     #   DB instance. Follow the allocation rules specified in
     #   `CreateDBInstance`.
     #
@@ -21994,6 +22020,18 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #   @return [Integer]
     #
+    # @!attribute [rw] allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the
+    #   DB instance. Follow the allocation rules specified in
+    #   `CreateDBInstance`.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that
+    #   the restore operation can succeed. You can also allocate additional
+    #   memory for future growth.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -22034,7 +22072,8 @@ module Aws::RDS
       :custom_iam_instance_profile,
       :backup_target,
       :network_type,
-      :storage_throughput)
+      :storage_throughput,
+      :allocated_storage)
       SENSITIVE = []
       include Aws::Structure
     end

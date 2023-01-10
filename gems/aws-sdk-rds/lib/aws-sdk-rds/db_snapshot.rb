@@ -667,6 +667,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     db_cluster_snapshot_identifier: "String",
+    #     allocated_storage: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -1055,6 +1056,15 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
+    # @option options [Integer] :allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the DB
+    #   instance. Follow the allocation rules specified in CreateDBInstance.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that the
+    #   restore operation can succeed. You can also allocate additional memory
+    #   for future growth.
+    #
+    #    </note>
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

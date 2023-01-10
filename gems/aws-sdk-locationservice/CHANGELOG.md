@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2023-01-10)
+------------------
+
+* Feature - This release adds support for two new route travel models, Bicycle and Motorcycle which can be used with Grab data source.
+
 1.26.0 (2022-12-15)
 ------------------
 

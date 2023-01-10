@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2023-01-10)
+------------------
+
+* Feature - This release adds support for configuring allocated storage on the CreateDBInstanceReadReplica, RestoreDBInstanceFromDBSnapshot, and RestoreDBInstanceToPointInTime APIs.
+
 1.169.0 (2023-01-05)
 ------------------
 

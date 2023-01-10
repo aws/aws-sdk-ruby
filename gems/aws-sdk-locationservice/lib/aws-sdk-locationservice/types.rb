@@ -625,7 +625,21 @@ module Aws::LocationService
     #
     #   * If traveling by `Truck` use the `TruckModeOptions` parameter.
     #
+    #   <note markdown="1"> `Bicycle` or `Motorcycle` are only valid when using `Grab` as a data
+    #   provider, and only within Southeast Asia.
+    #
+    #    `Truck` is not available for Grab.
+    #
+    #    For more information about using Grab as a data provider, see
+    #   [GrabMaps][1] in the *Amazon Location Service Developer Guide*.
+    #
+    #    </note>
+    #
     #   Default Value: `Car`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
     #   @return [String]
     #
     # @!attribute [rw] truck_mode_options
@@ -697,6 +711,8 @@ module Aws::LocationService
     #   the routes. Indicates one of the available providers:
     #
     #   * `Esri`
+    #
+    #   * `Grab`
     #
     #   * `Here`
     #
@@ -838,7 +854,19 @@ module Aws::LocationService
     # @!attribute [rw] travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility. You can
-    #   choose `Car`, `Truck`, or `Walking` as options for the `TravelMode`.
+    #   choose `Car`, `Truck`, `Walking`, `Bicycle` or `Motorcycle` as
+    #   options for the `TravelMode`.
+    #
+    #   <note markdown="1"> `Bicycle` and `Motorcycle` are only valid when using Grab as a data
+    #   provider, and only within Southeast Asia.
+    #
+    #    `Truck` is not available for Grab.
+    #
+    #    For more details on the using Grab for routing, including areas of
+    #   coverage, see [GrabMaps][1] in the *Amazon Location Service
+    #   Developer Guide*.
+    #
+    #    </note>
     #
     #   The `TravelMode` you specify also determines how you specify route
     #   preferences:
@@ -848,6 +876,10 @@ module Aws::LocationService
     #   * If traveling by `Truck` use the `TruckModeOptions` parameter.
     #
     #   Default Value: `Car`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
     #   @return [String]
     #
     # @!attribute [rw] truck_mode_options
@@ -960,6 +992,8 @@ module Aws::LocationService
     #   the route. Indicates one of the available providers:
     #
     #   * `Esri`
+    #
+    #   * `Grab`
     #
     #   * `Here`
     #
@@ -1318,27 +1352,33 @@ module Aws::LocationService
     #     your region of interest, see [Esri details on geocoding
     #     coverage][2].
     #
-    #   * `Here` – For additional information about [HERE Technologies][3]'
+    #   * `Grab` – Grab provides place index functionality for Southeast
+    #     Asia. For additional information about [GrabMaps][3]' coverage,
+    #     see [GrabMaps countries and areas covered][4].
+    #
+    #   * `Here` – For additional information about [HERE Technologies][5]'
     #     coverage in your region of interest, see [HERE details on
-    #     goecoding coverage][4].
+    #     goecoding coverage][6].
     #
     #     If you specify HERE Technologies (`Here`) as the data provider,
-    #     you may not [store results][5] for locations in Japan. For more
-    #     information, see the [AWS Service Terms][6] for Amazon Location
+    #     you may not [store results][7] for locations in Japan. For more
+    #     information, see the [AWS Service Terms][8] for Amazon Location
     #     Service.
     #
-    #   For additional information , see [Data providers][7] on the *Amazon
+    #   For additional information , see [Data providers][9] on the *Amazon
     #   Location Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [4]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
-    #   [5]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
-    #   [6]: https://aws.amazon.com/service-terms/
-    #   [7]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [6]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
+    #   [7]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
+    #   [8]: https://aws.amazon.com/service-terms/
+    #   [9]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -1454,9 +1494,7 @@ module Aws::LocationService
     #   Specifies the data provider of traffic and road network data.
     #
     #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
-    #   example, entering `HERE` returns an error. Route calculators that
-    #   use Esri as a data source only calculate routes that are shorter
-    #   than 400 km.
+    #   example, entering `HERE` returns an error.
     #
     #    </note>
     #
@@ -1466,21 +1504,30 @@ module Aws::LocationService
     #     your region of interest, see [Esri details on street networks and
     #     traffic coverage][2].
     #
-    #   * `Here` – For additional information about [HERE Technologies][3]'
-    #     coverage in your region of interest, see [HERE car routing
-    #     coverage][4] and [HERE truck routing coverage][5].
+    #     Route calculators that use Esri as a data source only calculate
+    #     routes that are shorter than 400 km.
     #
-    #   For additional information , see [Data providers][6] on the *Amazon
+    #   * `Grab` – Grab provides routing functionality for Southeast Asia.
+    #     For additional information about [GrabMaps][3]' coverage, see
+    #     [GrabMaps countries and areas covered][4].
+    #
+    #   * `Here` – For additional information about [HERE Technologies][5]'
+    #     coverage in your region of interest, see [HERE car routing
+    #     coverage][6] and [HERE truck routing coverage][7].
+    #
+    #   For additional information , see [Data providers][8] on the *Amazon
     #   Location Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [4]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
-    #   [5]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
-    #   [6]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [6]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
+    #   [7]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
+    #   [8]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2022,6 +2069,8 @@ module Aws::LocationService
     #
     #   * `Esri`
     #
+    #   * `Grab`
+    #
     #   * `Here`
     #
     #   For more information about data providers, see [Amazon Location
@@ -2131,6 +2180,8 @@ module Aws::LocationService
     #   the available providers:
     #
     #   * `Esri`
+    #
+    #   * `Grab`
     #
     #   * `Here`
     #
@@ -2703,7 +2754,14 @@ module Aws::LocationService
     #     `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \| `Noto Sans CJK JP
     #     Light` \| `Noto Sans CJK JP Regular`
     #
-    #   Valid font stacks for [Open Data (Preview)][3] styles:
+    #   Valid font stacks for [GrabMaps][3] styles:
+    #
+    #   * VectorGrabStandardLight, VectorGrabStandardDark – `Noto Sans
+    #     Regular` \| `Noto Sans Medium` \| `Noto Sans Bold`
+    #
+    #   ^
+    #
+    #   Valid font stacks for [Open Data (Preview)][4] styles:
     #
     #   * VectorOpenDataStandardLight – `Amazon Ember Regular,Noto Sans
     #     Regular` \| `Amazon Ember Bold,Noto Sans Bold` \| `Amazon Ember
@@ -2723,7 +2781,8 @@ module Aws::LocationService
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
     #   @return [String]
     #
     # @!attribute [rw] font_unicode_range
@@ -3512,6 +3571,8 @@ module Aws::LocationService
     #
     #   * `Esri`
     #
+    #   * `Grab`
+    #
     #   * `Here`
     #
     #   For more information about data providers, see [Amazon Location
@@ -3622,6 +3683,8 @@ module Aws::LocationService
     #   the available providers:
     #
     #   * `Esri`
+    #
+    #   * `Grab`
     #
     #   * `Here`
     #
@@ -3918,7 +3981,23 @@ module Aws::LocationService
     #
     #      </note>
     #
-    #   Valid [Open Data (Preview) map styles][3]\:
+    #   Valid [GrabMaps map styles][3]\:
+    #
+    #   * `VectorGrabStandardLight` – The Grab Standard Light map style
+    #     provides a basemap with detailed land use coloring, area names,
+    #     roads, landmarks, and points of interest covering Southeast Asia.
+    #
+    #   * `VectorGrabStandardDark` – The Grab Standard Dark map style
+    #     provides a dark variation of the standard basemap covering
+    #     Southeast Asia.
+    #
+    #   <note markdown="1"> Grab provides maps only for countries in Southeast Asia, and is only
+    #   available in the Asia Pacific (Singapore) Region (`ap-southeast-1`).
+    #   For more information, see [GrabMaps countries and area covered][4].
+    #
+    #    </note>
+    #
+    #   Valid [Open Data (Preview) map styles][5]\:
     #
     #   * `VectorOpenDataStandardLight` – The Open Data Standard Light
     #     (preview) map style provides a detailed basemap for the world
@@ -3929,14 +4008,16 @@ module Aws::LocationService
     #
     #     Open Data maps is in preview. We may add, change, or remove
     #     features before announcing general availability. For more
-    #     information, see [Open Data is in preview release][4].
+    #     information, see [Open Data is in preview release][6].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
-    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html#open-data-preview
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+    #   [6]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html#open-data-preview
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
@@ -4013,7 +4094,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] sub_region
-    #   A country, or an area that's part of a larger region. For example,
+    #   A county, or an area that's part of a larger region. For example,
     #   `Metro Vancouver`.
     #   @return [String]
     #
@@ -4278,7 +4359,8 @@ module Aws::LocationService
     #   `GetPlace` operation to find the place again later.
     #
     #   <note markdown="1"> For `SearchPlaceIndexForPosition` operations, the `PlaceId` is
-    #   returned only by place indexes that use HERE as a data provider.
+    #   returned only by place indexes that use HERE or Grab as a data
+    #   provider.
     #
     #    </note>
     #   @return [String]
@@ -4301,7 +4383,8 @@ module Aws::LocationService
     #   `GetPlace` operation to find the place again later.
     #
     #   <note markdown="1"> For `SearchPlaceIndexForSuggestions` operations, the `PlaceId` is
-    #   returned by place indexes that use HERE or Esri as data providers.
+    #   returned by place indexes that use Esri, Grab, or HERE as data
+    #   providers.
     #
     #    </note>
     #   @return [String]
@@ -4343,7 +4426,7 @@ module Aws::LocationService
     #   `GetPlace` operation to find the place again later.
     #
     #   <note markdown="1"> For `SearchPlaceIndexForText` operations, the `PlaceId` is returned
-    #   only by place indexes that use HERE as a data provider.
+    #   only by place indexes that use HERE or Grab as a data provider.
     #
     #    </note>
     #   @return [String]
@@ -4354,7 +4437,7 @@ module Aws::LocationService
     #   (including house number, street, city, country/region, and postal
     #   code), the relevance score is closer to 1.
     #
-    #   Returned only when the partner selected is Esri.
+    #   Returned only when the partner selected is Esri or Grab.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForTextResult AWS API Documentation
@@ -4453,6 +4536,8 @@ module Aws::LocationService
     #   specified in the request. Values can be one of the following:
     #
     #   * Esri
+    #
+    #   * Grab
     #
     #   * Here
     #
@@ -4643,6 +4728,8 @@ module Aws::LocationService
     #   specified in the request. Values can be one of the following:
     #
     #   * Esri
+    #
+    #   * Grab
     #
     #   * Here
     #
@@ -4846,6 +4933,8 @@ module Aws::LocationService
     #   specified in the request. Values can be one of the following:
     #
     #   * Esri
+    #
+    #   * Grab
     #
     #   * Here
     #
