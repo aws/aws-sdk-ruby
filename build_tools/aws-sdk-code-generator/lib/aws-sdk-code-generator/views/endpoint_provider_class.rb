@@ -157,7 +157,7 @@ module AwsSdkCodeGenerator
 
       def condition(condition)
         if condition['assign']
-          "#{underscore(condition['assign'])} = #{fn(condition)}"
+          "(#{underscore(condition['assign'])} = #{fn(condition)})"
         else
           fn(condition)
         end
