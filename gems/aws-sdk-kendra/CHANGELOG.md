@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-01-11)
+------------------
+
+* Feature - This release adds support to new document types - RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD
+
 1.61.0 (2022-11-28)
 ------------------
 

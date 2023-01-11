@@ -728,7 +728,7 @@ module Aws::Kendra
     #             ],
     #           },
     #         ],
-    #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
+    #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT, RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD
     #         access_control_configuration_id: "AccessControlConfigurationId",
     #       },
     #     ],
@@ -4659,7 +4659,7 @@ module Aws::Kendra
     # * Relevant documents
     #
     # You can specify that the query return only one type of result using
-    # the `QueryResultTypeConfig` parameter.
+    # the `QueryResultTypeFilter` parameter.
     #
     # Each query returns the 100 most relevant results.
     #
@@ -6413,7 +6413,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
