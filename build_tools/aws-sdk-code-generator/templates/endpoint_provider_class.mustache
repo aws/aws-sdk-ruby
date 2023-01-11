@@ -19,7 +19,7 @@ module {{module_name}}
     end
 
     def resolve_endpoint(parameters)
-      @provider.resolve_endpoint(parameters)
+{{{ endpoint_rules_code }}}
     end
 
     # @api private
