@@ -26,10 +26,6 @@ module AwsSdkCodeGenerator
         @service.module_name
       end
 
-      def endpoint_rules_encoded
-        Base64.encode64(JSON.dump(@endpoint_rules))
-      end
-
       def endpoint_rules_code
         res = StringIO.new
         # map parameters first
@@ -56,6 +52,8 @@ module AwsSdkCodeGenerator
 
         res.string
       end
+
+      private
 
       def endpoint_rule(rule, levels=3)
         res = StringIO.new
@@ -163,7 +161,6 @@ module AwsSdkCodeGenerator
         end
       end
 
-      # apply templating
       def str(s)
         if s.is_a?(Hash)
           if s['ref']
