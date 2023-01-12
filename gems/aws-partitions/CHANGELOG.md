@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.692.0 (2023-01-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CleanRooms`.
+
 1.691.0 (2023-01-10)
 ------------------
 

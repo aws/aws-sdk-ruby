@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-01-12)
+------------------
+
+* Feature - Update documentation for new ListSecrets and DescribeSecret parameters
+
 1.70.0 (2022-12-29)
 ------------------
 

@@ -628,6 +628,14 @@ module Aws::MediaConvert
     #   otherwise, the encoder will choose -23 LKFS.
     #   @return [Float]
     #
+    # @!attribute [rw] true_peak_limiter_threshold
+    #   Specify the True-peak limiter threshold in decibels relative to full
+    #   scale (dBFS). The peak inter-audio sample loudness in your output
+    #   will be limited to the value that you specify, without affecting the
+    #   overall target LKFS. Enter a value from 0 to -20. Leave blank to use
+    #   the default value 0.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioNormalizationSettings AWS API Documentation
     #
     class AudioNormalizationSettings < Struct.new(
@@ -636,7 +644,8 @@ module Aws::MediaConvert
       :correction_gate_level,
       :loudness_logging,
       :peak_calculation,
-      :target_lkfs)
+      :target_lkfs,
+      :true_peak_limiter_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1961,6 +1970,60 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Specify YUV limits and RGB tolerances when you set Sample range
+    # conversion to Limited range clip.
+    #
+    # @!attribute [rw] maximum_rgb_tolerance
+    #   Specify the Maximum RGB color sample range tolerance for your
+    #   output. MediaConvert corrects any YUV values that, when converted to
+    #   RGB, would be outside the upper tolerance that you specify. Enter an
+    #   integer from 90 to 105 as an offset percentage to the maximum
+    #   possible value. Leave blank to use the default value 100. When you
+    #   specify a value for Maximum RGB tolerance, you must set Sample range
+    #   conversion to Limited range clip.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_yuv
+    #   Specify the Maximum YUV color sample limit. MediaConvert conforms
+    #   any pixels in your input above the value that you specify to typical
+    #   limited range bounds. Enter an integer from 920 to 1023. Leave blank
+    #   to use the default value 940. The value that you enter applies to
+    #   10-bit ranges. For 8-bit ranges, MediaConvert automatically scales
+    #   this value down. When you specify a value for Maximum YUV, you must
+    #   set Sample range conversion to Limited range clip.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_rgb_tolerance
+    #   Specify the Minimum RGB color sample range tolerance for your
+    #   output. MediaConvert corrects any YUV values that, when converted to
+    #   RGB, would be outside the lower tolerance that you specify. Enter an
+    #   integer from -5 to 10 as an offset percentage to the minimum
+    #   possible value. Leave blank to use the default value 0. When you
+    #   specify a value for Minimum RGB tolerance, you must set Sample range
+    #   conversion to Limited range clip.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_yuv
+    #   Specify the Minimum YUV color sample limit. MediaConvert conforms
+    #   any pixels in your input below the value that you specify to typical
+    #   limited range bounds. Enter an integer from 0 to 128. Leave blank to
+    #   use the default value 64. The value that you enter applies to 10-bit
+    #   ranges. For 8-bit ranges, MediaConvert automatically scales this
+    #   value down. When you specify a value for Minumum YUV, you must set
+    #   Sample range conversion to Limited range clip.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ClipLimits AWS API Documentation
+    #
+    class ClipLimits < Struct.new(
+      :maximum_rgb_tolerance,
+      :maximum_yuv,
+      :minimum_rgb_tolerance,
+      :minimum_yuv)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specify the details for each pair of HLS and DASH additional manifests
     # that you want the service to generate for this CMAF output group. Each
     # pair of manifests can reference a different subset of outputs in the
@@ -2077,6 +2140,17 @@ module Aws::MediaConvert
     # @!attribute [rw] codec_specification
     #   Specification to use (RFC-6381 or the default RFC-4281) during m3u8
     #   playlist generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dash_manifest_style
+    #   Specify how MediaConvert writes SegmentTimeline in your output DASH
+    #   manifest. To write a SegmentTimeline in each video Representation:
+    #   Keep the default value, Basic. To write a common SegmentTimeline in
+    #   the video AdaptationSet: Choose Compact. Note that MediaConvert will
+    #   still write a SegmentTimeline in any Representation that does not
+    #   share a common timeline. To write a video AdaptationSet for each
+    #   different output framerate, and a common SegmentTimeline in each
+    #   AdaptationSet: Choose Distinct.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -2272,6 +2346,7 @@ module Aws::MediaConvert
       :base_url,
       :client_cache,
       :codec_specification,
+      :dash_manifest_style,
       :destination,
       :destination_settings,
       :encryption,
@@ -2471,7 +2546,9 @@ module Aws::MediaConvert
     #   scheme ID URI. For SCTE35 event messages, the InbandEventStream
     #   element schemeIdUri will be "urn:scte:scte35:2013:bin". To leave
     #   these elements out of your output MPD manifest, set Manifest
-    #   metadata signaling to Disabled.
+    #   metadata signaling to Disabled. To enable Manifest metadata
+    #   signaling, you must also set SCTE-35 source to Passthrough, ESAM
+    #   SCTE-35 to insert, or ID3 metadata (TimedMetadata) to Passthrough.
     #   @return [String]
     #
     # @!attribute [rw] scte_35_esam
@@ -2550,6 +2627,11 @@ module Aws::MediaConvert
     #   Brightness level.
     #   @return [Integer]
     #
+    # @!attribute [rw] clip_limits
+    #   Specify YUV limits and RGB tolerances when you set Sample range
+    #   conversion to Limited range clip.
+    #   @return [Types::ClipLimits]
+    #
     # @!attribute [rw] color_space_conversion
     #   Specify the color space you want for this output. The service
     #   supports conversion between HDR formats, between SDR formats, from
@@ -2589,18 +2671,23 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_range_conversion
-    #   Specify the video color sample range for this output. To create a
-    #   full range output, you must start with a full range YUV input and
-    #   keep the default value, None (NONE). To create a limited range
-    #   output from a full range input, choose Limited range
-    #   (LIMITED\_RANGE\_SQUEEZE). With RGB inputs, your output is always
-    #   limited range, regardless of your choice here. When you create a
-    #   limited range output from a full range input, MediaConvert limits
-    #   the active pixel values in a way that depends on the output's bit
-    #   depth: 8-bit outputs contain only values from 16 through 235 and
-    #   10-bit outputs contain only values from 64 through 940. With this
-    #   conversion, MediaConvert also changes the output metadata to note
-    #   the limited range.
+    #   Specify how MediaConvert limits the color sample range for this
+    #   output. To create a limited range output from a full range input:
+    #   Choose Limited range squeeze. For full range inputs, MediaConvert
+    #   performs a linear offset to color samples equally across all pixels
+    #   and frames. Color samples in 10-bit outputs are limited to 64
+    #   through 940, and 8-bit outputs are limited to 16 through 235. Note:
+    #   For limited range inputs, values for color samples are passed
+    #   through to your output unchanged. MediaConvert does not limit the
+    #   sample range. To correct pixels in your input that are out of range
+    #   or out of gamut: Choose Limited range clip. Use for broadcast
+    #   applications. MediaConvert conforms any pixels outside of the values
+    #   that you specify under Minimum YUV and Maximum YUV to limited range
+    #   bounds. MediaConvert also corrects any YUV values that, when
+    #   converted to RGB, would be outside the bounds you specify under
+    #   Minimum RGB tolerance and Maximum RGB tolerance. With either limited
+    #   range conversion, MediaConvert writes the sample range metadata in
+    #   the output.
     #   @return [String]
     #
     # @!attribute [rw] saturation
@@ -2624,6 +2711,7 @@ module Aws::MediaConvert
     #
     class ColorCorrector < Struct.new(
       :brightness,
+      :clip_limits,
       :color_space_conversion,
       :contrast,
       :hdr_10_metadata,
@@ -2737,7 +2825,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Optional. Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
+    #   Prevent duplicate jobs from being created and ensure idempotency for your requests. A client request token can be any string that includes up to 64 ASCII characters. If you reuse a client request token within one minute of a successful request, the API returns the job details of the original request instead. For more information see https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -3155,6 +3243,17 @@ module Aws::MediaConvert
     #   from a different URL than the manifest file.
     #   @return [String]
     #
+    # @!attribute [rw] dash_manifest_style
+    #   Specify how MediaConvert writes SegmentTimeline in your output DASH
+    #   manifest. To write a SegmentTimeline in each video Representation:
+    #   Keep the default value, Basic. To write a common SegmentTimeline in
+    #   the video AdaptationSet: Choose Compact. Note that MediaConvert will
+    #   still write a SegmentTimeline in any Representation that does not
+    #   share a common timeline. To write a video AdaptationSet for each
+    #   different output framerate, and a common SegmentTimeline in each
+    #   AdaptationSet: Choose Distinct.
+    #   @return [String]
+    #
     # @!attribute [rw] destination
     #   Use Destination (Destination) to specify the S3 output location and
     #   the output filename base. Destination accepts format identifiers. If
@@ -3312,6 +3411,7 @@ module Aws::MediaConvert
       :additional_manifests,
       :audio_channel_config_scheme_id_uri,
       :base_url,
+      :dash_manifest_style,
       :destination,
       :destination_settings,
       :encryption,
@@ -9331,7 +9431,9 @@ module Aws::MediaConvert
     #   scheme ID URI. For SCTE35 event messages, the InbandEventStream
     #   element schemeIdUri will be "urn:scte:scte35:2013:bin". To leave
     #   these elements out of your output MPD manifest, set Manifest
-    #   metadata signaling to Disabled.
+    #   metadata signaling to Disabled. To enable Manifest metadata
+    #   signaling, you must also set SCTE-35 source to Passthrough, ESAM
+    #   SCTE-35 to insert, or ID3 metadata (TimedMetadata) to Passthrough.
     #   @return [String]
     #
     # @!attribute [rw] scte_35_esam

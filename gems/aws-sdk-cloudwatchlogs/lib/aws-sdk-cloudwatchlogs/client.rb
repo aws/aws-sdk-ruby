@@ -1146,6 +1146,10 @@ module Aws::CloudWatchLogs
     # the log streams or filter the results by prefix. You can also control
     # how the results are ordered.
     #
+    # You can specify the log group to search by using either
+    # `logGroupIdentifier` or `logGroupName`. You must include one of these
+    # two parameters, but you can't include both.
+    #
     # This operation has a limit of five transactions per second, after
     # which transactions are throttled.
     #
@@ -1158,7 +1162,7 @@ module Aws::CloudWatchLogs
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
-    # @option params [required, String] :log_group_name
+    # @option params [String] :log_group_name
     #   The name of the log group.
     #
     #   <note markdown="1"> If you specify values for both `logGroupName` and
@@ -1172,9 +1176,11 @@ module Aws::CloudWatchLogs
     #   group is in a source account and you are using a monitoring account,
     #   you must use the log group ARN.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #
     # @option params [String] :log_stream_name_prefix
     #   The prefix to match.
@@ -1219,7 +1225,7 @@ module Aws::CloudWatchLogs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_log_streams({
-    #     log_group_name: "LogGroupName", # required
+    #     log_group_name: "LogGroupName",
     #     log_group_identifier: "LogGroupIdentifier",
     #     log_stream_name_prefix: "LogStreamName",
     #     order_by: "LogStreamName", # accepts LogStreamName, LastEventTime
@@ -1560,6 +1566,10 @@ module Aws::CloudWatchLogs
     # You must have the `logs;FilterLogEvents` permission to perform this
     # operation.
     #
+    # You can specify the log group to search by using either
+    # `logGroupIdentifier` or `logGroupName`. You must include one of these
+    # two parameters, but you can't include both.
+    #
     # By default, this operation returns as many log events as can fit in 1
     # MB (up to 10,000 log events) or all the events found within the
     # specified time range. If the results include a token, that means there
@@ -1581,7 +1591,7 @@ module Aws::CloudWatchLogs
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
-    # @option params [required, String] :log_group_name
+    # @option params [String] :log_group_name
     #   The name of the log group to search.
     #
     #   <note markdown="1"> If you specify values for both `logGroupName` and
@@ -1595,9 +1605,11 @@ module Aws::CloudWatchLogs
     #   from. If the log group is in a source account and you are using a
     #   monitoring account, you must use the log group ARN.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :log_stream_names
     #   Filters the results to only logs from the log streams in this list.
@@ -1671,7 +1683,7 @@ module Aws::CloudWatchLogs
     # @example Request syntax with placeholder values
     #
     #   resp = client.filter_log_events({
-    #     log_group_name: "LogGroupName", # required
+    #     log_group_name: "LogGroupName",
     #     log_group_identifier: "LogGroupIdentifier",
     #     log_stream_names: ["LogStreamName"],
     #     log_stream_name_prefix: "LogStreamName",
@@ -1753,11 +1765,15 @@ module Aws::CloudWatchLogs
     # source accounts. For more information, see [CloudWatch cross-account
     # observability][1].
     #
+    # You can specify the log group to search by using either
+    # `logGroupIdentifier` or `logGroupName`. You must include one of these
+    # two parameters, but you can't include both.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
-    # @option params [required, String] :log_group_name
+    # @option params [String] :log_group_name
     #   The name of the log group.
     #
     #   <note markdown="1"> If you specify values for both `logGroupName` and
@@ -1771,9 +1787,11 @@ module Aws::CloudWatchLogs
     #   If the log group is in a source account and you are using a monitoring
     #   account, you must use the log group ARN.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #
     # @option params [required, String] :log_stream_name
     #   The name of the log stream.
@@ -1825,7 +1843,7 @@ module Aws::CloudWatchLogs
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_log_events({
-    #     log_group_name: "LogGroupName", # required
+    #     log_group_name: "LogGroupName",
     #     log_group_identifier: "LogGroupIdentifier",
     #     log_stream_name: "LogStreamName", # required
     #     start_time: 1,
@@ -1859,6 +1877,10 @@ module Aws::CloudWatchLogs
     # contain each field. The search is limited to a time period that you
     # specify.
     #
+    # You can specify the log group to search by using either
+    # `logGroupIdentifier` or `logGroupName`. You must specify one of these
+    # parameters, but you can't specify both.
+    #
     # In the results, fields that start with `@` are fields generated by
     # CloudWatch Logs. For example, `@timestamp` is the timestamp of each
     # log event. For more information about the fields that are generated by
@@ -1877,12 +1899,14 @@ module Aws::CloudWatchLogs
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
-    # @option params [required, String] :log_group_name
+    # @option params [String] :log_group_name
     #   The name of the log group to search.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #
     # @option params [Integer] :time
     #   The time to set as the center of the query. If you specify `time`, the
@@ -1897,9 +1921,11 @@ module Aws::CloudWatchLogs
     #   group is in a source account and you are using a monitoring account,
     #   you must specify the ARN.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #
     # @return [Types::GetLogGroupFieldsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1908,7 +1934,7 @@ module Aws::CloudWatchLogs
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_log_group_fields({
-    #     log_group_name: "LogGroupName", # required
+    #     log_group_name: "LogGroupName",
     #     time: 1,
     #     log_group_identifier: "LogGroupIdentifier",
     #   })
@@ -3201,7 +3227,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

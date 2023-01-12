@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.157.0 (2023-01-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-cleanrooms` gem.
+
 3.156.0 (2023-01-09)
 ------------------
 
