@@ -171,6 +171,7 @@ module Aws::Connect
     DeleteContactFlowModuleRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleRequest')
     DeleteContactFlowModuleResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleResponse')
     DeleteContactFlowRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowRequest')
+    DeleteContactFlowResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowResponse')
     DeleteHoursOfOperationRequest = Shapes::StructureShape.new(name: 'DeleteHoursOfOperationRequest')
     DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
     DeleteIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationAssociationRequest')
@@ -688,12 +689,15 @@ module Aws::Connect
     UpdateContactAttributesRequest = Shapes::StructureShape.new(name: 'UpdateContactAttributesRequest')
     UpdateContactAttributesResponse = Shapes::StructureShape.new(name: 'UpdateContactAttributesResponse')
     UpdateContactFlowContentRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowContentRequest')
+    UpdateContactFlowContentResponse = Shapes::StructureShape.new(name: 'UpdateContactFlowContentResponse')
     UpdateContactFlowMetadataRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowMetadataRequest')
+    UpdateContactFlowMetadataResponse = Shapes::StructureShape.new(name: 'UpdateContactFlowMetadataResponse')
     UpdateContactFlowModuleContentRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowModuleContentRequest')
     UpdateContactFlowModuleContentResponse = Shapes::StructureShape.new(name: 'UpdateContactFlowModuleContentResponse')
     UpdateContactFlowModuleMetadataRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowModuleMetadataRequest')
     UpdateContactFlowModuleMetadataResponse = Shapes::StructureShape.new(name: 'UpdateContactFlowModuleMetadataResponse')
     UpdateContactFlowNameRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowNameRequest')
+    UpdateContactFlowNameResponse = Shapes::StructureShape.new(name: 'UpdateContactFlowNameResponse')
     UpdateContactRequest = Shapes::StructureShape.new(name: 'UpdateContactRequest')
     UpdateContactResponse = Shapes::StructureShape.new(name: 'UpdateContactResponse')
     UpdateContactScheduleRequest = Shapes::StructureShape.new(name: 'UpdateContactScheduleRequest')
@@ -1285,6 +1289,8 @@ module Aws::Connect
     DeleteContactFlowRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteContactFlowRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location: "uri", location_name: "ContactFlowId"))
     DeleteContactFlowRequest.struct_class = Types::DeleteContactFlowRequest
+
+    DeleteContactFlowResponse.struct_class = Types::DeleteContactFlowResponse
 
     DeleteHoursOfOperationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteHoursOfOperationRequest.add_member(:hours_of_operation_id, Shapes::ShapeRef.new(shape: HoursOfOperationId, required: true, location: "uri", location_name: "HoursOfOperationId"))
@@ -2874,12 +2880,16 @@ module Aws::Connect
     UpdateContactFlowContentRequest.add_member(:content, Shapes::ShapeRef.new(shape: ContactFlowContent, required: true, location_name: "Content"))
     UpdateContactFlowContentRequest.struct_class = Types::UpdateContactFlowContentRequest
 
+    UpdateContactFlowContentResponse.struct_class = Types::UpdateContactFlowContentResponse
+
     UpdateContactFlowMetadataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateContactFlowMetadataRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location: "uri", location_name: "ContactFlowId"))
     UpdateContactFlowMetadataRequest.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
     UpdateContactFlowMetadataRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
     UpdateContactFlowMetadataRequest.add_member(:contact_flow_state, Shapes::ShapeRef.new(shape: ContactFlowState, location_name: "ContactFlowState"))
     UpdateContactFlowMetadataRequest.struct_class = Types::UpdateContactFlowMetadataRequest
+
+    UpdateContactFlowMetadataResponse.struct_class = Types::UpdateContactFlowMetadataResponse
 
     UpdateContactFlowModuleContentRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateContactFlowModuleContentRequest.add_member(:contact_flow_module_id, Shapes::ShapeRef.new(shape: ContactFlowModuleId, required: true, location: "uri", location_name: "ContactFlowModuleId"))
@@ -2902,6 +2912,8 @@ module Aws::Connect
     UpdateContactFlowNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
     UpdateContactFlowNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
     UpdateContactFlowNameRequest.struct_class = Types::UpdateContactFlowNameRequest
+
+    UpdateContactFlowNameResponse.struct_class = Types::UpdateContactFlowNameResponse
 
     UpdateContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
@@ -3667,7 +3679,7 @@ module Aws::Connect
         o.http_method = "DELETE"
         o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteContactFlowRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DeleteContactFlowResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -5308,7 +5320,7 @@ module Aws::Connect
         o.http_method = "POST"
         o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/content"
         o.input = Shapes::ShapeRef.new(shape: UpdateContactFlowContentRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: UpdateContactFlowContentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidContactFlowException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -5322,7 +5334,7 @@ module Aws::Connect
         o.http_method = "POST"
         o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/metadata"
         o.input = Shapes::ShapeRef.new(shape: UpdateContactFlowMetadataRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: UpdateContactFlowMetadataResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
@@ -5365,7 +5377,7 @@ module Aws::Connect
         o.http_method = "POST"
         o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/name"
         o.input = Shapes::ShapeRef.new(shape: UpdateContactFlowNameRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: UpdateContactFlowNameResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)

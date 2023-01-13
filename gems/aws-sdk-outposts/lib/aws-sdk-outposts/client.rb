@@ -594,7 +594,7 @@ module Aws::Outposts
     #       municipality: "Municipality",
     #     },
     #     rack_physical_properties: {
-    #       power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA
+    #       power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA, POWER_30_KVA
     #       power_phase: "SINGLE_PHASE", # accepts SINGLE_PHASE, THREE_PHASE
     #       power_connector: "L6_30P", # accepts L6_30P, IEC309, AH530P7W, AH532P6W
     #       power_feed_drop: "ABOVE_RACK", # accepts ABOVE_RACK, BELOW_RACK
@@ -619,7 +619,7 @@ module Aws::Outposts
     #   resp.site.operating_address_country_code #=> String
     #   resp.site.operating_address_state_or_region #=> String
     #   resp.site.operating_address_city #=> String
-    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA", "POWER_30_KVA"
     #   resp.site.rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
     #   resp.site.rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
     #   resp.site.rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
@@ -930,7 +930,7 @@ module Aws::Outposts
     #   resp.site.operating_address_country_code #=> String
     #   resp.site.operating_address_state_or_region #=> String
     #   resp.site.operating_address_city #=> String
-    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA", "POWER_30_KVA"
     #   resp.site.rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
     #   resp.site.rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
     #   resp.site.rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
@@ -1291,7 +1291,7 @@ module Aws::Outposts
     #   resp.sites[0].operating_address_country_code #=> String
     #   resp.sites[0].operating_address_state_or_region #=> String
     #   resp.sites[0].operating_address_city #=> String
-    #   resp.sites[0].rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.sites[0].rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA", "POWER_30_KVA"
     #   resp.sites[0].rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
     #   resp.sites[0].rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
     #   resp.sites[0].rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
@@ -1544,7 +1544,7 @@ module Aws::Outposts
     #   resp.site.operating_address_country_code #=> String
     #   resp.site.operating_address_state_or_region #=> String
     #   resp.site.operating_address_city #=> String
-    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA", "POWER_30_KVA"
     #   resp.site.rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
     #   resp.site.rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
     #   resp.site.rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
@@ -1747,7 +1747,7 @@ module Aws::Outposts
     #
     #   resp = client.update_site_rack_physical_properties({
     #     site_id: "SiteId", # required
-    #     power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA
+    #     power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA, POWER_30_KVA
     #     power_phase: "SINGLE_PHASE", # accepts SINGLE_PHASE, THREE_PHASE
     #     power_connector: "L6_30P", # accepts L6_30P, IEC309, AH530P7W, AH532P6W
     #     power_feed_drop: "ABOVE_RACK", # accepts ABOVE_RACK, BELOW_RACK
@@ -1771,7 +1771,7 @@ module Aws::Outposts
     #   resp.site.operating_address_country_code #=> String
     #   resp.site.operating_address_state_or_region #=> String
     #   resp.site.operating_address_city #=> String
-    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA", "POWER_30_KVA"
     #   resp.site.rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
     #   resp.site.rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
     #   resp.site.rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
@@ -1803,7 +1803,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

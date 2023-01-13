@@ -10,6 +10,31 @@
 module Aws::ResourceGroups
   module Types
 
+    # The Resource Groups settings for this Amazon Web Services account.
+    #
+    # @!attribute [rw] group_lifecycle_events_desired_status
+    #   The desired target status of the group lifecycle events feature. If
+    #   @return [String]
+    #
+    # @!attribute [rw] group_lifecycle_events_status
+    #   The current status of the group lifecycle events feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_lifecycle_events_status_message
+    #   The text of any error message occurs during an attempt to turn group
+    #   lifecycle events on or off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/AccountSettings AWS API Documentation
+    #
+    class AccountSettings < Struct.new(
+      :group_lifecycle_events_desired_status,
+      :group_lifecycle_events_status,
+      :group_lifecycle_events_status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request includes one or more parameters that violate validation
     # rules.
     #
@@ -30,7 +55,8 @@ module Aws::ResourceGroups
     #   create it. A resource group name can consist of letters, numbers,
     #   hyphens, periods, and underscores. The name cannot start with `AWS`
     #   or `aws`; these are reserved. A resource group name must be unique
-    #   within each AWS Region in your AWS account.
+    #   within each Amazon Web Services Region in your Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -39,9 +65,10 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] resource_query
-    #   The resource query that determines which AWS resources are members
-    #   of this group. For more information about resource queries, see
-    #   [Create a tag-based group in Resource Groups][1].
+    #   The resource query that determines which Amazon Web Services
+    #   resources are members of this group. For more information about
+    #   resource queries, see [Create a tag-based group in Resource
+    #   Groups][1].
     #
     #   <note markdown="1"> A resource group can contain either a `ResourceQuery` or a
     #   `Configuration`, but not both.
@@ -58,11 +85,12 @@ module Aws::ResourceGroups
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] configuration
-    #   A configuration associates the resource group with an AWS service
-    #   and specifies how the service can interact with the resources in the
-    #   group. A configuration is an array of GroupConfigurationItem
-    #   elements. For details about the syntax of service configurations,
-    #   see [Service configurations for resource groups][1].
+    #   A configuration associates the resource group with an Amazon Web
+    #   Services service and specifies how the service can interact with the
+    #   resources in the group. A configuration is an array of
+    #   GroupConfigurationItem elements. For details about the syntax of
+    #   service configurations, see [Service configurations for Resource
+    #   Groups][1].
     #
     #   <note markdown="1"> A resource group can contain either a `Configuration` or a
     #   `ResourceQuery`, but not both.
@@ -107,7 +135,7 @@ module Aws::ResourceGroups
     # @!attribute [rw] group_configuration
     #   The service configuration associated with the resource group. For
     #   details about the syntax of a service configuration, see [Service
-    #   configurations for resource groups][1].
+    #   configurations for Resource Groups][1].
     #
     #
     #
@@ -191,8 +219,21 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_settings
+    #   The current settings for the optional features in Resource Groups.
+    #   @return [Types::AccountSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetAccountSettingsOutput AWS API Documentation
+    #
+    class GetAccountSettingsOutput < Struct.new(
+      :account_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group.
+    #   The name or the ARN of the resource group for which you want to
+    #   retrive the service configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupConfigurationInput AWS API Documentation
@@ -204,9 +245,9 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] group_configuration
-    #   The service configuration associated with the specified group. For
-    #   details about the service configuration syntax, see [Service
-    #   configurations for resource groups][1].
+    #   A structure that describes the service configuration attached with
+    #   the specified group. For details about the service configuration
+    #   syntax, see [Service configurations for Resource Groups][1].
     #
     #
     #
@@ -239,7 +280,9 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] group
-    #   A full description of the resource group.
+    #   A structure that contains the metadata details for the specified
+    #   resource group. Use GetGroupQuery and GetGroupConfiguration to get
+    #   those additional details of the resource group.
     #   @return [Types::Group]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupOutput AWS API Documentation
@@ -314,19 +357,20 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # A resource group that contains AWS resources. You can assign resources
-    # to the group by associating either of the following elements with the
-    # group:
+    # A resource group that contains Amazon Web Services resources. You can
+    # assign resources to the group by associating either of the following
+    # elements with the group:
     #
     # * ResourceQuery - Use a resource query to specify a set of tag keys
-    #   and values. All resources in the same AWS Region and AWS account
-    #   that have those keys with the same values are included in the group.
-    #   You can add a resource query when you create the group, or later by
-    #   using the PutGroupConfiguration operation.
+    #   and values. All resources in the same Amazon Web Services Region and
+    #   Amazon Web Services account that have those keys with the same
+    #   values are included in the group. You can add a resource query when
+    #   you create the group, or later by using the PutGroupConfiguration
+    #   operation.
     #
     # * GroupConfiguration - Use a service configuration to associate the
-    #   group with an AWS service. The configuration specifies which
-    #   resource types can be included in the group.
+    #   group with an Amazon Web Services service. The configuration
+    #   specifies which resource types can be included in the group.
     #
     # @!attribute [rw] group_arn
     #   The ARN of the resource group.
@@ -351,12 +395,13 @@ module Aws::ResourceGroups
     end
 
     # A service configuration associated with a resource group. The
-    # configuration options are determined by the AWS service that defines
-    # the `Type`, and specifies which resources can be included in the
-    # group. You can add a service configuration when you create the group
-    # by using CreateGroup, or later by using the PutGroupConfiguration
-    # operation. For details about group service configuration syntax, see
-    # [Service configurations for resource groups][1].
+    # configuration options are determined by the Amazon Web Services
+    # service that defines the `Type`, and specifies which resources can be
+    # included in the group. You can add a service configuration when you
+    # create the group by using CreateGroup, or later by using the
+    # PutGroupConfiguration operation. For details about group service
+    # configuration syntax, see [Service configurations for resource
+    # groups][1].
     #
     #
     #
@@ -507,7 +552,7 @@ module Aws::ResourceGroups
     end
 
     # A mapping of a query attached to a resource group that determines the
-    # AWS resources that are members of the group.
+    # Amazon Web Services resources that are members of the group.
     #
     # @!attribute [rw] group_name
     #   The name of the resource group that is associated with the specified
@@ -515,8 +560,8 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] resource_query
-    #   The resource query that determines which AWS resources are members
-    #   of the associated resource group.
+    #   The resource query that determines which Amazon Web Services
+    #   resources are members of the associated resource group.
     #   @return [Types::ResourceQuery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupQuery AWS API Documentation
@@ -533,7 +578,7 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The list of ARNs for resources to be added to the group.
+    #   The list of ARNs of the resources to be added to the group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupResourcesInput AWS API Documentation
@@ -546,22 +591,22 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] succeeded
-    #   A list of ARNs of resources that were successfully added to the
-    #   group by this operation.
+    #   A list of ARNs of the resources that this operation successfully
+    #   added to the group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] failed
-    #   A list of ARNs of any resources that failed to be added to the group
-    #   by this operation.
+    #   A list of ARNs of any resources that this operation failed to add to
+    #   the group.
     #   @return [Array<Types::FailedResource>]
     #
     # @!attribute [rw] pending
-    #   A list of ARNs of any resources that are still in the process of
-    #   being added to the group by this operation. These pending additions
-    #   continue asynchronously. You can check the status of pending
-    #   additions by using the ` ListGroupResources ` operation, and
-    #   checking the `Resources` array in the response and the `Status`
-    #   field of each object in that array.
+    #   A list of ARNs of any resources that this operation is still in the
+    #   process adding to the group. These pending additions continue
+    #   asynchronously. You can check the status of pending additions by
+    #   using the ` ListGroupResources ` operation, and checking the
+    #   `Resources` array in the response and the `Status` field of each
+    #   object in that array.
     #   @return [Array<Types::PendingResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupResourcesOutput AWS API Documentation
@@ -610,7 +655,7 @@ module Aws::ResourceGroups
     #   ^
     #
     #   When you specify a `resource-type` filter for `ListGroupResources`,
-    #   AWS Resource Groups validates your filter resource types against the
+    #   Resource Groups validates your filter resource types against the
     #   types that are defined in the query associated with the group. For
     #   example, if a group contains only S3 buckets because its query
     #   specifies only that resource type, but your `resource-type` filter
@@ -626,7 +671,7 @@ module Aws::ResourceGroups
     #   the group. This validation doesn't occur when the group query
     #   specifies `AWS::AllSupported`, because a group based on such a query
     #   can contain any of the allowed resource types for the query type
-    #   (tag-based or AWS CloudFormation stack-based queries).
+    #   (tag-based or Amazon CloudFront stack-based queries).
     #   @return [Array<Types::ResourceFilter>]
     #
     # @!attribute [rw] max_results
@@ -739,9 +784,9 @@ module Aws::ResourceGroups
     #     groups that have the specified configuration types attached. The
     #     current supported values are:
     #
-    #     * `AWS:EC2::CapacityReservationPool`
+    #     * `AWS::EC2::CapacityReservationPool`
     #
-    #     * `AWS:EC2::HostManagement`
+    #     * `AWS::EC2::HostManagement`
     #   @return [Array<Types::GroupFilter>]
     #
     # @!attribute [rw] max_results
@@ -855,13 +900,13 @@ module Aws::ResourceGroups
     #
     # @!attribute [rw] configuration
     #   The new configuration to associate with the specified group. A
-    #   configuration associates the resource group with an AWS service and
-    #   specifies how the service can interact with the resources in the
-    #   group. A configuration is an array of GroupConfigurationItem
-    #   elements.
+    #   configuration associates the resource group with an Amazon Web
+    #   Services service and specifies how the service can interact with the
+    #   resources in the group. A configuration is an array of
+    #   GroupConfigurationItem elements.
     #
     #   For information about the syntax of a service configuration, see
-    #   [Service configurations for resource groups][1].
+    #   [Service configurations for Resource Groups][1].
     #
     #   <note markdown="1"> A resource group can contain either a `Configuration` or a
     #   `ResourceQuery`, but not both.
@@ -887,23 +932,22 @@ module Aws::ResourceGroups
     class PutGroupConfigurationOutput < Aws::EmptyStructure; end
 
     # A two-part error structure that can occur in `ListGroupResources` or
-    # `SearchResources` operations on CloudFormation stack-based queries.
-    # The error occurs if the CloudFormation stack on which the query is
-    # based either does not exist, or has a status that renders the stack
-    # inactive. A `QueryError` occurrence does not necessarily mean that AWS
+    # `SearchResources` operations on CloudFront stack-based queries. The
+    # error occurs if the CloudFront stack on which the query is based
+    # either does not exist, or has a status that renders the stack
+    # inactive. A `QueryError` occurrence does not necessarily mean that
     # Resource Groups could not complete the operation, but the resulting
     # group might have no member resources.
     #
     # @!attribute [rw] error_code
-    #   Possible values are `CLOUDFORMATION_STACK_INACTIVE` and
-    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   Specifies the error code that was raised.
     #   @return [String]
     #
     # @!attribute [rw] message
     #   A message that explains the `ErrorCode` value. Messages might state
-    #   that the specified CloudFormation stack does not exist (or no longer
+    #   that the specified CloudFront stack does not exist (or no longer
     #   exists). For `CLOUDFORMATION_STACK_INACTIVE`, the message typically
-    #   states that the CloudFormation stack has a status that is not (or no
+    #   states that the CloudFront stack has a status that is not (or no
     #   longer) active, such as `CREATE_FAILED`.
     #   @return [String]
     #
@@ -956,108 +1000,101 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # The query that is used to define a resource group or a search for
-    # resources. A query specifies both a query type and a query string as a
-    # JSON object. See the examples section for example JSON strings.
+    # The query you can use to define a resource group or a search for
+    # resources. A `ResourceQuery` specifies both a query `Type` and a
+    # `Query` string as JSON string objects. See the examples section for
+    # example JSON strings. For more information about creating a resource
+    # group with a resource query, see [Build queries and groups in Resource
+    # Groups][1] in the *Resource Groups User Guide*
     #
-    # The examples that follow are shown as standard JSON strings. If you
-    # include such a string as a parameter to the AWS CLI or an SDK API, you
-    # might need to 'escape' the string into a single line. For example,
-    # see the [Quoting strings][1] in the *AWS CLI User Guide*.
+    # When you combine all of the elements together into a single string,
+    # any double quotes that are embedded inside another double quote pair
+    # must be escaped by preceding the embedded double quote with a
+    # backslash character (\\). For example, a complete `ResourceQuery`
+    # parameter must be formatted like the following CLI parameter example:
     #
-    # **Example 1**
+    # `--resource-query
+    # '\{"Type":"TAG_FILTERS_1_0","Query":"\{"ResourceTypeFilters":["AWS::AllSupported"],"TagFilters":[\{"Key":"Stage","Values":["Test"]\}]\}"\}'`
     #
-    # The following generic example shows a resource query JSON string that
-    # includes only resources that meet the following criteria:
+    # In the preceding example, all of the double quote characters in the
+    # value part of the `Query` element must be escaped because the value
+    # itself is surrounded by double quotes. For more information, see
+    # [Quoting strings][2] in the *Command Line Interface User Guide*.
     #
-    # * The resource type must be either `resource_type1` or
-    #   `resource_type2`.
+    # For the complete list of resource types that you can use in the array
+    # value for `ResourceTypeFilters`, see [Resources you can use with
+    # Resource Groups and Tag Editor][3] in the *Resource Groups User
+    # Guide*. For example:
     #
-    # * The resource must have a tag `Key1` with a value of either `ValueA`
-    #   or `ValueB`.
-    #
-    # * The resource must have a tag `Key2` with a value of either `ValueC`
-    #   or `ValueD`.
-    #
-    # `\{ "Type": "TAG_FILTERS_1_0", "Query": \{ "ResourceTypeFilters": [
-    # "resource_type1", "resource_type2"], "TagFilters": [ \{ "Key": "Key1",
-    # "Values": ["ValueA","ValueB"] \}, \{ "Key":"Key2",
-    # "Values":["ValueC","ValueD"] \} ] \} \}`
-    #
-    # This has the equivalent "shortcut" syntax of the following:
-    #
-    # `\{ "Type": "TAG_FILTERS_1_0", "Query": \{ "ResourceTypeFilters": [
-    # "resource_type1", "resource_type2"], "TagFilters": [ \{ "Key1":
-    # ["ValueA","ValueB"] \}, \{ "Key2": ["ValueC","ValueD"] \} ] \} \}`
-    #
-    # **Example 2**
-    #
-    # The following example shows a resource query JSON string that includes
-    # only Amazon EC2 instances that are tagged `Stage` with a value of
-    # `Test`.
-    #
-    # `\{ "Type": "TAG_FILTERS_1_0", "Query": "\{ "ResourceTypeFilters":
-    # "AWS::EC2::Instance", "TagFilters": \{ "Stage": "Test" \} \} \}`
-    #
-    # **Example 3**
-    #
-    # The following example shows a resource query JSON string that includes
-    # resource of any supported type as long as it is tagged `Stage` with a
-    # value of `Prod`.
-    #
-    # `\{ "Type": "TAG_FILTERS_1_0", "Query": \{ "ResourceTypeFilters":
-    # "AWS::AllSupported", "TagFilters": \{ "Stage": "Prod" \} \} \}`
-    #
-    # **Example 4**
-    #
-    # The following example shows a resource query JSON string that includes
-    # only Amazon EC2 instances and Amazon S3 buckets that are part of the
-    # specified AWS CloudFormation stack.
-    #
-    # `\{ "Type": "CLOUDFORMATION_STACK_1_0", "Query": \{
-    # "ResourceTypeFilters": [ "AWS::EC2::Instance", "AWS::S3::Bucket" ],
-    # "StackIdentifier":
-    # "arn:aws:cloudformation:us-west-2:123456789012:stack/AWStestuseraccount/fb0d5000-aba8-00e8-aa9e-50d5cEXAMPLE"
-    # \} \}`
+    # `"ResourceTypeFilters":["AWS::S3::Bucket", "AWS::EC2::Instance"]`
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html
+    # [1]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html
+    # [2]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html
+    # [3]: https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html
     #
     # @!attribute [rw] type
-    #   The type of the query. You can use the following values:
+    #   The type of the query to perform. This can have one of two values:
     #
-    #   * <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the
-    #     `Query` contains an ARN for a CloudFormation stack.
+    #   * <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> Specifies that you
+    #     want the group to contain the members of an CloudFormation stack.
+    #     The `Query` contains a `StackIdentifier` element with an ARN for a
+    #     CloudFormation stack.
     #
-    #   * <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the `Query`
-    #     parameter contains a JSON string that represents a collection of
-    #     simple tag filters for resource types and tags. The JSON string
-    #     uses a syntax similar to the ` GetResources ` operation, but uses
-    #     only the `  ResourceTypeFilters ` and ` TagFilters ` fields. If
-    #     you specify more than one tag key, only resources that match all
-    #     tag keys, and at least one value of each specified tag key, are
-    #     returned in your query. If you specify more than one value for a
-    #     tag key, a resource matches the filter if it has a tag key value
-    #     that matches *any* of the specified values.
+    #   * <i> <code>TAG_FILTERS_1_0:</code> </i> Specifies that you want the
+    #     group to include resource that have tags that match the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query
+    #   The query that defines a group or a search. The contents depends on
+    #   the value of the `Type` element.
+    #
+    #   * `ResourceTypeFilters` – Applies to all `ResourceQuery` objects of
+    #     either `Type`. This element contains one of the following two
+    #     items:
+    #
+    #     * The value `AWS::AllSupported`. This causes the ResourceQuery to
+    #       match resources of any resource type that also match the query.
+    #
+    #     * A list (a JSON array) of resource type identifiers that limit
+    #       the query to only resources of the specified types. For the
+    #       complete list of resource types that you can use in the array
+    #       value for `ResourceTypeFilters`, see [Resources you can use with
+    #       Resource Groups and Tag Editor][1] in the *Resource Groups User
+    #       Guide*.
+    #
+    #     Example: `"ResourceTypeFilters": ["AWS::AllSupported"]` or
+    #     `"ResourceTypeFilters": ["AWS::EC2::Instance", "AWS::S3::Bucket"]`
+    #
+    #   * `TagFilters` – applicable only if `Type` = `TAG_FILTERS_1_0`. The
+    #     `Query` contains a JSON string that represents a collection of
+    #     simple tag filters. The JSON string uses a syntax similar to the `
+    #     GetResources ` operation, but uses only the `  ResourceTypeFilters
+    #     ` and ` TagFilters ` fields. If you specify more than one tag key,
+    #     only resources that match all tag keys, and at least one value of
+    #     each specified tag key, are returned in your query. If you specify
+    #     more than one value for a tag key, a resource matches the filter
+    #     if it has a tag key value that matches *any* of the specified
+    #     values.
     #
     #     For example, consider the following sample query for resources
     #     that have two tags, `Stage` and `Version`, with two values each:
     #
     #     `[\{"Stage":["Test","Deploy"]\},\{"Version":["1","2"]\}]`
     #
-    #     The results of this query could include the following.
+    #     The results of this resource query could include the following.
     #
-    #     * An EC2 instance that has the following two tags:
+    #     * An Amazon EC2 instance that has the following two tags:
     #       `\{"Stage":"Deploy"\}`, and `\{"Version":"2"\}`
     #
     #     * An S3 bucket that has the following two tags:
     #       `\{"Stage":"Test"\}`, and `\{"Version":"1"\}`
     #
-    #     The query would not include the following items in the results,
-    #     however.
+    #     The resource query results would *not* include the following items
+    #     in the results, however.
     #
-    #     * An EC2 instance that has only the following tag:
+    #     * An Amazon EC2 instance that has only the following tag:
     #       `\{"Stage":"Deploy"\}`.
     #
     #       The instance does not have **all** of the tag keys specified in
@@ -1069,10 +1106,18 @@ module Aws::ResourceGroups
     #       The database has all of the tag keys, but none of those keys has
     #       an associated value that matches at least one of the specified
     #       values in the filter.
-    #   @return [String]
     #
-    # @!attribute [rw] query
-    #   The query that defines a group or a search.
+    #     Example: `"TagFilters": [ \{ "Key": "Stage", "Values": [ "Gamma",
+    #     "Beta" ] \}`
+    #
+    #   * `StackIdentifier` – applicable only if `Type` =
+    #     `CLOUDFORMATION_STACK_1_0`. The value of this parameter is the
+    #     Amazon Resource Name (ARN) of the CloudFormation stack whose
+    #     resources you want included in the group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceQuery AWS API Documentation
@@ -1152,9 +1197,13 @@ module Aws::ResourceGroups
     #
     # @!attribute [rw] query_errors
     #   A list of `QueryError` objects. Each error is an object that
-    #   contains `ErrorCode` and `Message` structures. Possible values for
-    #   `ErrorCode` are `CLOUDFORMATION_STACK_INACTIVE` and
-    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   contains `ErrorCode` and `Message` structures.
+    #
+    #   Possible values for `ErrorCode`\:
+    #
+    #   * `CLOUDFORMATION_STACK_INACTIVE`
+    #
+    #   * `CLOUDFORMATION_STACK_NOT_EXISTING`
     #   @return [Array<Types::QueryError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResourcesOutput AWS API Documentation
@@ -1313,6 +1362,36 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_lifecycle_events_desired_status
+    #   Specifies whether you want to turn [group lifecycle events][1] on or
+    #   off.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateAccountSettingsInput AWS API Documentation
+    #
+    class UpdateAccountSettingsInput < Struct.new(
+      :group_lifecycle_events_desired_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_settings
+    #   A structure that displays the status of the optional features in the
+    #   account.
+    #   @return [Types::AccountSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateAccountSettingsOutput AWS API Documentation
+    #
+    class UpdateAccountSettingsOutput < Struct.new(
+      :account_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group_name
     #   Don't use this parameter. Use `Group` instead.
     #   @return [String]
@@ -1358,8 +1437,8 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] resource_query
-    #   The resource query to determine which AWS resources are members of
-    #   this resource group.
+    #   The resource query to determine which Amazon Web Services resources
+    #   are members of this resource group.
     #
     #   <note markdown="1"> A resource group can contain either a `Configuration` or a
     #   `ResourceQuery`, but not both.

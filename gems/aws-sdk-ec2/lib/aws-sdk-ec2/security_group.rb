@@ -370,9 +370,10 @@ module Aws::EC2
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
     # @option options [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. For the ICMP type number, use `-1` to specify all types. If
-    #   you specify all ICMP types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the start of the port range. If
+    #   the protocol is ICMP, this is the type number. A value of -1 indicates
+    #   all ICMP types. If you specify all ICMP types, you must specify all
+    #   ICMP codes.
     #
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
@@ -415,9 +416,10 @@ module Aws::EC2
     #   specific IP protocol and port range, use a set of IP permissions
     #   instead.
     # @option options [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP code
-    #   number. For the ICMP code number, use `-1` to specify all codes. If
-    #   you specify all ICMP types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP, this is the code. A value of -1 indicates all
+    #   ICMP codes. If you specify all ICMP types, you must specify all ICMP
+    #   codes.
     #
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
@@ -676,8 +678,9 @@ module Aws::EC2
     #   The CIDR IP address range. You can't specify this parameter when
     #   specifying a source security group.
     # @option options [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. For the ICMP type number, use `-1` to specify all ICMP types.
+    #   If the protocol is TCP or UDP, this is the start of the port range. If
+    #   the protocol is ICMP, this is the type number. A value of -1 indicates
+    #   all ICMP types.
     # @option options [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You must
     #   specify either the security group ID or the security group name in the
@@ -710,9 +713,9 @@ module Aws::EC2
     #   specific rule for an IP protocol and port range, use a set of IP
     #   permissions instead.
     # @option options [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP code
-    #   number. For the ICMP code number, use `-1` to specify all ICMP codes
-    #   for the ICMP type.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP, this is the code. A value of -1 indicates all
+    #   ICMP codes.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
