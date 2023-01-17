@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2023-01-17)
+------------------
+
+* Feature - This release adds support for SKU Scope for pricing plans.
+
 1.4.0 (2022-12-06)
 ------------------
 

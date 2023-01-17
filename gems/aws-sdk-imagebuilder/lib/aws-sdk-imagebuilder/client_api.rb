@@ -153,6 +153,7 @@ module Aws::Imagebuilder
     ImageRecipeArn = Shapes::StringShape.new(name: 'ImageRecipeArn')
     ImageRecipeSummary = Shapes::StructureShape.new(name: 'ImageRecipeSummary')
     ImageRecipeSummaryList = Shapes::ListShape.new(name: 'ImageRecipeSummaryList')
+    ImageSource = Shapes::StringShape.new(name: 'ImageSource')
     ImageState = Shapes::StructureShape.new(name: 'ImageState')
     ImageStatus = Shapes::StringShape.new(name: 'ImageStatus')
     ImageSummary = Shapes::StructureShape.new(name: 'ImageSummary')
@@ -338,6 +339,8 @@ module Aws::Imagebuilder
     Component.add_member(:encrypted, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "encrypted"))
     Component.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     Component.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Component.add_member(:publisher, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "publisher"))
+    Component.add_member(:obfuscate, Shapes::ShapeRef.new(shape: Boolean, location_name: "obfuscate"))
     Component.struct_class = Types::Component
 
     ComponentConfiguration.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentVersionArnOrBuildVersionArn, required: true, location_name: "componentArn"))
@@ -378,6 +381,8 @@ module Aws::Imagebuilder
     ComponentSummary.add_member(:change_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "changeDescription"))
     ComponentSummary.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     ComponentSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ComponentSummary.add_member(:publisher, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "publisher"))
+    ComponentSummary.add_member(:obfuscate, Shapes::ShapeRef.new(shape: Boolean, location_name: "obfuscate"))
     ComponentSummary.struct_class = Types::ComponentSummary
 
     ComponentSummaryList.member = Shapes::ShapeRef.new(shape: ComponentSummary)
@@ -780,6 +785,7 @@ module Aws::Imagebuilder
     Image.add_member(:output_resources, Shapes::ShapeRef.new(shape: OutputResources, location_name: "outputResources"))
     Image.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Image.add_member(:build_type, Shapes::ShapeRef.new(shape: BuildType, location_name: "buildType"))
+    Image.add_member(:image_source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "imageSource"))
     Image.struct_class = Types::Image
 
     ImagePackage.add_member(:package_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "packageName"))
@@ -852,6 +858,7 @@ module Aws::Imagebuilder
     ImageSummary.add_member(:output_resources, Shapes::ShapeRef.new(shape: OutputResources, location_name: "outputResources"))
     ImageSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ImageSummary.add_member(:build_type, Shapes::ShapeRef.new(shape: BuildType, location_name: "buildType"))
+    ImageSummary.add_member(:image_source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "imageSource"))
     ImageSummary.struct_class = Types::ImageSummary
 
     ImageSummaryList.member = Shapes::ShapeRef.new(shape: ImageSummary)
@@ -869,6 +876,7 @@ module Aws::Imagebuilder
     ImageVersion.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ImageVersion.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     ImageVersion.add_member(:build_type, Shapes::ShapeRef.new(shape: BuildType, location_name: "buildType"))
+    ImageVersion.add_member(:image_source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "imageSource"))
     ImageVersion.struct_class = Types::ImageVersion
 
     ImageVersionList.member = Shapes::ShapeRef.new(shape: ImageVersion)

@@ -622,7 +622,7 @@ module Aws::BillingConductor
     #   @return [Float]
     #
     # @!attribute [rw] service
-    #   If the `Scope` attribute is set to `SERVICE`, the attribute
+    #   If the `Scope` attribute is set to `SERVICE` or `SKU`, the attribute
     #   indicates which service the `PricingRule` is applicable for.
     #   @return [String]
     #
@@ -641,6 +641,26 @@ module Aws::BillingConductor
     #   The set of tiering configurations for the pricing rule.
     #   @return [Types::CreateTieringInput]
     #
+    # @!attribute [rw] usage_type
+    #   Usage type is the unit that each service uses to measure the usage
+    #   of a specific type of resource.
+    #
+    #   If the `Scope` attribute is set to `SKU`, this attribute indicates
+    #   which usage type the `PricingRule` is modifying. For example,
+    #   `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra
+    #   Large` instance in the US West (Oregon) Region.     </p>
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   Operation is the specific Amazon Web Services action covered by this
+    #   line item. This describes the specific usage of the line item.
+    #
+    #   If the `Scope` attribute is set to `SKU`, this attribute indicates
+    #   which operation the `PricingRule` is modifying. For example, a value
+    #   of `RunInstances:0202` indicates the operation of running an Amazon
+    #   EC2 instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreatePricingRuleInput AWS API Documentation
     #
     class CreatePricingRuleInput < Struct.new(
@@ -653,7 +673,9 @@ module Aws::BillingConductor
       :service,
       :tags,
       :billing_entity,
-      :tiering)
+      :tiering,
+      :usage_type,
+      :operation)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -2570,6 +2592,26 @@ module Aws::BillingConductor
     #   The set of tiering configurations for the pricing rule.
     #   @return [Types::UpdateTieringInput]
     #
+    # @!attribute [rw] usage_type
+    #   Usage type is the unit that each service uses to measure the usage
+    #   of a specific type of resource.
+    #
+    #   If the `Scope` attribute is set to `SKU`, this attribute indicates
+    #   which usage type the `PricingRule` is modifying. For example,
+    #   `USW2-BoxUsage:m2.2xlarge` describes an `M2 High Memory Double Extra
+    #   Large` instance in the US West (Oregon) Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   Operation refers to the specific Amazon Web Services covered by this
+    #   line item. This describes the specific usage of the line item.
+    #
+    #   If the `Scope` attribute is set to `SKU`, this attribute indicates
+    #   which operation the `PricingRule` is modifying. For example, a value
+    #   of `RunInstances:0202` indicates the operation of running an Amazon
+    #   EC2 instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingRuleOutput AWS API Documentation
     #
     class UpdatePricingRuleOutput < Struct.new(
@@ -2583,7 +2625,9 @@ module Aws::BillingConductor
       :associated_pricing_plan_count,
       :last_modified_time,
       :billing_entity,
-      :tiering)
+      :tiering,
+      :usage_type,
+      :operation)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end

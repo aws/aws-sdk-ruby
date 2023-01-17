@@ -10,12 +10,18 @@
 module Aws::Imagebuilder
   module Types
 
-    # In addition to your infrastruction configuration, these settings
-    # provide an extra layer of control over your build instances. For
-    # instances where Image Builder installs the Systems Manager agent, you
-    # can choose whether to keep it for the AMI that you create. You can
+    # In addition to your infrastructure configuration, these settings
+    # provide an extra layer of control over your build instances. You can
     # also specify commands to run on launch for all of your build
     # instances.
+    #
+    # Image Builder does not automatically install the Systems Manager agent
+    # on Windows instances. If your base image includes the Systems Manager
+    # agent, then the AMI that you create will also include the agent. For
+    # Linux instances, if the base image does not already include the
+    # Systems Manager agent, Image Builder installs it. For Linux instances
+    # where Image Builder installs the Systems Manager agent, you can choose
+    # whether to keep it for the AMI that you create.
     #
     # @!attribute [rw] systems_manager_agent
     #   Contains settings for the Systems Manager agent on your build
@@ -238,18 +244,18 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the component denotes whether the component is used to
-    #   build the image or only to test it.
+    #   The component type specifies whether Image Builder uses the
+    #   component to build the image or only to test it.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the component.
+    #   The operating system platform of the component.
     #   @return [String]
     #
     # @!attribute [rw] supported_os_versions
     #   The operating system (OS) version supported by the component. If the
-    #   OS information is available, a prefix match is performed against the
-    #   base image OS version during image recipe creation.
+    #   OS information is available, Image Builder performs a prefix match
+    #   against the base image OS version during image recipe creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] state
@@ -258,8 +264,8 @@ module Aws::Imagebuilder
     #   @return [Types::ComponentState]
     #
     # @!attribute [rw] parameters
-    #   Contains parameter details for each of the parameters that are
-    #   defined for the component.
+    #   Contains parameter details for each of the parameters that the
+    #   component document defined for the component.
     #   @return [Array<Types::ComponentParameterDetail>]
     #
     # @!attribute [rw] owner
@@ -279,12 +285,23 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] date_created
-    #   The date that the component was created.
+    #   The date that Image Builder created the component.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the component.
+    #   The tags that apply to the component.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] publisher
+    #   Contains the name of the publisher if this is a third-party
+    #   component. Otherwise, this property is empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] obfuscate
+    #   Indicates whether component source is hidden from view in the
+    #   console, and from component detail results for API, CLI, or SDK
+    #   operations.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Component AWS API Documentation
     #
@@ -304,7 +321,9 @@ module Aws::Imagebuilder
       :kms_key_id,
       :encrypted,
       :date_created,
-      :tags)
+      :tags,
+      :publisher,
+      :obfuscate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -316,8 +335,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   A group of parameter settings that are used to configure the
-    #   component for a specific recipe.
+    #   A group of parameter settings that Image Builder uses to configure
+    #   the component for a specific recipe.
     #   @return [Array<Types::ComponentParameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentConfiguration AWS API Documentation
@@ -414,13 +433,14 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the component.
+    #   The operating system platform of the component.
     #   @return [String]
     #
     # @!attribute [rw] supported_os_versions
-    #   The operating system (OS) version supported by the component. If the
-    #   OS information is available, a prefix match is performed against the
-    #   base image OS version during image recipe creation.
+    #   The operating system (OS) version that the component supports. If
+    #   the OS information is available, Image Builder performs a prefix
+    #   match against the base image OS version during image recipe
+    #   creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] state
@@ -428,8 +448,8 @@ module Aws::Imagebuilder
     #   @return [Types::ComponentState]
     #
     # @!attribute [rw] type
-    #   The type of the component denotes whether the component is used to
-    #   build the image or only to test it.
+    #   The component type specifies whether Image Builder uses the
+    #   component to build the image or only to test it.
     #   @return [String]
     #
     # @!attribute [rw] owner
@@ -441,16 +461,27 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] change_description
-    #   The change description of the component.
+    #   The change description for the current version of the component.
     #   @return [String]
     #
     # @!attribute [rw] date_created
-    #   The date that the component was created.
+    #   The original creation date of the component.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the component.
+    #   The tags that apply to the component.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] publisher
+    #   Contains the name of the publisher if this is a third-party
+    #   component. Otherwise, this property is empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] obfuscate
+    #   Indicates whether component source is hidden from view in the
+    #   console, and from component detail results for API, CLI, or SDK
+    #   operations.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentSummary AWS API Documentation
     #
@@ -466,7 +497,9 @@ module Aws::Imagebuilder
       :description,
       :change_description,
       :date_created,
-      :tags)
+      :tags,
+      :publisher,
+      :obfuscate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -680,8 +713,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] components
-    #   Components for build and test that are included in the container
-    #   recipe.
+    #   Build and test components that are included in the container recipe.
+    #   Recipes require a minimum of one build component, and can have a
+    #   maximum of 20 build and test components in any combination.
     #   @return [Array<Types::ComponentConfiguration>]
     #
     # @!attribute [rw] instance_configuration
@@ -825,8 +859,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the component. Describes the contents of the
-    #   component.
+    #   Describes the contents of the component.
     #   @return [String]
     #
     # @!attribute [rw] change_description
@@ -836,7 +869,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the component.
+    #   The operating system platform of the component.
     #   @return [String]
     #
     # @!attribute [rw] supported_os_versions
@@ -863,11 +896,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the KMS key that should be used to encrypt this component.
+    #   The ID of the KMS key that is used to encrypt this component.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags of the component.
+    #   The tags that apply to the component.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -953,7 +986,8 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] components
     #   Components for build and test that are included in the container
-    #   recipe.
+    #   recipe. Recipes require a minimum of one build component, and can
+    #   have a maximum of 20 build and test components in any combination.
     #   @return [Array<Types::ComponentConfiguration>]
     #
     # @!attribute [rw] instance_configuration
@@ -1242,7 +1276,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] components
-    #   The components of the image recipe.
+    #   The components included in the image recipe.
     #   @return [Array<Types::ComponentConfiguration>]
     #
     # @!attribute [rw] parent_image
@@ -2428,7 +2462,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Specifies whether this is an AMI or container image.
+    #   Specifies whether this image produces an AMI or a container image.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2462,19 +2496,19 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the image.
+    #   The image operating system platform, such as Linux or Windows.
     #   @return [String]
     #
     # @!attribute [rw] enhanced_image_metadata_enabled
-    #   Collects additional information about the image being created,
-    #   including the operating system (OS) version and package list. This
-    #   information is used to enhance the overall experience of using EC2
-    #   Image Builder. Enabled by default.
+    #   Indicates whether Image Builder collects additional information
+    #   about the image, such as the operating system (OS) version and
+    #   package list.
     #   @return [Boolean]
     #
     # @!attribute [rw] os_version
-    #   The operating system version of the instance. For example, Amazon
-    #   Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+    #   The operating system version for instances that launch from this
+    #   image. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows
+    #   Server 2019.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -2482,11 +2516,15 @@ module Aws::Imagebuilder
     #   @return [Types::ImageState]
     #
     # @!attribute [rw] image_recipe
-    #   The image recipe used when creating the image.
+    #   For images that distribute an AMI, this is the image recipe that
+    #   Image Builder used to create the image. For container images, this
+    #   is empty.
     #   @return [Types::ImageRecipe]
     #
     # @!attribute [rw] container_recipe
-    #   The recipe that is used to create an Image Builder container image.
+    #   For container images, this is the container recipe that Image
+    #   Builder used to create the image. For images that distribute an AMI,
+    #   this is empty.
     #   @return [Types::ContainerRecipe]
     #
     # @!attribute [rw] source_pipeline_name
@@ -2499,27 +2537,28 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] infrastructure_configuration
-    #   The infrastructure used when creating this image.
+    #   The infrastructure that Image Builder used to create this image.
     #   @return [Types::InfrastructureConfiguration]
     #
     # @!attribute [rw] distribution_configuration
-    #   The distribution configuration used when creating this image.
+    #   The distribution configuration that Image Builder used to create
+    #   this image.
     #   @return [Types::DistributionConfiguration]
     #
     # @!attribute [rw] image_tests_configuration
-    #   The image tests configuration used when creating this image.
+    #   The image tests that ran when that Image Builder created this image.
     #   @return [Types::ImageTestsConfiguration]
     #
     # @!attribute [rw] date_created
-    #   The date on which this image was created.
+    #   The date on which Image Builder created this image.
     #   @return [String]
     #
     # @!attribute [rw] output_resources
-    #   The output resources produced when creating this image.
+    #   The output resources that Image Builder produces for this image.
     #   @return [Types::OutputResources]
     #
     # @!attribute [rw] tags
-    #   The tags of the image.
+    #   The tags that apply to this image.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] build_type
@@ -2533,6 +2572,11 @@ module Aws::Imagebuilder
     #
     #   * **IMPORT** – A VM import created the image to use as the base
     #     image for the recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_source
+    #   The origin of the base image that Image Builder used to build this
+    #   image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Image AWS API Documentation
@@ -2556,7 +2600,8 @@ module Aws::Imagebuilder
       :date_created,
       :output_resources,
       :tags,
-      :build_type)
+      :build_type,
+      :image_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2648,11 +2693,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] date_last_run
-    #   The date on which this image pipeline was last run.
+    #   This is no longer supported, and does not return a value.
     #   @return [String]
     #
     # @!attribute [rw] date_next_run
-    #   The date on which this image pipeline will next be run.
+    #   This is no longer supported, and does not return a value.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2715,7 +2760,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] components
-    #   The components of the image recipe.
+    #   The components that are included in the image recipe. Recipes
+    #   require a minimum of one build component, and can have a maximum of
+    #   20 build and test components in any combination.
     #   @return [Array<Types::ComponentConfiguration>]
     #
     # @!attribute [rw] parent_image
@@ -2842,7 +2889,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Specifies whether this is an AMI or container image.
+    #   Specifies whether this image produces an AMI or a container image.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2850,12 +2897,13 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the image.
+    #   The image operating system platform, such as Linux or Windows.
     #   @return [String]
     #
     # @!attribute [rw] os_version
-    #   The operating system version of the instance. For example, Amazon
-    #   Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+    #   The operating system version of the instances that launch from this
+    #   image. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows
+    #   Server 2019.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -2867,15 +2915,16 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] date_created
-    #   The date on which this image was created.
+    #   The date on which Image Builder created this image.
     #   @return [String]
     #
     # @!attribute [rw] output_resources
-    #   The output resources produced when creating this image.
+    #   The output resources that Image Builder produced when it created
+    #   this image.
     #   @return [Types::OutputResources]
     #
     # @!attribute [rw] tags
-    #   The tags of the image.
+    #   The tags that apply to this image.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] build_type
@@ -2889,6 +2938,11 @@ module Aws::Imagebuilder
     #
     #   * **IMPORT** – A VM import created the image to use as the base
     #     image for the recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_source
+    #   The origin of the base image that Image Builder used to build this
+    #   image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageSummary AWS API Documentation
@@ -2905,7 +2959,8 @@ module Aws::Imagebuilder
       :date_created,
       :output_resources,
       :tags,
-      :build_type)
+      :build_type,
+      :image_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2922,6 +2977,11 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] timeout_minutes
     #   The maximum time in minutes that tests are permitted to run.
+    #
+    #   <note markdown="1"> The timeoutMinutes attribute is not currently active. This value is
+    #   ignored.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageTestsConfiguration AWS API Documentation
@@ -2961,7 +3021,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Specifies whether this image is an AMI or a container image.
+    #   Specifies whether this image produces an AMI or a container image.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2992,8 +3052,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the image version, for example "Windows" or
-    #   "Linux".
+    #   The operating system platform of the image version, for example
+    #   "Windows" or "Linux".
     #   @return [String]
     #
     # @!attribute [rw] os_version
@@ -3024,6 +3084,11 @@ module Aws::Imagebuilder
     #     image for the recipe.
     #   @return [String]
     #
+    # @!attribute [rw] image_source
+    #   The origin of the base image that Image Builder used to build this
+    #   image.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageVersion AWS API Documentation
     #
     class ImageVersion < Struct.new(
@@ -3035,7 +3100,8 @@ module Aws::Imagebuilder
       :os_version,
       :owner,
       :date_created,
-      :build_type)
+      :build_type,
+      :image_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3494,7 +3560,9 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] http_put_response_hop_limit
     #   Limit the number of hops that an instance metadata request can
-    #   traverse to reach its destination.
+    #   traverse to reach its destination. The default is one hop. However,
+    #   if HTTP tokens are required, container image builds need a minimum
+    #   of two hops.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InstanceMetadataOptions AWS API Documentation
@@ -3714,11 +3782,11 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] owner
-    #   The owner defines which components you want to list. By default,
-    #   this request will only show components owned by your account. You
-    #   can use this field to specify if you want to view components owned
-    #   by yourself, by Amazon, or those components that have been shared
-    #   with you by other customers.
+    #   Filters results based on the type of owner for the component. By
+    #   default, this request returns a list of components that your account
+    #   owns. To see results for other types of owners, you can specify
+    #   components that Amazon manages, third party components, or
+    #   components that other accounts have shared with you.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -3738,7 +3806,7 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] by_name
-    #   Returns the list of component build versions for the specified name.
+    #   Returns the list of components for the specified name.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results

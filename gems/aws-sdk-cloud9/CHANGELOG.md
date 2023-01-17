@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2023-01-17)
+------------------
+
+* Feature - Added minimum value to AutomaticStopTimeMinutes parameter.
+
 1.47.0 (2022-10-28)
 ------------------
 

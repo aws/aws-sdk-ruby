@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2023-01-17)
+------------------
+
+* Feature - Add support for AWS Marketplace product IDs as input during CreateImageRecipe for the parent-image parameter. Add support for listing third-party components.
+
 1.41.0 (2022-10-25)
 ------------------
 

@@ -39,7 +39,7 @@ module Aws::NetworkFirewall
     # @!attribute [rw] address_definition
     #   Specify an IP address or a block of IP addresses in Classless
     #   Inter-Domain Routing (CIDR) notation. Network Firewall supports all
-    #   address ranges for IPv4.
+    #   address ranges for IPv4 and IPv6.
     #
     #   Examples:
     #
@@ -48,6 +48,15 @@ module Aws::NetworkFirewall
     #
     #   * To configure Network Firewall to inspect for IP addresses from
     #     192.0.2.0 to 192.0.2.255, specify `192.0.2.0/24`.
+    #
+    #   * To configure Network Firewall to inspect for the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
+    #
+    #   * To configure Network Firewall to inspect for IP addresses from
+    #     1111:0000:0000:0000:0000:0000:0000:0000 to
+    #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
+    #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
     #   For more information about CIDR notation, see the Wikipedia entry
     #   [Classless Inter-Domain Routing][1].
@@ -1797,7 +1806,7 @@ module Aws::NetworkFirewall
     #
     #   Specify an IP address or a block of IP addresses in Classless
     #   Inter-Domain Routing (CIDR) notation. Network Firewall supports all
-    #   address ranges for IPv4.
+    #   address ranges for IPv4 and IPv6.
     #
     #   Examples:
     #
@@ -1806,6 +1815,15 @@ module Aws::NetworkFirewall
     #
     #   * To configure Network Firewall to inspect for IP addresses from
     #     192.0.2.0 to 192.0.2.255, specify `192.0.2.0/24`.
+    #
+    #   * To configure Network Firewall to inspect for the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
+    #
+    #   * To configure Network Firewall to inspect for IP addresses from
+    #     1111:0000:0000:0000:0000:0000:0000:0000 to
+    #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
+    #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
     #   For more information about CIDR notation, see the Wikipedia entry
     #   [Classless Inter-Domain Routing][1].
@@ -1835,7 +1853,7 @@ module Aws::NetworkFirewall
     #
     #   Specify an IP address or a block of IP addresses in Classless
     #   Inter-Domain Routing (CIDR) notation. Network Firewall supports all
-    #   address ranges for IPv4.
+    #   address ranges for IPv4 and IPv6.
     #
     #   Examples:
     #
@@ -1844,6 +1862,15 @@ module Aws::NetworkFirewall
     #
     #   * To configure Network Firewall to inspect for IP addresses from
     #     192.0.2.0 to 192.0.2.255, specify `192.0.2.0/24`.
+    #
+    #   * To configure Network Firewall to inspect for the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
+    #
+    #   * To configure Network Firewall to inspect for IP addresses from
+    #     1111:0000:0000:0000:0000:0000:0000:0000 to
+    #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
+    #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
     #   For more information about CIDR notation, see the Wikipedia entry
     #   [Classless Inter-Domain Routing][1].
@@ -3259,10 +3286,16 @@ module Aws::NetworkFirewall
     #   The unique identifier for the subnet.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The subnet's IP address type. You can't change the IP address type
+    #   after you create the subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/SubnetMapping AWS API Documentation
     #
     class SubnetMapping < Struct.new(
-      :subnet_id)
+      :subnet_id,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
