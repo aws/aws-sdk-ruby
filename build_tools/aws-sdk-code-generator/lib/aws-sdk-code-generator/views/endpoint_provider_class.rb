@@ -48,7 +48,7 @@ module AwsSdkCodeGenerator
         end
 
         # if no rules match, raise an error
-        res << indent("raise 'No rules matched'\n", 3)
+        res << indent("raise ArgumentError, 'No endpoint could be resolved'\n", 3)
 
         res.string
       end

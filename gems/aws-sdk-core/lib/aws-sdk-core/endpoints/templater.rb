@@ -3,6 +3,12 @@
 module Aws
   module Endpoints
     # Does substitutions for templated endpoint strings
+
+    # This class is deprecated. It is used by the Runtime endpoint
+    # resolution approach. It has been replaced by a code generated
+    # approach in each service gem. It can be removed in a new
+    # major version. It has to exist because
+    # old service gems can use a new core version.
     # @api private
     module Templater
       class << self
