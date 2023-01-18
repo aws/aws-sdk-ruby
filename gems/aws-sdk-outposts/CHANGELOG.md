@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Replace runtime endpoint resolution approach with generated ruby code.
+
 1.38.0 (2023-01-13)
 ------------------
 

@@ -4,6 +4,7 @@ require 'ipaddr'
 
 module Aws
   module Endpoints
+
     # @api private
     class URL
       def initialize(url)

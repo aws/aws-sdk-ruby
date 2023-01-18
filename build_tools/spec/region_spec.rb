@@ -31,6 +31,9 @@ describe 'ensure no hard-coded region' do
     Dir.glob("#{dir}**/*").sort.each do |path|
       next if File.directory? path
 
+      # skip EndpointProviders as they have special cased region logic
+      next if File.basename(path) == "endpoint_provider.rb"
+
       file = File.open(path, 'r', encoding: 'UTF-8', &:read)
       lines = file.lines.to_a
 

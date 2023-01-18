@@ -2,6 +2,11 @@
 
 module Aws
   module Endpoints
+    # This class is deprecated. It is used by the Runtime endpoint
+    # resolution approach. It has been replaced by a code generated
+    # approach in each service gem. It can be removed in a new
+    # major version. It has to exist because
+    # old service gems can use a new core version.
     # @api private
     class RuleSet
       def initialize(version:, service_id:, parameters:, rules:)

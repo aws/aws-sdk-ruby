@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Replace runtime endpoint resolution approach with generated ruby code for STS, SSO, and SSOOIDC.
+
 3.168.4 (2022-12-08)
 ------------------
 
