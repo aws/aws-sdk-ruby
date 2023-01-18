@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Replace runtime endpoint resolution approach with generated ruby code.
+
 1.52.1 (2022-12-02)
 ------------------
 
