@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-01-18)
+------------------
+
+* Feature - Enable cross-account streams in CloudWatch Metric Streams via Observability Access Manager.
+
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
 1.70.0 (2022-12-14)

@@ -380,7 +380,7 @@ module Aws::EFS
     #
     # <note markdown="1"> If multiple requests to create access points on the same file system
     # are sent in quick succession, and the file system is near the limit of
-    # 120 access points, you may experience a throttling response for these
+    # 1000 access points, you may experience a throttling response for these
     # requests. This is to ensure that the file system does not exceed the
     # stated access point limit.
     #
@@ -1656,11 +1656,11 @@ module Aws::EFS
     #
     # When retrieving all file system descriptions, you can optionally
     # specify the `MaxItems` parameter to limit the number of descriptions
-    # in a response. Currently, this number is automatically set to 10. If
-    # more file system descriptions remain, Amazon EFS returns a
-    # `NextMarker`, an opaque token, in the response. In this case, you
-    # should send a subsequent request with the `Marker` request parameter
-    # set to the value of `NextMarker`.
+    # in a response. This number is automatically set to 100. If more file
+    # system descriptions remain, Amazon EFS returns a `NextMarker`, an
+    # opaque token, in the response. In this case, you should send a
+    # subsequent request with the `Marker` request parameter set to the
+    # value of `NextMarker`.
     #
     # To retrieve a list of your file system descriptions, this operation is
     # used in an iterative process, where `DescribeFileSystems` is called
@@ -2703,7 +2703,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

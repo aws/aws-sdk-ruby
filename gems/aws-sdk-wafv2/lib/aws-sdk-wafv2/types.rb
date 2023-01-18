@@ -2574,8 +2574,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] rule_metric_name
-    #   The metric name assigned to the `Rule` or `RuleGroup` for which you
-    #   want a sample of requests.
+    #   The metric name assigned to the `Rule` or `RuleGroup` dimension for
+    #   which you want a sample of requests.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -7084,11 +7084,11 @@ module Aws::WAFV2
     #   @return [Boolean]
     #
     # @!attribute [rw] metric_name
-    #   A name of the Amazon CloudWatch metric. The name can contain only
-    #   the characters: A-Z, a-z, 0-9, - (hyphen), and \_ (underscore). The
-    #   name can be from one to 128 characters long. It can't contain
-    #   whitespace or metric names reserved for WAF, for example `All` and
-    #   `Default_Action`.
+    #   A name of the Amazon CloudWatch metric dimension. The name can
+    #   contain only the characters: A-Z, a-z, 0-9, - (hyphen), and \_
+    #   (underscore). The name can be from one to 128 characters long. It
+    #   can't contain whitespace or metric names that are reserved for WAF,
+    #   for example `All` and `Default_Action`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/VisibilityConfig AWS API Documentation

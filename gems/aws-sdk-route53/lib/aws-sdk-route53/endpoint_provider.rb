@@ -9,335 +9,145 @@
 
 module Aws::Route53
   class EndpointProvider
-    def initialize(rule_set = nil)
-      @@rule_set ||= begin
-        endpoint_rules = Aws::Json.load(Base64.decode64(RULES))
-        Aws::Endpoints::RuleSet.new(
-          version: endpoint_rules['version'],
-          service_id: endpoint_rules['serviceId'],
-          parameters: endpoint_rules['parameters'],
-          rules: endpoint_rules['rules']
-        )
-      end
-      @provider = Aws::Endpoints::RulesProvider.new(rule_set || @@rule_set)
-    end
-
     def resolve_endpoint(parameters)
-      @provider.resolve_endpoint(parameters)
+      region = parameters.region
+      use_dual_stack = parameters.use_dual_stack
+      use_fips = parameters.use_fips
+      endpoint = parameters.endpoint
+      if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
+        if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+            raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"
+          end
+          return Aws::Endpoints::Endpoint.new(url: endpoint, headers: {}, properties: {})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53-fips.#{region}.api.aws", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route53-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53.#{region}.api.aws", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+          end
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53-fips.#{region}.api.amazonwebservices.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53-fips.#{region}.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53.#{region}.api.amazonwebservices.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+          end
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov")
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53-fips.#{region}.api.aws", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route53.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53.#{region}.api.aws", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+          end
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso")
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53-fips.#{region}.c2s.ic.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-iso-east-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+          end
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.c2s.ic.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-iso-east-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-b")
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+              return Aws::Endpoints::Endpoint.new(url: "https://route-53-fips.#{region}.sc2s.sgov.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-isob-east-1", "signingName"=>"route53"}]})
+            end
+            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+          end
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.sc2s.sgov.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-isob-east-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+            return Aws::Endpoints::Endpoint.new(url: "https://route53-fips.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
+              return Aws::Endpoints::Endpoint.new(url: "https://route53-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"route53"}]})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "aws-us-gov-global")
+              return Aws::Endpoints::Endpoint.new(url: "https://route53.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1", "signingName"=>"route53"}]})
+            end
+            return Aws::Endpoints::Endpoint.new(url: "https://route53-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+            return Aws::Endpoints::Endpoint.new(url: "https://route53.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "aws-cn-global")
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "aws-us-gov-global")
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "aws-iso-global")
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.c2s.ic.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-iso-east-1", "signingName"=>"route53"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "aws-iso-b-global")
+          return Aws::Endpoints::Endpoint.new(url: "https://route53.sc2s.sgov.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-isob-east-1", "signingName"=>"route53"}]})
+        end
+        return Aws::Endpoints::Endpoint.new(url: "https://route53.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+      end
+      raise ArgumentError, 'No endpoint could be resolved'
+
     end
-
-    # @api private
-    RULES = <<-JSON
-eyJ2ZXJzaW9uIjoiMS4wIiwicGFyYW1ldGVycyI6eyJSZWdpb24iOnsiYnVp
-bHRJbiI6IkFXUzo6UmVnaW9uIiwicmVxdWlyZWQiOnRydWUsImRvY3VtZW50
-YXRpb24iOiJUaGUgQVdTIHJlZ2lvbiB1c2VkIHRvIGRpc3BhdGNoIHRoZSBy
-ZXF1ZXN0LiIsInR5cGUiOiJTdHJpbmcifSwiVXNlRHVhbFN0YWNrIjp7ImJ1
-aWx0SW4iOiJBV1M6OlVzZUR1YWxTdGFjayIsInJlcXVpcmVkIjp0cnVlLCJk
-ZWZhdWx0IjpmYWxzZSwiZG9jdW1lbnRhdGlvbiI6IldoZW4gdHJ1ZSwgdXNl
-IHRoZSBkdWFsLXN0YWNrIGVuZHBvaW50LiBJZiB0aGUgY29uZmlndXJlZCBl
-bmRwb2ludCBkb2VzIG5vdCBzdXBwb3J0IGR1YWwtc3RhY2ssIGRpc3BhdGNo
-aW5nIHRoZSByZXF1ZXN0IE1BWSByZXR1cm4gYW4gZXJyb3IuIiwidHlwZSI6
-IkJvb2xlYW4ifSwiVXNlRklQUyI6eyJidWlsdEluIjoiQVdTOjpVc2VGSVBT
-IiwicmVxdWlyZWQiOnRydWUsImRlZmF1bHQiOmZhbHNlLCJkb2N1bWVudGF0
-aW9uIjoiV2hlbiB0cnVlLCBzZW5kIHRoaXMgcmVxdWVzdCB0byB0aGUgRklQ
-Uy1jb21wbGlhbnQgcmVnaW9uYWwgZW5kcG9pbnQuIElmIHRoZSBjb25maWd1
-cmVkIGVuZHBvaW50IGRvZXMgbm90IGhhdmUgYSBGSVBTIGNvbXBsaWFudCBl
-bmRwb2ludCwgZGlzcGF0Y2hpbmcgdGhlIHJlcXVlc3Qgd2lsbCByZXR1cm4g
-YW4gZXJyb3IuIiwidHlwZSI6IkJvb2xlYW4ifSwiRW5kcG9pbnQiOnsiYnVp
-bHRJbiI6IlNESzo6RW5kcG9pbnQiLCJyZXF1aXJlZCI6ZmFsc2UsImRvY3Vt
-ZW50YXRpb24iOiJPdmVycmlkZSB0aGUgZW5kcG9pbnQgdXNlZCB0byBzZW5k
-IHRoaXMgcmVxdWVzdCIsInR5cGUiOiJTdHJpbmcifX0sInJ1bGVzIjpbeyJj
-b25kaXRpb25zIjpbeyJmbiI6ImF3cy5wYXJ0aXRpb24iLCJhcmd2IjpbeyJy
-ZWYiOiJSZWdpb24ifV0sImFzc2lnbiI6IlBhcnRpdGlvblJlc3VsdCJ9XSwi
-dHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJp
-c1NldCIsImFyZ3YiOlt7InJlZiI6IkVuZHBvaW50In1dfSx7ImZuIjoicGFy
-c2VVUkwiLCJhcmd2IjpbeyJyZWYiOiJFbmRwb2ludCJ9XSwiYXNzaWduIjoi
-dXJsIn1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpb
-eyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbeyJyZWYiOiJVc2VGSVBT
-In0sdHJ1ZV19XSwiZXJyb3IiOiJJbnZhbGlkIENvbmZpZ3VyYXRpb246IEZJ
-UFMgYW5kIGN1c3RvbSBlbmRwb2ludCBhcmUgbm90IHN1cHBvcnRlZCIsInR5
-cGUiOiJlcnJvciJ9LHsiY29uZGl0aW9ucyI6W10sInR5cGUiOiJ0cmVlIiwi
-cnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVxdWFscyIs
-ImFyZ3YiOlt7InJlZiI6IlVzZUR1YWxTdGFjayJ9LHRydWVdfV0sImVycm9y
-IjoiSW52YWxpZCBDb25maWd1cmF0aW9uOiBEdWFsc3RhY2sgYW5kIGN1c3Rv
-bSBlbmRwb2ludCBhcmUgbm90IHN1cHBvcnRlZCIsInR5cGUiOiJlcnJvciJ9
-LHsiY29uZGl0aW9ucyI6W10sImVuZHBvaW50Ijp7InVybCI6eyJyZWYiOiJF
-bmRwb2ludCJ9LCJwcm9wZXJ0aWVzIjp7fSwiaGVhZGVycyI6e319LCJ0eXBl
-IjoiZW5kcG9pbnQifV19XX0seyJjb25kaXRpb25zIjpbeyJmbiI6InN0cmlu
-Z0VxdWFscyIsImFyZ3YiOlt7ImZuIjoiZ2V0QXR0ciIsImFyZ3YiOlt7InJl
-ZiI6IlBhcnRpdGlvblJlc3VsdCJ9LCJuYW1lIl19LCJhd3MiXX1dLCJ0eXBl
-IjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbeyJmbiI6ImJvb2xl
-YW5FcXVhbHMiLCJhcmd2IjpbeyJyZWYiOiJVc2VGSVBTIn0sdHJ1ZV19LHsi
-Zm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6W3sicmVmIjoiVXNlRHVhbFN0
-YWNrIn0sdHJ1ZV19XSwidHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0
-aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6W3RydWUseyJm
-biI6ImdldEF0dHIiLCJhcmd2IjpbeyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQi
-fSwic3VwcG9ydHNGSVBTIl19XX0seyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJh
-cmd2IjpbdHJ1ZSx7ImZuIjoiZ2V0QXR0ciIsImFyZ3YiOlt7InJlZiI6IlBh
-cnRpdGlvblJlc3VsdCJ9LCJzdXBwb3J0c0R1YWxTdGFjayJdfV19XSwidHlw
-ZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W10sImVuZHBvaW50
-Ijp7InVybCI6Imh0dHBzOi8vcm91dGUtNTMtZmlwcy57UmVnaW9ufS5hcGku
-YXdzIiwicHJvcGVydGllcyI6eyJhdXRoU2NoZW1lcyI6W3sibmFtZSI6InNp
-Z3Y0Iiwic2lnbmluZ1JlZ2lvbiI6InVzLWVhc3QtMSIsInNpZ25pbmdOYW1l
-Ijoicm91dGU1MyJ9XX0sImhlYWRlcnMiOnt9fSwidHlwZSI6ImVuZHBvaW50
-In1dfSx7ImNvbmRpdGlvbnMiOltdLCJlcnJvciI6IkZJUFMgYW5kIER1YWxT
-dGFjayBhcmUgZW5hYmxlZCwgYnV0IHRoaXMgcGFydGl0aW9uIGRvZXMgbm90
-IHN1cHBvcnQgb25lIG9yIGJvdGgiLCJ0eXBlIjoiZXJyb3IifV19LHsiY29u
-ZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6W3sicmVm
-IjoiVXNlRklQUyJ9LHRydWVdfV0sInR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7
-ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFyZ3YiOlt0
-cnVlLHsiZm4iOiJnZXRBdHRyIiwiYXJndiI6W3sicmVmIjoiUGFydGl0aW9u
-UmVzdWx0In0sInN1cHBvcnRzRklQUyJdfV19XSwidHlwZSI6InRyZWUiLCJy
-dWxlcyI6W3siY29uZGl0aW9ucyI6W10sImVuZHBvaW50Ijp7InVybCI6Imh0
-dHBzOi8vcm91dGU1My1maXBzLmFtYXpvbmF3cy5jb20iLCJwcm9wZXJ0aWVz
-Ijp7ImF1dGhTY2hlbWVzIjpbeyJuYW1lIjoic2lndjQiLCJzaWduaW5nUmVn
-aW9uIjoidXMtZWFzdC0xIiwic2lnbmluZ05hbWUiOiJyb3V0ZTUzIn1dfSwi
-aGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9u
-cyI6W10sImVycm9yIjoiRklQUyBpcyBlbmFibGVkIGJ1dCB0aGlzIHBhcnRp
-dGlvbiBkb2VzIG5vdCBzdXBwb3J0IEZJUFMiLCJ0eXBlIjoiZXJyb3IifV19
-LHsiY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6
-W3sicmVmIjoiVXNlRHVhbFN0YWNrIn0sdHJ1ZV19XSwidHlwZSI6InRyZWUi
-LCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxz
-IiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJhcmd2IjpbeyJyZWYi
-OiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNEdWFsU3RhY2siXX1dfV0s
-InR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOltdLCJlbmRw
-b2ludCI6eyJ1cmwiOiJodHRwczovL3JvdXRlLTUzLntSZWdpb259LmFwaS5h
-d3MiLCJwcm9wZXJ0aWVzIjp7ImF1dGhTY2hlbWVzIjpbeyJuYW1lIjoic2ln
-djQiLCJzaWduaW5nUmVnaW9uIjoidXMtZWFzdC0xIiwic2lnbmluZ05hbWUi
-OiJyb3V0ZTUzIn1dfSwiaGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQi
-fV19LHsiY29uZGl0aW9ucyI6W10sImVycm9yIjoiRHVhbFN0YWNrIGlzIGVu
-YWJsZWQgYnV0IHRoaXMgcGFydGl0aW9uIGRvZXMgbm90IHN1cHBvcnQgRHVh
-bFN0YWNrIiwidHlwZSI6ImVycm9yIn1dfSx7ImNvbmRpdGlvbnMiOltdLCJl
-bmRwb2ludCI6eyJ1cmwiOiJodHRwczovL3JvdXRlNTMuYW1hem9uYXdzLmNv
-bSIsInByb3BlcnRpZXMiOnsiYXV0aFNjaGVtZXMiOlt7Im5hbWUiOiJzaWd2
-NCIsInNpZ25pbmdSZWdpb24iOiJ1cy1lYXN0LTEiLCJzaWduaW5nTmFtZSI6
-InJvdXRlNTMifV19LCJoZWFkZXJzIjp7fX0sInR5cGUiOiJlbmRwb2ludCJ9
-XX0seyJjb25kaXRpb25zIjpbeyJmbiI6InN0cmluZ0VxdWFscyIsImFyZ3Yi
-Olt7ImZuIjoiZ2V0QXR0ciIsImFyZ3YiOlt7InJlZiI6IlBhcnRpdGlvblJl
-c3VsdCJ9LCJuYW1lIl19LCJhd3MtY24iXX1dLCJ0eXBlIjoidHJlZSIsInJ1
-bGVzIjpbeyJjb25kaXRpb25zIjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJh
-cmd2IjpbeyJyZWYiOiJVc2VGSVBTIn0sdHJ1ZV19LHsiZm4iOiJib29sZWFu
-RXF1YWxzIiwiYXJndiI6W3sicmVmIjoiVXNlRHVhbFN0YWNrIn0sdHJ1ZV19
-XSwidHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4i
-OiJib29sZWFuRXF1YWxzIiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIi
-LCJhcmd2IjpbeyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNG
-SVBTIl19XX0seyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbdHJ1ZSx7
-ImZuIjoiZ2V0QXR0ciIsImFyZ3YiOlt7InJlZiI6IlBhcnRpdGlvblJlc3Vs
-dCJ9LCJzdXBwb3J0c0R1YWxTdGFjayJdfV19XSwidHlwZSI6InRyZWUiLCJy
-dWxlcyI6W3siY29uZGl0aW9ucyI6W10sImVuZHBvaW50Ijp7InVybCI6Imh0
-dHBzOi8vcm91dGUtNTMtZmlwcy57UmVnaW9ufS5hcGkuYW1hem9ud2Vic2Vy
-dmljZXMuY29tLmNuIiwicHJvcGVydGllcyI6eyJhdXRoU2NoZW1lcyI6W3si
-bmFtZSI6InNpZ3Y0Iiwic2lnbmluZ1JlZ2lvbiI6ImNuLW5vcnRod2VzdC0x
-Iiwic2lnbmluZ05hbWUiOiJyb3V0ZTUzIn1dfSwiaGVhZGVycyI6e319LCJ0
-eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9ucyI6W10sImVycm9yIjoi
-RklQUyBhbmQgRHVhbFN0YWNrIGFyZSBlbmFibGVkLCBidXQgdGhpcyBwYXJ0
-aXRpb24gZG9lcyBub3Qgc3VwcG9ydCBvbmUgb3IgYm90aCIsInR5cGUiOiJl
-cnJvciJ9XX0seyJjb25kaXRpb25zIjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMi
-LCJhcmd2IjpbeyJyZWYiOiJVc2VGSVBTIn0sdHJ1ZV19XSwidHlwZSI6InRy
-ZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1
-YWxzIiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJhcmd2IjpbeyJy
-ZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNGSVBTIl19XX1dLCJ0
-eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbXSwiZW5kcG9p
-bnQiOnsidXJsIjoiaHR0cHM6Ly9yb3V0ZS01My1maXBzLntSZWdpb259LmFt
-YXpvbmF3cy5jb20uY24iLCJwcm9wZXJ0aWVzIjp7ImF1dGhTY2hlbWVzIjpb
-eyJuYW1lIjoic2lndjQiLCJzaWduaW5nUmVnaW9uIjoiY24tbm9ydGh3ZXN0
-LTEiLCJzaWduaW5nTmFtZSI6InJvdXRlNTMifV19LCJoZWFkZXJzIjp7fX0s
-InR5cGUiOiJlbmRwb2ludCJ9XX0seyJjb25kaXRpb25zIjpbXSwiZXJyb3Ii
-OiJGSVBTIGlzIGVuYWJsZWQgYnV0IHRoaXMgcGFydGl0aW9uIGRvZXMgbm90
-IHN1cHBvcnQgRklQUyIsInR5cGUiOiJlcnJvciJ9XX0seyJjb25kaXRpb25z
-IjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbeyJyZWYiOiJVc2VE
-dWFsU3RhY2sifSx0cnVlXX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJj
-b25kaXRpb25zIjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbdHJ1
-ZSx7ImZuIjoiZ2V0QXR0ciIsImFyZ3YiOlt7InJlZiI6IlBhcnRpdGlvblJl
-c3VsdCJ9LCJzdXBwb3J0c0R1YWxTdGFjayJdfV19XSwidHlwZSI6InRyZWUi
-LCJydWxlcyI6W3siY29uZGl0aW9ucyI6W10sImVuZHBvaW50Ijp7InVybCI6
-Imh0dHBzOi8vcm91dGUtNTMue1JlZ2lvbn0uYXBpLmFtYXpvbndlYnNlcnZp
-Y2VzLmNvbS5jbiIsInByb3BlcnRpZXMiOnsiYXV0aFNjaGVtZXMiOlt7Im5h
-bWUiOiJzaWd2NCIsInNpZ25pbmdSZWdpb24iOiJjbi1ub3J0aHdlc3QtMSIs
-InNpZ25pbmdOYW1lIjoicm91dGU1MyJ9XX0sImhlYWRlcnMiOnt9fSwidHlw
-ZSI6ImVuZHBvaW50In1dfSx7ImNvbmRpdGlvbnMiOltdLCJlcnJvciI6IkR1
-YWxTdGFjayBpcyBlbmFibGVkIGJ1dCB0aGlzIHBhcnRpdGlvbiBkb2VzIG5v
-dCBzdXBwb3J0IER1YWxTdGFjayIsInR5cGUiOiJlcnJvciJ9XX0seyJjb25k
-aXRpb25zIjpbXSwiZW5kcG9pbnQiOnsidXJsIjoiaHR0cHM6Ly9yb3V0ZTUz
-LmFtYXpvbmF3cy5jb20uY24iLCJwcm9wZXJ0aWVzIjp7ImF1dGhTY2hlbWVz
-IjpbeyJuYW1lIjoic2lndjQiLCJzaWduaW5nUmVnaW9uIjoiY24tbm9ydGh3
-ZXN0LTEiLCJzaWduaW5nTmFtZSI6InJvdXRlNTMifV19LCJoZWFkZXJzIjp7
-fX0sInR5cGUiOiJlbmRwb2ludCJ9XX0seyJjb25kaXRpb25zIjpbeyJmbiI6
-InN0cmluZ0VxdWFscyIsImFyZ3YiOlt7ImZuIjoiZ2V0QXR0ciIsImFyZ3Yi
-Olt7InJlZiI6IlBhcnRpdGlvblJlc3VsdCJ9LCJuYW1lIl19LCJhd3MtdXMt
-Z292Il19XSwidHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6
-W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6W3sicmVmIjoiVXNlRklQ
-UyJ9LHRydWVdfSx7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFyZ3YiOlt7InJl
-ZiI6IlVzZUR1YWxTdGFjayJ9LHRydWVdfV0sInR5cGUiOiJ0cmVlIiwicnVs
-ZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFy
-Z3YiOlt0cnVlLHsiZm4iOiJnZXRBdHRyIiwiYXJndiI6W3sicmVmIjoiUGFy
-dGl0aW9uUmVzdWx0In0sInN1cHBvcnRzRklQUyJdfV19LHsiZm4iOiJib29s
-ZWFuRXF1YWxzIiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJhcmd2
-IjpbeyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNEdWFsU3Rh
-Y2siXX1dfV0sInR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMi
-OltdLCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL3JvdXRlLTUzLWZpcHMu
-e1JlZ2lvbn0uYXBpLmF3cyIsInByb3BlcnRpZXMiOnsiYXV0aFNjaGVtZXMi
-Olt7Im5hbWUiOiJzaWd2NCIsInNpZ25pbmdSZWdpb24iOiJ1cy1nb3Ytd2Vz
-dC0xIiwic2lnbmluZ05hbWUiOiJyb3V0ZTUzIn1dfSwiaGVhZGVycyI6e319
-LCJ0eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9ucyI6W10sImVycm9y
-IjoiRklQUyBhbmQgRHVhbFN0YWNrIGFyZSBlbmFibGVkLCBidXQgdGhpcyBw
-YXJ0aXRpb24gZG9lcyBub3Qgc3VwcG9ydCBvbmUgb3IgYm90aCIsInR5cGUi
-OiJlcnJvciJ9XX0seyJjb25kaXRpb25zIjpbeyJmbiI6ImJvb2xlYW5FcXVh
-bHMiLCJhcmd2IjpbeyJyZWYiOiJVc2VGSVBTIn0sdHJ1ZV19XSwidHlwZSI6
-InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFu
-RXF1YWxzIiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJhcmd2Ijpb
-eyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNGSVBTIl19XX1d
-LCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbXSwiZW5k
-cG9pbnQiOnsidXJsIjoiaHR0cHM6Ly9yb3V0ZTUzLnVzLWdvdi5hbWF6b25h
-d3MuY29tIiwicHJvcGVydGllcyI6eyJhdXRoU2NoZW1lcyI6W3sibmFtZSI6
-InNpZ3Y0Iiwic2lnbmluZ1JlZ2lvbiI6InVzLWdvdi13ZXN0LTEiLCJzaWdu
-aW5nTmFtZSI6InJvdXRlNTMifV19LCJoZWFkZXJzIjp7fX0sInR5cGUiOiJl
-bmRwb2ludCJ9XX0seyJjb25kaXRpb25zIjpbXSwiZXJyb3IiOiJGSVBTIGlz
-IGVuYWJsZWQgYnV0IHRoaXMgcGFydGl0aW9uIGRvZXMgbm90IHN1cHBvcnQg
-RklQUyIsInR5cGUiOiJlcnJvciJ9XX0seyJjb25kaXRpb25zIjpbeyJmbiI6
-ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbeyJyZWYiOiJVc2VEdWFsU3RhY2si
-fSx0cnVlXX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25z
-IjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbdHJ1ZSx7ImZuIjoi
-Z2V0QXR0ciIsImFyZ3YiOlt7InJlZiI6IlBhcnRpdGlvblJlc3VsdCJ9LCJz
-dXBwb3J0c0R1YWxTdGFjayJdfV19XSwidHlwZSI6InRyZWUiLCJydWxlcyI6
-W3siY29uZGl0aW9ucyI6W10sImVuZHBvaW50Ijp7InVybCI6Imh0dHBzOi8v
-cm91dGUtNTMue1JlZ2lvbn0uYXBpLmF3cyIsInByb3BlcnRpZXMiOnsiYXV0
-aFNjaGVtZXMiOlt7Im5hbWUiOiJzaWd2NCIsInNpZ25pbmdSZWdpb24iOiJ1
-cy1nb3Ytd2VzdC0xIiwic2lnbmluZ05hbWUiOiJyb3V0ZTUzIn1dfSwiaGVh
-ZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9ucyI6
-W10sImVycm9yIjoiRHVhbFN0YWNrIGlzIGVuYWJsZWQgYnV0IHRoaXMgcGFy
-dGl0aW9uIGRvZXMgbm90IHN1cHBvcnQgRHVhbFN0YWNrIiwidHlwZSI6ImVy
-cm9yIn1dfSx7ImNvbmRpdGlvbnMiOltdLCJlbmRwb2ludCI6eyJ1cmwiOiJo
-dHRwczovL3JvdXRlNTMudXMtZ292LmFtYXpvbmF3cy5jb20iLCJwcm9wZXJ0
-aWVzIjp7ImF1dGhTY2hlbWVzIjpbeyJuYW1lIjoic2lndjQiLCJzaWduaW5n
-UmVnaW9uIjoidXMtZ292LXdlc3QtMSIsInNpZ25pbmdOYW1lIjoicm91dGU1
-MyJ9XX0sImhlYWRlcnMiOnt9fSwidHlwZSI6ImVuZHBvaW50In1dfSx7ImNv
-bmRpdGlvbnMiOlt7ImZuIjoic3RyaW5nRXF1YWxzIiwiYXJndiI6W3siZm4i
-OiJnZXRBdHRyIiwiYXJndiI6W3sicmVmIjoiUGFydGl0aW9uUmVzdWx0In0s
-Im5hbWUiXX0sImF3cy1pc28iXX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpb
-eyJjb25kaXRpb25zIjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2Ijpb
-eyJyZWYiOiJVc2VGSVBTIn0sdHJ1ZV19XSwidHlwZSI6InRyZWUiLCJydWxl
-cyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJn
-diI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJhcmd2IjpbeyJyZWYiOiJQYXJ0
-aXRpb25SZXN1bHQifSwic3VwcG9ydHNGSVBTIl19XX1dLCJ0eXBlIjoidHJl
-ZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbXSwiZW5kcG9pbnQiOnsidXJs
-IjoiaHR0cHM6Ly9yb3V0ZS01My1maXBzLntSZWdpb259LmMycy5pYy5nb3Yi
-LCJwcm9wZXJ0aWVzIjp7ImF1dGhTY2hlbWVzIjpbeyJuYW1lIjoic2lndjQi
-LCJzaWduaW5nUmVnaW9uIjoidXMtaXNvLWVhc3QtMSIsInNpZ25pbmdOYW1l
-Ijoicm91dGU1MyJ9XX0sImhlYWRlcnMiOnt9fSwidHlwZSI6ImVuZHBvaW50
-In1dfSx7ImNvbmRpdGlvbnMiOltdLCJlcnJvciI6IkZJUFMgaXMgZW5hYmxl
-ZCBidXQgdGhpcyBwYXJ0aXRpb24gZG9lcyBub3Qgc3VwcG9ydCBGSVBTIiwi
-dHlwZSI6ImVycm9yIn1dfSx7ImNvbmRpdGlvbnMiOltdLCJlbmRwb2ludCI6
-eyJ1cmwiOiJodHRwczovL3JvdXRlNTMuYzJzLmljLmdvdiIsInByb3BlcnRp
-ZXMiOnsiYXV0aFNjaGVtZXMiOlt7Im5hbWUiOiJzaWd2NCIsInNpZ25pbmdS
-ZWdpb24iOiJ1cy1pc28tZWFzdC0xIiwic2lnbmluZ05hbWUiOiJyb3V0ZTUz
-In1dfSwiaGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifV19LHsiY29u
-ZGl0aW9ucyI6W3siZm4iOiJzdHJpbmdFcXVhbHMiLCJhcmd2IjpbeyJmbiI6
-ImdldEF0dHIiLCJhcmd2IjpbeyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwi
-bmFtZSJdfSwiYXdzLWlzby1iIl19XSwidHlwZSI6InRyZWUiLCJydWxlcyI6
-W3siY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6
-W3sicmVmIjoiVXNlRklQUyJ9LHRydWVdfV0sInR5cGUiOiJ0cmVlIiwicnVs
-ZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFy
-Z3YiOlt0cnVlLHsiZm4iOiJnZXRBdHRyIiwiYXJndiI6W3sicmVmIjoiUGFy
-dGl0aW9uUmVzdWx0In0sInN1cHBvcnRzRklQUyJdfV19XSwidHlwZSI6InRy
-ZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W10sImVuZHBvaW50Ijp7InVy
-bCI6Imh0dHBzOi8vcm91dGUtNTMtZmlwcy57UmVnaW9ufS5zYzJzLnNnb3Yu
-Z292IiwicHJvcGVydGllcyI6eyJhdXRoU2NoZW1lcyI6W3sibmFtZSI6InNp
-Z3Y0Iiwic2lnbmluZ1JlZ2lvbiI6InVzLWlzb2ItZWFzdC0xIiwic2lnbmlu
-Z05hbWUiOiJyb3V0ZTUzIn1dfSwiaGVhZGVycyI6e319LCJ0eXBlIjoiZW5k
-cG9pbnQifV19LHsiY29uZGl0aW9ucyI6W10sImVycm9yIjoiRklQUyBpcyBl
-bmFibGVkIGJ1dCB0aGlzIHBhcnRpdGlvbiBkb2VzIG5vdCBzdXBwb3J0IEZJ
-UFMiLCJ0eXBlIjoiZXJyb3IifV19LHsiY29uZGl0aW9ucyI6W10sImVuZHBv
-aW50Ijp7InVybCI6Imh0dHBzOi8vcm91dGU1My5zYzJzLnNnb3YuZ292Iiwi
-cHJvcGVydGllcyI6eyJhdXRoU2NoZW1lcyI6W3sibmFtZSI6InNpZ3Y0Iiwi
-c2lnbmluZ1JlZ2lvbiI6InVzLWlzb2ItZWFzdC0xIiwic2lnbmluZ05hbWUi
-OiJyb3V0ZTUzIn1dfSwiaGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQi
-fV19LHsiY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJn
-diI6W3sicmVmIjoiVXNlRklQUyJ9LHRydWVdfSx7ImZuIjoiYm9vbGVhbkVx
-dWFscyIsImFyZ3YiOlt7InJlZiI6IlVzZUR1YWxTdGFjayJ9LHRydWVdfV0s
-InR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoi
-Ym9vbGVhbkVxdWFscyIsImFyZ3YiOlt0cnVlLHsiZm4iOiJnZXRBdHRyIiwi
-YXJndiI6W3sicmVmIjoiUGFydGl0aW9uUmVzdWx0In0sInN1cHBvcnRzRklQ
-UyJdfV19LHsiZm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6W3RydWUseyJm
-biI6ImdldEF0dHIiLCJhcmd2IjpbeyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQi
-fSwic3VwcG9ydHNEdWFsU3RhY2siXX1dfV0sInR5cGUiOiJ0cmVlIiwicnVs
-ZXMiOlt7ImNvbmRpdGlvbnMiOltdLCJlbmRwb2ludCI6eyJ1cmwiOiJodHRw
-czovL3JvdXRlNTMtZmlwcy57UmVnaW9ufS57UGFydGl0aW9uUmVzdWx0I2R1
-YWxTdGFja0Ruc1N1ZmZpeH0iLCJwcm9wZXJ0aWVzIjp7fSwiaGVhZGVycyI6
-e319LCJ0eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9ucyI6W10sImVy
-cm9yIjoiRklQUyBhbmQgRHVhbFN0YWNrIGFyZSBlbmFibGVkLCBidXQgdGhp
-cyBwYXJ0aXRpb24gZG9lcyBub3Qgc3VwcG9ydCBvbmUgb3IgYm90aCIsInR5
-cGUiOiJlcnJvciJ9XX0seyJjb25kaXRpb25zIjpbeyJmbiI6ImJvb2xlYW5F
-cXVhbHMiLCJhcmd2IjpbeyJyZWYiOiJVc2VGSVBTIn0sdHJ1ZV19XSwidHlw
-ZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJib29s
-ZWFuRXF1YWxzIiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJhcmd2
-IjpbeyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNGSVBTIl19
-XX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbXSwi
-dHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJz
-dHJpbmdFcXVhbHMiLCJhcmd2IjpbeyJyZWYiOiJSZWdpb24ifSwiYXdzLWds
-b2JhbCJdfV0sImVuZHBvaW50Ijp7InVybCI6Imh0dHBzOi8vcm91dGU1My1m
-aXBzLmFtYXpvbmF3cy5jb20iLCJwcm9wZXJ0aWVzIjp7ImF1dGhTY2hlbWVz
-IjpbeyJuYW1lIjoic2lndjQiLCJzaWduaW5nUmVnaW9uIjoidXMtZWFzdC0x
-Iiwic2lnbmluZ05hbWUiOiJyb3V0ZTUzIn1dfSwiaGVhZGVycyI6e319LCJ0
-eXBlIjoiZW5kcG9pbnQifSx7ImNvbmRpdGlvbnMiOlt7ImZuIjoic3RyaW5n
-RXF1YWxzIiwiYXJndiI6W3sicmVmIjoiUmVnaW9uIn0sImF3cy11cy1nb3Yt
-Z2xvYmFsIl19XSwiZW5kcG9pbnQiOnsidXJsIjoiaHR0cHM6Ly9yb3V0ZTUz
-LnVzLWdvdi5hbWF6b25hd3MuY29tIiwicHJvcGVydGllcyI6eyJhdXRoU2No
-ZW1lcyI6W3sibmFtZSI6InNpZ3Y0Iiwic2lnbmluZ1JlZ2lvbiI6InVzLWdv
-di13ZXN0LTEiLCJzaWduaW5nTmFtZSI6InJvdXRlNTMifV19LCJoZWFkZXJz
-Ijp7fX0sInR5cGUiOiJlbmRwb2ludCJ9LHsiY29uZGl0aW9ucyI6W10sImVu
-ZHBvaW50Ijp7InVybCI6Imh0dHBzOi8vcm91dGU1My1maXBzLntSZWdpb259
-LntQYXJ0aXRpb25SZXN1bHQjZG5zU3VmZml4fSIsInByb3BlcnRpZXMiOnt9
-LCJoZWFkZXJzIjp7fX0sInR5cGUiOiJlbmRwb2ludCJ9XX1dfSx7ImNvbmRp
-dGlvbnMiOltdLCJlcnJvciI6IkZJUFMgaXMgZW5hYmxlZCBidXQgdGhpcyBw
-YXJ0aXRpb24gZG9lcyBub3Qgc3VwcG9ydCBGSVBTIiwidHlwZSI6ImVycm9y
-In1dfSx7ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFy
-Z3YiOlt7InJlZiI6IlVzZUR1YWxTdGFjayJ9LHRydWVdfV0sInR5cGUiOiJ0
-cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVx
-dWFscyIsImFyZ3YiOlt0cnVlLHsiZm4iOiJnZXRBdHRyIiwiYXJndiI6W3si
-cmVmIjoiUGFydGl0aW9uUmVzdWx0In0sInN1cHBvcnRzRHVhbFN0YWNrIl19
-XX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbXSwi
-ZW5kcG9pbnQiOnsidXJsIjoiaHR0cHM6Ly9yb3V0ZTUzLntSZWdpb259LntQ
-YXJ0aXRpb25SZXN1bHQjZHVhbFN0YWNrRG5zU3VmZml4fSIsInByb3BlcnRp
-ZXMiOnt9LCJoZWFkZXJzIjp7fX0sInR5cGUiOiJlbmRwb2ludCJ9XX0seyJj
-b25kaXRpb25zIjpbXSwiZXJyb3IiOiJEdWFsU3RhY2sgaXMgZW5hYmxlZCBi
-dXQgdGhpcyBwYXJ0aXRpb24gZG9lcyBub3Qgc3VwcG9ydCBEdWFsU3RhY2si
-LCJ0eXBlIjoiZXJyb3IifV19LHsiY29uZGl0aW9ucyI6W10sInR5cGUiOiJ0
-cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoic3RyaW5nRXF1
-YWxzIiwiYXJndiI6W3sicmVmIjoiUmVnaW9uIn0sImF3cy1nbG9iYWwiXX1d
-LCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL3JvdXRlNTMuYW1hem9uYXdz
-LmNvbSIsInByb3BlcnRpZXMiOnsiYXV0aFNjaGVtZXMiOlt7Im5hbWUiOiJz
-aWd2NCIsInNpZ25pbmdSZWdpb24iOiJ1cy1lYXN0LTEiLCJzaWduaW5nTmFt
-ZSI6InJvdXRlNTMifV19LCJoZWFkZXJzIjp7fX0sInR5cGUiOiJlbmRwb2lu
-dCJ9LHsiY29uZGl0aW9ucyI6W3siZm4iOiJzdHJpbmdFcXVhbHMiLCJhcmd2
-IjpbeyJyZWYiOiJSZWdpb24ifSwiYXdzLWNuLWdsb2JhbCJdfV0sImVuZHBv
-aW50Ijp7InVybCI6Imh0dHBzOi8vcm91dGU1My5hbWF6b25hd3MuY29tLmNu
-IiwicHJvcGVydGllcyI6eyJhdXRoU2NoZW1lcyI6W3sibmFtZSI6InNpZ3Y0
-Iiwic2lnbmluZ1JlZ2lvbiI6ImNuLW5vcnRod2VzdC0xIiwic2lnbmluZ05h
-bWUiOiJyb3V0ZTUzIn1dfSwiaGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9p
-bnQifSx7ImNvbmRpdGlvbnMiOlt7ImZuIjoic3RyaW5nRXF1YWxzIiwiYXJn
-diI6W3sicmVmIjoiUmVnaW9uIn0sImF3cy11cy1nb3YtZ2xvYmFsIl19XSwi
-ZW5kcG9pbnQiOnsidXJsIjoiaHR0cHM6Ly9yb3V0ZTUzLnVzLWdvdi5hbWF6
-b25hd3MuY29tIiwicHJvcGVydGllcyI6eyJhdXRoU2NoZW1lcyI6W3sibmFt
-ZSI6InNpZ3Y0Iiwic2lnbmluZ1JlZ2lvbiI6InVzLWdvdi13ZXN0LTEiLCJz
-aWduaW5nTmFtZSI6InJvdXRlNTMifV19LCJoZWFkZXJzIjp7fX0sInR5cGUi
-OiJlbmRwb2ludCJ9LHsiY29uZGl0aW9ucyI6W3siZm4iOiJzdHJpbmdFcXVh
-bHMiLCJhcmd2IjpbeyJyZWYiOiJSZWdpb24ifSwiYXdzLWlzby1nbG9iYWwi
-XX1dLCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL3JvdXRlNTMuYzJzLmlj
-LmdvdiIsInByb3BlcnRpZXMiOnsiYXV0aFNjaGVtZXMiOlt7Im5hbWUiOiJz
-aWd2NCIsInNpZ25pbmdSZWdpb24iOiJ1cy1pc28tZWFzdC0xIiwic2lnbmlu
-Z05hbWUiOiJyb3V0ZTUzIn1dfSwiaGVhZGVycyI6e319LCJ0eXBlIjoiZW5k
-cG9pbnQifSx7ImNvbmRpdGlvbnMiOlt7ImZuIjoic3RyaW5nRXF1YWxzIiwi
-YXJndiI6W3sicmVmIjoiUmVnaW9uIn0sImF3cy1pc28tYi1nbG9iYWwiXX1d
-LCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL3JvdXRlNTMuc2Mycy5zZ292
-LmdvdiIsInByb3BlcnRpZXMiOnsiYXV0aFNjaGVtZXMiOlt7Im5hbWUiOiJz
-aWd2NCIsInNpZ25pbmdSZWdpb24iOiJ1cy1pc29iLWVhc3QtMSIsInNpZ25p
-bmdOYW1lIjoicm91dGU1MyJ9XX0sImhlYWRlcnMiOnt9fSwidHlwZSI6ImVu
-ZHBvaW50In0seyJjb25kaXRpb25zIjpbXSwiZW5kcG9pbnQiOnsidXJsIjoi
-aHR0cHM6Ly9yb3V0ZTUzLntSZWdpb259LntQYXJ0aXRpb25SZXN1bHQjZG5z
-U3VmZml4fSIsInByb3BlcnRpZXMiOnt9LCJoZWFkZXJzIjp7fX0sInR5cGUi
-OiJlbmRwb2ludCJ9XX1dfV19
-
-    JSON
   end
 end

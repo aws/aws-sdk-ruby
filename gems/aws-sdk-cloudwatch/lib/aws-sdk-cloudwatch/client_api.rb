@@ -124,6 +124,7 @@ module Aws::CloudWatch
     HistoryItemType = Shapes::StringShape.new(name: 'HistoryItemType')
     HistorySummary = Shapes::StringShape.new(name: 'HistorySummary')
     IncludeLinkedAccounts = Shapes::BooleanShape.new(name: 'IncludeLinkedAccounts')
+    IncludeLinkedAccountsMetrics = Shapes::BooleanShape.new(name: 'IncludeLinkedAccountsMetrics')
     InsightRule = Shapes::StructureShape.new(name: 'InsightRule')
     InsightRuleAggregationStatistic = Shapes::StringShape.new(name: 'InsightRuleAggregationStatistic')
     InsightRuleContributor = Shapes::StructureShape.new(name: 'InsightRuleContributor')
@@ -572,6 +573,7 @@ module Aws::CloudWatch
     GetMetricStreamOutput.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateDate"))
     GetMetricStreamOutput.add_member(:output_format, Shapes::ShapeRef.new(shape: MetricStreamOutputFormat, location_name: "OutputFormat"))
     GetMetricStreamOutput.add_member(:statistics_configurations, Shapes::ShapeRef.new(shape: MetricStreamStatisticsConfigurations, location_name: "StatisticsConfigurations"))
+    GetMetricStreamOutput.add_member(:include_linked_accounts_metrics, Shapes::ShapeRef.new(shape: IncludeLinkedAccountsMetrics, location_name: "IncludeLinkedAccountsMetrics"))
     GetMetricStreamOutput.struct_class = Types::GetMetricStreamOutput
 
     GetMetricWidgetImageInput.add_member(:metric_widget, Shapes::ShapeRef.new(shape: MetricWidget, required: true, location_name: "MetricWidget"))
@@ -922,6 +924,7 @@ module Aws::CloudWatch
     PutMetricStreamInput.add_member(:output_format, Shapes::ShapeRef.new(shape: MetricStreamOutputFormat, required: true, location_name: "OutputFormat"))
     PutMetricStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutMetricStreamInput.add_member(:statistics_configurations, Shapes::ShapeRef.new(shape: MetricStreamStatisticsConfigurations, location_name: "StatisticsConfigurations"))
+    PutMetricStreamInput.add_member(:include_linked_accounts_metrics, Shapes::ShapeRef.new(shape: IncludeLinkedAccountsMetrics, location_name: "IncludeLinkedAccountsMetrics"))
     PutMetricStreamInput.struct_class = Types::PutMetricStreamInput
 
     PutMetricStreamOutput.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "Arn"))

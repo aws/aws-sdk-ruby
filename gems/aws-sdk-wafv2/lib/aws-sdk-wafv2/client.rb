@@ -4212,8 +4212,8 @@ module Aws::WAFV2
     #   sample of requests.
     #
     # @option params [required, String] :rule_metric_name
-    #   The metric name assigned to the `Rule` or `RuleGroup` for which you
-    #   want a sample of requests.
+    #   The metric name assigned to the `Rule` or `RuleGroup` dimension for
+    #   which you want a sample of requests.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
@@ -6650,6 +6650,21 @@ module Aws::WAFV2
     # Enables the specified LoggingConfiguration, to start logging from a
     # web ACL, according to the configuration provided.
     #
+    # <note markdown="1"> This operation completely replaces any mutable specifications that you
+    # already have for a logging configuration with the ones that you
+    # provide to this call.
+    #
+    #  To modify an existing logging configuration, do the following:
+    #
+    #  1.  Retrieve it by calling GetLoggingConfiguration
+    #
+    # 2.  Update its settings as needed
+    #
+    # 3.  Provide the complete logging configuration specification to this
+    #     call
+    #
+    #  </note>
+    #
     # <note markdown="1"> You can define one logging destination per web ACL.
     #
     #  </note>
@@ -6681,15 +6696,6 @@ module Aws::WAFV2
     #
     # For additional information about web ACL logging, see [Logging web ACL
     # traffic information][1] in the *WAF Developer Guide*.
-    #
-    # <note markdown="1"> This operation completely replaces the mutable specifications that you
-    # already have for the logging configuration with the ones that you
-    # provide to this call. To modify the logging configuration, retrieve it
-    # by calling GetLoggingConfiguration, update the settings as needed, and
-    # then provide the complete logging configuration specification to this
-    # call.
-    #
-    #  </note>
     #
     #
     #
@@ -7068,9 +7074,15 @@ module Aws::WAFV2
     #
     # <note markdown="1"> This operation completely replaces the mutable specifications that you
     # already have for the IP set with the ones that you provide to this
-    # call. To modify the IP set, retrieve it by calling GetIPSet, update
-    # the settings as needed, and then provide the complete IP set
-    # specification to this call.
+    # call.
+    #
+    #  To modify an IP set, do the following:
+    #
+    #  1.  Retrieve it by calling GetIPSet
+    #
+    # 2.  Update its settings as needed
+    #
+    # 3.  Provide the complete IP set specification to this call
     #
     #  </note>
     #
@@ -7293,9 +7305,15 @@ module Aws::WAFV2
     #
     # <note markdown="1"> This operation completely replaces the mutable specifications that you
     # already have for the regex pattern set with the ones that you provide
-    # to this call. To modify the regex pattern set, retrieve it by calling
-    # GetRegexPatternSet, update the settings as needed, and then provide
-    # the complete regex pattern set specification to this call.
+    # to this call.
+    #
+    #  To modify a regex pattern set, do the following:
+    #
+    #  1.  Retrieve it by calling GetRegexPatternSet
+    #
+    # 2.  Update its settings as needed
+    #
+    # 3.  Provide the complete regex pattern set specification to this call
     #
     #  </note>
     #
@@ -7387,9 +7405,15 @@ module Aws::WAFV2
     #
     # <note markdown="1"> This operation completely replaces the mutable specifications that you
     # already have for the rule group with the ones that you provide to this
-    # call. To modify the rule group, retrieve it by calling GetRuleGroup,
-    # update the settings as needed, and then provide the complete rule
-    # group specification to this call.
+    # call.
+    #
+    #  To modify a rule group, do the following:
+    #
+    #  1.  Retrieve it by calling GetRuleGroup
+    #
+    # 2.  Update its settings as needed
+    #
+    # 3.  Provide the complete rule group specification to this call
     #
     #  </note>
     #
@@ -8169,6 +8193,20 @@ module Aws::WAFV2
     # continuous coverage to the resources that you have associated with the
     # web ACL.
     #
+    # <note markdown="1"> This operation completely replaces the mutable specifications that you
+    # already have for the web ACL with the ones that you provide to this
+    # call.
+    #
+    #  To modify a web ACL, do the following:
+    #
+    #  1.  Retrieve it by calling GetWebACL
+    #
+    # 2.  Update its settings as needed
+    #
+    # 3.  Provide the complete web ACL specification to this call
+    #
+    #  </note>
+    #
     # When you make changes to web ACLs or web ACL components, like rules
     # and rule groups, WAF propagates the changes everywhere that the web
     # ACL and its components are stored and used. Your changes are applied
@@ -8182,14 +8220,6 @@ module Aws::WAFV2
     # associate a web ACL with an Amazon Web Services resource and when you
     # change a web ACL that is already associated with a resource.
     # Generally, any inconsistencies of this type last only a few seconds.
-    #
-    # <note markdown="1"> This operation completely replaces the mutable specifications that you
-    # already have for the web ACL with the ones that you provide to this
-    # call. To modify the web ACL, retrieve it by calling GetWebACL, update
-    # the settings as needed, and then provide the complete web ACL
-    # specification to this call.
-    #
-    #  </note>
     #
     # A web ACL defines a collection of rules to use to inspect and control
     # web requests. Each rule has an action defined (allow, block, or count)
@@ -9032,7 +9062,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

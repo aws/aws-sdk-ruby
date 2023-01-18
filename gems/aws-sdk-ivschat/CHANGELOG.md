@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2023-01-18)
+------------------
+
+* Feature - Updates the range for a Chat Room's maximumMessageRatePerSecond field.
+
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
 1.7.0 (2022-12-05)

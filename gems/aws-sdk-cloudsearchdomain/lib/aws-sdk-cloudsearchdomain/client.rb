@@ -916,7 +916,7 @@ module Aws::CloudSearchDomain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudsearchdomain'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.34.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

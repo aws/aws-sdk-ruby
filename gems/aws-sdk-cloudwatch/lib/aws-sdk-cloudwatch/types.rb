@@ -1565,6 +1565,12 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
     #   @return [Array<Types::MetricStreamStatisticsConfiguration>]
     #
+    # @!attribute [rw] include_linked_accounts_metrics
+    #   If this is `true` and this metric stream is in a monitoring account,
+    #   then the stream includes metrics from source accounts that the
+    #   monitoring account is linked to.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStreamOutput AWS API Documentation
     #
     class GetMetricStreamOutput < Struct.new(
@@ -1578,7 +1584,8 @@ module Aws::CloudWatch
       :creation_date,
       :last_update_date,
       :output_format,
-      :statistics_configurations)
+      :statistics_configurations,
+      :include_linked_accounts_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3914,6 +3921,11 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
     #   @return [Array<Types::MetricStreamStatisticsConfiguration>]
     #
+    # @!attribute [rw] include_linked_accounts_metrics
+    #   If you are creating a metric stream in a monitoring account, specify
+    #   `true` to include metrics from source accounts in the metric stream.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricStreamInput AWS API Documentation
     #
     class PutMetricStreamInput < Struct.new(
@@ -3924,7 +3936,8 @@ module Aws::CloudWatch
       :role_arn,
       :output_format,
       :tags,
-      :statistics_configurations)
+      :statistics_configurations,
+      :include_linked_accounts_metrics)
       SENSITIVE = []
       include Aws::Structure
     end

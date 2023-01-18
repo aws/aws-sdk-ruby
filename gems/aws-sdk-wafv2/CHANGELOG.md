@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-01-18)
+------------------
+
+* Feature - Improved the visibility of the guidance for updating AWS WAF resources, such as web ACLs and rule groups.
+
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
 1.46.0 (2022-12-12)

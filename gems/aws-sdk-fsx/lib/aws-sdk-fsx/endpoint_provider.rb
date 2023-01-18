@@ -9,132 +9,64 @@
 
 module Aws::FSx
   class EndpointProvider
-    def initialize(rule_set = nil)
-      @@rule_set ||= begin
-        endpoint_rules = Aws::Json.load(Base64.decode64(RULES))
-        Aws::Endpoints::RuleSet.new(
-          version: endpoint_rules['version'],
-          service_id: endpoint_rules['serviceId'],
-          parameters: endpoint_rules['parameters'],
-          rules: endpoint_rules['rules']
-        )
-      end
-      @provider = Aws::Endpoints::RulesProvider.new(rule_set || @@rule_set)
-    end
-
     def resolve_endpoint(parameters)
-      @provider.resolve_endpoint(parameters)
+      region = parameters.region
+      use_dual_stack = parameters.use_dual_stack
+      use_fips = parameters.use_fips
+      endpoint = parameters.endpoint
+      if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
+        if Aws::Endpoints::Matchers.set?(endpoint)
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+            raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"
+          end
+          return Aws::Endpoints::Endpoint.new(url: endpoint, headers: {}, properties: {})
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+            return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.string_equals?(region, "prod-ca-central-1")
+              return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.ca-central-1.amazonaws.com", headers: {}, properties: {})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "prod-us-east-1")
+              return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.us-east-1.amazonaws.com", headers: {}, properties: {})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "prod-us-east-2")
+              return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.us-east-2.amazonaws.com", headers: {}, properties: {})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "prod-us-west-1")
+              return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.us-west-1.amazonaws.com", headers: {}, properties: {})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "prod-us-west-2")
+              return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.us-west-2.amazonaws.com", headers: {}, properties: {})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "prod-us-gov-east-1")
+              return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "prod-us-gov-west-1")
+              return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
+            end
+            return Aws::Endpoints::Endpoint.new(url: "https://fsx-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+            return Aws::Endpoints::Endpoint.new(url: "https://fsx.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+        end
+        return Aws::Endpoints::Endpoint.new(url: "https://fsx.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+      end
+      raise ArgumentError, 'No endpoint could be resolved'
+
     end
-
-    # @api private
-    RULES = <<-JSON
-eyJ2ZXJzaW9uIjoiMS4wIiwicGFyYW1ldGVycyI6eyJSZWdpb24iOnsiYnVp
-bHRJbiI6IkFXUzo6UmVnaW9uIiwicmVxdWlyZWQiOnRydWUsImRvY3VtZW50
-YXRpb24iOiJUaGUgQVdTIHJlZ2lvbiB1c2VkIHRvIGRpc3BhdGNoIHRoZSBy
-ZXF1ZXN0LiIsInR5cGUiOiJTdHJpbmcifSwiVXNlRHVhbFN0YWNrIjp7ImJ1
-aWx0SW4iOiJBV1M6OlVzZUR1YWxTdGFjayIsInJlcXVpcmVkIjp0cnVlLCJk
-ZWZhdWx0IjpmYWxzZSwiZG9jdW1lbnRhdGlvbiI6IldoZW4gdHJ1ZSwgdXNl
-IHRoZSBkdWFsLXN0YWNrIGVuZHBvaW50LiBJZiB0aGUgY29uZmlndXJlZCBl
-bmRwb2ludCBkb2VzIG5vdCBzdXBwb3J0IGR1YWwtc3RhY2ssIGRpc3BhdGNo
-aW5nIHRoZSByZXF1ZXN0IE1BWSByZXR1cm4gYW4gZXJyb3IuIiwidHlwZSI6
-IkJvb2xlYW4ifSwiVXNlRklQUyI6eyJidWlsdEluIjoiQVdTOjpVc2VGSVBT
-IiwicmVxdWlyZWQiOnRydWUsImRlZmF1bHQiOmZhbHNlLCJkb2N1bWVudGF0
-aW9uIjoiV2hlbiB0cnVlLCBzZW5kIHRoaXMgcmVxdWVzdCB0byB0aGUgRklQ
-Uy1jb21wbGlhbnQgcmVnaW9uYWwgZW5kcG9pbnQuIElmIHRoZSBjb25maWd1
-cmVkIGVuZHBvaW50IGRvZXMgbm90IGhhdmUgYSBGSVBTIGNvbXBsaWFudCBl
-bmRwb2ludCwgZGlzcGF0Y2hpbmcgdGhlIHJlcXVlc3Qgd2lsbCByZXR1cm4g
-YW4gZXJyb3IuIiwidHlwZSI6IkJvb2xlYW4ifSwiRW5kcG9pbnQiOnsiYnVp
-bHRJbiI6IlNESzo6RW5kcG9pbnQiLCJyZXF1aXJlZCI6ZmFsc2UsImRvY3Vt
-ZW50YXRpb24iOiJPdmVycmlkZSB0aGUgZW5kcG9pbnQgdXNlZCB0byBzZW5k
-IHRoaXMgcmVxdWVzdCIsInR5cGUiOiJTdHJpbmcifX0sInJ1bGVzIjpbeyJj
-b25kaXRpb25zIjpbeyJmbiI6ImF3cy5wYXJ0aXRpb24iLCJhcmd2IjpbeyJy
-ZWYiOiJSZWdpb24ifV0sImFzc2lnbiI6IlBhcnRpdGlvblJlc3VsdCJ9XSwi
-dHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJp
-c1NldCIsImFyZ3YiOlt7InJlZiI6IkVuZHBvaW50In1dfV0sInR5cGUiOiJ0
-cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVx
-dWFscyIsImFyZ3YiOlt7InJlZiI6IlVzZUZJUFMifSx0cnVlXX1dLCJlcnJv
-ciI6IkludmFsaWQgQ29uZmlndXJhdGlvbjogRklQUyBhbmQgY3VzdG9tIGVu
-ZHBvaW50IGFyZSBub3Qgc3VwcG9ydGVkIiwidHlwZSI6ImVycm9yIn0seyJj
-b25kaXRpb25zIjpbXSwidHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0
-aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6W3sicmVmIjoi
-VXNlRHVhbFN0YWNrIn0sdHJ1ZV19XSwiZXJyb3IiOiJJbnZhbGlkIENvbmZp
-Z3VyYXRpb246IER1YWxzdGFjayBhbmQgY3VzdG9tIGVuZHBvaW50IGFyZSBu
-b3Qgc3VwcG9ydGVkIiwidHlwZSI6ImVycm9yIn0seyJjb25kaXRpb25zIjpb
-XSwiZW5kcG9pbnQiOnsidXJsIjp7InJlZiI6IkVuZHBvaW50In0sInByb3Bl
-cnRpZXMiOnt9LCJoZWFkZXJzIjp7fX0sInR5cGUiOiJlbmRwb2ludCJ9XX1d
-fSx7ImNvbmRpdGlvbnMiOlt7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFyZ3Yi
-Olt7InJlZiI6IlVzZUZJUFMifSx0cnVlXX0seyJmbiI6ImJvb2xlYW5FcXVh
-bHMiLCJhcmd2IjpbeyJyZWYiOiJVc2VEdWFsU3RhY2sifSx0cnVlXX1dLCJ0
-eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbeyJmbiI6ImJv
-b2xlYW5FcXVhbHMiLCJhcmd2IjpbdHJ1ZSx7ImZuIjoiZ2V0QXR0ciIsImFy
-Z3YiOlt7InJlZiI6IlBhcnRpdGlvblJlc3VsdCJ9LCJzdXBwb3J0c0ZJUFMi
-XX1dfSx7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFyZ3YiOlt0cnVlLHsiZm4i
-OiJnZXRBdHRyIiwiYXJndiI6W3sicmVmIjoiUGFydGl0aW9uUmVzdWx0In0s
-InN1cHBvcnRzRHVhbFN0YWNrIl19XX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVz
-IjpbeyJjb25kaXRpb25zIjpbXSwiZW5kcG9pbnQiOnsidXJsIjoiaHR0cHM6
-Ly9mc3gtZmlwcy57UmVnaW9ufS57UGFydGl0aW9uUmVzdWx0I2R1YWxTdGFj
-a0Ruc1N1ZmZpeH0iLCJwcm9wZXJ0aWVzIjp7fSwiaGVhZGVycyI6e319LCJ0
-eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9ucyI6W10sImVycm9yIjoi
-RklQUyBhbmQgRHVhbFN0YWNrIGFyZSBlbmFibGVkLCBidXQgdGhpcyBwYXJ0
-aXRpb24gZG9lcyBub3Qgc3VwcG9ydCBvbmUgb3IgYm90aCIsInR5cGUiOiJl
-cnJvciJ9XX0seyJjb25kaXRpb25zIjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMi
-LCJhcmd2IjpbeyJyZWYiOiJVc2VGSVBTIn0sdHJ1ZV19XSwidHlwZSI6InRy
-ZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1
-YWxzIiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJhcmd2IjpbeyJy
-ZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNGSVBTIl19XX1dLCJ0
-eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbXSwidHlwZSI6
-InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJzdHJpbmdF
-cXVhbHMiLCJhcmd2IjpbeyJyZWYiOiJSZWdpb24ifSwicHJvZC1jYS1jZW50
-cmFsLTEiXX1dLCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL2ZzeC1maXBz
-LmNhLWNlbnRyYWwtMS5hbWF6b25hd3MuY29tIiwicHJvcGVydGllcyI6e30s
-ImhlYWRlcnMiOnt9fSwidHlwZSI6ImVuZHBvaW50In0seyJjb25kaXRpb25z
-IjpbeyJmbiI6InN0cmluZ0VxdWFscyIsImFyZ3YiOlt7InJlZiI6IlJlZ2lv
-biJ9LCJwcm9kLXVzLWVhc3QtMSJdfV0sImVuZHBvaW50Ijp7InVybCI6Imh0
-dHBzOi8vZnN4LWZpcHMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20iLCJwcm9w
-ZXJ0aWVzIjp7fSwiaGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifSx7
-ImNvbmRpdGlvbnMiOlt7ImZuIjoic3RyaW5nRXF1YWxzIiwiYXJndiI6W3si
-cmVmIjoiUmVnaW9uIn0sInByb2QtdXMtZWFzdC0yIl19XSwiZW5kcG9pbnQi
-OnsidXJsIjoiaHR0cHM6Ly9mc3gtZmlwcy51cy1lYXN0LTIuYW1hem9uYXdz
-LmNvbSIsInByb3BlcnRpZXMiOnt9LCJoZWFkZXJzIjp7fX0sInR5cGUiOiJl
-bmRwb2ludCJ9LHsiY29uZGl0aW9ucyI6W3siZm4iOiJzdHJpbmdFcXVhbHMi
-LCJhcmd2IjpbeyJyZWYiOiJSZWdpb24ifSwicHJvZC11cy13ZXN0LTEiXX1d
-LCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL2ZzeC1maXBzLnVzLXdlc3Qt
-MS5hbWF6b25hd3MuY29tIiwicHJvcGVydGllcyI6e30sImhlYWRlcnMiOnt9
-fSwidHlwZSI6ImVuZHBvaW50In0seyJjb25kaXRpb25zIjpbeyJmbiI6InN0
-cmluZ0VxdWFscyIsImFyZ3YiOlt7InJlZiI6IlJlZ2lvbiJ9LCJwcm9kLXVz
-LXdlc3QtMiJdfV0sImVuZHBvaW50Ijp7InVybCI6Imh0dHBzOi8vZnN4LWZp
-cHMudXMtd2VzdC0yLmFtYXpvbmF3cy5jb20iLCJwcm9wZXJ0aWVzIjp7fSwi
-aGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifSx7ImNvbmRpdGlvbnMi
-Olt7ImZuIjoic3RyaW5nRXF1YWxzIiwiYXJndiI6W3sicmVmIjoiUmVnaW9u
-In0sInByb2QtdXMtZ292LWVhc3QtMSJdfV0sImVuZHBvaW50Ijp7InVybCI6
-Imh0dHBzOi8vZnN4LWZpcHMudXMtZ292LWVhc3QtMS5hbWF6b25hd3MuY29t
-IiwicHJvcGVydGllcyI6e30sImhlYWRlcnMiOnt9fSwidHlwZSI6ImVuZHBv
-aW50In0seyJjb25kaXRpb25zIjpbeyJmbiI6InN0cmluZ0VxdWFscyIsImFy
-Z3YiOlt7InJlZiI6IlJlZ2lvbiJ9LCJwcm9kLXVzLWdvdi13ZXN0LTEiXX1d
-LCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL2ZzeC1maXBzLnVzLWdvdi13
-ZXN0LTEuYW1hem9uYXdzLmNvbSIsInByb3BlcnRpZXMiOnt9LCJoZWFkZXJz
-Ijp7fX0sInR5cGUiOiJlbmRwb2ludCJ9LHsiY29uZGl0aW9ucyI6W10sImVu
-ZHBvaW50Ijp7InVybCI6Imh0dHBzOi8vZnN4LWZpcHMue1JlZ2lvbn0ue1Bh
-cnRpdGlvblJlc3VsdCNkbnNTdWZmaXh9IiwicHJvcGVydGllcyI6e30sImhl
-YWRlcnMiOnt9fSwidHlwZSI6ImVuZHBvaW50In1dfV19LHsiY29uZGl0aW9u
-cyI6W10sImVycm9yIjoiRklQUyBpcyBlbmFibGVkIGJ1dCB0aGlzIHBhcnRp
-dGlvbiBkb2VzIG5vdCBzdXBwb3J0IEZJUFMiLCJ0eXBlIjoiZXJyb3IifV19
-LHsiY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxzIiwiYXJndiI6
-W3sicmVmIjoiVXNlRHVhbFN0YWNrIn0sdHJ1ZV19XSwidHlwZSI6InRyZWUi
-LCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJib29sZWFuRXF1YWxz
-IiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJhcmd2IjpbeyJyZWYi
-OiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNEdWFsU3RhY2siXX1dfV0s
-InR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOltdLCJlbmRw
-b2ludCI6eyJ1cmwiOiJodHRwczovL2ZzeC57UmVnaW9ufS57UGFydGl0aW9u
-UmVzdWx0I2R1YWxTdGFja0Ruc1N1ZmZpeH0iLCJwcm9wZXJ0aWVzIjp7fSwi
-aGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9u
-cyI6W10sImVycm9yIjoiRHVhbFN0YWNrIGlzIGVuYWJsZWQgYnV0IHRoaXMg
-cGFydGl0aW9uIGRvZXMgbm90IHN1cHBvcnQgRHVhbFN0YWNrIiwidHlwZSI6
-ImVycm9yIn1dfSx7ImNvbmRpdGlvbnMiOltdLCJlbmRwb2ludCI6eyJ1cmwi
-OiJodHRwczovL2ZzeC57UmVnaW9ufS57UGFydGl0aW9uUmVzdWx0I2Ruc1N1
-ZmZpeH0iLCJwcm9wZXJ0aWVzIjp7fSwiaGVhZGVycyI6e319LCJ0eXBlIjoi
-ZW5kcG9pbnQifV19XX0=
-
-    JSON
   end
 end

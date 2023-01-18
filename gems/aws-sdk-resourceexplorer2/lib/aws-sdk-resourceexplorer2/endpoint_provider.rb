@@ -9,85 +9,36 @@
 
 module Aws::ResourceExplorer2
   class EndpointProvider
-    def initialize(rule_set = nil)
-      @@rule_set ||= begin
-        endpoint_rules = Aws::Json.load(Base64.decode64(RULES))
-        Aws::Endpoints::RuleSet.new(
-          version: endpoint_rules['version'],
-          service_id: endpoint_rules['serviceId'],
-          parameters: endpoint_rules['parameters'],
-          rules: endpoint_rules['rules']
-        )
-      end
-      @provider = Aws::Endpoints::RulesProvider.new(rule_set || @@rule_set)
-    end
-
     def resolve_endpoint(parameters)
-      @provider.resolve_endpoint(parameters)
+      region = parameters.region
+      use_fips = parameters.use_fips
+      endpoint = parameters.endpoint
+      if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
+        if Aws::Endpoints::Matchers.set?(endpoint)
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
+          end
+          return Aws::Endpoints::Endpoint.new(url: endpoint, headers: {}, properties: {})
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+              return Aws::Endpoints::Endpoint.new(url: "https://resource-explorer-2-fips.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+            end
+            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+          end
+          return Aws::Endpoints::Endpoint.new(url: "https://resource-explorer-2.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            return Aws::Endpoints::Endpoint.new(url: "https://resource-explorer-2-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+        end
+        return Aws::Endpoints::Endpoint.new(url: "https://resource-explorer-2.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+      end
+      raise ArgumentError, 'No endpoint could be resolved'
+
     end
-
-    # @api private
-    RULES = <<-JSON
-eyJ2ZXJzaW9uIjoiMS4wIiwicGFyYW1ldGVycyI6eyJSZWdpb24iOnsiYnVp
-bHRJbiI6IkFXUzo6UmVnaW9uIiwicmVxdWlyZWQiOnRydWUsImRvY3VtZW50
-YXRpb24iOiJUaGUgQVdTIHJlZ2lvbiB1c2VkIHRvIGRpc3BhdGNoIHRoZSBy
-ZXF1ZXN0LiIsInR5cGUiOiJTdHJpbmcifSwiVXNlRklQUyI6eyJidWlsdElu
-IjoiQVdTOjpVc2VGSVBTIiwicmVxdWlyZWQiOnRydWUsImRlZmF1bHQiOmZh
-bHNlLCJkb2N1bWVudGF0aW9uIjoiV2hlbiB0cnVlLCBzZW5kIHRoaXMgcmVx
-dWVzdCB0byB0aGUgRklQUy1jb21wbGlhbnQgcmVnaW9uYWwgZW5kcG9pbnQu
-IElmIHRoZSBjb25maWd1cmVkIGVuZHBvaW50IGRvZXMgbm90IGhhdmUgYSBG
-SVBTIGNvbXBsaWFudCBlbmRwb2ludCwgZGlzcGF0Y2hpbmcgdGhlIHJlcXVl
-c3Qgd2lsbCByZXR1cm4gYW4gZXJyb3IuIiwidHlwZSI6IkJvb2xlYW4ifSwi
-RW5kcG9pbnQiOnsiYnVpbHRJbiI6IlNESzo6RW5kcG9pbnQiLCJyZXF1aXJl
-ZCI6ZmFsc2UsImRvY3VtZW50YXRpb24iOiJPdmVycmlkZSB0aGUgZW5kcG9p
-bnQgdXNlZCB0byBzZW5kIHRoaXMgcmVxdWVzdCIsInR5cGUiOiJTdHJpbmci
-fX0sInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbeyJmbiI6ImF3cy5wYXJ0aXRp
-b24iLCJhcmd2IjpbeyJyZWYiOiJSZWdpb24ifV0sImFzc2lnbiI6IlBhcnRp
-dGlvblJlc3VsdCJ9XSwidHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0
-aW9ucyI6W3siZm4iOiJpc1NldCIsImFyZ3YiOlt7InJlZiI6IkVuZHBvaW50
-In1dfV0sInR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7
-ImZuIjoiYm9vbGVhbkVxdWFscyIsImFyZ3YiOlt7InJlZiI6IlVzZUZJUFMi
-fSx0cnVlXX1dLCJlcnJvciI6IkludmFsaWQgQ29uZmlndXJhdGlvbjogRklQ
-UyBhbmQgY3VzdG9tIGVuZHBvaW50IGFyZSBub3Qgc3VwcG9ydGVkIiwidHlw
-ZSI6ImVycm9yIn0seyJjb25kaXRpb25zIjpbXSwiZW5kcG9pbnQiOnsidXJs
-Ijp7InJlZiI6IkVuZHBvaW50In0sInByb3BlcnRpZXMiOnt9LCJoZWFkZXJz
-Ijp7fX0sInR5cGUiOiJlbmRwb2ludCJ9XX0seyJjb25kaXRpb25zIjpbXSwi
-dHlwZSI6InRyZWUiLCJydWxlcyI6W3siY29uZGl0aW9ucyI6W3siZm4iOiJi
-b29sZWFuRXF1YWxzIiwiYXJndiI6W3RydWUseyJmbiI6ImdldEF0dHIiLCJh
-cmd2IjpbeyJyZWYiOiJQYXJ0aXRpb25SZXN1bHQifSwic3VwcG9ydHNEdWFs
-U3RhY2siXX1dfV0sInR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlv
-bnMiOlt7ImZuIjoiYm9vbGVhbkVxdWFscyIsImFyZ3YiOlt7InJlZiI6IlVz
-ZUZJUFMifSx0cnVlXX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25k
-aXRpb25zIjpbeyJmbiI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbdHJ1ZSx7
-ImZuIjoiZ2V0QXR0ciIsImFyZ3YiOlt7InJlZiI6IlBhcnRpdGlvblJlc3Vs
-dCJ9LCJzdXBwb3J0c0ZJUFMiXX1dfV0sInR5cGUiOiJ0cmVlIiwicnVsZXMi
-Olt7ImNvbmRpdGlvbnMiOltdLCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczov
-L3Jlc291cmNlLWV4cGxvcmVyLTItZmlwcy57UmVnaW9ufS57UGFydGl0aW9u
-UmVzdWx0I2R1YWxTdGFja0Ruc1N1ZmZpeH0iLCJwcm9wZXJ0aWVzIjp7fSwi
-aGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9u
-cyI6W10sImVycm9yIjoiRklQUyBpcyBlbmFibGVkIGJ1dCB0aGlzIHBhcnRp
-dGlvbiBkb2VzIG5vdCBzdXBwb3J0IEZJUFMiLCJ0eXBlIjoiZXJyb3IifV19
-LHsiY29uZGl0aW9ucyI6W10sImVuZHBvaW50Ijp7InVybCI6Imh0dHBzOi8v
-cmVzb3VyY2UtZXhwbG9yZXItMi57UmVnaW9ufS57UGFydGl0aW9uUmVzdWx0
-I2R1YWxTdGFja0Ruc1N1ZmZpeH0iLCJwcm9wZXJ0aWVzIjp7fSwiaGVhZGVy
-cyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifV19LHsiY29uZGl0aW9ucyI6W10s
-InR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlvbnMiOlt7ImZuIjoi
-Ym9vbGVhbkVxdWFscyIsImFyZ3YiOlt7InJlZiI6IlVzZUZJUFMifSx0cnVl
-XX1dLCJ0eXBlIjoidHJlZSIsInJ1bGVzIjpbeyJjb25kaXRpb25zIjpbeyJm
-biI6ImJvb2xlYW5FcXVhbHMiLCJhcmd2IjpbdHJ1ZSx7ImZuIjoiZ2V0QXR0
-ciIsImFyZ3YiOlt7InJlZiI6IlBhcnRpdGlvblJlc3VsdCJ9LCJzdXBwb3J0
-c0ZJUFMiXX1dfV0sInR5cGUiOiJ0cmVlIiwicnVsZXMiOlt7ImNvbmRpdGlv
-bnMiOltdLCJlbmRwb2ludCI6eyJ1cmwiOiJodHRwczovL3Jlc291cmNlLWV4
-cGxvcmVyLTItZmlwcy57UmVnaW9ufS57UGFydGl0aW9uUmVzdWx0I2Ruc1N1
-ZmZpeH0iLCJwcm9wZXJ0aWVzIjp7fSwiaGVhZGVycyI6e319LCJ0eXBlIjoi
-ZW5kcG9pbnQifV19LHsiY29uZGl0aW9ucyI6W10sImVycm9yIjoiRklQUyBp
-cyBlbmFibGVkIGJ1dCB0aGlzIHBhcnRpdGlvbiBkb2VzIG5vdCBzdXBwb3J0
-IEZJUFMiLCJ0eXBlIjoiZXJyb3IifV19LHsiY29uZGl0aW9ucyI6W10sImVu
-ZHBvaW50Ijp7InVybCI6Imh0dHBzOi8vcmVzb3VyY2UtZXhwbG9yZXItMi57
-UmVnaW9ufS57UGFydGl0aW9uUmVzdWx0I2Ruc1N1ZmZpeH0iLCJwcm9wZXJ0
-aWVzIjp7fSwiaGVhZGVycyI6e319LCJ0eXBlIjoiZW5kcG9pbnQifV19XX1d
-fV19
-
-    JSON
   end
 end

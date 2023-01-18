@@ -1934,6 +1934,7 @@ module Aws::CloudWatch
     #   * {Types::GetMetricStreamOutput#last_update_date #last_update_date} => Time
     #   * {Types::GetMetricStreamOutput#output_format #output_format} => String
     #   * {Types::GetMetricStreamOutput#statistics_configurations #statistics_configurations} => Array&lt;Types::MetricStreamStatisticsConfiguration&gt;
+    #   * {Types::GetMetricStreamOutput#include_linked_accounts_metrics #include_linked_accounts_metrics} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1961,6 +1962,7 @@ module Aws::CloudWatch
     #   resp.statistics_configurations[0].include_metrics[0].metric_name #=> String
     #   resp.statistics_configurations[0].additional_statistics #=> Array
     #   resp.statistics_configurations[0].additional_statistics[0] #=> String
+    #   resp.include_linked_accounts_metrics #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStream AWS API Documentation
     #
@@ -3446,10 +3448,16 @@ module Aws::CloudWatch
     # stream is created in the `running` state. If you use it to update an
     # existing stream, the state of the stream is not changed.
     #
+    # If you are using CloudWatch cross-account observability and you create
+    # a metric stream in a monitoring account, you can choose whether to
+    # include metrics from source accounts in the stream. For more
+    # information, see [CloudWatch cross-account observability][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
     # [2]: https://aws.amazon.com/cloudwatch/pricing/
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
     # @option params [required, String] :name
     #   If you are creating a new metric stream, this is the name for the new
@@ -3538,6 +3546,10 @@ module Aws::CloudWatch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
     #
+    # @option params [Boolean] :include_linked_accounts_metrics
+    #   If you are creating a metric stream in a monitoring account, specify
+    #   `true` to include metrics from source accounts in the metric stream.
+    #
     # @return [Types::PutMetricStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutMetricStreamOutput#arn #arn} => String
@@ -3576,6 +3588,7 @@ module Aws::CloudWatch
     #         additional_statistics: ["MetricStreamStatistic"], # required
     #       },
     #     ],
+    #     include_linked_accounts_metrics: false,
     #   })
     #
     # @example Response structure
@@ -3821,7 +3834,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

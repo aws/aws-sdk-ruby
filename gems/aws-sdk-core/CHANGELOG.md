@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.169.0 (2023-01-18)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Issue - Replace runtime endpoint resolution approach with generated ruby code for STS, SSO, and SSOOIDC.
 
 3.168.4 (2022-12-08)

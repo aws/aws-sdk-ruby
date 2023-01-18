@@ -52,6 +52,6 @@ require_relative 'aws-sdk-amplifyuibuilder/customizations'
 # @!group service
 module Aws::AmplifyUIBuilder
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

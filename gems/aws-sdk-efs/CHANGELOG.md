@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-01-18)
+------------------
+
+* Feature - Documentation updates for EFS access points limit increase
+
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
 1.57.0 (2022-12-16)

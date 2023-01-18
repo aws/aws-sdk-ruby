@@ -52,6 +52,6 @@ require_relative 'aws-sdk-gluedatabrew/customizations'
 # @!group service
 module Aws::GlueDataBrew
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
