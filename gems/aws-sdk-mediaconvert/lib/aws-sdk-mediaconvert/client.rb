@@ -434,7 +434,7 @@ module Aws::MediaConvert
     #   appear on the billing report unsorted.
     #
     # @option params [String] :client_request_token
-    #   Optional. Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
+    #   Prevent duplicate jobs from being created and ensure idempotency for your requests. A client request token can be any string that includes up to 64 ASCII characters. If you reuse a client request token within one minute of a successful request, the API returns the job details of the original request instead. For more information see https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Array<Types::HopDestination>] :hop_destinations
@@ -713,6 +713,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -763,6 +764,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -886,6 +888,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_source_name #=> String
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -1409,6 +1412,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -1424,7 +1431,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -1736,6 +1743,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -1786,6 +1794,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -1909,6 +1918,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_source_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -2432,6 +2442,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -2447,7 +2461,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -2553,6 +2567,7 @@ module Aws::MediaConvert
     #             loudness_logging: "LOG", # accepts LOG, DONT_LOG
     #             peak_calculation: "TRUE_PEAK", # accepts TRUE_PEAK, NONE
     #             target_lkfs: 1.0,
+    #             true_peak_limiter_threshold: 1.0,
     #           },
     #           audio_source_name: "__string",
     #           audio_type: 1,
@@ -3191,6 +3206,12 @@ module Aws::MediaConvert
     #         video_preprocessors: {
     #           color_corrector: {
     #             brightness: 1,
+    #             clip_limits: {
+    #               maximum_rgb_tolerance: 1,
+    #               maximum_yuv: 1,
+    #               minimum_rgb_tolerance: 1,
+    #               minimum_yuv: 1,
+    #             },
     #             color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #             contrast: 1,
     #             hdr_10_metadata: {
@@ -3208,7 +3229,7 @@ module Aws::MediaConvert
     #               white_point_y: 1,
     #             },
     #             hue: 1,
-    #             sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
+    #             sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE, LIMITED_RANGE_CLIP
     #             saturation: 1,
     #             sdr_reference_white_level: 1,
     #           },
@@ -3304,6 +3325,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.preset.settings.audio_descriptions[0].audio_source_name #=> String
     #   resp.preset.settings.audio_descriptions[0].audio_type #=> Integer
     #   resp.preset.settings.audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -3816,6 +3838,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -3831,7 +3857,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -4346,6 +4372,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -4396,6 +4423,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -4519,6 +4547,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_source_name #=> String
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -5042,6 +5071,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -5057,7 +5090,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -5328,6 +5361,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -5378,6 +5412,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -5501,6 +5536,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_source_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -6024,6 +6060,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -6039,7 +6079,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -6154,6 +6194,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.preset.settings.audio_descriptions[0].audio_source_name #=> String
     #   resp.preset.settings.audio_descriptions[0].audio_type #=> Integer
     #   resp.preset.settings.audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -6666,6 +6707,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -6681,7 +6726,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -7011,6 +7056,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -7061,6 +7107,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -7184,6 +7231,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_source_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -7707,6 +7755,10 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -7722,7 +7774,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -8044,6 +8096,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -8094,6 +8147,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -8217,6 +8271,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_source_name #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -8740,6 +8795,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -8755,7 +8814,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -8887,6 +8946,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.presets[0].settings.audio_descriptions[0].audio_source_name #=> String
     #   resp.presets[0].settings.audio_descriptions[0].audio_type #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -9399,6 +9459,10 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.sharpness #=> Integer
     #   resp.presets[0].settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -9414,7 +9478,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -9900,6 +9964,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -9950,6 +10015,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.dash_manifest_style #=> String, one of "BASIC", "COMPACT", "DISTINCT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
@@ -10073,6 +10139,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_source_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -10596,6 +10663,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -10611,7 +10682,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -10711,6 +10782,7 @@ module Aws::MediaConvert
     #             loudness_logging: "LOG", # accepts LOG, DONT_LOG
     #             peak_calculation: "TRUE_PEAK", # accepts TRUE_PEAK, NONE
     #             target_lkfs: 1.0,
+    #             true_peak_limiter_threshold: 1.0,
     #           },
     #           audio_source_name: "__string",
     #           audio_type: 1,
@@ -11349,6 +11421,12 @@ module Aws::MediaConvert
     #         video_preprocessors: {
     #           color_corrector: {
     #             brightness: 1,
+    #             clip_limits: {
+    #               maximum_rgb_tolerance: 1,
+    #               maximum_yuv: 1,
+    #               minimum_rgb_tolerance: 1,
+    #               minimum_yuv: 1,
+    #             },
     #             color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #             contrast: 1,
     #             hdr_10_metadata: {
@@ -11366,7 +11444,7 @@ module Aws::MediaConvert
     #               white_point_y: 1,
     #             },
     #             hue: 1,
-    #             sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
+    #             sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE, LIMITED_RANGE_CLIP
     #             saturation: 1,
     #             sdr_reference_white_level: 1,
     #           },
@@ -11459,6 +11537,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.peak_calculation #=> String, one of "TRUE_PEAK", "NONE"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.target_lkfs #=> Float
+    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.true_peak_limiter_threshold #=> Float
     #   resp.preset.settings.audio_descriptions[0].audio_source_name #=> String
     #   resp.preset.settings.audio_descriptions[0].audio_type #=> Integer
     #   resp.preset.settings.audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
@@ -11971,6 +12050,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_rgb_tolerance #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -11986,7 +12069,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hue #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE"
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.saturation #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sdr_reference_white_level #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
@@ -12121,7 +12204,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

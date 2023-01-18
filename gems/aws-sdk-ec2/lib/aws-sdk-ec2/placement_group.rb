@@ -342,12 +342,15 @@ module Aws::EC2
     #   * `metadata-options.http-tokens` - The metadata request authorization
     #     state (`optional` \| `required`)
     #
-    #   * `metadata-options.http-put-response-hop-limit` - The http metadata
+    #   * `metadata-options.http-put-response-hop-limit` - The HTTP metadata
     #     request put response hop limit (integer, possible values `1` to
     #     `64`)
     #
-    #   * `metadata-options.http-endpoint` - Enable or disable metadata access
-    #     on http endpoint (`enabled` \| `disabled`)
+    #   * `metadata-options.http-endpoint` - The status of access to the HTTP
+    #     metadata endpoint on your instance (`enabled` \| `disabled`)
+    #
+    #   * `metadata-options.instance-metadata-tags` - The status of access to
+    #     instance tags from the instance metadata (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).

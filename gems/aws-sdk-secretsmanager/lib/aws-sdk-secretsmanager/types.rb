@@ -494,6 +494,9 @@ module Aws::SecretsManager
     #   @return [Time]
     #
     # @!attribute [rw] next_rotation_date
+    #   The next date and time that Secrets Manager will rotate the secret,
+    #   rounded to the nearest hour. If the secret isn't configured for
+    #   rotation, Secrets Manager returns null.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -626,6 +629,8 @@ module Aws::SecretsManager
     #   * **tag-value**\: Prefix match, case-sensitive.
     #
     #   * **primary-region**\: Prefix match, case-sensitive.
+    #
+    #   * **owning-service**\: Prefix match, case-sensitive.
     #
     #   * **all**\: Breaks the filter value string into words and then
     #     searches all attributes for matches. Not case-sensitive.
@@ -1034,6 +1039,7 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] include_planned_deletion
+    #   Specifies whether to include secrets scheduled for deletion.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
@@ -1560,7 +1566,16 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] rotation_lambda_arn
-    #   The ARN of the Lambda rotation function that can rotate the secret.
+    #   For secrets that use a Lambda rotation function to rotate, the ARN
+    #   of the Lambda rotation function.
+    #
+    #   For secrets that use *managed rotation*, omit this field. For more
+    #   information, see [Managed rotation][1] in the *Secrets Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_managed.html
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
@@ -1572,10 +1587,11 @@ module Aws::SecretsManager
     #   next scheduled rotation window. The rotation schedule is defined in
     #   RotateSecretRequest$RotationRules.
     #
-    #   If you don't immediately rotate the secret, Secrets Manager tests
-    #   the rotation configuration by running the [ `testSecret` step][1] of
-    #   the Lambda rotation function. The test creates an `AWSPENDING`
-    #   version of the secret and then removes it.
+    #   For secrets that use a Lambda rotation function to rotate, if you
+    #   don't immediately rotate the secret, Secrets Manager tests the
+    #   rotation configuration by running the [ `testSecret` step][1] of the
+    #   Lambda rotation function. The test creates an `AWSPENDING` version
+    #   of the secret and then removes it.
     #
     #   If you don't specify this value, then by default, Secrets Manager
     #   rotates the secret immediately.
@@ -1622,9 +1638,13 @@ module Aws::SecretsManager
     # A structure that defines the rotation configuration for the secret.
     #
     # @!attribute [rw] automatically_after_days
-    #   The number of days between automatic scheduled rotations of the
-    #   secret. You can use this value to check that your secret meets your
-    #   compliance guidelines for how often secrets must be rotated.
+    #   The number of days between rotations of the secret. You can use this
+    #   value to check that your secret meets your compliance guidelines for
+    #   how often secrets must be rotated. If you use this field to set the
+    #   rotation schedule, Secrets Manager calculates the next rotation date
+    #   based on the previous rotation. Manually updating the secret value
+    #   by calling `PutSecretValue` or `UpdateSecret` is considered a valid
+    #   rotation.
     #
     #   In `DescribeSecret` and `ListSecrets`, this value is calculated from
     #   the rotation schedule after every successful rotation. In
@@ -1768,6 +1788,9 @@ module Aws::SecretsManager
     #   @return [Time]
     #
     # @!attribute [rw] next_rotation_date
+    #   The next date and time that Secrets Manager will attempt to rotate
+    #   the secret, rounded to the nearest hour. This value is null if the
+    #   secret is not set up for rotation.
     #   @return [Time]
     #
     # @!attribute [rw] tags

@@ -132,6 +132,9 @@
   "ChimeSDKVoice": {
     "models": "chime-sdk-voice/2022-08-03"
   },
+  "CleanRooms": {
+    "models": "cleanrooms/2022-02-17"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },

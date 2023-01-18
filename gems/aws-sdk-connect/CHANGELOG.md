@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
+1.92.0 (2023-01-13)
+------------------
+
+* Feature - This release updates the responses of UpdateContactFlowContent, UpdateContactFlowMetadata, UpdateContactFlowName and DeleteContactFlow API with empty responses.
+
 1.91.0 (2023-01-05)
 ------------------
 

@@ -1304,11 +1304,11 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # &gt;Maps attributes or field names of Confluence pages to Amazon
-    # Kendra index field names. To create custom fields, use the
-    # `UpdateIndex` API before you map to Confluence fields. For more
-    # information, see [Mapping data source fields][1]. The Confluence data
-    # source field names must exist in your Confluence custom metadata.
+    # Maps attributes or field names of Confluence pages to Amazon Kendra
+    # index field names. To create custom fields, use the `UpdateIndex` API
+    # before you map to Confluence fields. For more information, see
+    # [Mapping data source fields][1]. The Confluence data source field
+    # names must exist in your Confluence custom metadata.
     #
     #
     #
@@ -1401,11 +1401,11 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # &gt;Maps attributes or field names of Confluence spaces to Amazon
-    # Kendra index field names. To create custom fields, use the
-    # `UpdateIndex` API before you map to Confluence fields. For more
-    # information, see [Mapping data source fields][1]. The Confluence data
-    # source field names must exist in your Confluence custom metadata.
+    # Maps attributes or field names of Confluence spaces to Amazon Kendra
+    # index field names. To create custom fields, use the `UpdateIndex` API
+    # before you map to Confluence fields. For more information, see
+    # [Mapping data source fields][1]. The Confluence data source field
+    # names must exist in your Confluence custom metadata.
     #
     #
     #
@@ -5506,9 +5506,7 @@ module Aws::Kendra
     # source.
     #
     # @!attribute [rw] jira_account_url
-    #   The URL of the Jira account. For example, *company.atlassian.net* or
-    #   *https://jira.company.com*. You can find your Jira account URL in
-    #   the URL of your profile page for Jira desktop.
+    #   The URL of the Jira account. For example, *company.atlassian.net*.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -5517,10 +5515,10 @@ module Aws::Kendra
     #   source. The secret must contain a JSON structure with the following
     #   keys:
     #
-    #   * jiraId—The Jira username.
+    #   * jiraId—The Jira user name or email.
     #
-    #   * jiraCredentials—The Jira API token. For more information on
-    #     creating an API token in Jira, see [ Using a Jira data source][1].
+    #   * jiraCredentials—The Jira API token. For more information, see
+    #     [Using a Jira data source][1].
     #
     #
     #
@@ -5555,12 +5553,12 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] attachment_field_mappings
-    #   A list of DataSourceToIndexFieldMapping objects that map attributes
-    #   or field names of Jira attachments to Amazon Kendra index field
-    #   names. To create custom fields, use the UpdateIndex API before you
-    #   map to Jira fields. For more information, see [ Mapping data source
-    #   fields][1]. The Jira data source field names must exist in your Jira
-    #   custom metadata.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Jira attachments to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Jira fields. For more information, see [ Mapping
+    #   data source fields][1]. The Jira data source field names must exist
+    #   in your Jira custom metadata.
     #
     #
     #
@@ -5568,12 +5566,12 @@ module Aws::Kendra
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] comment_field_mappings
-    #   A list of DataSourceToIndexFieldMapping objects that map attributes
-    #   or field names of Jira comments to Amazon Kendra index field names.
-    #   To create custom fields, use the UpdateIndex API before you map to
-    #   Jira fields. For more information, see [ Mapping data source
-    #   fields][1]. The Jira data source field names must exist in your Jira
-    #   custom metadata.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Jira comments to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Jira fields. For more information, see [ Mapping
+    #   data source fields][1]. The Jira data source field names must exist
+    #   in your Jira custom metadata.
     #
     #
     #
@@ -5581,12 +5579,12 @@ module Aws::Kendra
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] issue_field_mappings
-    #   A list of DataSourceToIndexFieldMapping objects that map attributes
-    #   or field names of Jira issues to Amazon Kendra index field names. To
-    #   create custom fields, use the UpdateIndex API before you map to Jira
-    #   fields. For more information, see [ Mapping data source fields][1].
-    #   The Jira data source field names must exist in your Jira custom
-    #   metadata.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Jira issues to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Jira fields. For more information, see [ Mapping
+    #   data source fields][1]. The Jira data source field names must exist
+    #   in your Jira custom metadata.
     #
     #
     #
@@ -5594,12 +5592,12 @@ module Aws::Kendra
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] project_field_mappings
-    #   A list of DataSourceToIndexFieldMapping objects that map attributes
-    #   or field names of Jira projects to Amazon Kendra index field names.
-    #   To create custom fields, use the UpdateIndex API before you map to
-    #   Jira fields. For more information, see [ Mapping data source
-    #   fields][1]. The Jira data source field names must exist in your Jira
-    #   custom metadata.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Jira projects to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Jira fields. For more information, see [ Mapping
+    #   data source fields][1]. The Jira data source field names must exist
+    #   in your Jira custom metadata.
     #
     #
     #
@@ -5607,12 +5605,12 @@ module Aws::Kendra
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] work_log_field_mappings
-    #   A list of DataSourceToIndexFieldMapping objects that map attributes
-    #   or field names of Jira work logs to Amazon Kendra index field names.
-    #   To create custom fields, use the UpdateIndex API before you map to
-    #   Jira fields. For more information, see [ Mapping data source
-    #   fields][1]. The Jira data source field names must exist in your Jira
-    #   custom metadata.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Jira work logs to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Jira fields. For more information, see [ Mapping
+    #   data source fields][1]. The Jira data source field names must exist
+    #   in your Jira custom metadata.
     #
     #
     #
@@ -5639,7 +5637,12 @@ module Aws::Kendra
     #
     # @!attribute [rw] vpc_configuration
     #   Configuration information for an Amazon Virtual Private Cloud to
-    #   connect to your Jira. Your Jira account must reside inside your VPC.
+    #   connect to your Jira. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/JiraConfiguration AWS API Documentation
@@ -6381,7 +6384,7 @@ module Aws::Kendra
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of an Secrets Managersecret that
     #   contains the user name and password to connect to OneDrive. The user
-    #   namd should be the application ID for the OneDrive application, and
+    #   name should be the application ID for the OneDrive application, and
     #   the password is the application key for the OneDrive application.
     #   @return [String]
     #

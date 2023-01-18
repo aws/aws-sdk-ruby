@@ -641,8 +641,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Accepts one or more interface VPC endpoint connection requests to your
-    # VPC endpoint service.
+    # Accepts connection requests to your VPC endpoint service.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -654,7 +653,7 @@ module Aws::EC2
     #   The ID of the VPC endpoint service.
     #
     # @option params [required, Array<String>] :vpc_endpoint_ids
-    #   The IDs of one or more interface VPC endpoints.
+    #   The IDs of the interface VPC endpoints.
     #
     # @return [Types::AcceptVpcEndpointConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3194,9 +3193,10 @@ module Aws::EC2
     #   and a description for the rule.
     #
     # @option params [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. For the ICMP type number, use `-1` to specify all types. If
-    #   you specify all ICMP types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the start of the port range. If
+    #   the protocol is ICMP, this is the type number. A value of -1 indicates
+    #   all ICMP types. If you specify all ICMP types, you must specify all
+    #   ICMP codes.
     #
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
@@ -3250,9 +3250,10 @@ module Aws::EC2
     #   instead.
     #
     # @option params [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP code
-    #   number. For the ICMP code number, use `-1` to specify all codes. If
-    #   you specify all ICMP types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP, this is the code. A value of -1 indicates all
+    #   ICMP codes. If you specify all ICMP types, you must specify all ICMP
+    #   codes.
     #
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
@@ -5037,8 +5038,8 @@ module Aws::EC2
     #   IP addresses. The address range cannot overlap with the local CIDR of
     #   the VPC in which the associated subnet is located, or the routes that
     #   you add manually. The address range cannot be changed after the Client
-    #   VPN endpoint has been created. The CIDR block should be /22 or
-    #   greater.
+    #   VPN endpoint has been created. Client CIDR range must have a size of
+    #   at least /22 and must not be greater than /12.
     #
     # @option params [required, String] :server_certificate_arn
     #   The ARN of the server certificate. For more information, see the
@@ -11161,19 +11162,24 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a subnet in a specified VPC.
+    # Creates a subnet in the specified VPC. For an IPv4 only subnet,
+    # specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can
+    # create an IPv6 only subnet or a dual stack subnet instead. For an IPv6
+    # only subnet, specify an IPv6 CIDR block. For a dual stack subnet,
+    # specify both an IPv4 CIDR block and an IPv6 CIDR block.
     #
-    # You must specify an IPv4 CIDR block for the subnet. After you create a
-    # subnet, you can't change its CIDR block. The allowed block size is
-    # between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP
-    # addresses). The CIDR block must not overlap with the CIDR block of an
-    # existing subnet in the VPC.
+    # A subnet CIDR block must not overlap the CIDR block of an existing
+    # subnet in the VPC. After you create a subnet, you can't change its
+    # CIDR block.
     #
-    # If you've associated an IPv6 CIDR block with your VPC, you can create
-    # a subnet with an IPv6 CIDR block that uses a /64 prefix length.
+    # The allowed size for an IPv4 subnet is between a /28 netmask (16 IP
+    # addresses) and a /16 netmask (65,536 IP addresses). Amazon Web
+    # Services reserves both the first four and the last IPv4 address in
+    # each subnet's CIDR block. They're not available for your use.
     #
-    # Amazon Web Services reserves both the first four and the last IPv4
-    # address in each subnet's CIDR block. They're not available for use.
+    # If you've associated an IPv6 CIDR block with your VPC, you can
+    # associate an IPv6 CIDR block with a subnet when you create it. The
+    # allowed block size for an IPv6 subnet is a /64 netmask.
     #
     # If you add more than one subnet to a VPC, they're set up in a star
     # topology with a logical router in the middle.
@@ -11183,12 +11189,12 @@ module Aws::EC2
     # instances (they're all stopped), but no remaining IP addresses
     # available.
     #
-    # For more information about subnets, see [Your VPC and subnets][1] in
-    # the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [Subnets][1] in the *Amazon Virtual Private
+    # Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the subnet.
@@ -13540,20 +13546,18 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you
-    # can create uses a /28 netmask (16 IPv4 addresses), and the largest
-    # uses a /16 netmask (65,536 IPv4 addresses). For more information about
-    # how large to make your VPC, see [Your VPC and subnets][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # Creates a VPC with the specified CIDR blocks. For more information,
+    # see [VPC CIDR blocks][1] in the *Amazon Virtual Private Cloud User
+    # Guide*.
     #
     # You can optionally request an IPv6 CIDR block for the VPC. You can
     # request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6
     # addresses, or an IPv6 CIDR block from an IPv6 address pool that you
     # provisioned through bring your own IP addresses ([BYOIP][2]).
     #
-    # By default, each instance you launch in the VPC has the default DHCP
-    # options, which include only a default DNS server that we provide
-    # (AmazonProvidedDNS). For more information, see [DHCP options sets][3]
+    # By default, each instance that you launch in the VPC has the default
+    # DHCP options, which include only a default DNS server that we provide
+    # (AmazonProvidedDNS). For more information, see [DHCP option sets][3]
     # in the *Amazon Virtual Private Cloud User Guide*.
     #
     # You can specify the instance tenancy value for the VPC when you create
@@ -13563,7 +13567,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html#vpc-cidr-blocks
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
     # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
@@ -13768,12 +13772,10 @@ module Aws::EC2
     #   Default: Gateway
     #
     # @option params [required, String] :vpc_id
-    #   The ID of the VPC in which the endpoint will be used.
+    #   The ID of the VPC for the endpoint.
     #
     # @option params [required, String] :service_name
-    #   The service name. To get a list of available services, use the
-    #   DescribeVpcEndpointServices request, or get the name from the service
-    #   provider.
+    #   The service name.
     #
     # @option params [String] :policy_document
     #   (Interface and gateway endpoints) A policy to attach to the endpoint
@@ -13782,16 +13784,17 @@ module Aws::EC2
     #   that allows full access to the service.
     #
     # @option params [Array<String>] :route_table_ids
-    #   (Gateway endpoint) One or more route table IDs.
+    #   (Gateway endpoint) The route table IDs.
     #
     # @option params [Array<String>] :subnet_ids
-    #   (Interface and Gateway Load Balancer endpoints) The ID of one or more
-    #   subnets in which to create an endpoint network interface. For a
-    #   Gateway Load Balancer endpoint, you can specify one subnet only.
+    #   (Interface and Gateway Load Balancer endpoints) The IDs of the subnets
+    #   in which to create an endpoint network interface. For a Gateway Load
+    #   Balancer endpoint, you can specify only one subnet.
     #
     # @option params [Array<String>] :security_group_ids
-    #   (Interface endpoint) The ID of one or more security groups to
-    #   associate with the endpoint network interface.
+    #   (Interface endpoint) The IDs of the security groups to associate with
+    #   the endpoint network interface. If this parameter is not specified, we
+    #   use the default security group for the VPC.
     #
     # @option params [String] :ip_address_type
     #   The IP address type for the endpoint.
@@ -13932,8 +13935,8 @@ module Aws::EC2
     #   The ARN of the SNS topic for the notifications.
     #
     # @option params [required, Array<String>] :connection_events
-    #   One or more endpoint events for which to receive notifications. Valid
-    #   values are `Accept`, `Connect`, `Delete`, and `Reject`.
+    #   The endpoint events for which to receive notifications. Valid values
+    #   are `Accept`, `Connect`, `Delete`, and `Reject`.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -13982,7 +13985,7 @@ module Aws::EC2
     end
 
     # Creates a VPC endpoint service to which service consumers (Amazon Web
-    # Services accounts, IAM users, and IAM roles) can connect.
+    # Services accounts, users, and IAM roles) can connect.
     #
     # Before you create an endpoint service, you must create one of the
     # following for your service:
@@ -14020,12 +14023,10 @@ module Aws::EC2
     #   the VPC endpoint service.
     #
     # @option params [Array<String>] :network_load_balancer_arns
-    #   The Amazon Resource Names (ARNs) of one or more Network Load Balancers
-    #   for your service.
+    #   The Amazon Resource Names (ARNs) of the Network Load Balancers.
     #
     # @option params [Array<String>] :gateway_load_balancer_arns
-    #   The Amazon Resource Names (ARNs) of one or more Gateway Load
-    #   Balancers.
+    #   The Amazon Resource Names (ARNs) of the Gateway Load Balancers.
     #
     # @option params [Array<String>] :supported_ip_address_types
     #   The supported IP address types. The possible values are `ipv4` and
@@ -17725,7 +17726,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes one or more VPC endpoint connection notifications.
+    # Deletes the specified VPC endpoint connection notifications.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17734,7 +17735,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :connection_notification_ids
-    #   One or more notification IDs.
+    #   The IDs of the notifications.
     #
     # @return [Types::DeleteVpcEndpointConnectionNotificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17763,10 +17764,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes one or more VPC endpoint service configurations in your
-    # account. Before you delete the endpoint service configuration, you
-    # must reject any `Available` or `PendingAcceptance` interface endpoint
-    # connections that are attached to the service.
+    # Deletes the specified VPC endpoint service configurations. Before you
+    # can delete an endpoint service configuration, you must reject any
+    # `Available` or `PendingAcceptance` interface endpoint connections that
+    # are attached to the service.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17775,7 +17776,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :service_ids
-    #   The IDs of one or more services.
+    #   The IDs of the services.
     #
     # @return [Types::DeleteVpcEndpointServiceConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17804,28 +17805,18 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes one or more specified VPC endpoints. You can delete any of the
-    # following types of VPC endpoints.
+    # Deletes the specified VPC endpoints.
     #
-    # * Gateway endpoint,
+    # When you delete a gateway endpoint, we delete the endpoint routes in
+    # the route tables for the endpoint.
     #
-    # * Gateway Load Balancer endpoint,
+    # When you delete a Gateway Load Balancer endpoint, we delete its
+    # endpoint network interfaces. You can only delete Gateway Load Balancer
+    # endpoints when the routes that are associated with the endpoint are
+    # deleted.
     #
-    # * Interface endpoint
-    #
-    # The following rules apply when you delete a VPC endpoint:
-    #
-    # * When you delete a gateway endpoint, we delete the endpoint routes in
-    #   the route tables that are associated with the endpoint.
-    #
-    # * When you delete a Gateway Load Balancer endpoint, we delete the
-    #   endpoint network interfaces.
-    #
-    #   You can only delete Gateway Load Balancer endpoints when the routes
-    #   that are associated with the endpoint are deleted.
-    #
-    # * When you delete an interface endpoint, we delete the endpoint
-    #   network interfaces.
+    # When you delete an interface endpoint, we delete its endpoint network
+    # interfaces.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17834,7 +17825,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :vpc_endpoint_ids
-    #   One or more VPC endpoint IDs.
+    #   The IDs of the VPC endpoints.
     #
     # @return [Types::DeleteVpcEndpointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23870,12 +23861,15 @@ module Aws::EC2
     #   * `metadata-options.http-tokens` - The metadata request authorization
     #     state (`optional` \| `required`)
     #
-    #   * `metadata-options.http-put-response-hop-limit` - The http metadata
+    #   * `metadata-options.http-put-response-hop-limit` - The HTTP metadata
     #     request put response hop limit (integer, possible values `1` to
     #     `64`)
     #
-    #   * `metadata-options.http-endpoint` - Enable or disable metadata access
-    #     on http endpoint (`enabled` \| `disabled`)
+    #   * `metadata-options.http-endpoint` - The status of access to the HTTP
+    #     metadata endpoint on your instance (`enabled` \| `disabled`)
+    #
+    #   * `metadata-options.instance-metadata-tags` - The status of access to
+    #     instance tags from the instance metadata (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -34306,7 +34300,7 @@ module Aws::EC2
     #   The ID of the notification.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `connection-notification-arn` - The ARN of the SNS topic for the
     #     notification.
@@ -34384,7 +34378,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `ip-address-type` - The IP address type (`ipv4` \| `ipv6`).
     #
@@ -34471,10 +34465,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :service_ids
-    #   The IDs of one or more services.
+    #   The IDs of the endpoint services.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `service-name` - The name of the service.
     #
@@ -34581,7 +34575,7 @@ module Aws::EC2
     #   The ID of the service.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `principal` - The ARN of the principal.
     #
@@ -34658,10 +34652,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :service_names
-    #   One or more service names.
+    #   The service names.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `owner` - The ID or alias of the Amazon Web Services account that
     #     owns the service.
@@ -34755,7 +34749,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your VPC endpoints.
+    # Describes your VPC endpoints.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -34764,10 +34758,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :vpc_endpoint_ids
-    #   One or more endpoint IDs.
+    #   The IDs of the VPC endpoints.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `ip-address-type` - The IP address type (`ipv4` \| `ipv6`).
     #
@@ -43795,21 +43789,23 @@ module Aws::EC2
     #   The ID of the instance.
     #
     # @option params [String] :http_tokens
-    #   The state of token usage for your instance metadata requests. If the
-    #   parameter is not specified in the request, the default state is
-    #   `optional`.
+    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
+    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
+    #   `required` (in other words, set the use of IMDSv2 to `required`).
     #
-    #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a session token on your request. If you
-    #   retrieve the IAM role credentials without a token, the version 1.0
-    #   role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid session token, the version 2.0 role
-    #   credentials are returned.
+    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
+    #     instance metadata with or without a session token in your request.
+    #     If you retrieve the IAM role credentials without a token, the IMDSv1
+    #     role credentials are returned. If you retrieve the IAM role
+    #     credentials using a valid session token, the IMDSv2 role credentials
+    #     are returned.
     #
-    #   If the state is `required`, you must send a session token with any
-    #   instance metadata retrieval requests. In this state, retrieving the
-    #   IAM role credentials always returns the version 2.0 credentials; the
-    #   version 1.0 credentials are not available.
+    #   * `required` - When IMDSv2 is required, you must send a session token
+    #     with any instance metadata retrieval requests. In this state,
+    #     retrieving the IAM role credentials always returns IMDSv2
+    #     credentials; IMDSv1 credentials are not available.
+    #
+    #   Default: `optional`
     #
     # @option params [Integer] :http_put_response_hop_limit
     #   The desired HTTP PUT response hop limit for instance metadata
@@ -46669,28 +46665,28 @@ module Aws::EC2
     #   format.
     #
     # @option params [Array<String>] :add_route_table_ids
-    #   (Gateway endpoint) One or more route tables IDs to associate with the
+    #   (Gateway endpoint) The IDs of the route tables to associate with the
     #   endpoint.
     #
     # @option params [Array<String>] :remove_route_table_ids
-    #   (Gateway endpoint) One or more route table IDs to disassociate from
+    #   (Gateway endpoint) The IDs of the route tables to disassociate from
     #   the endpoint.
     #
     # @option params [Array<String>] :add_subnet_ids
-    #   (Interface and Gateway Load Balancer endpoints) One or more subnet IDs
+    #   (Interface and Gateway Load Balancer endpoints) The IDs of the subnets
     #   in which to serve the endpoint. For a Gateway Load Balancer endpoint,
     #   you can specify only one subnet.
     #
     # @option params [Array<String>] :remove_subnet_ids
-    #   (Interface endpoint) One or more subnets IDs in which to remove the
+    #   (Interface endpoint) The IDs of the subnets from which to remove the
     #   endpoint.
     #
     # @option params [Array<String>] :add_security_group_ids
-    #   (Interface endpoint) One or more security group IDs to associate with
+    #   (Interface endpoint) The IDs of the security groups to associate with
     #   the network interface.
     #
     # @option params [Array<String>] :remove_security_group_ids
-    #   (Interface endpoint) One or more security group IDs to disassociate
+    #   (Interface endpoint) The IDs of the security groups to disassociate
     #   from the network interface.
     #
     # @option params [String] :ip_address_type
@@ -46757,8 +46753,8 @@ module Aws::EC2
     #   The ARN for the SNS topic for the notification.
     #
     # @option params [Array<String>] :connection_events
-    #   One or more events for the endpoint. Valid values are `Accept`,
-    #   `Connect`, `Delete`, and `Reject`.
+    #   The events for the endpoint. Valid values are `Accept`, `Connect`,
+    #   `Delete`, and `Reject`.
     #
     # @return [Types::ModifyVpcEndpointConnectionNotificationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -46913,8 +46909,8 @@ module Aws::EC2
     end
 
     # Modifies the permissions for your VPC endpoint service. You can add or
-    # remove permissions for service consumers (IAM users, IAM roles, and
-    # Amazon Web Services accounts) to connect to your endpoint service.
+    # remove permissions for service consumers (Amazon Web Services
+    # accounts, users, and IAM roles) to connect to your endpoint service.
     #
     # If you grant permissions to all principals, the service is public. Any
     # users who know the name of a public service can send a request to
@@ -46931,13 +46927,13 @@ module Aws::EC2
     #   The ID of the service.
     #
     # @option params [Array<String>] :add_allowed_principals
-    #   The Amazon Resource Names (ARN) of one or more principals. Permissions
-    #   are granted to the principals in this list. To grant permissions to
-    #   all principals, specify an asterisk (*).
+    #   The Amazon Resource Names (ARN) of the principals. Permissions are
+    #   granted to the principals in this list. To grant permissions to all
+    #   principals, specify an asterisk (*).
     #
     # @option params [Array<String>] :remove_allowed_principals
-    #   The Amazon Resource Names (ARN) of one or more principals. Permissions
-    #   are revoked for principals in this list.
+    #   The Amazon Resource Names (ARN) of the principals. Permissions are
+    #   revoked for principals in this list.
     #
     # @return [Types::ModifyVpcEndpointServicePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -49012,8 +49008,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Rejects one or more VPC endpoint connection requests to your VPC
-    # endpoint service.
+    # Rejects VPC endpoint connection requests to your VPC endpoint service.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -49025,7 +49020,7 @@ module Aws::EC2
     #   The ID of the service.
     #
     # @option params [required, Array<String>] :vpc_endpoint_ids
-    #   The IDs of one or more VPC endpoints.
+    #   The IDs of the VPC endpoints.
     #
     # @return [Types::RejectVpcEndpointConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -51582,8 +51577,9 @@ module Aws::EC2
     #   specifying a source security group.
     #
     # @option params [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. For the ICMP type number, use `-1` to specify all ICMP types.
+    #   If the protocol is TCP or UDP, this is the start of the port range. If
+    #   the protocol is ICMP, this is the type number. A value of -1 indicates
+    #   all ICMP types.
     #
     # @option params [String] :group_id
     #   The ID of the security group. You must specify either the security
@@ -51627,9 +51623,9 @@ module Aws::EC2
     #   permissions instead.
     #
     # @option params [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP code
-    #   number. For the ICMP code number, use `-1` to specify all ICMP codes
-    #   for the ICMP type.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP, this is the code. A value of -1 indicates all
+    #   ICMP codes.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -51931,8 +51927,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #
     # @option params [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] The names of the security groups. For a
-    #   nondefault VPC, you must use security group IDs instead.
+    #   \[EC2-Classic, default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
     #   groups as part of the network interface.
@@ -54781,7 +54776,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.356.0'
+      context[:gem_version] = '1.357.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

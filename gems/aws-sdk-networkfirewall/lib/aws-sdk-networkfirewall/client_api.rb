@@ -86,6 +86,7 @@ module Aws::NetworkFirewall
     HashMapKey = Shapes::StringShape.new(name: 'HashMapKey')
     HashMapValue = Shapes::StringShape.new(name: 'HashMapValue')
     Header = Shapes::StructureShape.new(name: 'Header')
+    IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
     IPSet = Shapes::StructureShape.new(name: 'IPSet')
     IPSetArn = Shapes::StringShape.new(name: 'IPSetArn')
     IPSetMetadata = Shapes::StructureShape.new(name: 'IPSetMetadata')
@@ -740,6 +741,7 @@ module Aws::NetworkFirewall
     StatelessRulesAndCustomActions.struct_class = Types::StatelessRulesAndCustomActions
 
     SubnetMapping.add_member(:subnet_id, Shapes::ShapeRef.new(shape: CollectionMember_String, required: true, location_name: "SubnetId"))
+    SubnetMapping.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IPAddressType"))
     SubnetMapping.struct_class = Types::SubnetMapping
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)

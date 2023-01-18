@@ -151,6 +151,7 @@ module Aws::BillingConductor
     NumberOfAssociatedPricingRules = Shapes::IntegerShape.new(name: 'NumberOfAssociatedPricingRules')
     NumberOfAssociations = Shapes::IntegerShape.new(name: 'NumberOfAssociations')
     NumberOfPricingPlansAssociatedWith = Shapes::IntegerShape.new(name: 'NumberOfPricingPlansAssociatedWith')
+    Operation = Shapes::StringShape.new(name: 'Operation')
     PricingPlanArn = Shapes::StringShape.new(name: 'PricingPlanArn')
     PricingPlanArns = Shapes::ListShape.new(name: 'PricingPlanArns')
     PricingPlanDescription = Shapes::StringShape.new(name: 'PricingPlanDescription')
@@ -199,6 +200,7 @@ module Aws::BillingConductor
     UpdatePricingRuleInput = Shapes::StructureShape.new(name: 'UpdatePricingRuleInput')
     UpdatePricingRuleOutput = Shapes::StructureShape.new(name: 'UpdatePricingRuleOutput')
     UpdateTieringInput = Shapes::StructureShape.new(name: 'UpdateTieringInput')
+    UsageType = Shapes::StringShape.new(name: 'UsageType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -344,6 +346,8 @@ module Aws::BillingConductor
     CreatePricingRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreatePricingRuleInput.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
     CreatePricingRuleInput.add_member(:tiering, Shapes::ShapeRef.new(shape: CreateTieringInput, location_name: "Tiering"))
+    CreatePricingRuleInput.add_member(:usage_type, Shapes::ShapeRef.new(shape: UsageType, location_name: "UsageType"))
+    CreatePricingRuleInput.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
     CreatePricingRuleInput.struct_class = Types::CreatePricingRuleInput
 
     CreatePricingRuleOutput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingRuleArn, location_name: "Arn"))
@@ -770,6 +774,8 @@ module Aws::BillingConductor
     UpdatePricingRuleOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
     UpdatePricingRuleOutput.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
     UpdatePricingRuleOutput.add_member(:tiering, Shapes::ShapeRef.new(shape: UpdateTieringInput, location_name: "Tiering"))
+    UpdatePricingRuleOutput.add_member(:usage_type, Shapes::ShapeRef.new(shape: UsageType, location_name: "UsageType"))
+    UpdatePricingRuleOutput.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
     UpdatePricingRuleOutput.struct_class = Types::UpdatePricingRuleOutput
 
     UpdateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: UpdateFreeTierConfig, required: true, location_name: "FreeTier"))

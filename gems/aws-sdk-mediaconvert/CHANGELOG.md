@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
+1.97.0 (2023-01-12)
+------------------
+
+* Feature - The AWS Elemental MediaConvert SDK has added support for compact DASH manifest generation, audio normalization using TruePeak measurements, and the ability to clip the sample range in the color corrector.
+
 1.96.0 (2022-12-02)
 ------------------
 

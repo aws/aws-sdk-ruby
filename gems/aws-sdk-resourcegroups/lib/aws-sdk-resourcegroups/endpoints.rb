@@ -39,6 +39,20 @@ module Aws::ResourceGroups
       end
     end
 
+    class GetAccountSettings
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResourceGroups::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetGroup
       def self.build(context)
         unless context.config.regional_endpoint
@@ -194,6 +208,20 @@ module Aws::ResourceGroups
     end
 
     class Untag
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResourceGroups::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateAccountSettings
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

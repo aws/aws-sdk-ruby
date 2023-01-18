@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
+1.357.0 (2023-01-13)
+------------------
+
+* Feature - Documentation updates for EC2.
+
 1.356.0 (2022-12-20)
 ------------------
 

@@ -525,9 +525,11 @@ module Aws::CloudWatchLogs
     #   group is in a source account and you are using a monitoring account,
     #   you must use the log group ARN.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name_prefix
@@ -1010,9 +1012,11 @@ module Aws::CloudWatchLogs
     #   from. If the log group is in a source account and you are using a
     #   monitoring account, you must use the log group ARN.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] log_stream_names
@@ -1217,9 +1221,11 @@ module Aws::CloudWatchLogs
     #   If the log group is in a source account and you are using a
     #   monitoring account, you must use the log group ARN.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name
@@ -1314,9 +1320,11 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] time
@@ -1333,9 +1341,11 @@ module Aws::CloudWatchLogs
     #   group is in a source account and you are using a monitoring account,
     #   you must specify the ARN.
     #
-    #   If you specify values for both `logGroupName` and
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
     #   `logGroupIdentifier`, the action returns an
     #   `InvalidParameterException` error.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFieldsRequest AWS API Documentation

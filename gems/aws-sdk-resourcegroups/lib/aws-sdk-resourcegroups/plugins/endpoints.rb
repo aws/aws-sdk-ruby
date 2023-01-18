@@ -60,6 +60,8 @@ module Aws::ResourceGroups
             Aws::ResourceGroups::Endpoints::CreateGroup.build(context)
           when :delete_group
             Aws::ResourceGroups::Endpoints::DeleteGroup.build(context)
+          when :get_account_settings
+            Aws::ResourceGroups::Endpoints::GetAccountSettings.build(context)
           when :get_group
             Aws::ResourceGroups::Endpoints::GetGroup.build(context)
           when :get_group_configuration
@@ -84,6 +86,8 @@ module Aws::ResourceGroups
             Aws::ResourceGroups::Endpoints::UngroupResources.build(context)
           when :untag
             Aws::ResourceGroups::Endpoints::Untag.build(context)
+          when :update_account_settings
+            Aws::ResourceGroups::Endpoints::UpdateAccountSettings.build(context)
           when :update_group
             Aws::ResourceGroups::Endpoints::UpdateGroup.build(context)
           when :update_group_query

@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
+1.38.0 (2023-01-13)
+------------------
+
+* Feature - This release adds POWER_30_KVA as an option for PowerDrawKva. PowerDrawKva is part of the RackPhysicalProperties structure in the CreateSite request.
+
 1.37.0 (2022-10-25)
 ------------------
 

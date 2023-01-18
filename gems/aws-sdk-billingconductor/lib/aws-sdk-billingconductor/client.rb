@@ -760,8 +760,8 @@ module Aws::BillingConductor
     #   A percentage modifier that's applied on the public pricing rates.
     #
     # @option params [String] :service
-    #   If the `Scope` attribute is set to `SERVICE`, the attribute indicates
-    #   which service the `PricingRule` is applicable for.
+    #   If the `Scope` attribute is set to `SERVICE` or `SKU`, the attribute
+    #   indicates which service the `PricingRule` is applicable for.
     #
     # @option params [Hash<String,String>] :tags
     #   A map that contains tag keys and tag values that are attached to a
@@ -774,6 +774,24 @@ module Aws::BillingConductor
     #
     # @option params [Types::CreateTieringInput] :tiering
     #   The set of tiering configurations for the pricing rule.
+    #
+    # @option params [String] :usage_type
+    #   Usage type is the unit that each service uses to measure the usage of
+    #   a specific type of resource.
+    #
+    #   If the `Scope` attribute is set to `SKU`, this attribute indicates
+    #   which usage type the `PricingRule` is modifying. For example,
+    #   `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra
+    #   Large` instance in the US West (Oregon) Region.     </p>
+    #
+    # @option params [String] :operation
+    #   Operation is the specific Amazon Web Services action covered by this
+    #   line item. This describes the specific usage of the line item.
+    #
+    #   If the `Scope` attribute is set to `SKU`, this attribute indicates
+    #   which operation the `PricingRule` is modifying. For example, a value
+    #   of `RunInstances:0202` indicates the operation of running an Amazon
+    #   EC2 instance.
     #
     # @return [Types::CreatePricingRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -798,6 +816,8 @@ module Aws::BillingConductor
     #         activated: false, # required
     #       },
     #     },
+    #     usage_type: "UsageType",
+    #     operation: "Operation",
     #   })
     #
     # @example Response structure
@@ -1897,6 +1917,8 @@ module Aws::BillingConductor
     #   * {Types::UpdatePricingRuleOutput#last_modified_time #last_modified_time} => Integer
     #   * {Types::UpdatePricingRuleOutput#billing_entity #billing_entity} => String
     #   * {Types::UpdatePricingRuleOutput#tiering #tiering} => Types::UpdateTieringInput
+    #   * {Types::UpdatePricingRuleOutput#usage_type #usage_type} => String
+    #   * {Types::UpdatePricingRuleOutput#operation #operation} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1926,6 +1948,8 @@ module Aws::BillingConductor
     #   resp.last_modified_time #=> Integer
     #   resp.billing_entity #=> String
     #   resp.tiering.free_tier.activated #=> Boolean
+    #   resp.usage_type #=> String
+    #   resp.operation #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingRule AWS API Documentation
     #
@@ -1949,7 +1973,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

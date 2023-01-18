@@ -600,8 +600,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     # @option options [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] The names of the security groups. For a
-    #   nondefault VPC, you must use security group IDs instead.
+    #   \[EC2-Classic, default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
     #   groups as part of the network interface.
@@ -1179,12 +1178,15 @@ module Aws::EC2
     #   * `metadata-options.http-tokens` - The metadata request authorization
     #     state (`optional` \| `required`)
     #
-    #   * `metadata-options.http-put-response-hop-limit` - The http metadata
+    #   * `metadata-options.http-put-response-hop-limit` - The HTTP metadata
     #     request put response hop limit (integer, possible values `1` to
     #     `64`)
     #
-    #   * `metadata-options.http-endpoint` - Enable or disable metadata access
-    #     on http endpoint (`enabled` \| `disabled`)
+    #   * `metadata-options.http-endpoint` - The status of access to the HTTP
+    #     metadata endpoint on your instance (`enabled` \| `disabled`)
+    #
+    #   * `metadata-options.instance-metadata-tags` - The status of access to
+    #     instance tags from the instance metadata (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).

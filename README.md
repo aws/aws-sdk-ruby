@@ -341,6 +341,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Budgets                                           | Aws::Budgets                             | aws-sdk-budgets                             | 2016-10-20  |
 | AWS Certificate Manager                               | Aws::ACM                                 | aws-sdk-acm                                 | 2015-12-08  |
 | AWS Certificate Manager Private Certificate Authority | Aws::ACMPCA                              | aws-sdk-acmpca                              | 2017-08-22  |
+| AWS Clean Rooms Service                               | Aws::CleanRooms                          | aws-sdk-cleanrooms                          | 2022-02-17  |
 | AWS Cloud Control API                                 | Aws::CloudControlApi                     | aws-sdk-cloudcontrolapi                     | 2021-09-30  |
 | AWS Cloud Map                                         | Aws::ServiceDiscovery                    | aws-sdk-servicediscovery                    | 2017-03-14  |
 | AWS Cloud9                                            | Aws::Cloud9                              | aws-sdk-cloud9                              | 2017-09-23  |

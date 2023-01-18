@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
+1.60.0 (2023-01-12)
+------------------
+
+* Feature - Bug fix: logGroupName is now not a required field in GetLogEvents, FilterLogEvents, GetLogGroupFields, and DescribeLogStreams APIs as logGroupIdentifier can be provided instead
+
 1.59.0 (2023-01-04)
 ------------------
 

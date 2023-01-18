@@ -2466,6 +2466,10 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowResponse AWS API Documentation
+    #
+    class DeleteContactFlowResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10229,6 +10233,10 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowContentResponse AWS API Documentation
+    #
+    class UpdateContactFlowContentResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10261,6 +10269,10 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowMetadataResponse AWS API Documentation
+    #
+    class UpdateContactFlowMetadataResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -10352,6 +10364,10 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowNameResponse AWS API Documentation
+    #
+    class UpdateContactFlowNameResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the

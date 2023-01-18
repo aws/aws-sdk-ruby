@@ -448,8 +448,7 @@ module Aws::Imagebuilder
     #    </note>
     #
     # @option params [String] :description
-    #   The description of the component. Describes the contents of the
-    #   component.
+    #   Describes the contents of the component.
     #
     # @option params [String] :change_description
     #   The change description of the component. Describes what change has
@@ -457,7 +456,7 @@ module Aws::Imagebuilder
     #   other versions of this component.
     #
     # @option params [required, String] :platform
-    #   The platform of the component.
+    #   The operating system platform of the component.
     #
     # @option params [Array<String>] :supported_os_versions
     #   The operating system (OS) version supported by the component. If the
@@ -479,10 +478,10 @@ module Aws::Imagebuilder
     #   component `data` property. You cannot specify both properties.
     #
     # @option params [String] :kms_key_id
-    #   The ID of the KMS key that should be used to encrypt this component.
+    #   The ID of the KMS key that is used to encrypt this component.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags of the component.
+    #   The tags that apply to the component.
     #
     # @option params [required, String] :client_token
     #   The idempotency token of the component.
@@ -563,7 +562,8 @@ module Aws::Imagebuilder
     #
     # @option params [required, Array<Types::ComponentConfiguration>] :components
     #   Components for build and test that are included in the container
-    #   recipe.
+    #   recipe. Recipes require a minimum of one build component, and can have
+    #   a maximum of 20 build and test components in any combination.
     #
     # @option params [Types::InstanceConfiguration] :instance_configuration
     #   A group of options that can be used to configure an instance for
@@ -997,7 +997,7 @@ module Aws::Imagebuilder
     #    </note>
     #
     # @option params [required, Array<Types::ComponentConfiguration>] :components
-    #   The components of the image recipe.
+    #   The components included in the image recipe.
     #
     # @option params [required, String] :parent_image
     #   The base image of the image recipe. The value of the string can be the
@@ -1492,6 +1492,8 @@ module Aws::Imagebuilder
     #   resp.component.date_created #=> String
     #   resp.component.tags #=> Hash
     #   resp.component.tags["TagKey"] #=> String
+    #   resp.component.publisher #=> String
+    #   resp.component.obfuscate #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetComponent AWS API Documentation
     #
@@ -1893,6 +1895,7 @@ module Aws::Imagebuilder
     #   resp.image.tags #=> Hash
     #   resp.image.tags["TagKey"] #=> String
     #   resp.image.build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
+    #   resp.image.image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImage AWS API Documentation
     #
@@ -2400,6 +2403,8 @@ module Aws::Imagebuilder
     #   resp.component_summary_list[0].date_created #=> String
     #   resp.component_summary_list[0].tags #=> Hash
     #   resp.component_summary_list[0].tags["TagKey"] #=> String
+    #   resp.component_summary_list[0].publisher #=> String
+    #   resp.component_summary_list[0].obfuscate #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListComponentBuildVersions AWS API Documentation
@@ -2411,8 +2416,10 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Returns the list of component build versions for the specified
-    # semantic version.
+    # Returns the list of components that can be filtered by name, or by
+    # using the listed `filters` to streamline results. Newly created
+    # components can take up to two minutes to appear in the ListComponents
+    # API Results.
     #
     # <note markdown="1"> The semantic version has four nodes:
     # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
@@ -2427,11 +2434,11 @@ module Aws::Imagebuilder
     #  </note>
     #
     # @option params [String] :owner
-    #   The owner defines which components you want to list. By default, this
-    #   request will only show components owned by your account. You can use
-    #   this field to specify if you want to view components owned by
-    #   yourself, by Amazon, or those components that have been shared with
-    #   you by other customers.
+    #   Filters results based on the type of owner for the component. By
+    #   default, this request returns a list of components that your account
+    #   owns. To see results for other types of owners, you can specify
+    #   components that Amazon manages, third party components, or components
+    #   that other accounts have shared with you.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Use the following filters to streamline results:
@@ -2449,7 +2456,7 @@ module Aws::Imagebuilder
     #   * `version`
     #
     # @option params [Boolean] :by_name
-    #   Returns the list of component build versions for the specified name.
+    #   Returns the list of components for the specified name.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2469,7 +2476,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_components({
-    #     owner: "Self", # accepts Self, Shared, Amazon
+    #     owner: "Self", # accepts Self, Shared, Amazon, ThirdParty
     #     filters: [
     #       {
     #         name: "FilterName",
@@ -2543,7 +2550,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_container_recipes({
-    #     owner: "Self", # accepts Self, Shared, Amazon
+    #     owner: "Self", # accepts Self, Shared, Amazon, ThirdParty
     #     filters: [
     #       {
     #         name: "FilterName",
@@ -2712,6 +2719,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
     #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
+    #   resp.image_summary_list[0].image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageBuildVersions AWS API Documentation
@@ -2843,6 +2851,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
     #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
+    #   resp.image_summary_list[0].image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelineImages AWS API Documentation
@@ -2971,7 +2980,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_image_recipes({
-    #     owner: "Self", # accepts Self, Shared, Amazon
+    #     owner: "Self", # accepts Self, Shared, Amazon, ThirdParty
     #     filters: [
     #       {
     #         name: "FilterName",
@@ -3005,7 +3014,9 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Returns the list of images that you have access to.
+    # Returns the list of images that you have access to. Newly created
+    # images can take up to two minutes to appear in the ListImages API
+    # Results.
     #
     # @option params [String] :owner
     #   The owner defines which images you want to list. By default, this
@@ -3051,7 +3062,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_images({
-    #     owner: "Self", # accepts Self, Shared, Amazon
+    #     owner: "Self", # accepts Self, Shared, Amazon, ThirdParty
     #     filters: [
     #       {
     #         name: "FilterName",
@@ -3077,6 +3088,7 @@ module Aws::Imagebuilder
     #   resp.image_version_list[0].owner #=> String
     #   resp.image_version_list[0].date_created #=> String
     #   resp.image_version_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
+    #   resp.image_version_list[0].image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImages AWS API Documentation
@@ -3790,7 +3802,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

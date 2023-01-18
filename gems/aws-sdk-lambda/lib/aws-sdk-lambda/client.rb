@@ -733,21 +733,21 @@ module Aws::Lambda
     # The following error handling options are available only for stream
     # sources (DynamoDB and Kinesis):
     #
-    # * `BisectBatchOnFunctionError` - If the function returns an error,
+    # * `BisectBatchOnFunctionError` – If the function returns an error,
     #   split the batch in two and retry.
     #
-    # * `DestinationConfig` - Send discarded records to an Amazon SQS queue
+    # * `DestinationConfig` – Send discarded records to an Amazon SQS queue
     #   or Amazon SNS topic.
     #
-    # * `MaximumRecordAgeInSeconds` - Discard records older than the
+    # * `MaximumRecordAgeInSeconds` – Discard records older than the
     #   specified age. The default value is infinite (-1). When set to
     #   infinite (-1), failed records are retried until the record expires
     #
-    # * `MaximumRetryAttempts` - Discard records after the specified number
+    # * `MaximumRetryAttempts` – Discard records after the specified number
     #   of retries. The default value is infinite (-1). When set to infinite
     #   (-1), failed records are retried until the record expires.
     #
-    # * `ParallelizationFactor` - Process multiple batches from each shard
+    # * `ParallelizationFactor` – Process multiple batches from each shard
     #   concurrently.
     #
     # For information about which configuration parameters apply to each
@@ -783,32 +783,32 @@ module Aws::Lambda
     # @option params [String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
     #
-    #   * **Amazon Kinesis** - The ARN of the data stream or a stream
+    #   * **Amazon Kinesis** – The ARN of the data stream or a stream
     #     consumer.
     #
-    #   * **Amazon DynamoDB Streams** - The ARN of the stream.
+    #   * **Amazon DynamoDB Streams** – The ARN of the stream.
     #
-    #   * **Amazon Simple Queue Service** - The ARN of the queue.
+    #   * **Amazon Simple Queue Service** – The ARN of the queue.
     #
-    #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
+    #   * **Amazon Managed Streaming for Apache Kafka** – The ARN of the
     #     cluster.
     #
-    #   * **Amazon MQ** - The ARN of the broker.
+    #   * **Amazon MQ** – The ARN of the broker.
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
     #
     #   **Name formats**
     #
-    #   * **Function name** - `MyFunction`.
+    #   * **Function name** – `MyFunction`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
     #
-    #   * **Version or Alias ARN** -
+    #   * **Version or Alias ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`.
     #
-    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #   * **Partial ARN** – `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it's limited to 64 characters in length.
@@ -825,19 +825,19 @@ module Aws::Lambda
     #   the records in the batch to the function in a single call, up to the
     #   payload limit for synchronous invocation (6 MB).
     #
-    #   * **Amazon Kinesis** - Default 100. Max 10,000.
+    #   * **Amazon Kinesis** – Default 100. Max 10,000.
     #
-    #   * **Amazon DynamoDB Streams** - Default 100. Max 10,000.
+    #   * **Amazon DynamoDB Streams** – Default 100. Max 10,000.
     #
-    #   * **Amazon Simple Queue Service** - Default 10. For standard queues
+    #   * **Amazon Simple Queue Service** – Default 10. For standard queues
     #     the max is 10,000. For FIFO queues the max is 10.
     #
-    #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
+    #   * **Amazon Managed Streaming for Apache Kafka** – Default 100. Max
     #     10,000.
     #
-    #   * **Self-managed Apache Kafka** - Default 100. Max 10,000.
+    #   * **Self-managed Apache Kafka** – Default 100. Max 10,000.
     #
-    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** – Default 100. Max 10,000.
     #
     # @option params [Types::FilterCriteria] :filter_criteria
     #   An object that defines the filter criteria that determine whether
@@ -925,6 +925,15 @@ module Aws::Lambda
     #   Specific configuration settings for a self-managed Apache Kafka event
     #   source.
     #
+    # @option params [Types::ScalingConfig] :scaling_config
+    #   (Amazon SQS only) The scaling configuration for the event source. For
+    #   more information, see [Configuring maximum concurrency for Amazon SQS
+    #   event sources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
@@ -952,6 +961,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -1003,6 +1013,9 @@ module Aws::Lambda
     #     self_managed_kafka_event_source_config: {
     #       consumer_group_id: "URI",
     #     },
+    #     scaling_config: {
+    #       maximum_concurrency: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1041,6 +1054,7 @@ module Aws::Lambda
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.scaling_config.maximum_concurrency #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping AWS API Documentation
     #
@@ -1638,6 +1652,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -1681,6 +1696,7 @@ module Aws::Lambda
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.scaling_config.maximum_concurrency #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping AWS API Documentation
     #
@@ -2118,6 +2134,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2161,6 +2178,7 @@ module Aws::Lambda
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.scaling_config.maximum_concurrency #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping AWS API Documentation
     #
@@ -3216,32 +3234,32 @@ module Aws::Lambda
     # @option params [String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
     #
-    #   * **Amazon Kinesis** - The ARN of the data stream or a stream
+    #   * **Amazon Kinesis** – The ARN of the data stream or a stream
     #     consumer.
     #
-    #   * **Amazon DynamoDB Streams** - The ARN of the stream.
+    #   * **Amazon DynamoDB Streams** – The ARN of the stream.
     #
-    #   * **Amazon Simple Queue Service** - The ARN of the queue.
+    #   * **Amazon Simple Queue Service** – The ARN of the queue.
     #
-    #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
+    #   * **Amazon Managed Streaming for Apache Kafka** – The ARN of the
     #     cluster.
     #
-    #   * **Amazon MQ** - The ARN of the broker.
+    #   * **Amazon MQ** – The ARN of the broker.
     #
     # @option params [String] :function_name
     #   The name of the Lambda function.
     #
     #   **Name formats**
     #
-    #   * **Function name** - `MyFunction`.
+    #   * **Function name** – `MyFunction`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
     #
-    #   * **Version or Alias ARN** -
+    #   * **Version or Alias ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`.
     #
-    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #   * **Partial ARN** – `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it's limited to 64 characters in length.
@@ -3308,6 +3326,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.event_source_mappings[0].scaling_config.maximum_concurrency #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings AWS API Documentation
     #
@@ -4823,21 +4842,21 @@ module Aws::Lambda
     # The following error handling options are available only for stream
     # sources (DynamoDB and Kinesis):
     #
-    # * `BisectBatchOnFunctionError` - If the function returns an error,
+    # * `BisectBatchOnFunctionError` – If the function returns an error,
     #   split the batch in two and retry.
     #
-    # * `DestinationConfig` - Send discarded records to an Amazon SQS queue
+    # * `DestinationConfig` – Send discarded records to an Amazon SQS queue
     #   or Amazon SNS topic.
     #
-    # * `MaximumRecordAgeInSeconds` - Discard records older than the
+    # * `MaximumRecordAgeInSeconds` – Discard records older than the
     #   specified age. The default value is infinite (-1). When set to
     #   infinite (-1), failed records are retried until the record expires
     #
-    # * `MaximumRetryAttempts` - Discard records after the specified number
+    # * `MaximumRetryAttempts` – Discard records after the specified number
     #   of retries. The default value is infinite (-1). When set to infinite
     #   (-1), failed records are retried until the record expires.
     #
-    # * `ParallelizationFactor` - Process multiple batches from each shard
+    # * `ParallelizationFactor` – Process multiple batches from each shard
     #   concurrently.
     #
     # For information about which configuration parameters apply to each
@@ -4878,15 +4897,15 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `MyFunction`.
+    #   * **Function name** – `MyFunction`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
     #
-    #   * **Version or Alias ARN** -
+    #   * **Version or Alias ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`.
     #
-    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #   * **Partial ARN** – `123456789012:function:MyFunction`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it's limited to 64 characters in length.
@@ -4903,19 +4922,19 @@ module Aws::Lambda
     #   the records in the batch to the function in a single call, up to the
     #   payload limit for synchronous invocation (6 MB).
     #
-    #   * **Amazon Kinesis** - Default 100. Max 10,000.
+    #   * **Amazon Kinesis** – Default 100. Max 10,000.
     #
-    #   * **Amazon DynamoDB Streams** - Default 100. Max 10,000.
+    #   * **Amazon DynamoDB Streams** – Default 100. Max 10,000.
     #
-    #   * **Amazon Simple Queue Service** - Default 10. For standard queues
+    #   * **Amazon Simple Queue Service** – Default 10. For standard queues
     #     the max is 10,000. For FIFO queues the max is 10.
     #
-    #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
+    #   * **Amazon Managed Streaming for Apache Kafka** – Default 100. Max
     #     10,000.
     #
-    #   * **Self-managed Apache Kafka** - Default 100. Max 10,000.
+    #   * **Self-managed Apache Kafka** – Default 100. Max 10,000.
     #
-    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** – Default 100. Max 10,000.
     #
     # @option params [Types::FilterCriteria] :filter_criteria
     #   An object that defines the filter criteria that determine whether
@@ -4977,6 +4996,15 @@ module Aws::Lambda
     #   (Streams and Amazon SQS) A list of current response type enums applied
     #   to the event source mapping.
     #
+    # @option params [Types::ScalingConfig] :scaling_config
+    #   (Amazon SQS only) The scaling configuration for the event source. For
+    #   more information, see [Configuring maximum concurrency for Amazon SQS
+    #   event sources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
@@ -5004,6 +5032,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5040,6 +5069,9 @@ module Aws::Lambda
     #     ],
     #     tumbling_window_in_seconds: 1,
     #     function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
+    #     scaling_config: {
+    #       maximum_concurrency: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5078,6 +5110,7 @@ module Aws::Lambda
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.scaling_config.maximum_concurrency #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping AWS API Documentation
     #
@@ -5796,7 +5829,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -301,7 +301,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_ids
-    #   The IDs of one or more interface VPC endpoints.
+    #   The IDs of the interface VPC endpoints.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcEndpointConnectionsRequest AWS API Documentation
@@ -2947,9 +2947,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP
-    #   type number. For the ICMP type number, use `-1` to specify all
-    #   types. If you specify all ICMP types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the start of the port range.
+    #   If the protocol is ICMP, this is the type number. A value of -1
+    #   indicates all ICMP types. If you specify all ICMP types, you must
+    #   specify all ICMP codes.
     #
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
@@ -3011,9 +3012,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP code
-    #   number. For the ICMP code number, use `-1` to specify all codes. If
-    #   you specify all ICMP types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP, this is the code. A value of -1 indicates all
+    #   ICMP codes. If you specify all ICMP types, you must specify all ICMP
+    #   codes.
     #
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
@@ -6427,8 +6429,8 @@ module Aws::EC2
     #   client IP addresses. The address range cannot overlap with the local
     #   CIDR of the VPC in which the associated subnet is located, or the
     #   routes that you add manually. The address range cannot be changed
-    #   after the Client VPN endpoint has been created. The CIDR block
-    #   should be /22 or greater.
+    #   after the Client VPN endpoint has been created. Client CIDR range
+    #   must have a size of at least /22 and must not be greater than /12.
     #   @return [String]
     #
     # @!attribute [rw] server_certificate_arn
@@ -11573,8 +11575,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] connection_events
-    #   One or more endpoint events for which to receive notifications.
-    #   Valid values are `Accept`, `Connect`, `Delete`, and `Reject`.
+    #   The endpoint events for which to receive notifications. Valid values
+    #   are `Accept`, `Connect`, `Delete`, and `Reject`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
@@ -11618,8 +11620,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateVpcEndpoint.
-    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -11634,13 +11634,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the VPC in which the endpoint will be used.
+    #   The ID of the VPC for the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The service name. To get a list of available services, use the
-    #   DescribeVpcEndpointServices request, or get the name from the
-    #   service provider.
+    #   The service name.
     #   @return [String]
     #
     # @!attribute [rw] policy_document
@@ -11651,18 +11649,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
-    #   (Gateway endpoint) One or more route table IDs.
+    #   (Gateway endpoint) The route table IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   (Interface and Gateway Load Balancer endpoints) The ID of one or
-    #   more subnets in which to create an endpoint network interface. For a
-    #   Gateway Load Balancer endpoint, you can specify one subnet only.
+    #   (Interface and Gateway Load Balancer endpoints) The IDs of the
+    #   subnets in which to create an endpoint network interface. For a
+    #   Gateway Load Balancer endpoint, you can specify only one subnet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   (Interface endpoint) The ID of one or more security groups to
-    #   associate with the endpoint network interface.
+    #   (Interface endpoint) The IDs of the security groups to associate
+    #   with the endpoint network interface. If this parameter is not
+    #   specified, we use the default security group for the VPC.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ip_address_type
@@ -11724,8 +11723,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateVpcEndpoint.
-    #
     # @!attribute [rw] vpc_endpoint
     #   Information about the endpoint.
     #   @return [Types::VpcEndpoint]
@@ -11762,13 +11759,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_load_balancer_arns
-    #   The Amazon Resource Names (ARNs) of one or more Network Load
-    #   Balancers for your service.
+    #   The Amazon Resource Names (ARNs) of the Network Load Balancers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] gateway_load_balancer_arns
-    #   The Amazon Resource Names (ARNs) of one or more Gateway Load
-    #   Balancers.
+    #   The Amazon Resource Names (ARNs) of the Gateway Load Balancers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_ip_address_types
@@ -12261,19 +12256,15 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] metric
-    #   The aggregation metric used for the data query. Currently only
-    #   `aggregation-latency` is supported, indicating network latency.
+    #   The metric, `aggregation-latency`, indicating that network latency
+    #   is aggregated for the query. This is the only supported metric.
     #   @return [String]
     #
     # @!attribute [rw] statistic
-    #   Metric data aggregations over specified periods of time. The
-    #   following are the supported Infrastructure Performance statistics:
-    #
-    #   * `p50` - The median value of the metric aggregated over a specified
-    #     start and end time. For example, a metric of `five_minutes` is the
-    #     median of all the data points gathered within those five minutes.
-    #
-    #   ^
+    #   The metric data aggregation period, `p50`, between the specified
+    #   `startDate` and `endDate`. For example, a metric of `five_minutes`
+    #   is the median of all the data points gathered within those five
+    #   minutes. `p50` is the only supported metric.
     #   @return [String]
     #
     # @!attribute [rw] period
@@ -12310,9 +12301,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] metric
-    #   The metric used for the network performance request. Currently only
-    #   `aggregate-latency` is supported, showing network latency during a
-    #   specified period.
+    #   The metric used for the network performance request. Only
+    #   `aggregate-latency` is supported, which shows network latency during
+    #   a specified period.
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -14596,7 +14587,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] connection_notification_ids
-    #   One or more notification IDs.
+    #   The IDs of the notifications.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointConnectionNotificationsRequest AWS API Documentation
@@ -14629,7 +14620,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] service_ids
-    #   The IDs of one or more services.
+    #   The IDs of the services.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointServiceConfigurationsRequest AWS API Documentation
@@ -14654,8 +14645,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteVpcEndpoints.
-    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -14664,7 +14653,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_endpoint_ids
-    #   One or more VPC endpoint IDs.
+    #   The IDs of the VPC endpoints.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointsRequest AWS API Documentation
@@ -14676,8 +14665,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DeleteVpcEndpoints.
-    #
     # @!attribute [rw] unsuccessful
     #   Information about the VPC endpoints that were not successfully
     #   deleted.
@@ -18882,12 +18869,16 @@ module Aws::EC2
     #   * `metadata-options.http-tokens` - The metadata request
     #     authorization state (`optional` \| `required`)
     #
-    #   * `metadata-options.http-put-response-hop-limit` - The http metadata
+    #   * `metadata-options.http-put-response-hop-limit` - The HTTP metadata
     #     request put response hop limit (integer, possible values `1` to
     #     `64`)
     #
-    #   * `metadata-options.http-endpoint` - Enable or disable metadata
-    #     access on http endpoint (`enabled` \| `disabled`)
+    #   * `metadata-options.http-endpoint` - The status of access to the
+    #     HTTP metadata endpoint on your instance (`enabled` \| `disabled`)
+    #
+    #   * `metadata-options.instance-metadata-tags` - The status of access
+    #     to instance tags from the instance metadata (`enabled` \|
+    #     `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -25190,7 +25181,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `connection-notification-arn` - The ARN of the SNS topic for the
     #     notification.
@@ -25231,7 +25222,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] connection_notification_set
-    #   One or more notifications.
+    #   The notifications.
     #   @return [Array<Types::ConnectionNotification>]
     #
     # @!attribute [rw] next_token
@@ -25256,7 +25247,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `ip-address-type` - The IP address type (`ipv4` \| `ipv6`).
     #
@@ -25296,7 +25287,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] vpc_endpoint_connections
-    #   Information about one or more VPC endpoint connections.
+    #   Information about the VPC endpoint connections.
     #   @return [Array<Types::VpcEndpointConnection>]
     #
     # @!attribute [rw] next_token
@@ -25321,11 +25312,11 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] service_ids
-    #   The IDs of one or more services.
+    #   The IDs of the endpoint services.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `service-name` - The name of the service.
     #
@@ -25373,7 +25364,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] service_configurations
-    #   Information about one or more services.
+    #   Information about the services.
     #   @return [Array<Types::ServiceConfiguration>]
     #
     # @!attribute [rw] next_token
@@ -25402,7 +25393,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `principal` - The ARN of the principal.
     #
@@ -25435,7 +25426,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] allowed_principals
-    #   Information about one or more allowed principals.
+    #   Information about the allowed principals.
     #   @return [Array<Types::AllowedPrincipal>]
     #
     # @!attribute [rw] next_token
@@ -25452,8 +25443,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVpcEndpointServices.
-    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -25462,11 +25451,11 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] service_names
-    #   One or more service names.
+    #   The service names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `owner` - The ID or alias of the Amazon Web Services account that
     #     owns the service.
@@ -25516,10 +25505,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVpcEndpointServices.
-    #
     # @!attribute [rw] service_names
-    #   A list of supported services.
+    #   The supported services.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_details
@@ -25541,8 +25528,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVpcEndpoints.
-    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -25551,11 +25536,11 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_endpoint_ids
-    #   One or more endpoint IDs.
+    #   The IDs of the VPC endpoints.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `ip-address-type` - The IP address type (`ipv4` \| `ipv6`).
     #
@@ -25609,8 +25594,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVpcEndpoints.
-    #
     # @!attribute [rw] vpc_endpoints
     #   Information about the endpoints.
     #   @return [Array<Types::VpcEndpoint>]
@@ -30843,6 +30826,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_types
+    #   The instance types supported by the AFI.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImage AWS API Documentation
@@ -36109,19 +36093,21 @@ module Aws::EC2
     # The metadata options for the instance.
     #
     # @!attribute [rw] http_tokens
-    #   The state of token usage for your instance metadata requests.
+    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
+    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
+    #   `required` (in other words, set the use of IMDSv2 to `required`).
     #
-    #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a session token on your request. If you
-    #   retrieve the IAM role credentials without a token, the version 1.0
-    #   role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid session token, the version 2.0 role
-    #   credentials are returned.
+    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
+    #     instance metadata with or without a session token in your request.
+    #     If you retrieve the IAM role credentials without a token, the
+    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
+    #     credentials using a valid session token, the IMDSv2 role
+    #     credentials are returned.
     #
-    #   If the state is `required`, you must send a session token with any
-    #   instance metadata retrieval requests. In this state, retrieving the
-    #   IAM role credentials always returns the version 2.0 credentials; the
-    #   version 1.0 credentials are not available.
+    #   * `required` - When IMDSv2 is required, you must send a session
+    #     token with any instance metadata retrieval requests. In this
+    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #     credentials; IMDSv1 credentials are not available.
     #
     #   Default: `optional`
     #   @return [String]
@@ -36188,19 +36174,22 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   The state of token usage for your instance metadata requests.
+    #   IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP
+    #   tokens is `optional` (in other words, indicates whether the use of
+    #   IMDSv2 is `optional`) or `required` (in other words, indicates
+    #   whether the use of IMDSv2 is `required`).
     #
-    #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a session token on your request. If you
-    #   retrieve the IAM role credentials without a token, the version 1.0
-    #   role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid session token, the version 2.0 role
-    #   credentials are returned.
+    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
+    #     instance metadata with or without a session token in your request.
+    #     If you retrieve the IAM role credentials without a token, the
+    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
+    #     credentials using a valid session token, the IMDSv2 role
+    #     credentials are returned.
     #
-    #   If the state is `required`, you must send a session token with any
-    #   instance metadata retrieval requests. In this state, retrieving the
-    #   IAM role credentials always returns the version 2.0 credentials; the
-    #   version 1.0 credentials are not available.
+    #   * `required` - When IMDSv2 is required, you must send a session
+    #     token with any instance metadata retrieval requests. In this
+    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #     credentials; IMDSv1 credentials are not available.
     #
     #   Default: `optional`
     #   @return [String]
@@ -38062,10 +38051,10 @@ module Aws::EC2
     # Describes a set of permissions for a security group rule.
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. A value of `-1` indicates all ICMP/ICMPv6
-    #   types. If you specify all ICMP/ICMPv6 types, you must specify all
-    #   codes.
+    #   If the protocol is TCP or UDP, this is the start of the port range.
+    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
+    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
+    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
@@ -38098,9 +38087,10 @@ module Aws::EC2
     #   @return [Array<Types::PrefixListId>]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes.
-    #   If you specify all ICMP/ICMPv6 types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP or ICMPv6, this is the code. A value of -1
+    #   indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
+    #   types, you must specify all ICMP/ICMPv6 codes.
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
@@ -39985,21 +39975,21 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   The state of token usage for your instance metadata requests. If the
-    #   parameter is not specified in the request, the default state is
-    #   `optional`.
+    #   Indicates whether IMDSv2 is `optional` or `required`.
     #
-    #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a signed token header on your request. If
-    #   you retrieve the IAM role credentials without a token, the version
-    #   1.0 role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid signed token, the version 2.0 role
-    #   credentials are returned.
+    #   `optional` - When IMDSv2 is optional, you can choose to retrieve
+    #   instance metadata with or without a session token in your request.
+    #   If you retrieve the IAM role credentials without a token, the IMDSv1
+    #   role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid session token, the IMDSv2 role credentials
+    #   are returned.
     #
-    #   If the state is `required`, you must send a signed token header with
-    #   any instance metadata retrieval requests. In this state, retrieving
-    #   the IAM role credentials always returns the version 2.0 credentials;
-    #   the version 1.0 credentials are not available.
+    #   `required` - When IMDSv2 is required, you must send a session token
+    #   with any instance metadata retrieval requests. In this state,
+    #   retrieving the IAM role credentials always returns IMDSv2
+    #   credentials; IMDSv1 credentials are not available.
+    #
+    #   Default: `optional`
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -40064,21 +40054,23 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #
     # @!attribute [rw] http_tokens
-    #   The state of token usage for your instance metadata requests. If the
-    #   parameter is not specified in the request, the default state is
-    #   `optional`.
+    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
+    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
+    #   `required` (in other words, set the use of IMDSv2 to `required`).
     #
-    #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a signed token header on your request. If
-    #   you retrieve the IAM role credentials without a token, the version
-    #   1.0 role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid signed token, the version 2.0 role
-    #   credentials are returned.
+    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
+    #     instance metadata with or without a session token in your request.
+    #     If you retrieve the IAM role credentials without a token, the
+    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
+    #     credentials using a valid session token, the IMDSv2 role
+    #     credentials are returned.
     #
-    #   If the state is `required`, you must send a signed token header with
-    #   any instance metadata retrieval requests. In this state, retrieving
-    #   the IAM role credentials always returns the version 2.0 credentials;
-    #   the version 1.0 credentials are not available.
+    #   * `required` - When IMDSv2 is required, you must send a session
+    #     token with any instance metadata retrieval requests. In this
+    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #     credentials; IMDSv1 credentials are not available.
+    #
+    #   Default: `optional`
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -41657,7 +41649,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Indicates whether the network was healthy or unhealthy at a particular
+    # Indicates whether the network was healthy or degraded at a particular
     # point. The value is aggregated from the `startDate` to the `endDate`.
     # Currently only `five_minutes` is supported.
     #
@@ -42926,21 +42918,23 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   The state of token usage for your instance metadata requests. If the
-    #   parameter is not specified in the request, the default state is
-    #   `optional`.
+    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
+    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
+    #   `required` (in other words, set the use of IMDSv2 to `required`).
     #
-    #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a session token on your request. If you
-    #   retrieve the IAM role credentials without a token, the version 1.0
-    #   role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid session token, the version 2.0 role
-    #   credentials are returned.
+    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
+    #     instance metadata with or without a session token in your request.
+    #     If you retrieve the IAM role credentials without a token, the
+    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
+    #     credentials using a valid session token, the IMDSv2 role
+    #     credentials are returned.
     #
-    #   If the state is `required`, you must send a session token with any
-    #   instance metadata retrieval requests. In this state, retrieving the
-    #   IAM role credentials always returns the version 2.0 credentials; the
-    #   version 1.0 credentials are not available.
+    #   * `required` - When IMDSv2 is required, you must send a session
+    #     token with any instance metadata retrieval requests. In this
+    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #     credentials; IMDSv1 credentials are not available.
+    #
+    #   Default: `optional`
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -45059,8 +45053,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] connection_events
-    #   One or more events for the endpoint. Valid values are `Accept`,
-    #   `Connect`, `Delete`, and `Reject`.
+    #   The events for the endpoint. Valid values are `Accept`, `Connect`,
+    #   `Delete`, and `Reject`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointConnectionNotificationRequest AWS API Documentation
@@ -45087,8 +45081,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyVpcEndpoint.
-    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -45113,33 +45105,33 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] add_route_table_ids
-    #   (Gateway endpoint) One or more route tables IDs to associate with
-    #   the endpoint.
+    #   (Gateway endpoint) The IDs of the route tables to associate with the
+    #   endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_route_table_ids
-    #   (Gateway endpoint) One or more route table IDs to disassociate from
+    #   (Gateway endpoint) The IDs of the route tables to disassociate from
     #   the endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] add_subnet_ids
-    #   (Interface and Gateway Load Balancer endpoints) One or more subnet
-    #   IDs in which to serve the endpoint. For a Gateway Load Balancer
+    #   (Interface and Gateway Load Balancer endpoints) The IDs of the
+    #   subnets in which to serve the endpoint. For a Gateway Load Balancer
     #   endpoint, you can specify only one subnet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_subnet_ids
-    #   (Interface endpoint) One or more subnets IDs in which to remove the
+    #   (Interface endpoint) The IDs of the subnets from which to remove the
     #   endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] add_security_group_ids
-    #   (Interface endpoint) One or more security group IDs to associate
+    #   (Interface endpoint) The IDs of the security groups to associate
     #   with the network interface.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_security_group_ids
-    #   (Interface endpoint) One or more security group IDs to disassociate
+    #   (Interface endpoint) The IDs of the security groups to disassociate
     #   from the network interface.
     #   @return [Array<String>]
     #
@@ -45326,14 +45318,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] add_allowed_principals
-    #   The Amazon Resource Names (ARN) of one or more principals.
-    #   Permissions are granted to the principals in this list. To grant
-    #   permissions to all principals, specify an asterisk (*).
+    #   The Amazon Resource Names (ARN) of the principals. Permissions are
+    #   granted to the principals in this list. To grant permissions to all
+    #   principals, specify an asterisk (*).
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_allowed_principals
-    #   The Amazon Resource Names (ARN) of one or more principals.
-    #   Permissions are revoked for principals in this list.
+    #   The Amazon Resource Names (ARN) of the principals. Permissions are
+    #   revoked for principals in this list.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissionsRequest AWS API Documentation
@@ -49672,7 +49664,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_ids
-    #   The IDs of one or more VPC endpoints.
+    #   The IDs of the VPC endpoints.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcEndpointConnectionsRequest AWS API Documentation
@@ -50653,7 +50645,8 @@ module Aws::EC2
     #
     # @!attribute [rw] disable_api_stop
     #   Indicates whether to enable the instance for stop protection. For
-    #   more information, see [Stop Protection][1].
+    #   more information, see [Stop protection][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
@@ -52001,7 +51994,8 @@ module Aws::EC2
     #
     # @!attribute [rw] disable_api_stop
     #   Indicates whether the instance is enabled for stop protection. For
-    #   more information, see [Stop Protection][1].
+    #   more information, see [Stop protection][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
@@ -52449,9 +52443,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP
-    #   type number. For the ICMP type number, use `-1` to specify all ICMP
-    #   types.
+    #   If the protocol is TCP or UDP, this is the start of the port range.
+    #   If the protocol is ICMP, this is the type number. A value of -1
+    #   indicates all ICMP types.
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
@@ -52502,9 +52496,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP code
-    #   number. For the ICMP code number, use `-1` to specify all ICMP codes
-    #   for the ICMP type.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP, this is the code. A value of -1 indicates all
+    #   ICMP codes.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -52920,8 +52914,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
-    #   \[EC2-Classic, default VPC\] The names of the security groups. For a
-    #   nondefault VPC, you must use security group IDs instead.
+    #   \[EC2-Classic, default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
     #   groups as part of the network interface.
@@ -54329,15 +54322,17 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type. A value of -1 indicates all ICMP/ICMPv6 types. If
-    #   you specify all ICMP/ICMPv6 types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the start of the port range.
+    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
+    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
+    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes.
-    #   If you specify all ICMP/ICMPv6 types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP or ICMPv6, this is the type number. A value of
+    #   -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
+    #   types, you must specify all ICMP/ICMPv6 codes.
     #   @return [Integer]
     #
     # @!attribute [rw] cidr_ipv_4
@@ -54435,15 +54430,17 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type. A value of -1 indicates all ICMP/ICMPv6 types. If
-    #   you specify all ICMP/ICMPv6 types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the start of the port range.
+    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
+    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
+    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes.
-    #   If you specify all ICMP/ICMPv6 types, you must specify all codes.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP or ICMPv6, this is the code. A value of -1
+    #   indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
+    #   types, you must specify all ICMP/ICMPv6 codes.
     #   @return [Integer]
     #
     # @!attribute [rw] cidr_ipv_4
@@ -54588,7 +54585,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the service.
+    #   The tags assigned to the service.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceConfiguration AWS API Documentation
@@ -54667,7 +54664,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the service.
+    #   The tags assigned to the service.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] private_dns_name_verification_state
@@ -55793,7 +55790,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity.
+    #   The unit for the target capacity. `TargetCapacityUnitType` can only
+    #   be specified when `InstanceRequirements` is specified.
     #
     #   Default: `units` (translates to number of instances)
     #   @return [String]
@@ -56523,7 +56521,7 @@ module Aws::EC2
     #
     # @!attribute [rw] from_port
     #   The start of the port range for the TCP and UDP protocols, or an
-    #   ICMP type number. A value of `-1` indicates all ICMP types.
+    #   ICMP type number. A value of -1 indicates all ICMP types.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
@@ -57411,7 +57409,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity.
+    #   The unit for the target capacity. `TargetCapacityUnitType` can only
+    #   be specified when `InstanceRequirements` is specified.
     #
     #   Default: `units` (translates to number of instances)
     #   @return [String]
@@ -57469,7 +57468,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity.
+    #   The unit for the target capacity. `TargetCapacityUnitType` can only
+    #   be specified when `InstanceRequirements` is specified.
     #
     #   Default: `units` (translates to number of instances)
     #   @return [String]
@@ -61538,7 +61538,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
-    #   (Gateway endpoint) One or more route tables associated with the
+    #   (Gateway endpoint) The IDs of the route tables associated with the
     #   endpoint.
     #   @return [Array<String>]
     #
@@ -61569,8 +61569,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_ids
-    #   (Interface endpoint) One or more network interfaces for the
-    #   endpoint.
+    #   (Interface endpoint) The network interfaces for the endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dns_entries
@@ -61582,7 +61581,7 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the endpoint.
+    #   The tags assigned to the endpoint.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] owner_id

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.694.0 (2023-01-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.693.0 (2023-01-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.692.0 (2023-01-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CleanRooms`.
+
 1.691.0 (2023-01-10)
 ------------------
 

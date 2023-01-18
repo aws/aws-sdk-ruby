@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
+1.89.0 (2023-01-12)
+------------------
+
+* Feature - Add support for MaximumConcurrency parameter for SQS event source. Customers can now limit the maximum concurrent invocations for their SQS Event Source Mapping.
+
 1.88.0 (2022-11-29)
 ------------------
 

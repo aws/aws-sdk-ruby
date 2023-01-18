@@ -13,6 +13,7 @@ module Aws::ResourceGroups
 
     include Seahorse::Model
 
+    AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     CreateGroupInput = Shapes::StructureShape.new(name: 'CreateGroupInput')
     CreateGroupOutput = Shapes::StructureShape.new(name: 'CreateGroupOutput')
@@ -24,6 +25,7 @@ module Aws::ResourceGroups
     FailedResource = Shapes::StructureShape.new(name: 'FailedResource')
     FailedResourceList = Shapes::ListShape.new(name: 'FailedResourceList')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    GetAccountSettingsOutput = Shapes::StructureShape.new(name: 'GetAccountSettingsOutput')
     GetGroupConfigurationInput = Shapes::StructureShape.new(name: 'GetGroupConfigurationInput')
     GetGroupConfigurationOutput = Shapes::StructureShape.new(name: 'GetGroupConfigurationOutput')
     GetGroupInput = Shapes::StructureShape.new(name: 'GetGroupInput')
@@ -51,6 +53,9 @@ module Aws::ResourceGroups
     GroupFilterValues = Shapes::ListShape.new(name: 'GroupFilterValues')
     GroupIdentifier = Shapes::StructureShape.new(name: 'GroupIdentifier')
     GroupIdentifierList = Shapes::ListShape.new(name: 'GroupIdentifierList')
+    GroupLifecycleEventsDesiredStatus = Shapes::StringShape.new(name: 'GroupLifecycleEventsDesiredStatus')
+    GroupLifecycleEventsStatus = Shapes::StringShape.new(name: 'GroupLifecycleEventsStatus')
+    GroupLifecycleEventsStatusMessage = Shapes::StringShape.new(name: 'GroupLifecycleEventsStatusMessage')
     GroupList = Shapes::ListShape.new(name: 'GroupList')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
     GroupParameterList = Shapes::ListShape.new(name: 'GroupParameterList')
@@ -106,10 +111,17 @@ module Aws::ResourceGroups
     UngroupResourcesOutput = Shapes::StructureShape.new(name: 'UngroupResourcesOutput')
     UntagInput = Shapes::StructureShape.new(name: 'UntagInput')
     UntagOutput = Shapes::StructureShape.new(name: 'UntagOutput')
+    UpdateAccountSettingsInput = Shapes::StructureShape.new(name: 'UpdateAccountSettingsInput')
+    UpdateAccountSettingsOutput = Shapes::StructureShape.new(name: 'UpdateAccountSettingsOutput')
     UpdateGroupInput = Shapes::StructureShape.new(name: 'UpdateGroupInput')
     UpdateGroupOutput = Shapes::StructureShape.new(name: 'UpdateGroupOutput')
     UpdateGroupQueryInput = Shapes::StructureShape.new(name: 'UpdateGroupQueryInput')
     UpdateGroupQueryOutput = Shapes::StructureShape.new(name: 'UpdateGroupQueryOutput')
+
+    AccountSettings.add_member(:group_lifecycle_events_desired_status, Shapes::ShapeRef.new(shape: GroupLifecycleEventsDesiredStatus, location_name: "GroupLifecycleEventsDesiredStatus"))
+    AccountSettings.add_member(:group_lifecycle_events_status, Shapes::ShapeRef.new(shape: GroupLifecycleEventsStatus, location_name: "GroupLifecycleEventsStatus"))
+    AccountSettings.add_member(:group_lifecycle_events_status_message, Shapes::ShapeRef.new(shape: GroupLifecycleEventsStatusMessage, location_name: "GroupLifecycleEventsStatusMessage"))
+    AccountSettings.struct_class = Types::AccountSettings
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -143,6 +155,9 @@ module Aws::ResourceGroups
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ForbiddenException.struct_class = Types::ForbiddenException
+
+    GetAccountSettingsOutput.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "AccountSettings"))
+    GetAccountSettingsOutput.struct_class = Types::GetAccountSettingsOutput
 
     GetGroupConfigurationInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupString, location_name: "Group"))
     GetGroupConfigurationInput.struct_class = Types::GetGroupConfigurationInput
@@ -349,6 +364,12 @@ module Aws::ResourceGroups
     UntagOutput.add_member(:keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "Keys"))
     UntagOutput.struct_class = Types::UntagOutput
 
+    UpdateAccountSettingsInput.add_member(:group_lifecycle_events_desired_status, Shapes::ShapeRef.new(shape: GroupLifecycleEventsDesiredStatus, location_name: "GroupLifecycleEventsDesiredStatus"))
+    UpdateAccountSettingsInput.struct_class = Types::UpdateAccountSettingsInput
+
+    UpdateAccountSettingsOutput.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "AccountSettings"))
+    UpdateAccountSettingsOutput.struct_class = Types::UpdateAccountSettingsOutput
+
     UpdateGroupInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage"=>"This field is deprecated, use Group instead."}))
     UpdateGroupInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupString, location_name: "Group"))
     UpdateGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -405,6 +426,19 @@ module Aws::ResourceGroups
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-account-settings"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetAccountSettingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
@@ -591,6 +625,19 @@ module Aws::ResourceGroups
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:update_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/update-account-settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountSettingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)

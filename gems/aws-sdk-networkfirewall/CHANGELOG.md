@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Replace runtime endpoint resolution approach with generated ruby code.
 
+1.23.0 (2023-01-17)
+------------------
+
+* Feature - Network Firewall now allows creation of dual stack endpoints, enabling inspection of IPv6 traffic.
+
 1.22.0 (2023-01-09)
 ------------------
 
