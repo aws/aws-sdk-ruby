@@ -47,6 +47,7 @@ module Aws::GroundStation
     DataflowEndpoint = Shapes::StructureShape.new(name: 'DataflowEndpoint')
     DataflowEndpointConfig = Shapes::StructureShape.new(name: 'DataflowEndpointConfig')
     DataflowEndpointGroupArn = Shapes::StringShape.new(name: 'DataflowEndpointGroupArn')
+    DataflowEndpointGroupDurationInSeconds = Shapes::IntegerShape.new(name: 'DataflowEndpointGroupDurationInSeconds')
     DataflowEndpointGroupIdResponse = Shapes::StructureShape.new(name: 'DataflowEndpointGroupIdResponse')
     DataflowEndpointGroupList = Shapes::ListShape.new(name: 'DataflowEndpointGroupList')
     DataflowEndpointListItem = Shapes::StructureShape.new(name: 'DataflowEndpointListItem')
@@ -263,6 +264,8 @@ module Aws::GroundStation
     CreateConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateConfigRequest.struct_class = Types::CreateConfigRequest
 
+    CreateDataflowEndpointGroupRequest.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPostPassDurationSeconds"))
+    CreateDataflowEndpointGroupRequest.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPrePassDurationSeconds"))
     CreateDataflowEndpointGroupRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetailsList, required: true, location_name: "endpointDetails"))
     CreateDataflowEndpointGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateDataflowEndpointGroupRequest.struct_class = Types::CreateDataflowEndpointGroupRequest
@@ -458,6 +461,8 @@ module Aws::GroundStation
     GetDataflowEndpointGroupRequest.add_member(:dataflow_endpoint_group_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "dataflowEndpointGroupId"))
     GetDataflowEndpointGroupRequest.struct_class = Types::GetDataflowEndpointGroupRequest
 
+    GetDataflowEndpointGroupResponse.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPostPassDurationSeconds"))
+    GetDataflowEndpointGroupResponse.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPrePassDurationSeconds"))
     GetDataflowEndpointGroupResponse.add_member(:dataflow_endpoint_group_arn, Shapes::ShapeRef.new(shape: DataflowEndpointGroupArn, location_name: "dataflowEndpointGroupArn"))
     GetDataflowEndpointGroupResponse.add_member(:dataflow_endpoint_group_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "dataflowEndpointGroupId"))
     GetDataflowEndpointGroupResponse.add_member(:endpoints_details, Shapes::ShapeRef.new(shape: EndpointDetailsList, location_name: "endpointsDetails"))

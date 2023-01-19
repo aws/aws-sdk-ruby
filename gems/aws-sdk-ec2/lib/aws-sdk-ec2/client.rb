@@ -7987,6 +7987,18 @@ module Aws::EC2
     # @option params [required, Types::RequestLaunchTemplateData] :launch_template_data
     #   The information for the launch template.
     #
+    # @option params [Boolean] :resolve_alias
+    #   If `true`, and if a Systems Manager parameter is specified for
+    #   `ImageId`, the AMI ID is displayed in the response for `imageID`. For
+    #   more information, see [Use a Systems Manager parameter instead of an
+    #   AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id
+    #
     # @return [Types::CreateLaunchTemplateVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLaunchTemplateVersionResult#launch_template_version #launch_template_version} => Types::LaunchTemplateVersion
@@ -8258,6 +8270,7 @@ module Aws::EC2
     #       },
     #       disable_api_stop: false,
     #     },
+    #     resolve_alias: false,
     #   })
     #
     # @example Response structure
@@ -24978,6 +24991,22 @@ module Aws::EC2
     #
     #   * `ram-disk-id` - The RAM disk ID.
     #
+    # @option params [Boolean] :resolve_alias
+    #   If `true`, and if a Systems Manager parameter is specified for
+    #   `ImageId`, the AMI ID is displayed in the response for `imageId`.
+    #
+    #   If `false`, and if a Systems Manager parameter is specified for
+    #   `ImageId`, the parameter is displayed in the response for `imageId`.
+    #
+    #   For more information, see [Use a Systems Manager parameter instead of
+    #   an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id
+    #
     # @return [Types::DescribeLaunchTemplateVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeLaunchTemplateVersionsResult#launch_template_versions #launch_template_versions} => Array&lt;Types::LaunchTemplateVersion&gt;
@@ -25064,6 +25093,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
+    #     resolve_alias: false,
     #   })
     #
     # @example Response structure
@@ -54776,7 +54806,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.358.0'
+      context[:gem_version] = '1.359.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

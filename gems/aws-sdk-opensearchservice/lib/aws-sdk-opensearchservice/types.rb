@@ -1232,7 +1232,8 @@ module Aws::OpenSearchService
     end
 
     # @!attribute [rw] domain_arn
-    #   The Amazon Resource Name (ARN) of the domain to grant access to.
+    #   The Amazon Resource Name (ARN) of the domain to create the endpoint
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] vpc_options
@@ -1586,6 +1587,52 @@ module Aws::OpenSearchService
     #
     class DescribeDomainsResponse < Struct.new(
       :domain_status_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run_id
+    #   The unique identifier of the dry run.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_dry_run_config
+    #   Whether to include the configuration of the dry run in the response.
+    #   The configuration specifies the updates that you're planning to
+    #   make on the domain.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDryRunProgressRequest AWS API Documentation
+    #
+    class DescribeDryRunProgressRequest < Struct.new(
+      :domain_name,
+      :dry_run_id,
+      :load_dry_run_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run_progress_status
+    #   The current status of the dry run, including any validation errors.
+    #   @return [Types::DryRunProgressStatus]
+    #
+    # @!attribute [rw] dry_run_config
+    #   Details about the changes you're planning to make on the domain.
+    #   @return [Types::DomainStatus]
+    #
+    # @!attribute [rw] dry_run_results
+    #   The results of the dry run.
+    #   @return [Types::DryRunResults]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDryRunProgressResponse AWS API Documentation
+    #
+    class DescribeDryRunProgressResponse < Struct.new(
+      :dry_run_progress_status,
+      :dry_run_config,
+      :dry_run_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2399,6 +2446,40 @@ module Aws::OpenSearchService
       :advanced_security_options,
       :auto_tune_options,
       :change_progress_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the progress of a pre-upgrade dry run analysis.
+    #
+    # @!attribute [rw] dry_run_id
+    #   The unique identifier of the dry run.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run_status
+    #   The current status of the dry run.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The timestamp when the dry run was initiated.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_date
+    #   The timestamp when the dry run was last updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_failures
+    #   Any validation failures that occurred as a result of the dry run.
+    #   @return [Array<Types::ValidationFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DryRunProgressStatus AWS API Documentation
+    #
+    class DryRunProgressStatus < Struct.new(
+      :dry_run_id,
+      :dry_run_status,
+      :creation_date,
+      :update_date,
+      :validation_failures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4462,9 +4543,24 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] dry_run
     #   This flag, when set to True, specifies whether the `UpdateDomain`
-    #   request should return the results of validation check without
-    #   actually applying the change.
+    #   request should return the results of a dry run analysis without
+    #   actually applying the change. A dry run determines what type of
+    #   deployment the update will cause.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run_mode
+    #   The type of dry run to perform.
+    #
+    #   * `Basic` only returns the type of deployment (blue/green or
+    #     dynamic) that the update will cause.
+    #
+    #   * `Verbose` runs an additional check to validate the changes you're
+    #     making. For more information, see [Validating a domain update][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
     #
@@ -4483,7 +4579,8 @@ module Aws::OpenSearchService
       :node_to_node_encryption_options,
       :advanced_security_options,
       :auto_tune_options,
-      :dry_run)
+      :dry_run,
+      :dry_run_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4496,14 +4593,19 @@ module Aws::OpenSearchService
     #   @return [Types::DomainConfig]
     #
     # @!attribute [rw] dry_run_results
-    #   Results of a dry run performed in an update domain request.
+    #   Results of the dry run performed in the update domain request.
     #   @return [Types::DryRunResults]
+    #
+    # @!attribute [rw] dry_run_progress_status
+    #   The status of the dry run being performed on the domain, if any.
+    #   @return [Types::DryRunProgressStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigResponse AWS API Documentation
     #
     class UpdateDomainConfigResponse < Struct.new(
       :domain_config,
-      :dry_run_results)
+      :dry_run_results,
+      :dry_run_progress_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4840,6 +4942,26 @@ module Aws::OpenSearchService
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ValidationException AWS API Documentation
     #
     class ValidationException < Aws::EmptyStructure; end
+
+    # A validation failure that occurred as the result of a pre-update
+    # validation check (verbose dry run) on a domain.
+    #
+    # @!attribute [rw] code
+    #   The error code of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message corresponding to the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ValidationFailure AWS API Documentation
+    #
+    class ValidationFailure < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The status of the the OpenSearch or Elasticsearch version options for
     # the specified Amazon OpenSearch Service domain.

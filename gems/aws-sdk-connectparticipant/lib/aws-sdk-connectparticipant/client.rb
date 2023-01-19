@@ -613,7 +613,8 @@ module Aws::ConnectParticipant
     end
 
     # Retrieves a transcript of the session, including details about any
-    # attachments.
+    # attachments. For information about accessing past chat contact
+    # transcripts for a persistent chat, see [Enable persistent chat][1].
     #
     # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
     # `ParticipantToken`.
@@ -621,11 +622,12 @@ module Aws::ConnectParticipant
     #  </note>
     #
     # The Amazon Connect Participant Service APIs do not use [Signature
-    # Version 4 authentication][1].
+    # Version 4 authentication][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [String] :contact_id
     #   The contactId from the current contact chain for which transcript is
@@ -699,6 +701,8 @@ module Aws::ConnectParticipant
     #   resp.transcript[0].message_metadata.receipts[0].delivered_timestamp #=> String
     #   resp.transcript[0].message_metadata.receipts[0].read_timestamp #=> String
     #   resp.transcript[0].message_metadata.receipts[0].recipient_participant_id #=> String
+    #   resp.transcript[0].related_contact_id #=> String
+    #   resp.transcript[0].contact_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetTranscript AWS API Documentation
@@ -951,7 +955,7 @@ module Aws::ConnectParticipant
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

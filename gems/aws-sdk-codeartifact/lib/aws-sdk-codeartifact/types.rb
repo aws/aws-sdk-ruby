@@ -68,6 +68,8 @@ module Aws::CodeArtifact
     #
     #   * `public:npmjs` - for the npm public repository.
     #
+    #   * `public:nuget-org` - for the NuGet Gallery.
+    #
     #   * `public:pypi` - for the Python Package Index.
     #
     #   * `public:maven-central` - for Maven Central.
@@ -1283,6 +1285,11 @@ module Aws::CodeArtifact
     # @!attribute [rw] format
     #   A format that specifies the type of the package version with the
     #   requested readme file.
+    #
+    #   <note markdown="1"> Although `maven` is listed as a valid value, CodeArtifact does not
+    #   support displaying readme files for Maven packages.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1930,9 +1937,12 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace used to filter requested packages. Only packages with
-    #   the provided namespace will be returned. The package component that
-    #   specifies its namespace depends on its type. For example:
+    #   The namespace prefix used to filter requested packages. Only
+    #   packages with a namespace that starts with the provided string value
+    #   are returned. Note that although this option is called `--namespace`
+    #   and not `--namespace-prefix`, it has prefix-matching behavior.
+    #
+    #   Each package format uses namespace as follows:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
@@ -2172,8 +2182,22 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] dependency_type
     #   The type of a package dependency. The possible values depend on the
-    #   package type. Example types are `compile`, `runtime`, and `test` for
-    #   Maven packages, and `dev`, `prod`, and `optional` for npm packages.
+    #   package type.
+    #
+    #   * npm: `regular`, `dev`, `peer`, `optional`
+    #
+    #   * maven: `optional`, `parent`, `compile`, `runtime`, `test`,
+    #     `system`, `provided`.
+    #
+    #     <note markdown="1"> Note that `parent` is not a regular Maven dependency type; instead
+    #     this is extracted from the `<parent>` element if one is defined in
+    #     the package version's POM file.
+    #
+    #      </note>
+    #
+    #   * nuget: The `dependencyType` field is never set for NuGet packages.
+    #
+    #   * pypi: `Requires-Dist`
     #   @return [String]
     #
     # @!attribute [rw] version_requirement

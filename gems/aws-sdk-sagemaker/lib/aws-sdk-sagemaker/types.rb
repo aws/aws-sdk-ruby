@@ -18953,6 +18953,28 @@ module Aws::SageMaker
     #   additionally store training data in the storage volume (optional).
     #   @return [Types::HyperParameterTuningResourceConfig]
     #
+    # @!attribute [rw] environment
+    #   An environment variable that you can pass into the SageMaker
+    #   [CreateTrainingJob][1] API. You can use an existing [environment
+    #   variable from the training container][2] or use your own. See
+    #   [Define metrics and variables][3] for more information.
+    #
+    #   <note markdown="1"> The maximum number of items specified for `Map Entries` refers to
+    #   the maximum number of environment variables for each
+    #   `TrainingJobDefinition` and also the maximum for the hyperparameter
+    #   tuning job itself. That is, the sum of the number of environment
+    #   variables for all the training job definitions can't exceed the
+    #   maximum number specified.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
     #
     class HyperParameterTrainingJobDefinition < Struct.new(
@@ -18972,7 +18994,8 @@ module Aws::SageMaker
       :enable_managed_spot_training,
       :checkpoint_config,
       :retry_strategy,
-      :hyper_parameter_tuning_resource_config)
+      :hyper_parameter_tuning_resource_config,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19096,7 +19119,7 @@ module Aws::SageMaker
     #   The number of instances of the type specified by `InstanceType`.
     #   Choose an instance count larger than 1 for distributed training
     #   algorithms. See [SageMaker distributed training jobs][1] for more
-    #   informcration.
+    #   information.
     #
     #
     #
@@ -37330,7 +37353,8 @@ module Aws::SageMaker
     #   to `true`, `ExcludeRetainedVariantProperties` specifies the list of
     #   type VariantProperty to override with the values provided by
     #   `EndpointConfig`. If you don't specify a value for
-    #   `ExcludeAllVariantProperties`, no variant properties are overridden.
+    #   `ExcludeRetainedVariantProperties`, no variant properties are
+    #   overridden.
     #   @return [Array<Types::VariantProperty>]
     #
     # @!attribute [rw] deployment_config

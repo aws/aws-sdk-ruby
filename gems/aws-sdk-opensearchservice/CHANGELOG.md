@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-01-19)
+------------------
+
+* Feature - This release adds the enhanced dry run option, that checks for validation errors that might occur when deploying configuration changes and provides a summary of these errors, if any. The feature will also indicate whether a blue/green deployment will be required to apply a change.
+
 1.14.0 (2023-01-18)
 ------------------
 

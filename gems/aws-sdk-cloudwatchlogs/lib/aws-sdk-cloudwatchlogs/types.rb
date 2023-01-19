@@ -513,9 +513,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #
-    #   <note markdown="1"> If you specify values for both `logGroupName` and
-    #   `logGroupIdentifier`, the action returns an
-    #   `InvalidParameterException` error.
+    #   <note markdown="1"> You must include either `logGroupIdentifier` or `logGroupName`, but
+    #   not both.
     #
     #    </note>
     #   @return [String]
@@ -525,9 +524,8 @@ module Aws::CloudWatchLogs
     #   group is in a source account and you are using a monitoring account,
     #   you must use the log group ARN.
     #
-    #   <note markdown="1"> If you specify values for both `logGroupName` and
-    #   `logGroupIdentifier`, the action returns an
-    #   `InvalidParameterException` error.
+    #   <note markdown="1"> You must include either `logGroupIdentifier` or `logGroupName`, but
+    #   not both.
     #
     #    </note>
     #   @return [String]
@@ -1000,9 +998,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
     #
-    #   <note markdown="1"> If you specify values for both `logGroupName` and
-    #   `logGroupIdentifier`, the action returns an
-    #   `InvalidParameterException` error.
+    #   <note markdown="1"> You must include either `logGroupIdentifier` or `logGroupName`, but
+    #   not both.
     #
     #    </note>
     #   @return [String]
@@ -1012,9 +1009,8 @@ module Aws::CloudWatchLogs
     #   from. If the log group is in a source account and you are using a
     #   monitoring account, you must use the log group ARN.
     #
-    #   <note markdown="1"> If you specify values for both `logGroupName` and
-    #   `logGroupIdentifier`, the action returns an
-    #   `InvalidParameterException` error.
+    #   <note markdown="1"> You must include either `logGroupIdentifier` or `logGroupName`, but
+    #   not both.
     #
     #    </note>
     #   @return [String]
@@ -1209,9 +1205,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #
-    #   <note markdown="1"> If you specify values for both `logGroupName` and
-    #   `logGroupIdentifier`, the action returns an
-    #   `InvalidParameterException` error.
+    #   <note markdown="1"> You must include either `logGroupIdentifier` or `logGroupName`, but
+    #   not both.
     #
     #    </note>
     #   @return [String]
@@ -1221,9 +1216,8 @@ module Aws::CloudWatchLogs
     #   If the log group is in a source account and you are using a
     #   monitoring account, you must use the log group ARN.
     #
-    #   <note markdown="1"> If you specify values for both `logGroupName` and
-    #   `logGroupIdentifier`, the action returns an
-    #   `InvalidParameterException` error.
+    #   <note markdown="1"> You must include either `logGroupIdentifier` or `logGroupName`, but
+    #   not both.
     #
     #    </note>
     #   @return [String]
@@ -1320,9 +1314,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
     #
-    #   <note markdown="1"> If you specify values for both `logGroupName` and
-    #   `logGroupIdentifier`, the action returns an
-    #   `InvalidParameterException` error.
+    #   <note markdown="1"> You must include either `logGroupIdentifier` or `logGroupName`, but
+    #   not both.
     #
     #    </note>
     #   @return [String]
@@ -1341,9 +1334,8 @@ module Aws::CloudWatchLogs
     #   group is in a source account and you are using a monitoring account,
     #   you must specify the ARN.
     #
-    #   <note markdown="1"> If you specify values for both `logGroupName` and
-    #   `logGroupIdentifier`, the action returns an
-    #   `InvalidParameterException` error.
+    #   <note markdown="1"> You must include either `logGroupIdentifier` or `logGroupName`, but
+    #   not both.
     #
     #    </note>
     #   @return [String]

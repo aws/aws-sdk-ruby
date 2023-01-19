@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-01-19)
+------------------
+
+* Feature - Added AllowMajorVersionUpdate option to OTAJobConfig to make appliance software major version updates opt-in.
+
 1.11.0 (2023-01-18)
 ------------------
 

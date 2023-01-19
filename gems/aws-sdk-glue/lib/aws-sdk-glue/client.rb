@@ -1236,7 +1236,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
@@ -1543,6 +1543,64 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.cloud_watch_metrics_enabled #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_publishing_enabled #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.additional_hudi_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.additional_hudi_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_hudi_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.database #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -3411,7 +3469,7 @@ module Aws::Glue
     #           ],
     #           path: "EnclosedInStringProperty", # required
     #           compression: "EnclosedInStringProperty",
-    #           format: "json", # required, accepts json, csv, avro, orc, parquet
+    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi
     #           schema_change_policy: {
     #             enable_update_catalog: false,
     #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
@@ -3821,6 +3879,100 @@ module Aws::Glue
     #           },
     #           stop_job_on_failure_options: {
     #             stop_job_on_failure_timing: "Immediate", # accepts Immediate, AfterDataLoad
+    #           },
+    #         },
+    #         s3_catalog_hudi_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           additional_hudi_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         catalog_hudi_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           additional_hudi_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_hudi_source: {
+    #           name: "NodeName", # required
+    #           paths: ["EnclosedInStringProperty"], # required
+    #           additional_hudi_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #             enable_sample_path: false,
+    #             sample_path: "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_hudi_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           additional_options: { # required
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #           },
+    #         },
+    #         s3_hudi_direct_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           path: "EnclosedInStringProperty", # required
+    #           compression: "gzip", # required, accepts gzip, lzo, uncompressed, snappy
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi
+    #           additional_options: { # required
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             table: "EnclosedInStringProperty",
+    #             database: "EnclosedInStringProperty",
     #           },
     #         },
     #       },
@@ -7452,7 +7604,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
@@ -7759,6 +7911,64 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.cloud_watch_metrics_enabled #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_publishing_enabled #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.additional_hudi_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.additional_hudi_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.paths[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_hudi_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.bounded_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.bounded_files #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.sample_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.database #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -8208,7 +8418,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
@@ -8515,6 +8725,64 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.cloud_watch_metrics_enabled #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.publishing_options.results_publishing_enabled #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.additional_hudi_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.additional_hudi_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_hudi_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_hudi_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.database #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -15158,7 +15426,7 @@ module Aws::Glue
     #             ],
     #             path: "EnclosedInStringProperty", # required
     #             compression: "EnclosedInStringProperty",
-    #             format: "json", # required, accepts json, csv, avro, orc, parquet
+    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi
     #             schema_change_policy: {
     #               enable_update_catalog: false,
     #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
@@ -15568,6 +15836,100 @@ module Aws::Glue
     #             },
     #             stop_job_on_failure_options: {
     #               stop_job_on_failure_timing: "Immediate", # accepts Immediate, AfterDataLoad
+    #             },
+    #           },
+    #           s3_catalog_hudi_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             additional_hudi_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           catalog_hudi_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             additional_hudi_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_hudi_source: {
+    #             name: "NodeName", # required
+    #             paths: ["EnclosedInStringProperty"], # required
+    #             additional_hudi_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             additional_options: {
+    #               bounded_size: 1,
+    #               bounded_files: 1,
+    #               enable_sample_path: false,
+    #               sample_path: "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_hudi_catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             partition_keys: [
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             table: "EnclosedInStringProperty", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             additional_options: { # required
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             schema_change_policy: {
+    #               enable_update_catalog: false,
+    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             },
+    #           },
+    #           s3_hudi_direct_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             path: "EnclosedInStringProperty", # required
+    #             compression: "gzip", # required, accepts gzip, lzo, uncompressed, snappy
+    #             partition_keys: [
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi
+    #             additional_options: { # required
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             schema_change_policy: {
+    #               enable_update_catalog: false,
+    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #               table: "EnclosedInStringProperty",
+    #               database: "EnclosedInStringProperty",
     #             },
     #           },
     #         },
@@ -16395,7 +16757,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -457,6 +457,7 @@ module Aws::Connect
     Password = Shapes::StringShape.new(name: 'Password')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
+    PersistentChat = Shapes::StructureShape.new(name: 'PersistentChat')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     PhoneNumberCountryCode = Shapes::StringShape.new(name: 'PhoneNumberCountryCode')
     PhoneNumberCountryCodes = Shapes::ListShape.new(name: 'PhoneNumberCountryCodes')
@@ -525,6 +526,7 @@ module Aws::Connect
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
     ReferenceTypes = Shapes::ListShape.new(name: 'ReferenceTypes')
     ReferenceValue = Shapes::StringShape.new(name: 'ReferenceValue')
+    RehydrationType = Shapes::StringShape.new(name: 'RehydrationType')
     ReleasePhoneNumberRequest = Shapes::StructureShape.new(name: 'ReleasePhoneNumberRequest')
     ReplicateInstanceRequest = Shapes::StructureShape.new(name: 'ReplicateInstanceRequest')
     ReplicateInstanceResponse = Shapes::StructureShape.new(name: 'ReplicateInstanceResponse')
@@ -966,6 +968,7 @@ module Aws::Connect
     Contact.add_member(:disconnect_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "DisconnectTimestamp"))
     Contact.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdateTimestamp"))
     Contact.add_member(:scheduled_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ScheduledTimestamp"))
+    Contact.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     Contact.struct_class = Types::Contact
 
     ContactFilter.add_member(:contact_states, Shapes::ShapeRef.new(shape: ContactStates, location_name: "ContactStates"))
@@ -2227,6 +2230,10 @@ module Aws::Connect
 
     PermissionsList.member = Shapes::ShapeRef.new(shape: SecurityProfilePermission)
 
+    PersistentChat.add_member(:rehydration_type, Shapes::ShapeRef.new(shape: RehydrationType, location_name: "RehydrationType"))
+    PersistentChat.add_member(:source_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "SourceContactId"))
+    PersistentChat.struct_class = Types::PersistentChat
+
     PhoneNumberCountryCodes.member = Shapes::ShapeRef.new(shape: PhoneNumberCountryCode)
 
     PhoneNumberQuickConnectConfig.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "PhoneNumber"))
@@ -2661,11 +2668,13 @@ module Aws::Connect
     StartChatContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     StartChatContactRequest.add_member(:chat_duration_in_minutes, Shapes::ShapeRef.new(shape: ChatDurationInMinutes, location_name: "ChatDurationInMinutes"))
     StartChatContactRequest.add_member(:supported_messaging_content_types, Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: "SupportedMessagingContentTypes"))
+    StartChatContactRequest.add_member(:persistent_chat, Shapes::ShapeRef.new(shape: PersistentChat, location_name: "PersistentChat"))
     StartChatContactRequest.struct_class = Types::StartChatContactRequest
 
     StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     StartChatContactResponse.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
     StartChatContactResponse.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "ParticipantToken"))
+    StartChatContactResponse.add_member(:continued_from_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContinuedFromContactId"))
     StartChatContactResponse.struct_class = Types::StartChatContactResponse
 
     StartContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))

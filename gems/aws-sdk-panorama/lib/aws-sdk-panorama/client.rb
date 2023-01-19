@@ -430,11 +430,11 @@ module Aws::Panorama
       req.send_request(options)
     end
 
-    # Creates a job to run on one or more devices. A job can update a
-    # device's software or reboot it.
+    # Creates a job to run on a device. A job can update a device's
+    # software or reboot it.
     #
     # @option params [required, Array<String>] :device_ids
-    #   IDs of target devices.
+    #   ID of target device.
     #
     # @option params [Types::DeviceJobConfig] :device_job_config
     #   Configuration settings for a software update job.
@@ -452,6 +452,7 @@ module Aws::Panorama
     #     device_ids: ["DeviceId"], # required
     #     device_job_config: {
     #       ota_job_config: {
+    #         allow_major_version_update: false,
     #         image_version: "ImageVersion", # required
     #       },
     #     },
@@ -2040,7 +2041,7 @@ module Aws::Panorama
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-panorama'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

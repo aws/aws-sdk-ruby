@@ -412,7 +412,7 @@ module Aws::Appflow
     #   resp = client.create_connector_profile({
     #     connector_profile_name: "ConnectorProfileName", # required
     #     kms_arn: "KMSArn",
-    #     connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #     connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #     connector_label: "ConnectorLabel",
     #     connection_mode: "Public", # required, accepts Public, Private
     #     connector_profile_config: { # required
@@ -499,6 +499,11 @@ module Aws::Appflow
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
     #           },
+    #         },
+    #         pardot: {
+    #           instance_url: "InstanceUrl",
+    #           is_sandbox_environment: false,
+    #           business_unit_id: "BusinessUnitId",
     #         },
     #       },
     #       connector_profile_credentials: {
@@ -638,6 +643,15 @@ module Aws::Appflow
     #             },
     #           },
     #         },
+    #         pardot: {
+    #           access_token: "AccessToken",
+    #           refresh_token: "RefreshToken",
+    #           o_auth_request: {
+    #             auth_code: "AuthCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #           client_credentials_arn: "ClientCredentialsArn",
+    #         },
     #       },
     #     },
     #   })
@@ -726,7 +740,7 @@ module Aws::Appflow
     #       },
     #     },
     #     source_flow_config: { # required
-    #       connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #       connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #       api_version: "ApiVersion",
     #       connector_profile_name: "ConnectorProfileName",
     #       source_connector_properties: { # required
@@ -792,6 +806,9 @@ module Aws::Appflow
     #             "CustomPropertyKey" => "CustomPropertyValue",
     #           },
     #         },
+    #         pardot: {
+    #           object: "Object", # required
+    #         },
     #       },
     #       incremental_pull_config: {
     #         datetime_type_field_name: "DatetimeTypeFieldName",
@@ -799,7 +816,7 @@ module Aws::Appflow
     #     },
     #     destination_flow_config_list: [ # required
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #         api_version: "ApiVersion",
     #         connector_profile_name: "ConnectorProfileName",
     #         destination_connector_properties: { # required
@@ -957,6 +974,7 @@ module Aws::Appflow
     #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #           sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #           pardot: "PROJECTION", # accepts PROJECTION, EQUAL_TO, NO_OP, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC
     #         },
     #         destination_field: "DestinationField",
     #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
@@ -1069,7 +1087,7 @@ module Aws::Appflow
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_connector({
-    #     connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #     connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #     connector_label: "ConnectorLabel",
     #   })
     #
@@ -1078,7 +1096,7 @@ module Aws::Appflow
     #   resp.connector_configuration.can_use_as_source #=> Boolean
     #   resp.connector_configuration.can_use_as_destination #=> Boolean
     #   resp.connector_configuration.supported_destination_connectors #=> Array
-    #   resp.connector_configuration.supported_destination_connectors[0] #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.connector_configuration.supported_destination_connectors[0] #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.connector_configuration.supported_scheduling_frequencies #=> Array
     #   resp.connector_configuration.supported_scheduling_frequencies[0] #=> String, one of "BYMINUTE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "ONCE"
     #   resp.connector_configuration.is_private_link_enabled #=> Boolean
@@ -1099,7 +1117,7 @@ module Aws::Appflow
     #   resp.connector_configuration.connector_metadata.zendesk.o_auth_scopes[0] #=> String
     #   resp.connector_configuration.connector_metadata.honeycode.o_auth_scopes #=> Array
     #   resp.connector_configuration.connector_metadata.honeycode.o_auth_scopes[0] #=> String
-    #   resp.connector_configuration.connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.connector_configuration.connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.connector_configuration.connector_label #=> String
     #   resp.connector_configuration.connector_description #=> String
     #   resp.connector_configuration.connector_owner #=> String
@@ -1194,7 +1212,7 @@ module Aws::Appflow
     #
     #   resp = client.describe_connector_entity({
     #     connector_entity_name: "EntityName", # required
-    #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #     connector_profile_name: "ConnectorProfileName",
     #     api_version: "ApiVersion",
     #   })
@@ -1281,7 +1299,7 @@ module Aws::Appflow
     #
     #   resp = client.describe_connector_profiles({
     #     connector_profile_names: ["ConnectorProfileName"],
-    #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #     connector_label: "ConnectorLabel",
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1292,7 +1310,7 @@ module Aws::Appflow
     #   resp.connector_profile_details #=> Array
     #   resp.connector_profile_details[0].connector_profile_arn #=> String
     #   resp.connector_profile_details[0].connector_profile_name #=> String
-    #   resp.connector_profile_details[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.connector_profile_details[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.connector_profile_details[0].connector_label #=> String
     #   resp.connector_profile_details[0].connection_mode #=> String, one of "Public", "Private"
     #   resp.connector_profile_details[0].credentials_arn #=> String
@@ -1338,6 +1356,9 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties #=> Hash
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties["CustomPropertyKey"] #=> String
+    #   resp.connector_profile_details[0].connector_profile_properties.pardot.instance_url #=> String
+    #   resp.connector_profile_details[0].connector_profile_properties.pardot.is_sandbox_environment #=> Boolean
+    #   resp.connector_profile_details[0].connector_profile_properties.pardot.business_unit_id #=> String
     #   resp.connector_profile_details[0].created_at #=> Time
     #   resp.connector_profile_details[0].last_updated_at #=> Time
     #   resp.connector_profile_details[0].private_connection_provisioning_state.status #=> String, one of "FAILED", "PENDING", "CREATED"
@@ -1383,7 +1404,7 @@ module Aws::Appflow
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_connectors({
-    #     connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #     connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -1394,7 +1415,7 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].can_use_as_source #=> Boolean
     #   resp.connector_configurations["ConnectorType"].can_use_as_destination #=> Boolean
     #   resp.connector_configurations["ConnectorType"].supported_destination_connectors #=> Array
-    #   resp.connector_configurations["ConnectorType"].supported_destination_connectors[0] #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.connector_configurations["ConnectorType"].supported_destination_connectors[0] #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.connector_configurations["ConnectorType"].supported_scheduling_frequencies #=> Array
     #   resp.connector_configurations["ConnectorType"].supported_scheduling_frequencies[0] #=> String, one of "BYMINUTE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "ONCE"
     #   resp.connector_configurations["ConnectorType"].is_private_link_enabled #=> Boolean
@@ -1415,7 +1436,7 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].connector_metadata.zendesk.o_auth_scopes[0] #=> String
     #   resp.connector_configurations["ConnectorType"].connector_metadata.honeycode.o_auth_scopes #=> Array
     #   resp.connector_configurations["ConnectorType"].connector_metadata.honeycode.o_auth_scopes[0] #=> String
-    #   resp.connector_configurations["ConnectorType"].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.connector_configurations["ConnectorType"].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.connector_configurations["ConnectorType"].connector_label #=> String
     #   resp.connector_configurations["ConnectorType"].connector_description #=> String
     #   resp.connector_configurations["ConnectorType"].connector_owner #=> String
@@ -1481,7 +1502,7 @@ module Aws::Appflow
     #   resp.connectors[0].connector_owner #=> String
     #   resp.connectors[0].connector_version #=> String
     #   resp.connectors[0].application_type #=> String
-    #   resp.connectors[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.connectors[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.connectors[0].connector_label #=> String
     #   resp.connectors[0].registered_at #=> Time
     #   resp.connectors[0].registered_by #=> String
@@ -1541,7 +1562,7 @@ module Aws::Appflow
     #   resp.kms_arn #=> String
     #   resp.flow_status #=> String, one of "Active", "Deprecated", "Deleted", "Draft", "Errored", "Suspended"
     #   resp.flow_status_message #=> String
-    #   resp.source_flow_config.connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.source_flow_config.connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.source_flow_config.api_version #=> String
     #   resp.source_flow_config.connector_profile_name #=> String
     #   resp.source_flow_config.source_connector_properties.amplitude.object #=> String
@@ -1571,9 +1592,10 @@ module Aws::Appflow
     #   resp.source_flow_config.source_connector_properties.custom_connector.entity_name #=> String
     #   resp.source_flow_config.source_connector_properties.custom_connector.custom_properties #=> Hash
     #   resp.source_flow_config.source_connector_properties.custom_connector.custom_properties["CustomPropertyKey"] #=> String
+    #   resp.source_flow_config.source_connector_properties.pardot.object #=> String
     #   resp.source_flow_config.incremental_pull_config.datetime_type_field_name #=> String
     #   resp.destination_flow_config_list #=> Array
-    #   resp.destination_flow_config_list[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.destination_flow_config_list[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.destination_flow_config_list[0].api_version #=> String
     #   resp.destination_flow_config_list[0].connector_profile_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.redshift.object #=> String
@@ -1685,6 +1707,7 @@ module Aws::Appflow
     #   resp.tasks[0].connector_operator.zendesk #=> String, one of "PROJECTION", "GREATER_THAN", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
     #   resp.tasks[0].connector_operator.sapo_data #=> String, one of "PROJECTION", "LESS_THAN", "CONTAINS", "GREATER_THAN", "BETWEEN", "LESS_THAN_OR_EQUAL_TO", "GREATER_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
     #   resp.tasks[0].connector_operator.custom_connector #=> String, one of "PROJECTION", "LESS_THAN", "GREATER_THAN", "CONTAINS", "BETWEEN", "LESS_THAN_OR_EQUAL_TO", "GREATER_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
+    #   resp.tasks[0].connector_operator.pardot #=> String, one of "PROJECTION", "EQUAL_TO", "NO_OP", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC"
     #   resp.tasks[0].destination_field #=> String
     #   resp.tasks[0].task_type #=> String, one of "Arithmetic", "Filter", "Map", "Map_all", "Mask", "Merge", "Passthrough", "Truncate", "Validate", "Partition"
     #   resp.tasks[0].task_properties #=> Hash
@@ -1823,7 +1846,7 @@ module Aws::Appflow
     #
     #   resp = client.list_connector_entities({
     #     connector_profile_name: "ConnectorProfileName",
-    #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #     entities_path: "EntitiesPath",
     #     api_version: "ApiVersion",
     #     max_results: 1,
@@ -1882,7 +1905,7 @@ module Aws::Appflow
     #   resp.connectors[0].connector_owner #=> String
     #   resp.connectors[0].connector_version #=> String
     #   resp.connectors[0].application_type #=> String
-    #   resp.connectors[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.connectors[0].connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.connectors[0].connector_label #=> String
     #   resp.connectors[0].registered_at #=> Time
     #   resp.connectors[0].registered_by #=> String
@@ -1930,9 +1953,9 @@ module Aws::Appflow
     #   resp.flows[0].description #=> String
     #   resp.flows[0].flow_name #=> String
     #   resp.flows[0].flow_status #=> String, one of "Active", "Deprecated", "Deleted", "Draft", "Errored", "Suspended"
-    #   resp.flows[0].source_connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.flows[0].source_connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.flows[0].source_connector_label #=> String
-    #   resp.flows[0].destination_connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector"
+    #   resp.flows[0].destination_connector_type #=> String, one of "Salesforce", "Singular", "Slack", "Redshift", "S3", "Marketo", "Googleanalytics", "Zendesk", "Servicenow", "Datadog", "Trendmicro", "Snowflake", "Dynatrace", "Infornexus", "Amplitude", "Veeva", "EventBridge", "LookoutMetrics", "Upsolver", "Honeycode", "CustomerProfiles", "SAPOData", "CustomConnector", "Pardot"
     #   resp.flows[0].destination_connector_label #=> String
     #   resp.flows[0].trigger_type #=> String, one of "Scheduled", "Event", "OnDemand"
     #   resp.flows[0].created_at #=> Time
@@ -2292,6 +2315,11 @@ module Aws::Appflow
     #             },
     #           },
     #         },
+    #         pardot: {
+    #           instance_url: "InstanceUrl",
+    #           is_sandbox_environment: false,
+    #           business_unit_id: "BusinessUnitId",
+    #         },
     #       },
     #       connector_profile_credentials: {
     #         amplitude: {
@@ -2430,6 +2458,15 @@ module Aws::Appflow
     #             },
     #           },
     #         },
+    #         pardot: {
+    #           access_token: "AccessToken",
+    #           refresh_token: "RefreshToken",
+    #           o_auth_request: {
+    #             auth_code: "AuthCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #           client_credentials_arn: "ClientCredentialsArn",
+    #         },
     #       },
     #     },
     #   })
@@ -2550,7 +2587,7 @@ module Aws::Appflow
     #       },
     #     },
     #     source_flow_config: { # required
-    #       connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #       connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #       api_version: "ApiVersion",
     #       connector_profile_name: "ConnectorProfileName",
     #       source_connector_properties: { # required
@@ -2616,6 +2653,9 @@ module Aws::Appflow
     #             "CustomPropertyKey" => "CustomPropertyValue",
     #           },
     #         },
+    #         pardot: {
+    #           object: "Object", # required
+    #         },
     #       },
     #       incremental_pull_config: {
     #         datetime_type_field_name: "DatetimeTypeFieldName",
@@ -2623,7 +2663,7 @@ module Aws::Appflow
     #     },
     #     destination_flow_config_list: [ # required
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
     #         api_version: "ApiVersion",
     #         connector_profile_name: "ConnectorProfileName",
     #         destination_connector_properties: { # required
@@ -2781,6 +2821,7 @@ module Aws::Appflow
     #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #           sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #           pardot: "PROJECTION", # accepts PROJECTION, EQUAL_TO, NO_OP, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC
     #         },
     #         destination_field: "DestinationField",
     #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
@@ -2824,7 +2865,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1227,6 +1227,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -1320,6 +1321,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -2316,6 +2318,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -2409,6 +2412,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -3278,6 +3282,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -3371,6 +3376,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -5305,6 +5311,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -5398,6 +5405,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -6075,6 +6083,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -6168,6 +6177,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -6844,6 +6854,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -6937,6 +6948,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -7545,6 +7557,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -7638,6 +7651,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -8301,7 +8315,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -363,6 +363,18 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # @!attribute [rw] contact_post_pass_duration_seconds
+    #   Amount of time, in seconds, after a contact ends for the contact to
+    #   remain in a `POSTPASS` state. A CloudWatch event is emitted when the
+    #   contact enters and exits the `POSTPASS` state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] contact_pre_pass_duration_seconds
+    #   Amount of time, in seconds, prior to contact start for the contact
+    #   to remain in a `PREPASS` state. A CloudWatch event is emitted when
+    #   the contact enters and exits the `PREPASS` state.
+    #   @return [Integer]
+    #
     # @!attribute [rw] endpoint_details
     #   Endpoint details of each endpoint in the dataflow endpoint group.
     #   @return [Array<Types::EndpointDetails>]
@@ -374,6 +386,8 @@ module Aws::GroundStation
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateDataflowEndpointGroupRequest AWS API Documentation
     #
     class CreateDataflowEndpointGroupRequest < Struct.new(
+      :contact_post_pass_duration_seconds,
+      :contact_pre_pass_duration_seconds,
       :endpoint_details,
       :tags)
       SENSITIVE = []
@@ -1232,6 +1246,18 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # @!attribute [rw] contact_post_pass_duration_seconds
+    #   Amount of time, in seconds, after a contact ends for the contact to
+    #   remain in a `POSTPASS` state. A CloudWatch event is emitted when the
+    #   contact enters and exits the `POSTPASS` state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] contact_pre_pass_duration_seconds
+    #   Amount of time, in seconds, prior to contact start for the contact
+    #   to remain in a `PREPASS` state. A CloudWatch event is emitted when
+    #   the contact enters and exits the `PREPASS` state.
+    #   @return [Integer]
+    #
     # @!attribute [rw] dataflow_endpoint_group_arn
     #   ARN of a dataflow endpoint group.
     #   @return [String]
@@ -1251,6 +1277,8 @@ module Aws::GroundStation
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetDataflowEndpointGroupResponse AWS API Documentation
     #
     class GetDataflowEndpointGroupResponse < Struct.new(
+      :contact_post_pass_duration_seconds,
+      :contact_pre_pass_duration_seconds,
       :dataflow_endpoint_group_arn,
       :dataflow_endpoint_group_id,
       :endpoints_details,

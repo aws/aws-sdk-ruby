@@ -392,6 +392,8 @@ module Aws::CodeArtifact
     #
     #   * `public:npmjs` - for the npm public repository.
     #
+    #   * `public:nuget-org` - for the NuGet Gallery.
+    #
     #   * `public:pypi` - for the Python Package Index.
     #
     #   * `public:maven-central` - for Maven Central.
@@ -807,7 +809,7 @@ module Aws::CodeArtifact
     # version from your repository and be able to restore it later, set its
     # status to `Archived`. Archived packages cannot be downloaded from a
     # repository and don't show up with list package APIs (for example,
-    # [ListackageVersions][1]), but you can restore them using
+    # [ListPackageVersions][1]), but you can restore them using
     # [UpdatePackageVersionsStatus][2].
     #
     #
@@ -1594,10 +1596,7 @@ module Aws::CodeArtifact
       req.send_request(options, &block)
     end
 
-    # Gets the readme file or descriptive text for a package version. For
-    # packages that do not contain a readme file, CodeArtifact extracts a
-    # description from a metadata file. For example, from the
-    # `<description>` element in the `pom.xml` file of a Maven package.
+    # Gets the readme file or descriptive text for a package version.
     #
     # The returned text might contain formatting. For example, it might
     # contain formatting for Markdown or reStructuredText.
@@ -1617,6 +1616,11 @@ module Aws::CodeArtifact
     # @option params [required, String] :format
     #   A format that specifies the type of the package version with the
     #   requested readme file.
+    #
+    #   <note markdown="1"> Although `maven` is listed as a valid value, CodeArtifact does not
+    #   support displaying readme files for Maven packages.
+    #
+    #    </note>
     #
     # @option params [String] :namespace
     #   The namespace of the package version with the requested readme file.
@@ -2147,9 +2151,12 @@ module Aws::CodeArtifact
     #   provided format will be returned.
     #
     # @option params [String] :namespace
-    #   The namespace used to filter requested packages. Only packages with
-    #   the provided namespace will be returned. The package component that
-    #   specifies its namespace depends on its type. For example:
+    #   The namespace prefix used to filter requested packages. Only packages
+    #   with a namespace that starts with the provided string value are
+    #   returned. Note that although this option is called `--namespace` and
+    #   not `--namespace-prefix`, it has prefix-matching behavior.
+    #
+    #   Each package format uses namespace as follows:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
@@ -2836,7 +2843,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

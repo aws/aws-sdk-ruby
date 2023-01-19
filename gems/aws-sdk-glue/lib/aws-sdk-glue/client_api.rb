@@ -119,6 +119,7 @@ module Aws::Glue
     CatalogEntries = Shapes::ListShape.new(name: 'CatalogEntries')
     CatalogEntry = Shapes::StructureShape.new(name: 'CatalogEntry')
     CatalogGetterPageSize = Shapes::IntegerShape.new(name: 'CatalogGetterPageSize')
+    CatalogHudiSource = Shapes::StructureShape.new(name: 'CatalogHudiSource')
     CatalogIdString = Shapes::StringShape.new(name: 'CatalogIdString')
     CatalogImportStatus = Shapes::StructureShape.new(name: 'CatalogImportStatus')
     CatalogKafkaSource = Shapes::StructureShape.new(name: 'CatalogKafkaSource')
@@ -587,6 +588,7 @@ module Aws::Glue
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
     HashString = Shapes::StringShape.new(name: 'HashString')
+    HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     IllegalBlueprintStateException = Shapes::StructureShape.new(name: 'IllegalBlueprintStateException')
@@ -855,6 +857,7 @@ module Aws::Glue
     RunId = Shapes::StringShape.new(name: 'RunId')
     RunStatementRequest = Shapes::StructureShape.new(name: 'RunStatementRequest')
     RunStatementResponse = Shapes::StructureShape.new(name: 'RunStatementResponse')
+    S3CatalogHudiSource = Shapes::StructureShape.new(name: 'S3CatalogHudiSource')
     S3CatalogSource = Shapes::StructureShape.new(name: 'S3CatalogSource')
     S3CatalogTarget = Shapes::StructureShape.new(name: 'S3CatalogTarget')
     S3CsvSource = Shapes::StructureShape.new(name: 'S3CsvSource')
@@ -864,6 +867,9 @@ module Aws::Glue
     S3EncryptionList = Shapes::ListShape.new(name: 'S3EncryptionList')
     S3EncryptionMode = Shapes::StringShape.new(name: 'S3EncryptionMode')
     S3GlueParquetTarget = Shapes::StructureShape.new(name: 'S3GlueParquetTarget')
+    S3HudiCatalogTarget = Shapes::StructureShape.new(name: 'S3HudiCatalogTarget')
+    S3HudiDirectTarget = Shapes::StructureShape.new(name: 'S3HudiDirectTarget')
+    S3HudiSource = Shapes::StructureShape.new(name: 'S3HudiSource')
     S3JsonSource = Shapes::StructureShape.new(name: 'S3JsonSource')
     S3ParquetSource = Shapes::StructureShape.new(name: 'S3ParquetSource')
     S3SourceAdditionalOptions = Shapes::StructureShape.new(name: 'S3SourceAdditionalOptions')
@@ -1427,6 +1433,13 @@ module Aws::Glue
     CatalogEntry.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     CatalogEntry.struct_class = Types::CatalogEntry
 
+    CatalogHudiSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    CatalogHudiSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    CatalogHudiSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    CatalogHudiSource.add_member(:additional_hudi_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalHudiOptions"))
+    CatalogHudiSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    CatalogHudiSource.struct_class = Types::CatalogHudiSource
+
     CatalogImportStatus.add_member(:import_completed, Shapes::ShapeRef.new(shape: Boolean, location_name: "ImportCompleted"))
     CatalogImportStatus.add_member(:import_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImportTime"))
     CatalogImportStatus.add_member(:imported_by, Shapes::ShapeRef.new(shape: NameString, location_name: "ImportedBy"))
@@ -1544,6 +1557,11 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:postgre_sql_catalog_target, Shapes::ShapeRef.new(shape: PostgreSQLCatalogTarget, location_name: "PostgreSQLCatalogTarget"))
     CodeGenConfigurationNode.add_member(:dynamic_transform, Shapes::ShapeRef.new(shape: DynamicTransform, location_name: "DynamicTransform"))
     CodeGenConfigurationNode.add_member(:evaluate_data_quality, Shapes::ShapeRef.new(shape: EvaluateDataQuality, location_name: "EvaluateDataQuality"))
+    CodeGenConfigurationNode.add_member(:s3_catalog_hudi_source, Shapes::ShapeRef.new(shape: S3CatalogHudiSource, location_name: "S3CatalogHudiSource"))
+    CodeGenConfigurationNode.add_member(:catalog_hudi_source, Shapes::ShapeRef.new(shape: CatalogHudiSource, location_name: "CatalogHudiSource"))
+    CodeGenConfigurationNode.add_member(:s3_hudi_source, Shapes::ShapeRef.new(shape: S3HudiSource, location_name: "S3HudiSource"))
+    CodeGenConfigurationNode.add_member(:s3_hudi_catalog_target, Shapes::ShapeRef.new(shape: S3HudiCatalogTarget, location_name: "S3HudiCatalogTarget"))
+    CodeGenConfigurationNode.add_member(:s3_hudi_direct_target, Shapes::ShapeRef.new(shape: S3HudiDirectTarget, location_name: "S3HudiDirectTarget"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -4243,6 +4261,13 @@ module Aws::Glue
     RunStatementResponse.add_member(:id, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Id"))
     RunStatementResponse.struct_class = Types::RunStatementResponse
 
+    S3CatalogHudiSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3CatalogHudiSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    S3CatalogHudiSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    S3CatalogHudiSource.add_member(:additional_hudi_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalHudiOptions"))
+    S3CatalogHudiSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    S3CatalogHudiSource.struct_class = Types::S3CatalogHudiSource
+
     S3CatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     S3CatalogSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     S3CatalogSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
@@ -4307,6 +4332,32 @@ module Aws::Glue
     S3GlueParquetTarget.add_member(:compression, Shapes::ShapeRef.new(shape: ParquetCompressionType, location_name: "Compression"))
     S3GlueParquetTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
     S3GlueParquetTarget.struct_class = Types::S3GlueParquetTarget
+
+    S3HudiCatalogTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3HudiCatalogTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    S3HudiCatalogTarget.add_member(:partition_keys, Shapes::ShapeRef.new(shape: GlueStudioPathList, location_name: "PartitionKeys"))
+    S3HudiCatalogTarget.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    S3HudiCatalogTarget.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    S3HudiCatalogTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, required: true, location_name: "AdditionalOptions"))
+    S3HudiCatalogTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: CatalogSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3HudiCatalogTarget.struct_class = Types::S3HudiCatalogTarget
+
+    S3HudiDirectTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3HudiDirectTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    S3HudiDirectTarget.add_member(:path, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Path"))
+    S3HudiDirectTarget.add_member(:compression, Shapes::ShapeRef.new(shape: HudiTargetCompressionType, required: true, location_name: "Compression"))
+    S3HudiDirectTarget.add_member(:partition_keys, Shapes::ShapeRef.new(shape: GlueStudioPathList, location_name: "PartitionKeys"))
+    S3HudiDirectTarget.add_member(:format, Shapes::ShapeRef.new(shape: TargetFormat, required: true, location_name: "Format"))
+    S3HudiDirectTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, required: true, location_name: "AdditionalOptions"))
+    S3HudiDirectTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3HudiDirectTarget.struct_class = Types::S3HudiDirectTarget
+
+    S3HudiSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3HudiSource.add_member(:paths, Shapes::ShapeRef.new(shape: EnclosedInStringProperties, required: true, location_name: "Paths"))
+    S3HudiSource.add_member(:additional_hudi_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalHudiOptions"))
+    S3HudiSource.add_member(:additional_options, Shapes::ShapeRef.new(shape: S3DirectSourceAdditionalOptions, location_name: "AdditionalOptions"))
+    S3HudiSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    S3HudiSource.struct_class = Types::S3HudiSource
 
     S3JsonSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     S3JsonSource.add_member(:paths, Shapes::ShapeRef.new(shape: EnclosedInStringProperties, required: true, location_name: "Paths"))

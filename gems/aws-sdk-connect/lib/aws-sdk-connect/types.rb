@@ -845,6 +845,14 @@ module Aws::Connect
     #   the inbound flow.
     #   @return [Time]
     #
+    # @!attribute [rw] related_contact_id
+    #   The contactId that is [related][1] to this contact.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html#relatedcontactid
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
     #
     class Contact < Struct.new(
@@ -861,7 +869,8 @@ module Aws::Connect
       :initiation_timestamp,
       :disconnect_timestamp,
       :last_update_timestamp,
-      :scheduled_timestamp)
+      :scheduled_timestamp,
+      :related_contact_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7149,6 +7158,46 @@ module Aws::Connect
       class Unknown < ParticipantTimerValue; end
     end
 
+    # Enable persistent chats. For more information about enabling
+    # persistent chat, and for example use cases and how to configure for
+    # them, see [Enable persistent chat][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+    #
+    # @!attribute [rw] rehydration_type
+    #   The contactId that is used for rehydration depends on the
+    #   rehydration type. RehydrationType is required for persistent chat.
+    #
+    #   * `ENTIRE_PAST_SESSION`\: Rehydrates a chat from the most recently
+    #     terminated past chat contact of the specified past ended chat
+    #     session. To use this type, provide the `initialContactId` of the
+    #     past ended chat session in the `sourceContactId` field. In this
+    #     type, Amazon Connect determines the most recent chat contact on
+    #     the specified chat session that has ended, and uses it to start a
+    #     persistent chat.
+    #
+    #   * `FROM_SEGMENT`\: Rehydrates a chat from the past chat contact that
+    #     is specified in the `sourceContactId` field.
+    #
+    #   The actual contactId used for rehydration is provided in the
+    #   response of this API.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_contact_id
+    #   The contactId from which a persistent chat session must be started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PersistentChat AWS API Documentation
+    #
+    class PersistentChat < Struct.new(
+      :rehydration_type,
+      :source_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a phone number for a quick connect.
     #
     # @!attribute [rw] phone_number
@@ -9141,6 +9190,16 @@ module Aws::Connect
     #   application/json]`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] persistent_chat
+    #   Enable persistent chats. For more information about enabling
+    #   persistent chat, and for example use cases and how to configure for
+    #   them, see [Enable persistent chat][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+    #   @return [Types::PersistentChat]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -9151,7 +9210,8 @@ module Aws::Connect
       :initial_message,
       :client_token,
       :chat_duration_in_minutes,
-      :supported_messaging_content_types)
+      :supported_messaging_content_types,
+      :persistent_chat)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9175,12 +9235,18 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
     #   @return [String]
     #
+    # @!attribute [rw] continued_from_contact_id
+    #   The contactId from which a persistent chat session is started. This
+    #   field is populated only for persistent chats.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactResponse AWS API Documentation
     #
     class StartChatContactResponse < Struct.new(
       :contact_id,
       :participant_id,
-      :participant_token)
+      :participant_token,
+      :continued_from_contact_id)
       SENSITIVE = []
       include Aws::Structure
     end

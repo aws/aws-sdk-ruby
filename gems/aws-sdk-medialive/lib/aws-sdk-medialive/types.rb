@@ -7830,6 +7830,16 @@ module Aws::MediaLive
     #   values are 32 (or 0x20)..8182 (or 0x1ff6).
     #   @return [String]
     #
+    # @!attribute [rw] scte_35_preroll_pullup_milliseconds
+    #   Defines the amount SCTE-35 preroll will be increased (in
+    #   milliseconds) on the output. Preroll is the amount of time between
+    #   the presence of a SCTE-35 indication in a transport stream and the
+    #   PTS of the video frame it references. Zero means don't add pullup
+    #   (it doesn't mean set the preroll to zero). Negative pullup is not
+    #   supported, which means that you can't make the preroll shorter. Be
+    #   aware that latency in the output will increase by the pullup amount.
+    #   @return [Float]
+    #
     # @!attribute [rw] segmentation_markers
     #   Inserts segmentation markers at each segmentationTime period.
     #   raiSegstart sets the Random Access Indicator bit in the adaptation
@@ -7927,6 +7937,7 @@ module Aws::MediaLive
       :scte_27_pids,
       :scte_35_control,
       :scte_35_pid,
+      :scte_35_preroll_pullup_milliseconds,
       :segmentation_markers,
       :segmentation_style,
       :segmentation_time,

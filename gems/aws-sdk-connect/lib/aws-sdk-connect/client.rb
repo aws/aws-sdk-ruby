@@ -2640,6 +2640,7 @@ module Aws::Connect
     #   resp.contact.disconnect_timestamp #=> Time
     #   resp.contact.last_update_timestamp #=> Time
     #   resp.contact.scheduled_timestamp #=> Time
+    #   resp.contact.related_contact_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -7345,11 +7346,21 @@ module Aws::Connect
     #   application/json]`, `[text/markdown, text/plain]`, `[text/plain,
     #   application/json]`.
     #
+    # @option params [Types::PersistentChat] :persistent_chat
+    #   Enable persistent chats. For more information about enabling
+    #   persistent chat, and for example use cases and how to configure for
+    #   them, see [Enable persistent chat][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
     #   * {Types::StartChatContactResponse#participant_id #participant_id} => String
     #   * {Types::StartChatContactResponse#participant_token #participant_token} => String
+    #   * {Types::StartChatContactResponse#continued_from_contact_id #continued_from_contact_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7369,6 +7380,10 @@ module Aws::Connect
     #     client_token: "ClientToken",
     #     chat_duration_in_minutes: 1,
     #     supported_messaging_content_types: ["SupportedMessagingContentType"],
+    #     persistent_chat: {
+    #       rehydration_type: "ENTIRE_PAST_SESSION", # accepts ENTIRE_PAST_SESSION, FROM_SEGMENT
+    #       source_contact_id: "ContactId",
+    #     },
     #   })
     #
     # @example Response structure
@@ -7376,6 +7391,7 @@ module Aws::Connect
     #   resp.contact_id #=> String
     #   resp.participant_id #=> String
     #   resp.participant_token #=> String
+    #   resp.continued_from_contact_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContact AWS API Documentation
     #
@@ -9740,7 +9756,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

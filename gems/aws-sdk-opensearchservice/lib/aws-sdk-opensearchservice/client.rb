@@ -412,13 +412,13 @@ module Aws::OpenSearchService
     end
 
     # Attaches tags to an existing Amazon OpenSearch Service domain. Tags
-    # are a set of case-sensitive key-value pairs. An domain can have up to
-    # 10 tags. For more information, see [ Tagging Amazon OpenSearch Service
+    # are a set of case-sensitive key-value pairs. A domain can have up to
+    # 10 tags. For more information, see [Tagging Amazon OpenSearch Service
     # domains][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html
     #
     # @option params [required, String] :arn
     #   Amazon Resource Name (ARN) for the OpenSearch Service domain to which
@@ -1016,7 +1016,8 @@ module Aws::OpenSearchService
     # Creates an Amazon OpenSearch Service-managed VPC endpoint.
     #
     # @option params [required, String] :domain_arn
-    #   The Amazon Resource Name (ARN) of the domain to grant access to.
+    #   The Amazon Resource Name (ARN) of the domain to create the endpoint
+    #   for.
     #
     # @option params [required, Types::VPCOptions] :vpc_options
     #   Options to specify the subnets and security groups for the endpoint.
@@ -1803,6 +1804,135 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def describe_domains(params = {}, options = {})
       req = build_request(:describe_domains, params)
+      req.send_request(options)
+    end
+
+    # Describes the progress of a pre-update dry run analysis on an Amazon
+    # OpenSearch Service domain. For more information, see [Determining
+    # whether a change will cause a blue/green deployment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#dryrun
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [String] :dry_run_id
+    #   The unique identifier of the dry run.
+    #
+    # @option params [Boolean] :load_dry_run_config
+    #   Whether to include the configuration of the dry run in the response.
+    #   The configuration specifies the updates that you're planning to make
+    #   on the domain.
+    #
+    # @return [Types::DescribeDryRunProgressResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDryRunProgressResponse#dry_run_progress_status #dry_run_progress_status} => Types::DryRunProgressStatus
+    #   * {Types::DescribeDryRunProgressResponse#dry_run_config #dry_run_config} => Types::DomainStatus
+    #   * {Types::DescribeDryRunProgressResponse#dry_run_results #dry_run_results} => Types::DryRunResults
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dry_run_progress({
+    #     domain_name: "DomainName", # required
+    #     dry_run_id: "GUID",
+    #     load_dry_run_config: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dry_run_progress_status.dry_run_id #=> String
+    #   resp.dry_run_progress_status.dry_run_status #=> String
+    #   resp.dry_run_progress_status.creation_date #=> String
+    #   resp.dry_run_progress_status.update_date #=> String
+    #   resp.dry_run_progress_status.validation_failures #=> Array
+    #   resp.dry_run_progress_status.validation_failures[0].code #=> String
+    #   resp.dry_run_progress_status.validation_failures[0].message #=> String
+    #   resp.dry_run_config.domain_id #=> String
+    #   resp.dry_run_config.domain_name #=> String
+    #   resp.dry_run_config.arn #=> String
+    #   resp.dry_run_config.created #=> Boolean
+    #   resp.dry_run_config.deleted #=> Boolean
+    #   resp.dry_run_config.endpoint #=> String
+    #   resp.dry_run_config.endpoints #=> Hash
+    #   resp.dry_run_config.endpoints["String"] #=> String
+    #   resp.dry_run_config.processing #=> Boolean
+    #   resp.dry_run_config.upgrade_processing #=> Boolean
+    #   resp.dry_run_config.engine_version #=> String
+    #   resp.dry_run_config.cluster_config.instance_type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.dry_run_config.cluster_config.instance_count #=> Integer
+    #   resp.dry_run_config.cluster_config.dedicated_master_enabled #=> Boolean
+    #   resp.dry_run_config.cluster_config.zone_awareness_enabled #=> Boolean
+    #   resp.dry_run_config.cluster_config.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.dry_run_config.cluster_config.dedicated_master_type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.dry_run_config.cluster_config.dedicated_master_count #=> Integer
+    #   resp.dry_run_config.cluster_config.warm_enabled #=> Boolean
+    #   resp.dry_run_config.cluster_config.warm_type #=> String, one of "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search"
+    #   resp.dry_run_config.cluster_config.warm_count #=> Integer
+    #   resp.dry_run_config.cluster_config.cold_storage_options.enabled #=> Boolean
+    #   resp.dry_run_config.ebs_options.ebs_enabled #=> Boolean
+    #   resp.dry_run_config.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
+    #   resp.dry_run_config.ebs_options.volume_size #=> Integer
+    #   resp.dry_run_config.ebs_options.iops #=> Integer
+    #   resp.dry_run_config.ebs_options.throughput #=> Integer
+    #   resp.dry_run_config.access_policies #=> String
+    #   resp.dry_run_config.snapshot_options.automated_snapshot_start_hour #=> Integer
+    #   resp.dry_run_config.vpc_options.vpc_id #=> String
+    #   resp.dry_run_config.vpc_options.subnet_ids #=> Array
+    #   resp.dry_run_config.vpc_options.subnet_ids[0] #=> String
+    #   resp.dry_run_config.vpc_options.availability_zones #=> Array
+    #   resp.dry_run_config.vpc_options.availability_zones[0] #=> String
+    #   resp.dry_run_config.vpc_options.security_group_ids #=> Array
+    #   resp.dry_run_config.vpc_options.security_group_ids[0] #=> String
+    #   resp.dry_run_config.cognito_options.enabled #=> Boolean
+    #   resp.dry_run_config.cognito_options.user_pool_id #=> String
+    #   resp.dry_run_config.cognito_options.identity_pool_id #=> String
+    #   resp.dry_run_config.cognito_options.role_arn #=> String
+    #   resp.dry_run_config.encryption_at_rest_options.enabled #=> Boolean
+    #   resp.dry_run_config.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.dry_run_config.node_to_node_encryption_options.enabled #=> Boolean
+    #   resp.dry_run_config.advanced_options #=> Hash
+    #   resp.dry_run_config.advanced_options["String"] #=> String
+    #   resp.dry_run_config.log_publishing_options #=> Hash
+    #   resp.dry_run_config.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
+    #   resp.dry_run_config.log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.dry_run_config.service_software_options.current_version #=> String
+    #   resp.dry_run_config.service_software_options.new_version #=> String
+    #   resp.dry_run_config.service_software_options.update_available #=> Boolean
+    #   resp.dry_run_config.service_software_options.cancellable #=> Boolean
+    #   resp.dry_run_config.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.dry_run_config.service_software_options.description #=> String
+    #   resp.dry_run_config.service_software_options.automated_update_date #=> Time
+    #   resp.dry_run_config.service_software_options.optional_deployment #=> Boolean
+    #   resp.dry_run_config.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.dry_run_config.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.dry_run_config.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.dry_run_config.domain_endpoint_options.custom_endpoint #=> String
+    #   resp.dry_run_config.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
+    #   resp.dry_run_config.advanced_security_options.enabled #=> Boolean
+    #   resp.dry_run_config.advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.dry_run_config.advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.dry_run_config.advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.dry_run_config.advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.dry_run_config.advanced_security_options.saml_options.subject_key #=> String
+    #   resp.dry_run_config.advanced_security_options.saml_options.roles_key #=> String
+    #   resp.dry_run_config.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
+    #   resp.dry_run_config.advanced_security_options.anonymous_auth_disable_date #=> Time
+    #   resp.dry_run_config.advanced_security_options.anonymous_auth_enabled #=> Boolean
+    #   resp.dry_run_config.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
+    #   resp.dry_run_config.auto_tune_options.error_message #=> String
+    #   resp.dry_run_config.change_progress_details.change_id #=> String
+    #   resp.dry_run_config.change_progress_details.message #=> String
+    #   resp.dry_run_results.deployment_type #=> String
+    #   resp.dry_run_results.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDryRunProgress AWS API Documentation
+    #
+    # @overload describe_dry_run_progress(params = {})
+    # @param [Hash] params ({})
+    def describe_dry_run_progress(params = {}, options = {})
+      req = build_request(:describe_dry_run_progress, params)
       req.send_request(options)
     end
 
@@ -3130,13 +3260,28 @@ module Aws::OpenSearchService
     #
     # @option params [Boolean] :dry_run
     #   This flag, when set to True, specifies whether the `UpdateDomain`
-    #   request should return the results of validation check without actually
-    #   applying the change.
+    #   request should return the results of a dry run analysis without
+    #   actually applying the change. A dry run determines what type of
+    #   deployment the update will cause.
+    #
+    # @option params [String] :dry_run_mode
+    #   The type of dry run to perform.
+    #
+    #   * `Basic` only returns the type of deployment (blue/green or dynamic)
+    #     that the update will cause.
+    #
+    #   * `Verbose` runs an additional check to validate the changes you're
+    #     making. For more information, see [Validating a domain update][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
     #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigResponse#domain_config #domain_config} => Types::DomainConfig
     #   * {Types::UpdateDomainConfigResponse#dry_run_results #dry_run_results} => Types::DryRunResults
+    #   * {Types::UpdateDomainConfigResponse#dry_run_progress_status #dry_run_progress_status} => Types::DryRunProgressStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -3240,6 +3385,7 @@ module Aws::OpenSearchService
     #       ],
     #     },
     #     dry_run: false,
+    #     dry_run_mode: "Basic", # accepts Basic, Verbose
     #   })
     #
     # @example Response structure
@@ -3379,6 +3525,13 @@ module Aws::OpenSearchService
     #   resp.domain_config.change_progress_details.message #=> String
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
+    #   resp.dry_run_progress_status.dry_run_id #=> String
+    #   resp.dry_run_progress_status.dry_run_status #=> String
+    #   resp.dry_run_progress_status.creation_date #=> String
+    #   resp.dry_run_progress_status.update_date #=> String
+    #   resp.dry_run_progress_status.validation_failures #=> Array
+    #   resp.dry_run_progress_status.validation_failures[0].code #=> String
+    #   resp.dry_run_progress_status.validation_failures[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfig AWS API Documentation
     #
@@ -3569,7 +3722,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1335,6 +1335,41 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a Hudi data source that is registered in the Glue Data
+    # Catalog.
+    #
+    # @!attribute [rw] name
+    #   The name of the Hudi data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_hudi_options
+    #   Specifies additional connection options.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the Hudi source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogHudiSource AWS API Documentation
+    #
+    class CatalogHudiSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :additional_hudi_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure containing migration status information.
     #
     # @!attribute [rw] import_completed
@@ -1873,6 +1908,29 @@ module Aws::Glue
     #   Specifies your data quality evaluation criteria.
     #   @return [Types::EvaluateDataQuality]
     #
+    # @!attribute [rw] s3_catalog_hudi_source
+    #   Specifies a Hudi data source that is registered in the Glue Data
+    #   Catalog. The Hudi data source must be stored in Amazon S3.
+    #   @return [Types::S3CatalogHudiSource]
+    #
+    # @!attribute [rw] catalog_hudi_source
+    #   Specifies a Hudi data source that is registered in the Glue Data
+    #   Catalog.
+    #   @return [Types::CatalogHudiSource]
+    #
+    # @!attribute [rw] s3_hudi_source
+    #   Specifies a Hudi data source stored in Amazon S3.
+    #   @return [Types::S3HudiSource]
+    #
+    # @!attribute [rw] s3_hudi_catalog_target
+    #   Specifies a target that writes to a Hudi data source in the Glue
+    #   Data Catalog.
+    #   @return [Types::S3HudiCatalogTarget]
+    #
+    # @!attribute [rw] s3_hudi_direct_target
+    #   Specifies a target that writes to a Hudi data source in Amazon S3.
+    #   @return [Types::S3HudiDirectTarget]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -1927,7 +1985,12 @@ module Aws::Glue
       :oracle_sql_catalog_target,
       :postgre_sql_catalog_target,
       :dynamic_transform,
-      :evaluate_data_quality)
+      :evaluate_data_quality,
+      :s3_catalog_hudi_source,
+      :catalog_hudi_source,
+      :s3_hudi_source,
+      :s3_hudi_catalog_target,
+      :s3_hudi_direct_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15364,6 +15427,41 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a Hudi data source that is registered in the Glue Data
+    # Catalog. The Hudi data source must be stored in Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   The name of the Hudi data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_hudi_options
+    #   Specifies additional connection options.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the Hudi source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3CatalogHudiSource AWS API Documentation
+    #
+    class S3CatalogHudiSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :additional_hudi_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Amazon S3 data store in the Glue Data Catalog.
     #
     # @!attribute [rw] name
@@ -15713,6 +15811,136 @@ module Aws::Glue
       :path,
       :compression,
       :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that writes to a Hudi data source in the Glue Data
+    # Catalog.
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies native partitioning using a sequence of keys.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options for the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   A policy that specifies update behavior for the crawler.
+    #   @return [Types::CatalogSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3HudiCatalogTarget AWS API Documentation
+    #
+    class S3HudiCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :table,
+      :database,
+      :additional_options,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that writes to a Hudi data source in Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] path
+    #   The Amazon S3 path of your Hudi data source to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression
+    #   Specifies how the data is compressed. This is generally not
+    #   necessary if the data has a standard file extension. Possible values
+    #   are `"gzip"` and `"bzip"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies native partitioning using a sequence of keys.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] format
+    #   Specifies the data output format for the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   A policy that specifies update behavior for the crawler.
+    #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3HudiDirectTarget AWS API Documentation
+    #
+    class S3HudiDirectTarget < Struct.new(
+      :name,
+      :inputs,
+      :path,
+      :compression,
+      :partition_keys,
+      :format,
+      :additional_options,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a Hudi data source stored in Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   The name of the Hudi source.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   A list of the Amazon S3 paths to read from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_hudi_options
+    #   Specifies additional connection options.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options for the Amazon S3 data
+    #   store.
+    #   @return [Types::S3DirectSourceAdditionalOptions]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the Hudi source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3HudiSource AWS API Documentation
+    #
+    class S3HudiSource < Struct.new(
+      :name,
+      :paths,
+      :additional_hudi_options,
+      :additional_options,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end

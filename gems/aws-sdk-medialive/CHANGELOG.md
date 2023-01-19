@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2023-01-19)
+------------------
+
+* Feature - AWS Elemental MediaLive adds support for SCTE 35 preRollMilliSeconds.
+
 1.95.0 (2023-01-18)
 ------------------
 

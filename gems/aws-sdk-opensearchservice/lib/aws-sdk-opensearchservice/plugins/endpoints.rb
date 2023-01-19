@@ -94,6 +94,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::DescribeDomainConfig.build(context)
           when :describe_domains
             Aws::OpenSearchService::Endpoints::DescribeDomains.build(context)
+          when :describe_dry_run_progress
+            Aws::OpenSearchService::Endpoints::DescribeDryRunProgress.build(context)
           when :describe_inbound_connections
             Aws::OpenSearchService::Endpoints::DescribeInboundConnections.build(context)
           when :describe_instance_type_limits

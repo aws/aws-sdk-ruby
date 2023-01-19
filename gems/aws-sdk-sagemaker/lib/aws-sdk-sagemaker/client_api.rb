@@ -838,6 +838,9 @@ module Aws::SageMaker
     HyperParameterTrainingJobDefinition = Shapes::StructureShape.new(name: 'HyperParameterTrainingJobDefinition')
     HyperParameterTrainingJobDefinitionName = Shapes::StringShape.new(name: 'HyperParameterTrainingJobDefinitionName')
     HyperParameterTrainingJobDefinitions = Shapes::ListShape.new(name: 'HyperParameterTrainingJobDefinitions')
+    HyperParameterTrainingJobEnvironmentKey = Shapes::StringShape.new(name: 'HyperParameterTrainingJobEnvironmentKey')
+    HyperParameterTrainingJobEnvironmentMap = Shapes::MapShape.new(name: 'HyperParameterTrainingJobEnvironmentMap')
+    HyperParameterTrainingJobEnvironmentValue = Shapes::StringShape.new(name: 'HyperParameterTrainingJobEnvironmentValue')
     HyperParameterTrainingJobSummaries = Shapes::ListShape.new(name: 'HyperParameterTrainingJobSummaries')
     HyperParameterTrainingJobSummary = Shapes::StructureShape.new(name: 'HyperParameterTrainingJobSummary')
     HyperParameterTuningAllocationStrategy = Shapes::StringShape.new(name: 'HyperParameterTuningAllocationStrategy')
@@ -5109,9 +5112,13 @@ module Aws::SageMaker
     HyperParameterTrainingJobDefinition.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: CheckpointConfig, location_name: "CheckpointConfig"))
     HyperParameterTrainingJobDefinition.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
     HyperParameterTrainingJobDefinition.add_member(:hyper_parameter_tuning_resource_config, Shapes::ShapeRef.new(shape: HyperParameterTuningResourceConfig, location_name: "HyperParameterTuningResourceConfig"))
+    HyperParameterTrainingJobDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobEnvironmentMap, location_name: "Environment"))
     HyperParameterTrainingJobDefinition.struct_class = Types::HyperParameterTrainingJobDefinition
 
     HyperParameterTrainingJobDefinitions.member = Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition)
+
+    HyperParameterTrainingJobEnvironmentMap.key = Shapes::ShapeRef.new(shape: HyperParameterTrainingJobEnvironmentKey)
+    HyperParameterTrainingJobEnvironmentMap.value = Shapes::ShapeRef.new(shape: HyperParameterTrainingJobEnvironmentValue)
 
     HyperParameterTrainingJobSummaries.member = Shapes::ShapeRef.new(shape: HyperParameterTrainingJobSummary)
 

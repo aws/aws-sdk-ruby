@@ -765,6 +765,7 @@ module Aws::Panorama
     NtpStatus.add_member(:ntp_server_name, Shapes::ShapeRef.new(shape: NtpServerName, location_name: "NtpServerName"))
     NtpStatus.struct_class = Types::NtpStatus
 
+    OTAJobConfig.add_member(:allow_major_version_update, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMajorVersionUpdate"))
     OTAJobConfig.add_member(:image_version, Shapes::ShapeRef.new(shape: ImageVersion, required: true, location_name: "ImageVersion"))
     OTAJobConfig.struct_class = Types::OTAJobConfig
 

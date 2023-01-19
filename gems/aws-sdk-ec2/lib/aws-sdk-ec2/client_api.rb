@@ -4447,6 +4447,7 @@ module Aws::EC2
     CreateLaunchTemplateVersionRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "SourceVersion"))
     CreateLaunchTemplateVersionRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     CreateLaunchTemplateVersionRequest.add_member(:launch_template_data, Shapes::ShapeRef.new(shape: RequestLaunchTemplateData, required: true, location_name: "LaunchTemplateData"))
+    CreateLaunchTemplateVersionRequest.add_member(:resolve_alias, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResolveAlias"))
     CreateLaunchTemplateVersionRequest.struct_class = Types::CreateLaunchTemplateVersionRequest
 
     CreateLaunchTemplateVersionResult.add_member(:launch_template_version, Shapes::ShapeRef.new(shape: LaunchTemplateVersion, location_name: "launchTemplateVersion"))
@@ -6384,6 +6385,7 @@ module Aws::EC2
     DescribeLaunchTemplateVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeLaunchTemplateVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeLaunchTemplateVersionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeLaunchTemplateVersionsRequest.add_member(:resolve_alias, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResolveAlias"))
     DescribeLaunchTemplateVersionsRequest.struct_class = Types::DescribeLaunchTemplateVersionsRequest
 
     DescribeLaunchTemplateVersionsResult.add_member(:launch_template_versions, Shapes::ShapeRef.new(shape: LaunchTemplateVersionSet, location_name: "launchTemplateVersionSet"))

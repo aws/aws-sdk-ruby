@@ -3417,6 +3417,9 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
+    #       environment: {
+    #         "HyperParameterTrainingJobEnvironmentKey" => "HyperParameterTrainingJobEnvironmentValue",
+    #       },
     #     },
     #     training_job_definitions: [
     #       {
@@ -3540,6 +3543,9 @@ module Aws::SageMaker
     #               volume_size_in_gb: 1, # required
     #             },
     #           ],
+    #         },
+    #         environment: {
+    #           "HyperParameterTrainingJobEnvironmentKey" => "HyperParameterTrainingJobEnvironmentValue",
     #         },
     #       },
     #     ],
@@ -11062,6 +11068,8 @@ module Aws::SageMaker
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].instance_count #=> Integer
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].volume_size_in_gb #=> Integer
+    #   resp.training_job_definition.environment #=> Hash
+    #   resp.training_job_definition.environment["HyperParameterTrainingJobEnvironmentKey"] #=> String
     #   resp.training_job_definitions #=> Array
     #   resp.training_job_definitions[0].definition_name #=> String
     #   resp.training_job_definitions[0].tuning_objective.type #=> String, one of "Maximize", "Minimize"
@@ -11139,6 +11147,8 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].instance_count #=> Integer
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].volume_size_in_gb #=> Integer
+    #   resp.training_job_definitions[0].environment #=> Hash
+    #   resp.training_job_definitions[0].environment["HyperParameterTrainingJobEnvironmentKey"] #=> String
     #   resp.hyper_parameter_tuning_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
     #   resp.creation_time #=> Time
     #   resp.hyper_parameter_tuning_end_time #=> Time
@@ -20916,7 +20926,8 @@ module Aws::SageMaker
     #   `true`, `ExcludeRetainedVariantProperties` specifies the list of type
     #   VariantProperty to override with the values provided by
     #   `EndpointConfig`. If you don't specify a value for
-    #   `ExcludeAllVariantProperties`, no variant properties are overridden.
+    #   `ExcludeRetainedVariantProperties`, no variant properties are
+    #   overridden.
     #
     # @option params [Types::DeploymentConfig] :deployment_config
     #   The deployment configuration for an endpoint, which contains the
@@ -22716,7 +22727,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.160.0'
+      context[:gem_version] = '1.161.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

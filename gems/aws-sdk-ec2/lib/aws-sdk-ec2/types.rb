@@ -8177,6 +8177,19 @@ module Aws::EC2
     #   The information for the launch template.
     #   @return [Types::RequestLaunchTemplateData]
     #
+    # @!attribute [rw] resolve_alias
+    #   If `true`, and if a Systems Manager parameter is specified for
+    #   `ImageId`, the AMI ID is displayed in the response for `imageID`.
+    #   For more information, see [Use a Systems Manager parameter instead
+    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersionRequest AWS API Documentation
     #
     class CreateLaunchTemplateVersionRequest < Struct.new(
@@ -8186,7 +8199,8 @@ module Aws::EC2
       :launch_template_name,
       :source_version,
       :version_description,
-      :launch_template_data)
+      :launch_template_data,
+      :resolve_alias)
       SENSITIVE = [:launch_template_data]
       include Aws::Structure
     end
@@ -19605,6 +19619,23 @@ module Aws::EC2
     #   * `ram-disk-id` - The RAM disk ID.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] resolve_alias
+    #   If `true`, and if a Systems Manager parameter is specified for
+    #   `ImageId`, the AMI ID is displayed in the response for `imageId`.
+    #
+    #   If `false`, and if a Systems Manager parameter is specified for
+    #   `ImageId`, the parameter is displayed in the response for `imageId`.
+    #
+    #   For more information, see [Use a Systems Manager parameter instead
+    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersionsRequest AWS API Documentation
     #
     class DescribeLaunchTemplateVersionsRequest < Struct.new(
@@ -19616,7 +19647,8 @@ module Aws::EC2
       :max_version,
       :next_token,
       :max_results,
-      :filters)
+      :filters,
+      :resolve_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50414,7 +50446,25 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI.
+    #   The ID of the AMI. Alternatively, you can specify a Systems Manager
+    #   parameter, which will resolve to an AMI ID on launch.
+    #
+    #   Valid formats:
+    #
+    #   * `ami-17characters00000`
+    #
+    #   * `resolve:ssm:parameter-name`
+    #
+    #   * `resolve:ssm:parameter-name:version-number`
+    #
+    #   * `resolve:ssm:parameter-name:label`
+    #
+    #   For more information, see [Use a Systems Manager parameter instead
+    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -51865,7 +51915,30 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI that was used to launch the instance.
+    #   The ID of the AMI or a Systems Manager parameter. The Systems
+    #   Manager parameter will resolve to the ID of the AMI at instance
+    #   launch.
+    #
+    #   The value depends on what you specified in the request. The possible
+    #   values are:
+    #
+    #   * If an AMI ID was specified in the request, then this is the AMI
+    #     ID.
+    #
+    #   * If a Systems Manager parameter was specified in the request, and
+    #     `ResolveAlias` was configured as `true`, then this is the AMI ID
+    #     that the parameter is mapped to in the Parameter Store.
+    #
+    #   * If a Systems Manager parameter was specified in the request, and
+    #     `ResolveAlias` was configured as `false`, then this is the
+    #     parameter value.
+    #
+    #   For more information, see [Use a Systems Manager parameter instead
+    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id
     #   @return [String]
     #
     # @!attribute [rw] instance_type

@@ -105,6 +105,8 @@ module Aws::OpenSearchService
     DescribeDomainResponse = Shapes::StructureShape.new(name: 'DescribeDomainResponse')
     DescribeDomainsRequest = Shapes::StructureShape.new(name: 'DescribeDomainsRequest')
     DescribeDomainsResponse = Shapes::StructureShape.new(name: 'DescribeDomainsResponse')
+    DescribeDryRunProgressRequest = Shapes::StructureShape.new(name: 'DescribeDryRunProgressRequest')
+    DescribeDryRunProgressResponse = Shapes::StructureShape.new(name: 'DescribeDryRunProgressResponse')
     DescribeInboundConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeInboundConnectionsRequest')
     DescribeInboundConnectionsResponse = Shapes::StructureShape.new(name: 'DescribeInboundConnectionsResponse')
     DescribeInstanceTypeLimitsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceTypeLimitsRequest')
@@ -147,6 +149,8 @@ module Aws::OpenSearchService
     DomainStatusList = Shapes::ListShape.new(name: 'DomainStatusList')
     Double = Shapes::FloatShape.new(name: 'Double')
     DryRun = Shapes::BooleanShape.new(name: 'DryRun')
+    DryRunMode = Shapes::StringShape.new(name: 'DryRunMode')
+    DryRunProgressStatus = Shapes::StructureShape.new(name: 'DryRunProgressStatus')
     DryRunResults = Shapes::StructureShape.new(name: 'DryRunResults')
     Duration = Shapes::StructureShape.new(name: 'Duration')
     DurationValue = Shapes::IntegerShape.new(name: 'DurationValue')
@@ -332,6 +336,8 @@ module Aws::OpenSearchService
     VPCDerivedInfoStatus = Shapes::StructureShape.new(name: 'VPCDerivedInfoStatus')
     VPCOptions = Shapes::StructureShape.new(name: 'VPCOptions')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationFailure = Shapes::StructureShape.new(name: 'ValidationFailure')
+    ValidationFailures = Shapes::ListShape.new(name: 'ValidationFailures')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VersionList = Shapes::ListShape.new(name: 'VersionList')
     VersionStatus = Shapes::StructureShape.new(name: 'VersionStatus')
@@ -644,6 +650,16 @@ module Aws::OpenSearchService
     DescribeDomainsResponse.add_member(:domain_status_list, Shapes::ShapeRef.new(shape: DomainStatusList, required: true, location_name: "DomainStatusList"))
     DescribeDomainsResponse.struct_class = Types::DescribeDomainsResponse
 
+    DescribeDryRunProgressRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DescribeDryRunProgressRequest.add_member(:dry_run_id, Shapes::ShapeRef.new(shape: GUID, location: "querystring", location_name: "dryRunId"))
+    DescribeDryRunProgressRequest.add_member(:load_dry_run_config, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "loadDryRunConfig"))
+    DescribeDryRunProgressRequest.struct_class = Types::DescribeDryRunProgressRequest
+
+    DescribeDryRunProgressResponse.add_member(:dry_run_progress_status, Shapes::ShapeRef.new(shape: DryRunProgressStatus, location_name: "DryRunProgressStatus"))
+    DescribeDryRunProgressResponse.add_member(:dry_run_config, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DryRunConfig"))
+    DescribeDryRunProgressResponse.add_member(:dry_run_results, Shapes::ShapeRef.new(shape: DryRunResults, location_name: "DryRunResults"))
+    DescribeDryRunProgressResponse.struct_class = Types::DescribeDryRunProgressResponse
+
     DescribeInboundConnectionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeInboundConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     DescribeInboundConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -801,6 +817,13 @@ module Aws::OpenSearchService
     DomainStatus.struct_class = Types::DomainStatus
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
+
+    DryRunProgressStatus.add_member(:dry_run_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "DryRunId"))
+    DryRunProgressStatus.add_member(:dry_run_status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DryRunStatus"))
+    DryRunProgressStatus.add_member(:creation_date, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CreationDate"))
+    DryRunProgressStatus.add_member(:update_date, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UpdateDate"))
+    DryRunProgressStatus.add_member(:validation_failures, Shapes::ShapeRef.new(shape: ValidationFailures, location_name: "ValidationFailures"))
+    DryRunProgressStatus.struct_class = Types::DryRunProgressStatus
 
     DryRunResults.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "DeploymentType"))
     DryRunResults.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -1215,10 +1238,12 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     UpdateDomainConfigRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptions, location_name: "AutoTuneOptions"))
     UpdateDomainConfigRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    UpdateDomainConfigRequest.add_member(:dry_run_mode, Shapes::ShapeRef.new(shape: DryRunMode, location_name: "DryRunMode"))
     UpdateDomainConfigRequest.struct_class = Types::UpdateDomainConfigRequest
 
     UpdateDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: DomainConfig, required: true, location_name: "DomainConfig"))
     UpdateDomainConfigResponse.add_member(:dry_run_results, Shapes::ShapeRef.new(shape: DryRunResults, location_name: "DryRunResults"))
+    UpdateDomainConfigResponse.add_member(:dry_run_progress_status, Shapes::ShapeRef.new(shape: DryRunProgressStatus, location_name: "DryRunProgressStatus"))
     UpdateDomainConfigResponse.struct_class = Types::UpdateDomainConfigResponse
 
     UpdatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location_name: "PackageID"))
@@ -1282,6 +1307,12 @@ module Aws::OpenSearchService
     VPCOptions.struct_class = Types::VPCOptions
 
     ValidationException.struct_class = Types::ValidationException
+
+    ValidationFailure.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    ValidationFailure.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ValidationFailure.struct_class = Types::ValidationFailure
+
+    ValidationFailures.member = Shapes::ShapeRef.new(shape: ValidationFailure)
 
     ValueStringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -1577,6 +1608,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_dry_run_progress, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDryRunProgress"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/dryRun"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDryRunProgressRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDryRunProgressResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:describe_inbound_connections, Seahorse::Model::Operation.new.tap do |o|

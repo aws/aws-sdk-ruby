@@ -161,6 +161,8 @@ module Aws::ConnectParticipant
     Item.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
     Item.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "Attachments"))
     Item.add_member(:message_metadata, Shapes::ShapeRef.new(shape: MessageMetadata, location_name: "MessageMetadata"))
+    Item.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
+    Item.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     Item.struct_class = Types::Item
 
     MessageMetadata.add_member(:message_id, Shapes::ShapeRef.new(shape: ChatItemId, location_name: "MessageId"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.161.0 (2023-01-19)
+------------------
+
+* Feature - HyperParameterTuningJobs now allow passing environment variables into the corresponding TrainingJobs
+
 1.160.0 (2023-01-18)
 ------------------
 

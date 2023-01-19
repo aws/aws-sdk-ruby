@@ -219,7 +219,7 @@ module Aws::Panorama
     end
 
     # @!attribute [rw] device_ids
-    #   IDs of target devices.
+    #   ID of target device.
     #   @return [Array<String>]
     #
     # @!attribute [rw] device_job_config
@@ -2253,6 +2253,10 @@ module Aws::Panorama
 
     # An over-the-air update (OTA) job configuration.
     #
+    # @!attribute [rw] allow_major_version_update
+    #   Whether to apply the update if it is a major version change.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] image_version
     #   The target version of the device software.
     #   @return [String]
@@ -2260,6 +2264,7 @@ module Aws::Panorama
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/OTAJobConfig AWS API Documentation
     #
     class OTAJobConfig < Struct.new(
+      :allow_major_version_update,
       :image_version)
       SENSITIVE = []
       include Aws::Structure

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-01-19)
+------------------
+
+* Feature - Bug fix - Removed the regex pattern validation from CoralModel to avoid potential security issue.
+
 1.61.0 (2023-01-18)
 ------------------
 

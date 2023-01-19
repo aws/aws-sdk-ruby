@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2023-01-19)
+------------------
+
+* Feature - Adding support for Salesforce Pardot connector in Amazon AppFlow.
+
 1.34.0 (2023-01-18)
 ------------------
 

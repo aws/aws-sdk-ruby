@@ -643,6 +643,10 @@ module Aws::Appflow
     #   The connector metadata specific to SAPOData.
     #   @return [Types::SAPODataMetadata]
     #
+    # @!attribute [rw] pardot
+    #   The connector metadata specific to Salesforce Pardot.
+    #   @return [Types::PardotMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorMetadata AWS API Documentation
     #
     class ConnectorMetadata < Struct.new(
@@ -666,7 +670,8 @@ module Aws::Appflow
       :upsolver,
       :customer_profiles,
       :honeycode,
-      :sapo_data)
+      :sapo_data,
+      :pardot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -769,6 +774,11 @@ module Aws::Appflow
     #   Operators supported by the custom connector.
     #   @return [String]
     #
+    # @!attribute [rw] pardot
+    #   The operation to be performed on the provided Salesforce Pardot
+    #   source fields.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorOperator AWS API Documentation
     #
     class ConnectorOperator < Struct.new(
@@ -787,7 +797,8 @@ module Aws::Appflow
       :veeva,
       :zendesk,
       :sapo_data,
-      :custom_connector)
+      :custom_connector,
+      :pardot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -956,6 +967,11 @@ module Aws::Appflow
     #   using the custom connector.
     #   @return [Types::CustomConnectorProfileCredentials]
     #
+    # @!attribute [rw] pardot
+    #   The connector-specific credentials required when using Salesforce
+    #   Pardot.
+    #   @return [Types::PardotConnectorProfileCredentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorProfileCredentials AWS API Documentation
     #
     class ConnectorProfileCredentials < Struct.new(
@@ -976,7 +992,8 @@ module Aws::Appflow
       :veeva,
       :zendesk,
       :sapo_data,
-      :custom_connector)
+      :custom_connector,
+      :pardot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1056,6 +1073,10 @@ module Aws::Appflow
     #   The properties required by the custom connector.
     #   @return [Types::CustomConnectorProfileProperties]
     #
+    # @!attribute [rw] pardot
+    #   The connector-specific properties required by Salesforce Pardot.
+    #   @return [Types::PardotConnectorProfileProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorProfileProperties AWS API Documentation
     #
     class ConnectorProfileProperties < Struct.new(
@@ -1076,7 +1097,8 @@ module Aws::Appflow
       :veeva,
       :zendesk,
       :sapo_data,
-      :custom_connector)
+      :custom_connector,
+      :pardot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3321,6 +3343,86 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The connector-specific profile credentials required when using
+    # Salesforce Pardot.
+    #
+    # @!attribute [rw] access_token
+    #   The credentials used to access protected Salesforce Pardot
+    #   resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_token
+    #   The credentials used to acquire new access tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_request
+    #   Used by select connectors for which the OAuth workflow is supported,
+    #   such as Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
+    #   @return [Types::ConnectorOAuthRequest]
+    #
+    # @!attribute [rw] client_credentials_arn
+    #   The secret manager ARN, which contains the client ID and client
+    #   secret of the connected app.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/PardotConnectorProfileCredentials AWS API Documentation
+    #
+    class PardotConnectorProfileCredentials < Struct.new(
+      :access_token,
+      :refresh_token,
+      :o_auth_request,
+      :client_credentials_arn)
+      SENSITIVE = [:access_token, :client_credentials_arn]
+      include Aws::Structure
+    end
+
+    # The connector-specific profile properties required when using
+    # Salesforce Pardot.
+    #
+    # @!attribute [rw] instance_url
+    #   The location of the Salesforce Pardot resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_sandbox_environment
+    #   Indicates whether the connector profile applies to a sandbox or
+    #   production environment.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] business_unit_id
+    #   The business unit id of Salesforce Pardot instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/PardotConnectorProfileProperties AWS API Documentation
+    #
+    class PardotConnectorProfileProperties < Struct.new(
+      :instance_url,
+      :is_sandbox_environment,
+      :business_unit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connector metadata specific to Salesforce Pardot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/PardotMetadata AWS API Documentation
+    #
+    class PardotMetadata < Aws::EmptyStructure; end
+
+    # The properties that are applied when Salesforce Pardot is being used
+    # as a source.
+    #
+    # @!attribute [rw] object
+    #   The object specified in the Salesforce Pardot flow source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/PardotSourceProperties AWS API Documentation
+    #
+    class PardotSourceProperties < Struct.new(
+      :object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies elements that Amazon AppFlow includes in the file and folder
     # names in the flow destination.
     #
@@ -4572,6 +4674,11 @@ module Aws::Appflow
     #   used as a source.
     #   @return [Types::CustomConnectorSourceProperties]
     #
+    # @!attribute [rw] pardot
+    #   Specifies the information that is required for querying Salesforce
+    #   Pardot.
+    #   @return [Types::PardotSourceProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SourceConnectorProperties AWS API Documentation
     #
     class SourceConnectorProperties < Struct.new(
@@ -4590,7 +4697,8 @@ module Aws::Appflow
       :veeva,
       :zendesk,
       :sapo_data,
-      :custom_connector)
+      :custom_connector,
+      :pardot)
       SENSITIVE = []
       include Aws::Structure
     end

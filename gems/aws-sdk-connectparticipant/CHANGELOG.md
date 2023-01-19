@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2023-01-19)
+------------------
+
+* Feature - This release updates Amazon Connect Participant's GetTranscript api to provide transcripts of past chats on a persistent chat session.
+
 1.26.0 (2023-01-18)
 ------------------
 

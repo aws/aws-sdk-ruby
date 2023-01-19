@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2023-01-19)
+------------------
+
+* Feature - Release Glue Studio Hudi Data Lake Format for SDK/CLI
+
 1.128.0 (2023-01-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2023-01-19)
+------------------
+
+* Feature - Amazon Connect Chat introduces Persistent Chat, allowing customers to resume previous conversations with context and transcripts carried over from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.
+
 1.93.0 (2023-01-18)
 ------------------
 

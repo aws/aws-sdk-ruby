@@ -45,6 +45,7 @@ module Aws::Appflow
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketPrefix = Shapes::StringShape.new(name: 'BucketPrefix')
+    BusinessUnitId = Shapes::StringShape.new(name: 'BusinessUnitId')
     CatalogType = Shapes::StringShape.new(name: 'CatalogType')
     ClientCredentialsArn = Shapes::StringShape.new(name: 'ClientCredentialsArn')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -253,6 +254,11 @@ module Aws::Appflow
     Operator = Shapes::StringShape.new(name: 'Operator')
     OperatorPropertiesKeys = Shapes::StringShape.new(name: 'OperatorPropertiesKeys')
     Operators = Shapes::StringShape.new(name: 'Operators')
+    PardotConnectorOperator = Shapes::StringShape.new(name: 'PardotConnectorOperator')
+    PardotConnectorProfileCredentials = Shapes::StructureShape.new(name: 'PardotConnectorProfileCredentials')
+    PardotConnectorProfileProperties = Shapes::StructureShape.new(name: 'PardotConnectorProfileProperties')
+    PardotMetadata = Shapes::StructureShape.new(name: 'PardotMetadata')
+    PardotSourceProperties = Shapes::StructureShape.new(name: 'PardotSourceProperties')
     Password = Shapes::StringShape.new(name: 'Password')
     PathPrefix = Shapes::StringShape.new(name: 'PathPrefix')
     PathPrefixHierarchy = Shapes::ListShape.new(name: 'PathPrefixHierarchy')
@@ -550,6 +556,7 @@ module Aws::Appflow
     ConnectorMetadata.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesMetadata, location_name: "CustomerProfiles"))
     ConnectorMetadata.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeMetadata, location_name: "Honeycode"))
     ConnectorMetadata.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataMetadata, location_name: "SAPOData"))
+    ConnectorMetadata.add_member(:pardot, Shapes::ShapeRef.new(shape: PardotMetadata, location_name: "Pardot"))
     ConnectorMetadata.struct_class = Types::ConnectorMetadata
 
     ConnectorModeList.member = Shapes::ShapeRef.new(shape: ConnectorMode)
@@ -574,6 +581,7 @@ module Aws::Appflow
     ConnectorOperator.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskConnectorOperator, location_name: "Zendesk"))
     ConnectorOperator.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataConnectorOperator, location_name: "SAPOData"))
     ConnectorOperator.add_member(:custom_connector, Shapes::ShapeRef.new(shape: Operator, location_name: "CustomConnector"))
+    ConnectorOperator.add_member(:pardot, Shapes::ShapeRef.new(shape: PardotConnectorOperator, location_name: "Pardot"))
     ConnectorOperator.struct_class = Types::ConnectorOperator
 
     ConnectorProfile.add_member(:connector_profile_arn, Shapes::ShapeRef.new(shape: ConnectorProfileArn, location_name: "connectorProfileArn"))
@@ -610,6 +618,7 @@ module Aws::Appflow
     ConnectorProfileCredentials.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskConnectorProfileCredentials, location_name: "Zendesk"))
     ConnectorProfileCredentials.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataConnectorProfileCredentials, location_name: "SAPOData"))
     ConnectorProfileCredentials.add_member(:custom_connector, Shapes::ShapeRef.new(shape: CustomConnectorProfileCredentials, location_name: "CustomConnector"))
+    ConnectorProfileCredentials.add_member(:pardot, Shapes::ShapeRef.new(shape: PardotConnectorProfileCredentials, location_name: "Pardot"))
     ConnectorProfileCredentials.struct_class = Types::ConnectorProfileCredentials
 
     ConnectorProfileDetailList.member = Shapes::ShapeRef.new(shape: ConnectorProfile)
@@ -634,6 +643,7 @@ module Aws::Appflow
     ConnectorProfileProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskConnectorProfileProperties, location_name: "Zendesk"))
     ConnectorProfileProperties.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataConnectorProfileProperties, location_name: "SAPOData"))
     ConnectorProfileProperties.add_member(:custom_connector, Shapes::ShapeRef.new(shape: CustomConnectorProfileProperties, location_name: "CustomConnector"))
+    ConnectorProfileProperties.add_member(:pardot, Shapes::ShapeRef.new(shape: PardotConnectorProfileProperties, location_name: "Pardot"))
     ConnectorProfileProperties.struct_class = Types::ConnectorProfileProperties
 
     ConnectorProvisioningConfig.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaConnectorProvisioningConfig, location_name: "lambda"))
@@ -1103,6 +1113,22 @@ module Aws::Appflow
 
     OAuthScopeList.member = Shapes::ShapeRef.new(shape: OAuthScope)
 
+    PardotConnectorProfileCredentials.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
+    PardotConnectorProfileCredentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
+    PardotConnectorProfileCredentials.add_member(:o_auth_request, Shapes::ShapeRef.new(shape: ConnectorOAuthRequest, location_name: "oAuthRequest"))
+    PardotConnectorProfileCredentials.add_member(:client_credentials_arn, Shapes::ShapeRef.new(shape: ClientCredentialsArn, location_name: "clientCredentialsArn"))
+    PardotConnectorProfileCredentials.struct_class = Types::PardotConnectorProfileCredentials
+
+    PardotConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, location_name: "instanceUrl"))
+    PardotConnectorProfileProperties.add_member(:is_sandbox_environment, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSandboxEnvironment"))
+    PardotConnectorProfileProperties.add_member(:business_unit_id, Shapes::ShapeRef.new(shape: BusinessUnitId, location_name: "businessUnitId"))
+    PardotConnectorProfileProperties.struct_class = Types::PardotConnectorProfileProperties
+
+    PardotMetadata.struct_class = Types::PardotMetadata
+
+    PardotSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
+    PardotSourceProperties.struct_class = Types::PardotSourceProperties
+
     PathPrefixHierarchy.member = Shapes::ShapeRef.new(shape: PathPrefix)
 
     PrefixConfig.add_member(:prefix_type, Shapes::ShapeRef.new(shape: PrefixType, location_name: "prefixType"))
@@ -1329,6 +1355,7 @@ module Aws::Appflow
     SourceConnectorProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskSourceProperties, location_name: "Zendesk"))
     SourceConnectorProperties.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataSourceProperties, location_name: "SAPOData"))
     SourceConnectorProperties.add_member(:custom_connector, Shapes::ShapeRef.new(shape: CustomConnectorSourceProperties, location_name: "CustomConnector"))
+    SourceConnectorProperties.add_member(:pardot, Shapes::ShapeRef.new(shape: PardotSourceProperties, location_name: "Pardot"))
     SourceConnectorProperties.struct_class = Types::SourceConnectorProperties
 
     SourceFieldProperties.add_member(:is_retrievable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRetrievable"))

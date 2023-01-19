@@ -385,6 +385,23 @@ module Aws::ConnectParticipant
     #   information related to message receipts.
     #   @return [Types::MessageMetadata]
     #
+    # @!attribute [rw] related_contact_id
+    #   The contactId on which the transcript item was originally sent. This
+    #   field is only populated for persistent chats when the transcript
+    #   item is from the past chat session. For more information, see
+    #   [Enable persistent chat][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The contactId on which the transcript item was originally sent. This
+    #   field is populated only when the transcript item is from the current
+    #   chat session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/Item AWS API Documentation
     #
     class Item < Struct.new(
@@ -397,7 +414,9 @@ module Aws::ConnectParticipant
       :display_name,
       :participant_role,
       :attachments,
-      :message_metadata)
+      :message_metadata,
+      :related_contact_id,
+      :contact_id)
       SENSITIVE = []
       include Aws::Structure
     end
