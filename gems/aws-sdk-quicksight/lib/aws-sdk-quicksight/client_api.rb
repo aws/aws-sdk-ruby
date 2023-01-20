@@ -269,6 +269,7 @@ module Aws::QuickSight
     DashboardVersionSummaryList = Shapes::ListShape.new(name: 'DashboardVersionSummaryList')
     DashboardVisualId = Shapes::StructureShape.new(name: 'DashboardVisualId')
     DashboardVisualPublishOptions = Shapes::StructureShape.new(name: 'DashboardVisualPublishOptions')
+    DataBarsOptions = Shapes::StructureShape.new(name: 'DataBarsOptions')
     DataColor = Shapes::StructureShape.new(name: 'DataColor')
     DataColorPalette = Shapes::StructureShape.new(name: 'DataColorPalette')
     DataFieldSeriesItem = Shapes::StructureShape.new(name: 'DataFieldSeriesItem')
@@ -1129,6 +1130,8 @@ module Aws::QuickSight
     TableFieldOptions = Shapes::StructureShape.new(name: 'TableFieldOptions')
     TableFieldURLConfiguration = Shapes::StructureShape.new(name: 'TableFieldURLConfiguration')
     TableFieldWells = Shapes::StructureShape.new(name: 'TableFieldWells')
+    TableInlineVisualization = Shapes::StructureShape.new(name: 'TableInlineVisualization')
+    TableInlineVisualizationList = Shapes::ListShape.new(name: 'TableInlineVisualizationList')
     TableOptions = Shapes::StructureShape.new(name: 'TableOptions')
     TableOrientation = Shapes::StringShape.new(name: 'TableOrientation')
     TablePaginatedReportOptions = Shapes::StructureShape.new(name: 'TablePaginatedReportOptions')
@@ -2364,6 +2367,11 @@ module Aws::QuickSight
 
     DashboardVisualPublishOptions.add_member(:export_hidden_fields_option, Shapes::ShapeRef.new(shape: ExportHiddenFieldsOption, location_name: "ExportHiddenFieldsOption"))
     DashboardVisualPublishOptions.struct_class = Types::DashboardVisualPublishOptions
+
+    DataBarsOptions.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
+    DataBarsOptions.add_member(:positive_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "PositiveColor"))
+    DataBarsOptions.add_member(:negative_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "NegativeColor"))
+    DataBarsOptions.struct_class = Types::DataBarsOptions
 
     DataColor.add_member(:color, Shapes::ShapeRef.new(shape: HexColor, location_name: "Color"))
     DataColor.add_member(:data_value, Shapes::ShapeRef.new(shape: Double, location_name: "DataValue", metadata: {"box"=>true}))
@@ -5486,6 +5494,7 @@ module Aws::QuickSight
     TableConfiguration.add_member(:total_options, Shapes::ShapeRef.new(shape: TotalOptions, location_name: "TotalOptions"))
     TableConfiguration.add_member(:field_options, Shapes::ShapeRef.new(shape: TableFieldOptions, location_name: "FieldOptions"))
     TableConfiguration.add_member(:paginated_report_options, Shapes::ShapeRef.new(shape: TablePaginatedReportOptions, location_name: "PaginatedReportOptions"))
+    TableConfiguration.add_member(:table_inline_visualizations, Shapes::ShapeRef.new(shape: TableInlineVisualizationList, location_name: "TableInlineVisualizations"))
     TableConfiguration.struct_class = Types::TableConfiguration
 
     TableFieldCustomIconContent.add_member(:icon, Shapes::ShapeRef.new(shape: TableFieldIconSetType, location_name: "Icon"))
@@ -5526,6 +5535,11 @@ module Aws::QuickSight
     TableFieldWells.add_member(:table_aggregated_field_wells, Shapes::ShapeRef.new(shape: TableAggregatedFieldWells, location_name: "TableAggregatedFieldWells"))
     TableFieldWells.add_member(:table_unaggregated_field_wells, Shapes::ShapeRef.new(shape: TableUnaggregatedFieldWells, location_name: "TableUnaggregatedFieldWells"))
     TableFieldWells.struct_class = Types::TableFieldWells
+
+    TableInlineVisualization.add_member(:data_bars, Shapes::ShapeRef.new(shape: DataBarsOptions, location_name: "DataBars"))
+    TableInlineVisualization.struct_class = Types::TableInlineVisualization
+
+    TableInlineVisualizationList.member = Shapes::ShapeRef.new(shape: TableInlineVisualization)
 
     TableOptions.add_member(:orientation, Shapes::ShapeRef.new(shape: TableOrientation, location_name: "Orientation"))
     TableOptions.add_member(:header_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "HeaderStyle"))

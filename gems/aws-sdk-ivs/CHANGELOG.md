@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-01-20)
+------------------
+
+* Feature - API and Doc update. Update to arns field in BatchGetStreamKey. Also updates to operations and structures.
+
 1.25.0 (2023-01-18)
 ------------------
 

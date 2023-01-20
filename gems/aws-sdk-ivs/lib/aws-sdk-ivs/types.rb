@@ -107,7 +107,7 @@ module Aws::IVS
     end
 
     # @!attribute [rw] arns
-    #   Array of ARNs, one per channel.
+    #   Array of ARNs, one per stream key.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchGetStreamKeyRequest AWS API Documentation
@@ -171,11 +171,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
-    #   beyond what is documented there.
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -260,11 +260,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
-    #   beyond what is documented there.
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -1030,6 +1030,8 @@ module Aws::IVS
     end
 
     # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListTagsForResourceResponse AWS API Documentation
@@ -1067,11 +1069,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
-    #   beyond what is documented there.
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -1100,11 +1102,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
-    #   beyond what is documented there.
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -1167,11 +1169,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
-    #   beyond what is documented there.
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -1220,11 +1222,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
-    #   beyond what is documented there.
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -1404,11 +1406,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
-    #   beyond what is documented there.
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -1441,11 +1443,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
-    #   beyond what is documented there.
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -1615,11 +1617,11 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of tags to be added or updated. See [Tagging Amazon Web
-    #   Services Resources][1] for more information, including restrictions
-    #   that apply to tags and "Tag naming limits and requirements";
-    #   Amazon IVS has no service-specific constraints beyond what is
-    #   documented there.
+    #   Array of tags to be added or updated. Array of maps, each of the
+    #   form `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
@@ -1691,7 +1693,8 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   Array of tags to be removed. See [Tagging Amazon Web Services
+    #   Array of tags to be removed. Array of maps, each of the form
+    #   s`tring:string (key:value)`. See [Tagging Amazon Web Services
     #   Resources][1] for more information, including restrictions that
     #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
     #   has no service-specific constraints beyond what is documented there.

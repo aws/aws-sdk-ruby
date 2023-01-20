@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2023-01-20)
+------------------
+
+* Feature - This release adds support for data bars in QuickSight table and increases pivot table field well limit.
+
 1.73.0 (2023-01-18)
 ------------------
 

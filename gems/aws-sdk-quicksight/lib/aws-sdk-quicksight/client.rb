@@ -6551,9 +6551,21 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates an Amazon QuickSight user, whose identity is associated with
+    # Creates an Amazon QuickSight user whose identity is associated with
     # the Identity and Access Management (IAM) identity or role specified in
-    # the request.
+    # the request. When you register a new user from the Amazon QuickSight
+    # API, Amazon QuickSight generates a registration URL. The user accesses
+    # this registration URL to create their account. Amazon QuickSight
+    # doesn't send a registration email to users who are registered from
+    # the Amazon QuickSight API. If you want new users to receive a
+    # registration email, then add those users in the Amazon QuickSight
+    # console. For more information on registering a new user in the Amazon
+    # QuickSight console, see [ Inviting users to access Amazon
+    # QuickSight][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/managing-users.html#inviting-users
     #
     # @option params [required, String] :identity_type
     #   Amazon QuickSight supports several ways of managing the identity of
@@ -9279,7 +9291,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

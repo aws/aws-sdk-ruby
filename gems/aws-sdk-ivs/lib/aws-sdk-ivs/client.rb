@@ -414,7 +414,7 @@ module Aws::IVS
     # Performs GetStreamKey on multiple ARNs simultaneously.
     #
     # @option params [required, Array<String>] :arns
-    #   Array of ARNs, one per channel.
+    #   Array of ARNs, one per stream key.
     #
     # @return [Types::BatchGetStreamKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1503,7 +1503,8 @@ module Aws::IVS
     #   must be URL-encoded.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   Array of tags to be added or updated. See [Tagging Amazon Web Services
+    #   Array of tags to be added or updated. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
     #   Resources][1] for more information, including restrictions that apply
     #   to tags and "Tag naming limits and requirements"; Amazon IVS has no
     #   service-specific constraints beyond what is documented there.
@@ -1539,7 +1540,8 @@ module Aws::IVS
     #   URL-encoded.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   Array of tags to be removed. See [Tagging Amazon Web Services
+    #   Array of tags to be removed. Array of maps, each of the form
+    #   s`tring:string (key:value)`. See [Tagging Amazon Web Services
     #   Resources][1] for more information, including restrictions that apply
     #   to tags and "Tag naming limits and requirements"; Amazon IVS has no
     #   service-specific constraints beyond what is documented there.
@@ -1659,7 +1661,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

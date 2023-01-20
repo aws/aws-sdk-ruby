@@ -5309,6 +5309,30 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The options for data bars.
+    #
+    # @!attribute [rw] field_id
+    #   The field ID for the data bars options.
+    #   @return [String]
+    #
+    # @!attribute [rw] positive_color
+    #   The color of the positive data bar.
+    #   @return [String]
+    #
+    # @!attribute [rw] negative_color
+    #   The color of the negative data bar.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataBarsOptions AWS API Documentation
+    #
+    class DataBarsOptions < Struct.new(
+      :field_id,
+      :positive_color,
+      :negative_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Determines the color that is applied to a particular data value.
     #
     # @!attribute [rw] color
@@ -15334,7 +15358,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_transforms
-    #   Transform operations that act on this logical table.
+    #   Transform operations that act on this logical table. For this
+    #   structure to be valid, only one of the attributes can be non-null.
     #   @return [Array<Types::TransformOperation>]
     #
     # @!attribute [rw] source
@@ -20686,6 +20711,10 @@ module Aws::QuickSight
     #   The paginated report options for a table visual.
     #   @return [Types::TablePaginatedReportOptions]
     #
+    # @!attribute [rw] table_inline_visualizations
+    #   A collection of inline visualizations to display within a chart.
+    #   @return [Array<Types::TableInlineVisualization>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableConfiguration AWS API Documentation
     #
     class TableConfiguration < Struct.new(
@@ -20694,7 +20723,8 @@ module Aws::QuickSight
       :table_options,
       :total_options,
       :field_options,
-      :paginated_report_options)
+      :paginated_report_options,
+      :table_inline_visualizations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20880,6 +20910,21 @@ module Aws::QuickSight
     class TableFieldWells < Struct.new(
       :table_aggregated_field_wells,
       :table_unaggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inline visualization of a specific type to display within a chart.
+    #
+    # @!attribute [rw] data_bars
+    #   The configuration of the inline visualization of the data bars
+    #   within a chart.
+    #   @return [Types::DataBarsOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableInlineVisualization AWS API Documentation
+    #
+    class TableInlineVisualization < Struct.new(
+      :data_bars)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21241,6 +21286,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] violated_entities
+    #   An error path that shows which entities caused the template error.
     #   @return [Array<Types::Entity>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateError AWS API Documentation
@@ -21362,7 +21408,21 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] status
-    #   The HTTP status of the request.
+    #   The status that is associated with the template.
+    #
+    #   * `CREATION_IN_PROGRESS`
+    #
+    #   * `CREATION_SUCCESSFUL`
+    #
+    #   * `CREATION_FAILED`
+    #
+    #   * `UPDATE_IN_PROGRESS`
+    #
+    #   * `UPDATE_SUCCESSFUL`
+    #
+    #   * `UPDATE_FAILED`
+    #
+    #   * `DELETED`
     #   @return [String]
     #
     # @!attribute [rw] data_set_configurations
