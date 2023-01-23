@@ -16022,7 +16022,7 @@ module Aws::SageMaker
     # @!attribute [rw] shadow_production_variants
     #   A list of the shadow variants hosted on the endpoint. Each shadow
     #   variant is a model in shadow mode with production traffic replicated
-    #   from the proudction variant.
+    #   from the production variant.
     #   @return [Array<Types::ProductionVariantSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Endpoint AWS API Documentation
@@ -31309,7 +31309,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] volume_size_in_gb
     #   The size, in GB, of the ML storage volume attached to individual
-    #   inference instance associated with the production variant. Currenly
+    #   inference instance associated with the production variant. Currently
     #   only Amazon EBS gp2 storage volumes are supported.
     #   @return [Integer]
     #

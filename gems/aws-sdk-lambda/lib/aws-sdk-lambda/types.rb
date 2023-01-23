@@ -258,7 +258,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @!attribute [rw] alias_arn
     #   The Amazon Resource Name (ARN) of the alias.
@@ -2179,6 +2179,10 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
     #   @return [Types::SnapStartResponse]
     #
+    # @!attribute [rw] runtime_version_config
+    #   The ARN of the runtime and any errors that occured.
+    #   @return [Types::RuntimeVersionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -2215,7 +2219,8 @@ module Aws::Lambda
       :signing_job_arn,
       :architectures,
       :ephemeral_storage,
-      :snap_start)
+      :snap_start,
+      :runtime_version_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2970,6 +2975,56 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** – `my-function`.
+    #
+    #   * **Function ARN** –
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** – `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   Specify a version of the function. This can be `$LATEST` or a
+    #   published version number. If no value is specified, the
+    #   configuration for the `$LATEST` version is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetRuntimeManagementConfigRequest AWS API Documentation
+    #
+    class GetRuntimeManagementConfigRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_runtime_on
+    #   The current runtime update mode of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_version_arn
+    #   The ARN of the runtime the function is configured to use. If the
+    #   runtime update mode is **Manual**, the ARN is returned, otherwise
+    #   `null` is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetRuntimeManagementConfigResponse AWS API Documentation
+    #
+    class GetRuntimeManagementConfigResponse < Struct.new(
+      :update_runtime_on,
+      :runtime_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4724,6 +4779,102 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** – `my-function`.
+    #
+    #   * **Function ARN** –
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** – `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   Specify a version of the function. This can be `$LATEST` or a
+    #   published version number. If no value is specified, the
+    #   configuration for the `$LATEST` version is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_runtime_on
+    #   Specify the runtime update mode.
+    #
+    #   * **Auto (default)** - Automatically update to the most recent and
+    #     secure runtime version using a [Two-phase runtime version
+    #     rollout][1]. This is the best choice for most customers to ensure
+    #     they always benefit from runtime updates.
+    #
+    #   * **Function update** - Lambda updates the runtime of your function
+    #     to the most recent and secure runtime version when you update your
+    #     function. This approach synchronizes runtime updates with function
+    #     deployments, giving you control over when runtime updates are
+    #     applied and allowing you to detect and mitigate rare runtime
+    #     update incompatibilities early. When using this setting, you need
+    #     to regularly update your functions to keep their runtime
+    #     up-to-date.
+    #
+    #   * **Manual** - You specify a runtime version in your function
+    #     configuration. The function will use this runtime version
+    #     indefinitely. In the rare case where a new runtime version is
+    #     incompatible with an existing function, this allows you to roll
+    #     back your function to an earlier runtime version. For more
+    #     information, see [Roll back a runtime version][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-two-phase
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-rollback
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_version_arn
+    #   The ARN of the runtime version you want the function to use.
+    #
+    #   <note markdown="1"> This is only required if you're using the **Manual** runtime update
+    #   mode.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutRuntimeManagementConfigRequest AWS API Documentation
+    #
+    class PutRuntimeManagementConfigRequest < Struct.new(
+      :function_name,
+      :qualifier,
+      :update_runtime_on,
+      :runtime_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_runtime_on
+    #   The runtime update mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The ARN of the function
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_version_arn
+    #   The ARN of the runtime the function is configured to use. If the
+    #   runtime update mode is **manual**, the ARN is returned, otherwise
+    #   `null` is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutRuntimeManagementConfigResponse AWS API Documentation
+    #
+    class PutRuntimeManagementConfigResponse < Struct.new(
+      :update_runtime_on,
+      :function_arn,
+      :runtime_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -4895,6 +5046,46 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The ARN of the runtime and any errors that occured.
+    #
+    # @!attribute [rw] runtime_version_arn
+    #   The ARN of the runtime version you want the function to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Error response when Lambda is unable to retrieve the runtime version
+    #   for a function.
+    #   @return [Types::RuntimeVersionError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RuntimeVersionConfig AWS API Documentation
+    #
+    class RuntimeVersionConfig < Struct.new(
+      :runtime_version_arn,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Any error returned when the runtime version information for the
+    # function could not be retrieved.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RuntimeVersionError AWS API Documentation
+    #
+    class RuntimeVersionError < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
     # (Amazon SQS only) The scaling configuration for the event source. To
     # remove the configuration, pass an empty value.
     #
@@ -4992,8 +5183,12 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The runtime restore hook encountered an error. For more information,
-    # check the Amazon CloudWatch logs.
+    # The `afterRestore()` [runtime hook][1] encountered an error. For more
+    # information, check the Amazon CloudWatch logs.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -5062,8 +5257,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The runtime restore hook failed to complete within the timeout limit
-    # (2 seconds).
+    # Lambda couldn't restore the snapshot within the timeout limit.
     #
     # @!attribute [rw] type
     #   @return [String]

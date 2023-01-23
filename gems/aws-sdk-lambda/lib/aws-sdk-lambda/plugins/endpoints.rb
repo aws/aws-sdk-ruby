@@ -120,6 +120,8 @@ module Aws::Lambda
             Aws::Lambda::Endpoints::GetPolicy.build(context)
           when :get_provisioned_concurrency_config
             Aws::Lambda::Endpoints::GetProvisionedConcurrencyConfig.build(context)
+          when :get_runtime_management_config
+            Aws::Lambda::Endpoints::GetRuntimeManagementConfig.build(context)
           when :invoke
             Aws::Lambda::Endpoints::Invoke.build(context)
           when :invoke_async
@@ -160,6 +162,8 @@ module Aws::Lambda
             Aws::Lambda::Endpoints::PutFunctionEventInvokeConfig.build(context)
           when :put_provisioned_concurrency_config
             Aws::Lambda::Endpoints::PutProvisionedConcurrencyConfig.build(context)
+          when :put_runtime_management_config
+            Aws::Lambda::Endpoints::PutRuntimeManagementConfig.build(context)
           when :remove_layer_version_permission
             Aws::Lambda::Endpoints::RemoveLayerVersionPermission.build(context)
           when :remove_permission

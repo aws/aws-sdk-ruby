@@ -583,7 +583,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -1328,6 +1328,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
+    #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -1446,6 +1447,9 @@ module Aws::Lambda
     #   resp.ephemeral_storage.size #=> Integer
     #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
     #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
+    #   resp.runtime_version_config.runtime_version_arn #=> String
+    #   resp.runtime_version_config.error.error_code #=> String
+    #   resp.runtime_version_config.error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1551,7 +1555,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -2012,7 +2016,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -2286,6 +2290,9 @@ module Aws::Lambda
     #   resp.configuration.ephemeral_storage.size #=> Integer
     #   resp.configuration.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
     #   resp.configuration.snap_start.optimization_status #=> String, one of "On", "Off"
+    #   resp.configuration.runtime_version_config.runtime_version_arn #=> String
+    #   resp.configuration.runtime_version_config.error.error_code #=> String
+    #   resp.configuration.runtime_version_config.error.message #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.code.image_uri #=> String
@@ -2458,6 +2465,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
+    #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2523,6 +2531,9 @@ module Aws::Lambda
     #   resp.ephemeral_storage.size #=> Integer
     #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
     #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
+    #   resp.runtime_version_config.runtime_version_arn #=> String
+    #   resp.runtime_version_config.error.error_code #=> String
+    #   resp.runtime_version_config.error.message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2923,6 +2934,63 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Retrieves the runtime management configuration for a function's
+    # version. If the runtime update mode is **Manual**, this includes the
+    # ARN of the runtime version and the runtime update mode. If the runtime
+    # update mode is **Auto** or **Function update**, this includes the
+    # runtime update mode and `null` is returned for the ARN. For more
+    # information, see [Runtime updates][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** – `my-function`.
+    #
+    #   * **Function ARN** –
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** – `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   Specify a version of the function. This can be `$LATEST` or a
+    #   published version number. If no value is specified, the configuration
+    #   for the `$LATEST` version is returned.
+    #
+    # @return [Types::GetRuntimeManagementConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRuntimeManagementConfigResponse#update_runtime_on #update_runtime_on} => String
+    #   * {Types::GetRuntimeManagementConfigResponse#runtime_version_arn #runtime_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_runtime_management_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_runtime_on #=> String, one of "Auto", "Manual", "FunctionUpdate"
+    #   resp.runtime_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetRuntimeManagementConfig AWS API Documentation
+    #
+    # @overload get_runtime_management_config(params = {})
+    # @param [Hash] params ({})
+    def get_runtime_management_config(params = {}, options = {})
+      req = build_request(:get_runtime_management_config, params)
+      req.send_request(options)
+    end
+
     # Invokes a Lambda function. You can invoke a function synchronously
     # (and wait for the response), or asynchronously. To invoke a function
     # asynchronously, set `InvocationType` to `Event`.
@@ -3113,7 +3181,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -3479,8 +3547,8 @@ module Aws::Lambda
     # <note markdown="1"> The `ListFunctions` operation returns a subset of the
     # FunctionConfiguration fields. To get the additional fields (State,
     # StateReasonCode, StateReason, LastUpdateStatus,
-    # LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or
-    # version, use GetFunction.
+    # LastUpdateStatusReason, LastUpdateStatusReasonCode,
+    # RuntimeVersionConfig) for a function or version, use GetFunction.
     #
     #  </note>
     #
@@ -3579,6 +3647,9 @@ module Aws::Lambda
     #   resp.functions[0].ephemeral_storage.size #=> Integer
     #   resp.functions[0].snap_start.apply_on #=> String, one of "PublishedVersions", "None"
     #   resp.functions[0].snap_start.optimization_status #=> String, one of "On", "Off"
+    #   resp.functions[0].runtime_version_config.runtime_version_arn #=> String
+    #   resp.functions[0].runtime_version_config.error.error_code #=> String
+    #   resp.functions[0].runtime_version_config.error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -3973,6 +4044,9 @@ module Aws::Lambda
     #   resp.versions[0].ephemeral_storage.size #=> Integer
     #   resp.versions[0].snap_start.apply_on #=> String, one of "PublishedVersions", "None"
     #   resp.versions[0].snap_start.optimization_status #=> String, one of "On", "Off"
+    #   resp.versions[0].runtime_version_config.runtime_version_arn #=> String
+    #   resp.versions[0].runtime_version_config.error.error_code #=> String
+    #   resp.versions[0].runtime_version_config.error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -4170,6 +4244,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
+    #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -4237,6 +4312,9 @@ module Aws::Lambda
     #   resp.ephemeral_storage.size #=> Integer
     #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
     #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
+    #   resp.runtime_version_config.runtime_version_arn #=> String
+    #   resp.runtime_version_config.error.error_code #=> String
+    #   resp.runtime_version_config.error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -4526,6 +4604,99 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Sets the runtime management configuration for a function's version.
+    # For more information, see [Runtime updates][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** – `my-function`.
+    #
+    #   * **Function ARN** –
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** – `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   Specify a version of the function. This can be `$LATEST` or a
+    #   published version number. If no value is specified, the configuration
+    #   for the `$LATEST` version is returned.
+    #
+    # @option params [required, String] :update_runtime_on
+    #   Specify the runtime update mode.
+    #
+    #   * **Auto (default)** - Automatically update to the most recent and
+    #     secure runtime version using a [Two-phase runtime version
+    #     rollout][1]. This is the best choice for most customers to ensure
+    #     they always benefit from runtime updates.
+    #
+    #   * **Function update** - Lambda updates the runtime of your function to
+    #     the most recent and secure runtime version when you update your
+    #     function. This approach synchronizes runtime updates with function
+    #     deployments, giving you control over when runtime updates are
+    #     applied and allowing you to detect and mitigate rare runtime update
+    #     incompatibilities early. When using this setting, you need to
+    #     regularly update your functions to keep their runtime up-to-date.
+    #
+    #   * **Manual** - You specify a runtime version in your function
+    #     configuration. The function will use this runtime version
+    #     indefinitely. In the rare case where a new runtime version is
+    #     incompatible with an existing function, this allows you to roll back
+    #     your function to an earlier runtime version. For more information,
+    #     see [Roll back a runtime version][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-two-phase
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-rollback
+    #
+    # @option params [String] :runtime_version_arn
+    #   The ARN of the runtime version you want the function to use.
+    #
+    #   <note markdown="1"> This is only required if you're using the **Manual** runtime update
+    #   mode.
+    #
+    #    </note>
+    #
+    # @return [Types::PutRuntimeManagementConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRuntimeManagementConfigResponse#update_runtime_on #update_runtime_on} => String
+    #   * {Types::PutRuntimeManagementConfigResponse#function_arn #function_arn} => String
+    #   * {Types::PutRuntimeManagementConfigResponse#runtime_version_arn #runtime_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_runtime_management_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier",
+    #     update_runtime_on: "Auto", # required, accepts Auto, Manual, FunctionUpdate
+    #     runtime_version_arn: "RuntimeVersionArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_runtime_on #=> String, one of "Auto", "Manual", "FunctionUpdate"
+    #   resp.function_arn #=> String
+    #   resp.runtime_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutRuntimeManagementConfig AWS API Documentation
+    #
+    # @overload put_runtime_management_config(params = {})
+    # @param [Hash] params ({})
+    def put_runtime_management_config(params = {}, options = {})
+      req = build_request(:put_runtime_management_config, params)
+      req.send_request(options)
+    end
+
     # Removes a statement from the permissions policy for a version of an
     # [Lambda layer][1]. For more information, see
     # AddLayerVersionPermission.
@@ -4687,7 +4858,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -5245,6 +5416,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
+    #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5318,6 +5490,9 @@ module Aws::Lambda
     #   resp.ephemeral_storage.size #=> Integer
     #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
     #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
+    #   resp.runtime_version_config.runtime_version_arn #=> String
+    #   resp.runtime_version_config.error.error_code #=> String
+    #   resp.runtime_version_config.error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -5519,6 +5694,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
+    #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5624,6 +5800,9 @@ module Aws::Lambda
     #   resp.ephemeral_storage.size #=> Integer
     #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
     #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
+    #   resp.runtime_version_config.runtime_version_arn #=> String
+    #   resp.runtime_version_config.error.error_code #=> String
+    #   resp.runtime_version_config.error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -5829,7 +6008,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

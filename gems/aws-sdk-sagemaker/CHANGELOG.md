@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2023-01-23)
+------------------
+
+* Feature - Amazon SageMaker Inference now supports P4de instance types.
+
 1.161.0 (2023-01-19)
 ------------------
 

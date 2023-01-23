@@ -148,6 +148,8 @@ module Aws::Lambda
     GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     GetProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigRequest')
     GetProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigResponse')
+    GetRuntimeManagementConfigRequest = Shapes::StructureShape.new(name: 'GetRuntimeManagementConfigRequest')
+    GetRuntimeManagementConfigResponse = Shapes::StructureShape.new(name: 'GetRuntimeManagementConfigResponse')
     Handler = Shapes::StringShape.new(name: 'Handler')
     Header = Shapes::StringShape.new(name: 'Header')
     HeadersList = Shapes::ListShape.new(name: 'HeadersList')
@@ -263,6 +265,8 @@ module Aws::Lambda
     PutFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'PutFunctionEventInvokeConfigRequest')
     PutProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigRequest')
     PutProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigResponse')
+    PutRuntimeManagementConfigRequest = Shapes::StructureShape.new(name: 'PutRuntimeManagementConfigRequest')
+    PutRuntimeManagementConfigResponse = Shapes::StructureShape.new(name: 'PutRuntimeManagementConfigResponse')
     Qualifier = Shapes::StringShape.new(name: 'Qualifier')
     Queue = Shapes::StringShape.new(name: 'Queue')
     Queues = Shapes::ListShape.new(name: 'Queues')
@@ -277,6 +281,9 @@ module Aws::Lambda
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
+    RuntimeVersionArn = Shapes::StringShape.new(name: 'RuntimeVersionArn')
+    RuntimeVersionConfig = Shapes::StructureShape.new(name: 'RuntimeVersionConfig')
+    RuntimeVersionError = Shapes::StructureShape.new(name: 'RuntimeVersionError')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
@@ -336,6 +343,7 @@ module Aws::Lambda
     UpdateFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'UpdateFunctionEventInvokeConfigRequest')
     UpdateFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'UpdateFunctionUrlConfigRequest')
     UpdateFunctionUrlConfigResponse = Shapes::StructureShape.new(name: 'UpdateFunctionUrlConfigResponse')
+    UpdateRuntimeOn = Shapes::StringShape.new(name: 'UpdateRuntimeOn')
     Version = Shapes::StringShape.new(name: 'Version')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
@@ -721,6 +729,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     FunctionConfiguration.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
     FunctionConfiguration.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStartResponse, location_name: "SnapStart"))
+    FunctionConfiguration.add_member(:runtime_version_config, Shapes::ShapeRef.new(shape: RuntimeVersionConfig, location_name: "RuntimeVersionConfig"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -853,6 +862,14 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
     GetProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     GetProvisionedConcurrencyConfigResponse.struct_class = Types::GetProvisionedConcurrencyConfigResponse
+
+    GetRuntimeManagementConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetRuntimeManagementConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
+    GetRuntimeManagementConfigRequest.struct_class = Types::GetRuntimeManagementConfigRequest
+
+    GetRuntimeManagementConfigResponse.add_member(:update_runtime_on, Shapes::ShapeRef.new(shape: UpdateRuntimeOn, location_name: "UpdateRuntimeOn"))
+    GetRuntimeManagementConfigResponse.add_member(:runtime_version_arn, Shapes::ShapeRef.new(shape: RuntimeVersionArn, location_name: "RuntimeVersionArn"))
+    GetRuntimeManagementConfigResponse.struct_class = Types::GetRuntimeManagementConfigResponse
 
     HeadersList.member = Shapes::ShapeRef.new(shape: Header)
 
@@ -1178,6 +1195,17 @@ module Aws::Lambda
     PutProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     PutProvisionedConcurrencyConfigResponse.struct_class = Types::PutProvisionedConcurrencyConfigResponse
 
+    PutRuntimeManagementConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    PutRuntimeManagementConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
+    PutRuntimeManagementConfigRequest.add_member(:update_runtime_on, Shapes::ShapeRef.new(shape: UpdateRuntimeOn, required: true, location_name: "UpdateRuntimeOn"))
+    PutRuntimeManagementConfigRequest.add_member(:runtime_version_arn, Shapes::ShapeRef.new(shape: RuntimeVersionArn, location_name: "RuntimeVersionArn"))
+    PutRuntimeManagementConfigRequest.struct_class = Types::PutRuntimeManagementConfigRequest
+
+    PutRuntimeManagementConfigResponse.add_member(:update_runtime_on, Shapes::ShapeRef.new(shape: UpdateRuntimeOn, required: true, location_name: "UpdateRuntimeOn"))
+    PutRuntimeManagementConfigResponse.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location_name: "FunctionArn"))
+    PutRuntimeManagementConfigResponse.add_member(:runtime_version_arn, Shapes::ShapeRef.new(shape: RuntimeVersionArn, location_name: "RuntimeVersionArn"))
+    PutRuntimeManagementConfigResponse.struct_class = Types::PutRuntimeManagementConfigResponse
+
     Queues.member = Shapes::ShapeRef.new(shape: Queue)
 
     RemoveLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
@@ -1211,6 +1239,14 @@ module Aws::Lambda
     ResourceNotReadyException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
+
+    RuntimeVersionConfig.add_member(:runtime_version_arn, Shapes::ShapeRef.new(shape: RuntimeVersionArn, location_name: "RuntimeVersionArn"))
+    RuntimeVersionConfig.add_member(:error, Shapes::ShapeRef.new(shape: RuntimeVersionError, location_name: "Error"))
+    RuntimeVersionConfig.struct_class = Types::RuntimeVersionConfig
+
+    RuntimeVersionError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    RuntimeVersionError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
+    RuntimeVersionError.struct_class = Types::RuntimeVersionError
 
     ScalingConfig.add_member(:maximum_concurrency, Shapes::ShapeRef.new(shape: MaximumConcurrency, location_name: "MaximumConcurrency"))
     ScalingConfig.struct_class = Types::ScalingConfig
@@ -1804,6 +1840,18 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedConcurrencyConfigNotFoundException)
       end)
 
+      api.add_operation(:get_runtime_management_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRuntimeManagementConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-07-20/functions/{FunctionName}/runtime-management-config"
+        o.input = Shapes::ShapeRef.new(shape: GetRuntimeManagementConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRuntimeManagementConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:invoke, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Invoke"
         o.http_method = "POST"
@@ -2139,6 +2187,19 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:put_runtime_management_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRuntimeManagementConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2021-07-20/functions/{FunctionName}/runtime-management-config"
+        o.input = Shapes::ShapeRef.new(shape: PutRuntimeManagementConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRuntimeManagementConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:remove_layer_version_permission, Seahorse::Model::Operation.new.tap do |o|
