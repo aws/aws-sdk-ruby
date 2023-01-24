@@ -20,7 +20,7 @@ module Aws::Route53
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"aws-cn-global", :use_fips=>false})
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"aws-cn-global"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -34,7 +34,7 @@ module Aws::Route53
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"aws-global", :use_fips=>false})
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"aws-global"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -48,7 +48,7 @@ module Aws::Route53
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"aws-iso-global", :use_fips=>false})
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"aws-iso-global"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -62,7 +62,7 @@ module Aws::Route53
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"aws-iso-b-global", :use_fips=>false})
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"aws-iso-b-global"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -76,7 +76,7 @@ module Aws::Route53
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"aws-us-gov-global", :use_fips=>false})
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"aws-us-gov-global"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -90,7 +90,7 @@ module Aws::Route53
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"us-east-1", :use_fips=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"us-east-1", :endpoint=>"https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -104,7 +104,7 @@ module Aws::Route53
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"us-east-1", :use_fips=>true, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>true, :region=>"us-east-1", :endpoint=>"https://example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -117,7 +117,7 @@ module Aws::Route53
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"us-east-1", :use_fips=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:use_dual_stack=>true, :use_fips=>false, :region=>"us-east-1", :endpoint=>"https://example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

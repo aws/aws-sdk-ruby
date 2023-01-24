@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-01-24)
+------------------
+
+* Feature - Amazon Route 53 now supports the Asia Pacific (Melbourne) Region (ap-southeast-4) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 1.70.0 (2023-01-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-01-24)
+------------------
+
+* Feature - Enabled FIPS us-gov-west-1 endpoints in SDK.
+
 1.24.0 (2023-01-18)
 ------------------
 

@@ -10,28 +10,38 @@
 module Aws::SsmSap
   module Types
 
+    # An SAP application registered with AWS Systems Manager for SAP.
+    #
     # @!attribute [rw] id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of the application.
     #   @return [String]
     #
     # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the application.
     #   @return [String]
     #
     # @!attribute [rw] app_registry_arn
+    #   The Amazon Resource Name (ARN) of the Application Registry.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the application.
     #   @return [String]
     #
     # @!attribute [rw] components
+    #   The components of the application.
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_updated
+    #   The time at which the application was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] status_message
+    #   The status message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Application AWS API Documentation
@@ -49,13 +59,19 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The credentials of your SAP application.
+    #
     # @!attribute [rw] database_name
+    #   The name of the SAP HANA database.
     #   @return [String]
     #
     # @!attribute [rw] credential_type
+    #   The type of the application credentials.
     #   @return [String]
     #
     # @!attribute [rw] secret_id
+    #   The secret ID created in AWS Secrets Manager to store the
+    #   credentials of the SAP application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ApplicationCredential AWS API Documentation
@@ -68,16 +84,23 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The summary of the SAP application registered with AWS Systems Manager
+    # for SAP.
+    #
     # @!attribute [rw] id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of the application.
     #   @return [String]
     #
     # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the application.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags on the application.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ApplicationSummary AWS API Documentation
@@ -91,28 +114,38 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The SAP component of your application.
+    #
     # @!attribute [rw] component_id
+    #   The ID of the component.
     #   @return [String]
     #
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] component_type
+    #   The type of the component.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the component.
     #   @return [String]
     #
     # @!attribute [rw] databases
+    #   The SAP HANA databases of the component.
     #   @return [Array<String>]
     #
     # @!attribute [rw] hosts
+    #   The hosts of the component.
     #   @return [Array<Types::Host>]
     #
     # @!attribute [rw] primary_host
+    #   The primary host of the component.
     #   @return [String]
     #
     # @!attribute [rw] last_updated
+    #   The time at which the component was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Component AWS API Documentation
@@ -130,16 +163,22 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The summary of the component.
+    #
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] component_id
+    #   The ID of the component.
     #   @return [String]
     #
     # @!attribute [rw] component_type
+    #   The type of the component.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags of the component.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ComponentSummary AWS API Documentation
@@ -153,6 +192,8 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # A conflict has occurred.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -164,37 +205,51 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The SAP HANA database of the application registered with AWS Systems
+    # Manager for SAP.
+    #
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] component_id
+    #   The ID of the component.
     #   @return [String]
     #
     # @!attribute [rw] credentials
+    #   The credentials of the database.
     #   @return [Array<Types::ApplicationCredential>]
     #
     # @!attribute [rw] database_id
+    #   The ID of the SAP HANA database.
     #   @return [String]
     #
     # @!attribute [rw] database_name
+    #   The name of the database.
     #   @return [String]
     #
     # @!attribute [rw] database_type
+    #   The type of the database.
     #   @return [String]
     #
     # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the database.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the database.
     #   @return [String]
     #
     # @!attribute [rw] primary_host
+    #   The primary host of the database.
     #   @return [String]
     #
     # @!attribute [rw] sql_port
+    #   The SQL port of the database.
     #   @return [Integer]
     #
     # @!attribute [rw] last_updated
+    #   The time at which the database was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Database AWS API Documentation
@@ -215,22 +270,30 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The summary of the database.
+    #
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] component_id
+    #   The ID of the component.
     #   @return [String]
     #
     # @!attribute [rw] database_id
+    #   The ID of the database.
     #   @return [String]
     #
     # @!attribute [rw] database_type
+    #   The type of the database.
     #   @return [String]
     #
     # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the database.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags of the database.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DatabaseSummary AWS API Documentation
@@ -247,12 +310,15 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] action_type
+    #   Delete or restore the permissions on the target database.
     #   @return [String]
     #
     # @!attribute [rw] source_resource_arn
+    #   The Amazon Resource Name (ARN) of the source resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeleteResourcePermissionInput AWS API Documentation
@@ -266,6 +332,7 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] policy
+    #   The policy that removes permissions on the target database.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeleteResourcePermissionOutput AWS API Documentation
@@ -277,6 +344,7 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeregisterApplicationInput AWS API Documentation
@@ -291,25 +359,63 @@ module Aws::SsmSap
     #
     class DeregisterApplicationOutput < Aws::EmptyStructure; end
 
+    # A specific result obtained by specifying the name, value, and
+    # operator.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Filter names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The filter values. Filter values are case-sensitive. If you specify
+    #   multiple values for a filter, the values are joined with an OR, and
+    #   the request returns all results that match any of the specified
+    #   values
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator for the filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :name,
+      :value,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_registry_arn
+    #   The Amazon Resource Name (ARN) of the application registry.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetApplicationInput AWS API Documentation
     #
     class GetApplicationInput < Struct.new(
       :application_id,
-      :application_arn)
+      :application_arn,
+      :app_registry_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] application
+    #   Returns all of the metadata of an application registered with AWS
+    #   Systems Manager for SAP.
     #   @return [Types::Application]
     #
     # @!attribute [rw] tags
+    #   The tags of a registered application.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetApplicationOutput AWS API Documentation
@@ -322,9 +428,11 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] component_id
+    #   The ID of the component.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetComponentInput AWS API Documentation
@@ -337,6 +445,8 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] component
+    #   The component of an application registered with AWS Systems Manager
+    #   for SAP.
     #   @return [Types::Component]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetComponentOutput AWS API Documentation
@@ -348,15 +458,19 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] component_id
+    #   The ID of the component.
     #   @return [String]
     #
     # @!attribute [rw] database_id
+    #   The ID of the database.
     #   @return [String]
     #
     # @!attribute [rw] database_arn
+    #   The Amazon Resource Name (ARN) of the database.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetDatabaseInput AWS API Documentation
@@ -371,9 +485,12 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] database
+    #   The SAP HANA database of an application registered with AWS Systems
+    #   Manager for SAP.
     #   @return [Types::Database]
     #
     # @!attribute [rw] tags
+    #   The tags of a database.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetDatabaseOutput AWS API Documentation
@@ -386,6 +503,7 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] operation_id
+    #   The ID of the operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetOperationInput AWS API Documentation
@@ -397,6 +515,7 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] operation
+    #   Returns the details of an operation.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetOperationOutput AWS API Documentation
@@ -411,6 +530,7 @@ module Aws::SsmSap
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetResourcePermissionInput AWS API Documentation
@@ -433,16 +553,22 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # Describes the properties of the Dedicated Host.
+    #
     # @!attribute [rw] host_name
+    #   The name of the Dedicated Host.
     #   @return [String]
     #
     # @!attribute [rw] host_role
+    #   The role of the Dedicated Host.
     #   @return [String]
     #
     # @!attribute [rw] host_ip
+    #   The IP address of the Dedicated Host.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
+    #   The instance ID of the instance on the Dedicated Host.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Host AWS API Documentation
@@ -456,6 +582,8 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # An internal error has occurred.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -468,9 +596,13 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] next_token
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListApplicationsInput AWS API Documentation
@@ -483,9 +615,12 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] applications
+    #   The applications registered with AWS Systems Manager for SAP.
     #   @return [Array<Types::ApplicationSummary>]
     #
     # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListApplicationsOutput AWS API Documentation
@@ -498,12 +633,20 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] next_token
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #
+    #   If you do not specify a value for MaxResults, the request returns 50
+    #   items per page by default.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListComponentsInput AWS API Documentation
@@ -517,9 +660,12 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] components
+    #   List of components registered with AWS System Manager for SAP.
     #   @return [Array<Types::ComponentSummary>]
     #
     # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListComponentsOutput AWS API Documentation
@@ -532,15 +678,22 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] component_id
+    #   The ID of the component.
     #   @return [String]
     #
     # @!attribute [rw] next_token
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value. If you do not specify a value for MaxResults, the
+    #   request returns 50 items per page by default.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListDatabasesInput AWS API Documentation
@@ -555,9 +708,12 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] databases
+    #   The SAP HANA databases of an application.
     #   @return [Array<Types::DatabaseSummary>]
     #
     # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListDatabasesOutput AWS API Documentation
@@ -569,7 +725,56 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_id
+    #   The ID of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value. If you do not specify a value for MaxResults, the
+    #   request returns 50 items per page by default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters of an operation.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListOperationsInput AWS API Documentation
+    #
+    class ListOperationsInput < Struct.new(
+      :application_id,
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   List of operations performed by AWS Systems Manager for SAP.
+    #   @return [Array<Types::Operation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListOperationsOutput AWS API Documentation
+    #
+    class ListOperationsOutput < Struct.new(
+      :operations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListTagsForResourceRequest AWS API Documentation
@@ -591,37 +796,50 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The operations performed by AWS Systems Manager for SAP.
+    #
     # @!attribute [rw] id
+    #   The ID of the operation.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of the operation.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the operation.
     #   @return [String]
     #
     # @!attribute [rw] status_message
+    #   The status message of the operation.
     #   @return [String]
     #
     # @!attribute [rw] properties
+    #   The properties of the operation.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] resource_type
+    #   The resource type of the operation.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
+    #   The resource ID of the operation.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the operation.
     #   @return [String]
     #
     # @!attribute [rw] start_time
+    #   The start time of the operation.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
+    #   The end time of the operation.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
+    #   The time at which the operation was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Operation AWS API Documentation
@@ -673,24 +891,31 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] application_type
+    #   The type of the application.
     #   @return [String]
     #
     # @!attribute [rw] instances
+    #   The Amazon EC2 instances on which your SAP application is running.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sap_instance_number
+    #   The SAP instance number of the application.
     #   @return [String]
     #
     # @!attribute [rw] sid
+    #   The System ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags to be attached to the SAP application.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] credentials
+    #   The credentials of the SAP application.
     #   @return [Array<Types::ApplicationCredential>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/RegisterApplicationInput AWS API Documentation
@@ -708,9 +933,11 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] application
+    #   The application registered with AWS Systems Manager for SAP.
     #   @return [Types::Application]
     #
     # @!attribute [rw] operation_id
+    #   The ID of the operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/RegisterApplicationOutput AWS API Documentation
@@ -722,6 +949,8 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The resource is not available.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -734,9 +963,11 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags on a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/TagResourceRequest AWS API Documentation
@@ -753,6 +984,7 @@ module Aws::SsmSap
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -774,12 +1006,15 @@ module Aws::SsmSap
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
+    #   The ID of the application.
     #   @return [String]
     #
     # @!attribute [rw] credentials_to_add_or_update
+    #   The credentials to be added or updated.
     #   @return [Array<Types::ApplicationCredential>]
     #
     # @!attribute [rw] credentials_to_remove
+    #   The credentials to be removed.
     #   @return [Array<Types::ApplicationCredential>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UpdateApplicationSettingsInput AWS API Documentation
@@ -793,9 +1028,11 @@ module Aws::SsmSap
     end
 
     # @!attribute [rw] message
+    #   The update message.
     #   @return [String]
     #
     # @!attribute [rw] operation_ids
+    #   The IDs of the operations.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UpdateApplicationSettingsOutput AWS API Documentation
@@ -807,6 +1044,9 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The input fails to satisfy the constraints specified by an AWS
+    # service.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #

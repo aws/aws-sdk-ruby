@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-01-24)
+------------------
+
+* Feature - This release provides updates to documentation and support for listing operations performed by AWS Systems Manager for SAP.
+
 1.2.0 (2023-01-18)
 ------------------
 

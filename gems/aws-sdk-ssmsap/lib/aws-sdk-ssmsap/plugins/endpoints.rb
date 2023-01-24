@@ -76,6 +76,8 @@ module Aws::SsmSap
             Aws::SsmSap::Endpoints::ListComponents.build(context)
           when :list_databases
             Aws::SsmSap::Endpoints::ListDatabases.build(context)
+          when :list_operations
+            Aws::SsmSap::Endpoints::ListOperations.build(context)
           when :list_tags_for_resource
             Aws::SsmSap::Endpoints::ListTagsForResource.build(context)
           when :put_resource_permission

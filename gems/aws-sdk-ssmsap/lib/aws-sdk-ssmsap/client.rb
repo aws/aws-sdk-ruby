@@ -371,10 +371,13 @@ module Aws::SsmSap
     # Removes permissions associated with the target database.
     #
     # @option params [String] :action_type
+    #   Delete or restore the permissions on the target database.
     #
     # @option params [String] :source_resource_arn
+    #   The Amazon Resource Name (ARN) of the source resource.
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #
     # @return [Types::DeleteResourcePermissionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -406,6 +409,7 @@ module Aws::SsmSap
     # Amazon EC2.
     #
     # @option params [required, String] :application_id
+    #   The ID of the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -428,8 +432,13 @@ module Aws::SsmSap
     # also returns the components of the application.
     #
     # @option params [String] :application_id
+    #   The ID of the application.
     #
     # @option params [String] :application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #
+    # @option params [String] :app_registry_arn
+    #   The Amazon Resource Name (ARN) of the application registry.
     #
     # @return [Types::GetApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -441,6 +450,7 @@ module Aws::SsmSap
     #   resp = client.get_application({
     #     application_id: "ApplicationId",
     #     application_arn: "SsmSapArn",
+    #     app_registry_arn: "AppRegistryArn",
     #   })
     #
     # @example Response structure
@@ -470,8 +480,10 @@ module Aws::SsmSap
     # Manager for SAP.
     #
     # @option params [required, String] :application_id
+    #   The ID of the application.
     #
     # @option params [required, String] :component_id
+    #   The ID of the component.
     #
     # @return [Types::GetComponentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -513,12 +525,16 @@ module Aws::SsmSap
     # Systems Manager for SAP.
     #
     # @option params [String] :application_id
+    #   The ID of the application.
     #
     # @option params [String] :component_id
+    #   The ID of the component.
     #
     # @option params [String] :database_id
+    #   The ID of the database.
     #
     # @option params [String] :database_arn
+    #   The Amazon Resource Name (ARN) of the database.
     #
     # @return [Types::GetDatabaseOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -565,6 +581,7 @@ module Aws::SsmSap
     # Gets the details of an operation by specifying the operation ID.
     #
     # @option params [required, String] :operation_id
+    #   The ID of the operation.
     #
     # @return [Types::GetOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -605,6 +622,7 @@ module Aws::SsmSap
     # @option params [String] :action_type
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #
     # @return [Types::GetResourcePermissionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -634,8 +652,12 @@ module Aws::SsmSap
     # SAP.
     #
     # @option params [String] :next_token
+    #   The token for the next page of results.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
     #
     # @return [Types::ListApplicationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -673,10 +695,18 @@ module Aws::SsmSap
     # Lists all the components registered with AWS Systems Manager for SAP.
     #
     # @option params [String] :application_id
+    #   The ID of the application.
     #
     # @option params [String] :next_token
+    #   The token for the next page of results.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #
+    #   If you do not specify a value for MaxResults, the request returns 50
+    #   items per page by default.
     #
     # @return [Types::ListComponentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -716,12 +746,19 @@ module Aws::SsmSap
     # Systems Manager for SAP.
     #
     # @option params [String] :application_id
+    #   The ID of the application.
     #
     # @option params [String] :component_id
+    #   The ID of the component.
     #
     # @option params [String] :next_token
+    #   The token for the next page of results.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value. If you do not specify a value for MaxResults, the
+    #   request returns 50 items per page by default.
     #
     # @return [Types::ListDatabasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -760,10 +797,76 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Lists the operations performed by AWS Systems Manager for SAP.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value. If you do not specify a value for MaxResults, the
+    #   request returns 50 items per page by default.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters of an operation.
+    #
+    # @return [Types::ListOperationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOperationsOutput#operations #operations} => Array&lt;Types::Operation&gt;
+    #   * {Types::ListOperationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_operations({
+    #     application_id: "ApplicationId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         value: "FilterValue", # required
+    #         operator: "Equals", # required, accepts Equals, GreaterThanOrEquals, LessThanOrEquals
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].type #=> String
+    #   resp.operations[0].status #=> String, one of "INPROGRESS", "SUCCESS", "ERROR"
+    #   resp.operations[0].status_message #=> String
+    #   resp.operations[0].properties #=> Hash
+    #   resp.operations[0].properties["String"] #=> String
+    #   resp.operations[0].resource_type #=> String
+    #   resp.operations[0].resource_id #=> String
+    #   resp.operations[0].resource_arn #=> String
+    #   resp.operations[0].start_time #=> Time
+    #   resp.operations[0].end_time #=> Time
+    #   resp.operations[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListOperations AWS API Documentation
+    #
+    # @overload list_operations(params = {})
+    # @param [Hash] params ({})
+    def list_operations(params = {}, options = {})
+      req = build_request(:list_operations, params)
+      req.send_request(options)
+    end
+
     # Lists all tags on an SAP HANA application and/or database registered
     # with AWS Systems Manager for SAP.
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -835,18 +938,25 @@ module Aws::SsmSap
     # Secrets Manager to manage SAP applications and components.
     #
     # @option params [required, String] :application_id
+    #   The ID of the application.
     #
     # @option params [required, String] :application_type
+    #   The type of the application.
     #
     # @option params [required, Array<String>] :instances
+    #   The Amazon EC2 instances on which your SAP application is running.
     #
     # @option params [String] :sap_instance_number
+    #   The SAP instance number of the application.
     #
     # @option params [String] :sid
+    #   The System ID of the application.
     #
     # @option params [Hash<String,String>] :tags
+    #   The tags to be attached to the SAP application.
     #
     # @option params [required, Array<Types::ApplicationCredential>] :credentials
+    #   The credentials of the SAP application.
     #
     # @return [Types::RegisterApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -898,8 +1008,10 @@ module Aws::SsmSap
     # Creates tag for a resource by specifying the ARN.
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Hash<String,String>] :tags
+    #   The tags on a resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -924,6 +1036,7 @@ module Aws::SsmSap
     # Delete the tags for a resource.
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Array<String>] :tag_keys
     #   Adds/updates or removes credentials for applications registered with
@@ -947,11 +1060,17 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Updates the settings of an application registered with AWS Systems
+    # Manager for SAP.
+    #
     # @option params [required, String] :application_id
+    #   The ID of the application.
     #
     # @option params [Array<Types::ApplicationCredential>] :credentials_to_add_or_update
+    #   The credentials to be added or updated.
     #
     # @option params [Array<Types::ApplicationCredential>] :credentials_to_remove
+    #   The credentials to be removed.
     #
     # @return [Types::UpdateApplicationSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1006,7 +1125,7 @@ module Aws::SsmSap
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

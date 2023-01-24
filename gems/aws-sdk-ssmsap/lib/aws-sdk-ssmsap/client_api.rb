@@ -44,6 +44,11 @@ module Aws::SsmSap
     DeleteResourcePermissionOutput = Shapes::StructureShape.new(name: 'DeleteResourcePermissionOutput')
     DeregisterApplicationInput = Shapes::StructureShape.new(name: 'DeregisterApplicationInput')
     DeregisterApplicationOutput = Shapes::StructureShape.new(name: 'DeregisterApplicationOutput')
+    Filter = Shapes::StructureShape.new(name: 'Filter')
+    FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FilterName = Shapes::StringShape.new(name: 'FilterName')
+    FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
+    FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     GetApplicationInput = Shapes::StructureShape.new(name: 'GetApplicationInput')
     GetApplicationOutput = Shapes::StructureShape.new(name: 'GetApplicationOutput')
     GetComponentInput = Shapes::StructureShape.new(name: 'GetComponentInput')
@@ -67,6 +72,8 @@ module Aws::SsmSap
     ListComponentsOutput = Shapes::StructureShape.new(name: 'ListComponentsOutput')
     ListDatabasesInput = Shapes::StructureShape.new(name: 'ListDatabasesInput')
     ListDatabasesOutput = Shapes::StructureShape.new(name: 'ListDatabasesOutput')
+    ListOperationsInput = Shapes::StructureShape.new(name: 'ListOperationsInput')
+    ListOperationsOutput = Shapes::StructureShape.new(name: 'ListOperationsOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -74,6 +81,7 @@ module Aws::SsmSap
     Operation = Shapes::StructureShape.new(name: 'Operation')
     OperationId = Shapes::StringShape.new(name: 'OperationId')
     OperationIdList = Shapes::ListShape.new(name: 'OperationIdList')
+    OperationList = Shapes::ListShape.new(name: 'OperationList')
     OperationProperties = Shapes::MapShape.new(name: 'OperationProperties')
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
@@ -189,8 +197,16 @@ module Aws::SsmSap
 
     DeregisterApplicationOutput.struct_class = Types::DeregisterApplicationOutput
 
+    Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "Name"))
+    Filter.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, required: true, location_name: "Value"))
+    Filter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "Operator"))
+    Filter.struct_class = Types::Filter
+
+    FilterList.member = Shapes::ShapeRef.new(shape: Filter)
+
     GetApplicationInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
     GetApplicationInput.add_member(:application_arn, Shapes::ShapeRef.new(shape: SsmSapArn, location_name: "ApplicationArn"))
+    GetApplicationInput.add_member(:app_registry_arn, Shapes::ShapeRef.new(shape: AppRegistryArn, location_name: "AppRegistryArn"))
     GetApplicationInput.struct_class = Types::GetApplicationInput
 
     GetApplicationOutput.add_member(:application, Shapes::ShapeRef.new(shape: Application, location_name: "Application"))
@@ -267,6 +283,16 @@ module Aws::SsmSap
     ListDatabasesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDatabasesOutput.struct_class = Types::ListDatabasesOutput
 
+    ListOperationsInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
+    ListOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOperationsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    ListOperationsInput.struct_class = Types::ListOperationsInput
+
+    ListOperationsOutput.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "Operations"))
+    ListOperationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOperationsOutput.struct_class = Types::ListOperationsOutput
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: SsmSapArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -287,6 +313,8 @@ module Aws::SsmSap
     Operation.struct_class = Types::Operation
 
     OperationIdList.member = Shapes::ShapeRef.new(shape: OperationId)
+
+    OperationList.member = Shapes::ShapeRef.new(shape: Operation)
 
     OperationProperties.key = Shapes::ShapeRef.new(shape: String)
     OperationProperties.value = Shapes::ShapeRef.new(shape: String)
@@ -476,6 +504,22 @@ module Aws::SsmSap
         o.input = Shapes::ShapeRef.new(shape: ListDatabasesInput)
         o.output = Shapes::ShapeRef.new(shape: ListDatabasesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-operations"
+        o.input = Shapes::ShapeRef.new(shape: ListOperationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListOperationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
