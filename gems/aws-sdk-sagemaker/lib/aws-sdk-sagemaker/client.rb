@@ -3995,7 +3995,7 @@ module Aws::SageMaker
     #     job_type: "Default", # required, accepts Default, Advanced
     #     role_arn: "RoleArn", # required
     #     input_config: { # required
-    #       model_package_version_arn: "ModelPackageArn", # required
+    #       model_package_version_arn: "ModelPackageArn",
     #       job_duration_in_seconds: 1,
     #       traffic_pattern: {
     #         traffic_type: "PHASES", # accepts PHASES
@@ -4037,6 +4037,7 @@ module Aws::SageMaker
     #         },
     #         nearest_model_name: "String",
     #         supported_instance_types: ["String"],
+    #         data_input_config: "RecommendationJobDataInputConfig",
     #       },
     #       endpoints: [
     #         {
@@ -4047,6 +4048,7 @@ module Aws::SageMaker
     #         security_group_ids: ["RecommendationJobVpcSecurityGroupId"], # required
     #         subnets: ["RecommendationJobVpcSubnetId"], # required
     #       },
+    #       model_name: "ModelName",
     #     },
     #     job_description: "RecommendationJobDescription",
     #     stopping_conditions: {
@@ -11474,12 +11476,14 @@ module Aws::SageMaker
     #   resp.input_config.container_config.nearest_model_name #=> String
     #   resp.input_config.container_config.supported_instance_types #=> Array
     #   resp.input_config.container_config.supported_instance_types[0] #=> String
+    #   resp.input_config.container_config.data_input_config #=> String
     #   resp.input_config.endpoints #=> Array
     #   resp.input_config.endpoints[0].endpoint_name #=> String
     #   resp.input_config.vpc_config.security_group_ids #=> Array
     #   resp.input_config.vpc_config.security_group_ids[0] #=> String
     #   resp.input_config.vpc_config.subnets #=> Array
     #   resp.input_config.vpc_config.subnets[0] #=> String
+    #   resp.input_config.model_name #=> String
     #   resp.stopping_conditions.max_invocations #=> Integer
     #   resp.stopping_conditions.model_latency_thresholds #=> Array
     #   resp.stopping_conditions.model_latency_thresholds[0].percentile #=> String
@@ -11489,6 +11493,8 @@ module Aws::SageMaker
     #   resp.inference_recommendations[0].metrics.cost_per_inference #=> Float
     #   resp.inference_recommendations[0].metrics.max_invocations #=> Integer
     #   resp.inference_recommendations[0].metrics.model_latency #=> Integer
+    #   resp.inference_recommendations[0].metrics.cpu_utilization #=> Float
+    #   resp.inference_recommendations[0].metrics.memory_utilization #=> Float
     #   resp.inference_recommendations[0].endpoint_configuration.endpoint_name #=> String
     #   resp.inference_recommendations[0].endpoint_configuration.variant_name #=> String
     #   resp.inference_recommendations[0].endpoint_configuration.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.p4d.24xlarge", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m6gd.large", "ml.m6gd.xlarge", "ml.m6gd.2xlarge", "ml.m6gd.4xlarge", "ml.m6gd.8xlarge", "ml.m6gd.12xlarge", "ml.m6gd.16xlarge", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c6gd.large", "ml.c6gd.xlarge", "ml.c6gd.2xlarge", "ml.c6gd.4xlarge", "ml.c6gd.8xlarge", "ml.c6gd.12xlarge", "ml.c6gd.16xlarge", "ml.c6gn.large", "ml.c6gn.xlarge", "ml.c6gn.2xlarge", "ml.c6gn.4xlarge", "ml.c6gn.8xlarge", "ml.c6gn.12xlarge", "ml.c6gn.16xlarge", "ml.r6g.large", "ml.r6g.xlarge", "ml.r6g.2xlarge", "ml.r6g.4xlarge", "ml.r6g.8xlarge", "ml.r6g.12xlarge", "ml.r6g.16xlarge", "ml.r6gd.large", "ml.r6gd.xlarge", "ml.r6gd.2xlarge", "ml.r6gd.4xlarge", "ml.r6gd.8xlarge", "ml.r6gd.12xlarge", "ml.r6gd.16xlarge", "ml.p4de.24xlarge"
@@ -11498,6 +11504,8 @@ module Aws::SageMaker
     #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].key #=> String
     #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].value_type #=> String
     #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].value #=> String
+    #   resp.inference_recommendations[0].model_configuration.compilation_job_name #=> String
+    #   resp.inference_recommendations[0].recommendation_id #=> String
     #   resp.endpoint_performances #=> Array
     #   resp.endpoint_performances[0].metrics.max_invocations #=> Integer
     #   resp.endpoint_performances[0].metrics.model_latency #=> Integer
@@ -16382,6 +16390,8 @@ module Aws::SageMaker
     #   resp.steps[0].inference_benchmark.metrics.cost_per_inference #=> Float
     #   resp.steps[0].inference_benchmark.metrics.max_invocations #=> Integer
     #   resp.steps[0].inference_benchmark.metrics.model_latency #=> Integer
+    #   resp.steps[0].inference_benchmark.metrics.cpu_utilization #=> Float
+    #   resp.steps[0].inference_benchmark.metrics.memory_utilization #=> Float
     #   resp.steps[0].inference_benchmark.endpoint_configuration.endpoint_name #=> String
     #   resp.steps[0].inference_benchmark.endpoint_configuration.variant_name #=> String
     #   resp.steps[0].inference_benchmark.endpoint_configuration.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.p4d.24xlarge", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m6gd.large", "ml.m6gd.xlarge", "ml.m6gd.2xlarge", "ml.m6gd.4xlarge", "ml.m6gd.8xlarge", "ml.m6gd.12xlarge", "ml.m6gd.16xlarge", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c6gd.large", "ml.c6gd.xlarge", "ml.c6gd.2xlarge", "ml.c6gd.4xlarge", "ml.c6gd.8xlarge", "ml.c6gd.12xlarge", "ml.c6gd.16xlarge", "ml.c6gn.large", "ml.c6gn.xlarge", "ml.c6gn.2xlarge", "ml.c6gn.4xlarge", "ml.c6gn.8xlarge", "ml.c6gn.12xlarge", "ml.c6gn.16xlarge", "ml.r6g.large", "ml.r6g.xlarge", "ml.r6g.2xlarge", "ml.r6g.4xlarge", "ml.r6g.8xlarge", "ml.r6g.12xlarge", "ml.r6g.16xlarge", "ml.r6gd.large", "ml.r6gd.xlarge", "ml.r6gd.2xlarge", "ml.r6gd.4xlarge", "ml.r6gd.8xlarge", "ml.r6gd.12xlarge", "ml.r6gd.16xlarge", "ml.p4de.24xlarge"
@@ -16391,6 +16401,7 @@ module Aws::SageMaker
     #   resp.steps[0].inference_benchmark.model_configuration.environment_parameters[0].key #=> String
     #   resp.steps[0].inference_benchmark.model_configuration.environment_parameters[0].value_type #=> String
     #   resp.steps[0].inference_benchmark.model_configuration.environment_parameters[0].value #=> String
+    #   resp.steps[0].inference_benchmark.model_configuration.compilation_job_name #=> String
     #   resp.steps[0].inference_benchmark.failure_reason #=> String
     #   resp.next_token #=> String
     #
@@ -22727,7 +22738,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

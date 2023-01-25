@@ -31,9 +31,17 @@ module Aws::RedshiftServerless
     # Redshift Serverless.
     #
     # @!attribute [rw] parameter_key
-    #   The key of the parameter. The options are `datestyle`,
+    #   The key of the parameter. The options are `auto_mv`, `datestyle`,
+    #   `enable_case_sensitivity_identifier`,
     #   `enable_user_activity_logging`, `query_group`, `search_path`, and
-    #   `max_query_execution_time`.
+    #   query monitoring metrics that let you define performance boundaries.
+    #   For more information about query monitoring rules and available
+    #   metrics, see [Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
     #   @return [String]
     #
     # @!attribute [rw] parameter_value
@@ -319,10 +327,18 @@ module Aws::RedshiftServerless
     #   @return [Integer]
     #
     # @!attribute [rw] config_parameters
-    #   An array of parameters to set for more control over a serverless
-    #   database. The options are `datestyle`,
+    #   An array of parameters to set for advanced control over a database.
+    #   The options are `auto_mv`, `datestyle`,
+    #   `enable_case_sensitivity_identifier`,
     #   `enable_user_activity_logging`, `query_group`, `search_path`, and
-    #   `max_query_execution_time`.
+    #   query monitoring metrics that let you define performance boundaries.
+    #   For more information about query monitoring rules and available
+    #   metrics, see [ Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
     #   @return [Array<Types::ConfigParameter>]
     #
     # @!attribute [rw] enhanced_vpc_routing
@@ -2087,21 +2103,25 @@ module Aws::RedshiftServerless
 
     # @!attribute [rw] admin_user_password
     #   The password of the administrator for the first database created in
-    #   the namespace.
+    #   the namespace. This parameter must be updated together with
+    #   `adminUsername`.
     #   @return [String]
     #
     # @!attribute [rw] admin_username
     #   The username of the administrator for the first database created in
-    #   the namespace.
+    #   the namespace. This parameter must be updated together with
+    #   `adminUserPassword`.
     #   @return [String]
     #
     # @!attribute [rw] default_iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to set as a default
-    #   in the namespace.
+    #   in the namespace. This parameter must be updated together with
+    #   `iamRoles`.
     #   @return [String]
     #
     # @!attribute [rw] iam_roles
-    #   A list of IAM roles to associate with the namespace.
+    #   A list of IAM roles to associate with the namespace. This parameter
+    #   must be updated together with `defaultIamRoleArn`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] kms_key_id
@@ -2115,7 +2135,8 @@ module Aws::RedshiftServerless
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_name
-    #   The name of the namespace.
+    #   The name of the namespace to update. You can't update the name of a
+    #   namespace once it is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateNamespaceRequest AWS API Documentation
@@ -2218,8 +2239,17 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] config_parameters
     #   An array of parameters to set for advanced control over a database.
-    #   The options are `datestyle`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, and `max_query_execution_time`.
+    #   The options are `auto_mv`, `datestyle`,
+    #   `enable_case_sensitivity_identifier`,
+    #   `enable_user_activity_logging`, `query_group`, `search_path`, and
+    #   query monitoring metrics that let you define performance boundaries.
+    #   For more information about query monitoring rules and available
+    #   metrics, see [ Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
     #   @return [Array<Types::ConfigParameter>]
     #
     # @!attribute [rw] enhanced_vpc_routing
@@ -2247,7 +2277,8 @@ module Aws::RedshiftServerless
     #   @return [Array<String>]
     #
     # @!attribute [rw] workgroup_name
-    #   The name of the workgroup to update.
+    #   The name of the workgroup to update. You can't update the name of a
+    #   workgroup once it is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateWorkgroupRequest AWS API Documentation
@@ -2396,9 +2427,18 @@ module Aws::RedshiftServerless
     #   @return [Integer]
     #
     # @!attribute [rw] config_parameters
-    #   An array of parameters to set for finer control over a database. The
-    #   options are `datestyle`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, and `max_query_execution_time`.
+    #   An array of parameters to set for advanced control over a database.
+    #   The options are `auto_mv`, `datestyle`,
+    #   `enable_case_sensitivity_identifier`,
+    #   `enable_user_activity_logging`, `query_group`, , `search_path`, and
+    #   query monitoring metrics that let you define performance boundaries.
+    #   For more information about query monitoring rules and available
+    #   metrics, see [ Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
     #   @return [Array<Types::ConfigParameter>]
     #
     # @!attribute [rw] creation_date

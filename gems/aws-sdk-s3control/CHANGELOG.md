@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-01-25)
+------------------
+
+* Feature - Add additional endpoint tests for S3 Control. Fix missing endpoint parameters for PutBucketVersioning and GetBucketVersioning. Prior to this fix, those operations may have resulted in an invalid endpoint being resolved.
+
 1.59.0 (2023-01-18)
 ------------------
 

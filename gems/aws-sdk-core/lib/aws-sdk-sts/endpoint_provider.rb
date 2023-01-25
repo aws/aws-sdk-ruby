@@ -18,54 +18,54 @@ module Aws::STS
       if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
         if Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint))
           if Aws::Endpoints::Matchers.string_equals?(region, "ap-northeast-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "ap-south-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "ap-southeast-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "ap-southeast-2")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "ca-central-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "eu-central-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "eu-north-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "eu-west-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "eu-west-2")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "eu-west-3")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "sa-east-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "us-east-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "us-east-2")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "us-west-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(region, "us-west-2")
-            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://sts.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1", "signingName"=>"sts"}]})
           end
-          return Aws::Endpoints::Endpoint.new(url: "https://sts.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"sts", "signingRegion"=>"#{region}"}]})
+          return Aws::Endpoints::Endpoint.new(url: "https://sts.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "signingName"=>"sts"}]})
         end
         if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)

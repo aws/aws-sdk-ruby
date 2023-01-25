@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2023-01-25)
+------------------
+
+* Feature - Added query monitoring rules as possible parameters for create and update workgroup operations.
+
 1.6.0 (2023-01-18)
 ------------------
 

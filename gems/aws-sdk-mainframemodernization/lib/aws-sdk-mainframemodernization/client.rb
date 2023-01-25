@@ -921,12 +921,14 @@ module Aws::MainframeModernization
     # @return [Types::GetBatchJobExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBatchJobExecutionResponse#application_id #application_id} => String
+    #   * {Types::GetBatchJobExecutionResponse#batch_job_identifier #batch_job_identifier} => Types::BatchJobIdentifier
     #   * {Types::GetBatchJobExecutionResponse#end_time #end_time} => Time
     #   * {Types::GetBatchJobExecutionResponse#execution_id #execution_id} => String
     #   * {Types::GetBatchJobExecutionResponse#job_id #job_id} => String
     #   * {Types::GetBatchJobExecutionResponse#job_name #job_name} => String
     #   * {Types::GetBatchJobExecutionResponse#job_type #job_type} => String
     #   * {Types::GetBatchJobExecutionResponse#job_user #job_user} => String
+    #   * {Types::GetBatchJobExecutionResponse#return_code #return_code} => String
     #   * {Types::GetBatchJobExecutionResponse#start_time #start_time} => Time
     #   * {Types::GetBatchJobExecutionResponse#status #status} => String
     #   * {Types::GetBatchJobExecutionResponse#status_reason #status_reason} => String
@@ -941,12 +943,16 @@ module Aws::MainframeModernization
     # @example Response structure
     #
     #   resp.application_id #=> String
+    #   resp.batch_job_identifier.file_batch_job_identifier.file_name #=> String
+    #   resp.batch_job_identifier.file_batch_job_identifier.folder_path #=> String
+    #   resp.batch_job_identifier.script_batch_job_identifier.script_name #=> String
     #   resp.end_time #=> Time
     #   resp.execution_id #=> String
     #   resp.job_id #=> String
     #   resp.job_name #=> String
     #   resp.job_type #=> String, one of "VSE", "JES2", "JES3"
     #   resp.job_user #=> String
+    #   resp.return_code #=> String
     #   resp.start_time #=> Time
     #   resp.status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Succeeded With Warning"
     #   resp.status_reason #=> String
@@ -1396,11 +1402,15 @@ module Aws::MainframeModernization
     #
     #   resp.batch_job_executions #=> Array
     #   resp.batch_job_executions[0].application_id #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.file_batch_job_identifier.file_name #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.file_batch_job_identifier.folder_path #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.script_batch_job_identifier.script_name #=> String
     #   resp.batch_job_executions[0].end_time #=> Time
     #   resp.batch_job_executions[0].execution_id #=> String
     #   resp.batch_job_executions[0].job_id #=> String
     #   resp.batch_job_executions[0].job_name #=> String
     #   resp.batch_job_executions[0].job_type #=> String, one of "VSE", "JES2", "JES3"
+    #   resp.batch_job_executions[0].return_code #=> String
     #   resp.batch_job_executions[0].start_time #=> Time
     #   resp.batch_job_executions[0].status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Succeeded With Warning"
     #   resp.next_token #=> String
@@ -1977,7 +1987,7 @@ module Aws::MainframeModernization
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mainframemodernization'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

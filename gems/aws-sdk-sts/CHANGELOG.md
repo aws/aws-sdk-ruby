@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-01-25)
+------------------
+
+* Feature - Doc only change to update wording in a key topic
+
 1.8.0 (2022-11-17)
 ------------------
 

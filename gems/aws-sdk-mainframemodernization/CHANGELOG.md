@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2023-01-25)
+------------------
+
+* Feature - Add returnCode, batchJobIdentifier in GetBatchJobExecution response, for user to view the batch job execution result & unique identifier from engine. Also removed unused headers from REST APIs
+
 1.3.0 (2023-01-18)
 ------------------
 

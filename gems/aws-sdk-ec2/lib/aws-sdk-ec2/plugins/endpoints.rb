@@ -96,6 +96,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::AssociateIamInstanceProfile.build(context)
           when :associate_instance_event_window
             Aws::EC2::Endpoints::AssociateInstanceEventWindow.build(context)
+          when :associate_ipam_resource_discovery
+            Aws::EC2::Endpoints::AssociateIpamResourceDiscovery.build(context)
           when :associate_route_table
             Aws::EC2::Endpoints::AssociateRouteTable.build(context)
           when :associate_subnet_cidr_block
@@ -200,6 +202,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::CreateIpam.build(context)
           when :create_ipam_pool
             Aws::EC2::Endpoints::CreateIpamPool.build(context)
+          when :create_ipam_resource_discovery
+            Aws::EC2::Endpoints::CreateIpamResourceDiscovery.build(context)
           when :create_ipam_scope
             Aws::EC2::Endpoints::CreateIpamScope.build(context)
           when :create_key_pair
@@ -348,6 +352,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DeleteIpam.build(context)
           when :delete_ipam_pool
             Aws::EC2::Endpoints::DeleteIpamPool.build(context)
+          when :delete_ipam_resource_discovery
+            Aws::EC2::Endpoints::DeleteIpamResourceDiscovery.build(context)
           when :delete_ipam_scope
             Aws::EC2::Endpoints::DeleteIpamScope.build(context)
           when :delete_key_pair
@@ -584,6 +590,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeInternetGateways.build(context)
           when :describe_ipam_pools
             Aws::EC2::Endpoints::DescribeIpamPools.build(context)
+          when :describe_ipam_resource_discoveries
+            Aws::EC2::Endpoints::DescribeIpamResourceDiscoveries.build(context)
+          when :describe_ipam_resource_discovery_associations
+            Aws::EC2::Endpoints::DescribeIpamResourceDiscoveryAssociations.build(context)
           when :describe_ipam_scopes
             Aws::EC2::Endpoints::DescribeIpamScopes.build(context)
           when :describe_ipams
@@ -806,6 +816,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisassociateIamInstanceProfile.build(context)
           when :disassociate_instance_event_window
             Aws::EC2::Endpoints::DisassociateInstanceEventWindow.build(context)
+          when :disassociate_ipam_resource_discovery
+            Aws::EC2::Endpoints::DisassociateIpamResourceDiscovery.build(context)
           when :disassociate_route_table
             Aws::EC2::Endpoints::DisassociateRouteTable.build(context)
           when :disassociate_subnet_cidr_block
@@ -888,6 +900,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetInstanceUefiData.build(context)
           when :get_ipam_address_history
             Aws::EC2::Endpoints::GetIpamAddressHistory.build(context)
+          when :get_ipam_discovered_accounts
+            Aws::EC2::Endpoints::GetIpamDiscoveredAccounts.build(context)
+          when :get_ipam_discovered_resource_cidrs
+            Aws::EC2::Endpoints::GetIpamDiscoveredResourceCidrs.build(context)
           when :get_ipam_pool_allocations
             Aws::EC2::Endpoints::GetIpamPoolAllocations.build(context)
           when :get_ipam_pool_cidrs
@@ -1000,6 +1016,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::ModifyIpamPool.build(context)
           when :modify_ipam_resource_cidr
             Aws::EC2::Endpoints::ModifyIpamResourceCidr.build(context)
+          when :modify_ipam_resource_discovery
+            Aws::EC2::Endpoints::ModifyIpamResourceDiscovery.build(context)
           when :modify_ipam_scope
             Aws::EC2::Endpoints::ModifyIpamScope.build(context)
           when :modify_launch_template

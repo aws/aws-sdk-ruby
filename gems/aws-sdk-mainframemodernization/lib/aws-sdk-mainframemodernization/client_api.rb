@@ -227,11 +227,13 @@ module Aws::MainframeModernization
     BatchJobDefinitions.member = Shapes::ShapeRef.new(shape: BatchJobDefinition)
 
     BatchJobExecutionSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "applicationId"))
+    BatchJobExecutionSummary.add_member(:batch_job_identifier, Shapes::ShapeRef.new(shape: BatchJobIdentifier, location_name: "batchJobIdentifier"))
     BatchJobExecutionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     BatchJobExecutionSummary.add_member(:execution_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "executionId"))
     BatchJobExecutionSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: String100, location_name: "jobId"))
     BatchJobExecutionSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: String100, location_name: "jobName"))
     BatchJobExecutionSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: BatchJobType, location_name: "jobType"))
+    BatchJobExecutionSummary.add_member(:return_code, Shapes::ShapeRef.new(shape: String, location_name: "returnCode"))
     BatchJobExecutionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     BatchJobExecutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: BatchJobExecutionStatus, required: true, location_name: "status"))
     BatchJobExecutionSummary.struct_class = Types::BatchJobExecutionSummary
@@ -503,12 +505,14 @@ module Aws::MainframeModernization
     GetBatchJobExecutionRequest.struct_class = Types::GetBatchJobExecutionRequest
 
     GetBatchJobExecutionResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "applicationId"))
+    GetBatchJobExecutionResponse.add_member(:batch_job_identifier, Shapes::ShapeRef.new(shape: BatchJobIdentifier, location_name: "batchJobIdentifier"))
     GetBatchJobExecutionResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     GetBatchJobExecutionResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "executionId"))
     GetBatchJobExecutionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: String100, location_name: "jobId"))
     GetBatchJobExecutionResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: String100, location_name: "jobName"))
     GetBatchJobExecutionResponse.add_member(:job_type, Shapes::ShapeRef.new(shape: BatchJobType, location_name: "jobType"))
     GetBatchJobExecutionResponse.add_member(:job_user, Shapes::ShapeRef.new(shape: String100, location_name: "jobUser"))
+    GetBatchJobExecutionResponse.add_member(:return_code, Shapes::ShapeRef.new(shape: String, location_name: "returnCode"))
     GetBatchJobExecutionResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     GetBatchJobExecutionResponse.add_member(:status, Shapes::ShapeRef.new(shape: BatchJobExecutionStatus, required: true, location_name: "status"))
     GetBatchJobExecutionResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))

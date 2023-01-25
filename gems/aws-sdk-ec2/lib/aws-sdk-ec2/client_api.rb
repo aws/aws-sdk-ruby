@@ -126,6 +126,8 @@ module Aws::EC2
     AssociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'AssociateIamInstanceProfileResult')
     AssociateInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'AssociateInstanceEventWindowRequest')
     AssociateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'AssociateInstanceEventWindowResult')
+    AssociateIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'AssociateIpamResourceDiscoveryRequest')
+    AssociateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'AssociateIpamResourceDiscoveryResult')
     AssociateRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateRouteTableRequest')
     AssociateRouteTableResult = Shapes::StructureShape.new(name: 'AssociateRouteTableResult')
     AssociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockRequest')
@@ -412,6 +414,8 @@ module Aws::EC2
     CreateIpamPoolRequest = Shapes::StructureShape.new(name: 'CreateIpamPoolRequest')
     CreateIpamPoolResult = Shapes::StructureShape.new(name: 'CreateIpamPoolResult')
     CreateIpamRequest = Shapes::StructureShape.new(name: 'CreateIpamRequest')
+    CreateIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'CreateIpamResourceDiscoveryRequest')
+    CreateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'CreateIpamResourceDiscoveryResult')
     CreateIpamResult = Shapes::StructureShape.new(name: 'CreateIpamResult')
     CreateIpamScopeRequest = Shapes::StructureShape.new(name: 'CreateIpamScopeRequest')
     CreateIpamScopeResult = Shapes::StructureShape.new(name: 'CreateIpamScopeResult')
@@ -593,6 +597,8 @@ module Aws::EC2
     DeleteIpamPoolRequest = Shapes::StructureShape.new(name: 'DeleteIpamPoolRequest')
     DeleteIpamPoolResult = Shapes::StructureShape.new(name: 'DeleteIpamPoolResult')
     DeleteIpamRequest = Shapes::StructureShape.new(name: 'DeleteIpamRequest')
+    DeleteIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'DeleteIpamResourceDiscoveryRequest')
+    DeleteIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'DeleteIpamResourceDiscoveryResult')
     DeleteIpamResult = Shapes::StructureShape.new(name: 'DeleteIpamResult')
     DeleteIpamScopeRequest = Shapes::StructureShape.new(name: 'DeleteIpamScopeRequest')
     DeleteIpamScopeResult = Shapes::StructureShape.new(name: 'DeleteIpamScopeResult')
@@ -849,6 +855,10 @@ module Aws::EC2
     DescribeInternetGatewaysResult = Shapes::StructureShape.new(name: 'DescribeInternetGatewaysResult')
     DescribeIpamPoolsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoolsRequest')
     DescribeIpamPoolsResult = Shapes::StructureShape.new(name: 'DescribeIpamPoolsResult')
+    DescribeIpamResourceDiscoveriesRequest = Shapes::StructureShape.new(name: 'DescribeIpamResourceDiscoveriesRequest')
+    DescribeIpamResourceDiscoveriesResult = Shapes::StructureShape.new(name: 'DescribeIpamResourceDiscoveriesResult')
+    DescribeIpamResourceDiscoveryAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeIpamResourceDiscoveryAssociationsRequest')
+    DescribeIpamResourceDiscoveryAssociationsResult = Shapes::StructureShape.new(name: 'DescribeIpamResourceDiscoveryAssociationsResult')
     DescribeIpamScopesRequest = Shapes::StructureShape.new(name: 'DescribeIpamScopesRequest')
     DescribeIpamScopesResult = Shapes::StructureShape.new(name: 'DescribeIpamScopesResult')
     DescribeIpamsRequest = Shapes::StructureShape.new(name: 'DescribeIpamsRequest')
@@ -1116,6 +1126,8 @@ module Aws::EC2
     DisassociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'DisassociateIamInstanceProfileResult')
     DisassociateInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'DisassociateInstanceEventWindowRequest')
     DisassociateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'DisassociateInstanceEventWindowResult')
+    DisassociateIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'DisassociateIpamResourceDiscoveryRequest')
+    DisassociateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'DisassociateIpamResourceDiscoveryResult')
     DisassociateRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateRouteTableRequest')
     DisassociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockRequest')
     DisassociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockResult')
@@ -1370,6 +1382,10 @@ module Aws::EC2
     GetInstanceUefiDataResult = Shapes::StructureShape.new(name: 'GetInstanceUefiDataResult')
     GetIpamAddressHistoryRequest = Shapes::StructureShape.new(name: 'GetIpamAddressHistoryRequest')
     GetIpamAddressHistoryResult = Shapes::StructureShape.new(name: 'GetIpamAddressHistoryResult')
+    GetIpamDiscoveredAccountsRequest = Shapes::StructureShape.new(name: 'GetIpamDiscoveredAccountsRequest')
+    GetIpamDiscoveredAccountsResult = Shapes::StructureShape.new(name: 'GetIpamDiscoveredAccountsResult')
+    GetIpamDiscoveredResourceCidrsRequest = Shapes::StructureShape.new(name: 'GetIpamDiscoveredResourceCidrsRequest')
+    GetIpamDiscoveredResourceCidrsResult = Shapes::StructureShape.new(name: 'GetIpamDiscoveredResourceCidrsResult')
     GetIpamPoolAllocationsMaxResults = Shapes::IntegerShape.new(name: 'GetIpamPoolAllocationsMaxResults')
     GetIpamPoolAllocationsRequest = Shapes::StructureShape.new(name: 'GetIpamPoolAllocationsRequest')
     GetIpamPoolAllocationsResult = Shapes::StructureShape.new(name: 'GetIpamPoolAllocationsResult')
@@ -1655,8 +1671,15 @@ module Aws::EC2
     IpamAddressHistoryRecord = Shapes::StructureShape.new(name: 'IpamAddressHistoryRecord')
     IpamAddressHistoryRecordSet = Shapes::ListShape.new(name: 'IpamAddressHistoryRecordSet')
     IpamAddressHistoryResourceType = Shapes::StringShape.new(name: 'IpamAddressHistoryResourceType')
+    IpamAssociatedResourceDiscoveryStatus = Shapes::StringShape.new(name: 'IpamAssociatedResourceDiscoveryStatus')
     IpamCidrAuthorizationContext = Shapes::StructureShape.new(name: 'IpamCidrAuthorizationContext')
     IpamComplianceStatus = Shapes::StringShape.new(name: 'IpamComplianceStatus')
+    IpamDiscoveredAccount = Shapes::StructureShape.new(name: 'IpamDiscoveredAccount')
+    IpamDiscoveredAccountSet = Shapes::ListShape.new(name: 'IpamDiscoveredAccountSet')
+    IpamDiscoveredResourceCidr = Shapes::StructureShape.new(name: 'IpamDiscoveredResourceCidr')
+    IpamDiscoveredResourceCidrSet = Shapes::ListShape.new(name: 'IpamDiscoveredResourceCidrSet')
+    IpamDiscoveryFailureCode = Shapes::StringShape.new(name: 'IpamDiscoveryFailureCode')
+    IpamDiscoveryFailureReason = Shapes::StructureShape.new(name: 'IpamDiscoveryFailureReason')
     IpamId = Shapes::StringShape.new(name: 'IpamId')
     IpamManagementState = Shapes::StringShape.new(name: 'IpamManagementState')
     IpamMaxResults = Shapes::IntegerShape.new(name: 'IpamMaxResults')
@@ -1674,13 +1697,23 @@ module Aws::EC2
     IpamPoolCidr = Shapes::StructureShape.new(name: 'IpamPoolCidr')
     IpamPoolCidrFailureCode = Shapes::StringShape.new(name: 'IpamPoolCidrFailureCode')
     IpamPoolCidrFailureReason = Shapes::StructureShape.new(name: 'IpamPoolCidrFailureReason')
+    IpamPoolCidrId = Shapes::StringShape.new(name: 'IpamPoolCidrId')
     IpamPoolCidrSet = Shapes::ListShape.new(name: 'IpamPoolCidrSet')
     IpamPoolCidrState = Shapes::StringShape.new(name: 'IpamPoolCidrState')
     IpamPoolId = Shapes::StringShape.new(name: 'IpamPoolId')
+    IpamPoolPublicIpSource = Shapes::StringShape.new(name: 'IpamPoolPublicIpSource')
     IpamPoolSet = Shapes::ListShape.new(name: 'IpamPoolSet')
     IpamPoolState = Shapes::StringShape.new(name: 'IpamPoolState')
     IpamResourceCidr = Shapes::StructureShape.new(name: 'IpamResourceCidr')
     IpamResourceCidrSet = Shapes::ListShape.new(name: 'IpamResourceCidrSet')
+    IpamResourceDiscovery = Shapes::StructureShape.new(name: 'IpamResourceDiscovery')
+    IpamResourceDiscoveryAssociation = Shapes::StructureShape.new(name: 'IpamResourceDiscoveryAssociation')
+    IpamResourceDiscoveryAssociationId = Shapes::StringShape.new(name: 'IpamResourceDiscoveryAssociationId')
+    IpamResourceDiscoveryAssociationSet = Shapes::ListShape.new(name: 'IpamResourceDiscoveryAssociationSet')
+    IpamResourceDiscoveryAssociationState = Shapes::StringShape.new(name: 'IpamResourceDiscoveryAssociationState')
+    IpamResourceDiscoveryId = Shapes::StringShape.new(name: 'IpamResourceDiscoveryId')
+    IpamResourceDiscoverySet = Shapes::ListShape.new(name: 'IpamResourceDiscoverySet')
+    IpamResourceDiscoveryState = Shapes::StringShape.new(name: 'IpamResourceDiscoveryState')
     IpamResourceTag = Shapes::StructureShape.new(name: 'IpamResourceTag')
     IpamResourceTagList = Shapes::ListShape.new(name: 'IpamResourceTagList')
     IpamResourceType = Shapes::StringShape.new(name: 'IpamResourceType')
@@ -1929,6 +1962,8 @@ module Aws::EC2
     ModifyIpamRequest = Shapes::StructureShape.new(name: 'ModifyIpamRequest')
     ModifyIpamResourceCidrRequest = Shapes::StructureShape.new(name: 'ModifyIpamResourceCidrRequest')
     ModifyIpamResourceCidrResult = Shapes::StructureShape.new(name: 'ModifyIpamResourceCidrResult')
+    ModifyIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'ModifyIpamResourceDiscoveryRequest')
+    ModifyIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'ModifyIpamResourceDiscoveryResult')
     ModifyIpamResult = Shapes::StructureShape.new(name: 'ModifyIpamResult')
     ModifyIpamScopeRequest = Shapes::StructureShape.new(name: 'ModifyIpamScopeRequest')
     ModifyIpamScopeResult = Shapes::StructureShape.new(name: 'ModifyIpamScopeResult')
@@ -3330,6 +3365,16 @@ module Aws::EC2
     AssociateInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
     AssociateInstanceEventWindowResult.struct_class = Types::AssociateInstanceEventWindowResult
 
+    AssociateIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateIpamResourceDiscoveryRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
+    AssociateIpamResourceDiscoveryRequest.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, required: true, location_name: "IpamResourceDiscoveryId"))
+    AssociateIpamResourceDiscoveryRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    AssociateIpamResourceDiscoveryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateIpamResourceDiscoveryRequest.struct_class = Types::AssociateIpamResourceDiscoveryRequest
+
+    AssociateIpamResourceDiscoveryResult.add_member(:ipam_resource_discovery_association, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociation, location_name: "ipamResourceDiscoveryAssociation"))
+    AssociateIpamResourceDiscoveryResult.struct_class = Types::AssociateIpamResourceDiscoveryResult
+
     AssociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AssociateRouteTableRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "routeTableId"))
     AssociateRouteTableRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
@@ -4396,6 +4441,7 @@ module Aws::EC2
     CreateIpamPoolRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateIpamPoolRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateIpamPoolRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: IpamPoolAwsService, location_name: "AwsService"))
+    CreateIpamPoolRequest.add_member(:public_ip_source, Shapes::ShapeRef.new(shape: IpamPoolPublicIpSource, location_name: "PublicIpSource"))
     CreateIpamPoolRequest.struct_class = Types::CreateIpamPoolRequest
 
     CreateIpamPoolResult.add_member(:ipam_pool, Shapes::ShapeRef.new(shape: IpamPool, location_name: "ipamPool"))
@@ -4407,6 +4453,16 @@ module Aws::EC2
     CreateIpamRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateIpamRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateIpamRequest.struct_class = Types::CreateIpamRequest
+
+    CreateIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateIpamResourceDiscoveryRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateIpamResourceDiscoveryRequest.add_member(:operating_regions, Shapes::ShapeRef.new(shape: AddIpamOperatingRegionSet, location_name: "OperatingRegion"))
+    CreateIpamResourceDiscoveryRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateIpamResourceDiscoveryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIpamResourceDiscoveryRequest.struct_class = Types::CreateIpamResourceDiscoveryRequest
+
+    CreateIpamResourceDiscoveryResult.add_member(:ipam_resource_discovery, Shapes::ShapeRef.new(shape: IpamResourceDiscovery, location_name: "ipamResourceDiscovery"))
+    CreateIpamResourceDiscoveryResult.struct_class = Types::CreateIpamResourceDiscoveryResult
 
     CreateIpamResult.add_member(:ipam, Shapes::ShapeRef.new(shape: Ipam, location_name: "ipam"))
     CreateIpamResult.struct_class = Types::CreateIpamResult
@@ -5289,6 +5345,13 @@ module Aws::EC2
     DeleteIpamRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
     DeleteIpamRequest.add_member(:cascade, Shapes::ShapeRef.new(shape: Boolean, location_name: "Cascade"))
     DeleteIpamRequest.struct_class = Types::DeleteIpamRequest
+
+    DeleteIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteIpamResourceDiscoveryRequest.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, required: true, location_name: "IpamResourceDiscoveryId"))
+    DeleteIpamResourceDiscoveryRequest.struct_class = Types::DeleteIpamResourceDiscoveryRequest
+
+    DeleteIpamResourceDiscoveryResult.add_member(:ipam_resource_discovery, Shapes::ShapeRef.new(shape: IpamResourceDiscovery, location_name: "ipamResourceDiscovery"))
+    DeleteIpamResourceDiscoveryResult.struct_class = Types::DeleteIpamResourceDiscoveryResult
 
     DeleteIpamResult.add_member(:ipam, Shapes::ShapeRef.new(shape: Ipam, location_name: "ipam"))
     DeleteIpamResult.struct_class = Types::DeleteIpamResult
@@ -6332,6 +6395,28 @@ module Aws::EC2
     DescribeIpamPoolsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeIpamPoolsResult.add_member(:ipam_pools, Shapes::ShapeRef.new(shape: IpamPoolSet, location_name: "ipamPoolSet"))
     DescribeIpamPoolsResult.struct_class = Types::DescribeIpamPoolsResult
+
+    DescribeIpamResourceDiscoveriesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeIpamResourceDiscoveriesRequest.add_member(:ipam_resource_discovery_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "IpamResourceDiscoveryId"))
+    DescribeIpamResourceDiscoveriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIpamResourceDiscoveriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    DescribeIpamResourceDiscoveriesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeIpamResourceDiscoveriesRequest.struct_class = Types::DescribeIpamResourceDiscoveriesRequest
+
+    DescribeIpamResourceDiscoveriesResult.add_member(:ipam_resource_discoveries, Shapes::ShapeRef.new(shape: IpamResourceDiscoverySet, location_name: "ipamResourceDiscoverySet"))
+    DescribeIpamResourceDiscoveriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeIpamResourceDiscoveriesResult.struct_class = Types::DescribeIpamResourceDiscoveriesResult
+
+    DescribeIpamResourceDiscoveryAssociationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeIpamResourceDiscoveryAssociationsRequest.add_member(:ipam_resource_discovery_association_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "IpamResourceDiscoveryAssociationId"))
+    DescribeIpamResourceDiscoveryAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIpamResourceDiscoveryAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    DescribeIpamResourceDiscoveryAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeIpamResourceDiscoveryAssociationsRequest.struct_class = Types::DescribeIpamResourceDiscoveryAssociationsRequest
+
+    DescribeIpamResourceDiscoveryAssociationsResult.add_member(:ipam_resource_discovery_associations, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociationSet, location_name: "ipamResourceDiscoveryAssociationSet"))
+    DescribeIpamResourceDiscoveryAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeIpamResourceDiscoveryAssociationsResult.struct_class = Types::DescribeIpamResourceDiscoveryAssociationsResult
 
     DescribeIpamScopesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeIpamScopesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -7541,6 +7626,13 @@ module Aws::EC2
     DisassociateInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
     DisassociateInstanceEventWindowResult.struct_class = Types::DisassociateInstanceEventWindowResult
 
+    DisassociateIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateIpamResourceDiscoveryRequest.add_member(:ipam_resource_discovery_association_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociationId, required: true, location_name: "IpamResourceDiscoveryAssociationId"))
+    DisassociateIpamResourceDiscoveryRequest.struct_class = Types::DisassociateIpamResourceDiscoveryRequest
+
+    DisassociateIpamResourceDiscoveryResult.add_member(:ipam_resource_discovery_association, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociation, location_name: "ipamResourceDiscoveryAssociation"))
+    DisassociateIpamResourceDiscoveryResult.struct_class = Types::DisassociateIpamResourceDiscoveryResult
+
     DisassociateRouteTableRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: RouteTableAssociationId, required: true, location_name: "associationId"))
     DisassociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateRouteTableRequest.struct_class = Types::DisassociateRouteTableRequest
@@ -8427,6 +8519,30 @@ module Aws::EC2
     GetIpamAddressHistoryResult.add_member(:history_records, Shapes::ShapeRef.new(shape: IpamAddressHistoryRecordSet, location_name: "historyRecordSet"))
     GetIpamAddressHistoryResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetIpamAddressHistoryResult.struct_class = Types::GetIpamAddressHistoryResult
+
+    GetIpamDiscoveredAccountsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetIpamDiscoveredAccountsRequest.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, required: true, location_name: "IpamResourceDiscoveryId"))
+    GetIpamDiscoveredAccountsRequest.add_member(:discovery_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DiscoveryRegion"))
+    GetIpamDiscoveredAccountsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetIpamDiscoveredAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetIpamDiscoveredAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    GetIpamDiscoveredAccountsRequest.struct_class = Types::GetIpamDiscoveredAccountsRequest
+
+    GetIpamDiscoveredAccountsResult.add_member(:ipam_discovered_accounts, Shapes::ShapeRef.new(shape: IpamDiscoveredAccountSet, location_name: "ipamDiscoveredAccountSet"))
+    GetIpamDiscoveredAccountsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetIpamDiscoveredAccountsResult.struct_class = Types::GetIpamDiscoveredAccountsResult
+
+    GetIpamDiscoveredResourceCidrsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetIpamDiscoveredResourceCidrsRequest.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, required: true, location_name: "IpamResourceDiscoveryId"))
+    GetIpamDiscoveredResourceCidrsRequest.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceRegion"))
+    GetIpamDiscoveredResourceCidrsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetIpamDiscoveredResourceCidrsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetIpamDiscoveredResourceCidrsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    GetIpamDiscoveredResourceCidrsRequest.struct_class = Types::GetIpamDiscoveredResourceCidrsRequest
+
+    GetIpamDiscoveredResourceCidrsResult.add_member(:ipam_discovered_resource_cidrs, Shapes::ShapeRef.new(shape: IpamDiscoveredResourceCidrSet, location_name: "ipamDiscoveredResourceCidrSet"))
+    GetIpamDiscoveredResourceCidrsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetIpamDiscoveredResourceCidrsResult.struct_class = Types::GetIpamDiscoveredResourceCidrsResult
 
     GetIpamPoolAllocationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetIpamPoolAllocationsRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
@@ -9614,6 +9730,9 @@ module Aws::EC2
     Ipam.add_member(:operating_regions, Shapes::ShapeRef.new(shape: IpamOperatingRegionSet, location_name: "operatingRegionSet"))
     Ipam.add_member(:state, Shapes::ShapeRef.new(shape: IpamState, location_name: "state"))
     Ipam.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    Ipam.add_member(:default_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, location_name: "defaultResourceDiscoveryId"))
+    Ipam.add_member(:default_resource_discovery_association_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociationId, location_name: "defaultResourceDiscoveryAssociationId"))
+    Ipam.add_member(:resource_discovery_association_count, Shapes::ShapeRef.new(shape: Integer, location_name: "resourceDiscoveryAssociationCount"))
     Ipam.struct_class = Types::Ipam
 
     IpamAddressHistoryRecord.add_member(:resource_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwnerId"))
@@ -9634,6 +9753,33 @@ module Aws::EC2
     IpamCidrAuthorizationContext.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     IpamCidrAuthorizationContext.add_member(:signature, Shapes::ShapeRef.new(shape: String, location_name: "Signature"))
     IpamCidrAuthorizationContext.struct_class = Types::IpamCidrAuthorizationContext
+
+    IpamDiscoveredAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    IpamDiscoveredAccount.add_member(:discovery_region, Shapes::ShapeRef.new(shape: String, location_name: "discoveryRegion"))
+    IpamDiscoveredAccount.add_member(:failure_reason, Shapes::ShapeRef.new(shape: IpamDiscoveryFailureReason, location_name: "failureReason"))
+    IpamDiscoveredAccount.add_member(:last_attempted_discovery_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastAttemptedDiscoveryTime"))
+    IpamDiscoveredAccount.add_member(:last_successful_discovery_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastSuccessfulDiscoveryTime"))
+    IpamDiscoveredAccount.struct_class = Types::IpamDiscoveredAccount
+
+    IpamDiscoveredAccountSet.member = Shapes::ShapeRef.new(shape: IpamDiscoveredAccount, location_name: "item")
+
+    IpamDiscoveredResourceCidr.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, location_name: "ipamResourceDiscoveryId"))
+    IpamDiscoveredResourceCidr.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "resourceRegion"))
+    IpamDiscoveredResourceCidr.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    IpamDiscoveredResourceCidr.add_member(:resource_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwnerId"))
+    IpamDiscoveredResourceCidr.add_member(:resource_cidr, Shapes::ShapeRef.new(shape: String, location_name: "resourceCidr"))
+    IpamDiscoveredResourceCidr.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamResourceType, location_name: "resourceType"))
+    IpamDiscoveredResourceCidr.add_member(:resource_tags, Shapes::ShapeRef.new(shape: IpamResourceTagList, location_name: "resourceTagSet"))
+    IpamDiscoveredResourceCidr.add_member(:ip_usage, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "ipUsage"))
+    IpamDiscoveredResourceCidr.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    IpamDiscoveredResourceCidr.add_member(:sample_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "sampleTime"))
+    IpamDiscoveredResourceCidr.struct_class = Types::IpamDiscoveredResourceCidr
+
+    IpamDiscoveredResourceCidrSet.member = Shapes::ShapeRef.new(shape: IpamDiscoveredResourceCidr, location_name: "item")
+
+    IpamDiscoveryFailureReason.add_member(:code, Shapes::ShapeRef.new(shape: IpamDiscoveryFailureCode, location_name: "code"))
+    IpamDiscoveryFailureReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    IpamDiscoveryFailureReason.struct_class = Types::IpamDiscoveryFailureReason
 
     IpamOperatingRegion.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "regionName"))
     IpamOperatingRegion.struct_class = Types::IpamOperatingRegion
@@ -9662,6 +9808,7 @@ module Aws::EC2
     IpamPool.add_member(:allocation_resource_tags, Shapes::ShapeRef.new(shape: IpamResourceTagList, location_name: "allocationResourceTagSet"))
     IpamPool.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     IpamPool.add_member(:aws_service, Shapes::ShapeRef.new(shape: IpamPoolAwsService, location_name: "awsService"))
+    IpamPool.add_member(:public_ip_source, Shapes::ShapeRef.new(shape: IpamPoolPublicIpSource, location_name: "publicIpSource"))
     IpamPool.struct_class = Types::IpamPool
 
     IpamPoolAllocation.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
@@ -9680,6 +9827,8 @@ module Aws::EC2
     IpamPoolCidr.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
     IpamPoolCidr.add_member(:state, Shapes::ShapeRef.new(shape: IpamPoolCidrState, location_name: "state"))
     IpamPoolCidr.add_member(:failure_reason, Shapes::ShapeRef.new(shape: IpamPoolCidrFailureReason, location_name: "failureReason"))
+    IpamPoolCidr.add_member(:ipam_pool_cidr_id, Shapes::ShapeRef.new(shape: IpamPoolCidrId, location_name: "ipamPoolCidrId"))
+    IpamPoolCidr.add_member(:netmask_length, Shapes::ShapeRef.new(shape: Integer, location_name: "netmaskLength"))
     IpamPoolCidr.struct_class = Types::IpamPoolCidr
 
     IpamPoolCidrFailureReason.add_member(:code, Shapes::ShapeRef.new(shape: IpamPoolCidrFailureCode, location_name: "code"))
@@ -9708,6 +9857,34 @@ module Aws::EC2
     IpamResourceCidr.struct_class = Types::IpamResourceCidr
 
     IpamResourceCidrSet.member = Shapes::ShapeRef.new(shape: IpamResourceCidr, location_name: "item")
+
+    IpamResourceDiscovery.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    IpamResourceDiscovery.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, location_name: "ipamResourceDiscoveryId"))
+    IpamResourceDiscovery.add_member(:ipam_resource_discovery_arn, Shapes::ShapeRef.new(shape: String, location_name: "ipamResourceDiscoveryArn"))
+    IpamResourceDiscovery.add_member(:ipam_resource_discovery_region, Shapes::ShapeRef.new(shape: String, location_name: "ipamResourceDiscoveryRegion"))
+    IpamResourceDiscovery.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    IpamResourceDiscovery.add_member(:operating_regions, Shapes::ShapeRef.new(shape: IpamOperatingRegionSet, location_name: "operatingRegionSet"))
+    IpamResourceDiscovery.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDefault"))
+    IpamResourceDiscovery.add_member(:state, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryState, location_name: "state"))
+    IpamResourceDiscovery.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    IpamResourceDiscovery.struct_class = Types::IpamResourceDiscovery
+
+    IpamResourceDiscoveryAssociation.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    IpamResourceDiscoveryAssociation.add_member(:ipam_resource_discovery_association_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociationId, location_name: "ipamResourceDiscoveryAssociationId"))
+    IpamResourceDiscoveryAssociation.add_member(:ipam_resource_discovery_association_arn, Shapes::ShapeRef.new(shape: String, location_name: "ipamResourceDiscoveryAssociationArn"))
+    IpamResourceDiscoveryAssociation.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, location_name: "ipamResourceDiscoveryId"))
+    IpamResourceDiscoveryAssociation.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, location_name: "ipamId"))
+    IpamResourceDiscoveryAssociation.add_member(:ipam_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ipamArn"))
+    IpamResourceDiscoveryAssociation.add_member(:ipam_region, Shapes::ShapeRef.new(shape: String, location_name: "ipamRegion"))
+    IpamResourceDiscoveryAssociation.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDefault"))
+    IpamResourceDiscoveryAssociation.add_member(:resource_discovery_status, Shapes::ShapeRef.new(shape: IpamAssociatedResourceDiscoveryStatus, location_name: "resourceDiscoveryStatus"))
+    IpamResourceDiscoveryAssociation.add_member(:state, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociationState, location_name: "state"))
+    IpamResourceDiscoveryAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    IpamResourceDiscoveryAssociation.struct_class = Types::IpamResourceDiscoveryAssociation
+
+    IpamResourceDiscoveryAssociationSet.member = Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociation, location_name: "item")
+
+    IpamResourceDiscoverySet.member = Shapes::ShapeRef.new(shape: IpamResourceDiscovery, location_name: "item")
 
     IpamResourceTag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     IpamResourceTag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -10576,6 +10753,16 @@ module Aws::EC2
 
     ModifyIpamResourceCidrResult.add_member(:ipam_resource_cidr, Shapes::ShapeRef.new(shape: IpamResourceCidr, location_name: "ipamResourceCidr"))
     ModifyIpamResourceCidrResult.struct_class = Types::ModifyIpamResourceCidrResult
+
+    ModifyIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyIpamResourceDiscoveryRequest.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, required: true, location_name: "IpamResourceDiscoveryId"))
+    ModifyIpamResourceDiscoveryRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyIpamResourceDiscoveryRequest.add_member(:add_operating_regions, Shapes::ShapeRef.new(shape: AddIpamOperatingRegionSet, location_name: "AddOperatingRegion"))
+    ModifyIpamResourceDiscoveryRequest.add_member(:remove_operating_regions, Shapes::ShapeRef.new(shape: RemoveIpamOperatingRegionSet, location_name: "RemoveOperatingRegion"))
+    ModifyIpamResourceDiscoveryRequest.struct_class = Types::ModifyIpamResourceDiscoveryRequest
+
+    ModifyIpamResourceDiscoveryResult.add_member(:ipam_resource_discovery, Shapes::ShapeRef.new(shape: IpamResourceDiscovery, location_name: "ipamResourceDiscovery"))
+    ModifyIpamResourceDiscoveryResult.struct_class = Types::ModifyIpamResourceDiscoveryResult
 
     ModifyIpamResult.add_member(:ipam, Shapes::ShapeRef.new(shape: Ipam, location_name: "ipam"))
     ModifyIpamResult.struct_class = Types::ModifyIpamResult
@@ -11666,6 +11853,8 @@ module Aws::EC2
     ProvisionIpamPoolCidrRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
     ProvisionIpamPoolCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "Cidr"))
     ProvisionIpamPoolCidrRequest.add_member(:cidr_authorization_context, Shapes::ShapeRef.new(shape: IpamCidrAuthorizationContext, location_name: "CidrAuthorizationContext"))
+    ProvisionIpamPoolCidrRequest.add_member(:netmask_length, Shapes::ShapeRef.new(shape: Integer, location_name: "NetmaskLength"))
+    ProvisionIpamPoolCidrRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     ProvisionIpamPoolCidrRequest.struct_class = Types::ProvisionIpamPoolCidrRequest
 
     ProvisionIpamPoolCidrResult.add_member(:ipam_pool_cidr, Shapes::ShapeRef.new(shape: IpamPoolCidr, location_name: "ipamPoolCidr"))
@@ -14626,6 +14815,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: AssociateInstanceEventWindowResult)
       end)
 
+      api.add_operation(:associate_ipam_resource_discovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateIpamResourceDiscovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateIpamResourceDiscoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateIpamResourceDiscoveryResult)
+      end)
+
       api.add_operation(:associate_route_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateRouteTable"
         o.http_method = "POST"
@@ -15040,6 +15237,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateIpamPoolRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateIpamPoolResult)
+      end)
+
+      api.add_operation(:create_ipam_resource_discovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIpamResourceDiscovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateIpamResourceDiscoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIpamResourceDiscoveryResult)
       end)
 
       api.add_operation(:create_ipam_scope, Seahorse::Model::Operation.new.tap do |o|
@@ -15632,6 +15837,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteIpamPoolRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteIpamPoolResult)
+      end)
+
+      api.add_operation(:delete_ipam_resource_discovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIpamResourceDiscovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIpamResourceDiscoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIpamResourceDiscoveryResult)
       end)
 
       api.add_operation(:delete_ipam_scope, Seahorse::Model::Operation.new.tap do |o|
@@ -16792,6 +17005,34 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeIpamPoolsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeIpamPoolsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_ipam_resource_discoveries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpamResourceDiscoveries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpamResourceDiscoveriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpamResourceDiscoveriesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_ipam_resource_discovery_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpamResourceDiscoveryAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpamResourceDiscoveryAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpamResourceDiscoveryAssociationsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -18113,6 +18354,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisassociateInstanceEventWindowResult)
       end)
 
+      api.add_operation(:disassociate_ipam_resource_discovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateIpamResourceDiscovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateIpamResourceDiscoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateIpamResourceDiscoveryResult)
+      end)
+
       api.add_operation(:disassociate_route_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateRouteTable"
         o.http_method = "POST"
@@ -18463,6 +18712,34 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetIpamAddressHistoryRequest)
         o.output = Shapes::ShapeRef.new(shape: GetIpamAddressHistoryResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_ipam_discovered_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIpamDiscoveredAccounts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIpamDiscoveredAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIpamDiscoveredAccountsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_ipam_discovered_resource_cidrs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIpamDiscoveredResourceCidrs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIpamDiscoveredResourceCidrsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIpamDiscoveredResourceCidrsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -19007,6 +19284,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyIpamResourceCidrRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyIpamResourceCidrResult)
+      end)
+
+      api.add_operation(:modify_ipam_resource_discovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyIpamResourceDiscovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyIpamResourceDiscoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyIpamResourceDiscoveryResult)
       end)
 
       api.add_operation(:modify_ipam_scope, Seahorse::Model::Operation.new.tap do |o|

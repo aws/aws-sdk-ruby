@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-01-25)
+------------------
+
+* Feature - Enabled FIPS aws-us-gov endpoints in SDK.
+
 1.74.0 (2023-01-18)
 ------------------
 

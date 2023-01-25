@@ -195,6 +195,10 @@ module Aws::MainframeModernization
     #   The unique identifier of the application that hosts this batch job.
     #   @return [String]
     #
+    # @!attribute [rw] batch_job_identifier
+    #   Identifies a specific batch job.
+    #   @return [Types::BatchJobIdentifier]
+    #
     # @!attribute [rw] end_time
     #   The timestamp when this batch job execution ended.
     #   @return [Time]
@@ -215,6 +219,9 @@ module Aws::MainframeModernization
     #   The type of a particular batch job execution.
     #   @return [String]
     #
+    # @!attribute [rw] return_code
+    #   @return [String]
+    #
     # @!attribute [rw] start_time
     #   The timestamp when a particular batch job execution started.
     #   @return [Time]
@@ -227,11 +234,13 @@ module Aws::MainframeModernization
     #
     class BatchJobExecutionSummary < Struct.new(
       :application_id,
+      :batch_job_identifier,
       :end_time,
       :execution_id,
       :job_id,
       :job_name,
       :job_type,
+      :return_code,
       :start_time,
       :status)
       SENSITIVE = []
@@ -241,6 +250,8 @@ module Aws::MainframeModernization
     # Identifies a specific batch job.
     #
     # @note BatchJobIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note BatchJobIdentifier is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of BatchJobIdentifier corresponding to the set member.
     #
     # @!attribute [rw] file_batch_job_identifier
     #   Specifies a file associated with a specific batch job.
@@ -1401,6 +1412,10 @@ module Aws::MainframeModernization
     #   The identifier of the application.
     #   @return [String]
     #
+    # @!attribute [rw] batch_job_identifier
+    #   Identifies a specific batch job.
+    #   @return [Types::BatchJobIdentifier]
+    #
     # @!attribute [rw] end_time
     #   The timestamp when the batch job execution ended.
     #   @return [Time]
@@ -1425,6 +1440,9 @@ module Aws::MainframeModernization
     #   The user for the job.
     #   @return [String]
     #
+    # @!attribute [rw] return_code
+    #   @return [String]
+    #
     # @!attribute [rw] start_time
     #   The timestamp when the batch job execution started.
     #   @return [Time]
@@ -1441,12 +1459,14 @@ module Aws::MainframeModernization
     #
     class GetBatchJobExecutionResponse < Struct.new(
       :application_id,
+      :batch_job_identifier,
       :end_time,
       :execution_id,
       :job_id,
       :job_name,
       :job_type,
       :job_user,
+      :return_code,
       :start_time,
       :status,
       :status_reason)

@@ -1914,6 +1914,57 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_id
+    #   An IPAM ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   A resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Tag specifications.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] client_token
+    #   A client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIpamResourceDiscoveryRequest AWS API Documentation
+    #
+    class AssociateIpamResourceDiscoveryRequest < Struct.new(
+      :dry_run,
+      :ipam_id,
+      :ipam_resource_discovery_id,
+      :tag_specifications,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_resource_discovery_association
+    #   A resource discovery association. An associated resource discovery
+    #   is a resource discovery that has been associated with an IPAM.
+    #   @return [Types::IpamResourceDiscoveryAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIpamResourceDiscoveryResult AWS API Documentation
+    #
+    class AssociateIpamResourceDiscoveryResult < Struct.new(
+      :ipam_resource_discovery_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
@@ -7843,6 +7894,22 @@ module Aws::EC2
     #   IP addresses and VPCs.
     #   @return [String]
     #
+    # @!attribute [rw] public_ip_source
+    #   The IP address source for pools in the public scope. Only used for
+    #   provisioning IP address CIDRs to pools in the public scope. Default
+    #   is `byoip`. For more information, see [Create IPv6 pools][1] in the
+    #   *Amazon VPC IPAM User Guide*. By default, you can add only one
+    #   Amazon-provided IPv6 CIDR block to a top-level IPv6 pool if
+    #   PublicIpSource is `amazon`. For information on increasing the
+    #   default limit, see [ Quotas for your IPAM][2] in the *Amazon VPC
+    #   IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html
+    #   [2]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamPoolRequest AWS API Documentation
     #
     class CreateIpamPoolRequest < Struct.new(
@@ -7860,7 +7927,8 @@ module Aws::EC2
       :allocation_resource_tags,
       :tag_specifications,
       :client_token,
-      :aws_service)
+      :aws_service,
+      :public_ip_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7931,6 +7999,59 @@ module Aws::EC2
       :operating_regions,
       :tag_specifications,
       :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description for the IPAM resource discovery.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_regions
+    #   Operating Regions for the IPAM resource discovery. Operating Regions
+    #   are Amazon Web Services Regions where the IPAM is allowed to manage
+    #   IP address CIDRs. IPAM only discovers and monitors resources in the
+    #   Amazon Web Services Regions you select as operating Regions.
+    #   @return [Array<Types::AddIpamOperatingRegion>]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Tag specifications for the IPAM resource discovery.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] client_token
+    #   A client token for the IPAM resource discovery.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamResourceDiscoveryRequest AWS API Documentation
+    #
+    class CreateIpamResourceDiscoveryRequest < Struct.new(
+      :dry_run,
+      :description,
+      :operating_regions,
+      :tag_specifications,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_resource_discovery
+    #   An IPAM resource discovery.
+    #   @return [Types::IpamResourceDiscovery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamResourceDiscoveryResult AWS API Documentation
+    #
+    class CreateIpamResourceDiscoveryResult < Struct.new(
+      :ipam_resource_discovery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12910,6 +13031,38 @@ module Aws::EC2
       :dry_run,
       :ipam_id,
       :cascade)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   The IPAM resource discovery ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteIpamResourceDiscoveryRequest AWS API Documentation
+    #
+    class DeleteIpamResourceDiscoveryRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_resource_discovery
+    #   The IPAM resource discovery.
+    #   @return [Types::IpamResourceDiscovery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteIpamResourceDiscoveryResult AWS API Documentation
+    #
+    class DeleteIpamResourceDiscoveryResult < Struct.new(
+      :ipam_resource_discovery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19266,6 +19419,116 @@ module Aws::EC2
     class DescribeIpamPoolsResult < Struct.new(
       :next_token,
       :ipam_pools)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_ids
+    #   The IPAM resource discovery IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resource discoveries to return in one page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The resource discovery filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamResourceDiscoveriesRequest AWS API Documentation
+    #
+    class DescribeIpamResourceDiscoveriesRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_ids,
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_resource_discoveries
+    #   The resource discoveries.
+    #   @return [Array<Types::IpamResourceDiscovery>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamResourceDiscoveriesResult AWS API Documentation
+    #
+    class DescribeIpamResourceDiscoveriesResult < Struct.new(
+      :ipam_resource_discoveries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_association_ids
+    #   The resource discovery association IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resource discovery associations to return in
+    #   one page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The resource discovery association filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamResourceDiscoveryAssociationsRequest AWS API Documentation
+    #
+    class DescribeIpamResourceDiscoveryAssociationsRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_association_ids,
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_resource_discovery_associations
+    #   The resource discovery associations.
+    #   @return [Array<Types::IpamResourceDiscoveryAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamResourceDiscoveryAssociationsResult AWS API Documentation
+    #
+    class DescribeIpamResourceDiscoveryAssociationsResult < Struct.new(
+      :ipam_resource_discovery_associations,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27150,6 +27413,38 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_association_id
+    #   A resource discovery association ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateIpamResourceDiscoveryRequest AWS API Documentation
+    #
+    class DisassociateIpamResourceDiscoveryRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_resource_discovery_association
+    #   A resource discovery association.
+    #   @return [Types::IpamResourceDiscoveryAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateIpamResourceDiscoveryResult AWS API Documentation
+    #
+    class DisassociateIpamResourceDiscoveryResult < Struct.new(
+      :ipam_resource_discovery_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] association_id
     #   The association ID representing the current association between the
     #   route table and subnet or gateway.
@@ -31775,6 +32070,127 @@ module Aws::EC2
     #
     class GetIpamAddressHistoryResult < Struct.new(
       :history_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   A resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_region
+    #   The Amazon Web Services Region that the account information is
+    #   returned from.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Discovered account filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of discovered accounts to return in one page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredAccountsRequest AWS API Documentation
+    #
+    class GetIpamDiscoveredAccountsRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_id,
+      :discovery_region,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_discovered_accounts
+    #   Discovered accounts.
+    #   @return [Array<Types::IpamDiscoveredAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredAccountsResult AWS API Documentation
+    #
+    class GetIpamDiscoveredAccountsResult < Struct.new(
+      :ipam_discovered_accounts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   A resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   A resource Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of discovered resource CIDRs to return in one
+    #   page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredResourceCidrsRequest AWS API Documentation
+    #
+    class GetIpamDiscoveredResourceCidrsRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_id,
+      :resource_region,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_discovered_resource_cidrs
+    #   Discovered resource CIDRs.
+    #   @return [Array<Types::IpamDiscoveredResourceCidr>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredResourceCidrsResult AWS API Documentation
+    #
+    class GetIpamDiscoveredResourceCidrsResult < Struct.new(
+      :ipam_discovered_resource_cidrs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -38188,7 +38604,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipam_arn
-    #   The ARN of the IPAM.
+    #   The Amazon Resource Name (ARN) of the IPAM.
     #   @return [String]
     #
     # @!attribute [rw] ipam_region
@@ -38243,6 +38659,18 @@ module Aws::EC2
     #   name and `TeamA` for the filter value.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] default_resource_discovery_id
+    #   The IPAM's default resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_resource_discovery_association_id
+    #   The IPAM's default resource discovery association ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_discovery_association_count
+    #   The IPAM's resource discovery association count.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipam AWS API Documentation
     #
     class Ipam < Struct.new(
@@ -38256,7 +38684,10 @@ module Aws::EC2
       :description,
       :operating_regions,
       :state,
-      :tags)
+      :tags,
+      :default_resource_discovery_id,
+      :default_resource_discovery_association_id,
+      :resource_discovery_association_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38368,6 +38799,165 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # An IPAM discovered account. A discovered account is an Amazon Web
+    # Services account that is monitored under a resource discovery. If you
+    # have integrated IPAM with Amazon Web Services Organizations, all
+    # accounts in the organization are discovered accounts.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_region
+    #   The Amazon Web Services Region that the account information is
+    #   returned from. An account can be discovered in multiple regions and
+    #   will have a separate discovered account for each Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The resource discovery failure reason.
+    #   @return [Types::IpamDiscoveryFailureReason]
+    #
+    # @!attribute [rw] last_attempted_discovery_time
+    #   The last attempted resource discovery time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_discovery_time
+    #   The last successful resource discovery time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamDiscoveredAccount AWS API Documentation
+    #
+    class IpamDiscoveredAccount < Struct.new(
+      :account_id,
+      :discovery_region,
+      :failure_reason,
+      :last_attempted_discovery_time,
+      :last_successful_discovery_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An IPAM discovered resource CIDR. A discovered resource is a resource
+    # CIDR monitored under a resource discovery. The following resources can
+    # be discovered: VPCs, Public IPv4 pools, VPC subnets, and Elastic IP
+    # addresses. The discovered resource CIDR is the IP address range in
+    # CIDR notation that is associated with the resource.
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   The resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The resource Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_id
+    #   The resource owner ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_cidr
+    #   The resource CIDR.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_tags
+    #   The resource tags.
+    #   @return [Array<Types::IpamResourceTag>]
+    #
+    # @!attribute [rw] ip_usage
+    #   The percentage of IP address space in use. To convert the decimal to
+    #   a percentage, multiply the decimal by 100. Note the following:
+    #
+    #   * For resources that are VPCs, this is the percentage of IP address
+    #     space in the VPC that's taken up by subnet CIDRs.
+    #
+    #   * For resources that are subnets, if the subnet has an IPv4 CIDR
+    #     provisioned to it, this is the percentage of IPv4 address space in
+    #     the subnet that's in use. If the subnet has an IPv6 CIDR
+    #     provisioned to it, the percentage of IPv6 address space in use is
+    #     not represented. The percentage of IPv6 address space in use
+    #     cannot currently be calculated.
+    #
+    #   * For resources that are public IPv4 pools, this is the percentage
+    #     of IP address space in the pool that's been allocated to Elastic
+    #     IP addresses (EIPs).
+    #   @return [Float]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_time
+    #   The last successful resource discovery time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamDiscoveredResourceCidr AWS API Documentation
+    #
+    class IpamDiscoveredResourceCidr < Struct.new(
+      :ipam_resource_discovery_id,
+      :resource_region,
+      :resource_id,
+      :resource_owner_id,
+      :resource_cidr,
+      :resource_type,
+      :resource_tags,
+      :ip_usage,
+      :vpc_id,
+      :sample_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The discovery failure reason.
+    #
+    # @!attribute [rw] code
+    #   The discovery failure code.
+    #
+    #   * `assume-role-failure` - IPAM could not assume the Amazon Web
+    #     Services IAM service-linked role. This could be because of any of
+    #     the following:
+    #
+    #     * SLR has not been created yet and IPAM is still creating it.
+    #
+    #     * You have opted-out of the IPAM home Region.
+    #
+    #     * Account you are using as your IPAM account has been suspended.
+    #
+    #   * `throttling-failure` - IPAM account is already using the allotted
+    #     transactions per second and IPAM is receiving a throttling error
+    #     when assuming the Amazon Web Services IAM SLR.
+    #
+    #   * `unauthorized-failure` - Amazon Web Services account making the
+    #     request is not authorized. For more information, see
+    #     [AuthFailure][1] in the *Amazon Elastic Compute Cloud API
+    #     Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The discovery failure message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamDiscoveryFailureReason AWS API Documentation
+    #
+    class IpamDiscoveryFailureReason < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operating Regions for an IPAM. Operating Regions are Amazon Web
     # Services Regions where the IPAM is allowed to manage IP address CIDRs.
     # IPAM only discovers and monitors resources in the Amazon Web Services
@@ -38412,7 +39002,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipam_pool_arn
-    #   The ARN of the IPAM pool.
+    #   The Amazon Resource Name (ARN) of the IPAM pool.
     #   @return [String]
     #
     # @!attribute [rw] ipam_scope_arn
@@ -38540,6 +39130,21 @@ module Aws::EC2
     #   IP addresses and VPCs.
     #   @return [String]
     #
+    # @!attribute [rw] public_ip_source
+    #   The IP address source for pools in the public scope. Only used for
+    #   provisioning IP address CIDRs to pools in the public scope. Default
+    #   is `BYOIP`. For more information, see [Create IPv6 pools][1] in the
+    #   *Amazon VPC IPAM User Guide*. By default, you can add only one
+    #   Amazon-provided IPv6 CIDR block to a top-level IPv6 pool. For
+    #   information on increasing the default limit, see [ Quotas for your
+    #   IPAM][2] in the *Amazon VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html
+    #   [2]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPool AWS API Documentation
     #
     class IpamPool < Struct.new(
@@ -38564,13 +39169,14 @@ module Aws::EC2
       :allocation_default_netmask_length,
       :allocation_resource_tags,
       :tags,
-      :aws_service)
+      :aws_service,
+      :public_ip_source)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # In IPAM, an allocation is a CIDR assignment from an IPAM pool to
-    # another resource or IPAM pool.
+    # another IPAM pool or to a resource.
     #
     # @!attribute [rw] cidr
     #   The CIDR for the allocation. A CIDR is a representation of an IP
@@ -38634,12 +39240,26 @@ module Aws::EC2
     #   Details related to why an IPAM pool CIDR failed to be provisioned.
     #   @return [Types::IpamPoolCidrFailureReason]
     #
+    # @!attribute [rw] ipam_pool_cidr_id
+    #   The IPAM pool CIDR ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] netmask_length
+    #   The netmask length of the CIDR you'd like to provision to a pool.
+    #   Can be used for provisioning Amazon-provided IPv6 CIDRs to top-level
+    #   pools and for provisioning CIDRs to pools with source pools. Cannot
+    #   be used to provision BYOIP CIDRs to top-level pools.
+    #   "NetmaskLength" or "Cidr" is required.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPoolCidr AWS API Documentation
     #
     class IpamPoolCidr < Struct.new(
       :cidr,
       :state,
-      :failure_reason)
+      :failure_reason,
+      :ipam_pool_cidr_id,
+      :netmask_length)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38711,8 +39331,8 @@ module Aws::EC2
     #   The percentage of IP address space in use. To convert the decimal to
     #   a percentage, multiply the decimal by 100. Note the following:
     #
-    #   * For a resources that are VPCs, this is the percentage of IP
-    #     address space in the VPC that's taken up by subnet CIDRs.
+    #   * For resources that are VPCs, this is the percentage of IP address
+    #     space in the VPC that's taken up by subnet CIDRs.
     #
     #   * For resources that are subnets, if the subnet has an IPv4 CIDR
     #     provisioned to it, this is the percentage of IPv4 address space in
@@ -38783,6 +39403,201 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # A resource discovery is an IPAM component that enables IPAM Service to
+    # manage and monitor resources that belong to the owning account.
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   The resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_resource_discovery_arn
+    #   The resource discovery Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_resource_discovery_region
+    #   The resource discovery Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The resource discovery description.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_regions
+    #   The operating Regions for the resource discovery. Operating Regions
+    #   are Amazon Web Services Regions where the IPAM is allowed to manage
+    #   IP address CIDRs. IPAM only discovers and monitors resources in the
+    #   Amazon Web Services Regions you select as operating Regions.
+    #   @return [Array<Types::IpamOperatingRegion>]
+    #
+    # @!attribute [rw] is_default
+    #   Defines if the resource discovery is the default. The default
+    #   resource discovery is the resource discovery automatically created
+    #   when you create an IPAM.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] state
+    #   The lifecycle state of the resource discovery.
+    #
+    #   * `create-in-progress` - Resource discovery is being created.
+    #
+    #   * `create-complete` - Resource discovery creation is complete.
+    #
+    #   * `create-failed` - Resource discovery creation has failed.
+    #
+    #   * `modify-in-progress` - Resource discovery is being modified.
+    #
+    #   * `modify-complete` - Resource discovery modification is complete.
+    #
+    #   * `modify-failed` - Resource discovery modification has failed.
+    #
+    #   * `delete-in-progress` - Resource discovery is being deleted.
+    #
+    #   * `delete-complete` - Resource discovery deletion is complete.
+    #
+    #   * `delete-failed` - Resource discovery deletion has failed.
+    #
+    #   * `isolate-in-progress` - Amazon Web Services account that created
+    #     the resource discovery has been removed and the resource discovery
+    #     is being isolated.
+    #
+    #   * `isolate-complete` - Resource discovery isolation is complete.
+    #
+    #   * `restore-in-progress` - Amazon Web Services account that created
+    #     the resource discovery and was isolated has been restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. You can use tags
+    #   to search and filter your resources or track your Amazon Web
+    #   Services costs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamResourceDiscovery AWS API Documentation
+    #
+    class IpamResourceDiscovery < Struct.new(
+      :owner_id,
+      :ipam_resource_discovery_id,
+      :ipam_resource_discovery_arn,
+      :ipam_resource_discovery_region,
+      :description,
+      :operating_regions,
+      :is_default,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An IPAM resource discovery association. An associated resource
+    # discovery is a resource discovery that has been associated with an
+    # IPAM. IPAM aggregates the resource CIDRs discovered by the associated
+    # resource discovery.
+    #
+    # @!attribute [rw] owner_id
+    #   The Amazon Web Services account ID of the resource discovery owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_resource_discovery_association_id
+    #   The resource discovery association ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_resource_discovery_association_arn
+    #   The resource discovery association Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   The resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_id
+    #   The IPAM ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_arn
+    #   The IPAM ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_region
+    #   The IPAM home Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Defines if the resource discovery is the default. When you create an
+    #   IPAM, a default resource discovery is created for your IPAM and
+    #   it's associated with your IPAM.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] resource_discovery_status
+    #   The resource discovery status.
+    #
+    #   * `active` - Connection or permissions required to read the results
+    #     of the resource discovery are intact.
+    #
+    #   * `not-found` - Connection or permissions required to read the
+    #     results of the resource discovery are broken. This may happen if
+    #     the owner of the resource discovery stopped sharing it or deleted
+    #     the resource discovery. Verify the resource discovery still exists
+    #     and the Amazon Web Services RAM resource share is still intact.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The lifecycle state of the association when you associate or
+    #   disassociate a resource discovery.
+    #
+    #   * `associate-in-progress` - Resource discovery is being associated.
+    #
+    #   * `associate-complete` - Resource discovery association is complete.
+    #
+    #   * `associate-failed` - Resource discovery association has failed.
+    #
+    #   * `disassociate-in-progress` - Resource discovery is being
+    #     disassociated.
+    #
+    #   * `disassociate-complete` - Resource discovery disassociation is
+    #     complete.
+    #
+    #   * `disassociate-failed ` - Resource discovery disassociation has
+    #     failed.
+    #
+    #   * `isolate-in-progress` - Amazon Web Services account that created
+    #     the resource discovery association has been removed and the
+    #     resource discovery associatation is being isolated.
+    #
+    #   * `isolate-complete` - Resource discovery isolation is complete..
+    #
+    #   * `restore-in-progress` - Resource discovery is being restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. You can use tags
+    #   to search and filter your resources or track your Amazon Web
+    #   Services costs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamResourceDiscoveryAssociation AWS API Documentation
+    #
+    class IpamResourceDiscoveryAssociation < Struct.new(
+      :owner_id,
+      :ipam_resource_discovery_association_id,
+      :ipam_resource_discovery_association_arn,
+      :ipam_resource_discovery_id,
+      :ipam_id,
+      :ipam_arn,
+      :ipam_region,
+      :is_default,
+      :resource_discovery_status,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The key/value combination of a tag assigned to the resource. Use the
     # tag key in the filter name and the tag value as the filter value. For
     # example, to find all resources that have a tag with the key `Owner`
@@ -38831,7 +39646,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipam_scope_arn
-    #   The ARN of the scope.
+    #   The Amazon Resource Name (ARN) of the scope.
     #   @return [String]
     #
     # @!attribute [rw] ipam_arn
@@ -43317,6 +44132,56 @@ module Aws::EC2
     #
     class ModifyIpamResourceCidrResult < Struct.new(
       :ipam_resource_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   A resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A resource discovery description.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_operating_regions
+    #   Add operating Regions to the resource discovery. Operating Regions
+    #   are Amazon Web Services Regions where the IPAM is allowed to manage
+    #   IP address CIDRs. IPAM only discovers and monitors resources in the
+    #   Amazon Web Services Regions you select as operating Regions.
+    #   @return [Array<Types::AddIpamOperatingRegion>]
+    #
+    # @!attribute [rw] remove_operating_regions
+    #   Remove operating Regions.
+    #   @return [Array<Types::RemoveIpamOperatingRegion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamResourceDiscoveryRequest AWS API Documentation
+    #
+    class ModifyIpamResourceDiscoveryRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_id,
+      :description,
+      :add_operating_regions,
+      :remove_operating_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_resource_discovery
+    #   A resource discovery.
+    #   @return [Types::IpamResourceDiscovery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamResourceDiscoveryResult AWS API Documentation
+    #
+    class ModifyIpamResourceDiscoveryResult < Struct.new(
+      :ipam_resource_discovery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48611,7 +49476,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] cidr
-    #   The CIDR you want to assign to the IPAM pool.
+    #   The CIDR you want to assign to the IPAM pool. Either
+    #   "NetmaskLength" or "Cidr" is required. This value will be null
+    #   if you specify "NetmaskLength" and will be filled in during the
+    #   provisioning process.
     #   @return [String]
     #
     # @!attribute [rw] cidr_authorization_context
@@ -48620,13 +49488,36 @@ module Aws::EC2
     #   applies to public pools only.
     #   @return [Types::IpamCidrAuthorizationContext]
     #
+    # @!attribute [rw] netmask_length
+    #   The netmask length of the CIDR you'd like to provision to a pool.
+    #   Can be used for provisioning Amazon-provided IPv6 CIDRs to top-level
+    #   pools and for provisioning CIDRs to pools with source pools. Cannot
+    #   be used to provision BYOIP CIDRs to top-level pools. Either
+    #   "NetmaskLength" or "Cidr" is required.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionIpamPoolCidrRequest AWS API Documentation
     #
     class ProvisionIpamPoolCidrRequest < Struct.new(
       :dry_run,
       :ipam_pool_id,
       :cidr,
-      :cidr_authorization_context)
+      :cidr_authorization_context,
+      :netmask_length,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end

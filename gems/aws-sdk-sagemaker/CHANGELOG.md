@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2023-01-25)
+------------------
+
+* Feature - SageMaker Inference Recommender now decouples from Model Registry and could accept Model Name to invoke inference recommendations job; Inference Recommender now provides CPU/Memory Utilization metrics data in recommendation output.
+
 1.162.0 (2023-01-23)
 ------------------
 

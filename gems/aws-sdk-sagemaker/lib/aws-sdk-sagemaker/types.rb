@@ -20098,12 +20098,17 @@ module Aws::SageMaker
     #   Defines the model configuration.
     #   @return [Types::ModelConfiguration]
     #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID which uniquely identifies each recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendation AWS API Documentation
     #
     class InferenceRecommendation < Struct.new(
       :metrics,
       :endpoint_configuration,
-      :model_configuration)
+      :model_configuration,
+      :recommendation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27008,11 +27013,17 @@ module Aws::SageMaker
     #   and values.
     #   @return [Array<Types::EnvironmentParameter>]
     #
+    # @!attribute [rw] compilation_job_name
+    #   The name of the compilation job used to create the recommended model
+    #   artifacts.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelConfiguration AWS API Documentation
     #
     class ModelConfiguration < Struct.new(
       :inference_specification_name,
-      :environment_parameters)
+      :environment_parameters,
+      :compilation_job_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32566,6 +32577,17 @@ module Aws::SageMaker
     #   real-time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] data_input_config
+    #   Specifies the name and shape of the expected data inputs for your
+    #   trained model with a JSON dictionary form. This field is used for
+    #   optimizing your model using SageMaker Neo. For more information, see
+    #   [DataInputConfig][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobContainerConfig AWS API Documentation
     #
     class RecommendationJobContainerConfig < Struct.new(
@@ -32575,7 +32597,8 @@ module Aws::SageMaker
       :framework_version,
       :payload_config,
       :nearest_model_name,
-      :supported_instance_types)
+      :supported_instance_types,
+      :data_input_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32690,6 +32713,10 @@ module Aws::SageMaker
     #   VPC in the inference recommendation job.
     #   @return [Types::RecommendationJobVpcConfig]
     #
+    # @!attribute [rw] model_name
+    #   The name of the created model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
     #
     class RecommendationJobInputConfig < Struct.new(
@@ -32701,7 +32728,8 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :container_config,
       :endpoints,
-      :vpc_config)
+      :vpc_config,
+      :model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32864,13 +32892,29 @@ module Aws::SageMaker
     #   instance.
     #   @return [Integer]
     #
+    # @!attribute [rw] cpu_utilization
+    #   The expected CPU utilization at maximum invocations per minute for
+    #   the instance.
+    #
+    #   `NaN` indicates that the value is not available.
+    #   @return [Float]
+    #
+    # @!attribute [rw] memory_utilization
+    #   The expected memory utilization at maximum invocations per minute
+    #   for the instance.
+    #
+    #   `NaN` indicates that the value is not available.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationMetrics AWS API Documentation
     #
     class RecommendationMetrics < Struct.new(
       :cost_per_hour,
       :cost_per_inference,
       :max_invocations,
-      :model_latency)
+      :model_latency,
+      :cpu_utilization,
+      :memory_utilization)
       SENSITIVE = []
       include Aws::Structure
     end

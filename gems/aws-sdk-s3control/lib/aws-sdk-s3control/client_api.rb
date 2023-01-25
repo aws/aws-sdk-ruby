@@ -708,8 +708,8 @@ module Aws::S3Control
     GetBucketTaggingResult.add_member(:tag_set, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "TagSet"))
     GetBucketTaggingResult.struct_class = Types::GetBucketTaggingResult
 
-    GetBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id"))
-    GetBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    GetBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     GetBucketVersioningRequest.struct_class = Types::GetBucketVersioningRequest
 
     GetBucketVersioningResult.add_member(:status, Shapes::ShapeRef.new(shape: BucketVersioningStatus, location_name: "Status"))
@@ -1114,8 +1114,8 @@ module Aws::S3Control
     PutBucketTaggingRequest[:payload] = :tagging
     PutBucketTaggingRequest[:payload_member] = PutBucketTaggingRequest.member(:tagging)
 
-    PutBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id"))
-    PutBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    PutBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    PutBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     PutBucketVersioningRequest.add_member(:mfa, Shapes::ShapeRef.new(shape: MFA, location: "header", location_name: "x-amz-mfa"))
     PutBucketVersioningRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, required: true, location_name: "VersioningConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
     PutBucketVersioningRequest.struct_class = Types::PutBucketVersioningRequest

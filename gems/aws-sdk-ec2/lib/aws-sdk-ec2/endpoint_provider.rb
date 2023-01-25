@@ -33,7 +33,7 @@ module Aws::EC2
         if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
             if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
-              return Aws::Endpoints::Endpoint.new(url: "https://ec2.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+              return Aws::Endpoints::Endpoint.new(url: "https://ec2.#{region}.amazonaws.com", headers: {}, properties: {})
             end
             return Aws::Endpoints::Endpoint.new(url: "https://ec2-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
@@ -44,6 +44,12 @@ module Aws::EC2
             return Aws::Endpoints::Endpoint.new(url: "https://ec2.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
           raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-east-1")
+          return Aws::Endpoints::Endpoint.new(url: "https://ec2.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
+          return Aws::Endpoints::Endpoint.new(url: "https://ec2.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
         end
         return Aws::Endpoints::Endpoint.new(url: "https://ec2.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
       end

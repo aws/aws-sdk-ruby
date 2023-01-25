@@ -742,9 +742,17 @@ module Aws::RedshiftServerless
     #   Processing Units (RPUs).
     #
     # @option params [Array<Types::ConfigParameter>] :config_parameters
-    #   An array of parameters to set for more control over a serverless
-    #   database. The options are `datestyle`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, and `max_query_execution_time`.
+    #   An array of parameters to set for advanced control over a database.
+    #   The options are `auto_mv`, `datestyle`,
+    #   `enable_case_sensitivity_identifier`, `enable_user_activity_logging`,
+    #   `query_group`, `search_path`, and query monitoring metrics that let
+    #   you define performance boundaries. For more information about query
+    #   monitoring rules and available metrics, see [ Query monitoring metrics
+    #   for Amazon Redshift Serverless][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
     #
     # @option params [Boolean] :enhanced_vpc_routing
     #   The value that specifies whether to turn on enhanced virtual private
@@ -2143,7 +2151,12 @@ module Aws::RedshiftServerless
     end
 
     # Restores a table from a snapshot to your Amazon Redshift Serverless
-    # instance.
+    # instance. You can't use this operation to restore tables with
+    # [interleaved sort keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved
     #
     # @option params [Boolean] :activate_case_sensitive_identifier
     #   Indicates whether name identifiers for database, schema, and table are
@@ -2332,22 +2345,30 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
-    # Updates a namespace with the specified settings.
+    # Updates a namespace with the specified settings. Unless required, you
+    # can't update multiple parameters in one request. For example, you
+    # must specify both `adminUsername` and `adminUserPassword` to update
+    # either field, but you can't update both `kmsKeyId` and `logExports`
+    # in a single request.
     #
     # @option params [String] :admin_user_password
     #   The password of the administrator for the first database created in
-    #   the namespace.
+    #   the namespace. This parameter must be updated together with
+    #   `adminUsername`.
     #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
-    #   the namespace.
+    #   the namespace. This parameter must be updated together with
+    #   `adminUserPassword`.
     #
     # @option params [String] :default_iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to set as a default in
-    #   the namespace.
+    #   the namespace. This parameter must be updated together with
+    #   `iamRoles`.
     #
     # @option params [Array<String>] :iam_roles
-    #   A list of IAM roles to associate with the namespace.
+    #   A list of IAM roles to associate with the namespace. This parameter
+    #   must be updated together with `defaultIamRoleArn`.
     #
     # @option params [String] :kms_key_id
     #   The ID of the Amazon Web Services Key Management Service key used to
@@ -2358,7 +2379,8 @@ module Aws::RedshiftServerless
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #
     # @option params [required, String] :namespace_name
-    #   The name of the namespace.
+    #   The name of the namespace to update. You can't update the name of a
+    #   namespace once it is created.
     #
     # @return [Types::UpdateNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2501,7 +2523,10 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
-    # Updates a workgroup with the specified configuration settings.
+    # Updates a workgroup with the specified configuration settings. You
+    # can't update multiple parameters in one request. For example, you can
+    # update `baseCapacity` or `port` in a single request, but you can't
+    # update both in the same request.
     #
     # @option params [Integer] :base_capacity
     #   The new base data warehouse capacity in Redshift Processing Units
@@ -2509,8 +2534,16 @@ module Aws::RedshiftServerless
     #
     # @option params [Array<Types::ConfigParameter>] :config_parameters
     #   An array of parameters to set for advanced control over a database.
-    #   The options are `datestyle`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, and `max_query_execution_time`.
+    #   The options are `auto_mv`, `datestyle`,
+    #   `enable_case_sensitivity_identifier`, `enable_user_activity_logging`,
+    #   `query_group`, `search_path`, and query monitoring metrics that let
+    #   you define performance boundaries. For more information about query
+    #   monitoring rules and available metrics, see [ Query monitoring metrics
+    #   for Amazon Redshift Serverless][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
     #
     # @option params [Boolean] :enhanced_vpc_routing
     #   The value that specifies whether to turn on enhanced virtual private
@@ -2532,7 +2565,8 @@ module Aws::RedshiftServerless
     #   An array of VPC subnet IDs to associate with the workgroup.
     #
     # @option params [required, String] :workgroup_name
-    #   The name of the workgroup to update.
+    #   The name of the workgroup to update. You can't update the name of a
+    #   workgroup once it is created.
     #
     # @return [Types::UpdateWorkgroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2608,7 +2642,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

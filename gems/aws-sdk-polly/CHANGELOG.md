@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-01-25)
+------------------
+
+* Feature - Add 5 new neural voices - Sergio (es-ES), Andres (es-MX), Remi (fr-FR), Adriano (it-IT) and Thiago (pt-BR).
+
 1.63.0 (2023-01-18)
 ------------------
 

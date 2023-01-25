@@ -53,6 +53,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -102,6 +103,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -151,6 +153,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -200,6 +203,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -249,6 +253,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -300,6 +305,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -351,6 +357,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -400,6 +407,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -451,6 +459,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -502,6 +511,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -551,6 +561,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -602,6 +613,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -653,6 +665,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1258,7 +1271,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :name=>"apname"})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1429,7 +1442,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :name=>"apname"})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1600,7 +1613,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :name=>"apname"})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2558,6 +2571,7 @@ module Aws::S3Control
         expect do
           client.delete_access_point(
             name: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+            account_id: '123456789012',
           )
         end.to raise_error(ArgumentError, expected['error'])
       end
@@ -2629,6 +2643,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.delete_access_point(
           name: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -2731,6 +2746,7 @@ module Aws::S3Control
         expect do
           client.delete_access_point(
             name: 'arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+            account_id: '123456789012',
           )
         end.to raise_error(ArgumentError, expected['error'])
       end
@@ -2746,6 +2762,57 @@ module Aws::S3Control
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'outpost bucket arn@us-west-2' do
+      let(:expected) do
+        {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_bucket_versioning' do
+        client = Client.new(
+          region: 'us-west-2',
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
+        resp = client.get_bucket_versioning(
+          bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
+      end
+
+      it 'produces the correct output from the client when calling put_bucket_versioning' do
+        client = Client.new(
+          region: 'us-west-2',
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
+        resp = client.put_bucket_versioning(
+          bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
+          versioning_configuration: {"status"=>"Enabled"},
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
       end
     end
 

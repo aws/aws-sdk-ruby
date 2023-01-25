@@ -40,12 +40,12 @@ module Aws::S3Control
                 raise ArgumentError, "Invalid configuration: Outposts do not support dual-stack"
               end
               if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
               end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+                return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
               end
-              return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             raise ArgumentError, "Invalid region: region was not a valid DNS name."
           end
@@ -75,12 +75,12 @@ module Aws::S3Control
                                 if (access_point_name = Aws::Endpoints::Matchers.attr(access_point_arn, "resourceId[3]"))
                                   if Aws::Endpoints::Matchers.string_equals?(outpost_type, "accesspoint")
                                     if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                                      return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{access_point_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{access_point_arn['region']}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+                                      return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{access_point_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{access_point_arn['region']}"}]})
                                     end
                                     if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
-                                      return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{access_point_arn['region']}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+                                      return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{access_point_arn['region']}"}]})
                                     end
-                                    return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{access_point_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{access_point_arn['region']}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+                                    return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{access_point_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{access_point_arn['region']}"}]})
                                   end
                                   raise ArgumentError, "Expected an outpost type `accesspoint`, found `#{outpost_type}`"
                                 end
@@ -131,12 +131,12 @@ module Aws::S3Control
                                 if (bucket_name = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[3]"))
                                   if Aws::Endpoints::Matchers.string_equals?(outpost_type, "bucket")
                                     if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                                      return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{bucket_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{bucket_arn['region']}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+                                      return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{bucket_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{bucket_arn['region']}"}]})
                                     end
                                     if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
-                                      return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{bucket_arn['region']}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+                                      return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{bucket_arn['region']}"}]})
                                     end
-                                    return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{bucket_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{bucket_arn['region']}", "disableDoubleEncoding"=>true, "signingName"=>"s3-outposts"}]})
+                                    return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{bucket_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "disableDoubleEncoding"=>true, "signingRegion"=>"#{bucket_arn['region']}"}]})
                                   end
                                   raise ArgumentError, "Invalid ARN: Expected an outpost type `bucket`, found `#{outpost_type}`"
                                 end
@@ -179,33 +179,33 @@ module Aws::S3Control
                 raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"
               end
               if Aws::Endpoints::Matchers.set?(requires_account_id) && Aws::Endpoints::Matchers.boolean_equals?(requires_account_id, true) && Aws::Endpoints::Matchers.set?(account_id)
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{account_id}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{account_id}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
               end
-              return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(requires_account_id) && Aws::Endpoints::Matchers.boolean_equals?(requires_account_id, true) && Aws::Endpoints::Matchers.set?(account_id)
-              return Aws::Endpoints::Endpoint.new(url: "https://#{account_id}.s3-control-fips.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://#{account_id}.s3-control-fips.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              return Aws::Endpoints::Endpoint.new(url: "https://s3-control-fips.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://s3-control-fips.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(requires_account_id) && Aws::Endpoints::Matchers.boolean_equals?(requires_account_id, true) && Aws::Endpoints::Matchers.set?(account_id)
-              return Aws::Endpoints::Endpoint.new(url: "https://#{account_id}.s3-control-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://#{account_id}.s3-control-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
-              return Aws::Endpoints::Endpoint.new(url: "https://s3-control-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://s3-control-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(requires_account_id) && Aws::Endpoints::Matchers.boolean_equals?(requires_account_id, true) && Aws::Endpoints::Matchers.set?(account_id)
-              return Aws::Endpoints::Endpoint.new(url: "https://#{account_id}.s3-control.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://#{account_id}.s3-control.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              return Aws::Endpoints::Endpoint.new(url: "https://s3-control.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://s3-control.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(requires_account_id) && Aws::Endpoints::Matchers.boolean_equals?(requires_account_id, true) && Aws::Endpoints::Matchers.set?(account_id)
-              return Aws::Endpoints::Endpoint.new(url: "https://#{account_id}.s3-control.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://#{account_id}.s3-control.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
-              return Aws::Endpoints::Endpoint.new(url: "https://s3-control.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{region}", "disableDoubleEncoding"=>true, "signingName"=>"s3"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://s3-control.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"#{region}"}]})
             end
           end
           raise ArgumentError, "Invalid region: region was not a valid DNS name."
