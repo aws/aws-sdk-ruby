@@ -20,21 +20,21 @@ module Aws::EventBridge
           if Aws::Endpoints::Matchers.valid_host_label?(endpoint_id, true)
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false)
               if Aws::Endpoints::Matchers.set?(endpoint)
-                return Aws::Endpoints::Endpoint.new(url: endpoint, headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingRegionSet"=>["*"], "signingName"=>"events"}]})
+                return Aws::Endpoints::Endpoint.new(url: endpoint, headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"events", "signingRegionSet"=>["*"]}]})
               end
               if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
                 if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{endpoint_id}.endpoint.events.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingRegionSet"=>["*"], "signingName"=>"events"}]})
+                  return Aws::Endpoints::Endpoint.new(url: "https://#{endpoint_id}.endpoint.events.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"events", "signingRegionSet"=>["*"]}]})
                 end
                 raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
               end
-              return Aws::Endpoints::Endpoint.new(url: "https://#{endpoint_id}.endpoint.events.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingRegionSet"=>["*"], "signingName"=>"events"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://#{endpoint_id}.endpoint.events.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"events", "signingRegionSet"=>["*"]}]})
             end
             raise ArgumentError, "Invalid Configuration: FIPS is not supported with EventBridge multi-region endpoints."
           end
           raise ArgumentError, "EndpointId must be a valid host label."
         end
-        if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
+        if Aws::Endpoints::Matchers.set?(endpoint)
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
             raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
           end
@@ -51,11 +51,11 @@ module Aws::EventBridge
         end
         if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-            if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
-              return Aws::Endpoints::Endpoint.new(url: "https://events.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
-            end
             if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-east-1")
               return Aws::Endpoints::Endpoint.new(url: "https://events.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
+              return Aws::Endpoints::Endpoint.new(url: "https://events.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
             end
             return Aws::Endpoints::Endpoint.new(url: "https://events-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end

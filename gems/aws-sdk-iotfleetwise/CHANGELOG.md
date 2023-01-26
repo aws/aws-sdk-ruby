@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2023-01-26)
+------------------
+
+* Feature - Add model validation to BatchCreateVehicle and BatchUpdateVehicle operations that invalidate requests with an empty vehicles list.
+
 1.6.0 (2023-01-18)
 ------------------
 

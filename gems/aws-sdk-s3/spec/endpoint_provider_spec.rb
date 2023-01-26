@@ -1981,14 +1981,15 @@ module Aws::S3
 
     context 'ForcePathStyle, aws-global region with fips is invalid' do
       let(:expected) do
-        {"error"=>"Path-style addressing cannot be used with FIPS"}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"}]}, "url"=>"https://s3-fips.us-east-1.amazonaws.com/bucket-name"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"aws-global", :bucket=>"bucket-name", :force_path_style=>true, :use_fips=>true, :use_dual_stack=>false, :accelerate=>false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
     end
 
@@ -2858,32 +2859,36 @@ module Aws::S3
       end
     end
 
-    context 'path style + fips@us-west-2' do
+    context 'fips@us-gov-west-2, bucket is not S3-dns-compatible (subdomains)' do
       let(:expected) do
-        {"error"=>"Path-style addressing cannot be used with FIPS"}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"s3", "signingRegion"=>"us-gov-west-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"}]}, "url"=>"https://s3-fips.us-gov-west-1.amazonaws.com/bucket.with.dots"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket.with.dots", :region=>"us-gov-west-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
 
       it 'produces the correct output from the client when calling get_object' do
         client = Client.new(
-          region: 'us-west-2',
+          region: 'us-gov-west-1',
           use_fips_endpoint: true,
           force_path_style: true,
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect do
-          client.get_object(
-            bucket: 'bucket-name',
-            key: 'key',
-          )
-        end.to raise_error(ArgumentError, expected['error'])
+        expect_auth({"signingName"=>"s3", "signingRegion"=>"us-gov-west-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"})
+        resp = client.get_object(
+          bucket: 'bucket.with.dots',
+          key: 'key',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
       end
     end
 
@@ -3074,14 +3079,15 @@ module Aws::S3
 
     context 'path style + fips@cn-north-1' do
       let(:expected) do
-        {"error"=>"Path-style addressing cannot be used with FIPS"}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"s3", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"}]}, "url"=>"https://s3-fips.cn-north-1.amazonaws.com.cn/bucket-name"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
 
       it 'produces the correct output from the client when calling get_object' do
@@ -3092,12 +3098,15 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect do
-          client.get_object(
-            bucket: 'bucket-name',
-            key: 'key',
-          )
-        end.to raise_error(ArgumentError, expected['error'])
+        expect_auth({"signingName"=>"s3", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"})
+        resp = client.get_object(
+          bucket: 'bucket-name',
+          key: 'key',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
       end
     end
 
@@ -3288,14 +3297,15 @@ module Aws::S3
 
     context 'path style + fips@af-south-1' do
       let(:expected) do
-        {"error"=>"Path-style addressing cannot be used with FIPS"}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"s3", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"}]}, "url"=>"https://s3-fips.af-south-1.amazonaws.com/bucket-name"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
 
       it 'produces the correct output from the client when calling get_object' do
@@ -3306,12 +3316,15 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect do
-          client.get_object(
-            bucket: 'bucket-name',
-            key: 'key',
-          )
-        end.to raise_error(ArgumentError, expected['error'])
+        expect_auth({"signingName"=>"s3", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"})
+        resp = client.get_object(
+          bucket: 'bucket-name',
+          key: 'key',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
       end
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2023-01-26)
+------------------
+
+* Feature - Allow FIPS to be used with path-style URLs.
+
 1.118.0 (2023-01-18)
 ------------------
 

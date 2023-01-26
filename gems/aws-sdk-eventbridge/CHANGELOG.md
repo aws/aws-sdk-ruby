@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2023-01-26)
+------------------
+
+* Feature - Minor comments for Redshift Serverless workgroup target support.
+
 1.41.0 (2023-01-18)
 ------------------
 

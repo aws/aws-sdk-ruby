@@ -366,6 +366,10 @@ module Aws::EventBridge
     #
     # @!attribute [rw] authorization_type
     #   The authorization type specified for the connection.
+    #
+    #   <note markdown="1"> OAUTH tokens are refreshed when a 401 or 407 response is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -874,6 +878,10 @@ module Aws::EventBridge
     #
     # @!attribute [rw] authorization_type
     #   The type of authorization to use for the connection.
+    #
+    #   <note markdown="1"> OAUTH tokens are refreshed when a 401 or 407 response is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] auth_parameters
@@ -934,7 +942,10 @@ module Aws::EventBridge
     #   @return [Types::RoutingConfig]
     #
     # @!attribute [rw] replication_config
-    #   Enable or disable event replication.
+    #   Enable or disable event replication. The default state is `ENABLED`
+    #   which means you must supply a `RoleArn`. If you don't have a
+    #   `RoleArn` or you don't want event replication enabled, set the
+    #   state to `DISABLED`.
     #   @return [Types::ReplicationConfig]
     #
     # @!attribute [rw] event_buses
@@ -1005,12 +1016,13 @@ module Aws::EventBridge
     # @!attribute [rw] name
     #   The name of the new event bus.
     #
-    #   Event bus names cannot contain the / character. You can't use the
-    #   name `default` for a custom event bus, as this name is already used
-    #   for your account's default event bus.
+    #   Custom event bus names can't contain the `/` character, but you can
+    #   use the `/` character in partner event bus names. In addition, for
+    #   partner event buses, the name must exactly match the name of the
+    #   partner event source that this event bus is matched to.
     #
-    #   If this is a partner event bus, the name must exactly match the name
-    #   of the partner event source that this event bus is matched to.
+    #   You can't use the name `default` for a custom event bus, as this
+    #   name is already used for your account's default event bus.
     #   @return [String]
     #
     # @!attribute [rw] event_source_name
@@ -2089,11 +2101,11 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # An global endpoint used to improve your application's availability by
+    # A global endpoint used to improve your application's availability by
     # making it regional-fault tolerant. For more information about global
     # endpoints, see [Making applications Regional-fault tolerant with
     # global endpoints and event replication][1] in the Amazon EventBridge
-    # User Guide..
+    # User Guide.
     #
     #
     #
@@ -2117,6 +2129,9 @@ module Aws::EventBridge
     #
     # @!attribute [rw] replication_config
     #   Whether event replication was enabled or disabled for this endpoint.
+    #   The default state is `ENABLED` which means you must supply a
+    #   `RoleArn`. If you don't have a `RoleArn` or you don't want event
+    #   replication enabled, set the state to `DISABLED`.
     #   @return [Types::ReplicationConfig]
     #
     # @!attribute [rw] event_buses
@@ -2129,8 +2144,8 @@ module Aws::EventBridge
     #
     # @!attribute [rw] endpoint_id
     #   The URL subdomain of the endpoint. For example, if the URL for
-    #   Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the
-    #   EndpointId is `abcde.veo`.
+    #   Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then
+    #   the EndpointId is `abcde.veo`.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_url
@@ -2187,13 +2202,13 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # An event bus receives events from a source and routes them to rules
-    # associated with that event bus. Your account's default event bus
-    # receives events from Amazon Web Services services. A custom event bus
-    # can receive events from your custom applications and services. A
-    # partner event bus receives events from an event source created by an
-    # SaaS partner. These events come from the partners services or
-    # applications.
+    # An event bus receives events from a source, uses rules to evaluate
+    # them, applies any configured input transformation, and routes them to
+    # the appropriate target(s). Your account's default event bus receives
+    # events from Amazon Web Services services. A custom event bus can
+    # receive events from your custom applications and services. A partner
+    # event bus receives events from an event source created by an SaaS
+    # partner. These events come from the partners services or applications.
     #
     # @!attribute [rw] name
     #   The name of the event bus.
@@ -2288,23 +2303,23 @@ module Aws::EventBridge
     end
 
     # These are custom parameter to be used when the target is an API
-    # Gateway REST APIs or EventBridge ApiDestinations. In the latter case,
-    # these are merged with any InvocationParameters specified on the
-    # Connection, with any values from the Connection taking precedence.
+    # Gateway APIs or EventBridge ApiDestinations. In the latter case, these
+    # are merged with any InvocationParameters specified on the Connection,
+    # with any values from the Connection taking precedence.
     #
     # @!attribute [rw] path_parameter_values
-    #   The path parameter values to be used to populate API Gateway REST
-    #   API or EventBridge ApiDestination path wildcards ("*").
+    #   The path parameter values to be used to populate API Gateway API or
+    #   EventBridge ApiDestination path wildcards ("*").
     #   @return [Array<String>]
     #
     # @!attribute [rw] header_parameters
     #   The headers that need to be sent as part of request invoking the API
-    #   Gateway REST API or EventBridge ApiDestination.
+    #   Gateway API or EventBridge ApiDestination.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] query_string_parameters
     #   The query string keys/values that need to be sent as part of request
-    #   invoking the API Gateway REST API or EventBridge ApiDestination.
+    #   invoking the API Gateway API or EventBridge ApiDestination.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/HttpParameters AWS API Documentation
@@ -2343,7 +2358,7 @@ module Aws::EventBridge
     #   Input template where you specify placeholders that will be filled
     #   with the values of the keys from `InputPathsMap` to customize the
     #   data sent to the target. Enclose each `InputPathsMaps` value in
-    #   brackets: &lt;*value*&gt; The InputTemplate must be valid JSON.
+    #   brackets: &lt;*value*&gt;
     #
     #   If `InputTemplate` is a JSON object (surrounded by curly braces),
     #   the following restrictions apply:
@@ -2616,11 +2631,11 @@ module Aws::EventBridge
     #
     # @!attribute [rw] next_token
     #   If `nextToken` is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
-    #   the call again using the returned token to retrieve the next page.
-    #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 24 hours. Using an expired pagination token will return an
-    #   HTTP 400 InvalidToken error.
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an HTTP 400 InvalidToken error.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2644,11 +2659,11 @@ module Aws::EventBridge
     #
     # @!attribute [rw] next_token
     #   If `nextToken` is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
-    #   the call again using the returned token to retrieve the next page.
-    #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 24 hours. Using an expired pagination token will return an
-    #   HTTP 400 InvalidToken error.
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an HTTP 400 InvalidToken error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEndpointsResponse AWS API Documentation
@@ -3252,8 +3267,8 @@ module Aws::EventBridge
     #
     # @!attribute [rw] endpoint_id
     #   The URL subdomain of the endpoint. For example, if the URL for
-    #   Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the
-    #   EndpointId is `abcde.veo`.
+    #   Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then
+    #   the EndpointId is `abcde.veo`.
     #
     #   When using Java, you must include `auth-crt` on the class path.
     #   @return [String]
@@ -3290,8 +3305,8 @@ module Aws::EventBridge
     #   @return [Array<String>]
     #
     # @!attribute [rw] detail_type
-    #   Free-form string used to decide what fields to expect in the event
-    #   detail.
+    #   Free-form string, with a maximum of 128 characters, used to decide
+    #   what fields to expect in the event detail.
     #   @return [String]
     #
     # @!attribute [rw] detail
@@ -3348,6 +3363,9 @@ module Aws::EventBridge
     #   ingestion was successful, the entry has the event ID in it.
     #   Otherwise, you can use the error code and error message to identify
     #   the problem with the entry.
+    #
+    #   For each record, the index of the response element is the same as
+    #   the index in the request array.
     #   @return [Array<Types::PutEventsResultEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsResponse AWS API Documentation
@@ -3417,8 +3435,8 @@ module Aws::EventBridge
     #   @return [Array<String>]
     #
     # @!attribute [rw] detail_type
-    #   A free-form string used to decide what fields to expect in the event
-    #   detail.
+    #   A free-form string, with a maximum of 128 characters, used to decide
+    #   what fields to expect in the event detail.
     #   @return [String]
     #
     # @!attribute [rw] detail
@@ -3567,12 +3585,12 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern. For more information, see [EventBridge event
-    #   patterns][1] in the *Amazon EventBridge User Guide*.
+    #   The event pattern. For more information, see [Amazon EventBridge
+    #   event patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -3697,8 +3715,8 @@ module Aws::EventBridge
     end
 
     # These are custom parameters to be used when the target is a Amazon
-    # Redshift cluster to invoke the Amazon Redshift Data API
-    # ExecuteStatement based on EventBridge events.
+    # Redshift cluster or Redshift Serverless workgroup to invoke the Amazon
+    # Redshift Data API ExecuteStatement based on EventBridge events.
     #
     # @!attribute [rw] secret_manager_arn
     #   The name or ARN of the secret that enables access to the database.
@@ -3714,6 +3732,9 @@ module Aws::EventBridge
     # @!attribute [rw] db_user
     #   The database user name. Required when authenticating using temporary
     #   credentials.
+    #
+    #   Do not provide this parameter when connecting to a Redshift
+    #   Serverless workgroup.
     #   @return [String]
     #
     # @!attribute [rw] sql
@@ -4325,9 +4346,9 @@ module Aws::EventBridge
     #
     # @!attribute [rw] input_path
     #   The value of the JSONPath that is used for extracting part of the
-    #   matched event when passing it to the target. You must use JSON dot
-    #   notation, not bracket notation. For more information about JSON
-    #   paths, see [JSONPath][1].
+    #   matched event when passing it to the target. You may use JSON dot
+    #   notation or bracket notation. For more information about JSON paths,
+    #   see [JSONPath][1].
     #
     #
     #
@@ -4383,10 +4404,10 @@ module Aws::EventBridge
     #
     # @!attribute [rw] http_parameters
     #   Contains the HTTP parameters to use when the target is a API Gateway
-    #   REST endpoint or EventBridge ApiDestination.
+    #   endpoint or EventBridge ApiDestination.
     #
-    #   If you specify an API Gateway REST API or EventBridge ApiDestination
-    #   as a target, you can use this parameter to specify headers, path
+    #   If you specify an API Gateway API or EventBridge ApiDestination as a
+    #   target, you can use this parameter to specify headers, path
     #   parameters, and query string keys/values as part of your target
     #   invoking request. If you're using ApiDestinations, the
     #   corresponding Connection can also have these values configured. In
@@ -4836,7 +4857,7 @@ module Aws::EventBridge
     #
     # @!attribute [rw] routing_config
     #   Configure the routing policy, including the health check and
-    #   secondary Region..
+    #   secondary Region.
     #   @return [Types::RoutingConfig]
     #
     # @!attribute [rw] replication_config

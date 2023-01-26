@@ -561,6 +561,10 @@ module Aws::EventBridge
     # @option params [required, String] :authorization_type
     #   The type of authorization to use for the connection.
     #
+    #   <note markdown="1"> OAUTH tokens are refreshed when a 401 or 407 response is returned.
+    #
+    #    </note>
+    #
     # @option params [required, Types::CreateConnectionAuthRequestParameters] :auth_parameters
     #   A `CreateConnectionAuthRequestParameters` object that contains the
     #   authorization parameters to use to authorize with the endpoint.
@@ -680,7 +684,10 @@ module Aws::EventBridge
     #   Region..
     #
     # @option params [Types::ReplicationConfig] :replication_config
-    #   Enable or disable event replication.
+    #   Enable or disable event replication. The default state is `ENABLED`
+    #   which means you must supply a `RoleArn`. If you don't have a
+    #   `RoleArn` or you don't want event replication enabled, set the state
+    #   to `DISABLED`.
     #
     # @option params [required, Array<Types::EndpointEventBus>] :event_buses
     #   Define the event buses used.
@@ -755,12 +762,13 @@ module Aws::EventBridge
     # @option params [required, String] :name
     #   The name of the new event bus.
     #
-    #   Event bus names cannot contain the / character. You can't use the
-    #   name `default` for a custom event bus, as this name is already used
-    #   for your account's default event bus.
+    #   Custom event bus names can't contain the `/` character, but you can
+    #   use the `/` character in partner event bus names. In addition, for
+    #   partner event buses, the name must exactly match the name of the
+    #   partner event source that this event bus is matched to.
     #
-    #   If this is a partner event bus, the name must exactly match the name
-    #   of the partner event source that this event bus is matched to.
+    #   You can't use the name `default` for a custom event bus, as this name
+    #   is already used for your account's default event bus.
     #
     # @option params [String] :event_source_name
     #   If you are creating a partner event bus, this specifies the partner
@@ -1888,7 +1896,7 @@ module Aws::EventBridge
     #
     # @option params [String] :next_token
     #   If `nextToken` is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
+    #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
     #   after 24 hours. Using an expired pagination token will return an HTTP
@@ -2454,7 +2462,7 @@ module Aws::EventBridge
     #
     # @option params [String] :endpoint_id
     #   The URL subdomain of the endpoint. For example, if the URL for
-    #   Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the
+    #   Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the
     #   EndpointId is `abcde.veo`.
     #
     #   When using Java, you must include `auth-crt` on the class path.
@@ -2730,12 +2738,12 @@ module Aws::EventBridge
     #   "rate(5 minutes)".
     #
     # @option params [String] :event_pattern
-    #   The event pattern. For more information, see [EventBridge event
+    #   The event pattern. For more information, see [Amazon EventBridge event
     #   patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
     #
     # @option params [String] :state
     #   Indicates whether the rule is enabled or disabled.
@@ -2849,6 +2857,8 @@ module Aws::EventBridge
     #
     # * Redshift cluster
     #
+    # * Redshift Serverless workgroup
+    #
     # * SageMaker Pipeline
     #
     # * SNS topic
@@ -2878,10 +2888,10 @@ module Aws::EventBridge
     # Amazon EventBridge needs the appropriate permissions. For Lambda and
     # Amazon SNS resources, EventBridge relies on resource-based policies.
     # For EC2 instances, Kinesis Data Streams, Step Functions state machines
-    # and API Gateway REST APIs, EventBridge relies on IAM roles that you
-    # specify in the `RoleARN` argument in `PutTargets`. For more
-    # information, see [Authentication and Access Control][6] in the *Amazon
-    # EventBridge User Guide*.
+    # and API Gateway APIs, EventBridge relies on IAM roles that you specify
+    # in the `RoleARN` argument in `PutTargets`. For more information, see
+    # [Authentication and Access Control][6] in the *Amazon EventBridge User
+    # Guide*.
     #
     # If another Amazon Web Services account is in the same region and has
     # granted you permission (using `PutPermission`), you can send events to
@@ -3649,7 +3659,7 @@ module Aws::EventBridge
     #
     # @option params [Types::RoutingConfig] :routing_config
     #   Configure the routing policy, including the health check and secondary
-    #   Region..
+    #   Region.
     #
     # @option params [Types::ReplicationConfig] :replication_config
     #   Whether event replication was enabled or disabled by this request.
@@ -3734,7 +3744,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
