@@ -1140,6 +1140,10 @@ module Aws::Outposts
     #   The fulfillment date of the order.
     #   @return [Time]
     #
+    # @!attribute [rw] payment_term
+    #   The payment term.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Order AWS API Documentation
     #
     class Order < Struct.new(
@@ -1149,7 +1153,8 @@ module Aws::Outposts
       :line_items,
       :payment_option,
       :order_submission_date,
-      :order_fulfilled_date)
+      :order_fulfilled_date,
+      :payment_term)
       SENSITIVE = []
       include Aws::Structure
     end

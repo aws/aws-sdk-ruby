@@ -22,6 +22,7 @@ module Aws::SageMakerRuntime
     InputLocationHeader = Shapes::StringShape.new(name: 'InputLocationHeader')
     InternalDependencyException = Shapes::StructureShape.new(name: 'InternalDependencyException')
     InternalFailure = Shapes::StructureShape.new(name: 'InternalFailure')
+    InvocationTimeoutSecondsHeader = Shapes::IntegerShape.new(name: 'InvocationTimeoutSecondsHeader')
     InvokeEndpointAsyncInput = Shapes::StructureShape.new(name: 'InvokeEndpointAsyncInput')
     InvokeEndpointAsyncOutput = Shapes::StructureShape.new(name: 'InvokeEndpointAsyncOutput')
     InvokeEndpointInput = Shapes::StructureShape.new(name: 'InvokeEndpointInput')
@@ -51,6 +52,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointAsyncInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
     InvokeEndpointAsyncInput.add_member(:input_location, Shapes::ShapeRef.new(shape: InputLocationHeader, required: true, location: "header", location_name: "X-Amzn-SageMaker-InputLocation"))
     InvokeEndpointAsyncInput.add_member(:request_ttl_seconds, Shapes::ShapeRef.new(shape: RequestTTLSecondsHeader, location: "header", location_name: "X-Amzn-SageMaker-RequestTTLSeconds"))
+    InvokeEndpointAsyncInput.add_member(:invocation_timeout_seconds, Shapes::ShapeRef.new(shape: InvocationTimeoutSecondsHeader, location: "header", location_name: "X-Amzn-SageMaker-InvocationTimeoutSeconds"))
     InvokeEndpointAsyncInput.struct_class = Types::InvokeEndpointAsyncInput
 
     InvokeEndpointAsyncOutput.add_member(:inference_id, Shapes::ShapeRef.new(shape: Header, location_name: "InferenceId"))

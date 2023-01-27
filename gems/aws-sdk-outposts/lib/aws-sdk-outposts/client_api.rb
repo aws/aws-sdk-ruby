@@ -483,6 +483,7 @@ module Aws::Outposts
     Order.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "PaymentOption"))
     Order.add_member(:order_submission_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "OrderSubmissionDate"))
     Order.add_member(:order_fulfilled_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "OrderFulfilledDate"))
+    Order.add_member(:payment_term, Shapes::ShapeRef.new(shape: PaymentTerm, location_name: "PaymentTerm"))
     Order.struct_class = Types::Order
 
     OrderSummary.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostIdOnly, location_name: "OutpostId"))

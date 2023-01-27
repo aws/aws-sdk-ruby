@@ -27,6 +27,8 @@ module Aws::MediaTailor
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
     ConfigurationAliasesRequest = Shapes::MapShape.new(name: 'ConfigurationAliasesRequest')
     ConfigurationAliasesResponse = Shapes::MapShape.new(name: 'ConfigurationAliasesResponse')
+    ConfigureLogsForChannelRequest = Shapes::StructureShape.new(name: 'ConfigureLogsForChannelRequest')
+    ConfigureLogsForChannelResponse = Shapes::StructureShape.new(name: 'ConfigureLogsForChannelResponse')
     ConfigureLogsForPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'ConfigureLogsForPlaybackConfigurationRequest')
     ConfigureLogsForPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'ConfigureLogsForPlaybackConfigurationResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
@@ -104,6 +106,9 @@ module Aws::MediaTailor
     LivePreRollConfiguration = Shapes::StructureShape.new(name: 'LivePreRollConfiguration')
     LiveSource = Shapes::StructureShape.new(name: 'LiveSource')
     LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
+    LogConfigurationForChannel = Shapes::StructureShape.new(name: 'LogConfigurationForChannel')
+    LogType = Shapes::StringShape.new(name: 'LogType')
+    LogTypes = Shapes::ListShape.new(name: 'LogTypes')
     ManifestProcessingRules = Shapes::StructureShape.new(name: 'ManifestProcessingRules')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
@@ -223,6 +228,7 @@ module Aws::MediaTailor
     Channel.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
     Channel.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     Channel.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    Channel.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfigurationForChannel, required: true, location_name: "LogConfiguration"))
     Channel.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, required: true, location_name: "Outputs"))
     Channel.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "PlaybackMode"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -234,6 +240,14 @@ module Aws::MediaTailor
 
     ConfigurationAliasesResponse.key = Shapes::ShapeRef.new(shape: __string)
     ConfigurationAliasesResponse.value = Shapes::ShapeRef.new(shape: __mapOf__string)
+
+    ConfigureLogsForChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
+    ConfigureLogsForChannelRequest.add_member(:log_types, Shapes::ShapeRef.new(shape: LogTypes, required: true, location_name: "LogTypes"))
+    ConfigureLogsForChannelRequest.struct_class = Types::ConfigureLogsForChannelRequest
+
+    ConfigureLogsForChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
+    ConfigureLogsForChannelResponse.add_member(:log_types, Shapes::ShapeRef.new(shape: LogTypes, location_name: "LogTypes"))
+    ConfigureLogsForChannelResponse.struct_class = Types::ConfigureLogsForChannelResponse
 
     ConfigureLogsForPlaybackConfigurationRequest.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
     ConfigureLogsForPlaybackConfigurationRequest.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "PlaybackConfigurationName"))
@@ -418,6 +432,7 @@ module Aws::MediaTailor
     DescribeChannelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
     DescribeChannelResponse.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     DescribeChannelResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    DescribeChannelResponse.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfigurationForChannel, required: true, location_name: "LogConfiguration"))
     DescribeChannelResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, location_name: "Outputs"))
     DescribeChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
     DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -629,6 +644,11 @@ module Aws::MediaTailor
 
     LogConfiguration.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
     LogConfiguration.struct_class = Types::LogConfiguration
+
+    LogConfigurationForChannel.add_member(:log_types, Shapes::ShapeRef.new(shape: LogTypes, location_name: "LogTypes"))
+    LogConfigurationForChannel.struct_class = Types::LogConfigurationForChannel
+
+    LogTypes.member = Shapes::ShapeRef.new(shape: LogType)
 
     ManifestProcessingRules.add_member(:ad_marker_passthrough, Shapes::ShapeRef.new(shape: AdMarkerPassthrough, location_name: "AdMarkerPassthrough"))
     ManifestProcessingRules.struct_class = Types::ManifestProcessingRules
@@ -942,6 +962,14 @@ module Aws::MediaTailor
         "signingName" => "mediatailor",
         "uid" => "mediatailor-2018-04-23",
       }
+
+      api.add_operation(:configure_logs_for_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ConfigureLogsForChannel"
+        o.http_method = "PUT"
+        o.http_request_uri = "/configureLogs/channel"
+        o.input = Shapes::ShapeRef.new(shape: ConfigureLogsForChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: ConfigureLogsForChannelResponse)
+      end)
 
       api.add_operation(:configure_logs_for_playback_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ConfigureLogsForPlaybackConfiguration"

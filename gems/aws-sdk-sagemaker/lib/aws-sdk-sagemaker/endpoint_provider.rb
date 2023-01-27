@@ -33,13 +33,10 @@ module Aws::SageMaker
         if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
             if Aws::Endpoints::Matchers.string_equals?("aws", Aws::Endpoints::Matchers.attr(partition_result, "name"))
-              return Aws::Endpoints::Endpoint.new(url: "https://api-fips.sagemaker.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
-            end
-            if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1-secondary")
-              return Aws::Endpoints::Endpoint.new(url: "https://api.sagemaker.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
+              return Aws::Endpoints::Endpoint.new(url: "https://api-fips.sagemaker.#{region}.amazonaws.com", headers: {}, properties: {})
             end
             if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
-              return Aws::Endpoints::Endpoint.new(url: "https://api-fips.sagemaker.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+              return Aws::Endpoints::Endpoint.new(url: "https://api-fips.sagemaker.#{region}.amazonaws.com", headers: {}, properties: {})
             end
             return Aws::Endpoints::Endpoint.new(url: "https://api.sagemaker-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end

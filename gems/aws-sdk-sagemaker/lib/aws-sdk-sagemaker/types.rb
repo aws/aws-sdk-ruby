@@ -411,6 +411,11 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] training_image_config
+    #   The configuration to use an image from a private Docker registry for
+    #   a training job.
+    #   @return [Types::TrainingImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification AWS API Documentation
     #
     class AlgorithmSpecification < Struct.new(
@@ -420,7 +425,8 @@ module Aws::SageMaker
       :metric_definitions,
       :enable_sage_maker_metrics_time_series,
       :container_entrypoint,
-      :container_arguments)
+      :container_arguments,
+      :training_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35172,6 +35178,29 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration to use an image from a private Docker registry for a
+    # training job.
+    #
+    # @!attribute [rw] training_repository_access_mode
+    #   The method that your training job will use to gain access to the
+    #   images in your private Docker registry. For access to an image in a
+    #   private Docker registry, set to `Vpc`.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_repository_auth_config
+    #   An object containing authentication information for a private Docker
+    #   registry containing your training images.
+    #   @return [Types::TrainingRepositoryAuthConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingImageConfig AWS API Documentation
+    #
+    class TrainingImageConfig < Struct.new(
+      :training_repository_access_mode,
+      :training_repository_auth_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a training job.
     #
     # @!attribute [rw] training_job_name
@@ -35697,6 +35726,23 @@ module Aws::SageMaker
       :last_modified_time,
       :training_job_status,
       :warm_pool_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing authentication information for a private Docker
+    # registry.
+    #
+    # @!attribute [rw] training_repository_credentials_provider_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services Lambda
+    #   function used to give SageMaker access credentials to your private
+    #   Docker registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingRepositoryAuthConfig AWS API Documentation
+    #
+    class TrainingRepositoryAuthConfig < Struct.new(
+      :training_repository_credentials_provider_arn)
       SENSITIVE = []
       include Aws::Structure
     end

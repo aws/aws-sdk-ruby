@@ -93,6 +93,11 @@ module Aws::SageMakerRuntime
     #   marked as expired.
     #   @return [Integer]
     #
+    # @!attribute [rw] invocation_timeout_seconds
+    #   Maximum amount of time in seconds a request can be processed before
+    #   it is marked as expired.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointAsyncInput AWS API Documentation
     #
     class InvokeEndpointAsyncInput < Struct.new(
@@ -102,7 +107,8 @@ module Aws::SageMakerRuntime
       :custom_attributes,
       :inference_id,
       :input_location,
-      :request_ttl_seconds)
+      :request_ttl_seconds,
+      :invocation_timeout_seconds)
       SENSITIVE = [:custom_attributes]
       include Aws::Structure
     end
@@ -225,7 +231,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/clarify-online-explainability-create-endpoint.html#clarify-online-exaplainability-create-endpoint-enable
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation

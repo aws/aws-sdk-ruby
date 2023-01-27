@@ -6912,6 +6912,12 @@ module Aws::SageMaker
     #       enable_sage_maker_metrics_time_series: false,
     #       container_entrypoint: ["TrainingContainerEntrypointString"],
     #       container_arguments: ["TrainingContainerArgument"],
+    #       training_image_config: {
+    #         training_repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #         training_repository_auth_config: {
+    #           training_repository_credentials_provider_arn: "TrainingRepositoryCredentialsProviderArn", # required
+    #         },
+    #       },
     #     },
     #     role_arn: "RoleArn", # required
     #     input_data_config: [
@@ -13143,6 +13149,8 @@ module Aws::SageMaker
     #   resp.algorithm_specification.container_entrypoint[0] #=> String
     #   resp.algorithm_specification.container_arguments #=> Array
     #   resp.algorithm_specification.container_arguments[0] #=> String
+    #   resp.algorithm_specification.training_image_config.training_repository_access_mode #=> String, one of "Platform", "Vpc"
+    #   resp.algorithm_specification.training_image_config.training_repository_auth_config.training_repository_credentials_provider_arn #=> String
     #   resp.role_arn #=> String
     #   resp.input_data_config #=> Array
     #   resp.input_data_config[0].channel_name #=> String
@@ -22738,7 +22746,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

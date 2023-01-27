@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-01-27)
+------------------
+
+* Feature - Amazon SageMaker Runtime which supports InvokeEndpointAsync asynchronously can now invoke endpoints with custom timeout values. Asynchronous invocations support longer processing times.
+
 1.45.0 (2023-01-18)
 ------------------
 

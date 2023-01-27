@@ -1784,6 +1784,7 @@ module Aws::SageMaker
     TrainingEnvironmentKey = Shapes::StringShape.new(name: 'TrainingEnvironmentKey')
     TrainingEnvironmentMap = Shapes::MapShape.new(name: 'TrainingEnvironmentMap')
     TrainingEnvironmentValue = Shapes::StringShape.new(name: 'TrainingEnvironmentValue')
+    TrainingImageConfig = Shapes::StructureShape.new(name: 'TrainingImageConfig')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
     TrainingInstanceCount = Shapes::IntegerShape.new(name: 'TrainingInstanceCount')
     TrainingInstanceType = Shapes::StringShape.new(name: 'TrainingInstanceType')
@@ -1800,6 +1801,9 @@ module Aws::SageMaker
     TrainingJobStepMetadata = Shapes::StructureShape.new(name: 'TrainingJobStepMetadata')
     TrainingJobSummaries = Shapes::ListShape.new(name: 'TrainingJobSummaries')
     TrainingJobSummary = Shapes::StructureShape.new(name: 'TrainingJobSummary')
+    TrainingRepositoryAccessMode = Shapes::StringShape.new(name: 'TrainingRepositoryAccessMode')
+    TrainingRepositoryAuthConfig = Shapes::StructureShape.new(name: 'TrainingRepositoryAuthConfig')
+    TrainingRepositoryCredentialsProviderArn = Shapes::StringShape.new(name: 'TrainingRepositoryCredentialsProviderArn')
     TrainingSpecification = Shapes::StructureShape.new(name: 'TrainingSpecification')
     TrainingTimeInSeconds = Shapes::IntegerShape.new(name: 'TrainingTimeInSeconds')
     TransformDataSource = Shapes::StructureShape.new(name: 'TransformDataSource')
@@ -2030,6 +2034,7 @@ module Aws::SageMaker
     AlgorithmSpecification.add_member(:enable_sage_maker_metrics_time_series, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableSageMakerMetricsTimeSeries"))
     AlgorithmSpecification.add_member(:container_entrypoint, Shapes::ShapeRef.new(shape: TrainingContainerEntrypoint, location_name: "ContainerEntrypoint"))
     AlgorithmSpecification.add_member(:container_arguments, Shapes::ShapeRef.new(shape: TrainingContainerArguments, location_name: "ContainerArguments"))
+    AlgorithmSpecification.add_member(:training_image_config, Shapes::ShapeRef.new(shape: TrainingImageConfig, location_name: "TrainingImageConfig"))
     AlgorithmSpecification.struct_class = Types::AlgorithmSpecification
 
     AlgorithmStatusDetails.add_member(:validation_statuses, Shapes::ShapeRef.new(shape: AlgorithmStatusItemList, location_name: "ValidationStatuses"))
@@ -8030,6 +8035,10 @@ module Aws::SageMaker
     TrainingEnvironmentMap.key = Shapes::ShapeRef.new(shape: TrainingEnvironmentKey)
     TrainingEnvironmentMap.value = Shapes::ShapeRef.new(shape: TrainingEnvironmentValue)
 
+    TrainingImageConfig.add_member(:training_repository_access_mode, Shapes::ShapeRef.new(shape: TrainingRepositoryAccessMode, required: true, location_name: "TrainingRepositoryAccessMode"))
+    TrainingImageConfig.add_member(:training_repository_auth_config, Shapes::ShapeRef.new(shape: TrainingRepositoryAuthConfig, location_name: "TrainingRepositoryAuthConfig"))
+    TrainingImageConfig.struct_class = Types::TrainingImageConfig
+
     TrainingInstanceTypes.member = Shapes::ShapeRef.new(shape: TrainingInstanceType)
 
     TrainingJob.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, location_name: "TrainingJobName"))
@@ -8099,6 +8108,9 @@ module Aws::SageMaker
     TrainingJobSummary.add_member(:training_job_status, Shapes::ShapeRef.new(shape: TrainingJobStatus, required: true, location_name: "TrainingJobStatus"))
     TrainingJobSummary.add_member(:warm_pool_status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "WarmPoolStatus"))
     TrainingJobSummary.struct_class = Types::TrainingJobSummary
+
+    TrainingRepositoryAuthConfig.add_member(:training_repository_credentials_provider_arn, Shapes::ShapeRef.new(shape: TrainingRepositoryCredentialsProviderArn, required: true, location_name: "TrainingRepositoryCredentialsProviderArn"))
+    TrainingRepositoryAuthConfig.struct_class = Types::TrainingRepositoryAuthConfig
 
     TrainingSpecification.add_member(:training_image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "TrainingImage"))
     TrainingSpecification.add_member(:training_image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "TrainingImageDigest"))

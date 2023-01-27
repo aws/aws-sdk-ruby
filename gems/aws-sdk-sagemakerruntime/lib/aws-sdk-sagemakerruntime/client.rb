@@ -490,7 +490,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/clarify-online-explainability-create-endpoint.html#clarify-online-exaplainability-create-endpoint-enable
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable
     #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -537,7 +537,7 @@ module Aws::SageMakerRuntime
     #
     # Inference requests sent to this API are enqueued for asynchronous
     # processing. The processing of the inference request may or may not
-    # complete before the you receive a response from this API. The response
+    # complete before you receive a response from this API. The response
     # from this API will not contain the result of the inference request but
     # contain information about where you can locate it.
     #
@@ -553,7 +553,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint that you specified when you created the
@@ -603,6 +603,10 @@ module Aws::SageMakerRuntime
     #   Maximum age in seconds a request can be in the queue before it is
     #   marked as expired.
     #
+    # @option params [Integer] :invocation_timeout_seconds
+    #   Maximum amount of time in seconds a request can be processed before it
+    #   is marked as expired.
+    #
     # @return [Types::InvokeEndpointAsyncOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointAsyncOutput#inference_id #inference_id} => String
@@ -618,6 +622,7 @@ module Aws::SageMakerRuntime
     #     inference_id: "InferenceId",
     #     input_location: "InputLocationHeader", # required
     #     request_ttl_seconds: 1,
+    #     invocation_timeout_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -647,7 +652,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

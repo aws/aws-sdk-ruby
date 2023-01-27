@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-01-27)
+------------------
+
+* Feature - Adding support for payment term in GetOrder, CreateOrder responses.
+
 1.39.0 (2023-01-18)
 ------------------
 

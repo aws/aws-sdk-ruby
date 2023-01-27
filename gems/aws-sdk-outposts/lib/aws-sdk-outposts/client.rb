@@ -441,6 +441,7 @@ module Aws::Outposts
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
+    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOrder AWS API Documentation
     #
@@ -807,6 +808,7 @@ module Aws::Outposts
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
+    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOrder AWS API Documentation
     #
@@ -1803,7 +1805,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

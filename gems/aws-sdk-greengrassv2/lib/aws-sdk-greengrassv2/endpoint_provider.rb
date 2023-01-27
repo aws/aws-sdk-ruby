@@ -15,7 +15,7 @@ module Aws::GreengrassV2
       use_fips = parameters.use_fips
       endpoint = parameters.endpoint
       if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-        if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
+        if Aws::Endpoints::Matchers.set?(endpoint)
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
             raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
           end
@@ -32,6 +32,12 @@ module Aws::GreengrassV2
         end
         if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-east-1")
+              return Aws::Endpoints::Endpoint.new(url: "https://greengrass.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+            end
+            if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
+              return Aws::Endpoints::Endpoint.new(url: "https://greengrass.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
+            end
             return Aws::Endpoints::Endpoint.new(url: "https://greengrass-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
           raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
@@ -43,10 +49,16 @@ module Aws::GreengrassV2
           raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
         end
         if Aws::Endpoints::Matchers.string_equals?(region, "dataplane-us-gov-east-1")
-          return Aws::Endpoints::Endpoint.new(url: "https://greengrass-ats.iot.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+          return Aws::Endpoints::Endpoint.new(url: "https://greengrass-ats.iot.us-gov-east-1.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-east-1", "signingName"=>"greengrass"}]})
         end
         if Aws::Endpoints::Matchers.string_equals?(region, "dataplane-us-gov-west-1")
-          return Aws::Endpoints::Endpoint.new(url: "https://greengrass-ats.iot.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
+          return Aws::Endpoints::Endpoint.new(url: "https://greengrass-ats.iot.us-gov-west-1.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1", "signingName"=>"greengrass"}]})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-east-1")
+          return Aws::Endpoints::Endpoint.new(url: "https://greengrass.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+        end
+        if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
+          return Aws::Endpoints::Endpoint.new(url: "https://greengrass.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
         end
         return Aws::Endpoints::Endpoint.new(url: "https://greengrass.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
       end

@@ -56,6 +56,8 @@ module Aws::MediaTailor
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :configure_logs_for_channel
+            Aws::MediaTailor::Endpoints::ConfigureLogsForChannel.build(context)
           when :configure_logs_for_playback_configuration
             Aws::MediaTailor::Endpoints::ConfigureLogsForPlaybackConfiguration.build(context)
           when :create_channel

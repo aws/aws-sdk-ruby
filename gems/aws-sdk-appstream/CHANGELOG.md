@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-01-27)
+------------------
+
+* Feature - Fixing the issue where Appstream waiters hang for fleet_started and fleet_stopped.
+
 1.69.0 (2023-01-18)
 ------------------
 

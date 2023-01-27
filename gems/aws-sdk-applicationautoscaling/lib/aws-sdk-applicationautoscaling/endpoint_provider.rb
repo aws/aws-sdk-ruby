@@ -15,7 +15,7 @@ module Aws::ApplicationAutoScaling
       use_fips = parameters.use_fips
       endpoint = parameters.endpoint
       if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-        if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
+        if Aws::Endpoints::Matchers.set?(endpoint)
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
             raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
           end
@@ -32,6 +32,9 @@ module Aws::ApplicationAutoScaling
         end
         if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+              return Aws::Endpoints::Endpoint.new(url: "https://application-autoscaling.#{region}.amazonaws.com", headers: {}, properties: {})
+            end
             return Aws::Endpoints::Endpoint.new(url: "https://application-autoscaling-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
           raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

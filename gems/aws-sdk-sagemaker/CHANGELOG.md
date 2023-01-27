@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2023-01-27)
+------------------
+
+* Feature - This release supports running SageMaker Training jobs with container images that are in a private Docker registry.
+
 1.163.0 (2023-01-25)
 ------------------
 

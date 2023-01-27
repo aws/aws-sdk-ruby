@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-01-27)
+------------------
+
+* Feature - This release introduces the As Run logging type, along with API and documentation updates.
+
 1.58.0 (2023-01-18)
 ------------------
 

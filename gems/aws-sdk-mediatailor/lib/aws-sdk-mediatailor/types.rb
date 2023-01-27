@@ -344,6 +344,10 @@ module Aws::MediaTailor
     #   The timestamp of when the channel was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] log_configuration
+    #   The log configuration.
+    #   @return [Types::LogConfigurationForChannel]
+    #
     # @!attribute [rw] outputs
     #   The channel's output properties.
     #   @return [Array<Types::ResponseOutputItem>]
@@ -383,10 +387,45 @@ module Aws::MediaTailor
       :creation_time,
       :filler_slate,
       :last_modified_time,
+      :log_configuration,
       :outputs,
       :playback_mode,
       :tags,
       :tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_name
+    #   The name of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_types
+    #   The types of logs to collect.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForChannelRequest AWS API Documentation
+    #
+    class ConfigureLogsForChannelRequest < Struct.new(
+      :channel_name,
+      :log_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_name
+    #   The name of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_types
+    #   The types of logs collected.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForChannelResponse AWS API Documentation
+    #
+    class ConfigureLogsForChannelResponse < Struct.new(
+      :channel_name,
+      :log_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1339,6 +1378,10 @@ module Aws::MediaTailor
     #   The timestamp of when the channel was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] log_configuration
+    #   The log configuration for the channel.
+    #   @return [Types::LogConfigurationForChannel]
+    #
     # @!attribute [rw] outputs
     #   The channel's output properties.
     #   @return [Array<Types::ResponseOutputItem>]
@@ -1371,6 +1414,7 @@ module Aws::MediaTailor
       :creation_time,
       :filler_slate,
       :last_modified_time,
+      :log_configuration,
       :outputs,
       :playback_mode,
       :tags,
@@ -2515,6 +2559,20 @@ module Aws::MediaTailor
     #
     class LogConfiguration < Struct.new(
       :percent_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log configuration for the channel.
+    #
+    # @!attribute [rw] log_types
+    #   The log types.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/LogConfigurationForChannel AWS API Documentation
+    #
+    class LogConfigurationForChannel < Struct.new(
+      :log_types)
       SENSITIVE = []
       include Aws::Structure
     end

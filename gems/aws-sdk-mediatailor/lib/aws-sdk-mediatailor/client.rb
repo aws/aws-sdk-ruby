@@ -368,6 +368,41 @@ module Aws::MediaTailor
 
     # @!group API Operations
 
+    # Configures Amazon CloudWatch log settings for a channel.
+    #
+    # @option params [required, String] :channel_name
+    #   The name of the channel.
+    #
+    # @option params [required, Array<String>] :log_types
+    #   The types of logs to collect.
+    #
+    # @return [Types::ConfigureLogsForChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfigureLogsForChannelResponse#channel_name #channel_name} => String
+    #   * {Types::ConfigureLogsForChannelResponse#log_types #log_types} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.configure_logs_for_channel({
+    #     channel_name: "__string", # required
+    #     log_types: ["AS_RUN"], # required, accepts AS_RUN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_name #=> String
+    #   resp.log_types #=> Array
+    #   resp.log_types[0] #=> String, one of "AS_RUN"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForChannel AWS API Documentation
+    #
+    # @overload configure_logs_for_channel(params = {})
+    # @param [Hash] params ({})
+    def configure_logs_for_channel(params = {}, options = {})
+      req = build_request(:configure_logs_for_channel, params)
+      req.send_request(options)
+    end
+
     # Amazon CloudWatch log settings for a playback configuration.
     #
     # @option params [required, Integer] :percent_enabled
@@ -1239,6 +1274,7 @@ module Aws::MediaTailor
     #   * {Types::DescribeChannelResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeChannelResponse#filler_slate #filler_slate} => Types::SlateSource
     #   * {Types::DescribeChannelResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeChannelResponse#log_configuration #log_configuration} => Types::LogConfigurationForChannel
     #   * {Types::DescribeChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
     #   * {Types::DescribeChannelResponse#playback_mode #playback_mode} => String
     #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -1259,6 +1295,8 @@ module Aws::MediaTailor
     #   resp.filler_slate.source_location_name #=> String
     #   resp.filler_slate.vod_source_name #=> String
     #   resp.last_modified_time #=> Time
+    #   resp.log_configuration.log_types #=> Array
+    #   resp.log_configuration.log_types[0] #=> String, one of "AS_RUN"
     #   resp.outputs #=> Array
     #   resp.outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
     #   resp.outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
@@ -1835,6 +1873,8 @@ module Aws::MediaTailor
     #   resp.items[0].filler_slate.source_location_name #=> String
     #   resp.items[0].filler_slate.vod_source_name #=> String
     #   resp.items[0].last_modified_time #=> Time
+    #   resp.items[0].log_configuration.log_types #=> Array
+    #   resp.items[0].log_configuration.log_types[0] #=> String, one of "AS_RUN"
     #   resp.items[0].outputs #=> Array
     #   resp.items[0].outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
     #   resp.items[0].outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
@@ -2879,7 +2919,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
