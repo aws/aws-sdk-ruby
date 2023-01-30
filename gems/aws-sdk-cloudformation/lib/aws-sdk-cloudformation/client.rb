@@ -2970,6 +2970,8 @@ module Aws::CloudFormation
     #   resp.stack_set.organizational_unit_ids #=> Array
     #   resp.stack_set.organizational_unit_ids[0] #=> String
     #   resp.stack_set.managed_execution.active #=> Boolean
+    #   resp.stack_set.regions #=> Array
+    #   resp.stack_set.regions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet AWS API Documentation
     #
@@ -6823,7 +6825,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

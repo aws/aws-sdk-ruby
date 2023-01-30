@@ -7409,6 +7409,9 @@ module Aws::CloudFormation
     #   concurrently and queues conflicting operations.
     #   @return [Types::ManagedExecution]
     #
+    # @!attribute [rw] regions
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
     #
     class StackSet < Struct.new(
@@ -7427,7 +7430,8 @@ module Aws::CloudFormation
       :auto_deployment,
       :permission_model,
       :organizational_unit_ids,
-      :managed_execution)
+      :managed_execution,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end

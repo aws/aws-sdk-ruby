@@ -8369,6 +8369,12 @@ module Aws::EC2
     #   The ID of the network interface.
     #   @return [String]
     #
+    # @!attribute [rw] destination_prefix_list_id
+    #   The ID of the prefix list. Use a prefix list in place of
+    #   `DestinationCidrBlock`. You cannot use `DestinationPrefixListId` and
+    #   `DestinationCidrBlock` in the same request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRouteRequest AWS API Documentation
     #
     class CreateLocalGatewayRouteRequest < Struct.new(
@@ -8376,7 +8382,8 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :local_gateway_virtual_interface_group_id,
       :dry_run,
-      :network_interface_id)
+      :network_interface_id,
+      :destination_prefix_list_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13304,12 +13311,19 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] destination_prefix_list_id
+    #   Use a prefix list in place of `DestinationCidrBlock`. You cannot use
+    #   `DestinationPrefixListId` and `DestinationCidrBlock` in the same
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayRouteRequest AWS API Documentation
     #
     class DeleteLocalGatewayRouteRequest < Struct.new(
       :destination_cidr_block,
       :local_gateway_route_table_id,
-      :dry_run)
+      :dry_run,
+      :destination_prefix_list_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42072,6 +42086,10 @@ module Aws::EC2
     #   The ID of the network interface.
     #   @return [String]
     #
+    # @!attribute [rw] destination_prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRoute AWS API Documentation
     #
     class LocalGatewayRoute < Struct.new(
@@ -42084,7 +42102,8 @@ module Aws::EC2
       :owner_id,
       :subnet_id,
       :coip_pool_id,
-      :network_interface_id)
+      :network_interface_id,
+      :destination_prefix_list_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44321,6 +44340,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] destination_prefix_list_id
+    #   The ID of the prefix list. Use a prefix list in place of
+    #   `DestinationCidrBlock`. You cannot use `DestinationPrefixListId` and
+    #   `DestinationCidrBlock` in the same request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLocalGatewayRouteRequest AWS API Documentation
     #
     class ModifyLocalGatewayRouteRequest < Struct.new(
@@ -44328,7 +44353,8 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :local_gateway_virtual_interface_group_id,
       :network_interface_id,
-      :dry_run)
+      :dry_run,
+      :destination_prefix_list_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54935,6 +54961,8 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `prefix-list-id` - The ID of the prefix list.
     #
     #   * `route-search.exact-match` - The exact match of the specified
     #     filter.

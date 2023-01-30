@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.362.0 (2023-01-30)
+------------------
+
+* Feature - We add Prefix Lists as a new route destination option for LocalGatewayRoutes. This will allow customers to create routes to Prefix Lists. Prefix List routes will allow customers to group individual CIDR routes with the same target into a single route.
+
 1.361.0 (2023-01-25)
 ------------------
 

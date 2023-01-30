@@ -32,6 +32,9 @@ module Aws::Imagebuilder
         end
         if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+              return Aws::Endpoints::Endpoint.new(url: "https://imagebuilder.#{region}.amazonaws.com", headers: {}, properties: {})
+            end
             return Aws::Endpoints::Endpoint.new(url: "https://imagebuilder-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
           raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

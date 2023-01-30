@@ -1793,8 +1793,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_enclave_certificate_iam_role({
-    #     certificate_arn: "ResourceArn",
-    #     role_arn: "ResourceArn",
+    #     certificate_arn: "CertificateId",
+    #     role_arn: "RoleId",
     #     dry_run: false,
     #   })
     #
@@ -8616,7 +8616,7 @@ module Aws::EC2
     #
     # * `NetworkInterfaceId`
     #
-    # @option params [required, String] :destination_cidr_block
+    # @option params [String] :destination_cidr_block
     #   The CIDR range used for destination matches. Routing decisions are
     #   based on the most specific match.
     #
@@ -8635,6 +8635,11 @@ module Aws::EC2
     # @option params [String] :network_interface_id
     #   The ID of the network interface.
     #
+    # @option params [String] :destination_prefix_list_id
+    #   The ID of the prefix list. Use a prefix list in place of
+    #   `DestinationCidrBlock`. You cannot use `DestinationPrefixListId` and
+    #   `DestinationCidrBlock` in the same request.
+    #
     # @return [Types::CreateLocalGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLocalGatewayRouteResult#route #route} => Types::LocalGatewayRoute
@@ -8642,11 +8647,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_local_gateway_route({
-    #     destination_cidr_block: "String", # required
+    #     destination_cidr_block: "String",
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
     #     local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId",
     #     dry_run: false,
     #     network_interface_id: "NetworkInterfaceId",
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #   })
     #
     # @example Response structure
@@ -8661,6 +8667,7 @@ module Aws::EC2
     #   resp.route.subnet_id #=> String
     #   resp.route.coip_pool_id #=> String
     #   resp.route.network_interface_id #=> String
+    #   resp.route.destination_prefix_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRoute AWS API Documentation
     #
@@ -11162,7 +11169,7 @@ module Aws::EC2
     #   resp = client.create_snapshots({
     #     description: "String",
     #     instance_specification: { # required
-    #       instance_id: "InstanceId",
+    #       instance_id: "InstanceIdWithVolumeResolver", # required
     #       exclude_boot_volume: false,
     #       exclude_data_volume_ids: ["VolumeId"],
     #     },
@@ -15805,7 +15812,7 @@ module Aws::EC2
     # Deletes the specified route from the specified local gateway route
     # table.
     #
-    # @option params [required, String] :destination_cidr_block
+    # @option params [String] :destination_cidr_block
     #   The CIDR range for the route. This must match the CIDR for the route
     #   exactly.
     #
@@ -15818,6 +15825,11 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :destination_prefix_list_id
+    #   Use a prefix list in place of `DestinationCidrBlock`. You cannot use
+    #   `DestinationPrefixListId` and `DestinationCidrBlock` in the same
+    #   request.
+    #
     # @return [Types::DeleteLocalGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteLocalGatewayRouteResult#route #route} => Types::LocalGatewayRoute
@@ -15825,9 +15837,10 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_local_gateway_route({
-    #     destination_cidr_block: "String", # required
+    #     destination_cidr_block: "String",
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
     #     dry_run: false,
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #   })
     #
     # @example Response structure
@@ -15842,6 +15855,7 @@ module Aws::EC2
     #   resp.route.subnet_id #=> String
     #   resp.route.coip_pool_id #=> String
     #   resp.route.network_interface_id #=> String
+    #   resp.route.destination_prefix_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayRoute AWS API Documentation
     #
@@ -16994,7 +17008,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_traffic_mirror_filter_rule({
-    #     traffic_mirror_filter_rule_id: "TrafficMirrorFilterRuleId", # required
+    #     traffic_mirror_filter_rule_id: "TrafficMirrorFilterRuleIdWithResolver", # required
     #     dry_run: false,
     #   })
     #
@@ -36941,8 +36955,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_enclave_certificate_iam_role({
-    #     certificate_arn: "ResourceArn",
-    #     role_arn: "ResourceArn",
+    #     certificate_arn: "CertificateId",
+    #     role_arn: "RoleId",
     #     dry_run: false,
     #   })
     #
@@ -38482,7 +38496,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_associated_enclave_certificate_iam_roles({
-    #     certificate_arn: "ResourceArn",
+    #     certificate_arn: "CertificateId",
     #     dry_run: false,
     #   })
     #
@@ -45112,7 +45126,7 @@ module Aws::EC2
 
     # Modifies the specified local gateway route.
     #
-    # @option params [required, String] :destination_cidr_block
+    # @option params [String] :destination_cidr_block
     #   The CIDR block used for destination matches. The value that you
     #   provide must match the CIDR of an existing route in the table.
     #
@@ -45131,6 +45145,11 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :destination_prefix_list_id
+    #   The ID of the prefix list. Use a prefix list in place of
+    #   `DestinationCidrBlock`. You cannot use `DestinationPrefixListId` and
+    #   `DestinationCidrBlock` in the same request.
+    #
     # @return [Types::ModifyLocalGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyLocalGatewayRouteResult#route #route} => Types::LocalGatewayRoute
@@ -45138,11 +45157,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_local_gateway_route({
-    #     destination_cidr_block: "String", # required
+    #     destination_cidr_block: "String",
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
     #     local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId",
     #     network_interface_id: "NetworkInterfaceId",
     #     dry_run: false,
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #   })
     #
     # @example Response structure
@@ -45157,6 +45177,7 @@ module Aws::EC2
     #   resp.route.subnet_id #=> String
     #   resp.route.coip_pool_id #=> String
     #   resp.route.network_interface_id #=> String
+    #   resp.route.destination_prefix_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLocalGatewayRoute AWS API Documentation
     #
@@ -46186,7 +46207,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_traffic_mirror_filter_rule({
-    #     traffic_mirror_filter_rule_id: "TrafficMirrorFilterRuleId", # required
+    #     traffic_mirror_filter_rule_id: "TrafficMirrorFilterRuleIdWithResolver", # required
     #     traffic_direction: "ingress", # accepts ingress, egress
     #     rule_number: 1,
     #     rule_action: "accept", # accepts accept, reject
@@ -53477,6 +53498,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
+    #   * `prefix-list-id` - The ID of the prefix list.
+    #
     #   * `route-search.exact-match` - The exact match of the specified
     #     filter.
     #
@@ -53545,6 +53568,7 @@ module Aws::EC2
     #   resp.routes[0].subnet_id #=> String
     #   resp.routes[0].coip_pool_id #=> String
     #   resp.routes[0].network_interface_id #=> String
+    #   resp.routes[0].destination_prefix_list_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchLocalGatewayRoutes AWS API Documentation
@@ -55489,7 +55513,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.361.0'
+      context[:gem_version] = '1.362.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

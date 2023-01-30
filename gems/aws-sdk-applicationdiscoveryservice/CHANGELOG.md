@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2023-01-30)
+------------------
+
+* Feature - Update ImportName validation to 255 from the current length of 100
+
 1.48.0 (2023-01-18)
 ------------------
 

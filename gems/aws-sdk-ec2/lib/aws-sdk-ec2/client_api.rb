@@ -285,6 +285,7 @@ module Aws::EC2
     CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
     CertificateAuthentication = Shapes::StructureShape.new(name: 'CertificateAuthentication')
     CertificateAuthenticationRequest = Shapes::StructureShape.new(name: 'CertificateAuthenticationRequest')
+    CertificateId = Shapes::StringShape.new(name: 'CertificateId')
     CidrAuthorizationContext = Shapes::StructureShape.new(name: 'CidrAuthorizationContext')
     CidrBlock = Shapes::StructureShape.new(name: 'CidrBlock')
     CidrBlockSet = Shapes::ListShape.new(name: 'CidrBlockSet')
@@ -1580,6 +1581,7 @@ module Aws::EC2
     InstanceIdList = Shapes::ListShape.new(name: 'InstanceIdList')
     InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
     InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
+    InstanceIdWithVolumeResolver = Shapes::StringShape.new(name: 'InstanceIdWithVolumeResolver')
     InstanceIdsSet = Shapes::ListShape.new(name: 'InstanceIdsSet')
     InstanceInterruptionBehavior = Shapes::StringShape.new(name: 'InstanceInterruptionBehavior')
     InstanceIpv4Prefix = Shapes::StructureShape.new(name: 'InstanceIpv4Prefix')
@@ -2417,6 +2419,7 @@ module Aws::EC2
     RevokeSecurityGroupEgressResult = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressResult')
     RevokeSecurityGroupIngressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupIngressRequest')
     RevokeSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'RevokeSecurityGroupIngressResult')
+    RoleId = Shapes::StringShape.new(name: 'RoleId')
     RootDeviceType = Shapes::StringShape.new(name: 'RootDeviceType')
     RootDeviceTypeList = Shapes::ListShape.new(name: 'RootDeviceTypeList')
     Route = Shapes::StructureShape.new(name: 'Route')
@@ -2650,7 +2653,7 @@ module Aws::EC2
     TrafficMirrorFilterRule = Shapes::StructureShape.new(name: 'TrafficMirrorFilterRule')
     TrafficMirrorFilterRuleField = Shapes::StringShape.new(name: 'TrafficMirrorFilterRuleField')
     TrafficMirrorFilterRuleFieldList = Shapes::ListShape.new(name: 'TrafficMirrorFilterRuleFieldList')
-    TrafficMirrorFilterRuleId = Shapes::StringShape.new(name: 'TrafficMirrorFilterRuleId')
+    TrafficMirrorFilterRuleIdWithResolver = Shapes::StringShape.new(name: 'TrafficMirrorFilterRuleIdWithResolver')
     TrafficMirrorFilterRuleList = Shapes::ListShape.new(name: 'TrafficMirrorFilterRuleList')
     TrafficMirrorFilterSet = Shapes::ListShape.new(name: 'TrafficMirrorFilterSet')
     TrafficMirrorNetworkService = Shapes::StringShape.new(name: 'TrafficMirrorNetworkService')
@@ -3340,8 +3343,8 @@ module Aws::EC2
     AssociateDhcpOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AssociateDhcpOptionsRequest.struct_class = Types::AssociateDhcpOptionsRequest
 
-    AssociateEnclaveCertificateIamRoleRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "CertificateArn"))
-    AssociateEnclaveCertificateIamRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RoleArn"))
+    AssociateEnclaveCertificateIamRoleRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateArn"))
+    AssociateEnclaveCertificateIamRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleId, location_name: "RoleArn"))
     AssociateEnclaveCertificateIamRoleRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     AssociateEnclaveCertificateIamRoleRequest.struct_class = Types::AssociateEnclaveCertificateIamRoleRequest
 
@@ -4510,11 +4513,12 @@ module Aws::EC2
     CreateLaunchTemplateVersionResult.add_member(:warning, Shapes::ShapeRef.new(shape: ValidationWarning, location_name: "warning"))
     CreateLaunchTemplateVersionResult.struct_class = Types::CreateLaunchTemplateVersionResult
 
-    CreateLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
+    CreateLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "DestinationCidrBlock"))
     CreateLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
     CreateLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, location_name: "LocalGatewayVirtualInterfaceGroupId"))
     CreateLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateLocalGatewayRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
+    CreateLocalGatewayRouteRequest.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "DestinationPrefixListId"))
     CreateLocalGatewayRouteRequest.struct_class = Types::CreateLocalGatewayRouteRequest
 
     CreateLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
@@ -5401,9 +5405,10 @@ module Aws::EC2
     DeleteLaunchTemplateVersionsResult.add_member(:unsuccessfully_deleted_launch_template_versions, Shapes::ShapeRef.new(shape: DeleteLaunchTemplateVersionsResponseErrorSet, location_name: "unsuccessfullyDeletedLaunchTemplateVersionSet"))
     DeleteLaunchTemplateVersionsResult.struct_class = Types::DeleteLaunchTemplateVersionsResult
 
-    DeleteLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
+    DeleteLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "DestinationCidrBlock"))
     DeleteLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
     DeleteLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteLocalGatewayRouteRequest.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "DestinationPrefixListId"))
     DeleteLocalGatewayRouteRequest.struct_class = Types::DeleteLocalGatewayRouteRequest
 
     DeleteLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
@@ -5565,7 +5570,7 @@ module Aws::EC2
     DeleteTrafficMirrorFilterResult.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorFilterId"))
     DeleteTrafficMirrorFilterResult.struct_class = Types::DeleteTrafficMirrorFilterResult
 
-    DeleteTrafficMirrorFilterRuleRequest.add_member(:traffic_mirror_filter_rule_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleId, required: true, location_name: "TrafficMirrorFilterRuleId"))
+    DeleteTrafficMirrorFilterRuleRequest.add_member(:traffic_mirror_filter_rule_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleIdWithResolver, required: true, location_name: "TrafficMirrorFilterRuleId"))
     DeleteTrafficMirrorFilterRuleRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteTrafficMirrorFilterRuleRequest.struct_class = Types::DeleteTrafficMirrorFilterRuleRequest
 
@@ -7604,8 +7609,8 @@ module Aws::EC2
     DisassociateClientVpnTargetNetworkResult.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "status"))
     DisassociateClientVpnTargetNetworkResult.struct_class = Types::DisassociateClientVpnTargetNetworkResult
 
-    DisassociateEnclaveCertificateIamRoleRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "CertificateArn"))
-    DisassociateEnclaveCertificateIamRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RoleArn"))
+    DisassociateEnclaveCertificateIamRoleRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateArn"))
+    DisassociateEnclaveCertificateIamRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleId, location_name: "RoleArn"))
     DisassociateEnclaveCertificateIamRoleRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisassociateEnclaveCertificateIamRoleRequest.struct_class = Types::DisassociateEnclaveCertificateIamRoleRequest
 
@@ -8363,7 +8368,7 @@ module Aws::EC2
     FpgaInfo.add_member(:total_fpga_memory_in_mi_b, Shapes::ShapeRef.new(shape: totalFpgaMemory, location_name: "totalFpgaMemoryInMiB"))
     FpgaInfo.struct_class = Types::FpgaInfo
 
-    GetAssociatedEnclaveCertificateIamRolesRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "CertificateArn"))
+    GetAssociatedEnclaveCertificateIamRolesRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateArn"))
     GetAssociatedEnclaveCertificateIamRolesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetAssociatedEnclaveCertificateIamRolesRequest.struct_class = Types::GetAssociatedEnclaveCertificateIamRolesRequest
 
@@ -9565,7 +9570,7 @@ module Aws::EC2
     InstanceRequirementsWithMetadataRequest.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "InstanceRequirements"))
     InstanceRequirementsWithMetadataRequest.struct_class = Types::InstanceRequirementsWithMetadataRequest
 
-    InstanceSpecification.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    InstanceSpecification.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdWithVolumeResolver, required: true, location_name: "InstanceId"))
     InstanceSpecification.add_member(:exclude_boot_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExcludeBootVolume"))
     InstanceSpecification.add_member(:exclude_data_volume_ids, Shapes::ShapeRef.new(shape: VolumeIdStringList, location_name: "ExcludeDataVolumeId"))
     InstanceSpecification.struct_class = Types::InstanceSpecification
@@ -10380,6 +10385,7 @@ module Aws::EC2
     LocalGatewayRoute.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
     LocalGatewayRoute.add_member(:coip_pool_id, Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "coipPoolId"))
     LocalGatewayRoute.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
+    LocalGatewayRoute.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "destinationPrefixListId"))
     LocalGatewayRoute.struct_class = Types::LocalGatewayRoute
 
     LocalGatewayRouteList.member = Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "item")
@@ -10785,11 +10791,12 @@ module Aws::EC2
     ModifyLaunchTemplateResult.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "launchTemplate"))
     ModifyLaunchTemplateResult.struct_class = Types::ModifyLaunchTemplateResult
 
-    ModifyLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
+    ModifyLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "DestinationCidrBlock"))
     ModifyLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
     ModifyLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, location_name: "LocalGatewayVirtualInterfaceGroupId"))
     ModifyLocalGatewayRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
     ModifyLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyLocalGatewayRouteRequest.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "DestinationPrefixListId"))
     ModifyLocalGatewayRouteRequest.struct_class = Types::ModifyLocalGatewayRouteRequest
 
     ModifyLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
@@ -10893,7 +10900,7 @@ module Aws::EC2
     ModifyTrafficMirrorFilterNetworkServicesResult.add_member(:traffic_mirror_filter, Shapes::ShapeRef.new(shape: TrafficMirrorFilter, location_name: "trafficMirrorFilter"))
     ModifyTrafficMirrorFilterNetworkServicesResult.struct_class = Types::ModifyTrafficMirrorFilterNetworkServicesResult
 
-    ModifyTrafficMirrorFilterRuleRequest.add_member(:traffic_mirror_filter_rule_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleId, required: true, location_name: "TrafficMirrorFilterRuleId"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:traffic_mirror_filter_rule_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleIdWithResolver, required: true, location_name: "TrafficMirrorFilterRuleId"))
     ModifyTrafficMirrorFilterRuleRequest.add_member(:traffic_direction, Shapes::ShapeRef.new(shape: TrafficDirection, location_name: "TrafficDirection"))
     ModifyTrafficMirrorFilterRuleRequest.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "RuleNumber"))
     ModifyTrafficMirrorFilterRuleRequest.add_member(:rule_action, Shapes::ShapeRef.new(shape: TrafficMirrorRuleAction, location_name: "RuleAction"))
