@@ -540,6 +540,28 @@ module Aws::GroundStation
     #     contact_pre_pass_duration_seconds: 1,
     #     endpoint_details: [ # required
     #       {
+    #         aws_ground_station_agent_endpoint: {
+    #           agent_status: "SUCCESS", # accepts SUCCESS, FAILED, ACTIVE, INACTIVE
+    #           audit_results: "HEALTHY", # accepts HEALTHY, UNHEALTHY
+    #           egress_address: { # required
+    #             mtu: 1,
+    #             socket_address: { # required
+    #               name: "String", # required
+    #               port: 1, # required
+    #             },
+    #           },
+    #           ingress_address: { # required
+    #             mtu: 1,
+    #             socket_address: { # required
+    #               name: "IpV4Address", # required
+    #               port_range: { # required
+    #                 maximum: 1, # required
+    #                 minimum: 1, # required
+    #               },
+    #             },
+    #           },
+    #           name: "SafeName", # required
+    #         },
     #         endpoint: {
     #           address: {
     #             name: "String", # required
@@ -694,6 +716,12 @@ module Aws::GroundStation
     # @option params [required, String] :name
     #   Name of a mission profile.
     #
+    # @option params [Types::KmsKey] :streams_kms_key
+    #   KMS key to use for encrypting streams.
+    #
+    # @option params [String] :streams_kms_role
+    #   Role to use for encrypting streams with KMS key.
+    #
     # @option params [Hash<String,String>] :tags
     #   Tags assigned to a mission profile.
     #
@@ -714,6 +742,11 @@ module Aws::GroundStation
     #     ],
     #     minimum_viable_contact_duration_seconds: 1, # required
     #     name: "SafeName", # required
+    #     streams_kms_key: {
+    #       kms_alias_arn: "KeyAliasArn",
+    #       kms_key_arn: "KeyArn",
+    #     },
+    #     streams_kms_role: "RoleArn",
     #     tags: {
     #       "String" => "String",
     #     },
@@ -887,6 +920,16 @@ module Aws::GroundStation
     #   resp.contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "AWS_FAILED", "CANCELLED", "CANCELLING", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
     #   resp.dataflow_list #=> Array
     #   resp.dataflow_list[0].destination.config_details.antenna_demod_decode_details.output_node #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.name #=> String
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.name #=> String
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.port #=> Integer
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.mtu #=> Integer
@@ -904,6 +947,16 @@ module Aws::GroundStation
     #   resp.dataflow_list[0].destination.dataflow_destination_region #=> String
     #   resp.dataflow_list[0].error_message #=> String
     #   resp.dataflow_list[0].source.config_details.antenna_demod_decode_details.output_node #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.name #=> String
     #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.name #=> String
     #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.port #=> Integer
     #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.mtu #=> Integer
@@ -998,6 +1051,36 @@ module Aws::GroundStation
     # @param [Hash] params ({})
     def describe_ephemeris(params = {}, options = {})
       req = build_request(:describe_ephemeris, params)
+      req.send_request(options)
+    end
+
+    # Gets the latest configuration information for a registered agent.
+    #
+    # @option params [required, String] :agent_id
+    #   UUID of agent to get configuration information for.
+    #
+    # @return [Types::GetAgentConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentConfigurationResponse#agent_id #agent_id} => String
+    #   * {Types::GetAgentConfigurationResponse#tasking_document #tasking_document} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_configuration({
+    #     agent_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_id #=> String
+    #   resp.tasking_document #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetAgentConfiguration AWS API Documentation
+    #
+    # @overload get_agent_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_agent_configuration(params = {}, options = {})
+      req = build_request(:get_agent_configuration, params)
       req.send_request(options)
     end
 
@@ -1098,6 +1181,16 @@ module Aws::GroundStation
     #   resp.dataflow_endpoint_group_arn #=> String
     #   resp.dataflow_endpoint_group_id #=> String
     #   resp.endpoints_details #=> Array
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.name #=> String
     #   resp.endpoints_details[0].endpoint.address.name #=> String
     #   resp.endpoints_details[0].endpoint.address.port #=> Integer
     #   resp.endpoints_details[0].endpoint.mtu #=> Integer
@@ -1175,6 +1268,8 @@ module Aws::GroundStation
     #   * {Types::GetMissionProfileResponse#mission_profile_id #mission_profile_id} => String
     #   * {Types::GetMissionProfileResponse#name #name} => String
     #   * {Types::GetMissionProfileResponse#region #region} => String
+    #   * {Types::GetMissionProfileResponse#streams_kms_key #streams_kms_key} => Types::KmsKey
+    #   * {Types::GetMissionProfileResponse#streams_kms_role #streams_kms_role} => String
     #   * {Types::GetMissionProfileResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetMissionProfileResponse#tracking_config_arn #tracking_config_arn} => String
     #
@@ -1196,6 +1291,9 @@ module Aws::GroundStation
     #   resp.mission_profile_id #=> String
     #   resp.name #=> String
     #   resp.region #=> String
+    #   resp.streams_kms_key.kms_alias_arn #=> String
+    #   resp.streams_kms_key.kms_key_arn #=> String
+    #   resp.streams_kms_role #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.tracking_config_arn #=> String
@@ -1634,6 +1732,53 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # Registers a new agent with AWS Groundstation.
+    #
+    # @option params [required, Types::AgentDetails] :agent_details
+    #   Detailed information about the agent being registered.
+    #
+    # @option params [required, Types::DiscoveryData] :discovery_data
+    #   Data for associating and agent with the capabilities it is managing.
+    #
+    # @return [Types::RegisterAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterAgentResponse#agent_id #agent_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_agent({
+    #     agent_details: { # required
+    #       agent_version: "VersionString", # required
+    #       component_versions: [ # required
+    #         {
+    #           component_type: "LAMINAR_FLOW", # required, accepts LAMINAR_FLOW, PRISM, DIGITIZER
+    #           versions: ["VersionString"], # required
+    #         },
+    #       ],
+    #       instance_id: "InstanceId", # required
+    #       instance_type: "InstanceType", # required
+    #       reserved_cpu_cores: [1], # required
+    #     },
+    #     discovery_data: { # required
+    #       capability_arns: ["CapabilityArn"], # required
+    #       private_ip_addresses: ["IpV4Address"], # required
+    #       public_ip_addresses: ["IpV4Address"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/RegisterAgent AWS API Documentation
+    #
+    # @overload register_agent(params = {})
+    # @param [Hash] params ({})
+    def register_agent(params = {}, options = {})
+      req = build_request(:register_agent, params)
+      req.send_request(options)
+    end
+
     # Reserves a contact using specified parameters.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
@@ -1735,6 +1880,61 @@ module Aws::GroundStation
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Update the status of the agent.
+    #
+    # @option params [required, String] :agent_id
+    #   UUID of agent to update.
+    #
+    # @option params [required, Types::AggregateStatus] :aggregate_status
+    #   Aggregate status for agent.
+    #
+    # @option params [required, Array<Types::ComponentStatusData>] :component_statuses
+    #   List of component statuses for agent.
+    #
+    # @option params [required, String] :task_id
+    #   GUID of agent task.
+    #
+    # @return [Types::UpdateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAgentStatusResponse#agent_id #agent_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_status({
+    #     agent_id: "Uuid", # required
+    #     aggregate_status: { # required
+    #       signature_map: {
+    #         "String" => false,
+    #       },
+    #       status: "SUCCESS", # required, accepts SUCCESS, FAILED, ACTIVE, INACTIVE
+    #     },
+    #     component_statuses: [ # required
+    #       {
+    #         bytes_received: 1,
+    #         bytes_sent: 1,
+    #         capability_arn: "CapabilityArn", # required
+    #         component_type: "LAMINAR_FLOW", # required, accepts LAMINAR_FLOW, PRISM, DIGITIZER
+    #         dataflow_id: "Uuid", # required
+    #         packets_dropped: 1,
+    #         status: "SUCCESS", # required, accepts SUCCESS, FAILED, ACTIVE, INACTIVE
+    #       },
+    #     ],
+    #     task_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateAgentStatus AWS API Documentation
+    #
+    # @overload update_agent_status(params = {})
+    # @param [Hash] params ({})
+    def update_agent_status(params = {}, options = {})
+      req = build_request(:update_agent_status, params)
       req.send_request(options)
     end
 
@@ -1924,6 +2124,12 @@ module Aws::GroundStation
     # @option params [String] :name
     #   Name of a mission profile.
     #
+    # @option params [Types::KmsKey] :streams_kms_key
+    #   KMS key to use for encrypting streams.
+    #
+    # @option params [String] :streams_kms_role
+    #   Role to use for encrypting streams with KMS key.
+    #
     # @option params [String] :tracking_config_arn
     #   ARN of a tracking `Config`.
     #
@@ -1942,6 +2148,11 @@ module Aws::GroundStation
     #     minimum_viable_contact_duration_seconds: 1,
     #     mission_profile_id: "Uuid", # required
     #     name: "SafeName",
+    #     streams_kms_key: {
+    #       kms_alias_arn: "KeyAliasArn",
+    #       kms_key_arn: "KeyArn",
+    #     },
+    #     streams_kms_role: "RoleArn",
     #     tracking_config_arn: "ConfigArn",
     #   })
     #
@@ -1971,7 +2182,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

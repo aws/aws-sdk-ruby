@@ -2604,6 +2604,24 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A structure that keeps track of which training jobs launched by your
+    # hyperparameter tuning job are not improving model performance as
+    # evaluated against an objective function.
+    #
+    # @!attribute [rw] max_number_of_training_jobs_not_improving
+    #   The number of training jobs that have failed to improve model
+    #   performance by 1% or greater over prior training jobs as evaluated
+    #   against an objective function.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BestObjectiveNotImproving AWS API Documentation
+    #
+    class BestObjectiveNotImproving < Struct.new(
+      :max_number_of_training_jobs_not_improving)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains bias metrics for a model.
     #
     # @!attribute [rw] report
@@ -3921,6 +3939,23 @@ module Aws::SageMaker
     class ContinuousParameterRangeSpecification < Struct.new(
       :min_value,
       :max_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A flag to indicating that automatic model tuning (AMT) has detected
+    # model convergence, defined as a lack of significant improvement (1% or
+    # less) against an objective metric.
+    #
+    # @!attribute [rw] complete_on_convergence
+    #   A flag to stop a tuning job once AMT has detected that the job has
+    #   converged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ConvergenceDetected AWS API Documentation
+    #
+    class ConvergenceDetected < Struct.new(
+      :complete_on_convergence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11842,6 +11877,18 @@ module Aws::SageMaker
     #   If the tuning job failed, the reason it failed.
     #   @return [String]
     #
+    # @!attribute [rw] tuning_job_completion_details
+    #   Tuning job completion information returned as the response from a
+    #   hyperparameter tuning job. This information tells if your tuning job
+    #   has or has not converged. It also includes the number of training
+    #   jobs that have not improved model performance as evaluated against
+    #   the objective function.
+    #   @return [Types::HyperParameterTuningJobCompletionDetails]
+    #
+    # @!attribute [rw] consumed_resources
+    #   The total resources consumed by your hyperparameter tuning job.
+    #   @return [Types::HyperParameterTuningJobConsumedResources]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJobResponse AWS API Documentation
     #
     class DescribeHyperParameterTuningJobResponse < Struct.new(
@@ -11859,7 +11906,9 @@ module Aws::SageMaker
       :best_training_job,
       :overall_best_training_job,
       :warm_start_config,
-      :failure_reason)
+      :failure_reason,
+      :tuning_job_completion_details,
+      :consumed_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19147,6 +19196,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A structure that contains runtime information about both current and
+    # completed hyperparameter tuning jobs.
+    #
+    # @!attribute [rw] number_of_training_jobs_objective_not_improving
+    #   The number of training jobs launched by a tuning job that are not
+    #   improving (1% or less) as measured by model performance evaluated
+    #   against an objective function.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] convergence_detected_time
+    #   The time in timestamp format that AMT detected model convergence, as
+    #   defined by a lack of significant improvement over time based on
+    #   criteria developed over a wide range of diverse benchmarking tests.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobCompletionDetails AWS API Documentation
+    #
+    class HyperParameterTuningJobCompletionDetails < Struct.new(
+      :number_of_training_jobs_objective_not_improving,
+      :convergence_detected_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configures a hyperparameter tuning job.
     #
     # @!attribute [rw] strategy
@@ -19232,6 +19305,21 @@ module Aws::SageMaker
       :training_job_early_stopping_type,
       :tuning_job_completion_criteria,
       :random_seed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The total resources consumed by your hyperparameter tuning job.
+    #
+    # @!attribute [rw] runtime_in_seconds
+    #   The wall clock runtime in seconds used by your hyperparameter tuning
+    #   job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobConsumedResources AWS API Documentation
+    #
+    class HyperParameterTuningJobConsumedResources < Struct.new(
+      :runtime_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19357,6 +19445,16 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] tuning_job_completion_details
+    #   Information about either a current or completed hyperparameter
+    #   tuning job.
+    #   @return [Types::HyperParameterTuningJobCompletionDetails]
+    #
+    # @!attribute [rw] consumed_resources
+    #   The total amount of resources consumed by a hyperparameter tuning
+    #   job.
+    #   @return [Types::HyperParameterTuningJobConsumedResources]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobSearchEntity AWS API Documentation
     #
     class HyperParameterTuningJobSearchEntity < Struct.new(
@@ -19375,7 +19473,9 @@ module Aws::SageMaker
       :overall_best_training_job,
       :warm_start_config,
       :failure_reason,
-      :tags)
+      :tags,
+      :tuning_job_completion_details,
+      :consumed_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33350,11 +33450,17 @@ module Aws::SageMaker
     #   tuning job can launch.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_runtime_in_seconds
+    #   The maximum time in seconds that a training job launched by a
+    #   hyperparameter tuning job can run.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceLimits AWS API Documentation
     #
     class ResourceLimits < Struct.new(
       :max_number_of_training_jobs,
-      :max_parallel_training_jobs)
+      :max_parallel_training_jobs,
+      :max_runtime_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36956,10 +37062,23 @@ module Aws::SageMaker
     #   The value of the objective metric.
     #   @return [Float]
     #
+    # @!attribute [rw] best_objective_not_improving
+    #   A flag to stop your hyperparameter tuning job if model performance
+    #   fails to improve as evaluated against an objective function.
+    #   @return [Types::BestObjectiveNotImproving]
+    #
+    # @!attribute [rw] convergence_detected
+    #   A flag to top your hyperparameter tuning job if automatic model
+    #   tuning (AMT) has detected that your model has converged as evaluated
+    #   against your objective function.
+    #   @return [Types::ConvergenceDetected]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TuningJobCompletionCriteria AWS API Documentation
     #
     class TuningJobCompletionCriteria < Struct.new(
-      :target_objective_metric_value)
+      :target_objective_metric_value,
+      :best_objective_not_improving,
+      :convergence_detected)
       SENSITIVE = []
       include Aws::Structure
     end

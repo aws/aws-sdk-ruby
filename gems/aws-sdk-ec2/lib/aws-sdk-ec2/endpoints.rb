@@ -207,6 +207,20 @@ module Aws::EC2
       end
     end
 
+    class AssignPrivateNatGatewayAddress
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class AssociateAddress
       def self.build(context)
         unless context.config.regional_endpoint
@@ -292,6 +306,20 @@ module Aws::EC2
     end
 
     class AssociateIpamResourceDiscovery
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class AssociateNatGatewayAddress
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -5345,6 +5373,20 @@ module Aws::EC2
       end
     end
 
+    class DisassociateNatGatewayAddress
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DisassociateRouteTable
       def self.build(context)
         unless context.config.regional_endpoint
@@ -8132,6 +8174,20 @@ module Aws::EC2
     end
 
     class UnassignPrivateIpAddresses
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UnassignPrivateNatGatewayAddress
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

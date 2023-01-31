@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.158.0 (2023-01-31)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-cloudtraildata` gem.
+
 3.157.0 (2023-01-12)
 ------------------
 

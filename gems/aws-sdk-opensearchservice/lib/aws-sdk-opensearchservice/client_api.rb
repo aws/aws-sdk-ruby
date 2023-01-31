@@ -72,6 +72,8 @@ module Aws::OpenSearchService
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionAlias = Shapes::StringShape.new(name: 'ConnectionAlias')
     ConnectionId = Shapes::StringShape.new(name: 'ConnectionId')
+    ConnectionMode = Shapes::StringShape.new(name: 'ConnectionMode')
+    ConnectionProperties = Shapes::StructureShape.new(name: 'ConnectionProperties')
     ConnectionStatusMessage = Shapes::StringShape.new(name: 'ConnectionStatusMessage')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
@@ -536,6 +538,9 @@ module Aws::OpenSearchService
 
     ConflictException.struct_class = Types::ConflictException
 
+    ConnectionProperties.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
+    ConnectionProperties.struct_class = Types::ConnectionProperties
+
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CreateDomainRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: VersionString, location_name: "EngineVersion"))
     CreateDomainRequest.add_member(:cluster_config, Shapes::ShapeRef.new(shape: ClusterConfig, location_name: "ClusterConfig"))
@@ -560,6 +565,7 @@ module Aws::OpenSearchService
     CreateOutboundConnectionRequest.add_member(:local_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, required: true, location_name: "LocalDomainInfo"))
     CreateOutboundConnectionRequest.add_member(:remote_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, required: true, location_name: "RemoteDomainInfo"))
     CreateOutboundConnectionRequest.add_member(:connection_alias, Shapes::ShapeRef.new(shape: ConnectionAlias, required: true, location_name: "ConnectionAlias"))
+    CreateOutboundConnectionRequest.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, location_name: "ConnectionMode"))
     CreateOutboundConnectionRequest.struct_class = Types::CreateOutboundConnectionRequest
 
     CreateOutboundConnectionResponse.add_member(:local_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, location_name: "LocalDomainInfo"))
@@ -567,6 +573,8 @@ module Aws::OpenSearchService
     CreateOutboundConnectionResponse.add_member(:connection_alias, Shapes::ShapeRef.new(shape: ConnectionAlias, location_name: "ConnectionAlias"))
     CreateOutboundConnectionResponse.add_member(:connection_status, Shapes::ShapeRef.new(shape: OutboundConnectionStatus, location_name: "ConnectionStatus"))
     CreateOutboundConnectionResponse.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "ConnectionId"))
+    CreateOutboundConnectionResponse.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, location_name: "ConnectionMode"))
+    CreateOutboundConnectionResponse.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, location_name: "ConnectionProperties"))
     CreateOutboundConnectionResponse.struct_class = Types::CreateOutboundConnectionResponse
 
     CreatePackageRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location_name: "PackageName"))
@@ -902,6 +910,7 @@ module Aws::OpenSearchService
     InboundConnection.add_member(:remote_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, location_name: "RemoteDomainInfo"))
     InboundConnection.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "ConnectionId"))
     InboundConnection.add_member(:connection_status, Shapes::ShapeRef.new(shape: InboundConnectionStatus, location_name: "ConnectionStatus"))
+    InboundConnection.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, location_name: "ConnectionMode"))
     InboundConnection.struct_class = Types::InboundConnection
 
     InboundConnectionStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: InboundConnectionStatusCode, location_name: "StatusCode"))
@@ -1056,6 +1065,8 @@ module Aws::OpenSearchService
     OutboundConnection.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "ConnectionId"))
     OutboundConnection.add_member(:connection_alias, Shapes::ShapeRef.new(shape: ConnectionAlias, location_name: "ConnectionAlias"))
     OutboundConnection.add_member(:connection_status, Shapes::ShapeRef.new(shape: OutboundConnectionStatus, location_name: "ConnectionStatus"))
+    OutboundConnection.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, location_name: "ConnectionMode"))
+    OutboundConnection.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, location_name: "ConnectionProperties"))
     OutboundConnection.struct_class = Types::OutboundConnection
 
     OutboundConnectionStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: OutboundConnectionStatusCode, location_name: "StatusCode"))

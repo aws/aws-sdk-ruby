@@ -3266,6 +3266,7 @@ module Aws::IoT
     #           cloudwatch_logs: {
     #             role_arn: "AwsArn", # required
     #             log_group_name: "LogGroupName", # required
+    #             batch_mode: false,
     #           },
     #           elasticsearch: {
     #             role_arn: "AwsArn", # required
@@ -3468,6 +3469,7 @@ module Aws::IoT
     #         cloudwatch_logs: {
     #           role_arn: "AwsArn", # required
     #           log_group_name: "LogGroupName", # required
+    #           batch_mode: false,
     #         },
     #         elasticsearch: {
     #           role_arn: "AwsArn", # required
@@ -7292,6 +7294,7 @@ module Aws::IoT
     #   resp.rule.actions[0].cloudwatch_alarm.state_value #=> String
     #   resp.rule.actions[0].cloudwatch_logs.role_arn #=> String
     #   resp.rule.actions[0].cloudwatch_logs.log_group_name #=> String
+    #   resp.rule.actions[0].cloudwatch_logs.batch_mode #=> Boolean
     #   resp.rule.actions[0].elasticsearch.role_arn #=> String
     #   resp.rule.actions[0].elasticsearch.endpoint #=> String
     #   resp.rule.actions[0].elasticsearch.index #=> String
@@ -7413,6 +7416,7 @@ module Aws::IoT
     #   resp.rule.error_action.cloudwatch_alarm.state_value #=> String
     #   resp.rule.error_action.cloudwatch_logs.role_arn #=> String
     #   resp.rule.error_action.cloudwatch_logs.log_group_name #=> String
+    #   resp.rule.error_action.cloudwatch_logs.batch_mode #=> Boolean
     #   resp.rule.error_action.elasticsearch.role_arn #=> String
     #   resp.rule.error_action.elasticsearch.endpoint #=> String
     #   resp.rule.error_action.elasticsearch.index #=> String
@@ -11404,6 +11408,7 @@ module Aws::IoT
     #           cloudwatch_logs: {
     #             role_arn: "AwsArn", # required
     #             log_group_name: "LogGroupName", # required
+    #             batch_mode: false,
     #           },
     #           elasticsearch: {
     #             role_arn: "AwsArn", # required
@@ -11606,6 +11611,7 @@ module Aws::IoT
     #         cloudwatch_logs: {
     #           role_arn: "AwsArn", # required
     #           log_group_name: "LogGroupName", # required
+    #           batch_mode: false,
     #         },
     #         elasticsearch: {
     #           role_arn: "AwsArn", # required
@@ -14061,7 +14067,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

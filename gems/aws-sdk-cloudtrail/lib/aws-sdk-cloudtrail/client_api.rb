@@ -31,7 +31,10 @@ module Aws::CloudTrail
     CannotDelegateManagementAccountException = Shapes::StructureShape.new(name: 'CannotDelegateManagementAccountException')
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelARNInvalidException = Shapes::StructureShape.new(name: 'ChannelARNInvalidException')
+    ChannelAlreadyExistsException = Shapes::StructureShape.new(name: 'ChannelAlreadyExistsException')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
+    ChannelExistsForEDSException = Shapes::StructureShape.new(name: 'ChannelExistsForEDSException')
+    ChannelMaxLimitExceededException = Shapes::StructureShape.new(name: 'ChannelMaxLimitExceededException')
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ChannelNotFoundException = Shapes::StructureShape.new(name: 'ChannelNotFoundException')
     Channels = Shapes::ListShape.new(name: 'Channels')
@@ -40,6 +43,8 @@ module Aws::CloudTrail
     CloudTrailInvalidClientTokenIdException = Shapes::StructureShape.new(name: 'CloudTrailInvalidClientTokenIdException')
     CloudWatchLogsDeliveryUnavailableException = Shapes::StructureShape.new(name: 'CloudWatchLogsDeliveryUnavailableException')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
+    CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
     CreateEventDataStoreRequest = Shapes::StructureShape.new(name: 'CreateEventDataStoreRequest')
     CreateEventDataStoreResponse = Shapes::StructureShape.new(name: 'CreateEventDataStoreResponse')
     CreateTrailRequest = Shapes::StructureShape.new(name: 'CreateTrailRequest')
@@ -49,8 +54,12 @@ module Aws::CloudTrail
     DataResources = Shapes::ListShape.new(name: 'DataResources')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DelegatedAdminAccountLimitExceededException = Shapes::StructureShape.new(name: 'DelegatedAdminAccountLimitExceededException')
+    DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
+    DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
     DeleteEventDataStoreRequest = Shapes::StructureShape.new(name: 'DeleteEventDataStoreRequest')
     DeleteEventDataStoreResponse = Shapes::StructureShape.new(name: 'DeleteEventDataStoreResponse')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeleteTrailRequest = Shapes::StructureShape.new(name: 'DeleteTrailRequest')
     DeleteTrailResponse = Shapes::StructureShape.new(name: 'DeleteTrailResponse')
     DeliveryS3Uri = Shapes::StringShape.new(name: 'DeliveryS3Uri')
@@ -95,6 +104,8 @@ module Aws::CloudTrail
     GetInsightSelectorsResponse = Shapes::StructureShape.new(name: 'GetInsightSelectorsResponse')
     GetQueryResultsRequest = Shapes::StructureShape.new(name: 'GetQueryResultsRequest')
     GetQueryResultsResponse = Shapes::StructureShape.new(name: 'GetQueryResultsResponse')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     GetTrailRequest = Shapes::StructureShape.new(name: 'GetTrailRequest')
     GetTrailResponse = Shapes::StructureShape.new(name: 'GetTrailResponse')
     GetTrailStatusRequest = Shapes::StructureShape.new(name: 'GetTrailStatusRequest')
@@ -111,6 +122,7 @@ module Aws::CloudTrail
     ImportsListItem = Shapes::StructureShape.new(name: 'ImportsListItem')
     InactiveEventDataStoreException = Shapes::StructureShape.new(name: 'InactiveEventDataStoreException')
     InactiveQueryException = Shapes::StructureShape.new(name: 'InactiveQueryException')
+    IngestionStatus = Shapes::StructureShape.new(name: 'IngestionStatus')
     InsightNotEnabledException = Shapes::StructureShape.new(name: 'InsightNotEnabledException')
     InsightSelector = Shapes::StructureShape.new(name: 'InsightSelector')
     InsightSelectors = Shapes::ListShape.new(name: 'InsightSelectors')
@@ -141,6 +153,7 @@ module Aws::CloudTrail
     InvalidS3BucketNameException = Shapes::StructureShape.new(name: 'InvalidS3BucketNameException')
     InvalidS3PrefixException = Shapes::StructureShape.new(name: 'InvalidS3PrefixException')
     InvalidSnsTopicNameException = Shapes::StructureShape.new(name: 'InvalidSnsTopicNameException')
+    InvalidSourceException = Shapes::StructureShape.new(name: 'InvalidSourceException')
     InvalidTagParameterException = Shapes::StructureShape.new(name: 'InvalidTagParameterException')
     InvalidTimeRangeException = Shapes::StructureShape.new(name: 'InvalidTimeRangeException')
     InvalidTokenException = Shapes::StructureShape.new(name: 'InvalidTokenException')
@@ -197,6 +210,8 @@ module Aws::CloudTrail
     PutEventSelectorsResponse = Shapes::StructureShape.new(name: 'PutEventSelectorsResponse')
     PutInsightSelectorsRequest = Shapes::StructureShape.new(name: 'PutInsightSelectorsRequest')
     PutInsightSelectorsResponse = Shapes::StructureShape.new(name: 'PutInsightSelectorsResponse')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     Queries = Shapes::ListShape.new(name: 'Queries')
     Query = Shapes::StructureShape.new(name: 'Query')
     QueryIdNotFoundException = Shapes::StructureShape.new(name: 'QueryIdNotFoundException')
@@ -215,9 +230,14 @@ module Aws::CloudTrail
     RemoveTagsRequest = Shapes::StructureShape.new(name: 'RemoveTagsRequest')
     RemoveTagsResponse = Shapes::StructureShape.new(name: 'RemoveTagsResponse')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceARNNotValidException = Shapes::StructureShape.new(name: 'ResourceARNNotValidException')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
+    ResourcePolicyNotFoundException = Shapes::StructureShape.new(name: 'ResourcePolicyNotFoundException')
+    ResourcePolicyNotValidException = Shapes::StructureShape.new(name: 'ResourcePolicyNotValidException')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
     ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
     ResourceTypeNotSupportedException = Shapes::StructureShape.new(name: 'ResourceTypeNotSupportedException')
@@ -257,6 +277,8 @@ module Aws::CloudTrail
     Trails = Shapes::ListShape.new(name: 'Trails')
     UUID = Shapes::StringShape.new(name: 'UUID')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
+    UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
+    UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateEventDataStoreRequest = Shapes::StructureShape.new(name: 'UpdateEventDataStoreRequest')
     UpdateEventDataStoreResponse = Shapes::StructureShape.new(name: 'UpdateEventDataStoreResponse')
     UpdateTrailRequest = Shapes::StructureShape.new(name: 'UpdateTrailRequest')
@@ -309,6 +331,12 @@ module Aws::CloudTrail
 
     ChannelARNInvalidException.struct_class = Types::ChannelARNInvalidException
 
+    ChannelAlreadyExistsException.struct_class = Types::ChannelAlreadyExistsException
+
+    ChannelExistsForEDSException.struct_class = Types::ChannelExistsForEDSException
+
+    ChannelMaxLimitExceededException.struct_class = Types::ChannelMaxLimitExceededException
+
     ChannelNotFoundException.struct_class = Types::ChannelNotFoundException
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
@@ -322,6 +350,19 @@ module Aws::CloudTrail
     CloudWatchLogsDeliveryUnavailableException.struct_class = Types::CloudWatchLogsDeliveryUnavailableException
 
     ConflictException.struct_class = Types::ConflictException
+
+    CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "Name"))
+    CreateChannelRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "Source"))
+    CreateChannelRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: Destinations, required: true, location_name: "Destinations"))
+    CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    CreateChannelRequest.struct_class = Types::CreateChannelRequest
+
+    CreateChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "ChannelArn"))
+    CreateChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name"))
+    CreateChannelResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "Source"))
+    CreateChannelResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: Destinations, location_name: "Destinations"))
+    CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
     CreateEventDataStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventDataStoreName, required: true, location_name: "Name"))
     CreateEventDataStoreRequest.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
@@ -386,10 +427,20 @@ module Aws::CloudTrail
 
     DelegatedAdminAccountLimitExceededException.struct_class = Types::DelegatedAdminAccountLimitExceededException
 
+    DeleteChannelRequest.add_member(:channel, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "Channel"))
+    DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
+
+    DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
+
     DeleteEventDataStoreRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, required: true, location_name: "EventDataStore"))
     DeleteEventDataStoreRequest.struct_class = Types::DeleteEventDataStoreRequest
 
     DeleteEventDataStoreResponse.struct_class = Types::DeleteEventDataStoreResponse
+
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
 
     DeleteTrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     DeleteTrailRequest.struct_class = Types::DeleteTrailRequest
@@ -484,6 +535,7 @@ module Aws::CloudTrail
     GetChannelResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "Source"))
     GetChannelResponse.add_member(:source_config, Shapes::ShapeRef.new(shape: SourceConfig, location_name: "SourceConfig"))
     GetChannelResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: Destinations, location_name: "Destinations"))
+    GetChannelResponse.add_member(:ingestion_status, Shapes::ShapeRef.new(shape: IngestionStatus, location_name: "IngestionStatus"))
     GetChannelResponse.struct_class = Types::GetChannelResponse
 
     GetEventDataStoreRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, required: true, location_name: "EventDataStore"))
@@ -543,6 +595,13 @@ module Aws::CloudTrail
     GetQueryResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetQueryResultsResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     GetQueryResultsResponse.struct_class = Types::GetQueryResultsResponse
+
+    GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    GetResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
+    GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
     GetTrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     GetTrailRequest.struct_class = Types::GetTrailRequest
@@ -608,6 +667,13 @@ module Aws::CloudTrail
 
     InactiveQueryException.struct_class = Types::InactiveQueryException
 
+    IngestionStatus.add_member(:latest_ingestion_success_time, Shapes::ShapeRef.new(shape: Date, location_name: "LatestIngestionSuccessTime"))
+    IngestionStatus.add_member(:latest_ingestion_success_event_id, Shapes::ShapeRef.new(shape: UUID, location_name: "LatestIngestionSuccessEventID"))
+    IngestionStatus.add_member(:latest_ingestion_error_code, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "LatestIngestionErrorCode"))
+    IngestionStatus.add_member(:latest_ingestion_attempt_time, Shapes::ShapeRef.new(shape: Date, location_name: "LatestIngestionAttemptTime"))
+    IngestionStatus.add_member(:latest_ingestion_attempt_event_id, Shapes::ShapeRef.new(shape: UUID, location_name: "LatestIngestionAttemptEventID"))
+    IngestionStatus.struct_class = Types::IngestionStatus
+
     InsightNotEnabledException.struct_class = Types::InsightNotEnabledException
 
     InsightSelector.add_member(:insight_type, Shapes::ShapeRef.new(shape: InsightType, location_name: "InsightType"))
@@ -664,6 +730,8 @@ module Aws::CloudTrail
     InvalidS3PrefixException.struct_class = Types::InvalidS3PrefixException
 
     InvalidSnsTopicNameException.struct_class = Types::InvalidSnsTopicNameException
+
+    InvalidSourceException.struct_class = Types::InvalidSourceException
 
     InvalidTagParameterException.struct_class = Types::InvalidTagParameterException
 
@@ -812,6 +880,14 @@ module Aws::CloudTrail
     PutInsightSelectorsResponse.add_member(:insight_selectors, Shapes::ShapeRef.new(shape: InsightSelectors, location_name: "InsightSelectors"))
     PutInsightSelectorsResponse.struct_class = Types::PutInsightSelectorsResponse
 
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "ResourcePolicy"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    PutResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
     Queries.member = Shapes::ShapeRef.new(shape: Query)
 
     Query.add_member(:query_id, Shapes::ShapeRef.new(shape: UUID, location_name: "QueryId"))
@@ -855,11 +931,17 @@ module Aws::CloudTrail
     Resource.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, location_name: "ResourceName"))
     Resource.struct_class = Types::Resource
 
+    ResourceARNNotValidException.struct_class = Types::ResourceARNNotValidException
+
     ResourceIdList.member = Shapes::ShapeRef.new(shape: String)
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourcePolicyNotFoundException.struct_class = Types::ResourcePolicyNotFoundException
+
+    ResourcePolicyNotValidException.struct_class = Types::ResourcePolicyNotValidException
 
     ResourceTag.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ResourceTag.add_member(:tags_list, Shapes::ShapeRef.new(shape: TagsList, location_name: "TagsList"))
@@ -989,6 +1071,17 @@ module Aws::CloudTrail
 
     UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
 
+    UpdateChannelRequest.add_member(:channel, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "Channel"))
+    UpdateChannelRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: Destinations, location_name: "Destinations"))
+    UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name"))
+    UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
+
+    UpdateChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "ChannelArn"))
+    UpdateChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name"))
+    UpdateChannelResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "Source"))
+    UpdateChannelResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: Destinations, location_name: "Destinations"))
+    UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
+
     UpdateEventDataStoreRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, required: true, location_name: "EventDataStore"))
     UpdateEventDataStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventDataStoreName, location_name: "Name"))
     UpdateEventDataStoreRequest.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
@@ -1073,6 +1166,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InactiveEventDataStoreException)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
@@ -1096,6 +1190,26 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelMaxLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventDataStoreCategoryException)
+        o.errors << Shapes::ShapeRef.new(shape: InactiveEventDataStoreException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TagsLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:create_event_data_store, Seahorse::Model::Operation.new.tap do |o|
@@ -1163,6 +1277,18 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:delete_event_data_store, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEventDataStore"
         o.http_method = "POST"
@@ -1179,7 +1305,22 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelExistsForEDSException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
+      end)
+
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceARNNotValidException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceTypeNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:delete_trail, Seahorse::Model::Operation.new.tap do |o|
@@ -1191,13 +1332,13 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: TrailNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: CloudTrailARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidHomeRegionException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:deregister_organization_delegated_admin, Seahorse::Model::Operation.new.tap do |o|
@@ -1209,6 +1350,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccountNotRegisteredException)
         o.errors << Shapes::ShapeRef.new(shape: CloudTrailAccessNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationManagementAccountException)
@@ -1335,6 +1477,20 @@ module Aws::CloudTrail
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceARNNotValidException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceTypeNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:get_trail, Seahorse::Model::Operation.new.tap do |o|
@@ -1575,6 +1731,20 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
       end)
 
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceARNNotValidException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotValidException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceTypeNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:register_organization_delegated_admin, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterOrganizationDelegatedAdmin"
         o.http_method = "POST"
@@ -1587,6 +1757,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: CannotDelegateManagementAccountException)
         o.errors << Shapes::ShapeRef.new(shape: CloudTrailAccessNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: DelegatedAdminAccountLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationManagementAccountException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
@@ -1608,6 +1779,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InactiveEventDataStoreException)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
@@ -1663,6 +1835,7 @@ module Aws::CloudTrail
         o.input = Shapes::ShapeRef.new(shape: StartLoggingRequest)
         o.output = Shapes::ShapeRef.new(shape: StartLoggingResponse)
         o.errors << Shapes::ShapeRef.new(shape: CloudTrailARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TrailNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidHomeRegionException)
@@ -1716,12 +1889,31 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: TrailNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: CloudTrailARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidHomeRegionException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
+      end)
+
+      api.add_operation(:update_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventDataStoreCategoryException)
+        o.errors << Shapes::ShapeRef.new(shape: InactiveEventDataStoreException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:update_event_data_store, Seahorse::Model::Operation.new.tap do |o|
@@ -1769,6 +1961,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: TrailNotProvidedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEventSelectorsException)
         o.errors << Shapes::ShapeRef.new(shape: CloudTrailARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidHomeRegionException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyNotFoundException)

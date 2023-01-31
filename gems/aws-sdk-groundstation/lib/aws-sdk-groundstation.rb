@@ -53,6 +53,6 @@ require_relative 'aws-sdk-groundstation/customizations'
 # @!group service
 module Aws::GroundStation
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end

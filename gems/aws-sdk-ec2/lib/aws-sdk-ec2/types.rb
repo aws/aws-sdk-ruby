@@ -1622,6 +1622,56 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] nat_gateway_id
+    #   The NAT gateway ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses you want to assign to the private NAT
+    #   gateway.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] private_ip_address_count
+    #   The number of private IP addresses to assign to the NAT gateway. You
+    #   can't specify this parameter when also specifying private IP
+    #   addresses.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateNatGatewayAddressRequest AWS API Documentation
+    #
+    class AssignPrivateNatGatewayAddressRequest < Struct.new(
+      :nat_gateway_id,
+      :private_ip_addresses,
+      :private_ip_address_count,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nat_gateway_id
+    #   The NAT gateway ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_addresses
+    #   NAT gateway IP addresses.
+    #   @return [Array<Types::NatGatewayAddress>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateNatGatewayAddressResult AWS API Documentation
+    #
+    class AssignPrivateNatGatewayAddressResult < Struct.new(
+      :nat_gateway_id,
+      :nat_gateway_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the private IP addresses assigned to a network interface.
     #
     # @!attribute [rw] private_ip_address
@@ -1960,6 +2010,55 @@ module Aws::EC2
     #
     class AssociateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nat_gateway_id
+    #   The NAT gateway ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_ids
+    #   The allocation IDs of EIPs that you want to associate with your NAT
+    #   gateway.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses that you want to assign to the NAT
+    #   gateway.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateNatGatewayAddressRequest AWS API Documentation
+    #
+    class AssociateNatGatewayAddressRequest < Struct.new(
+      :nat_gateway_id,
+      :allocation_ids,
+      :private_ip_addresses,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nat_gateway_id
+    #   The NAT gateway ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_addresses
+    #   The IP addresses.
+    #   @return [Array<Types::NatGatewayAddress>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateNatGatewayAddressResult AWS API Documentation
+    #
+    class AssociateNatGatewayAddressResult < Struct.new(
+      :nat_gateway_id,
+      :nat_gateway_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6012,7 +6111,7 @@ module Aws::EC2
       :source_snapshot_id,
       :tag_specifications,
       :dry_run)
-      SENSITIVE = []
+      SENSITIVE = [:presigned_url]
       include Aws::Structure
     end
 
@@ -8633,7 +8732,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] subnet_id
-    #   The subnet in which to create the NAT gateway.
+    #   The ID of the subnet in which to create the NAT gateway.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -8651,6 +8750,37 @@ module Aws::EC2
     #   assigned.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_allocation_ids
+    #   Secondary EIP allocation IDs. For more information about secondary
+    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
+    #   Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] secondary_private_ip_addresses
+    #   Secondary private IPv4 addresses. For more information about
+    #   secondary addresses, see [Create a NAT gateway][1] in the *Amazon
+    #   Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] secondary_private_ip_address_count
+    #   \[Private NAT gateway only\] The number of secondary private IPv4
+    #   addresses you want to assign to the NAT gateway. For more
+    #   information about secondary addresses, see [Create a NAT gateway][1]
+    #   in the *Amazon Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayRequest AWS API Documentation
     #
     class CreateNatGatewayRequest < Struct.new(
@@ -8660,7 +8790,10 @@ module Aws::EC2
       :subnet_id,
       :tag_specifications,
       :connectivity_type,
-      :private_ip_address)
+      :private_ip_address,
+      :secondary_allocation_ids,
+      :secondary_private_ip_addresses,
+      :secondary_private_ip_address_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27455,6 +27588,56 @@ module Aws::EC2
     #
     class DisassociateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nat_gateway_id
+    #   The NAT gateway ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_ids
+    #   The association IDs of EIPs that have been associated with the NAT
+    #   gateway.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_drain_duration_seconds
+    #   The maximum amount of time to wait (in seconds) before forcibly
+    #   releasing the IP addresses if connections are still in progress.
+    #   Default value is 350 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateNatGatewayAddressRequest AWS API Documentation
+    #
+    class DisassociateNatGatewayAddressRequest < Struct.new(
+      :nat_gateway_id,
+      :association_ids,
+      :max_drain_duration_seconds,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nat_gateway_id
+    #   The NAT gateway ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_addresses
+    #   Information about the NAT gateway IP addresses.
+    #   @return [Array<Types::NatGatewayAddress>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateNatGatewayAddressResult AWS API Documentation
+    #
+    class DisassociateNatGatewayAddressResult < Struct.new(
+      :nat_gateway_id,
+      :nat_gateway_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47048,13 +47231,34 @@ module Aws::EC2
     #   the NAT gateway.
     #   @return [String]
     #
+    # @!attribute [rw] association_id
+    #   \[Public NAT gateway only\] The association ID of the Elastic IP
+    #   address that's associated with the NAT gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_primary
+    #   Defines if the IP address is the primary address.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] failure_message
+    #   The address failure message.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The address status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGatewayAddress AWS API Documentation
     #
     class NatGatewayAddress < Struct.new(
       :allocation_id,
       :network_interface_id,
       :private_ip,
-      :public_ip)
+      :public_ip,
+      :association_id,
+      :is_primary,
+      :failure_message,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -60803,6 +61007,55 @@ module Aws::EC2
       :network_interface_id,
       :private_ip_addresses,
       :ipv_4_prefixes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nat_gateway_id
+    #   The NAT gateway ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses you want to unassign.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_drain_duration_seconds
+    #   The maximum amount of time to wait (in seconds) before forcibly
+    #   releasing the IP addresses if connections are still in progress.
+    #   Default value is 350 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateNatGatewayAddressRequest AWS API Documentation
+    #
+    class UnassignPrivateNatGatewayAddressRequest < Struct.new(
+      :nat_gateway_id,
+      :private_ip_addresses,
+      :max_drain_duration_seconds,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] nat_gateway_id
+    #   The NAT gateway ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_addresses
+    #   Information about the NAT gateway IP addresses.
+    #   @return [Array<Types::NatGatewayAddress>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateNatGatewayAddressResult AWS API Documentation
+    #
+    class UnassignPrivateNatGatewayAddressResult < Struct.new(
+      :nat_gateway_id,
+      :nat_gateway_addresses)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1969,9 +1969,16 @@ module Aws::IoT
     #   The CloudWatch log group to which the action sends data.
     #   @return [String]
     #
+    # @!attribute [rw] batch_mode
+    #   Indicates whether batches of log records will be extracted and
+    #   uploaded into CloudWatch. Values include `true` or `false`
+    #   *(default)*.
+    #   @return [Boolean]
+    #
     class CloudwatchLogsAction < Struct.new(
       :role_arn,
-      :log_group_name)
+      :log_group_name,
+      :batch_mode)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-01-31)
+------------------
+
+* Feature - Amazon Polly adds two new neural American English voices - Ruth, Stephen
+
 1.64.0 (2023-01-25)
 ------------------
 

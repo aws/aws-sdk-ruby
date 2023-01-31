@@ -60,12 +60,18 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::AddTags.build(context)
           when :cancel_query
             Aws::CloudTrail::Endpoints::CancelQuery.build(context)
+          when :create_channel
+            Aws::CloudTrail::Endpoints::CreateChannel.build(context)
           when :create_event_data_store
             Aws::CloudTrail::Endpoints::CreateEventDataStore.build(context)
           when :create_trail
             Aws::CloudTrail::Endpoints::CreateTrail.build(context)
+          when :delete_channel
+            Aws::CloudTrail::Endpoints::DeleteChannel.build(context)
           when :delete_event_data_store
             Aws::CloudTrail::Endpoints::DeleteEventDataStore.build(context)
+          when :delete_resource_policy
+            Aws::CloudTrail::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_trail
             Aws::CloudTrail::Endpoints::DeleteTrail.build(context)
           when :deregister_organization_delegated_admin
@@ -86,6 +92,8 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::GetInsightSelectors.build(context)
           when :get_query_results
             Aws::CloudTrail::Endpoints::GetQueryResults.build(context)
+          when :get_resource_policy
+            Aws::CloudTrail::Endpoints::GetResourcePolicy.build(context)
           when :get_trail
             Aws::CloudTrail::Endpoints::GetTrail.build(context)
           when :get_trail_status
@@ -112,6 +120,8 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::PutEventSelectors.build(context)
           when :put_insight_selectors
             Aws::CloudTrail::Endpoints::PutInsightSelectors.build(context)
+          when :put_resource_policy
+            Aws::CloudTrail::Endpoints::PutResourcePolicy.build(context)
           when :register_organization_delegated_admin
             Aws::CloudTrail::Endpoints::RegisterOrganizationDelegatedAdmin.build(context)
           when :remove_tags
@@ -128,6 +138,8 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::StopImport.build(context)
           when :stop_logging
             Aws::CloudTrail::Endpoints::StopLogging.build(context)
+          when :update_channel
+            Aws::CloudTrail::Endpoints::UpdateChannel.build(context)
           when :update_event_data_store
             Aws::CloudTrail::Endpoints::UpdateEventDataStore.build(context)
           when :update_trail

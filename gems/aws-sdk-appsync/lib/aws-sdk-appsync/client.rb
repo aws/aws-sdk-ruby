@@ -587,6 +587,9 @@ module Aws::AppSync
     # @option params [Types::RelationalDatabaseDataSourceConfig] :relational_database_config
     #   Relational database settings.
     #
+    # @option params [Types::EventBridgeDataSourceConfig] :event_bridge_config
+    #   Amazon EventBridge settings.
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#data_source #data_source} => Types::DataSource
@@ -597,7 +600,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE, AMAZON_EVENTBRIDGE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -641,6 +644,9 @@ module Aws::AppSync
     #         aws_secret_store_arn: "String",
     #       },
     #     },
+    #     event_bridge_config: {
+    #       event_bus_arn: "String", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -648,7 +654,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE", "AMAZON_EVENTBRIDGE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -672,6 +678,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.database_name #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
+    #   resp.data_source.event_bridge_config.event_bus_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSource AWS API Documentation
     #
@@ -1593,7 +1600,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE", "AMAZON_EVENTBRIDGE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -1617,6 +1624,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.database_name #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
+    #   resp.data_source.event_bridge_config.event_bus_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSource AWS API Documentation
     #
@@ -2012,7 +2020,7 @@ module Aws::AppSync
     #   resp.data_sources[0].data_source_arn #=> String
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].description #=> String
-    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE"
+    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE", "AMAZON_EVENTBRIDGE"
     #   resp.data_sources[0].service_role_arn #=> String
     #   resp.data_sources[0].dynamodb_config.table_name #=> String
     #   resp.data_sources[0].dynamodb_config.aws_region #=> String
@@ -2036,6 +2044,7 @@ module Aws::AppSync
     #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.database_name #=> String
     #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
+    #   resp.data_sources[0].event_bridge_config.event_bus_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSources AWS API Documentation
@@ -2681,6 +2690,9 @@ module Aws::AppSync
     # @option params [Types::RelationalDatabaseDataSourceConfig] :relational_database_config
     #   The new relational database configuration.
     #
+    # @option params [Types::EventBridgeDataSourceConfig] :event_bridge_config
+    #   The new Amazon EventBridge settings.
+    #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataSourceResponse#data_source #data_source} => Types::DataSource
@@ -2691,7 +2703,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE, AMAZON_EVENTBRIDGE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -2735,6 +2747,9 @@ module Aws::AppSync
     #         aws_secret_store_arn: "String",
     #       },
     #     },
+    #     event_bridge_config: {
+    #       event_bus_arn: "String", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2742,7 +2757,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE", "AMAZON_EVENTBRIDGE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -2766,6 +2781,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.database_name #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
+    #   resp.data_source.event_bridge_config.event_bus_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSource AWS API Documentation
     #
@@ -3240,7 +3256,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

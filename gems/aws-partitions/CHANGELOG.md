@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.702.0 (2023-01-31)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CloudTrailData`.
+
 1.701.0 (2023-01-26)
 ------------------
 

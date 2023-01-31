@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-01-31)
+------------------
+
+* Feature - This release introduces the feature to support EventBridge as AppSync data source.
+
 1.57.0 (2023-01-18)
 ------------------
 

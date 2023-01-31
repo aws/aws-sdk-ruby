@@ -78,6 +78,8 @@ module Aws::GroundStation
             Aws::GroundStation::Endpoints::DescribeContact.build(context)
           when :describe_ephemeris
             Aws::GroundStation::Endpoints::DescribeEphemeris.build(context)
+          when :get_agent_configuration
+            Aws::GroundStation::Endpoints::GetAgentConfiguration.build(context)
           when :get_config
             Aws::GroundStation::Endpoints::GetConfig.build(context)
           when :get_dataflow_endpoint_group
@@ -104,12 +106,16 @@ module Aws::GroundStation
             Aws::GroundStation::Endpoints::ListSatellites.build(context)
           when :list_tags_for_resource
             Aws::GroundStation::Endpoints::ListTagsForResource.build(context)
+          when :register_agent
+            Aws::GroundStation::Endpoints::RegisterAgent.build(context)
           when :reserve_contact
             Aws::GroundStation::Endpoints::ReserveContact.build(context)
           when :tag_resource
             Aws::GroundStation::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::GroundStation::Endpoints::UntagResource.build(context)
+          when :update_agent_status
+            Aws::GroundStation::Endpoints::UpdateAgentStatus.build(context)
           when :update_config
             Aws::GroundStation::Endpoints::UpdateConfig.build(context)
           when :update_ephemeris

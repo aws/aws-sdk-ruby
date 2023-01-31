@@ -1454,6 +1454,68 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Assigns one or more private IPv4 addresses to a private NAT gateway.
+    # For more information, see [Work with NAT gateways][1] in the *Amazon
+    # Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
+    #
+    # @option params [required, String] :nat_gateway_id
+    #   The NAT gateway ID.
+    #
+    # @option params [Array<String>] :private_ip_addresses
+    #   The private IPv4 addresses you want to assign to the private NAT
+    #   gateway.
+    #
+    # @option params [Integer] :private_ip_address_count
+    #   The number of private IP addresses to assign to the NAT gateway. You
+    #   can't specify this parameter when also specifying private IP
+    #   addresses.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssignPrivateNatGatewayAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssignPrivateNatGatewayAddressResult#nat_gateway_id #nat_gateway_id} => String
+    #   * {Types::AssignPrivateNatGatewayAddressResult#nat_gateway_addresses #nat_gateway_addresses} => Array&lt;Types::NatGatewayAddress&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.assign_private_nat_gateway_address({
+    #     nat_gateway_id: "NatGatewayId", # required
+    #     private_ip_addresses: ["String"],
+    #     private_ip_address_count: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nat_gateway_id #=> String
+    #   resp.nat_gateway_addresses #=> Array
+    #   resp.nat_gateway_addresses[0].allocation_id #=> String
+    #   resp.nat_gateway_addresses[0].network_interface_id #=> String
+    #   resp.nat_gateway_addresses[0].private_ip #=> String
+    #   resp.nat_gateway_addresses[0].public_ip #=> String
+    #   resp.nat_gateway_addresses[0].association_id #=> String
+    #   resp.nat_gateway_addresses[0].is_primary #=> Boolean
+    #   resp.nat_gateway_addresses[0].failure_message #=> String
+    #   resp.nat_gateway_addresses[0].status #=> String, one of "assigning", "unassigning", "associating", "disassociating", "succeeded", "failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateNatGatewayAddress AWS API Documentation
+    #
+    # @overload assign_private_nat_gateway_address(params = {})
+    # @param [Hash] params ({})
+    def assign_private_nat_gateway_address(params = {}, options = {})
+      req = build_request(:assign_private_nat_gateway_address, params)
+      req.send_request(options)
+    end
+
     # Associates an Elastic IP address, or carrier IP address (for instances
     # that are in subnets in Wavelength Zones) with an instance or a network
     # interface. Before you can use an Elastic IP address, you must allocate
@@ -2026,6 +2088,72 @@ module Aws::EC2
     # @param [Hash] params ({})
     def associate_ipam_resource_discovery(params = {}, options = {})
       req = build_request(:associate_ipam_resource_discovery, params)
+      req.send_request(options)
+    end
+
+    # Associates Elastic IP addresses (EIPs) and private IPv4 addresses with
+    # a public NAT gateway. For more information, see [Work with NAT
+    # gateways][1] in the *Amazon Virtual Private Cloud User Guide*.
+    #
+    # By default, you can associate up to 2 Elastic IP addresses per public
+    # NAT gateway. You can increase the limit by requesting a quota
+    # adjustment. For more information, see [Elastic IP address quotas][2]
+    # in the *Amazon Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips
+    #
+    # @option params [required, String] :nat_gateway_id
+    #   The NAT gateway ID.
+    #
+    # @option params [required, Array<String>] :allocation_ids
+    #   The allocation IDs of EIPs that you want to associate with your NAT
+    #   gateway.
+    #
+    # @option params [Array<String>] :private_ip_addresses
+    #   The private IPv4 addresses that you want to assign to the NAT gateway.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssociateNatGatewayAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateNatGatewayAddressResult#nat_gateway_id #nat_gateway_id} => String
+    #   * {Types::AssociateNatGatewayAddressResult#nat_gateway_addresses #nat_gateway_addresses} => Array&lt;Types::NatGatewayAddress&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_nat_gateway_address({
+    #     nat_gateway_id: "NatGatewayId", # required
+    #     allocation_ids: ["AllocationId"], # required
+    #     private_ip_addresses: ["String"],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nat_gateway_id #=> String
+    #   resp.nat_gateway_addresses #=> Array
+    #   resp.nat_gateway_addresses[0].allocation_id #=> String
+    #   resp.nat_gateway_addresses[0].network_interface_id #=> String
+    #   resp.nat_gateway_addresses[0].private_ip #=> String
+    #   resp.nat_gateway_addresses[0].public_ip #=> String
+    #   resp.nat_gateway_addresses[0].association_id #=> String
+    #   resp.nat_gateway_addresses[0].is_primary #=> Boolean
+    #   resp.nat_gateway_addresses[0].failure_message #=> String
+    #   resp.nat_gateway_addresses[0].status #=> String, one of "assigning", "unassigning", "associating", "disassociating", "succeeded", "failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateNatGatewayAddress AWS API Documentation
+    #
+    # @overload associate_nat_gateway_address(params = {})
+    # @param [Hash] params ({})
+    def associate_nat_gateway_address(params = {}, options = {})
+      req = build_request(:associate_nat_gateway_address, params)
       req.send_request(options)
     end
 
@@ -4595,7 +4723,7 @@ module Aws::EC2
     #     destination_region: "String",
     #     encrypted: false,
     #     kms_key_id: "KmsKeyId",
-    #     presigned_url: "String",
+    #     presigned_url: "CopySnapshotRequestPSU",
     #     source_region: "String", # required
     #     source_snapshot_id: "String", # required
     #     tag_specifications: [
@@ -9019,7 +9147,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :subnet_id
-    #   The subnet in which to create the NAT gateway.
+    #   The ID of the subnet in which to create the NAT gateway.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the NAT gateway.
@@ -9032,6 +9160,34 @@ module Aws::EC2
     #   The private IPv4 address to assign to the NAT gateway. If you don't
     #   provide an address, a private IPv4 address will be automatically
     #   assigned.
+    #
+    # @option params [Array<String>] :secondary_allocation_ids
+    #   Secondary EIP allocation IDs. For more information about secondary
+    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
+    #   Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #
+    # @option params [Array<String>] :secondary_private_ip_addresses
+    #   Secondary private IPv4 addresses. For more information about secondary
+    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
+    #   Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #
+    # @option params [Integer] :secondary_private_ip_address_count
+    #   \[Private NAT gateway only\] The number of secondary private IPv4
+    #   addresses you want to assign to the NAT gateway. For more information
+    #   about secondary addresses, see [Create a NAT gateway][1] in the
+    #   *Amazon Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #
     # @return [Types::CreateNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9085,6 +9241,9 @@ module Aws::EC2
     #     ],
     #     connectivity_type: "private", # accepts private, public
     #     private_ip_address: "String",
+    #     secondary_allocation_ids: ["AllocationId"],
+    #     secondary_private_ip_addresses: ["String"],
+    #     secondary_private_ip_address_count: 1,
     #   })
     #
     # @example Response structure
@@ -9099,6 +9258,10 @@ module Aws::EC2
     #   resp.nat_gateway.nat_gateway_addresses[0].network_interface_id #=> String
     #   resp.nat_gateway.nat_gateway_addresses[0].private_ip #=> String
     #   resp.nat_gateway.nat_gateway_addresses[0].public_ip #=> String
+    #   resp.nat_gateway.nat_gateway_addresses[0].association_id #=> String
+    #   resp.nat_gateway.nat_gateway_addresses[0].is_primary #=> Boolean
+    #   resp.nat_gateway.nat_gateway_addresses[0].failure_message #=> String
+    #   resp.nat_gateway.nat_gateway_addresses[0].status #=> String, one of "assigning", "unassigning", "associating", "disassociating", "succeeded", "failed"
     #   resp.nat_gateway.nat_gateway_id #=> String
     #   resp.nat_gateway.provisioned_bandwidth.provision_time #=> Time
     #   resp.nat_gateway.provisioned_bandwidth.provisioned #=> String
@@ -26542,6 +26705,10 @@ module Aws::EC2
     #   resp.nat_gateways[0].nat_gateway_addresses[0].network_interface_id #=> String
     #   resp.nat_gateways[0].nat_gateway_addresses[0].private_ip #=> String
     #   resp.nat_gateways[0].nat_gateway_addresses[0].public_ip #=> String
+    #   resp.nat_gateways[0].nat_gateway_addresses[0].association_id #=> String
+    #   resp.nat_gateways[0].nat_gateway_addresses[0].is_primary #=> Boolean
+    #   resp.nat_gateways[0].nat_gateway_addresses[0].failure_message #=> String
+    #   resp.nat_gateways[0].nat_gateway_addresses[0].status #=> String, one of "assigning", "unassigning", "associating", "disassociating", "succeeded", "failed"
     #   resp.nat_gateways[0].nat_gateway_id #=> String
     #   resp.nat_gateways[0].provisioned_bandwidth.provision_time #=> Time
     #   resp.nat_gateways[0].provisioned_bandwidth.provisioned #=> String
@@ -37150,6 +37317,80 @@ module Aws::EC2
     # @param [Hash] params ({})
     def disassociate_ipam_resource_discovery(params = {}, options = {})
       req = build_request(:disassociate_ipam_resource_discovery, params)
+      req.send_request(options)
+    end
+
+    # Disassociates secondary Elastic IP addresses (EIPs) from a public NAT
+    # gateway. You cannot disassociate your primary EIP. For more
+    # information, see [Edit secondary IP address associations][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
+    #
+    # While disassociating is in progress, you cannot associate/disassociate
+    # additional EIPs while the connections are being drained. You are,
+    # however, allowed to delete the NAT gateway.
+    #
+    # An EIP will only be released at the end of MaxDrainDurationSeconds.
+    # The EIPs stay associated and support the existing connections but do
+    # not support any new connections (new connections are distributed
+    # across the remaining associated EIPs). As the existing connections
+    # drain out, the EIPs (and the corresponding private IPs mapped to them)
+    # get released.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
+    #
+    # @option params [required, String] :nat_gateway_id
+    #   The NAT gateway ID.
+    #
+    # @option params [required, Array<String>] :association_ids
+    #   The association IDs of EIPs that have been associated with the NAT
+    #   gateway.
+    #
+    # @option params [Integer] :max_drain_duration_seconds
+    #   The maximum amount of time to wait (in seconds) before forcibly
+    #   releasing the IP addresses if connections are still in progress.
+    #   Default value is 350 seconds.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisassociateNatGatewayAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateNatGatewayAddressResult#nat_gateway_id #nat_gateway_id} => String
+    #   * {Types::DisassociateNatGatewayAddressResult#nat_gateway_addresses #nat_gateway_addresses} => Array&lt;Types::NatGatewayAddress&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_nat_gateway_address({
+    #     nat_gateway_id: "NatGatewayId", # required
+    #     association_ids: ["ElasticIpAssociationId"], # required
+    #     max_drain_duration_seconds: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nat_gateway_id #=> String
+    #   resp.nat_gateway_addresses #=> Array
+    #   resp.nat_gateway_addresses[0].allocation_id #=> String
+    #   resp.nat_gateway_addresses[0].network_interface_id #=> String
+    #   resp.nat_gateway_addresses[0].private_ip #=> String
+    #   resp.nat_gateway_addresses[0].public_ip #=> String
+    #   resp.nat_gateway_addresses[0].association_id #=> String
+    #   resp.nat_gateway_addresses[0].is_primary #=> Boolean
+    #   resp.nat_gateway_addresses[0].failure_message #=> String
+    #   resp.nat_gateway_addresses[0].status #=> String, one of "assigning", "unassigning", "associating", "disassociating", "succeeded", "failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateNatGatewayAddress AWS API Documentation
+    #
+    # @overload disassociate_nat_gateway_address(params = {})
+    # @param [Hash] params ({})
+    def disassociate_nat_gateway_address(params = {}, options = {})
+      req = build_request(:disassociate_nat_gateway_address, params)
       req.send_request(options)
     end
 
@@ -55164,6 +55405,83 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Unassigns secondary private NAT gateway IPv4 addresses from a private
+    # NAT gateway. You cannot unassign your primary private IP. For more
+    # information, see [Edit secondary IP address associations][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
+    #
+    # While unassigning is in progress, you cannot assign/unassign
+    # additional IP addresses while the connections are being drained. You
+    # are, however, allowed to delete the NAT gateway.
+    #
+    # A private IP address will only be released at the end of
+    # MaxDrainDurationSeconds. The private IP addresses stay associated and
+    # support the existing connections but do not support any new
+    # connections (new connections are distributed across the remaining
+    # assigned private IP address). After the existing connections drain
+    # out, the private IP addresses get released.
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
+    #
+    # @option params [required, String] :nat_gateway_id
+    #   The NAT gateway ID.
+    #
+    # @option params [required, Array<String>] :private_ip_addresses
+    #   The private IPv4 addresses you want to unassign.
+    #
+    # @option params [Integer] :max_drain_duration_seconds
+    #   The maximum amount of time to wait (in seconds) before forcibly
+    #   releasing the IP addresses if connections are still in progress.
+    #   Default value is 350 seconds.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::UnassignPrivateNatGatewayAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UnassignPrivateNatGatewayAddressResult#nat_gateway_id #nat_gateway_id} => String
+    #   * {Types::UnassignPrivateNatGatewayAddressResult#nat_gateway_addresses #nat_gateway_addresses} => Array&lt;Types::NatGatewayAddress&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.unassign_private_nat_gateway_address({
+    #     nat_gateway_id: "NatGatewayId", # required
+    #     private_ip_addresses: ["String"], # required
+    #     max_drain_duration_seconds: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nat_gateway_id #=> String
+    #   resp.nat_gateway_addresses #=> Array
+    #   resp.nat_gateway_addresses[0].allocation_id #=> String
+    #   resp.nat_gateway_addresses[0].network_interface_id #=> String
+    #   resp.nat_gateway_addresses[0].private_ip #=> String
+    #   resp.nat_gateway_addresses[0].public_ip #=> String
+    #   resp.nat_gateway_addresses[0].association_id #=> String
+    #   resp.nat_gateway_addresses[0].is_primary #=> Boolean
+    #   resp.nat_gateway_addresses[0].failure_message #=> String
+    #   resp.nat_gateway_addresses[0].status #=> String, one of "assigning", "unassigning", "associating", "disassociating", "succeeded", "failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateNatGatewayAddress AWS API Documentation
+    #
+    # @overload unassign_private_nat_gateway_address(params = {})
+    # @param [Hash] params ({})
+    def unassign_private_nat_gateway_address(params = {}, options = {})
+      req = build_request(:unassign_private_nat_gateway_address, params)
+      req.send_request(options)
+    end
+
     # Disables detailed monitoring for a running instance. For more
     # information, see [Monitoring your instances and volumes][1] in the
     # *Amazon EC2 User Guide*.
@@ -55513,7 +55831,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.362.0'
+      context[:gem_version] = '1.363.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

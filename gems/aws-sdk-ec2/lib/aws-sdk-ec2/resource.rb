@@ -705,6 +705,9 @@ module Aws::EC2
     #     ],
     #     connectivity_type: "private", # accepts private, public
     #     private_ip_address: "String",
+    #     secondary_allocation_ids: ["AllocationId"],
+    #     secondary_private_ip_addresses: ["String"],
+    #     secondary_private_ip_address_count: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :allocation_id
@@ -729,7 +732,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :subnet_id
-    #   The subnet in which to create the NAT gateway.
+    #   The ID of the subnet in which to create the NAT gateway.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the NAT gateway.
     # @option options [String] :connectivity_type
@@ -739,6 +742,31 @@ module Aws::EC2
     #   The private IPv4 address to assign to the NAT gateway. If you don't
     #   provide an address, a private IPv4 address will be automatically
     #   assigned.
+    # @option options [Array<String>] :secondary_allocation_ids
+    #   Secondary EIP allocation IDs. For more information about secondary
+    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
+    #   Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    # @option options [Array<String>] :secondary_private_ip_addresses
+    #   Secondary private IPv4 addresses. For more information about secondary
+    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
+    #   Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    # @option options [Integer] :secondary_private_ip_address_count
+    #   \[Private NAT gateway only\] The number of secondary private IPv4
+    #   addresses you want to assign to the NAT gateway. For more information
+    #   about secondary addresses, see [Create a NAT gateway][1] in the
+    #   *Amazon Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     # @return [NatGateway]
     def create_nat_gateway(options = {})
       resp = @client.create_nat_gateway(options)

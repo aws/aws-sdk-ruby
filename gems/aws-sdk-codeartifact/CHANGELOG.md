@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-01-31)
+------------------
+
+* Feature - This release introduces a new DeletePackage API, which enables deletion of a package and all of its versions from a repository.
+
 1.24.0 (2023-01-19)
 ------------------
 

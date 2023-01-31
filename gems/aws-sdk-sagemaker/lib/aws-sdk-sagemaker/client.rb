@@ -3264,6 +3264,7 @@ module Aws::SageMaker
     #       resource_limits: { # required
     #         max_number_of_training_jobs: 1,
     #         max_parallel_training_jobs: 1, # required
+    #         max_runtime_in_seconds: 1,
     #       },
     #       parameter_ranges: {
     #         integer_parameter_ranges: [
@@ -3291,7 +3292,13 @@ module Aws::SageMaker
     #       },
     #       training_job_early_stopping_type: "Off", # accepts Off, Auto
     #       tuning_job_completion_criteria: {
-    #         target_objective_metric_value: 1.0, # required
+    #         target_objective_metric_value: 1.0,
+    #         best_objective_not_improving: {
+    #           max_number_of_training_jobs_not_improving: 1,
+    #         },
+    #         convergence_detected: {
+    #           complete_on_convergence: "Disabled", # accepts Disabled, Enabled
+    #         },
     #       },
     #       random_seed: 1,
     #     },
@@ -10965,6 +10972,8 @@ module Aws::SageMaker
     #   * {Types::DescribeHyperParameterTuningJobResponse#overall_best_training_job #overall_best_training_job} => Types::HyperParameterTrainingJobSummary
     #   * {Types::DescribeHyperParameterTuningJobResponse#warm_start_config #warm_start_config} => Types::HyperParameterTuningJobWarmStartConfig
     #   * {Types::DescribeHyperParameterTuningJobResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeHyperParameterTuningJobResponse#tuning_job_completion_details #tuning_job_completion_details} => Types::HyperParameterTuningJobCompletionDetails
+    #   * {Types::DescribeHyperParameterTuningJobResponse#consumed_resources #consumed_resources} => Types::HyperParameterTuningJobConsumedResources
     #
     # @example Request syntax with placeholder values
     #
@@ -10983,6 +10992,7 @@ module Aws::SageMaker
     #   resp.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.metric_name #=> String
     #   resp.hyper_parameter_tuning_job_config.resource_limits.max_number_of_training_jobs #=> Integer
     #   resp.hyper_parameter_tuning_job_config.resource_limits.max_parallel_training_jobs #=> Integer
+    #   resp.hyper_parameter_tuning_job_config.resource_limits.max_runtime_in_seconds #=> Integer
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges #=> Array
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].name #=> String
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].min_value #=> String
@@ -10999,6 +11009,8 @@ module Aws::SageMaker
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
     #   resp.hyper_parameter_tuning_job_config.training_job_early_stopping_type #=> String, one of "Off", "Auto"
     #   resp.hyper_parameter_tuning_job_config.tuning_job_completion_criteria.target_objective_metric_value #=> Float
+    #   resp.hyper_parameter_tuning_job_config.tuning_job_completion_criteria.best_objective_not_improving.max_number_of_training_jobs_not_improving #=> Integer
+    #   resp.hyper_parameter_tuning_job_config.tuning_job_completion_criteria.convergence_detected.complete_on_convergence #=> String, one of "Disabled", "Enabled"
     #   resp.hyper_parameter_tuning_job_config.random_seed #=> Integer
     #   resp.training_job_definition.definition_name #=> String
     #   resp.training_job_definition.tuning_objective.type #=> String, one of "Maximize", "Minimize"
@@ -11203,6 +11215,9 @@ module Aws::SageMaker
     #   resp.warm_start_config.parent_hyper_parameter_tuning_jobs[0].hyper_parameter_tuning_job_name #=> String
     #   resp.warm_start_config.warm_start_type #=> String, one of "IdenticalDataAndAlgorithm", "TransferLearning"
     #   resp.failure_reason #=> String
+    #   resp.tuning_job_completion_details.number_of_training_jobs_objective_not_improving #=> Integer
+    #   resp.tuning_job_completion_details.convergence_detected_time #=> Time
+    #   resp.consumed_resources.runtime_in_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJob AWS API Documentation
     #
@@ -16083,6 +16098,7 @@ module Aws::SageMaker
     #   resp.hyper_parameter_tuning_job_summaries[0].objective_status_counters.failed #=> Integer
     #   resp.hyper_parameter_tuning_job_summaries[0].resource_limits.max_number_of_training_jobs #=> Integer
     #   resp.hyper_parameter_tuning_job_summaries[0].resource_limits.max_parallel_training_jobs #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].resource_limits.max_runtime_in_seconds #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHyperParameterTuningJobs AWS API Documentation
@@ -22746,7 +22762,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

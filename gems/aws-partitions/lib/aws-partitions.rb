@@ -297,6 +297,7 @@ module Aws
             'CloudHSMV2' => 'cloudhsmv2',
             'CloudSearch' => 'cloudsearch',
             'CloudTrail' => 'cloudtrail',
+            'CloudTrailData' => 'cloudtrail-data',
             'CloudWatch' => 'monitoring',
             'CloudWatchEvents' => 'events',
             'CloudWatchEvidently' => 'evidently',

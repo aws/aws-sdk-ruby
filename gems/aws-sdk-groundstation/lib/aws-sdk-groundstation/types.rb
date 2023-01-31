@@ -10,6 +10,59 @@
 module Aws::GroundStation
   module Types
 
+    # Detailed information about the agent.
+    #
+    # @!attribute [rw] agent_version
+    #   Current agent version.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_versions
+    #   List of versions being used by agent components.
+    #   @return [Array<Types::ComponentVersion>]
+    #
+    # @!attribute [rw] instance_id
+    #   ID of EC2 instance agent is running on.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   Type of EC2 instance agent is running on.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_cpu_cores
+    #   Number of Cpu cores reserved for agent.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/AgentDetails AWS API Documentation
+    #
+    class AgentDetails < Struct.new(
+      :agent_version,
+      :component_versions,
+      :instance_id,
+      :instance_type,
+      :reserved_cpu_cores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Aggregate status of Agent components.
+    #
+    # @!attribute [rw] signature_map
+    #   Sparse map of failure signatures.
+    #   @return [Hash<String,Boolean>]
+    #
+    # @!attribute [rw] status
+    #   Aggregate status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/AggregateStatus AWS API Documentation
+    #
+    class AggregateStatus < Struct.new(
+      :signature_map,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about an antenna demod decode `Config` used in a contact.
     #
     # @!attribute [rw] output_node
@@ -88,6 +141,41 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # Information about AwsGroundStationAgentEndpoint.
+    #
+    # @!attribute [rw] agent_status
+    #   The status of AgentEndpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_results
+    #   The results of the audit.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_address
+    #   The egress address of AgentEndpoint.
+    #   @return [Types::ConnectionDetails]
+    #
+    # @!attribute [rw] ingress_address
+    #   The ingress address of AgentEndpoint.
+    #   @return [Types::RangedConnectionDetails]
+    #
+    # @!attribute [rw] name
+    #   Name string associated with AgentEndpoint. Used as a human-readable
+    #   identifier for AgentEndpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/AwsGroundStationAgentEndpoint AWS API Documentation
+    #
+    class AwsGroundStationAgentEndpoint < Struct.new(
+      :agent_status,
+      :audit_results,
+      :egress_address,
+      :ingress_address,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] contact_id
     #   UUID of a contact.
     #   @return [String]
@@ -96,6 +184,69 @@ module Aws::GroundStation
     #
     class CancelContactRequest < Struct.new(
       :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Data on the status of agent components.
+    #
+    # @!attribute [rw] bytes_received
+    #   Bytes received by the component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_sent
+    #   Bytes sent by the component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capability_arn
+    #   Capability ARN of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_type
+    #   The Component type.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataflow_id
+    #   Dataflow UUID associated with the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] packets_dropped
+    #   Packets dropped by component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   Component status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ComponentStatusData AWS API Documentation
+    #
+    class ComponentStatusData < Struct.new(
+      :bytes_received,
+      :bytes_sent,
+      :capability_arn,
+      :component_type,
+      :dataflow_id,
+      :packets_dropped,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Version information for agent components.
+    #
+    # @!attribute [rw] component_type
+    #   Component type.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   List of versions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ComponentVersion AWS API Documentation
+    #
+    class ComponentVersion < Struct.new(
+      :component_type,
+      :versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -251,6 +402,26 @@ module Aws::GroundStation
       class TrackingConfig < ConfigTypeData; end
       class UplinkEchoConfig < ConfigTypeData; end
       class Unknown < ConfigTypeData; end
+    end
+
+    # Egress address of AgentEndpoint with an optional mtu.
+    #
+    # @!attribute [rw] mtu
+    #   Maximum transmission unit (MTU) size in bytes of a dataflow
+    #   endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] socket_address
+    #   A socket address.
+    #   @return [Types::SocketAddress]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ConnectionDetails AWS API Documentation
+    #
+    class ConnectionDetails < Struct.new(
+      :mtu,
+      :socket_address)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Data describing a contact.
@@ -478,6 +649,14 @@ module Aws::GroundStation
     #   Name of a mission profile.
     #   @return [String]
     #
+    # @!attribute [rw] streams_kms_key
+    #   KMS key to use for encrypting streams.
+    #   @return [Types::KmsKey]
+    #
+    # @!attribute [rw] streams_kms_role
+    #   Role to use for encrypting streams with KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Tags assigned to a mission profile.
     #   @return [Hash<String,String>]
@@ -494,6 +673,8 @@ module Aws::GroundStation
       :dataflow_edges,
       :minimum_viable_contact_duration_seconds,
       :name,
+      :streams_kms_key,
+      :streams_kms_role,
       :tags,
       :tracking_config_arn)
       SENSITIVE = []
@@ -901,6 +1082,30 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # Data for agent discovery.
+    #
+    # @!attribute [rw] capability_arns
+    #   List of capabilities to associate with agent.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   List of private IP addresses to associate with agent.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] public_ip_addresses
+    #   List of public IP addresses to associate with agent.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DiscoveryData AWS API Documentation
+    #
+    class DiscoveryData < Struct.new(
+      :capability_arns,
+      :private_ip_addresses,
+      :public_ip_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object that represents EIRP.
     #
     # @!attribute [rw] units
@@ -941,6 +1146,10 @@ module Aws::GroundStation
 
     # Information about the endpoint details.
     #
+    # @!attribute [rw] aws_ground_station_agent_endpoint
+    #   An agent endpoint.
+    #   @return [Types::AwsGroundStationAgentEndpoint]
+    #
     # @!attribute [rw] endpoint
     #   A dataflow endpoint.
     #   @return [Types::DataflowEndpoint]
@@ -953,6 +1162,7 @@ module Aws::GroundStation
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EndpointDetails AWS API Documentation
     #
     class EndpointDetails < Struct.new(
+      :aws_ground_station_agent_endpoint,
       :endpoint,
       :security_details)
       SENSITIVE = []
@@ -1180,6 +1390,35 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # @!attribute [rw] agent_id
+    #   UUID of agent to get configuration information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetAgentConfigurationRequest AWS API Documentation
+    #
+    class GetAgentConfigurationRequest < Struct.new(
+      :agent_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_id
+    #   UUID of agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] tasking_document
+    #   Tasking document for agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetAgentConfigurationResponse AWS API Documentation
+    #
+    class GetAgentConfigurationResponse < Struct.new(
+      :agent_id,
+      :tasking_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] config_id
     #   UUID of a `Config`.
     #   @return [String]
@@ -1390,6 +1629,14 @@ module Aws::GroundStation
     #   Region of a mission profile.
     #   @return [String]
     #
+    # @!attribute [rw] streams_kms_key
+    #   KMS key to use for encrypting streams.
+    #   @return [Types::KmsKey]
+    #
+    # @!attribute [rw] streams_kms_role
+    #   Role to use for encrypting streams with KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Tags assigned to a mission profile.
     #   @return [Hash<String,String>]
@@ -1409,6 +1656,8 @@ module Aws::GroundStation
       :mission_profile_id,
       :name,
       :region,
+      :streams_kms_key,
+      :streams_kms_role,
       :tags,
       :tracking_config_arn)
       SENSITIVE = []
@@ -1484,6 +1733,25 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # An integer range that has a minimum and maximum value.
+    #
+    # @!attribute [rw] maximum
+    #   A maximum value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum
+    #   A minimum value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/IntegerRange AWS API Documentation
+    #
+    class IntegerRange < Struct.new(
+      :maximum,
+      :minimum)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more parameters are not valid.
     #
     # @!attribute [rw] message
@@ -1499,6 +1767,35 @@ module Aws::GroundStation
       :parameter_name)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # AWS Key Management Service (KMS) Key.
+    #
+    # @note KmsKey is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note KmsKey is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of KmsKey corresponding to the set member.
+    #
+    # @!attribute [rw] kms_alias_arn
+    #   KMS Alias Arn.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   KMS Key Arn.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/KmsKey AWS API Documentation
+    #
+    class KmsKey < Struct.new(
+      :kms_alias_arn,
+      :kms_key_arn,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class KmsAliasArn < KmsKey; end
+      class KmsKeyArn < KmsKey; end
+      class Unknown < KmsKey; end
     end
 
     # @!attribute [rw] max_results
@@ -1893,6 +2190,75 @@ module Aws::GroundStation
     class OEMEphemeris < Struct.new(
       :oem_data,
       :s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Ingress address of AgentEndpoint with a port range and an optional
+    # mtu.
+    #
+    # @!attribute [rw] mtu
+    #   Maximum transmission unit (MTU) size in bytes of a dataflow
+    #   endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] socket_address
+    #   A ranged socket address.
+    #   @return [Types::RangedSocketAddress]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/RangedConnectionDetails AWS API Documentation
+    #
+    class RangedConnectionDetails < Struct.new(
+      :mtu,
+      :socket_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A socket address with a port range.
+    #
+    # @!attribute [rw] name
+    #   IPv4 socket address.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_range
+    #   Port range of a socket address.
+    #   @return [Types::IntegerRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/RangedSocketAddress AWS API Documentation
+    #
+    class RangedSocketAddress < Struct.new(
+      :name,
+      :port_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_details
+    #   Detailed information about the agent being registered.
+    #   @return [Types::AgentDetails]
+    #
+    # @!attribute [rw] discovery_data
+    #   Data for associating and agent with the capabilities it is managing.
+    #   @return [Types::DiscoveryData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/RegisterAgentRequest AWS API Documentation
+    #
+    class RegisterAgentRequest < Struct.new(
+      :agent_details,
+      :discovery_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_id
+    #   UUID of registered agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/RegisterAgentResponse AWS API Documentation
+    #
+    class RegisterAgentResponse < Struct.new(
+      :agent_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2297,6 +2663,45 @@ module Aws::GroundStation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] agent_id
+    #   UUID of agent to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_status
+    #   Aggregate status for agent.
+    #   @return [Types::AggregateStatus]
+    #
+    # @!attribute [rw] component_statuses
+    #   List of component statuses for agent.
+    #   @return [Array<Types::ComponentStatusData>]
+    #
+    # @!attribute [rw] task_id
+    #   GUID of agent task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateAgentStatusRequest AWS API Documentation
+    #
+    class UpdateAgentStatusRequest < Struct.new(
+      :agent_id,
+      :aggregate_status,
+      :component_statuses,
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_id
+    #   UUID of updated agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateAgentStatusResponse AWS API Documentation
+    #
+    class UpdateAgentStatusResponse < Struct.new(
+      :agent_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] config_data
     #   Parameters of a `Config`.
     #   @return [Types::ConfigTypeData]
@@ -2388,6 +2793,14 @@ module Aws::GroundStation
     #   Name of a mission profile.
     #   @return [String]
     #
+    # @!attribute [rw] streams_kms_key
+    #   KMS key to use for encrypting streams.
+    #   @return [Types::KmsKey]
+    #
+    # @!attribute [rw] streams_kms_role
+    #   Role to use for encrypting streams with KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] tracking_config_arn
     #   ARN of a tracking `Config`.
     #   @return [String]
@@ -2401,6 +2814,8 @@ module Aws::GroundStation
       :minimum_viable_contact_duration_seconds,
       :mission_profile_id,
       :name,
+      :streams_kms_key,
+      :streams_kms_role,
       :tracking_config_arn)
       SENSITIVE = []
       include Aws::Structure

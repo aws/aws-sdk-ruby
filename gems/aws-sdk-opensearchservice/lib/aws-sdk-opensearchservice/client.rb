@@ -401,6 +401,7 @@ module Aws::OpenSearchService
     #   resp.connection.connection_id #=> String
     #   resp.connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "PROVISIONING", "ACTIVE", "REJECTING", "REJECTED", "DELETING", "DELETED"
     #   resp.connection.connection_status.message #=> String
+    #   resp.connection.connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AcceptInboundConnection AWS API Documentation
     #
@@ -905,6 +906,9 @@ module Aws::OpenSearchService
     # @option params [required, String] :connection_alias
     #   Name of the connection.
     #
+    # @option params [String] :connection_mode
+    #   The connection mode.
+    #
     # @return [Types::CreateOutboundConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOutboundConnectionResponse#local_domain_info #local_domain_info} => Types::DomainInformationContainer
@@ -912,6 +916,8 @@ module Aws::OpenSearchService
     #   * {Types::CreateOutboundConnectionResponse#connection_alias #connection_alias} => String
     #   * {Types::CreateOutboundConnectionResponse#connection_status #connection_status} => Types::OutboundConnectionStatus
     #   * {Types::CreateOutboundConnectionResponse#connection_id #connection_id} => String
+    #   * {Types::CreateOutboundConnectionResponse#connection_mode #connection_mode} => String
+    #   * {Types::CreateOutboundConnectionResponse#connection_properties #connection_properties} => Types::ConnectionProperties
     #
     # @example Request syntax with placeholder values
     #
@@ -931,6 +937,7 @@ module Aws::OpenSearchService
     #       },
     #     },
     #     connection_alias: "ConnectionAlias", # required
+    #     connection_mode: "DIRECT", # accepts DIRECT, VPC_ENDPOINT
     #   })
     #
     # @example Response structure
@@ -945,6 +952,8 @@ module Aws::OpenSearchService
     #   resp.connection_status.status_code #=> String, one of "VALIDATING", "VALIDATION_FAILED", "PENDING_ACCEPTANCE", "APPROVED", "PROVISIONING", "ACTIVE", "REJECTING", "REJECTED", "DELETING", "DELETED"
     #   resp.connection_status.message #=> String
     #   resp.connection_id #=> String
+    #   resp.connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
+    #   resp.connection_properties.endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateOutboundConnection AWS API Documentation
     #
@@ -1201,6 +1210,7 @@ module Aws::OpenSearchService
     #   resp.connection.connection_id #=> String
     #   resp.connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "PROVISIONING", "ACTIVE", "REJECTING", "REJECTED", "DELETING", "DELETED"
     #   resp.connection.connection_status.message #=> String
+    #   resp.connection.connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteInboundConnection AWS API Documentation
     #
@@ -1245,6 +1255,8 @@ module Aws::OpenSearchService
     #   resp.connection.connection_alias #=> String
     #   resp.connection.connection_status.status_code #=> String, one of "VALIDATING", "VALIDATION_FAILED", "PENDING_ACCEPTANCE", "APPROVED", "PROVISIONING", "ACTIVE", "REJECTING", "REJECTED", "DELETING", "DELETED"
     #   resp.connection.connection_status.message #=> String
+    #   resp.connection.connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
+    #   resp.connection.connection_properties.endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteOutboundConnection AWS API Documentation
     #
@@ -1991,6 +2003,7 @@ module Aws::OpenSearchService
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "PROVISIONING", "ACTIVE", "REJECTING", "REJECTED", "DELETING", "DELETED"
     #   resp.connections[0].connection_status.message #=> String
+    #   resp.connections[0].connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeInboundConnections AWS API Documentation
@@ -2110,6 +2123,8 @@ module Aws::OpenSearchService
     #   resp.connections[0].connection_alias #=> String
     #   resp.connections[0].connection_status.status_code #=> String, one of "VALIDATING", "VALIDATION_FAILED", "PENDING_ACCEPTANCE", "APPROVED", "PROVISIONING", "ACTIVE", "REJECTING", "REJECTED", "DELETING", "DELETED"
     #   resp.connections[0].connection_status.message #=> String
+    #   resp.connections[0].connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
+    #   resp.connections[0].connection_properties.endpoint #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeOutboundConnections AWS API Documentation
@@ -3059,6 +3074,7 @@ module Aws::OpenSearchService
     #   resp.connection.connection_id #=> String
     #   resp.connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "PROVISIONING", "ACTIVE", "REJECTING", "REJECTED", "DELETING", "DELETED"
     #   resp.connection.connection_status.message #=> String
+    #   resp.connection.connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RejectInboundConnection AWS API Documentation
     #
@@ -3722,7 +3738,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

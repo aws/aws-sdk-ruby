@@ -14,16 +14,28 @@ module Aws::GroundStation
     include Seahorse::Model
 
     AWSRegion = Shapes::StringShape.new(name: 'AWSRegion')
+    AgentDetails = Shapes::StructureShape.new(name: 'AgentDetails')
+    AgentStatus = Shapes::StringShape.new(name: 'AgentStatus')
+    AggregateStatus = Shapes::StructureShape.new(name: 'AggregateStatus')
     AngleUnits = Shapes::StringShape.new(name: 'AngleUnits')
     AntennaDemodDecodeDetails = Shapes::StructureShape.new(name: 'AntennaDemodDecodeDetails')
     AntennaDownlinkConfig = Shapes::StructureShape.new(name: 'AntennaDownlinkConfig')
     AntennaDownlinkDemodDecodeConfig = Shapes::StructureShape.new(name: 'AntennaDownlinkDemodDecodeConfig')
     AntennaUplinkConfig = Shapes::StructureShape.new(name: 'AntennaUplinkConfig')
     AnyArn = Shapes::StringShape.new(name: 'AnyArn')
+    AuditResults = Shapes::StringShape.new(name: 'AuditResults')
+    AwsGroundStationAgentEndpoint = Shapes::StructureShape.new(name: 'AwsGroundStationAgentEndpoint')
     BandwidthUnits = Shapes::StringShape.new(name: 'BandwidthUnits')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketArn = Shapes::StringShape.new(name: 'BucketArn')
     CancelContactRequest = Shapes::StructureShape.new(name: 'CancelContactRequest')
+    CapabilityArn = Shapes::StringShape.new(name: 'CapabilityArn')
+    CapabilityArnList = Shapes::ListShape.new(name: 'CapabilityArnList')
+    ComponentStatusData = Shapes::StructureShape.new(name: 'ComponentStatusData')
+    ComponentStatusList = Shapes::ListShape.new(name: 'ComponentStatusList')
+    ComponentType = Shapes::StringShape.new(name: 'ComponentType')
+    ComponentVersion = Shapes::StructureShape.new(name: 'ComponentVersion')
+    ComponentVersionList = Shapes::ListShape.new(name: 'ComponentVersionList')
     ConfigArn = Shapes::StringShape.new(name: 'ConfigArn')
     ConfigCapabilityType = Shapes::StringShape.new(name: 'ConfigCapabilityType')
     ConfigDetails = Shapes::UnionShape.new(name: 'ConfigDetails')
@@ -31,6 +43,7 @@ module Aws::GroundStation
     ConfigList = Shapes::ListShape.new(name: 'ConfigList')
     ConfigListItem = Shapes::StructureShape.new(name: 'ConfigListItem')
     ConfigTypeData = Shapes::UnionShape.new(name: 'ConfigTypeData')
+    ConnectionDetails = Shapes::StructureShape.new(name: 'ConnectionDetails')
     ContactData = Shapes::StructureShape.new(name: 'ContactData')
     ContactIdResponse = Shapes::StructureShape.new(name: 'ContactIdResponse')
     ContactList = Shapes::ListShape.new(name: 'ContactList')
@@ -65,6 +78,7 @@ module Aws::GroundStation
     DescribeEphemerisRequest = Shapes::StructureShape.new(name: 'DescribeEphemerisRequest')
     DescribeEphemerisResponse = Shapes::StructureShape.new(name: 'DescribeEphemerisResponse')
     Destination = Shapes::StructureShape.new(name: 'Destination')
+    DiscoveryData = Shapes::StructureShape.new(name: 'DiscoveryData')
     Double = Shapes::FloatShape.new(name: 'Double')
     DurationInSeconds = Shapes::IntegerShape.new(name: 'DurationInSeconds')
     Eirp = Shapes::StructureShape.new(name: 'Eirp')
@@ -88,6 +102,8 @@ module Aws::GroundStation
     Frequency = Shapes::StructureShape.new(name: 'Frequency')
     FrequencyBandwidth = Shapes::StructureShape.new(name: 'FrequencyBandwidth')
     FrequencyUnits = Shapes::StringShape.new(name: 'FrequencyUnits')
+    GetAgentConfigurationRequest = Shapes::StructureShape.new(name: 'GetAgentConfigurationRequest')
+    GetAgentConfigurationResponse = Shapes::StructureShape.new(name: 'GetAgentConfigurationResponse')
     GetConfigRequest = Shapes::StructureShape.new(name: 'GetConfigRequest')
     GetConfigResponse = Shapes::StructureShape.new(name: 'GetConfigResponse')
     GetDataflowEndpointGroupRequest = Shapes::StructureShape.new(name: 'GetDataflowEndpointGroupRequest')
@@ -102,10 +118,17 @@ module Aws::GroundStation
     GroundStationIdList = Shapes::ListShape.new(name: 'GroundStationIdList')
     GroundStationList = Shapes::ListShape.new(name: 'GroundStationList')
     GroundStationName = Shapes::StringShape.new(name: 'GroundStationName')
+    InstanceId = Shapes::StringShape.new(name: 'InstanceId')
+    InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerRange = Shapes::StructureShape.new(name: 'IntegerRange')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    IpAddressList = Shapes::ListShape.new(name: 'IpAddressList')
+    IpV4Address = Shapes::StringShape.new(name: 'IpV4Address')
     JsonString = Shapes::StringShape.new(name: 'JsonString')
+    KeyAliasArn = Shapes::StringShape.new(name: 'KeyAliasArn')
     KeyArn = Shapes::StringShape.new(name: 'KeyArn')
+    KmsKey = Shapes::UnionShape.new(name: 'KmsKey')
     ListConfigsRequest = Shapes::StructureShape.new(name: 'ListConfigsRequest')
     ListConfigsResponse = Shapes::StructureShape.new(name: 'ListConfigsResponse')
     ListContactsRequest = Shapes::StructureShape.new(name: 'ListContactsRequest')
@@ -122,6 +145,7 @@ module Aws::GroundStation
     ListSatellitesResponse = Shapes::StructureShape.new(name: 'ListSatellitesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MissionProfileArn = Shapes::StringShape.new(name: 'MissionProfileArn')
     MissionProfileIdResponse = Shapes::StructureShape.new(name: 'MissionProfileIdResponse')
     MissionProfileList = Shapes::ListShape.new(name: 'MissionProfileList')
@@ -132,7 +156,13 @@ module Aws::GroundStation
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Polarization = Shapes::StringShape.new(name: 'Polarization')
     PositiveDurationInSeconds = Shapes::IntegerShape.new(name: 'PositiveDurationInSeconds')
+    RangedConnectionDetails = Shapes::StructureShape.new(name: 'RangedConnectionDetails')
+    RangedConnectionDetailsMtuInteger = Shapes::IntegerShape.new(name: 'RangedConnectionDetailsMtuInteger')
+    RangedSocketAddress = Shapes::StructureShape.new(name: 'RangedSocketAddress')
+    RegisterAgentRequest = Shapes::StructureShape.new(name: 'RegisterAgentRequest')
+    RegisterAgentResponse = Shapes::StructureShape.new(name: 'RegisterAgentResponse')
     ReserveContactRequest = Shapes::StructureShape.new(name: 'ReserveContactRequest')
+    ReservedCpuCoresList = Shapes::ListShape.new(name: 'ReservedCpuCoresList')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -148,6 +178,7 @@ module Aws::GroundStation
     SatelliteListItem = Shapes::StructureShape.new(name: 'SatelliteListItem')
     SecurityDetails = Shapes::StructureShape.new(name: 'SecurityDetails')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
+    SignatureMap = Shapes::MapShape.new(name: 'SignatureMap')
     SocketAddress = Shapes::StructureShape.new(name: 'SocketAddress')
     Source = Shapes::StructureShape.new(name: 'Source')
     SpectrumConfig = Shapes::StructureShape.new(name: 'SpectrumConfig')
@@ -169,15 +200,30 @@ module Aws::GroundStation
     UnboundedString = Shapes::StringShape.new(name: 'UnboundedString')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAgentStatusRequest = Shapes::StructureShape.new(name: 'UpdateAgentStatusRequest')
+    UpdateAgentStatusResponse = Shapes::StructureShape.new(name: 'UpdateAgentStatusResponse')
     UpdateConfigRequest = Shapes::StructureShape.new(name: 'UpdateConfigRequest')
     UpdateEphemerisRequest = Shapes::StructureShape.new(name: 'UpdateEphemerisRequest')
     UpdateMissionProfileRequest = Shapes::StructureShape.new(name: 'UpdateMissionProfileRequest')
     UplinkEchoConfig = Shapes::StructureShape.new(name: 'UplinkEchoConfig')
     UplinkSpectrumConfig = Shapes::StructureShape.new(name: 'UplinkSpectrumConfig')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
+    VersionString = Shapes::StringShape.new(name: 'VersionString')
+    VersionStringList = Shapes::ListShape.new(name: 'VersionStringList')
     Year = Shapes::IntegerShape.new(name: 'Year')
     noradSatelliteID = Shapes::IntegerShape.new(name: 'noradSatelliteID')
     satelliteArn = Shapes::StringShape.new(name: 'satelliteArn')
+
+    AgentDetails.add_member(:agent_version, Shapes::ShapeRef.new(shape: VersionString, required: true, location_name: "agentVersion"))
+    AgentDetails.add_member(:component_versions, Shapes::ShapeRef.new(shape: ComponentVersionList, required: true, location_name: "componentVersions"))
+    AgentDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
+    AgentDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "instanceType"))
+    AgentDetails.add_member(:reserved_cpu_cores, Shapes::ShapeRef.new(shape: ReservedCpuCoresList, required: true, location_name: "reservedCpuCores"))
+    AgentDetails.struct_class = Types::AgentDetails
+
+    AggregateStatus.add_member(:signature_map, Shapes::ShapeRef.new(shape: SignatureMap, location_name: "signatureMap"))
+    AggregateStatus.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
+    AggregateStatus.struct_class = Types::AggregateStatus
 
     AntennaDemodDecodeDetails.add_member(:output_node, Shapes::ShapeRef.new(shape: String, location_name: "outputNode"))
     AntennaDemodDecodeDetails.struct_class = Types::AntennaDemodDecodeDetails
@@ -195,8 +241,34 @@ module Aws::GroundStation
     AntennaUplinkConfig.add_member(:transmit_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "transmitDisabled"))
     AntennaUplinkConfig.struct_class = Types::AntennaUplinkConfig
 
+    AwsGroundStationAgentEndpoint.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "agentStatus"))
+    AwsGroundStationAgentEndpoint.add_member(:audit_results, Shapes::ShapeRef.new(shape: AuditResults, location_name: "auditResults"))
+    AwsGroundStationAgentEndpoint.add_member(:egress_address, Shapes::ShapeRef.new(shape: ConnectionDetails, required: true, location_name: "egressAddress"))
+    AwsGroundStationAgentEndpoint.add_member(:ingress_address, Shapes::ShapeRef.new(shape: RangedConnectionDetails, required: true, location_name: "ingressAddress"))
+    AwsGroundStationAgentEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    AwsGroundStationAgentEndpoint.struct_class = Types::AwsGroundStationAgentEndpoint
+
     CancelContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "contactId"))
     CancelContactRequest.struct_class = Types::CancelContactRequest
+
+    CapabilityArnList.member = Shapes::ShapeRef.new(shape: CapabilityArn)
+
+    ComponentStatusData.add_member(:bytes_received, Shapes::ShapeRef.new(shape: Long, location_name: "bytesReceived"))
+    ComponentStatusData.add_member(:bytes_sent, Shapes::ShapeRef.new(shape: Long, location_name: "bytesSent"))
+    ComponentStatusData.add_member(:capability_arn, Shapes::ShapeRef.new(shape: CapabilityArn, required: true, location_name: "capabilityArn"))
+    ComponentStatusData.add_member(:component_type, Shapes::ShapeRef.new(shape: ComponentType, required: true, location_name: "componentType"))
+    ComponentStatusData.add_member(:dataflow_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "dataflowId"))
+    ComponentStatusData.add_member(:packets_dropped, Shapes::ShapeRef.new(shape: Long, location_name: "packetsDropped"))
+    ComponentStatusData.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
+    ComponentStatusData.struct_class = Types::ComponentStatusData
+
+    ComponentStatusList.member = Shapes::ShapeRef.new(shape: ComponentStatusData)
+
+    ComponentVersion.add_member(:component_type, Shapes::ShapeRef.new(shape: ComponentType, required: true, location_name: "componentType"))
+    ComponentVersion.add_member(:versions, Shapes::ShapeRef.new(shape: VersionStringList, required: true, location_name: "versions"))
+    ComponentVersion.struct_class = Types::ComponentVersion
+
+    ComponentVersionList.member = Shapes::ShapeRef.new(shape: ComponentVersion)
 
     ConfigDetails.add_member(:antenna_demod_decode_details, Shapes::ShapeRef.new(shape: AntennaDemodDecodeDetails, location_name: "antennaDemodDecodeDetails"))
     ConfigDetails.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "endpointDetails"))
@@ -238,6 +310,10 @@ module Aws::GroundStation
     ConfigTypeData.add_member_subclass(:uplink_echo_config, Types::ConfigTypeData::UplinkEchoConfig)
     ConfigTypeData.add_member_subclass(:unknown, Types::ConfigTypeData::Unknown)
     ConfigTypeData.struct_class = Types::ConfigTypeData
+
+    ConnectionDetails.add_member(:mtu, Shapes::ShapeRef.new(shape: Integer, location_name: "mtu"))
+    ConnectionDetails.add_member(:socket_address, Shapes::ShapeRef.new(shape: SocketAddress, required: true, location_name: "socketAddress"))
+    ConnectionDetails.struct_class = Types::ConnectionDetails
 
     ContactData.add_member(:contact_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "contactId"))
     ContactData.add_member(:contact_status, Shapes::ShapeRef.new(shape: ContactStatus, location_name: "contactStatus"))
@@ -285,6 +361,8 @@ module Aws::GroundStation
     CreateMissionProfileRequest.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, required: true, location_name: "dataflowEdges"))
     CreateMissionProfileRequest.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, required: true, location_name: "minimumViableContactDurationSeconds"))
     CreateMissionProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    CreateMissionProfileRequest.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
+    CreateMissionProfileRequest.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
     CreateMissionProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "trackingConfigArn"))
     CreateMissionProfileRequest.struct_class = Types::CreateMissionProfileRequest
@@ -382,6 +460,11 @@ module Aws::GroundStation
     Destination.add_member(:dataflow_destination_region, Shapes::ShapeRef.new(shape: String, location_name: "dataflowDestinationRegion"))
     Destination.struct_class = Types::Destination
 
+    DiscoveryData.add_member(:capability_arns, Shapes::ShapeRef.new(shape: CapabilityArnList, required: true, location_name: "capabilityArns"))
+    DiscoveryData.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: IpAddressList, required: true, location_name: "privateIpAddresses"))
+    DiscoveryData.add_member(:public_ip_addresses, Shapes::ShapeRef.new(shape: IpAddressList, required: true, location_name: "publicIpAddresses"))
+    DiscoveryData.struct_class = Types::DiscoveryData
+
     Eirp.add_member(:units, Shapes::ShapeRef.new(shape: EirpUnits, required: true, location_name: "units"))
     Eirp.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
     Eirp.struct_class = Types::Eirp
@@ -390,6 +473,7 @@ module Aws::GroundStation
     Elevation.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
     Elevation.struct_class = Types::Elevation
 
+    EndpointDetails.add_member(:aws_ground_station_agent_endpoint, Shapes::ShapeRef.new(shape: AwsGroundStationAgentEndpoint, location_name: "awsGroundStationAgentEndpoint"))
     EndpointDetails.add_member(:endpoint, Shapes::ShapeRef.new(shape: DataflowEndpoint, location_name: "endpoint"))
     EndpointDetails.add_member(:security_details, Shapes::ShapeRef.new(shape: SecurityDetails, location_name: "securityDetails"))
     EndpointDetails.struct_class = Types::EndpointDetails
@@ -446,6 +530,13 @@ module Aws::GroundStation
     FrequencyBandwidth.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
     FrequencyBandwidth.struct_class = Types::FrequencyBandwidth
 
+    GetAgentConfigurationRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "agentId"))
+    GetAgentConfigurationRequest.struct_class = Types::GetAgentConfigurationRequest
+
+    GetAgentConfigurationResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "agentId"))
+    GetAgentConfigurationResponse.add_member(:tasking_document, Shapes::ShapeRef.new(shape: String, location_name: "taskingDocument"))
+    GetAgentConfigurationResponse.struct_class = Types::GetAgentConfigurationResponse
+
     GetConfigRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "configId"))
     GetConfigRequest.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, required: true, location: "uri", location_name: "configType"))
     GetConfigRequest.struct_class = Types::GetConfigRequest
@@ -491,6 +582,8 @@ module Aws::GroundStation
     GetMissionProfileResponse.add_member(:mission_profile_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "missionProfileId"))
     GetMissionProfileResponse.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
     GetMissionProfileResponse.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegion, location_name: "region"))
+    GetMissionProfileResponse.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
+    GetMissionProfileResponse.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
     GetMissionProfileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetMissionProfileResponse.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "trackingConfigArn"))
     GetMissionProfileResponse.struct_class = Types::GetMissionProfileResponse
@@ -514,9 +607,23 @@ module Aws::GroundStation
 
     GroundStationList.member = Shapes::ShapeRef.new(shape: GroundStationData)
 
+    IntegerRange.add_member(:maximum, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maximum"))
+    IntegerRange.add_member(:minimum, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "minimum"))
+    IntegerRange.struct_class = Types::IntegerRange
+
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterException.add_member(:parameter_name, Shapes::ShapeRef.new(shape: String, location_name: "parameterName"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    IpAddressList.member = Shapes::ShapeRef.new(shape: IpV4Address)
+
+    KmsKey.add_member(:kms_alias_arn, Shapes::ShapeRef.new(shape: KeyAliasArn, location_name: "kmsAliasArn"))
+    KmsKey.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "kmsKeyArn"))
+    KmsKey.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    KmsKey.add_member_subclass(:kms_alias_arn, Types::KmsKey::KmsAliasArn)
+    KmsKey.add_member_subclass(:kms_key_arn, Types::KmsKey::KmsKeyArn)
+    KmsKey.add_member_subclass(:unknown, Types::KmsKey::Unknown)
+    KmsKey.struct_class = Types::KmsKey
 
     ListConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location: "querystring", location_name: "maxResults"))
     ListConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -606,6 +713,21 @@ module Aws::GroundStation
     OEMEphemeris.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
     OEMEphemeris.struct_class = Types::OEMEphemeris
 
+    RangedConnectionDetails.add_member(:mtu, Shapes::ShapeRef.new(shape: RangedConnectionDetailsMtuInteger, location_name: "mtu"))
+    RangedConnectionDetails.add_member(:socket_address, Shapes::ShapeRef.new(shape: RangedSocketAddress, required: true, location_name: "socketAddress"))
+    RangedConnectionDetails.struct_class = Types::RangedConnectionDetails
+
+    RangedSocketAddress.add_member(:name, Shapes::ShapeRef.new(shape: IpV4Address, required: true, location_name: "name"))
+    RangedSocketAddress.add_member(:port_range, Shapes::ShapeRef.new(shape: IntegerRange, required: true, location_name: "portRange"))
+    RangedSocketAddress.struct_class = Types::RangedSocketAddress
+
+    RegisterAgentRequest.add_member(:agent_details, Shapes::ShapeRef.new(shape: AgentDetails, required: true, location_name: "agentDetails"))
+    RegisterAgentRequest.add_member(:discovery_data, Shapes::ShapeRef.new(shape: DiscoveryData, required: true, location_name: "discoveryData"))
+    RegisterAgentRequest.struct_class = Types::RegisterAgentRequest
+
+    RegisterAgentResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "agentId"))
+    RegisterAgentResponse.struct_class = Types::RegisterAgentResponse
+
     ReserveContactRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
     ReserveContactRequest.add_member(:ground_station, Shapes::ShapeRef.new(shape: GroundStationName, required: true, location_name: "groundStation"))
     ReserveContactRequest.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, required: true, location_name: "missionProfileArn"))
@@ -613,6 +735,8 @@ module Aws::GroundStation
     ReserveContactRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     ReserveContactRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ReserveContactRequest.struct_class = Types::ReserveContactRequest
+
+    ReservedCpuCoresList.member = Shapes::ShapeRef.new(shape: Integer)
 
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceLimitExceededException.add_member(:parameter_name, Shapes::ShapeRef.new(shape: String, location_name: "parameterName"))
@@ -650,6 +774,9 @@ module Aws::GroundStation
     SecurityDetails.struct_class = Types::SecurityDetails
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    SignatureMap.key = Shapes::ShapeRef.new(shape: String)
+    SignatureMap.value = Shapes::ShapeRef.new(shape: Boolean)
 
     SocketAddress.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     SocketAddress.add_member(:port, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "port"))
@@ -705,6 +832,15 @@ module Aws::GroundStation
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateAgentStatusRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "agentId"))
+    UpdateAgentStatusRequest.add_member(:aggregate_status, Shapes::ShapeRef.new(shape: AggregateStatus, required: true, location_name: "aggregateStatus"))
+    UpdateAgentStatusRequest.add_member(:component_statuses, Shapes::ShapeRef.new(shape: ComponentStatusList, required: true, location_name: "componentStatuses"))
+    UpdateAgentStatusRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "taskId"))
+    UpdateAgentStatusRequest.struct_class = Types::UpdateAgentStatusRequest
+
+    UpdateAgentStatusResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "agentId"))
+    UpdateAgentStatusResponse.struct_class = Types::UpdateAgentStatusResponse
+
     UpdateConfigRequest.add_member(:config_data, Shapes::ShapeRef.new(shape: ConfigTypeData, required: true, location_name: "configData"))
     UpdateConfigRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "configId"))
     UpdateConfigRequest.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, required: true, location: "uri", location_name: "configType"))
@@ -723,6 +859,8 @@ module Aws::GroundStation
     UpdateMissionProfileRequest.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, location_name: "minimumViableContactDurationSeconds"))
     UpdateMissionProfileRequest.add_member(:mission_profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "missionProfileId"))
     UpdateMissionProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
+    UpdateMissionProfileRequest.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
+    UpdateMissionProfileRequest.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
     UpdateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "trackingConfigArn"))
     UpdateMissionProfileRequest.struct_class = Types::UpdateMissionProfileRequest
 
@@ -733,6 +871,8 @@ module Aws::GroundStation
     UplinkSpectrumConfig.add_member(:center_frequency, Shapes::ShapeRef.new(shape: Frequency, required: true, location_name: "centerFrequency"))
     UplinkSpectrumConfig.add_member(:polarization, Shapes::ShapeRef.new(shape: Polarization, location_name: "polarization"))
     UplinkSpectrumConfig.struct_class = Types::UplinkSpectrumConfig
+
+    VersionStringList.member = Shapes::ShapeRef.new(shape: VersionString)
 
 
     # @api private
@@ -869,6 +1009,17 @@ module Aws::GroundStation
         o.http_request_uri = "/ephemeris/{ephemerisId}"
         o.input = Shapes::ShapeRef.new(shape: DescribeEphemerisRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeEphemerisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_agent_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/agent/{agentId}/configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1059,6 +1210,17 @@ module Aws::GroundStation
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:register_agent, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterAgent"
+        o.http_method = "POST"
+        o.http_request_uri = "/agent"
+        o.input = Shapes::ShapeRef.new(shape: RegisterAgentRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:reserve_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ReserveContact"
         o.http_method = "POST"
@@ -1087,6 +1249,17 @@ module Aws::GroundStation
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_agent_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAgentStatus"
+        o.http_method = "PUT"
+        o.http_request_uri = "/agent/{agentId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAgentStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAgentStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

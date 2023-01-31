@@ -84,6 +84,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::AssignIpv6Addresses.build(context)
           when :assign_private_ip_addresses
             Aws::EC2::Endpoints::AssignPrivateIpAddresses.build(context)
+          when :assign_private_nat_gateway_address
+            Aws::EC2::Endpoints::AssignPrivateNatGatewayAddress.build(context)
           when :associate_address
             Aws::EC2::Endpoints::AssociateAddress.build(context)
           when :associate_client_vpn_target_network
@@ -98,6 +100,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::AssociateInstanceEventWindow.build(context)
           when :associate_ipam_resource_discovery
             Aws::EC2::Endpoints::AssociateIpamResourceDiscovery.build(context)
+          when :associate_nat_gateway_address
+            Aws::EC2::Endpoints::AssociateNatGatewayAddress.build(context)
           when :associate_route_table
             Aws::EC2::Endpoints::AssociateRouteTable.build(context)
           when :associate_subnet_cidr_block
@@ -818,6 +822,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisassociateInstanceEventWindow.build(context)
           when :disassociate_ipam_resource_discovery
             Aws::EC2::Endpoints::DisassociateIpamResourceDiscovery.build(context)
+          when :disassociate_nat_gateway_address
+            Aws::EC2::Endpoints::DisassociateNatGatewayAddress.build(context)
           when :disassociate_route_table
             Aws::EC2::Endpoints::DisassociateRouteTable.build(context)
           when :disassociate_subnet_cidr_block
@@ -1218,6 +1224,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::UnassignIpv6Addresses.build(context)
           when :unassign_private_ip_addresses
             Aws::EC2::Endpoints::UnassignPrivateIpAddresses.build(context)
+          when :unassign_private_nat_gateway_address
+            Aws::EC2::Endpoints::UnassignPrivateNatGatewayAddress.build(context)
           when :unmonitor_instances
             Aws::EC2::Endpoints::UnmonitorInstances.build(context)
           when :update_security_group_rule_descriptions_egress

@@ -318,7 +318,7 @@ module Aws::EC2
     #     destination_region: "String",
     #     encrypted: false,
     #     kms_key_id: "KmsKeyId",
-    #     presigned_url: "String",
+    #     presigned_url: "CopySnapshotRequestPSU",
     #     source_region: "String", # required
     #     tag_specifications: [
     #       {

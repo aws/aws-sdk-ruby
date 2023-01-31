@@ -59,6 +59,7 @@ module Aws
   autoload :CloudSearch, 'aws-sdk-cloudsearch'
   autoload :CloudSearchDomain, 'aws-sdk-cloudsearchdomain'
   autoload :CloudTrail, 'aws-sdk-cloudtrail'
+  autoload :CloudTrailData, 'aws-sdk-cloudtraildata'
   autoload :CloudWatch, 'aws-sdk-cloudwatch'
   autoload :CloudWatchEvents, 'aws-sdk-cloudwatchevents'
   autoload :CloudWatchEvidently, 'aws-sdk-cloudwatchevidently'

@@ -804,12 +804,80 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Deletes a package and all associated package versions. A deleted
+    # package cannot be restored. To delete one or more package versions,
+    # use the [DeletePackageVersions][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain that contains the package to delete.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :repository
+    #   The name of the repository that contains the package to delete.
+    #
+    # @option params [required, String] :format
+    #   The format of the requested package to delete.
+    #
+    # @option params [String] :namespace
+    #   The namespace of the package to delete. The package component that
+    #   specifies its namespace depends on its type. For example:
+    #
+    #   * The namespace of a Maven package is its `groupId`. The namespace is
+    #     required when deleting Maven package versions.
+    #
+    #   * The namespace of an npm package is its `scope`.
+    #
+    #   * Python and NuGet packages do not contain corresponding components,
+    #     packages of those formats do not have a namespace.
+    #
+    # @option params [required, String] :package
+    #   The name of the package to delete.
+    #
+    # @return [Types::DeletePackageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePackageResult#deleted_package #deleted_package} => Types::PackageSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_package({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     repository: "RepositoryName", # required
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
+    #     namespace: "PackageNamespace",
+    #     package: "PackageName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deleted_package.format #=> String, one of "npm", "pypi", "maven", "nuget"
+    #   resp.deleted_package.namespace #=> String
+    #   resp.deleted_package.package #=> String
+    #   resp.deleted_package.origin_configuration.restrictions.publish #=> String, one of "ALLOW", "BLOCK"
+    #   resp.deleted_package.origin_configuration.restrictions.upstream #=> String, one of "ALLOW", "BLOCK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeletePackage AWS API Documentation
+    #
+    # @overload delete_package(params = {})
+    # @param [Hash] params ({})
+    def delete_package(params = {}, options = {})
+      req = build_request(:delete_package, params)
+      req.send_request(options)
+    end
+
     # Deletes one or more versions of a package. A deleted package version
     # cannot be restored in your repository. If you want to remove a package
     # version from your repository and be able to restore it later, set its
     # status to `Archived`. Archived packages cannot be downloaded from a
     # repository and don't show up with list package APIs (for example,
-    # [ListPackageVersions][1]), but you can restore them using
+    # [ListackageVersions][1]), but you can restore them using
     # [UpdatePackageVersionsStatus][2].
     #
     #
@@ -2022,7 +2090,9 @@ module Aws::CodeArtifact
     end
 
     # Returns a list of [PackageVersionSummary][1] objects for package
-    # versions in a repository that match the request parameters.
+    # versions in a repository that match the request parameters. Package
+    # versions of all statuses will be returned by default when calling
+    # `list-package-versions` with no `--status` parameter.
     #
     #
     #
@@ -2151,12 +2221,9 @@ module Aws::CodeArtifact
     #   provided format will be returned.
     #
     # @option params [String] :namespace
-    #   The namespace prefix used to filter requested packages. Only packages
-    #   with a namespace that starts with the provided string value are
-    #   returned. Note that although this option is called `--namespace` and
-    #   not `--namespace-prefix`, it has prefix-matching behavior.
-    #
-    #   Each package format uses namespace as follows:
+    #   The namespace used to filter requested packages. Only packages with
+    #   the provided namespace will be returned. The package component that
+    #   specifies its namespace depends on its type. For example:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
@@ -2843,7 +2910,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

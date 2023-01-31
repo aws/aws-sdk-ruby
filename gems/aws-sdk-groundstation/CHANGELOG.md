@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2023-01-31)
+------------------
+
+* Feature - DigIF Expansion changes to the Customer APIs.
+
 1.31.0 (2023-01-19)
 ------------------
 

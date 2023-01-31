@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2023-01-31)
+------------------
+
+* Feature - Added support for IoT Rules Engine Cloudwatch Logs action batch mode.
+
 1.99.0 (2023-01-18)
 ------------------
 

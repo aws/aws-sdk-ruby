@@ -63,8 +63,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # An error occurred because user does not have permissions to access the
-    # resource. Returns HTTP status code 403.
+    # An error occurred because you don't have permissions to access the
+    # resource.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AccessDeniedException AWS API Documentation
     #
@@ -963,11 +963,25 @@ module Aws::OpenSearchService
     end
 
     # An error occurred because the client attempts to remove a resource
-    # that is currently in use. Returns HTTP status code 409.
+    # that's currently in use.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ConflictException AWS API Documentation
     #
     class ConflictException < Aws::EmptyStructure; end
+
+    # The connection properties of an outbound connection.
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint of the remote domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ConnectionProperties AWS API Documentation
+    #
+    class ConnectionProperties < Struct.new(
+      :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] domain_name
     #   Name of the OpenSearch Service domain to create. Domain names are
@@ -1142,12 +1156,17 @@ module Aws::OpenSearchService
     #   Name of the connection.
     #   @return [String]
     #
+    # @!attribute [rw] connection_mode
+    #   The connection mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateOutboundConnectionRequest AWS API Documentation
     #
     class CreateOutboundConnectionRequest < Struct.new(
       :local_domain_info,
       :remote_domain_info,
-      :connection_alias)
+      :connection_alias,
+      :connection_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1176,6 +1195,14 @@ module Aws::OpenSearchService
     #   used for subsequent operations on the connection.
     #   @return [String]
     #
+    # @!attribute [rw] connection_mode
+    #   The connection mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_properties
+    #   The `ConnectionProperties` for the newly created connection.
+    #   @return [Types::ConnectionProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateOutboundConnectionResponse AWS API Documentation
     #
     class CreateOutboundConnectionResponse < Struct.new(
@@ -1183,7 +1210,9 @@ module Aws::OpenSearchService
       :remote_domain_info,
       :connection_alias,
       :connection_status,
-      :connection_id)
+      :connection_id,
+      :connection_mode,
+      :connection_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1993,8 +2022,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # An error occured because the client wanted to access a not supported
-    # operation. Gives http status code of 409.
+    # An error occured because the client wanted to access an unsupported
+    # operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DisabledOperationException AWS API Documentation
     #
@@ -2890,13 +2919,18 @@ module Aws::OpenSearchService
     #   The current status of the connection.
     #   @return [Types::InboundConnectionStatus]
     #
+    # @!attribute [rw] connection_mode
+    #   The connection mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InboundConnection AWS API Documentation
     #
     class InboundConnection < Struct.new(
       :local_domain_info,
       :remote_domain_info,
       :connection_id,
-      :connection_status)
+      :connection_status,
+      :connection_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3024,30 +3058,29 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The request processing has failed because of an unknown error,
-    # exception or failure (the failure is internal to the service) . Gives
-    # http status code of 500.
+    # Request processing failed because of an unknown error, exception, or
+    # internal failure.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InternalException AWS API Documentation
     #
     class InternalException < Aws::EmptyStructure; end
 
-    # The request processing has failed because of invalid pagination token
-    # provided by customer. Returns an HTTP status code of 400.
+    # The request processing has failed because you provided an invalid
+    # pagination token.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InvalidPaginationTokenException AWS API Documentation
     #
     class InvalidPaginationTokenException < Aws::EmptyStructure; end
 
-    # An exception for trying to create or access sub-resource that is
-    # either invalid or not supported. Gives http status code of 409.
+    # An exception for trying to create or access a sub-resource that's
+    # either invalid or not supported.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InvalidTypeException AWS API Documentation
     #
     class InvalidTypeException < Aws::EmptyStructure; end
 
-    # An exception for trying to create more than allowed resources or
-    # sub-resources. Gives http status code of 409.
+    # An exception for trying to create more than the allowed number of
+    # resources or sub-resources.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/LimitExceededException AWS API Documentation
     #
@@ -3638,6 +3671,14 @@ module Aws::OpenSearchService
     #   Status of the connection.
     #   @return [Types::OutboundConnectionStatus]
     #
+    # @!attribute [rw] connection_mode
+    #   The connection mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_properties
+    #   Properties for the outbound connection.
+    #   @return [Types::ConnectionProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/OutboundConnection AWS API Documentation
     #
     class OutboundConnection < Struct.new(
@@ -3645,7 +3686,9 @@ module Aws::OpenSearchService
       :remote_domain_info,
       :connection_id,
       :connection_alias,
-      :connection_status)
+      :connection_status,
+      :connection_mode,
+      :connection_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4047,15 +4090,13 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # An exception for creating a resource that already exists. Gives http
-    # status code of 400.
+    # An exception for creating a resource that already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ResourceAlreadyExistsException AWS API Documentation
     #
     class ResourceAlreadyExistsException < Aws::EmptyStructure; end
 
-    # An exception for accessing or deleting a resource that does not exist.
-    # Gives http status code of 400.
+    # An exception for accessing or deleting a resource that doesn't exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ResourceNotFoundException AWS API Documentation
     #
@@ -4936,8 +4977,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # An exception for missing / invalid input fields. Gives http status
-    # code of 400.
+    # An exception for missing or invalid input fields.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ValidationException AWS API Documentation
     #

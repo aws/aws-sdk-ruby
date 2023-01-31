@@ -113,6 +113,8 @@ module Aws::EC2
     AssignIpv6AddressesResult = Shapes::StructureShape.new(name: 'AssignIpv6AddressesResult')
     AssignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'AssignPrivateIpAddressesRequest')
     AssignPrivateIpAddressesResult = Shapes::StructureShape.new(name: 'AssignPrivateIpAddressesResult')
+    AssignPrivateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'AssignPrivateNatGatewayAddressRequest')
+    AssignPrivateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'AssignPrivateNatGatewayAddressResult')
     AssignedPrivateIpAddress = Shapes::StructureShape.new(name: 'AssignedPrivateIpAddress')
     AssignedPrivateIpAddressList = Shapes::ListShape.new(name: 'AssignedPrivateIpAddressList')
     AssociateAddressRequest = Shapes::StructureShape.new(name: 'AssociateAddressRequest')
@@ -128,6 +130,8 @@ module Aws::EC2
     AssociateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'AssociateInstanceEventWindowResult')
     AssociateIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'AssociateIpamResourceDiscoveryRequest')
     AssociateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'AssociateIpamResourceDiscoveryResult')
+    AssociateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'AssociateNatGatewayAddressRequest')
+    AssociateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'AssociateNatGatewayAddressResult')
     AssociateRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateRouteTableRequest')
     AssociateRouteTableResult = Shapes::StructureShape.new(name: 'AssociateRouteTableResult')
     AssociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockRequest')
@@ -361,6 +365,7 @@ module Aws::EC2
     CopyImageRequest = Shapes::StructureShape.new(name: 'CopyImageRequest')
     CopyImageResult = Shapes::StructureShape.new(name: 'CopyImageResult')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
+    CopySnapshotRequestPSU = Shapes::StringShape.new(name: 'CopySnapshotRequestPSU')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
     CopyTagsFromSource = Shapes::StringShape.new(name: 'CopyTagsFromSource')
     CoreCount = Shapes::IntegerShape.new(name: 'CoreCount')
@@ -1129,6 +1134,8 @@ module Aws::EC2
     DisassociateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'DisassociateInstanceEventWindowResult')
     DisassociateIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'DisassociateIpamResourceDiscoveryRequest')
     DisassociateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'DisassociateIpamResourceDiscoveryResult')
+    DisassociateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'DisassociateNatGatewayAddressRequest')
+    DisassociateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'DisassociateNatGatewayAddressResult')
     DisassociateRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateRouteTableRequest')
     DisassociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockRequest')
     DisassociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockResult')
@@ -1164,6 +1171,7 @@ module Aws::EC2
     DomainType = Shapes::StringShape.new(name: 'DomainType')
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleWithConstraints = Shapes::FloatShape.new(name: 'DoubleWithConstraints')
+    DrainSeconds = Shapes::IntegerShape.new(name: 'DrainSeconds')
     DynamicRoutingValue = Shapes::StringShape.new(name: 'DynamicRoutingValue')
     EbsBlockDevice = Shapes::StructureShape.new(name: 'EbsBlockDevice')
     EbsEncryptionSupport = Shapes::StringShape.new(name: 'EbsEncryptionSupport')
@@ -1179,6 +1187,7 @@ module Aws::EC2
     EgressOnlyInternetGatewayId = Shapes::StringShape.new(name: 'EgressOnlyInternetGatewayId')
     EgressOnlyInternetGatewayIdList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayIdList')
     EgressOnlyInternetGatewayList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayList')
+    EipAssociationIdList = Shapes::ListShape.new(name: 'EipAssociationIdList')
     ElasticGpuAssociation = Shapes::StructureShape.new(name: 'ElasticGpuAssociation')
     ElasticGpuAssociationList = Shapes::ListShape.new(name: 'ElasticGpuAssociationList')
     ElasticGpuHealth = Shapes::StructureShape.new(name: 'ElasticGpuHealth')
@@ -1662,6 +1671,7 @@ module Aws::EC2
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressList = Shapes::ListShape.new(name: 'IpAddressList')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    IpList = Shapes::ListShape.new(name: 'IpList')
     IpPermission = Shapes::StructureShape.new(name: 'IpPermission')
     IpPermissionList = Shapes::ListShape.new(name: 'IpPermissionList')
     IpPrefixList = Shapes::ListShape.new(name: 'IpPrefixList')
@@ -2062,6 +2072,7 @@ module Aws::EC2
     NatGateway = Shapes::StructureShape.new(name: 'NatGateway')
     NatGatewayAddress = Shapes::StructureShape.new(name: 'NatGatewayAddress')
     NatGatewayAddressList = Shapes::ListShape.new(name: 'NatGatewayAddressList')
+    NatGatewayAddressStatus = Shapes::StringShape.new(name: 'NatGatewayAddressStatus')
     NatGatewayId = Shapes::StringShape.new(name: 'NatGatewayId')
     NatGatewayIdStringList = Shapes::ListShape.new(name: 'NatGatewayIdStringList')
     NatGatewayList = Shapes::ListShape.new(name: 'NatGatewayList')
@@ -2233,6 +2244,7 @@ module Aws::EC2
     PrivateDnsNameOptionsRequest = Shapes::StructureShape.new(name: 'PrivateDnsNameOptionsRequest')
     PrivateDnsNameOptionsResponse = Shapes::StructureShape.new(name: 'PrivateDnsNameOptionsResponse')
     PrivateIpAddressConfigSet = Shapes::ListShape.new(name: 'PrivateIpAddressConfigSet')
+    PrivateIpAddressCount = Shapes::IntegerShape.new(name: 'PrivateIpAddressCount')
     PrivateIpAddressSpecification = Shapes::StructureShape.new(name: 'PrivateIpAddressSpecification')
     PrivateIpAddressSpecificationList = Shapes::ListShape.new(name: 'PrivateIpAddressSpecificationList')
     PrivateIpAddressStringList = Shapes::ListShape.new(name: 'PrivateIpAddressStringList')
@@ -2782,6 +2794,8 @@ module Aws::EC2
     UnassignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesRequest')
     UnassignIpv6AddressesResult = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesResult')
     UnassignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'UnassignPrivateIpAddressesRequest')
+    UnassignPrivateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'UnassignPrivateNatGatewayAddressRequest')
+    UnassignPrivateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'UnassignPrivateNatGatewayAddressResult')
     UnlimitedSupportedInstanceFamily = Shapes::StringShape.new(name: 'UnlimitedSupportedInstanceFamily')
     UnmonitorInstancesRequest = Shapes::StructureShape.new(name: 'UnmonitorInstancesRequest')
     UnmonitorInstancesResult = Shapes::StructureShape.new(name: 'UnmonitorInstancesResult')
@@ -3311,6 +3325,16 @@ module Aws::EC2
     AssignPrivateIpAddressesResult.add_member(:assigned_ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixesList, location_name: "assignedIpv4PrefixSet"))
     AssignPrivateIpAddressesResult.struct_class = Types::AssignPrivateIpAddressesResult
 
+    AssignPrivateNatGatewayAddressRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
+    AssignPrivateNatGatewayAddressRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: IpList, location_name: "PrivateIpAddress"))
+    AssignPrivateNatGatewayAddressRequest.add_member(:private_ip_address_count, Shapes::ShapeRef.new(shape: PrivateIpAddressCount, location_name: "PrivateIpAddressCount"))
+    AssignPrivateNatGatewayAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssignPrivateNatGatewayAddressRequest.struct_class = Types::AssignPrivateNatGatewayAddressRequest
+
+    AssignPrivateNatGatewayAddressResult.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "natGatewayId"))
+    AssignPrivateNatGatewayAddressResult.add_member(:nat_gateway_addresses, Shapes::ShapeRef.new(shape: NatGatewayAddressList, location_name: "natGatewayAddressSet"))
+    AssignPrivateNatGatewayAddressResult.struct_class = Types::AssignPrivateNatGatewayAddressResult
+
     AssignedPrivateIpAddress.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     AssignedPrivateIpAddress.struct_class = Types::AssignedPrivateIpAddress
 
@@ -3377,6 +3401,16 @@ module Aws::EC2
 
     AssociateIpamResourceDiscoveryResult.add_member(:ipam_resource_discovery_association, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociation, location_name: "ipamResourceDiscoveryAssociation"))
     AssociateIpamResourceDiscoveryResult.struct_class = Types::AssociateIpamResourceDiscoveryResult
+
+    AssociateNatGatewayAddressRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
+    AssociateNatGatewayAddressRequest.add_member(:allocation_ids, Shapes::ShapeRef.new(shape: AllocationIdList, required: true, location_name: "AllocationId"))
+    AssociateNatGatewayAddressRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: IpList, location_name: "PrivateIpAddress"))
+    AssociateNatGatewayAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateNatGatewayAddressRequest.struct_class = Types::AssociateNatGatewayAddressRequest
+
+    AssociateNatGatewayAddressResult.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "natGatewayId"))
+    AssociateNatGatewayAddressResult.add_member(:nat_gateway_addresses, Shapes::ShapeRef.new(shape: NatGatewayAddressList, location_name: "natGatewayAddressSet"))
+    AssociateNatGatewayAddressResult.struct_class = Types::AssociateNatGatewayAddressResult
 
     AssociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AssociateRouteTableRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "routeTableId"))
@@ -4144,7 +4178,7 @@ module Aws::EC2
     CopySnapshotRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "destinationRegion"))
     CopySnapshotRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     CopySnapshotRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
-    CopySnapshotRequest.add_member(:presigned_url, Shapes::ShapeRef.new(shape: String, location_name: "presignedUrl"))
+    CopySnapshotRequest.add_member(:presigned_url, Shapes::ShapeRef.new(shape: CopySnapshotRequestPSU, location_name: "presignedUrl"))
     CopySnapshotRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceRegion"))
     CopySnapshotRequest.add_member(:source_snapshot_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceSnapshotId"))
     CopySnapshotRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -4570,6 +4604,9 @@ module Aws::EC2
     CreateNatGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateNatGatewayRequest.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "ConnectivityType"))
     CreateNatGatewayRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress"))
+    CreateNatGatewayRequest.add_member(:secondary_allocation_ids, Shapes::ShapeRef.new(shape: AllocationIdList, location_name: "SecondaryAllocationId"))
+    CreateNatGatewayRequest.add_member(:secondary_private_ip_addresses, Shapes::ShapeRef.new(shape: IpList, location_name: "SecondaryPrivateIpAddress"))
+    CreateNatGatewayRequest.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: PrivateIpAddressCount, location_name: "SecondaryPrivateIpAddressCount"))
     CreateNatGatewayRequest.struct_class = Types::CreateNatGatewayRequest
 
     CreateNatGatewayResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
@@ -7638,6 +7675,16 @@ module Aws::EC2
     DisassociateIpamResourceDiscoveryResult.add_member(:ipam_resource_discovery_association, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociation, location_name: "ipamResourceDiscoveryAssociation"))
     DisassociateIpamResourceDiscoveryResult.struct_class = Types::DisassociateIpamResourceDiscoveryResult
 
+    DisassociateNatGatewayAddressRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
+    DisassociateNatGatewayAddressRequest.add_member(:association_ids, Shapes::ShapeRef.new(shape: EipAssociationIdList, required: true, location_name: "AssociationId"))
+    DisassociateNatGatewayAddressRequest.add_member(:max_drain_duration_seconds, Shapes::ShapeRef.new(shape: DrainSeconds, location_name: "MaxDrainDurationSeconds"))
+    DisassociateNatGatewayAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateNatGatewayAddressRequest.struct_class = Types::DisassociateNatGatewayAddressRequest
+
+    DisassociateNatGatewayAddressResult.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "natGatewayId"))
+    DisassociateNatGatewayAddressResult.add_member(:nat_gateway_addresses, Shapes::ShapeRef.new(shape: NatGatewayAddressList, location_name: "natGatewayAddressSet"))
+    DisassociateNatGatewayAddressResult.struct_class = Types::DisassociateNatGatewayAddressResult
+
     DisassociateRouteTableRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: RouteTableAssociationId, required: true, location_name: "associationId"))
     DisassociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateRouteTableRequest.struct_class = Types::DisassociateRouteTableRequest
@@ -7782,6 +7829,8 @@ module Aws::EC2
     EgressOnlyInternetGatewayIdList.member = Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, location_name: "item")
 
     EgressOnlyInternetGatewayList.member = Shapes::ShapeRef.new(shape: EgressOnlyInternetGateway, location_name: "item")
+
+    EipAssociationIdList.member = Shapes::ShapeRef.new(shape: ElasticIpAssociationId, location_name: "item")
 
     ElasticGpuAssociation.add_member(:elastic_gpu_id, Shapes::ShapeRef.new(shape: ElasticGpuId, location_name: "elasticGpuId"))
     ElasticGpuAssociation.add_member(:elastic_gpu_association_id, Shapes::ShapeRef.new(shape: String, location_name: "elasticGpuAssociationId"))
@@ -9703,6 +9752,8 @@ module Aws::EC2
 
     IpAddressList.member = Shapes::ShapeRef.new(shape: IpAddress, location_name: "item")
 
+    IpList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     IpPermission.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "fromPort"))
     IpPermission.add_member(:ip_protocol, Shapes::ShapeRef.new(shape: String, location_name: "ipProtocol"))
     IpPermission.add_member(:ip_ranges, Shapes::ShapeRef.new(shape: IpRangeList, location_name: "ipRanges"))
@@ -11275,6 +11326,10 @@ module Aws::EC2
     NatGatewayAddress.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
     NatGatewayAddress.add_member(:private_ip, Shapes::ShapeRef.new(shape: String, location_name: "privateIp"))
     NatGatewayAddress.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
+    NatGatewayAddress.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    NatGatewayAddress.add_member(:is_primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPrimary"))
+    NatGatewayAddress.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
+    NatGatewayAddress.add_member(:status, Shapes::ShapeRef.new(shape: NatGatewayAddressStatus, location_name: "status"))
     NatGatewayAddress.struct_class = Types::NatGatewayAddress
 
     NatGatewayAddressList.member = Shapes::ShapeRef.new(shape: NatGatewayAddress, location_name: "item")
@@ -14036,6 +14091,16 @@ module Aws::EC2
     UnassignPrivateIpAddressesRequest.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: IpPrefixList, location_name: "Ipv4Prefix"))
     UnassignPrivateIpAddressesRequest.struct_class = Types::UnassignPrivateIpAddressesRequest
 
+    UnassignPrivateNatGatewayAddressRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
+    UnassignPrivateNatGatewayAddressRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: IpList, required: true, location_name: "PrivateIpAddress"))
+    UnassignPrivateNatGatewayAddressRequest.add_member(:max_drain_duration_seconds, Shapes::ShapeRef.new(shape: DrainSeconds, location_name: "MaxDrainDurationSeconds"))
+    UnassignPrivateNatGatewayAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    UnassignPrivateNatGatewayAddressRequest.struct_class = Types::UnassignPrivateNatGatewayAddressRequest
+
+    UnassignPrivateNatGatewayAddressResult.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "natGatewayId"))
+    UnassignPrivateNatGatewayAddressResult.add_member(:nat_gateway_addresses, Shapes::ShapeRef.new(shape: NatGatewayAddressList, location_name: "natGatewayAddressSet"))
+    UnassignPrivateNatGatewayAddressResult.struct_class = Types::UnassignPrivateNatGatewayAddressResult
+
     UnmonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
     UnmonitorInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     UnmonitorInstancesRequest.struct_class = Types::UnmonitorInstancesRequest
@@ -14774,6 +14839,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: AssignPrivateIpAddressesResult)
       end)
 
+      api.add_operation(:assign_private_nat_gateway_address, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssignPrivateNatGatewayAddress"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssignPrivateNatGatewayAddressRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssignPrivateNatGatewayAddressResult)
+      end)
+
       api.add_operation(:associate_address, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateAddress"
         o.http_method = "POST"
@@ -14828,6 +14901,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateIpamResourceDiscoveryRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateIpamResourceDiscoveryResult)
+      end)
+
+      api.add_operation(:associate_nat_gateway_address, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateNatGatewayAddress"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateNatGatewayAddressRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateNatGatewayAddressResult)
       end)
 
       api.add_operation(:associate_route_table, Seahorse::Model::Operation.new.tap do |o|
@@ -18369,6 +18450,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisassociateIpamResourceDiscoveryResult)
       end)
 
+      api.add_operation(:disassociate_nat_gateway_address, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateNatGatewayAddress"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateNatGatewayAddressRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateNatGatewayAddressResult)
+      end)
+
       api.add_operation(:disassociate_route_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateRouteTable"
         o.http_method = "POST"
@@ -20111,6 +20200,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UnassignPrivateIpAddressesRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:unassign_private_nat_gateway_address, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UnassignPrivateNatGatewayAddress"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UnassignPrivateNatGatewayAddressRequest)
+        o.output = Shapes::ShapeRef.new(shape: UnassignPrivateNatGatewayAddressResult)
       end)
 
       api.add_operation(:unmonitor_instances, Seahorse::Model::Operation.new.tap do |o|

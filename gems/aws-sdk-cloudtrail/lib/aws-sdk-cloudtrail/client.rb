@@ -378,9 +378,9 @@ module Aws::CloudTrail
 
     # @!group API Operations
 
-    # Adds one or more tags to a trail or event data store, up to a limit of
-    # 50. Overwrites an existing tag's value when a new value is specified
-    # for an existing tag key. Tag key names must be unique for a trail; you
+    # Adds one or more tags to a trail, event data store, or channel, up to
+    # a limit of 50. Overwrites an existing tag's value when a new value is
+    # specified for an existing tag key. Tag key names must be unique; you
     # cannot have two keys with the same name but different values. If you
     # specify a key without a value, the tag will be created with the
     # specified key and a value of null. You can tag a trail or event data
@@ -389,10 +389,17 @@ module Aws::CloudTrail
     # as its home region).
     #
     # @option params [required, String] :resource_id
-    #   Specifies the ARN of the trail or event data store to which one or
-    #   more tags will be added. The format of a trail ARN is:
+    #   Specifies the ARN of the trail, event data store, or channel to which
+    #   one or more tags will be added.
     #
+    #   The format of a trail ARN is:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    #   The format of an event data store ARN is:
+    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #
+    #   The format of a channel ARN is:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
     #
     # @option params [required, Array<Types::Tag>] :tags_list
     #   Contains a list of tags, up to a limit of 50
@@ -460,6 +467,82 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Creates a channel for CloudTrail to ingest events from a partner or
+    # external source. After you create a channel, a CloudTrail Lake event
+    # data store can log events from the partner or source that you specify.
+    #
+    # @option params [required, String] :name
+    #   The name of the channel.
+    #
+    # @option params [required, String] :source
+    #   The name of the partner or external event source. You cannot change
+    #   this name after you create the channel. A maximum of one channel is
+    #   allowed per source.
+    #
+    #   A source can be either `Custom` for all valid non-Amazon Web Services
+    #   events, or the name of a partner event source. For information about
+    #   the source names for available partners, see [Additional information
+    #   about integration partners][1] in the CloudTrail User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store-integration.html#cloudtrail-lake-partner-information
+    #
+    # @option params [required, Array<Types::Destination>] :destinations
+    #   One or more event data stores to which events arriving through a
+    #   channel will be logged.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags.
+    #
+    # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelResponse#channel_arn #channel_arn} => String
+    #   * {Types::CreateChannelResponse#name #name} => String
+    #   * {Types::CreateChannelResponse#source #source} => String
+    #   * {Types::CreateChannelResponse#destinations #destinations} => Array&lt;Types::Destination&gt;
+    #   * {Types::CreateChannelResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel({
+    #     name: "ChannelName", # required
+    #     source: "Source", # required
+    #     destinations: [ # required
+    #       {
+    #         type: "EVENT_DATA_STORE", # required, accepts EVENT_DATA_STORE, AWS_SERVICE
+    #         location: "Location", # required
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.name #=> String
+    #   resp.source #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].type #=> String, one of "EVENT_DATA_STORE", "AWS_SERVICE"
+    #   resp.destinations[0].location #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateChannel AWS API Documentation
+    #
+    # @overload create_channel(params = {})
+    # @param [Hash] params ({})
+    def create_channel(params = {}, options = {})
+      req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
     # Creates a new event data store.
     #
     # @option params [required, String] :name
@@ -467,13 +550,28 @@ module Aws::CloudTrail
     #
     # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
     #   The advanced event selectors to use to select the events for the data
-    #   store. For more information about how to use advanced event selectors,
-    #   see [Log events by using advanced event selectors][1] in the
+    #   store. You can configure up to five advanced event selectors for each
+    #   event data store.
+    #
+    #   For more information about how to use advanced event selectors to log
+    #   CloudTrail events, see [Log events by using advanced event
+    #   selectors][1] in the CloudTrail User Guide.
+    #
+    #   For more information about how to use advanced event selectors to
+    #   include Config configuration items in your event data store, see
+    #   [Create an event data store for Config configuration items][2] in the
     #   CloudTrail User Guide.
+    #
+    #   For more information about how to use advanced event selectors to
+    #   include non-Amazon Web Services events in your event data store, see
+    #   [Create an integration to log events from outside Amazon Web
+    #   Services][3] in the CloudTrail User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config
+    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration
     #
     # @option params [Boolean] :multi_region_enabled
     #   Specifies whether the event data store includes events from all
@@ -687,12 +785,15 @@ module Aws::CloudTrail
     # @option params [String] :cloud_watch_logs_log_group_arn
     #   Specifies a log group name using an Amazon Resource Name (ARN), a
     #   unique identifier that represents the log group to which CloudTrail
-    #   logs will be delivered. Not required unless you specify
-    #   `CloudWatchLogsRoleArn`.
+    #   logs will be delivered. You must use a log group that exists in your
+    #   account.
+    #
+    #   Not required unless you specify `CloudWatchLogsRoleArn`.
     #
     # @option params [String] :cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to write
-    #   to a user's log group.
+    #   to a user's log group. You must use a role that exists in your
+    #   account.
     #
     # @option params [String] :kms_key_id
     #   Specifies the KMS key ID to use to encrypt the logs delivered by
@@ -723,7 +824,8 @@ module Aws::CloudTrail
     #   organization in Organizations, or only for the current Amazon Web
     #   Services account. The default is false, and cannot be true unless the
     #   call is made on behalf of an Amazon Web Services account that is the
-    #   management account for an organization in Organizations.
+    #   management account or delegated administrator account for an
+    #   organization in Organizations.
     #
     # @option params [Array<Types::Tag>] :tags_list
     #   A list of tags.
@@ -791,6 +893,28 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Deletes a channel.
+    #
+    # @option params [required, String] :channel
+    #   The ARN or the `UUID` value of the channel that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel({
+    #     channel: "ChannelArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteChannel AWS API Documentation
+    #
+    # @overload delete_channel(params = {})
+    # @param [Hash] params ({})
+    def delete_channel(params = {}, options = {})
+      req = build_request(:delete_channel, params)
+      req.send_request(options)
+    end
+
     # Disables the event data store specified by `EventDataStore`, which
     # accepts an event data store ARN. After you run `DeleteEventDataStore`,
     # the event data store enters a `PENDING_DELETION` state, and is
@@ -823,6 +947,31 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def delete_event_data_store(params = {}, options = {})
       req = build_request(:delete_event_data_store, params)
+      req.send_request(options)
+    end
+
+    # Deletes the resource-based policy attached to the CloudTrail channel.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail channel you're
+    #   deleting the resource-based policy from. The following is the format
+    #   of a resource ARN:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
       req.send_request(options)
     end
 
@@ -951,8 +1100,8 @@ module Aws::CloudTrail
     #
     #   <note markdown="1"> If one or more trail names are specified, information is returned only
     #   if the names match the names of trails belonging only to the current
-    #   region. To return information about a trail in another region, you
-    #   must specify its trail ARN.
+    #   region and current account. To return information about a trail in
+    #   another region, you must specify its trail ARN.
     #
     #    </note>
     #
@@ -1004,15 +1153,7 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Returns information about a specific channel. Amazon Web Services
-    # services create service-linked channels to get information about
-    # CloudTrail events on your behalf. For more information about
-    # service-linked channels, see [Viewing service-linked channels for
-    # CloudTrail by using the CLI][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html
+    # Returns information about a specific channel.
     #
     # @option params [required, String] :channel
     #   The ARN or `UUID` of a channel.
@@ -1024,6 +1165,7 @@ module Aws::CloudTrail
     #   * {Types::GetChannelResponse#source #source} => String
     #   * {Types::GetChannelResponse#source_config #source_config} => Types::SourceConfig
     #   * {Types::GetChannelResponse#destinations #destinations} => Array&lt;Types::Destination&gt;
+    #   * {Types::GetChannelResponse#ingestion_status #ingestion_status} => Types::IngestionStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -1056,6 +1198,11 @@ module Aws::CloudTrail
     #   resp.destinations #=> Array
     #   resp.destinations[0].type #=> String, one of "EVENT_DATA_STORE", "AWS_SERVICE"
     #   resp.destinations[0].location #=> String
+    #   resp.ingestion_status.latest_ingestion_success_time #=> Time
+    #   resp.ingestion_status.latest_ingestion_success_event_id #=> String
+    #   resp.ingestion_status.latest_ingestion_error_code #=> String
+    #   resp.ingestion_status.latest_ingestion_attempt_time #=> Time
+    #   resp.ingestion_status.latest_ingestion_attempt_event_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetChannel AWS API Documentation
     #
@@ -1395,6 +1542,39 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Retrieves the JSON text of the resource-based policy document attached
+    # to the CloudTrail channel.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail channel attached to
+    #   the resource-based policy. The following is the format of a resource
+    #   ARN: `arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel`.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetResourcePolicyResponse#resource_policy #resource_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.resource_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Returns settings information for a specified trail.
     #
     # @option params [required, String] :name
@@ -1510,14 +1690,6 @@ module Aws::CloudTrail
     end
 
     # Lists the channels in the current account, and their source names.
-    # Amazon Web Services services create service-linked channels get
-    # information about CloudTrail events on your behalf. For more
-    # information about service-linked channels, see [Viewing service-linked
-    # channels for CloudTrail by using the CLI][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of CloudTrail channels to display on a single page.
@@ -1840,12 +2012,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Lists the tags for the trail or event data store in the current
-    # region.
+    # Lists the tags for the trail, event data store, or channel in the
+    # current region.
     #
     # @option params [required, Array<String>] :resource_id_list
-    #   Specifies a list of trail and event data store ARNs whose tags will be
-    #   listed. The list has a limit of 20 ARNs.
+    #   Specifies a list of trail, event data store, or channel ARNs whose
+    #   tags will be listed. The list has a limit of 20 ARNs.
     #
     # @option params [String] :next_token
     #   Reserved for future use.
@@ -2259,6 +2431,61 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Attaches a resource-based permission policy to a CloudTrail channel
+    # that is used for an integration with an event source outside of Amazon
+    # Web Services. For more information about resource-based policies, see
+    # [CloudTrail resource-based policy examples][1] in the *CloudTrail User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail channel attached to
+    #   the resource-based policy. The following is the format of a resource
+    #   ARN: `arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel`.
+    #
+    # @option params [required, String] :resource_policy
+    #   A JSON-formatted string for an Amazon Web Services resource-based
+    #   policy.
+    #
+    #   The following are requirements for the resource policy:
+    #
+    #   * Contains only one action: cloudtrail-data:PutAuditEvents
+    #
+    #   * Contains at least one statement. The policy can have a maximum of 20
+    #     statements.
+    #
+    #   * Each statement contains at least one principal. A statement can have
+    #     a maximum of 50 principals.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::PutResourcePolicyResponse#resource_policy #resource_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #     resource_policy: "ResourcePolicy", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.resource_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Registers an organization’s member account as the CloudTrail delegated
     # administrator.
     #
@@ -2283,17 +2510,20 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Removes the specified tags from a trail or event data store.
+    # Removes the specified tags from a trail, event data store, or channel.
     #
     # @option params [required, String] :resource_id
-    #   Specifies the ARN of the trail or event data store from which tags
-    #   should be removed.
+    #   Specifies the ARN of the trail, event data store, or channel from
+    #   which tags should be removed.
     #
     #   Example trail ARN format:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   Example event data store ARN format:
     #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #
+    #   Example channel ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
     #
     # @option params [required, Array<Types::Tag>] :tags_list
     #   Specifies a list of tags to be removed.
@@ -2405,6 +2635,12 @@ module Aws::CloudTrail
     # objects and disabling ACLs for your bucket][2].
     #
     # When you retry an import, the `ImportID` parameter is required.
+    #
+    # <note markdown="1"> If the destination event data store is for an organization, you must
+    # use the management account to import trail events. You cannot use the
+    # delegated administrator account for the organization.
+    #
+    #  </note>
     #
     #
     #
@@ -2640,15 +2876,71 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Updates a channel specified by a required channel ARN or UUID.
+    #
+    # @option params [required, String] :channel
+    #   The ARN or ID (the ARN suffix) of the channel that you want to update.
+    #
+    # @option params [Array<Types::Destination>] :destinations
+    #   The ARNs of event data stores that you want to log events arriving
+    #   through the channel.
+    #
+    # @option params [String] :name
+    #   Changes the name of the channel.
+    #
+    # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChannelResponse#channel_arn #channel_arn} => String
+    #   * {Types::UpdateChannelResponse#name #name} => String
+    #   * {Types::UpdateChannelResponse#source #source} => String
+    #   * {Types::UpdateChannelResponse#destinations #destinations} => Array&lt;Types::Destination&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel({
+    #     channel: "ChannelArn", # required
+    #     destinations: [
+    #       {
+    #         type: "EVENT_DATA_STORE", # required, accepts EVENT_DATA_STORE, AWS_SERVICE
+    #         location: "Location", # required
+    #       },
+    #     ],
+    #     name: "ChannelName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.name #=> String
+    #   resp.source #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].type #=> String, one of "EVENT_DATA_STORE", "AWS_SERVICE"
+    #   resp.destinations[0].location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateChannel AWS API Documentation
+    #
+    # @overload update_channel(params = {})
+    # @param [Hash] params ({})
+    def update_channel(params = {}, options = {})
+      req = build_request(:update_channel, params)
+      req.send_request(options)
+    end
+
     # Updates an event data store. The required `EventDataStore` value is an
     # ARN or the ID portion of the ARN. Other parameters are optional, but
     # at least one optional parameter must be specified, or CloudTrail
     # throws an error. `RetentionPeriod` is in days, and valid values are
     # integers between 90 and 2557. By default, `TerminationProtection` is
-    # enabled. `AdvancedEventSelectors` includes or excludes management and
-    # data events in your event data store; for more information about
-    # `AdvancedEventSelectors`, see
+    # enabled.
+    #
+    # For event data stores for CloudTrail events, `AdvancedEventSelectors`
+    # includes or excludes management and data events in your event data
+    # store. For more information about `AdvancedEventSelectors`, see
     # PutEventSelectorsRequest$AdvancedEventSelectors.
+    #
+    # For event data stores for Config configuration items, Audit Manager
+    # evidence, or non-Amazon Web Services events, `AdvancedEventSelectors`
+    # includes events of that type in your event data store.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store that you
@@ -2872,12 +3164,15 @@ module Aws::CloudTrail
     # @option params [String] :cloud_watch_logs_log_group_arn
     #   Specifies a log group name using an Amazon Resource Name (ARN), a
     #   unique identifier that represents the log group to which CloudTrail
-    #   logs are delivered. Not required unless you specify
-    #   `CloudWatchLogsRoleArn`.
+    #   logs are delivered. You must use a log group that exists in your
+    #   account.
+    #
+    #   Not required unless you specify `CloudWatchLogsRoleArn`.
     #
     # @option params [String] :cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to write
-    #   to a user's log group.
+    #   to a user's log group. You must use a role that exists in your
+    #   account.
     #
     # @option params [String] :kms_key_id
     #   Specifies the KMS key ID to use to encrypt the logs delivered by
@@ -2908,12 +3203,13 @@ module Aws::CloudTrail
     #   organization in Organizations, or only for the current Amazon Web
     #   Services account. The default is false, and cannot be true unless the
     #   call is made on behalf of an Amazon Web Services account that is the
-    #   management account for an organization in Organizations. If the trail
-    #   is not an organization trail and this is set to `true`, the trail will
-    #   be created in all Amazon Web Services accounts that belong to the
-    #   organization. If the trail is an organization trail and this is set to
-    #   `false`, the trail will remain in the current Amazon Web Services
-    #   account but be deleted from all member accounts in the organization.
+    #   management account or delegated administrator account for an
+    #   organization in Organizations. If the trail is not an organization
+    #   trail and this is set to `true`, the trail will be created in all
+    #   Amazon Web Services accounts that belong to the organization. If the
+    #   trail is an organization trail and this is set to `false`, the trail
+    #   will remain in the current Amazon Web Services account but be deleted
+    #   from all member accounts in the organization.
     #
     # @return [Types::UpdateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2985,7 +3281,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

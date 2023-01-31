@@ -457,6 +457,65 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] repository
+    #   The name of the repository that contains the package to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the requested package to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the package to delete. The package component that
+    #   specifies its namespace depends on its type. For example:
+    #
+    #   * The namespace of a Maven package is its `groupId`. The namespace
+    #     is required when deleting Maven package versions.
+    #
+    #   * The namespace of an npm package is its `scope`.
+    #
+    #   * Python and NuGet packages do not contain corresponding components,
+    #     packages of those formats do not have a namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] package
+    #   The name of the package to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeletePackageRequest AWS API Documentation
+    #
+    class DeletePackageRequest < Struct.new(
+      :domain,
+      :domain_owner,
+      :repository,
+      :format,
+      :namespace,
+      :package)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deleted_package
+    #   Details about a package, including its format, namespace, and name.
+    #   @return [Types::PackageSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeletePackageResult AWS API Documentation
+    #
+    class DeletePackageResult < Struct.new(
+      :deleted_package)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain
+    #   The name of the domain that contains the package to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
     #   The name of the repository that contains the package versions to
     #   delete.
     #   @return [String]
@@ -1937,12 +1996,9 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace prefix used to filter requested packages. Only
-    #   packages with a namespace that starts with the provided string value
-    #   are returned. Note that although this option is called `--namespace`
-    #   and not `--namespace-prefix`, it has prefix-matching behavior.
-    #
-    #   Each package format uses namespace as follows:
+    #   The namespace used to filter requested packages. Only packages with
+    #   the provided namespace will be returned. The package component that
+    #   specifies its namespace depends on its type. For example:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
@@ -2182,22 +2238,8 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] dependency_type
     #   The type of a package dependency. The possible values depend on the
-    #   package type.
-    #
-    #   * npm: `regular`, `dev`, `peer`, `optional`
-    #
-    #   * maven: `optional`, `parent`, `compile`, `runtime`, `test`,
-    #     `system`, `provided`.
-    #
-    #     <note markdown="1"> Note that `parent` is not a regular Maven dependency type; instead
-    #     this is extracted from the `<parent>` element if one is defined in
-    #     the package version's POM file.
-    #
-    #      </note>
-    #
-    #   * nuget: The `dependencyType` field is never set for NuGet packages.
-    #
-    #   * pypi: `Requires-Dist`
+    #   package type. Example types are `compile`, `runtime`, and `test` for
+    #   Maven packages, and `dev`, `prod`, and `optional` for npm packages.
     #   @return [String]
     #
     # @!attribute [rw] version_requirement
@@ -2296,12 +2338,6 @@ module Aws::CodeArtifact
     end
 
     # Details about a package, including its format, namespace, and name.
-    # The [ListPackages][1] operation returns a list of `PackageSummary`
-    # objects.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html
     #
     # @!attribute [rw] format
     #   The format of the package.

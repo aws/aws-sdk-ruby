@@ -165,6 +165,20 @@ module Aws::GroundStation
       end
     end
 
+    class GetAgentConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::GroundStation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetConfig
       def self.build(context)
         unless context.config.regional_endpoint
@@ -347,6 +361,20 @@ module Aws::GroundStation
       end
     end
 
+    class RegisterAgent
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::GroundStation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ReserveContact
       def self.build(context)
         unless context.config.regional_endpoint
@@ -376,6 +404,20 @@ module Aws::GroundStation
     end
 
     class UntagResource
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::GroundStation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateAgentStatus
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

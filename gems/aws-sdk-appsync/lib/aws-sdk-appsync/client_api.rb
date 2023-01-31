@@ -108,6 +108,7 @@ module Aws::AppSync
     EvaluateMappingTemplateRequest = Shapes::StructureShape.new(name: 'EvaluateMappingTemplateRequest')
     EvaluateMappingTemplateResponse = Shapes::StructureShape.new(name: 'EvaluateMappingTemplateResponse')
     EvaluationResult = Shapes::StringShape.new(name: 'EvaluationResult')
+    EventBridgeDataSourceConfig = Shapes::StructureShape.new(name: 'EventBridgeDataSourceConfig')
     FieldLogLevel = Shapes::StringShape.new(name: 'FieldLogLevel')
     FlushApiCacheRequest = Shapes::StructureShape.new(name: 'FlushApiCacheRequest')
     FlushApiCacheResponse = Shapes::StructureShape.new(name: 'FlushApiCacheResponse')
@@ -345,6 +346,7 @@ module Aws::AppSync
     CreateDataSourceRequest.add_member(:open_search_service_config, Shapes::ShapeRef.new(shape: OpenSearchServiceDataSourceConfig, location_name: "openSearchServiceConfig"))
     CreateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     CreateDataSourceRequest.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
+    CreateDataSourceRequest.add_member(:event_bridge_config, Shapes::ShapeRef.new(shape: EventBridgeDataSourceConfig, location_name: "eventBridgeConfig"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
@@ -425,6 +427,7 @@ module Aws::AppSync
     DataSource.add_member(:open_search_service_config, Shapes::ShapeRef.new(shape: OpenSearchServiceDataSourceConfig, location_name: "openSearchServiceConfig"))
     DataSource.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     DataSource.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
+    DataSource.add_member(:event_bridge_config, Shapes::ShapeRef.new(shape: EventBridgeDataSourceConfig, location_name: "eventBridgeConfig"))
     DataSource.struct_class = Types::DataSource
 
     DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
@@ -531,6 +534,9 @@ module Aws::AppSync
     EvaluateMappingTemplateResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
     EvaluateMappingTemplateResponse.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     EvaluateMappingTemplateResponse.struct_class = Types::EvaluateMappingTemplateResponse
+
+    EventBridgeDataSourceConfig.add_member(:event_bus_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "eventBusArn"))
+    EventBridgeDataSourceConfig.struct_class = Types::EventBridgeDataSourceConfig
 
     FlushApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     FlushApiCacheRequest.struct_class = Types::FlushApiCacheRequest
@@ -870,6 +876,7 @@ module Aws::AppSync
     UpdateDataSourceRequest.add_member(:open_search_service_config, Shapes::ShapeRef.new(shape: OpenSearchServiceDataSourceConfig, location_name: "openSearchServiceConfig"))
     UpdateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     UpdateDataSourceRequest.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
+    UpdateDataSourceRequest.add_member(:event_bridge_config, Shapes::ShapeRef.new(shape: EventBridgeDataSourceConfig, location_name: "eventBridgeConfig"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
 
     UpdateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))

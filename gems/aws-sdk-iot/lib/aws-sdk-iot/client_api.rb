@@ -1763,6 +1763,7 @@ module Aws::IoT
 
     CloudwatchLogsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     CloudwatchLogsAction.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    CloudwatchLogsAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     CloudwatchLogsAction.struct_class = Types::CloudwatchLogsAction
 
     CloudwatchMetricAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))

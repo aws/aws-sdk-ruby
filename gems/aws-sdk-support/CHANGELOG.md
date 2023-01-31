@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2023-01-31)
+------------------
+
+* Feature - This fixes incorrect endpoint construction when a customer is explicitly setting a region.
+
 1.44.0 (2023-01-18)
 ------------------
 

@@ -33,6 +33,9 @@ module Aws::CloudTrail
   # * {AccountRegisteredException}
   # * {CannotDelegateManagementAccountException}
   # * {ChannelARNInvalidException}
+  # * {ChannelAlreadyExistsException}
+  # * {ChannelExistsForEDSException}
+  # * {ChannelMaxLimitExceededException}
   # * {ChannelNotFoundException}
   # * {CloudTrailARNInvalidException}
   # * {CloudTrailAccessNotEnabledException}
@@ -75,6 +78,7 @@ module Aws::CloudTrail
   # * {InvalidS3BucketNameException}
   # * {InvalidS3PrefixException}
   # * {InvalidSnsTopicNameException}
+  # * {InvalidSourceException}
   # * {InvalidTagParameterException}
   # * {InvalidTimeRangeException}
   # * {InvalidTokenException}
@@ -91,7 +95,10 @@ module Aws::CloudTrail
   # * {OrganizationNotInAllFeaturesModeException}
   # * {OrganizationsNotInUseException}
   # * {QueryIdNotFoundException}
+  # * {ResourceARNNotValidException}
   # * {ResourceNotFoundException}
+  # * {ResourcePolicyNotFoundException}
+  # * {ResourcePolicyNotValidException}
   # * {ResourceTypeNotSupportedException}
   # * {S3BucketDoesNotExistException}
   # * {TagsLimitExceededException}
@@ -161,6 +168,36 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::ChannelARNInvalidException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ChannelAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ChannelAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ChannelExistsForEDSException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ChannelExistsForEDSException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ChannelMaxLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ChannelMaxLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -586,6 +623,16 @@ module Aws::CloudTrail
       end
     end
 
+    class InvalidSourceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::InvalidSourceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidTagParameterException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -746,11 +793,41 @@ module Aws::CloudTrail
       end
     end
 
+    class ResourceARNNotValidException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ResourceARNNotValidException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ResourcePolicyNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ResourcePolicyNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ResourcePolicyNotValidException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ResourcePolicyNotValidException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

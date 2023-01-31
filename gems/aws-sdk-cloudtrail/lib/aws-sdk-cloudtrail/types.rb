@@ -17,8 +17,8 @@ module Aws::CloudTrail
     #
     class AccountHasOngoingImportException < Aws::EmptyStructure; end
 
-    # This exception is thrown when when the specified account is not found
-    # or not part of an organization.
+    # This exception is thrown when the specified account is not found or
+    # not part of an organization.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AccountNotFoundException AWS API Documentation
     #
@@ -38,13 +38,20 @@ module Aws::CloudTrail
     #
     class AccountRegisteredException < Aws::EmptyStructure; end
 
-    # Specifies the tags to add to a trail or event data store.
+    # Specifies the tags to add to a trail, event data store, or channel.
     #
     # @!attribute [rw] resource_id
-    #   Specifies the ARN of the trail or event data store to which one or
-    #   more tags will be added. The format of a trail ARN is:
+    #   Specifies the ARN of the trail, event data store, or channel to
+    #   which one or more tags will be added.
     #
+    #   The format of a trail ARN is:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    #   The format of an event data store ARN is:
+    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #
+    #   The format of a channel ARN is:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
     #   @return [String]
     #
     # @!attribute [rw] tags_list
@@ -113,10 +120,18 @@ module Aws::CloudTrail
     # A single selector statement in an advanced event selector.
     #
     # @!attribute [rw] field
-    #   A field in an event record on which to filter events to be logged.
-    #   Supported fields include `readOnly`, `eventCategory`, `eventSource`
-    #   (for management events), `eventName`, `resources.type`, and
-    #   `resources.ARN`.
+    #   A field in a CloudTrail event record on which to filter events to be
+    #   logged. For event data stores for Config configuration items, Audit
+    #   Manager evidence, or non-Amazon Web Services events, the field is
+    #   used only for selecting events as filtering is not supported.
+    #
+    #   For CloudTrail event records, supported fields include `readOnly`,
+    #   `eventCategory`, `eventSource` (for management events), `eventName`,
+    #   `resources.type`, and `resources.ARN`.
+    #
+    #   For event data stores for Config configuration items, Audit Manager
+    #   evidence, or non-Amazon Web Services events, the only supported
+    #   field is `eventCategory`.
     #
     #   * <b> <code>readOnly</code> </b> - Optional. Can be set to `Equals`
     #     a value of `true` or `false`. If you do not add this field,
@@ -133,12 +148,25 @@ module Aws::CloudTrail
     #     CloudTrail, such as `PutBucket` or `GetSnapshotBlock`. You can
     #     have multiple values for this ﬁeld, separated by commas.
     #
-    #   * <b> <code>eventCategory</code> </b> - This is required. It must be
-    #     set to `Equals`, and the value must be `Management` or `Data`.
+    #   * <b> <code>eventCategory</code> </b> - This is required and must be
+    #     set to `Equals`.
     #
-    #   * <b> <code>resources.type</code> </b> - This ﬁeld is required.
-    #     `resources.type` can only use the `Equals` operator, and the value
-    #     can be one of the following:
+    #     * For CloudTrail event records, the value must be `Management` or
+    #       `Data`.
+    #
+    #     * For Config configuration items, the value must be
+    #       `ConfigurationItem`.
+    #
+    #     * For Audit Manager evidence, the value must be `Evidence`.
+    #
+    #     * For non-Amazon Web Services events, the value must be
+    #       `ActivityAuditLog`.
+    #
+    #   * <b> <code>resources.type</code> </b> - This ﬁeld is required for
+    #     CloudTrail data events. `resources.type` can only use the `Equals`
+    #     operator, and the value can be one of the following:
+    #
+    #     * `AWS::CloudTrail::Channel`
     #
     #     * `AWS::S3::Object`
     #
@@ -159,6 +187,12 @@ module Aws::CloudTrail
     #     * `AWS::DynamoDB::Stream`
     #
     #     * `AWS::Glue::Table`
+    #
+    #     * `AWS::FinSpace::Environment`
+    #
+    #     * `AWS::SageMaker::ExperimentTrialComponent`
+    #
+    #     * `AWS::SageMaker::FeatureGroup`
     #
     #     You can have only one `resources.type` ﬁeld per selector. To log
     #     data events on more than one resource type, add another selector.
@@ -207,6 +241,14 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When resources.type equals `AWS::CloudTrail::Channel`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:cloudtrail:<region>:<account_ID>:channel/<channel_UUID>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::S3Outposts::Object`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
@@ -252,6 +294,31 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:glue:<region>:<account_ID>:table/<database_name>/<table_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::FinSpace::Environment`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:finspace:<region>:<account_ID>:environment/<environment_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals
+    #     `AWS::SageMaker::ExperimentTrialComponent`, and the operator is
+    #     set to `Equals` or `NotEquals`, the ARN must be in the following
+    #     format:
+    #
+    #     * `arn:<partition>:sagemaker:<region>:<account_ID>:experiment-trial-component/<experiment_trial_component_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SageMaker::FeatureGroup`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:sagemaker:<region>:<account_ID>:feature-group/<feature_group_name>`
     #
     #     ^
     #   @return [String]
@@ -376,7 +443,28 @@ module Aws::CloudTrail
     #
     class ChannelARNInvalidException < Aws::EmptyStructure; end
 
-    # The specified channel was not found.
+    # This exception is thrown when the provided channel already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ChannelAlreadyExistsException AWS API Documentation
+    #
+    class ChannelAlreadyExistsException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the specified event data store cannot
+    # yet be deleted because it is in use by a channel.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ChannelExistsForEDSException AWS API Documentation
+    #
+    class ChannelExistsForEDSException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the maximum number of channels limit is
+    # exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ChannelMaxLimitExceededException AWS API Documentation
+    #
+    class ChannelMaxLimitExceededException < Aws::EmptyStructure; end
+
+    # This exception is thrown when CloudTrail cannot find the specified
+    # channel.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ChannelNotFoundException AWS API Documentation
     #
@@ -386,6 +474,16 @@ module Aws::CloudTrail
     # that is not valid. The following is the format of a trail ARN.
     #
     # `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    # This exception is also thrown when you call `AddTags` or `RemoveTags`
+    # on a trail, event data store, or channel with a resource ARN that is
+    # not valid.
+    #
+    # The following is the format of an event data store ARN:
+    # `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #
+    # The following is the format of a channel ARN:
+    # `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudTrailARNInvalidException AWS API Documentation
     #
@@ -422,13 +520,86 @@ module Aws::CloudTrail
 
     # This exception is thrown when the specified resource is not ready for
     # an operation. This can occur when you try to run an operation on a
-    # resource before CloudTrail has time to fully load the resource. If
-    # this exception occurs, wait a few minutes, and then try the operation
-    # again.
+    # resource before CloudTrail has time to fully load the resource, or
+    # because another operation is modifying the resource. If this exception
+    # occurs, wait a few minutes, and then try the operation again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ConflictException AWS API Documentation
     #
     class ConflictException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   The name of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The name of the partner or external event source. You cannot change
+    #   this name after you create the channel. A maximum of one channel is
+    #   allowed per source.
+    #
+    #   A source can be either `Custom` for all valid non-Amazon Web
+    #   Services events, or the name of a partner event source. For
+    #   information about the source names for available partners, see
+    #   [Additional information about integration partners][1] in the
+    #   CloudTrail User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store-integration.html#cloudtrail-lake-partner-information
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   One or more event data stores to which events arriving through a
+    #   channel will be logged.
+    #   @return [Array<Types::Destination>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateChannelRequest AWS API Documentation
+    #
+    class CreateChannelRequest < Struct.new(
+      :name,
+      :source,
+      :destinations,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The Amazon Resource Name (ARN) of the new channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the new channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The partner or external event source name.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The event data stores that log the events arriving through the
+    #   channel.
+    #   @return [Array<Types::Destination>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateChannelResponse AWS API Documentation
+    #
+    class CreateChannelResponse < Struct.new(
+      :channel_arn,
+      :name,
+      :source,
+      :destinations,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] name
     #   The name of the event data store.
@@ -436,13 +607,28 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] advanced_event_selectors
     #   The advanced event selectors to use to select the events for the
-    #   data store. For more information about how to use advanced event
-    #   selectors, see [Log events by using advanced event selectors][1] in
+    #   data store. You can configure up to five advanced event selectors
+    #   for each event data store.
+    #
+    #   For more information about how to use advanced event selectors to
+    #   log CloudTrail events, see [Log events by using advanced event
+    #   selectors][1] in the CloudTrail User Guide.
+    #
+    #   For more information about how to use advanced event selectors to
+    #   include Config configuration items in your event data store, see
+    #   [Create an event data store for Config configuration items][2] in
     #   the CloudTrail User Guide.
+    #
+    #   For more information about how to use advanced event selectors to
+    #   include non-Amazon Web Services events in your event data store, see
+    #   [Create an integration to log events from outside Amazon Web
+    #   Services][3] in the CloudTrail User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config
+    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @!attribute [rw] multi_region_enabled
@@ -673,13 +859,16 @@ module Aws::CloudTrail
     # @!attribute [rw] cloud_watch_logs_log_group_arn
     #   Specifies a log group name using an Amazon Resource Name (ARN), a
     #   unique identifier that represents the log group to which CloudTrail
-    #   logs will be delivered. Not required unless you specify
-    #   `CloudWatchLogsRoleArn`.
+    #   logs will be delivered. You must use a log group that exists in your
+    #   account.
+    #
+    #   Not required unless you specify `CloudWatchLogsRoleArn`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to
-    #   write to a user's log group.
+    #   write to a user's log group. You must use a role that exists in
+    #   your account.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -712,7 +901,8 @@ module Aws::CloudTrail
     #   organization in Organizations, or only for the current Amazon Web
     #   Services account. The default is false, and cannot be true unless
     #   the call is made on behalf of an Amazon Web Services account that is
-    #   the management account for an organization in Organizations.
+    #   the management account or delegated administrator account for an
+    #   organization in Organizations.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags_list
@@ -843,7 +1033,7 @@ module Aws::CloudTrail
     #
     # <note markdown="1"> The total number of allowed data resources is 250. This number can be
     # distributed between 1 and 5 event selectors, but the total cannot
-    # exceed 250 across all selectors.
+    # exceed 250 across all selectors for the trail.
     #
     #  If you are using advanced event selectors, the maximum total number of
     # values for all conditions, across all advanced event selectors for the
@@ -907,6 +1097,8 @@ module Aws::CloudTrail
     #   are not valid in basic event selectors. For more information, see
     #   AdvancedFieldSelector$Field.
     #
+    #   * `AWS::CloudTrail::Channel`
+    #
     #   * `AWS::S3Outposts::Object`
     #
     #   * `AWS::ManagedBlockchain::Node`
@@ -920,6 +1112,12 @@ module Aws::CloudTrail
     #   * `AWS::DynamoDB::Stream`
     #
     #   * `AWS::Glue::Table`
+    #
+    #   * `AWS::FinSpace::Environment`
+    #
+    #   * `AWS::SageMaker::ExperimentTrialComponent`
+    #
+    #   * `AWS::SageMaker::FeatureGroup`
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -989,6 +1187,22 @@ module Aws::CloudTrail
     #
     class DelegatedAdminAccountLimitExceededException < Aws::EmptyStructure; end
 
+    # @!attribute [rw] channel
+    #   The ARN or the `UUID` value of the channel that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteChannelRequest AWS API Documentation
+    #
+    class DeleteChannelRequest < Struct.new(
+      :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteChannelResponse AWS API Documentation
+    #
+    class DeleteChannelResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store to
     #   delete.
@@ -1005,6 +1219,25 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteEventDataStoreResponse AWS API Documentation
     #
     class DeleteEventDataStoreResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail channel you're
+    #   deleting the resource-based policy from. The following is the format
+    #   of a resource ARN:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
     # The request that specifies the name of a trail to delete.
     #
@@ -1138,8 +1371,8 @@ module Aws::CloudTrail
     #
     #   <note markdown="1"> If one or more trail names are specified, information is returned
     #   only if the names match the names of trails belonging only to the
-    #   current region. To return information about a trail in another
-    #   region, you must specify its trail ARN.
+    #   current region and current account. To return information about a
+    #   trail in another region, you must specify its trail ARN.
     #
     #    </note>
     #   @return [Array<String>]
@@ -1183,17 +1416,20 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # Contains information about the service where CloudTrail delivers
-    # events.
+    # Contains information about the destination receiving events.
     #
     # @!attribute [rw] type
     #   The type of destination for events arriving from a channel. For
-    #   service-linked channels, the value is `AWS_SERVICE`.
+    #   channels used for a CloudTrail Lake integration, the value is
+    #   `EventDataStore`. For service-linked channels, the value is
+    #   `AWS_SERVICE`.
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   For service-linked channels, the value is the name of the Amazon Web
-    #   Services service.
+    #   For channels used for a CloudTrail Lake integration, the location is
+    #   the ARN of an event data store that receives events from a channel.
+    #   For service-linked channels, the location is the name of the Amazon
+    #   Web Services service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Destination AWS API Documentation
@@ -1283,44 +1519,42 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] termination_protection_enabled
-    #   This field is being deprecated. Indicates whether the event data
-    #   store is protected from termination.
+    #   Indicates whether the event data store is protected from
+    #   termination.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   This field is being deprecated. The status of an event data store.
-    #   Values are `ENABLED` and `PENDING_DELETION`.
+    #   The status of an event data store. Values are `ENABLED` and
+    #   `PENDING_DELETION`.
     #   @return [String]
     #
     # @!attribute [rw] advanced_event_selectors
-    #   This field is being deprecated. The advanced event selectors that
-    #   were used to select events for the data store.
+    #   The advanced event selectors that were used to select events for the
+    #   data store.
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @!attribute [rw] multi_region_enabled
-    #   This field is being deprecated. Indicates whether the event data
-    #   store includes events from all regions, or only from the region in
-    #   which it was created.
+    #   Indicates whether the event data store includes events from all
+    #   regions, or only from the region in which it was created.
     #   @return [Boolean]
     #
     # @!attribute [rw] organization_enabled
-    #   This field is being deprecated. Indicates that an event data store
-    #   is collecting logged events for an organization.
+    #   Indicates that an event data store is collecting logged events for
+    #   an organization.
     #   @return [Boolean]
     #
     # @!attribute [rw] retention_period
-    #   This field is being deprecated. The retention period, in days.
+    #   The retention period, in days.
     #   @return [Integer]
     #
     # @!attribute [rw] created_timestamp
-    #   This field is being deprecated. The timestamp of the event data
-    #   store's creation.
+    #   The timestamp of the event data store's creation.
     #   @return [Time]
     #
     # @!attribute [rw] updated_timestamp
-    #   This field is being deprecated. The timestamp showing when an event
-    #   data store was updated, if applicable. `UpdatedTimestamp` is always
-    #   either the same or newer than the time shown in `CreatedTimestamp`.
+    #   The timestamp showing when an event data store was updated, if
+    #   applicable. `UpdatedTimestamp` is always either the same or newer
+    #   than the time shown in `CreatedTimestamp`.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStore AWS API Documentation
@@ -1479,14 +1713,14 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] name
     #   The name of the CloudTrail channel. For service-linked channels, the
-    #   value is `aws-service-channel/service-name/custom-suffix` where
+    #   name is `aws-service-channel/service-name/custom-suffix` where
     #   `service-name` represents the name of the Amazon Web Services
     #   service that created the channel and `custom-suffix` represents the
     #   suffix generated by the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The event source for the CloudTrail channel.
+    #   The source for the CloudTrail channel.
     #   @return [String]
     #
     # @!attribute [rw] source_config
@@ -1496,9 +1730,17 @@ module Aws::CloudTrail
     #   @return [Types::SourceConfig]
     #
     # @!attribute [rw] destinations
-    #   The Amazon Web Services service that created the service-linked
-    #   channel.
+    #   The destinations for the channel. For channels created for
+    #   integrations, the destinations are the event data stores that log
+    #   events arriving through the channel. For service-linked channels,
+    #   the destination is the Amazon Web Services service that created the
+    #   service-linked channel to receive events.
     #   @return [Array<Types::Destination>]
+    #
+    # @!attribute [rw] ingestion_status
+    #   A table showing information about the most recent successful and
+    #   failed attempts to ingest events.
+    #   @return [Types::IngestionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetChannelResponse AWS API Documentation
     #
@@ -1507,7 +1749,8 @@ module Aws::CloudTrail
       :name,
       :source,
       :source_config,
-      :destinations)
+      :destinations,
+      :ingestion_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1826,6 +2069,39 @@ module Aws::CloudTrail
       :query_result_rows,
       :next_token,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail channel attached to
+    #   the resource-based policy. The following is the format of a resource
+    #   ARN: `arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail channel attached to
+    #   resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   A JSON-formatted string that contains the resource-based policy
+    #   attached to the CloudTrail channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :resource_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2154,6 +2430,43 @@ module Aws::CloudTrail
     #
     class InactiveQueryException < Aws::EmptyStructure; end
 
+    # A table showing information about the most recent successful and
+    # failed attempts to ingest events.
+    #
+    # @!attribute [rw] latest_ingestion_success_time
+    #   The time stamp of the most recent successful ingestion of events for
+    #   the channel.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_ingestion_success_event_id
+    #   The event ID of the most recent successful ingestion of events.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_ingestion_error_code
+    #   The error code for the most recent failure to ingest events.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_ingestion_attempt_time
+    #   The time stamp of the most recent attempt to ingest events on the
+    #   channel.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_ingestion_attempt_event_id
+    #   The event ID of the most recent attempt to ingest events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/IngestionStatus AWS API Documentation
+    #
+    class IngestionStatus < Struct.new(
+      :latest_ingestion_success_time,
+      :latest_ingestion_success_event_id,
+      :latest_ingestion_error_code,
+      :latest_ingestion_attempt_time,
+      :latest_ingestion_attempt_event_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # If you run `GetInsightSelectors` on a trail that does not have
     # Insights events enabled, the operation throws the exception
     # `InsightNotEnabledException`.
@@ -2383,6 +2696,13 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidSnsTopicNameException AWS API Documentation
     #
     class InvalidSnsTopicNameException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the specified value of `Source` is not
+    # valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidSourceException AWS API Documentation
+    #
+    class InvalidSourceException < Aws::EmptyStructure; end
 
     # This exception is thrown when the specified tag key or values are not
     # valid. It can also occur if there are duplicate tags or too many tags
@@ -2722,8 +3042,8 @@ module Aws::CloudTrail
     # Specifies a list of tags to return.
     #
     # @!attribute [rw] resource_id_list
-    #   Specifies a list of trail and event data store ARNs whose tags will
-    #   be listed. The list has a limit of 20 ARNs.
+    #   Specifies a list of trail, event data store, or channel ARNs whose
+    #   tags will be listed. The list has a limit of 20 ARNs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -3113,6 +3433,55 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail channel attached to
+    #   the resource-based policy. The following is the format of a resource
+    #   ARN: `arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   A JSON-formatted string for an Amazon Web Services resource-based
+    #   policy.
+    #
+    #   The following are requirements for the resource policy:
+    #
+    #   * Contains only one action: cloudtrail-data:PutAuditEvents
+    #
+    #   * Contains at least one statement. The policy can have a maximum of
+    #     20 statements.
+    #
+    #   * Each statement contains at least one principal. A statement can
+    #     have a maximum of 50 principals.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail channel attached to
+    #   the resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   The JSON-formatted string of the Amazon Web Services resource-based
+    #   policy attached to the CloudTrail channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A SQL string of criteria about events that you want to collect in an
     # event data store.
     #
@@ -3232,17 +3601,21 @@ module Aws::CloudTrail
     #
     class RegisterOrganizationDelegatedAdminResponse < Aws::EmptyStructure; end
 
-    # Specifies the tags to remove from a trail or event data store.
+    # Specifies the tags to remove from a trail, event data store, or
+    # channel.
     #
     # @!attribute [rw] resource_id
-    #   Specifies the ARN of the trail or event data store from which tags
-    #   should be removed.
+    #   Specifies the ARN of the trail, event data store, or channel from
+    #   which tags should be removed.
     #
     #   Example trail ARN format:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   Example event data store ARN format:
     #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #
+    #   Example channel ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
     #   @return [String]
     #
     # @!attribute [rw] tags_list
@@ -3297,11 +3670,44 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # This exception is thrown when the provided resource does not exist, or
+    # the ARN format of the resource is not valid. The following is the
+    # valid format for a resource ARN:
+    # `arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ResourceARNNotValidException AWS API Documentation
+    #
+    class ResourceARNNotValidException < Aws::EmptyStructure; end
+
     # This exception is thrown when the specified resource is not found.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the specified resource policy is not
+    # found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ResourcePolicyNotFoundException AWS API Documentation
+    #
+    class ResourcePolicyNotFoundException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the resouce-based policy has syntax
+    # errors, or contains a principal that is not valid.
+    #
+    # The following are requirements for the resource policy:
+    #
+    # * Contains only one action: cloudtrail-data:PutAuditEvents
+    #
+    # * Contains at least one statement. The policy can have a maximum of 20
+    #   statements.
+    #
+    # * Each statement contains at least one principal. A statement can have
+    #   a maximum of 50 principals.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ResourcePolicyNotValidException AWS API Documentation
+    #
+    class ResourcePolicyNotValidException < Aws::EmptyStructure; end
 
     # A resource tag.
     #
@@ -3713,7 +4119,7 @@ module Aws::CloudTrail
     class StopLoggingResponse < Aws::EmptyStructure; end
 
     # A custom key-value pair associated with a resource such as a
-    # CloudTrail trail.
+    # CloudTrail trail, event data store, or channel.
     #
     # @!attribute [rw] key
     #   The key in a key-value pair. The key must be must be no longer than
@@ -3735,8 +4141,8 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # The number of tags per trail has exceeded the permitted amount.
-    # Currently, the limit is 50.
+    # The number of tags per trail, event data store, or channel has
+    # exceeded the permitted amount. Currently, the limit is 50.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/TagsLimitExceededException AWS API Documentation
     #
@@ -3910,6 +4316,57 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UnsupportedOperationException AWS API Documentation
     #
     class UnsupportedOperationException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] channel
+    #   The ARN or ID (the ARN suffix) of the channel that you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The ARNs of event data stores that you want to log events arriving
+    #   through the channel.
+    #   @return [Array<Types::Destination>]
+    #
+    # @!attribute [rw] name
+    #   Changes the name of the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateChannelRequest AWS API Documentation
+    #
+    class UpdateChannelRequest < Struct.new(
+      :channel,
+      :destinations,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the channel that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The event source of the channel that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The event data stores that log events arriving through the channel.
+    #   @return [Array<Types::Destination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateChannelResponse AWS API Documentation
+    #
+    class UpdateChannelResponse < Struct.new(
+      :channel_arn,
+      :name,
+      :source,
+      :destinations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store that
@@ -4151,13 +4608,16 @@ module Aws::CloudTrail
     # @!attribute [rw] cloud_watch_logs_log_group_arn
     #   Specifies a log group name using an Amazon Resource Name (ARN), a
     #   unique identifier that represents the log group to which CloudTrail
-    #   logs are delivered. Not required unless you specify
-    #   `CloudWatchLogsRoleArn`.
+    #   logs are delivered. You must use a log group that exists in your
+    #   account.
+    #
+    #   Not required unless you specify `CloudWatchLogsRoleArn`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to
-    #   write to a user's log group.
+    #   write to a user's log group. You must use a role that exists in
+    #   your account.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -4190,13 +4650,13 @@ module Aws::CloudTrail
     #   organization in Organizations, or only for the current Amazon Web
     #   Services account. The default is false, and cannot be true unless
     #   the call is made on behalf of an Amazon Web Services account that is
-    #   the management account for an organization in Organizations. If the
-    #   trail is not an organization trail and this is set to `true`, the
-    #   trail will be created in all Amazon Web Services accounts that
-    #   belong to the organization. If the trail is an organization trail
-    #   and this is set to `false`, the trail will remain in the current
-    #   Amazon Web Services account but be deleted from all member accounts
-    #   in the organization.
+    #   the management account or delegated administrator account for an
+    #   organization in Organizations. If the trail is not an organization
+    #   trail and this is set to `true`, the trail will be created in all
+    #   Amazon Web Services accounts that belong to the organization. If the
+    #   trail is an organization trail and this is set to `false`, the trail
+    #   will remain in the current Amazon Web Services account but be
+    #   deleted from all member accounts in the organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailRequest AWS API Documentation

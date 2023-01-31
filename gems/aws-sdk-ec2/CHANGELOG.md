@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.363.0 (2023-01-31)
+------------------
+
+* Feature - This launch allows customers to associate up to 8 IP addresses to their NAT Gateways to increase the limit on concurrent connections to a single destination by eight times from 55K to 440K.
+
 1.362.0 (2023-01-30)
 ------------------
 

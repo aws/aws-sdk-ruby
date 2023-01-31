@@ -69,6 +69,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-cloudsearch', '~> 1')
   spec.add_dependency('aws-sdk-cloudsearchdomain', '~> 1')
   spec.add_dependency('aws-sdk-cloudtrail', '~> 1')
+  spec.add_dependency('aws-sdk-cloudtraildata', '~> 1')
   spec.add_dependency('aws-sdk-cloudwatch', '~> 1')
   spec.add_dependency('aws-sdk-cloudwatchevents', '~> 1')
   spec.add_dependency('aws-sdk-cloudwatchevidently', '~> 1')

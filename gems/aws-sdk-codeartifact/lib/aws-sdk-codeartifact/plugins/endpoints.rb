@@ -68,6 +68,8 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::DeleteDomain.build(context)
           when :delete_domain_permissions_policy
             Aws::CodeArtifact::Endpoints::DeleteDomainPermissionsPolicy.build(context)
+          when :delete_package
+            Aws::CodeArtifact::Endpoints::DeletePackage.build(context)
           when :delete_package_versions
             Aws::CodeArtifact::Endpoints::DeletePackageVersions.build(context)
           when :delete_repository

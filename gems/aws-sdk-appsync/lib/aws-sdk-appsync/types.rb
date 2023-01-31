@@ -748,6 +748,10 @@ module Aws::AppSync
     #   Relational database settings.
     #   @return [Types::RelationalDatabaseDataSourceConfig]
     #
+    # @!attribute [rw] event_bridge_config
+    #   Amazon EventBridge settings.
+    #   @return [Types::EventBridgeDataSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -761,7 +765,8 @@ module Aws::AppSync
       :elasticsearch_config,
       :open_search_service_config,
       :http_config,
-      :relational_database_config)
+      :relational_database_config,
+      :event_bridge_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1140,6 +1145,9 @@ module Aws::AppSync
     #   * **AMAZON\_OPENSEARCH\_SERVICE**\: The data source is an Amazon
     #     OpenSearch Service domain.
     #
+    #   * **AMAZON\_EVENTBRIDGE**\: The data source is an Amazon EventBridge
+    #     configuration.
+    #
     #   * **NONE**\: There is no data source. Use this type when you want to
     #     invoke a GraphQL operation without connecting to a data source,
     #     such as when you're performing data transformation with resolvers
@@ -1181,6 +1189,10 @@ module Aws::AppSync
     #   Relational database settings.
     #   @return [Types::RelationalDatabaseDataSourceConfig]
     #
+    # @!attribute [rw] event_bridge_config
+    #   Amazon EventBridge settings.
+    #   @return [Types::EventBridgeDataSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
@@ -1194,7 +1206,8 @@ module Aws::AppSync
       :elasticsearch_config,
       :open_search_service_config,
       :http_config,
-      :relational_database_config)
+      :relational_database_config,
+      :event_bridge_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1624,6 +1637,25 @@ module Aws::AppSync
       :evaluation_result,
       :error,
       :logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon EventBridge bus data source configuration.
+    #
+    # @!attribute [rw] event_bus_arn
+    #   The ARN of the event bus. For more information about event buses,
+    #   see [Amazon EventBridge event buses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EventBridgeDataSourceConfig AWS API Documentation
+    #
+    class EventBridgeDataSourceConfig < Struct.new(
+      :event_bus_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3220,6 +3252,10 @@ module Aws::AppSync
     #   The new relational database configuration.
     #   @return [Types::RelationalDatabaseDataSourceConfig]
     #
+    # @!attribute [rw] event_bridge_config
+    #   The new Amazon EventBridge settings.
+    #   @return [Types::EventBridgeDataSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
@@ -3233,7 +3269,8 @@ module Aws::AppSync
       :elasticsearch_config,
       :open_search_service_config,
       :http_config,
-      :relational_database_config)
+      :relational_database_config,
+      :event_bridge_config)
       SENSITIVE = []
       include Aws::Structure
     end

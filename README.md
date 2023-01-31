@@ -348,6 +348,7 @@ RubyGems.org page under "LINKS" section.
 | AWS CloudFormation                                    | Aws::CloudFormation                      | aws-sdk-cloudformation                      | 2010-05-15  |
 | AWS CloudHSM V2                                       | Aws::CloudHSMV2                          | aws-sdk-cloudhsmv2                          | 2017-04-28  |
 | AWS CloudTrail                                        | Aws::CloudTrail                          | aws-sdk-cloudtrail                          | 2013-11-01  |
+| AWS CloudTrail Data Service                           | Aws::CloudTrailData                      | aws-sdk-cloudtraildata                      | 2021-08-11  |
 | AWS CodeBuild                                         | Aws::CodeBuild                           | aws-sdk-codebuild                           | 2016-10-06  |
 | AWS CodeCommit                                        | Aws::CodeCommit                          | aws-sdk-codecommit                          | 2015-04-13  |
 | AWS CodeDeploy                                        | Aws::CodeDeploy                          | aws-sdk-codedeploy                          | 2014-10-06  |

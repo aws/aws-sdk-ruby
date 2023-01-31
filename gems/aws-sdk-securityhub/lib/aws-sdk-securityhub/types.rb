@@ -307,6 +307,28 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about an enabled security standard in which a security
+    # control is enabled.
+    #
+    # @!attribute [rw] standards_id
+    #   The unique identifier of a standard in which a control is enabled.
+    #   This field consists of the resource portion of the Amazon Resource
+    #   Name (ARN) returned for a standard in the [DescribeStandards][1] API
+    #   response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AssociatedStandard AWS API Documentation
+    #
+    class AssociatedStandard < Struct.new(
+      :standards_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Availability Zone.
     #
     # @!attribute [rw] zone_name
@@ -15395,7 +15417,7 @@ module Aws::SecurityHub
     #   An array of up to three Git repositories associated with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories
-    #   in [AWS CodeCommit][1] or in any other Git repository. These
+    #   in [CodeCommit][1] or in any other Git repository. These
     #   repositories are cloned at the same level as the default repository
     #   of your notebook instance. For more information, see [Associating
     #   Git repositories with SageMaker notebook instances][2] in the
@@ -15411,8 +15433,8 @@ module Aws::SecurityHub
     #   The Git repository associated with the notebook instance as its
     #   default code repository. This can be either the name of a Git
     #   repository stored as a resource in your account, or the URL of a Git
-    #   repository in [AWS CodeCommit][1] or in any other Git repository.
-    #   When you open a notebook instance, it opens in the directory that
+    #   repository in [CodeCommit][1] or in any other Git repository. When
+    #   you open a notebook instance, it opens in the directory that
     #   contains this repository. For more information, see [Associating Git
     #   repositories with SageMaker notebook instances][2] in the *Amazon
     #   SageMaker Developer Guide*.
@@ -16448,6 +16470,23 @@ module Aws::SecurityHub
     #   results.
     #   @return [Array<Types::BooleanFilter>]
     #
+    # @!attribute [rw] compliance_security_control_id
+    #   The unique identifier of a control across standards. Values for this
+    #   field typically consist of an Amazon Web Service and a number, such
+    #   as APIGateway.5.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_associated_standards_id
+    #   The unique identifier of a standard in which a control is enabled.
+    #   This field consists of the resource portion of the Amazon Resource
+    #   Name (ARN) returned for a standard in the [DescribeStandards][1] API
+    #   response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
+    #   @return [Array<Types::StringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingFilters AWS API Documentation
     #
     class AwsSecurityFindingFilters < Struct.new(
@@ -16545,7 +16584,9 @@ module Aws::SecurityHub
       :finding_provider_fields_severity_label,
       :finding_provider_fields_severity_original,
       :finding_provider_fields_types,
-      :sample)
+      :sample,
+      :compliance_security_control_id,
+      :compliance_associated_standards_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17777,8 +17818,8 @@ module Aws::SecurityHub
 
     # Provides details about rules in a rule group. A rule identifies web
     # requests that you want to allow, block, or count. Each rule includes
-    # one top-level Statement that AWS WAF uses to identify matching web
-    # requests, and parameters that govern how AWS WAF handles them.
+    # one top-level Statement that WAF uses to identify matching web
+    # requests, and parameters that govern how WAF handles them.
     #
     # @!attribute [rw] action
     #   The action that WAF should take on a web request when it matches the
@@ -18463,12 +18504,25 @@ module Aws::SecurityHub
     #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
     #   @return [Array<Types::StatusReason>]
     #
+    # @!attribute [rw] security_control_id
+    #   The unique identifier of a control across standards. Values for this
+    #   field typically consist of an Amazon Web Service and a number, such
+    #   as APIGateway.5.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_standards
+    #   The enabled security standards in which a security control is
+    #   currently enabled.
+    #   @return [Array<Types::AssociatedStandard>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Compliance AWS API Documentation
     #
     class Compliance < Struct.new(
       :status,
       :related_requirements,
-      :status_reasons)
+      :status_reasons,
+      :security_control_id,
+      :associated_standards)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20716,27 +20770,27 @@ module Aws::SecurityHub
     #
     #   The status can have one of the following values:
     #
-    #   * `CREATED` - Indicates that the administrator account added the
+    #   * `Created` - Indicates that the administrator account added the
     #     member account, but has not yet invited the member account.
     #
-    #   * `INVITED` - Indicates that the administrator account invited the
+    #   * `Invited` - Indicates that the administrator account invited the
     #     member account. The member account has not yet responded to the
     #     invitation.
     #
-    #   * `ENABLED` - Indicates that the member account is currently active.
+    #   * `Enabled` - Indicates that the member account is currently active.
     #     For manually invited member accounts, indicates that the member
     #     account accepted the invitation.
     #
-    #   * `REMOVED` - Indicates that the administrator account disassociated
+    #   * `Removed` - Indicates that the administrator account disassociated
     #     the member account.
     #
-    #   * `RESIGNED` - Indicates that the member account disassociated
+    #   * `Resigned` - Indicates that the member account disassociated
     #     themselves from the administrator account.
     #
-    #   * `DELETED` - Indicates that the administrator account deleted the
+    #   * `Deleted` - Indicates that the administrator account deleted the
     #     member account.
     #
-    #   * `ACCOUNT_SUSPENDED` - Indicates that an organization account was
+    #   * `AccountSuspended` - Indicates that an organization account was
     #     suspended from Amazon Web Services at the same time that the
     #     administrator account tried to enable the organization account as
     #     a member account.

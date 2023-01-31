@@ -36,6 +36,8 @@ module Aws::SecurityHub
     AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
     AdminsMaxResults = Shapes::IntegerShape.new(name: 'AdminsMaxResults')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
+    AssociatedStandard = Shapes::StructureShape.new(name: 'AssociatedStandard')
+    AssociatedStandardsList = Shapes::ListShape.new(name: 'AssociatedStandardsList')
     AutoEnableStandards = Shapes::StringShape.new(name: 'AutoEnableStandards')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
@@ -1008,6 +1010,11 @@ module Aws::SecurityHub
     AdminAccounts.member = Shapes::ShapeRef.new(shape: AdminAccount)
 
     ArnList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    AssociatedStandard.add_member(:standards_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StandardsId"))
+    AssociatedStandard.struct_class = Types::AssociatedStandard
+
+    AssociatedStandardsList.member = Shapes::ShapeRef.new(shape: AssociatedStandard)
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubnetId"))
@@ -3980,6 +3987,8 @@ module Aws::SecurityHub
     AwsSecurityFindingFilters.add_member(:finding_provider_fields_severity_original, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsSeverityOriginal"))
     AwsSecurityFindingFilters.add_member(:finding_provider_fields_types, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsTypes"))
     AwsSecurityFindingFilters.add_member(:sample, Shapes::ShapeRef.new(shape: BooleanFilterList, location_name: "Sample"))
+    AwsSecurityFindingFilters.add_member(:compliance_security_control_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ComplianceSecurityControlId"))
+    AwsSecurityFindingFilters.add_member(:compliance_associated_standards_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ComplianceAssociatedStandardsId"))
     AwsSecurityFindingFilters.struct_class = Types::AwsSecurityFindingFilters
 
     AwsSecurityFindingIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
@@ -4337,6 +4346,8 @@ module Aws::SecurityHub
     Compliance.add_member(:status, Shapes::ShapeRef.new(shape: ComplianceStatus, location_name: "Status"))
     Compliance.add_member(:related_requirements, Shapes::ShapeRef.new(shape: RelatedRequirementsList, location_name: "RelatedRequirements"))
     Compliance.add_member(:status_reasons, Shapes::ShapeRef.new(shape: StatusReasonsList, location_name: "StatusReasons"))
+    Compliance.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SecurityControlId"))
+    Compliance.add_member(:associated_standards, Shapes::ShapeRef.new(shape: AssociatedStandardsList, location_name: "AssociatedStandards"))
     Compliance.struct_class = Types::Compliance
 
     ContainerDetails.add_member(:container_runtime, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerRuntime"))

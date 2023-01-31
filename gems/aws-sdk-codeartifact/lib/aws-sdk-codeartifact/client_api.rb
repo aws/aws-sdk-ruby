@@ -38,6 +38,8 @@ module Aws::CodeArtifact
     DeleteDomainPermissionsPolicyResult = Shapes::StructureShape.new(name: 'DeleteDomainPermissionsPolicyResult')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResult = Shapes::StructureShape.new(name: 'DeleteDomainResult')
+    DeletePackageRequest = Shapes::StructureShape.new(name: 'DeletePackageRequest')
+    DeletePackageResult = Shapes::StructureShape.new(name: 'DeletePackageResult')
     DeletePackageVersionsRequest = Shapes::StructureShape.new(name: 'DeletePackageVersionsRequest')
     DeletePackageVersionsResult = Shapes::StructureShape.new(name: 'DeletePackageVersionsResult')
     DeleteRepositoryPermissionsPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryPermissionsPolicyRequest')
@@ -255,6 +257,17 @@ module Aws::CodeArtifact
 
     DeleteDomainResult.add_member(:domain, Shapes::ShapeRef.new(shape: DomainDescription, location_name: "domain"))
     DeleteDomainResult.struct_class = Types::DeleteDomainResult
+
+    DeletePackageRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "querystring", location_name: "domain"))
+    DeletePackageRequest.add_member(:domain_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "domain-owner"))
+    DeletePackageRequest.add_member(:repository, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location: "querystring", location_name: "repository"))
+    DeletePackageRequest.add_member(:format, Shapes::ShapeRef.new(shape: PackageFormat, required: true, location: "querystring", location_name: "format"))
+    DeletePackageRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: PackageNamespace, location: "querystring", location_name: "namespace"))
+    DeletePackageRequest.add_member(:package, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "querystring", location_name: "package"))
+    DeletePackageRequest.struct_class = Types::DeletePackageRequest
+
+    DeletePackageResult.add_member(:deleted_package, Shapes::ShapeRef.new(shape: PackageSummary, location_name: "deletedPackage"))
+    DeletePackageResult.struct_class = Types::DeletePackageResult
 
     DeletePackageVersionsRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "querystring", location_name: "domain"))
     DeletePackageVersionsRequest.add_member(:domain_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "domain-owner"))
@@ -872,6 +885,20 @@ module Aws::CodeArtifact
         o.http_request_uri = "/v1/domain/permissions/policy"
         o.input = Shapes::ShapeRef.new(shape: DeleteDomainPermissionsPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDomainPermissionsPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_package, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePackage"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/package"
+        o.input = Shapes::ShapeRef.new(shape: DeletePackageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePackageResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

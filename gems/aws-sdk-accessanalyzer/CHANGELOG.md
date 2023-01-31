@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-01-31)
+------------------
+
+* Feature - Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+
 1.33.0 (2023-01-18)
 ------------------
 

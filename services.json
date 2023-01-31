@@ -176,6 +176,9 @@
   "CloudTrail": {
     "models": "cloudtrail/2013-11-01"
   },
+  "CloudTrailData": {
+    "models": "cloudtrail-data/2021-08-11"
+  },
   "CloudWatch": {
     "models": "monitoring/2010-08-01"
   },

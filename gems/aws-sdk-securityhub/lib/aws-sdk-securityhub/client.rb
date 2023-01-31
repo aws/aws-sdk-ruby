@@ -1566,6 +1566,18 @@ module Aws::SecurityHub
     #           value: false,
     #         },
     #       ],
+    #       compliance_security_control_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString", # required
     #   })
@@ -3186,6 +3198,18 @@ module Aws::SecurityHub
     #           value: false,
     #         },
     #       ],
+    #       compliance_security_control_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     sort_criteria: [
     #       {
@@ -3590,6 +3614,12 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.finding_provider_fields_types[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].filters.sample #=> Array
     #   resp.insights[0].filters.sample[0].value #=> Boolean
+    #   resp.insights[0].filters.compliance_security_control_id #=> Array
+    #   resp.insights[0].filters.compliance_security_control_id[0].value #=> String
+    #   resp.insights[0].filters.compliance_security_control_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.compliance_associated_standards_id #=> Array
+    #   resp.insights[0].filters.compliance_associated_standards_id[0].value #=> String
+    #   resp.insights[0].filters.compliance_associated_standards_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].group_by_attribute #=> String
     #   resp.next_token #=> String
     #
@@ -4832,6 +4862,18 @@ module Aws::SecurityHub
     #           value: false,
     #         },
     #       ],
+    #       compliance_security_control_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     note: {
     #       text: "NonEmptyString", # required
@@ -5492,6 +5534,18 @@ module Aws::SecurityHub
     #           value: false,
     #         },
     #       ],
+    #       compliance_security_control_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString",
     #   })
@@ -5623,7 +5677,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

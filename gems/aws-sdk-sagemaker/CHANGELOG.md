@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2023-01-31)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports more completion criteria for Hyperparameter Optimization.
+
 1.164.0 (2023-01-27)
 ------------------
 
