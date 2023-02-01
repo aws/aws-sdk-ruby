@@ -52,6 +52,6 @@ require_relative 'aws-sdk-forecastservice/customizations'
 # @!group service
 module Aws::ForecastService
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end

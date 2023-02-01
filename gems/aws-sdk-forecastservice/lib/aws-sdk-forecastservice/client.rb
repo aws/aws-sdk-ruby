@@ -452,10 +452,28 @@ module Aws::ForecastService
     # @option params [String] :forecast_frequency
     #   The frequency of predictions in a forecast.
     #
-    #   Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour),
-    #   30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5
-    #   minutes), and 1min (1 minute). For example, "Y" indicates every year
-    #   and "5min" indicates every five minutes.
+    #   Valid intervals are an integer followed by Y (Year), M (Month), W
+    #   (Week), D (Day), H (Hour), and min (Minute). For example, "1D"
+    #   indicates every day and "15min" indicates every 15 minutes. You
+    #   cannot specify a value that would overlap with the next larger
+    #   frequency. That means, for example, you cannot specify a frequency of
+    #   60 minutes, because that is equivalent to 1 hour. The valid values for
+    #   each frequency are the following:
+    #
+    #   * Minute - 1-59
+    #
+    #   * Hour - 1-23
+    #
+    #   * Day - 1-6
+    #
+    #   * Week - 1-4
+    #
+    #   * Month - 1-11
+    #
+    #   * Year - 1
+    #
+    #   Thus, if you want every other week forecasts, specify "2W". Or, if
+    #   you want quarterly forecasts, you specify "3M".
     #
     #   The frequency must be greater than or equal to the
     #   TARGET\_TIME\_SERIES dataset frequency.
@@ -468,7 +486,7 @@ module Aws::ForecastService
     #   datasets.
     #
     # @option params [Types::EncryptionConfig] :encryption_config
-    #   An AWS Key Management Service (KMS) key and an AWS Identity and Access
+    #   An Key Management Service (KMS) key and an Identity and Access
     #   Management (IAM) role that Amazon Forecast can assume to access the
     #   key. You can specify this optional object in the CreateDataset and
     #   CreatePredictor requests.
@@ -676,10 +694,28 @@ module Aws::ForecastService
     #   The frequency of data collection. This parameter is required for
     #   RELATED\_TIME\_SERIES datasets.
     #
-    #   Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour),
-    #   30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5
-    #   minutes), and 1min (1 minute). For example, "D" indicates every day
-    #   and "15min" indicates every 15 minutes.
+    #   Valid intervals are an integer followed by Y (Year), M (Month), W
+    #   (Week), D (Day), H (Hour), and min (Minute). For example, "1D"
+    #   indicates every day and "15min" indicates every 15 minutes. You
+    #   cannot specify a value that would overlap with the next larger
+    #   frequency. That means, for example, you cannot specify a frequency of
+    #   60 minutes, because that is equivalent to 1 hour. The valid values for
+    #   each frequency are the following:
+    #
+    #   * Minute - 1-59
+    #
+    #   * Hour - 1-23
+    #
+    #   * Day - 1-6
+    #
+    #   * Week - 1-4
+    #
+    #   * Month - 1-11
+    #
+    #   * Year - 1
+    #
+    #   Thus, if you want every other week forecasts, specify "2W". Or, if
+    #   you want quarterly forecasts, you specify "3M".
     #
     # @option params [required, Types::Schema] :schema
     #   The schema for the dataset. The schema attributes and their order must
@@ -693,9 +729,9 @@ module Aws::ForecastService
     #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-domains-ds-types.html
     #
     # @option params [Types::EncryptionConfig] :encryption_config
-    #   An AWS Key Management Service (KMS) key and the AWS Identity and
-    #   Access Management (IAM) role that Amazon Forecast can assume to access
-    #   the key.
+    #   An Key Management Service (KMS) key and the Identity and Access
+    #   Management (IAM) role that Amazon Forecast can assume to access the
+    #   key.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The optional metadata that you apply to the dataset to help you
@@ -722,12 +758,12 @@ module Aws::ForecastService
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
-    #     such as a prefix for keys as it is reserved for AWS use. You cannot
-    #     edit or delete tag keys with this prefix. Values can have this
-    #     prefix. If a tag value has `aws` as its prefix but the key does not,
-    #     then Forecast considers it to be a user tag and will count against
-    #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
-    #     count against your tags per resource limit.
+    #     such as a prefix for keys as it is reserved for Amazon Web Services
+    #     use. You cannot edit or delete tag keys with this prefix. Values can
+    #     have this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will count
+    #     against the limit of 50 tags. Tags with only the key prefix of `aws`
+    #     do not count against your tags per resource limit.
     #
     # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -846,12 +882,12 @@ module Aws::ForecastService
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
-    #     such as a prefix for keys as it is reserved for AWS use. You cannot
-    #     edit or delete tag keys with this prefix. Values can have this
-    #     prefix. If a tag value has `aws` as its prefix but the key does not,
-    #     then Forecast considers it to be a user tag and will count against
-    #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
-    #     count against your tags per resource limit.
+    #     such as a prefix for keys as it is reserved for Amazon Web Services
+    #     use. You cannot edit or delete tag keys with this prefix. Values can
+    #     have this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will count
+    #     against the limit of 50 tags. Tags with only the key prefix of `aws`
+    #     do not count against your tags per resource limit.
     #
     # @return [Types::CreateDatasetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -889,11 +925,11 @@ module Aws::ForecastService
     # (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset
     # that you want to import the data to.
     #
-    # You must specify a [DataSource][1] object that includes an AWS
-    # Identity and Access Management (IAM) role that Amazon Forecast can
-    # assume to access the data, as Amazon Forecast makes a copy of your
-    # data and processes it in an internal AWS system. For more information,
-    # see [Set up permissions][2].
+    # You must specify a [DataSource][1] object that includes an Identity
+    # and Access Management (IAM) role that Amazon Forecast can assume to
+    # access the data, as Amazon Forecast makes a copy of your data and
+    # processes it in an internal Amazon Web Services system. For more
+    # information, see [Set up permissions][2].
     #
     # The training data must be in CSV or Parquet format. The delimiter must
     # be a comma (,).
@@ -928,11 +964,11 @@ module Aws::ForecastService
     #   want to import data to.
     #
     # @option params [required, Types::DataSource] :data_source
-    #   The location of the training data to import and an AWS Identity and
-    #   Access Management (IAM) role that Amazon Forecast can assume to access
-    #   the data. The training data must be stored in an Amazon S3 bucket.
+    #   The location of the training data to import and an Identity and Access
+    #   Management (IAM) role that Amazon Forecast can assume to access the
+    #   data. The training data must be stored in an Amazon S3 bucket.
     #
-    #   If encryption is used, `DataSource` must include an AWS Key Management
+    #   If encryption is used, `DataSource` must include an Key Management
     #   Service (KMS) key and the IAM role must allow Amazon Forecast
     #   permission to access the key. The KMS key and IAM role must match
     #   those specified in the `EncryptionConfig` parameter of the
@@ -1012,16 +1048,22 @@ module Aws::ForecastService
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
-    #     such as a prefix for keys as it is reserved for AWS use. You cannot
-    #     edit or delete tag keys with this prefix. Values can have this
-    #     prefix. If a tag value has `aws` as its prefix but the key does not,
-    #     then Forecast considers it to be a user tag and will count against
-    #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
-    #     count against your tags per resource limit.
+    #     such as a prefix for keys as it is reserved for Amazon Web Services
+    #     use. You cannot edit or delete tag keys with this prefix. Values can
+    #     have this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will count
+    #     against the limit of 50 tags. Tags with only the key prefix of `aws`
+    #     do not count against your tags per resource limit.
     #
     # @option params [String] :format
     #   The format of the imported data, CSV or PARQUET. The default value is
     #   CSV.
+    #
+    # @option params [String] :import_mode
+    #   Specifies whether the dataset import job is a `FULL` or `INCREMENTAL`
+    #   import. A `FULL` dataset import replaces all of the existing data with
+    #   the newly imported data. An `INCREMENTAL` import appends the imported
+    #   data to the existing data.
     #
     # @return [Types::CreateDatasetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1050,6 +1092,7 @@ module Aws::ForecastService
     #       },
     #     ],
     #     format: "Format",
+    #     import_mode: "FULL", # accepts FULL, INCREMENTAL
     #   })
     #
     # @example Response structure
@@ -1160,16 +1203,16 @@ module Aws::ForecastService
     #   and time points for the Explainability.
     #
     # @option params [Types::DataSource] :data_source
-    #   The source of your data, an AWS Identity and Access Management (IAM)
-    #   role that allows Amazon Forecast to access the data and, optionally,
-    #   an AWS Key Management Service (KMS) key.
+    #   The source of your data, an Identity and Access Management (IAM) role
+    #   that allows Amazon Forecast to access the data and, optionally, an Key
+    #   Management Service (KMS) key.
     #
     # @option params [Types::Schema] :schema
     #   Defines the fields of a dataset.
     #
     # @option params [Boolean] :enable_visualization
-    #   Create an Explainability visualization that is viewable within the AWS
-    #   console.
+    #   Create an Explainability visualization that is viewable within the
+    #   Amazon Web Services console.
     #
     # @option params [String] :start_date_time
     #   If `TimePointGranularity` is set to `SPECIFIC`, define the first point
@@ -1270,8 +1313,8 @@ module Aws::ForecastService
     # Service (Amazon S3) bucket.
     #
     # You must specify a DataDestination object that includes an Amazon S3
-    # bucket and an AWS Identity and Access Management (IAM) role that
-    # Amazon Forecast can assume to access the Amazon S3 bucket. For more
+    # bucket and an Identity and Access Management (IAM) role that Amazon
+    # Forecast can assume to access the Amazon S3 bucket. For more
     # information, see aws-forecast-iam-roles.
     #
     # <note markdown="1"> The `Status` of the export job must be `ACTIVE` before you can access
@@ -1287,9 +1330,9 @@ module Aws::ForecastService
     #   The Amazon Resource Name (ARN) of the Explainability to export.
     #
     # @option params [required, Types::DataDestination] :destination
-    #   The destination for an export job. Provide an S3 path, an AWS Identity
-    #   and Access Management (IAM) role that allows Amazon Forecast to access
-    #   the location, and an AWS Key Management Service (KMS) key (optional).
+    #   The destination for an export job. Provide an S3 path, an Identity and
+    #   Access Management (IAM) role that allows Amazon Forecast to access the
+    #   location, and an Key Management Service (KMS) key (optional).
     #
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata to help you categorize and organize your resources.
@@ -1439,12 +1482,12 @@ module Aws::ForecastService
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
-    #     such as a prefix for keys as it is reserved for AWS use. You cannot
-    #     edit or delete tag keys with this prefix. Values can have this
-    #     prefix. If a tag value has `aws` as its prefix but the key does not,
-    #     then Forecast considers it to be a user tag and will count against
-    #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
-    #     count against your tags per resource limit.
+    #     such as a prefix for keys as it is reserved for Amazon Web Services
+    #     use. You cannot edit or delete tag keys with this prefix. Values can
+    #     have this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will count
+    #     against the limit of 50 tags. Tags with only the key prefix of `aws`
+    #     do not count against your tags per resource limit.
     #
     # @option params [Types::TimeSeriesSelector] :time_series_selector
     #   Defines the set of time series that are used to create the forecasts
@@ -1518,9 +1561,9 @@ module Aws::ForecastService
     # where the &lt;ExportTimestamp&gt; component is in Java
     # SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ).
     #
-    # You must specify a DataDestination object that includes an AWS
-    # Identity and Access Management (IAM) role that Amazon Forecast can
-    # assume to access the Amazon S3 bucket. For more information, see
+    # You must specify a DataDestination object that includes an Identity
+    # and Access Management (IAM) role that Amazon Forecast can assume to
+    # access the Amazon S3 bucket. For more information, see
     # aws-forecast-iam-roles.
     #
     # For more information, see howitworks-forecast.
@@ -1542,14 +1585,13 @@ module Aws::ForecastService
     #   export.
     #
     # @option params [required, Types::DataDestination] :destination
-    #   The location where you want to save the forecast and an AWS Identity
-    #   and Access Management (IAM) role that Amazon Forecast can assume to
-    #   access the location. The forecast must be exported to an Amazon S3
-    #   bucket.
+    #   The location where you want to save the forecast and an Identity and
+    #   Access Management (IAM) role that Amazon Forecast can assume to access
+    #   the location. The forecast must be exported to an Amazon S3 bucket.
     #
-    #   If encryption is used, `Destination` must include an AWS Key
-    #   Management Service (KMS) key. The IAM role must allow Amazon Forecast
-    #   permission to access the key.
+    #   If encryption is used, `Destination` must include an Key Management
+    #   Service (KMS) key. The IAM role must allow Amazon Forecast permission
+    #   to access the key.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The optional metadata that you apply to the forecast export job to
@@ -1576,12 +1618,12 @@ module Aws::ForecastService
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
-    #     such as a prefix for keys as it is reserved for AWS use. You cannot
-    #     edit or delete tag keys with this prefix. Values can have this
-    #     prefix. If a tag value has `aws` as its prefix but the key does not,
-    #     then Forecast considers it to be a user tag and will count against
-    #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
-    #     count against your tags per resource limit.
+    #     such as a prefix for keys as it is reserved for Amazon Web Services
+    #     use. You cannot edit or delete tag keys with this prefix. Values can
+    #     have this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will count
+    #     against the limit of 50 tags. Tags with only the key prefix of `aws`
+    #     do not count against your tags per resource limit.
     #
     # @option params [String] :format
     #   The format of the exported data, CSV or PARQUET. The default value is
@@ -1794,8 +1836,8 @@ module Aws::ForecastService
     #
     # @option params [String] :auto_ml_override_strategy
     #   <note markdown="1"> The `LatencyOptimized` AutoML override strategy is only available in
-    #   private beta. Contact AWS Support or your account manager to learn
-    #   more about access privileges.
+    #   private beta. Contact Amazon Web Services Support or your account
+    #   manager to learn more about access privileges.
     #
     #    </note>
     #
@@ -1856,9 +1898,9 @@ module Aws::ForecastService
     #   The featurization configuration.
     #
     # @option params [Types::EncryptionConfig] :encryption_config
-    #   An AWS Key Management Service (KMS) key and the AWS Identity and
-    #   Access Management (IAM) role that Amazon Forecast can assume to access
-    #   the key.
+    #   An Key Management Service (KMS) key and the Identity and Access
+    #   Management (IAM) role that Amazon Forecast can assume to access the
+    #   key.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The optional metadata that you apply to the predictor to help you
@@ -1885,12 +1927,12 @@ module Aws::ForecastService
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
-    #     such as a prefix for keys as it is reserved for AWS use. You cannot
-    #     edit or delete tag keys with this prefix. Values can have this
-    #     prefix. If a tag value has `aws` as its prefix but the key does not,
-    #     then Forecast considers it to be a user tag and will count against
-    #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
-    #     count against your tags per resource limit.
+    #     such as a prefix for keys as it is reserved for Amazon Web Services
+    #     use. You cannot edit or delete tag keys with this prefix. Values can
+    #     have this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will count
+    #     against the limit of 50 tags. Tags with only the key prefix of `aws`
+    #     do not count against your tags per resource limit.
     #
     # @option params [String] :optimization_metric
     #   The accuracy metric used to optimize the predictor.
@@ -2007,8 +2049,8 @@ module Aws::ForecastService
     # (yyyy-MM-ddTHH-mm-ssZ).
     #
     # You must specify a DataDestination object that includes an Amazon S3
-    # bucket and an AWS Identity and Access Management (IAM) role that
-    # Amazon Forecast can assume to access the Amazon S3 bucket. For more
+    # bucket and an Identity and Access Management (IAM) role that Amazon
+    # Forecast can assume to access the Amazon S3 bucket. For more
     # information, see aws-forecast-iam-roles.
     #
     # <note markdown="1"> The `Status` of the export job must be `ACTIVE` before you can access
@@ -2025,9 +2067,9 @@ module Aws::ForecastService
     #   export.
     #
     # @option params [required, Types::DataDestination] :destination
-    #   The destination for an export job. Provide an S3 path, an AWS Identity
-    #   and Access Management (IAM) role that allows Amazon Forecast to access
-    #   the location, and an AWS Key Management Service (KMS) key (optional).
+    #   The destination for an export job. Provide an S3 path, an Identity and
+    #   Access Management (IAM) role that allows Amazon Forecast to access the
+    #   location, and an Key Management Service (KMS) key (optional).
     #
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata to help you categorize and organize your backtests.
@@ -2109,12 +2151,13 @@ module Aws::ForecastService
     # For example, imagine you are a clothing retailer who is considering an
     # end of season sale to clear space for new styles. After creating a
     # baseline forecast, you can use a what-if analysis to investigate how
-    # different sales tactics might affect your goals. You could create a
-    # scenario where everything is given a 25% markdown and another where
-    # everything is given a fixed dollar markdown. You can create a scenario
-    # where the sale lasts for 1 week and another where the sale lasts for 1
-    # month. Your what-if analysis enables you to compare many different
-    # scenarios against each other.
+    # different sales tactics might affect your goals.
+    #
+    # You could create a scenario where everything is given a 25% markdown,
+    # and another where everything is given a fixed dollar markdown. You
+    # could create a scenario where the sale lasts for one week and another
+    # where the sale lasts for one month. With a what-if analysis, you can
+    # compare many different scenarios against each other.
     #
     # Note that a what-if analysis is meant to display what the forecasting
     # model has learned and how it will behave in the scenarios that you are
@@ -2225,8 +2268,9 @@ module Aws::ForecastService
     #   want to change in the related time series dataset. A replacement time
     #   series does not need to contain all rows that are in the baseline
     #   related time series. Include only the rows (measure-dimension
-    #   combinations) that you want to include in the what-if forecast. This
-    #   dataset is merged with the original time series to create a
+    #   combinations) that you want to include in the what-if forecast.
+    #
+    #   This dataset is merged with the original time series to create a
     #   transformed dataset that is used for the what-if analysis.
     #
     #   This dataset should contain the items to modify (such as item\_id or
@@ -2316,9 +2360,9 @@ module Aws::ForecastService
     # The &lt;ExportTimestamp&gt; component is in Java SimpleDateFormat
     # (yyyy-MM-ddTHH-mm-ssZ).
     #
-    # You must specify a DataDestination object that includes an AWS
-    # Identity and Access Management (IAM) role that Amazon Forecast can
-    # assume to access the Amazon S3 bucket. For more information, see
+    # You must specify a DataDestination object that includes an Identity
+    # and Access Management (IAM) role that Amazon Forecast can assume to
+    # access the Amazon S3 bucket. For more information, see
     # aws-forecast-iam-roles.
     #
     # For more information, see howitworks-forecast.
@@ -2339,14 +2383,13 @@ module Aws::ForecastService
     #   The list of what-if forecast Amazon Resource Names (ARNs) to export.
     #
     # @option params [required, Types::DataDestination] :destination
-    #   The location where you want to save the forecast and an AWS Identity
-    #   and Access Management (IAM) role that Amazon Forecast can assume to
-    #   access the location. The forecast must be exported to an Amazon S3
-    #   bucket.
+    #   The location where you want to save the forecast and an Identity and
+    #   Access Management (IAM) role that Amazon Forecast can assume to access
+    #   the location. The forecast must be exported to an Amazon S3 bucket.
     #
-    #   If encryption is used, `Destination` must include an AWS Key
-    #   Management Service (KMS) key. The IAM role must allow Amazon Forecast
-    #   permission to access the key.
+    #   If encryption is used, `Destination` must include an Key Management
+    #   Service (KMS) key. The IAM role must allow Amazon Forecast permission
+    #   to access the key.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of [tags][1] to apply to the what if forecast.
@@ -3051,6 +3094,7 @@ module Aws::ForecastService
     #   * {Types::DescribeDatasetImportJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeDatasetImportJobResponse#last_modification_time #last_modification_time} => Time
     #   * {Types::DescribeDatasetImportJobResponse#format #format} => String
+    #   * {Types::DescribeDatasetImportJobResponse#import_mode #import_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3090,6 +3134,7 @@ module Aws::ForecastService
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
     #   resp.format #=> String
+    #   resp.import_mode #=> String, one of "FULL", "INCREMENTAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetImportJob AWS API Documentation
     #
@@ -4006,6 +4051,7 @@ module Aws::ForecastService
     #   resp.dataset_import_jobs[0].message #=> String
     #   resp.dataset_import_jobs[0].creation_time #=> Time
     #   resp.dataset_import_jobs[0].last_modification_time #=> Time
+    #   resp.dataset_import_jobs[0].import_mode #=> String, one of "FULL", "INCREMENTAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListDatasetImportJobs AWS API Documentation
@@ -5121,12 +5167,12 @@ module Aws::ForecastService
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
-    #     such as a prefix for keys as it is reserved for AWS use. You cannot
-    #     edit or delete tag keys with this prefix. Values can have this
-    #     prefix. If a tag value has `aws` as its prefix but the key does not,
-    #     then Forecast considers it to be a user tag and will count against
-    #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
-    #     count against your tags per resource limit.
+    #     such as a prefix for keys as it is reserved for Amazon Web Services
+    #     use. You cannot edit or delete tag keys with this prefix. Values can
+    #     have this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will count
+    #     against the limit of 50 tags. Tags with only the key prefix of `aws`
+    #     do not count against your tags per resource limit.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5228,7 +5274,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

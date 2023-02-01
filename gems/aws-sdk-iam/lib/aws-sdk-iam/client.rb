@@ -1298,10 +1298,10 @@ module Aws::IAM
     # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
     # providers (IdPs) through our library of trusted certificate
     # authorities (CAs) instead of using a certificate thumbprint to verify
-    # your IdP server certificate. These OIDC IdPs include Google, and those
-    # that use an Amazon S3 bucket to host a JSON Web Key Set (JWKS)
-    # endpoint. In these cases, your legacy thumbprint remains in your
-    # configuration, but is no longer used for validation.
+    # your IdP server certificate. These OIDC IdPs include Google, Auth0,
+    # and those that use an Amazon S3 bucket to host a JSON Web Key Set
+    # (JWKS) endpoint. In these cases, your legacy thumbprint remains in
+    # your configuration, but is no longer used for validation.
     #
     #  </note>
     #
@@ -1790,8 +1790,23 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
     # @option params [String] :permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary for
-    #   the role.
+    #   The ARN of the managed policy that is used to set the permissions
+    #   boundary for the role.
+    #
+    #   A permissions boundary policy defines the maximum permissions that
+    #   identity-based policies can grant to an entity, but does not grant
+    #   permissions. Permissions boundaries do not define the maximum
+    #   permissions that a resource-based policy can grant to an entity. To
+    #   learn more, see [Permissions boundaries for IAM entities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   For more information about policy types, see [Policy types ][2] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags that you want to attach to the new role. Each tag
@@ -2183,8 +2198,23 @@ module Aws::IAM
     #   create resources named both "MyResource" and "myresource".
     #
     # @option params [String] :permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary for
-    #   the user.
+    #   The ARN of the managed policy that is used to set the permissions
+    #   boundary for the user.
+    #
+    #   A permissions boundary policy defines the maximum permissions that
+    #   identity-based policies can grant to an entity, but does not grant
+    #   permissions. Permissions boundaries do not define the maximum
+    #   permissions that a resource-based policy can grant to an entity. To
+    #   learn more, see [Permissions boundaries for IAM entities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   For more information about policy types, see [Policy types ][2] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags that you want to attach to the new user. Each tag
@@ -2916,9 +2946,20 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Deletes the specified role. The role must not have any policies
-    # attached. For more information about roles, see [Working with
-    # roles][1].
+    # Deletes the specified role. Unlike the Amazon Web Services Management
+    # Console, when you delete a role programmatically, you must delete the
+    # items attached to the role manually, or the deletion fails. For more
+    # information, see [Deleting an IAM role][1]. Before attempting to
+    # delete a role, remove the following attached items:
+    #
+    # * Inline policies (DeleteRolePolicy)
+    #
+    # * Attached managed policies (DetachRolePolicy)
+    #
+    # * Instance profile (RemoveRoleFromInstanceProfile)
+    #
+    # * Optional – Delete instance profile after detaching from role for
+    #   resource clean up (DeleteInstanceProfile)
     #
     # Make sure that you do not have any Amazon EC2 instances running with
     # the role you are about to delete. Deleting a role or instance profile
@@ -2927,7 +2968,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html#roles-managingrole-deleting-cli
     #
     # @option params [required, String] :role_name
     #   The name of the role to delete.
@@ -9356,8 +9397,23 @@ module Aws::IAM
     #   to set the permissions boundary.
     #
     # @option params [required, String] :permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary for
-    #   the role.
+    #   The ARN of the managed policy that is used to set the permissions
+    #   boundary for the role.
+    #
+    #   A permissions boundary policy defines the maximum permissions that
+    #   identity-based policies can grant to an entity, but does not grant
+    #   permissions. Permissions boundaries do not define the maximum
+    #   permissions that a resource-based policy can grant to an entity. To
+    #   learn more, see [Permissions boundaries for IAM entities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   For more information about policy types, see [Policy types ][2] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9509,8 +9565,23 @@ module Aws::IAM
     #   to set the permissions boundary.
     #
     # @option params [required, String] :permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary for
-    #   the user.
+    #   The ARN of the managed policy that is used to set the permissions
+    #   boundary for the user.
+    #
+    #   A permissions boundary policy defines the maximum permissions that
+    #   identity-based policies can grant to an entity, but does not grant
+    #   permissions. Permissions boundaries do not define the maximum
+    #   permissions that a resource-based policy can grant to an entity. To
+    #   learn more, see [Permissions boundaries for IAM entities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   For more information about policy types, see [Policy types ][2] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -10071,9 +10142,16 @@ module Aws::IAM
     # If the output is long, you can use `MaxItems` and `Marker` parameters
     # to paginate the results.
     #
-    # For more information about using the policy simulator, see [Testing
-    # IAM policies with the IAM policy simulator ][1]in the *IAM User
-    # Guide*.
+    # <note markdown="1"> The IAM policy simulator evaluates statements in the identity-based
+    # policy and the inputs that you provide during simulation. The policy
+    # simulator results can differ from your live Amazon Web Services
+    # environment. We recommend that you check your policies against your
+    # live Amazon Web Services environment after testing using the policy
+    # simulator to confirm that you have the desired results. For more
+    # information about using the policy simulator, see [Testing IAM
+    # policies with the IAM policy simulator ][1]in the *IAM User Guide*.
+    #
+    #  </note>
     #
     #
     #
@@ -10173,6 +10251,10 @@ module Aws::IAM
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
     #   in the *Amazon Web Services General Reference*.
     #
+    #   <note markdown="1"> Simulation of resource-based policies isn't supported for IAM roles.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
@@ -10199,6 +10281,10 @@ module Aws::IAM
     #
     #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
     #     carriage return (`\u000D`)
+    #
+    #   <note markdown="1"> Simulation of resource-based policies isn't supported for IAM roles.
+    #
+    #    </note>
     #
     #
     #
@@ -10382,7 +10468,8 @@ module Aws::IAM
     # instead.
     #
     # You can also optionally include one resource-based policy to be
-    # evaluated with each of the resources included in the simulation.
+    # evaluated with each of the resources included in the simulation for
+    # IAM users only.
     #
     # The simulation does not perform the API operations; it only checks the
     # authorization to determine if the simulated policies allow or deny the
@@ -10403,9 +10490,16 @@ module Aws::IAM
     # If the output is long, you can use the `MaxItems` and `Marker`
     # parameters to paginate the results.
     #
-    # For more information about using the policy simulator, see [Testing
-    # IAM policies with the IAM policy simulator ][1]in the *IAM User
-    # Guide*.
+    # <note markdown="1"> The IAM policy simulator evaluates statements in the identity-based
+    # policy and the inputs that you provide during simulation. The policy
+    # simulator results can differ from your live Amazon Web Services
+    # environment. We recommend that you check your policies against your
+    # live Amazon Web Services environment after testing using the policy
+    # simulator to confirm that you have the desired results. For more
+    # information about using the policy simulator, see [Testing IAM
+    # policies with the IAM policy simulator ][1]in the *IAM User Guide*.
+    #
+    #  </note>
     #
     #
     #
@@ -10511,6 +10605,10 @@ module Aws::IAM
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
     #   in the *Amazon Web Services General Reference*.
     #
+    #   <note markdown="1"> Simulation of resource-based policies isn't supported for IAM roles.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
@@ -10537,6 +10635,10 @@ module Aws::IAM
     #
     #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
     #     carriage return (`\u000D`)
+    #
+    #   <note markdown="1"> Simulation of resource-based policies isn't supported for IAM roles.
+    #
+    #    </note>
     #
     #
     #
@@ -12255,10 +12357,10 @@ module Aws::IAM
     # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
     # providers (IdPs) through our library of trusted certificate
     # authorities (CAs) instead of using a certificate thumbprint to verify
-    # your IdP server certificate. These OIDC IdPs include Google, and those
-    # that use an Amazon S3 bucket to host a JSON Web Key Set (JWKS)
-    # endpoint. In these cases, your legacy thumbprint remains in your
-    # configuration, but is no longer used for validation.
+    # your IdP server certificate. These OIDC IdPs include Google, Auth0,
+    # and those that use an Amazon S3 bucket to host a JSON Web Key Set
+    # (JWKS) endpoint. In these cases, your legacy thumbprint remains in
+    # your configuration, but is no longer used for validation.
     #
     #  </note>
     #
@@ -13233,7 +13335,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

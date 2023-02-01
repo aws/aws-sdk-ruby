@@ -138,6 +138,8 @@ module Aws::MediaTailor
             Aws::MediaTailor::Endpoints::UpdateChannel.build(context)
           when :update_live_source
             Aws::MediaTailor::Endpoints::UpdateLiveSource.build(context)
+          when :update_program
+            Aws::MediaTailor::Endpoints::UpdateProgram.build(context)
           when :update_source_location
             Aws::MediaTailor::Endpoints::UpdateSourceLocation.build(context)
           when :update_vod_source

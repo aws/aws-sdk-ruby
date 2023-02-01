@@ -396,6 +396,22 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Clip range configuration for the VOD source associated with the
+    # program.
+    #
+    # @!attribute [rw] end_offset_millis
+    #   The end offset of the clip range, in milliseconds, starting from the
+    #   beginning of the VOD source associated with the program.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ClipRange AWS API Documentation
+    #
+    class ClipRange < Struct.new(
+      :end_offset_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -829,9 +845,17 @@ module Aws::MediaTailor
     #   The name to assign to the channel for this program.
     #   @return [String]
     #
+    # @!attribute [rw] clip_range
+    #   The clip range configuration settings.
+    #   @return [Types::ClipRange]
+    #
     # @!attribute [rw] creation_time
     #   The time the program was created.
     #   @return [Time]
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the live program in milliseconds.
+    #   @return [Integer]
     #
     # @!attribute [rw] live_source_name
     #   The name of the LiveSource for this Program.
@@ -859,7 +883,9 @@ module Aws::MediaTailor
       :ad_breaks,
       :arn,
       :channel_name,
+      :clip_range,
       :creation_time,
+      :duration_millis,
       :live_source_name,
       :program_name,
       :scheduled_start_time,
@@ -1518,9 +1544,17 @@ module Aws::MediaTailor
     #   The name of the channel that the program belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] clip_range
+    #   The clip range configuration settings.
+    #   @return [Types::ClipRange]
+    #
     # @!attribute [rw] creation_time
     #   The timestamp of when the program was created.
     #   @return [Time]
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the live program in milliseconds.
+    #   @return [Integer]
     #
     # @!attribute [rw] live_source_name
     #   The name of the LiveSource for this Program.
@@ -1551,7 +1585,9 @@ module Aws::MediaTailor
       :ad_breaks,
       :arn,
       :channel_name,
+      :clip_range,
       :creation_time,
+      :duration_millis,
       :live_source_name,
       :program_name,
       :scheduled_start_time,
@@ -3310,6 +3346,10 @@ module Aws::MediaTailor
     # Schedule configuration parameters. A channel must be stopped before
     # changes can be made to the schedule.
     #
+    # @!attribute [rw] clip_range
+    #   Program clip range configuration.
+    #   @return [Types::ClipRange]
+    #
     # @!attribute [rw] transition
     #   Program transition configurations.
     #   @return [Types::Transition]
@@ -3317,6 +3357,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ScheduleConfiguration AWS API Documentation
     #
     class ScheduleConfiguration < Struct.new(
+      :clip_range,
       :transition)
       SENSITIVE = []
       include Aws::Structure
@@ -3973,6 +4014,134 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ad_breaks
+    #   The ad break configuration settings.
+    #   @return [Array<Types::AdBreak>]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the channel for this Program.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_name
+    #   The name of the Program.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The schedule configuration settings.
+    #   @return [Types::UpdateProgramScheduleConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateProgramRequest AWS API Documentation
+    #
+    class UpdateProgramRequest < Struct.new(
+      :ad_breaks,
+      :channel_name,
+      :program_name,
+      :schedule_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ad_breaks
+    #   The ad break configuration settings.
+    #   @return [Array<Types::AdBreak>]
+    #
+    # @!attribute [rw] arn
+    #   The ARN to assign to the program.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name to assign to the channel for this program.
+    #   @return [String]
+    #
+    # @!attribute [rw] clip_range
+    #   The clip range configuration settings.
+    #   @return [Types::ClipRange]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the program was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the live program in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] live_source_name
+    #   The name of the LiveSource for this Program.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_name
+    #   The name to assign to this program.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_start_time
+    #   The scheduled start time for this Program.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_location_name
+    #   The name to assign to the source location for this program.
+    #   @return [String]
+    #
+    # @!attribute [rw] vod_source_name
+    #   The name that's used to refer to a VOD source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateProgramResponse AWS API Documentation
+    #
+    class UpdateProgramResponse < Struct.new(
+      :ad_breaks,
+      :arn,
+      :channel_name,
+      :clip_range,
+      :creation_time,
+      :duration_millis,
+      :live_source_name,
+      :program_name,
+      :scheduled_start_time,
+      :source_location_name,
+      :vod_source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Schedule configuration parameters.
+    #
+    # @!attribute [rw] clip_range
+    #   Program clip range configuration.
+    #   @return [Types::ClipRange]
+    #
+    # @!attribute [rw] transition
+    #   Program transition configuration.
+    #   @return [Types::UpdateProgramTransition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateProgramScheduleConfiguration AWS API Documentation
+    #
+    class UpdateProgramScheduleConfiguration < Struct.new(
+      :clip_range,
+      :transition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Program transition configuration.
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the live program in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scheduled_start_time_millis
+    #   The date and time that the program is scheduled to start, in epoch
+    #   milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateProgramTransition AWS API Documentation
+    #
+    class UpdateProgramTransition < Struct.new(
+      :duration_millis,
+      :scheduled_start_time_millis)
       SENSITIVE = []
       include Aws::Structure
     end

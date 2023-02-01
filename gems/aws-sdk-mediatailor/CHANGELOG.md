@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-02-01)
+------------------
+
+* Feature - The AWS Elemental MediaTailor SDK for Channel Assembly has added support for program updates, and the ability to clip the end of VOD sources in programs.
+
 1.59.0 (2023-01-27)
 ------------------
 

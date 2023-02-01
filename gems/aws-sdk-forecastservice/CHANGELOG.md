@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-02-01)
+------------------
+
+* Feature - This release will enable customer select INCREMENTAL as ImportModel in Forecast's CreateDatasetImportJob API. Verified latest SDK containing required attribute, following https://w.amazon.com/bin/view/AWS-Seer/Launch/Trebuchet/
+
 1.39.0 (2023-01-18)
 ------------------
 

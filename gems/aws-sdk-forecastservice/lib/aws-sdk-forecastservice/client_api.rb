@@ -157,6 +157,7 @@ module Aws::ForecastService
     GetAccuracyMetricsResponse = Shapes::StructureShape.new(name: 'GetAccuracyMetricsResponse')
     Hour = Shapes::IntegerShape.new(name: 'Hour')
     HyperParameterTuningJobConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobConfig')
+    ImportMode = Shapes::StringShape.new(name: 'ImportMode')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerParameterRange = Shapes::StructureShape.new(name: 'IntegerParameterRange')
@@ -372,6 +373,7 @@ module Aws::ForecastService
     CreateDatasetImportJobRequest.add_member(:geolocation_format, Shapes::ShapeRef.new(shape: GeolocationFormat, location_name: "GeolocationFormat"))
     CreateDatasetImportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateDatasetImportJobRequest.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
+    CreateDatasetImportJobRequest.add_member(:import_mode, Shapes::ShapeRef.new(shape: ImportMode, location_name: "ImportMode"))
     CreateDatasetImportJobRequest.struct_class = Types::CreateDatasetImportJobRequest
 
     CreateDatasetImportJobResponse.add_member(:dataset_import_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DatasetImportJobArn"))
@@ -526,6 +528,7 @@ module Aws::ForecastService
     DatasetImportJobSummary.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DatasetImportJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DatasetImportJobSummary.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    DatasetImportJobSummary.add_member(:import_mode, Shapes::ShapeRef.new(shape: ImportMode, location_name: "ImportMode"))
     DatasetImportJobSummary.struct_class = Types::DatasetImportJobSummary
 
     DatasetImportJobs.member = Shapes::ShapeRef.new(shape: DatasetImportJobSummary)
@@ -637,6 +640,7 @@ module Aws::ForecastService
     DescribeDatasetImportJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeDatasetImportJobResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
     DescribeDatasetImportJobResponse.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
+    DescribeDatasetImportJobResponse.add_member(:import_mode, Shapes::ShapeRef.new(shape: ImportMode, location_name: "ImportMode"))
     DescribeDatasetImportJobResponse.struct_class = Types::DescribeDatasetImportJobResponse
 
     DescribeDatasetRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DatasetArn"))

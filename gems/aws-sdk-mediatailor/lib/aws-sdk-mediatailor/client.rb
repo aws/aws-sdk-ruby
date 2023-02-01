@@ -765,7 +765,9 @@ module Aws::MediaTailor
     #   * {Types::CreateProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
     #   * {Types::CreateProgramResponse#arn #arn} => String
     #   * {Types::CreateProgramResponse#channel_name #channel_name} => String
+    #   * {Types::CreateProgramResponse#clip_range #clip_range} => Types::ClipRange
     #   * {Types::CreateProgramResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateProgramResponse#duration_millis #duration_millis} => Integer
     #   * {Types::CreateProgramResponse#live_source_name #live_source_name} => String
     #   * {Types::CreateProgramResponse#program_name #program_name} => String
     #   * {Types::CreateProgramResponse#scheduled_start_time #scheduled_start_time} => Time
@@ -809,6 +811,9 @@ module Aws::MediaTailor
     #     live_source_name: "__string",
     #     program_name: "__string", # required
     #     schedule_configuration: { # required
+    #       clip_range: {
+    #         end_offset_millis: 1, # required
+    #       },
     #       transition: { # required
     #         duration_millis: 1,
     #         relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
@@ -843,7 +848,9 @@ module Aws::MediaTailor
     #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
     #   resp.arn #=> String
     #   resp.channel_name #=> String
+    #   resp.clip_range.end_offset_millis #=> Integer
     #   resp.creation_time #=> Time
+    #   resp.duration_millis #=> Integer
     #   resp.live_source_name #=> String
     #   resp.program_name #=> String
     #   resp.scheduled_start_time #=> Time
@@ -1386,7 +1393,9 @@ module Aws::MediaTailor
     #   * {Types::DescribeProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
     #   * {Types::DescribeProgramResponse#arn #arn} => String
     #   * {Types::DescribeProgramResponse#channel_name #channel_name} => String
+    #   * {Types::DescribeProgramResponse#clip_range #clip_range} => Types::ClipRange
     #   * {Types::DescribeProgramResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeProgramResponse#duration_millis #duration_millis} => Integer
     #   * {Types::DescribeProgramResponse#live_source_name #live_source_name} => String
     #   * {Types::DescribeProgramResponse#program_name #program_name} => String
     #   * {Types::DescribeProgramResponse#scheduled_start_time #scheduled_start_time} => Time
@@ -1422,7 +1431,9 @@ module Aws::MediaTailor
     #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
     #   resp.arn #=> String
     #   resp.channel_name #=> String
+    #   resp.clip_range.end_offset_millis #=> Integer
     #   resp.creation_time #=> Time
+    #   resp.duration_millis #=> Integer
     #   resp.live_source_name #=> String
     #   resp.program_name #=> String
     #   resp.scheduled_start_time #=> Time
@@ -2757,6 +2768,120 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Updates a program within a channel.
+    #
+    # @option params [Array<Types::AdBreak>] :ad_breaks
+    #   The ad break configuration settings.
+    #
+    # @option params [required, String] :channel_name
+    #   The name of the channel for this Program.
+    #
+    # @option params [required, String] :program_name
+    #   The name of the Program.
+    #
+    # @option params [required, Types::UpdateProgramScheduleConfiguration] :schedule_configuration
+    #   The schedule configuration settings.
+    #
+    # @return [Types::UpdateProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
+    #   * {Types::UpdateProgramResponse#arn #arn} => String
+    #   * {Types::UpdateProgramResponse#channel_name #channel_name} => String
+    #   * {Types::UpdateProgramResponse#clip_range #clip_range} => Types::ClipRange
+    #   * {Types::UpdateProgramResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateProgramResponse#duration_millis #duration_millis} => Integer
+    #   * {Types::UpdateProgramResponse#live_source_name #live_source_name} => String
+    #   * {Types::UpdateProgramResponse#program_name #program_name} => String
+    #   * {Types::UpdateProgramResponse#scheduled_start_time #scheduled_start_time} => Time
+    #   * {Types::UpdateProgramResponse#source_location_name #source_location_name} => String
+    #   * {Types::UpdateProgramResponse#vod_source_name #vod_source_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_program({
+    #     ad_breaks: [
+    #       {
+    #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
+    #         offset_millis: 1,
+    #         slate: {
+    #           source_location_name: "__string",
+    #           vod_source_name: "__string",
+    #         },
+    #         splice_insert_message: {
+    #           avail_num: 1,
+    #           avails_expected: 1,
+    #           splice_event_id: 1,
+    #           unique_program_id: 1,
+    #         },
+    #         time_signal_message: {
+    #           segmentation_descriptors: [
+    #             {
+    #               segment_num: 1,
+    #               segmentation_event_id: 1,
+    #               segmentation_type_id: 1,
+    #               segmentation_upid: "String",
+    #               segmentation_upid_type: 1,
+    #               segments_expected: 1,
+    #               sub_segment_num: 1,
+    #               sub_segments_expected: 1,
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #     channel_name: "__string", # required
+    #     program_name: "__string", # required
+    #     schedule_configuration: { # required
+    #       clip_range: {
+    #         end_offset_millis: 1, # required
+    #       },
+    #       transition: {
+    #         duration_millis: 1,
+    #         scheduled_start_time_millis: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ad_breaks #=> Array
+    #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
+    #   resp.ad_breaks[0].offset_millis #=> Integer
+    #   resp.ad_breaks[0].slate.source_location_name #=> String
+    #   resp.ad_breaks[0].slate.vod_source_name #=> String
+    #   resp.ad_breaks[0].splice_insert_message.avail_num #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.avails_expected #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors #=> Array
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segment_num #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_event_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_type_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid #=> String
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid_type #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segments_expected #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
+    #   resp.arn #=> String
+    #   resp.channel_name #=> String
+    #   resp.clip_range.end_offset_millis #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.duration_millis #=> Integer
+    #   resp.live_source_name #=> String
+    #   resp.program_name #=> String
+    #   resp.scheduled_start_time #=> Time
+    #   resp.source_location_name #=> String
+    #   resp.vod_source_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateProgram AWS API Documentation
+    #
+    # @overload update_program(params = {})
+    # @param [Hash] params ({})
+    def update_program(params = {}, options = {})
+      req = build_request(:update_program, params)
+      req.send_request(options)
+    end
+
     # Updates a source location. A source location is a container for
     # sources. For more information about source locations, see [Working
     # with source locations][1] in the *MediaTailor User Guide*.
@@ -2919,7 +3044,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

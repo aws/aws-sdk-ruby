@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2023-02-01)
+------------------
+
+* Feature - This release adds filter support ListAnomalyForInsight API.
+
 1.28.0 (2023-01-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-02-01)
+------------------
+
+* Feature - Additional attributes added for set-topic-attributes.
+
 1.58.0 (2023-01-18)
 ------------------
 

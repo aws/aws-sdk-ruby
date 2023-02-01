@@ -25,6 +25,7 @@ module Aws::MediaTailor
     CdnConfiguration = Shapes::StructureShape.new(name: 'CdnConfiguration')
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
+    ClipRange = Shapes::StructureShape.new(name: 'ClipRange')
     ConfigurationAliasesRequest = Shapes::MapShape.new(name: 'ConfigurationAliasesRequest')
     ConfigurationAliasesResponse = Shapes::MapShape.new(name: 'ConfigurationAliasesResponse')
     ConfigureLogsForChannelRequest = Shapes::StructureShape.new(name: 'ConfigureLogsForChannelRequest')
@@ -109,6 +110,7 @@ module Aws::MediaTailor
     LogConfigurationForChannel = Shapes::StructureShape.new(name: 'LogConfigurationForChannel')
     LogType = Shapes::StringShape.new(name: 'LogType')
     LogTypes = Shapes::ListShape.new(name: 'LogTypes')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     ManifestProcessingRules = Shapes::StructureShape.new(name: 'ManifestProcessingRules')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
@@ -155,6 +157,10 @@ module Aws::MediaTailor
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateLiveSourceRequest = Shapes::StructureShape.new(name: 'UpdateLiveSourceRequest')
     UpdateLiveSourceResponse = Shapes::StructureShape.new(name: 'UpdateLiveSourceResponse')
+    UpdateProgramRequest = Shapes::StructureShape.new(name: 'UpdateProgramRequest')
+    UpdateProgramResponse = Shapes::StructureShape.new(name: 'UpdateProgramResponse')
+    UpdateProgramScheduleConfiguration = Shapes::StructureShape.new(name: 'UpdateProgramScheduleConfiguration')
+    UpdateProgramTransition = Shapes::StructureShape.new(name: 'UpdateProgramTransition')
     UpdateSourceLocationRequest = Shapes::StructureShape.new(name: 'UpdateSourceLocationRequest')
     UpdateSourceLocationResponse = Shapes::StructureShape.new(name: 'UpdateSourceLocationResponse')
     UpdateVodSourceRequest = Shapes::StructureShape.new(name: 'UpdateVodSourceRequest')
@@ -234,6 +240,9 @@ module Aws::MediaTailor
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     Channel.add_member(:tier, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Tier"))
     Channel.struct_class = Types::Channel
+
+    ClipRange.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: __long, required: true, location_name: "EndOffsetMillis"))
+    ClipRange.struct_class = Types::ClipRange
 
     ConfigurationAliasesRequest.key = Shapes::ShapeRef.new(shape: __string)
     ConfigurationAliasesRequest.value = Shapes::ShapeRef.new(shape: __mapOf__string)
@@ -319,7 +328,9 @@ module Aws::MediaTailor
     CreateProgramResponse.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
     CreateProgramResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     CreateProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
+    CreateProgramResponse.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
     CreateProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    CreateProgramResponse.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
     CreateProgramResponse.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
     CreateProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "ProgramName"))
     CreateProgramResponse.add_member(:scheduled_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ScheduledStartTime"))
@@ -459,7 +470,9 @@ module Aws::MediaTailor
     DescribeProgramResponse.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
     DescribeProgramResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     DescribeProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
+    DescribeProgramResponse.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
     DescribeProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    DescribeProgramResponse.add_member(:duration_millis, Shapes::ShapeRef.new(shape: Long, location_name: "DurationMillis"))
     DescribeProgramResponse.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
     DescribeProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "ProgramName"))
     DescribeProgramResponse.add_member(:scheduled_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ScheduledStartTime"))
@@ -758,6 +771,7 @@ module Aws::MediaTailor
     ScheduleAdBreak.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     ScheduleAdBreak.struct_class = Types::ScheduleAdBreak
 
+    ScheduleConfiguration.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
     ScheduleConfiguration.add_member(:transition, Shapes::ShapeRef.new(shape: Transition, required: true, location_name: "Transition"))
     ScheduleConfiguration.struct_class = Types::ScheduleConfiguration
 
@@ -873,6 +887,33 @@ module Aws::MediaTailor
     UpdateLiveSourceResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     UpdateLiveSourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     UpdateLiveSourceResponse.struct_class = Types::UpdateLiveSourceResponse
+
+    UpdateProgramRequest.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
+    UpdateProgramRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
+    UpdateProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ProgramName"))
+    UpdateProgramRequest.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: UpdateProgramScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
+    UpdateProgramRequest.struct_class = Types::UpdateProgramRequest
+
+    UpdateProgramResponse.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
+    UpdateProgramResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    UpdateProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
+    UpdateProgramResponse.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
+    UpdateProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    UpdateProgramResponse.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
+    UpdateProgramResponse.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
+    UpdateProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "ProgramName"))
+    UpdateProgramResponse.add_member(:scheduled_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ScheduledStartTime"))
+    UpdateProgramResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
+    UpdateProgramResponse.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
+    UpdateProgramResponse.struct_class = Types::UpdateProgramResponse
+
+    UpdateProgramScheduleConfiguration.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
+    UpdateProgramScheduleConfiguration.add_member(:transition, Shapes::ShapeRef.new(shape: UpdateProgramTransition, location_name: "Transition"))
+    UpdateProgramScheduleConfiguration.struct_class = Types::UpdateProgramScheduleConfiguration
+
+    UpdateProgramTransition.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
+    UpdateProgramTransition.add_member(:scheduled_start_time_millis, Shapes::ShapeRef.new(shape: __long, location_name: "ScheduledStartTimeMillis"))
+    UpdateProgramTransition.struct_class = Types::UpdateProgramTransition
 
     UpdateSourceLocationRequest.add_member(:access_configuration, Shapes::ShapeRef.new(shape: AccessConfiguration, location_name: "AccessConfiguration"))
     UpdateSourceLocationRequest.add_member(:default_segment_delivery_configuration, Shapes::ShapeRef.new(shape: DefaultSegmentDeliveryConfiguration, location_name: "DefaultSegmentDeliveryConfiguration"))
@@ -1340,6 +1381,14 @@ module Aws::MediaTailor
         o.http_request_uri = "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateLiveSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateLiveSourceResponse)
+      end)
+
+      api.add_operation(:update_program, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProgram"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channel/{ChannelName}/program/{ProgramName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProgramRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProgramResponse)
       end)
 
       api.add_operation(:update_source_location, Seahorse::Model::Operation.new.tap do |o|

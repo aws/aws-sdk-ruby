@@ -1356,6 +1356,62 @@ module Aws::SNS
       end
     end
 
+    context 'For region ca-west-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://sns-fips.ca-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_dual_stack=>true, :use_fips=>true, :region=>"ca-west-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ca-west-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://sns-fips.ca-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>true, :region=>"ca-west-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ca-west-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://sns.ca-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_dual_stack=>true, :use_fips=>false, :region=>"ca-west-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region ca-west-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://sns.ca-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"ca-west-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context 'For region us-gov-west-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://sns-fips.us-gov-west-1.api.aws"}}

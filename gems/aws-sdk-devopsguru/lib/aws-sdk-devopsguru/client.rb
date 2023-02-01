@@ -1199,6 +1199,9 @@ module Aws::DevOpsGuru
     # @option params [String] :account_id
     #   The ID of the Amazon Web Services account.
     #
+    # @option params [Types::ListAnomaliesForInsightFilters] :filters
+    #   Specifies one or more service names that are used to list anomalies.
+    #
     # @return [Types::ListAnomaliesForInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAnomaliesForInsightResponse#proactive_anomalies #proactive_anomalies} => Array&lt;Types::ProactiveAnomalySummary&gt;
@@ -1218,6 +1221,11 @@ module Aws::DevOpsGuru
     #     max_results: 1,
     #     next_token: "UuidNextToken",
     #     account_id: "AwsAccountId",
+    #     filters: {
+    #       service_collection: {
+    #         service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2324,7 +2332,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

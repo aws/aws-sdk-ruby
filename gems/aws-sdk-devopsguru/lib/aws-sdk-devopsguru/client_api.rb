@@ -132,6 +132,7 @@ module Aws::DevOpsGuru
     InsightTimeRange = Shapes::StructureShape.new(name: 'InsightTimeRange')
     InsightType = Shapes::StringShape.new(name: 'InsightType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    ListAnomaliesForInsightFilters = Shapes::StructureShape.new(name: 'ListAnomaliesForInsightFilters')
     ListAnomaliesForInsightMaxResults = Shapes::IntegerShape.new(name: 'ListAnomaliesForInsightMaxResults')
     ListAnomaliesForInsightRequest = Shapes::StructureShape.new(name: 'ListAnomaliesForInsightRequest')
     ListAnomaliesForInsightResponse = Shapes::StructureShape.new(name: 'ListAnomaliesForInsightResponse')
@@ -627,11 +628,15 @@ module Aws::DevOpsGuru
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    ListAnomaliesForInsightFilters.add_member(:service_collection, Shapes::ShapeRef.new(shape: ServiceCollection, location_name: "ServiceCollection"))
+    ListAnomaliesForInsightFilters.struct_class = Types::ListAnomaliesForInsightFilters
+
     ListAnomaliesForInsightRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, required: true, location: "uri", location_name: "InsightId"))
     ListAnomaliesForInsightRequest.add_member(:start_time_range, Shapes::ShapeRef.new(shape: StartTimeRange, location_name: "StartTimeRange"))
     ListAnomaliesForInsightRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAnomaliesForInsightMaxResults, location_name: "MaxResults"))
     ListAnomaliesForInsightRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     ListAnomaliesForInsightRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AccountId"))
+    ListAnomaliesForInsightRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListAnomaliesForInsightFilters, location_name: "Filters"))
     ListAnomaliesForInsightRequest.struct_class = Types::ListAnomaliesForInsightRequest
 
     ListAnomaliesForInsightResponse.add_member(:proactive_anomalies, Shapes::ShapeRef.new(shape: ProactiveAnomalies, location_name: "ProactiveAnomalies"))

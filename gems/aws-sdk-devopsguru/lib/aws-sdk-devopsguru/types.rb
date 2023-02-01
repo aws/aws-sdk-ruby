@@ -1464,6 +1464,20 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Specifies one or more service names that are used to list anomalies.
+    #
+    # @!attribute [rw] service_collection
+    #   A collection of the names of Amazon Web Services services.
+    #   @return [Types::ServiceCollection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomaliesForInsightFilters AWS API Documentation
+    #
+    class ListAnomaliesForInsightFilters < Struct.new(
+      :service_collection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] insight_id
     #   The ID of the insight. The returned anomalies belong to this
     #   insight.
@@ -1489,6 +1503,10 @@ module Aws::DevOpsGuru
     #   The ID of the Amazon Web Services account.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   Specifies one or more service names that are used to list anomalies.
+    #   @return [Types::ListAnomaliesForInsightFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomaliesForInsightRequest AWS API Documentation
     #
     class ListAnomaliesForInsightRequest < Struct.new(
@@ -1496,7 +1514,8 @@ module Aws::DevOpsGuru
       :start_time_range,
       :max_results,
       :next_token,
-      :account_id)
+      :account_id,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end

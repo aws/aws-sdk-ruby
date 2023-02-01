@@ -1250,8 +1250,23 @@ module Aws::IAM
     #   @return [Integer]
     #
     # @!attribute [rw] permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary
-    #   for the role.
+    #   The ARN of the managed policy that is used to set the permissions
+    #   boundary for the role.
+    #
+    #   A permissions boundary policy defines the maximum permissions that
+    #   identity-based policies can grant to an entity, but does not grant
+    #   permissions. Permissions boundaries do not define the maximum
+    #   permissions that a resource-based policy can grant to an entity. To
+    #   learn more, see [Permissions boundaries for IAM entities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   For more information about policy types, see [Policy types ][2] in
+    #   the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1516,8 +1531,23 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary
-    #   for the user.
+    #   The ARN of the managed policy that is used to set the permissions
+    #   boundary for the user.
+    #
+    #   A permissions boundary policy defines the maximum permissions that
+    #   identity-based policies can grant to an entity, but does not grant
+    #   permissions. Permissions boundaries do not define the maximum
+    #   permissions that a resource-based policy can grant to an entity. To
+    #   learn more, see [Permissions boundaries for IAM entities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   For more information about policy types, see [Policy types ][2] in
+    #   the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -8130,8 +8160,23 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary
-    #   for the role.
+    #   The ARN of the managed policy that is used to set the permissions
+    #   boundary for the role.
+    #
+    #   A permissions boundary policy defines the maximum permissions that
+    #   identity-based policies can grant to an entity, but does not grant
+    #   permissions. Permissions boundaries do not define the maximum
+    #   permissions that a resource-based policy can grant to an entity. To
+    #   learn more, see [Permissions boundaries for IAM entities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   For more information about policy types, see [Policy types ][2] in
+    #   the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePermissionsBoundaryRequest AWS API Documentation
@@ -8210,8 +8255,23 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary
-    #   for the user.
+    #   The ARN of the managed policy that is used to set the permissions
+    #   boundary for the user.
+    #
+    #   A permissions boundary policy defines the maximum permissions that
+    #   identity-based policies can grant to an entity, but does not grant
+    #   permissions. Permissions boundaries do not define the maximum
+    #   permissions that a resource-based policy can grant to an entity. To
+    #   learn more, see [Permissions boundaries for IAM entities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   For more information about policy types, see [Policy types ][2] in
+    #   the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPermissionsBoundaryRequest AWS API Documentation
@@ -9504,6 +9564,11 @@ module Aws::IAM
     #   For more information about ARNs, see [Amazon Resource Names
     #   (ARNs)][1] in the *Amazon Web Services General Reference*.
     #
+    #   <note markdown="1"> Simulation of resource-based policies isn't supported for IAM
+    #   roles.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
@@ -9531,6 +9596,11 @@ module Aws::IAM
     #
     #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
     #     carriage return (`\u000D`)
+    #
+    #   <note markdown="1"> Simulation of resource-based policies isn't supported for IAM
+    #   roles.
+    #
+    #    </note>
     #
     #
     #
@@ -9789,6 +9859,11 @@ module Aws::IAM
     #   For more information about ARNs, see [Amazon Resource Names
     #   (ARNs)][1] in the *Amazon Web Services General Reference*.
     #
+    #   <note markdown="1"> Simulation of resource-based policies isn't supported for IAM
+    #   roles.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
@@ -9816,6 +9891,11 @@ module Aws::IAM
     #
     #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
     #     carriage return (`\u000D`)
+    #
+    #   <note markdown="1"> Simulation of resource-based policies isn't supported for IAM
+    #   roles.
+    #
+    #    </note>
     #
     #
     #
