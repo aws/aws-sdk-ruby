@@ -435,11 +435,25 @@ module Aws::AppConfig
 
     # Creates a configuration profile, which is information that enables
     # AppConfig to access the configuration source. Valid configuration
-    # sources include the AppConfig hosted configuration store, Amazon Web
-    # Services Systems Manager (SSM) documents, SSM Parameter Store
-    # parameters, Amazon S3 objects, or any [integration source action][1]
-    # supported by CodePipeline. A configuration profile includes the
-    # following information:
+    # sources include the following:
+    #
+    # * Configuration data in YAML, JSON, and other formats stored in the
+    #   AppConfig hosted configuration store
+    #
+    # * Configuration data stored as objects in an Amazon Simple Storage
+    #   Service (Amazon S3) bucket
+    #
+    # * Pipelines stored in CodePipeline
+    #
+    # * Secrets stored in Secrets Manager
+    #
+    # * Standard and secure string parameters stored in Amazon Web Services
+    #   Systems Manager Parameter Store
+    #
+    # * Configuration data in SSM documents stored in the Systems Manager
+    #   document store
+    #
+    # A configuration profile includes the following information:
     #
     # * The URI location of the configuration data.
     #
@@ -450,12 +464,11 @@ module Aws::AppConfig
     #   either a JSON Schema or an Amazon Web Services Lambda function.
     #
     # For more information, see [Create a Configuration and a Configuration
-    # Profile][2] in the *AppConfig User Guide*.
+    # Profile][1] in the *AppConfig User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html#integrations-source
-    # [2]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html
+    # [1]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -467,17 +480,24 @@ module Aws::AppConfig
     #   A description of the configuration profile.
     #
     # @option params [required, String] :location_uri
-    #   A URI to locate the configuration. You can specify the AppConfig
-    #   hosted configuration store, Systems Manager (SSM) document, an SSM
-    #   Parameter Store parameter, or an Amazon S3 object. For the hosted
-    #   configuration store and for feature flags, specify `hosted`. For an
-    #   SSM document, specify either the document name in the format
-    #   `ssm-document://<Document_name>` or the Amazon Resource Name (ARN).
-    #   For a parameter, specify either the parameter name in the format
-    #   `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon S3
-    #   object, specify the URI in the following format:
-    #   `s3://<bucket>/<objectKey> `. Here is an example:
-    #   `s3://my-bucket/my-app/us-east-1/my-config.json`
+    #   A URI to locate the configuration. You can specify the following:
+    #
+    #   * For the AppConfig hosted configuration store and for feature flags,
+    #     specify `hosted`.
+    #
+    #   * For an Amazon Web Services Systems Manager Parameter Store
+    #     parameter, specify either the parameter name in the format
+    #     `ssm-parameter://<parameter name>` or the ARN.
+    #
+    #   * For an Secrets Manager secret, specify the URI in the following
+    #     format: `secrets-manager`\://&lt;secret name&gt;.
+    #
+    #   * For an Amazon S3 object, specify the URI in the following format:
+    #     `s3://<bucket>/<objectKey> `. Here is an example:
+    #     `s3://my-bucket/my-app/us-east-1/my-config.json`
+    #
+    #   * For an SSM document, specify either the document name in the format
+    #     `ssm-document://<document name>` or the Amazon Resource Name (ARN).
     #
     # @option params [String] :retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration at
@@ -818,12 +838,12 @@ module Aws::AppConfig
     # inject logic or behavior at different points during the AppConfig
     # workflow of creating or deploying a configuration.
     #
-    # You can create your own extensions or use the Amazon Web
-    # Services-authored extensions provided by AppConfig. For most
-    # use-cases, to create your own extension, you must create an Lambda
-    # function to perform any computation and processing defined in the
-    # extension. For more information about extensions, see [Working with
-    # AppConfig extensions][1] in the *AppConfig User Guide*.
+    # You can create your own extensions or use the Amazon Web Services
+    # authored extensions provided by AppConfig. For most use cases, to
+    # create your own extension, you must create an Lambda function to
+    # perform any computation and processing defined in the extension. For
+    # more information about extensions, see [Working with AppConfig
+    # extensions][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -919,19 +939,18 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # When you create an extension or configure an Amazon Web
-    # Services-authored extension, you associate the extension with an
-    # AppConfig application, environment, or configuration profile. For
-    # example, you can choose to run the `AppConfig deployment events to
-    # Amazon SNS` Amazon Web Services-authored extension and receive
-    # notifications on an Amazon SNS topic anytime a configuration
-    # deployment is started for a specific application. Defining which
-    # extension to associate with an AppConfig resource is called an
-    # *extension association*. An extension association is a specified
-    # relationship between an extension and an AppConfig resource, such as
-    # an application or a configuration profile. For more information about
-    # extensions and associations, see [Working with AppConfig
-    # extensions][1] in the *AppConfig User Guide*.
+    # When you create an extension or configure an Amazon Web Services
+    # authored extension, you associate the extension with an AppConfig
+    # application, environment, or configuration profile. For example, you
+    # can choose to run the `AppConfig deployment events to Amazon SNS`
+    # Amazon Web Services authored extension and receive notifications on an
+    # Amazon SNS topic anytime a configuration deployment is started for a
+    # specific application. Defining which extension to associate with an
+    # AppConfig resource is called an *extension association*. An extension
+    # association is a specified relationship between an extension and an
+    # AppConfig resource, such as an application or a configuration profile.
+    # For more information about extensions and associations, see [Working
+    # with AppConfig extensions][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -1371,41 +1390,22 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Retrieves the latest deployed configuration.
+    # (Deprecated) Retrieves the latest deployed configuration.
     #
     # Note the following important information.
     #
-    #  * This API action has been deprecated. Calls to receive configuration
-    #   data should use the [StartConfigurationSession][1] and
+    #  * This API action is deprecated. Calls to receive configuration data
+    #   should use the [StartConfigurationSession][1] and
     #   [GetLatestConfiguration][2] APIs instead.
     #
     # * `GetConfiguration` is a priced call. For more information, see
     #   [Pricing][3].
-    #
-    # * AppConfig uses the value of the `ClientConfigurationVersion`
-    #   parameter to identify the configuration version on your clients. If
-    #   you don’t send `ClientConfigurationVersion` with each call to
-    #   `GetConfiguration`, your clients receive the current configuration.
-    #   You are charged each time your clients receive a configuration.
-    #
-    #   To avoid excess charges, we recommend you use the
-    #   [StartConfigurationSession][4] and [GetLatestConfiguration][5] APIs,
-    #   which track the client configuration version on your behalf. If you
-    #   choose to continue using `GetConfiguration`, we recommend that you
-    #   include the `ClientConfigurationVersion` value with every call to
-    #   `GetConfiguration`. The value to use for
-    #   `ClientConfigurationVersion` comes from the `ConfigurationVersion`
-    #   attribute returned by `GetConfiguration` when there is new or
-    #   updated data, and should be saved for subsequent calls to
-    #   `GetConfiguration`.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html
     # [2]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
     # [3]: https://aws.amazon.com/systems-manager/pricing/
-    # [4]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html
-    # [5]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html
     #
     # @option params [required, String] :application
     #   The application to get. Specify either the application name or the
@@ -1435,18 +1435,24 @@ module Aws::AppConfig
     #   `GetConfiguration`, your clients receive the current configuration.
     #   You are charged each time your clients receive a configuration.
     #
-    #    To avoid excess charges, we recommend that you include the
-    #   `ClientConfigurationVersion` value with every call to
-    #   `GetConfiguration`. This value must be saved on your client.
-    #   Subsequent calls to `GetConfiguration` must pass this value by using
-    #   the `ClientConfigurationVersion` parameter.
+    #    To avoid excess charges, we recommend you use the
+    #   [StartConfigurationSession][1] and [GetLatestConfiguration][2] APIs,
+    #   which track the client configuration version on your behalf. If you
+    #   choose to continue using `GetConfiguration`, we recommend that you
+    #   include the `ClientConfigurationVersion` value with every call to
+    #   `GetConfiguration`. The value to use for `ClientConfigurationVersion`
+    #   comes from the `ConfigurationVersion` attribute returned by
+    #   `GetConfiguration` when there is new or updated data, and should be
+    #   saved for subsequent calls to `GetConfiguration`.
     #
     #   For more information about working with configurations, see
-    #   [Retrieving the Configuration][1] in the *AppConfig User Guide*.
+    #   [Retrieving the Configuration][3] in the *AppConfig User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html
+    #   [2]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html
+    #   [3]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
     #
     # @return [Types::Configuration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1602,6 +1608,8 @@ module Aws::AppConfig
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
     #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
+    #   * {Types::Deployment#kms_key_arn #kms_key_arn} => String
+    #   * {Types::Deployment#kms_key_identifier #kms_key_identifier} => String
     #
     #
     # @example Example: To retrieve deployment details
@@ -1725,6 +1733,8 @@ module Aws::AppConfig
     #   resp.applied_extensions[0].version_number #=> Integer
     #   resp.applied_extensions[0].parameters #=> Hash
     #   resp.applied_extensions[0].parameters["Name"] #=> String
+    #   resp.kms_key_arn #=> String
+    #   resp.kms_key_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetDeployment AWS API Documentation
     #
@@ -2474,7 +2484,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Lists all custom and Amazon Web Services-authored AppConfig extensions
+    # Lists all custom and Amazon Web Services authored AppConfig extensions
     # in the account. For more information about extensions, see [Working
     # with AppConfig extensions][1] in the *AppConfig User Guide*.
     #
@@ -2674,6 +2684,11 @@ module Aws::AppConfig
     #   categorize your AppConfig resources. Each tag consists of a key and an
     #   optional value, both of which you define.
     #
+    # @option params [String] :kms_key_identifier
+    #   The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses
+    #   this ID to encrypt the configuration data using a customer managed
+    #   key.
+    #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Deployment#application_id #application_id} => String
@@ -2695,6 +2710,8 @@ module Aws::AppConfig
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
     #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
+    #   * {Types::Deployment#kms_key_arn #kms_key_arn} => String
+    #   * {Types::Deployment#kms_key_identifier #kms_key_identifier} => String
     #
     #
     # @example Example: To start a configuration deployment
@@ -2752,6 +2769,7 @@ module Aws::AppConfig
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     kms_key_identifier: "Identifier",
     #   })
     #
     # @example Response structure
@@ -2792,6 +2810,8 @@ module Aws::AppConfig
     #   resp.applied_extensions[0].version_number #=> Integer
     #   resp.applied_extensions[0].parameters #=> Hash
     #   resp.applied_extensions[0].parameters["Name"] #=> String
+    #   resp.kms_key_arn #=> String
+    #   resp.kms_key_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartDeployment AWS API Documentation
     #
@@ -2836,6 +2856,8 @@ module Aws::AppConfig
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
     #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
+    #   * {Types::Deployment#kms_key_arn #kms_key_arn} => String
+    #   * {Types::Deployment#kms_key_identifier #kms_key_identifier} => String
     #
     #
     # @example Example: To stop configuration deployment
@@ -2903,6 +2925,8 @@ module Aws::AppConfig
     #   resp.applied_extensions[0].version_number #=> Integer
     #   resp.applied_extensions[0].parameters #=> Hash
     #   resp.applied_extensions[0].parameters["Name"] #=> String
+    #   resp.kms_key_arn #=> String
+    #   resp.kms_key_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StopDeployment AWS API Documentation
     #
@@ -3528,7 +3552,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

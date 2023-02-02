@@ -10,7 +10,7 @@
 module Aws::AppConfig
   module Types
 
-    # An action defines the tasks the extension performs during the
+    # An action defines the tasks that the extension performs during the
     # AppConfig workflow. Each action includes an action point such as
     # `ON_CREATE_HOSTED_CONFIGURATION`, `PRE_DEPLOYMENT`, or
     # `ON_DEPLOYMENT`. Each action also includes a name, a URI to an Lambda
@@ -436,17 +436,25 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   A URI to locate the configuration. You can specify the AppConfig
-    #   hosted configuration store, Systems Manager (SSM) document, an SSM
-    #   Parameter Store parameter, or an Amazon S3 object. For the hosted
-    #   configuration store and for feature flags, specify `hosted`. For an
-    #   SSM document, specify either the document name in the format
-    #   `ssm-document://<Document_name>` or the Amazon Resource Name (ARN).
-    #   For a parameter, specify either the parameter name in the format
-    #   `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon S3
-    #   object, specify the URI in the following format:
-    #   `s3://<bucket>/<objectKey> `. Here is an example:
-    #   `s3://my-bucket/my-app/us-east-1/my-config.json`
+    #   A URI to locate the configuration. You can specify the following:
+    #
+    #   * For the AppConfig hosted configuration store and for feature
+    #     flags, specify `hosted`.
+    #
+    #   * For an Amazon Web Services Systems Manager Parameter Store
+    #     parameter, specify either the parameter name in the format
+    #     `ssm-parameter://<parameter name>` or the ARN.
+    #
+    #   * For an Secrets Manager secret, specify the URI in the following
+    #     format: `secrets-manager`\://&lt;secret name&gt;.
+    #
+    #   * For an Amazon S3 object, specify the URI in the following format:
+    #     `s3://<bucket>/<objectKey> `. Here is an example:
+    #     `s3://my-bucket/my-app/us-east-1/my-config.json`
+    #
+    #   * For an SSM document, specify either the document name in the
+    #     format `ssm-document://<document name>` or the Amazon Resource
+    #     Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] retrieval_role_arn
@@ -944,6 +952,20 @@ module Aws::AppConfig
     #   called.
     #   @return [Array<Types::AppliedExtension>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name of the Key Management Service key used to
+    #   encrypt configuration data. You can encrypt secrets stored in
+    #   Secrets Manager, Amazon Simple Storage Service (Amazon S3) objects
+    #   encrypted with SSE-KMS, or secure string parameters stored in Amazon
+    #   Web Services Systems Manager Parameter Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   The KMS key identifier (key ID, key alias, or key ARN). AppConfig
+    #   uses this ID to encrypt the configuration data using a customer
+    #   managed key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -965,7 +987,9 @@ module Aws::AppConfig
       :percentage_complete,
       :started_at,
       :completed_at,
-      :applied_extensions)
+      :applied_extensions,
+      :kms_key_arn,
+      :kms_key_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1394,7 +1418,7 @@ module Aws::AppConfig
 
     # @!attribute [rw] items
     #   The list of available extensions. The list includes Amazon Web
-    #   Services-authored and user-created extensions.
+    #   Services authored and user-created extensions.
     #   @return [Array<Types::ExtensionSummary>]
     #
     # @!attribute [rw] next_token
@@ -1473,18 +1497,25 @@ module Aws::AppConfig
     #   `GetConfiguration`, your clients receive the current configuration.
     #   You are charged each time your clients receive a configuration.
     #
-    #    To avoid excess charges, we recommend that you include the
-    #   `ClientConfigurationVersion` value with every call to
-    #   `GetConfiguration`. This value must be saved on your client.
-    #   Subsequent calls to `GetConfiguration` must pass this value by using
-    #   the `ClientConfigurationVersion` parameter.
+    #    To avoid excess charges, we recommend you use the
+    #   [StartConfigurationSession][1] and [GetLatestConfiguration][2] APIs,
+    #   which track the client configuration version on your behalf. If you
+    #   choose to continue using `GetConfiguration`, we recommend that you
+    #   include the `ClientConfigurationVersion` value with every call to
+    #   `GetConfiguration`. The value to use for
+    #   `ClientConfigurationVersion` comes from the `ConfigurationVersion`
+    #   attribute returned by `GetConfiguration` when there is new or
+    #   updated data, and should be saved for subsequent calls to
+    #   `GetConfiguration`.
     #
     #   For more information about working with configurations, see
-    #   [Retrieving the Configuration][1] in the *AppConfig User Guide*.
+    #   [Retrieving the Configuration][3] in the *AppConfig User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html
+    #   [2]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html
+    #   [3]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetConfigurationRequest AWS API Documentation
@@ -2140,6 +2171,12 @@ module Aws::AppConfig
     #   an optional value, both of which you define.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The KMS key identifier (key ID, key alias, or key ARN). AppConfig
+    #   uses this ID to encrypt the configuration data using a customer
+    #   managed key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartDeploymentRequest AWS API Documentation
     #
     class StartDeploymentRequest < Struct.new(
@@ -2149,7 +2186,8 @@ module Aws::AppConfig
       :configuration_profile_id,
       :configuration_version,
       :description,
-      :tags)
+      :tags,
+      :kms_key_identifier)
       SENSITIVE = []
       include Aws::Structure
     end

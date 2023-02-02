@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-02-02)
+------------------
+
+* Feature - QuickSight support for Radar Chart and Dashboard Publish Options
+
 1.74.0 (2023-01-20)
 ------------------
 

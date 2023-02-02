@@ -700,7 +700,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates an analysis in Amazon QuickSight.
+    # Creates an analysis in Amazon QuickSight. Analyses can be created
+    # either from a template or from an `AnalysisDefinition`.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account where you are creating an
@@ -733,6 +734,9 @@ module Aws::QuickSight
     #   metadata structure contains details that describe a source template
     #   and one or more datasets.
     #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
+    #
     # @option params [String] :theme_arn
     #   The ARN for the theme to apply to the analysis that you're creating.
     #   To see the theme in the Amazon QuickSight console, make sure that you
@@ -747,6 +751,9 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #
     # @return [Types::CreateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -773,8 +780,9 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates a dashboard from a template. To first create a template, see
-    # the ` CreateTemplate ` API operation.
+    # Creates a dashboard from either a template or directly with a
+    # `DashboardDefinition`. To first create a template, see the `
+    # CreateTemplate ` API operation.
     #
     # A dashboard is an entity in Amazon QuickSight that identifies Amazon
     # QuickSight reports, created from analyses. You can share Amazon
@@ -820,6 +828,9 @@ module Aws::QuickSight
     #   replacement datasets for the placeholders listed in the original. The
     #   schema in each dataset must match its placeholder.
     #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the dashboard.
@@ -856,6 +867,9 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1890,8 +1904,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates a template from an existing Amazon QuickSight analysis or
-    # template. You can use the resulting template to create a dashboard.
+    # Creates a template either from a `TemplateDefinition` or from an
+    # existing Amazon QuickSight analysis or template. You can use the
+    # resulting template to create additional dashboards, templates, or
+    # analyses.
     #
     # A *template* is an entity in Amazon QuickSight that encapsulates the
     # metadata required to create an analysis and that you can use to create
@@ -1932,6 +1948,9 @@ module Aws::QuickSight
     #   listed in the original. The schema in each dataset must match its
     #   placeholder.
     #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the resource.
@@ -1948,6 +1967,9 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #
     # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3450,6 +3472,7 @@ module Aws::QuickSight
     #   * {Types::DescribeDashboardDefinitionResponse#definition #definition} => Types::DashboardVersionDefinition
     #   * {Types::DescribeDashboardDefinitionResponse#status #status} => Integer
     #   * {Types::DescribeDashboardDefinitionResponse#request_id #request_id} => String
+    #   * {Types::DescribeDashboardDefinitionResponse#dashboard_publish_options #dashboard_publish_options} => Types::DashboardPublishOptions
     #
     # @example Request syntax with placeholder values
     #
@@ -9291,7 +9314,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

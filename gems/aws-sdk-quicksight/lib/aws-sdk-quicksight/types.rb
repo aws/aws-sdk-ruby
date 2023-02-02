@@ -3179,6 +3179,9 @@ module Aws::QuickSight
     #   A source entity to use for the analysis that you're creating. This
     #   metadata structure contains details that describe a source template
     #   and one or more datasets.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #   @return [Types::AnalysisSourceEntity]
     #
     # @!attribute [rw] theme_arn
@@ -3197,6 +3200,9 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #   @return [Types::AnalysisDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAnalysisRequest AWS API Documentation
@@ -3303,6 +3309,9 @@ module Aws::QuickSight
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list
     #   the replacement datasets for the placeholders listed in the
     #   original. The schema in each dataset must match its placeholder.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #   @return [Types::DashboardSourceEntity]
     #
     # @!attribute [rw] tags
@@ -3345,6 +3354,9 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #   @return [Types::DashboardVersionDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardRequest AWS API Documentation
@@ -4190,6 +4202,9 @@ module Aws::QuickSight
     #   `SourceAnalysis` to list the replacement datasets for the
     #   placeholders listed in the original. The schema in each dataset must
     #   match its placeholder.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #   @return [Types::TemplateSourceEntity]
     #
     # @!attribute [rw] tags
@@ -4210,6 +4225,9 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    #   Either a `SourceEntity` or a `Definition` must be provided in order
+    #   for the request to be valid.
     #   @return [Types::TemplateVersionDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTemplateRequest AWS API Documentation
@@ -4899,6 +4917,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] violated_entities
+    #   Lists the violated entities that caused the dashboard error.
     #   @return [Array<Types::Entity>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardError AWS API Documentation
@@ -4926,7 +4945,36 @@ module Aws::QuickSight
     #   @return [Types::SheetControlsOption]
     #
     # @!attribute [rw] visual_publish_options
+    #   The visual publish options of a visual in a dashboard.
     #   @return [Types::DashboardVisualPublishOptions]
+    #
+    # @!attribute [rw] sheet_layout_element_maximization_option
+    #   The sheet layout maximization options of a dashbaord.
+    #   @return [Types::SheetLayoutElementMaximizationOption]
+    #
+    # @!attribute [rw] visual_menu_option
+    #   The menu options of a visual in a dashboard.
+    #   @return [Types::VisualMenuOption]
+    #
+    # @!attribute [rw] visual_axis_sort_option
+    #   The axis sort options of a dashboard.
+    #   @return [Types::VisualAxisSortOption]
+    #
+    # @!attribute [rw] export_with_hidden_fields_option
+    #   Determines if hidden fields are exported with a dashboard.
+    #   @return [Types::ExportWithHiddenFieldsOption]
+    #
+    # @!attribute [rw] data_point_drill_up_down_option
+    #   The drill-down options of data points in a dashboard.
+    #   @return [Types::DataPointDrillUpDownOption]
+    #
+    # @!attribute [rw] data_point_menu_label_option
+    #   The data point menu label options of a dashboard.
+    #   @return [Types::DataPointMenuLabelOption]
+    #
+    # @!attribute [rw] data_point_tooltip_option
+    #   The data point tool tip options of a dashboard.
+    #   @return [Types::DataPointTooltipOption]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardPublishOptions AWS API Documentation
     #
@@ -4934,7 +4982,14 @@ module Aws::QuickSight
       :ad_hoc_filtering_option,
       :export_to_csv_option,
       :sheet_controls_option,
-      :visual_publish_options)
+      :visual_publish_options,
+      :sheet_layout_element_maximization_option,
+      :visual_menu_option,
+      :visual_axis_sort_option,
+      :export_with_hidden_fields_option,
+      :data_point_drill_up_down_option,
+      :data_point_menu_label_option,
+      :data_point_tooltip_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5298,7 +5353,10 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The visual publish options of a visual in a dashboard
+    #
     # @!attribute [rw] export_hidden_fields_option
+    #   Determines if hidden fields are included in an exported dashboard.
     #   @return [Types::ExportHiddenFieldsOption]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVisualPublishOptions AWS API Documentation
@@ -5591,6 +5649,48 @@ module Aws::QuickSight
       :field_id,
       :field_value)
       SENSITIVE = [:field_value]
+      include Aws::Structure
+    end
+
+    # The drill down options for data points in a dashbaord.
+    #
+    # @!attribute [rw] availability_status
+    #   The status of the drill down options of data points.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPointDrillUpDownOption AWS API Documentation
+    #
+    class DataPointDrillUpDownOption < Struct.new(
+      :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data point menu options of a dashboard.
+    #
+    # @!attribute [rw] availability_status
+    #   The status of the data point menu options.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPointMenuLabelOption AWS API Documentation
+    #
+    class DataPointMenuLabelOption < Struct.new(
+      :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data point tooltip options.
+    #
+    # @!attribute [rw] availability_status
+    #   The status of the data point tool tip options.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPointTooltipOption AWS API Documentation
+    #
+    class DataPointTooltipOption < Struct.new(
+      :availability_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8052,6 +8152,25 @@ module Aws::QuickSight
     #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
+    # @!attribute [rw] dashboard_publish_options
+    #   Options for publishing the dashboard:
+    #
+    #   * `AvailabilityStatus` for `AdHocFilteringOption` - This status can
+    #     be either `ENABLED` or `DISABLED`. When this is set to `DISABLED`,
+    #     Amazon QuickSight disables the left filter pane on the published
+    #     dashboard, which can be used for ad hoc (one-time) filtering. This
+    #     option is `ENABLED` by default.
+    #
+    #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
+    #     either `ENABLED` or `DISABLED`. The visual option to export data
+    #     to .CSV format isn't enabled when this is set to `DISABLED`. This
+    #     option is `ENABLED` by default.
+    #
+    #   * `VisibilityState` for `SheetControlsOption` - This visibility
+    #     state can be either `COLLAPSED` or `EXPANDED`. This option is
+    #     `COLLAPSED` by default.
+    #   @return [Types::DashboardPublishOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardDefinitionResponse AWS API Documentation
     #
     class DescribeDashboardDefinitionResponse < Struct.new(
@@ -8062,7 +8181,8 @@ module Aws::QuickSight
       :theme_arn,
       :definition,
       :status,
-      :request_id)
+      :request_id,
+      :dashboard_publish_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9563,7 +9683,10 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Determines if hidden fields are included in an exported dashboard.
+    #
     # @!attribute [rw] availability_status
+    #   The status of the export hidden fields options of a dashbaord.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExportHiddenFieldsOption AWS API Documentation
@@ -9583,6 +9706,21 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExportToCSVOption AWS API Documentation
     #
     class ExportToCSVOption < Struct.new(
+      :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Determines whether or not hidden fields are visible on exported
+    # dashbaords.
+    #
+    # @!attribute [rw] availability_status
+    #   The status of the export with hidden fields options.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExportWithHiddenFieldsOption AWS API Documentation
+    #
+    class ExportWithHiddenFieldsOption < Struct.new(
       :availability_status)
       SENSITIVE = []
       include Aws::Structure
@@ -17700,6 +17838,225 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The aggregated field well configuration of a `RadarChartVisual`.
+    #
+    # @!attribute [rw] category
+    #   The aggregated field well categories of a radar chart.
+    #   @return [Array<Types::DimensionField>]
+    #
+    # @!attribute [rw] color
+    #   The color that are assigned to the aggregated field wells of a radar
+    #   chart.
+    #   @return [Array<Types::DimensionField>]
+    #
+    # @!attribute [rw] values
+    #   The values that are assigned to the aggregated field wells of a
+    #   radar chart.
+    #   @return [Array<Types::MeasureField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartAggregatedFieldWells AWS API Documentation
+    #
+    class RadarChartAggregatedFieldWells < Struct.new(
+      :category,
+      :color,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured style settings of a radar chart.
+    #
+    # @!attribute [rw] visibility
+    #   The visibility settings of a radar chart.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartAreaStyleSettings AWS API Documentation
+    #
+    class RadarChartAreaStyleSettings < Struct.new(
+      :visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of a `RadarChartVisual`.
+    #
+    # @!attribute [rw] field_wells
+    #   The field well configuration of a `RadarChartVisual`.
+    #   @return [Types::RadarChartFieldWells]
+    #
+    # @!attribute [rw] sort_configuration
+    #   The sort configuration of a `RadarChartVisual`.
+    #   @return [Types::RadarChartSortConfiguration]
+    #
+    # @!attribute [rw] shape
+    #   The shape of the radar chart.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_series_settings
+    #   The base sreies settings of a radar chart.
+    #   @return [Types::RadarChartSeriesSettings]
+    #
+    # @!attribute [rw] start_angle
+    #   The start angle of a radar chart's axis.
+    #   @return [Float]
+    #
+    # @!attribute [rw] visual_palette
+    #   The palette (chart color) display setup of the visual.
+    #   @return [Types::VisualPalette]
+    #
+    # @!attribute [rw] alternate_band_colors_visibility
+    #   Determines the visibility of the colors of alternatign bands in a
+    #   radar chart.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternate_band_even_color
+    #   The color of the even-numbered alternate bands of a radar chart.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternate_band_odd_color
+    #   The color of the odd-numbered alternate bands of a radar chart.
+    #   @return [String]
+    #
+    # @!attribute [rw] category_axis
+    #   The category axis of a radar chart.
+    #   @return [Types::AxisDisplayOptions]
+    #
+    # @!attribute [rw] category_label_options
+    #   The category label options of a radar chart.
+    #   @return [Types::ChartAxisLabelOptions]
+    #
+    # @!attribute [rw] color_axis
+    #   The color axis of a radar chart.
+    #   @return [Types::AxisDisplayOptions]
+    #
+    # @!attribute [rw] color_label_options
+    #   The color label options of a radar chart.
+    #   @return [Types::ChartAxisLabelOptions]
+    #
+    # @!attribute [rw] legend
+    #   The legend display setup of the visual.
+    #   @return [Types::LegendOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartConfiguration AWS API Documentation
+    #
+    class RadarChartConfiguration < Struct.new(
+      :field_wells,
+      :sort_configuration,
+      :shape,
+      :base_series_settings,
+      :start_angle,
+      :visual_palette,
+      :alternate_band_colors_visibility,
+      :alternate_band_even_color,
+      :alternate_band_odd_color,
+      :category_axis,
+      :category_label_options,
+      :color_axis,
+      :color_label_options,
+      :legend)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The field wells of a radar chart visual.
+    #
+    # @!attribute [rw] radar_chart_aggregated_field_wells
+    #   The aggregated field wells of a radar chart visual.
+    #   @return [Types::RadarChartAggregatedFieldWells]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartFieldWells AWS API Documentation
+    #
+    class RadarChartFieldWells < Struct.new(
+      :radar_chart_aggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The series settings of a radar chart.
+    #
+    # @!attribute [rw] area_style_settings
+    #   The area style settings of a radar chart.
+    #   @return [Types::RadarChartAreaStyleSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartSeriesSettings AWS API Documentation
+    #
+    class RadarChartSeriesSettings < Struct.new(
+      :area_style_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sort configuration of a `RadarChartVisual`.
+    #
+    # @!attribute [rw] category_sort
+    #   The category sort options of a radar chart.
+    #   @return [Array<Types::FieldSortOptions>]
+    #
+    # @!attribute [rw] category_items_limit
+    #   The category items limit for a radar chart.
+    #   @return [Types::ItemsLimitConfiguration]
+    #
+    # @!attribute [rw] color_sort
+    #   The color sort configuration of a radar chart.
+    #   @return [Array<Types::FieldSortOptions>]
+    #
+    # @!attribute [rw] color_items_limit
+    #   The color items limit of a radar chart.
+    #   @return [Types::ItemsLimitConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartSortConfiguration AWS API Documentation
+    #
+    class RadarChartSortConfiguration < Struct.new(
+      :category_sort,
+      :category_items_limit,
+      :color_sort,
+      :color_items_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A radar chart visual.
+    #
+    # @!attribute [rw] visual_id
+    #   The unique identifier of a visual. This identifier must be unique
+    #   within the context of a dashboard, template, or analysis. Two
+    #   dashboards, analyses, or templates can have visuals with the same
+    #   identifiers.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title that is displayed on the visual.
+    #   @return [Types::VisualTitleLabelOptions]
+    #
+    # @!attribute [rw] subtitle
+    #   The subtitle that is displayed on the visual.
+    #   @return [Types::VisualSubtitleLabelOptions]
+    #
+    # @!attribute [rw] chart_configuration
+    #   The configuration settings of the visual.
+    #   @return [Types::RadarChartConfiguration]
+    #
+    # @!attribute [rw] actions
+    #   The list of custom actions that are configured for a visual.
+    #   @return [Array<Types::VisualCustomAction>]
+    #
+    # @!attribute [rw] column_hierarchies
+    #   The column hierarchy that is used during drill-downs and drill-ups.
+    #   @return [Array<Types::ColumnHierarchy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartVisual AWS API Documentation
+    #
+    class RadarChartVisual < Struct.new(
+      :visual_id,
+      :title,
+      :subtitle,
+      :chart_configuration,
+      :actions,
+      :column_hierarchies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The range ends label type of a data path label.
     #
     # @!attribute [rw] visibility
@@ -20060,6 +20417,20 @@ module Aws::QuickSight
       :expression,
       :configuration_overrides)
       SENSITIVE = [:expression]
+      include Aws::Structure
+    end
+
+    # The sheet layout maximization options of a dashbaord.
+    #
+    # @!attribute [rw] availability_status
+    #   The status of the sheet layout maximization options of a dashbaord.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetLayoutElementMaximizationOption AWS API Documentation
+    #
+    class SheetLayoutElementMaximizationOption < Struct.new(
+      :availability_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25067,6 +25438,17 @@ module Aws::QuickSight
     #   An empty visual.
     #   @return [Types::EmptyVisual]
     #
+    # @!attribute [rw] radar_chart_visual
+    #   A radar chart visual.
+    #
+    #   For more information, see [Using radar charts][1] in the *Amazon
+    #   QuickSight User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html
+    #   @return [Types::RadarChartVisual]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Visual AWS API Documentation
     #
     class Visual < Struct.new(
@@ -25091,7 +25473,22 @@ module Aws::QuickSight
       :insight_visual,
       :sankey_diagram_visual,
       :custom_content_visual,
-      :empty_visual)
+      :empty_visual,
+      :radar_chart_visual)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The axis sort options for a visual.
+    #
+    # @!attribute [rw] availability_status
+    #   The availaiblity status of a visual's axis sort options.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualAxisSortOption AWS API Documentation
+    #
+    class VisualAxisSortOption < Struct.new(
+      :availability_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25171,6 +25568,20 @@ module Aws::QuickSight
       :navigation_operation,
       :url_operation,
       :set_parameters_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The menu options for a visual.
+    #
+    # @!attribute [rw] availability_status
+    #   The availaiblity status of a visual's menu options.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualMenuOption AWS API Documentation
+    #
+    class VisualMenuOption < Struct.new(
+      :availability_status)
       SENSITIVE = []
       include Aws::Structure
     end

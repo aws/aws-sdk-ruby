@@ -7257,6 +7257,8 @@ module Aws::EC2
     #   Indicates whether running instances should be terminated if the
     #   total target capacity of the EC2 Fleet is decreased below the
     #   current size of the EC2 Fleet.
+    #
+    #   Supported only for fleets of type `maintain`.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_configs
@@ -11752,6 +11754,9 @@ module Aws::EC2
     #   * Cold HDD: `sc1`
     #
     #   * Magnetic: `standard`
+    #
+    #   Throughput Optimized HDD (`st1`) and Cold HDD (`sc1`) volumes can't
+    #   be used as boot volumes.
     #
     #   For more information, see [Amazon EBS volume types][1] in the
     #   *Amazon Elastic Compute Cloud User Guide*.
@@ -28238,6 +28243,14 @@ module Aws::EC2
     #
     #   This parameter is not returned by [DescribeImageAttribute][3].
     #
+    #   For CreateImage and RegisterImage, you can specify this parameter
+    #   only for block device mappings that result in new, empty volumes
+    #   when instances are launched from the image. Omit this parameter on
+    #   block device mappings that include an existing volume or snapshot.
+    #   If you include this parameter, and specify an encryption setting
+    #   that is different from the existing volume or snapshot, the request
+    #   will fail.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
@@ -30574,6 +30587,8 @@ module Aws::EC2
     #   Indicates whether running instances should be terminated if the
     #   target capacity of the EC2 Fleet is decreased below the current size
     #   of the EC2 Fleet.
+    #
+    #   Supported only for fleets of type `maintain`.
     #   @return [String]
     #
     # @!attribute [rw] fulfilled_capacity
@@ -39600,8 +39615,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # A resource discovery is an IPAM component that enables IPAM Service to
-    # manage and monitor resources that belong to the owning account.
+    # A resource discovery is an IPAM component that enables IPAM to manage
+    # and monitor resources that belong to the owning account.
     #
     # @!attribute [rw] owner_id
     #   The ID of the owner.
@@ -43202,6 +43217,8 @@ module Aws::EC2
     #   Indicates whether running instances should be terminated if the
     #   total target capacity of the EC2 Fleet is decreased below the
     #   current size of the EC2 Fleet.
+    #
+    #   Supported only for fleets of type `maintain`.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_configs
@@ -44903,9 +44920,11 @@ module Aws::EC2
     # Contains the parameters for ModifySpotFleetRequest.
     #
     # @!attribute [rw] excess_capacity_termination_policy
-    #   Indicates whether running Spot Instances should be terminated if the
+    #   Indicates whether running instances should be terminated if the
     #   target capacity of the Spot Fleet request is decreased below the
     #   current size of the Spot Fleet.
+    #
+    #   Supported only for fleets of type `maintain`.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_configs
@@ -51580,12 +51599,12 @@ module Aws::EC2
     #
     #   * `resolve:ssm:parameter-name:label`
     #
-    #   For more information, see [Use a Systems Manager parameter instead
-    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   For more information, see [Use a Systems Manager parameter to find
+    #   an AMI][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -54525,11 +54544,12 @@ module Aws::EC2
     # @!attribute [rw] aws_access_key_id
     #   The access key ID of the owner of the bucket. Before you specify a
     #   value for your access key ID, review and follow the guidance in
-    #   [Best practices for managing Amazon Web Services access keys][1].
+    #   [Best Practices for Amazon Web Services accounts][1] in the *Account
+    #   ManagementReference Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
+    #   [1]: https://docs.aws.amazon.com/accounts/latest/reference/best-practices.html
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -56816,9 +56836,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] excess_capacity_termination_policy
-    #   Indicates whether running Spot Instances should be terminated if you
+    #   Indicates whether running instances should be terminated if you
     #   decrease the target capacity of the Spot Fleet request below the
     #   current size of the Spot Fleet.
+    #
+    #   Supported only for fleets of type `maintain`.
     #   @return [String]
     #
     # @!attribute [rw] fulfilled_capacity

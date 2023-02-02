@@ -697,7 +697,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [String] :vpc_peering_connection_id
+    # @option params [required, String] :vpc_peering_connection_id
     #   The ID of the VPC peering connection. You must specify this parameter
     #   in the request.
     #
@@ -709,7 +709,7 @@ module Aws::EC2
     #
     #   resp = client.accept_vpc_peering_connection({
     #     dry_run: false,
-    #     vpc_peering_connection_id: "VpcPeeringConnectionIdWithResolver",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionIdWithResolver", # required
     #   })
     #
     # @example Response structure
@@ -1833,10 +1833,10 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html
     # [2]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy
     #
-    # @option params [String] :certificate_arn
+    # @option params [required, String] :certificate_arn
     #   The ARN of the ACM certificate with which to associate the IAM role.
     #
-    # @option params [String] :role_arn
+    # @option params [required, String] :role_arn
     #   The ARN of the IAM role to associate with the ACM certificate. You can
     #   associate up to 16 IAM roles with an ACM certificate.
     #
@@ -1855,8 +1855,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_enclave_certificate_iam_role({
-    #     certificate_arn: "CertificateId",
-    #     role_arn: "RoleId",
+    #     certificate_arn: "CertificateId", # required
+    #     role_arn: "RoleId", # required
     #     dry_run: false,
     #   })
     #
@@ -2018,8 +2018,8 @@ module Aws::EC2
     end
 
     # Associates an IPAM resource discovery with an Amazon VPC IPAM. A
-    # resource discovery is an IPAM component that enables IPAM Service to
-    # manage and monitor resources that belong to the owning account.
+    # resource discovery is an IPAM component that enables IPAM to manage
+    # and monitor resources that belong to the owning account.
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -2281,14 +2281,14 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html
     #
-    # @option params [String] :transit_gateway_multicast_domain_id
+    # @option params [required, String] :transit_gateway_multicast_domain_id
     #   The ID of the transit gateway multicast domain.
     #
-    # @option params [String] :transit_gateway_attachment_id
+    # @option params [required, String] :transit_gateway_attachment_id
     #   The ID of the transit gateway attachment to associate with the transit
     #   gateway multicast domain.
     #
-    # @option params [Array<String>] :subnet_ids
+    # @option params [required, Array<String>] :subnet_ids
     #   The IDs of the subnets to associate with the transit gateway multicast
     #   domain.
     #
@@ -2305,9 +2305,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_transit_gateway_multicast_domain({
-    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
-    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
-    #     subnet_ids: ["SubnetId"],
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     subnet_ids: ["SubnetId"], # required
     #     dry_run: false,
     #   })
     #
@@ -6155,6 +6155,8 @@ module Aws::EC2
     #   target capacity of the EC2 Fleet is decreased below the current size
     #   of the EC2 Fleet.
     #
+    #   Supported only for fleets of type `maintain`.
+    #
     # @option params [required, Array<Types::FleetLaunchTemplateConfigRequest>] :launch_template_configs
     #   The configuration for the EC2 Fleet.
     #
@@ -7582,8 +7584,8 @@ module Aws::EC2
     end
 
     # Creates an IPAM resource discovery. A resource discovery is an IPAM
-    # component that enables IPAM Service to manage and monitor resources
-    # that belong to the owning account.
+    # component that enables IPAM to manage and monitor resources that
+    # belong to the owning account.
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -13717,6 +13719,9 @@ module Aws::EC2
     #
     #   * Magnetic: `standard`
     #
+    #   Throughput Optimized HDD (`st1`) and Cold HDD (`sc1`) volumes can't
+    #   be used as boot volumes.
+    #
     #   For more information, see [Amazon EBS volume types][1] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
@@ -14507,7 +14512,7 @@ module Aws::EC2
     #   The ID of the VPC with which you are creating the VPC peering
     #   connection. You must specify this parameter in the request.
     #
-    # @option params [String] :vpc_id
+    # @option params [required, String] :vpc_id
     #   The ID of the requester VPC. You must specify this parameter in the
     #   request.
     #
@@ -14530,7 +14535,7 @@ module Aws::EC2
     #     dry_run: false,
     #     peer_owner_id: "String",
     #     peer_vpc_id: "String",
-    #     vpc_id: "VpcId",
+    #     vpc_id: "VpcId", # required
     #     peer_region: "String",
     #     tag_specifications: [
     #       {
@@ -15665,8 +15670,8 @@ module Aws::EC2
     end
 
     # Deletes an IPAM resource discovery. A resource discovery is an IPAM
-    # component that enables IPAM Service to manage and monitor resources
-    # that belong to the owning account.
+    # component that enables IPAM to manage and monitor resources that
+    # belong to the owning account.
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -24957,8 +24962,8 @@ module Aws::EC2
     end
 
     # Describes IPAM resource discoveries. A resource discovery is an IPAM
-    # component that enables IPAM Service to manage and monitor resources
-    # that belong to the owning account.
+    # component that enables IPAM to manage and monitor resources that
+    # belong to the owning account.
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -37102,11 +37107,11 @@ module Aws::EC2
     # used to encrypt the private key. This effectively revokes the role's
     # permission to use the certificate.
     #
-    # @option params [String] :certificate_arn
+    # @option params [required, String] :certificate_arn
     #   The ARN of the ACM certificate from which to disassociate the IAM
     #   role.
     #
-    # @option params [String] :role_arn
+    # @option params [required, String] :role_arn
     #   The ARN of the IAM role to disassociate.
     #
     # @option params [Boolean] :dry_run
@@ -37122,8 +37127,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_enclave_certificate_iam_role({
-    #     certificate_arn: "CertificateId",
-    #     role_arn: "RoleId",
+    #     certificate_arn: "CertificateId", # required
+    #     role_arn: "RoleId", # required
     #     dry_run: false,
     #   })
     #
@@ -37272,8 +37277,8 @@ module Aws::EC2
     end
 
     # Disassociates a resource discovery from an Amazon VPC IPAM. A resource
-    # discovery is an IPAM component that enables IPAM Service to manage and
-    # monitor resources that belong to the owning account.
+    # discovery is an IPAM component that enables IPAM to manage and monitor
+    # resources that belong to the owning account.
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -37481,13 +37486,13 @@ module Aws::EC2
     # Disassociates the specified subnets from the transit gateway multicast
     # domain.
     #
-    # @option params [String] :transit_gateway_multicast_domain_id
+    # @option params [required, String] :transit_gateway_multicast_domain_id
     #   The ID of the transit gateway multicast domain.
     #
-    # @option params [String] :transit_gateway_attachment_id
+    # @option params [required, String] :transit_gateway_attachment_id
     #   The ID of the attachment.
     #
-    # @option params [Array<String>] :subnet_ids
+    # @option params [required, Array<String>] :subnet_ids
     #   The IDs of the subnets;
     #
     # @option params [Boolean] :dry_run
@@ -37503,9 +37508,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_transit_gateway_multicast_domain({
-    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
-    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
-    #     subnet_ids: ["SubnetId"],
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     subnet_ids: ["SubnetId"], # required
     #     dry_run: false,
     #   })
     #
@@ -38720,7 +38725,7 @@ module Aws::EC2
     # encrypted private key bundle are stored, and the ARN of the KMS key
     # that's used to encrypt the private key.
     #
-    # @option params [String] :certificate_arn
+    # @option params [required, String] :certificate_arn
     #   The ARN of the ACM certificate for which to view the associated IAM
     #   roles, encryption keys, and Amazon S3 object information.
     #
@@ -38737,7 +38742,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_associated_enclave_certificate_iam_roles({
-    #     certificate_arn: "CertificateId",
+    #     certificate_arn: "CertificateId", # required
     #     dry_run: false,
     #   })
     #
@@ -40025,8 +40030,8 @@ module Aws::EC2
     # Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is
     # associated with more than one resource discovery, the resource CIDRs
     # across all of the resource discoveries is returned. A resource
-    # discovery is an IPAM component that enables IPAM Service to manage and
-    # monitor resources that belong to the owning account.
+    # discovery is an IPAM component that enables IPAM to manage and monitor
+    # resources that belong to the owning account.
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -41395,7 +41400,7 @@ module Aws::EC2
     # Gets information about the associations for the transit gateway
     # multicast domain.
     #
-    # @option params [String] :transit_gateway_multicast_domain_id
+    # @option params [required, String] :transit_gateway_multicast_domain_id
     #   The ID of the transit gateway multicast domain.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -41438,7 +41443,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_multicast_domain_associations({
-    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -43486,6 +43491,8 @@ module Aws::EC2
     #   target capacity of the EC2 Fleet is decreased below the current size
     #   of the EC2 Fleet.
     #
+    #   Supported only for fleets of type `maintain`.
+    #
     # @option params [Array<Types::FleetLaunchTemplateConfigRequest>] :launch_template_configs
     #   The launch template and overrides.
     #
@@ -44402,7 +44409,7 @@ module Aws::EC2
     #     client_token: "String",
     #     instance_credit_specifications: [ # required
     #       {
-    #         instance_id: "InstanceId",
+    #         instance_id: "InstanceId", # required
     #         cpu_credits: "String",
     #       },
     #     ],
@@ -45149,8 +45156,8 @@ module Aws::EC2
     end
 
     # Modifies a resource discovery. A resource discovery is an IPAM
-    # component that enables IPAM Service to manage and monitor resources
-    # that belong to the owning account.
+    # component that enables IPAM to manage and monitor resources that
+    # belong to the owning account.
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -45646,7 +45653,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [String] :instance_id
+    # @option params [required, String] :instance_id
     #   The ID of the instance.
     #
     # @option params [String] :private_dns_hostname_type
@@ -45672,7 +45679,7 @@ module Aws::EC2
     #
     #   resp = client.modify_private_dns_name_options({
     #     dry_run: false,
-    #     instance_id: "InstanceId",
+    #     instance_id: "InstanceId", # required
     #     private_dns_hostname_type: "ip-name", # accepts ip-name, resource-name
     #     enable_resource_name_dns_a_record: false,
     #     enable_resource_name_dns_aaaa_record: false,
@@ -45783,7 +45790,7 @@ module Aws::EC2
     #     group_id: "SecurityGroupId", # required
     #     security_group_rules: [ # required
     #       {
-    #         security_group_rule_id: "SecurityGroupRuleId",
+    #         security_group_rule_id: "SecurityGroupRuleId", # required
     #         security_group_rule: {
     #           ip_protocol: "String",
     #           from_port: 1,
@@ -46013,9 +46020,11 @@ module Aws::EC2
     # again later, you can set the target capacity to 0.
     #
     # @option params [String] :excess_capacity_termination_policy
-    #   Indicates whether running Spot Instances should be terminated if the
-    #   target capacity of the Spot Fleet request is decreased below the
-    #   current size of the Spot Fleet.
+    #   Indicates whether running instances should be terminated if the target
+    #   capacity of the Spot Fleet request is decreased below the current size
+    #   of the Spot Fleet.
+    #
+    #   Supported only for fleets of type `maintain`.
     #
     # @option params [Array<Types::LaunchTemplateConfig>] :launch_template_configs
     #   The launch template and overrides. You can only use this parameter if
@@ -49720,13 +49729,13 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html
     #
-    # @option params [String] :transit_gateway_multicast_domain_id
+    # @option params [required, String] :transit_gateway_multicast_domain_id
     #   The ID of the transit gateway multicast domain.
     #
     # @option params [String] :group_ip_address
     #   The IP address assigned to the transit gateway multicast group.
     #
-    # @option params [Array<String>] :network_interface_ids
+    # @option params [required, Array<String>] :network_interface_ids
     #   The group members' network interface IDs to register with the transit
     #   gateway multicast group.
     #
@@ -49743,9 +49752,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_transit_gateway_multicast_group_members({
-    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId", # required
     #     group_ip_address: "String",
-    #     network_interface_ids: ["NetworkInterfaceId"],
+    #     network_interface_ids: ["NetworkInterfaceId"], # required
     #     dry_run: false,
     #   })
     #
@@ -49781,13 +49790,13 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html
     #
-    # @option params [String] :transit_gateway_multicast_domain_id
+    # @option params [required, String] :transit_gateway_multicast_domain_id
     #   The ID of the transit gateway multicast domain.
     #
     # @option params [String] :group_ip_address
     #   The IP address assigned to the transit gateway multicast group.
     #
-    # @option params [Array<String>] :network_interface_ids
+    # @option params [required, Array<String>] :network_interface_ids
     #   The group sources' network interface IDs to register with the transit
     #   gateway multicast group.
     #
@@ -49804,9 +49813,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_transit_gateway_multicast_group_sources({
-    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId", # required
     #     group_ip_address: "String",
-    #     network_interface_ids: ["NetworkInterfaceId"],
+    #     network_interface_ids: ["NetworkInterfaceId"], # required
     #     dry_run: false,
     #   })
     #
@@ -53824,7 +53833,7 @@ module Aws::EC2
     # Searches one or more transit gateway multicast groups and returns the
     # group membership information.
     #
-    # @option params [String] :transit_gateway_multicast_domain_id
+    # @option params [required, String] :transit_gateway_multicast_domain_id
     #   The ID of the transit gateway multicast domain.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -53879,7 +53888,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_transit_gateway_multicast_groups({
-    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -55831,7 +55840,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.363.0'
+      context[:gem_version] = '1.364.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

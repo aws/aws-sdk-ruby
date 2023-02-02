@@ -1430,14 +1430,14 @@ module Aws::ElasticLoadBalancingV2
     #   The number of consecutive health check successes required before
     #   considering a target healthy. The range is 2-10. If the target group
     #   protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the default is 5.
-    #   For target groups with a protocol of GENEVE, the default is 3. If the
+    #   For target groups with a protocol of GENEVE, the default is 5. If the
     #   target type is `lambda`, the default is 5.
     #
     # @option params [Integer] :unhealthy_threshold_count
     #   The number of consecutive health check failures required before
     #   considering a target unhealthy. The range is 2-10. If the target group
     #   protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the default is 2.
-    #   For target groups with a protocol of GENEVE, the default is 3. If the
+    #   For target groups with a protocol of GENEVE, the default is 2. If the
     #   target type is `lambda`, the default is 5.
     #
     # @option params [Types::Matcher] :matcher
@@ -4326,7 +4326,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

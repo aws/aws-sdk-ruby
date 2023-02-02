@@ -285,6 +285,9 @@ module Aws::QuickSight
     DataPathSort = Shapes::StructureShape.new(name: 'DataPathSort')
     DataPathValue = Shapes::StructureShape.new(name: 'DataPathValue')
     DataPathValueList = Shapes::ListShape.new(name: 'DataPathValueList')
+    DataPointDrillUpDownOption = Shapes::StructureShape.new(name: 'DataPointDrillUpDownOption')
+    DataPointMenuLabelOption = Shapes::StructureShape.new(name: 'DataPointMenuLabelOption')
+    DataPointTooltipOption = Shapes::StructureShape.new(name: 'DataPointTooltipOption')
     DataSet = Shapes::StructureShape.new(name: 'DataSet')
     DataSetArnsList = Shapes::ListShape.new(name: 'DataSetArnsList')
     DataSetConfiguration = Shapes::StructureShape.new(name: 'DataSetConfiguration')
@@ -471,6 +474,7 @@ module Aws::QuickSight
     ExplicitHierarchyColumnList = Shapes::ListShape.new(name: 'ExplicitHierarchyColumnList')
     ExportHiddenFieldsOption = Shapes::StructureShape.new(name: 'ExportHiddenFieldsOption')
     ExportToCSVOption = Shapes::StructureShape.new(name: 'ExportToCSVOption')
+    ExportWithHiddenFieldsOption = Shapes::StructureShape.new(name: 'ExportWithHiddenFieldsOption')
     Expression = Shapes::StringShape.new(name: 'Expression')
     FieldBasedTooltip = Shapes::StructureShape.new(name: 'FieldBasedTooltip')
     FieldFolder = Shapes::StructureShape.new(name: 'FieldFolder')
@@ -922,6 +926,18 @@ module Aws::QuickSight
     Query = Shapes::StringShape.new(name: 'Query')
     QueueInfo = Shapes::StructureShape.new(name: 'QueueInfo')
     QuickSightUserNotFoundException = Shapes::StructureShape.new(name: 'QuickSightUserNotFoundException')
+    RadarChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'RadarChartAggregatedFieldWells')
+    RadarChartAreaStyleSettings = Shapes::StructureShape.new(name: 'RadarChartAreaStyleSettings')
+    RadarChartCategoryFieldList = Shapes::ListShape.new(name: 'RadarChartCategoryFieldList')
+    RadarChartColorFieldList = Shapes::ListShape.new(name: 'RadarChartColorFieldList')
+    RadarChartConfiguration = Shapes::StructureShape.new(name: 'RadarChartConfiguration')
+    RadarChartFieldWells = Shapes::StructureShape.new(name: 'RadarChartFieldWells')
+    RadarChartSeriesSettings = Shapes::StructureShape.new(name: 'RadarChartSeriesSettings')
+    RadarChartShape = Shapes::StringShape.new(name: 'RadarChartShape')
+    RadarChartSortConfiguration = Shapes::StructureShape.new(name: 'RadarChartSortConfiguration')
+    RadarChartStartAngle = Shapes::FloatShape.new(name: 'RadarChartStartAngle')
+    RadarChartValuesFieldList = Shapes::ListShape.new(name: 'RadarChartValuesFieldList')
+    RadarChartVisual = Shapes::StructureShape.new(name: 'RadarChartVisual')
     RangeEndsLabelType = Shapes::StructureShape.new(name: 'RangeEndsLabelType')
     RdsParameters = Shapes::StructureShape.new(name: 'RdsParameters')
     RecoveryWindowInDays = Shapes::IntegerShape.new(name: 'RecoveryWindowInDays')
@@ -1065,6 +1081,7 @@ module Aws::QuickSight
     SheetElementConfigurationOverrides = Shapes::StructureShape.new(name: 'SheetElementConfigurationOverrides')
     SheetElementRenderingRule = Shapes::StructureShape.new(name: 'SheetElementRenderingRule')
     SheetElementRenderingRuleList = Shapes::ListShape.new(name: 'SheetElementRenderingRuleList')
+    SheetLayoutElementMaximizationOption = Shapes::StructureShape.new(name: 'SheetLayoutElementMaximizationOption')
     SheetList = Shapes::ListShape.new(name: 'SheetList')
     SheetName = Shapes::StringShape.new(name: 'SheetName')
     SheetStyle = Shapes::StructureShape.new(name: 'SheetStyle')
@@ -1305,6 +1322,7 @@ module Aws::QuickSight
     VisiblePanelRows = Shapes::IntegerShape.new(name: 'VisiblePanelRows')
     VisibleRangeOptions = Shapes::StructureShape.new(name: 'VisibleRangeOptions')
     Visual = Shapes::StructureShape.new(name: 'Visual')
+    VisualAxisSortOption = Shapes::StructureShape.new(name: 'VisualAxisSortOption')
     VisualCustomAction = Shapes::StructureShape.new(name: 'VisualCustomAction')
     VisualCustomActionList = Shapes::ListShape.new(name: 'VisualCustomActionList')
     VisualCustomActionName = Shapes::StringShape.new(name: 'VisualCustomActionName')
@@ -1312,6 +1330,7 @@ module Aws::QuickSight
     VisualCustomActionOperationList = Shapes::ListShape.new(name: 'VisualCustomActionOperationList')
     VisualCustomActionTrigger = Shapes::StringShape.new(name: 'VisualCustomActionTrigger')
     VisualList = Shapes::ListShape.new(name: 'VisualList')
+    VisualMenuOption = Shapes::StructureShape.new(name: 'VisualMenuOption')
     VisualPalette = Shapes::StructureShape.new(name: 'VisualPalette')
     VisualSubtitleLabelOptions = Shapes::StructureShape.new(name: 'VisualSubtitleLabelOptions')
     VisualTitleLabelOptions = Shapes::StructureShape.new(name: 'VisualTitleLabelOptions')
@@ -1721,7 +1740,7 @@ module Aws::QuickSight
 
     CategoryFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
     CategoryFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
-    CategoryFilter.add_member(:configuration, Shapes::ShapeRef.new(shape: CategoryFilterConfiguration, location_name: "Configuration"))
+    CategoryFilter.add_member(:configuration, Shapes::ShapeRef.new(shape: CategoryFilterConfiguration, required: true, location_name: "Configuration"))
     CategoryFilter.struct_class = Types::CategoryFilter
 
     CategoryFilterConfiguration.add_member(:filter_list_configuration, Shapes::ShapeRef.new(shape: FilterListConfiguration, location_name: "FilterListConfiguration"))
@@ -2301,7 +2320,14 @@ module Aws::QuickSight
     DashboardPublishOptions.add_member(:ad_hoc_filtering_option, Shapes::ShapeRef.new(shape: AdHocFilteringOption, location_name: "AdHocFilteringOption"))
     DashboardPublishOptions.add_member(:export_to_csv_option, Shapes::ShapeRef.new(shape: ExportToCSVOption, location_name: "ExportToCSVOption"))
     DashboardPublishOptions.add_member(:sheet_controls_option, Shapes::ShapeRef.new(shape: SheetControlsOption, location_name: "SheetControlsOption"))
-    DashboardPublishOptions.add_member(:visual_publish_options, Shapes::ShapeRef.new(shape: DashboardVisualPublishOptions, location_name: "VisualPublishOptions"))
+    DashboardPublishOptions.add_member(:visual_publish_options, Shapes::ShapeRef.new(shape: DashboardVisualPublishOptions, deprecated: true, location_name: "VisualPublishOptions", metadata: {"deprecatedMessage"=>"VisualPublishOptions property will reach its end of standard support in a future release. To perform this action, use ExportWithHiddenFields."}))
+    DashboardPublishOptions.add_member(:sheet_layout_element_maximization_option, Shapes::ShapeRef.new(shape: SheetLayoutElementMaximizationOption, location_name: "SheetLayoutElementMaximizationOption"))
+    DashboardPublishOptions.add_member(:visual_menu_option, Shapes::ShapeRef.new(shape: VisualMenuOption, location_name: "VisualMenuOption"))
+    DashboardPublishOptions.add_member(:visual_axis_sort_option, Shapes::ShapeRef.new(shape: VisualAxisSortOption, location_name: "VisualAxisSortOption"))
+    DashboardPublishOptions.add_member(:export_with_hidden_fields_option, Shapes::ShapeRef.new(shape: ExportWithHiddenFieldsOption, location_name: "ExportWithHiddenFieldsOption"))
+    DashboardPublishOptions.add_member(:data_point_drill_up_down_option, Shapes::ShapeRef.new(shape: DataPointDrillUpDownOption, location_name: "DataPointDrillUpDownOption"))
+    DashboardPublishOptions.add_member(:data_point_menu_label_option, Shapes::ShapeRef.new(shape: DataPointMenuLabelOption, location_name: "DataPointMenuLabelOption"))
+    DashboardPublishOptions.add_member(:data_point_tooltip_option, Shapes::ShapeRef.new(shape: DataPointTooltipOption, location_name: "DataPointTooltipOption"))
     DashboardPublishOptions.struct_class = Types::DashboardPublishOptions
 
     DashboardSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "Operator"))
@@ -2429,6 +2455,15 @@ module Aws::QuickSight
     DataPathValue.struct_class = Types::DataPathValue
 
     DataPathValueList.member = Shapes::ShapeRef.new(shape: DataPathValue)
+
+    DataPointDrillUpDownOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    DataPointDrillUpDownOption.struct_class = Types::DataPointDrillUpDownOption
+
+    DataPointMenuLabelOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    DataPointMenuLabelOption.struct_class = Types::DataPointMenuLabelOption
+
+    DataPointTooltipOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    DataPointTooltipOption.struct_class = Types::DataPointTooltipOption
 
     DataSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DataSet.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DataSetId"))
@@ -2926,6 +2961,7 @@ module Aws::QuickSight
     DescribeDashboardDefinitionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: DashboardVersionDefinition, location_name: "Definition"))
     DescribeDashboardDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeDashboardDefinitionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeDashboardDefinitionResponse.add_member(:dashboard_publish_options, Shapes::ShapeRef.new(shape: DashboardPublishOptions, location_name: "DashboardPublishOptions"))
     DescribeDashboardDefinitionResponse.struct_class = Types::DescribeDashboardDefinitionResponse
 
     DescribeDashboardPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -3247,6 +3283,9 @@ module Aws::QuickSight
 
     ExportToCSVOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
     ExportToCSVOption.struct_class = Types::ExportToCSVOption
+
+    ExportWithHiddenFieldsOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    ExportWithHiddenFieldsOption.struct_class = Types::ExportWithHiddenFieldsOption
 
     FieldBasedTooltip.add_member(:aggregation_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "AggregationVisibility"))
     FieldBasedTooltip.add_member(:tooltip_title_type, Shapes::ShapeRef.new(shape: TooltipTitleType, location_name: "TooltipTitleType"))
@@ -4908,6 +4947,56 @@ module Aws::QuickSight
     QuickSightUserNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     QuickSightUserNotFoundException.struct_class = Types::QuickSightUserNotFoundException
 
+    RadarChartAggregatedFieldWells.add_member(:category, Shapes::ShapeRef.new(shape: RadarChartCategoryFieldList, location_name: "Category"))
+    RadarChartAggregatedFieldWells.add_member(:color, Shapes::ShapeRef.new(shape: RadarChartColorFieldList, location_name: "Color"))
+    RadarChartAggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: RadarChartValuesFieldList, location_name: "Values"))
+    RadarChartAggregatedFieldWells.struct_class = Types::RadarChartAggregatedFieldWells
+
+    RadarChartAreaStyleSettings.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    RadarChartAreaStyleSettings.struct_class = Types::RadarChartAreaStyleSettings
+
+    RadarChartCategoryFieldList.member = Shapes::ShapeRef.new(shape: DimensionField)
+
+    RadarChartColorFieldList.member = Shapes::ShapeRef.new(shape: DimensionField)
+
+    RadarChartConfiguration.add_member(:field_wells, Shapes::ShapeRef.new(shape: RadarChartFieldWells, location_name: "FieldWells"))
+    RadarChartConfiguration.add_member(:sort_configuration, Shapes::ShapeRef.new(shape: RadarChartSortConfiguration, location_name: "SortConfiguration"))
+    RadarChartConfiguration.add_member(:shape, Shapes::ShapeRef.new(shape: RadarChartShape, location_name: "Shape"))
+    RadarChartConfiguration.add_member(:base_series_settings, Shapes::ShapeRef.new(shape: RadarChartSeriesSettings, location_name: "BaseSeriesSettings"))
+    RadarChartConfiguration.add_member(:start_angle, Shapes::ShapeRef.new(shape: RadarChartStartAngle, location_name: "StartAngle"))
+    RadarChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    RadarChartConfiguration.add_member(:alternate_band_colors_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "AlternateBandColorsVisibility"))
+    RadarChartConfiguration.add_member(:alternate_band_even_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "AlternateBandEvenColor"))
+    RadarChartConfiguration.add_member(:alternate_band_odd_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "AlternateBandOddColor"))
+    RadarChartConfiguration.add_member(:category_axis, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "CategoryAxis"))
+    RadarChartConfiguration.add_member(:category_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "CategoryLabelOptions"))
+    RadarChartConfiguration.add_member(:color_axis, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "ColorAxis"))
+    RadarChartConfiguration.add_member(:color_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "ColorLabelOptions"))
+    RadarChartConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
+    RadarChartConfiguration.struct_class = Types::RadarChartConfiguration
+
+    RadarChartFieldWells.add_member(:radar_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: RadarChartAggregatedFieldWells, location_name: "RadarChartAggregatedFieldWells"))
+    RadarChartFieldWells.struct_class = Types::RadarChartFieldWells
+
+    RadarChartSeriesSettings.add_member(:area_style_settings, Shapes::ShapeRef.new(shape: RadarChartAreaStyleSettings, location_name: "AreaStyleSettings"))
+    RadarChartSeriesSettings.struct_class = Types::RadarChartSeriesSettings
+
+    RadarChartSortConfiguration.add_member(:category_sort, Shapes::ShapeRef.new(shape: FieldSortOptionsList, location_name: "CategorySort"))
+    RadarChartSortConfiguration.add_member(:category_items_limit, Shapes::ShapeRef.new(shape: ItemsLimitConfiguration, location_name: "CategoryItemsLimit"))
+    RadarChartSortConfiguration.add_member(:color_sort, Shapes::ShapeRef.new(shape: FieldSortOptionsList, location_name: "ColorSort"))
+    RadarChartSortConfiguration.add_member(:color_items_limit, Shapes::ShapeRef.new(shape: ItemsLimitConfiguration, location_name: "ColorItemsLimit"))
+    RadarChartSortConfiguration.struct_class = Types::RadarChartSortConfiguration
+
+    RadarChartValuesFieldList.member = Shapes::ShapeRef.new(shape: MeasureField)
+
+    RadarChartVisual.add_member(:visual_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "VisualId"))
+    RadarChartVisual.add_member(:title, Shapes::ShapeRef.new(shape: VisualTitleLabelOptions, location_name: "Title"))
+    RadarChartVisual.add_member(:subtitle, Shapes::ShapeRef.new(shape: VisualSubtitleLabelOptions, location_name: "Subtitle"))
+    RadarChartVisual.add_member(:chart_configuration, Shapes::ShapeRef.new(shape: RadarChartConfiguration, location_name: "ChartConfiguration"))
+    RadarChartVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
+    RadarChartVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
+    RadarChartVisual.struct_class = Types::RadarChartVisual
+
     RangeEndsLabelType.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     RangeEndsLabelType.struct_class = Types::RangeEndsLabelType
 
@@ -5350,6 +5439,9 @@ module Aws::QuickSight
     SheetElementRenderingRule.struct_class = Types::SheetElementRenderingRule
 
     SheetElementRenderingRuleList.member = Shapes::ShapeRef.new(shape: SheetElementRenderingRule)
+
+    SheetLayoutElementMaximizationOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    SheetLayoutElementMaximizationOption.struct_class = Types::SheetLayoutElementMaximizationOption
 
     SheetList.member = Shapes::ShapeRef.new(shape: Sheet)
 
@@ -6335,7 +6427,11 @@ module Aws::QuickSight
     Visual.add_member(:sankey_diagram_visual, Shapes::ShapeRef.new(shape: SankeyDiagramVisual, location_name: "SankeyDiagramVisual"))
     Visual.add_member(:custom_content_visual, Shapes::ShapeRef.new(shape: CustomContentVisual, location_name: "CustomContentVisual"))
     Visual.add_member(:empty_visual, Shapes::ShapeRef.new(shape: EmptyVisual, location_name: "EmptyVisual"))
+    Visual.add_member(:radar_chart_visual, Shapes::ShapeRef.new(shape: RadarChartVisual, location_name: "RadarChartVisual"))
     Visual.struct_class = Types::Visual
+
+    VisualAxisSortOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    VisualAxisSortOption.struct_class = Types::VisualAxisSortOption
 
     VisualCustomAction.add_member(:custom_action_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "CustomActionId"))
     VisualCustomAction.add_member(:name, Shapes::ShapeRef.new(shape: VisualCustomActionName, required: true, location_name: "Name"))
@@ -6355,6 +6451,9 @@ module Aws::QuickSight
     VisualCustomActionOperationList.member = Shapes::ShapeRef.new(shape: VisualCustomActionOperation)
 
     VisualList.member = Shapes::ShapeRef.new(shape: Visual)
+
+    VisualMenuOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    VisualMenuOption.struct_class = Types::VisualMenuOption
 
     VisualPalette.add_member(:chart_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "ChartColor"))
     VisualPalette.add_member(:color_map, Shapes::ShapeRef.new(shape: DataPathColorList, location_name: "ColorMap"))

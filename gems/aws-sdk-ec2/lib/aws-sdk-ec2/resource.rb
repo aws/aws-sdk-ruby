@@ -1451,6 +1451,9 @@ module Aws::EC2
     #
     #   * Magnetic: `standard`
     #
+    #   Throughput Optimized HDD (`st1`) and Cold HDD (`sc1`) volumes can't
+    #   be used as boot volumes.
+    #
     #   For more information, see [Amazon EBS volume types][1] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
@@ -1626,7 +1629,7 @@ module Aws::EC2
     #     dry_run: false,
     #     peer_owner_id: "String",
     #     peer_vpc_id: "String",
-    #     vpc_id: "VpcId",
+    #     vpc_id: "VpcId", # required
     #     peer_region: "String",
     #     tag_specifications: [
     #       {
@@ -1653,7 +1656,7 @@ module Aws::EC2
     # @option options [String] :peer_vpc_id
     #   The ID of the VPC with which you are creating the VPC peering
     #   connection. You must specify this parameter in the request.
-    # @option options [String] :vpc_id
+    # @option options [required, String] :vpc_id
     #   The ID of the requester VPC. You must specify this parameter in the
     #   request.
     # @option options [String] :peer_region

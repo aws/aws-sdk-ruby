@@ -343,6 +343,8 @@ module Aws::AppConfig
     Deployment.add_member(:started_at, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartedAt"))
     Deployment.add_member(:completed_at, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "CompletedAt"))
     Deployment.add_member(:applied_extensions, Shapes::ShapeRef.new(shape: AppliedExtensions, location_name: "AppliedExtensions"))
+    Deployment.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "KmsKeyArn"))
+    Deployment.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "KmsKeyIdentifier"))
     Deployment.struct_class = Types::Deployment
 
     DeploymentEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: DeploymentEventType, location_name: "EventType"))
@@ -602,6 +604,7 @@ module Aws::AppConfig
     StartDeploymentRequest.add_member(:configuration_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "ConfigurationVersion"))
     StartDeploymentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StartDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    StartDeploymentRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "KmsKeyIdentifier"))
     StartDeploymentRequest.struct_class = Types::StartDeploymentRequest
 
     StopDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))

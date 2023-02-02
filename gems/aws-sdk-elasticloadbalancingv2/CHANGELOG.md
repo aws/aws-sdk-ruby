@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2023-02-02)
+------------------
+
+* Feature - The GWLB Flex Health Check project updates the default values of healthy-threshold-count from 3 to 5 and unhealthy-threshold-count from 3 to 2
+
 1.83.0 (2023-01-18)
 ------------------
 

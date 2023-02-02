@@ -756,7 +756,7 @@ module Aws::ElasticLoadBalancingV2
     #   The number of consecutive health check successes required before
     #   considering a target healthy. The range is 2-10. If the target group
     #   protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the default is
-    #   5. For target groups with a protocol of GENEVE, the default is 3. If
+    #   5. For target groups with a protocol of GENEVE, the default is 5. If
     #   the target type is `lambda`, the default is 5.
     #   @return [Integer]
     #
@@ -765,7 +765,7 @@ module Aws::ElasticLoadBalancingV2
     #   considering a target unhealthy. The range is 2-10. If the target
     #   group protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the
     #   default is 2. For target groups with a protocol of GENEVE, the
-    #   default is 3. If the target type is `lambda`, the default is 5.
+    #   default is 2. If the target type is `lambda`, the default is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] matcher
