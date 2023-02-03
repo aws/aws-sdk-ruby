@@ -2583,6 +2583,82 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # Get counts of Proton resources.
+    #
+    # For infrastructure-provisioning resources (environments, services,
+    # service instances, pipelines), the action returns staleness counts. A
+    # resource is stale when it's behind the recommended version of the
+    # Proton template that it uses and it needs an update to become current.
+    #
+    # The action returns staleness counts (counts of resources that are
+    # up-to-date, behind a template major version, or behind a template
+    # minor version), the total number of resources, and the number of
+    # resources that are in a failed state, grouped by resource type.
+    # Components, environments, and service templates are exceptions—see the
+    # `components`, `environments`, and `serviceTemplates` field
+    # descriptions.
+    #
+    # For context, the action also returns the total number of each type of
+    # Proton template in the Amazon Web Services account.
+    #
+    # For more information, see [Proton dashboard][1] in the *Proton User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html
+    #
+    # @return [Types::GetResourcesSummaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcesSummaryOutput#counts #counts} => Types::CountsSummary
+    #
+    # @example Response structure
+    #
+    #   resp.counts.components.behind_major #=> Integer
+    #   resp.counts.components.behind_minor #=> Integer
+    #   resp.counts.components.failed #=> Integer
+    #   resp.counts.components.total #=> Integer
+    #   resp.counts.components.up_to_date #=> Integer
+    #   resp.counts.environment_templates.behind_major #=> Integer
+    #   resp.counts.environment_templates.behind_minor #=> Integer
+    #   resp.counts.environment_templates.failed #=> Integer
+    #   resp.counts.environment_templates.total #=> Integer
+    #   resp.counts.environment_templates.up_to_date #=> Integer
+    #   resp.counts.environments.behind_major #=> Integer
+    #   resp.counts.environments.behind_minor #=> Integer
+    #   resp.counts.environments.failed #=> Integer
+    #   resp.counts.environments.total #=> Integer
+    #   resp.counts.environments.up_to_date #=> Integer
+    #   resp.counts.pipelines.behind_major #=> Integer
+    #   resp.counts.pipelines.behind_minor #=> Integer
+    #   resp.counts.pipelines.failed #=> Integer
+    #   resp.counts.pipelines.total #=> Integer
+    #   resp.counts.pipelines.up_to_date #=> Integer
+    #   resp.counts.service_instances.behind_major #=> Integer
+    #   resp.counts.service_instances.behind_minor #=> Integer
+    #   resp.counts.service_instances.failed #=> Integer
+    #   resp.counts.service_instances.total #=> Integer
+    #   resp.counts.service_instances.up_to_date #=> Integer
+    #   resp.counts.service_templates.behind_major #=> Integer
+    #   resp.counts.service_templates.behind_minor #=> Integer
+    #   resp.counts.service_templates.failed #=> Integer
+    #   resp.counts.service_templates.total #=> Integer
+    #   resp.counts.service_templates.up_to_date #=> Integer
+    #   resp.counts.services.behind_major #=> Integer
+    #   resp.counts.services.behind_minor #=> Integer
+    #   resp.counts.services.failed #=> Integer
+    #   resp.counts.services.total #=> Integer
+    #   resp.counts.services.up_to_date #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetResourcesSummary AWS API Documentation
+    #
+    # @overload get_resources_summary(params = {})
+    # @param [Hash] params ({})
+    def get_resources_summary(params = {}, options = {})
+      req = build_request(:get_resources_summary, params)
+      req.send_request(options)
+    end
+
     # Get detailed data for a service.
     #
     # @option params [required, String] :name
@@ -5236,7 +5312,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

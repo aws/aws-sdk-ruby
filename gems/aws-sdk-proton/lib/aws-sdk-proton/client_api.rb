@@ -39,6 +39,7 @@ module Aws::Proton
     ComponentSummary = Shapes::StructureShape.new(name: 'ComponentSummary')
     ComponentSummaryList = Shapes::ListShape.new(name: 'ComponentSummaryList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CountsSummary = Shapes::StructureShape.new(name: 'CountsSummary')
     CreateComponentInput = Shapes::StructureShape.new(name: 'CreateComponentInput')
     CreateComponentOutput = Shapes::StructureShape.new(name: 'CreateComponentOutput')
     CreateEnvironmentAccountConnectionInput = Shapes::StructureShape.new(name: 'CreateEnvironmentAccountConnectionInput')
@@ -125,6 +126,8 @@ module Aws::Proton
     GetRepositoryOutput = Shapes::StructureShape.new(name: 'GetRepositoryOutput')
     GetRepositorySyncStatusInput = Shapes::StructureShape.new(name: 'GetRepositorySyncStatusInput')
     GetRepositorySyncStatusOutput = Shapes::StructureShape.new(name: 'GetRepositorySyncStatusOutput')
+    GetResourcesSummaryInput = Shapes::StructureShape.new(name: 'GetResourcesSummaryInput')
+    GetResourcesSummaryOutput = Shapes::StructureShape.new(name: 'GetResourcesSummaryOutput')
     GetServiceInput = Shapes::StructureShape.new(name: 'GetServiceInput')
     GetServiceInstanceInput = Shapes::StructureShape.new(name: 'GetServiceInstanceInput')
     GetServiceInstanceOutput = Shapes::StructureShape.new(name: 'GetServiceInstanceOutput')
@@ -138,6 +141,7 @@ module Aws::Proton
     GetTemplateSyncStatusInput = Shapes::StructureShape.new(name: 'GetTemplateSyncStatusInput')
     GetTemplateSyncStatusOutput = Shapes::StructureShape.new(name: 'GetTemplateSyncStatusOutput')
     GitBranchName = Shapes::StringShape.new(name: 'GitBranchName')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListComponentOutputsInput = Shapes::StructureShape.new(name: 'ListComponentOutputsInput')
     ListComponentOutputsOutput = Shapes::StructureShape.new(name: 'ListComponentOutputsOutput')
@@ -217,6 +221,7 @@ module Aws::Proton
     RepositorySyncEvent = Shapes::StructureShape.new(name: 'RepositorySyncEvent')
     RepositorySyncEvents = Shapes::ListShape.new(name: 'RepositorySyncEvents')
     RepositorySyncStatus = Shapes::StringShape.new(name: 'RepositorySyncStatus')
+    ResourceCountsSummary = Shapes::StructureShape.new(name: 'ResourceCountsSummary')
     ResourceDeploymentStatus = Shapes::StringShape.new(name: 'ResourceDeploymentStatus')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNameOrEmpty = Shapes::StringShape.new(name: 'ResourceNameOrEmpty')
@@ -387,6 +392,15 @@ module Aws::Proton
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CountsSummary.add_member(:components, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "components"))
+    CountsSummary.add_member(:environment_templates, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "environmentTemplates"))
+    CountsSummary.add_member(:environments, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "environments"))
+    CountsSummary.add_member(:pipelines, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "pipelines"))
+    CountsSummary.add_member(:service_instances, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "serviceInstances"))
+    CountsSummary.add_member(:service_templates, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "serviceTemplates"))
+    CountsSummary.add_member(:services, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "services"))
+    CountsSummary.struct_class = Types::CountsSummary
 
     CreateComponentInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateComponentInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "environmentName"))
@@ -758,6 +772,11 @@ module Aws::Proton
     GetRepositorySyncStatusOutput.add_member(:latest_sync, Shapes::ShapeRef.new(shape: RepositorySyncAttempt, location_name: "latestSync"))
     GetRepositorySyncStatusOutput.struct_class = Types::GetRepositorySyncStatusOutput
 
+    GetResourcesSummaryInput.struct_class = Types::GetResourcesSummaryInput
+
+    GetResourcesSummaryOutput.add_member(:counts, Shapes::ShapeRef.new(shape: CountsSummary, required: true, location_name: "counts"))
+    GetResourcesSummaryOutput.struct_class = Types::GetResourcesSummaryOutput
+
     GetServiceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     GetServiceInput.struct_class = Types::GetServiceInput
 
@@ -1066,6 +1085,13 @@ module Aws::Proton
     RepositorySyncEvent.struct_class = Types::RepositorySyncEvent
 
     RepositorySyncEvents.member = Shapes::ShapeRef.new(shape: RepositorySyncEvent)
+
+    ResourceCountsSummary.add_member(:behind_major, Shapes::ShapeRef.new(shape: Integer, location_name: "behindMajor"))
+    ResourceCountsSummary.add_member(:behind_minor, Shapes::ShapeRef.new(shape: Integer, location_name: "behindMinor"))
+    ResourceCountsSummary.add_member(:failed, Shapes::ShapeRef.new(shape: Integer, location_name: "failed"))
+    ResourceCountsSummary.add_member(:total, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "total"))
+    ResourceCountsSummary.add_member(:up_to_date, Shapes::ShapeRef.new(shape: Integer, location_name: "upToDate"))
+    ResourceCountsSummary.struct_class = Types::ResourceCountsSummary
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1863,6 +1889,18 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_resources_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcesSummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcesSummaryInput)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcesSummaryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

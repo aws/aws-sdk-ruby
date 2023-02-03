@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2023-02-03)
+------------------
+
+* Feature - Corrects descriptions of the parameters for the API operations RestoreFromClusterSnapshot, RestoreTableFromClusterSnapshot, and CreateCluster.
+
 1.89.0 (2023-02-02)
 ------------------
 

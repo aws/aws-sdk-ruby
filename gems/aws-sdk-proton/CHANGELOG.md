@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2023-02-03)
+------------------
+
+* Feature - Add new GetResourcesSummary API
+
 1.22.0 (2023-01-18)
 ------------------
 

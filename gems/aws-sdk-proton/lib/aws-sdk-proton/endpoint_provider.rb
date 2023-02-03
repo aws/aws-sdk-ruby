@@ -15,7 +15,7 @@ module Aws::Proton
       use_fips = parameters.use_fips
       endpoint = parameters.endpoint
       if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-        if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
+        if Aws::Endpoints::Matchers.set?(endpoint)
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
             raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
           end

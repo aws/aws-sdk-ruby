@@ -122,6 +122,8 @@ module Aws::Proton
             Aws::Proton::Endpoints::GetRepository.build(context)
           when :get_repository_sync_status
             Aws::Proton::Endpoints::GetRepositorySyncStatus.build(context)
+          when :get_resources_summary
+            Aws::Proton::Endpoints::GetResourcesSummary.build(context)
           when :get_service
             Aws::Proton::Endpoints::GetService.build(context)
           when :get_service_instance

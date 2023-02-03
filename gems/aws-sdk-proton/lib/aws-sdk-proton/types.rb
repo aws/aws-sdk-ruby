@@ -396,6 +396,65 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # Summary counts of each Proton resource type.
+    #
+    # @!attribute [rw] components
+    #   The total number of components in the Amazon Web Services account.
+    #
+    #   The semantics of the `components` field are different from the
+    #   semantics of results for other infrastructure-provisioning
+    #   resources. That's because at this time components don't have
+    #   associated templates, therefore they don't have the concept of
+    #   staleness. The `components` object will only contain `total` and
+    #   `failed` members.
+    #   @return [Types::ResourceCountsSummary]
+    #
+    # @!attribute [rw] environment_templates
+    #   The total number of environment templates in the Amazon Web Services
+    #   account.
+    #   @return [Types::ResourceCountsSummary]
+    #
+    # @!attribute [rw] environments
+    #   The staleness counts for Proton environments in the Amazon Web
+    #   Services account. The `environments` object will only contain
+    #   `total` members.
+    #   @return [Types::ResourceCountsSummary]
+    #
+    # @!attribute [rw] pipelines
+    #   The staleness counts for Proton pipelines in the Amazon Web Services
+    #   account.
+    #   @return [Types::ResourceCountsSummary]
+    #
+    # @!attribute [rw] service_instances
+    #   The staleness counts for Proton service instances in the Amazon Web
+    #   Services account.
+    #   @return [Types::ResourceCountsSummary]
+    #
+    # @!attribute [rw] service_templates
+    #   The total number of service templates in the Amazon Web Services
+    #   account. The `serviceTemplates` object will only contain `total`
+    #   members.
+    #   @return [Types::ResourceCountsSummary]
+    #
+    # @!attribute [rw] services
+    #   The staleness counts for Proton services in the Amazon Web Services
+    #   account.
+    #   @return [Types::ResourceCountsSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CountsSummary AWS API Documentation
+    #
+    class CountsSummary < Struct.new(
+      :components,
+      :environment_templates,
+      :environments,
+      :pipelines,
+      :service_instances,
+      :service_templates,
+      :services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] description
     #   An optional customer-provided description of the component.
     #   @return [String]
@@ -2363,6 +2422,24 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetResourcesSummaryInput AWS API Documentation
+    #
+    class GetResourcesSummaryInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] counts
+    #   Summary counts of each Proton resource type.
+    #   @return [Types::CountsSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetResourcesSummaryOutput AWS API Documentation
+    #
+    class GetResourcesSummaryOutput < Struct.new(
+      :counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the service that you want to get the detailed data for.
     #   @return [String]
@@ -3789,6 +3866,45 @@ module Aws::Proton
       :external_id,
       :time,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary counts of each Proton resource types.
+    #
+    # @!attribute [rw] behind_major
+    #   The number of resources of this type in the Amazon Web Services
+    #   account that need a major template version update.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] behind_minor
+    #   The number of resources of this type in the Amazon Web Services
+    #   account that need a minor template version update.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed
+    #   The number of resources of this type in the Amazon Web Services
+    #   account that failed to deploy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total
+    #   The total number of resources of this type in the Amazon Web
+    #   Services account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] up_to_date
+    #   The number of resources of this type in the Amazon Web Services
+    #   account that are up-to-date with their template.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ResourceCountsSummary AWS API Documentation
+    #
+    class ResourceCountsSummary < Struct.new(
+      :behind_major,
+      :behind_minor,
+      :failed,
+      :total,
+      :up_to_date)
       SENSITIVE = []
       include Aws::Structure
     end

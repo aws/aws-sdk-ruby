@@ -1218,10 +1218,15 @@ module Aws::Redshift
     #
     #   Constraints:
     #
-    #   * Must be 1 - 128 alphanumeric characters. The user name can't be
-    #     `PUBLIC`.
+    #   * Must be 1 - 128 alphanumeric characters or hyphens. The user name
+    #     can't be `PUBLIC`.
     #
-    #   * First character must be a letter.
+    #   * Must contain only lowercase letters, numbers, underscore, plus sign,
+    #     period (dot), at symbol (@), or hyphen.
+    #
+    #   * The first character must be a letter.
+    #
+    #   * Must not contain a colon (:) or a slash (/).
     #
     #   * Cannot be a reserved word. A list of reserved words can be found in
     #     [Reserved Words][1] in the Amazon Redshift Database Developer Guide.
@@ -3852,7 +3857,7 @@ module Aws::Redshift
     #
     # @option params [String] :cluster_security_group_name
     #   The name of a cluster security group for which you are requesting
-    #   details. You can specify either the **Marker** parameter or a
+    #   details. You must specify either the **Marker** parameter or a
     #   **ClusterSecurityGroupName** parameter, but not both.
     #
     #   Example: `securitygroup1`
@@ -3877,7 +3882,7 @@ module Aws::Redshift
     #   records by providing the returned marker value in the `Marker`
     #   parameter and retrying the request.
     #
-    #   Constraints: You can specify either the **ClusterSecurityGroupName**
+    #   Constraints: You must specify either the **ClusterSecurityGroupName**
     #   parameter or the **Marker** parameter, but not both.
     #
     # @option params [Array<String>] :tag_keys
@@ -4967,7 +4972,7 @@ module Aws::Redshift
     #   The cluster identifier of the cluster to access.
     #
     # @option params [String] :account
-    #   The AAmazon Web Services account ID of either the cluster owner
+    #   The Amazon Web Services account ID of either the cluster owner
     #   (grantor) or grantee. If `Grantee` parameter is true, then the
     #   `Account` value is of the grantor.
     #
@@ -6969,8 +6974,8 @@ module Aws::Redshift
     #   `cloudwatch`.
     #
     # @option params [Array<String>] :log_exports
-    #   The collection of exported log types. Log types include the connection
-    #   log, user log and user activity log.
+    #   The collection of exported log types. Possible values are
+    #   `connectionlog`, `useractivitylog`, and `userlog`.
     #
     # @return [Types::LoggingStatus] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10069,14 +10074,14 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_identifier
     #   The name of the snapshot from which to create the new cluster. This
-    #   parameter isn't case sensitive. You can specify this parameter or
+    #   parameter isn't case sensitive. You must specify this parameter or
     #   `snapshotArn`, but not both.
     #
     #   Example: `my-snapshot-id`
     #
     # @option params [String] :snapshot_arn
     #   The Amazon Resource Name (ARN) of the snapshot associated with the
-    #   message to restore from a cluster. You can specify this parameter or
+    #   message to restore from a cluster. You must specify this parameter or
     #   `snapshotIdentifier`, but not both.
     #
     # @option params [String] :snapshot_cluster_identifier
@@ -10496,6 +10501,13 @@ module Aws::Redshift
     # the `NewTableName` parameter value in the call to
     # `RestoreTableFromClusterSnapshot`. This way, you can replace the
     # original table with the table created from the snapshot.
+    #
+    # You can't use this operation to restore tables with [interleaved sort
+    # keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved
     #
     # @option params [required, String] :cluster_identifier
     #   The identifier of the Amazon Redshift cluster to restore the table to.
@@ -11164,7 +11176,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
