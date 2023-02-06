@@ -4746,9 +4746,9 @@ module Aws::MediaConvert
     # EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.
     #
     # @!attribute [rw] copy_protection_action
-    #   The action to take on copy and redistribution control XDS packets.
-    #   If you select PASSTHROUGH, packets will not be changed. If you
-    #   select STRIP, any packets will be removed in output captions.
+    #   The action to take on content advisory XDS packets. If you select
+    #   PASSTHROUGH, packets will not be changed. If you select STRIP, any
+    #   packets will be removed in output captions.
     #   @return [String]
     #
     # @!attribute [rw] vchip_action
@@ -7068,7 +7068,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] filter_strength
     #   Use Filter strength (FilterStrength) to adjust the magnitude the
-    #   input filter settings (Deblock and Denoise). The range is -5 to 5.
+    #   input filter settings (Deblock and Denoise). The range is 0 to 5.
     #   Default is 0.
     #   @return [Integer]
     #
@@ -7354,7 +7354,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] filter_strength
     #   Use Filter strength (FilterStrength) to adjust the magnitude the
-    #   input filter settings (Deblock and Denoise). The range is -5 to 5.
+    #   input filter settings (Deblock and Denoise). The range is 0 to 5.
     #   Default is 0.
     #   @return [Integer]
     #

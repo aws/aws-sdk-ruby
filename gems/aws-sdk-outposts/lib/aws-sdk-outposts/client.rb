@@ -431,17 +431,20 @@ module Aws::Outposts
     #   resp.order.line_items[0].catalog_item_id #=> String
     #   resp.order.line_items[0].line_item_id #=> String
     #   resp.order.line_items[0].quantity #=> Integer
-    #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED"
+    #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED", "REPLACED"
     #   resp.order.line_items[0].shipment_information.shipment_tracking_number #=> String
     #   resp.order.line_items[0].shipment_information.shipment_carrier #=> String, one of "DHL", "DBS", "FEDEX", "UPS"
     #   resp.order.line_items[0].asset_information_list #=> Array
     #   resp.order.line_items[0].asset_information_list[0].asset_id #=> String
     #   resp.order.line_items[0].asset_information_list[0].mac_address_list #=> Array
     #   resp.order.line_items[0].asset_information_list[0].mac_address_list[0] #=> String
+    #   resp.order.line_items[0].previous_line_item_id #=> String
+    #   resp.order.line_items[0].previous_order_id #=> String
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
     #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR"
+    #   resp.order.order_type #=> String, one of "OUTPOST", "REPLACEMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOrder AWS API Documentation
     #
@@ -798,17 +801,20 @@ module Aws::Outposts
     #   resp.order.line_items[0].catalog_item_id #=> String
     #   resp.order.line_items[0].line_item_id #=> String
     #   resp.order.line_items[0].quantity #=> Integer
-    #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED"
+    #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED", "REPLACED"
     #   resp.order.line_items[0].shipment_information.shipment_tracking_number #=> String
     #   resp.order.line_items[0].shipment_information.shipment_carrier #=> String, one of "DHL", "DBS", "FEDEX", "UPS"
     #   resp.order.line_items[0].asset_information_list #=> Array
     #   resp.order.line_items[0].asset_information_list[0].asset_id #=> String
     #   resp.order.line_items[0].asset_information_list[0].mac_address_list #=> Array
     #   resp.order.line_items[0].asset_information_list[0].mac_address_list[0] #=> String
+    #   resp.order.line_items[0].previous_line_item_id #=> String
+    #   resp.order.line_items[0].previous_order_id #=> String
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
     #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR"
+    #   resp.order.order_type #=> String, one of "OUTPOST", "REPLACEMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOrder AWS API Documentation
     #
@@ -1805,7 +1811,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

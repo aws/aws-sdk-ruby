@@ -2687,6 +2687,8 @@ module Aws::CustomerProfiles
     #   resp.items[0].found_by_items[0].key_name #=> String
     #   resp.items[0].found_by_items[0].values #=> Array
     #   resp.items[0].found_by_items[0].values[0] #=> String
+    #   resp.items[0].party_type_string #=> String
+    #   resp.items[0].gender_string #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchProfiles AWS API Documentation
@@ -3104,7 +3106,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

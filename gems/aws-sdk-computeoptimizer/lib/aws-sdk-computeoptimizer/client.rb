@@ -934,7 +934,7 @@ module Aws::ComputeOptimizer
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
     #
     # @option params [Array<String>] :account_ids
-    #   The Amazon Web Services account IDs for the export ECS service
+    #   The Amazon Web Services account IDs for the export Amazon ECS service
     #   recommendations.
     #
     #   If your account is the management account or the delegated
@@ -952,7 +952,7 @@ module Aws::ComputeOptimizer
     #
     # @option params [Array<Types::ECSServiceRecommendationFilter>] :filters
     #   An array of objects to specify a filter that exports a more specific
-    #   set of ECS service recommendations.
+    #   set of Amazon ECS service recommendations.
     #
     # @option params [Array<String>] :fields_to_export
     #   The recommendations data to include in the export file. For more
@@ -1287,7 +1287,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.inferred_workload_types #=> String, one of "Active", "Inactive"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.auto_scaling_group_recommendations[0].inferred_workload_types #=> Array
-    #   resp.auto_scaling_group_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis"
+    #   resp.auto_scaling_group_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis", "Kafka"
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
@@ -1517,7 +1517,7 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].effective_recommendation_preferences.inferred_workload_types #=> String, one of "Active", "Inactive"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.instance_recommendations[0].inferred_workload_types #=> Array
-    #   resp.instance_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis"
+    #   resp.instance_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis", "Kafka"
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
@@ -1608,7 +1608,7 @@ module Aws::ComputeOptimizer
     # Returns the projected metrics of Amazon ECS service recommendations.
     #
     # @option params [required, String] :service_arn
-    #   The ARN that identifies the ECS service.
+    #   The ARN that identifies the Amazon ECS service.
     #
     #   The following is the format of the ARN:
     #
@@ -1675,33 +1675,34 @@ module Aws::ComputeOptimizer
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
     #
     # @option params [Array<String>] :service_arns
-    #   The ARN that identifies the ECS service.
+    #   The ARN that identifies the Amazon ECS service.
     #
     #   The following is the format of the ARN:
     #
     #   `arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name`
     #
     # @option params [String] :next_token
-    #   The token to advance to the next page of ECS service recommendations.
+    #   The token to advance to the next page of Amazon ECS service
+    #   recommendations.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of ECS service recommendations to return with a
-    #   single request.
+    #   The maximum number of Amazon ECS service recommendations to return
+    #   with a single request.
     #
     #   To retrieve the remaining results, make another request with the
     #   returned `nextToken` value.
     #
     # @option params [Array<Types::ECSServiceRecommendationFilter>] :filters
     #   An array of objects to specify a filter that returns a more specific
-    #   list of ECS service recommendations.
+    #   list of Amazon ECS service recommendations.
     #
     # @option params [Array<String>] :account_ids
-    #   Return the ECS service recommendations to the specified Amazon Web
-    #   Services account IDs.
+    #   Return the Amazon ECS service recommendations to the specified Amazon
+    #   Web Services account IDs.
     #
     #   If your account is the management account or the delegated
-    #   administrator of an organization, use this parameter to return the ECS
-    #   service recommendations to specific member accounts.
+    #   administrator of an organization, use this parameter to return the
+    #   Amazon ECS service recommendations to specific member accounts.
     #
     #   You can only specify one account ID per request.
     #
@@ -2415,7 +2416,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

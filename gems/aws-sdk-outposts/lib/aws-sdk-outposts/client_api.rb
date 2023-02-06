@@ -393,6 +393,8 @@ module Aws::Outposts
     LineItem.add_member(:status, Shapes::ShapeRef.new(shape: LineItemStatus, location_name: "Status"))
     LineItem.add_member(:shipment_information, Shapes::ShapeRef.new(shape: ShipmentInformation, location_name: "ShipmentInformation"))
     LineItem.add_member(:asset_information_list, Shapes::ShapeRef.new(shape: LineItemAssetInformationList, location_name: "AssetInformationList"))
+    LineItem.add_member(:previous_line_item_id, Shapes::ShapeRef.new(shape: LineItemId, location_name: "PreviousLineItemId"))
+    LineItem.add_member(:previous_order_id, Shapes::ShapeRef.new(shape: OrderId, location_name: "PreviousOrderId"))
     LineItem.struct_class = Types::LineItem
 
     LineItemAssetInformation.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "AssetId"))
@@ -484,6 +486,7 @@ module Aws::Outposts
     Order.add_member(:order_submission_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "OrderSubmissionDate"))
     Order.add_member(:order_fulfilled_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "OrderFulfilledDate"))
     Order.add_member(:payment_term, Shapes::ShapeRef.new(shape: PaymentTerm, location_name: "PaymentTerm"))
+    Order.add_member(:order_type, Shapes::ShapeRef.new(shape: OrderType, location_name: "OrderType"))
     Order.struct_class = Types::Order
 
     OrderSummary.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostIdOnly, location_name: "OutpostId"))

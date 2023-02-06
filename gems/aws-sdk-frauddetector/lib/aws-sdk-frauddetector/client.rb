@@ -817,7 +817,7 @@ module Aws::FraudDetector
     #         label_mapper: {
     #           "string" => ["string"],
     #         },
-    #         unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
+    #         unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT, AUTO
     #       },
     #     },
     #     external_events_detail: {
@@ -1514,7 +1514,7 @@ module Aws::FraudDetector
     #   resp.model_version_details[0].training_data_schema.label_schema.label_mapper #=> Hash
     #   resp.model_version_details[0].training_data_schema.label_schema.label_mapper["string"] #=> Array
     #   resp.model_version_details[0].training_data_schema.label_schema.label_mapper["string"][0] #=> String
-    #   resp.model_version_details[0].training_data_schema.label_schema.unlabeled_events_treatment #=> String, one of "IGNORE", "FRAUD", "LEGIT"
+    #   resp.model_version_details[0].training_data_schema.label_schema.unlabeled_events_treatment #=> String, one of "IGNORE", "FRAUD", "LEGIT", "AUTO"
     #   resp.model_version_details[0].external_events_detail.data_location #=> String
     #   resp.model_version_details[0].external_events_detail.data_access_role_arn #=> String
     #   resp.model_version_details[0].ingested_events_detail.ingested_events_time_window.start_time #=> String
@@ -1558,12 +1558,16 @@ module Aws::FraudDetector
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.metric_data_points[0].tpr #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.metric_data_points[0].threshold #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.model_performance.auc #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.model_performance.uncertainty_range.lower_bound_value #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ofi.model_performance.uncertainty_range.upper_bound_value #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points #=> Array
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points[0].fpr #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points[0].precision #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points[0].tpr #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.metric_data_points[0].threshold #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.model_performance.auc #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.model_performance.uncertainty_range.lower_bound_value #=> Float
+    #   resp.model_version_details[0].training_result_v2.training_metrics_v2.tfi.model_performance.uncertainty_range.upper_bound_value #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.metric_data_points #=> Array
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.metric_data_points[0].cr #=> Float
     #   resp.model_version_details[0].training_result_v2.training_metrics_v2.ati.metric_data_points[0].adr #=> Float
@@ -2413,7 +2417,7 @@ module Aws::FraudDetector
     #   resp.training_data_schema.label_schema.label_mapper #=> Hash
     #   resp.training_data_schema.label_schema.label_mapper["string"] #=> Array
     #   resp.training_data_schema.label_schema.label_mapper["string"][0] #=> String
-    #   resp.training_data_schema.label_schema.unlabeled_events_treatment #=> String, one of "IGNORE", "FRAUD", "LEGIT"
+    #   resp.training_data_schema.label_schema.unlabeled_events_treatment #=> String, one of "IGNORE", "FRAUD", "LEGIT", "AUTO"
     #   resp.external_events_detail.data_location #=> String
     #   resp.external_events_detail.data_access_role_arn #=> String
     #   resp.ingested_events_detail.ingested_events_time_window.start_time #=> String
@@ -3678,7 +3682,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

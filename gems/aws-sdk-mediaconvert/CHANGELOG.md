@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2023-02-06)
+------------------
+
+* Feature - The AWS Elemental MediaConvert SDK has added improved scene change detection capabilities and a bandwidth reduction filter, along with video quality enhancements, to the AVC encoder.
+
 1.99.0 (2023-01-30)
 ------------------
 

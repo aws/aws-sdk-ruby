@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-02-06)
+------------------
+
+* Feature - My AWS Service (Amazon Fraud Detector) - This release introduces Cold Start Model Training which optimizes training for small datasets and adds intelligent methods for treating unlabeled data. You can now train Online Fraud Insights or Transaction Fraud Insights models with minimal historical-data.
+
 1.37.0 (2023-01-18)
 ------------------
 

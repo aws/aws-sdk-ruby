@@ -1541,9 +1541,9 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] is_unstructured
-    #   Boolean to indicate if the Flow associated with the Integration is
-    #   created via Appflow console or with ObjectTypeName equals
-    #   \_unstructured via API/CLI in flowDefinition
+    #   Boolean that shows if the Flow that's associated with the
+    #   Integration is created in Amazon Appflow, or with ObjectTypeName
+    #   equals \_unstructured via API/CLI in flowDefinition.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegrationResponse AWS API Documentation
@@ -2245,9 +2245,9 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] is_unstructured
-    #   Boolean to indicate if the Flow associated with the Integration is
-    #   created via Appflow console or with ObjectTypeName equals
-    #   \_unstructured via API/CLI in flowDefinition
+    #   Boolean that shows if the Flow that's associated with the
+    #   Integration is created in Amazon Appflow, or with ObjectTypeName
+    #   equals \_unstructured via API/CLI in flowDefinition.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrationItem AWS API Documentation
@@ -3009,6 +3009,14 @@ module Aws::CustomerProfiles
     #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html
     #   @return [Array<Types::FoundByKeyValue>]
     #
+    # @!attribute [rw] party_type_string
+    #   An alternative to PartyType which accepts any string as input.
+    #   @return [String]
+    #
+    # @!attribute [rw] gender_string
+    #   An alternative to Gender which accepts any string as input.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Profile AWS API Documentation
     #
     class Profile < Struct.new(
@@ -3034,7 +3042,9 @@ module Aws::CustomerProfiles
       :mailing_address,
       :billing_address,
       :attributes,
-      :found_by_items)
+      :found_by_items,
+      :party_type_string,
+      :gender_string)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3124,9 +3134,9 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] is_unstructured
-    #   Boolean to indicate if the Flow associated with the Integration is
-    #   created via Appflow console or with ObjectTypeName equals
-    #   \_unstructured via API/CLI in flowDefinition
+    #   Boolean that shows if the Flow that's associated with the
+    #   Integration is created in Amazon Appflow, or with ObjectTypeName
+    #   equals \_unstructured via API/CLI in flowDefinition.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationResponse AWS API Documentation

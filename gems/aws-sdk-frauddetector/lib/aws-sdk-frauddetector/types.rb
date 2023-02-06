@@ -2989,6 +2989,24 @@ module Aws::FraudDetector
     #
     # @!attribute [rw] unlabeled_events_treatment
     #   The action to take for unlabeled events.
+    #
+    #   * Use `IGNORE` if you want the unlabeled events to be ignored. This
+    #     is recommended when the majority of the events in the dataset are
+    #     labeled.
+    #
+    #   * Use `FRAUD` if you want to categorize all unlabeled events as
+    #     “Fraud”. This is recommended when most of the events in your
+    #     dataset are fraudulent.
+    #
+    #   * Use `LEGIT` f you want to categorize all unlabeled events as
+    #     “Legit”. This is recommended when most of the events in your
+    #     dataset are legitimate.
+    #
+    #   * Use `AUTO` if you want Amazon Fraud Detector to decide how to use
+    #     the unlabeled data. This is recommended when there is significant
+    #     unlabeled events in the dataset.
+    #
+    #   By default, Amazon Fraud Detector ignores the unlabeled data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/LabelSchema AWS API Documentation
@@ -3493,10 +3511,16 @@ module Aws::FraudDetector
     #   score thresholds.
     #   @return [Float]
     #
+    # @!attribute [rw] uncertainty_range
+    #   Indicates the range of area under curve (auc) expected from the OFI
+    #   model. A range greater than 0.1 indicates higher model uncertainity.
+    #   @return [Types::UncertaintyRange]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/OFIModelPerformance AWS API Documentation
     #
     class OFIModelPerformance < Struct.new(
-      :auc)
+      :auc,
+      :uncertainty_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4046,10 +4070,16 @@ module Aws::FraudDetector
     #   score thresholds.
     #   @return [Float]
     #
+    # @!attribute [rw] uncertainty_range
+    #   Indicates the range of area under curve (auc) expected from the TFI
+    #   model. A range greater than 0.1 indicates higher model uncertainity.
+    #   @return [Types::UncertaintyRange]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/TFIModelPerformance AWS API Documentation
     #
     class TFIModelPerformance < Struct.new(
-      :auc)
+      :auc,
+      :uncertainty_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4247,6 +4277,27 @@ module Aws::FraudDetector
       :training_metrics_v2,
       :variable_importance_metrics,
       :aggregated_variables_importance_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Range of area under curve (auc) expected from the model. A range
+    # greater than 0.1 indicates higher model uncertainity. A range is the
+    # difference between upper and lower bound of auc.
+    #
+    # @!attribute [rw] lower_bound_value
+    #   The lower bound value of the area under curve (auc).
+    #   @return [Float]
+    #
+    # @!attribute [rw] upper_bound_value
+    #   The lower bound value of the area under curve (auc).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UncertaintyRange AWS API Documentation
+    #
+    class UncertaintyRange < Struct.new(
+      :lower_bound_value,
+      :upper_bound_value)
       SENSITIVE = []
       include Aws::Structure
     end

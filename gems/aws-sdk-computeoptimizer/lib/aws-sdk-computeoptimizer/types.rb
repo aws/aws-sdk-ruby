@@ -581,20 +581,20 @@ module Aws::ComputeOptimizer
     # Describes the projected metrics of an Amazon ECS service
     # recommendation option.
     #
-    # To determine the performance difference between your current ECS
-    # service and the recommended option, compare the metric data of your
-    # service against its projected metric data.
+    # To determine the performance difference between your current Amazon
+    # ECS service and the recommended option, compare the metric data of
+    # your service against its projected metric data.
     #
     # @!attribute [rw] name
     #   The name of the projected metric.
     #
     #   The following metrics are available:
     #
-    #   * `CPU` — The percentage of allocated compute units that are
-    #     currently in use on the ECS service tasks.
+    #   * `Cpu` — The percentage of allocated compute units that are
+    #     currently in use on the service tasks.
     #
-    #   * `Memory` — The percentage of memory that is currently in use on
-    #     the ECS service tasks.
+    #   * `Memory` — The percentage of memory that's currently in use on
+    #     the service tasks.
     #   @return [String]
     #
     # @!attribute [rw] timestamps
@@ -623,8 +623,8 @@ module Aws::ComputeOptimizer
     # Describes the projected utilization metrics of an Amazon ECS service
     # recommendation option.
     #
-    # To determine the performance difference between your current ECS
-    # service and the recommended option, compare the utilization metric
+    # To determine the performance difference between your current Amazon
+    # ECS service and the recommended option, compare the utilization metric
     # data of your service against its projected utilization metric data.
     #
     # @!attribute [rw] name
@@ -632,11 +632,11 @@ module Aws::ComputeOptimizer
     #
     #   The following utilization metrics are available:
     #
-    #   * `CPU` — The percentage of allocated compute units that are
-    #     currently in use on the ECS service tasks.
+    #   * `Cpu` — The percentage of allocated compute units that are
+    #     currently in use on the service tasks.
     #
-    #   * `Memory` — The percentage of memory that is currently in use on
-    #     the ECS service tasks.
+    #   * `Memory` — The percentage of memory that's currently in use on
+    #     the service tasks.
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -682,7 +682,7 @@ module Aws::ComputeOptimizer
     # Describes an Amazon ECS service recommendation.
     #
     # @!attribute [rw] service_arn
-    #   The Amazon Resource Name (ARN) of the current ECS service.
+    #   The Amazon Resource Name (ARN) of the current Amazon ECS service.
     #
     #   The following is the format of the ARN:
     #
@@ -690,25 +690,25 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account ID of the ECS service.
+    #   The Amazon Web Services account ID of the Amazon ECS service.
     #   @return [String]
     #
     # @!attribute [rw] current_service_configuration
-    #   The configuration of the current ECS service.
+    #   The configuration of the current Amazon ECS service.
     #   @return [Types::ServiceConfiguration]
     #
     # @!attribute [rw] utilization_metrics
-    #   An array of objects that describe the utilization metrics of the ECS
-    #   service.
+    #   An array of objects that describe the utilization metrics of the
+    #   Amazon ECS service.
     #   @return [Array<Types::ECSServiceUtilizationMetric>]
     #
     # @!attribute [rw] lookback_period_in_days
-    #   The number of days the ECS service utilization metrics were
+    #   The number of days the Amazon ECS service utilization metrics were
     #   analyzed.
     #   @return [Float]
     #
     # @!attribute [rw] launch_type
-    #   The launch type the ECS service is using.
+    #   The launch type the Amazon ECS service is using.
     #
     #   <note markdown="1"> Compute Optimizer only supports the Fargate launch type.
     #
@@ -716,54 +716,53 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] last_refresh_timestamp
-    #   The timestamp of when the ECS service recommendation was last
+    #   The timestamp of when the Amazon ECS service recommendation was last
     #   generated.
     #   @return [Time]
     #
     # @!attribute [rw] finding
-    #   The finding classification of an ECS service.
+    #   The finding classification of an Amazon ECS service.
     #
-    #   Findings for ECS services include:
+    #   Findings for Amazon ECS services include:
     #
     #   * <b> <code>Underprovisioned</code> </b> — When Compute Optimizer
-    #     detects that there’s not enough memory or CPU, an ECS service is
-    #     considered under-provisioned. An under-provisioned ECS service
-    #     might result in poor application performance.
+    #     detects that there’s not enough memory or CPU, an Amazon ECS
+    #     service is considered under-provisioned. An under-provisioned
+    #     service might result in poor application performance.
     #
     #   * <b> <code>Overprovisioned</code> </b> — When Compute Optimizer
-    #     detects that there’s excessive memory or CPU, an ECS service is
-    #     considered over-provisioned. An over-provisioned ECS service might
-    #     result in additional infrastructure costs.
+    #     detects that there’s excessive memory or CPU, an Amazon ECS
+    #     service is considered over-provisioned. An over-provisioned
+    #     service might result in additional infrastructure costs.
     #
     #   * <b> <code>Optimized</code> </b> — When both the CPU and memory of
-    #     your ECS service meet the performance requirements of your
+    #     your Amazon ECS service meet the performance requirements of your
     #     workload, the service is considered optimized.
     #   @return [String]
     #
     # @!attribute [rw] finding_reason_codes
-    #   The reason for the finding classification of an ECS service.
+    #   The reason for the finding classification of an Amazon ECS service.
     #
-    #   Finding reason codes for ECS services include:
+    #   Finding reason codes for Amazon ECS services include:
     #
-    #   * <b> <code>CPUUnderprovisioned</code> </b> — The ECS service CPU
+    #   * <b> <code>CPUUnderprovisioned</code> </b> — The service CPU
     #     configuration can be sized up to enhance the performance of your
     #     workload. This is identified by analyzing the `CPUUtilization`
     #     metric of the current service during the look-back period.
     #
-    #   * <b> <code>CPUOverprovisioned</code> </b> — The ECS service CPU
+    #   * <b> <code>CPUOverprovisioned</code> </b> — The service CPU
     #     configuration can be sized down while still meeting the
     #     performance requirements of your workload. This is identified by
     #     analyzing the `CPUUtilization` metric of the current service
     #     during the look-back period.
     #
-    #   * <b> <code>MemoryUnderprovisioned</code> </b> — The ECS service
-    #     memory configuration can be sized up to enhance the performance of
-    #     your workload. This is identified by analyzing the
-    #     `MemoryUtilization` metric of the current service during the
-    #     look-back period.
+    #   * <b> <code>MemoryUnderprovisioned</code> </b> — The service memory
+    #     configuration can be sized up to enhance the performance of your
+    #     workload. This is identified by analyzing the `MemoryUtilization`
+    #     metric of the current service during the look-back period.
     #
-    #   * <b> <code>MemoryOverprovisioned</code> </b> — The ECS service
-    #     memory configuration can be sized down while still meeting the
+    #   * <b> <code>MemoryOverprovisioned</code> </b> — The service memory
+    #     configuration can be sized down while still meeting the
     #     performance requirements of your workload. This is identified by
     #     analyzing the `MemoryUtilization` metric of the current service
     #     during the look-back period.
@@ -771,14 +770,14 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] service_recommendation_options
     #   An array of objects that describe the recommendation options for the
-    #   ECS service.
+    #   Amazon ECS service.
     #   @return [Array<Types::ECSServiceRecommendationOption>]
     #
     # @!attribute [rw] current_performance_risk
-    #   The risk of the current ECS service not meeting the performance
-    #   needs of its workloads. The higher the risk, the more likely the
-    #   current service can't meet the performance requirements of its
-    #   workload.
+    #   The risk of the current Amazon ECS service not meeting the
+    #   performance needs of its workloads. The higher the risk, the more
+    #   likely the current service can't meet the performance requirements
+    #   of its workload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceRecommendation AWS API Documentation
@@ -838,11 +837,11 @@ module Aws::ComputeOptimizer
     # Describes the recommendation options for an Amazon ECS service.
     #
     # @!attribute [rw] memory
-    #   The memory size of the ECS service recommendation option.
+    #   The memory size of the Amazon ECS service recommendation option.
     #   @return [Integer]
     #
     # @!attribute [rw] cpu
-    #   The CPU size of the ECS service recommendation option.
+    #   The CPU size of the Amazon ECS service recommendation option.
     #   @return [Integer]
     #
     # @!attribute [rw] savings_opportunity
@@ -873,12 +872,12 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] projected_utilization_metrics
     #   An array of objects that describe the projected utilization metrics
-    #   of the ECS service recommendation option.
+    #   of the Amazon ECS service recommendation option.
     #   @return [Array<Types::ECSServiceProjectedUtilizationMetric>]
     #
     # @!attribute [rw] container_recommendations
     #   The CPU and memory size recommendations for the containers within
-    #   the task of your ECS service.
+    #   the task of your Amazon ECS service.
     #   @return [Array<Types::ContainerRecommendation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceRecommendationOption AWS API Documentation
@@ -896,16 +895,16 @@ module Aws::ComputeOptimizer
     # Describes the projected metrics of an Amazon ECS service
     # recommendation option.
     #
-    # To determine the performance difference between your current ECS
-    # service and the recommended option, compare the metric data of your
-    # service against its projected metric data.
+    # To determine the performance difference between your current Amazon
+    # ECS service and the recommended option, compare the metric data of
+    # your service against its projected metric data.
     #
     # @!attribute [rw] recommended_cpu_units
-    #   The recommended CPU size for the ECS service.
+    #   The recommended CPU size for the Amazon ECS service.
     #   @return [Integer]
     #
     # @!attribute [rw] recommended_memory_size
-    #   The recommended memory size for the ECS service.
+    #   The recommended memory size for the Amazon ECS service.
     #   @return [Integer]
     #
     # @!attribute [rw] projected_metrics
@@ -924,8 +923,8 @@ module Aws::ComputeOptimizer
 
     # Describes the utilization metric of an Amazon ECS service.
     #
-    # To determine the performance difference between your current ECS
-    # service and the recommended option, compare the utilization metric
+    # To determine the performance difference between your current Amazon
+    # ECS service and the recommended option, compare the utilization metric
     # data of your service against its projected utilization metric data.
     #
     # @!attribute [rw] name
@@ -933,9 +932,9 @@ module Aws::ComputeOptimizer
     #
     #   The following utilization metrics are available:
     #
-    #   * `Cpu` — The amount of CPU units that are used in the service.
+    #   * `Cpu` — The amount of CPU capacity that's used in the service.
     #
-    #   * `Memory` — The amount of memory that is used in the service.
+    #   * `Memory` — The amount of memory that's used in the service.
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -1475,8 +1474,8 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] account_ids
-    #   The Amazon Web Services account IDs for the export ECS service
-    #   recommendations.
+    #   The Amazon Web Services account IDs for the export Amazon ECS
+    #   service recommendations.
     #
     #   If your account is the management account or the delegated
     #   administrator of an organization, use this parameter to specify the
@@ -1494,7 +1493,7 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] filters
     #   An array of objects to specify a filter that exports a more specific
-    #   set of ECS service recommendations.
+    #   set of Amazon ECS service recommendations.
     #   @return [Array<Types::ECSServiceRecommendationFilter>]
     #
     # @!attribute [rw] fields_to_export
@@ -2144,7 +2143,7 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] service_arn
-    #   The ARN that identifies the ECS service.
+    #   The ARN that identifies the Amazon ECS service.
     #
     #   The following is the format of the ARN:
     #
@@ -2192,7 +2191,7 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] service_arns
-    #   The ARN that identifies the ECS service.
+    #   The ARN that identifies the Amazon ECS service.
     #
     #   The following is the format of the ARN:
     #
@@ -2200,13 +2199,13 @@ module Aws::ComputeOptimizer
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to advance to the next page of ECS service
+    #   The token to advance to the next page of Amazon ECS service
     #   recommendations.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of ECS service recommendations to return with a
-    #   single request.
+    #   The maximum number of Amazon ECS service recommendations to return
+    #   with a single request.
     #
     #   To retrieve the remaining results, make another request with the
     #   returned `nextToken` value.
@@ -2214,16 +2213,16 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] filters
     #   An array of objects to specify a filter that returns a more specific
-    #   list of ECS service recommendations.
+    #   list of Amazon ECS service recommendations.
     #   @return [Array<Types::ECSServiceRecommendationFilter>]
     #
     # @!attribute [rw] account_ids
-    #   Return the ECS service recommendations to the specified Amazon Web
-    #   Services account IDs.
+    #   Return the Amazon ECS service recommendations to the specified
+    #   Amazon Web Services account IDs.
     #
     #   If your account is the management account or the delegated
     #   administrator of an organization, use this parameter to return the
-    #   ECS service recommendations to specific member accounts.
+    #   Amazon ECS service recommendations to specific member accounts.
     #
     #   You can only specify one account ID per request.
     #   @return [Array<String>]
@@ -2241,12 +2240,13 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] next_token
-    #   The token to advance to the next page of ECS service
+    #   The token to advance to the next page of Amazon ECS service
     #   recommendations.
     #   @return [String]
     #
     # @!attribute [rw] ecs_service_recommendations
-    #   An array of objects that describe the ECS service recommendations.
+    #   An array of objects that describe the Amazon ECS service
+    #   recommendations.
     #   @return [Array<Types::ECSServiceRecommendation>]
     #
     # @!attribute [rw] errors
@@ -2913,6 +2913,8 @@ module Aws::ComputeOptimizer
     #     instance.
     #
     #   * `Redis` - Infers that Redis might be running on the instance.
+    #
+    #   * `Kafka` - Infers that Kafka might be running on the instance.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendation AWS API Documentation
@@ -4196,30 +4198,30 @@ module Aws::ComputeOptimizer
     # The Amazon ECS service configurations used for recommendations.
     #
     # @!attribute [rw] memory
-    #   The amount of memory used by the tasks in the ECS service.
+    #   The amount of memory used by the tasks in the Amazon ECS service.
     #   @return [Integer]
     #
     # @!attribute [rw] cpu
-    #   The number of CPU units used by the tasks in the ECS service.
+    #   The number of CPU units used by the tasks in the Amazon ECS service.
     #   @return [Integer]
     #
     # @!attribute [rw] container_configurations
-    #   The container configurations within a task of an ECS service.
+    #   The container configurations within a task of an Amazon ECS service.
     #   @return [Array<Types::ContainerConfiguration>]
     #
     # @!attribute [rw] auto_scaling_configuration
     #   Describes the Auto Scaling configuration methods for an Amazon ECS
     #   service. This affects the generated recommendations. For example, if
-    #   Auto Scaling is configured on a ECS service’s CPU, then Compute
+    #   Auto Scaling is configured on a service’s CPU, then Compute
     #   Optimizer doesn’t generate CPU size recommendations.
     #
     #   The Auto Scaling configuration methods include:
     #
-    #   * `TARGET_TRACKING_SCALING_CPU` — If the ECS service is configured
-    #     to use target scaling on CPU, Compute Optimizer doesn't generate
-    #     CPU recommendations.
+    #   * `TARGET_TRACKING_SCALING_CPU` — If the Amazon ECS service is
+    #     configured to use target scaling on CPU, Compute Optimizer
+    #     doesn't generate CPU recommendations.
     #
-    #   * `TARGET_TRACKING_SCALING_MEMORY` — If the ECS service is
+    #   * `TARGET_TRACKING_SCALING_MEMORY` — If the Amazon ECS service is
     #     configured to use target scaling on memory, Compute Optimizer
     #     doesn't generate memory recommendations.
     #
@@ -4235,7 +4237,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] task_definition_arn
-    #   The task definition ARN used by the tasks in the ECS service.
+    #   The task definition ARN used by the tasks in the Amazon ECS service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ServiceConfiguration AWS API Documentation

@@ -770,6 +770,14 @@ module Aws::Outposts
     #   Information about assets.
     #   @return [Array<Types::LineItemAssetInformation>]
     #
+    # @!attribute [rw] previous_line_item_id
+    #   The ID of the previous line item.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_order_id
+    #   The ID of the previous order.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItem AWS API Documentation
     #
     class LineItem < Struct.new(
@@ -778,7 +786,9 @@ module Aws::Outposts
       :quantity,
       :status,
       :shipment_information,
-      :asset_information_list)
+      :asset_information_list,
+      :previous_line_item_id,
+      :previous_order_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1144,6 +1154,10 @@ module Aws::Outposts
     #   The payment term.
     #   @return [String]
     #
+    # @!attribute [rw] order_type
+    #   The type of order.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Order AWS API Documentation
     #
     class Order < Struct.new(
@@ -1154,7 +1168,8 @@ module Aws::Outposts
       :payment_option,
       :order_submission_date,
       :order_fulfilled_date,
-      :payment_term)
+      :payment_term,
+      :order_type)
       SENSITIVE = []
       include Aws::Structure
     end

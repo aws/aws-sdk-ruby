@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2023-02-06)
+------------------
+
+* Feature - This release deprecates the PartyType and Gender enum data types from the Profile model and replaces them with new PartyTypeString and GenderString attributes, which accept any string of length up to 255.
+
 1.26.0 (2023-01-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-02-06)
+------------------
+
+* Feature - AWS Compute optimizer can now infer if Kafka is running on an instance.
+
 1.37.0 (2023-01-18)
 ------------------
 

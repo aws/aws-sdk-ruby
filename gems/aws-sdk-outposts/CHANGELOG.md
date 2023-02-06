@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2023-02-06)
+------------------
+
+* Feature - Adds OrderType to Order structure. Adds PreviousOrderId and PreviousLineItemId to LineItem structure. Adds new line item status REPLACED. Increases maximum length of pagination token.
+
 1.41.0 (2023-01-31)
 ------------------
 

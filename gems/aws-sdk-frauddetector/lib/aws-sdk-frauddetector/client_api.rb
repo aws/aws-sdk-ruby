@@ -258,6 +258,7 @@ module Aws::FraudDetector
     TrainingMetricsV2 = Shapes::StructureShape.new(name: 'TrainingMetricsV2')
     TrainingResult = Shapes::StructureShape.new(name: 'TrainingResult')
     TrainingResultV2 = Shapes::StructureShape.new(name: 'TrainingResultV2')
+    UncertaintyRange = Shapes::StructureShape.new(name: 'UncertaintyRange')
     UnlabeledEventsTreatment = Shapes::StringShape.new(name: 'UnlabeledEventsTreatment')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
@@ -1135,6 +1136,7 @@ module Aws::FraudDetector
     OFIMetricDataPointsList.member = Shapes::ShapeRef.new(shape: OFIMetricDataPoint)
 
     OFIModelPerformance.add_member(:auc, Shapes::ShapeRef.new(shape: float, location_name: "auc"))
+    OFIModelPerformance.add_member(:uncertainty_range, Shapes::ShapeRef.new(shape: UncertaintyRange, location_name: "uncertaintyRange"))
     OFIModelPerformance.struct_class = Types::OFIModelPerformance
 
     OFITrainingMetricsValue.add_member(:metric_data_points, Shapes::ShapeRef.new(shape: OFIMetricDataPointsList, location_name: "metricDataPoints"))
@@ -1265,6 +1267,7 @@ module Aws::FraudDetector
     TFIMetricDataPointsList.member = Shapes::ShapeRef.new(shape: TFIMetricDataPoint)
 
     TFIModelPerformance.add_member(:auc, Shapes::ShapeRef.new(shape: float, location_name: "auc"))
+    TFIModelPerformance.add_member(:uncertainty_range, Shapes::ShapeRef.new(shape: UncertaintyRange, location_name: "uncertaintyRange"))
     TFIModelPerformance.struct_class = Types::TFIModelPerformance
 
     TFITrainingMetricsValue.add_member(:metric_data_points, Shapes::ShapeRef.new(shape: TFIMetricDataPointsList, location_name: "metricDataPoints"))
@@ -1307,6 +1310,10 @@ module Aws::FraudDetector
     TrainingResultV2.add_member(:variable_importance_metrics, Shapes::ShapeRef.new(shape: VariableImportanceMetrics, location_name: "variableImportanceMetrics"))
     TrainingResultV2.add_member(:aggregated_variables_importance_metrics, Shapes::ShapeRef.new(shape: AggregatedVariablesImportanceMetrics, location_name: "aggregatedVariablesImportanceMetrics"))
     TrainingResultV2.struct_class = Types::TrainingResultV2
+
+    UncertaintyRange.add_member(:lower_bound_value, Shapes::ShapeRef.new(shape: float, required: true, location_name: "lowerBoundValue"))
+    UncertaintyRange.add_member(:upper_bound_value, Shapes::ShapeRef.new(shape: float, required: true, location_name: "upperBoundValue"))
+    UncertaintyRange.struct_class = Types::UncertaintyRange
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, required: true, location_name: "resourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: tagKeyList, required: true, location_name: "tagKeys"))
