@@ -561,8 +561,7 @@ module Aws::Transfer
     #   The landing directory (folder) for files transferred by using the AS2
     #   protocol.
     #
-    #   A `BaseDirectory` example is
-    #   *DOC-EXAMPLE-BUCKET*/*home*/*mydirectory*.
+    #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory`.
     #
     # @option params [required, String] :access_role
     #   With AS2, you can send files by calling `StartFileTransfer` and
@@ -882,7 +881,7 @@ module Aws::Transfer
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see [Update host keys for your SFTP-enabled
+    #   For more information, see [Manage host keys for your SFTP-enabled
     #   server][1] in the *Transfer Family User Guide*.
     #
     #
@@ -965,14 +964,15 @@ module Aws::Transfer
     #
     #   * If `Protocol` includes either `FTP` or `FTPS`, then the
     #     `EndpointType` must be `VPC` and the `IdentityProviderType` must be
-    #     `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #     either `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
     #     associated.
     #
     #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
-    #     to `PUBLIC` and the `IdentityProviderType` can be set to
-    #     `SERVICE_MANAGED`.
+    #     to `PUBLIC` and the `IdentityProviderType` can be set any of the
+    #     supported identity types: `SERVICE_MANAGED`,
+    #     `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `AS2`, then the `EndpointType` must be `VPC`,
     #     and domain must be Amazon S3.
@@ -1014,8 +1014,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A partial
     #   upload occurs when a file is open when the session disconnects.
     #
@@ -1191,7 +1191,19 @@ module Aws::Transfer
     #   The public portion of the Secure Shell (SSH) key used to authenticate
     #   the user to the server.
     #
+    #   The three standard SSH public key format elements are `<key type>`,
+    #   `<body base64>`, and an optional `<comment>`, with spaces between each
+    #   element.
+    #
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+    #
+    #   * For RSA keys, the key type is `ssh-rsa`.
+    #
+    #   * For ED25519 keys, the key type is `ssh-ed25519`.
+    #
+    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
+    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
+    #     size of the key you generated.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for users. Tags
@@ -1268,20 +1280,24 @@ module Aws::Transfer
     #   The `TYPE` specifies which of the following actions is being taken for
     #   this step.
     #
-    #   * *COPY*\: Copy the file to another location.
+    #   * <b> <code>COPY</code> </b> - Copy the file to another location.
     #
-    #   * *CUSTOM*\: Perform a custom step with an Lambda function target.
+    #   * <b> <code>CUSTOM</code> </b> - Perform a custom step with an Lambda
+    #     function target.
     #
-    #   * *DELETE*\: Delete the file.
+    #   * <b> <code>DECRYPT</code> </b> - Decrypt a file that was encrypted
+    #     before it was uploaded.
     #
-    #   * *TAG*\: Add a tag to the file.
+    #   * <b> <code>DELETE</code> </b> - Delete the file.
+    #
+    #   * <b> <code>TAG</code> </b> - Add a tag to the file.
     #
     #   <note markdown="1"> Currently, copying and tagging are supported only on S3.
     #
     #    </note>
     #
-    #   For file location, you specify either the S3 bucket and key, or the
-    #   EFS file system ID and path.
+    #   For file location, you specify either the Amazon S3 bucket and key, or
+    #   the Amazon EFS file system ID and path.
     #
     # @option params [Array<Types::WorkflowStep>] :on_exception_steps
     #   Specifies the steps (actions) to take if errors are encountered during
@@ -2337,15 +2353,24 @@ module Aws::Transfer
     #   Specifies whether this certificate is used for signing or encryption.
     #
     # @option params [required, String] :certificate
-    #   The file that contains the certificate to import.
+    #   * For the CLI, provide a file path for a certificate in URI format.
+    #     For example, `--certificate file://encryption-cert.pem`.
+    #     Alternatively, you can provide the raw content.
+    #
+    #   * For the SDK, specify the raw content of a certificate file. For
+    #     example, `` --certificate "`cat encryption-cert.pem`" ``.
     #
     # @option params [String] :certificate_chain
     #   An optional list of certificates that make up the chain for the
     #   certificate that's being imported.
     #
     # @option params [String] :private_key
-    #   The file that contains the private key for the certificate that's
-    #   being imported.
+    #   * For the CLI, provide a file path for a private key in URI format.For
+    #     example, `--private-key file://encryption-key.pem`. Alternatively,
+    #     you can provide the raw content of the private key file.
+    #
+    #   * For the SDK, specify the raw content of a private key file. For
+    #     example, `` --private-key "`cat encryption-key.pem`" ``
     #
     # @option params [Time,DateTime,Date,Integer,String] :active_date
     #   An optional date that specifies when the certificate becomes active.
@@ -2402,7 +2427,7 @@ module Aws::Transfer
     #   importing.
     #
     # @option params [required, String] :host_key_body
-    #   The public key portion of an SSH key pair.
+    #   The private key portion of an SSH key pair.
     #
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
     #
@@ -3956,7 +3981,7 @@ module Aws::Transfer
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see [Update host keys for your SFTP-enabled
+    #   For more information, see [Manage host keys for your SFTP-enabled
     #   server][1] in the *Transfer Family User Guide*.
     #
     #
@@ -4014,14 +4039,15 @@ module Aws::Transfer
     #
     #   * If `Protocol` includes either `FTP` or `FTPS`, then the
     #     `EndpointType` must be `VPC` and the `IdentityProviderType` must be
-    #     `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #     either `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
     #     associated.
     #
     #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
-    #     to `PUBLIC` and the `IdentityProviderType` can be set to
-    #     `SERVICE_MANAGED`.
+    #     to `PUBLIC` and the `IdentityProviderType` can be set any of the
+    #     supported identity types: `SERVICE_MANAGED`,
+    #     `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `AS2`, then the `EndpointType` must be `VPC`,
     #     and domain must be Amazon S3.
@@ -4040,8 +4066,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A partial
     #   upload occurs when a file is open when the session disconnects.
     #
@@ -4273,7 +4299,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

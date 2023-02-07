@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-02-07)
+------------------
+
+* Feature - Updated the documentation for the ImportCertificate API call, and added examples.
+
 1.66.0 (2023-01-18)
 ------------------
 

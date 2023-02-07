@@ -46,6 +46,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] encryption_algorithm
     #   The algorithm that is used to encrypt the file.
+    #
+    #   <note markdown="1"> You can only specify `NONE` if the URL for your connector uses
+    #   HTTPS. This ensures that no traffic is sent in clear text.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] signing_algorithm
@@ -57,7 +62,7 @@ module Aws::Transfer
     #   The signing algorithm for the MDN response.
     #
     #   <note markdown="1"> If set to DEFAULT (or not set at all), the value for
-    #   `SigningAlogorithm` is used.
+    #   `SigningAlgorithm` is used.
     #
     #    </note>
     #   @return [String]
@@ -111,14 +116,28 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] destination_file_location
-    #   Specifies the location for the file being copied. Only applicable
-    #   for Copy type workflow steps. Use `$\{Transfer:username\}` in this
-    #   field to parametrize the destination prefix by username.
+    #   Specifies the location for the file being copied. Use
+    #   `$\{Transfer:username\}` or `$\{Transfer:UploadDate\}` in this field
+    #   to parametrize the destination prefix by username or uploaded date.
+    #
+    #   * Set the value of `DestinationFileLocation` to
+    #     `$\{Transfer:username\}` to copy uploaded files to an Amazon S3
+    #     bucket that is prefixed with the name of the Transfer Family user
+    #     that uploaded the file.
+    #
+    #   * Set the value of `DestinationFileLocation` to
+    #     `$\{Transfer:UploadDate\}` to copy uploaded files to an Amazon S3
+    #     bucket that is prefixed with the date of the upload.
+    #
+    #     <note markdown="1"> The system resolves `UploadDate` to a date format of *YYYY-MM-DD*,
+    #     based on the date the file is uploaded.
+    #
+    #      </note>
     #   @return [Types::InputFileLocation]
     #
     # @!attribute [rw] overwrite_existing
-    #   A flag that indicates whether or not to overwrite an existing file
-    #   of the same name. The default is `FALSE`.
+    #   A flag that indicates whether to overwrite an existing file of the
+    #   same name. The default is `FALSE`.
     #   @return [String]
     #
     # @!attribute [rw] source_file_location
@@ -126,12 +145,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * Enter `$\{previous.file\}` to use the previous file as the input.
+    #   * To use the previous file as the input, enter `$\{previous.file\}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
-    #   * Enter `$\{original.file\}` to use the originally-uploaded file
-    #     location as input for this step.
+    #   * To use the originally uploaded file location as input for this
+    #     step, enter `$\{original.file\}`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CopyStepDetails AWS API Documentation
@@ -316,8 +335,7 @@ module Aws::Transfer
     #   The landing directory (folder) for files transferred by using the
     #   AS2 protocol.
     #
-    #   A `BaseDirectory` example is
-    #   *DOC-EXAMPLE-BUCKET*/*home*/*mydirectory*.
+    #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] access_role
@@ -609,7 +627,7 @@ module Aws::Transfer
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see [Update host keys for your SFTP-enabled
+    #   For more information, see [Manage host keys for your SFTP-enabled
     #   server][1] in the *Transfer Family User Guide*.
     #
     #
@@ -699,14 +717,15 @@ module Aws::Transfer
     #
     #   * If `Protocol` includes either `FTP` or `FTPS`, then the
     #     `EndpointType` must be `VPC` and the `IdentityProviderType` must
-    #     be `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #     be either `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot
     #     be associated.
     #
     #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
-    #     to `PUBLIC` and the `IdentityProviderType` can be set to
-    #     `SERVICE_MANAGED`.
+    #     to `PUBLIC` and the `IdentityProviderType` can be set any of the
+    #     supported identity types: `SERVICE_MANAGED`,
+    #     `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `AS2`, then the `EndpointType` must be
     #     `VPC`, and domain must be Amazon S3.
@@ -753,8 +772,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -894,7 +913,19 @@ module Aws::Transfer
     #   The public portion of the Secure Shell (SSH) key used to
     #   authenticate the user to the server.
     #
+    #   The three standard SSH public key format elements are `<key type>`,
+    #   `<body base64>`, and an optional `<comment>`, with spaces between
+    #   each element.
+    #
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+    #
+    #   * For RSA keys, the key type is `ssh-rsa`.
+    #
+    #   * For ED25519 keys, the key type is `ssh-ed25519`.
+    #
+    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
+    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
+    #     size of the key you generated.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -956,20 +987,24 @@ module Aws::Transfer
     #   The `TYPE` specifies which of the following actions is being taken
     #   for this step.
     #
-    #   * *COPY*\: Copy the file to another location.
+    #   * <b> <code>COPY</code> </b> - Copy the file to another location.
     #
-    #   * *CUSTOM*\: Perform a custom step with an Lambda function target.
+    #   * <b> <code>CUSTOM</code> </b> - Perform a custom step with an
+    #     Lambda function target.
     #
-    #   * *DELETE*\: Delete the file.
+    #   * <b> <code>DECRYPT</code> </b> - Decrypt a file that was encrypted
+    #     before it was uploaded.
     #
-    #   * *TAG*\: Add a tag to the file.
+    #   * <b> <code>DELETE</code> </b> - Delete the file.
+    #
+    #   * <b> <code>TAG</code> </b> - Add a tag to the file.
     #
     #   <note markdown="1"> Currently, copying and tagging are supported only on S3.
     #
     #    </note>
     #
-    #   For file location, you specify either the S3 bucket and key, or the
-    #   EFS file system ID and path.
+    #   For file location, you specify either the Amazon S3 bucket and key,
+    #   or the Amazon EFS file system ID and path.
     #   @return [Array<Types::WorkflowStep>]
     #
     # @!attribute [rw] on_exception_steps
@@ -1031,12 +1066,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * Enter `$\{previous.file\}` to use the previous file as the input.
+    #   * To use the previous file as the input, enter `$\{previous.file\}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
-    #   * Enter `$\{original.file\}` to use the originally-uploaded file
-    #     location as input for this step.
+    #   * To use the originally uploaded file location as input for this
+    #     step, enter `$\{original.file\}`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CustomStepDetails AWS API Documentation
@@ -1050,21 +1085,36 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # Each step type has its own `StepDetails` structure.
+    #
     # @!attribute [rw] name
+    #   The name of the step, used as an identifier.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of encryption used. Currently, this value must be `PGP`.
     #   @return [String]
     #
     # @!attribute [rw] source_file_location
+    #   Specifies which file to use as input to the workflow step: either
+    #   the output from the previous step, or the originally uploaded file
+    #   for the workflow.
+    #
+    #   * To use the previous file as the input, enter `$\{previous.file\}`.
+    #     In this case, this workflow step uses the output file from the
+    #     previous workflow step as input. This is the default value.
+    #
+    #   * To use the originally uploaded file location as input for this
+    #     step, enter `$\{original.file\}`.
     #   @return [String]
     #
     # @!attribute [rw] overwrite_existing
+    #   A flag that indicates whether to overwrite an existing file of the
+    #   same name. The default is `FALSE`.
     #   @return [String]
     #
     # @!attribute [rw] destination_file_location
-    #   Specifies the location for the file being copied. Only applicable
-    #   for the Copy type of workflow steps.
+    #   Specifies the location for the file that's being processed.
     #   @return [Types::InputFileLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DecryptStepDetails AWS API Documentation
@@ -1233,12 +1283,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * Enter `$\{previous.file\}` to use the previous file as the input.
+    #   * To use the previous file as the input, enter `$\{previous.file\}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
-    #   * Enter `$\{original.file\}` to use the originally-uploaded file
-    #     location as input for this step.
+    #   * To use the originally uploaded file location as input for this
+    #     step, enter `$\{original.file\}`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteStepDetails AWS API Documentation
@@ -2297,14 +2347,15 @@ module Aws::Transfer
     #
     #   * If `Protocol` includes either `FTP` or `FTPS`, then the
     #     `EndpointType` must be `VPC` and the `IdentityProviderType` must
-    #     be `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #     be either `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot
     #     be associated.
     #
     #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
-    #     to `PUBLIC` and the `IdentityProviderType` can be set to
-    #     `SERVICE_MANAGED`.
+    #     to `PUBLIC` and the `IdentityProviderType` can be set any of the
+    #     supported identity types: `SERVICE_MANAGED`,
+    #     `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `AS2`, then the `EndpointType` must be
     #     `VPC`, and domain must be Amazon S3.
@@ -2348,8 +2399,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -2527,7 +2578,9 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Specifies the details for the file location for the file that's being
+    # used in the workflow. Only applicable if you are using Amazon Elastic
+    # File Systems (Amazon EFS) for storage.
     #
     # @!attribute [rw] file_system_id
     #   The identifier of the file system, assigned by Amazon EFS.
@@ -2716,13 +2769,17 @@ module Aws::Transfer
     # @!attribute [rw] step_type
     #   One of the available step types.
     #
-    #   * *COPY*\: Copy the file to another location.
+    #   * <b> <code>COPY</code> </b> - Copy the file to another location.
     #
-    #   * *CUSTOM*\: Perform a custom step with an Lambda function target.
+    #   * <b> <code>CUSTOM</code> </b> - Perform a custom step with an
+    #     Lambda function target.
     #
-    #   * *DELETE*\: Delete the file.
+    #   * <b> <code>DECRYPT</code> </b> - Decrypt a file that was encrypted
+    #     before it was uploaded.
     #
-    #   * *TAG*\: Add a tag to the file.
+    #   * <b> <code>DELETE</code> </b> - Delete the file.
+    #
+    #   * <b> <code>TAG</code> </b> - Add a tag to the file.
     #   @return [String]
     #
     # @!attribute [rw] outputs
@@ -2830,7 +2887,12 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] certificate
-    #   The file that contains the certificate to import.
+    #   * For the CLI, provide a file path for a certificate in URI format.
+    #     For example, `--certificate file://encryption-cert.pem`.
+    #     Alternatively, you can provide the raw content.
+    #
+    #   * For the SDK, specify the raw content of a certificate file. For
+    #     example, `` --certificate "`cat encryption-cert.pem`" ``.
     #   @return [String]
     #
     # @!attribute [rw] certificate_chain
@@ -2839,8 +2901,13 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] private_key
-    #   The file that contains the private key for the certificate that's
-    #   being imported.
+    #   * For the CLI, provide a file path for a private key in URI
+    #     format.For example, `--private-key file://encryption-key.pem`.
+    #     Alternatively, you can provide the raw content of the private key
+    #     file.
+    #
+    #   * For the SDK, specify the raw content of a private key file. For
+    #     example, `` --private-key "`cat encryption-key.pem`" ``
     #   @return [String]
     #
     # @!attribute [rw] active_date
@@ -2895,7 +2962,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] host_key_body
-    #   The public key portion of an SSH key pair.
+    #   The private key portion of an SSH key pair.
     #
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
     #   @return [String]
@@ -2987,15 +3054,16 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Specifies the location for the file being copied. Only applicable for
-    # the Copy type of workflow steps.
+    # Specifies the location for the file that's being processed.
     #
     # @!attribute [rw] s3_file_location
-    #   Specifies the details for the S3 file being copied.
+    #   Specifies the details for the Amazon S3 file that's being copied or
+    #   decrypted.
     #   @return [Types::S3InputFileLocation]
     #
     # @!attribute [rw] efs_file_location
-    #   Reserved for future use.
+    #   Specifies the details for the Amazon Elastic File System (Amazon
+    #   EFS) file that's being decrypted.
     #   @return [Types::EfsFileLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/InputFileLocation AWS API Documentation
@@ -4365,9 +4433,9 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Specifies the customer input S3 file location. If it is used inside
-    # `copyStepDetails.DestinationFileLocation`, it should be the S3 copy
-    # destination.
+    # Specifies the customer input Amazon S3 file location. If it is used
+    # inside `copyStepDetails.DestinationFileLocation`, it should be the S3
+    # copy destination.
     #
     # You need to provide the bucket and key. The key can represent either a
     # path or a file. This is determined by whether or not you end the key
@@ -4635,12 +4703,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * Enter `$\{previous.file\}` to use the previous file as the input.
+    #   * To use the previous file as the input, enter `$\{previous.file\}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
-    #   * Enter `$\{original.file\}` to use the originally-uploaded file
-    #     location as input for this step.
+    #   * To use the originally uploaded file location as input for this
+    #     step, enter `$\{original.file\}`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TagStepDetails AWS API Documentation
@@ -5298,7 +5366,7 @@ module Aws::Transfer
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see [Update host keys for your SFTP-enabled
+    #   For more information, see [Manage host keys for your SFTP-enabled
     #   server][1] in the *Transfer Family User Guide*.
     #
     #
@@ -5361,14 +5429,15 @@ module Aws::Transfer
     #
     #   * If `Protocol` includes either `FTP` or `FTPS`, then the
     #     `EndpointType` must be `VPC` and the `IdentityProviderType` must
-    #     be `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #     be either `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot
     #     be associated.
     #
     #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
-    #     to `PUBLIC` and the `IdentityProviderType` can be set to
-    #     `SERVICE_MANAGED`.
+    #     to `PUBLIC` and the `IdentityProviderType` can be set any of the
+    #     supported identity types: `SERVICE_MANAGED`,
+    #     `AWS_DIRECTORY_SERVICE`, `AWS_LAMBDA`, or `API_GATEWAY`.
     #
     #   * If `Protocol` includes `AS2`, then the `EndpointType` must be
     #     `VPC`, and domain must be Amazon S3.
@@ -5390,8 +5459,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -5610,8 +5679,8 @@ module Aws::Transfer
     # Specifies the workflow ID for the workflow to assign and the execution
     # role that's used for executing the workflow.
     #
-    # In additon to a workflow to execute when a file is uploaded
-    # completely, `WorkflowDeatails` can also contain a workflow ID (and
+    # In addition to a workflow to execute when a file is uploaded
+    # completely, `WorkflowDetails` can also contain a workflow ID (and
     # execution role) for a workflow to execute on partial upload. A partial
     # upload occurs when a file is open when the session disconnects.
     #
@@ -5671,13 +5740,17 @@ module Aws::Transfer
     # @!attribute [rw] type
     #   Currently, the following step types are supported.
     #
-    #   * *COPY*\: Copy the file to another location.
+    #   * <b> <code>COPY</code> </b> - Copy the file to another location.
     #
-    #   * *CUSTOM*\: Perform a custom step with an Lambda function target.
+    #   * <b> <code>CUSTOM</code> </b> - Perform a custom step with an
+    #     Lambda function target.
     #
-    #   * *DELETE*\: Delete the file.
+    #   * <b> <code>DECRYPT</code> </b> - Decrypt a file that was encrypted
+    #     before it was uploaded.
     #
-    #   * *TAG*\: Add a tag to the file.
+    #   * <b> <code>DELETE</code> </b> - Delete the file.
+    #
+    #   * <b> <code>TAG</code> </b> - Add a tag to the file.
     #   @return [String]
     #
     # @!attribute [rw] copy_step_details
@@ -5687,16 +5760,16 @@ module Aws::Transfer
     #
     #   * A description
     #
-    #   * An S3 location for the destination of the file copy.
+    #   * An Amazon S3 location for the destination of the file copy.
     #
-    #   * A flag that indicates whether or not to overwrite an existing file
-    #     of the same name. The default is `FALSE`.
+    #   * A flag that indicates whether to overwrite an existing file of the
+    #     same name. The default is `FALSE`.
     #   @return [Types::CopyStepDetails]
     #
     # @!attribute [rw] custom_step_details
-    #   Details for a step that invokes a lambda function.
+    #   Details for a step that invokes an Lambda function.
     #
-    #   Consists of the lambda function name, target, and timeout (in
+    #   Consists of the Lambda function's name, target, and timeout (in
     #   seconds).
     #   @return [Types::CustomStepDetails]
     #
@@ -5707,10 +5780,27 @@ module Aws::Transfer
     # @!attribute [rw] tag_step_details
     #   Details for a step that creates one or more tags.
     #
-    #   You specify one or more tags: each tag contains a key/value pair.
+    #   You specify one or more tags. Each tag contains a key-value pair.
     #   @return [Types::TagStepDetails]
     #
     # @!attribute [rw] decrypt_step_details
+    #   Details for a step that decrypts an encrypted file.
+    #
+    #   Consists of the following values:
+    #
+    #   * A descriptive name
+    #
+    #   * An Amazon S3 or Amazon Elastic File System (Amazon EFS) location
+    #     for the source file to decrypt.
+    #
+    #   * An S3 or Amazon EFS location for the destination of the file
+    #     decryption.
+    #
+    #   * A flag that indicates whether to overwrite an existing file of the
+    #     same name. The default is `FALSE`.
+    #
+    #   * The type of encryption that's used. Currently, only PGP
+    #     encryption is supported.
     #   @return [Types::DecryptStepDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/WorkflowStep AWS API Documentation
