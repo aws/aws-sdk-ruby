@@ -1702,12 +1702,11 @@ module Aws::Glue
     #   @return [Types::S3ParquetSource]
     #
     # @!attribute [rw] relational_catalog_source
-    #   Specifies a Relational database data source in the Glue Data
-    #   Catalog.
+    #   Specifies a relational catalog data store in the Glue Data Catalog.
     #   @return [Types::RelationalCatalogSource]
     #
     # @!attribute [rw] dynamo_db_catalog_source
-    #   Specifies a DynamoDB data source in the Glue Data Catalog.
+    #   Specifies a DynamoDBC Catalog data store in the Glue Data Catalog.
     #   @return [Types::DynamoDBCatalogSource]
     #
     # @!attribute [rw] jdbc_connector_target
@@ -12371,6 +12370,31 @@ module Aws::Glue
     #   partitions is equal to the number of Kafka partitions.
     #   @return [Integer]
     #
+    # @!attribute [rw] include_headers
+    #   Whether to include the Kafka headers. When the option is set to
+    #   "true", the data output will contain an additional column named
+    #   "glue\_streaming\_kafka\_headers" with type `Array[Struct(key:
+    #   String, value: String)]`. The default value is "false". This
+    #   option is available in Glue version 3.0 or later only.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] add_record_timestamp
+    #   When this option is set to 'true', the data output will contain an
+    #   additional column named "\_\_src\_timestamp" that indicates the
+    #   time when the corresponding record received by the topic. The
+    #   default value is 'false'. This option is supported in Glue version
+    #   4.0 or later.
+    #   @return [String]
+    #
+    # @!attribute [rw] emit_consumer_lag_metrics
+    #   When this option is set to 'true', for each batch, it will emit
+    #   the metrics for the duration between the oldest record received by
+    #   the topic and the time it arrives in Glue to CloudWatch. The
+    #   metric's name is "glue.driver.streaming.maxConsumerLagInMs". The
+    #   default value is 'false'. This option is supported in Glue version
+    #   4.0 or later.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KafkaStreamingSourceOptions AWS API Documentation
     #
     class KafkaStreamingSourceOptions < Struct.new(
@@ -12388,7 +12412,10 @@ module Aws::Glue
       :num_retries,
       :retry_interval_ms,
       :max_offsets_per_trigger,
-      :min_partitions)
+      :min_partitions,
+      :include_headers,
+      :add_record_timestamp,
+      :emit_consumer_lag_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12509,6 +12536,23 @@ module Aws::Glue
     #   account. Used in conjunction with `"awsSTSRoleARN"`.
     #   @return [String]
     #
+    # @!attribute [rw] add_record_timestamp
+    #   When this option is set to 'true', the data output will contain an
+    #   additional column named "\_\_src\_timestamp" that indicates the
+    #   time when the corresponding record received by the stream. The
+    #   default value is 'false'. This option is supported in Glue version
+    #   4.0 or later.
+    #   @return [String]
+    #
+    # @!attribute [rw] emit_consumer_lag_metrics
+    #   When this option is set to 'true', for each batch, it will emit
+    #   the metrics for the duration between the oldest record received by
+    #   the stream and the time it arrives in Glue to CloudWatch. The
+    #   metric's name is "glue.driver.streaming.maxConsumerLagInMs". The
+    #   default value is 'false'. This option is supported in Glue version
+    #   4.0 or later.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KinesisStreamingSourceOptions AWS API Documentation
     #
     class KinesisStreamingSourceOptions < Struct.new(
@@ -12529,7 +12573,9 @@ module Aws::Glue
       :avoid_empty_batches,
       :stream_arn,
       :role_arn,
-      :role_session_name)
+      :role_session_name,
+      :add_record_timestamp,
+      :emit_consumer_lag_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15889,6 +15935,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] additional_options
+    #   Specifies additional connection options for the connector.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] schema_change_policy
@@ -15925,8 +15972,7 @@ module Aws::Glue
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] additional_options
-    #   Specifies additional connection options for the Amazon S3 data
-    #   store.
+    #   Specifies additional options for the connector.
     #   @return [Types::S3DirectSourceAdditionalOptions]
     #
     # @!attribute [rw] output_schemas

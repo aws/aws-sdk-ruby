@@ -228,6 +228,11 @@ module Aws::Backup
     #   backup job.
     #   @return [Boolean]
     #
+    # @!attribute [rw] resource_name
+    #   This is the non-unique name of the resource that belongs to the
+    #   specified backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupJob AWS API Documentation
     #
     class BackupJob < Struct.new(
@@ -252,7 +257,8 @@ module Aws::Backup
       :backup_options,
       :backup_type,
       :parent_job_id,
-      :is_parent)
+      :is_parent,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1253,6 +1259,11 @@ module Aws::Backup
     #   jobs.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] resource_name
+    #   This is the non-unique name of the resource that belongs to the
+    #   specified backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyJob AWS API Documentation
     #
     class CopyJob < Struct.new(
@@ -1275,7 +1286,8 @@ module Aws::Backup
       :is_parent,
       :composite_member_identifier,
       :number_of_child_jobs,
-      :child_jobs_in_state)
+      :child_jobs_in_state,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2077,6 +2089,11 @@ module Aws::Backup
     #   jobs.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] resource_name
+    #   This is the non-unique name of the resource that belongs to the
+    #   specified backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJobOutput AWS API Documentation
     #
     class DescribeBackupJobOutput < Struct.new(
@@ -2103,7 +2120,8 @@ module Aws::Backup
       :parent_job_id,
       :is_parent,
       :number_of_child_jobs,
-      :child_jobs_in_state)
+      :child_jobs_in_state,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2393,12 +2411,18 @@ module Aws::Backup
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] resource_name
+    #   This is the non-unique name of the resource that belongs to the
+    #   specified backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeProtectedResourceOutput AWS API Documentation
     #
     class DescribeProtectedResourceOutput < Struct.new(
       :resource_arn,
       :resource_type,
-      :last_backup_time)
+      :last_backup_time,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2604,6 +2628,11 @@ module Aws::Backup
     #   (composite) job.
     #   @return [Boolean]
     #
+    # @!attribute [rw] resource_name
+    #   This is the non-unique name of the resource that belongs to the
+    #   specified backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPointOutput AWS API Documentation
     #
     class DescribeRecoveryPointOutput < Struct.new(
@@ -2628,7 +2657,8 @@ module Aws::Backup
       :last_restore_time,
       :parent_recovery_point_arn,
       :composite_member_identifier,
-      :is_parent)
+      :is_parent,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4682,12 +4712,18 @@ module Aws::Backup
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] resource_name
+    #   This is the non-unique name of the resource that belongs to the
+    #   specified backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ProtectedResource AWS API Documentation
     #
     class ProtectedResource < Struct.new(
       :resource_arn,
       :resource_type,
-      :last_backup_time)
+      :last_backup_time,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4991,6 +5027,11 @@ module Aws::Backup
     #   recovery point.
     #   @return [Boolean]
     #
+    # @!attribute [rw] resource_name
+    #   This is the non-unique name of the resource that belongs to the
+    #   specified backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByBackupVault AWS API Documentation
     #
     class RecoveryPointByBackupVault < Struct.new(
@@ -5014,7 +5055,8 @@ module Aws::Backup
       :last_restore_time,
       :parent_recovery_point_arn,
       :composite_member_identifier,
-      :is_parent)
+      :is_parent,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5070,6 +5112,11 @@ module Aws::Backup
     #   recovery point.
     #   @return [String]
     #
+    # @!attribute [rw] resource_name
+    #   This is the non-unique name of the resource that belongs to the
+    #   specified backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByResource AWS API Documentation
     #
     class RecoveryPointByResource < Struct.new(
@@ -5081,7 +5128,8 @@ module Aws::Backup
       :backup_size_bytes,
       :backup_vault_name,
       :is_parent,
-      :parent_recovery_point_arn)
+      :parent_recovery_point_arn,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5657,6 +5705,9 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] recovery_point_arn
+    #   *Note: This field is only returned for Amazon EFS and Advanced
+    #   DynamoDB resources.*
+    #
     #   An ARN that uniquely identifies a recovery point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]

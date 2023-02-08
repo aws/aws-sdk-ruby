@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2023-02-08)
+------------------
+
+* Feature - This release added one attribute (resource name) in the output model of our 9 existing APIs in AWS backup so that customers will see the resource name at the output. No input required from Customers.
+
 1.48.0 (2023-01-18)
 ------------------
 

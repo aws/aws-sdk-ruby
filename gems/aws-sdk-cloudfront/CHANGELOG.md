@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-02-08)
+------------------
+
+* Feature - CloudFront Origin Access Control extends support to AWS Elemental MediaStore origins.
+
 1.74.0 (2023-01-18)
 ------------------
 

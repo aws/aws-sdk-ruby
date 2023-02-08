@@ -312,6 +312,7 @@ module Aws::Backup
     BackupJob.add_member(:backup_type, Shapes::ShapeRef.new(shape: string, location_name: "BackupType"))
     BackupJob.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
     BackupJob.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
+    BackupJob.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
     BackupJob.struct_class = Types::BackupJob
 
     BackupJobChildJobsInState.key = Shapes::ShapeRef.new(shape: BackupJobState)
@@ -487,6 +488,7 @@ module Aws::Backup
     CopyJob.add_member(:composite_member_identifier, Shapes::ShapeRef.new(shape: string, location_name: "CompositeMemberIdentifier"))
     CopyJob.add_member(:number_of_child_jobs, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfChildJobs"))
     CopyJob.add_member(:child_jobs_in_state, Shapes::ShapeRef.new(shape: CopyJobChildJobsInState, location_name: "ChildJobsInState"))
+    CopyJob.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
     CopyJob.struct_class = Types::CopyJob
 
     CopyJobChildJobsInState.key = Shapes::ShapeRef.new(shape: CopyJobState)
@@ -639,6 +641,7 @@ module Aws::Backup
     DescribeBackupJobOutput.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     DescribeBackupJobOutput.add_member(:number_of_child_jobs, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfChildJobs"))
     DescribeBackupJobOutput.add_member(:child_jobs_in_state, Shapes::ShapeRef.new(shape: BackupJobChildJobsInState, location_name: "ChildJobsInState"))
+    DescribeBackupJobOutput.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
     DescribeBackupJobOutput.struct_class = Types::DescribeBackupJobOutput
 
     DescribeBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupVaultName"))
@@ -687,6 +690,7 @@ module Aws::Backup
     DescribeProtectedResourceOutput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     DescribeProtectedResourceOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     DescribeProtectedResourceOutput.add_member(:last_backup_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastBackupTime"))
+    DescribeProtectedResourceOutput.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
     DescribeProtectedResourceOutput.struct_class = Types::DescribeProtectedResourceOutput
 
     DescribeRecoveryPointInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
@@ -715,6 +719,7 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:parent_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ParentRecoveryPointArn"))
     DescribeRecoveryPointOutput.add_member(:composite_member_identifier, Shapes::ShapeRef.new(shape: string, location_name: "CompositeMemberIdentifier"))
     DescribeRecoveryPointOutput.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
+    DescribeRecoveryPointOutput.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
     DescribeRecoveryPointOutput.struct_class = Types::DescribeRecoveryPointOutput
 
     DescribeRegionSettingsInput.struct_class = Types::DescribeRegionSettingsInput
@@ -1103,6 +1108,7 @@ module Aws::Backup
     ProtectedResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     ProtectedResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ProtectedResource.add_member(:last_backup_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastBackupTime"))
+    ProtectedResource.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
     ProtectedResource.struct_class = Types::ProtectedResource
 
     ProtectedResourcesList.member = Shapes::ShapeRef.new(shape: ProtectedResource)
@@ -1143,6 +1149,7 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:parent_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ParentRecoveryPointArn"))
     RecoveryPointByBackupVault.add_member(:composite_member_identifier, Shapes::ShapeRef.new(shape: string, location_name: "CompositeMemberIdentifier"))
     RecoveryPointByBackupVault.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
+    RecoveryPointByBackupVault.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
     RecoveryPointByBackupVault.struct_class = Types::RecoveryPointByBackupVault
 
     RecoveryPointByBackupVaultList.member = Shapes::ShapeRef.new(shape: RecoveryPointByBackupVault)
@@ -1156,6 +1163,7 @@ module Aws::Backup
     RecoveryPointByResource.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     RecoveryPointByResource.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     RecoveryPointByResource.add_member(:parent_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ParentRecoveryPointArn"))
+    RecoveryPointByResource.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
     RecoveryPointByResource.struct_class = Types::RecoveryPointByResource
 
     RecoveryPointByResourceList.member = Shapes::ShapeRef.new(shape: RecoveryPointByResource)

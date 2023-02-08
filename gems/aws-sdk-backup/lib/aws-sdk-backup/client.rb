@@ -1206,6 +1206,7 @@ module Aws::Backup
     #   * {Types::DescribeBackupJobOutput#is_parent #is_parent} => Boolean
     #   * {Types::DescribeBackupJobOutput#number_of_child_jobs #number_of_child_jobs} => Integer
     #   * {Types::DescribeBackupJobOutput#child_jobs_in_state #child_jobs_in_state} => Hash&lt;String,Integer&gt;
+    #   * {Types::DescribeBackupJobOutput#resource_name #resource_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1244,6 +1245,7 @@ module Aws::Backup
     #   resp.number_of_child_jobs #=> Integer
     #   resp.child_jobs_in_state #=> Hash
     #   resp.child_jobs_in_state["BackupJobState"] #=> Integer
+    #   resp.resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJob AWS API Documentation
     #
@@ -1344,6 +1346,7 @@ module Aws::Backup
     #   resp.copy_job.number_of_child_jobs #=> Integer
     #   resp.copy_job.child_jobs_in_state #=> Hash
     #   resp.copy_job.child_jobs_in_state["CopyJobState"] #=> Integer
+    #   resp.copy_job.resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeCopyJob AWS API Documentation
     #
@@ -1444,6 +1447,7 @@ module Aws::Backup
     #   * {Types::DescribeProtectedResourceOutput#resource_arn #resource_arn} => String
     #   * {Types::DescribeProtectedResourceOutput#resource_type #resource_type} => String
     #   * {Types::DescribeProtectedResourceOutput#last_backup_time #last_backup_time} => Time
+    #   * {Types::DescribeProtectedResourceOutput#resource_name #resource_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1456,6 +1460,7 @@ module Aws::Backup
     #   resp.resource_arn #=> String
     #   resp.resource_type #=> String
     #   resp.last_backup_time #=> Time
+    #   resp.resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeProtectedResource AWS API Documentation
     #
@@ -1504,6 +1509,7 @@ module Aws::Backup
     #   * {Types::DescribeRecoveryPointOutput#parent_recovery_point_arn #parent_recovery_point_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#composite_member_identifier #composite_member_identifier} => String
     #   * {Types::DescribeRecoveryPointOutput#is_parent #is_parent} => Boolean
+    #   * {Types::DescribeRecoveryPointOutput#resource_name #resource_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1541,6 +1547,7 @@ module Aws::Backup
     #   resp.parent_recovery_point_arn #=> String
     #   resp.composite_member_identifier #=> String
     #   resp.is_parent #=> Boolean
+    #   resp.resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPoint AWS API Documentation
     #
@@ -2374,6 +2381,7 @@ module Aws::Backup
     #   resp.backup_jobs[0].backup_type #=> String
     #   resp.backup_jobs[0].parent_job_id #=> String
     #   resp.backup_jobs[0].is_parent #=> Boolean
+    #   resp.backup_jobs[0].resource_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobs AWS API Documentation
@@ -2765,6 +2773,7 @@ module Aws::Backup
     #   resp.copy_jobs[0].number_of_child_jobs #=> Integer
     #   resp.copy_jobs[0].child_jobs_in_state #=> Hash
     #   resp.copy_jobs[0].child_jobs_in_state["CopyJobState"] #=> Integer
+    #   resp.copy_jobs[0].resource_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobs AWS API Documentation
@@ -2901,6 +2910,7 @@ module Aws::Backup
     #   resp.results[0].resource_arn #=> String
     #   resp.results[0].resource_type #=> String
     #   resp.results[0].last_backup_time #=> Time
+    #   resp.results[0].resource_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListProtectedResources AWS API Documentation
@@ -3008,6 +3018,7 @@ module Aws::Backup
     #   resp.recovery_points[0].parent_recovery_point_arn #=> String
     #   resp.recovery_points[0].composite_member_identifier #=> String
     #   resp.recovery_points[0].is_parent #=> Boolean
+    #   resp.recovery_points[0].resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByBackupVault AWS API Documentation
     #
@@ -3116,6 +3127,7 @@ module Aws::Backup
     #   resp.recovery_points[0].backup_vault_name #=> String
     #   resp.recovery_points[0].is_parent #=> Boolean
     #   resp.recovery_points[0].parent_recovery_point_arn #=> String
+    #   resp.recovery_points[0].resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByResource AWS API Documentation
     #
@@ -3436,8 +3448,11 @@ module Aws::Backup
     # maximum retention period for future backup and copy jobs that target a
     # backup vault.
     #
-    # <note markdown="1"> Backup Vault Lock has yet to receive a third-party assessment for SEC
-    # 17a-4(f) and CFTC.
+    # <note markdown="1"> Backup Vault Lock has been assessed by Cohasset Associates for use in
+    # environments that are subject to SEC 17a-4, CFTC, and FINRA
+    # regulations. For more information about how Backup Vault Lock relates
+    # to these regulations, see the [Cohasset Associates Compliance
+    # Assessment.](samples/cohassetreport.zip)
     #
     #  </note>
     #
@@ -4429,7 +4444,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

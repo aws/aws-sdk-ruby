@@ -2191,17 +2191,17 @@ module Aws::CloudFront
     # distribution so that CloudFront sends authenticated (signed) requests
     # to the origin.
     #
-    # For an Amazon S3 origin, this makes it possible to block public access
-    # to the Amazon S3 bucket so that viewers (users) can access the content
-    # in the bucket only through CloudFront.
+    # This makes it possible to block public access to the origin, allowing
+    # viewers (users) to access the origin's content only through
+    # CloudFront.
     #
     # For more information about using a CloudFront origin access control,
-    # see [Restricting access to an Amazon S3 origin][1] in the *Amazon
-    # CloudFront Developer Guide*.
+    # see [Restricting access to an Amazon Web Services origin][1] in the
+    # *Amazon CloudFront Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html
     #
     # @option params [required, Types::OriginAccessControlConfig] :origin_access_control_config
     #   Contains the origin access control.
@@ -2220,7 +2220,7 @@ module Aws::CloudFront
     #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4
     #       signing_behavior: "never", # required, accepts never, always, no-override
-    #       origin_access_control_origin_type: "s3", # required, accepts s3
+    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore
     #     },
     #   })
     #
@@ -2231,7 +2231,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
     #   resp.location #=> String
     #   resp.etag #=> String
     #
@@ -4465,7 +4465,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControl AWS API Documentation
@@ -4499,7 +4499,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_config.description #=> String
     #   resp.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControlConfig AWS API Documentation
@@ -6483,7 +6483,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_list.items[0].name #=> String
     #   resp.origin_access_control_list.items[0].signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control_list.items[0].signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3", "mediastore"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginAccessControls AWS API Documentation
     #
@@ -8340,7 +8340,7 @@ module Aws::CloudFront
     #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4
     #       signing_behavior: "never", # required, accepts never, always, no-override
-    #       origin_access_control_origin_type: "s3", # required, accepts s3
+    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore
     #     },
     #     id: "string", # required
     #     if_match: "string",
@@ -8353,7 +8353,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginAccessControl AWS API Documentation
@@ -8876,7 +8876,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

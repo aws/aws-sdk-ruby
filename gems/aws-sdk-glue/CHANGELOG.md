@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2023-02-08)
+------------------
+
+* Feature - DirectJDBCSource + Glue 4.0 streaming options
+
 1.129.0 (2023-01-19)
 ------------------
 

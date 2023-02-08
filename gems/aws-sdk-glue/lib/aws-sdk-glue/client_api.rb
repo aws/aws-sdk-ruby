@@ -3587,6 +3587,9 @@ module Aws::Glue
     KafkaStreamingSourceOptions.add_member(:retry_interval_ms, Shapes::ShapeRef.new(shape: BoxedNonNegativeLong, location_name: "RetryIntervalMs"))
     KafkaStreamingSourceOptions.add_member(:max_offsets_per_trigger, Shapes::ShapeRef.new(shape: BoxedNonNegativeLong, location_name: "MaxOffsetsPerTrigger"))
     KafkaStreamingSourceOptions.add_member(:min_partitions, Shapes::ShapeRef.new(shape: BoxedNonNegativeInt, location_name: "MinPartitions"))
+    KafkaStreamingSourceOptions.add_member(:include_headers, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "IncludeHeaders"))
+    KafkaStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
+    KafkaStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
     KafkaStreamingSourceOptions.struct_class = Types::KafkaStreamingSourceOptions
 
     KeyList.member = Shapes::ShapeRef.new(shape: NameString)
@@ -3615,6 +3618,8 @@ module Aws::Glue
     KinesisStreamingSourceOptions.add_member(:stream_arn, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "StreamArn"))
     KinesisStreamingSourceOptions.add_member(:role_arn, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RoleArn"))
     KinesisStreamingSourceOptions.add_member(:role_session_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RoleSessionName"))
+    KinesisStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
+    KinesisStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
     KinesisStreamingSourceOptions.struct_class = Types::KinesisStreamingSourceOptions
 
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))

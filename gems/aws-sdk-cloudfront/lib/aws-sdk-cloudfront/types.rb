@@ -8025,8 +8025,7 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] origin_access_control_origin_type
-    #   The type of origin that this origin access control is for. The only
-    #   valid value is `s3`.
+    #   The type of origin that this origin access control is for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginAccessControlConfig AWS API Documentation
@@ -8135,8 +8134,7 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] origin_access_control_origin_type
-    #   The type of origin that this origin access control is for. The only
-    #   valid value is `s3`.
+    #   The type of origin that this origin access control is for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginAccessControlSummary AWS API Documentation

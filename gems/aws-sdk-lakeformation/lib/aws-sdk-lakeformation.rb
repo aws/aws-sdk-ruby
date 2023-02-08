@@ -52,6 +52,6 @@ require_relative 'aws-sdk-lakeformation/customizations'
 # @!group service
 module Aws::LakeFormation
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
