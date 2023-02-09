@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-02-09)
+------------------
+
+* Feature - This release adds support for creating environments with a network fabric type of NONE
+
 1.10.0 (2023-01-18)
 ------------------
 

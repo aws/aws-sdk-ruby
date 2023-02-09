@@ -368,24 +368,28 @@ module Aws::LexModelsV2
 
     # @!group API Operations
 
-    # Batch create custom vocabulary item for the specified locale in the
-    # specified bot.
+    # Create a batch of custom vocabulary items for a given bot locale's
+    # custom vocabulary.
     #
     # @option params [required, String] :bot_id
-    #   The unique identifier of the bot to batch create the custom vocabulary
-    #   item for.
+    #   The identifier of the bot associated with this custom vocabulary.
     #
     # @option params [required, String] :bot_version
-    #   The bot version of the bot to batch create the custom vocabulary item
-    #   for.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #
     # @option params [required, String] :locale_id
-    #   The unique locale identifier of the bot to batch create the custom
-    #   vocabulary item for.
+    #   The identifier of the language and locale where this custom vocabulary
+    #   is used. The string must match one of the supported locales. For more
+    #   information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [required, Array<Types::NewCustomVocabularyItem>] :custom_vocabulary_item_list
-    #   The custom vocabulary item list of the bot to batch create the custom
-    #   vocabulary item for.
+    #   A list of new custom vocabulary items. Each entry must contain a
+    #   phrase and can optionally contain a displayAs and/or a weight.
     #
     # @return [Types::BatchCreateCustomVocabularyItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -434,24 +438,28 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Batch delete custom vocabulary item for the specified locale in the
-    # specified bot.
+    # Delete a batch of custom vocabulary items for a given bot locale's
+    # custom vocabulary.
     #
     # @option params [required, String] :bot_id
-    #   The unique identifier of the bot to batch delete request for the
-    #   custom vocabulary item.
+    #   The identifier of the bot associated with this custom vocabulary.
     #
     # @option params [required, String] :bot_version
-    #   The version of the bot to batch delete request for the custom
-    #   vocabulary item.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #
     # @option params [required, String] :locale_id
-    #   The locale identifier of the bot to batch delete request for the
-    #   custom vocabulary item.
+    #   The identifier of the language and locale where this custom vocabulary
+    #   is used. The string must match one of the supported locales. For more
+    #   information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [required, Array<Types::CustomVocabularyEntryId>] :custom_vocabulary_item_list
-    #   The custom vocabulary list to batch delete request for the custom
-    #   vocabulary item.
+    #   A list of custom vocabulary items requested to be deleted. Each entry
+    #   must contain the unique custom vocabulary entry identifier.
     #
     # @return [Types::BatchDeleteCustomVocabularyItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -498,24 +506,29 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Batch update custom vocabulary item for the specified locale in the
-    # specified bot.
+    # Update a batch of custom vocabulary items for a given bot locale's
+    # custom vocabulary.
     #
     # @option params [required, String] :bot_id
-    #   The unique identifier of the bot to the batch update request for the
-    #   custom vocabulary item.
+    #   The identifier of the bot associated with this custom vocabulary
     #
     # @option params [required, String] :bot_version
-    #   The bot version of the bot to the batch update request for the custom
-    #   vocabulary item.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #
     # @option params [required, String] :locale_id
-    #   The locale identifier of the bot to the batch update request for the
-    #   custom vocabulary item.
+    #   The identifier of the language and locale where this custom vocabulary
+    #   is used. The string must match one of the supported locales. For more
+    #   information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [required, Array<Types::CustomVocabularyItem>] :custom_vocabulary_item_list
-    #   The custom vocabulary item list of the bot to the batch update request
-    #   for the custom vocabulary item.
+    #   A list of custom vocabulary items with updated fields. Each entry must
+    #   contain a phrase and can optionally contain a displayAs and/or a
+    #   weight.
     #
     # @return [Types::BatchUpdateCustomVocabularyItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -575,7 +588,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
     #
     # @option params [required, String] :bot_version
     #   The version of the bot to build. This can only be the draft version of
@@ -663,6 +676,12 @@ module Aws::LexModelsV2
     #   to update tags. To update tags on the test alias, use the
     #   `TagResource` operation.
     #
+    # @option params [String] :bot_type
+    #   The type of a bot to create.
+    #
+    # @option params [Array<Types::BotMember>] :bot_members
+    #   The list of bot members in a network to be created.
+    #
     # @return [Types::CreateBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBotResponse#bot_id #bot_id} => String
@@ -675,6 +694,8 @@ module Aws::LexModelsV2
     #   * {Types::CreateBotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateBotResponse#bot_tags #bot_tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateBotResponse#test_bot_alias_tags #test_bot_alias_tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateBotResponse#bot_type #bot_type} => String
+    #   * {Types::CreateBotResponse#bot_members #bot_members} => Array&lt;Types::BotMember&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -692,6 +713,16 @@ module Aws::LexModelsV2
     #     test_bot_alias_tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     bot_type: "Bot", # accepts Bot, BotNetwork
+    #     bot_members: [
+    #       {
+    #         bot_member_id: "Id", # required
+    #         bot_member_name: "Name", # required
+    #         bot_member_alias_id: "BotAliasId", # required
+    #         bot_member_alias_name: "BotAliasName", # required
+    #         bot_member_version: "BotVersion", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -702,12 +733,19 @@ module Aws::LexModelsV2
     #   resp.role_arn #=> String
     #   resp.data_privacy.child_directed #=> Boolean
     #   resp.idle_session_ttl_in_seconds #=> Integer
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #   resp.creation_date_time #=> Time
     #   resp.bot_tags #=> Hash
     #   resp.bot_tags["TagKey"] #=> String
     #   resp.test_bot_alias_tags #=> Hash
     #   resp.test_bot_alias_tags["TagKey"] #=> String
+    #   resp.bot_type #=> String, one of "Bot", "BotNetwork"
+    #   resp.bot_members #=> Array
+    #   resp.bot_members[0].bot_member_id #=> String
+    #   resp.bot_members[0].bot_member_name #=> String
+    #   resp.bot_members[0].bot_member_alias_id #=> String
+    #   resp.bot_members[0].bot_member_alias_name #=> String
+    #   resp.bot_members[0].bot_member_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBot AWS API Documentation
     #
@@ -739,7 +777,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_UpdateBotAlias.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_UpdateBotAlias.html
     #
     # @option params [Hash<String,Types::BotAliasLocaleSettings>] :bot_alias_locale_settings
     #   Maps configuration information to a specific locale. You can use this
@@ -1013,7 +1051,7 @@ module Aws::LexModelsV2
     #   resp.bot_version #=> String
     #   resp.bot_version_locale_specification #=> Hash
     #   resp.bot_version_locale_specification["LocaleId"].source_bot_version #=> String
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #   resp.creation_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotVersion AWS API Documentation
@@ -2439,8 +2477,11 @@ module Aws::LexModelsV2
     #   The identifier of the bot to delete.
     #
     # @option params [Boolean] :skip_resource_in_use_check
-    #   When `true`, Amazon Lex doesn't check to see if another resource,
-    #   such as an alias, is using the bot before it is deleted.
+    #   By default, Amazon Lex checks if any other resource, such as an alias
+    #   or bot network, is using the bot version before it is deleted and
+    #   throws a `ResourceInUseException` exception if the bot is being used
+    #   by another resource. Set this parameter to `true` to skip this check
+    #   and remove the bot even if it is being used by another resource.
     #
     # @return [Types::DeleteBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2457,7 +2498,7 @@ module Aws::LexModelsV2
     # @example Response structure
     #
     #   resp.bot_id #=> String
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBot AWS API Documentation
     #
@@ -2477,8 +2518,11 @@ module Aws::LexModelsV2
     #   The unique identifier of the bot associated with the alias to delete.
     #
     # @option params [Boolean] :skip_resource_in_use_check
-    #   When this parameter is true, Amazon Lex doesn't check to see if any
-    #   other resource is using the alias before it is deleted.
+    #   By default, Amazon Lex checks if any other resource, such as a bot
+    #   network, is using the bot alias before it is deleted and throws a
+    #   `ResourceInUseException` exception if the alias is being used by
+    #   another resource. Set this parameter to `true` to skip this check and
+    #   remove the alias even if it is being used by another resource.
     #
     # @return [Types::DeleteBotAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2560,12 +2604,12 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Deletes a specific version of a bot. To delete all version of a bot,
+    # Deletes a specific version of a bot. To delete all versions of a bot,
     # use the [DeleteBot][1] operation.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DeleteBot.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DeleteBot.html
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot that contains the version.
@@ -2574,11 +2618,12 @@ module Aws::LexModelsV2
     #   The version of the bot to delete.
     #
     # @option params [Boolean] :skip_resource_in_use_check
-    #   By default, the `DeleteBotVersion` operations throws a
-    #   `ResourceInUseException` exception if you try to delete a bot version
-    #   that has an alias pointing at it. Set the `skipResourceInUseCheck`
-    #   parameter to `true` to skip this check and remove the version even if
-    #   an alias points to it.
+    #   By default, Amazon Lex checks if any other resource, such as an alias
+    #   or bot network, is using the bot version before it is deleted and
+    #   throws a `ResourceInUseException` exception if the version is being
+    #   used by another resource. Set this parameter to `true` to skip this
+    #   check and remove the version even if it is being used by another
+    #   resource.
     #
     # @return [Types::DeleteBotVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2598,7 +2643,7 @@ module Aws::LexModelsV2
     #
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotVersion AWS API Documentation
     #
@@ -2956,7 +3001,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListAggregatedUtterances.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html
     #
     # @option params [required, String] :bot_id
     #   The unique identifier of the bot that contains the utterances.
@@ -2977,8 +3022,8 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html
-    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeText.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeUtterance.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3015,6 +3060,9 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotResponse#bot_status #bot_status} => String
     #   * {Types::DescribeBotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeBotResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeBotResponse#bot_type #bot_type} => String
+    #   * {Types::DescribeBotResponse#bot_members #bot_members} => Array&lt;Types::BotMember&gt;
+    #   * {Types::DescribeBotResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3030,9 +3078,18 @@ module Aws::LexModelsV2
     #   resp.role_arn #=> String
     #   resp.data_privacy.child_directed #=> Boolean
     #   resp.idle_session_ttl_in_seconds #=> Integer
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.bot_type #=> String, one of "Bot", "BotNetwork"
+    #   resp.bot_members #=> Array
+    #   resp.bot_members[0].bot_member_id #=> String
+    #   resp.bot_members[0].bot_member_name #=> String
+    #   resp.bot_members[0].bot_member_alias_id #=> String
+    #   resp.bot_members[0].bot_member_alias_name #=> String
+    #   resp.bot_members[0].bot_member_version #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3070,6 +3127,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotAliasResponse#bot_id #bot_id} => String
     #   * {Types::DescribeBotAliasResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeBotAliasResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeBotAliasResponse#parent_bot_networks #parent_bot_networks} => Array&lt;Types::ParentBotNetwork&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3106,6 +3164,9 @@ module Aws::LexModelsV2
     #   resp.bot_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.parent_bot_networks #=> Array
+    #   resp.parent_bot_networks[0].bot_id #=> String
+    #   resp.parent_bot_networks[0].bot_version #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3309,6 +3370,9 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotVersionResponse#bot_status #bot_status} => String
     #   * {Types::DescribeBotVersionResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
     #   * {Types::DescribeBotVersionResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeBotVersionResponse#parent_bot_networks #parent_bot_networks} => Array&lt;Types::ParentBotNetwork&gt;
+    #   * {Types::DescribeBotVersionResponse#bot_type #bot_type} => String
+    #   * {Types::DescribeBotVersionResponse#bot_members #bot_members} => Array&lt;Types::BotMember&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3326,10 +3390,20 @@ module Aws::LexModelsV2
     #   resp.role_arn #=> String
     #   resp.data_privacy.child_directed #=> Boolean
     #   resp.idle_session_ttl_in_seconds #=> Integer
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
     #   resp.creation_date_time #=> Time
+    #   resp.parent_bot_networks #=> Array
+    #   resp.parent_bot_networks[0].bot_id #=> String
+    #   resp.parent_bot_networks[0].bot_version #=> String
+    #   resp.bot_type #=> String, one of "Bot", "BotNetwork"
+    #   resp.bot_members #=> Array
+    #   resp.bot_members[0].bot_member_id #=> String
+    #   resp.bot_members[0].bot_member_name #=> String
+    #   resp.bot_members[0].bot_member_alias_id #=> String
+    #   resp.bot_members[0].bot_member_alias_name #=> String
+    #   resp.bot_members[0].bot_member_version #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4872,7 +4946,7 @@ module Aws::LexModelsV2
     #   resp.bot_version_summaries[0].bot_name #=> String
     #   resp.bot_version_summaries[0].bot_version #=> String
     #   resp.bot_version_summaries[0].description #=> String
-    #   resp.bot_version_summaries[0].bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_version_summaries[0].bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #   resp.bot_version_summaries[0].creation_date_time #=> Time
     #   resp.next_token #=> String
     #
@@ -4927,9 +5001,9 @@ module Aws::LexModelsV2
     #     },
     #     filters: [
     #       {
-    #         name: "BotName", # required, accepts BotName
+    #         name: "BotName", # required, accepts BotName, BotType
     #         values: ["FilterValue"], # required
-    #         operator: "CO", # required, accepts CO, EQ
+    #         operator: "CO", # required, accepts CO, EQ, NE
     #       },
     #     ],
     #     max_results: 1,
@@ -4942,9 +5016,10 @@ module Aws::LexModelsV2
     #   resp.bot_summaries[0].bot_id #=> String
     #   resp.bot_summaries[0].bot_name #=> String
     #   resp.bot_summaries[0].description #=> String
-    #   resp.bot_summaries[0].bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_summaries[0].bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #   resp.bot_summaries[0].latest_bot_version #=> String
     #   resp.bot_summaries[0].last_updated_date_time #=> Time
+    #   resp.bot_summaries[0].bot_type #=> String, one of "Bot", "BotNetwork"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBots AWS API Documentation
@@ -4966,7 +5041,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateIntent.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html
     #
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the intents to list. The
@@ -5094,22 +5169,24 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # List custom vocabulary items for the specified locale in the specified
-    # bot.
+    # Paginated list of custom vocabulary items for a given bot locale's
+    # custom vocabulary.
     #
     # @option params [required, String] :bot_id
-    #   The unique identifier of the bot to the list custom vocabulary
-    #   request.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #
     # @option params [required, String] :bot_version
     #   The bot version of the bot to the list custom vocabulary request.
     #
     # @option params [required, String] :locale_id
-    #   The locale identifier of the bot to the list custom vocabulary
-    #   request.
+    #   The identifier of the language and locale where this custom vocabulary
+    #   is used. The string must match one of the supported locales. For more
+    #   information, see Supported languages
+    #   (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
     #
     # @option params [Integer] :max_results
-    #   The maximum results to the list custom vocabulary request.
+    #   The maximum number of items returned by the list operation.
     #
     # @option params [String] :next_token
     #   The nextToken identifier to the list custom vocabulary request.
@@ -5974,7 +6051,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateUploadUrl.html
     #
     # @option params [required, Types::ImportResourceSpecification] :resource_specification
     #   Parameters for creating the bot, bot locale or custom vocabulary.
@@ -6192,7 +6269,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
     #
     # @option params [required, String] :bot_name
     #   The new name of the bot. The name must be unique in the account that
@@ -6219,6 +6296,13 @@ module Aws::LexModelsV2
     #
     #   You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.
     #
+    # @option params [String] :bot_type
+    #   The type of the bot to be updated.
+    #
+    # @option params [Array<Types::BotMember>] :bot_members
+    #   The list of bot members in the network associated with the update
+    #   action.
+    #
     # @return [Types::UpdateBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBotResponse#bot_id #bot_id} => String
@@ -6230,6 +6314,8 @@ module Aws::LexModelsV2
     #   * {Types::UpdateBotResponse#bot_status #bot_status} => String
     #   * {Types::UpdateBotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateBotResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::UpdateBotResponse#bot_type #bot_type} => String
+    #   * {Types::UpdateBotResponse#bot_members #bot_members} => Array&lt;Types::BotMember&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6242,6 +6328,16 @@ module Aws::LexModelsV2
     #       child_directed: false, # required
     #     },
     #     idle_session_ttl_in_seconds: 1, # required
+    #     bot_type: "Bot", # accepts Bot, BotNetwork
+    #     bot_members: [
+    #       {
+    #         bot_member_id: "Id", # required
+    #         bot_member_name: "Name", # required
+    #         bot_member_alias_id: "BotAliasId", # required
+    #         bot_member_alias_name: "BotAliasName", # required
+    #         bot_member_version: "BotVersion", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6252,9 +6348,16 @@ module Aws::LexModelsV2
     #   resp.role_arn #=> String
     #   resp.data_privacy.child_directed #=> Boolean
     #   resp.idle_session_ttl_in_seconds #=> Integer
-    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing"
+    #   resp.bot_status #=> String, one of "Creating", "Available", "Inactive", "Deleting", "Failed", "Versioning", "Importing", "Updating"
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.bot_type #=> String, one of "Bot", "BotNetwork"
+    #   resp.bot_members #=> Array
+    #   resp.bot_members[0].bot_member_id #=> String
+    #   resp.bot_members[0].bot_member_name #=> String
+    #   resp.bot_members[0].bot_member_alias_id #=> String
+    #   resp.bot_members[0].bot_member_alias_name #=> String
+    #   resp.bot_members[0].bot_member_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBot AWS API Documentation
     #
@@ -6567,7 +6670,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html
     #
     # @option params [required, String] :export_id
     #   The unique identifier Amazon Lex assigned to the export.
@@ -7741,7 +7844,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

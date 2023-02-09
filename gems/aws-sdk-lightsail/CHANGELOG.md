@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2023-02-09)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
 1.73.0 (2023-01-18)
 ------------------
 

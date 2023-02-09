@@ -23,6 +23,11 @@ module Aws::ChimeSDKMeetings
     # @!attribute [rw] external_user_id
     #   The Amazon Chime SDK external user ID. An idempotency token. Links
     #   the attendee to an identity managed by a builder application.
+    #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix. Case insensitive.
     #   @return [String]
     #
     # @!attribute [rw] attendee_id
@@ -267,6 +272,11 @@ module Aws::ChimeSDKMeetings
     # @!attribute [rw] external_user_id
     #   The Amazon Chime SDK external user ID. An idempotency token. Links
     #   the attendee to an identity managed by a builder application.
+    #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix. Case insensitive.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -294,6 +304,11 @@ module Aws::ChimeSDKMeetings
     # @!attribute [rw] external_user_id
     #   The Amazon Chime SDK external user ID. An idempotency token. Links
     #   the attendee to an identity managed by a builder application.
+    #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix.
     #   @return [String]
     #
     # @!attribute [rw] capabilities
@@ -344,6 +359,11 @@ module Aws::ChimeSDKMeetings
     # @!attribute [rw] external_user_id
     #   The Amazon Chime SDK external user ID. An idempotency token. Links
     #   the attendee to an identity managed by a builder application.
+    #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix. Case insensitive.
     #   @return [String]
     #
     # @!attribute [rw] capabilities
@@ -398,6 +418,11 @@ module Aws::ChimeSDKMeetings
     #
     # @!attribute [rw] external_meeting_id
     #   The external meeting ID.
+    #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix. Case insensitive.
     #   @return [String]
     #
     # @!attribute [rw] notifications_configuration
@@ -449,7 +474,7 @@ module Aws::ChimeSDKMeetings
     #
     #   **Minimum permissions**
     #
-    #   In addition to the `tag:TagResources `permission required by this
+    #   In addition to the `tag:TagResources` permission required by this
     #   operation, you must also have the tagging permission defined by the
     #   service that created the resource. For example, to tag a
     #   `ChimeSDKMeetings` instance using the `TagResources` operation, you
@@ -529,6 +554,11 @@ module Aws::ChimeSDKMeetings
     #
     # @!attribute [rw] external_meeting_id
     #   The external meeting ID.
+    #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix. Case insensitive.
     #   @return [String]
     #
     # @!attribute [rw] meeting_features
@@ -998,6 +1028,11 @@ module Aws::ChimeSDKMeetings
     #
     # @!attribute [rw] external_meeting_id
     #   The external meeting ID.
+    #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix. Case insensitive.
     #   @return [String]
     #
     # @!attribute [rw] media_region
@@ -1016,7 +1051,7 @@ module Aws::ChimeSDKMeetings
     #   @return [Types::MediaPlacement]
     #
     # @!attribute [rw] meeting_features
-    #   The features available to a meeting, such as Amazon Voice Focus.
+    #   The features available to a meeting, such as echo reduction.
     #   @return [Types::MeetingFeaturesConfiguration]
     #
     # @!attribute [rw] primary_meeting_id
@@ -1048,7 +1083,7 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # The configuration settings of the features available to a meeting.&gt;
+    # The configuration settings of the features available to a meeting.
     #
     # @!attribute [rw] audio
     #   The configuration settings for the audio features available to a

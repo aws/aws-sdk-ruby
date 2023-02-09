@@ -11,8 +11,8 @@ module Aws::WorkDocs
   module Types
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -38,8 +38,8 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUserRequest AWS API Documentation
@@ -127,8 +127,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -286,8 +286,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -350,8 +350,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -383,8 +383,8 @@ module Aws::WorkDocs
     class CreateCustomMetadataResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -426,8 +426,8 @@ module Aws::WorkDocs
     #   @return [Array<String>]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabelsRequest AWS API Documentation
@@ -518,8 +518,8 @@ module Aws::WorkDocs
     #   @return [Types::StorageRuleType]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserRequest AWS API Documentation
@@ -569,8 +569,8 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUserRequest AWS API Documentation
@@ -589,8 +589,8 @@ module Aws::WorkDocs
     class DeactivatingLastSystemUserException < Aws::EmptyStructure; end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -617,8 +617,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -656,8 +656,8 @@ module Aws::WorkDocs
     class DeleteCustomMetadataResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -674,21 +674,20 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
-    #   The ID of a document.
+    #   The ID of the document associated with the version being deleted.
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The version ID of a document.
+    #   The ID of the version being deleted.
     #   @return [String]
     #
     # @!attribute [rw] delete_prior_versions
-    #   When set to `TRUE`, deletes the specified version and *all prior
-    #   versions* of a document.
+    #   Deletes all versions of a document prior to the current version.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentVersionRequest AWS API Documentation
@@ -703,8 +702,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -721,8 +720,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -743,8 +742,8 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -789,8 +788,8 @@ module Aws::WorkDocs
 
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Do not set this field when
-    #   using administrative API actions, as in accessing the API using AWS
-    #   credentials.
+    #   using administrative API actions, as in accessing the API using
+    #   Amazon Web Services credentials.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -807,8 +806,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -893,8 +892,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -945,8 +944,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1004,8 +1003,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -1077,8 +1076,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] search_query
@@ -1170,8 +1169,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1262,8 +1261,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] organization_id
@@ -1549,7 +1548,7 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # The AWS Directory Service cannot reach an on-premises instance. Or a
+    # The Directory Service cannot reach an on-premises instance. Or a
     # dependency under the control of the organization is failing, such as a
     # connected Active Directory.
     #
@@ -1654,8 +1653,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1700,8 +1699,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1740,8 +1739,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1791,8 +1790,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -1837,8 +1836,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -1878,7 +1877,7 @@ module Aws::WorkDocs
 
     # @!attribute [rw] authentication_token
     #   The Amazon WorkDocs authentication token. Not required when using
-    #   AWS administrator credentials to access the API.
+    #   Amazon Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1967,8 +1966,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -2103,7 +2102,7 @@ module Aws::WorkDocs
     #
     # @!attribute [rw] send_email
     #   Boolean value to indicate an email notification should be sent to
-    #   the receipients.
+    #   the recipients.
     #   @return [Boolean]
     #
     # @!attribute [rw] email_message
@@ -2195,8 +2194,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2213,8 +2212,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2346,8 +2345,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -2556,8 +2555,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -2590,8 +2589,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -2618,8 +2617,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -2652,8 +2651,8 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. Not required when using AWS
-    #   administrator credentials to access the API.
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -2685,7 +2684,7 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] grant_poweruser_privileges
-    #   Boolean value to determine whether the user is granted Poweruser
+    #   Boolean value to determine whether the user is granted Power user
     #   privileges.
     #   @return [String]
     #

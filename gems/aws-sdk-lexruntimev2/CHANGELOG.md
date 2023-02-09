@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-02-09)
+------------------
+
+* Feature - AWS Lex now supports Network of Bots.
+
 1.18.0 (2023-01-18)
 ------------------
 

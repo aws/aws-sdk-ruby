@@ -79,6 +79,7 @@ module Aws::LexRuntimeV2
     RecognizeTextResponse = Shapes::StructureShape.new(name: 'RecognizeTextResponse')
     RecognizeUtteranceRequest = Shapes::StructureShape.new(name: 'RecognizeUtteranceRequest')
     RecognizeUtteranceResponse = Shapes::StructureShape.new(name: 'RecognizeUtteranceResponse')
+    RecognizedBotMember = Shapes::StructureShape.new(name: 'RecognizedBotMember')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RuntimeHintDetails = Shapes::StructureShape.new(name: 'RuntimeHintDetails')
     RuntimeHintPhrase = Shapes::StringShape.new(name: 'RuntimeHintPhrase')
@@ -232,6 +233,7 @@ module Aws::LexRuntimeV2
     IntentResultEvent.add_member(:request_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "requestAttributes"))
     IntentResultEvent.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "sessionId"))
     IntentResultEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: EventId, location_name: "eventId"))
+    IntentResultEvent.add_member(:recognized_bot_member, Shapes::ShapeRef.new(shape: RecognizedBotMember, location_name: "recognizedBotMember"))
     IntentResultEvent.struct_class = Types::IntentResultEvent
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -294,6 +296,7 @@ module Aws::LexRuntimeV2
     RecognizeTextResponse.add_member(:interpretations, Shapes::ShapeRef.new(shape: Interpretations, location_name: "interpretations"))
     RecognizeTextResponse.add_member(:request_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "requestAttributes"))
     RecognizeTextResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "sessionId"))
+    RecognizeTextResponse.add_member(:recognized_bot_member, Shapes::ShapeRef.new(shape: RecognizedBotMember, location_name: "recognizedBotMember"))
     RecognizeTextResponse.struct_class = Types::RecognizeTextResponse
 
     RecognizeUtteranceRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: BotIdentifier, required: true, location: "uri", location_name: "botId"))
@@ -318,9 +321,14 @@ module Aws::LexRuntimeV2
     RecognizeUtteranceResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location: "header", location_name: "x-amz-lex-session-id"))
     RecognizeUtteranceResponse.add_member(:input_transcript, Shapes::ShapeRef.new(shape: NonEmptyString, location: "header", location_name: "x-amz-lex-input-transcript"))
     RecognizeUtteranceResponse.add_member(:audio_stream, Shapes::ShapeRef.new(shape: BlobStream, location_name: "audioStream"))
+    RecognizeUtteranceResponse.add_member(:recognized_bot_member, Shapes::ShapeRef.new(shape: NonEmptyString, location: "header", location_name: "x-amz-lex-recognized-bot-member"))
     RecognizeUtteranceResponse.struct_class = Types::RecognizeUtteranceResponse
     RecognizeUtteranceResponse[:payload] = :audio_stream
     RecognizeUtteranceResponse[:payload_member] = RecognizeUtteranceResponse.member(:audio_stream)
+
+    RecognizedBotMember.add_member(:bot_id, Shapes::ShapeRef.new(shape: BotIdentifier, required: true, location_name: "botId"))
+    RecognizedBotMember.add_member(:bot_name, Shapes::ShapeRef.new(shape: Name, location_name: "botName"))
+    RecognizedBotMember.struct_class = Types::RecognizedBotMember
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException

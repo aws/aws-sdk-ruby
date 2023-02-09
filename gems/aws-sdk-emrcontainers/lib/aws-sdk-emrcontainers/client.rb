@@ -509,8 +509,8 @@ module Aws::EMRContainers
     end
 
     # Creates a managed endpoint. A managed endpoint is a gateway that
-    # connects EMR Studio to Amazon EMR on EKS so that EMR Studio can
-    # communicate with your virtual cluster.
+    # connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR
+    # Studio can communicate with your virtual cluster.
     #
     # @option params [required, String] :name
     #   The name of the managed endpoint.
@@ -699,8 +699,8 @@ module Aws::EMRContainers
     end
 
     # Deletes a managed endpoint. A managed endpoint is a gateway that
-    # connects EMR Studio to Amazon EMR on EKS so that EMR Studio can
-    # communicate with your virtual cluster.
+    # connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR
+    # Studio can communicate with your virtual cluster.
     #
     # @option params [required, String] :id
     #   The ID of the managed endpoint.
@@ -820,6 +820,8 @@ module Aws::EMRContainers
     #   resp.job_run.failure_reason #=> String, one of "INTERNAL_ERROR", "USER_ERROR", "VALIDATION_ERROR", "CLUSTER_UNAVAILABLE"
     #   resp.job_run.tags #=> Hash
     #   resp.job_run.tags["String128"] #=> String
+    #   resp.job_run.retry_policy_configuration.max_attempts #=> Integer
+    #   resp.job_run.retry_policy_execution.current_attempt_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeJobRun AWS API Documentation
     #
@@ -893,8 +895,9 @@ module Aws::EMRContainers
     end
 
     # Displays detailed information about a managed endpoint. A managed
-    # endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so
-    # that EMR Studio can communicate with your virtual cluster.
+    # endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on
+    # EKS so that Amazon EMR Studio can communicate with your virtual
+    # cluster.
     #
     # @option params [required, String] :id
     #   This output displays ID of the managed endpoint.
@@ -1074,6 +1077,8 @@ module Aws::EMRContainers
     #   resp.job_runs[0].failure_reason #=> String, one of "INTERNAL_ERROR", "USER_ERROR", "VALIDATION_ERROR", "CLUSTER_UNAVAILABLE"
     #   resp.job_runs[0].tags #=> Hash
     #   resp.job_runs[0].tags["String128"] #=> String
+    #   resp.job_runs[0].retry_policy_configuration.max_attempts #=> Integer
+    #   resp.job_runs[0].retry_policy_execution.current_attempt_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListJobRuns AWS API Documentation
@@ -1165,8 +1170,9 @@ module Aws::EMRContainers
     end
 
     # Lists managed endpoints based on a set of parameters. A managed
-    # endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so
-    # that EMR Studio can communicate with your virtual cluster.
+    # endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on
+    # EKS so that Amazon EMR Studio can communicate with your virtual
+    # cluster.
     #
     # @option params [required, String] :virtual_cluster_id
     #   The ID of the virtual cluster.
@@ -1292,8 +1298,8 @@ module Aws::EMRContainers
     #   The container provider ID of the virtual cluster.
     #
     # @option params [String] :container_provider_type
-    #   The container provider type of the virtual cluster. EKS is the only
-    #   supported type as of now.
+    #   The container provider type of the virtual cluster. Amazon EKS is the
+    #   only supported type as of now.
     #
     # @option params [Time,DateTime,Date,Integer,String] :created_after
     #   The date and time after which the virtual clusters are created.
@@ -1390,6 +1396,9 @@ module Aws::EMRContainers
     # @option params [Hash<String,String>] :job_template_parameters
     #   The values of job template parameters to start a job run.
     #
+    # @option params [Types::RetryPolicyConfiguration] :retry_policy_configuration
+    #   The retry policy configuration for the job run.
+    #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartJobRunResponse#id #id} => String
@@ -1446,6 +1455,9 @@ module Aws::EMRContainers
     #     job_template_parameters: {
     #       "TemplateParameterName" => "String1024",
     #     },
+    #     retry_policy_configuration: {
+    #       max_attempts: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1464,16 +1476,17 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
-    # Assigns tags to resources. A tag is a label that you assign to an AWS
-    # resource. Each tag consists of a key and an optional value, both of
-    # which you define. Tags enable you to categorize your AWS resources by
-    # attributes such as purpose, owner, or environment. When you have many
-    # resources of the same type, you can quickly identify a specific
-    # resource based on the tags you've assigned to it. For example, you
-    # can define a set of tags for your Amazon EMR on EKS clusters to help
-    # you track each cluster's owner and stack level. We recommend that you
-    # devise a consistent set of tag keys for each resource type. You can
-    # then search and filter the resources based on the tags that you add.
+    # Assigns tags to resources. A tag is a label that you assign to an
+    # Amazon Web Services resource. Each tag consists of a key and an
+    # optional value, both of which you define. Tags enable you to
+    # categorize your Amazon Web Services resources by attributes such as
+    # purpose, owner, or environment. When you have many resources of the
+    # same type, you can quickly identify a specific resource based on the
+    # tags you've assigned to it. For example, you can define a set of tags
+    # for your Amazon EMR on EKS clusters to help you track each cluster's
+    # owner and stack level. We recommend that you devise a consistent set
+    # of tag keys for each resource type. You can then search and filter the
+    # resources based on the tags that you add.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of resources.
@@ -1540,7 +1553,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

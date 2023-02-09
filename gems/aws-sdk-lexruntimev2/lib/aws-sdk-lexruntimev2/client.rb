@@ -782,6 +782,7 @@ module Aws::LexRuntimeV2
     #   * {Types::RecognizeTextResponse#interpretations #interpretations} => Array&lt;Types::Interpretation&gt;
     #   * {Types::RecognizeTextResponse#request_attributes #request_attributes} => Hash&lt;String,String&gt;
     #   * {Types::RecognizeTextResponse#session_id #session_id} => String
+    #   * {Types::RecognizeTextResponse#recognized_bot_member #recognized_bot_member} => Types::RecognizedBotMember
     #
     # @example Request syntax with placeholder values
     #
@@ -928,6 +929,8 @@ module Aws::LexRuntimeV2
     #   resp.request_attributes #=> Hash
     #   resp.request_attributes["NonEmptyString"] #=> String
     #   resp.session_id #=> String
+    #   resp.recognized_bot_member.bot_id #=> String
+    #   resp.recognized_bot_member.bot_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RecognizeText AWS API Documentation
     #
@@ -1059,7 +1062,7 @@ module Aws::LexRuntimeV2
     #   * If the value begins with `audio/`, Amazon Lex V2 returns speech in
     #     the response. Amazon Lex V2 uses Amazon Polly to generate the speech
     #     using the configuration that you specified in the
-    #     `requestContentType` parameter. For example, if you specify
+    #     `responseContentType` parameter. For example, if you specify
     #     `audio/mpeg` as the value, Amazon Lex V2 returns speech in the MPEG
     #     format.
     #
@@ -1093,6 +1096,7 @@ module Aws::LexRuntimeV2
     #   * {Types::RecognizeUtteranceResponse#session_id #session_id} => String
     #   * {Types::RecognizeUtteranceResponse#input_transcript #input_transcript} => String
     #   * {Types::RecognizeUtteranceResponse#audio_stream #audio_stream} => IO
+    #   * {Types::RecognizeUtteranceResponse#recognized_bot_member #recognized_bot_member} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1119,6 +1123,7 @@ module Aws::LexRuntimeV2
     #   resp.session_id #=> String
     #   resp.input_transcript #=> String
     #   resp.audio_stream #=> IO
+    #   resp.recognized_bot_member #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RecognizeUtterance AWS API Documentation
     #
@@ -1142,7 +1147,7 @@ module Aws::LexRuntimeV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

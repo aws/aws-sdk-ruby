@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-02-09)
+------------------
+
+* Feature - Documentation updates for Chime Meetings SDK
+
 1.16.0 (2023-01-18)
 ------------------
 

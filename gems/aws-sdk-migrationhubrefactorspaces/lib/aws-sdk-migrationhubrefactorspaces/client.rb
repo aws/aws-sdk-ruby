@@ -469,8 +469,11 @@ module Aws::MigrationHubRefactorSpaces
     # environment. They are referred to as the *environment owner*. The
     # environment owner has cross-account visibility and control of Refactor
     # Spaces resources that are added to the environment by other accounts
-    # that the environment is shared with. When creating an environment,
-    # Refactor Spaces provisions a transit gateway in your account.
+    # that the environment is shared with.
+    #
+    # When creating an environment with a network fabric type of
+    # `TRANSIT_GATEWAY`, Refactor Spaces provisions a transit gateway in
+    # your account.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -512,7 +515,7 @@ module Aws::MigrationHubRefactorSpaces
     #     client_token: "ClientToken",
     #     description: "Description",
     #     name: "EnvironmentName", # required
-    #     network_fabric_type: "TRANSIT_GATEWAY", # required, accepts TRANSIT_GATEWAY
+    #     network_fabric_type: "TRANSIT_GATEWAY", # required, accepts TRANSIT_GATEWAY, NONE
     #     tags: {
     #       "TagMapKeyString" => "TagMapValueString",
     #     },
@@ -526,7 +529,7 @@ module Aws::MigrationHubRefactorSpaces
     #   resp.environment_id #=> String
     #   resp.last_updated_time #=> Time
     #   resp.name #=> String
-    #   resp.network_fabric_type #=> String, one of "TRANSIT_GATEWAY"
+    #   resp.network_fabric_type #=> String, one of "TRANSIT_GATEWAY", "NONE"
     #   resp.owner_account_id #=> String
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.tags #=> Hash
@@ -1154,7 +1157,7 @@ module Aws::MigrationHubRefactorSpaces
     #   resp.error.resource_type #=> String, one of "ENVIRONMENT", "APPLICATION", "ROUTE", "SERVICE", "TRANSIT_GATEWAY", "TRANSIT_GATEWAY_ATTACHMENT", "API_GATEWAY", "NLB", "TARGET_GROUP", "LOAD_BALANCER_LISTENER", "VPC_LINK", "LAMBDA", "VPC", "SUBNET", "ROUTE_TABLE", "SECURITY_GROUP", "VPC_ENDPOINT_SERVICE_CONFIGURATION", "RESOURCE_SHARE", "IAM_ROLE"
     #   resp.last_updated_time #=> Time
     #   resp.name #=> String
-    #   resp.network_fabric_type #=> String, one of "TRANSIT_GATEWAY"
+    #   resp.network_fabric_type #=> String, one of "TRANSIT_GATEWAY", "NONE"
     #   resp.owner_account_id #=> String
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.tags #=> Hash
@@ -1515,7 +1518,7 @@ module Aws::MigrationHubRefactorSpaces
     #   resp.environment_summary_list[0].error.resource_type #=> String, one of "ENVIRONMENT", "APPLICATION", "ROUTE", "SERVICE", "TRANSIT_GATEWAY", "TRANSIT_GATEWAY_ATTACHMENT", "API_GATEWAY", "NLB", "TARGET_GROUP", "LOAD_BALANCER_LISTENER", "VPC_LINK", "LAMBDA", "VPC", "SUBNET", "ROUTE_TABLE", "SECURITY_GROUP", "VPC_ENDPOINT_SERVICE_CONFIGURATION", "RESOURCE_SHARE", "IAM_ROLE"
     #   resp.environment_summary_list[0].last_updated_time #=> Time
     #   resp.environment_summary_list[0].name #=> String
-    #   resp.environment_summary_list[0].network_fabric_type #=> String, one of "TRANSIT_GATEWAY"
+    #   resp.environment_summary_list[0].network_fabric_type #=> String, one of "TRANSIT_GATEWAY", "NONE"
     #   resp.environment_summary_list[0].owner_account_id #=> String
     #   resp.environment_summary_list[0].state #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.environment_summary_list[0].tags #=> Hash
@@ -1871,7 +1874,7 @@ module Aws::MigrationHubRefactorSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubrefactorspaces'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

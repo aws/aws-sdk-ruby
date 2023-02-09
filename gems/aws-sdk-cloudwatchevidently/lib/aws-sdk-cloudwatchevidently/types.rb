@@ -172,7 +172,14 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with an experiment.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with an experiment.
+    #
+    #   For more information, see [Tagging Amazon Web Services
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] treatments
@@ -258,7 +265,14 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with a feature.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with a feature.
+    #
+    #   For more information, see [Tagging Amazon Web Services
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] variations
@@ -341,7 +355,14 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with a launch.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with a launch.
+    #
+    #   For more information, see [Tagging Amazon Web Services
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/CreateLaunchRequest AWS API Documentation
@@ -421,7 +442,14 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with a project.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with a project.
+    #
+    #   For more information, see [Tagging Amazon Web Services
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/CreateProjectRequest AWS API Documentation
@@ -476,7 +504,14 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with a segment.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with a segment.
+    #
+    #   For more information, see [Tagging Amazon Web Services
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/CreateSegmentRequest AWS API Documentation
@@ -612,7 +647,8 @@ module Aws::CloudWatchEvidently
     #   audience segments. For more information, see [Use segments to focus
     #   your audience][1].
     #
-    #        <p>If you include this parameter, the value must be a JSON object. A JSON array is not supported.</p>
+    #   If you include this parameter, the value must be a JSON object. A
+    #   JSON array is not supported.
     #
     #
     #
@@ -2637,7 +2673,14 @@ module Aws::CloudWatchEvidently
     #   keys are variation names. The values represent the percentage of
     #   traffic to allocate to that variation during this step.
     #
-    #        <p>The values is expressed in thousandths of a percent, so assigning a weight of 50000 assigns 50% of traffic to that variation.</p> <p>If the sum of the weights for all the variations in a segment override does not add up to 100,000, then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves on to the next segment override or the default traffic split.</p>
+    #   The values is expressed in thousandths of a percent, so assigning a
+    #   weight of 50000 assigns 50% of traffic to that variation.
+    #
+    #   If the sum of the weights for all the variations in a segment
+    #   override does not add up to 100,000, then the remaining traffic that
+    #   matches this segment is not assigned by this segment override, and
+    #   instead moves on to the next segment override or the default traffic
+    #   split.
     #   @return [Hash<String,Integer>]
     #
     # @!attribute [rw] segment_overrides

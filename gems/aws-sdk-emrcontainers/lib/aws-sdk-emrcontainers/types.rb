@@ -145,7 +145,7 @@ module Aws::EMRContainers
     # @note ContainerInfo is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContainerInfo corresponding to the set member.
     #
     # @!attribute [rw] eks_info
-    #   The information about the EKS cluster.
+    #   The information about the Amazon EKS cluster.
     #   @return [Types::EksInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ContainerInfo AWS API Documentation
@@ -164,8 +164,8 @@ module Aws::EMRContainers
     # The information about the container provider.
     #
     # @!attribute [rw] type
-    #   The type of the container provider. EKS is the only supported type
-    #   as of now.
+    #   The type of the container provider. Amazon EKS is the only supported
+    #   type as of now.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -576,10 +576,10 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # The information about the EKS cluster.
+    # The information about the Amazon EKS cluster.
     #
     # @!attribute [rw] namespace
-    #   The namespaces of the EKS cluster.
+    #   The namespaces of the Amazon EKS cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/EksInfo AWS API Documentation
@@ -796,6 +796,14 @@ module Aws::EMRContainers
     #   The assigned tags of the job run.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] retry_policy_configuration
+    #   The configuration of the retry policy that the job runs on.
+    #   @return [Types::RetryPolicyConfiguration]
+    #
+    # @!attribute [rw] retry_policy_execution
+    #   The current status of the retry policy executed on the job.
+    #   @return [Types::RetryPolicyExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -814,7 +822,9 @@ module Aws::EMRContainers
       :finished_at,
       :state_details,
       :failure_reason,
-      :tags)
+      :tags,
+      :retry_policy_configuration,
+      :retry_policy_execution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1111,8 +1121,8 @@ module Aws::EMRContainers
     #   @return [String]
     #
     # @!attribute [rw] container_provider_type
-    #   The container provider type of the virtual cluster. EKS is the only
-    #   supported type as of now.
+    #   The container provider type of the virtual cluster. Amazon EKS is
+    #   the only supported type as of now.
     #   @return [String]
     #
     # @!attribute [rw] created_after
@@ -1286,6 +1296,34 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # The configuration of the retry policy that the job runs on.
+    #
+    # @!attribute [rw] max_attempts
+    #   The maximum number of attempts on the job's driver.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/RetryPolicyConfiguration AWS API Documentation
+    #
+    class RetryPolicyConfiguration < Struct.new(
+      :max_attempts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current status of the retry policy executed on the job.
+    #
+    # @!attribute [rw] current_attempt_count
+    #   The current number of attempts made on the driver of the job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/RetryPolicyExecution AWS API Documentation
+    #
+    class RetryPolicyExecution < Struct.new(
+      :current_attempt_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon S3 configuration for monitoring log publishing. You can
     # configure your jobs to send log information to Amazon S3.
     #
@@ -1387,6 +1425,10 @@ module Aws::EMRContainers
     #   The values of job template parameters to start a job run.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] retry_policy_configuration
+    #   The retry policy configuration for the job run.
+    #   @return [Types::RetryPolicyConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/StartJobRunRequest AWS API Documentation
     #
     class StartJobRunRequest < Struct.new(
@@ -1399,7 +1441,8 @@ module Aws::EMRContainers
       :configuration_overrides,
       :tags,
       :job_template_id,
-      :job_template_parameters)
+      :job_template_parameters,
+      :retry_policy_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1457,7 +1500,7 @@ module Aws::EMRContainers
     #
     # @!attribute [rw] type
     #   The type of the job template parameter. Allowed values are:
-    #   ‘String’, ‘Number’.
+    #   ‘STRING’, ‘NUMBER’.
     #   @return [String]
     #
     # @!attribute [rw] default_value
@@ -1511,9 +1554,9 @@ module Aws::EMRContainers
     # Kubernetes namespace that Amazon EMR is registered with. Amazon EMR
     # uses virtual clusters to run jobs and host endpoints. Multiple virtual
     # clusters can be backed by the same physical cluster. However, each
-    # virtual cluster maps to one namespace on an EKS cluster. Virtual
-    # clusters do not create any active resources that contribute to your
-    # bill or that require lifecycle management outside the service.
+    # virtual cluster maps to one namespace on an Amazon EKS cluster.
+    # Virtual clusters do not create any active resources that contribute to
+    # your bill or that require lifecycle management outside the service.
     #
     # @!attribute [rw] id
     #   The ID of the virtual cluster.

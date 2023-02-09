@@ -708,13 +708,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Creates a Standby WorkSpace in a secondary region.
+    # Creates a standby WorkSpace in a secondary Region.
     #
     # @option params [required, String] :primary_region
     #   The Region of the primary WorkSpace.
     #
     # @option params [required, Array<Types::StandbyWorkspace>] :standby_workspaces
-    #   Information about the Standby WorkSpace to be created.
+    #   Information about the standby WorkSpace to be created.
     #
     # @return [Types::CreateStandbyWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -806,7 +806,7 @@ module Aws::WorkSpaces
     # To determine which WorkSpace images need to be updated with the latest
     # Amazon WorkSpaces requirements, use [ DescribeWorkspaceImages][1].
     #
-    # <note markdown="1"> * Only Windows 10, Windows Sever 2016, and Windows Server 2019
+    # <note markdown="1"> * Only Windows 10, Windows Server 2016, and Windows Server 2019
     #   WorkSpace images can be programmatically updated at this time.
     #
     # * Microsoft Windows updates and other application updates are not
@@ -2429,12 +2429,11 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Imports the specified Windows 10 Bring Your Own License (BYOL) or
-    # Windows Server 2016 BYOL image into Amazon WorkSpaces. The image must
-    # be an already licensed Amazon EC2 image that is in your Amazon Web
-    # Services account, and you must own the image. For more information
-    # about creating BYOL images, see [ Bring Your Own Windows Desktop
-    # Licenses][1].
+    # Imports the specified Windows 10 Bring Your Own License (BYOL) image
+    # into Amazon WorkSpaces. The image must be an already licensed Amazon
+    # EC2 image that is in your Amazon Web Services account, and you must
+    # own the image. For more information about creating BYOL images, see [
+    # Bring Your Own Windows Desktop Licenses][1].
     #
     #
     #
@@ -3571,7 +3570,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

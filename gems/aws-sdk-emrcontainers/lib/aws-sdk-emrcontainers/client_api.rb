@@ -100,6 +100,8 @@ module Aws::EMRContainers
     ResourceIdString = Shapes::StringShape.new(name: 'ResourceIdString')
     ResourceNameString = Shapes::StringShape.new(name: 'ResourceNameString')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RetryPolicyConfiguration = Shapes::StructureShape.new(name: 'RetryPolicyConfiguration')
+    RetryPolicyExecution = Shapes::StructureShape.new(name: 'RetryPolicyExecution')
     RsiArn = Shapes::StringShape.new(name: 'RsiArn')
     S3MonitoringConfiguration = Shapes::StructureShape.new(name: 'S3MonitoringConfiguration')
     SensitivePropertiesMap = Shapes::MapShape.new(name: 'SensitivePropertiesMap')
@@ -314,6 +316,8 @@ module Aws::EMRContainers
     JobRun.add_member(:state_details, Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails"))
     JobRun.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     JobRun.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    JobRun.add_member(:retry_policy_configuration, Shapes::ShapeRef.new(shape: RetryPolicyConfiguration, location_name: "retryPolicyConfiguration"))
+    JobRun.add_member(:retry_policy_execution, Shapes::ShapeRef.new(shape: RetryPolicyExecution, location_name: "retryPolicyExecution"))
     JobRun.struct_class = Types::JobRun
 
     JobRunStates.member = Shapes::ShapeRef.new(shape: JobRunState)
@@ -420,6 +424,12 @@ module Aws::EMRContainers
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RetryPolicyConfiguration.add_member(:max_attempts, Shapes::ShapeRef.new(shape: JavaInteger, required: true, location_name: "maxAttempts"))
+    RetryPolicyConfiguration.struct_class = Types::RetryPolicyConfiguration
+
+    RetryPolicyExecution.add_member(:current_attempt_count, Shapes::ShapeRef.new(shape: JavaInteger, required: true, location_name: "currentAttemptCount"))
+    RetryPolicyExecution.struct_class = Types::RetryPolicyExecution
+
     S3MonitoringConfiguration.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, required: true, location_name: "logUri"))
     S3MonitoringConfiguration.struct_class = Types::S3MonitoringConfiguration
 
@@ -445,6 +455,7 @@ module Aws::EMRContainers
     StartJobRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartJobRunRequest.add_member(:job_template_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "jobTemplateId"))
     StartJobRunRequest.add_member(:job_template_parameters, Shapes::ShapeRef.new(shape: TemplateParameterInputMap, location_name: "jobTemplateParameters"))
+    StartJobRunRequest.add_member(:retry_policy_configuration, Shapes::ShapeRef.new(shape: RetryPolicyConfiguration, location_name: "retryPolicyConfiguration"))
     StartJobRunRequest.struct_class = Types::StartJobRunRequest
 
     StartJobRunResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))

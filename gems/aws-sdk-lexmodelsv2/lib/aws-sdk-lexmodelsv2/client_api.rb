@@ -49,6 +49,7 @@ module Aws::LexModelsV2
     BotAliasId = Shapes::StringShape.new(name: 'BotAliasId')
     BotAliasLocaleSettings = Shapes::StructureShape.new(name: 'BotAliasLocaleSettings')
     BotAliasLocaleSettingsMap = Shapes::MapShape.new(name: 'BotAliasLocaleSettingsMap')
+    BotAliasName = Shapes::StringShape.new(name: 'BotAliasName')
     BotAliasStatus = Shapes::StringShape.new(name: 'BotAliasStatus')
     BotAliasSummary = Shapes::StructureShape.new(name: 'BotAliasSummary')
     BotAliasSummaryList = Shapes::ListShape.new(name: 'BotAliasSummaryList')
@@ -72,6 +73,8 @@ module Aws::LexModelsV2
     BotLocaleStatus = Shapes::StringShape.new(name: 'BotLocaleStatus')
     BotLocaleSummary = Shapes::StructureShape.new(name: 'BotLocaleSummary')
     BotLocaleSummaryList = Shapes::ListShape.new(name: 'BotLocaleSummaryList')
+    BotMember = Shapes::StructureShape.new(name: 'BotMember')
+    BotMembers = Shapes::ListShape.new(name: 'BotMembers')
     BotRecommendationResultStatistics = Shapes::StructureShape.new(name: 'BotRecommendationResultStatistics')
     BotRecommendationResults = Shapes::StructureShape.new(name: 'BotRecommendationResults')
     BotRecommendationStatus = Shapes::StringShape.new(name: 'BotRecommendationStatus')
@@ -82,6 +85,7 @@ module Aws::LexModelsV2
     BotStatus = Shapes::StringShape.new(name: 'BotStatus')
     BotSummary = Shapes::StructureShape.new(name: 'BotSummary')
     BotSummaryList = Shapes::ListShape.new(name: 'BotSummaryList')
+    BotType = Shapes::StringShape.new(name: 'BotType')
     BotVersion = Shapes::StringShape.new(name: 'BotVersion')
     BotVersionLocaleDetails = Shapes::StructureShape.new(name: 'BotVersionLocaleDetails')
     BotVersionLocaleSpecification = Shapes::MapShape.new(name: 'BotVersionLocaleSpecification')
@@ -352,6 +356,8 @@ module Aws::LexModelsV2
     OperationList = Shapes::ListShape.new(name: 'OperationList')
     OutputContext = Shapes::StructureShape.new(name: 'OutputContext')
     OutputContextsList = Shapes::ListShape.new(name: 'OutputContextsList')
+    ParentBotNetwork = Shapes::StructureShape.new(name: 'ParentBotNetwork')
+    ParentBotNetworks = Shapes::ListShape.new(name: 'ParentBotNetworks')
     PathFormat = Shapes::StructureShape.new(name: 'PathFormat')
     Phrase = Shapes::StringShape.new(name: 'Phrase')
     PlainTextMessage = Shapes::StructureShape.new(name: 'PlainTextMessage')
@@ -690,6 +696,15 @@ module Aws::LexModelsV2
 
     BotLocaleSummaryList.member = Shapes::ShapeRef.new(shape: BotLocaleSummary)
 
+    BotMember.add_member(:bot_member_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botMemberId"))
+    BotMember.add_member(:bot_member_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "botMemberName"))
+    BotMember.add_member(:bot_member_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, required: true, location_name: "botMemberAliasId"))
+    BotMember.add_member(:bot_member_alias_name, Shapes::ShapeRef.new(shape: BotAliasName, required: true, location_name: "botMemberAliasName"))
+    BotMember.add_member(:bot_member_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location_name: "botMemberVersion"))
+    BotMember.struct_class = Types::BotMember
+
+    BotMembers.member = Shapes::ShapeRef.new(shape: BotMember)
+
     BotRecommendationResultStatistics.add_member(:intents, Shapes::ShapeRef.new(shape: IntentStatistics, location_name: "intents"))
     BotRecommendationResultStatistics.add_member(:slot_types, Shapes::ShapeRef.new(shape: SlotTypeStatistics, location_name: "slotTypes"))
     BotRecommendationResultStatistics.struct_class = Types::BotRecommendationResultStatistics
@@ -717,6 +732,7 @@ module Aws::LexModelsV2
     BotSummary.add_member(:bot_status, Shapes::ShapeRef.new(shape: BotStatus, location_name: "botStatus"))
     BotSummary.add_member(:latest_bot_version, Shapes::ShapeRef.new(shape: NumericalBotVersion, location_name: "latestBotVersion"))
     BotSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    BotSummary.add_member(:bot_type, Shapes::ShapeRef.new(shape: BotType, location_name: "botType"))
     BotSummary.struct_class = Types::BotSummary
 
     BotSummaryList.member = Shapes::ShapeRef.new(shape: BotSummary)
@@ -866,6 +882,8 @@ module Aws::LexModelsV2
     CreateBotRequest.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, required: true, location_name: "idleSessionTTLInSeconds"))
     CreateBotRequest.add_member(:bot_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "botTags"))
     CreateBotRequest.add_member(:test_bot_alias_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "testBotAliasTags"))
+    CreateBotRequest.add_member(:bot_type, Shapes::ShapeRef.new(shape: BotType, location_name: "botType"))
+    CreateBotRequest.add_member(:bot_members, Shapes::ShapeRef.new(shape: BotMembers, location_name: "botMembers"))
     CreateBotRequest.struct_class = Types::CreateBotRequest
 
     CreateBotResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
@@ -878,6 +896,8 @@ module Aws::LexModelsV2
     CreateBotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateBotResponse.add_member(:bot_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "botTags"))
     CreateBotResponse.add_member(:test_bot_alias_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "testBotAliasTags"))
+    CreateBotResponse.add_member(:bot_type, Shapes::ShapeRef.new(shape: BotType, location_name: "botType"))
+    CreateBotResponse.add_member(:bot_members, Shapes::ShapeRef.new(shape: BotMembers, location_name: "botMembers"))
     CreateBotResponse.struct_class = Types::CreateBotResponse
 
     CreateBotVersionRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -1191,6 +1211,7 @@ module Aws::LexModelsV2
     DescribeBotAliasResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
     DescribeBotAliasResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeBotAliasResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeBotAliasResponse.add_member(:parent_bot_networks, Shapes::ShapeRef.new(shape: ParentBotNetworks, location_name: "parentBotNetworks"))
     DescribeBotAliasResponse.struct_class = Types::DescribeBotAliasResponse
 
     DescribeBotLocaleRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -1247,6 +1268,9 @@ module Aws::LexModelsV2
     DescribeBotResponse.add_member(:bot_status, Shapes::ShapeRef.new(shape: BotStatus, location_name: "botStatus"))
     DescribeBotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeBotResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeBotResponse.add_member(:bot_type, Shapes::ShapeRef.new(shape: BotType, location_name: "botType"))
+    DescribeBotResponse.add_member(:bot_members, Shapes::ShapeRef.new(shape: BotMembers, location_name: "botMembers"))
+    DescribeBotResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     DescribeBotResponse.struct_class = Types::DescribeBotResponse
 
     DescribeBotVersionRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -1263,6 +1287,9 @@ module Aws::LexModelsV2
     DescribeBotVersionResponse.add_member(:bot_status, Shapes::ShapeRef.new(shape: BotStatus, location_name: "botStatus"))
     DescribeBotVersionResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     DescribeBotVersionResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeBotVersionResponse.add_member(:parent_bot_networks, Shapes::ShapeRef.new(shape: ParentBotNetworks, location_name: "parentBotNetworks"))
+    DescribeBotVersionResponse.add_member(:bot_type, Shapes::ShapeRef.new(shape: BotType, location_name: "botType"))
+    DescribeBotVersionResponse.add_member(:bot_members, Shapes::ShapeRef.new(shape: BotMembers, location_name: "botMembers"))
     DescribeBotVersionResponse.struct_class = Types::DescribeBotVersionResponse
 
     DescribeCustomVocabularyMetadataRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -1850,6 +1877,12 @@ module Aws::LexModelsV2
 
     OutputContextsList.member = Shapes::ShapeRef.new(shape: OutputContext)
 
+    ParentBotNetwork.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
+    ParentBotNetwork.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location_name: "botVersion"))
+    ParentBotNetwork.struct_class = Types::ParentBotNetwork
+
+    ParentBotNetworks.member = Shapes::ShapeRef.new(shape: ParentBotNetwork)
+
     PathFormat.add_member(:object_prefixes, Shapes::ShapeRef.new(shape: ObjectPrefixes, location_name: "objectPrefixes"))
     PathFormat.struct_class = Types::PathFormat
 
@@ -2261,6 +2294,8 @@ module Aws::LexModelsV2
     UpdateBotRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     UpdateBotRequest.add_member(:data_privacy, Shapes::ShapeRef.new(shape: DataPrivacy, required: true, location_name: "dataPrivacy"))
     UpdateBotRequest.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, required: true, location_name: "idleSessionTTLInSeconds"))
+    UpdateBotRequest.add_member(:bot_type, Shapes::ShapeRef.new(shape: BotType, location_name: "botType"))
+    UpdateBotRequest.add_member(:bot_members, Shapes::ShapeRef.new(shape: BotMembers, location_name: "botMembers"))
     UpdateBotRequest.struct_class = Types::UpdateBotRequest
 
     UpdateBotResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
@@ -2272,6 +2307,8 @@ module Aws::LexModelsV2
     UpdateBotResponse.add_member(:bot_status, Shapes::ShapeRef.new(shape: BotStatus, location_name: "botStatus"))
     UpdateBotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateBotResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    UpdateBotResponse.add_member(:bot_type, Shapes::ShapeRef.new(shape: BotType, location_name: "botType"))
+    UpdateBotResponse.add_member(:bot_members, Shapes::ShapeRef.new(shape: BotMembers, location_name: "botMembers"))
     UpdateBotResponse.struct_class = Types::UpdateBotResponse
 
     UpdateCustomVocabularyItemsList.member = Shapes::ShapeRef.new(shape: CustomVocabularyItem)

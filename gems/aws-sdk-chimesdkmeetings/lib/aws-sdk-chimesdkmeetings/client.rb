@@ -509,6 +509,11 @@ module Aws::ChimeSDKMeetings
     #   The Amazon Chime SDK external user ID. An idempotency token. Links the
     #   attendee to an identity managed by a builder application.
     #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix.
+    #
     # @option params [Types::AttendeeCapabilities] :capabilities
     #   The capabilities (`audio`, `video`, or `content`) that you want to
     #   grant an attendee. If you don't specify capabilities, all users have
@@ -610,6 +615,11 @@ module Aws::ChimeSDKMeetings
     # @option params [required, String] :external_meeting_id
     #   The external meeting ID.
     #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix. Case insensitive.
+    #
     # @option params [Types::NotificationsConfiguration] :notifications_configuration
     #   The configuration for resource targets to receive notifications when
     #   meeting and attendee events occur.
@@ -655,7 +665,7 @@ module Aws::ChimeSDKMeetings
     #
     #   **Minimum permissions**
     #
-    #   In addition to the `tag:TagResources `permission required by this
+    #   In addition to the `tag:TagResources` permission required by this
     #   operation, you must also have the tagging permission defined by the
     #   service that created the resource. For example, to tag a
     #   `ChimeSDKMeetings` instance using the `TagResources` operation, you
@@ -773,6 +783,11 @@ module Aws::ChimeSDKMeetings
     #
     # @option params [required, String] :external_meeting_id
     #   The external meeting ID.
+    #
+    #   Pattern: `[-_&@+=,()\{\}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+    #
+    #   Values that begin with `aws:` are reserved. You can't configure a
+    #   value that uses this prefix. Case insensitive.
     #
     # @option params [Types::MeetingFeaturesConfiguration] :meeting_features
     #   Lists the audio and video features enabled for a meeting, such as echo
@@ -1118,7 +1133,19 @@ module Aws::ChimeSDKMeetings
       req.send_request(options)
     end
 
-    # Starts transcription for the specified `meetingId`.
+    # Starts transcription for the specified `meetingId`. For more
+    # information, refer to [ Using Amazon Chime SDK live transcription ][1]
+    # in the *Amazon Chime SDK Developer Guide*.
+    #
+    # Amazon Chime SDK live transcription is powered by Amazon Transcribe.
+    # Use of Amazon Transcribe is subject to the [AWS Service Terms][2],
+    # including the terms specific to the AWS Machine Learning and
+    # Artificial Intelligence Services.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html
+    # [2]: https://aws.amazon.com/service-terms/
     #
     # @option params [required, String] :meeting_id
     #   The unique ID of the meeting being transcribed.
@@ -1171,7 +1198,19 @@ module Aws::ChimeSDKMeetings
       req.send_request(options)
     end
 
-    # Stops transcription for the specified `meetingId`.
+    # Stops transcription for the specified `meetingId`. For more
+    # information, refer to [ Using Amazon Chime SDK live transcription ][1]
+    # in the *Amazon Chime SDK Developer Guide*.
+    #
+    # Amazon Chime SDK live transcription is powered by Amazon Transcribe.
+    # Use of Amazon Transcribe is subject to the [AWS Service Terms][2],
+    # including the terms specific to the AWS Machine Learning and
+    # Artificial Intelligence Services.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html
+    # [2]: https://aws.amazon.com/service-terms/
     #
     # @option params [required, String] :meeting_id
     #   The unique ID of the meeting for which you stop transcription.
@@ -1357,7 +1396,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

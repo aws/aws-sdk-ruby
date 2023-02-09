@@ -704,6 +704,10 @@ module Aws::LexRuntimeV2
     #   current session.
     #   @return [String]
     #
+    # @!attribute [rw] recognized_bot_member
+    #   The bot member that is processing the intent.
+    #   @return [Types::RecognizedBotMember]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/IntentResultEvent AWS API Documentation
     #
     class IntentResultEvent < Struct.new(
@@ -713,6 +717,7 @@ module Aws::LexRuntimeV2
       :request_attributes,
       :session_id,
       :event_id,
+      :recognized_bot_member,
       :event_type)
       SENSITIVE = []
       include Aws::Structure
@@ -1036,6 +1041,10 @@ module Aws::LexRuntimeV2
     #   The identifier of the session in use.
     #   @return [String]
     #
+    # @!attribute [rw] recognized_bot_member
+    #   The bot member that recognized the text.
+    #   @return [Types::RecognizedBotMember]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RecognizeTextResponse AWS API Documentation
     #
     class RecognizeTextResponse < Struct.new(
@@ -1043,7 +1052,8 @@ module Aws::LexRuntimeV2
       :session_state,
       :interpretations,
       :request_attributes,
-      :session_id)
+      :session_id,
+      :recognized_bot_member)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1122,7 +1132,7 @@ module Aws::LexRuntimeV2
     #   * If the value begins with `audio/`, Amazon Lex V2 returns speech in
     #     the response. Amazon Lex V2 uses Amazon Polly to generate the
     #     speech using the configuration that you specified in the
-    #     `requestContentType` parameter. For example, if you specify
+    #     `responseContentType` parameter. For example, if you specify
     #     `audio/mpeg` as the value, Amazon Lex V2 returns speech in the
     #     MPEG format.
     #
@@ -1251,6 +1261,10 @@ module Aws::LexRuntimeV2
     #   Amazon Lex V2 sends that message in the response.
     #   @return [IO]
     #
+    # @!attribute [rw] recognized_bot_member
+    #   The bot member that recognized the utterance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RecognizeUtteranceResponse AWS API Documentation
     #
     class RecognizeUtteranceResponse < Struct.new(
@@ -1262,7 +1276,27 @@ module Aws::LexRuntimeV2
       :request_attributes,
       :session_id,
       :input_transcript,
-      :audio_stream)
+      :audio_stream,
+      :recognized_bot_member)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The bot member that processes the request.
+    #
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot member that processes the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_name
+    #   The name of the bot member that processes the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RecognizedBotMember AWS API Documentation
+    #
+    class RecognizedBotMember < Struct.new(
+      :bot_id,
+      :bot_name)
       SENSITIVE = []
       include Aws::Structure
     end

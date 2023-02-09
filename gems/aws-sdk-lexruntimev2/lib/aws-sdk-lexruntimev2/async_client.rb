@@ -577,6 +577,8 @@ module Aws::LexRuntimeV2
     #   event.request_attributes["NonEmptyString"] #=> String
     #   event.session_id #=> String
     #   event.event_id #=> String
+    #   event.recognized_bot_member.bot_id #=> String
+    #   event.recognized_bot_member.bot_name #=> String
     #
     #   For :text_response_event event available at #on_text_response_event_event callback and response eventstream enumerator:
     #   event.messages #=> Array
@@ -665,7 +667,7 @@ module Aws::LexRuntimeV2
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

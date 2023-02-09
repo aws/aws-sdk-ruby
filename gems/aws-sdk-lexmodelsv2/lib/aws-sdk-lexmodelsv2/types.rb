@@ -224,7 +224,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
     #   @return [Types::S3BucketLogDestination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AudioLogDestination AWS API Documentation
@@ -279,23 +279,27 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
-    #   The unique identifier of the bot to batch create the custom
-    #   vocabulary item for.
+    #   The identifier of the bot associated with this custom vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The bot version of the bot to batch create the custom vocabulary
-    #   item for.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
-    #   The unique locale identifier of the bot to batch create the custom
-    #   vocabulary item for.
+    #   The identifier of the language and locale where this custom
+    #   vocabulary is used. The string must match one of the supported
+    #   locales. For more information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] custom_vocabulary_item_list
-    #   The custom vocabulary item list of the bot to batch create the
-    #   custom vocabulary item for.
+    #   A list of new custom vocabulary items. Each entry must contain a
+    #   phrase and can optionally contain a displayAs and/or a weight.
     #   @return [Array<Types::NewCustomVocabularyItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchCreateCustomVocabularyItemRequest AWS API Documentation
@@ -310,28 +314,33 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
-    #   The unique identifier of the bot to batch create response for the
-    #   custom vocabulary item.
+    #   The identifier of the bot associated with this custom vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The bot version of the bot to batch create the custom vocabulary
-    #   item response for.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
-    #   The unique locale identifier of the bot to batch create the custom
-    #   vocabulary item response for.
+    #   The identifier of the language and locale where this custom
+    #   vocabulary is used. The string must match one of the supported
+    #   locales. For more information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] errors
-    #   The errors of the action to batch create the custom vocabulary item
-    #   response for a bot.
+    #   A list of custom vocabulary items that failed to create during the
+    #   operation. The reason for the error is contained within each error
+    #   object.
     #   @return [Array<Types::FailedCustomVocabularyItem>]
     #
     # @!attribute [rw] resources
-    #   The resources of the action to batch create the custom vocabulary
-    #   item response for a bot.
+    #   A list of custom vocabulary items that were successfully created
+    #   during the operation.
     #   @return [Array<Types::CustomVocabularyItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchCreateCustomVocabularyItemResponse AWS API Documentation
@@ -347,23 +356,27 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
-    #   The unique identifier of the bot to batch delete request for the
-    #   custom vocabulary item.
+    #   The identifier of the bot associated with this custom vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The version of the bot to batch delete request for the custom
-    #   vocabulary item.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
-    #   The locale identifier of the bot to batch delete request for the
-    #   custom vocabulary item.
+    #   The identifier of the language and locale where this custom
+    #   vocabulary is used. The string must match one of the supported
+    #   locales. For more information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] custom_vocabulary_item_list
-    #   The custom vocabulary list to batch delete request for the custom
-    #   vocabulary item.
+    #   A list of custom vocabulary items requested to be deleted. Each
+    #   entry must contain the unique custom vocabulary entry identifier.
     #   @return [Array<Types::CustomVocabularyEntryId>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchDeleteCustomVocabularyItemRequest AWS API Documentation
@@ -378,28 +391,30 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
-    #   The unique identifier of the bot to batch delete response for the
-    #   custom vocabulary item.
+    #   The identifier of the bot associated with this custom vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The version of the bot to batch delete response for the custom
-    #   vocabulary item.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
-    #   The locale identifier of the bot to batch delete response for the
-    #   custom vocabulary item.
+    #   The identifier of the language and locale where this custom
+    #   vocabulary is used. The string must match one of the supported
+    #   locales. For more information, see Supported languages
+    #   (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
     #   @return [String]
     #
     # @!attribute [rw] errors
-    #   The errors of the action to batch delete response for the custom
-    #   vocabulary item.
+    #   A list of custom vocabulary items that failed to delete during the
+    #   operation. The reason for the error is contained within each error
+    #   object.
     #   @return [Array<Types::FailedCustomVocabularyItem>]
     #
     # @!attribute [rw] resources
-    #   The resources of the action to batch delete response for the custom
-    #   vocabulary item.
+    #   A list of custom vocabulary items that were successfully deleted
+    #   during the operation.
     #   @return [Array<Types::CustomVocabularyItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchDeleteCustomVocabularyItemResponse AWS API Documentation
@@ -415,23 +430,28 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
-    #   The unique identifier of the bot to the batch update request for the
-    #   custom vocabulary item.
+    #   The identifier of the bot associated with this custom vocabulary
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The bot version of the bot to the batch update request for the
-    #   custom vocabulary item.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
-    #   The locale identifier of the bot to the batch update request for the
-    #   custom vocabulary item.
+    #   The identifier of the language and locale where this custom
+    #   vocabulary is used. The string must match one of the supported
+    #   locales. For more information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] custom_vocabulary_item_list
-    #   The custom vocabulary item list of the bot to the batch update
-    #   request for the custom vocabulary item.
+    #   A list of custom vocabulary items with updated fields. Each entry
+    #   must contain a phrase and can optionally contain a displayAs and/or
+    #   a weight.
     #   @return [Array<Types::CustomVocabularyItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchUpdateCustomVocabularyItemRequest AWS API Documentation
@@ -446,28 +466,33 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
-    #   The unique identifier of the bot to the batch update response for
-    #   the custom vocabulary item.
+    #   The identifier of the bot associated with this custom vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The bot version of the bot to the batch update response for the
-    #   custom vocabulary item.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
-    #   The locale identifier of the bot to the batch update response for
-    #   the custom vocabulary item.
+    #   The identifier of the language and locale where this custom
+    #   vocabulary is used. The string must match one of the supported
+    #   locales. For more information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] errors
-    #   The errors of the action to batch update response for the custom
-    #   vocabulary item.
+    #   A list of custom vocabulary items that failed to update during the
+    #   operation. The reason for the error is contained within each error
+    #   object.
     #   @return [Array<Types::FailedCustomVocabularyItem>]
     #
     # @!attribute [rw] resources
-    #   The resources of the action to batch update response for the custom
-    #   vocabulary item.
+    #   A list of custom vocabulary items that were successfully updated
+    #   during the operation.
     #   @return [Array<Types::CustomVocabularyItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchUpdateCustomVocabularyItemResponse AWS API Documentation
@@ -533,7 +558,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotAliases.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotAliases.html
     #
     # @!attribute [rw] bot_alias_id
     #   The unique identifier assigned to the bot alias. You can use this ID
@@ -542,7 +567,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBotAlias.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBotAlias.html
     #   @return [String]
     #
     # @!attribute [rw] bot_alias_name
@@ -846,7 +871,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotLocales.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotLocales.html
     #
     # @!attribute [rw] locale_id
     #   The language and locale of the bot locale.
@@ -883,6 +908,40 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :last_updated_date_time,
       :last_build_submitted_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A bot that is a member of a network of bots.
+    #
+    # @!attribute [rw] bot_member_id
+    #   The unique ID of a bot that is a member of this network of bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_member_name
+    #   The unique name of a bot that is a member of this network of bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_member_alias_id
+    #   The alias ID of a bot that is a member of this network of bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_member_alias_name
+    #   The alias name of a bot that is a member of this network of bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_member_version
+    #   The version of a bot that is a member of this network of bots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotMember AWS API Documentation
+    #
+    class BotMember < Struct.new(
+      :bot_member_id,
+      :bot_member_name,
+      :bot_member_alias_id,
+      :bot_member_alias_name,
+      :bot_member_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -992,7 +1051,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBots.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBots.html
     #
     # @!attribute [rw] bot_id
     #   The unique identifier assigned to the bot. Use this ID to get
@@ -1001,7 +1060,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBot.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBot.html
     #   @return [String]
     #
     # @!attribute [rw] bot_name
@@ -1025,6 +1084,10 @@ module Aws::LexModelsV2
     #   The date and time that the bot was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] bot_type
+    #   The type of the bot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotSummary AWS API Documentation
     #
     class BotSummary < Struct.new(
@@ -1033,7 +1096,8 @@ module Aws::LexModelsV2
       :description,
       :bot_status,
       :latest_bot_version,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :bot_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1077,7 +1141,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotVersions.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotVersions.html
     #
     # @!attribute [rw] bot_name
     #   The name of the bot associated with the version.
@@ -1119,7 +1183,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
     #   @return [String]
     #
     # @!attribute [rw] bot_version
@@ -1210,7 +1274,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInIntents.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInIntents.html
     #
     # @!attribute [rw] intent_signature
     #   The signature of the built-in intent. Use this to specify the parent
@@ -1254,7 +1318,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInSlotTypes.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInSlotTypes.html
     #
     # @!attribute [rw] slot_type_signature
     #   The signature of the built-in slot type. Use this to specify the
@@ -1480,7 +1544,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_UpdateBotAlias.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_UpdateBotAlias.html
     #   @return [String]
     #
     # @!attribute [rw] bot_alias_locale_settings
@@ -1770,6 +1834,14 @@ module Aws::LexModelsV2
     #   `TagResource` operation.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] bot_type
+    #   The type of a bot to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_members
+    #   The list of bot members in a network to be created.
+    #   @return [Array<Types::BotMember>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotRequest AWS API Documentation
     #
     class CreateBotRequest < Struct.new(
@@ -1779,7 +1851,9 @@ module Aws::LexModelsV2
       :data_privacy,
       :idle_session_ttl_in_seconds,
       :bot_tags,
-      :test_bot_alias_tags)
+      :test_bot_alias_tags,
+      :bot_type,
+      :bot_members)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1813,7 +1887,7 @@ module Aws::LexModelsV2
     #   Shows the current status of the bot. The bot is first in the
     #   `Creating` status. Once the bot is read for use, it changes to the
     #   `Available` status. After the bot is created, you can use the
-    #   `Draft` version of the bot.
+    #   `DRAFT` version of the bot.
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -1828,6 +1902,14 @@ module Aws::LexModelsV2
     #   A list of tags associated with the test alias for the bot.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] bot_type
+    #   The type of a bot that was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_members
+    #   The list of bots in a network that was created.
+    #   @return [Array<Types::BotMember>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotResponse AWS API Documentation
     #
     class CreateBotResponse < Struct.new(
@@ -1840,7 +1922,9 @@ module Aws::LexModelsV2
       :bot_status,
       :creation_date_time,
       :bot_tags,
-      :test_bot_alias_tags)
+      :test_bot_alias_tags,
+      :bot_type,
+      :bot_members)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1956,7 +2040,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -2694,7 +2778,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_StartImport.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_StartImport.html
     #   @return [String]
     #
     # @!attribute [rw] upload_url
@@ -2809,7 +2893,7 @@ module Aws::LexModelsV2
     #   @return [Integer]
     #
     # @!attribute [rw] display_as
-    #   The display as value for the custom vocabulary item from the custom
+    #   The DisplayAs value for the custom vocabulary item from the custom
     #   vocabulary list.
     #   @return [String]
     #
@@ -2951,8 +3035,11 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] skip_resource_in_use_check
-    #   When this parameter is true, Amazon Lex doesn't check to see if any
-    #   other resource is using the alias before it is deleted.
+    #   By default, Amazon Lex checks if any other resource, such as a bot
+    #   network, is using the bot alias before it is deleted and throws a
+    #   `ResourceInUseException` exception if the alias is being used by
+    #   another resource. Set this parameter to `true` to skip this check
+    #   and remove the alias even if it is being used by another resource.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotAliasRequest AWS API Documentation
@@ -3052,8 +3139,12 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] skip_resource_in_use_check
-    #   When `true`, Amazon Lex doesn't check to see if another resource,
-    #   such as an alias, is using the bot before it is deleted.
+    #   By default, Amazon Lex checks if any other resource, such as an
+    #   alias or bot network, is using the bot version before it is deleted
+    #   and throws a `ResourceInUseException` exception if the bot is being
+    #   used by another resource. Set this parameter to `true` to skip this
+    #   check and remove the bot even if it is being used by another
+    #   resource.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotRequest AWS API Documentation
@@ -3092,11 +3183,12 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] skip_resource_in_use_check
-    #   By default, the `DeleteBotVersion` operations throws a
-    #   `ResourceInUseException` exception if you try to delete a bot
-    #   version that has an alias pointing at it. Set the
-    #   `skipResourceInUseCheck` parameter to `true` to skip this check and
-    #   remove the version even if an alias points to it.
+    #   By default, Amazon Lex checks if any other resource, such as an
+    #   alias or bot network, is using the bot version before it is deleted
+    #   and throws a `ResourceInUseException` exception if the version is
+    #   being used by another resource. Set this parameter to `true` to skip
+    #   this check and remove the version even if it is being used by
+    #   another resource.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotVersionRequest AWS API Documentation
@@ -3208,8 +3300,8 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html
-    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteExportResponse AWS API Documentation
@@ -3245,8 +3337,8 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html
-    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeImport.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeImport.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteImportResponse AWS API Documentation
@@ -3483,8 +3575,8 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html
-    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeText.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeUtterance.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteUtterancesRequest AWS API Documentation
@@ -3570,6 +3662,10 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the alias was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] parent_bot_networks
+    #   A list of the networks to which the bot alias you described belongs.
+    #   @return [Array<Types::ParentBotNetwork>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotAliasResponse AWS API Documentation
     #
     class DescribeBotAliasResponse < Struct.new(
@@ -3584,7 +3680,8 @@ module Aws::LexModelsV2
       :bot_alias_status,
       :bot_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :parent_bot_networks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3866,6 +3963,19 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the bot was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] bot_type
+    #   The type of the bot that was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_members
+    #   The list of bots in the network that was described.
+    #   @return [Array<Types::BotMember>]
+    #
+    # @!attribute [rw] failure_reasons
+    #   If the `botStatus` is `Failed`, this contains a list of reasons that
+    #   the bot couldn't be built.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotResponse AWS API Documentation
     #
     class DescribeBotResponse < Struct.new(
@@ -3877,7 +3987,10 @@ module Aws::LexModelsV2
       :idle_session_ttl_in_seconds,
       :bot_status,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :bot_type,
+      :bot_members,
+      :failure_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3909,7 +4022,7 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The version of the bot to describe.
+    #   The version of the bot that was described.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3944,6 +4057,19 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the bot version was created.
     #   @return [Time]
     #
+    # @!attribute [rw] parent_bot_networks
+    #   A list of the networks to which the bot version you described
+    #   belongs.
+    #   @return [Array<Types::ParentBotNetwork>]
+    #
+    # @!attribute [rw] bot_type
+    #   The type of the bot in the version that was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_members
+    #   The members of bot network in the version that was described.
+    #   @return [Array<Types::BotMember>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotVersionResponse AWS API Documentation
     #
     class DescribeBotVersionResponse < Struct.new(
@@ -3956,7 +4082,10 @@ module Aws::LexModelsV2
       :idle_session_ttl_in_seconds,
       :bot_status,
       :failure_reasons,
-      :creation_date_time)
+      :creation_date_time,
+      :parent_bot_networks,
+      :bot_type,
+      :bot_members)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4732,7 +4861,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html
     #
     # @!attribute [rw] name
     #   The name of the field to use for filtering.
@@ -5104,7 +5233,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html
     #
     # @!attribute [rw] name
     #   The name of the field to use for filtering.
@@ -6278,8 +6407,8 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
-    #   The unique identifier of the bot to the list custom vocabulary
-    #   request.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] bot_version
@@ -6287,12 +6416,14 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] locale_id
-    #   The locale identifier of the bot to the list custom vocabulary
-    #   request.
+    #   The identifier of the language and locale where this custom
+    #   vocabulary is used. The string must match one of the supported
+    #   locales. For more information, see Supported languages
+    #   (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum results to the list custom vocabulary request.
+    #   The maximum number of items returned by the list operation.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -6312,17 +6443,22 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
-    #   The unique identifier of the bot to the list custom vocabulary
-    #   response.
+    #   The identifier of the bot associated with this custom vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The bot version of the bot to the list custom vocabulary response.
+    #   The identifier of the version of the bot associated with this custom
+    #   vocabulary.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
-    #   The locale identifier of the bot to the list custom vocabulary
-    #   response.
+    #   The identifier of the language and locale where this custom
+    #   vocabulary is used. The string must match one of the supported
+    #   locales. For more information, see [ Supported Languages ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] custom_vocabulary_items
@@ -7103,6 +7239,25 @@ module Aws::LexModelsV2
       :name,
       :time_to_live_in_seconds,
       :turns_to_live)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A network of bots.
+    #
+    # @!attribute [rw] bot_id
+    #   The identifier of the network of bots assigned by Amazon Lex.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the network of bots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ParentBotNetwork AWS API Documentation
+    #
+    class ParentBotNetwork < Struct.new(
+      :bot_id,
+      :bot_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8388,7 +8543,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateUploadUrl.html
     #   @return [String]
     #
     # @!attribute [rw] resource_specification
@@ -8729,6 +8884,7 @@ module Aws::LexModelsV2
     # Your request rate is too high. Reduce the frequency of requests.
     #
     # @!attribute [rw] retry_after_seconds
+    #   The number of seconds after which the user can invoke the API again.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -9149,7 +9305,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
     #   @return [String]
     #
     # @!attribute [rw] bot_name
@@ -9182,6 +9338,15 @@ module Aws::LexModelsV2
     #   You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] bot_type
+    #   The type of the bot to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_members
+    #   The list of bot members in the network associated with the update
+    #   action.
+    #   @return [Array<Types::BotMember>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotRequest AWS API Documentation
     #
     class UpdateBotRequest < Struct.new(
@@ -9190,7 +9355,9 @@ module Aws::LexModelsV2
       :description,
       :role_arn,
       :data_privacy,
-      :idle_session_ttl_in_seconds)
+      :idle_session_ttl_in_seconds,
+      :bot_type,
+      :bot_members)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9235,6 +9402,14 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the bot was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] bot_type
+    #   The type of the bot that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_members
+    #   The list of bot members in the network that was updated.
+    #   @return [Array<Types::BotMember>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotResponse AWS API Documentation
     #
     class UpdateBotResponse < Struct.new(
@@ -9246,7 +9421,9 @@ module Aws::LexModelsV2
       :idle_session_ttl_in_seconds,
       :bot_status,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :bot_type,
+      :bot_members)
       SENSITIVE = []
       include Aws::Structure
     end

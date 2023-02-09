@@ -515,7 +515,7 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] standby_workspaces
-    #   Information about the Standby WorkSpace to be created.
+    #   Information about the standby WorkSpace to be created.
     #   @return [Array<Types::StandbyWorkspace>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateStandbyWorkspacesRequest AWS API Documentation
@@ -528,11 +528,11 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] failed_standby_requests
-    #   Information about the Standby WorkSpace that could not be created.
+    #   Information about the standby WorkSpace that could not be created.
     #   @return [Array<Types::FailedCreateStandbyWorkspacesRequest>]
     #
     # @!attribute [rw] pending_standby_requests
-    #   Information about the Standby WorkSpace that was created.
+    #   Information about the standby WorkSpace that was created.
     #   @return [Array<Types::PendingCreateStandbyWorkspacesRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateStandbyWorkspacesResult AWS API Documentation
@@ -1830,19 +1830,19 @@ module Aws::WorkSpaces
     #
     class DisassociateIpGroupsResult < Aws::EmptyStructure; end
 
-    # Describes the Standby WorkSpace that could not be created.
+    # Describes the standby WorkSpace that could not be created.
     #
     # @!attribute [rw] standby_workspace_request
-    #   Information about the Standby WorkSpace that could not be created.
+    #   Information about the standby WorkSpace that could not be created.
     #   @return [Types::StandbyWorkspace]
     #
     # @!attribute [rw] error_code
-    #   The error code that is returned if the Standby WorkSpace could not
+    #   The error code that is returned if the standby WorkSpace could not
     #   be created.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The text of the error message that is returned if the Standby
+    #   The text of the error message that is returned if the standby
     #   WorkSpace could not be created.
     #   @return [String]
     #
@@ -2694,10 +2694,10 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Information about the Standby WorkSpace.
+    # Information about the standby WorkSpace.
     #
     # @!attribute [rw] user_name
-    #   Describes the Standby WorkSpace that was created.
+    #   Describes the standby WorkSpace that was created.
     #
     #   Because this operation is asynchronous, the identifier returned is
     #   not immediately available for use with other operations. For
@@ -2710,15 +2710,15 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the directory for the Standby WorkSpace.
+    #   The identifier of the directory for the standby WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The operational state of the Standby WorkSpace.
+    #   The operational state of the standby WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
-    #   The identifier of the Standby WorkSpace.
+    #   The identifier of the standby WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/PendingCreateStandbyWorkspacesRequest AWS API Documentation
@@ -2874,7 +2874,7 @@ module Aws::WorkSpaces
     class RegisterWorkspaceDirectoryResult < Aws::EmptyStructure; end
 
     # Describes the related WorkSpace. The related WorkSpace could be a
-    # Standby WorkSpace or Primary WorkSpace related to the specified
+    # standby WorkSpace or primary WorkSpace related to the specified
     # WorkSpace.
     #
     # @!attribute [rw] workspace_id
@@ -3157,22 +3157,22 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes a Standby WorkSpace.
+    # Describes a standby WorkSpace.
     #
     # @!attribute [rw] primary_workspace_id
-    #   The identifier of the Standby WorkSpace.
+    #   The identifier of the standby WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
-    #   The volume encryption key of the Standby WorkSpace.
+    #   The volume encryption key of the standby WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the directory for the Standby WorkSpace.
+    #   The identifier of the directory for the standby WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the Standby WorkSpace.
+    #   The tags associated with the standby WorkSpace.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StandbyWorkspace AWS API Documentation
@@ -3610,7 +3610,7 @@ module Aws::WorkSpaces
     #   @return [Array<Types::ModificationState>]
     #
     # @!attribute [rw] related_workspaces
-    #   The Standby WorkSpace or Primary WorkSpace related to the specified
+    #   The standby WorkSpace or primary WorkSpace related to the specified
     #   WorkSpace.
     #   @return [Array<Types::RelatedWorkspaceProperties>]
     #

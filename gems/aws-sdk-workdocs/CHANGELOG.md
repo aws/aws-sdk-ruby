@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-02-09)
+------------------
+
+* Feature - Doc only update for the WorkDocs APIs.
+
 1.42.0 (2023-01-18)
 ------------------
 

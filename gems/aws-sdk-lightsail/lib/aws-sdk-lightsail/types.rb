@@ -906,7 +906,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes an Availability Zone.
+    # Describes an Availability Zone. This is returned only as part of a
+    # `GetRegions` request.
     #
     # @!attribute [rw] zone_name
     #   The name of the Availability Zone. The format is `us-east-2a`
@@ -2523,8 +2524,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes the login information for the container image registry of an
-    # Amazon Lightsail account.
+    # Describes the sign-in credentials for the container image registry of
+    # an Amazon Lightsail account.
     #
     # @!attribute [rw] username
     #   The container service registry username to use to push container
@@ -2537,8 +2538,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] expires_at
-    #   The timestamp of when the container image registry username and
-    #   password expire.
+    #   The timestamp of when the container image registry sign-in
+    #   credentials expire.
     #
     #   The log in credentials expire 12 hours after they are created, at
     #   which point you will need to create a new set of log in credentials
@@ -5883,9 +5884,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] is_alias
     #   When `true`, specifies whether the domain entry is an alias used by
-    #   the Lightsail load balancer. You can include an alias (A type)
-    #   record in your request, which points to a load balancer DNS name and
-    #   routes traffic to your load balancer.
+    #   the Lightsail load balancer, Lightsail container service, Lightsail
+    #   content delivery network (CDN) distribution, or another Amazon Web
+    #   Services resource. You can include an alias (A type) record in your
+    #   request, which points to the DNS name of a load balancer, container
+    #   service, CDN distribution, or other Amazon Web Services resource and
+    #   routes traffic to that resource.
     #   @return [Boolean]
     #
     # @!attribute [rw] type
@@ -14062,7 +14066,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   Describes the API operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateInstanceMetadataOptionsResult AWS API Documentation

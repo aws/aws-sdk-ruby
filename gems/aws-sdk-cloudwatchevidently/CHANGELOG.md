@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-02-09)
+------------------
+
+* Feature - Updated entity overrides parameter to accept up to 2500 overrides or a total of 40KB.
+
 1.10.0 (2023-01-18)
 ------------------
 

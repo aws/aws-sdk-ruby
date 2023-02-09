@@ -513,7 +513,13 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with an experiment.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with an experiment.
+    #
+    #   For more information, see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [required, Array<Types::TreatmentConfig>] :treatments
     #   An array of structures that describe the configuration of each feature
@@ -662,7 +668,13 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with a feature.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with a feature.
+    #
+    #   For more information, see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [required, Array<Types::VariationConfig>] :variations
     #   An array of structures that contain the configuration of the
@@ -789,7 +801,13 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with a launch.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with a launch.
+    #
+    #   For more information, see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateLaunchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -944,7 +962,13 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with a project.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with a project.
+    #
+    #   For more information, see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1015,7 +1039,18 @@ module Aws::CloudWatchEvidently
     # segments in a launch allows you to define different traffic splits for
     # the different audience segments.
     #
-    #      <p>For more information about segment pattern syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html"> Segment rule pattern syntax</a>.</p> <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which is passed into Evidently in the <a href="https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html">EvaluateFeature</a> operation, when Evidently assigns a feature variation to a user.</p>
+    # For more information about segment pattern syntax, see [ Segment rule
+    # pattern syntax][1].
+    #
+    # The pattern that you define for a segment is matched against the value
+    # of `evaluationContext`, which is passed into Evidently in the
+    # [EvaluateFeature][2] operation, when Evidently assigns a feature
+    # variation to a user.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html
+    # [2]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
     #
     # @option params [String] :description
     #   An optional description for this segment.
@@ -1045,7 +1080,13 @@ module Aws::CloudWatchEvidently
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with a segment.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with a segment.
+    #
+    #   For more information, see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1236,7 +1277,38 @@ module Aws::CloudWatchEvidently
     # user's `entityID` matches an override rule, the user is served the
     # variation specified by that rule.
     #
-    #      <p>If there is a current launch with this feature that uses segment overrides, and if the user session's <code>evaluationContext</code> matches a segment rule defined in a segment override, the configuration in the segment overrides is used. For more information about segments, see <a href="https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html">CreateSegment</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html">Use segments to focus your audience</a>.</p> <p>If there is a launch with no segment overrides, the user might be assigned to a variation in the launch. The chance of this depends on the percentage of users that are allocated to that launch. If the user is enrolled in the launch, the variation they are served depends on the allocation of the various feature variations used for the launch.</p> <p>If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might be assigned to a variation in the experiment. The chance of this depends on the percentage of users that are allocated to that experiment.</p> <p>If the experiment uses a segment, then only user sessions with <code>evaluationContext</code> values that match the segment rule are used in the experiment.</p> <p>If the user is enrolled in the experiment, the variation they are served depends on the allocation of the various feature variations used for the experiment. </p> <p>If the user is not assigned to a launch or experiment, they are served the default variation.</p>
+    # If there is a current launch with this feature that uses segment
+    # overrides, and if the user session's `evaluationContext` matches a
+    # segment rule defined in a segment override, the configuration in the
+    # segment overrides is used. For more information about segments, see
+    # [CreateSegment][1] and [Use segments to focus your audience][2].
+    #
+    # If there is a launch with no segment overrides, the user might be
+    # assigned to a variation in the launch. The chance of this depends on
+    # the percentage of users that are allocated to that launch. If the user
+    # is enrolled in the launch, the variation they are served depends on
+    # the allocation of the various feature variations used for the launch.
+    #
+    # If the user is not assigned to a launch, and there is an ongoing
+    # experiment for this feature, the user might be assigned to a variation
+    # in the experiment. The chance of this depends on the percentage of
+    # users that are allocated to that experiment.
+    #
+    # If the experiment uses a segment, then only user sessions with
+    # `evaluationContext` values that match the segment rule are used in the
+    # experiment.
+    #
+    # If the user is enrolled in the experiment, the variation they are
+    # served depends on the allocation of the various feature variations
+    # used for the experiment.
+    #
+    # If the user is not assigned to a launch or experiment, they are served
+    # the default variation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
     #
     # @option params [required, String] :entity_id
     #   An internal ID that represents a unique user of the application. This
@@ -1250,7 +1322,8 @@ module Aws::CloudWatchEvidently
     #   audience segments. For more information, see [Use segments to focus
     #   your audience][1].
     #
-    #        <p>If you include this parameter, the value must be a JSON object. A JSON array is not supported.</p>
+    #   If you include this parameter, the value must be a JSON object. A JSON
+    #   array is not supported.
     #
     #   **SDK automatically handles json encoding and base64 encoding for you
     #   when the required value (Hash, Array, etc.) is provided according to
@@ -3040,7 +3113,7 @@ module Aws::CloudWatchEvidently
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevidently'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

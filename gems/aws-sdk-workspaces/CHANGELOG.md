@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-02-09)
+------------------
+
+* Feature - Removed Windows Server 2016 BYOL and made changes based on IAM campaign.
+
 1.78.0 (2023-01-18)
 ------------------
 
