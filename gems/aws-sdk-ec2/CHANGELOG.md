@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.365.0 (2023-02-10)
+------------------
+
+* Feature - Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.
+
 1.364.0 (2023-02-02)
 ------------------
 

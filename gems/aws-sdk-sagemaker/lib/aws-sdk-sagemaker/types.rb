@@ -1642,6 +1642,54 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The collection of algorithms run on a dataset for training the model
+    # candidates of an Autopilot job.
+    #
+    # @!attribute [rw] auto_ml_algorithms
+    #   The selection of algorithms run on a dataset to train the model
+    #   candidates of an Autopilot job.
+    #
+    #   <note markdown="1"> Selected algorithms must belong to the list corresponding to the
+    #   training mode set in ` AutoMLJobConfig.Mode ` (`ENSEMBLING` or
+    #   `HYPERPARAMETER_TUNING`). Choose a minimum of 1 algorithm.
+    #
+    #    </note>
+    #
+    #   * In `ENSEMBLING` mode:
+    #
+    #     * "catboost"
+    #
+    #     * "extra-trees"
+    #
+    #     * "fastai"
+    #
+    #     * "lightgbm"
+    #
+    #     * "linear-learner"
+    #
+    #     * "nn-torch"
+    #
+    #     * "randomforest"
+    #
+    #     * "xgboost"
+    #
+    #   * In `HYPERPARAMETER_TUNING` mode:
+    #
+    #     * "linear-learner"
+    #
+    #     * "mlp"
+    #
+    #     * "xgboost"
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLAlgorithmConfig AWS API Documentation
+    #
+    class AutoMLAlgorithmConfig < Struct.new(
+      :auto_ml_algorithms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a candidate produced by an AutoML training job,
     # including its status, steps, and other properties.
     #
@@ -1707,7 +1755,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Stores the config information for how a candidate is generated
+    # Stores the configuration information for how a candidate is generated
     # (optional).
     #
     # @!attribute [rw] feature_specification_s3_uri
@@ -1727,10 +1775,10 @@ module Aws::SageMaker
     #
     #    </note>
     #
-    #   In ensembling mode, Autopilot will only support the following data
-    #   types: `numeric`, `categorical`, `text` and `datetime`. In HPO mode,
-    #   Autopilot can support `numeric`, `categorical`, `text`, `datetime`
-    #   and `sequence`.
+    #   In ensembling mode, Autopilot only supports the following data
+    #   types: `numeric`, `categorical`, `text`, and `datetime`. In HPO
+    #   mode, Autopilot can support `numeric`, `categorical`, `text`,
+    #   `datetime`, and `sequence`.
     #
     #   If only `FeatureDataTypes` is provided, the column keys (`col1`,
     #   `col2`,..) should be a subset of the column names in the input data.
@@ -1740,16 +1788,48 @@ module Aws::SageMaker
     #   in `FeatureAttributeNames`.
     #
     #   The key name `FeatureAttributeNames` is fixed. The values listed in
-    #   `["col1", "col2", ...]` is case sensitive and should be a list of
+    #   `["col1", "col2", ...]` are case sensitive and should be a list of
     #   strings containing unique values that are a subset of the column
     #   names in the input data. The list of columns provided must not
     #   include the target column.
     #   @return [String]
     #
+    # @!attribute [rw] algorithms_config
+    #   Stores the configuration information for the selection of algorithms
+    #   used to train the model candidates.
+    #
+    #   The list of available algorithms to choose from depends on the
+    #   training mode set in [ `AutoMLJobConfig.Mode` ][1].
+    #
+    #   * `AlgorithmsConfig` should not be set in `AUTO` training mode.
+    #
+    #   * When `AlgorithmsConfig` is provided, one `AutoMLAlgorithms`
+    #     attribute must be set and one only.
+    #
+    #     If the list of algorithms provided as values for
+    #     `AutoMLAlgorithms` is empty, `AutoMLCandidateGenerationConfig`
+    #     uses the full set of algorithms for the given training mode.
+    #
+    #   * When `AlgorithmsConfig` is not provided,
+    #     `AutoMLCandidateGenerationConfig` uses the full set of algorithms
+    #     for the given training mode.
+    #
+    #   For the list of all algorithms per training mode, see .
+    #
+    #   For more information on each algorithm, see the [Algorithm
+    #   support][2] section in Autopilot developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
+    #   @return [Array<Types::AutoMLAlgorithmConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLCandidateGenerationConfig AWS API Documentation
     #
     class AutoMLCandidateGenerationConfig < Struct.new(
-      :feature_specification_s3_uri)
+      :feature_specification_s3_uri,
+      :algorithms_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1933,7 +2013,7 @@ module Aws::SageMaker
     #   automatically and its processing is ended gracefully. The AutoML job
     #   identifies the best model whose training was completed and marks it
     #   as the best-performing model. Any unfinished steps of the job, such
-    #   as automatic one-click Autopilot model deployment, will not be
+    #   as automatic one-click Autopilot model deployment, are not
     #   completed.
     #   @return [Integer]
     #
@@ -1988,11 +2068,11 @@ module Aws::SageMaker
     #   by `ENSEMBLING` mode.
     #
     #   The `HYPERPARAMETER_TUNING` (HPO) mode uses the best hyperparameters
-    #   to train the best version of a model. HPO will automatically select
-    #   an algorithm for the type of problem you want to solve. Then HPO
-    #   finds the best hyperparameters according to your objective metric.
-    #   See [Autopilot algorithm support][1] for a list of algorithms
-    #   supported by `HYPERPARAMETER_TUNING` mode.
+    #   to train the best version of a model. HPO automatically selects an
+    #   algorithm for the type of problem you want to solve. Then HPO finds
+    #   the best hyperparameters according to your objective metric. See
+    #   [Autopilot algorithm support][1] for a list of algorithms supported
+    #   by `HYPERPARAMETER_TUNING` mode.
     #
     #
     #
@@ -2162,7 +2242,7 @@ module Aws::SageMaker
     #     find all of the true positives. A false positive (FP) reflects a
     #     positive prediction that is actually negative in the data. It is
     #     often insufficient to measure only recall, because predicting
-    #     every output as a true positive will yield a perfect recall score.
+    #     every output as a true positive yield a perfect recall score.
     #
     #   RecallMacro
     #
@@ -2173,8 +2253,8 @@ module Aws::SageMaker
     #     true positives (TP) in a dataset. Whereas, a true positive
     #     reflects a positive prediction that is also an actual positive
     #     value in the data. It is often insufficient to measure only
-    #     recall, because predicting every output as a true positive will
-    #     yield a perfect recall score.
+    #     recall, because predicting every output as a true positive yields
+    #     a perfect recall score.
     #
     #   RMSE
     #
@@ -3743,12 +3823,12 @@ module Aws::SageMaker
     #   If you provide a value for this parameter, SageMaker uses Amazon Web
     #   Services Security Token Service to download model artifacts from the
     #   S3 path you provide. Amazon Web Services STS is activated in your
-    #   IAM user account by default. If you previously deactivated Amazon
-    #   Web Services STS for a region, you need to reactivate Amazon Web
-    #   Services STS for that region. For more information, see [Activating
-    #   and Deactivating Amazon Web Services STS in an Amazon Web Services
-    #   Region][2] in the *Amazon Web Services Identity and Access
-    #   Management User Guide*.
+    #   Amazon Web Services account by default. If you previously
+    #   deactivated Amazon Web Services STS for a region, you need to
+    #   reactivate Amazon Web Services STS for that region. For more
+    #   information, see [Activating and Deactivating Amazon Web Services
+    #   STS in an Amazon Web Services Region][2] in the *Amazon Web Services
+    #   Identity and Access Management User Guide*.
     #
     #   If you use a built-in algorithm to create a model, SageMaker
     #   requires that you provide a S3 path to the model artifacts in
@@ -4272,7 +4352,7 @@ module Aws::SageMaker
 
     # @!attribute [rw] auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
-    #   and is case-insensitive.
+    #   and is case insensitive.
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
@@ -10076,7 +10156,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
-    #   Returns the input data configuration for the AutoML job..
+    #   Returns the input data configuration for the AutoML job.
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -10150,7 +10230,7 @@ module Aws::SageMaker
     #   @return [Types::AutoMLJobArtifacts]
     #
     # @!attribute [rw] resolved_attributes
-    #   This contains `ProblemType`, `AutoMLJobObjective`, and
+    #   Contains `ProblemType`, `AutoMLJobObjective`, and
     #   `CompletionCriteria`. If you do not provide these values, they are
     #   auto-inferred. If you do provide them, the values used are the ones
     #   you provide.
@@ -11621,7 +11701,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] hub_content_markdown
-    #   Markdown files associated with the hub content to import.
+    #   A string that provides a description of the hub content. This string
+    #   can include links, tables, and standard markdown formating.
     #   @return [String]
     #
     # @!attribute [rw] hub_content_document
@@ -17157,12 +17238,22 @@ module Aws::SageMaker
     #   The value of the metric with the best result.
     #   @return [Float]
     #
+    # @!attribute [rw] standard_metric_name
+    #   The name of the standard metric. For a description of the standard
+    #   metrics, see [Autopilot candidate metrics][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FinalAutoMLJobObjectiveMetric AWS API Documentation
     #
     class FinalAutoMLJobObjectiveMetric < Struct.new(
       :type,
       :metric_name,
-      :value)
+      :value,
+      :standard_metric_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17601,7 +17692,7 @@ module Aws::SageMaker
     # The Amazon S3 storage configuration of a hub.
     #
     # @!attribute [rw] s3_output_path
-    #   The Amazon S3 output path for the hub.
+    #   The Amazon S3 bucket prefix for hosting hub content.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubS3StorageConfig AWS API Documentation
@@ -19775,7 +19866,7 @@ module Aws::SageMaker
     # @!attribute [rw] min_resource
     #   The minimum number of resources (such as epochs) that can be used by
     #   a training job launched by a hyperparameter tuning job. If the value
-    #   for `MinResource` has not been reached, the training job will not be
+    #   for `MinResource` has not been reached, the training job is not
     #   stopped by `Hyperband`.
     #   @return [Integer]
     #
@@ -19980,7 +20071,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] hub_content_markdown
-    #   Markdown files associated with the hub content to import.
+    #   A string that provides a description of the hub content. This string
+    #   can include links, tables, and standard markdown formating.
     #   @return [String]
     #
     # @!attribute [rw] hub_content_document
@@ -29777,7 +29869,7 @@ module Aws::SageMaker
     #
     #   * `"kms:RevokeGrant"`
     #
-    #   The caller (either IAM user or IAM role) to all DataPlane operations
+    #   The caller (either user or IAM role) to all DataPlane operations
     #   (`PutRecord`, `GetRecord`, `DeleteRecord`) must have the following
     #   permissions to the `KmsKeyId`\:
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2023-02-10)
+------------------
+
+* Feature - Amazon SageMaker Autopilot adds support for selecting algorithms in CreateAutoMLJob API.
+
 1.165.0 (2023-01-31)
 ------------------
 

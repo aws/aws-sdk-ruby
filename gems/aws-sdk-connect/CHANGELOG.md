@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2023-02-10)
+------------------
+
+* Feature - This update provides the Wisdom session ARN for contacts enabled for Wisdom in the chat channel.
+
 1.95.0 (2023-02-02)
 ------------------
 

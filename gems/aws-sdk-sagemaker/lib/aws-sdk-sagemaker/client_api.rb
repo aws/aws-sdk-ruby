@@ -95,6 +95,10 @@ module Aws::SageMaker
     AttributeNames = Shapes::ListShape.new(name: 'AttributeNames')
     AuthMode = Shapes::StringShape.new(name: 'AuthMode')
     AutoGenerateEndpointName = Shapes::BooleanShape.new(name: 'AutoGenerateEndpointName')
+    AutoMLAlgorithm = Shapes::StringShape.new(name: 'AutoMLAlgorithm')
+    AutoMLAlgorithmConfig = Shapes::StructureShape.new(name: 'AutoMLAlgorithmConfig')
+    AutoMLAlgorithms = Shapes::ListShape.new(name: 'AutoMLAlgorithms')
+    AutoMLAlgorithmsConfig = Shapes::ListShape.new(name: 'AutoMLAlgorithmsConfig')
     AutoMLCandidate = Shapes::StructureShape.new(name: 'AutoMLCandidate')
     AutoMLCandidateGenerationConfig = Shapes::StructureShape.new(name: 'AutoMLCandidateGenerationConfig')
     AutoMLCandidateStep = Shapes::StructureShape.new(name: 'AutoMLCandidateStep')
@@ -2172,6 +2176,13 @@ module Aws::SageMaker
 
     AttributeNames.member = Shapes::ShapeRef.new(shape: AttributeName)
 
+    AutoMLAlgorithmConfig.add_member(:auto_ml_algorithms, Shapes::ShapeRef.new(shape: AutoMLAlgorithms, required: true, location_name: "AutoMLAlgorithms"))
+    AutoMLAlgorithmConfig.struct_class = Types::AutoMLAlgorithmConfig
+
+    AutoMLAlgorithms.member = Shapes::ShapeRef.new(shape: AutoMLAlgorithm)
+
+    AutoMLAlgorithmsConfig.member = Shapes::ShapeRef.new(shape: AutoMLAlgorithmConfig)
+
     AutoMLCandidate.add_member(:candidate_name, Shapes::ShapeRef.new(shape: CandidateName, required: true, location_name: "CandidateName"))
     AutoMLCandidate.add_member(:final_auto_ml_job_objective_metric, Shapes::ShapeRef.new(shape: FinalAutoMLJobObjectiveMetric, location_name: "FinalAutoMLJobObjectiveMetric"))
     AutoMLCandidate.add_member(:objective_status, Shapes::ShapeRef.new(shape: ObjectiveStatus, required: true, location_name: "ObjectiveStatus"))
@@ -2186,6 +2197,7 @@ module Aws::SageMaker
     AutoMLCandidate.struct_class = Types::AutoMLCandidate
 
     AutoMLCandidateGenerationConfig.add_member(:feature_specification_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "FeatureSpecificationS3Uri"))
+    AutoMLCandidateGenerationConfig.add_member(:algorithms_config, Shapes::ShapeRef.new(shape: AutoMLAlgorithmsConfig, location_name: "AlgorithmsConfig"))
     AutoMLCandidateGenerationConfig.struct_class = Types::AutoMLCandidateGenerationConfig
 
     AutoMLCandidateStep.add_member(:candidate_step_type, Shapes::ShapeRef.new(shape: CandidateStepType, required: true, location_name: "CandidateStepType"))
@@ -4946,6 +4958,7 @@ module Aws::SageMaker
     FinalAutoMLJobObjectiveMetric.add_member(:type, Shapes::ShapeRef.new(shape: AutoMLJobObjectiveType, location_name: "Type"))
     FinalAutoMLJobObjectiveMetric.add_member(:metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, required: true, location_name: "MetricName"))
     FinalAutoMLJobObjectiveMetric.add_member(:value, Shapes::ShapeRef.new(shape: MetricValue, required: true, location_name: "Value"))
+    FinalAutoMLJobObjectiveMetric.add_member(:standard_metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, location_name: "StandardMetricName"))
     FinalAutoMLJobObjectiveMetric.struct_class = Types::FinalAutoMLJobObjectiveMetric
 
     FinalHyperParameterTuningJobObjectiveMetric.add_member(:type, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjectiveType, location_name: "Type"))

@@ -51,8 +51,10 @@ module Aws::SNS
     # * `Policy` – The JSON serialization of the topic's access control
     #   policy.
     #
-    # * `SignatureVersion` – The version of the Amazon SNS signature used
-    #   for the topic.
+    # * `SignatureVersion` – The signature version corresponds to the
+    #   hashing algorithm used while creating the signature of the
+    #   notifications, subscription confirmations, or unsubscribe
+    #   confirmation messages sent by Amazon SNS.
     #
     #   * By default, `SignatureVersion` is set to **1**. The signature is a
     #     Base64-encoded **SHA1withRSA** signature.
@@ -76,6 +78,13 @@ module Aws::SNS
     #   confirmation for the topic.
     #
     # * `TopicArn` – The topic's ARN.
+    #
+    # * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
+    #   `TracingConfig` is set to `PassThrough`, and the topic passes
+    #   through the tracing header it receives from an Amazon SNS publisher
+    #   to its subscriptions. If set to `Active`, Amazon SNS will vend X-Ray
+    #   segment data to topic owner account if the sampled flag in the
+    #   tracing header is true. This is only supported on standard topics.
     #
     # The following attribute applies only to [server-side-encryption][1]\:
     #
@@ -399,6 +408,13 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
+    #   * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
+    #     `TracingConfig` is set to `PassThrough`, and the topic passes
+    #     through the tracing header it receives from an Amazon SNS publisher
+    #     to its subscriptions. If set to `Active`, Amazon SNS will vend X-Ray
+    #     segment data to topic owner account if the sampled flag in the
+    #     tracing header is true. This is only supported on standard topics.
+    #
     #   * HTTP
     #
     #     * `HTTPSuccessFeedbackRoleArn` – Indicates successful message
@@ -501,7 +517,8 @@ module Aws::SNS
     #   * `SignatureVersion` – The signature version corresponds to the
     #     hashing algorithm used while creating the signature of the
     #     notifications, subscription confirmations, or unsubscribe
-    #     confirmation messages sent by Amazon SNS.
+    #     confirmation messages sent by Amazon SNS. By default,
+    #     `SignatureVersion` is set to `1`.
     #
     #   The following attribute applies only to [FIFO topics][5]\:
     #

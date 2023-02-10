@@ -1185,7 +1185,7 @@ module Aws::SageMaker
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
-    #   and is case-insensitive.
+    #   and is case insensitive.
     #
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
     #   An array of channel objects that describes the input data and its
@@ -1281,6 +1281,11 @@ module Aws::SageMaker
     #       },
     #       candidate_generation_config: {
     #         feature_specification_s3_uri: "S3Uri",
+    #         algorithms_config: [
+    #           {
+    #             auto_ml_algorithms: ["xgboost"], # required, accepts xgboost, linear-learner, mlp, lightgbm, catboost, randomforest, extra-trees, nn-torch, fastai
+    #           },
+    #         ],
     #       },
     #       mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
     #     },
@@ -1825,8 +1830,7 @@ module Aws::SageMaker
     # Creates a `Domain` used by Amazon SageMaker Studio. A domain consists
     # of an associated Amazon Elastic File System (EFS) volume, a list of
     # authorized users, and a variety of security, application, policy, and
-    # Amazon Virtual Private Cloud (VPC) configurations. An Amazon Web
-    # Services account is limited to one domain per region. Users within a
+    # Amazon Virtual Private Cloud (VPC) configurations. Users within a
     # domain can share notebook files and other artifacts with each other.
     #
     # **EFS storage**
@@ -2320,12 +2324,12 @@ module Aws::SageMaker
     # If any of the models hosted at this endpoint get model data from an
     # Amazon S3 location, SageMaker uses Amazon Web Services Security Token
     # Service to download model artifacts from the S3 path you provided.
-    # Amazon Web Services STS is activated in your IAM user account by
-    # default. If you previously deactivated Amazon Web Services STS for a
-    # region, you need to reactivate Amazon Web Services STS for that
-    # region. For more information, see [Activating and Deactivating Amazon
-    # Web Services STS in an Amazon Web Services Region][3] in the *Amazon
-    # Web Services Identity and Access Management User Guide*.
+    # Amazon Web Services STS is activated in your Amazon Web Services
+    # account by default. If you previously deactivated Amazon Web Services
+    # STS for a region, you need to reactivate Amazon Web Services STS for
+    # that region. For more information, see [Activating and Deactivating
+    # Amazon Web Services STS in an Amazon Web Services Region][3] in the
+    # *Amazon Web Services Identity and Access Management User Guide*.
     #
     # <note markdown="1"> To add the IAM role policies for using this API operation, go to the
     # [IAM console][4], and choose Roles in the left navigation pane. Search
@@ -3055,6 +3059,10 @@ module Aws::SageMaker
     end
 
     # Create a hub.
+    #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
     #
     # @option params [required, String] :hub_name
     #   The name of the hub to create.
@@ -8368,6 +8376,10 @@ module Aws::SageMaker
 
     # Delete a hub.
     #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
+    #
     # @option params [required, String] :hub_name
     #   The name of the hub to delete.
     #
@@ -8389,6 +8401,10 @@ module Aws::SageMaker
     end
 
     # Delete the contents of a hub.
+    #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
     #
     # @option params [required, String] :hub_name
     #   The name of the hub that you want to delete content in.
@@ -9584,6 +9600,9 @@ module Aws::SageMaker
     #   resp.auto_ml_job_config.security_config.vpc_config.subnets[0] #=> String
     #   resp.auto_ml_job_config.data_split_config.validation_fraction #=> Float
     #   resp.auto_ml_job_config.candidate_generation_config.feature_specification_s3_uri #=> String
+    #   resp.auto_ml_job_config.candidate_generation_config.algorithms_config #=> Array
+    #   resp.auto_ml_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms #=> Array
+    #   resp.auto_ml_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms[0] #=> String, one of "xgboost", "linear-learner", "mlp", "lightgbm", "catboost", "randomforest", "extra-trees", "nn-torch", "fastai"
     #   resp.auto_ml_job_config.mode #=> String, one of "AUTO", "ENSEMBLING", "HYPERPARAMETER_TUNING"
     #   resp.creation_time #=> Time
     #   resp.end_time #=> Time
@@ -9595,6 +9614,7 @@ module Aws::SageMaker
     #   resp.best_candidate.final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
     #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
     #   resp.best_candidate.final_auto_ml_job_objective_metric.value #=> Float
+    #   resp.best_candidate.final_auto_ml_job_objective_metric.standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
     #   resp.best_candidate.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.best_candidate.candidate_steps #=> Array
     #   resp.best_candidate.candidate_steps[0].candidate_step_type #=> String, one of "AWS::SageMaker::TrainingJob", "AWS::SageMaker::TransformJob", "AWS::SageMaker::ProcessingJob"
@@ -10793,6 +10813,10 @@ module Aws::SageMaker
 
     # Describe a hub.
     #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
+    #
     # @option params [required, String] :hub_name
     #   The name of the hub to describe.
     #
@@ -10839,6 +10863,10 @@ module Aws::SageMaker
     end
 
     # Describe the content of a hub.
+    #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
     #
     # @option params [required, String] :hub_name
     #   The name of the hub that contains the content to describe.
@@ -13977,6 +14005,10 @@ module Aws::SageMaker
 
     # Import hub content.
     #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
+    #
     # @option params [required, String] :hub_content_name
     #   The name of the hub content to import.
     #
@@ -13999,7 +14031,8 @@ module Aws::SageMaker
     #   A description of the hub content to import.
     #
     # @option params [String] :hub_content_markdown
-    #   Markdown files associated with the hub content to import.
+    #   A string that provides a description of the hub content. This string
+    #   can include links, tables, and standard markdown formating.
     #
     # @option params [required, String] :hub_content_document
     #   The hub content document that describes information about the hub
@@ -14693,6 +14726,7 @@ module Aws::SageMaker
     #   resp.candidates[0].final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
     #   resp.candidates[0].final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
     #   resp.candidates[0].final_auto_ml_job_objective_metric.value #=> Float
+    #   resp.candidates[0].final_auto_ml_job_objective_metric.standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
     #   resp.candidates[0].objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.candidates[0].candidate_steps #=> Array
     #   resp.candidates[0].candidate_steps[0].candidate_step_type #=> String, one of "AWS::SageMaker::TrainingJob", "AWS::SageMaker::TransformJob", "AWS::SageMaker::ProcessingJob"
@@ -15723,6 +15757,10 @@ module Aws::SageMaker
 
     # List hub content versions.
     #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
+    #
     # @option params [required, String] :hub_name
     #   The name of the hub to list the content versions of.
     #
@@ -15808,6 +15846,10 @@ module Aws::SageMaker
 
     # List the contents of a hub.
     #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
+    #
     # @option params [required, String] :hub_name
     #   The name of the hub to list the contents of.
     #
@@ -15886,6 +15928,10 @@ module Aws::SageMaker
     end
 
     # List all existing hubs.
+    #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
     #
     # @option params [String] :name_contains
     #   Only list hubs with names that contain the specified string.
@@ -20009,7 +20055,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # A method for forcing the termination of a running job.
+    # A method for forcing a running job to shut down.
     #
     # @option params [required, String] :auto_ml_job_name
     #   The name of the object you are requesting.
@@ -21197,6 +21243,10 @@ module Aws::SageMaker
     end
 
     # Update a hub.
+    #
+    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
+    #
+    #  </note>
     #
     # @option params [required, String] :hub_name
     #   The name of the hub to update.
@@ -22762,7 +22812,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

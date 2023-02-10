@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-02-10)
+------------------
+
+* Feature - This release adds support for SNS X-Ray active tracing as well as other updates.
+
 1.59.0 (2023-02-01)
 ------------------
 

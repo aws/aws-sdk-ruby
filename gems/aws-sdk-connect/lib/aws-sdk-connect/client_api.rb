@@ -779,6 +779,7 @@ module Aws::Connect
     VocabularySummaryList = Shapes::ListShape.new(name: 'VocabularySummaryList')
     VoiceRecordingConfiguration = Shapes::StructureShape.new(name: 'VoiceRecordingConfiguration')
     VoiceRecordingTrack = Shapes::StringShape.new(name: 'VoiceRecordingTrack')
+    WisdomInfo = Shapes::StructureShape.new(name: 'WisdomInfo')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -969,6 +970,7 @@ module Aws::Connect
     Contact.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdateTimestamp"))
     Contact.add_member(:scheduled_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ScheduledTimestamp"))
     Contact.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
+    Contact.add_member(:wisdom_info, Shapes::ShapeRef.new(shape: WisdomInfo, location_name: "WisdomInfo"))
     Contact.struct_class = Types::Contact
 
     ContactFilter.add_member(:contact_states, Shapes::ShapeRef.new(shape: ContactStates, location_name: "ContactStates"))
@@ -3254,6 +3256,9 @@ module Aws::Connect
 
     VoiceRecordingConfiguration.add_member(:voice_recording_track, Shapes::ShapeRef.new(shape: VoiceRecordingTrack, location_name: "VoiceRecordingTrack"))
     VoiceRecordingConfiguration.struct_class = Types::VoiceRecordingConfiguration
+
+    WisdomInfo.add_member(:session_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SessionArn"))
+    WisdomInfo.struct_class = Types::WisdomInfo
 
 
     # @api private

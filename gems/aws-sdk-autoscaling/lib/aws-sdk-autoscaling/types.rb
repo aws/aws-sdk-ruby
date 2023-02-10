@@ -51,8 +51,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # The request failed because an active instance refresh for the
-    # specified Auto Scaling group was not found.
+    # The request failed because an active instance refresh or rollback for
+    # the specified Auto Scaling group was not found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -467,6 +467,10 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_sources
+    #   **Reserved for use with Amazon VPC Lattice, which is in preview
+    #   release and is subject to change. Do not use this parameter for
+    #   production workloads. It is also subject to change.**
+    #
     #   The unique identifiers of the traffic sources.
     #   @return [Array<Types::TrafficSourceIdentifier>]
     #
@@ -802,7 +806,8 @@ module Aws::AutoScaling
     end
 
     # @!attribute [rw] instance_refresh_id
-    #   The instance refresh ID.
+    #   The instance refresh ID associated with the request. This is the
+    #   unique ID assigned to the instance refresh when it was started.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CancelInstanceRefreshAnswer AWS API Documentation
@@ -1191,26 +1196,25 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] default_instance_warmup
-    #   The amount of time, in seconds, until a newly launched instance can
-    #   contribute to the Amazon CloudWatch metrics. This delay lets an
-    #   instance finish initializing before Amazon EC2 Auto Scaling
-    #   aggregates instance metrics, resulting in more reliable usage data.
-    #   Set this value equal to the amount of time that it takes for
-    #   resource consumption to become stable after an instance reaches the
-    #   `InService` state. For more information, see [Set the default
-    #   instance warmup for an Auto Scaling group][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   The amount of time, in seconds, until a new instance is considered
+    #   to have finished initializing and resource consumption to become
+    #   stable after it enters the `InService` state.
     #
-    #   To manage your warm-up settings at the group level, we recommend
-    #   that you set the default instance warmup, *even if its value is set
-    #   to 0 seconds*. This also optimizes the performance of scaling
-    #   policies that scale continuously, such as target tracking and step
-    #   scaling policies.
+    #   During an instance refresh, Amazon EC2 Auto Scaling waits for the
+    #   warm-up period after it replaces an instance before it moves on to
+    #   replacing the next instance. Amazon EC2 Auto Scaling also waits for
+    #   the warm-up period before aggregating the metrics for new instances
+    #   with existing instances in the Amazon CloudWatch metrics that are
+    #   used for scaling, resulting in more reliable usage data. For more
+    #   information, see [Set the default instance warmup for an Auto
+    #   Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #    If you need to remove a value that you previously set, include the
+    #   To manage various warm-up settings at the group level, we recommend
+    #   that you set the default instance warmup, *even if it is set to 0
+    #   seconds*. To remove a value that you previously set, include the
     #   property but specify `-1` for the value. However, we strongly
     #   recommend keeping the default instance warmup enabled by specifying
-    #   a minimum value of `0`.
+    #   a value of `0` or other nominal value.
     #
     #   Default: None
     #
@@ -3266,27 +3270,30 @@ module Aws::AutoScaling
     # @!attribute [rw] status
     #   The current status for the instance refresh operation:
     #
-    #   * `Pending` - The request was created, but the operation has not
-    #     started.
+    #   * `Pending` - The request was created, but the instance refresh has
+    #     not started.
     #
-    #   * `InProgress` - The operation is in progress.
+    #   * `InProgress` - An instance refresh is in progress.
     #
-    #   * `Successful` - The operation completed successfully.
+    #   * `Successful` - An instance refresh completed successfully.
     #
-    #   * `Failed` - The operation failed to complete. You can troubleshoot
-    #     using the status reason and the scaling activities.
+    #   * `Failed` - An instance refresh failed to complete. You can
+    #     troubleshoot using the status reason and the scaling activities.
     #
-    #   * `Cancelling` - An ongoing operation is being cancelled.
-    #     Cancellation does not roll back any replacements that have already
-    #     been completed, but it prevents new replacements from being
-    #     started.
+    #   * `Cancelling` - An ongoing instance refresh is being cancelled.
     #
-    #   * `Cancelled` - The operation is cancelled.
+    #   * `Cancelled` - The instance refresh is cancelled.
+    #
+    #   * `RollbackInProgress` - An instance refresh is being rolled back.
+    #
+    #   * `RollbackFailed` - The rollback failed to complete. You can
+    #     troubleshoot using the status reason and the scaling activities.
+    #
+    #   * `RollbackSuccessful` - The rollback completed successfully.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
-    #   Provides more details about the current status of the instance
-    #   refresh.
+    #   The explanation for the specific status assigned to this operation.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3304,11 +3311,24 @@ module Aws::AutoScaling
     #   changes to healthy and the specified warm-up time passes, the
     #   instance is considered updated and is added to the percentage
     #   complete.
+    #
+    #   <note markdown="1"> `PercentageComplete` does not include instances that are replaced
+    #   during a rollback. This value gradually goes back down to zero
+    #   during a rollback.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] instances_to_update
     #   The number of instances remaining to update before the instance
     #   refresh is complete.
+    #
+    #   <note markdown="1"> If you roll back the instance refresh, `InstancesToUpdate` shows you
+    #   the number of instances that were not yet updated by the instance
+    #   refresh. Therefore, these instances don't need to be replaced as
+    #   part of the rollback.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] progress_details
@@ -3321,8 +3341,12 @@ module Aws::AutoScaling
     #   @return [Types::RefreshPreferences]
     #
     # @!attribute [rw] desired_configuration
-    #   Describes the specific update you want to deploy.
+    #   Describes the desired configuration for the instance refresh.
     #   @return [Types::DesiredConfiguration]
+    #
+    # @!attribute [rw] rollback_details
+    #   The rollback details.
+    #   @return [Types::RollbackDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefresh AWS API Documentation
     #
@@ -3337,13 +3361,14 @@ module Aws::AutoScaling
       :instances_to_update,
       :progress_details,
       :preferences,
-      :desired_configuration)
+      :desired_configuration,
+      :rollback_details)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The request failed because an active instance refresh operation
-    # already exists for the specified Auto Scaling group.
+    # The request failed because an active instance refresh already exists
+    # for the specified Auto Scaling group.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3356,8 +3381,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Reports the progress of an instance refresh on instances that are in
-    # the Auto Scaling group.
+    # Reports progress on replacing instances that are in the Auto Scaling
+    # group.
     #
     # @!attribute [rw] percentage_complete
     #   The percentage of instances in the Auto Scaling group that have been
@@ -3381,18 +3406,17 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Reports the progress of an instance refresh on an Auto Scaling group
-    # that has a warm pool. This includes separate details for instances in
-    # the warm pool and instances in the Auto Scaling group (the live pool).
+    # Reports progress on replacing instances in an Auto Scaling group that
+    # has a warm pool. This includes separate details for instances in the
+    # warm pool and instances in the Auto Scaling group (the live pool).
     #
     # @!attribute [rw] live_pool_progress
-    #   Indicates the progress of an instance refresh on instances that are
-    #   in the Auto Scaling group.
+    #   Reports progress on replacing instances that are in the Auto Scaling
+    #   group.
     #   @return [Types::InstanceRefreshLivePoolProgress]
     #
     # @!attribute [rw] warm_pool_progress
-    #   Indicates the progress of an instance refresh on instances that are
-    #   in the warm pool.
+    #   Reports progress on replacing instances that are in the warm pool.
     #   @return [Types::InstanceRefreshWarmPoolProgress]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefreshProgressDetails AWS API Documentation
@@ -3404,8 +3428,7 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Reports the progress of an instance refresh on instances that are in
-    # the warm pool.
+    # Reports progress on replacing instances that are in the warm pool.
     #
     # @!attribute [rw] percentage_complete
     #   The percentage of instances in the warm pool that have been
@@ -3948,6 +3971,22 @@ module Aws::AutoScaling
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InvalidNextToken AWS API Documentation
     #
     class InvalidNextToken < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request failed because a desired configuration was not found or an
+    # incompatible launch template (uses a Systems Manager parameter instead
+    # of an AMI ID) or launch template version (`$Latest` or `$Default`) is
+    # present on the Auto Scaling group.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/IrreversibleInstanceRefreshFault AWS API Documentation
+    #
+    class IrreversibleInstanceRefreshFault < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -6166,23 +6205,26 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] instance_warmup
-    #   *Not needed if the default instance warmup is defined for the
-    #   group.*
+    #   A time period, in seconds, during which an instance refresh waits
+    #   before moving on to replacing the next instance after a new instance
+    #   enters the `InService` state.
     #
-    #   The duration of the instance warmup, in seconds.
+    #   This property is not required for normal usage. Instead, use the
+    #   `DefaultInstanceWarmup` property of the Auto Scaling group. The
+    #   `InstanceWarmup` and `DefaultInstanceWarmup` properties work the
+    #   same way. Only specify this property if you must override the
+    #   `DefaultInstanceWarmup` property.
     #
-    #   <note markdown="1"> The default is to use the value for the default instance warmup
-    #   defined for the group. If default instance warmup is null, then
-    #   `InstanceWarmup` falls back to the value of the health check grace
-    #   period.
-    #
-    #    </note>
+    #   If you do not specify this property, the instance warmup by default
+    #   is the value of the `DefaultInstanceWarmup` property, if defined
+    #   (which is recommended in all cases), or the `HealthCheckGracePeriod`
+    #   property otherwise.
     #   @return [Integer]
     #
     # @!attribute [rw] checkpoint_percentages
-    #   Threshold values for each checkpoint in ascending order. Each number
-    #   must be unique. To replace all instances in the Auto Scaling group,
-    #   the last number in the array must be `100`.
+    #   (Optional) Threshold values for each checkpoint in ascending order.
+    #   Each number must be unique. To replace all instances in the Auto
+    #   Scaling group, the last number in the array must be `100`.
     #
     #   For usage examples, see [Adding checkpoints to an instance
     #   refresh][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -6193,22 +6235,94 @@ module Aws::AutoScaling
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] checkpoint_delay
-    #   The amount of time, in seconds, to wait after a checkpoint before
-    #   continuing. This property is optional, but if you specify a value
-    #   for it, you must also specify a value for `CheckpointPercentages`.
-    #   If you specify a value for `CheckpointPercentages` and not for
-    #   `CheckpointDelay`, the `CheckpointDelay` defaults to `3600` (1
-    #   hour).
+    #   (Optional) The amount of time, in seconds, to wait after a
+    #   checkpoint before continuing. This property is optional, but if you
+    #   specify a value for it, you must also specify a value for
+    #   `CheckpointPercentages`. If you specify a value for
+    #   `CheckpointPercentages` and not for `CheckpointDelay`, the
+    #   `CheckpointDelay` defaults to `3600` (1 hour).
     #   @return [Integer]
     #
     # @!attribute [rw] skip_matching
-    #   A boolean value that indicates whether skip matching is enabled. If
-    #   true, then Amazon EC2 Auto Scaling skips replacing instances that
-    #   match the desired configuration. If no desired configuration is
+    #   (Optional) Indicates whether skip matching is enabled. If enabled
+    #   (`true`), then Amazon EC2 Auto Scaling skips replacing instances
+    #   that match the desired configuration. If no desired configuration is
     #   specified, then it skips replacing instances that have the same
-    #   configuration that is already set on the group. The default is
+    #   launch template and instance types that the Auto Scaling group was
+    #   using before the start of the instance refresh. The default is
     #   `false`.
+    #
+    #   For more information, see [Use an instance refresh with skip
+    #   matching][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh-skip-matching.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_rollback
+    #   (Optional) Indicates whether to roll back the Auto Scaling group to
+    #   its previous configuration if the instance refresh fails. The
+    #   default is `false`.
+    #
+    #   A rollback is not supported in the following situations:
+    #
+    #   * There is no desired configuration specified for the instance
+    #     refresh.
+    #
+    #   * The Auto Scaling group has a launch template that uses an Amazon
+    #     Web Services Systems Manager parameter instead of an AMI ID for
+    #     the `ImageId` property.
+    #
+    #   * The Auto Scaling group uses the launch template's `$Latest` or
+    #     `$Default` version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scale_in_protected_instances
+    #   Choose the behavior that you want Amazon EC2 Auto Scaling to use if
+    #   instances protected from scale in are found.
+    #
+    #   The following lists the valid values:
+    #
+    #   Refresh
+    #
+    #   : Amazon EC2 Auto Scaling replaces instances that are protected from
+    #     scale in.
+    #
+    #   Ignore
+    #
+    #   : Amazon EC2 Auto Scaling ignores instances that are protected from
+    #     scale in and continues to replace instances that are not
+    #     protected.
+    #
+    #   Wait (default)
+    #
+    #   : Amazon EC2 Auto Scaling waits one hour for you to remove scale-in
+    #     protection. Otherwise, the instance refresh will fail.
+    #   @return [String]
+    #
+    # @!attribute [rw] standby_instances
+    #   Choose the behavior that you want Amazon EC2 Auto Scaling to use if
+    #   instances in `Standby` state are found.
+    #
+    #   The following lists the valid values:
+    #
+    #   Terminate
+    #
+    #   : Amazon EC2 Auto Scaling terminates instances that are in
+    #     `Standby`.
+    #
+    #   Ignore
+    #
+    #   : Amazon EC2 Auto Scaling ignores instances that are in `Standby`
+    #     and continues to replace instances that are in the `InService`
+    #     state.
+    #
+    #   Wait (default)
+    #
+    #   : Amazon EC2 Auto Scaling waits one hour for you to return the
+    #     instances to service. Otherwise, the instance refresh will fail.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RefreshPreferences AWS API Documentation
     #
@@ -6217,7 +6331,10 @@ module Aws::AutoScaling
       :instance_warmup,
       :checkpoint_percentages,
       :checkpoint_delay,
-      :skip_matching)
+      :skip_matching,
+      :auto_rollback,
+      :scale_in_protected_instances,
+      :standby_instances)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6246,6 +6363,71 @@ module Aws::AutoScaling
     #
     class ResourceInUseFault < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an instance refresh rollback.
+    #
+    # @!attribute [rw] rollback_reason
+    #   The reason for this instance refresh rollback (for example, whether
+    #   a manual or automatic rollback was initiated).
+    #   @return [String]
+    #
+    # @!attribute [rw] rollback_start_time
+    #   The date and time at which the rollback began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] percentage_complete_on_rollback
+    #   Indicates the value of `PercentageComplete` at the time the rollback
+    #   started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_to_update_on_rollback
+    #   Indicates the value of `InstancesToUpdate` at the time the rollback
+    #   started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] progress_details_on_rollback
+    #   Reports progress on replacing instances in an Auto Scaling group
+    #   that has a warm pool. This includes separate details for instances
+    #   in the warm pool and instances in the Auto Scaling group (the live
+    #   pool).
+    #   @return [Types::InstanceRefreshProgressDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RollbackDetails AWS API Documentation
+    #
+    class RollbackDetails < Struct.new(
+      :rollback_reason,
+      :rollback_start_time,
+      :percentage_complete_on_rollback,
+      :instances_to_update_on_rollback,
+      :progress_details_on_rollback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_refresh_id
+    #   The instance refresh ID associated with the request. This is the
+    #   unique ID assigned to the instance refresh when it was started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RollbackInstanceRefreshAnswer AWS API Documentation
+    #
+    class RollbackInstanceRefreshAnswer < Struct.new(
+      :instance_refresh_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RollbackInstanceRefreshType AWS API Documentation
+    #
+    class RollbackInstanceRefreshType < Struct.new(
+      :auto_scaling_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6699,7 +6881,7 @@ module Aws::AutoScaling
     end
 
     # @!attribute [rw] instance_refresh_id
-    #   A unique ID for tracking the progress of the request.
+    #   A unique ID for tracking the progress of the instance refresh.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefreshAnswer AWS API Documentation
@@ -6717,12 +6899,6 @@ module Aws::AutoScaling
     # @!attribute [rw] strategy
     #   The strategy to use for the instance refresh. The only valid value
     #   is `Rolling`.
-    #
-    #   A rolling update helps you update your instances gradually. A
-    #   rolling update can fail due to failed health checks or if instances
-    #   are on standby or are protected from scale in. If the rolling update
-    #   process fails, any instances that are replaced are not rolled back
-    #   to their previous configuration.
     #   @return [String]
     #
     # @!attribute [rw] desired_configuration
@@ -6738,16 +6914,26 @@ module Aws::AutoScaling
     #   current launch template for your desired configuration, consider
     #   enabling the `SkipMatching` property in preferences. If it's
     #   enabled, Amazon EC2 Auto Scaling skips replacing instances that
-    #   already use the specified launch template and version. This can help
-    #   you reduce the number of replacements that are required to apply
-    #   updates.
+    #   already use the specified launch template and instance types. This
+    #   can help you reduce the number of replacements that are required to
+    #   apply updates.
     #
     #    </note>
     #   @return [Types::DesiredConfiguration]
     #
     # @!attribute [rw] preferences
-    #   Set of preferences associated with the instance refresh request. If
-    #   not provided, the default values are used.
+    #   Sets your preferences for the instance refresh so that it performs
+    #   as expected when you start it. Includes the instance warmup time,
+    #   the minimum healthy percentage, and the behaviors that you want
+    #   Amazon EC2 Auto Scaling to use if instances that are in `Standby`
+    #   state or protected from scale in are found. You can also choose to
+    #   enable additional features, such as the following:
+    #
+    #   * Auto rollback
+    #
+    #   * Checkpoints
+    #
+    #   * Skip matching
     #   @return [Types::RefreshPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefreshType AWS API Documentation
@@ -7406,26 +7592,25 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] default_instance_warmup
-    #   The amount of time, in seconds, until a newly launched instance can
-    #   contribute to the Amazon CloudWatch metrics. This delay lets an
-    #   instance finish initializing before Amazon EC2 Auto Scaling
-    #   aggregates instance metrics, resulting in more reliable usage data.
-    #   Set this value equal to the amount of time that it takes for
-    #   resource consumption to become stable after an instance reaches the
-    #   `InService` state. For more information, see [Set the default
-    #   instance warmup for an Auto Scaling group][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   The amount of time, in seconds, until a new instance is considered
+    #   to have finished initializing and resource consumption to become
+    #   stable after it enters the `InService` state.
     #
-    #   To manage your warm-up settings at the group level, we recommend
-    #   that you set the default instance warmup, *even if its value is set
-    #   to 0 seconds*. This also optimizes the performance of scaling
-    #   policies that scale continuously, such as target tracking and step
-    #   scaling policies.
+    #   During an instance refresh, Amazon EC2 Auto Scaling waits for the
+    #   warm-up period after it replaces an instance before it moves on to
+    #   replacing the next instance. Amazon EC2 Auto Scaling also waits for
+    #   the warm-up period before aggregating the metrics for new instances
+    #   with existing instances in the Amazon CloudWatch metrics that are
+    #   used for scaling, resulting in more reliable usage data. For more
+    #   information, see [Set the default instance warmup for an Auto
+    #   Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #    If you need to remove a value that you previously set, include the
+    #   To manage various warm-up settings at the group level, we recommend
+    #   that you set the default instance warmup, *even if it is set to 0
+    #   seconds*. To remove a value that you previously set, include the
     #   property but specify `-1` for the value. However, we strongly
     #   recommend keeping the default instance warmup enabled by specifying
-    #   a minimum value of `0`.
+    #   a value of `0` or other nominal value.
     #
     #
     #

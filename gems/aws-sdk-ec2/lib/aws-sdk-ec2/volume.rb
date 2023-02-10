@@ -518,21 +518,20 @@ module Aws::EC2
     #   * `volume-status.status` - The status of the volume (`ok` \|
     #     `impaired` \| `warning` \| `insufficient-data`).
     # @option options [Integer] :max_results
-    #   The maximum number of volume results returned by
-    #   `DescribeVolumeStatus` in paginated output. When this parameter is
-    #   used, the request only returns `MaxResults` results in a single page
-    #   along with a `NextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another request with the
-    #   returned `NextToken` value. This value can be between 5 and 1,000; if
-    #   `MaxResults` is given a value larger than 1,000, only 1,000 results
-    #   are returned. If this parameter is not used, then
-    #   `DescribeVolumeStatus` returns all results. You cannot specify this
-    #   parameter and the volume IDs parameter in the same request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1,000; if the value is
+    #   larger than 1,000, only 1,000 results are returned. If this parameter
+    #   is not used, then all items are returned. You cannot specify this
+    #   parameter and the volume IDs parameter in the same request. For more
+    #   information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     # @option options [String] :next_token
-    #   The `NextToken` value to include in a future `DescribeVolumeStatus`
-    #   request. When the results of the request exceed `MaxResults`, this
-    #   value can be used to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

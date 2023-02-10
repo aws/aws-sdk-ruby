@@ -10062,7 +10062,7 @@ module Aws::EC2
     LaunchPermissionModifications.add_member(:remove, Shapes::ShapeRef.new(shape: LaunchPermissionList, location_name: "Remove"))
     LaunchPermissionModifications.struct_class = Types::LaunchPermissionModifications
 
-    LaunchSpecification.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "userData"))
+    LaunchSpecification.add_member(:user_data, Shapes::ShapeRef.new(shape: SensitiveUserData, location_name: "userData"))
     LaunchSpecification.add_member(:security_groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
     LaunchSpecification.add_member(:addressing_type, Shapes::ShapeRef.new(shape: String, location_name: "addressingType"))
     LaunchSpecification.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingList, location_name: "blockDeviceMapping"))
@@ -12345,7 +12345,7 @@ module Aws::EC2
     RequestSpotLaunchSpecification.add_member(:placement, Shapes::ShapeRef.new(shape: SpotPlacement, location_name: "placement"))
     RequestSpotLaunchSpecification.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: RamdiskId, location_name: "ramdiskId"))
     RequestSpotLaunchSpecification.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
-    RequestSpotLaunchSpecification.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "userData"))
+    RequestSpotLaunchSpecification.add_member(:user_data, Shapes::ShapeRef.new(shape: SensitiveUserData, location_name: "userData"))
     RequestSpotLaunchSpecification.struct_class = Types::RequestSpotLaunchSpecification
 
     RequestSpotLaunchSpecificationSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "item")
@@ -12558,7 +12558,7 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:ram_disk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramDiskId"))
     ResponseLaunchTemplateData.add_member(:disable_api_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableApiTermination"))
     ResponseLaunchTemplateData.add_member(:instance_initiated_shutdown_behavior, Shapes::ShapeRef.new(shape: ShutdownBehavior, location_name: "instanceInitiatedShutdownBehavior"))
-    ResponseLaunchTemplateData.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "userData"))
+    ResponseLaunchTemplateData.add_member(:user_data, Shapes::ShapeRef.new(shape: SensitiveUserData, location_name: "userData"))
     ResponseLaunchTemplateData.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: LaunchTemplateTagSpecificationList, location_name: "tagSpecificationSet"))
     ResponseLaunchTemplateData.add_member(:elastic_gpu_specifications, Shapes::ShapeRef.new(shape: ElasticGpuSpecificationResponseList, location_name: "elasticGpuSpecificationSet"))
     ResponseLaunchTemplateData.add_member(:elastic_inference_accelerators, Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAcceleratorResponseList, location_name: "elasticInferenceAcceleratorSet"))
@@ -13191,7 +13191,7 @@ module Aws::EC2
     SpotFleetLaunchSpecification.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramdiskId"))
     SpotFleetLaunchSpecification.add_member(:spot_price, Shapes::ShapeRef.new(shape: String, location_name: "spotPrice"))
     SpotFleetLaunchSpecification.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
-    SpotFleetLaunchSpecification.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "userData"))
+    SpotFleetLaunchSpecification.add_member(:user_data, Shapes::ShapeRef.new(shape: SensitiveUserData, location_name: "userData"))
     SpotFleetLaunchSpecification.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
     SpotFleetLaunchSpecification.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: SpotFleetTagSpecificationList, location_name: "tagSpecificationSet"))
     SpotFleetLaunchSpecification.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirements, location_name: "instanceRequirements"))

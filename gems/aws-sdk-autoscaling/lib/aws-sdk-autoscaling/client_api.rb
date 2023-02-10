@@ -43,6 +43,7 @@ module Aws::AutoScaling
     AttachLoadBalancersType = Shapes::StructureShape.new(name: 'AttachLoadBalancersType')
     AttachTrafficSourcesResultType = Shapes::StructureShape.new(name: 'AttachTrafficSourcesResultType')
     AttachTrafficSourcesType = Shapes::StructureShape.new(name: 'AttachTrafficSourcesType')
+    AutoRollback = Shapes::BooleanShape.new(name: 'AutoRollback')
     AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
     AutoScalingGroupDesiredCapacity = Shapes::IntegerShape.new(name: 'AutoScalingGroupDesiredCapacity')
     AutoScalingGroupMaxSize = Shapes::IntegerShape.new(name: 'AutoScalingGroupMaxSize')
@@ -186,6 +187,7 @@ module Aws::AutoScaling
     InstancesToUpdate = Shapes::IntegerShape.new(name: 'InstancesToUpdate')
     IntPercent = Shapes::IntegerShape.new(name: 'IntPercent')
     InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken')
+    IrreversibleInstanceRefreshFault = Shapes::StructureShape.new(name: 'IrreversibleInstanceRefreshFault')
     LaunchConfiguration = Shapes::StructureShape.new(name: 'LaunchConfiguration')
     LaunchConfigurationNameType = Shapes::StructureShape.new(name: 'LaunchConfigurationNameType')
     LaunchConfigurationNames = Shapes::ListShape.new(name: 'LaunchConfigurationNames')
@@ -310,6 +312,10 @@ module Aws::AutoScaling
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
     ReuseOnScaleIn = Shapes::BooleanShape.new(name: 'ReuseOnScaleIn')
+    RollbackDetails = Shapes::StructureShape.new(name: 'RollbackDetails')
+    RollbackInstanceRefreshAnswer = Shapes::StructureShape.new(name: 'RollbackInstanceRefreshAnswer')
+    RollbackInstanceRefreshType = Shapes::StructureShape.new(name: 'RollbackInstanceRefreshType')
+    ScaleInProtectedInstances = Shapes::StringShape.new(name: 'ScaleInProtectedInstances')
     ScalingActivityInProgressFault = Shapes::StructureShape.new(name: 'ScalingActivityInProgressFault')
     ScalingActivityStatusCode = Shapes::StringShape.new(name: 'ScalingActivityStatusCode')
     ScalingPolicies = Shapes::ListShape.new(name: 'ScalingPolicies')
@@ -333,6 +339,7 @@ module Aws::AutoScaling
     SkipMatching = Shapes::BooleanShape.new(name: 'SkipMatching')
     SpotInstancePools = Shapes::IntegerShape.new(name: 'SpotInstancePools')
     SpotPrice = Shapes::StringShape.new(name: 'SpotPrice')
+    StandbyInstances = Shapes::StringShape.new(name: 'StandbyInstances')
     StartInstanceRefreshAnswer = Shapes::StructureShape.new(name: 'StartInstanceRefreshAnswer')
     StartInstanceRefreshType = Shapes::StructureShape.new(name: 'StartInstanceRefreshType')
     StepAdjustment = Shapes::StructureShape.new(name: 'StepAdjustment')
@@ -929,6 +936,7 @@ module Aws::AutoScaling
     InstanceRefresh.add_member(:progress_details, Shapes::ShapeRef.new(shape: InstanceRefreshProgressDetails, location_name: "ProgressDetails"))
     InstanceRefresh.add_member(:preferences, Shapes::ShapeRef.new(shape: RefreshPreferences, location_name: "Preferences"))
     InstanceRefresh.add_member(:desired_configuration, Shapes::ShapeRef.new(shape: DesiredConfiguration, location_name: "DesiredConfiguration"))
+    InstanceRefresh.add_member(:rollback_details, Shapes::ShapeRef.new(shape: RollbackDetails, location_name: "RollbackDetails"))
     InstanceRefresh.struct_class = Types::InstanceRefresh
 
     InstanceRefreshIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -990,6 +998,9 @@ module Aws::AutoScaling
 
     InvalidNextToken.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
     InvalidNextToken.struct_class = Types::InvalidNextToken
+
+    IrreversibleInstanceRefreshFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
+    IrreversibleInstanceRefreshFault.struct_class = Types::IrreversibleInstanceRefreshFault
 
     LaunchConfiguration.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
     LaunchConfiguration.add_member(:launch_configuration_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "LaunchConfigurationARN"))
@@ -1298,6 +1309,9 @@ module Aws::AutoScaling
     RefreshPreferences.add_member(:checkpoint_percentages, Shapes::ShapeRef.new(shape: CheckpointPercentages, location_name: "CheckpointPercentages"))
     RefreshPreferences.add_member(:checkpoint_delay, Shapes::ShapeRef.new(shape: CheckpointDelay, location_name: "CheckpointDelay"))
     RefreshPreferences.add_member(:skip_matching, Shapes::ShapeRef.new(shape: SkipMatching, location_name: "SkipMatching"))
+    RefreshPreferences.add_member(:auto_rollback, Shapes::ShapeRef.new(shape: AutoRollback, location_name: "AutoRollback"))
+    RefreshPreferences.add_member(:scale_in_protected_instances, Shapes::ShapeRef.new(shape: ScaleInProtectedInstances, location_name: "ScaleInProtectedInstances"))
+    RefreshPreferences.add_member(:standby_instances, Shapes::ShapeRef.new(shape: StandbyInstances, location_name: "StandbyInstances"))
     RefreshPreferences.struct_class = Types::RefreshPreferences
 
     ResourceContentionFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
@@ -1305,6 +1319,19 @@ module Aws::AutoScaling
 
     ResourceInUseFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
     ResourceInUseFault.struct_class = Types::ResourceInUseFault
+
+    RollbackDetails.add_member(:rollback_reason, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "RollbackReason"))
+    RollbackDetails.add_member(:rollback_start_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "RollbackStartTime"))
+    RollbackDetails.add_member(:percentage_complete_on_rollback, Shapes::ShapeRef.new(shape: IntPercent, location_name: "PercentageCompleteOnRollback"))
+    RollbackDetails.add_member(:instances_to_update_on_rollback, Shapes::ShapeRef.new(shape: InstancesToUpdate, location_name: "InstancesToUpdateOnRollback"))
+    RollbackDetails.add_member(:progress_details_on_rollback, Shapes::ShapeRef.new(shape: InstanceRefreshProgressDetails, location_name: "ProgressDetailsOnRollback"))
+    RollbackDetails.struct_class = Types::RollbackDetails
+
+    RollbackInstanceRefreshAnswer.add_member(:instance_refresh_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "InstanceRefreshId"))
+    RollbackInstanceRefreshAnswer.struct_class = Types::RollbackInstanceRefreshAnswer
+
+    RollbackInstanceRefreshType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AutoScalingGroupName"))
+    RollbackInstanceRefreshType.struct_class = Types::RollbackInstanceRefreshType
 
     ScalingActivityInProgressFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
     ScalingActivityInProgressFault.struct_class = Types::ScalingActivityInProgressFault
@@ -2136,6 +2163,18 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+      end)
+
+      api.add_operation(:rollback_instance_refresh, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RollbackInstanceRefresh"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RollbackInstanceRefreshType)
+        o.output = Shapes::ShapeRef.new(shape: RollbackInstanceRefreshAnswer)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ActiveInstanceRefreshNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: IrreversibleInstanceRefreshFault)
       end)
 
       api.add_operation(:set_desired_capacity, Seahorse::Model::Operation.new.tap do |o|

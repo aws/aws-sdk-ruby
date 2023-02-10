@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2023-02-10)
+------------------
+
+* Feature - Amazon Polly adds two new neural Japanese voices - Kazuha, Tomoko
+
 1.65.0 (2023-01-31)
 ------------------
 

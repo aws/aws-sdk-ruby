@@ -91,6 +91,7 @@ module Aws::EC2
   # | password_data_available         | {Client#get_password_data}                | 15       | 40            |
   # | security_group_exists           | {Client#describe_security_groups}         | 5        | 6             |
   # | snapshot_completed              | {Client#describe_snapshots}               | 15       | 40            |
+  # | snapshot_imported               | {Client#describe_import_snapshot_tasks}   | 15       | 40            |
   # | spot_instance_request_fulfilled | {Client#describe_spot_instance_requests}  | 15       | 40            |
   # | subnet_available                | {Client#describe_subnets}                 | 15       | 40            |
   # | system_status_ok                | {Client#describe_instance_status}         | 15       | 40            |
@@ -1075,6 +1076,50 @@ module Aws::EC2
 
       # @option (see Client#describe_snapshots)
       # @return (see Client#describe_snapshots)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class SnapshotImported
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_import_snapshot_tasks,
+            acceptors: [
+              {
+                "expected" => "completed",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "import_snapshot_tasks[].snapshot_task_detail.status"
+              },
+              {
+                "expected" => "error",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "import_snapshot_tasks[].snapshot_task_detail.status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_import_snapshot_tasks)
+      # @return (see Client#describe_import_snapshot_tasks)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

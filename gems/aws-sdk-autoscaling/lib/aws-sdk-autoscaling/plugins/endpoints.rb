@@ -170,6 +170,8 @@ module Aws::AutoScaling
             Aws::AutoScaling::Endpoints::RecordLifecycleActionHeartbeat.build(context)
           when :resume_processes
             Aws::AutoScaling::Endpoints::ResumeProcesses.build(context)
+          when :rollback_instance_refresh
+            Aws::AutoScaling::Endpoints::RollbackInstanceRefresh.build(context)
           when :set_desired_capacity
             Aws::AutoScaling::Endpoints::SetDesiredCapacity.build(context)
           when :set_instance_health

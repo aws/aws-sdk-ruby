@@ -853,6 +853,10 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html#relatedcontactid
     #   @return [String]
     #
+    # @!attribute [rw] wisdom_info
+    #   Information about Amazon Connect Wisdom.
+    #   @return [Types::WisdomInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
     #
     class Contact < Struct.new(
@@ -870,7 +874,8 @@ module Aws::Connect
       :disconnect_timestamp,
       :last_update_timestamp,
       :scheduled_timestamp,
-      :related_contact_id)
+      :related_contact_id,
+      :wisdom_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1646,6 +1651,16 @@ module Aws::Connect
     # @!attribute [rw] queue_configs
     #   The inbound queues associated with the routing profile. If no queue
     #   is added, the agent can make only outbound calls.
+    #
+    #   The limit of 10 array members applies to the maximum number of
+    #   `RoutingProfileQueueConfig` objects that can be passed during a
+    #   CreateRoutingProfile API request. It is different from the quota of
+    #   50 queues per routing profile per instance that is listed in [Amazon
+    #   Connect service quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
     #   @return [Array<Types::RoutingProfileQueueConfig>]
     #
     # @!attribute [rw] media_concurrencies
@@ -12005,6 +12020,20 @@ module Aws::Connect
     #
     class VoiceRecordingConfiguration < Struct.new(
       :voice_recording_track)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about Amazon Connect Wisdom.
+    #
+    # @!attribute [rw] session_arn
+    #   The Amazon Resource Name (ARN) of the Wisdom session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/WisdomInfo AWS API Documentation
+    #
+    class WisdomInfo < Struct.new(
+      :session_arn)
       SENSITIVE = []
       include Aws::Structure
     end

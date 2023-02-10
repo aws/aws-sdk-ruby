@@ -3939,13 +3939,13 @@ module Aws::EC2
     end
 
     # Removes your Amazon Web Services account from the launch permissions
-    # for the specified AMI. For more information, see [Cancel having an AMI
-    # shared with your Amazon Web Services account][1] in the *Amazon EC2
-    # User Guide*.
+    # for the specified AMI. For more information, see [ Cancel having an
+    # AMI shared with your Amazon Web Services account][1] in the *Amazon
+    # EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cancel-sharing-an-AMI.html
     #
     # @option params [required, String] :image_id
     #   The ID of the AMI that was shared with your Amazon Web Services
@@ -19313,8 +19313,8 @@ module Aws::EC2
     #
     #   * `message` - The Zone message.
     #
-    #   * `opt-in-status` - The opt-in status (`opted-in`, and `not-opted-in`
-    #     \| `opt-in-not-required`).
+    #   * `opt-in-status` - The opt-in status (`opted-in` \| `not-opted-in` \|
+    #     `opt-in-not-required`).
     #
     #   * `parent-zoneID` - The ID of the zone that handles some of the Local
     #     Zone and Wavelength Zone control plane operations, such as API
@@ -19334,13 +19334,12 @@ module Aws::EC2
     #     `use1-az1`), the Local Zone (for example, `usw2-lax1-az1`), or the
     #     Wavelength Zone (for example, `us-east-1-wl1-bos-wlz-1`).
     #
-    #   * `zone-type` - The type of zone, for example, `local-zone`.
-    #
     #   * `zone-name` - The name of the Availability Zone (for example,
     #     `us-east-1a`), the Local Zone (for example, `us-west-2-lax-1a`), or
     #     the Wavelength Zone (for example, `us-east-1-wl1-bos-wlz-1`).
     #
-    #   * `zone-type` - The type of zone, for example, `local-zone`.
+    #   * `zone-type` - The type of zone (`availability-zone` \| `local-zone`
+    #     \| `wavelength-zone`).
     #
     # @option params [Array<String>] :zone_names
     #   The names of the Availability Zones, Local Zones, and Wavelength
@@ -20059,15 +20058,20 @@ module Aws::EC2
     #   ClassicLink.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
     #   Constraint: If the value is greater than 1000, we return only 1000
     #   items.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeClassicLinkInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20835,12 +20839,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeDhcpOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20932,12 +20941,17 @@ module Aws::EC2
     #   One or more egress-only internet gateway IDs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -21306,12 +21320,17 @@ module Aws::EC2
     #     `disabled`).
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21855,12 +21874,17 @@ module Aws::EC2
     #   Constraint: Maximum of 1000 flow log IDs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token to request the next page of items. Pagination continues from
+    #   the end of the items returned by the previous request.
     #
     # @return [Types::DescribeFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -22399,12 +22423,17 @@ module Aws::EC2
     #     `associated` \| `disassociating`).
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeIamInstanceProfileAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23170,6 +23199,11 @@ module Aws::EC2
     #   resp.import_snapshot_tasks[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * snapshot_imported
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasks AWS API Documentation
     #
     # @overload describe_import_snapshot_tasks(params = {})
@@ -23387,13 +23421,19 @@ module Aws::EC2
     #   Constraints: Maximum 1000 explicitly specified instance IDs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned `NextToken`
-    #   value. This value can be between 5 and 1000. You cannot specify this
-    #   parameter and the instance IDs parameter in the same call.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. You cannot specify
+    #   this parameter and the instance IDs parameter in the same call. For
+    #   more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeInstanceCreditSpecificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23678,13 +23718,19 @@ module Aws::EC2
     #   Constraints: Maximum 100 explicitly specified instance IDs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned `NextToken`
-    #   value. This value can be between 5 and 1000. You cannot specify this
-    #   parameter and the instance IDs parameter in the same call.
+    #   The maximum number of items to return for this request. To retrieve
+    #   the next page of items, make another request with the token returned
+    #   in the output. This value can be between 5 and 1000. You cannot
+    #   specify this parameter and the instance IDs parameter in the same
+    #   call. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -23830,12 +23876,17 @@ module Aws::EC2
     #   * `instance-type` - The instance type. For example, `c5.2xlarge`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the next token value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeInstanceTypeOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -24043,12 +24094,17 @@ module Aws::EC2
     #     "1,2".
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the next token value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeInstanceTypesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -24487,13 +24543,19 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned `NextToken`
-    #   value. This value can be between 5 and 1000. You cannot specify this
-    #   parameter and the instance IDs parameter in the same call.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. You cannot specify
+    #   this parameter and the instance IDs parameter in the same request. For
+    #   more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -24784,12 +24846,17 @@ module Aws::EC2
     #   Default: Describes all your internet gateways.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -26629,15 +26696,20 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Array<String>] :nat_gateway_ids
     #   One or more NAT gateway IDs.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeNatGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -26823,12 +26895,17 @@ module Aws::EC2
     #   Default: Describes all your network ACLs.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeNetworkAclsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -28042,13 +28119,18 @@ module Aws::EC2
     #     (`INSTANCE-ATTACH` \| `EIP-ASSOCIATE`).
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned `NextToken`
-    #   value. If this parameter is not specified, up to 50 results are
-    #   returned by default.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. If this parameter is not specified, up to 50 results are
+    #   returned by default. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeNetworkInterfacePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -28224,13 +28306,19 @@ module Aws::EC2
     #   Default: Describes all your network interfaces.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results. You cannot specify this parameter and the network
-    #   interface IDs parameter in the same request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. You cannot specify this parameter and the network
+    #   interface IDs parameter in the same request. For more information, see
+    #   [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeNetworkInterfacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -28864,12 +28952,17 @@ module Aws::EC2
     #   ^
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -29562,12 +29655,17 @@ module Aws::EC2
     #   Default: Describes all your route tables.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeRouteTablesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30072,13 +30170,19 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another request with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. If this
-    #   parameter is not specified, then all results are returned.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. If this parameter is
+    #   not specified, then all items are returned. For more information, see
+    #   [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeSecurityGroupRulesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30261,13 +30365,19 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another request with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. If this
-    #   parameter is not specified, then all results are returned.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. If this parameter is
+    #   not specified, then all items are returned. For more information, see
+    #   [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeSecurityGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30491,12 +30601,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeSnapshotTierStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30591,22 +30706,19 @@ module Aws::EC2
     # public snapshots.
     #
     # If you are describing a long list of snapshots, we recommend that you
-    # paginate the output to make the list more manageable. The `MaxResults`
-    # parameter sets the maximum number of results returned in a single
-    # page. If the list of results exceeds your `MaxResults` value, then
-    # that number of results is returned along with a `NextToken` value that
-    # can be passed to a subsequent `DescribeSnapshots` request to retrieve
-    # the remaining results.
+    # paginate the output to make the list more manageable. For more
+    # information, see [Pagination][1].
     #
     # To get the state of fast snapshot restores for a snapshot, use
     # DescribeFastSnapshotRestores.
     #
     # For more information about EBS snapshots, see [Amazon EBS
-    # snapshots][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # snapshots][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -30652,23 +30764,20 @@ module Aws::EC2
     #   * `volume-size` - The size of the volume, in GiB.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of snapshot results returned by `DescribeSnapshots`
-    #   in paginated output. When this parameter is used, `DescribeSnapshots`
-    #   only returns `MaxResults` results in a single page along with a
-    #   `NextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `DescribeSnapshots` request
-    #   with the returned `NextToken` value. This value can be between 5 and
-    #   1,000; if `MaxResults` is given a value larger than 1,000, only 1,000
-    #   results are returned. If this parameter is not used, then
-    #   `DescribeSnapshots` returns all results. You cannot specify this
-    #   parameter and the snapshot IDs parameter in the same request.
+    #   The maximum number of snapshots to return for this request. This value
+    #   can be between 5 and 1,000; if this value is larger than 1,000, only
+    #   1,000 results are returned. If this parameter is not used, then the
+    #   request returns all snapshots. You cannot specify this parameter and
+    #   the snapshot IDs parameter in the same request. For more information,
+    #   see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The `NextToken` value returned from a previous paginated
-    #   `DescribeSnapshots` request where `MaxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `NextToken`
-    #   value. This value is `null` when there are no more results to return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<String>] :owner_ids
     #   Scopes the results to snapshots with the specified owners. You can
@@ -31888,13 +31997,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a prior call.)
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -32170,12 +32283,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeSubnetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -32319,12 +32437,18 @@ module Aws::EC2
     #   * `value` - The tag value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. This value
-    #   can be between 5 and 1000. To retrieve the remaining results, make
-    #   another call with the returned `NextToken` value.
+    #   The maximum number of items to return for this request. This value can
+    #   be between 5 and 1000. To get the next page of items, make another
+    #   request with the token returned in the output. For more information,
+    #   see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -34150,22 +34274,21 @@ module Aws::EC2
     #     `impaired` \| `warning` \| `insufficient-data`).
     #
     # @option params [Integer] :max_results
-    #   The maximum number of volume results returned by
-    #   `DescribeVolumeStatus` in paginated output. When this parameter is
-    #   used, the request only returns `MaxResults` results in a single page
-    #   along with a `NextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another request with the
-    #   returned `NextToken` value. This value can be between 5 and 1,000; if
-    #   `MaxResults` is given a value larger than 1,000, only 1,000 results
-    #   are returned. If this parameter is not used, then
-    #   `DescribeVolumeStatus` returns all results. You cannot specify this
-    #   parameter and the volume IDs parameter in the same request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1,000; if the value is
+    #   larger than 1,000, only 1,000 results are returned. If this parameter
+    #   is not used, then all items are returned. You cannot specify this
+    #   parameter and the volume IDs parameter in the same request. For more
+    #   information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The `NextToken` value to include in a future `DescribeVolumeStatus`
-    #   request. When the results of the request exceed `MaxResults`, this
-    #   value can be used to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<String>] :volume_ids
     #   The IDs of the volumes.
@@ -34299,19 +34422,16 @@ module Aws::EC2
     # Describes the specified EBS volumes or all of your EBS volumes.
     #
     # If you are describing a long list of volumes, we recommend that you
-    # paginate the output to make the list more manageable. The `MaxResults`
-    # parameter sets the maximum number of results returned in a single
-    # page. If the list of results exceeds your `MaxResults` value, then
-    # that number of results is returned along with a `NextToken` value that
-    # can be passed to a subsequent `DescribeVolumes` request to retrieve
-    # the remaining results.
+    # paginate the output to make the list more manageable. For more
+    # information, see [Pagination][1].
     #
-    # For more information about EBS volumes, see [Amazon EBS volumes][1] in
+    # For more information about EBS volumes, see [Amazon EBS volumes][2] in
     # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -34378,23 +34498,21 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of volume results returned by `DescribeVolumes` in
-    #   paginated output. When this parameter is used, `DescribeVolumes` only
-    #   returns `MaxResults` results in a single page along with a `NextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `DescribeVolumes` request with the returned
-    #   `NextToken` value. This value can be between 5 and 500; if
-    #   `MaxResults` is given a value larger than 500, only 500 results are
-    #   returned. If this parameter is not used, then `DescribeVolumes`
-    #   returns all results. You cannot specify this parameter and the volume
-    #   IDs parameter in the same request.
+    #   The maximum number of volumes to return for this request. This value
+    #   can be between 5 and 500; if you specify a value larger than 500, only
+    #   500 items are returned. If this parameter is not used, then all items
+    #   are returned. You cannot specify this parameter and the volume IDs
+    #   parameter in the same request. For more information, see
+    #   [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The `NextToken` value returned from a previous paginated
-    #   `DescribeVolumes` request where `MaxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `NextToken` value. This
-    #   value is `null` when there are no more results to return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned from the previous
+    #   request.
     #
     # @return [Types::DescribeVolumesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -34602,11 +34720,16 @@ module Aws::EC2
     #   * `volume-id` - The ID of the volume.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned by a previous paginated request.
+    #   The token returned by a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results (up to a limit of 500) to be returned in
-    #   a paginated request.
+    #   a paginated request. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeVolumesModificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -34839,12 +34962,17 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<String>] :vpc_ids
     #   One or more VPC IDs.
@@ -35513,12 +35641,17 @@ module Aws::EC2
     #   Default: Describes all your VPC peering connections.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeVpcPeeringConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -35655,12 +35788,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeVpcsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -42857,12 +42995,17 @@ module Aws::EC2
     # Lists one or more snapshots that are currently in the Recycle Bin.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<String>] :snapshot_ids
     #   The IDs of the snapshots to list. Omit this parameter to list all of
@@ -51119,7 +51262,7 @@ module Aws::EC2
     #           ramdisk_id: "String",
     #           spot_price: "String",
     #           subnet_id: "SubnetId",
-    #           user_data: "String",
+    #           user_data: "SensitiveUserData",
     #           weighted_capacity: 1.0,
     #           tag_specifications: [
     #             {
@@ -51589,7 +51732,7 @@ module Aws::EC2
     #       },
     #       ramdisk_id: "RamdiskId",
     #       subnet_id: "SubnetId",
-    #       user_data: "String",
+    #       user_data: "SensitiveUserData",
     #     },
     #     spot_price: "String",
     #     type: "one-time", # accepts one-time, persistent
@@ -55414,10 +55557,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Unassigns secondary private NAT gateway IPv4 addresses from a private
-    # NAT gateway. You cannot unassign your primary private IP. For more
-    # information, see [Edit secondary IP address associations][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # Unassigns secondary private IPv4 addresses from a private NAT gateway.
+    # You cannot unassign your primary private IP. For more information, see
+    # [Edit secondary IP address associations][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     # While unassigning is in progress, you cannot assign/unassign
     # additional IP addresses while the connections are being drained. You
@@ -55840,7 +55983,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.364.0'
+      context[:gem_version] = '1.365.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -55930,6 +56073,7 @@ module Aws::EC2
     # | password_data_available         | {Client#get_password_data}                | 15       | 40            |
     # | security_group_exists           | {Client#describe_security_groups}         | 5        | 6             |
     # | snapshot_completed              | {Client#describe_snapshots}               | 15       | 40            |
+    # | snapshot_imported               | {Client#describe_import_snapshot_tasks}   | 15       | 40            |
     # | spot_instance_request_fulfilled | {Client#describe_spot_instance_requests}  | 15       | 40            |
     # | subnet_available                | {Client#describe_subnets}                 | 15       | 40            |
     # | system_status_ok                | {Client#describe_instance_status}         | 15       | 40            |
@@ -56014,6 +56158,7 @@ module Aws::EC2
         password_data_available: Waiters::PasswordDataAvailable,
         security_group_exists: Waiters::SecurityGroupExists,
         snapshot_completed: Waiters::SnapshotCompleted,
+        snapshot_imported: Waiters::SnapshotImported,
         spot_instance_request_fulfilled: Waiters::SpotInstanceRequestFulfilled,
         subnet_available: Waiters::SubnetAvailable,
         system_status_ok: Waiters::SystemStatusOk,

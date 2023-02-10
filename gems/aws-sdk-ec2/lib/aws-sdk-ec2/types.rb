@@ -15648,8 +15648,8 @@ module Aws::EC2
     #
     #   * `message` - The Zone message.
     #
-    #   * `opt-in-status` - The opt-in status (`opted-in`, and
-    #     `not-opted-in` \| `opt-in-not-required`).
+    #   * `opt-in-status` - The opt-in status (`opted-in` \| `not-opted-in`
+    #     \| `opt-in-not-required`).
     #
     #   * `parent-zoneID` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as
@@ -15669,13 +15669,12 @@ module Aws::EC2
     #     `use1-az1`), the Local Zone (for example, `usw2-lax1-az1`), or the
     #     Wavelength Zone (for example, `us-east-1-wl1-bos-wlz-1`).
     #
-    #   * `zone-type` - The type of zone, for example, `local-zone`.
-    #
     #   * `zone-name` - The name of the Availability Zone (for example,
     #     `us-east-1a`), the Local Zone (for example, `us-west-2-lax-1a`),
     #     or the Wavelength Zone (for example, `us-east-1-wl1-bos-wlz-1`).
     #
-    #   * `zone-type` - The type of zone, for example, `local-zone`.
+    #   * `zone-type` - The type of zone (`availability-zone` \|
+    #     `local-zone` \| `wavelength-zone`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] zone_names
@@ -16208,16 +16207,22 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
     #   Constraint: If the value is greater than 1000, we return only 1000
     #   items.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstancesRequest AWS API Documentation
@@ -16237,8 +16242,8 @@ module Aws::EC2
     #   @return [Array<Types::ClassicLinkInstance>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstancesResult AWS API Documentation
@@ -16760,13 +16765,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsRequest AWS API Documentation
@@ -16786,8 +16797,8 @@ module Aws::EC2
     #   @return [Array<Types::DhcpOptions>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsResult AWS API Documentation
@@ -16811,13 +16822,19 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -16851,8 +16868,8 @@ module Aws::EC2
     #   @return [Array<Types::EgressOnlyInternetGateway>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysResult AWS API Documentation
@@ -17248,13 +17265,19 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -17280,8 +17303,8 @@ module Aws::EC2
     #   @return [Array<Types::DescribeFastSnapshotRestoreSuccessItem>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastSnapshotRestoresResult AWS API Documentation
@@ -17643,13 +17666,18 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token to request the next page of items. Pagination continues
+    #   from the end of the items returned by the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsRequest AWS API Documentation
@@ -17669,8 +17697,8 @@ module Aws::EC2
     #   @return [Array<Types::FlowLog>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to request the next page of items. This value is `null`
+    #   when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsResult AWS API Documentation
@@ -18041,13 +18069,19 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIamInstanceProfileAssociationsRequest AWS API Documentation
@@ -18066,8 +18100,8 @@ module Aws::EC2
     #   @return [Array<Types::IamInstanceProfileAssociation>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIamInstanceProfileAssociationsResult AWS API Documentation
@@ -18541,15 +18575,21 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. You cannot
-    #   specify this parameter and the instance IDs parameter in the same
-    #   call.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. You cannot specify
+    #   this parameter and the instance IDs parameter in the same call. For
+    #   more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceCreditSpecificationsRequest AWS API Documentation
@@ -18569,8 +18609,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceCreditSpecification>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceCreditSpecificationsResult AWS API Documentation
@@ -18760,15 +18800,21 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. You cannot
+    #   The maximum number of items to return for this request. To retrieve
+    #   the next page of items, make another request with the token returned
+    #   in the output. This value can be between 5 and 1000. You cannot
     #   specify this parameter and the instance IDs parameter in the same
-    #   call.
+    #   call. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -18803,8 +18849,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceStatus>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatusResult AWS API Documentation
@@ -18838,13 +18884,19 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the next token value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypeOfferingsRequest AWS API Documentation
@@ -18864,8 +18916,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceTypeOffering>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypeOfferingsResult AWS API Documentation
@@ -19044,13 +19096,19 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the next token value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypesRequest AWS API Documentation
@@ -19075,8 +19133,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceTypeInfo>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypesResult AWS API Documentation
@@ -19398,15 +19456,21 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. You cannot
-    #   specify this parameter and the instance IDs parameter in the same
-    #   call.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. You cannot specify
+    #   this parameter and the instance IDs parameter in the same request.
+    #   For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstancesRequest AWS API Documentation
@@ -19426,8 +19490,8 @@ module Aws::EC2
     #   @return [Array<Types::Reservation>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstancesResult AWS API Documentation
@@ -19478,13 +19542,19 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysRequest AWS API Documentation
@@ -19504,8 +19574,8 @@ module Aws::EC2
     #   @return [Array<Types::InternetGateway>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysResult AWS API Documentation
@@ -20738,9 +20808,13 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] nat_gateway_ids
@@ -20748,7 +20822,9 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGatewaysRequest AWS API Documentation
@@ -20768,8 +20844,8 @@ module Aws::EC2
     #   @return [Array<Types::NatGateway>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGatewaysResult AWS API Documentation
@@ -20854,13 +20930,19 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAclsRequest AWS API Documentation
@@ -20880,8 +20962,8 @@ module Aws::EC2
     #   @return [Array<Types::NetworkAcl>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAclsResult AWS API Documentation
@@ -21248,14 +21330,20 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value. If this parameter is not specified, up to 50
-    #   results are returned by default.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. If this parameter is not specified, up to 50 results are
+    #   returned by default. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacePermissionsRequest AWS API Documentation
@@ -21276,7 +21364,8 @@ module Aws::EC2
     #   @return [Array<Types::NetworkInterfacePermission>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacePermissionsResult AWS API Documentation
@@ -21424,14 +21513,21 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results. You cannot specify this parameter and the
-    #   network interface IDs parameter in the same request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. You cannot specify this parameter and the network
+    #   interface IDs parameter in the same request. For more information,
+    #   see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacesRequest AWS API Documentation
@@ -21446,15 +21542,13 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeNetworkInterfaces.
-    #
     # @!attribute [rw] network_interfaces
     #   Information about one or more network interfaces.
     #   @return [Array<Types::NetworkInterface>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacesResult AWS API Documentation
@@ -21776,13 +21870,19 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -21809,8 +21909,8 @@ module Aws::EC2
     #   @return [Array<Types::ReplaceRootVolumeTask>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasksResult AWS API Documentation
@@ -22327,13 +22427,19 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesRequest AWS API Documentation
@@ -22355,8 +22461,8 @@ module Aws::EC2
     #   @return [Array<Types::RouteTable>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesResult AWS API Documentation
@@ -22590,14 +22696,21 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another request with the
-    #   returned `NextToken` value. This value can be between 5 and 1000. If
-    #   this parameter is not specified, then all results are returned.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. If this parameter
+    #   is not specified, then all items are returned. For more information,
+    #   see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupRulesRequest AWS API Documentation
@@ -22617,8 +22730,8 @@ module Aws::EC2
     #   @return [Array<Types::SecurityGroupRule>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupRulesResult AWS API Documentation
@@ -22740,14 +22853,21 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another request with the
-    #   returned `NextToken` value. This value can be between 5 and 1000. If
-    #   this parameter is not specified, then all results are returned.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. If this parameter
+    #   is not specified, then all items are returned. For more information,
+    #   see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsRequest AWS API Documentation
@@ -22768,8 +22888,8 @@ module Aws::EC2
     #   @return [Array<Types::SecurityGroup>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsResult AWS API Documentation
@@ -22852,13 +22972,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotTierStatusRequest AWS API Documentation
@@ -22877,8 +23003,8 @@ module Aws::EC2
     #   @return [Array<Types::SnapshotTierStatus>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotTierStatusResult AWS API Documentation
@@ -22936,26 +23062,22 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of snapshot results returned by
-    #   `DescribeSnapshots` in paginated output. When this parameter is
-    #   used, `DescribeSnapshots` only returns `MaxResults` results in a
-    #   single page along with a `NextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
-    #   `DescribeSnapshots` request with the returned `NextToken` value.
-    #   This value can be between 5 and 1,000; if `MaxResults` is given a
-    #   value larger than 1,000, only 1,000 results are returned. If this
-    #   parameter is not used, then `DescribeSnapshots` returns all results.
-    #   You cannot specify this parameter and the snapshot IDs parameter in
-    #   the same request.
+    #   The maximum number of snapshots to return for this request. This
+    #   value can be between 5 and 1,000; if this value is larger than
+    #   1,000, only 1,000 results are returned. If this parameter is not
+    #   used, then the request returns all snapshots. You cannot specify
+    #   this parameter and the snapshot IDs parameter in the same request.
+    #   For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` value returned from a previous paginated
-    #   `DescribeSnapshots` request where `MaxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `NextToken`
-    #   value. This value is `null` when there are no more results to
-    #   return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] owner_ids
@@ -23002,10 +23124,8 @@ module Aws::EC2
     #   @return [Array<Types::Snapshot>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` value to include in a future `DescribeSnapshots`
-    #   request. When the results of a `DescribeSnapshots` request exceed
-    #   `MaxResults`, this value can be used to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
+    #   The token to include in another request to return the next page of
+    #   snapshots. This value is `null` when there are no more snapshots to
     #   return.
     #   @return [String]
     #
@@ -23545,14 +23665,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a prior call.)
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -23571,8 +23696,9 @@ module Aws::EC2
     end
 
     # @!attribute [rw] next_token
-    #   The token to use when requesting the next set of items. If there are
-    #   no additional items to return, the string is empty.
+    #   The token to include in another request to get the next page of
+    #   items. If there are no additional items to return, the string is
+    #   empty.
     #   @return [String]
     #
     # @!attribute [rw] stale_security_group_set
@@ -23757,13 +23883,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsRequest AWS API Documentation
@@ -23783,8 +23915,8 @@ module Aws::EC2
     #   @return [Array<Types::Subnet>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsResult AWS API Documentation
@@ -23830,13 +23962,20 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. This value
-    #   can be between 5 and 1000. To retrieve the remaining results, make
-    #   another call with the returned `NextToken` value.
+    #   The maximum number of items to return for this request. This value
+    #   can be between 5 and 1000. To get the next page of items, make
+    #   another request with the token returned in the output. For more
+    #   information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTagsRequest AWS API Documentation
@@ -23851,8 +23990,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -25201,23 +25340,23 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of volume results returned by
-    #   `DescribeVolumeStatus` in paginated output. When this parameter is
-    #   used, the request only returns `MaxResults` results in a single page
-    #   along with a `NextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another request with the
-    #   returned `NextToken` value. This value can be between 5 and 1,000;
-    #   if `MaxResults` is given a value larger than 1,000, only 1,000
-    #   results are returned. If this parameter is not used, then
-    #   `DescribeVolumeStatus` returns all results. You cannot specify this
-    #   parameter and the volume IDs parameter in the same request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1,000; if the value is
+    #   larger than 1,000, only 1,000 results are returned. If this
+    #   parameter is not used, then all items are returned. You cannot
+    #   specify this parameter and the volume IDs parameter in the same
+    #   request. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` value to include in a future `DescribeVolumeStatus`
-    #   request. When the results of the request exceed `MaxResults`, this
-    #   value can be used to retrieve the next page of results. This value
-    #   is `null` when there are no more results to return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] volume_ids
@@ -25246,8 +25385,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] volume_statuses
@@ -25306,12 +25445,18 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned by a previous paginated request.
+    #   The token returned by a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results (up to a limit of 500) to be returned
-    #   in a paginated request.
+    #   in a paginated request. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModificationsRequest AWS API Documentation
@@ -25331,7 +25476,8 @@ module Aws::EC2
     #   @return [Array<Types::VolumeModification>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination, null if there are no more results
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` if there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModificationsResult AWS API Documentation
@@ -25411,25 +25557,22 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of volume results returned by `DescribeVolumes`
-    #   in paginated output. When this parameter is used, `DescribeVolumes`
-    #   only returns `MaxResults` results in a single page along with a
-    #   `NextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `DescribeVolumes` request
-    #   with the returned `NextToken` value. This value can be between 5 and
-    #   500; if `MaxResults` is given a value larger than 500, only 500
-    #   results are returned. If this parameter is not used, then
-    #   `DescribeVolumes` returns all results. You cannot specify this
-    #   parameter and the volume IDs parameter in the same request.
+    #   The maximum number of volumes to return for this request. This value
+    #   can be between 5 and 500; if you specify a value larger than 500,
+    #   only 500 items are returned. If this parameter is not used, then all
+    #   items are returned. You cannot specify this parameter and the volume
+    #   IDs parameter in the same request. For more information, see
+    #   [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` value returned from a previous paginated
-    #   `DescribeVolumes` request where `MaxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `NextToken`
-    #   value. This value is `null` when there are no more results to
-    #   return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned from the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesRequest AWS API Documentation
@@ -25449,11 +25592,8 @@ module Aws::EC2
     #   @return [Array<Types::Volume>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` value to include in a future `DescribeVolumes`
-    #   request. When the results of a `DescribeVolumes` request exceed
-    #   `MaxResults`, this value can be used to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
-    #   return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesResult AWS API Documentation
@@ -25524,13 +25664,19 @@ module Aws::EC2
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] vpc_ids
@@ -25548,8 +25694,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] vpcs
@@ -26116,13 +26262,19 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsRequest AWS API Documentation
@@ -26142,8 +26294,8 @@ module Aws::EC2
     #   @return [Array<Types::VpcPeeringConnection>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsResult AWS API Documentation
@@ -26220,13 +26372,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcsRequest AWS API Documentation
@@ -26246,8 +26404,8 @@ module Aws::EC2
     #   @return [Array<Types::Vpc>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcsResult AWS API Documentation
@@ -28241,21 +28399,38 @@ module Aws::EC2
     #   Amazon EBS encryption. For more information, see [Supported instance
     #   types][2].
     #
-    #   This parameter is not returned by [DescribeImageAttribute][3].
+    #   This parameter is not returned by DescribeImageAttribute.
     #
-    #   For CreateImage and RegisterImage, you can specify this parameter
-    #   only for block device mappings that result in new, empty volumes
-    #   when instances are launched from the image. Omit this parameter on
-    #   block device mappings that include an existing volume or snapshot.
-    #   If you include this parameter, and specify an encryption setting
-    #   that is different from the existing volume or snapshot, the request
-    #   will fail.
+    #   For CreateImage and RegisterImage, whether you can include this
+    #   parameter, and the allowed values differ depending on the type of
+    #   block device mapping you are creating.
+    #
+    #   * If you are creating a block device mapping for a **new (empty)
+    #     volume**, you can include this parameter, and specify either
+    #     `true` for an encrypted volume, or `false` for an unencrypted
+    #     volume. If you omit this parameter, it defaults to `false`
+    #     (unencrypted).
+    #
+    #   * If you are creating a block device mapping from an **existing
+    #     encrypted or unencrypted snapshot**, you must omit this parameter.
+    #     If you include this parameter, the request will fail, regardless
+    #     of the value that you specify.
+    #
+    #   * If you are creating a block device mapping from an **existing
+    #     unencrypted volume**, you can include this parameter, but you must
+    #     specify `false`. If you specify `true`, the request will fail. In
+    #     this case, we recommend that you omit the parameter.
+    #
+    #   * If you are creating a block device mapping from an **existing
+    #     encrypted volume**, you can include this parameter, and specify
+    #     either `true` or `false`. However, if you specify `false`, the
+    #     parameter is ignored and the block device mapping is always
+    #     encrypted. In this case, we recommend that you omit the parameter.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImageAttribute.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
@@ -40378,7 +40553,7 @@ module Aws::EC2
       :ramdisk_id,
       :subnet_id,
       :monitoring)
-      SENSITIVE = []
+      SENSITIVE = [:user_data]
       include Aws::Structure
     end
 
@@ -42078,13 +42253,19 @@ module Aws::EC2
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_ids
@@ -42115,8 +42296,8 @@ module Aws::EC2
     #   @return [Array<Types::SnapshotRecycleBinInfo>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ListSnapshotsInRecycleBinResult AWS API Documentation
@@ -52181,7 +52362,7 @@ module Aws::EC2
       :ramdisk_id,
       :subnet_id,
       :user_data)
-      SENSITIVE = []
+      SENSITIVE = [:user_data]
       include Aws::Structure
     end
 
@@ -53249,7 +53430,7 @@ module Aws::EC2
       :private_dns_name_options,
       :maintenance_options,
       :disable_api_stop)
-      SENSITIVE = []
+      SENSITIVE = [:user_data]
       include Aws::Structure
     end
 
@@ -54489,7 +54670,7 @@ module Aws::EC2
       :instance_count,
       :launch_specification,
       :scheduled_instance_id)
-      SENSITIVE = []
+      SENSITIVE = [:launch_specification]
       include Aws::Structure
     end
 
@@ -56686,7 +56867,7 @@ module Aws::EC2
       :weighted_capacity,
       :tag_specifications,
       :instance_requirements)
-      SENSITIVE = []
+      SENSITIVE = [:user_data]
       include Aws::Structure
     end
 
@@ -58558,6 +58739,8 @@ module Aws::EC2
     end
 
     # The tags to apply to a resource when the resource is being created.
+    # When you specify a tag, you must specify the resource type to tag,
+    # otherwise the request will fail.
     #
     # <note markdown="1"> The `Valid Values` lists all the resource types that can be tagged.
     # However, the action you're using might not support tagging all of

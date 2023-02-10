@@ -31,6 +31,7 @@ module Aws::AutoScaling
   # * {AlreadyExistsFault}
   # * {InstanceRefreshInProgressFault}
   # * {InvalidNextToken}
+  # * {IrreversibleInstanceRefreshFault}
   # * {LimitExceededFault}
   # * {ResourceContentionFault}
   # * {ResourceInUseFault}
@@ -93,6 +94,21 @@ module Aws::AutoScaling
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AutoScaling::Types::InvalidNextToken] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class IrreversibleInstanceRefreshFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AutoScaling::Types::IrreversibleInstanceRefreshFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
