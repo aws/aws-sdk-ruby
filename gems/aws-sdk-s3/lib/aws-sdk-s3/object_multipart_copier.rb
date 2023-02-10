@@ -24,6 +24,9 @@ module Aws
         @thread_count = options.delete(:thread_count) || 10
         @min_part_size = options.delete(:min_part_size) || (FIVE_MB * 10)
         @client = options[:client] || Client.new
+        if options[:checksum_algorithm]
+          raise ArgumentError, 'Multipart Copy does not support setting :checksum_algorithm'
+        end
       end
 
       # @return [Client]
@@ -31,8 +34,9 @@ module Aws
 
       # @option (see S3::Client#copy_object)
       def copy(options = {})
-        size = source_size(options)
-        options[:upload_id] = initiate_upload(options)
+        metadata = source_metadata(options)
+        size = metadata[:content_length]
+        options[:upload_id] = initiate_upload(metadata.merge(options))
         begin
           parts = copy_parts(size, default_part_size(size), options)
           complete_upload(parts, options)
@@ -118,8 +122,10 @@ module Aws
         end
       end
 
-      def source_size(options)
-        return options.delete(:content_length) if options[:content_length]
+      def source_metadata(options)
+        if options[:content_length]
+          return { content_length: options.delete(:content_length) }
+        end
 
         client = options[:copy_source_client] || @client
 
@@ -132,7 +138,7 @@ module Aws
         key = CGI.unescape(key)
         opts = { bucket: bucket, key: key }
         opts[:version_id] = version_id if version_id
-        client.head_object(opts).content_length
+        client.head_object(opts).to_h
       end
 
       def default_part_size(source_size)
