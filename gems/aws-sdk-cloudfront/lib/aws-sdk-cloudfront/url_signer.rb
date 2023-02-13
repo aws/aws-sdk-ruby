@@ -33,7 +33,7 @@ module Aws
           policy: params[:policy]
         )
 
-        start_flag = URI.parse(uri).query ? '&' : '?'
+        start_flag = uri.include?('?') ? '&' : '?'
         signature = signed_content.map{ |k, v| "#{k}=#{v}" }.join('&').gsub("\n", '')
         uri = "#{uri}#{start_flag}#{signature}"
 

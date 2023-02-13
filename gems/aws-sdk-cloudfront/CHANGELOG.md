@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Improve performance of `UrlSigner#signed_url` (#2824).
+
 1.75.0 (2023-02-08)
 ------------------
 
