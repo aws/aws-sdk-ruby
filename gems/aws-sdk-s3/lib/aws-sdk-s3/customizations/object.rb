@@ -27,10 +27,13 @@ module Aws
       #   necessary for objects larger than 5GB and can provide
       #   performance improvements on large objects. Amazon S3 does
       #   not accept multipart copies for objects smaller than 5MB.
+      #   Object metadata such as Content-Type will be copied, however,
+      #   Checksums are not copied.
       #
       # @option options [Integer] :content_length Only used when
       #   `:multipart_copy` is `true`. Passing this options avoids a HEAD
-      #   request to query the source object size. Raises an `ArgumentError` if
+      #   request to query the source object size but prevents object metadata
+      #   from being copied. Raises an `ArgumentError` if
       #   this option is provided when `:multipart_copy` is `false` or not set.
       #
       # @option options [S3::Client] :copy_source_client Only used when

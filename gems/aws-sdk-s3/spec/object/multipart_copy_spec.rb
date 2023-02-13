@@ -208,7 +208,7 @@ module Aws
               bucket: 'source-bucket',
               key: 'source key',
               version_id: 'source-version-id'
-            }).and_return(client.stub_data(:head_object, content_length: size))
+            }).and_return(Types::HeadObjectOutput.new(content_length: size))
           end
 
           it 'performs multipart uploads for a versioned object' do
@@ -251,18 +251,22 @@ module Aws
           end
         end
 
-        context 'with multipart_copy: true' do
+        context 'with multipart_copy: true and source metadata' do
           before(:each) do
             size = 300 * 1024 * 1024 # 300MB
             allow(client).to receive(:head_object).with({
               bucket: 'source-bucket',
               key: 'source key'
-            }).and_return(client.stub_data(:head_object, content_length: size))
+            }).and_return(Types::HeadObjectOutput.new(
+              content_length: size, content_type: 'ContentType'))
           end
 
           it 'performs multipart uploads when :multipart_copy is true' do
             expect(client).to receive(:create_multipart_upload)
-              .with({bucket: 'bucket', key: 'unescaped/key path'})
+              .with({
+                      bucket: 'bucket',
+                      key: 'unescaped/key path',
+                      content_type: 'ContentType'})
               .and_return(
                 client.stub_data(:create_multipart_upload, upload_id: 'id')
               )
@@ -331,7 +335,8 @@ module Aws
             expect(first.operation_name).to eq(:create_multipart_upload)
             expect(first.params).to eq(
               bucket: 'bucket',
-              key: 'unescaped/key path'
+              key: 'unescaped/key path',
+              content_type: 'ContentType'
             )
 
             # part requests
@@ -366,7 +371,6 @@ module Aws
           it 'aborts the upload on errors', thread_report_on_exception: false do
             client.stub_responses(:upload_part_copy, Array.new(10, 'NoSuchKey'))
             allow(client).to receive(:create_multipart_upload)
-              .with({bucket: 'bucket', key: 'unescaped/key path'})
               .and_return(
                 client.stub_data(:create_multipart_upload, upload_id: 'id')
               )
@@ -435,7 +439,7 @@ module Aws
             end
 
             let(:head_response) do
-              double(Types::HeadObjectOutput, content_length: content_length)
+              Types::HeadObjectOutput.new(content_length: content_length)
             end
 
             before do
