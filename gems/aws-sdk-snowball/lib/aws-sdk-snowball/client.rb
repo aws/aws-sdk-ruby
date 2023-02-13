@@ -719,6 +719,10 @@ module Aws::Snowball
     #         storage_limit: 1,
     #         storage_unit: "TB", # accepts TB
     #       },
+    #       eks_on_device_service: {
+    #         kubernetes_version: "String",
+    #         eks_anywhere_version: "String",
+    #       },
     #     },
     #     description: "String",
     #     address_id: "AddressId", # required
@@ -821,14 +825,6 @@ module Aws::Snowball
     #   * Capacity: T100
     #
     #   * Description: Snowball Edge Storage Optimized with EC2 Compute
-    #
-    #
-    #
-    # * Device type: **V3\_5C**
-    #
-    #   * Capacity: T32
-    #
-    #   * Description: Snowball Edge Compute Optimized without GPU
     #
     #
     #
@@ -1082,12 +1078,16 @@ module Aws::Snowball
     #         storage_limit: 1,
     #         storage_unit: "TB", # accepts TB
     #       },
+    #       eks_on_device_service: {
+    #         kubernetes_version: "String",
+    #         eks_anywhere_version: "String",
+    #       },
     #     },
     #     description: "String",
     #     address_id: "AddressId",
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference, T32
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -1136,8 +1136,6 @@ module Aws::Snowball
     #   1-year or 3-year long-term pricing.
     #
     # @option params [Boolean] :is_long_term_pricing_auto_renew
-    #   snowballty
-    #
     #   Specifies whether the current long-term pricing type for the device
     #   should be renewed.
     #
@@ -1444,6 +1442,8 @@ module Aws::Snowball
     #   resp.cluster_metadata.on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.cluster_metadata.on_device_service_configuration.tgw_on_device_service.storage_limit #=> Integer
     #   resp.cluster_metadata.on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.cluster_metadata.on_device_service_configuration.eks_on_device_service.kubernetes_version #=> String
+    #   resp.cluster_metadata.on_device_service_configuration.eks_on_device_service.eks_anywhere_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster AWS API Documentation
     #
@@ -1544,7 +1544,7 @@ module Aws::Snowball
     #   resp.job_metadata.shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.status #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "NoPreference", "T32"
+    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
     #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1566,6 +1566,8 @@ module Aws::Snowball
     #   resp.job_metadata.on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.job_metadata.on_device_service_configuration.tgw_on_device_service.storage_limit #=> Integer
     #   resp.job_metadata.on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.job_metadata.on_device_service_configuration.eks_on_device_service.kubernetes_version #=> String
+    #   resp.job_metadata.on_device_service_configuration.eks_on_device_service.eks_anywhere_version #=> String
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1595,7 +1597,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.status #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "NoPreference", "T32"
+    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
     #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1617,6 +1619,8 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.sub_job_metadata[0].on_device_service_configuration.tgw_on_device_service.storage_limit #=> Integer
     #   resp.sub_job_metadata[0].on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.sub_job_metadata[0].on_device_service_configuration.eks_on_device_service.kubernetes_version #=> String
+    #   resp.sub_job_metadata[0].on_device_service_configuration.eks_on_device_service.eks_anywhere_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
     #
@@ -2218,6 +2222,67 @@ module Aws::Snowball
       req.send_request(options)
     end
 
+    # Lists all supported versions for Snow on-device services. Returns an
+    # array of `ServiceVersion` object containing the supported versions for
+    # a particular service.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service for which you're requesting supported
+    #   versions.
+    #
+    # @option params [Array<Types::DependentService>] :dependent_services
+    #   A list of names and versions of dependant services of the requested
+    #   service.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of `ListServiceVersions` objects to return.
+    #
+    # @option params [String] :next_token
+    #   Because HTTP requests are stateless, this is the starting point for
+    #   the next list of returned `ListServiceVersionsRequest` versions.
+    #
+    # @return [Types::ListServiceVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceVersionsResult#service_versions #service_versions} => Array&lt;Types::ServiceVersion&gt;
+    #   * {Types::ListServiceVersionsResult#service_name #service_name} => String
+    #   * {Types::ListServiceVersionsResult#dependent_services #dependent_services} => Array&lt;Types::DependentService&gt;
+    #   * {Types::ListServiceVersionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_versions({
+    #     service_name: "KUBERNETES", # required, accepts KUBERNETES, EKS_ANYWHERE
+    #     dependent_services: [
+    #       {
+    #         service_name: "KUBERNETES", # accepts KUBERNETES, EKS_ANYWHERE
+    #         service_version: {
+    #           version: "String",
+    #         },
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_versions #=> Array
+    #   resp.service_versions[0].version #=> String
+    #   resp.service_name #=> String, one of "KUBERNETES", "EKS_ANYWHERE"
+    #   resp.dependent_services #=> Array
+    #   resp.dependent_services[0].service_name #=> String, one of "KUBERNETES", "EKS_ANYWHERE"
+    #   resp.dependent_services[0].service_version.version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListServiceVersions AWS API Documentation
+    #
+    # @overload list_service_versions(params = {})
+    # @param [Hash] params ({})
+    def list_service_versions(params = {}, options = {})
+      req = build_request(:list_service_versions, params)
+      req.send_request(options)
+    end
+
     # While a cluster's `ClusterState` value is in the `AwaitingQuorum`
     # state, you can update some of the information associated with a
     # cluster. Once the cluster changes to a different job state, usually 60
@@ -2325,6 +2390,10 @@ module Aws::Snowball
     #       tgw_on_device_service: {
     #         storage_limit: 1,
     #         storage_unit: "TB", # accepts TB
+    #       },
+    #       eks_on_device_service: {
+    #         kubernetes_version: "String",
+    #         eks_anywhere_version: "String",
     #       },
     #     },
     #     address_id: "AddressId",
@@ -2468,11 +2537,15 @@ module Aws::Snowball
     #         storage_limit: 1,
     #         storage_unit: "TB", # accepts TB
     #       },
+    #       eks_on_device_service: {
+    #         kubernetes_version: "String",
+    #         eks_anywhere_version: "String",
+    #       },
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     description: "String",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference, T32
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference
     #     forwarding_address_id: "AddressId",
     #   })
     #
@@ -2563,7 +2636,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

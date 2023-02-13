@@ -441,6 +441,125 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Disables (opts-out) a particular Region for an account.
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If you
+    #   don't specify this parameter, it defaults to the Amazon Web Services
+    #   account of the identity used to call the operation. To use this
+    #   parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must also be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [required, String] :region_name
+    #   Specifies the Region-code for a given Region name (for example,
+    #   `af-south-1`). When you disable a Region, AWS performs actions to
+    #   deactivate that Region in your account, such as destroying IAM
+    #   resources in the Region. This process takes a few minutes for most
+    #   accounts, but this can take several hours. You cannot enable the
+    #   Region until the disabling process is fully completed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_region({
+    #     account_id: "AccountId",
+    #     region_name: "RegionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/DisableRegion AWS API Documentation
+    #
+    # @overload disable_region(params = {})
+    # @param [Hash] params ({})
+    def disable_region(params = {}, options = {})
+      req = build_request(:disable_region, params)
+      req.send_request(options)
+    end
+
+    # Enables (opts-in) a particular Region for an account.
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If you
+    #   don't specify this parameter, it defaults to the Amazon Web Services
+    #   account of the identity used to call the operation. To use this
+    #   parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must also be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [required, String] :region_name
+    #   Specifies the Region-code for a given Region name (for example,
+    #   `af-south-1`). When you enable a Region, AWS performs actions to
+    #   prepare your account in that Region, such as distributing your IAM
+    #   resources to the Region. This process takes a few minutes for most
+    #   accounts, but it can take several hours. You cannot use the Region
+    #   until this process is complete. Furthermore, you cannot disable the
+    #   Region until the enabling process is fully completed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_region({
+    #     account_id: "AccountId",
+    #     region_name: "RegionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/EnableRegion AWS API Documentation
+    #
+    # @overload enable_region(params = {})
+    # @param [Hash] params ({})
+    def enable_region(params = {}, options = {})
+      req = build_request(:enable_region, params)
+      req.send_request(options)
+    end
+
     # Retrieves the specified alternate contact attached to an Amazon Web
     # Services account.
     #
@@ -596,6 +715,167 @@ module Aws::Account
     # @param [Hash] params ({})
     def get_contact_information(params = {}, options = {})
       req = build_request(:get_contact_information, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the opt-in status of a particular Region.
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If you
+    #   don't specify this parameter, it defaults to the Amazon Web Services
+    #   account of the identity used to call the operation. To use this
+    #   parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must also be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [required, String] :region_name
+    #   Specifies the Region-code for a given Region name (for example,
+    #   `af-south-1`). This function will return the status of whatever Region
+    #   you pass into this parameter.
+    #
+    # @return [Types::GetRegionOptStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRegionOptStatusResponse#region_name #region_name} => String
+    #   * {Types::GetRegionOptStatusResponse#region_opt_status #region_opt_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_region_opt_status({
+    #     account_id: "AccountId",
+    #     region_name: "RegionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.region_name #=> String
+    #   resp.region_opt_status #=> String, one of "ENABLED", "ENABLING", "DISABLING", "DISABLED", "ENABLED_BY_DEFAULT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetRegionOptStatus AWS API Documentation
+    #
+    # @overload get_region_opt_status(params = {})
+    # @param [Hash] params ({})
+    def get_region_opt_status(params = {}, options = {})
+      req = build_request(:get_region_opt_status, params)
+      req.send_request(options)
+    end
+
+    # Lists all the Regions for a given account and their respective opt-in
+    # statuses. Optionally, this list can be filtered by the
+    # `region-opt-status-contains` parameter.
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If you
+    #   don't specify this parameter, it defaults to the Amazon Web Services
+    #   account of the identity used to call the operation. To use this
+    #   parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must also be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [Integer] :max_results
+    #   The total number of items to return in the command’s output. If the
+    #   total number of items available is more than the value specified, a
+    #   `NextToken` is provided in the command’s output. To resume pagination,
+    #   provide the `NextToken` value in the `starting-token` argument of a
+    #   subsequent command. Do not use the `NextToken` response element
+    #   directly outside of the Amazon Web Services CLI. For usage examples,
+    #   see [Pagination][1] in the *Amazon Web Services Command Line Interface
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/pagination.html
+    #
+    # @option params [String] :next_token
+    #   A token used to specify where to start paginating. This is the
+    #   `NextToken` from a previously truncated response. For usage examples,
+    #   see [Pagination][1] in the *Amazon Web Services Command Line Interface
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/pagination.html
+    #
+    # @option params [Array<String>] :region_opt_status_contains
+    #   A list of Region statuses (Enabling, Enabled, Disabling, Disabled,
+    #   Enabled\_by\_default) to use to filter the list of Regions for a given
+    #   account. For example, passing in a value of ENABLING will only return
+    #   a list of Regions with a Region status of ENABLING.
+    #
+    # @return [Types::ListRegionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegionsResponse#next_token #next_token} => String
+    #   * {Types::ListRegionsResponse#regions #regions} => Array&lt;Types::Region&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_regions({
+    #     account_id: "AccountId",
+    #     max_results: 1,
+    #     next_token: "ListRegionsRequestNextTokenString",
+    #     region_opt_status_contains: ["ENABLED"], # accepts ENABLED, ENABLING, DISABLING, DISABLED, ENABLED_BY_DEFAULT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.regions #=> Array
+    #   resp.regions[0].region_name #=> String
+    #   resp.regions[0].region_opt_status #=> String, one of "ENABLED", "ENABLING", "DISABLING", "DISABLED", "ENABLED_BY_DEFAULT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/ListRegions AWS API Documentation
+    #
+    # @overload list_regions(params = {})
+    # @param [Hash] params ({})
+    def list_regions(params = {}, options = {})
+      req = build_request(:list_regions, params)
       req.send_request(options)
     end
 
@@ -777,7 +1057,7 @@ module Aws::Account
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-account'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

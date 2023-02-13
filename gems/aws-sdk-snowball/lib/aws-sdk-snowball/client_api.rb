@@ -42,6 +42,8 @@ module Aws::Snowball
     CreateReturnShippingLabelRequest = Shapes::StructureShape.new(name: 'CreateReturnShippingLabelRequest')
     CreateReturnShippingLabelResult = Shapes::StructureShape.new(name: 'CreateReturnShippingLabelResult')
     DataTransfer = Shapes::StructureShape.new(name: 'DataTransfer')
+    DependentService = Shapes::StructureShape.new(name: 'DependentService')
+    DependentServiceList = Shapes::ListShape.new(name: 'DependentServiceList')
     DescribeAddressRequest = Shapes::StructureShape.new(name: 'DescribeAddressRequest')
     DescribeAddressResult = Shapes::StructureShape.new(name: 'DescribeAddressResult')
     DescribeAddressesRequest = Shapes::StructureShape.new(name: 'DescribeAddressesRequest')
@@ -54,6 +56,7 @@ module Aws::Snowball
     DescribeReturnShippingLabelResult = Shapes::StructureShape.new(name: 'DescribeReturnShippingLabelResult')
     DeviceConfiguration = Shapes::StructureShape.new(name: 'DeviceConfiguration')
     DeviceServiceName = Shapes::StringShape.new(name: 'DeviceServiceName')
+    EKSOnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'EKSOnDeviceServiceConfiguration')
     Ec2AmiResource = Shapes::StructureShape.new(name: 'Ec2AmiResource')
     Ec2AmiResourceList = Shapes::ListShape.new(name: 'Ec2AmiResourceList')
     Ec2RequestFailedException = Shapes::StructureShape.new(name: 'Ec2RequestFailedException')
@@ -102,6 +105,8 @@ module Aws::Snowball
     ListLimit = Shapes::IntegerShape.new(name: 'ListLimit')
     ListLongTermPricingRequest = Shapes::StructureShape.new(name: 'ListLongTermPricingRequest')
     ListLongTermPricingResult = Shapes::StructureShape.new(name: 'ListLongTermPricingResult')
+    ListServiceVersionsRequest = Shapes::StructureShape.new(name: 'ListServiceVersionsRequest')
+    ListServiceVersionsResult = Shapes::StructureShape.new(name: 'ListServiceVersionsResult')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongTermPricingAssociatedJobIdList = Shapes::ListShape.new(name: 'LongTermPricingAssociatedJobIdList')
     LongTermPricingEntryList = Shapes::ListShape.new(name: 'LongTermPricingEntryList')
@@ -117,6 +122,9 @@ module Aws::Snowball
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     S3Resource = Shapes::StructureShape.new(name: 'S3Resource')
     S3ResourceList = Shapes::ListShape.new(name: 'S3ResourceList')
+    ServiceName = Shapes::StringShape.new(name: 'ServiceName')
+    ServiceVersion = Shapes::StructureShape.new(name: 'ServiceVersion')
+    ServiceVersionList = Shapes::ListShape.new(name: 'ServiceVersionList')
     Shipment = Shapes::StructureShape.new(name: 'Shipment')
     ShipmentState = Shapes::StringShape.new(name: 'ShipmentState')
     ShippingDetails = Shapes::StructureShape.new(name: 'ShippingDetails')
@@ -279,6 +287,12 @@ module Aws::Snowball
     DataTransfer.add_member(:total_objects, Shapes::ShapeRef.new(shape: Long, location_name: "TotalObjects"))
     DataTransfer.struct_class = Types::DataTransfer
 
+    DependentService.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
+    DependentService.add_member(:service_version, Shapes::ShapeRef.new(shape: ServiceVersion, location_name: "ServiceVersion"))
+    DependentService.struct_class = Types::DependentService
+
+    DependentServiceList.member = Shapes::ShapeRef.new(shape: DependentService)
+
     DescribeAddressRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, required: true, location_name: "AddressId"))
     DescribeAddressRequest.struct_class = Types::DescribeAddressRequest
 
@@ -316,6 +330,10 @@ module Aws::Snowball
 
     DeviceConfiguration.add_member(:snowcone_device_configuration, Shapes::ShapeRef.new(shape: SnowconeDeviceConfiguration, location_name: "SnowconeDeviceConfiguration"))
     DeviceConfiguration.struct_class = Types::DeviceConfiguration
+
+    EKSOnDeviceServiceConfiguration.add_member(:kubernetes_version, Shapes::ShapeRef.new(shape: String, location_name: "KubernetesVersion"))
+    EKSOnDeviceServiceConfiguration.add_member(:eks_anywhere_version, Shapes::ShapeRef.new(shape: String, location_name: "EKSAnywhereVersion"))
+    EKSOnDeviceServiceConfiguration.struct_class = Types::EKSOnDeviceServiceConfiguration
 
     Ec2AmiResource.add_member(:ami_id, Shapes::ShapeRef.new(shape: AmiId, required: true, location_name: "AmiId"))
     Ec2AmiResource.add_member(:snowball_ami_id, Shapes::ShapeRef.new(shape: String, location_name: "SnowballAmiId"))
@@ -477,6 +495,18 @@ module Aws::Snowball
     ListLongTermPricingResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListLongTermPricingResult.struct_class = Types::ListLongTermPricingResult
 
+    ListServiceVersionsRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
+    ListServiceVersionsRequest.add_member(:dependent_services, Shapes::ShapeRef.new(shape: DependentServiceList, location_name: "DependentServices"))
+    ListServiceVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
+    ListServiceVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListServiceVersionsRequest.struct_class = Types::ListServiceVersionsRequest
+
+    ListServiceVersionsResult.add_member(:service_versions, Shapes::ShapeRef.new(shape: ServiceVersionList, required: true, location_name: "ServiceVersions"))
+    ListServiceVersionsResult.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
+    ListServiceVersionsResult.add_member(:dependent_services, Shapes::ShapeRef.new(shape: DependentServiceList, location_name: "DependentServices"))
+    ListServiceVersionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListServiceVersionsResult.struct_class = Types::ListServiceVersionsResult
+
     LongTermPricingAssociatedJobIdList.member = Shapes::ShapeRef.new(shape: JobId)
 
     LongTermPricingEntryList.member = Shapes::ShapeRef.new(shape: LongTermPricingListEntry)
@@ -504,6 +534,7 @@ module Aws::Snowball
 
     OnDeviceServiceConfiguration.add_member(:nfs_on_device_service, Shapes::ShapeRef.new(shape: NFSOnDeviceServiceConfiguration, location_name: "NFSOnDeviceService"))
     OnDeviceServiceConfiguration.add_member(:tgw_on_device_service, Shapes::ShapeRef.new(shape: TGWOnDeviceServiceConfiguration, location_name: "TGWOnDeviceService"))
+    OnDeviceServiceConfiguration.add_member(:eks_on_device_service, Shapes::ShapeRef.new(shape: EKSOnDeviceServiceConfiguration, location_name: "EKSOnDeviceService"))
     OnDeviceServiceConfiguration.struct_class = Types::OnDeviceServiceConfiguration
 
     ReturnShippingLabelAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -515,6 +546,11 @@ module Aws::Snowball
     S3Resource.struct_class = Types::S3Resource
 
     S3ResourceList.member = Shapes::ShapeRef.new(shape: S3Resource)
+
+    ServiceVersion.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    ServiceVersion.struct_class = Types::ServiceVersion
+
+    ServiceVersionList.member = Shapes::ShapeRef.new(shape: ServiceVersion)
 
     Shipment.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     Shipment.add_member(:tracking_number, Shapes::ShapeRef.new(shape: String, location_name: "TrackingNumber"))
@@ -853,6 +889,16 @@ module Aws::Snowball
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_service_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceVersionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
       end)
 
       api.add_operation(:update_cluster, Seahorse::Model::Operation.new.tap do |o|

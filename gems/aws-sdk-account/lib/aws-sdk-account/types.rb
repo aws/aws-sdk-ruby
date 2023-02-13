@@ -59,6 +59,22 @@ module Aws::Account
       include Aws::Structure
     end
 
+    # The request could not be processed because of a conflict in the
+    # current status of the resource. For example, this happens if you try
+    # to enable a Region that is currently being disabled (in a status of
+    # DISABLING).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details of the primary contact information associated
     # with an Amazon Web Services account.
     #
@@ -182,6 +198,107 @@ module Aws::Account
     end
 
     # @!attribute [rw] account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If
+    #   you don't specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation. To use
+    #   this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account. The specified account ID must also be a member account in
+    #   the same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated admin][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   Specifies the Region-code for a given Region name (for example,
+    #   `af-south-1`). When you disable a Region, AWS performs actions to
+    #   deactivate that Region in your account, such as destroying IAM
+    #   resources in the Region. This process takes a few minutes for most
+    #   accounts, but this can take several hours. You cannot enable the
+    #   Region until the disabling process is fully completed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/DisableRegionRequest AWS API Documentation
+    #
+    class DisableRegionRequest < Struct.new(
+      :account_id,
+      :region_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If
+    #   you don't specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation. To use
+    #   this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account. The specified account ID must also be a member account in
+    #   the same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated admin][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   Specifies the Region-code for a given Region name (for example,
+    #   `af-south-1`). When you enable a Region, AWS performs actions to
+    #   prepare your account in that Region, such as distributing your IAM
+    #   resources to the Region. This process takes a few minutes for most
+    #   accounts, but it can take several hours. You cannot use the Region
+    #   until this process is complete. Furthermore, you cannot disable the
+    #   Region until the enabling process is fully completed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/EnableRegionRequest AWS API Documentation
+    #
+    class EnableRegionRequest < Struct.new(
+      :account_id,
+      :region_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
     #   Specifies the 12 digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation.
     #
@@ -294,6 +411,71 @@ module Aws::Account
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If
+    #   you don't specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation. To use
+    #   this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account. The specified account ID must also be a member account in
+    #   the same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated admin][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   Specifies the Region-code for a given Region name (for example,
+    #   `af-south-1`). This function will return the status of whatever
+    #   Region you pass into this parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetRegionOptStatusRequest AWS API Documentation
+    #
+    class GetRegionOptStatusRequest < Struct.new(
+      :account_id,
+      :region_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] region_name
+    #   The Region code that was passed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_opt_status
+    #   One of the potential statuses a Region can undergo (Enabled,
+    #   Enabling, Disabled, Disabling, Enabled\_By\_Default).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetRegionOptStatusResponse AWS API Documentation
+    #
+    class GetRegionOptStatusResponse < Struct.new(
+      :region_name,
+      :region_opt_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation failed because of an error internal to Amazon Web
     # Services. Try your operation again later.
     #
@@ -304,6 +486,103 @@ module Aws::Account
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If
+    #   you don't specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation. To use
+    #   this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account. The specified account ID must also be a member account in
+    #   the same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated admin][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The total number of items to return in the command’s output. If the
+    #   total number of items available is more than the value specified, a
+    #   `NextToken` is provided in the command’s output. To resume
+    #   pagination, provide the `NextToken` value in the `starting-token`
+    #   argument of a subsequent command. Do not use the `NextToken`
+    #   response element directly outside of the Amazon Web Services CLI.
+    #   For usage examples, see [Pagination][1] in the *Amazon Web Services
+    #   Command Line Interface User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/pagination.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to specify where to start paginating. This is the
+    #   `NextToken` from a previously truncated response. For usage
+    #   examples, see [Pagination][1] in the *Amazon Web Services Command
+    #   Line Interface User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/pagination.html
+    #   @return [String]
+    #
+    # @!attribute [rw] region_opt_status_contains
+    #   A list of Region statuses (Enabling, Enabled, Disabling, Disabled,
+    #   Enabled\_by\_default) to use to filter the list of Regions for a
+    #   given account. For example, passing in a value of ENABLING will only
+    #   return a list of Regions with a Region status of ENABLING.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/ListRegionsRequest AWS API Documentation
+    #
+    class ListRegionsRequest < Struct.new(
+      :account_id,
+      :max_results,
+      :next_token,
+      :region_opt_status_contains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there is more data to be returned, this will be populated. It
+    #   should be passed into the `next-token` request parameter of
+    #   `list-regions`.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   This is a list of Regions for a given account, or if the filtered
+    #   parameter was used, a list of Regions that match the filter criteria
+    #   set in the `filter` parameter.
+    #   @return [Array<Types::Region>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/ListRegionsResponse AWS API Documentation
+    #
+    class ListRegionsResponse < Struct.new(
+      :next_token,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -421,6 +700,27 @@ module Aws::Account
       include Aws::Structure
     end
 
+    # This is a structure that expresses the Region for a given account,
+    # consisting of a name and opt-in status.
+    #
+    # @!attribute [rw] region_name
+    #   The Region code of a given Region (for example, `us-east-1`).
+    #   @return [String]
+    #
+    # @!attribute [rw] region_opt_status
+    #   One of potential statuses a Region can undergo (Enabled, Enabling,
+    #   Disabled, Disabling, Enabled\_By\_Default).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/Region AWS API Documentation
+    #
+    class Region < Struct.new(
+      :region_name,
+      :region_opt_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation failed because it specified a resource that can't be
     # found.
     #
@@ -451,14 +751,46 @@ module Aws::Account
 
     # The operation failed because one of the input parameters was invalid.
     #
+    # @!attribute [rw] field_list
+    #   The field where the invalid entry was detected.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @!attribute [rw] message
+    #   The message that informs you about what was invalid about the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason that validation failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message)
-      SENSITIVE = []
+      :field_list,
+      :message,
+      :reason)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # The input failed to meet the constraints specified by the AWS service
+    # in a specified field.
+    #
+    # @!attribute [rw] message
+    #   A message about the validation exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The field name where the invalid entry was detected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/ValidationExceptionField AWS API Documentation
+    #
+    class ValidationExceptionField < Struct.new(
+      :message,
+      :name)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 

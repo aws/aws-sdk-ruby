@@ -58,8 +58,13 @@ module Aws::AppConfigData
     #   obtain a token, first call the StartConfigurationSession API. Note
     #   that every call to `GetLatestConfiguration` will return a new
     #   `ConfigurationToken` (`NextPollConfigurationToken` in the response)
-    #   and MUST be provided to subsequent `GetLatestConfiguration` API
+    #   and *must* be provided to subsequent `GetLatestConfiguration` API
     #   calls.
+    #
+    #   This token should only be used once. To support long poll use cases,
+    #   the token is valid for up to 24 hours. If a `GetLatestConfiguration`
+    #   call uses an expired token, the system returns
+    #   `BadRequestException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfigdata-2021-11-11/GetLatestConfigurationRequest AWS API Documentation
@@ -72,8 +77,13 @@ module Aws::AppConfigData
 
     # @!attribute [rw] next_poll_configuration_token
     #   The latest token describing the current state of the configuration
-    #   session. This MUST be provided to the next call to
+    #   session. This *must* be provided to the next call to
     #   `GetLatestConfiguration.`
+    #
+    #   This token should only be used once. To support long poll use cases,
+    #   the token is valid for up to 24 hours. If a `GetLatestConfiguration`
+    #   call uses an expired token, the system returns
+    #   `BadRequestException`.
     #   @return [String]
     #
     # @!attribute [rw] next_poll_interval_in_seconds
@@ -93,13 +103,22 @@ module Aws::AppConfigData
     #   already has the latest version of configuration.
     #   @return [String]
     #
+    # @!attribute [rw] version_label
+    #   The user-defined label for the AppConfig hosted configuration
+    #   version. This attribute doesn't apply if the configuration is not
+    #   from an AppConfig hosted configuration version. If the client
+    #   already has the latest version of the configuration data, this value
+    #   is empty.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfigdata-2021-11-11/GetLatestConfigurationResponse AWS API Documentation
     #
     class GetLatestConfigurationResponse < Struct.new(
       :next_poll_configuration_token,
       :next_poll_interval_in_seconds,
       :content_type,
-      :configuration)
+      :configuration,
+      :version_label)
       SENSITIVE = [:configuration]
       include Aws::Structure
     end
@@ -170,7 +189,7 @@ module Aws::AppConfigData
     # @!attribute [rw] required_minimum_poll_interval_in_seconds
     #   Sets a constraint on a session. If you specify a value of, for
     #   example, 60 seconds, then the client that established the session
-    #   can't call GetLatestConfiguration more frequently then every 60
+    #   can't call GetLatestConfiguration more frequently than every 60
     #   seconds.
     #   @return [Integer]
     #
@@ -191,9 +210,14 @@ module Aws::AppConfigData
     #   configuration data.
     #
     #   This token should only be used once in your first call to
-    #   `GetLatestConfiguration`. You MUST use the new token in the
+    #   `GetLatestConfiguration`. You *must* use the new token in the
     #   `GetLatestConfiguration` response (`NextPollConfigurationToken`) in
     #   each subsequent call to `GetLatestConfiguration`.
+    #
+    #    The `InitialConfigurationToken` and `NextPollConfigurationToken`
+    #   should only be used once. To support long poll use cases, the tokens
+    #   are valid for up to 24 hours. If a `GetLatestConfiguration` call
+    #   uses an expired token, the system returns `BadRequestException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfigdata-2021-11-11/StartConfigurationSessionResponse AWS API Documentation

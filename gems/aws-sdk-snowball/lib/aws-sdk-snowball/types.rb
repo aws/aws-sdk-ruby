@@ -730,8 +730,6 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] is_long_term_pricing_auto_renew
-    #   snowballty
-    #
     #   Specifies whether the current long-term pricing type for the device
     #   should be renewed.
     #   @return [Boolean]
@@ -830,6 +828,26 @@ module Aws::Snowball
       :objects_transferred,
       :total_bytes,
       :total_objects)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name and version of the service dependant on the requested
+    # service.
+    #
+    # @!attribute [rw] service_name
+    #   The name of the dependent service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_version
+    #   The version of the dependent service.
+    #   @return [Types::ServiceVersion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DependentService AWS API Documentation
+    #
+    class DependentService < Struct.new(
+      :service_name,
+      :service_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1005,6 +1023,26 @@ module Aws::Snowball
     #
     class DeviceConfiguration < Struct.new(
       :snowcone_device_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the metadata and configuration settings of EKS
+    # Anywhere on the Snow Family device.
+    #
+    # @!attribute [rw] kubernetes_version
+    #   The Kubernetes version for EKS Anywhere on the Snow Family device.
+    #   @return [String]
+    #
+    # @!attribute [rw] eks_anywhere_version
+    #   The version of EKS Anywhere on the Snow Family device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/EKSOnDeviceServiceConfiguration AWS API Documentation
+    #
+    class EKSOnDeviceServiceConfiguration < Struct.new(
+      :kubernetes_version,
+      :eks_anywhere_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1812,6 +1850,66 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_name
+    #   The name of the service for which you're requesting supported
+    #   versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dependent_services
+    #   A list of names and versions of dependant services of the requested
+    #   service.
+    #   @return [Array<Types::DependentService>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of `ListServiceVersions` objects to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Because HTTP requests are stateless, this is the starting point for
+    #   the next list of returned `ListServiceVersionsRequest` versions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListServiceVersionsRequest AWS API Documentation
+    #
+    class ListServiceVersionsRequest < Struct.new(
+      :service_name,
+      :dependent_services,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_versions
+    #   A list of supported versions.
+    #   @return [Array<Types::ServiceVersion>]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service for which the system provided supported
+    #   versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dependent_services
+    #   A list of names and versions of dependant services of the service
+    #   for which the system provided supported versions.
+    #   @return [Array<Types::DependentService>]
+    #
+    # @!attribute [rw] next_token
+    #   Because HTTP requests are stateless, this is the starting point of
+    #   the next list of returned `ListServiceVersionsResult` results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListServiceVersionsResult AWS API Documentation
+    #
+    class ListServiceVersionsResult < Struct.new(
+      :service_versions,
+      :service_name,
+      :dependent_services,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Each `LongTermPricingListEntry` object contains information about a
     # long-term pricing type.
     #
@@ -1959,11 +2057,16 @@ module Aws::Snowball
     #   Family device.
     #   @return [Types::TGWOnDeviceServiceConfiguration]
     #
+    # @!attribute [rw] eks_on_device_service
+    #   The configuration of EKS Anywhere on the Snow Family device.
+    #   @return [Types::EKSOnDeviceServiceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/OnDeviceServiceConfiguration AWS API Documentation
     #
     class OnDeviceServiceConfiguration < Struct.new(
       :nfs_on_device_service,
-      :tgw_on_device_service)
+      :tgw_on_device_service,
+      :eks_on_device_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2014,6 +2117,20 @@ module Aws::Snowball
       :bucket_arn,
       :key_range,
       :target_on_device_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The version of the requested service.
+    #
+    # @!attribute [rw] version
+    #   The version number of the requested service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ServiceVersion AWS API Documentation
+    #
+    class ServiceVersion < Struct.new(
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end

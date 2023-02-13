@@ -27,11 +27,11 @@ module Aws::AppConfigData
     OptionalPollSeconds = Shapes::IntegerShape.new(name: 'OptionalPollSeconds')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    SensitiveBlob = Shapes::BlobShape.new(name: 'SensitiveBlob')
     StartConfigurationSessionRequest = Shapes::StructureShape.new(name: 'StartConfigurationSessionRequest')
     StartConfigurationSessionResponse = Shapes::StructureShape.new(name: 'StartConfigurationSessionResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
-    SyntheticGetLatestConfigurationResponseBlob = Shapes::BlobShape.new(name: 'SyntheticGetLatestConfigurationResponseBlob')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Token = Shapes::StringShape.new(name: 'Token')
 
@@ -52,7 +52,8 @@ module Aws::AppConfigData
     GetLatestConfigurationResponse.add_member(:next_poll_configuration_token, Shapes::ShapeRef.new(shape: Token, location: "header", location_name: "Next-Poll-Configuration-Token"))
     GetLatestConfigurationResponse.add_member(:next_poll_interval_in_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Next-Poll-Interval-In-Seconds"))
     GetLatestConfigurationResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
-    GetLatestConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: SyntheticGetLatestConfigurationResponseBlob, location_name: "Configuration"))
+    GetLatestConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: SensitiveBlob, location_name: "Configuration"))
+    GetLatestConfigurationResponse.add_member(:version_label, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Version-Label"))
     GetLatestConfigurationResponse.struct_class = Types::GetLatestConfigurationResponse
     GetLatestConfigurationResponse[:payload] = :configuration
     GetLatestConfigurationResponse[:payload_member] = GetLatestConfigurationResponse.member(:configuration)

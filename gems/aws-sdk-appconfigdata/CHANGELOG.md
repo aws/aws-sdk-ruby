@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2023-02-13)
+------------------
+
+* Feature - AWS AppConfig now offers the option to set a version label on hosted configuration versions. If a labeled hosted configuration version is deployed, its version label is available in the GetLatestConfiguration response.
+
 1.7.0 (2023-01-18)
 ------------------
 

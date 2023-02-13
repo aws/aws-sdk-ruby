@@ -58,10 +58,18 @@ module Aws::Account
           case context.operation_name
           when :delete_alternate_contact
             Aws::Account::Endpoints::DeleteAlternateContact.build(context)
+          when :disable_region
+            Aws::Account::Endpoints::DisableRegion.build(context)
+          when :enable_region
+            Aws::Account::Endpoints::EnableRegion.build(context)
           when :get_alternate_contact
             Aws::Account::Endpoints::GetAlternateContact.build(context)
           when :get_contact_information
             Aws::Account::Endpoints::GetContactInformation.build(context)
+          when :get_region_opt_status
+            Aws::Account::Endpoints::GetRegionOptStatus.build(context)
+          when :list_regions
+            Aws::Account::Endpoints::ListRegions.build(context)
           when :put_alternate_contact
             Aws::Account::Endpoints::PutAlternateContact.build(context)
           when :put_contact_information

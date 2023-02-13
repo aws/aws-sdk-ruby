@@ -28,6 +28,7 @@ module Aws::Account
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {TooManyRequestsException}
@@ -44,6 +45,21 @@ module Aws::Account
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Account::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Account::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -121,8 +137,18 @@ module Aws::Account
       end
 
       # @return [String]
+      def field_list
+        @data[:field_list]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
       end
     end
 

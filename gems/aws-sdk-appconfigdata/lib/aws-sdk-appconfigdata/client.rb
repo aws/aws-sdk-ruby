@@ -372,7 +372,7 @@ module Aws::AppConfigData
     # configuration data if the client already has the latest version. For
     # more information about this API action and to view example CLI
     # commands that show how to use it with the StartConfigurationSession
-    # API action, see [Receiving the configuration][1] in the *AppConfig
+    # API action, see [Retrieving the configuration][1] in the *AppConfig
     # User Guide*.
     #
     # Note the following important information.
@@ -396,7 +396,12 @@ module Aws::AppConfigData
     #   obtain a token, first call the StartConfigurationSession API. Note
     #   that every call to `GetLatestConfiguration` will return a new
     #   `ConfigurationToken` (`NextPollConfigurationToken` in the response)
-    #   and MUST be provided to subsequent `GetLatestConfiguration` API calls.
+    #   and *must* be provided to subsequent `GetLatestConfiguration` API
+    #   calls.
+    #
+    #   This token should only be used once. To support long poll use cases,
+    #   the token is valid for up to 24 hours. If a `GetLatestConfiguration`
+    #   call uses an expired token, the system returns `BadRequestException`.
     #
     # @return [Types::GetLatestConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -404,6 +409,7 @@ module Aws::AppConfigData
     #   * {Types::GetLatestConfigurationResponse#next_poll_interval_in_seconds #next_poll_interval_in_seconds} => Integer
     #   * {Types::GetLatestConfigurationResponse#content_type #content_type} => String
     #   * {Types::GetLatestConfigurationResponse#configuration #configuration} => String
+    #   * {Types::GetLatestConfigurationResponse#version_label #version_label} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -417,6 +423,7 @@ module Aws::AppConfigData
     #   resp.next_poll_interval_in_seconds #=> Integer
     #   resp.content_type #=> String
     #   resp.configuration #=> String
+    #   resp.version_label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfigdata-2021-11-11/GetLatestConfiguration AWS API Documentation
     #
@@ -430,7 +437,7 @@ module Aws::AppConfigData
     # Starts a configuration session used to retrieve a deployed
     # configuration. For more information about this API action and to view
     # example CLI commands that show how to use it with the
-    # GetLatestConfiguration API action, see [Receiving the
+    # GetLatestConfiguration API action, see [Retrieving the
     # configuration][1] in the *AppConfig User Guide*.
     #
     #
@@ -449,7 +456,7 @@ module Aws::AppConfigData
     # @option params [Integer] :required_minimum_poll_interval_in_seconds
     #   Sets a constraint on a session. If you specify a value of, for
     #   example, 60 seconds, then the client that established the session
-    #   can't call GetLatestConfiguration more frequently then every 60
+    #   can't call GetLatestConfiguration more frequently than every 60
     #   seconds.
     #
     # @return [Types::StartConfigurationSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -491,7 +498,7 @@ module Aws::AppConfigData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfigdata'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

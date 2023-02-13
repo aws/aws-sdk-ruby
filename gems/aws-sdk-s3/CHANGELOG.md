@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.119.1 (2023-02-13)
+------------------
+
 * Issue - Ensure object metadata is not lost on multipart copy (#2821).
 
 1.119.0 (2023-01-26)
