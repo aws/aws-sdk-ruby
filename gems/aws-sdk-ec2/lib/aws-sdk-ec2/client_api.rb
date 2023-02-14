@@ -1472,6 +1472,7 @@ module Aws::EC2
     HostInstance = Shapes::StructureShape.new(name: 'HostInstance')
     HostInstanceList = Shapes::ListShape.new(name: 'HostInstanceList')
     HostList = Shapes::ListShape.new(name: 'HostList')
+    HostMaintenance = Shapes::StringShape.new(name: 'HostMaintenance')
     HostOffering = Shapes::StructureShape.new(name: 'HostOffering')
     HostOfferingSet = Shapes::ListShape.new(name: 'HostOfferingSet')
     HostProperties = Shapes::StructureShape.new(name: 'HostProperties')
@@ -3193,6 +3194,7 @@ module Aws::EC2
     AllocateHostsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AllocateHostsRequest.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "HostRecovery"))
     AllocateHostsRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
+    AllocateHostsRequest.add_member(:host_maintenance, Shapes::ShapeRef.new(shape: HostMaintenance, location_name: "HostMaintenance"))
     AllocateHostsRequest.struct_class = Types::AllocateHostsRequest
 
     AllocateHostsResult.add_member(:host_ids, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "hostIdSet"))
@@ -8919,6 +8921,7 @@ module Aws::EC2
     Host.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     Host.add_member(:member_of_service_linked_resource_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "memberOfServiceLinkedResourceGroup"))
     Host.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
+    Host.add_member(:host_maintenance, Shapes::ShapeRef.new(shape: HostMaintenance, location_name: "hostMaintenance"))
     Host.struct_class = Types::Host
 
     HostInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -10658,6 +10661,7 @@ module Aws::EC2
     ModifyHostsRequest.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "HostRecovery"))
     ModifyHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
     ModifyHostsRequest.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "InstanceFamily"))
+    ModifyHostsRequest.add_member(:host_maintenance, Shapes::ShapeRef.new(shape: HostMaintenance, location_name: "HostMaintenance"))
     ModifyHostsRequest.struct_class = Types::ModifyHostsRequest
 
     ModifyHostsResult.add_member(:successful, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "successful"))

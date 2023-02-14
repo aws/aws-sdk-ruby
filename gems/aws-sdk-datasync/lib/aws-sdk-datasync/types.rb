@@ -10,24 +10,28 @@
 module Aws::DataSync
   module Types
 
-    # Represents a single entry in a list of agents. `AgentListEntry`
-    # returns an array that contains a list of agents when the
-    # [ListAgents][1] operation is called.
+    # Represents a single entry in a list (or array) of DataSync agents when
+    # you call the [ListAgents][1] operation.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html
     #
     # @!attribute [rw] agent_arn
-    #   The Amazon Resource Name (ARN) of the agent.
+    #   The Amazon Resource Name (ARN) of a DataSync agent.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the agent.
+    #   The name of an agent.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the agent.
+    #   The status of an agent. For more information, see [DataSync agent
+    #   statuses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-agent-statuses.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/AgentListEntry AWS API Documentation
@@ -303,13 +307,18 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] storage_virtual_machine_arn
-    #   Specifies the ARN of the storage virtual machine (SVM) on your file
-    #   system where you're copying data to or from.
+    #   Specifies the ARN of the storage virtual machine (SVM) in your file
+    #   system where you want to copy data to or from.
     #   @return [String]
     #
     # @!attribute [rw] subdirectory
-    #   Specifies the junction path (also known as a mount point) in the SVM
-    #   volume where you're copying data to or from (for example, `/vol1`).
+    #   Specifies a path to the file share in the SVM where you'll copy
+    #   your data.
+    #
+    #   You can specify a junction path (also known as a mount point), qtree
+    #   path (for NFS file shares), or share name (for SMB file shares). For
+    #   example, your mount path might be `/vol1`, `/vol1/tree1`, or
+    #   `/share1`.
     #
     #   <note markdown="1"> Don't specify a junction path in the SVM's root volume. For more
     #   information, see [Managing FSx for ONTAP storage virtual
@@ -900,71 +909,83 @@ module Aws::DataSync
     # CreateLocationSmbRequest
     #
     # @!attribute [rw] subdirectory
-    #   The subdirectory in the SMB file system that is used to read data
-    #   from the SMB source location or write data to the SMB destination.
-    #   The SMB path should be a path that's exported by the SMB server, or
-    #   a subdirectory of that path. The path should be such that it can be
-    #   mounted by other SMB clients in your network.
+    #   Specifies the name of the share exported by your SMB file server
+    #   where DataSync will read or write data. You can include a
+    #   subdirectory in the share path (for example,
+    #   `/path/to/subdirectory`). Make sure that other SMB clients in your
+    #   network can also mount this path.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
-    #   `/path/to/folder`.
+    #   To copy all data in the specified subdirectory, DataSync must be
+    #   able to mount the SMB share and access all of its data. For more
+    #   information, see [required permissions][1] for SMB locations.
     #
-    #    </note>
     #
-    #   To transfer all the data in the folder you specified, DataSync needs
-    #   to have permissions to mount the SMB share, as well as to access all
-    #   the data in that share. To ensure this, either ensure that the
-    #   user/password specified belongs to the user who can mount the share,
-    #   and who has the appropriate permissions for all of the files and
-    #   directories that you want DataSync to access, or use credentials of
-    #   a member of the Backup Operators group to mount the share. Doing
-    #   either enables the agent to access the data. For the agent to access
-    #   directories, you must additionally enable all execute access.
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
-    #   The name of the SMB server. This value is the IP address or Domain
-    #   Name Service (DNS) name of the SMB server. An agent that is
-    #   installed on-premises uses this hostname to mount the SMB server in
-    #   a network.
+    #   Specifies the Domain Name Service (DNS) name or IP address of the
+    #   SMB file server that your DataSync agent will mount.
     #
-    #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
-    #   (IPv4) address.
+    #   <note markdown="1"> You can't specify an IP version 6 (IPv6) address.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   The user who can mount the share, has the permissions to access
-    #   files and folders in the SMB share.
+    #   Specifies the user name that can mount your SMB file server and has
+    #   permission to access the files and folders involved in your
+    #   transfer.
     #
-    #   For information about choosing a user name that ensures sufficient
-    #   permissions to files, folders, and metadata, see the [User
-    #   setting](create-smb-location.html#SMBuser) for SMB locations.
+    #   For information about choosing a user with the right level of access
+    #   for your transfer, see [required permissions][1] for SMB locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the Windows domain that the SMB server belongs to.
+    #   Specifies the Windows domain name that your SMB file server belongs
+    #   to.
+    #
+    #   For more information, see [required permissions][1] for SMB
+    #   locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password of the user who can mount the share, has the
-    #   permissions to access files and folders in the SMB share.
+    #   Specifies the password of the user who can mount your SMB file
+    #   server and has permission to access the files and folders involved
+    #   in your transfer.
+    #
+    #   For more information, see [required permissions][1] for SMB
+    #   locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The Amazon Resource Names (ARNs) of agents to use for a Simple
-    #   Message Block (SMB) location.
+    #   Specifies the DataSync agent (or agents) which you want to connect
+    #   to your SMB file server. You specify an agent by using its Amazon
+    #   Resource Name (ARN).
     #   @return [Array<String>]
     #
     # @!attribute [rw] mount_options
-    #   The mount options used by DataSync to access the SMB server.
+    #   Specifies the version of the SMB protocol that DataSync uses to
+    #   access your SMB file server.
     #   @return [Types::SmbMountOptions]
     #
     # @!attribute [rw] tags
-    #   The key-value pair that represents the tag that you want to add to
-    #   the location. The value can be an empty string. We recommend using
-    #   tags to name your resources.
+    #   Specifies labels that help you categorize, filter, and search for
+    #   your Amazon Web Services resources. We recommend creating at least a
+    #   name tag for your location.
     #   @return [Array<Types::TagListEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationSmbRequest AWS API Documentation
@@ -985,8 +1006,7 @@ module Aws::DataSync
     # CreateLocationSmbResponse
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the source SMB file system
-    #   location that is created.
+    #   The ARN of the SMB location that you created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationSmbResponse AWS API Documentation
@@ -1159,7 +1179,8 @@ module Aws::DataSync
     # DescribeAgent
     #
     # @!attribute [rw] agent_arn
-    #   The Amazon Resource Name (ARN) of the agent to describe.
+    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent to
+    #   describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgentRequest AWS API Documentation
@@ -1173,7 +1194,7 @@ module Aws::DataSync
     # DescribeAgentResponse
     #
     # @!attribute [rw] agent_arn
-    #   The Amazon Resource Name (ARN) of the agent.
+    #   The ARN of the agent.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2239,7 +2260,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] mount_options
-    #   Specifies how DataSync can access a location using the SMB protocol.
+    #   Specifies the version of the Server Message Block (SMB) protocol
+    #   that DataSync uses to access an SMB file server.
     #   @return [Types::SmbMountOptions]
     #
     # @!attribute [rw] password
@@ -2359,12 +2381,13 @@ module Aws::DataSync
     # ListAgentsRequest
     #
     # @!attribute [rw] max_results
-    #   The maximum number of agents to list.
+    #   Specifies the maximum number of DataSync agents to list in a
+    #   response. By default, a response shows a maximum of 100 agents.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   An opaque string that indicates the position at which to begin the
-    #   next list of agents.
+    #   Specifies an opaque string that indicates the position to begin the
+    #   next list of results in the response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListAgentsRequest AWS API Documentation
@@ -2379,12 +2402,14 @@ module Aws::DataSync
     # ListAgentsResponse
     #
     # @!attribute [rw] agents
-    #   A list of agents in your account.
+    #   A list of DataSync agents in your Amazon Web Services account in the
+    #   Amazon Web Services Region specified in the request. The list is
+    #   ordered by the agents' Amazon Resource Names (ARNs).
     #   @return [Array<Types::AgentListEntry>]
     #
     # @!attribute [rw] next_token
-    #   An opaque string that indicates the position at which to begin
-    #   returning the next list of agents.
+    #   The opaque string that indicates the position to begin the next list
+    #   of results in the response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListAgentsResponse AWS API Documentation
@@ -2775,7 +2800,7 @@ module Aws::DataSync
     #   Some storage classes have specific behaviors that can affect your
     #   Amazon S3 storage cost. For detailed information, see
     #   [Considerations when working with Amazon S3 storage classes in
-    #   DataSync ][1].
+    #   DataSync][1].
     #
     #
     #
@@ -2871,7 +2896,7 @@ module Aws::DataSync
     #   Amazon S3 storage cost. If your task deletes objects, you might
     #   incur minimum storage duration charges for certain storage classes.
     #   For detailed information, see [Considerations when working with
-    #   Amazon S3 storage classes in DataSync ][1].
+    #   Amazon S3 storage classes in DataSync][1].
     #
     #   Default value: `PRESERVE`
     #
@@ -2879,6 +2904,12 @@ module Aws::DataSync
     #
     #   `REMOVE`\: Delete destination files that aren’t present in the
     #   source.
+    #
+    #   <note markdown="1"> If you set this parameter to `REMOVE`, you can't set `TransferMode`
+    #   to `ALL`. When you transfer all data, DataSync doesn't scan your
+    #   destination location and doesn't know what to delete.
+    #
+    #    </note>
     #
     #
     #
@@ -3137,13 +3168,46 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Specifies how DataSync can access a location using the SMB protocol.
+    # Specifies the version of the Server Message Block (SMB) protocol that
+    # DataSync uses to access an SMB file server.
     #
     # @!attribute [rw] version
-    #   Specifies the SMB version that you want DataSync to use when
-    #   mounting your SMB share. If you don't specify a version, DataSync
-    #   defaults to `AUTOMATIC` and chooses a version based on negotiation
-    #   with the SMB server.
+    #   By default, DataSync automatically chooses an SMB protocol version
+    #   based on negotiation with your SMB file server. You also can
+    #   configure DataSync to use a specific SMB version, but we recommend
+    #   doing this only if DataSync has trouble negotiating with the SMB
+    #   file server automatically.
+    #
+    #   These are the following options for configuring the SMB version:
+    #
+    #   * `AUTOMATIC` (default): DataSync and the SMB file server negotiate
+    #     a protocol version that they mutually support. (DataSync supports
+    #     SMB versions 1.0 and later.)
+    #
+    #     This is the recommended option. If you instead choose a specific
+    #     version that your file server doesn't support, you may get an
+    #     `Operation Not Supported` error.
+    #
+    #   * `SMB3`\: Restricts the protocol negotiation to only SMB version
+    #     3.0.2.
+    #
+    #   * `SMB2`\: Restricts the protocol negotiation to only SMB version
+    #     2.1.
+    #
+    #   * `SMB2_0`\: Restricts the protocol negotiation to only SMB version
+    #     2.0.
+    #
+    #   * `SMB1`\: Restricts the protocol negotiation to only SMB version
+    #     1.0.
+    #
+    #     <note markdown="1"> The `SMB1` option isn't available when [creating an Amazon FSx
+    #     for NetApp ONTAP location][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationFsxOntap.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/SmbMountOptions AWS API Documentation
@@ -3765,7 +3829,8 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] mount_options
-    #   Specifies how DataSync can access a location using the SMB protocol.
+    #   Specifies the version of the Server Message Block (SMB) protocol
+    #   that DataSync uses to access an SMB file server.
     #   @return [Types::SmbMountOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationSmbRequest AWS API Documentation

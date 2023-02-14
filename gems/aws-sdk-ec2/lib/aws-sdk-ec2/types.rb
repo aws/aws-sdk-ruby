@@ -992,6 +992,18 @@ module Aws::EC2
     #   which to allocate the Dedicated Host.
     #   @return [String]
     #
+    # @!attribute [rw] host_maintenance
+    #   Indicates whether to enable or disable host maintenance for the
+    #   Dedicated Host. For more information, see [ Host maintenance][1] in
+    #   the *Amazon EC2 User Guide*.
+    #
+    #   Default: `on`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest AWS API Documentation
     #
     class AllocateHostsRequest < Struct.new(
@@ -1003,7 +1015,8 @@ module Aws::EC2
       :quantity,
       :tag_specifications,
       :host_recovery,
-      :outpost_arn)
+      :outpost_arn,
+      :host_maintenance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34256,6 +34269,11 @@ module Aws::EC2
     #   which the Dedicated Host is allocated.
     #   @return [String]
     #
+    # @!attribute [rw] host_maintenance
+    #   Indicates whether host maintenance is enabled or disabled for the
+    #   Dedicated Host.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -34276,7 +34294,8 @@ module Aws::EC2
       :owner_id,
       :availability_zone_id,
       :member_of_service_linked_resource_group,
-      :outpost_arn)
+      :outpost_arn,
+      :host_maintenance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43561,6 +43580,16 @@ module Aws::EC2
     #   in the same request.
     #   @return [String]
     #
+    # @!attribute [rw] host_maintenance
+    #   Indicates whether to enable or disable host maintenance for the
+    #   Dedicated Host. For more information, see [ Host maintenance][1] in
+    #   the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHostsRequest AWS API Documentation
     #
     class ModifyHostsRequest < Struct.new(
@@ -43568,7 +43597,8 @@ module Aws::EC2
       :host_ids,
       :host_recovery,
       :instance_type,
-      :instance_family)
+      :instance_family,
+      :host_maintenance)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2023-02-14)
+------------------
+
+* Feature - With this launch, we are giving customers the ability to use older SMB protocol versions, enabling them to use DataSync to copy data to and from their legacy storage arrays.
+
 1.53.0 (2023-01-18)
 ------------------
 

@@ -1057,6 +1057,17 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on
     #   which to allocate the Dedicated Host.
     #
+    # @option params [String] :host_maintenance
+    #   Indicates whether to enable or disable host maintenance for the
+    #   Dedicated Host. For more information, see [ Host maintenance][1] in
+    #   the *Amazon EC2 User Guide*.
+    #
+    #   Default: `on`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html
+    #
     # @return [Types::AllocateHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllocateHostsResult#host_ids #host_ids} => Array&lt;String&gt;
@@ -1083,6 +1094,7 @@ module Aws::EC2
     #     ],
     #     host_recovery: "on", # accepts on, off
     #     outpost_arn: "String",
+    #     host_maintenance: "on", # accepts on, off
     #   })
     #
     # @example Response structure
@@ -22398,6 +22410,7 @@ module Aws::EC2
     #   resp.hosts[0].availability_zone_id #=> String
     #   resp.hosts[0].member_of_service_linked_resource_group #=> Boolean
     #   resp.hosts[0].outpost_arn #=> String
+    #   resp.hosts[0].host_maintenance #=> String, one of "on", "off"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
@@ -43905,6 +43918,15 @@ module Aws::EC2
     #   You cannot specify **InstanceFamily** and **InstanceType** in the same
     #   request.
     #
+    # @option params [String] :host_maintenance
+    #   Indicates whether to enable or disable host maintenance for the
+    #   Dedicated Host. For more information, see [ Host maintenance][1] in
+    #   the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html
+    #
     # @return [Types::ModifyHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyHostsResult#successful #successful} => Array&lt;String&gt;
@@ -43918,6 +43940,7 @@ module Aws::EC2
     #     host_recovery: "on", # accepts on, off
     #     instance_type: "String",
     #     instance_family: "String",
+    #     host_maintenance: "on", # accepts on, off
     #   })
     #
     # @example Response structure
@@ -55983,7 +56006,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.365.0'
+      context[:gem_version] = '1.366.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.366.0 (2023-02-14)
+------------------
+
+* Feature - With this release customers can turn host maintenance on or off when allocating or modifying a supported dedicated host. Host maintenance is turned on by default for supported hosts.
+
 1.365.0 (2023-02-10)
 ------------------
 

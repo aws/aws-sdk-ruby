@@ -154,6 +154,7 @@ module Aws::AppConfig
     ValidatorType = Shapes::StringShape.new(name: 'ValidatorType')
     ValidatorTypeList = Shapes::ListShape.new(name: 'ValidatorTypeList')
     Version = Shapes::StringShape.new(name: 'Version')
+    VersionLabel = Shapes::StringShape.new(name: 'VersionLabel')
 
     Action.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Action.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -294,6 +295,7 @@ module Aws::AppConfig
     CreateHostedConfigurationVersionRequest.add_member(:content, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "Content"))
     CreateHostedConfigurationVersionRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, required: true, location: "header", location_name: "Content-Type"))
     CreateHostedConfigurationVersionRequest.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Latest-Version-Number", metadata: {"box"=>true}))
+    CreateHostedConfigurationVersionRequest.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location: "header", location_name: "VersionLabel"))
     CreateHostedConfigurationVersionRequest.struct_class = Types::CreateHostedConfigurationVersionRequest
     CreateHostedConfigurationVersionRequest[:payload] = :content
     CreateHostedConfigurationVersionRequest[:payload_member] = CreateHostedConfigurationVersionRequest.member(:content)
@@ -490,6 +492,7 @@ module Aws::AppConfig
     HostedConfigurationVersion.add_member(:description, Shapes::ShapeRef.new(shape: Description, location: "header", location_name: "Description"))
     HostedConfigurationVersion.add_member(:content, Shapes::ShapeRef.new(shape: Blob, location_name: "Content"))
     HostedConfigurationVersion.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, location: "header", location_name: "Content-Type"))
+    HostedConfigurationVersion.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location: "header", location_name: "VersionLabel"))
     HostedConfigurationVersion.struct_class = Types::HostedConfigurationVersion
     HostedConfigurationVersion[:payload] = :content
     HostedConfigurationVersion[:payload_member] = HostedConfigurationVersion.member(:content)
@@ -499,6 +502,7 @@ module Aws::AppConfig
     HostedConfigurationVersionSummary.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location_name: "VersionNumber"))
     HostedConfigurationVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     HostedConfigurationVersionSummary.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, location_name: "ContentType"))
+    HostedConfigurationVersionSummary.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
     HostedConfigurationVersionSummary.struct_class = Types::HostedConfigurationVersionSummary
 
     HostedConfigurationVersionSummaryList.member = Shapes::ShapeRef.new(shape: HostedConfigurationVersionSummary)
@@ -560,6 +564,7 @@ module Aws::AppConfig
     ListHostedConfigurationVersionsRequest.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ConfigurationProfileId"))
     ListHostedConfigurationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
     ListHostedConfigurationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
+    ListHostedConfigurationVersionsRequest.add_member(:version_label, Shapes::ShapeRef.new(shape: QueryName, location: "querystring", location_name: "version_label"))
     ListHostedConfigurationVersionsRequest.struct_class = Types::ListHostedConfigurationVersionsRequest
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))

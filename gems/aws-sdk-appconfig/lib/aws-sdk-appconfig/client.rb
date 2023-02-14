@@ -1048,6 +1048,11 @@ module Aws::AppConfig
     #   configuration versions in rapid succession, specify the version number
     #   of the latest hosted configuration version.
     #
+    # @option params [String] :version_label
+    #   An optional, user-defined label for the AppConfig hosted configuration
+    #   version. This value must contain at least one non-numeric character.
+    #   For example, "v2.2.0".
+    #
     # @return [Types::HostedConfigurationVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::HostedConfigurationVersion#application_id #application_id} => String
@@ -1056,6 +1061,7 @@ module Aws::AppConfig
     #   * {Types::HostedConfigurationVersion#description #description} => String
     #   * {Types::HostedConfigurationVersion#content #content} => String
     #   * {Types::HostedConfigurationVersion#content_type #content_type} => String
+    #   * {Types::HostedConfigurationVersion#version_label #version_label} => String
     #
     #
     # @example Example: To create a hosted configuration version
@@ -1088,6 +1094,7 @@ module Aws::AppConfig
     #     content: "data", # required
     #     content_type: "StringWithLengthBetween1And255", # required
     #     latest_version_number: 1,
+    #     version_label: "VersionLabel",
     #   })
     #
     # @example Response structure
@@ -1098,6 +1105,7 @@ module Aws::AppConfig
     #   resp.description #=> String
     #   resp.content #=> String
     #   resp.content_type #=> String
+    #   resp.version_label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateHostedConfigurationVersion AWS API Documentation
     #
@@ -1996,6 +2004,7 @@ module Aws::AppConfig
     #   * {Types::HostedConfigurationVersion#description #description} => String
     #   * {Types::HostedConfigurationVersion#content #content} => String
     #   * {Types::HostedConfigurationVersion#content_type #content_type} => String
+    #   * {Types::HostedConfigurationVersion#version_label #version_label} => String
     #
     #
     # @example Example: To retrieve hosted configuration details
@@ -2033,6 +2042,7 @@ module Aws::AppConfig
     #   resp.description #=> String
     #   resp.content #=> String
     #   resp.content_type #=> String
+    #   resp.version_label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetHostedConfigurationVersion AWS API Documentation
     #
@@ -2556,6 +2566,13 @@ module Aws::AppConfig
     #   A token to start the list. Use this token to get the next set of
     #   results.
     #
+    # @option params [String] :version_label
+    #   An optional filter that can be used to specify the version label of an
+    #   AppConfig hosted configuration version. This parameter supports
+    #   filtering by prefix using a wildcard, for example "v2*". If you
+    #   don't specify an asterisk at the end of the value, only an exact
+    #   match is returned.
+    #
     # @return [Types::HostedConfigurationVersions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::HostedConfigurationVersions#items #items} => Array&lt;Types::HostedConfigurationVersionSummary&gt;
@@ -2593,6 +2610,7 @@ module Aws::AppConfig
     #     configuration_profile_id: "Id", # required
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     version_label: "QueryName",
     #   })
     #
     # @example Response structure
@@ -2603,6 +2621,7 @@ module Aws::AppConfig
     #   resp.items[0].version_number #=> Integer
     #   resp.items[0].description #=> String
     #   resp.items[0].content_type #=> String
+    #   resp.items[0].version_label #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListHostedConfigurationVersions AWS API Documentation
@@ -2674,7 +2693,9 @@ module Aws::AppConfig
     #   The configuration profile ID.
     #
     # @option params [required, String] :configuration_version
-    #   The configuration version to deploy.
+    #   The configuration version to deploy. If deploying an AppConfig hosted
+    #   configuration version, you can specify either the version number or
+    #   version label.
     #
     # @option params [String] :description
     #   A description of the deployment.
@@ -3552,7 +3573,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

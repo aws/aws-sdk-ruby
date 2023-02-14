@@ -743,6 +743,12 @@ module Aws::AppConfig
     #   number of the latest hosted configuration version.
     #   @return [Integer]
     #
+    # @!attribute [rw] version_label
+    #   An optional, user-defined label for the AppConfig hosted
+    #   configuration version. This value must contain at least one
+    #   non-numeric character. For example, "v2.2.0".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateHostedConfigurationVersionRequest AWS API Documentation
     #
     class CreateHostedConfigurationVersionRequest < Struct.new(
@@ -751,7 +757,8 @@ module Aws::AppConfig
       :description,
       :content,
       :content_type,
-      :latest_version_number)
+      :latest_version_number,
+      :version_label)
       SENSITIVE = [:content]
       include Aws::Structure
     end
@@ -1666,6 +1673,10 @@ module Aws::AppConfig
     #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
     #   @return [String]
     #
+    # @!attribute [rw] version_label
+    #   A user-defined label for an AppConfig hosted configuration version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersion AWS API Documentation
     #
     class HostedConfigurationVersion < Struct.new(
@@ -1674,7 +1685,8 @@ module Aws::AppConfig
       :version_number,
       :description,
       :content,
-      :content_type)
+      :content_type,
+      :version_label)
       SENSITIVE = [:content]
       include Aws::Structure
     end
@@ -1706,6 +1718,10 @@ module Aws::AppConfig
     #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
     #   @return [String]
     #
+    # @!attribute [rw] version_label
+    #   A user-defined label for an AppConfig hosted configuration version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersionSummary AWS API Documentation
     #
     class HostedConfigurationVersionSummary < Struct.new(
@@ -1713,7 +1729,8 @@ module Aws::AppConfig
       :configuration_profile_id,
       :version_number,
       :description,
-      :content_type)
+      :content_type,
+      :version_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2000,13 +2017,22 @@ module Aws::AppConfig
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] version_label
+    #   An optional filter that can be used to specify the version label of
+    #   an AppConfig hosted configuration version. This parameter supports
+    #   filtering by prefix using a wildcard, for example "v2*". If you
+    #   don't specify an asterisk at the end of the value, only an exact
+    #   match is returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListHostedConfigurationVersionsRequest AWS API Documentation
     #
     class ListHostedConfigurationVersionsRequest < Struct.new(
       :application_id,
       :configuration_profile_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :version_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2158,7 +2184,9 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] configuration_version
-    #   The configuration version to deploy.
+    #   The configuration version to deploy. If deploying an AppConfig
+    #   hosted configuration version, you can specify either the version
+    #   number or version label.
     #   @return [String]
     #
     # @!attribute [rw] description
