@@ -1822,6 +1822,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidImportSourceException)
         o.errors << Shapes::ShapeRef.new(shape: ImportNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientEncryptionPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)

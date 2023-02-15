@@ -373,6 +373,7 @@ module Aws::Glue
     DevEndpointList = Shapes::ListShape.new(name: 'DevEndpointList')
     DevEndpointNameList = Shapes::ListShape.new(name: 'DevEndpointNameList')
     DevEndpointNames = Shapes::ListShape.new(name: 'DevEndpointNames')
+    DirectJDBCSource = Shapes::StructureShape.new(name: 'DirectJDBCSource')
     DirectKafkaSource = Shapes::StructureShape.new(name: 'DirectKafkaSource')
     DirectKinesisSource = Shapes::StructureShape.new(name: 'DirectKinesisSource')
     DirectSchemaChangePolicy = Shapes::StructureShape.new(name: 'DirectSchemaChangePolicy')
@@ -604,6 +605,7 @@ module Aws::Glue
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     IsVersionValid = Shapes::BooleanShape.new(name: 'IsVersionValid')
+    JDBCConnectionType = Shapes::StringShape.new(name: 'JDBCConnectionType')
     JDBCConnectorOptions = Shapes::StructureShape.new(name: 'JDBCConnectorOptions')
     JDBCConnectorSource = Shapes::StructureShape.new(name: 'JDBCConnectorSource')
     JDBCConnectorTarget = Shapes::StructureShape.new(name: 'JDBCConnectorTarget')
@@ -1562,6 +1564,7 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:s3_hudi_source, Shapes::ShapeRef.new(shape: S3HudiSource, location_name: "S3HudiSource"))
     CodeGenConfigurationNode.add_member(:s3_hudi_catalog_target, Shapes::ShapeRef.new(shape: S3HudiCatalogTarget, location_name: "S3HudiCatalogTarget"))
     CodeGenConfigurationNode.add_member(:s3_hudi_direct_target, Shapes::ShapeRef.new(shape: S3HudiDirectTarget, location_name: "S3HudiDirectTarget"))
+    CodeGenConfigurationNode.add_member(:direct_jdbc_source, Shapes::ShapeRef.new(shape: DirectJDBCSource, location_name: "DirectJDBCSource"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -2503,6 +2506,14 @@ module Aws::Glue
     DevEndpointNameList.member = Shapes::ShapeRef.new(shape: NameString)
 
     DevEndpointNames.member = Shapes::ShapeRef.new(shape: GenericString)
+
+    DirectJDBCSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    DirectJDBCSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    DirectJDBCSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    DirectJDBCSource.add_member(:connection_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "ConnectionName"))
+    DirectJDBCSource.add_member(:connection_type, Shapes::ShapeRef.new(shape: JDBCConnectionType, required: true, location_name: "ConnectionType"))
+    DirectJDBCSource.add_member(:redshift_tmp_dir, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RedshiftTmpDir"))
+    DirectJDBCSource.struct_class = Types::DirectJDBCSource
 
     DirectKafkaSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     DirectKafkaSource.add_member(:streaming_options, Shapes::ShapeRef.new(shape: KafkaStreamingSourceOptions, location_name: "StreamingOptions"))

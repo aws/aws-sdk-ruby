@@ -1611,6 +1611,12 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_type #=> String, one of "sqlserver", "mysql", "oracle", "postgresql", "redshift"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.redshift_tmp_dir #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -3994,6 +4000,14 @@ module Aws::Glue
     #             table: "EnclosedInStringProperty",
     #             database: "EnclosedInStringProperty",
     #           },
+    #         },
+    #         direct_jdbc_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connection_type: "sqlserver", # required, accepts sqlserver, mysql, oracle, postgresql, redshift
+    #           redshift_tmp_dir: "EnclosedInStringProperty",
     #         },
     #       },
     #     },
@@ -7999,6 +8013,12 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.table #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_type #=> String, one of "sqlserver", "mysql", "oracle", "postgresql", "redshift"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.redshift_tmp_dir #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -8823,6 +8843,12 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_type #=> String, one of "sqlserver", "mysql", "oracle", "postgresql", "redshift"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.redshift_tmp_dir #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -15982,6 +16008,14 @@ module Aws::Glue
     #               database: "EnclosedInStringProperty",
     #             },
     #           },
+    #           direct_jdbc_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             connection_name: "EnclosedInStringProperty", # required
+    #             connection_type: "sqlserver", # required, accepts sqlserver, mysql, oracle, postgresql, redshift
+    #             redshift_tmp_dir: "EnclosedInStringProperty",
+    #           },
     #         },
     #       },
     #       execution_class: "FLEX", # accepts FLEX, STANDARD
@@ -16807,7 +16841,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

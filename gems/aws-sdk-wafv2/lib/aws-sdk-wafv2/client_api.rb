@@ -13,6 +13,7 @@ module Aws::WAFV2
 
     include Seahorse::Model
 
+    AWSManagedRulesATPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesATPRuleSet')
     AWSManagedRulesBotControlRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesBotControlRuleSet')
     Action = Shapes::StringShape.new(name: 'Action')
     ActionCondition = Shapes::StructureShape.new(name: 'ActionCondition')
@@ -91,7 +92,9 @@ module Aws::WAFV2
     ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
     ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
+    FailureCode = Shapes::IntegerShape.new(name: 'FailureCode')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    FailureValue = Shapes::StringShape.new(name: 'FailureValue')
     FallbackBehavior = Shapes::StringShape.new(name: 'FallbackBehavior')
     FieldIdentifier = Shapes::StringShape.new(name: 'FieldIdentifier')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
@@ -250,12 +253,27 @@ module Aws::WAFV2
     ReleaseNotes = Shapes::StringShape.new(name: 'ReleaseNotes')
     ReleaseSummaries = Shapes::ListShape.new(name: 'ReleaseSummaries')
     ReleaseSummary = Shapes::StructureShape.new(name: 'ReleaseSummary')
+    RequestInspection = Shapes::StructureShape.new(name: 'RequestInspection')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResponseCode = Shapes::IntegerShape.new(name: 'ResponseCode')
     ResponseContent = Shapes::StringShape.new(name: 'ResponseContent')
     ResponseContentType = Shapes::StringShape.new(name: 'ResponseContentType')
+    ResponseInspection = Shapes::StructureShape.new(name: 'ResponseInspection')
+    ResponseInspectionBodyContains = Shapes::StructureShape.new(name: 'ResponseInspectionBodyContains')
+    ResponseInspectionBodyContainsFailureStrings = Shapes::ListShape.new(name: 'ResponseInspectionBodyContainsFailureStrings')
+    ResponseInspectionBodyContainsSuccessStrings = Shapes::ListShape.new(name: 'ResponseInspectionBodyContainsSuccessStrings')
+    ResponseInspectionHeader = Shapes::StructureShape.new(name: 'ResponseInspectionHeader')
+    ResponseInspectionHeaderFailureValues = Shapes::ListShape.new(name: 'ResponseInspectionHeaderFailureValues')
+    ResponseInspectionHeaderName = Shapes::StringShape.new(name: 'ResponseInspectionHeaderName')
+    ResponseInspectionHeaderSuccessValues = Shapes::ListShape.new(name: 'ResponseInspectionHeaderSuccessValues')
+    ResponseInspectionJson = Shapes::StructureShape.new(name: 'ResponseInspectionJson')
+    ResponseInspectionJsonFailureValues = Shapes::ListShape.new(name: 'ResponseInspectionJsonFailureValues')
+    ResponseInspectionJsonSuccessValues = Shapes::ListShape.new(name: 'ResponseInspectionJsonSuccessValues')
+    ResponseInspectionStatusCode = Shapes::StructureShape.new(name: 'ResponseInspectionStatusCode')
+    ResponseInspectionStatusCodeFailureCodes = Shapes::ListShape.new(name: 'ResponseInspectionStatusCodeFailureCodes')
+    ResponseInspectionStatusCodeSuccessCodes = Shapes::ListShape.new(name: 'ResponseInspectionStatusCodeSuccessCodes')
     ResponseStatusCode = Shapes::IntegerShape.new(name: 'ResponseStatusCode')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleAction = Shapes::StructureShape.new(name: 'RuleAction')
@@ -284,6 +302,9 @@ module Aws::WAFV2
     SqliMatchStatement = Shapes::StructureShape.new(name: 'SqliMatchStatement')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     Statements = Shapes::ListShape.new(name: 'Statements')
+    String = Shapes::StringShape.new(name: 'String')
+    SuccessCode = Shapes::IntegerShape.new(name: 'SuccessCode')
+    SuccessValue = Shapes::StringShape.new(name: 'SuccessValue')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagInfoForResource = Shapes::StructureShape.new(name: 'TagInfoForResource')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -344,6 +365,11 @@ module Aws::WAFV2
     WebACLSummaries = Shapes::ListShape.new(name: 'WebACLSummaries')
     WebACLSummary = Shapes::StructureShape.new(name: 'WebACLSummary')
     XssMatchStatement = Shapes::StructureShape.new(name: 'XssMatchStatement')
+
+    AWSManagedRulesATPRuleSet.add_member(:login_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LoginPath"))
+    AWSManagedRulesATPRuleSet.add_member(:request_inspection, Shapes::ShapeRef.new(shape: RequestInspection, location_name: "RequestInspection"))
+    AWSManagedRulesATPRuleSet.add_member(:response_inspection, Shapes::ShapeRef.new(shape: ResponseInspection, location_name: "ResponseInspection"))
+    AWSManagedRulesATPRuleSet.struct_class = Types::AWSManagedRulesATPRuleSet
 
     AWSManagedRulesBotControlRuleSet.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, required: true, location_name: "InspectionLevel"))
     AWSManagedRulesBotControlRuleSet.struct_class = Types::AWSManagedRulesBotControlRuleSet
@@ -923,11 +949,12 @@ module Aws::WAFV2
     LoggingFilter.add_member(:default_behavior, Shapes::ShapeRef.new(shape: FilterBehavior, required: true, location_name: "DefaultBehavior"))
     LoggingFilter.struct_class = Types::LoggingFilter
 
-    ManagedRuleGroupConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: LoginPathString, location_name: "LoginPath"))
-    ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, location_name: "PayloadType"))
-    ManagedRuleGroupConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, location_name: "UsernameField"))
-    ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, location_name: "PasswordField"))
+    ManagedRuleGroupConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: LoginPathString, deprecated: true, location_name: "LoginPath", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet LoginPath"}))
+    ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, deprecated: true, location_name: "PayloadType", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType"}))
+    ManagedRuleGroupConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, deprecated: true, location_name: "UsernameField", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection UsernameField"}))
+    ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, deprecated: true, location_name: "PasswordField", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PasswordField"}))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_bot_control_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesBotControlRuleSet, location_name: "AWSManagedRulesBotControlRuleSet"))
+    ManagedRuleGroupConfig.add_member(:aws_managed_rules_atp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesATPRuleSet, location_name: "AWSManagedRulesATPRuleSet"))
     ManagedRuleGroupConfig.struct_class = Types::ManagedRuleGroupConfig
 
     ManagedRuleGroupConfigs.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupConfig)
@@ -1082,7 +1109,52 @@ module Aws::WAFV2
     ReleaseSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     ReleaseSummary.struct_class = Types::ReleaseSummary
 
+    RequestInspection.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, required: true, location_name: "PayloadType"))
+    RequestInspection.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, required: true, location_name: "UsernameField"))
+    RequestInspection.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, required: true, location_name: "PasswordField"))
+    RequestInspection.struct_class = Types::RequestInspection
+
     ResourceArns.member = Shapes::ShapeRef.new(shape: ResourceArn)
+
+    ResponseInspection.add_member(:status_code, Shapes::ShapeRef.new(shape: ResponseInspectionStatusCode, location_name: "StatusCode"))
+    ResponseInspection.add_member(:header, Shapes::ShapeRef.new(shape: ResponseInspectionHeader, location_name: "Header"))
+    ResponseInspection.add_member(:body_contains, Shapes::ShapeRef.new(shape: ResponseInspectionBodyContains, location_name: "BodyContains"))
+    ResponseInspection.add_member(:json, Shapes::ShapeRef.new(shape: ResponseInspectionJson, location_name: "Json"))
+    ResponseInspection.struct_class = Types::ResponseInspection
+
+    ResponseInspectionBodyContains.add_member(:success_strings, Shapes::ShapeRef.new(shape: ResponseInspectionBodyContainsSuccessStrings, required: true, location_name: "SuccessStrings"))
+    ResponseInspectionBodyContains.add_member(:failure_strings, Shapes::ShapeRef.new(shape: ResponseInspectionBodyContainsFailureStrings, required: true, location_name: "FailureStrings"))
+    ResponseInspectionBodyContains.struct_class = Types::ResponseInspectionBodyContains
+
+    ResponseInspectionBodyContainsFailureStrings.member = Shapes::ShapeRef.new(shape: FailureValue)
+
+    ResponseInspectionBodyContainsSuccessStrings.member = Shapes::ShapeRef.new(shape: SuccessValue)
+
+    ResponseInspectionHeader.add_member(:name, Shapes::ShapeRef.new(shape: ResponseInspectionHeaderName, required: true, location_name: "Name"))
+    ResponseInspectionHeader.add_member(:success_values, Shapes::ShapeRef.new(shape: ResponseInspectionHeaderSuccessValues, required: true, location_name: "SuccessValues"))
+    ResponseInspectionHeader.add_member(:failure_values, Shapes::ShapeRef.new(shape: ResponseInspectionHeaderFailureValues, required: true, location_name: "FailureValues"))
+    ResponseInspectionHeader.struct_class = Types::ResponseInspectionHeader
+
+    ResponseInspectionHeaderFailureValues.member = Shapes::ShapeRef.new(shape: FailureValue)
+
+    ResponseInspectionHeaderSuccessValues.member = Shapes::ShapeRef.new(shape: SuccessValue)
+
+    ResponseInspectionJson.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
+    ResponseInspectionJson.add_member(:success_values, Shapes::ShapeRef.new(shape: ResponseInspectionJsonSuccessValues, required: true, location_name: "SuccessValues"))
+    ResponseInspectionJson.add_member(:failure_values, Shapes::ShapeRef.new(shape: ResponseInspectionJsonFailureValues, required: true, location_name: "FailureValues"))
+    ResponseInspectionJson.struct_class = Types::ResponseInspectionJson
+
+    ResponseInspectionJsonFailureValues.member = Shapes::ShapeRef.new(shape: FailureValue)
+
+    ResponseInspectionJsonSuccessValues.member = Shapes::ShapeRef.new(shape: SuccessValue)
+
+    ResponseInspectionStatusCode.add_member(:success_codes, Shapes::ShapeRef.new(shape: ResponseInspectionStatusCodeSuccessCodes, required: true, location_name: "SuccessCodes"))
+    ResponseInspectionStatusCode.add_member(:failure_codes, Shapes::ShapeRef.new(shape: ResponseInspectionStatusCodeFailureCodes, required: true, location_name: "FailureCodes"))
+    ResponseInspectionStatusCode.struct_class = Types::ResponseInspectionStatusCode
+
+    ResponseInspectionStatusCodeFailureCodes.member = Shapes::ShapeRef.new(shape: FailureCode)
+
+    ResponseInspectionStatusCodeSuccessCodes.member = Shapes::ShapeRef.new(shape: SuccessCode)
 
     Rule.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     Rule.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "Priority"))

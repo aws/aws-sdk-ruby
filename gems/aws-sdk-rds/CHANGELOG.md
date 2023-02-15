@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.172.0 (2023-02-15)
+------------------
+
+* Feature - Database Activity Stream support for RDS for SQL Server.
+
 1.171.0 (2023-01-18)
 ------------------
 

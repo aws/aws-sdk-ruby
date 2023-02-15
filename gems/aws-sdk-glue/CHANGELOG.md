@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2023-02-15)
+------------------
+
+* Feature - Fix DirectJDBCSource not showing up in CLI code gen
+
 1.130.0 (2023-02-08)
 ------------------
 

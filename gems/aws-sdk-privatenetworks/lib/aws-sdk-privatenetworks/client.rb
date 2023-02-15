@@ -613,8 +613,21 @@ module Aws::PrivateNetworks
     #   resp.access_point.position.elevation_unit #=> String, one of "FEET"
     #   resp.access_point.position.latitude #=> Float
     #   resp.access_point.position.longitude #=> Float
+    #   resp.access_point.return_information.replacement_order_arn #=> String
+    #   resp.access_point.return_information.return_reason #=> String
+    #   resp.access_point.return_information.shipping_address.city #=> String
+    #   resp.access_point.return_information.shipping_address.company #=> String
+    #   resp.access_point.return_information.shipping_address.country #=> String
+    #   resp.access_point.return_information.shipping_address.name #=> String
+    #   resp.access_point.return_information.shipping_address.phone_number #=> String
+    #   resp.access_point.return_information.shipping_address.postal_code #=> String
+    #   resp.access_point.return_information.shipping_address.state_or_province #=> String
+    #   resp.access_point.return_information.shipping_address.street1 #=> String
+    #   resp.access_point.return_information.shipping_address.street2 #=> String
+    #   resp.access_point.return_information.shipping_address.street3 #=> String
+    #   resp.access_point.return_information.shipping_label #=> String
     #   resp.access_point.serial_number #=> String
-    #   resp.access_point.status #=> String, one of "PENDING", "SHIPPED", "PROVISIONING", "PROVISIONED", "AVAILABLE", "DELETING", "PENDING_RETURN", "DELETED"
+    #   resp.access_point.status #=> String, one of "PENDING", "SHIPPED", "PROVISIONING", "PROVISIONED", "AVAILABLE", "DELETING", "PENDING_RETURN", "DELETED", "CREATING_SHIPPING_LABEL"
     #   resp.access_point.status_reason #=> String
     #   resp.access_point.type #=> String, one of "RADIO_UNIT"
     #   resp.access_point.vendor #=> String
@@ -1076,8 +1089,21 @@ module Aws::PrivateNetworks
     #   resp.network_resource.position.elevation_unit #=> String, one of "FEET"
     #   resp.network_resource.position.latitude #=> Float
     #   resp.network_resource.position.longitude #=> Float
+    #   resp.network_resource.return_information.replacement_order_arn #=> String
+    #   resp.network_resource.return_information.return_reason #=> String
+    #   resp.network_resource.return_information.shipping_address.city #=> String
+    #   resp.network_resource.return_information.shipping_address.company #=> String
+    #   resp.network_resource.return_information.shipping_address.country #=> String
+    #   resp.network_resource.return_information.shipping_address.name #=> String
+    #   resp.network_resource.return_information.shipping_address.phone_number #=> String
+    #   resp.network_resource.return_information.shipping_address.postal_code #=> String
+    #   resp.network_resource.return_information.shipping_address.state_or_province #=> String
+    #   resp.network_resource.return_information.shipping_address.street1 #=> String
+    #   resp.network_resource.return_information.shipping_address.street2 #=> String
+    #   resp.network_resource.return_information.shipping_address.street3 #=> String
+    #   resp.network_resource.return_information.shipping_label #=> String
     #   resp.network_resource.serial_number #=> String
-    #   resp.network_resource.status #=> String, one of "PENDING", "SHIPPED", "PROVISIONING", "PROVISIONED", "AVAILABLE", "DELETING", "PENDING_RETURN", "DELETED"
+    #   resp.network_resource.status #=> String, one of "PENDING", "SHIPPED", "PROVISIONING", "PROVISIONED", "AVAILABLE", "DELETING", "PENDING_RETURN", "DELETED", "CREATING_SHIPPING_LABEL"
     #   resp.network_resource.status_reason #=> String
     #   resp.network_resource.type #=> String, one of "RADIO_UNIT"
     #   resp.network_resource.vendor #=> String
@@ -1202,11 +1228,8 @@ module Aws::PrivateNetworks
     # Name (ARN) of an order, the status of device identifiers, or the ARN
     # of the traffic group.
     #
-    #      <p>If you specify multiple filters, filters are joined with an OR, and the request
-    #
-    # returns results that match all of the specified filters.
-    #
-    # </p>
+    # If you specify multiple filters, filters are joined with an OR, and
+    # the request returns results that match all of the specified filters.
     #
     # @option params [Hash<String,Array>] :filters
     #   The filters.
@@ -1337,8 +1360,21 @@ module Aws::PrivateNetworks
     #   resp.network_resources[0].position.elevation_unit #=> String, one of "FEET"
     #   resp.network_resources[0].position.latitude #=> Float
     #   resp.network_resources[0].position.longitude #=> Float
+    #   resp.network_resources[0].return_information.replacement_order_arn #=> String
+    #   resp.network_resources[0].return_information.return_reason #=> String
+    #   resp.network_resources[0].return_information.shipping_address.city #=> String
+    #   resp.network_resources[0].return_information.shipping_address.company #=> String
+    #   resp.network_resources[0].return_information.shipping_address.country #=> String
+    #   resp.network_resources[0].return_information.shipping_address.name #=> String
+    #   resp.network_resources[0].return_information.shipping_address.phone_number #=> String
+    #   resp.network_resources[0].return_information.shipping_address.postal_code #=> String
+    #   resp.network_resources[0].return_information.shipping_address.state_or_province #=> String
+    #   resp.network_resources[0].return_information.shipping_address.street1 #=> String
+    #   resp.network_resources[0].return_information.shipping_address.street2 #=> String
+    #   resp.network_resources[0].return_information.shipping_address.street3 #=> String
+    #   resp.network_resources[0].return_information.shipping_label #=> String
     #   resp.network_resources[0].serial_number #=> String
-    #   resp.network_resources[0].status #=> String, one of "PENDING", "SHIPPED", "PROVISIONING", "PROVISIONED", "AVAILABLE", "DELETING", "PENDING_RETURN", "DELETED"
+    #   resp.network_resources[0].status #=> String, one of "PENDING", "SHIPPED", "PROVISIONING", "PROVISIONED", "AVAILABLE", "DELETING", "PENDING_RETURN", "DELETED", "CREATING_SHIPPING_LABEL"
     #   resp.network_resources[0].status_reason #=> String
     #   resp.network_resources[0].type #=> String, one of "RADIO_UNIT"
     #   resp.network_resources[0].vendor #=> String
@@ -1621,6 +1657,112 @@ module Aws::PrivateNetworks
       req.send_request(options)
     end
 
+    # Starts an update of the specified network resource.
+    #
+    # After you submit a request to replace or return a network resource,
+    # the status of the network resource is `CREATING_SHIPPING_LABEL`. The
+    # shipping label is available when the status of the network resource is
+    # `PENDING_RETURN`. After the network resource is successfully returned,
+    # its status is `DELETED`. For more information, see [Return a radio
+    # unit][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit
+    #
+    # @option params [required, String] :network_resource_arn
+    #   The Amazon Resource Name (ARN) of the network resource.
+    #
+    # @option params [String] :return_reason
+    #   The reason for the return. Providing a reason for a return is
+    #   optional.
+    #
+    # @option params [Types::Address] :shipping_address
+    #   The shipping address. If you don't provide a shipping address when
+    #   replacing or returning a network resource, we use the address from the
+    #   original order for the network resource.
+    #
+    # @option params [required, String] :update_type
+    #   The update type.
+    #
+    #   * `REPLACE` - Submits a request to replace a defective radio unit. We
+    #     provide a shipping label that you can use for the return process and
+    #     we ship a replacement radio unit to you.
+    #
+    #   * `RETURN` - Submits a request to replace a radio unit that you no
+    #     longer need. We provide a shipping label that you can use for the
+    #     return process.
+    #
+    # @return [Types::StartNetworkResourceUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNetworkResourceUpdateResponse#network_resource #network_resource} => Types::NetworkResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_network_resource_update({
+    #     network_resource_arn: "Arn", # required
+    #     return_reason: "StartNetworkResourceUpdateRequestReturnReasonString",
+    #     shipping_address: {
+    #       city: "AddressContent", # required
+    #       company: "AddressContent",
+    #       country: "AddressContent", # required
+    #       name: "AddressContent", # required
+    #       phone_number: "AddressContent",
+    #       postal_code: "AddressContent", # required
+    #       state_or_province: "AddressContent", # required
+    #       street1: "AddressContent", # required
+    #       street2: "AddressContent",
+    #       street3: "AddressContent",
+    #     },
+    #     update_type: "REPLACE", # required, accepts REPLACE, RETURN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_resource.attributes #=> Array
+    #   resp.network_resource.attributes[0].name #=> String
+    #   resp.network_resource.attributes[0].value #=> String
+    #   resp.network_resource.created_at #=> Time
+    #   resp.network_resource.description #=> String
+    #   resp.network_resource.health #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
+    #   resp.network_resource.model #=> String
+    #   resp.network_resource.network_arn #=> String
+    #   resp.network_resource.network_resource_arn #=> String
+    #   resp.network_resource.network_site_arn #=> String
+    #   resp.network_resource.order_arn #=> String
+    #   resp.network_resource.position.elevation #=> Float
+    #   resp.network_resource.position.elevation_reference #=> String, one of "AGL", "AMSL"
+    #   resp.network_resource.position.elevation_unit #=> String, one of "FEET"
+    #   resp.network_resource.position.latitude #=> Float
+    #   resp.network_resource.position.longitude #=> Float
+    #   resp.network_resource.return_information.replacement_order_arn #=> String
+    #   resp.network_resource.return_information.return_reason #=> String
+    #   resp.network_resource.return_information.shipping_address.city #=> String
+    #   resp.network_resource.return_information.shipping_address.company #=> String
+    #   resp.network_resource.return_information.shipping_address.country #=> String
+    #   resp.network_resource.return_information.shipping_address.name #=> String
+    #   resp.network_resource.return_information.shipping_address.phone_number #=> String
+    #   resp.network_resource.return_information.shipping_address.postal_code #=> String
+    #   resp.network_resource.return_information.shipping_address.state_or_province #=> String
+    #   resp.network_resource.return_information.shipping_address.street1 #=> String
+    #   resp.network_resource.return_information.shipping_address.street2 #=> String
+    #   resp.network_resource.return_information.shipping_address.street3 #=> String
+    #   resp.network_resource.return_information.shipping_label #=> String
+    #   resp.network_resource.serial_number #=> String
+    #   resp.network_resource.status #=> String, one of "PENDING", "SHIPPED", "PROVISIONING", "PROVISIONED", "AVAILABLE", "DELETING", "PENDING_RETURN", "DELETED", "CREATING_SHIPPING_LABEL"
+    #   resp.network_resource.status_reason #=> String
+    #   resp.network_resource.type #=> String, one of "RADIO_UNIT"
+    #   resp.network_resource.vendor #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/privatenetworks-2021-12-03/StartNetworkResourceUpdate AWS API Documentation
+    #
+    # @overload start_network_resource_update(params = {})
+    # @param [Hash] params ({})
+    def start_network_resource_update(params = {}, options = {})
+      req = build_request(:start_network_resource_update, params)
+      req.send_request(options)
+    end
+
     # Adds tags to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -1849,7 +1991,7 @@ module Aws::PrivateNetworks
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-privatenetworks'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -729,6 +729,67 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Creates a list.
+    #
+    # List is a set of input data for a variable in your event dataset. You
+    # use the input data in a rule that's associated with your detector.
+    # For more information, see [Lists][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/lists.html
+    #
+    # @option params [required, String] :name
+    #   The name of the list.
+    #
+    # @option params [Array<String>] :elements
+    #   The names of the elements, if providing. You can also create an empty
+    #   list and add elements later using the [UpdateList][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/api/API_Updatelist.html
+    #
+    # @option params [String] :variable_type
+    #   The variable type of the list. You can only assign the variable type
+    #   with String data type. For more information, see [Variable types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
+    #
+    # @option params [String] :description
+    #   The description of the list.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A collection of the key and value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_list({
+    #     name: "noDashIdentifier", # required
+    #     elements: ["Elements"],
+    #     variable_type: "variableType",
+    #     description: "description",
+    #     tags: [
+    #       {
+    #         key: "tagKey", # required
+    #         value: "tagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateList AWS API Documentation
+    #
+    # @overload create_list(params = {})
+    # @param [Hash] params ({})
+    def create_list(params = {}, options = {})
+      req = build_request(:create_list, params)
+      req.send_request(options)
+    end
+
     # Creates a model using the specified model type.
     #
     # @option params [required, String] :model_id
@@ -1256,6 +1317,31 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def delete_label(params = {}, options = {})
       req = build_request(:delete_label, params)
+      req.send_request(options)
+    end
+
+    # Deletes the list, provided it is not used in a rule.
+    #
+    # When you delete a list, Amazon Fraud Detector permanently deletes that
+    # list and the elements in the list.
+    #
+    # @option params [required, String] :name
+    #   The name of the list to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_list({
+    #     name: "noDashIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteList AWS API Documentation
+    #
+    # @overload delete_list(params = {})
+    # @param [Hash] params ({})
+    def delete_list(params = {}, options = {})
+      req = build_request(:delete_list, params)
       req.send_request(options)
     end
 
@@ -2375,6 +2461,94 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Gets all the elements in the specified list.
+    #
+    # @option params [required, String] :name
+    #   The name of the list.
+    #
+    # @option params [String] :next_token
+    #   The next token for the subsequent request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects to return for the request.
+    #
+    # @return [Types::GetListElementsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetListElementsResult#elements #elements} => Array&lt;String&gt;
+    #   * {Types::GetListElementsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_list_elements({
+    #     name: "noDashIdentifier", # required
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.elements #=> Array
+    #   resp.elements[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetListElements AWS API Documentation
+    #
+    # @overload get_list_elements(params = {})
+    # @param [Hash] params ({})
+    def get_list_elements(params = {}, options = {})
+      req = build_request(:get_list_elements, params)
+      req.send_request(options)
+    end
+
+    # Gets the metadata of either all the lists under the account or the
+    # specified list.
+    #
+    # @option params [String] :name
+    #   The name of the list.
+    #
+    # @option params [String] :next_token
+    #   The next token for the subsequent request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects to return for the request.
+    #
+    # @return [Types::GetListsMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetListsMetadataResult#lists #lists} => Array&lt;Types::AllowDenyList&gt;
+    #   * {Types::GetListsMetadataResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lists_metadata({
+    #     name: "noDashIdentifier",
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lists #=> Array
+    #   resp.lists[0].name #=> String
+    #   resp.lists[0].description #=> String
+    #   resp.lists[0].variable_type #=> String
+    #   resp.lists[0].created_time #=> String
+    #   resp.lists[0].updated_time #=> String
+    #   resp.lists[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetListsMetadata AWS API Documentation
+    #
+    # @overload get_lists_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_lists_metadata(params = {}, options = {})
+      req = build_request(:get_lists_metadata, params)
+      req.send_request(options)
+    end
+
     # Gets the details of the specified model version.
     #
     # @option params [required, String] :model_id
@@ -3395,6 +3569,60 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Updates a list.
+    #
+    # @option params [required, String] :name
+    #   The name of the list to update.
+    #
+    # @option params [Array<String>] :elements
+    #   One or more list elements to add or replace. If you are providing the
+    #   elements, make sure to specify the `updateMode` to use.
+    #
+    #   If you are deleting all elements from the list, use `REPLACE` for the
+    #   `updateMode` and provide an empty list (0 elements).
+    #
+    # @option params [String] :description
+    #   The new description.
+    #
+    # @option params [String] :update_mode
+    #   The update mode (type).
+    #
+    #   * Use `APPEND` if you are adding elements to the list.
+    #
+    #   * Use `REPLACE` if you replacing existing elements in the list.
+    #
+    #   * Use `REMOVE` if you are removing elements from the list.
+    #
+    # @option params [String] :variable_type
+    #   The variable type you want to assign to the list.
+    #
+    #   <note markdown="1"> You cannot update a variable type of a list that already has a
+    #   variable type assigned to it. You can assign a variable type to a list
+    #   only if the list does not already have a variable type.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_list({
+    #     name: "noDashIdentifier", # required
+    #     elements: ["Elements"],
+    #     description: "description",
+    #     update_mode: "REPLACE", # accepts REPLACE, APPEND, REMOVE
+    #     variable_type: "variableType",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateList AWS API Documentation
+    #
+    # @overload update_list(params = {})
+    # @param [Hash] params ({})
+    def update_list(params = {}, options = {})
+      req = build_request(:update_list, params)
+      req.send_request(options)
+    end
+
     # Updates model description.
     #
     # @option params [required, String] :model_id
@@ -3682,7 +3910,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

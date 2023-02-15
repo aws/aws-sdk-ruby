@@ -83,7 +83,7 @@ module Aws::EFS
     #   @return [Types::RootDirectory]
     #
     # @!attribute [rw] owner_id
-    #   Identified the Amazon Web Services account that owns the access
+    #   Identifies the Amazon Web Services account that owns the access
     #   point resource.
     #   @return [String]
     #
@@ -1215,9 +1215,7 @@ module Aws::EFS
     # A description of the file system.
     #
     # @!attribute [rw] owner_id
-    #   The Amazon Web Services account that created the file system. If the
-    #   file system was created by an IAM user, the parent account to which
-    #   the user belongs is the owner.
+    #   The Amazon Web Services account that created the file system.
     #   @return [String]
     #
     # @!attribute [rw] creation_token

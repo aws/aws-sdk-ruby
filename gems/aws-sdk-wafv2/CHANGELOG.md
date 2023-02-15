@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2023-02-15)
+------------------
+
+* Feature - For protected CloudFront distributions, you can now use the AWS WAF Fraud Control account takeover prevention (ATP) managed rule group to block new login attempts from clients that have recently submitted too many failed login attempts.
+
 1.47.0 (2023-01-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2023-02-15)
+------------------
+
+* Feature - This release introduces a new StartNetworkResourceUpdate API, which enables return/replacement of hardware from a NetworkSite.
+
 1.3.0 (2023-01-18)
 ------------------
 

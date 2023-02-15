@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-02-15)
+------------------
+
+* Feature - This release adds an InsufficientEncryptionPolicyException type to the StartImport endpoint
+
 1.57.0 (2023-01-31)
 ------------------
 

@@ -1095,6 +1095,10 @@ module Aws::PrivateNetworks
     #   The position of the network resource.
     #   @return [Types::Position]
     #
+    # @!attribute [rw] return_information
+    #   Information about a request to return the network resource.
+    #   @return [Types::ReturnInformation]
+    #
     # @!attribute [rw] serial_number
     #   The serial number of the network resource.
     #   @return [String]
@@ -1128,6 +1132,7 @@ module Aws::PrivateNetworks
       :network_site_arn,
       :order_arn,
       :position,
+      :return_information,
       :serial_number,
       :status,
       :status_reason,
@@ -1342,6 +1347,43 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
+    # Information about a request to return a network resource.
+    #
+    # @!attribute [rw] replacement_order_arn
+    #   The Amazon Resource Name (ARN) of the replacement order.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_reason
+    #   The reason for the return. If the return request did not include a
+    #   reason for the return, this value is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_address
+    #   The shipping address.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] shipping_label
+    #   The URL of the shipping label. The shipping label is available for
+    #   download only if the status of the network resource is
+    #   `PENDING_RETURN`. For more information, see [Return a radio
+    #   unit][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/privatenetworks-2021-12-03/ReturnInformation AWS API Documentation
+    #
+    class ReturnInformation < Struct.new(
+      :replacement_order_arn,
+      :return_reason,
+      :shipping_address,
+      :shipping_label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a site plan.
     #
     # @!attribute [rw] options
@@ -1357,6 +1399,56 @@ module Aws::PrivateNetworks
     class SitePlan < Struct.new(
       :options,
       :resource_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_resource_arn
+    #   The Amazon Resource Name (ARN) of the network resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_reason
+    #   The reason for the return. Providing a reason for a return is
+    #   optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_address
+    #   The shipping address. If you don't provide a shipping address when
+    #   replacing or returning a network resource, we use the address from
+    #   the original order for the network resource.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] update_type
+    #   The update type.
+    #
+    #   * `REPLACE` - Submits a request to replace a defective radio unit.
+    #     We provide a shipping label that you can use for the return
+    #     process and we ship a replacement radio unit to you.
+    #
+    #   * `RETURN` - Submits a request to replace a radio unit that you no
+    #     longer need. We provide a shipping label that you can use for the
+    #     return process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/privatenetworks-2021-12-03/StartNetworkResourceUpdateRequest AWS API Documentation
+    #
+    class StartNetworkResourceUpdateRequest < Struct.new(
+      :network_resource_arn,
+      :return_reason,
+      :shipping_address,
+      :update_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_resource
+    #   The network resource.
+    #   @return [Types::NetworkResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/privatenetworks-2021-12-03/StartNetworkResourceUpdateResponse AWS API Documentation
+    #
+    class StartNetworkResourceUpdateResponse < Struct.new(
+      :network_resource)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -10,7 +10,53 @@
 module Aws::WAFV2
   module Types
 
-    # Details for your use of the Bot Control managed rule group, used in
+    # Details for your use of the account takeover prevention managed rule
+    # group, `AWSManagedRulesATPRuleSet`. This configuration is used in
+    # `ManagedRuleGroupConfig`.
+    #
+    # @!attribute [rw] login_path
+    #   The path of the login endpoint for your application. For example,
+    #   for the URL `https://example.com/web/login`, you would provide the
+    #   path `/web/login`.
+    #
+    #   The rule group inspects only HTTP `POST` requests to your specified
+    #   login endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_inspection
+    #   The criteria for inspecting login requests, used by the ATP rule
+    #   group to validate credentials usage.
+    #   @return [Types::RequestInspection]
+    #
+    # @!attribute [rw] response_inspection
+    #   The criteria for inspecting responses to login requests, used by the
+    #   ATP rule group to track login failure rates.
+    #
+    #   The ATP rule group evaluates the responses that your protected
+    #   resources send back to client login attempts, keeping count of
+    #   successful and failed attempts from each IP address and client
+    #   session. Using this information, the rule group labels and mitigates
+    #   requests from client sessions and IP addresses that submit too many
+    #   failed login attempts in a short amount of time.
+    #
+    #   <note markdown="1"> Response inspection is available only in web ACLs that protect
+    #   Amazon CloudFront distributions.
+    #
+    #    </note>
+    #   @return [Types::ResponseInspection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesATPRuleSet AWS API Documentation
+    #
+    class AWSManagedRulesATPRuleSet < Struct.new(
+      :login_path,
+      :request_inspection,
+      :response_inspection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for your use of the Bot Control managed rule group,
+    # `AWSManagedRulesBotControlRuleSet`. This configuration is used in
     # `ManagedRuleGroupConfig`.
     #
     # @!attribute [rw] inspection_level
@@ -239,7 +285,7 @@ module Aws::WAFV2
     # @!attribute [rw] search_string
     #   A string value that you want WAF to search for. WAF searches only in
     #   the part of web requests that you designate for inspection in
-    #   FieldToMatch. The maximum length of the value is 50 bytes.
+    #   FieldToMatch. The maximum length of the value is 200 bytes.
     #
     #   Valid values depend on the component that you specify for inspection
     #   in `FieldToMatch`\:
@@ -256,7 +302,7 @@ module Aws::WAFV2
     #   **If you're using the WAF API**
     #
     #   Specify a base64-encoded version of the value. The maximum length of
-    #   the value before you base64-encode it is 50 bytes.
+    #   the value before you base64-encode it is 200 bytes.
     #
     #   For example, suppose the value of `Type` is `HEADER` and the value
     #   of `Data` is `User-Agent`. If you want to search the `User-Agent`
@@ -4209,6 +4255,11 @@ module Aws::WAFV2
     # Additional information that's used by a managed rule group. Many
     # managed rule groups don't require this.
     #
+    # Use the `AWSManagedRulesATPRuleSet` configuration object for the
+    # account takeover prevention managed rule group, to provide information
+    # such as the sign-in page of your application and the type of content
+    # to accept or reject from the client.
+    #
     # Use the `AWSManagedRulesBotControlRuleSet` configuration object to
     # configure the protection level that you want the Bot Control rule
     # group to use.
@@ -4216,22 +4267,31 @@ module Aws::WAFV2
     # For example specifications, see the examples section of CreateWebACL.
     #
     # @!attribute [rw] login_path
-    #   The path of the login endpoint for your application. For example,
-    #   for the URL `https://example.com/web/login`, you would provide the
-    #   path `/web/login`.
+    #   <note markdown="1"> Instead of this setting, provide your configuration under
+    #   `AWSManagedRulesATPRuleSet`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] payload_type
-    #   The payload type for your login endpoint, either JSON or form
-    #   encoded.
+    #   <note markdown="1"> Instead of this setting, provide your configuration under
+    #   `AWSManagedRulesATPRuleSet` `RequestInspection`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] username_field
-    #   Details about your login page username field.
+    #   <note markdown="1"> Instead of this setting, provide your configuration under
+    #   `AWSManagedRulesATPRuleSet` `RequestInspection`.
+    #
+    #    </note>
     #   @return [Types::UsernameField]
     #
     # @!attribute [rw] password_field
-    #   Details about your login page password field.
+    #   <note markdown="1"> Instead of this setting, provide your configuration under
+    #   `AWSManagedRulesATPRuleSet` `RequestInspection`.
+    #
+    #    </note>
     #   @return [Types::PasswordField]
     #
     # @!attribute [rw] aws_managed_rules_bot_control_rule_set
@@ -4247,6 +4307,27 @@ module Aws::WAFV2
     #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html
     #   @return [Types::AWSManagedRulesBotControlRuleSet]
     #
+    # @!attribute [rw] aws_managed_rules_atp_rule_set
+    #   Additional configuration for using the account takeover prevention
+    #   (ATP) managed rule group, `AWSManagedRulesATPRuleSet`. Use this to
+    #   provide login request information to the rule group. For web ACLs
+    #   that protect CloudFront distributions, use this to also provide the
+    #   information about how your distribution responds to login requests.
+    #   This configuration replaces the individual configuration fields in
+    #   `ManagedRuleGroupConfig` and provides additional feature
+    #   configuration.
+    #
+    #   For information about using the ATP managed rule group, see [WAF
+    #   Fraud Control account takeover prevention (ATP) rule group][1] and
+    #   [WAF Fraud Control account takeover prevention (ATP)][2] in the *WAF
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html
+    #   @return [Types::AWSManagedRulesATPRuleSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupConfig AWS API Documentation
     #
     class ManagedRuleGroupConfig < Struct.new(
@@ -4254,7 +4335,8 @@ module Aws::WAFV2
       :payload_type,
       :username_field,
       :password_field,
-      :aws_managed_rules_bot_control_rule_set)
+      :aws_managed_rules_bot_control_rule_set,
+      :aws_managed_rules_atp_rule_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4319,6 +4401,11 @@ module Aws::WAFV2
     # @!attribute [rw] managed_rule_group_configs
     #   Additional information that's used by a managed rule group. Many
     #   managed rule groups don't require this.
+    #
+    #   Use the `AWSManagedRulesATPRuleSet` configuration object for the
+    #   account takeover prevention managed rule group, to provide
+    #   information such as the sign-in page of your application and the
+    #   type of content to accept or reject from the client.
     #
     #   Use the `AWSManagedRulesBotControlRuleSet` configuration object to
     #   configure the protection level that you want the Bot Control rule
@@ -4785,8 +4872,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Details about your login page password field, used in a
-    # `ManagedRuleGroupConfig`.
+    # Details about your login page password field for request inspection,
+    # used in the `AWSManagedRulesATPRuleSet` `RequestInspection`
+    # configuration.
     #
     # @!attribute [rw] identifier
     #   The name of the password field. For example `/form/password`.
@@ -4990,7 +5078,7 @@ module Aws::WAFV2
     # rate-based rule with a nested AND rule statement that contains the
     # following nested statements:
     #
-    # * An IP match statement with an IP set that specified the address
+    # * An IP match statement with an IP set that specifies the address
     #   192.0.2.44.
     #
     # * A string match statement that searches in the User-Agent header for
@@ -5268,6 +5356,272 @@ module Aws::WAFV2
     class ReleaseSummary < Struct.new(
       :release_version,
       :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria for inspecting login requests, used by the ATP rule group
+    # to validate credentials usage.
+    #
+    # This is part of the `AWSManagedRulesATPRuleSet` configuration in
+    # `ManagedRuleGroupConfig`.
+    #
+    # In these settings, you specify how your application accepts login
+    # attempts by providing the request payload type and the names of the
+    # fields within the request body where the username and password are
+    # provided.
+    #
+    # @!attribute [rw] payload_type
+    #   The payload type for your login endpoint, either JSON or form
+    #   encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_field
+    #   Details about your login page username field.
+    #
+    #   How you specify this depends on the payload type.
+    #
+    #   * For JSON payloads, specify the field name in JSON pointer syntax.
+    #     For information about the JSON Pointer syntax, see the Internet
+    #     Engineering Task Force (IETF) documentation [JavaScript Object
+    #     Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "login": \{ "username":
+    #     "THE_USERNAME", "password": "THE_PASSWORD" \} \}`, the username
+    #     field specification is `/login/username` and the password field
+    #     specification is `/login/password`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with input elements named
+    #     `username1` and `password1`, the username field specification is
+    #     `username1` and the password field specification is `password1`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [Types::UsernameField]
+    #
+    # @!attribute [rw] password_field
+    #   Details about your login page password field.
+    #
+    #   How you specify this depends on the payload type.
+    #
+    #   * For JSON payloads, specify the field name in JSON pointer syntax.
+    #     For information about the JSON Pointer syntax, see the Internet
+    #     Engineering Task Force (IETF) documentation [JavaScript Object
+    #     Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "login": \{ "username":
+    #     "THE_USERNAME", "password": "THE_PASSWORD" \} \}`, the username
+    #     field specification is `/login/username` and the password field
+    #     specification is `/login/password`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with input elements named
+    #     `username1` and `password1`, the username field specification is
+    #     `username1` and the password field specification is `password1`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [Types::PasswordField]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RequestInspection AWS API Documentation
+    #
+    class RequestInspection < Struct.new(
+      :payload_type,
+      :username_field,
+      :password_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria for inspecting responses to login requests, used by the
+    # ATP rule group to track login failure rates.
+    #
+    # The ATP rule group evaluates the responses that your protected
+    # resources send back to client login attempts, keeping count of
+    # successful and failed attempts from each IP address and client
+    # session. Using this information, the rule group labels and mitigates
+    # requests from client sessions and IP addresses that submit too many
+    # failed login attempts in a short amount of time.
+    #
+    # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
+    # CloudFront distributions.
+    #
+    #  </note>
+    #
+    # This is part of the `AWSManagedRulesATPRuleSet` configuration in
+    # `ManagedRuleGroupConfig`.
+    #
+    # Enable login response inspection by configuring exactly one component
+    # of the response to inspect. You can't configure more than one. If you
+    # don't configure any of the response inspection options, response
+    # inspection is disabled.
+    #
+    # @!attribute [rw] status_code
+    #   Configures inspection of the response status code.
+    #   @return [Types::ResponseInspectionStatusCode]
+    #
+    # @!attribute [rw] header
+    #   Configures inspection of the response header.
+    #   @return [Types::ResponseInspectionHeader]
+    #
+    # @!attribute [rw] body_contains
+    #   Configures inspection of the response body.
+    #   @return [Types::ResponseInspectionBodyContains]
+    #
+    # @!attribute [rw] json
+    #   Configures inspection of the response JSON.
+    #   @return [Types::ResponseInspectionJson]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspection AWS API Documentation
+    #
+    class ResponseInspection < Struct.new(
+      :status_code,
+      :header,
+      :body_contains,
+      :json)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures inspection of the response body. This is part of the
+    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    #
+    # @!attribute [rw] success_strings
+    #   Strings in the body of the response that indicate a successful login
+    #   attempt. To be counted as a successful login, the string can be
+    #   anywhere in the body and must be an exact match, including case.
+    #   Each string must be unique among the success and failure strings.
+    #
+    #   JSON example: `"SuccessStrings": [ "Login successful", "Welcome to
+    #   our site!" ]`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failure_strings
+    #   Strings in the body of the response that indicate a failed login
+    #   attempt. To be counted as a failed login, the string can be anywhere
+    #   in the body and must be an exact match, including case. Each string
+    #   must be unique among the success and failure strings.
+    #
+    #   JSON example: `"FailureStrings": [ "Login failed" ]`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspectionBodyContains AWS API Documentation
+    #
+    class ResponseInspectionBodyContains < Struct.new(
+      :success_strings,
+      :failure_strings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures inspection of the response header. This is part of the
+    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    #
+    # @!attribute [rw] name
+    #   The name of the header to match against. The name must be an exact
+    #   match, including case.
+    #
+    #   JSON example: `"Name": [ "LoginResult" ]`
+    #   @return [String]
+    #
+    # @!attribute [rw] success_values
+    #   Values in the response header with the specified name that indicate
+    #   a successful login attempt. To be counted as a successful login, the
+    #   value must be an exact match, including case. Each value must be
+    #   unique among the success and failure values.
+    #
+    #   JSON example: `"SuccessValues": [ "LoginPassed", "Successful login"
+    #   ]`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failure_values
+    #   Values in the response header with the specified name that indicate
+    #   a failed login attempt. To be counted as a failed login, the value
+    #   must be an exact match, including case. Each value must be unique
+    #   among the success and failure values.
+    #
+    #   JSON example: `"FailureValues": [ "LoginFailed", "Failed login" ]`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspectionHeader AWS API Documentation
+    #
+    class ResponseInspectionHeader < Struct.new(
+      :name,
+      :success_values,
+      :failure_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures inspection of the response JSON. This is part of the
+    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    #
+    # @!attribute [rw] identifier
+    #   The identifier for the value to match against in the JSON. The
+    #   identifier must be an exact match, including case.
+    #
+    #   JSON example: `"Identifier": [ "/login/success" ]`
+    #   @return [String]
+    #
+    # @!attribute [rw] success_values
+    #   Values for the specified identifier in the response JSON that
+    #   indicate a successful login attempt. To be counted as a successful
+    #   login, the value must be an exact match, including case. Each value
+    #   must be unique among the success and failure values.
+    #
+    #   JSON example: `"SuccessValues": [ "True", "Succeeded" ]`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failure_values
+    #   Values for the specified identifier in the response JSON that
+    #   indicate a failed login attempt. To be counted as a failed login,
+    #   the value must be an exact match, including case. Each value must be
+    #   unique among the success and failure values.
+    #
+    #   JSON example: `"FailureValues": [ "False", "Failed" ]`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspectionJson AWS API Documentation
+    #
+    class ResponseInspectionJson < Struct.new(
+      :identifier,
+      :success_values,
+      :failure_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures inspection of the response status code. This is part of the
+    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    #
+    # @!attribute [rw] success_codes
+    #   Status codes in the response that indicate a successful login
+    #   attempt. To be counted as a successful login, the response status
+    #   code must match one of these. Each code must be unique among the
+    #   success and failure status codes.
+    #
+    #   JSON example: `"SuccessCodes": [ 200, 201 ]`
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] failure_codes
+    #   Status codes in the response that indicate a failed login attempt.
+    #   To be counted as a failed login, the response status code must match
+    #   one of these. Each code must be unique among the success and failure
+    #   status codes.
+    #
+    #   JSON example: `"FailureCodes": [ 400, 404 ]`
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspectionStatusCode AWS API Documentation
+    #
+    class ResponseInspectionStatusCode < Struct.new(
+      :success_codes,
+      :failure_codes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6070,7 +6424,7 @@ module Aws::WAFV2
     #   create a rate-based rule with a nested AND rule statement that
     #   contains the following nested statements:
     #
-    #   * An IP match statement with an IP set that specified the address
+    #   * An IP match statement with an IP set that specifies the address
     #     192.0.2.44.
     #
     #   * A string match statement that searches in the User-Agent header
@@ -7016,8 +7370,9 @@ module Aws::WAFV2
     #
     class UriPath < Aws::EmptyStructure; end
 
-    # Details about your login page username field, used in a
-    # `ManagedRuleGroupConfig`.
+    # Details about your login page username field for request inspection,
+    # used in the `AWSManagedRulesATPRuleSet` `RequestInspection`
+    # configuration.
     #
     # @!attribute [rw] identifier
     #   The name of the username field. For example `/form/username`.

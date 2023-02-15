@@ -198,6 +198,45 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The metadata of a list.
+    #
+    # @!attribute [rw] name
+    #   The name of the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] variable_type
+    #   The variable type of the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time the list was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_time
+    #   The time the list was last updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/AllowDenyList AWS API Documentation
+    #
+    class AllowDenyList < Struct.new(
+      :name,
+      :description,
+      :variable_type,
+      :created_time,
+      :updated_time,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the error of the batch create variable API.
     #
     # @!attribute [rw] name
@@ -704,6 +743,53 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] elements
+    #   The names of the elements, if providing. You can also create an
+    #   empty list and add elements later using the [UpdateList][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/api/API_Updatelist.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] variable_type
+    #   The variable type of the list. You can only assign the variable type
+    #   with String data type. For more information, see [Variable
+    #   types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of the key and value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateListRequest AWS API Documentation
+    #
+    class CreateListRequest < Struct.new(
+      :name,
+      :elements,
+      :variable_type,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateListResult AWS API Documentation
+    #
+    class CreateListResult < Aws::EmptyStructure; end
+
     # @!attribute [rw] model_id
     #   The model ID.
     #   @return [String]
@@ -1132,6 +1218,22 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteLabelResult AWS API Documentation
     #
     class DeleteLabelResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   The name of the list to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteListRequest AWS API Documentation
+    #
+    class DeleteListRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteListResult AWS API Documentation
+    #
+    class DeleteListResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] model_id
     #   The model ID of the model to delete.
@@ -2571,6 +2673,84 @@ module Aws::FraudDetector
     #
     class GetLabelsResult < Struct.new(
       :labels,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next token for the subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects to return for the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetListElementsRequest AWS API Documentation
+    #
+    class GetListElementsRequest < Struct.new(
+      :name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] elements
+    #   The list elements.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetListElementsResult AWS API Documentation
+    #
+    class GetListElementsResult < Struct.new(
+      :elements,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next token for the subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects to return for the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetListsMetadataRequest AWS API Documentation
+    #
+    class GetListsMetadataRequest < Struct.new(
+      :name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lists
+    #   The metadata of the specified list or all lists under the account.
+    #   @return [Array<Types::AllowDenyList>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetListsMetadataResult AWS API Documentation
+    #
+    class GetListsMetadataResult < Struct.new(
+      :lists,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4467,6 +4647,58 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateEventLabelResult AWS API Documentation
     #
     class UpdateEventLabelResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   The name of the list to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] elements
+    #   One or more list elements to add or replace. If you are providing
+    #   the elements, make sure to specify the `updateMode` to use.
+    #
+    #   If you are deleting all elements from the list, use `REPLACE` for
+    #   the `updateMode` and provide an empty list (0 elements).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   The new description.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_mode
+    #   The update mode (type).
+    #
+    #   * Use `APPEND` if you are adding elements to the list.
+    #
+    #   * Use `REPLACE` if you replacing existing elements in the list.
+    #
+    #   * Use `REMOVE` if you are removing elements from the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] variable_type
+    #   The variable type you want to assign to the list.
+    #
+    #   <note markdown="1"> You cannot update a variable type of a list that already has a
+    #   variable type assigned to it. You can assign a variable type to a
+    #   list only if the list does not already have a variable type.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateListRequest AWS API Documentation
+    #
+    class UpdateListRequest < Struct.new(
+      :name,
+      :elements,
+      :description,
+      :update_mode,
+      :variable_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateListResult AWS API Documentation
+    #
+    class UpdateListResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] model_id
     #   The model ID.

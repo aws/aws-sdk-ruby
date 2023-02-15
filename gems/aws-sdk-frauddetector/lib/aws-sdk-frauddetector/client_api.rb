@@ -21,6 +21,8 @@ module Aws::FraudDetector
     AggregatedLogOddsMetric = Shapes::StructureShape.new(name: 'AggregatedLogOddsMetric')
     AggregatedVariablesImpactExplanation = Shapes::StructureShape.new(name: 'AggregatedVariablesImpactExplanation')
     AggregatedVariablesImportanceMetrics = Shapes::StructureShape.new(name: 'AggregatedVariablesImportanceMetrics')
+    AllowDenyList = Shapes::StructureShape.new(name: 'AllowDenyList')
+    AllowDenyLists = Shapes::ListShape.new(name: 'AllowDenyLists')
     AsyncJobStatus = Shapes::StringShape.new(name: 'AsyncJobStatus')
     BatchCreateVariableError = Shapes::StructureShape.new(name: 'BatchCreateVariableError')
     BatchCreateVariableErrorList = Shapes::ListShape.new(name: 'BatchCreateVariableErrorList')
@@ -46,6 +48,8 @@ module Aws::FraudDetector
     CreateBatchPredictionJobResult = Shapes::StructureShape.new(name: 'CreateBatchPredictionJobResult')
     CreateDetectorVersionRequest = Shapes::StructureShape.new(name: 'CreateDetectorVersionRequest')
     CreateDetectorVersionResult = Shapes::StructureShape.new(name: 'CreateDetectorVersionResult')
+    CreateListRequest = Shapes::StructureShape.new(name: 'CreateListRequest')
+    CreateListResult = Shapes::StructureShape.new(name: 'CreateListResult')
     CreateModelRequest = Shapes::StructureShape.new(name: 'CreateModelRequest')
     CreateModelResult = Shapes::StructureShape.new(name: 'CreateModelResult')
     CreateModelVersionRequest = Shapes::StructureShape.new(name: 'CreateModelVersionRequest')
@@ -79,6 +83,8 @@ module Aws::FraudDetector
     DeleteExternalModelResult = Shapes::StructureShape.new(name: 'DeleteExternalModelResult')
     DeleteLabelRequest = Shapes::StructureShape.new(name: 'DeleteLabelRequest')
     DeleteLabelResult = Shapes::StructureShape.new(name: 'DeleteLabelResult')
+    DeleteListRequest = Shapes::StructureShape.new(name: 'DeleteListRequest')
+    DeleteListResult = Shapes::StructureShape.new(name: 'DeleteListResult')
     DeleteModelRequest = Shapes::StructureShape.new(name: 'DeleteModelRequest')
     DeleteModelResult = Shapes::StructureShape.new(name: 'DeleteModelResult')
     DeleteModelVersionRequest = Shapes::StructureShape.new(name: 'DeleteModelVersionRequest')
@@ -100,6 +106,8 @@ module Aws::FraudDetector
     DetectorVersionSummary = Shapes::StructureShape.new(name: 'DetectorVersionSummary')
     DetectorVersionSummaryList = Shapes::ListShape.new(name: 'DetectorVersionSummaryList')
     DetectorsMaxResults = Shapes::IntegerShape.new(name: 'DetectorsMaxResults')
+    Elements = Shapes::StringShape.new(name: 'Elements')
+    ElementsList = Shapes::ListShape.new(name: 'ElementsList')
     Entity = Shapes::StructureShape.new(name: 'Entity')
     EntityType = Shapes::StructureShape.new(name: 'EntityType')
     EvaluatedExternalModel = Shapes::StructureShape.new(name: 'EvaluatedExternalModel')
@@ -150,6 +158,10 @@ module Aws::FraudDetector
     GetKMSEncryptionKeyResult = Shapes::StructureShape.new(name: 'GetKMSEncryptionKeyResult')
     GetLabelsRequest = Shapes::StructureShape.new(name: 'GetLabelsRequest')
     GetLabelsResult = Shapes::StructureShape.new(name: 'GetLabelsResult')
+    GetListElementsRequest = Shapes::StructureShape.new(name: 'GetListElementsRequest')
+    GetListElementsResult = Shapes::StructureShape.new(name: 'GetListElementsResult')
+    GetListsMetadataRequest = Shapes::StructureShape.new(name: 'GetListsMetadataRequest')
+    GetListsMetadataResult = Shapes::StructureShape.new(name: 'GetListsMetadataResult')
     GetModelVersionRequest = Shapes::StructureShape.new(name: 'GetModelVersionRequest')
     GetModelVersionResult = Shapes::StructureShape.new(name: 'GetModelVersionResult')
     GetModelsRequest = Shapes::StructureShape.new(name: 'GetModelsRequest')
@@ -188,6 +200,9 @@ module Aws::FraudDetector
     ListOfStrings = Shapes::ListShape.new(name: 'ListOfStrings')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
+    ListUpdateMode = Shapes::StringShape.new(name: 'ListUpdateMode')
+    ListsElementsMaxResults = Shapes::IntegerShape.new(name: 'ListsElementsMaxResults')
+    ListsMetadataMaxResults = Shapes::IntegerShape.new(name: 'ListsMetadataMaxResults')
     LogOddsMetric = Shapes::StructureShape.new(name: 'LogOddsMetric')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MapOfStrings = Shapes::MapShape.new(name: 'MapOfStrings')
@@ -270,6 +285,8 @@ module Aws::FraudDetector
     UpdateDetectorVersionStatusResult = Shapes::StructureShape.new(name: 'UpdateDetectorVersionStatusResult')
     UpdateEventLabelRequest = Shapes::StructureShape.new(name: 'UpdateEventLabelRequest')
     UpdateEventLabelResult = Shapes::StructureShape.new(name: 'UpdateEventLabelResult')
+    UpdateListRequest = Shapes::StructureShape.new(name: 'UpdateListRequest')
+    UpdateListResult = Shapes::StructureShape.new(name: 'UpdateListResult')
     UpdateModelRequest = Shapes::StructureShape.new(name: 'UpdateModelRequest')
     UpdateModelResult = Shapes::StructureShape.new(name: 'UpdateModelResult')
     UpdateModelVersionRequest = Shapes::StructureShape.new(name: 'UpdateModelVersionRequest')
@@ -323,6 +340,8 @@ module Aws::FraudDetector
     modelList = Shapes::ListShape.new(name: 'modelList')
     modelVersionDetailList = Shapes::ListShape.new(name: 'modelVersionDetailList')
     modelsMaxPageSize = Shapes::IntegerShape.new(name: 'modelsMaxPageSize')
+    nextToken = Shapes::StringShape.new(name: 'nextToken')
+    noDashIdentifier = Shapes::StringShape.new(name: 'noDashIdentifier')
     ruleExpression = Shapes::StringShape.new(name: 'ruleExpression')
     s3BucketLocation = Shapes::StringShape.new(name: 's3BucketLocation')
     sageMakerEndpointIdentifier = Shapes::StringShape.new(name: 'sageMakerEndpointIdentifier')
@@ -335,6 +354,7 @@ module Aws::FraudDetector
     time = Shapes::StringShape.new(name: 'time')
     utcTimestampISO8601 = Shapes::StringShape.new(name: 'utcTimestampISO8601')
     variableName = Shapes::StringShape.new(name: 'variableName')
+    variableType = Shapes::StringShape.new(name: 'variableType')
     variableValue = Shapes::StringShape.new(name: 'variableValue')
     wholeNumberVersionString = Shapes::StringShape.new(name: 'wholeNumberVersionString')
 
@@ -367,6 +387,16 @@ module Aws::FraudDetector
 
     AggregatedVariablesImportanceMetrics.add_member(:log_odds_metrics, Shapes::ShapeRef.new(shape: ListOfAggregatedLogOddsMetrics, location_name: "logOddsMetrics"))
     AggregatedVariablesImportanceMetrics.struct_class = Types::AggregatedVariablesImportanceMetrics
+
+    AllowDenyList.add_member(:name, Shapes::ShapeRef.new(shape: noDashIdentifier, required: true, location_name: "name"))
+    AllowDenyList.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
+    AllowDenyList.add_member(:variable_type, Shapes::ShapeRef.new(shape: variableType, location_name: "variableType"))
+    AllowDenyList.add_member(:created_time, Shapes::ShapeRef.new(shape: time, location_name: "createdTime"))
+    AllowDenyList.add_member(:updated_time, Shapes::ShapeRef.new(shape: time, location_name: "updatedTime"))
+    AllowDenyList.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
+    AllowDenyList.struct_class = Types::AllowDenyList
+
+    AllowDenyLists.member = Shapes::ShapeRef.new(shape: AllowDenyList)
 
     BatchCreateVariableError.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     BatchCreateVariableError.add_member(:code, Shapes::ShapeRef.new(shape: integer, location_name: "code"))
@@ -481,6 +511,15 @@ module Aws::FraudDetector
     CreateDetectorVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: DetectorVersionStatus, location_name: "status"))
     CreateDetectorVersionResult.struct_class = Types::CreateDetectorVersionResult
 
+    CreateListRequest.add_member(:name, Shapes::ShapeRef.new(shape: noDashIdentifier, required: true, location_name: "name"))
+    CreateListRequest.add_member(:elements, Shapes::ShapeRef.new(shape: ElementsList, location_name: "elements"))
+    CreateListRequest.add_member(:variable_type, Shapes::ShapeRef.new(shape: variableType, location_name: "variableType"))
+    CreateListRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
+    CreateListRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
+    CreateListRequest.struct_class = Types::CreateListRequest
+
+    CreateListResult.struct_class = Types::CreateListResult
+
     CreateModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     CreateModelRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     CreateModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
@@ -590,6 +629,11 @@ module Aws::FraudDetector
 
     DeleteLabelResult.struct_class = Types::DeleteLabelResult
 
+    DeleteListRequest.add_member(:name, Shapes::ShapeRef.new(shape: noDashIdentifier, required: true, location_name: "name"))
+    DeleteListRequest.struct_class = Types::DeleteListRequest
+
+    DeleteListResult.struct_class = Types::DeleteListResult
+
     DeleteModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     DeleteModelRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     DeleteModelRequest.struct_class = Types::DeleteModelRequest
@@ -657,6 +701,8 @@ module Aws::FraudDetector
     DetectorVersionSummary.struct_class = Types::DetectorVersionSummary
 
     DetectorVersionSummaryList.member = Shapes::ShapeRef.new(shape: DetectorVersionSummary)
+
+    ElementsList.member = Shapes::ShapeRef.new(shape: Elements)
 
     Entity.add_member(:entity_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "entityType"))
     Entity.add_member(:entity_id, Shapes::ShapeRef.new(shape: entityRestrictedString, required: true, location_name: "entityId"))
@@ -913,6 +959,24 @@ module Aws::FraudDetector
     GetLabelsResult.add_member(:labels, Shapes::ShapeRef.new(shape: labelList, location_name: "labels"))
     GetLabelsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     GetLabelsResult.struct_class = Types::GetLabelsResult
+
+    GetListElementsRequest.add_member(:name, Shapes::ShapeRef.new(shape: noDashIdentifier, required: true, location_name: "name"))
+    GetListElementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    GetListElementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListsElementsMaxResults, location_name: "maxResults"))
+    GetListElementsRequest.struct_class = Types::GetListElementsRequest
+
+    GetListElementsResult.add_member(:elements, Shapes::ShapeRef.new(shape: ElementsList, location_name: "elements"))
+    GetListElementsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    GetListElementsResult.struct_class = Types::GetListElementsResult
+
+    GetListsMetadataRequest.add_member(:name, Shapes::ShapeRef.new(shape: noDashIdentifier, location_name: "name"))
+    GetListsMetadataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    GetListsMetadataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListsMetadataMaxResults, location_name: "maxResults"))
+    GetListsMetadataRequest.struct_class = Types::GetListsMetadataRequest
+
+    GetListsMetadataResult.add_member(:lists, Shapes::ShapeRef.new(shape: AllowDenyLists, location_name: "lists"))
+    GetListsMetadataResult.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    GetListsMetadataResult.struct_class = Types::GetListsMetadataResult
 
     GetModelVersionRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     GetModelVersionRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
@@ -1354,6 +1418,15 @@ module Aws::FraudDetector
 
     UpdateEventLabelResult.struct_class = Types::UpdateEventLabelResult
 
+    UpdateListRequest.add_member(:name, Shapes::ShapeRef.new(shape: noDashIdentifier, required: true, location_name: "name"))
+    UpdateListRequest.add_member(:elements, Shapes::ShapeRef.new(shape: ElementsList, location_name: "elements"))
+    UpdateListRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
+    UpdateListRequest.add_member(:update_mode, Shapes::ShapeRef.new(shape: ListUpdateMode, location_name: "updateMode"))
+    UpdateListRequest.add_member(:variable_type, Shapes::ShapeRef.new(shape: variableType, location_name: "variableType"))
+    UpdateListRequest.struct_class = Types::UpdateListRequest
+
+    UpdateListResult.struct_class = Types::UpdateListResult
+
     UpdateModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     UpdateModelRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     UpdateModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
@@ -1576,6 +1649,18 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateListRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateListResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_model, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateModel"
         o.http_method = "POST"
@@ -1751,6 +1836,19 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteListRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteListResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_model, Seahorse::Model::Operation.new.tap do |o|
@@ -2049,6 +2147,44 @@ module Aws::FraudDetector
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetLabelsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLabelsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_list_elements, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetListElements"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetListElementsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetListElementsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_lists_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetListsMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetListsMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetListsMetadataResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -2364,6 +2500,20 @@ module Aws::FraudDetector
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateEventLabelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateEventLabelResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateListRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateListResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

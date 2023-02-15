@@ -691,7 +691,7 @@ module Aws::RDS
     end
 
     # @!attribute [rw] export_task_identifier
-    #   The identifier of the snapshot export task to cancel.
+    #   The identifier of the snapshot or cluster export task to cancel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CancelExportTaskMessage AWS API Documentation
@@ -2214,7 +2214,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) of the source DB instance or DB
     #   cluster if this DB cluster is created as a read replica.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and RDS for PostgreSQL Multi-AZ DB
+    #   clusters
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4964,9 +4965,9 @@ module Aws::RDS
     #   read replica. Follow the allocation rules specified in
     #   `CreateDBInstance`.
     #
-    #   <note markdown="1"> Be sure to allocate enough memory for your read replica so that the
+    #   <note markdown="1"> Be sure to allocate enough storage for your read replica so that the
     #   create operation can succeed. You can also allocate additional
-    #   memory for future growth.
+    #   storage for future growth.
     #
     #    </note>
     #   @return [Integer]
@@ -9569,7 +9570,12 @@ module Aws::RDS
     #
     # @!attribute [rw] delete_target
     #   A value that indicates whether to delete the resources in the green
-    #   environment.
+    #   environment. You can't specify this option if the blue/green
+    #   deployment [status][1] is `SWITCHOVER_COMPLETED`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteBlueGreenDeploymentRequest AWS API Documentation
@@ -12126,28 +12132,29 @@ module Aws::RDS
     end
 
     # @!attribute [rw] export_task_identifier
-    #   The identifier of the snapshot export task to be described.
+    #   The identifier of the snapshot or cluster export task to be
+    #   described.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the snapshot exported to Amazon
-    #   S3.
+    #   The Amazon Resource Name (ARN) of the snapshot or cluster exported
+    #   to Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Filters specify one or more snapshot exports to describe. The
-    #   filters are specified as name-value pairs that define what to
+    #   Filters specify one or more snapshot or cluster exports to describe.
+    #   The filters are specified as name-value pairs that define what to
     #   include in the output. Filter names and values are case-sensitive.
     #
     #   Supported filters include the following:
     #
-    #   * `export-task-identifier` - An identifier for the snapshot export
-    #     task.
+    #   * `export-task-identifier` - An identifier for the snapshot or
+    #     cluster export task.
     #
-    #   * `s3-bucket` - The Amazon S3 bucket the snapshot is exported to.
+    #   * `s3-bucket` - The Amazon S3 bucket the data is exported to.
     #
-    #   * `source-arn` - The Amazon Resource Name (ARN) of the snapshot
-    #     exported to Amazon S3
+    #   * `source-arn` - The Amazon Resource Name (ARN) of the snapshot or
+    #     cluster exported to Amazon S3.
     #
     #   * `status` - The status of the export task. Must be lowercase. Valid
     #     statuses are the following:
@@ -13245,34 +13252,35 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # Contains the details of a snapshot export to Amazon S3.
+    # Contains the details of a snapshot or cluster export to Amazon S3.
     #
     # This data type is used as a response element in the
     # `DescribeExportTasks` action.
     #
     # @!attribute [rw] export_task_identifier
-    #   A unique identifier for the snapshot export task. This ID isn't an
-    #   identifier for the Amazon S3 bucket where the snapshot is exported
-    #   to.
+    #   A unique identifier for the snapshot or cluster export task. This ID
+    #   isn't an identifier for the Amazon S3 bucket where the data is
+    #   exported.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the snapshot exported to Amazon
-    #   S3.
+    #   The Amazon Resource Name (ARN) of the snapshot or cluster exported
+    #   to Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] export_only
-    #   The data exported from the snapshot. Valid values are the following:
+    #   The data exported from the snapshot or cluster. Valid values are the
+    #   following:
     #
     #   * `database` - Export all the data from a specified database.
     #
-    #   * `database.table` *table-name* - Export a table of the snapshot.
-    #     This format is valid only for RDS for MySQL, RDS for MariaDB, and
-    #     Aurora MySQL.
+    #   * `database.table` *table-name* - Export a table of the snapshot or
+    #     cluster. This format is valid only for RDS for MySQL, RDS for
+    #     MariaDB, and Aurora MySQL.
     #
     #   * `database.schema` *schema-name* - Export a database schema of the
-    #     snapshot. This format is valid only for RDS for PostgreSQL and
-    #     Aurora PostgreSQL.
+    #     snapshot or cluster. This format is valid only for RDS for
+    #     PostgreSQL and Aurora PostgreSQL.
     #
     #   * `database.schema.table` *table-name* - Export a table of the
     #     database schema. This format is valid only for RDS for PostgreSQL
@@ -13284,41 +13292,54 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] task_start_time
-    #   The time that the snapshot export task started.
+    #   The time that the snapshot or cluster export task started.
     #   @return [Time]
     #
     # @!attribute [rw] task_end_time
-    #   The time that the snapshot export task completed.
+    #   The time that the snapshot or cluster export task ended.
     #   @return [Time]
     #
     # @!attribute [rw] s3_bucket
-    #   The Amazon S3 bucket that the snapshot is exported to.
+    #   The Amazon S3 bucket that the snapshot or cluster is exported to.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
     #   The Amazon S3 bucket prefix that is the file name and path of the
-    #   exported snapshot.
+    #   exported data.
     #   @return [String]
     #
     # @!attribute [rw] iam_role_arn
     #   The name of the IAM role that is used to write to Amazon S3 when
-    #   exporting a snapshot.
+    #   exporting a snapshot or cluster.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
     #   The key identifier of the Amazon Web Services KMS key that is used
-    #   to encrypt the snapshot when it's exported to Amazon S3. The KMS
-    #   key identifier is its key ARN, key ID, alias ARN, or alias name. The
-    #   IAM role used for the snapshot export must have encryption and
-    #   decryption permissions to use this KMS key.
+    #   to encrypt the data when it's exported to Amazon S3. The KMS key
+    #   identifier is its key ARN, key ID, alias ARN, or alias name. The IAM
+    #   role used for the export must have encryption and decryption
+    #   permissions to use this KMS key.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The progress status of the export task.
+    #   The progress status of the export task. The status can be one of the
+    #   following:
+    #
+    #   * `CANCELED`
+    #
+    #   * `CANCELING`
+    #
+    #   * `COMPLETE`
+    #
+    #   * `FAILED`
+    #
+    #   * `IN_PROGRESS`
+    #
+    #   * `STARTING`
     #   @return [String]
     #
     # @!attribute [rw] percent_progress
-    #   The progress of the snapshot export task as a percentage.
+    #   The progress of the snapshot or cluster export task as a percentage.
     #   @return [Integer]
     #
     # @!attribute [rw] total_extracted_data_in_gb
@@ -13330,7 +13351,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] warning_message
-    #   A warning about the snapshot export task.
+    #   A warning about the snapshot or cluster export task.
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -13379,7 +13400,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] export_tasks
-    #   Information about an export of a snapshot to Amazon S3.
+    #   Information about an export of a snapshot or cluster to Amazon S3.
     #   @return [Array<Types::ExportTask>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ExportTasksMessage AWS API Documentation
@@ -14092,8 +14113,8 @@ module Aws::RDS
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the RDS for Oracle DB instance,
-    #   for example,
+    #   The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft
+    #   SQL Server DB instance. For example,
     #   `arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db`.
     #   @return [String]
     #
@@ -20840,9 +20861,8 @@ module Aws::RDS
     #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
     #   restore from.
     #
-    #   For more information on Multi-AZ DB clusters, see [ Multi-AZ
-    #   deployments with two readable standby DB instances][1] in the
-    #   *Amazon RDS User Guide*.
+    #   For more information on Multi-AZ DB clusters, see [ Multi-AZ DB
+    #   cluster deployments][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -20872,9 +20892,9 @@ module Aws::RDS
     #   DB instance. Follow the allocation rules specified in
     #   CreateDBInstance.
     #
-    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that
+    #   <note markdown="1"> Be sure to allocate enough storage for your new DB instance so that
     #   the restore operation can succeed. You can also allocate additional
-    #   memory for future growth.
+    #   storage for future growth.
     #
     #    </note>
     #   @return [Integer]
@@ -20966,9 +20986,9 @@ module Aws::RDS
     #   DB instance. Follow the allocation rules specified in
     #   `CreateDBInstance`.
     #
-    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that
+    #   <note markdown="1"> Be sure to allocate enough storage for your new DB instance so that
     #   the restore operation can succeed. You can also allocate additional
-    #   memory for future growth.
+    #   storage for future growth.
     #
     #    </note>
     #   @return [Integer]
@@ -22025,9 +22045,9 @@ module Aws::RDS
     #   DB instance. Follow the allocation rules specified in
     #   `CreateDBInstance`.
     #
-    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that
+    #   <note markdown="1"> Be sure to allocate enough storage for your new DB instance so that
     #   the restore operation can succeed. You can also allocate additional
-    #   memory for future growth.
+    #   storage for future growth.
     #
     #    </note>
     #   @return [Integer]
@@ -22540,8 +22560,9 @@ module Aws::RDS
     #
     # @!attribute [rw] engine_native_audit_fields_included
     #   Specifies whether the database activity stream includes
-    #   engine-native audit fields. This option only applies to an Oracle DB
-    #   instance. By default, no engine-native audit fields are included.
+    #   engine-native audit fields. This option applies to an Oracle or
+    #   Microsoft SQL Server DB instance. By default, no engine-native audit
+    #   fields are included.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStreamRequest AWS API Documentation
@@ -22764,32 +22785,33 @@ module Aws::RDS
     end
 
     # @!attribute [rw] export_task_identifier
-    #   A unique identifier for the snapshot export task. This ID isn't an
-    #   identifier for the Amazon S3 bucket where the snapshot is to be
-    #   exported to.
+    #   A unique identifier for the export task. This ID isn't an
+    #   identifier for the Amazon S3 bucket where the data is to be
+    #   exported.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the snapshot to export to Amazon
-    #   S3.
+    #   The Amazon Resource Name (ARN) of the snapshot or cluster to export
+    #   to Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
-    #   The name of the Amazon S3 bucket to export the snapshot to.
+    #   The name of the Amazon S3 bucket to export the snapshot or cluster
+    #   data to.
     #   @return [String]
     #
     # @!attribute [rw] iam_role_arn
     #   The name of the IAM role to use for writing to the Amazon S3 bucket
-    #   when exporting a snapshot.
+    #   when exporting a snapshot or cluster.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Amazon Web Services KMS key to use to encrypt the
-    #   snapshot exported to Amazon S3. The Amazon Web Services KMS key
-    #   identifier is the key ARN, key ID, alias ARN, or alias name for the
-    #   KMS key. The caller of this operation must be authorized to run the
-    #   following operations. These can be set in the Amazon Web Services
-    #   KMS key policy:
+    #   The ID of the Amazon Web Services KMS key to use to encrypt the data
+    #   exported to Amazon S3. The Amazon Web Services KMS key identifier is
+    #   the key ARN, key ID, alias ARN, or alias name for the KMS key. The
+    #   caller of this operation must be authorized to run the following
+    #   operations. These can be set in the Amazon Web Services KMS key
+    #   policy:
     #
     #   * kms:Encrypt
     #
@@ -22812,23 +22834,23 @@ module Aws::RDS
     #
     # @!attribute [rw] s3_prefix
     #   The Amazon S3 bucket prefix to use as the file name and path of the
-    #   exported snapshot.
+    #   exported data.
     #   @return [String]
     #
     # @!attribute [rw] export_only
-    #   The data to be exported from the snapshot. If this parameter is not
-    #   provided, all the snapshot data is exported. Valid values are the
-    #   following:
+    #   The data to be exported from the snapshot or cluster. If this
+    #   parameter is not provided, all of the data is exported. Valid values
+    #   are the following:
     #
     #   * `database` - Export all the data from a specified database.
     #
-    #   * `database.table` *table-name* - Export a table of the snapshot.
-    #     This format is valid only for RDS for MySQL, RDS for MariaDB, and
-    #     Aurora MySQL.
+    #   * `database.table` *table-name* - Export a table of the snapshot or
+    #     cluster. This format is valid only for RDS for MySQL, RDS for
+    #     MariaDB, and Aurora MySQL.
     #
     #   * `database.schema` *schema-name* - Export a database schema of the
-    #     snapshot. This format is valid only for RDS for PostgreSQL and
-    #     Aurora PostgreSQL.
+    #     snapshot or cluster. This format is valid only for RDS for
+    #     PostgreSQL and Aurora PostgreSQL.
     #
     #   * `database.schema.table` *table-name* - Export a table of the
     #     database schema. This format is valid only for RDS for PostgreSQL

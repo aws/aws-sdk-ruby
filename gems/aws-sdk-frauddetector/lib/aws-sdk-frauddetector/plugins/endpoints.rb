@@ -70,6 +70,8 @@ module Aws::FraudDetector
             Aws::FraudDetector::Endpoints::CreateBatchPredictionJob.build(context)
           when :create_detector_version
             Aws::FraudDetector::Endpoints::CreateDetectorVersion.build(context)
+          when :create_list
+            Aws::FraudDetector::Endpoints::CreateList.build(context)
           when :create_model
             Aws::FraudDetector::Endpoints::CreateModel.build(context)
           when :create_model_version
@@ -98,6 +100,8 @@ module Aws::FraudDetector
             Aws::FraudDetector::Endpoints::DeleteExternalModel.build(context)
           when :delete_label
             Aws::FraudDetector::Endpoints::DeleteLabel.build(context)
+          when :delete_list
+            Aws::FraudDetector::Endpoints::DeleteList.build(context)
           when :delete_model
             Aws::FraudDetector::Endpoints::DeleteModel.build(context)
           when :delete_model_version
@@ -138,6 +142,10 @@ module Aws::FraudDetector
             Aws::FraudDetector::Endpoints::GetKMSEncryptionKey.build(context)
           when :get_labels
             Aws::FraudDetector::Endpoints::GetLabels.build(context)
+          when :get_list_elements
+            Aws::FraudDetector::Endpoints::GetListElements.build(context)
+          when :get_lists_metadata
+            Aws::FraudDetector::Endpoints::GetListsMetadata.build(context)
           when :get_model_version
             Aws::FraudDetector::Endpoints::GetModelVersion.build(context)
           when :get_models
@@ -180,6 +188,8 @@ module Aws::FraudDetector
             Aws::FraudDetector::Endpoints::UpdateDetectorVersionStatus.build(context)
           when :update_event_label
             Aws::FraudDetector::Endpoints::UpdateEventLabel.build(context)
+          when :update_list
+            Aws::FraudDetector::Endpoints::UpdateList.build(context)
           when :update_model
             Aws::FraudDetector::Endpoints::UpdateModel.build(context)
           when :update_model_version

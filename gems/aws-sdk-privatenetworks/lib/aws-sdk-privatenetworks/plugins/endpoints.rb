@@ -98,6 +98,8 @@ module Aws::PrivateNetworks
             Aws::PrivateNetworks::Endpoints::ListTagsForResource.build(context)
           when :ping
             Aws::PrivateNetworks::Endpoints::Ping.build(context)
+          when :start_network_resource_update
+            Aws::PrivateNetworks::Endpoints::StartNetworkResourceUpdate.build(context)
           when :tag_resource
             Aws::PrivateNetworks::Endpoints::TagResource.build(context)
           when :untag_resource

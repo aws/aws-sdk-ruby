@@ -1930,6 +1930,10 @@ module Aws::Glue
     #   Specifies a target that writes to a Hudi data source in Amazon S3.
     #   @return [Types::S3HudiDirectTarget]
     #
+    # @!attribute [rw] direct_jdbc_source
+    #   Specifies the direct JDBC source connection.
+    #   @return [Types::DirectJDBCSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -1989,7 +1993,8 @@ module Aws::Glue
       :catalog_hudi_source,
       :s3_hudi_source,
       :s3_hudi_catalog_target,
-      :s3_hudi_direct_target)
+      :s3_hudi_direct_target,
+      :direct_jdbc_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6827,6 +6832,45 @@ module Aws::Glue
     class DevEndpointCustomLibraries < Struct.new(
       :extra_python_libs_s3_path,
       :extra_jars_s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the direct JDBC source connection.
+    #
+    # @!attribute [rw] name
+    #   The name of the JDBC source connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The database of the JDBC source connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The table of the JDBC source connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The connection name of the JDBC source.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The connection type of the JDBC source.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_tmp_dir
+    #   The temp directory of the JDBC Redshift source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DirectJDBCSource AWS API Documentation
+    #
+    class DirectJDBCSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :connection_name,
+      :connection_type,
+      :redshift_tmp_dir)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1031,9 +1031,8 @@ module Aws::RDS
     #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
     #   restore from.
     #
-    #   For more information on Multi-AZ DB clusters, see [ Multi-AZ
-    #   deployments with two readable standby DB instances][1] in the *Amazon
-    #   RDS User Guide*.
+    #   For more information on Multi-AZ DB clusters, see [ Multi-AZ DB
+    #   cluster deployments][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -1060,9 +1059,9 @@ module Aws::RDS
     #   The amount of storage (in gibibytes) to allocate initially for the DB
     #   instance. Follow the allocation rules specified in CreateDBInstance.
     #
-    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that the
-    #   restore operation can succeed. You can also allocate additional memory
-    #   for future growth.
+    #   <note markdown="1"> Be sure to allocate enough storage for your new DB instance so that
+    #   the restore operation can succeed. You can also allocate additional
+    #   storage for future growth.
     #
     #    </note>
     # @return [DBInstance]

@@ -119,7 +119,11 @@ module Aws::PrivateNetworks
     PingResponse = Shapes::StructureShape.new(name: 'PingResponse')
     Position = Shapes::StructureShape.new(name: 'Position')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ReturnInformation = Shapes::StructureShape.new(name: 'ReturnInformation')
     SitePlan = Shapes::StructureShape.new(name: 'SitePlan')
+    StartNetworkResourceUpdateRequest = Shapes::StructureShape.new(name: 'StartNetworkResourceUpdateRequest')
+    StartNetworkResourceUpdateRequestReturnReasonString = Shapes::StringShape.new(name: 'StartNetworkResourceUpdateRequestReturnReasonString')
+    StartNetworkResourceUpdateResponse = Shapes::StructureShape.new(name: 'StartNetworkResourceUpdateResponse')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -136,6 +140,7 @@ module Aws::PrivateNetworks
     UpdateNetworkSitePlanRequest = Shapes::StructureShape.new(name: 'UpdateNetworkSitePlanRequest')
     UpdateNetworkSiteRequest = Shapes::StructureShape.new(name: 'UpdateNetworkSiteRequest')
     UpdateNetworkSiteResponse = Shapes::StructureShape.new(name: 'UpdateNetworkSiteResponse')
+    UpdateType = Shapes::StringShape.new(name: 'UpdateType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -295,7 +300,7 @@ module Aws::PrivateNetworks
     LimitExceededException.struct_class = Types::LimitExceededException
 
     ListDeviceIdentifiersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DeviceIdentifierFilters, location_name: "filters"))
-    ListDeviceIdentifiersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDeviceIdentifiersRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListDeviceIdentifiersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDeviceIdentifiersRequestMaxResultsInteger, location_name: "maxResults"))
     ListDeviceIdentifiersRequest.add_member(:network_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "networkArn"))
     ListDeviceIdentifiersRequest.add_member(:start_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "startToken"))
     ListDeviceIdentifiersRequest.struct_class = Types::ListDeviceIdentifiersRequest
@@ -305,7 +310,7 @@ module Aws::PrivateNetworks
     ListDeviceIdentifiersResponse.struct_class = Types::ListDeviceIdentifiersResponse
 
     ListNetworkResourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: NetworkResourceFilters, location_name: "filters"))
-    ListNetworkResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNetworkResourcesRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListNetworkResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNetworkResourcesRequestMaxResultsInteger, location_name: "maxResults"))
     ListNetworkResourcesRequest.add_member(:network_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "networkArn"))
     ListNetworkResourcesRequest.add_member(:start_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "startToken"))
     ListNetworkResourcesRequest.struct_class = Types::ListNetworkResourcesRequest
@@ -315,7 +320,7 @@ module Aws::PrivateNetworks
     ListNetworkResourcesResponse.struct_class = Types::ListNetworkResourcesResponse
 
     ListNetworkSitesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: NetworkSiteFilters, location_name: "filters"))
-    ListNetworkSitesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNetworkSitesRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListNetworkSitesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNetworkSitesRequestMaxResultsInteger, location_name: "maxResults"))
     ListNetworkSitesRequest.add_member(:network_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "networkArn"))
     ListNetworkSitesRequest.add_member(:start_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "startToken"))
     ListNetworkSitesRequest.struct_class = Types::ListNetworkSitesRequest
@@ -325,7 +330,7 @@ module Aws::PrivateNetworks
     ListNetworkSitesResponse.struct_class = Types::ListNetworkSitesResponse
 
     ListNetworksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: NetworkFilters, location_name: "filters"))
-    ListNetworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNetworksRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListNetworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNetworksRequestMaxResultsInteger, location_name: "maxResults"))
     ListNetworksRequest.add_member(:start_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "startToken"))
     ListNetworksRequest.struct_class = Types::ListNetworksRequest
 
@@ -334,7 +339,7 @@ module Aws::PrivateNetworks
     ListNetworksResponse.struct_class = Types::ListNetworksResponse
 
     ListOrdersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: OrderFilters, location_name: "filters"))
-    ListOrdersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrdersRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListOrdersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrdersRequestMaxResultsInteger, location_name: "maxResults"))
     ListOrdersRequest.add_member(:network_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "networkArn"))
     ListOrdersRequest.add_member(:start_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "startToken"))
     ListOrdersRequest.struct_class = Types::ListOrdersRequest
@@ -380,6 +385,7 @@ module Aws::PrivateNetworks
     NetworkResource.add_member(:network_site_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "networkSiteArn"))
     NetworkResource.add_member(:order_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "orderArn"))
     NetworkResource.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "position"))
+    NetworkResource.add_member(:return_information, Shapes::ShapeRef.new(shape: ReturnInformation, location_name: "returnInformation"))
     NetworkResource.add_member(:serial_number, Shapes::ShapeRef.new(shape: String, location_name: "serialNumber"))
     NetworkResource.add_member(:status, Shapes::ShapeRef.new(shape: NetworkResourceStatus, location_name: "status"))
     NetworkResource.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
@@ -454,9 +460,24 @@ module Aws::PrivateNetworks
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ReturnInformation.add_member(:replacement_order_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "replacementOrderArn"))
+    ReturnInformation.add_member(:return_reason, Shapes::ShapeRef.new(shape: String, location_name: "returnReason"))
+    ReturnInformation.add_member(:shipping_address, Shapes::ShapeRef.new(shape: Address, location_name: "shippingAddress"))
+    ReturnInformation.add_member(:shipping_label, Shapes::ShapeRef.new(shape: String, location_name: "shippingLabel"))
+    ReturnInformation.struct_class = Types::ReturnInformation
+
     SitePlan.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "options"))
     SitePlan.add_member(:resource_definitions, Shapes::ShapeRef.new(shape: NetworkResourceDefinitions, location_name: "resourceDefinitions"))
     SitePlan.struct_class = Types::SitePlan
+
+    StartNetworkResourceUpdateRequest.add_member(:network_resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "networkResourceArn"))
+    StartNetworkResourceUpdateRequest.add_member(:return_reason, Shapes::ShapeRef.new(shape: StartNetworkResourceUpdateRequestReturnReasonString, location_name: "returnReason"))
+    StartNetworkResourceUpdateRequest.add_member(:shipping_address, Shapes::ShapeRef.new(shape: Address, location_name: "shippingAddress"))
+    StartNetworkResourceUpdateRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: UpdateType, required: true, location_name: "updateType"))
+    StartNetworkResourceUpdateRequest.struct_class = Types::StartNetworkResourceUpdateRequest
+
+    StartNetworkResourceUpdateResponse.add_member(:network_resource, Shapes::ShapeRef.new(shape: NetworkResource, location_name: "networkResource"))
+    StartNetworkResourceUpdateResponse.struct_class = Types::StartNetworkResourceUpdateResponse
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -610,6 +631,7 @@ module Aws::PrivateNetworks
         o.input = Shapes::ShapeRef.new(shape: DeleteNetworkRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteNetworkResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -621,6 +643,7 @@ module Aws::PrivateNetworks
         o.input = Shapes::ShapeRef.new(shape: DeleteNetworkSiteRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteNetworkSiteResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -784,6 +807,17 @@ module Aws::PrivateNetworks
         o.http_request_uri = "/ping"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: PingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_network_resource_update, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartNetworkResourceUpdate"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/network-resources/update"
+        o.input = Shapes::ShapeRef.new(shape: StartNetworkResourceUpdateRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartNetworkResourceUpdateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

@@ -919,6 +919,38 @@ module Aws::WAFV2
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
     #                 },
+    #                 aws_managed_rules_atp_rule_set: {
+    #                   login_path: "String", # required
+    #                   request_inspection: {
+    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
+    #                     username_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                   response_inspection: {
+    #                     status_code: {
+    #                       success_codes: [1], # required
+    #                       failure_codes: [1], # required
+    #                     },
+    #                     header: {
+    #                       name: "ResponseInspectionHeaderName", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                     body_contains: {
+    #                       success_strings: ["SuccessValue"], # required
+    #                       failure_strings: ["FailureValue"], # required
+    #                     },
+    #                     json: {
+    #                       identifier: "FieldIdentifier", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #             rule_action_overrides: [
@@ -1854,6 +1886,38 @@ module Aws::WAFV2
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
     #                 },
+    #                 aws_managed_rules_atp_rule_set: {
+    #                   login_path: "String", # required
+    #                   request_inspection: {
+    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
+    #                     username_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                   response_inspection: {
+    #                     status_code: {
+    #                       success_codes: [1], # required
+    #                       failure_codes: [1], # required
+    #                     },
+    #                     header: {
+    #                       name: "ResponseInspectionHeaderName", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                     body_contains: {
+    #                       success_strings: ["SuccessValue"], # required
+    #                       failure_strings: ["FailureValue"], # required
+    #                     },
+    #                     json: {
+    #                       identifier: "FieldIdentifier", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #             rule_action_overrides: [
@@ -2668,6 +2732,38 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #                 aws_managed_rules_atp_rule_set: {
+    #                   login_path: "String", # required
+    #                   request_inspection: {
+    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
+    #                     username_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                   response_inspection: {
+    #                     status_code: {
+    #                       success_codes: [1], # required
+    #                       failure_codes: [1], # required
+    #                     },
+    #                     header: {
+    #                       name: "ResponseInspectionHeaderName", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                     body_contains: {
+    #                       success_strings: ["SuccessValue"], # required
+    #                       failure_strings: ["FailureValue"], # required
+    #                     },
+    #                     json: {
+    #                       identifier: "FieldIdentifier", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                   },
     #                 },
     #               },
     #             ],
@@ -4100,6 +4196,28 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.password_field.identifier #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes[0] #=> Integer
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes[0] #=> Integer
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.name #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values[0] #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values[0] #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings[0] #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings[0] #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.identifier #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values[0] #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values[0] #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -4534,6 +4652,28 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.password_field.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes[0] #=> Integer
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes[0] #=> Integer
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values[0] #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -4812,6 +4952,28 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.password_field.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes[0] #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes[0] #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -5061,6 +5223,28 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.password_field.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes[0] #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes[0] #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -5350,6 +5534,28 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.password_field.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes[0] #=> Integer
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes[0] #=> Integer
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values[0] #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values[0] #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -5628,6 +5834,28 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.password_field.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes[0] #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes[0] #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -5877,6 +6105,28 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.password_field.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.success_codes[0] #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.status_code.failure_codes[0] #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.success_values[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.header.failure_values[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.success_strings[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.body_contains.failure_strings[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.success_values[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.response_inspection.json.failure_values[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -7947,6 +8197,38 @@ module Aws::WAFV2
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
     #                 },
+    #                 aws_managed_rules_atp_rule_set: {
+    #                   login_path: "String", # required
+    #                   request_inspection: {
+    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
+    #                     username_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                   response_inspection: {
+    #                     status_code: {
+    #                       success_codes: [1], # required
+    #                       failure_codes: [1], # required
+    #                     },
+    #                     header: {
+    #                       name: "ResponseInspectionHeaderName", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                     body_contains: {
+    #                       success_strings: ["SuccessValue"], # required
+    #                       failure_strings: ["FailureValue"], # required
+    #                     },
+    #                     json: {
+    #                       identifier: "FieldIdentifier", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #             rule_action_overrides: [
@@ -8796,6 +9078,38 @@ module Aws::WAFV2
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
     #                 },
+    #                 aws_managed_rules_atp_rule_set: {
+    #                   login_path: "String", # required
+    #                   request_inspection: {
+    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
+    #                     username_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: { # required
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                   response_inspection: {
+    #                     status_code: {
+    #                       success_codes: [1], # required
+    #                       failure_codes: [1], # required
+    #                     },
+    #                     header: {
+    #                       name: "ResponseInspectionHeaderName", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                     body_contains: {
+    #                       success_strings: ["SuccessValue"], # required
+    #                       failure_strings: ["FailureValue"], # required
+    #                     },
+    #                     json: {
+    #                       identifier: "FieldIdentifier", # required
+    #                       success_values: ["SuccessValue"], # required
+    #                       failure_values: ["FailureValue"], # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #             rule_action_overrides: [
@@ -9062,7 +9376,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

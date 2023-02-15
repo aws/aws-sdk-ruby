@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-02-15)
+------------------
+
+* Feature - Documentation update for EFS to support IAM best practices.
+
 1.58.0 (2023-01-18)
 ------------------
 

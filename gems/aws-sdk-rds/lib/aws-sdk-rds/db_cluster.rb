@@ -1107,7 +1107,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
     #   if this DB cluster is created as a read replica.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and RDS for PostgreSQL Multi-AZ DB
+    #   clusters
     # @option options [Array<Types::Tag>] :tags
     #   Tags to assign to the DB cluster.
     #
