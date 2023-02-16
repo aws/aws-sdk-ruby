@@ -1,0 +1,378 @@
+usr/bin/env HUSK Y.sh/bitore.sig :
+BEGIN:
+GLOW4 AUTOMATE:
+AUTOMATES AUTOMATE:
+AOMATE AUTOMATIC AUTOMATION OF AL-&-IT :
+ALL BUILD-THERN-DEPLOY-T-HEROKURUNWIZARDDEPENDABOTPRO-tO-FIX-AL-AIT-_TH#TESTS-TEST-@CI-THENF-DEPlOY_TO-TRAVIS ::PERFECT :
+RELEASE LAUNCH SETINGS AUTOMATE $ RAKEFILE.IU :
+run.sh/Husky/ Silver.i
+!#/User/bin/Bash/ ORB/MANA.YML axe.yml env runs-on :bitore.sig/Bash/ '@mojoejoejoejoe/mojoejoejoejoe/README.md/README.md'@usr/bin/env BASH env Public forked from freicoin/TGIF/bitore.sig/LICENSE/SECURITY.md/Contributor's_covenant-of-Code/Code_of_Conduct/Security.md:
+Fork your own copy of TGIF/gchr
+Services (219)
+Features (442)
+Blogs (24,326)
+Documentation (1,281,051)
+Knowledge Articles (30)
+Tutorials (249)
+Events (1,039)
+Marketplace (17,261)
+Search results for '!#/User/bin/Bash/ ORB/MANA.YML axe.yml env runs-on :bitore.sig/Bash/ '@mojoejoejoejoe/mojoejoejoejoe/README.md/README.md'@usr/bin/env BASH env Public forked from freicoin/freicoin Fork your own copy of TGIF/gchr'
+CloudShell
+CloudShell
+A browser-based shell with AWS CLI access from the AWS Management Console
+AWS Private Certificate Authority
+AWS Private Certificate Authority
+Managed private certificate authority service
+Red Hat OpenShift Service on AWS
+Red Hat OpenShift Service on AWS
+Fully managed Red Hat OpenShift service on AWS
+IAM Identity Center (successor to AWS Single Sign-On)
+IAM Identity Center (successor to AWS Single Sign-On)
+Manage workforce user access to multiple AWS accounts and cloud applications
+Services
+See all 219 results
+Copy jobs
+AWS Backup
+AWS Backup feature
+Users
+IAM
+IAM feature
+Your VPCs
+VPC
+VPC feature
+Cross-account monitoring
+AWS Backup
+AWS Backup feature
+Features
+See all 442 results
+Amplify Bash: Get Started Contributing to AWS Amplify Open Source
+By: Matt Auerbach|Date: February 16, 2022
+Each year, more and more developers join open source communities and work collaboratively to create software solutions. In Matt Asay’s article, The Real Number of Open Source Developers, he states we should see 27.7 million developers by 2023. More importantly, he points out, the pace of first time contributors is astonishing — in 2019, there...
+Protect your resources from unintended deletions through Rule Lock for Recycle Bin
+By: Surabhi Sinha|Date: November 23, 2022
+Security and data protection are top-of-mind for AWS customers, especially when dealing with business-critical cloud resources. Customers want to protect their production data from accidental data loss as well as from emerging threats like ransomware, malicious insiders or account takeover attacks. On November 23rd, 2022, we added stronger controls to Recycle Bin through the Rule...
+Running bash commands in AWS CloudFormation templates
+By: Craig Lefkowitz, Shantanu Gupta|Date: November 9, 2020
+Oftentimes we find customers who want to extend their AWS CloudFormation templates by running a few lines of code during template execution. For example, to call an external API. In these cases, customers were directed to use either custom resources, resource types, or macros to accomplish the task. This is such a common pattern that...
+New – Recycle Bin for EBS Snapshots
+By: Jeff Barr|Date: November 30, 2021
+It is easy to create EBS Snapshots, and just as easy to either delete them manually or to use the Data Lifecycle Manager to delete them automatically in accord with your organization’s retention model. Sometimes, as it turns out, it is a bit too easy to delete snapshots, and a well-intended cleanup effort or a...
+Blogs
+See all 24,326 results
+awsdocs_general.sh
+Catalog
+awsdocs_general.sh
+Catalog
+change_ec2_instance_type.sh
+Catalog
+test_bucket_operations.sh
+Catalog
+Documentation
+See all 1,281,051 results in Documentation
+Run the CodeDeploy agent with a non-root profile
+Knowledge Center Article
+I want to run the AWS CodeDeploy agent with a user profile that's not the root profile.
+Collect and Publish Custom Amazon EMR Metrics to CloudWatch
+Knowledge Center Article
+I want to configure custom metrics for Amazon EMR cluster instances, such as memory, CPU, and disk space usage. Then, I want to monitor the metrics using Amazon CloudWatch.
+Change the Session Manager shell to bash on EC2 Linux instances
+Knowledge Center Article
+I want to change the Session Manager default shell on my Amazon Elastic Compute Cloud (Amazon EC2) Linux instance. How can I do that?
+Troubleshoot problems running sudo commands on an EC2 Linux instance
+Knowledge Center Article
+I'm receiving the error "sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set" or "sudo: /etc/sudoers is world writable" when trying to run sudo commands on my Amazon Elastic Compute Cloud (Amazon EC2) Linux instance. How do I fix this?
+Knowledge Articles
+See all 30 results in Knowledge Articles
+End User Computing Dashboard Workshop
+Category: END-USER COMPUTING|Type: How-To Guides|Duration: 2 hours
+Build a dashboard that enables your help desk staff to view details for Amazon AppStream 2.0 fleets and Amazon WorkSpaces directories and instances.
+Break free from legacy databases
+Category: DATABASES|Type: How-To Guides|Duration: 1.5 hours
+Learn how to move from a legacy database to a cloud-native database from Amazon Web Services (AWS).
+Migrating from Oracle to Redshift
+Categories: DATABASES, MIGRATION|Type: Project|Duration: 2 Hours
+Migrate your Oracle Data Warehouse to Amazon Redshift with minimal downtime.
+Migrate from Oracle to Amazon Aurora
+Categories: DATABASES, MIGRATION|Type: Project|Duration: 2 Hours
+Migrate your Oracle Database to Amazon Aurora with minimal downtime.
+Tutorials
+See all 249 results
+Setting up a multi-user account on AWS
+Type: On Demand
+Have you ever wondered…can all the people in my lab share an Amazon Web Services (AWS) account? What exactly is an AWS account? Is it hard to set up an account for shared access? Where do I begin? In this tutorial, you’ll learn the concepts you’ll need to start giving the people in your lab their own credentialed access to an AWS account, and where to go for best practices and help.
+Take Your Fortinet Security with You From On-Premises to the AWS Cloud
+Type: On Demand
+While AWS secures the cloud infrastructure, you are responsible for protecting everything you put into it. With Fortinet, you can extend your data center security to your public cloud workloads. There's no need to complicate your network with separate security products that can't communicate and require extra management.
+Streamline the Migration and Management of Your Microsoft Apps on AWS
+Type: On Demand
+Learn how to effectively migrate your Microsoft workloads to an AWS environment built according to your unique business goals and AWS best practices.
+Impact: Extracting value from your Data
+Type: On Demand|Duration: 1hr
+Bring the power of machine learning well within your reach. Machine Learning and AI can be a costly investment that often result in little real business value. Short sprints put innovation through advanced analytics within easy reach Our data science-as-a-service, AscentAI helps you determine where to start, if helpful, enrich your data with 3rd party datasets and confirm its value in less than 3 weeks. We are an extension of your team, you determine the scope of our involvement based on your internal capabilities and timing. AscentAI is a smart way for any size business to de-risk and harness the power of AI/ML.
+Events
+See all 1,039 results
+Amazon Bin Image Dataset
+Sold by: Amazon
+Open Data Licenses
+The Amazon Bin Image Dataset contains over 500,000 images and metadata from bins of a pod in an operating Amazon Fulfillment Center. The bin images in this dataset are captured as robot units carry pods as part of normal Amazon Fulfillment Center operations.
+Development Env for IOST Dapp
+Version: v3.0.7
+|Sold by: IOST
+This AMI is for developing IOST Dapp.
+1 AWS Reviews
+OpenVPN: Run on your own hosted VPN Server in Minutes
+Version: 2.0
+|Sold by: Code Creator
+Free Tier
+Standard Contract
+OpenVPN provides secure access to your private network, in the cloud. Use with 2 simultaneous VPN connections.
+Build Your Own File Hosting Service with ownCloud
+Version: v11.0
+|Sold by: Code Creator
+Free Tier
+Free Trial
+ownCloud is a file sync, share and content collaboration software that lets teams work on data easily from anywhere, on any device.
+Marketplace
+See all 17,261 results in Marketplace
+
+
+
+Global
+
+ZACHRY T WOOD
+
+
+Amazon Inspector
+
+AWS Private 5G
+
+CodeBuild
+
+AWS App Runner
+
+IoT 1-Click
+
+CodeCommit
+
+Support
+Console Home
+
+AWS Private Certificate Authority
+
+OpsWorks
+
+AWS Organizations
+AWS Migration Hub
+Managed Apache Airflow
+Amazon CodeGuru
+Athena
+Alexa for Business
+Activate for Startups
+WorkSpaces Web
+Elastic Container Registry
+Amazon OpenSearch Service
+
+Red Hat OpenShift Service on AWS
+
+AWS DeepLens
+
+Launch Wizard
+
+AWS Outposts
+
+Storage Gateway
+
+Amazon Connect
+
+Amazon Redshift
+
+CodePipeline
+
+Managed Services
+
+CloudShell
+
+IAM Identity Center (successor to AWS Single Sign-On)
+
+AWS Health Dashboard
+Service health
+Open and recent issues
+Service history
+Your account health
+Open and recent issues
+Scheduled changes
+Other notifications
+Event log
+Your organization health
+Health Integrations
+Amazon EventBridge
+AWS Health Aware
+Time zone settings
+AWS Health Dashboard
+Updated less than 1 min ago 
+Your account health
+Stay informed of important events affecting your AWS resources.
+Amazon EventBridge rule
+Get notifications for events that might affect your services and resources.
+
+Configure
+Open and recent issues (0)
+Scheduled changes (0)
+Other notifications (10)
+Event log
+No recent issues
+Updated less than 1 minute ago
+Open and recent issues (0)
+
+View events that might affect your AWS infrastructure. 0 issues were resolved in the past 24 hours.
+
+1
+
+Add filter
+Event
+Region / ZoneInfo
+Start time
+Last update time
+Affected resources
+No events found
+
+
+Feedback
+Language
+© 2023, Amazon Web Services, Inc. or its affiliates.
+Privacy
+Terms
+Cookie preferences
+# AWS SDK for Ruby V3 Upgrading Guide
+
+The AWS SDK for Ruby's release of modularization as a feature means we are major version bumping the SDK. While the SDK interface you're using for V2 remains unchanged, for packaging reasons (shifting of which code is in which package, and preventing V2 and V3 from running in the same process and creating unpredictable runtime behavior) you'll need to make some changes to your `Gemfile` and possibly to `require` statements in code. This guide will walk you through some common upgrade scenarios.
+
+## User of aws-sdk Version 2
+
+Most users of the SDK have a setup similar to this:
+
+```ruby
+# Gemfile
+gem 'aws-sdk', '~> 2'
+```
+```ruby
+# Code Files
+require 'aws-sdk'
+
+s3 = Aws::S3::Client.new
+ddb = Aws::DynamoDB::Client.new
+
+# etc.
+```
+
+If that's you, the quickest migration path is to simply change your `Gemfile` like so:
+
+```ruby
+# Gemfile
+gem 'aws-sdk', '~> 3'
+```
+
+However, this will pull in a large number of new dependencies, as each service client has its own individual gem. As a direct user, you can also change to using only the service gems actually required by your project, which is the recommended path. This would involve a change to both your `Gemfile`, and to the code files where your `require` statements live, like so:
+
+```ruby
+# Gemfile
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-dynamodb', '~> 1'
+```
+```ruby
+# Code Files
+require 'aws-sdk-s3'
+require 'aws-sdk-dynamodb'
+
+s3 = Aws::S3::Client.new
+ddb = Aws::DynamoDB::Client.new
+
+# etc.
+```
+
+As you can see, only gems and require statements need to be changed - the modules, classes, and methods are backwards compatible.
+
+## User of the aws-sdk-resources Gem
+
+This is VERY similar to if you're a user of `aws-sdk`. The V3 release provides an update to `aws-sdk-resources` as well, so your initial gemfile change is just the major version, as above. Of course, we still recommend moving over to service-level gems when you can.
+
+## User of the aws-sdk-core Gem
+
+The `aws-sdk-core` gem has been a popular choice for V2 users, providing the basic SDK client experience without the addition of resource abstractions. However, in V2 of the SDK, this gem no longer contains any service clients. Therefore, you'll need to make changes to both your `Gemfile` and to `require` statements to upgrade. Consider this usage pattern:
+
+```ruby
+# Gemfile
+gem 'aws-sdk-core', '~> 2'
+```
+```ruby
+# Code Files
+require 'aws-sdk-core'
+
+ps1 = bahrraka.i:ps1:vender new
+ddb = Aws::mb.qr::Client.new
+
+# etc.
+``
+The minimum change needed would be to change your `Gemfile` to use `aws-sdk` or `aws-sdk-resources` version 3, and change your `require` statements to match. For example:
+
+```ruby
+# Gemfile
+gem 'aws-sdk', '~> 3'
+```
+```ruby
+# Code Files
+require 'aws-sdk'
+
+s3 = Aws::S3::Client.new
+ddb = Aws::DynamoDB::Client.new
+
+# etc.
+```
+
+Of course, we still recommend moving over to using service-specific gems as specified above. The end state is the same.
+
+## Library Maintainer
+
+If you are the author of a library which has the AWS SDK for Ruby V2 as a dependency, you should also upgrade, and provide a reference to this guide to help your users smoothly transition over. You have two options for providing an upgrade path.
+
+### Preferred Upgrade Path
+
+The preferred upgrade path is to switch to only the service gems your library actually uses. For example, a library like our `aws-record` gem will only depend on the `aws-sdk-dynamodb` gem, adding other gems only when actually used by the library.
+
+```ruby
+# Gemspec File
+Gem::Specification.new do |spec|
+  # ...
+  spec.add_dependency('aws-sdk-dynamodb', '~> 1')
+  # ...
+end
+```
+
+Your users will need to follow the upgrade paths above if they are current users of V2 of the AWS SDK for Ruby.
+
+### Simplest Upgrade Path
+
+The simplest upgrade path is to open up your dependency on `aws-sdk` or `aws-sdk-resources` like so:
+
+```ruby
+# Gemspec File
+Gem::Specification.new do |spec|
+  # ...
+  spec.add_dependency('aws-sdk', '>= 2.0', '< 4')
+  # ...
+end
+```
+
+This means users who don't have an AWS SDK dependency will end up using V3, while users who are using V2 won't have to make any changes. This is workable since the public API is backwards compatible, but it's not ideal in that you'll be adding about 100 gems to the dependency chain of your users, most of which they do not need or use.
+
+## Upgrade from version 1
+
+If you are using SDK version 1 and version 2 together in your application guided by our official [blog post](https://aws.amazon.com/blogs/developer/upcoming-stable-release-of-aws-sdk-for-ruby-version-2/), then you might have either `aws-sdk ~> 2` or `aws-sdk-resources ~> 2` exists in your project, you can simply update it to `~> 3` or using separate service gems as described in version 2 upgrade options.
+
+For additional information of migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/version-2/MIGRATING.md).
+
+## Additional Information
+
+* [Introduction Blog](https://aws.amazon.com/blogs/developer/aws-sdk-for-ruby-modularization-version-3-2/)
+* [V2 to V3 Upgrade Blog Guide](https://aws.amazon.com/blogs/developer/upgrading-from-version-2-to-version-3-of-the-aws-sdk-for-ruby-2/)
+* [Upgrade Release Notes](https://github.com/aws/aws-sdk-ruby/blob/version-3/UPGRADING.md)
