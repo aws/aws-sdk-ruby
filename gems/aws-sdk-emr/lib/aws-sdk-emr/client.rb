@@ -456,6 +456,14 @@ module Aws::EMR
     #           },
     #         },
     #       },
+    #       resize_specifications: {
+    #         spot_resize_specification: {
+    #           timeout_duration_minutes: 1, # required
+    #         },
+    #         on_demand_resize_specification: {
+    #           timeout_duration_minutes: 1, # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1602,11 +1610,10 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Provides Temporary, basic HTTP credentials that are associated with a
+    # Provides temporary, HTTP basic credentials that are associated with a
     # given runtime IAM role and used by a cluster with fine-grained access
     # control activated. You can use these credentials to connect to cluster
-    # endpoints that support username-based and password-based
-    # authentication.
+    # endpoints that support username and password authentication.
     #
     # @option params [required, String] :cluster_id
     #   The unique identifier of the cluster.
@@ -1917,6 +1924,8 @@ module Aws::EMR
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_resource_group_arn #=> String
+    #   resp.instance_fleets[0].resize_specifications.spot_resize_specification.timeout_duration_minutes #=> Integer
+    #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.timeout_duration_minutes #=> Integer
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets AWS API Documentation
@@ -2515,6 +2524,14 @@ module Aws::EMR
     #       instance_fleet_id: "InstanceFleetId", # required
     #       target_on_demand_capacity: 1,
     #       target_spot_capacity: 1,
+    #       resize_specifications: {
+    #         spot_resize_specification: {
+    #           timeout_duration_minutes: 1, # required
+    #         },
+    #         on_demand_resize_specification: {
+    #           timeout_duration_minutes: 1, # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -3363,6 +3380,14 @@ module Aws::EMR
     #               },
     #             },
     #           },
+    #           resize_specifications: {
+    #             spot_resize_specification: {
+    #               timeout_duration_minutes: 1, # required
+    #             },
+    #             on_demand_resize_specification: {
+    #               timeout_duration_minutes: 1, # required
+    #             },
+    #           },
     #         },
     #       ],
     #       ec2_key_name: "XmlStringMaxLen256",
@@ -3845,7 +3870,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

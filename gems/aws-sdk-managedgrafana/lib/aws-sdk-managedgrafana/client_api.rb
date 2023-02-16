@@ -68,6 +68,7 @@ module Aws::ManagedGrafana
     ListWorkspacesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkspacesRequestMaxResultsInteger')
     ListWorkspacesResponse = Shapes::StructureShape.new(name: 'ListWorkspacesResponse')
     LoginValidityDuration = Shapes::IntegerShape.new(name: 'LoginValidityDuration')
+    NetworkAccessConfiguration = Shapes::StructureShape.new(name: 'NetworkAccessConfiguration')
     NotificationDestinationType = Shapes::StringShape.new(name: 'NotificationDestinationType')
     NotificationDestinationsList = Shapes::ListShape.new(name: 'NotificationDestinationsList')
     OrganizationRoleName = Shapes::StringShape.new(name: 'OrganizationRoleName')
@@ -78,6 +79,8 @@ module Aws::ManagedGrafana
     PermissionEntry = Shapes::StructureShape.new(name: 'PermissionEntry')
     PermissionEntryList = Shapes::ListShape.new(name: 'PermissionEntryList')
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
+    PrefixListId = Shapes::StringShape.new(name: 'PrefixListId')
+    PrefixListIds = Shapes::ListShape.new(name: 'PrefixListIds')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Role = Shapes::StringShape.new(name: 'Role')
     RoleValue = Shapes::StringShape.new(name: 'RoleValue')
@@ -127,6 +130,8 @@ module Aws::ManagedGrafana
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
+    VpceId = Shapes::StringShape.new(name: 'VpceId')
+    VpceIds = Shapes::ListShape.new(name: 'VpceIds')
     WorkspaceDescription = Shapes::StructureShape.new(name: 'WorkspaceDescription')
     WorkspaceId = Shapes::StringShape.new(name: 'WorkspaceId')
     WorkspaceList = Shapes::ListShape.new(name: 'WorkspaceList')
@@ -188,6 +193,7 @@ module Aws::ManagedGrafana
     CreateWorkspaceRequest.add_member(:authentication_providers, Shapes::ShapeRef.new(shape: AuthenticationProviders, required: true, location_name: "authenticationProviders"))
     CreateWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateWorkspaceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    CreateWorkspaceRequest.add_member(:network_access_control, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "networkAccessControl"))
     CreateWorkspaceRequest.add_member(:organization_role_name, Shapes::ShapeRef.new(shape: OrganizationRoleName, location_name: "organizationRoleName"))
     CreateWorkspaceRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, required: true, location_name: "permissionType"))
     CreateWorkspaceRequest.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, location_name: "stackSetName"))
@@ -283,6 +289,10 @@ module Aws::ManagedGrafana
     ListWorkspacesResponse.add_member(:workspaces, Shapes::ShapeRef.new(shape: WorkspaceList, required: true, location_name: "workspaces"))
     ListWorkspacesResponse.struct_class = Types::ListWorkspacesResponse
 
+    NetworkAccessConfiguration.add_member(:prefix_list_ids, Shapes::ShapeRef.new(shape: PrefixListIds, required: true, location_name: "prefixListIds"))
+    NetworkAccessConfiguration.add_member(:vpce_ids, Shapes::ShapeRef.new(shape: VpceIds, required: true, location_name: "vpceIds"))
+    NetworkAccessConfiguration.struct_class = Types::NetworkAccessConfiguration
+
     NotificationDestinationsList.member = Shapes::ShapeRef.new(shape: NotificationDestinationType)
 
     OrganizationalUnitList.member = Shapes::ShapeRef.new(shape: OrganizationalUnit)
@@ -292,6 +302,8 @@ module Aws::ManagedGrafana
     PermissionEntry.struct_class = Types::PermissionEntry
 
     PermissionEntryList.member = Shapes::ShapeRef.new(shape: PermissionEntry)
+
+    PrefixListIds.member = Shapes::ShapeRef.new(shape: PrefixListId)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -385,8 +397,10 @@ module Aws::ManagedGrafana
     UpdateWorkspaceConfigurationResponse.struct_class = Types::UpdateWorkspaceConfigurationResponse
 
     UpdateWorkspaceRequest.add_member(:account_access_type, Shapes::ShapeRef.new(shape: AccountAccessType, location_name: "accountAccessType"))
+    UpdateWorkspaceRequest.add_member(:network_access_control, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "networkAccessControl"))
     UpdateWorkspaceRequest.add_member(:organization_role_name, Shapes::ShapeRef.new(shape: OrganizationRoleName, location_name: "organizationRoleName"))
     UpdateWorkspaceRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, location_name: "permissionType"))
+    UpdateWorkspaceRequest.add_member(:remove_network_access_configuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "removeNetworkAccessConfiguration"))
     UpdateWorkspaceRequest.add_member(:remove_vpc_configuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "removeVpcConfiguration"))
     UpdateWorkspaceRequest.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, location_name: "stackSetName"))
     UpdateWorkspaceRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
@@ -423,6 +437,8 @@ module Aws::ManagedGrafana
     VpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "subnetIds"))
     VpcConfiguration.struct_class = Types::VpcConfiguration
 
+    VpceIds.member = Shapes::ShapeRef.new(shape: VpceId)
+
     WorkspaceDescription.add_member(:account_access_type, Shapes::ShapeRef.new(shape: AccountAccessType, location_name: "accountAccessType"))
     WorkspaceDescription.add_member(:authentication, Shapes::ShapeRef.new(shape: AuthenticationSummary, required: true, location_name: "authentication"))
     WorkspaceDescription.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "created"))
@@ -437,6 +453,7 @@ module Aws::ManagedGrafana
     WorkspaceDescription.add_member(:license_type, Shapes::ShapeRef.new(shape: LicenseType, location_name: "licenseType"))
     WorkspaceDescription.add_member(:modified, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modified"))
     WorkspaceDescription.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "name"))
+    WorkspaceDescription.add_member(:network_access_control, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "networkAccessControl"))
     WorkspaceDescription.add_member(:notification_destinations, Shapes::ShapeRef.new(shape: NotificationDestinationsList, location_name: "notificationDestinations"))
     WorkspaceDescription.add_member(:organization_role_name, Shapes::ShapeRef.new(shape: OrganizationRoleName, location_name: "organizationRoleName"))
     WorkspaceDescription.add_member(:organizational_units, Shapes::ShapeRef.new(shape: OrganizationalUnitList, location_name: "organizationalUnits"))

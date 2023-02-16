@@ -43,6 +43,14 @@ module Aws::WAFV2
     #   Amazon CloudFront distributions.
     #
     #    </note>
+    #
+    #   <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1,
+    #   it's possible to configure response inspection through the APIs,
+    #   but ATP response inspection will not be enabled. You can only use
+    #   the response inspection capabilities of the ATP managed rule group
+    #   in web ACLs that protect CloudFront distributions.
+    #
+    #    </note>
     #   @return [Types::ResponseInspection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesATPRuleSet AWS API Documentation
@@ -4313,6 +4321,15 @@ module Aws::WAFV2
     #   provide login request information to the rule group. For web ACLs
     #   that protect CloudFront distributions, use this to also provide the
     #   information about how your distribution responds to login requests.
+    #
+    #   <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1,
+    #   it's possible to configure response inspection through the APIs,
+    #   but ATP response inspection will not be enabled. You can only use
+    #   the response inspection capabilities of the ATP managed rule group
+    #   in web ACLs that protect CloudFront distributions.
+    #
+    #    </note>
+    #
     #   This configuration replaces the individual configuration fields in
     #   `ManagedRuleGroupConfig` and provides additional feature
     #   configuration.
@@ -5453,6 +5470,14 @@ module Aws::WAFV2
     #
     #  </note>
     #
+    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
+    # possible to configure response inspection through the APIs, but ATP
+    # response inspection will not be enabled. You can only use the response
+    # inspection capabilities of the ATP managed rule group in web ACLs that
+    # protect CloudFront distributions.
+    #
+    #  </note>
+    #
     # This is part of the `AWSManagedRulesATPRuleSet` configuration in
     # `ManagedRuleGroupConfig`.
     #
@@ -5491,6 +5516,19 @@ module Aws::WAFV2
     # Configures inspection of the response body. This is part of the
     # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
     #
+    # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
+    # CloudFront distributions.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
+    # possible to configure response inspection through the APIs, but ATP
+    # response inspection will not be enabled. You can only use the response
+    # inspection capabilities of the ATP managed rule group in web ACLs that
+    # protect CloudFront distributions.
+    #
+    #  </note>
+    #
     # @!attribute [rw] success_strings
     #   Strings in the body of the response that indicate a successful login
     #   attempt. To be counted as a successful login, the string can be
@@ -5521,6 +5559,19 @@ module Aws::WAFV2
 
     # Configures inspection of the response header. This is part of the
     # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    #
+    # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
+    # CloudFront distributions.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
+    # possible to configure response inspection through the APIs, but ATP
+    # response inspection will not be enabled. You can only use the response
+    # inspection capabilities of the ATP managed rule group in web ACLs that
+    # protect CloudFront distributions.
+    #
+    #  </note>
     #
     # @!attribute [rw] name
     #   The name of the header to match against. The name must be an exact
@@ -5561,6 +5612,19 @@ module Aws::WAFV2
     # Configures inspection of the response JSON. This is part of the
     # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
     #
+    # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
+    # CloudFront distributions.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
+    # possible to configure response inspection through the APIs, but ATP
+    # response inspection will not be enabled. You can only use the response
+    # inspection capabilities of the ATP managed rule group in web ACLs that
+    # protect CloudFront distributions.
+    #
+    #  </note>
+    #
     # @!attribute [rw] identifier
     #   The identifier for the value to match against in the JSON. The
     #   identifier must be an exact match, including case.
@@ -5598,6 +5662,19 @@ module Aws::WAFV2
 
     # Configures inspection of the response status code. This is part of the
     # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    #
+    # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
+    # CloudFront distributions.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
+    # possible to configure response inspection through the APIs, but ATP
+    # response inspection will not be enabled. You can only use the response
+    # inspection capabilities of the ATP managed rule group in web ACLs that
+    # protect CloudFront distributions.
+    #
+    #  </note>
     #
     # @!attribute [rw] success_codes
     #   Status codes in the response that indicate a successful login

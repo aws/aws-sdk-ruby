@@ -285,6 +285,18 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #   @return [String]
     #
+    # @!attribute [rw] network_access_control
+    #   Configuration for network access to your workspace.
+    #
+    #   When this is configured, only listed IP addresses and VPC endpoints
+    #   will be able to access your workspace. Standard Grafana
+    #   authentication and authorization will still be required.
+    #
+    #   If this is not configured, or is removed, then all IP addresses and
+    #   VPC endpoints will be allowed. Standard Grafana authentication and
+    #   authorization will still be required.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
     # @!attribute [rw] organization_role_name
     #   The name of an IAM role that already exists to use with
     #   Organizations to access Amazon Web Services data sources and
@@ -383,6 +395,7 @@ module Aws::ManagedGrafana
       :authentication_providers,
       :client_token,
       :configuration,
+      :network_access_control,
       :organization_role_name,
       :permission_type,
       :stack_set_name,
@@ -746,6 +759,69 @@ module Aws::ManagedGrafana
     class ListWorkspacesResponse < Struct.new(
       :next_token,
       :workspaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for in-bound network access to your
+    # workspace.
+    #
+    # When this is configured, only listed IP addresses and VPC endpoints
+    # will be able to access your workspace. Standard Grafana authentication
+    # and authorization will still be required.
+    #
+    # If this is not configured, or is removed, then all IP addresses and
+    # VPC endpoints will be allowed. Standard Grafana authentication and
+    # authorization will still be required.
+    #
+    # @!attribute [rw] prefix_list_ids
+    #   An array of prefix list IDs. A prefix list is a list of CIDR ranges
+    #   of IP addresses. The IP addresses specified are allowed to access
+    #   your workspace. If the list is not included in the configuration
+    #   then no IP addresses will be allowed to access the workspace. You
+    #   create a prefix list using the Amazon VPC console.
+    #
+    #   Prefix list IDs have the format `pl-1a2b3c4d `.
+    #
+    #   For more information about prefix lists, see [Group CIDR blocks
+    #   using managed prefix lists][1]in the *Amazon Virtual Private Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpce_ids
+    #   An array of Amazon VPC endpoint IDs for the workspace. You can
+    #   create VPC endpoints to your Amazon Managed Grafana workspace for
+    #   access from within a VPC. If a `NetworkAccessConfiguration` is
+    #   specified then only VPC endpoints specified here will be allowed to
+    #   access the workspace.
+    #
+    #   VPC endpoint IDs have the format `vpce-1a2b3c4d `.
+    #
+    #   For more information about creating an interface VPC endpoint, see
+    #   [Interface VPC endpoints][1] in the *Amazon Managed Grafana User
+    #   Guide*.
+    #
+    #   <note markdown="1"> The only VPC endpoints that can be specified here are interface VPC
+    #   endpoints for Grafana workspaces (using the
+    #   `com.amazonaws.[region].grafana-workspace` service endpoint). Other
+    #   VPC endpoints will be ignored.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/NetworkAccessConfiguration AWS API Documentation
+    #
+    class NetworkAccessConfiguration < Struct.new(
+      :prefix_list_ids,
+      :vpce_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1162,13 +1238,25 @@ module Aws::ManagedGrafana
     #   `workspaceOrganizationalUnits` parameter.
     #   @return [String]
     #
+    # @!attribute [rw] network_access_control
+    #   The configuration settings for network access to your workspace.
+    #
+    #   When this is configured, only listed IP addresses and VPC endpoints
+    #   will be able to access your workspace. Standard Grafana
+    #   authentication and authorization will still be required.
+    #
+    #   If this is not configured, or is removed, then all IP addresses and
+    #   VPC endpoints will be allowed. Standard Grafana authentication and
+    #   authorization will still be required.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
     # @!attribute [rw] organization_role_name
     #   The name of an IAM role that already exists to use to access
     #   resources through Organizations.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
-    #   If you specify `Service Managed`, Amazon Managed Grafana
+    #   If you specify `SERVICE_MANAGED`, Amazon Managed Grafana
     #   automatically creates the IAM roles and provisions the permissions
     #   that the workspace needs to use Amazon Web Services data sources and
     #   notification channels.
@@ -1188,6 +1276,18 @@ module Aws::ManagedGrafana
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html
     #   @return [String]
+    #
+    # @!attribute [rw] remove_network_access_configuration
+    #   Whether to remove the network access configuration from the
+    #   workspace.
+    #
+    #   Setting this to `true` and providing a `networkAccessControl` to set
+    #   will return an error.
+    #
+    #   If you remove this configuration by setting this to `true`, then all
+    #   IP addresses and VPC endpoints will be allowed. Standard Grafana
+    #   authentication and authorization will still be required.
+    #   @return [Boolean]
     #
     # @!attribute [rw] remove_vpc_configuration
     #   Whether to remove the VPC configuration from the workspace.
@@ -1259,8 +1359,10 @@ module Aws::ManagedGrafana
     #
     class UpdateWorkspaceRequest < Struct.new(
       :account_access_type,
+      :network_access_control,
       :organization_role_name,
       :permission_type,
+      :remove_network_access_configuration,
       :remove_vpc_configuration,
       :stack_set_name,
       :vpc_configuration,
@@ -1356,14 +1458,19 @@ module Aws::ManagedGrafana
     # The configuration settings for an Amazon VPC that contains data
     # sources for your Grafana workspace to connect to.
     #
+    # <note markdown="1"> Provided `securityGroupIds` and `subnetIds` must be part of the same
+    # VPC.
+    #
+    #  </note>
+    #
     # @!attribute [rw] security_group_ids
     #   The list of Amazon EC2 security group IDs attached to the Amazon VPC
-    #   for your Grafana workspace to connect.
+    #   for your Grafana workspace to connect. Duplicates not allowed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
     #   The list of Amazon EC2 subnet IDs created in the Amazon VPC for your
-    #   Grafana workspace to connect.
+    #   Grafana workspace to connect. Duplicates not allowed.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/VpcConfiguration AWS API Documentation
@@ -1447,6 +1554,10 @@ module Aws::ManagedGrafana
     #   The name of the workspace.
     #   @return [String]
     #
+    # @!attribute [rw] network_access_control
+    #   The configuration settings for network access to your workspace.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
     # @!attribute [rw] notification_destinations
     #   The Amazon Web Services notification channels that Amazon Managed
     #   Grafana can automatically create IAM roles and permissions for, to
@@ -1465,7 +1576,7 @@ module Aws::ManagedGrafana
     #   @return [Array<String>]
     #
     # @!attribute [rw] permission_type
-    #   If this is `Service Managed`, Amazon Managed Grafana automatically
+    #   If this is `SERVICE_MANAGED`, Amazon Managed Grafana automatically
     #   creates the IAM roles and provisions the permissions that the
     #   workspace needs to use Amazon Web Services data sources and
     #   notification channels.
@@ -1527,6 +1638,7 @@ module Aws::ManagedGrafana
       :license_type,
       :modified,
       :name,
+      :network_access_control,
       :notification_destinations,
       :organization_role_name,
       :organizational_units,

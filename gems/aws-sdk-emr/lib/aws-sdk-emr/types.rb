@@ -1940,7 +1940,7 @@ module Aws::EMR
 
     # @!attribute [rw] credentials
     #   The credentials that you can use to connect to cluster endpoints
-    #   that support username-based and password-based authentication.
+    #   that support username and password authentication.
     #   @return [Types::Credentials]
     #
     # @!attribute [rw] expires_at
@@ -2282,6 +2282,10 @@ module Aws::EMR
     #   Describes the launch specification for an instance fleet.
     #   @return [Types::InstanceFleetProvisioningSpecifications]
     #
+    # @!attribute [rw] resize_specifications
+    #   The resize specification for the instance fleet.
+    #   @return [Types::InstanceFleetResizingSpecifications]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleet AWS API Documentation
     #
     class InstanceFleet < Struct.new(
@@ -2294,7 +2298,8 @@ module Aws::EMR
       :provisioned_on_demand_capacity,
       :provisioned_spot_capacity,
       :instance_type_specifications,
-      :launch_specifications)
+      :launch_specifications,
+      :resize_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2372,6 +2377,10 @@ module Aws::EMR
     #   The launch specification for the instance fleet.
     #   @return [Types::InstanceFleetProvisioningSpecifications]
     #
+    # @!attribute [rw] resize_specifications
+    #   The resize specification for the instance fleet.
+    #   @return [Types::InstanceFleetResizingSpecifications]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetConfig AWS API Documentation
     #
     class InstanceFleetConfig < Struct.new(
@@ -2380,7 +2389,8 @@ module Aws::EMR
       :target_on_demand_capacity,
       :target_spot_capacity,
       :instance_type_configs,
-      :launch_specifications)
+      :launch_specifications,
+      :resize_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2406,12 +2416,17 @@ module Aws::EMR
     #   information, see InstanceFleetConfig$TargetSpotCapacity.
     #   @return [Integer]
     #
+    # @!attribute [rw] resize_specifications
+    #   The resize specification for the instance fleet.
+    #   @return [Types::InstanceFleetResizingSpecifications]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetModifyConfig AWS API Documentation
     #
     class InstanceFleetModifyConfig < Struct.new(
       :instance_fleet_id,
       :target_on_demand_capacity,
-      :target_spot_capacity)
+      :target_spot_capacity,
+      :resize_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2422,13 +2437,13 @@ module Aws::EMR
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
     # versions 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot
-    # Instance allocation strategies are available in Amazon EMR version
+    # instance allocation strategies are available in Amazon EMR version
     # 5.12.1 and later.
     #
     #  </note>
     #
     # @!attribute [rw] spot_specification
-    #   The launch specification for Spot Instances in the fleet, which
+    #   The launch specification for Spot instances in the fleet, which
     #   determines the defined duration, provisioning timeout behavior, and
     #   allocation strategy.
     #   @return [Types::SpotProvisioningSpecification]
@@ -2450,6 +2465,28 @@ module Aws::EMR
     class InstanceFleetProvisioningSpecifications < Struct.new(
       :spot_specification,
       :on_demand_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resize specification for On-Demand and Spot Instances in the
+    # fleet.
+    #
+    # @!attribute [rw] spot_resize_specification
+    #   The resize specification for Spot Instances in the instance fleet,
+    #   which contains the resize timeout period.
+    #   @return [Types::SpotResizingSpecification]
+    #
+    # @!attribute [rw] on_demand_resize_specification
+    #   The resize specification for On-Demand Instances in the instance
+    #   fleet, which contains the resize timeout period.
+    #   @return [Types::OnDemandResizingSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetResizingSpecifications AWS API Documentation
+    #
+    class InstanceFleetResizingSpecifications < Struct.new(
+      :spot_resize_specification,
+      :on_demand_resize_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4624,6 +4661,28 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # The resize specification for On-Demand Instances in the instance
+    # fleet, which contains the resize timeout period.
+    #
+    # @!attribute [rw] timeout_duration_minutes
+    #   On-Demand resize timeout in minutes. If On-Demand Instances are not
+    #   provisioned within this time, the resize workflow stops. The minimum
+    #   value is 5 minutes, and the maximum value is 10,080 minutes (7
+    #   days). The timeout applies to all resize workflows on the Instance
+    #   Fleet. The resize could be triggered by Amazon EMR Managed Scaling
+    #   or by the customer (via Amazon EMR Console, Amazon EMR CLI
+    #   modify-instance-fleet or Amazon EMR SDK ModifyInstanceFleet API) or
+    #   by Amazon EMR due to Amazon EC2 Spot Reclamation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OnDemandResizingSpecification AWS API Documentation
+    #
+    class OnDemandResizingSpecification < Struct.new(
+      :timeout_duration_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Placement group configuration for an Amazon EMR cluster. The
     # configuration specifies the placement strategy that can be applied to
     # instance roles during cluster creation.
@@ -5675,7 +5734,7 @@ module Aws::EMR
     #  </note>
     #
     # @!attribute [rw] timeout_duration_minutes
-    #   The spot provisioning timeout period in minutes. If Spot Instances
+    #   The Spot provisioning timeout period in minutes. If Spot Instances
     #   are not provisioned within this time period, the `TimeOutAction` is
     #   taken. Minimum value is 5 and maximum value is 1440. The timeout
     #   applies only during initial provisioning, when the cluster is first
@@ -5726,6 +5785,29 @@ module Aws::EMR
       :timeout_action,
       :block_duration_minutes,
       :allocation_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resize specification for Spot Instances in the instance fleet,
+    # which contains the resize timeout period.
+    #
+    # @!attribute [rw] timeout_duration_minutes
+    #   Spot resize timeout in minutes. If Spot Instances are not
+    #   provisioned within this time, the resize workflow will stop
+    #   provisioning of Spot instances. Minimum value is 5 minutes and
+    #   maximum value is 10,080 minutes (7 days). The timeout applies to all
+    #   resize workflows on the Instance Fleet. The resize could be
+    #   triggered by Amazon EMR Managed Scaling or by the customer (via
+    #   Amazon EMR Console, Amazon EMR CLI modify-instance-fleet or Amazon
+    #   EMR SDK ModifyInstanceFleet API) or by Amazon EMR due to Amazon EC2
+    #   Spot Reclamation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotResizingSpecification AWS API Documentation
+    #
+    class SpotResizingSpecification < Struct.new(
+      :timeout_duration_minutes)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -127,6 +127,7 @@ module Aws::EMR
     InstanceFleetList = Shapes::ListShape.new(name: 'InstanceFleetList')
     InstanceFleetModifyConfig = Shapes::StructureShape.new(name: 'InstanceFleetModifyConfig')
     InstanceFleetProvisioningSpecifications = Shapes::StructureShape.new(name: 'InstanceFleetProvisioningSpecifications')
+    InstanceFleetResizingSpecifications = Shapes::StructureShape.new(name: 'InstanceFleetResizingSpecifications')
     InstanceFleetState = Shapes::StringShape.new(name: 'InstanceFleetState')
     InstanceFleetStateChangeReason = Shapes::StructureShape.new(name: 'InstanceFleetStateChangeReason')
     InstanceFleetStateChangeReasonCode = Shapes::StringShape.new(name: 'InstanceFleetStateChangeReasonCode')
@@ -225,6 +226,7 @@ module Aws::EMR
     OnDemandCapacityReservationUsageStrategy = Shapes::StringShape.new(name: 'OnDemandCapacityReservationUsageStrategy')
     OnDemandProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'OnDemandProvisioningAllocationStrategy')
     OnDemandProvisioningSpecification = Shapes::StructureShape.new(name: 'OnDemandProvisioningSpecification')
+    OnDemandResizingSpecification = Shapes::StructureShape.new(name: 'OnDemandResizingSpecification')
     OptionalArnType = Shapes::StringShape.new(name: 'OptionalArnType')
     PlacementGroupConfig = Shapes::StructureShape.new(name: 'PlacementGroupConfig')
     PlacementGroupConfigList = Shapes::ListShape.new(name: 'PlacementGroupConfigList')
@@ -277,6 +279,7 @@ module Aws::EMR
     SpotProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'SpotProvisioningAllocationStrategy')
     SpotProvisioningSpecification = Shapes::StructureShape.new(name: 'SpotProvisioningSpecification')
     SpotProvisioningTimeoutAction = Shapes::StringShape.new(name: 'SpotProvisioningTimeoutAction')
+    SpotResizingSpecification = Shapes::StructureShape.new(name: 'SpotResizingSpecification')
     StartNotebookExecutionInput = Shapes::StructureShape.new(name: 'StartNotebookExecutionInput')
     StartNotebookExecutionOutput = Shapes::StructureShape.new(name: 'StartNotebookExecutionOutput')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
@@ -735,6 +738,7 @@ module Aws::EMR
     InstanceFleet.add_member(:provisioned_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "ProvisionedSpotCapacity"))
     InstanceFleet.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: InstanceTypeSpecificationList, location_name: "InstanceTypeSpecifications"))
     InstanceFleet.add_member(:launch_specifications, Shapes::ShapeRef.new(shape: InstanceFleetProvisioningSpecifications, location_name: "LaunchSpecifications"))
+    InstanceFleet.add_member(:resize_specifications, Shapes::ShapeRef.new(shape: InstanceFleetResizingSpecifications, location_name: "ResizeSpecifications"))
     InstanceFleet.struct_class = Types::InstanceFleet
 
     InstanceFleetConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Name"))
@@ -743,6 +747,7 @@ module Aws::EMR
     InstanceFleetConfig.add_member(:target_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetSpotCapacity"))
     InstanceFleetConfig.add_member(:instance_type_configs, Shapes::ShapeRef.new(shape: InstanceTypeConfigList, location_name: "InstanceTypeConfigs"))
     InstanceFleetConfig.add_member(:launch_specifications, Shapes::ShapeRef.new(shape: InstanceFleetProvisioningSpecifications, location_name: "LaunchSpecifications"))
+    InstanceFleetConfig.add_member(:resize_specifications, Shapes::ShapeRef.new(shape: InstanceFleetResizingSpecifications, location_name: "ResizeSpecifications"))
     InstanceFleetConfig.struct_class = Types::InstanceFleetConfig
 
     InstanceFleetConfigList.member = Shapes::ShapeRef.new(shape: InstanceFleetConfig)
@@ -752,11 +757,16 @@ module Aws::EMR
     InstanceFleetModifyConfig.add_member(:instance_fleet_id, Shapes::ShapeRef.new(shape: InstanceFleetId, required: true, location_name: "InstanceFleetId"))
     InstanceFleetModifyConfig.add_member(:target_on_demand_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetOnDemandCapacity"))
     InstanceFleetModifyConfig.add_member(:target_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetSpotCapacity"))
+    InstanceFleetModifyConfig.add_member(:resize_specifications, Shapes::ShapeRef.new(shape: InstanceFleetResizingSpecifications, location_name: "ResizeSpecifications"))
     InstanceFleetModifyConfig.struct_class = Types::InstanceFleetModifyConfig
 
     InstanceFleetProvisioningSpecifications.add_member(:spot_specification, Shapes::ShapeRef.new(shape: SpotProvisioningSpecification, location_name: "SpotSpecification"))
     InstanceFleetProvisioningSpecifications.add_member(:on_demand_specification, Shapes::ShapeRef.new(shape: OnDemandProvisioningSpecification, location_name: "OnDemandSpecification"))
     InstanceFleetProvisioningSpecifications.struct_class = Types::InstanceFleetProvisioningSpecifications
+
+    InstanceFleetResizingSpecifications.add_member(:spot_resize_specification, Shapes::ShapeRef.new(shape: SpotResizingSpecification, location_name: "SpotResizeSpecification"))
+    InstanceFleetResizingSpecifications.add_member(:on_demand_resize_specification, Shapes::ShapeRef.new(shape: OnDemandResizingSpecification, location_name: "OnDemandResizeSpecification"))
+    InstanceFleetResizingSpecifications.struct_class = Types::InstanceFleetResizingSpecifications
 
     InstanceFleetStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: InstanceFleetStateChangeReasonCode, location_name: "Code"))
     InstanceFleetStateChangeReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1151,6 +1161,9 @@ module Aws::EMR
     OnDemandProvisioningSpecification.add_member(:capacity_reservation_options, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationOptions, location_name: "CapacityReservationOptions"))
     OnDemandProvisioningSpecification.struct_class = Types::OnDemandProvisioningSpecification
 
+    OnDemandResizingSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "TimeoutDurationMinutes"))
+    OnDemandResizingSpecification.struct_class = Types::OnDemandResizingSpecification
+
     PlacementGroupConfig.add_member(:instance_role, Shapes::ShapeRef.new(shape: InstanceRoleType, required: true, location_name: "InstanceRole"))
     PlacementGroupConfig.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementGroupStrategy, location_name: "PlacementStrategy"))
     PlacementGroupConfig.struct_class = Types::PlacementGroupConfig
@@ -1334,6 +1347,9 @@ module Aws::EMR
     SpotProvisioningSpecification.add_member(:block_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "BlockDurationMinutes"))
     SpotProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotProvisioningAllocationStrategy, location_name: "AllocationStrategy"))
     SpotProvisioningSpecification.struct_class = Types::SpotProvisioningSpecification
+
+    SpotResizingSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "TimeoutDurationMinutes"))
+    SpotResizingSpecification.struct_class = Types::SpotResizingSpecification
 
     StartNotebookExecutionInput.add_member(:editor_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "EditorId"))
     StartNotebookExecutionInput.add_member(:relative_path, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "RelativePath"))

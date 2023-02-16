@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-02-16)
+------------------
+
+* Feature - With this release Amazon Managed Grafana now supports inbound Network Access Control that helps you to restrict user access to your Grafana workspaces
+
 1.11.0 (2023-01-18)
 ------------------
 

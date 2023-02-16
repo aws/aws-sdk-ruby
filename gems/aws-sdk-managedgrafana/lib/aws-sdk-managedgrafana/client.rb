@@ -412,6 +412,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
     #   resp.workspace.organization_role_name #=> String
@@ -486,6 +490,17 @@ module Aws::ManagedGrafana
     #
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+    #
+    # @option params [Types::NetworkAccessConfiguration] :network_access_control
+    #   Configuration for network access to your workspace.
+    #
+    #   When this is configured, only listed IP addresses and VPC endpoints
+    #   will be able to access your workspace. Standard Grafana authentication
+    #   and authorization will still be required.
+    #
+    #   If this is not configured, or is removed, then all IP addresses and
+    #   VPC endpoints will be allowed. Standard Grafana authentication and
+    #   authorization will still be required.
     #
     # @option params [String] :organization_role_name
     #   The name of an IAM role that already exists to use with Organizations
@@ -577,6 +592,10 @@ module Aws::ManagedGrafana
     #     authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
     #     client_token: "ClientToken",
     #     configuration: "OverridableConfigurationJson",
+    #     network_access_control: {
+    #       prefix_list_ids: ["PrefixListId"], # required
+    #       vpce_ids: ["VpceId"], # required
+    #     },
     #     organization_role_name: "OrganizationRoleName",
     #     permission_type: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #     stack_set_name: "StackSetName",
@@ -614,6 +633,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
     #   resp.workspace.organization_role_name #=> String
@@ -728,6 +751,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
     #   resp.workspace.organization_role_name #=> String
@@ -821,6 +848,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
     #   resp.workspace.organization_role_name #=> String
@@ -959,6 +990,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
     #   resp.workspace.organization_role_name #=> String
@@ -1277,12 +1312,23 @@ module Aws::ManagedGrafana
     #   which organizational units the workspace can access in the
     #   `workspaceOrganizationalUnits` parameter.
     #
+    # @option params [Types::NetworkAccessConfiguration] :network_access_control
+    #   The configuration settings for network access to your workspace.
+    #
+    #   When this is configured, only listed IP addresses and VPC endpoints
+    #   will be able to access your workspace. Standard Grafana authentication
+    #   and authorization will still be required.
+    #
+    #   If this is not configured, or is removed, then all IP addresses and
+    #   VPC endpoints will be allowed. Standard Grafana authentication and
+    #   authorization will still be required.
+    #
     # @option params [String] :organization_role_name
     #   The name of an IAM role that already exists to use to access resources
     #   through Organizations.
     #
     # @option params [String] :permission_type
-    #   If you specify `Service Managed`, Amazon Managed Grafana automatically
+    #   If you specify `SERVICE_MANAGED`, Amazon Managed Grafana automatically
     #   creates the IAM roles and provisions the permissions that the
     #   workspace needs to use Amazon Web Services data sources and
     #   notification channels.
@@ -1301,6 +1347,16 @@ module Aws::ManagedGrafana
     #
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html
+    #
+    # @option params [Boolean] :remove_network_access_configuration
+    #   Whether to remove the network access configuration from the workspace.
+    #
+    #   Setting this to `true` and providing a `networkAccessControl` to set
+    #   will return an error.
+    #
+    #   If you remove this configuration by setting this to `true`, then all
+    #   IP addresses and VPC endpoints will be allowed. Standard Grafana
+    #   authentication and authorization will still be required.
     #
     # @option params [Boolean] :remove_vpc_configuration
     #   Whether to remove the VPC configuration from the workspace.
@@ -1364,8 +1420,13 @@ module Aws::ManagedGrafana
     #
     #   resp = client.update_workspace({
     #     account_access_type: "CURRENT_ACCOUNT", # accepts CURRENT_ACCOUNT, ORGANIZATION
+    #     network_access_control: {
+    #       prefix_list_ids: ["PrefixListId"], # required
+    #       vpce_ids: ["VpceId"], # required
+    #     },
     #     organization_role_name: "OrganizationRoleName",
     #     permission_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, SERVICE_MANAGED
+    #     remove_network_access_configuration: false,
     #     remove_vpc_configuration: false,
     #     stack_set_name: "StackSetName",
     #     vpc_configuration: {
@@ -1400,6 +1461,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
     #   resp.workspace.organization_role_name #=> String
@@ -1561,7 +1626,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

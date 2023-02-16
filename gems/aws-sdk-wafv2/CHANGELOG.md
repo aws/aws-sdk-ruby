@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2023-02-16)
+------------------
+
+* Feature - Added a notice for account takeover prevention (ATP). The interface incorrectly lets you to configure ATP response inspection in regional web ACLs in Region US East (N. Virginia), without returning an error. ATP response inspection is only available in web ACLs that protect CloudFront distributions.
+
 1.48.0 (2023-02-15)
 ------------------
 
