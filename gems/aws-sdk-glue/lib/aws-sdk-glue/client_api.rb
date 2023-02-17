@@ -115,6 +115,7 @@ module Aws::Glue
     CancelMLTaskRunResponse = Shapes::StructureShape.new(name: 'CancelMLTaskRunResponse')
     CancelStatementRequest = Shapes::StructureShape.new(name: 'CancelStatementRequest')
     CancelStatementResponse = Shapes::StructureShape.new(name: 'CancelStatementResponse')
+    CatalogDeltaSource = Shapes::StructureShape.new(name: 'CatalogDeltaSource')
     CatalogEncryptionMode = Shapes::StringShape.new(name: 'CatalogEncryptionMode')
     CatalogEntries = Shapes::ListShape.new(name: 'CatalogEntries')
     CatalogEntry = Shapes::StructureShape.new(name: 'CatalogEntry')
@@ -365,6 +366,7 @@ module Aws::Glue
     DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
     DeleteWorkflowResponse = Shapes::StructureShape.new(name: 'DeleteWorkflowResponse')
     DeltaTarget = Shapes::StructureShape.new(name: 'DeltaTarget')
+    DeltaTargetCompressionType = Shapes::StringShape.new(name: 'DeltaTargetCompressionType')
     DeltaTargetList = Shapes::ListShape.new(name: 'DeltaTargetList')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
     DescriptionStringRemovable = Shapes::StringShape.new(name: 'DescriptionStringRemovable')
@@ -859,10 +861,14 @@ module Aws::Glue
     RunId = Shapes::StringShape.new(name: 'RunId')
     RunStatementRequest = Shapes::StructureShape.new(name: 'RunStatementRequest')
     RunStatementResponse = Shapes::StructureShape.new(name: 'RunStatementResponse')
+    S3CatalogDeltaSource = Shapes::StructureShape.new(name: 'S3CatalogDeltaSource')
     S3CatalogHudiSource = Shapes::StructureShape.new(name: 'S3CatalogHudiSource')
     S3CatalogSource = Shapes::StructureShape.new(name: 'S3CatalogSource')
     S3CatalogTarget = Shapes::StructureShape.new(name: 'S3CatalogTarget')
     S3CsvSource = Shapes::StructureShape.new(name: 'S3CsvSource')
+    S3DeltaCatalogTarget = Shapes::StructureShape.new(name: 'S3DeltaCatalogTarget')
+    S3DeltaDirectTarget = Shapes::StructureShape.new(name: 'S3DeltaDirectTarget')
+    S3DeltaSource = Shapes::StructureShape.new(name: 'S3DeltaSource')
     S3DirectSourceAdditionalOptions = Shapes::StructureShape.new(name: 'S3DirectSourceAdditionalOptions')
     S3DirectTarget = Shapes::StructureShape.new(name: 'S3DirectTarget')
     S3Encryption = Shapes::StructureShape.new(name: 'S3Encryption')
@@ -1429,6 +1435,13 @@ module Aws::Glue
 
     CancelStatementResponse.struct_class = Types::CancelStatementResponse
 
+    CatalogDeltaSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    CatalogDeltaSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    CatalogDeltaSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    CatalogDeltaSource.add_member(:additional_delta_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalDeltaOptions"))
+    CatalogDeltaSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    CatalogDeltaSource.struct_class = Types::CatalogDeltaSource
+
     CatalogEntries.member = Shapes::ShapeRef.new(shape: CatalogEntry)
 
     CatalogEntry.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -1565,6 +1578,11 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:s3_hudi_catalog_target, Shapes::ShapeRef.new(shape: S3HudiCatalogTarget, location_name: "S3HudiCatalogTarget"))
     CodeGenConfigurationNode.add_member(:s3_hudi_direct_target, Shapes::ShapeRef.new(shape: S3HudiDirectTarget, location_name: "S3HudiDirectTarget"))
     CodeGenConfigurationNode.add_member(:direct_jdbc_source, Shapes::ShapeRef.new(shape: DirectJDBCSource, location_name: "DirectJDBCSource"))
+    CodeGenConfigurationNode.add_member(:s3_catalog_delta_source, Shapes::ShapeRef.new(shape: S3CatalogDeltaSource, location_name: "S3CatalogDeltaSource"))
+    CodeGenConfigurationNode.add_member(:catalog_delta_source, Shapes::ShapeRef.new(shape: CatalogDeltaSource, location_name: "CatalogDeltaSource"))
+    CodeGenConfigurationNode.add_member(:s3_delta_source, Shapes::ShapeRef.new(shape: S3DeltaSource, location_name: "S3DeltaSource"))
+    CodeGenConfigurationNode.add_member(:s3_delta_catalog_target, Shapes::ShapeRef.new(shape: S3DeltaCatalogTarget, location_name: "S3DeltaCatalogTarget"))
+    CodeGenConfigurationNode.add_member(:s3_delta_direct_target, Shapes::ShapeRef.new(shape: S3DeltaDirectTarget, location_name: "S3DeltaDirectTarget"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -4277,6 +4295,13 @@ module Aws::Glue
     RunStatementResponse.add_member(:id, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Id"))
     RunStatementResponse.struct_class = Types::RunStatementResponse
 
+    S3CatalogDeltaSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3CatalogDeltaSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    S3CatalogDeltaSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    S3CatalogDeltaSource.add_member(:additional_delta_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalDeltaOptions"))
+    S3CatalogDeltaSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    S3CatalogDeltaSource.struct_class = Types::S3CatalogDeltaSource
+
     S3CatalogHudiSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     S3CatalogHudiSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     S3CatalogHudiSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
@@ -4319,6 +4344,32 @@ module Aws::Glue
     S3CsvSource.add_member(:optimize_performance, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "OptimizePerformance"))
     S3CsvSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     S3CsvSource.struct_class = Types::S3CsvSource
+
+    S3DeltaCatalogTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3DeltaCatalogTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    S3DeltaCatalogTarget.add_member(:partition_keys, Shapes::ShapeRef.new(shape: GlueStudioPathList, location_name: "PartitionKeys"))
+    S3DeltaCatalogTarget.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    S3DeltaCatalogTarget.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    S3DeltaCatalogTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalOptions"))
+    S3DeltaCatalogTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: CatalogSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3DeltaCatalogTarget.struct_class = Types::S3DeltaCatalogTarget
+
+    S3DeltaDirectTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3DeltaDirectTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    S3DeltaDirectTarget.add_member(:partition_keys, Shapes::ShapeRef.new(shape: GlueStudioPathList, location_name: "PartitionKeys"))
+    S3DeltaDirectTarget.add_member(:path, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Path"))
+    S3DeltaDirectTarget.add_member(:compression, Shapes::ShapeRef.new(shape: DeltaTargetCompressionType, required: true, location_name: "Compression"))
+    S3DeltaDirectTarget.add_member(:format, Shapes::ShapeRef.new(shape: TargetFormat, required: true, location_name: "Format"))
+    S3DeltaDirectTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalOptions"))
+    S3DeltaDirectTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3DeltaDirectTarget.struct_class = Types::S3DeltaDirectTarget
+
+    S3DeltaSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3DeltaSource.add_member(:paths, Shapes::ShapeRef.new(shape: EnclosedInStringProperties, required: true, location_name: "Paths"))
+    S3DeltaSource.add_member(:additional_delta_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalDeltaOptions"))
+    S3DeltaSource.add_member(:additional_options, Shapes::ShapeRef.new(shape: S3DirectSourceAdditionalOptions, location_name: "AdditionalOptions"))
+    S3DeltaSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    S3DeltaSource.struct_class = Types::S3DeltaSource
 
     S3DirectSourceAdditionalOptions.add_member(:bounded_size, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "BoundedSize"))
     S3DirectSourceAdditionalOptions.add_member(:bounded_files, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "BoundedFiles"))

@@ -1316,6 +1316,41 @@ module Aws::Glue
     #
     class CancelStatementResponse < Aws::EmptyStructure; end
 
+    # Specifies a Delta Lake data source that is registered in the Glue Data
+    # Catalog.
+    #
+    # @!attribute [rw] name
+    #   The name of the Delta Lake data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_delta_options
+    #   Specifies additional connection options.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the Delta Lake source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogDeltaSource AWS API Documentation
+    #
+    class CatalogDeltaSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :additional_delta_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a table definition in the Glue Data Catalog.
     #
     # @!attribute [rw] database_name
@@ -1909,7 +1944,7 @@ module Aws::Glue
     #
     # @!attribute [rw] s3_catalog_hudi_source
     #   Specifies a Hudi data source that is registered in the Glue Data
-    #   Catalog. The Hudi data source must be stored in Amazon S3.
+    #   Catalog. The data source must be stored in Amazon S3.
     #   @return [Types::S3CatalogHudiSource]
     #
     # @!attribute [rw] catalog_hudi_source
@@ -1933,6 +1968,30 @@ module Aws::Glue
     # @!attribute [rw] direct_jdbc_source
     #   Specifies the direct JDBC source connection.
     #   @return [Types::DirectJDBCSource]
+    #
+    # @!attribute [rw] s3_catalog_delta_source
+    #   Specifies a Delta Lake data source that is registered in the Glue
+    #   Data Catalog. The data source must be stored in Amazon S3.
+    #   @return [Types::S3CatalogDeltaSource]
+    #
+    # @!attribute [rw] catalog_delta_source
+    #   Specifies a Delta Lake data source that is registered in the Glue
+    #   Data Catalog.
+    #   @return [Types::CatalogDeltaSource]
+    #
+    # @!attribute [rw] s3_delta_source
+    #   Specifies a Delta Lake data source stored in Amazon S3.
+    #   @return [Types::S3DeltaSource]
+    #
+    # @!attribute [rw] s3_delta_catalog_target
+    #   Specifies a target that writes to a Delta Lake data source in the
+    #   Glue Data Catalog.
+    #   @return [Types::S3DeltaCatalogTarget]
+    #
+    # @!attribute [rw] s3_delta_direct_target
+    #   Specifies a target that writes to a Delta Lake data source in Amazon
+    #   S3.
+    #   @return [Types::S3DeltaDirectTarget]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
@@ -1994,7 +2053,12 @@ module Aws::Glue
       :s3_hudi_source,
       :s3_hudi_catalog_target,
       :s3_hudi_direct_target,
-      :direct_jdbc_source)
+      :direct_jdbc_source,
+      :s3_catalog_delta_source,
+      :catalog_delta_source,
+      :s3_delta_source,
+      :s3_delta_catalog_target,
+      :s3_delta_direct_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2148,10 +2212,14 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A filter that uses both column-level and row-level filtering.
+    #
     # @!attribute [rw] column_name
+    #   A string containing the name of the column.
     #   @return [String]
     #
     # @!attribute [rw] row_filter_expression
+    #   A string containing the row-level filter expression.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnRowFilter AWS API Documentation
@@ -2529,8 +2597,8 @@ module Aws::Glue
     #     the Kafka client key password (if the user has the Glue encrypt
     #     passwords setting selected).
     #
-    #   * `KAFKA_SASL_MECHANISM` - `"SCRAM-SHA-512"` or `"GSSAPI"`. These
-    #     are the two supported [SASL Mechanisms][1].
+    #   * `KAFKA_SASL_MECHANISM` - `"SCRAM-SHA-512"`, `"GSSAPI"`, or
+    #     `"AWS_MSK_IAM"`. These are the supported [SASL Mechanisms][1].
     #
     #   * `KAFKA_SASL_SCRAM_USERNAME` - A plaintext username used to
     #     authenticate with the "SCRAM-SHA-512" mechanism.
@@ -2607,7 +2675,8 @@ module Aws::Glue
     # A structure that is used to specify a connection to create or update.
     #
     # @!attribute [rw] name
-    #   The name of the connection.
+    #   The name of the connection. Connection will not function as expected
+    #   without a name.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2620,25 +2689,93 @@ module Aws::Glue
     #   * `JDBC` - Designates a connection to a database through Java
     #     Database Connectivity (JDBC).
     #
+    #     `JDBC` Connections use the following ConnectionParameters.
+    #
+    #     * Required: All of (`HOST`, `PORT`, `JDBC_ENGINE`) or
+    #       `JDBC_CONNECTION_URL`.
+    #
+    #     * Required: All of (`USERNAME`, `PASSWORD`) or `SECRET_ID`.
+    #
+    #     * Optional: `JDBC_ENFORCE_SSL`, `CUSTOM_JDBC_CERT`,
+    #       `CUSTOM_JDBC_CERT_STRING`, `SKIP_CUSTOM_JDBC_CERT_VALIDATION`.
+    #       These parameters are used to configure SSL with JDBC.
+    #
     #   * `KAFKA` - Designates a connection to an Apache Kafka streaming
     #     platform.
+    #
+    #     `KAFKA` Connections use the following ConnectionParameters.
+    #
+    #     * Required: `KAFKA_BOOTSTRAP_SERVERS`.
+    #
+    #     * Optional: `KAFKA_SSL_ENABLED`, `KAFKA_CUSTOM_CERT`,
+    #       `KAFKA_SKIP_CUSTOM_CERT_VALIDATION`. These parameters are used
+    #       to configure SSL with `KAFKA`.
+    #
+    #     * Optional: `KAFKA_CLIENT_KEYSTORE`,
+    #       `KAFKA_CLIENT_KEYSTORE_PASSWORD`, `KAFKA_CLIENT_KEY_PASSWORD`,
+    #       `ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD`,
+    #       `ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD`. These parameters are used
+    #       to configure TLS client configuration with SSL in `KAFKA`.
+    #
+    #     * Optional: `KAFKA_SASL_MECHANISM`. Can be specified as
+    #       `SCRAM-SHA-512`, `GSSAPI`, or `AWS_MSK_IAM`.
+    #
+    #     * Optional: `KAFKA_SASL_SCRAM_USERNAME`,
+    #       `KAFKA_SASL_SCRAM_PASSWORD`,
+    #       `ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD`. These parameters are used
+    #       to configure SASL/SCRAM-SHA-512 authentication with `KAFKA`.
+    #
+    #     * Optional: `KAFKA_SASL_GSSAPI_KEYTAB`,
+    #       `KAFKA_SASL_GSSAPI_KRB5_CONF`, `KAFKA_SASL_GSSAPI_SERVICE`,
+    #       `KAFKA_SASL_GSSAPI_PRINCIPAL`. These parameters are used to
+    #       configure SASL/GSSAPI authentication with `KAFKA`.
     #
     #   * `MONGODB` - Designates a connection to a MongoDB document
     #     database.
     #
+    #     `MONGODB` Connections use the following ConnectionParameters.
+    #
+    #     * Required: `CONNECTION_URL`.
+    #
+    #     * Required: All of (`USERNAME`, `PASSWORD`) or `SECRET_ID`.
+    #
     #   * `NETWORK` - Designates a network connection to a data source
     #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
+    #
+    #     `NETWORK` Connections do not require ConnectionParameters.
+    #     Instead, provide a PhysicalConnectionRequirements.
     #
     #   * `MARKETPLACE` - Uses configuration settings contained in a
     #     connector purchased from Amazon Web Services Marketplace to read
     #     from and write to data stores that are not natively supported by
     #     Glue.
     #
+    #     `MARKETPLACE` Connections use the following ConnectionParameters.
+    #
+    #     * Required: `CONNECTOR_TYPE`, `CONNECTOR_URL`,
+    #       `CONNECTOR_CLASS_NAME`, `CONNECTION_URL`.
+    #
+    #     * Required for `JDBC` `CONNECTOR_TYPE` connections: All of
+    #       (`USERNAME`, `PASSWORD`) or `SECRET_ID`.
+    #
     #   * `CUSTOM` - Uses configuration settings contained in a custom
     #     connector to read from and write to data stores that are not
     #     natively supported by Glue.
     #
-    #   SFTP is not supported.
+    #   `SFTP` is not supported.
+    #
+    #   For more information about how optional ConnectionProperties are
+    #   used to configure features in Glue, consult [Glue connection
+    #   properties][1].
+    #
+    #   For more information about how optional ConnectionProperties are
+    #   used to configure features in Glue Studio, consult [Using connectors
+    #   and connections][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/connection-defining.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/ug/connectors-chapter.html
     #   @return [String]
     #
     # @!attribute [rw] match_criteria
@@ -5695,6 +5832,8 @@ module Aws::Glue
     #
     # @!attribute [rw] create_table_default_permissions
     #   Creates a set of default permissions on the table for principals.
+    #   Used by Lake Formation. Not used in the normal course of Glue
+    #   operations.
     #   @return [Array<Types::PrincipalPermissions>]
     #
     # @!attribute [rw] target_database
@@ -5765,6 +5904,8 @@ module Aws::Glue
     #
     # @!attribute [rw] create_table_default_permissions
     #   Creates a set of default permissions on the table for principals.
+    #   Used by Lake Formation. Not used in the normal course of Glue
+    #   operations.
     #   @return [Array<Types::PrincipalPermissions>]
     #
     # @!attribute [rw] target_database
@@ -10453,22 +10594,29 @@ module Aws::Glue
     end
 
     # @!attribute [rw] catalog_id
+    #   The catalog ID where the partition resides.
     #   @return [String]
     #
     # @!attribute [rw] database_name
+    #   (Required) Specifies the name of a database that contains the
+    #   partition.
     #   @return [String]
     #
     # @!attribute [rw] table_name
+    #   (Required) Specifies the name of a table that contains the
+    #   partition.
     #   @return [String]
     #
     # @!attribute [rw] partition_values
+    #   (Required) A list of partition key values.
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_context
-    #   A structure containing information for audit.
+    #   A structure containing Lake Formation audit context information.
     #   @return [Types::AuditContext]
     #
     # @!attribute [rw] supported_permission_types
+    #   (Required) A list of supported permission types.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionMetadataRequest AWS API Documentation
@@ -10485,13 +10633,16 @@ module Aws::Glue
     end
 
     # @!attribute [rw] partition
-    #   Represents a slice of table data.
+    #   A Partition object containing the partition metadata.
     #   @return [Types::Partition]
     #
     # @!attribute [rw] authorized_columns
+    #   A list of column names that the user has been granted access to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_registered_with_lake_formation
+    #   A Boolean value that indicates whether the partition location is
+    #   registered with Lake Formation.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionMetadataResponse AWS API Documentation
@@ -10505,33 +10656,128 @@ module Aws::Glue
     end
 
     # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside.
+    #   If none is provided, the AWS account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
+    #   The name of the catalog database where the partitions reside.
     #   @return [String]
     #
     # @!attribute [rw] table_name
+    #   The name of the table that contains the partition.
     #   @return [String]
     #
     # @!attribute [rw] expression
+    #   An expression that filters the partitions to be returned.
+    #
+    #   The expression uses SQL syntax similar to the SQL `WHERE` filter
+    #   clause. The SQL statement parser [JSQLParser][1] parses the
+    #   expression.
+    #
+    #   *Operators*\: The following are the operators that you can use in
+    #   the `Expression` API call:
+    #
+    #   =
+    #
+    #   : Checks whether the values of the two operands are equal; if yes,
+    #     then the condition becomes true.
+    #
+    #     Example: Assume 'variable a' holds 10 and 'variable b' holds
+    #     20.
+    #
+    #     (a = b) is not true.
+    #
+    #   &lt; &gt;
+    #
+    #   : Checks whether the values of two operands are equal; if the values
+    #     are not equal, then the condition becomes true.
+    #
+    #     Example: (a &lt; &gt; b) is true.
+    #
+    #   &gt;
+    #
+    #   : Checks whether the value of the left operand is greater than the
+    #     value of the right operand; if yes, then the condition becomes
+    #     true.
+    #
+    #     Example: (a &gt; b) is not true.
+    #
+    #   &lt;
+    #
+    #   : Checks whether the value of the left operand is less than the
+    #     value of the right operand; if yes, then the condition becomes
+    #     true.
+    #
+    #     Example: (a &lt; b) is true.
+    #
+    #   &gt;=
+    #
+    #   : Checks whether the value of the left operand is greater than or
+    #     equal to the value of the right operand; if yes, then the
+    #     condition becomes true.
+    #
+    #     Example: (a &gt;= b) is not true.
+    #
+    #   &lt;=
+    #
+    #   : Checks whether the value of the left operand is less than or equal
+    #     to the value of the right operand; if yes, then the condition
+    #     becomes true.
+    #
+    #     Example: (a &lt;= b) is true.
+    #
+    #   AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL
+    #
+    #   : Logical operators.
+    #
+    #   *Supported Partition Key Types*\: The following are the supported
+    #   partition keys.
+    #
+    #   * `string`
+    #
+    #   * `date`
+    #
+    #   * `timestamp`
+    #
+    #   * `int`
+    #
+    #   * `bigint`
+    #
+    #   * `long`
+    #
+    #   * `tinyint`
+    #
+    #   * `smallint`
+    #
+    #   * `decimal`
+    #
+    #   If an type is encountered that is not valid, an exception is thrown.
+    #
+    #
+    #
+    #   [1]: http://jsqlparser.sourceforge.net/home.php
     #   @return [String]
     #
     # @!attribute [rw] audit_context
-    #   A structure containing information for audit.
+    #   A structure containing Lake Formation audit context information.
     #   @return [Types::AuditContext]
     #
     # @!attribute [rw] supported_permission_types
+    #   A list of supported permission types.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
+    #   A continuation token, if this is not the first call to retrieve
+    #   these partitions.
     #   @return [String]
     #
     # @!attribute [rw] segment
-    #   Defines a non-overlapping region of a table's partitions, allowing
-    #   multiple requests to be run in parallel.
+    #   The segment of the table's partitions to scan in this request.
     #   @return [Types::Segment]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of partitions to return in a single response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionsMetadataRequest AWS API Documentation
@@ -10551,9 +10797,12 @@ module Aws::Glue
     end
 
     # @!attribute [rw] unfiltered_partitions
+    #   A list of requested partitions.
     #   @return [Array<Types::UnfilteredPartition>]
     #
     # @!attribute [rw] next_token
+    #   A continuation token, if the returned list of partitions does not
+    #   include the last one.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionsMetadataResponse AWS API Documentation
@@ -10566,19 +10815,24 @@ module Aws::Glue
     end
 
     # @!attribute [rw] catalog_id
+    #   The catalog ID where the table resides.
     #   @return [String]
     #
     # @!attribute [rw] database_name
+    #   (Required) Specifies the name of a database that contains the table.
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   (Required) Specifies the name of a table for which you are
+    #   requesting metadata.
     #   @return [String]
     #
     # @!attribute [rw] audit_context
-    #   A structure containing information for audit.
+    #   A structure containing Lake Formation audit context information.
     #   @return [Types::AuditContext]
     #
     # @!attribute [rw] supported_permission_types
+    #   (Required) A list of supported permission types.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadataRequest AWS API Documentation
@@ -10594,17 +10848,20 @@ module Aws::Glue
     end
 
     # @!attribute [rw] table
-    #   Represents a collection of related data organized in columns and
-    #   rows.
+    #   A Table object containing the table metadata.
     #   @return [Types::Table]
     #
     # @!attribute [rw] authorized_columns
+    #   A list of column names that the user has been granted access to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_registered_with_lake_formation
+    #   A Boolean value that indicates whether the partition location is
+    #   registered with Lake Formation.
     #   @return [Boolean]
     #
     # @!attribute [rw] cell_filters
+    #   A list of column row filters.
     #   @return [Array<Types::ColumnRowFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadataResponse AWS API Documentation
@@ -15517,6 +15774,41 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a Delta Lake data source that is registered in the Glue Data
+    # Catalog. The data source must be stored in Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   The name of the Delta Lake data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_delta_options
+    #   Specifies additional connection options.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the Delta Lake source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3CatalogDeltaSource AWS API Documentation
+    #
+    class S3CatalogDeltaSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :additional_delta_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a Hudi data source that is registered in the Glue Data
     # Catalog. The Hudi data source must be stored in Amazon S3.
     #
@@ -15760,6 +16052,137 @@ module Aws::Glue
       :write_header,
       :skip_first,
       :optimize_performance,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that writes to a Delta Lake data source in the Glue
+    # Data Catalog.
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies native partitioning using a sequence of keys.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options for the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   A policy that specifies update behavior for the crawler.
+    #   @return [Types::CatalogSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3DeltaCatalogTarget AWS API Documentation
+    #
+    class S3DeltaCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :table,
+      :database,
+      :additional_options,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that writes to a Delta Lake data source in Amazon
+    # S3.
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies native partitioning using a sequence of keys.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] path
+    #   The Amazon S3 path of your Delta Lake data source to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression
+    #   Specifies how the data is compressed. This is generally not
+    #   necessary if the data has a standard file extension. Possible values
+    #   are `"gzip"` and `"bzip"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Specifies the data output format for the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options for the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   A policy that specifies update behavior for the crawler.
+    #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3DeltaDirectTarget AWS API Documentation
+    #
+    class S3DeltaDirectTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :path,
+      :compression,
+      :format,
+      :additional_options,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a Delta Lake data source stored in Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   The name of the Delta Lake source.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   A list of the Amazon S3 paths to read from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_delta_options
+    #   Specifies additional connection options.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional options for the connector.
+    #   @return [Types::S3DirectSourceAdditionalOptions]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the Delta Lake source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3DeltaSource AWS API Documentation
+    #
+    class S3DeltaSource < Struct.new(
+      :name,
+      :paths,
+      :additional_delta_options,
+      :additional_options,
       :output_schemas)
       SENSITIVE = []
       include Aws::Structure
@@ -18120,17 +18543,31 @@ module Aws::Glue
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] view_original_text
-    #   If the table is a view, the original text of the view; otherwise
-    #   `null`.
+    #   Included for Apache Hive compatibility. Not used in the normal
+    #   course of Glue operations. If the table is a `VIRTUAL_VIEW`, certain
+    #   Athena configuration encoded in base64.
     #   @return [String]
     #
     # @!attribute [rw] view_expanded_text
-    #   If the table is a view, the expanded text of the view; otherwise
-    #   `null`.
+    #   Included for Apache Hive compatibility. Not used in the normal
+    #   course of Glue operations.
     #   @return [String]
     #
     # @!attribute [rw] table_type
-    #   The type of this table (`EXTERNAL_TABLE`, `VIRTUAL_VIEW`, etc.).
+    #   The type of this table. Glue will create tables with the
+    #   `EXTERNAL_TABLE` type. Other services, such as Athena, may create
+    #   tables with additional table types.
+    #
+    #   Glue related table types:
+    #
+    #   EXTERNAL\_TABLE
+    #
+    #   : Hive compatible attribute - indicates a non-Hive managed table.
+    #
+    #   GOVERNED
+    #
+    #   : Used by Lake Formation. The Glue Data Catalog understands
+    #     `GOVERNED`.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -18241,7 +18678,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The table owner.
+    #   The table owner. Included for Apache Hive compatibility. Not used in
+    #   the normal course of Glue operations.
     #   @return [String]
     #
     # @!attribute [rw] last_access_time
@@ -18273,17 +18711,31 @@ module Aws::Glue
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] view_original_text
-    #   If the table is a view, the original text of the view; otherwise
-    #   `null`.
+    #   Included for Apache Hive compatibility. Not used in the normal
+    #   course of Glue operations. If the table is a `VIRTUAL_VIEW`, certain
+    #   Athena configuration encoded in base64.
     #   @return [String]
     #
     # @!attribute [rw] view_expanded_text
-    #   If the table is a view, the expanded text of the view; otherwise
-    #   `null`.
+    #   Included for Apache Hive compatibility. Not used in the normal
+    #   course of Glue operations.
     #   @return [String]
     #
     # @!attribute [rw] table_type
-    #   The type of this table (`EXTERNAL_TABLE`, `VIRTUAL_VIEW`, etc.).
+    #   The type of this table. Glue will create tables with the
+    #   `EXTERNAL_TABLE` type. Other services, such as Athena, may create
+    #   tables with additional table types.
+    #
+    #   Glue related table types:
+    #
+    #   EXTERNAL\_TABLE
+    #
+    #   : Hive compatible attribute - indicates a non-Hive managed table.
+    #
+    #   GOVERNED
+    #
+    #   : Used by Lake Formation. The Glue Data Catalog understands
+    #     `GOVERNED`.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -18861,14 +19313,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A partition that contains unfiltered metadata.
+    #
     # @!attribute [rw] partition
-    #   Represents a slice of table data.
+    #   The partition object.
     #   @return [Types::Partition]
     #
     # @!attribute [rw] authorized_columns
+    #   The list of columns the user has permissions to access.
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_registered_with_lake_formation
+    #   A Boolean value indicating that the partition location is registered
+    #   with Lake Formation.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UnfilteredPartition AWS API Documentation

@@ -1960,7 +1960,7 @@ module Aws::AppRunner
     #
     #   resp.operation_summary_list #=> Array
     #   resp.operation_summary_list[0].id #=> String
-    #   resp.operation_summary_list[0].type #=> String, one of "START_DEPLOYMENT", "CREATE_SERVICE", "PAUSE_SERVICE", "RESUME_SERVICE", "DELETE_SERVICE"
+    #   resp.operation_summary_list[0].type #=> String, one of "START_DEPLOYMENT", "CREATE_SERVICE", "PAUSE_SERVICE", "RESUME_SERVICE", "DELETE_SERVICE", "UPDATE_SERVICE"
     #   resp.operation_summary_list[0].status #=> String, one of "PENDING", "IN_PROGRESS", "FAILED", "SUCCEEDED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_SUCCEEDED"
     #   resp.operation_summary_list[0].target_arn #=> String
     #   resp.operation_summary_list[0].started_at #=> Time
@@ -2715,7 +2715,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

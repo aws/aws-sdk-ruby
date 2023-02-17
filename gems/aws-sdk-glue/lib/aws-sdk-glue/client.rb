@@ -1236,7 +1236,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
@@ -1604,7 +1604,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -1617,6 +1617,64 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_type #=> String, one of "sqlserver", "mysql", "oracle", "postgresql", "redshift"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.redshift_tmp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.additional_delta_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.additional_delta_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_delta_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.compression #=> String, one of "uncompressed", "snappy"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.database #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -3485,7 +3543,7 @@ module Aws::Glue
     #           ],
     #           path: "EnclosedInStringProperty", # required
     #           compression: "EnclosedInStringProperty",
-    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi
+    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
     #           schema_change_policy: {
     #             enable_update_catalog: false,
     #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
@@ -3990,7 +4048,7 @@ module Aws::Glue
     #           partition_keys: [
     #             ["EnclosedInStringProperty"],
     #           ],
-    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi
+    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
     #           additional_options: { # required
     #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
     #           },
@@ -4008,6 +4066,100 @@ module Aws::Glue
     #           connection_name: "EnclosedInStringProperty", # required
     #           connection_type: "sqlserver", # required, accepts sqlserver, mysql, oracle, postgresql, redshift
     #           redshift_tmp_dir: "EnclosedInStringProperty",
+    #         },
+    #         s3_catalog_delta_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           additional_delta_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         catalog_delta_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           additional_delta_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_delta_source: {
+    #           name: "NodeName", # required
+    #           paths: ["EnclosedInStringProperty"], # required
+    #           additional_delta_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #             enable_sample_path: false,
+    #             sample_path: "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_delta_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #           },
+    #         },
+    #         s3_delta_direct_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           path: "EnclosedInStringProperty", # required
+    #           compression: "uncompressed", # required, accepts uncompressed, snappy
+    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
+    #           additional_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             table: "EnclosedInStringProperty",
+    #             database: "EnclosedInStringProperty",
+    #           },
     #         },
     #       },
     #     },
@@ -7638,7 +7790,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
@@ -8006,7 +8158,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -8019,6 +8171,64 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_type #=> String, one of "sqlserver", "mysql", "oracle", "postgresql", "redshift"
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_jdbc_source.redshift_tmp_dir #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.additional_delta_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.additional_delta_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.paths[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_delta_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.bounded_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.bounded_files #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.sample_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.compression #=> String, one of "uncompressed", "snappy"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.database #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -8468,7 +8678,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
@@ -8836,7 +9046,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -8849,6 +9059,64 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.connection_type #=> String, one of "sqlserver", "mysql", "oracle", "postgresql", "redshift"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_jdbc_source.redshift_tmp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.additional_delta_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_catalog_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.additional_delta_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_delta_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_delta_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_catalog_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.compression #=> String, one of "uncompressed", "snappy"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.database #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -10907,18 +11175,30 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves partition metadata from the Data Catalog that contains
+    # unfiltered metadata.
+    #
+    # For IAM authorization, the public IAM action associated with this API
+    # is `glue:GetPartition`.
+    #
     # @option params [required, String] :catalog_id
+    #   The catalog ID where the partition resides.
     #
     # @option params [required, String] :database_name
+    #   (Required) Specifies the name of a database that contains the
+    #   partition.
     #
     # @option params [required, String] :table_name
+    #   (Required) Specifies the name of a table that contains the partition.
     #
     # @option params [required, Array<String>] :partition_values
+    #   (Required) A list of partition key values.
     #
     # @option params [Types::AuditContext] :audit_context
-    #   A structure containing information for audit.
+    #   A structure containing Lake Formation audit context information.
     #
     # @option params [required, Array<String>] :supported_permission_types
+    #   (Required) A list of supported permission types.
     #
     # @return [Types::GetUnfilteredPartitionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11002,26 +11282,124 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves partition metadata from the Data Catalog that contains
+    # unfiltered metadata.
+    #
+    # For IAM authorization, the public IAM action associated with this API
+    # is `glue:GetPartitions`.
+    #
     # @option params [required, String] :catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside. If
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
+    #   The name of the catalog database where the partitions reside.
     #
     # @option params [required, String] :table_name
+    #   The name of the table that contains the partition.
     #
     # @option params [String] :expression
+    #   An expression that filters the partitions to be returned.
+    #
+    #   The expression uses SQL syntax similar to the SQL `WHERE` filter
+    #   clause. The SQL statement parser [JSQLParser][1] parses the
+    #   expression.
+    #
+    #   *Operators*\: The following are the operators that you can use in the
+    #   `Expression` API call:
+    #
+    #   =
+    #
+    #   : Checks whether the values of the two operands are equal; if yes,
+    #     then the condition becomes true.
+    #
+    #     Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
+    #
+    #     (a = b) is not true.
+    #
+    #   &lt; &gt;
+    #
+    #   : Checks whether the values of two operands are equal; if the values
+    #     are not equal, then the condition becomes true.
+    #
+    #     Example: (a &lt; &gt; b) is true.
+    #
+    #   &gt;
+    #
+    #   : Checks whether the value of the left operand is greater than the
+    #     value of the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &gt; b) is not true.
+    #
+    #   &lt;
+    #
+    #   : Checks whether the value of the left operand is less than the value
+    #     of the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &lt; b) is true.
+    #
+    #   &gt;=
+    #
+    #   : Checks whether the value of the left operand is greater than or
+    #     equal to the value of the right operand; if yes, then the condition
+    #     becomes true.
+    #
+    #     Example: (a &gt;= b) is not true.
+    #
+    #   &lt;=
+    #
+    #   : Checks whether the value of the left operand is less than or equal
+    #     to the value of the right operand; if yes, then the condition
+    #     becomes true.
+    #
+    #     Example: (a &lt;= b) is true.
+    #
+    #   AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL
+    #
+    #   : Logical operators.
+    #
+    #   *Supported Partition Key Types*\: The following are the supported
+    #   partition keys.
+    #
+    #   * `string`
+    #
+    #   * `date`
+    #
+    #   * `timestamp`
+    #
+    #   * `int`
+    #
+    #   * `bigint`
+    #
+    #   * `long`
+    #
+    #   * `tinyint`
+    #
+    #   * `smallint`
+    #
+    #   * `decimal`
+    #
+    #   If an type is encountered that is not valid, an exception is thrown.
+    #
+    #
+    #
+    #   [1]: http://jsqlparser.sourceforge.net/home.php
     #
     # @option params [Types::AuditContext] :audit_context
-    #   A structure containing information for audit.
+    #   A structure containing Lake Formation audit context information.
     #
     # @option params [required, Array<String>] :supported_permission_types
+    #   A list of supported permission types.
     #
     # @option params [String] :next_token
+    #   A continuation token, if this is not the first call to retrieve these
+    #   partitions.
     #
     # @option params [Types::Segment] :segment
-    #   Defines a non-overlapping region of a table's partitions, allowing
-    #   multiple requests to be run in parallel.
+    #   The segment of the table's partitions to scan in this request.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of partitions to return in a single response.
     #
     # @return [Types::GetUnfilteredPartitionsMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11114,16 +11492,27 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves table metadata from the Data Catalog that contains
+    # unfiltered metadata.
+    #
+    # For IAM authorization, the public IAM action associated with this API
+    # is `glue:GetTable`.
+    #
     # @option params [required, String] :catalog_id
+    #   The catalog ID where the table resides.
     #
     # @option params [required, String] :database_name
+    #   (Required) Specifies the name of a database that contains the table.
     #
     # @option params [required, String] :name
+    #   (Required) Specifies the name of a table for which you are requesting
+    #   metadata.
     #
     # @option params [Types::AuditContext] :audit_context
-    #   A structure containing information for audit.
+    #   A structure containing Lake Formation audit context information.
     #
     # @option params [required, Array<String>] :supported_permission_types
+    #   (Required) A list of supported permission types.
     #
     # @return [Types::GetUnfilteredTableMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15492,7 +15881,7 @@ module Aws::Glue
     #             ],
     #             path: "EnclosedInStringProperty", # required
     #             compression: "EnclosedInStringProperty",
-    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi
+    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
     #             schema_change_policy: {
     #               enable_update_catalog: false,
     #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
@@ -15997,7 +16386,7 @@ module Aws::Glue
     #             partition_keys: [
     #               ["EnclosedInStringProperty"],
     #             ],
-    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi
+    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
     #             additional_options: { # required
     #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
     #             },
@@ -16015,6 +16404,100 @@ module Aws::Glue
     #             connection_name: "EnclosedInStringProperty", # required
     #             connection_type: "sqlserver", # required, accepts sqlserver, mysql, oracle, postgresql, redshift
     #             redshift_tmp_dir: "EnclosedInStringProperty",
+    #           },
+    #           s3_catalog_delta_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             additional_delta_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           catalog_delta_source: {
+    #             name: "NodeName", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             table: "EnclosedInStringProperty", # required
+    #             additional_delta_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_delta_source: {
+    #             name: "NodeName", # required
+    #             paths: ["EnclosedInStringProperty"], # required
+    #             additional_delta_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             additional_options: {
+    #               bounded_size: 1,
+    #               bounded_files: 1,
+    #               enable_sample_path: false,
+    #               sample_path: "EnclosedInStringProperty",
+    #             },
+    #             output_schemas: [
+    #               {
+    #                 columns: [
+    #                   {
+    #                     name: "GlueStudioColumnNameString", # required
+    #                     type: "ColumnTypeString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_delta_catalog_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             partition_keys: [
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             table: "EnclosedInStringProperty", # required
+    #             database: "EnclosedInStringProperty", # required
+    #             additional_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             schema_change_policy: {
+    #               enable_update_catalog: false,
+    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             },
+    #           },
+    #           s3_delta_direct_target: {
+    #             name: "NodeName", # required
+    #             inputs: ["NodeId"], # required
+    #             partition_keys: [
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #             path: "EnclosedInStringProperty", # required
+    #             compression: "uncompressed", # required, accepts uncompressed, snappy
+    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
+    #             additional_options: {
+    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #             },
+    #             schema_change_policy: {
+    #               enable_update_catalog: false,
+    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #               table: "EnclosedInStringProperty",
+    #               database: "EnclosedInStringProperty",
+    #             },
     #           },
     #         },
     #       },
@@ -16841,7 +17324,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

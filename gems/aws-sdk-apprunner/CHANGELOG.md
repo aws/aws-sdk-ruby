@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-02-17)
+------------------
+
+* Feature - This release supports removing MaxSize limit for AutoScalingConfiguration.
+
 1.20.0 (2023-01-18)
 ------------------
 
