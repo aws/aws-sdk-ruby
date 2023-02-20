@@ -3647,7 +3647,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Updates Audit Manager settings for the current user account.
+    # Updates Audit Manager settings for the current account.
     #
     # @option params [String] :sns_topic
     #   The Amazon Simple Notification Service (Amazon SNS) topic that Audit
@@ -3783,7 +3783,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -374,8 +374,12 @@ module Aws::Connect
     # Associates an approved origin to an Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :origin
     #   The domain to add to your allow list.
@@ -405,8 +409,12 @@ module Aws::Connect
     # Amazon Lex or Amazon Lex V2 bot.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Types::LexBot] :lex_bot
     #   Configuration information of an Amazon Lex bot.
@@ -421,8 +429,8 @@ module Aws::Connect
     #   resp = client.associate_bot({
     #     instance_id: "InstanceId", # required
     #     lex_bot: {
-    #       name: "BotName",
-    #       lex_region: "LexRegion",
+    #       name: "BotName", # required
+    #       lex_region: "LexRegion", # required
     #     },
     #     lex_v2_bot: {
     #       alias_arn: "AliasArn",
@@ -443,8 +451,12 @@ module Aws::Connect
     # sessions for the given language.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries. For a list of languages
@@ -492,8 +504,12 @@ module Aws::Connect
     # being used for association.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :resource_type
     #   A valid resource type.
@@ -509,7 +525,7 @@ module Aws::Connect
     #
     #   resp = client.associate_instance_storage_config({
     #     instance_id: "InstanceId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
     #     storage_config: { # required
     #       association_id: "AssociationId",
     #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
@@ -558,8 +574,12 @@ module Aws::Connect
     # Lambda function.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :function_arn
     #   The Amazon Resource Name (ARN) for the Lambda function being
@@ -591,8 +611,12 @@ module Aws::Connect
     # Lex V1 bots.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, Types::LexBot] :lex_bot
     #   The Amazon Lex bot to associate with the instance.
@@ -604,8 +628,8 @@ module Aws::Connect
     #   resp = client.associate_lex_bot({
     #     instance_id: "InstanceId", # required
     #     lex_bot: { # required
-    #       name: "BotName",
-    #       lex_region: "LexRegion",
+    #       name: "BotName", # required
+    #       lex_region: "LexRegion", # required
     #     },
     #   })
     #
@@ -636,8 +660,12 @@ module Aws::Connect
     #   A unique identifier for the phone number.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_flow_id
     #   The identifier of the flow.
@@ -667,8 +695,12 @@ module Aws::Connect
     # Associates a set of quick connects with a queue.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -698,8 +730,12 @@ module Aws::Connect
     # Associates a set of queues with a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -741,8 +777,12 @@ module Aws::Connect
     # Associates a security key to the instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :key
     #   A valid security key in PEM format.
@@ -862,8 +902,12 @@ module Aws::Connect
     # Creates an agent status for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   The name of the status.
@@ -983,8 +1027,12 @@ module Aws::Connect
     # Creates a flow module for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   The name of the flow module.
@@ -1051,8 +1099,12 @@ module Aws::Connect
     # Creates hours of operation.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   The name of the hours of operation.
@@ -1183,8 +1235,12 @@ module Aws::Connect
     # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :integration_type
     #   The type of information to be ingested.
@@ -1269,8 +1325,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   The name of the queue.
@@ -1337,8 +1397,12 @@ module Aws::Connect
     # Creates a quick connect for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   The name of the quick connect.
@@ -1401,8 +1465,12 @@ module Aws::Connect
     # Creates a new routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   The name of the routing profile. Must not be more than 127 characters.
@@ -1493,8 +1561,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   A unique name for the rule.
@@ -1610,8 +1682,12 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -1665,8 +1741,12 @@ module Aws::Connect
     # Creates a new task template in the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   The name of the task template.
@@ -1853,8 +1933,12 @@ module Aws::Connect
     # Creates a use case for an integration association.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :integration_association_id
     #   The identifier for the integration association.
@@ -1948,8 +2032,12 @@ module Aws::Connect
     #   The identifier of the hierarchy group for the user.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -2014,8 +2102,12 @@ module Aws::Connect
     #   created at level one if the parent group ID is null.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -2074,8 +2166,12 @@ module Aws::Connect
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :vocabulary_name
     #   A unique name of the custom vocabulary.
@@ -2142,8 +2238,12 @@ module Aws::Connect
     # Deletes a flow for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_flow_id
     #   The identifier of the flow.
@@ -2169,8 +2269,12 @@ module Aws::Connect
     # Deletes the specified flow module.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_flow_module_id
     #   The identifier of the flow module.
@@ -2199,8 +2303,12 @@ module Aws::Connect
     # Deletes an hours of operation.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :hours_of_operation_id
     #   The identifier for the hours of operation.
@@ -2236,8 +2344,12 @@ module Aws::Connect
     # account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2261,8 +2373,12 @@ module Aws::Connect
     # associated with it.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :integration_association_id
     #   The identifier for the integration association.
@@ -2288,8 +2404,12 @@ module Aws::Connect
     # Deletes a quick connect.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :quick_connect_id
     #   The identifier for the quick connect.
@@ -2315,8 +2435,12 @@ module Aws::Connect
     # Deletes a rule for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :rule_id
     #   A unique identifier for the rule.
@@ -2345,8 +2469,12 @@ module Aws::Connect
     # Deletes a security profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :security_profile_id
     #   The identifier for the security profle.
@@ -2372,8 +2500,12 @@ module Aws::Connect
     # Deletes the task template.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :task_template_id
     #   A unique identifier for the task template.
@@ -2433,8 +2565,12 @@ module Aws::Connect
     # Deletes a use case from an integration association.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :integration_association_id
     #   The identifier for the integration association.
@@ -2472,8 +2608,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :user_id
     #   The identifier of the user.
@@ -2503,8 +2643,12 @@ module Aws::Connect
     #   The identifier of the hierarchy group.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2527,8 +2671,12 @@ module Aws::Connect
     # Deletes the vocabulary that has the given identifier.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :vocabulary_id
     #   The identifier of the custom vocabulary.
@@ -2567,8 +2715,12 @@ module Aws::Connect
     # Describes an agent status.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :agent_status_id
     #   The identifier for the agent status.
@@ -2616,8 +2768,12 @@ module Aws::Connect
     #  Only data from November 12, 2021, and later is returned by this API.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -2713,8 +2869,12 @@ module Aws::Connect
     # Describes the specified flow module.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_flow_module_id
     #   The identifier of the flow module.
@@ -2757,8 +2917,12 @@ module Aws::Connect
     # Describes the hours of operation.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :hours_of_operation_id
     #   The identifier for the hours of operation.
@@ -2812,8 +2976,12 @@ module Aws::Connect
     # invoked.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Types::DescribeInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2853,8 +3021,12 @@ module Aws::Connect
     # Describes the specified instance attribute.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :attribute_type
     #   The type of attribute.
@@ -2891,8 +3063,12 @@ module Aws::Connect
     # resource type, association ID, and instance ID.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :association_id
     #   The existing association identifier that uniquely identifies the
@@ -2910,7 +3086,7 @@ module Aws::Connect
     #   resp = client.describe_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
     #   })
     #
     # @example Response structure
@@ -2992,8 +3168,12 @@ module Aws::Connect
     # Describes the specified queue.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -3036,8 +3216,12 @@ module Aws::Connect
     # Describes the quick connect.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :quick_connect_id
     #   The identifier for the quick connect.
@@ -3080,8 +3264,12 @@ module Aws::Connect
     # Describes the specified routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -3125,8 +3313,12 @@ module Aws::Connect
     # Describes a rule for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :rule_id
     #   A unique identifier for the rule.
@@ -3192,8 +3384,12 @@ module Aws::Connect
     #   The identifier for the security profle.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Types::DescribeSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3267,17 +3463,25 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Describes the specified user account. You can find the instance ID in
-    # the console (it’s the final part of the ARN). The console does not
-    # display the user IDs. Instead, list the users and note the IDs
-    # provided in the output.
+    # Describes the specified user account. You can [find the instance ID in
+    # the Amazon Connect console][1] (it’s the final part of the ARN). The
+    # console does not display the user IDs. Instead, list the users and
+    # note the IDs provided in the output.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :user_id
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3327,8 +3531,12 @@ module Aws::Connect
     #   The identifier of the hierarchy group.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Types::DescribeUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3378,8 +3586,12 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Types::DescribeUserHierarchyStructureResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3421,8 +3633,12 @@ module Aws::Connect
     # Describes the specified vocabulary.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :vocabulary_id
     #   The identifier of the custom vocabulary.
@@ -3466,8 +3682,12 @@ module Aws::Connect
     # Revokes access to integrated applications from Amazon Connect.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :origin
     #   The domain URL of the integrated application.
@@ -3497,8 +3717,12 @@ module Aws::Connect
     # specified Amazon Lex or Amazon Lex V2 bot.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Types::LexBot] :lex_bot
     #   Configuration information of an Amazon Lex bot.
@@ -3513,8 +3737,8 @@ module Aws::Connect
     #   resp = client.disassociate_bot({
     #     instance_id: "InstanceId", # required
     #     lex_bot: {
-    #       name: "BotName",
-    #       lex_region: "LexRegion",
+    #       name: "BotName", # required
+    #       lex_region: "LexRegion", # required
     #     },
     #     lex_v2_bot: {
     #       alias_arn: "AliasArn",
@@ -3537,8 +3761,12 @@ module Aws::Connect
     # type and association ID.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :association_id
     #   The existing association identifier that uniquely identifies the
@@ -3554,7 +3782,7 @@ module Aws::Connect
     #   resp = client.disassociate_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateInstanceStorageConfig AWS API Documentation
@@ -3573,8 +3801,12 @@ module Aws::Connect
     # relevant flow blocks.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance..
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance..
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :function_arn
     #   The Amazon Resource Name (ARN) of the Lambda function being
@@ -3605,8 +3837,12 @@ module Aws::Connect
     # specified Amazon Lex bot.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :bot_name
     #   The name of the Amazon Lex bot. Maximum character limit of 50.
@@ -3652,8 +3888,12 @@ module Aws::Connect
     #   A unique identifier for the phone number.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3679,8 +3919,12 @@ module Aws::Connect
     # Disassociates a set of quick connects from a queue.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -3710,8 +3954,12 @@ module Aws::Connect
     # Disassociates a set of queues from a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -3749,8 +3997,12 @@ module Aws::Connect
     # Deletes the specified security key.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :association_id
     #   The existing association identifier that uniquely identifies the
@@ -3856,8 +4108,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, Types::Filters] :filters
     #   The filters to apply to returned metrics. You can filter up to the
@@ -4093,8 +4349,12 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, Types::UserDataFilters] :filters
     #   The filters to apply to returned user data. You can filter up to the
@@ -4210,8 +4470,12 @@ module Aws::Connect
     #  </note>
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Types::GetFederationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4256,8 +4520,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The timestamp, in UNIX Epoch time format, at which to start the
@@ -4541,8 +4809,12 @@ module Aws::Connect
     # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :task_template_id
     #   A unique identifier for the task template.
@@ -4654,8 +4926,12 @@ module Aws::Connect
     # Lists agent statuses.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -4709,8 +4985,12 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -4758,8 +5038,12 @@ module Aws::Connect
     # this API to returns both Amazon Lex V1 and V2 bots.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -4809,8 +5093,12 @@ module Aws::Connect
     # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -4872,8 +5160,12 @@ module Aws::Connect
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Array<String>] :contact_flow_types
     #   The type of flow.
@@ -4929,8 +5221,12 @@ module Aws::Connect
     # associated with the contact.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the initial contact.
@@ -4993,8 +5289,12 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :language_code
     #   The language code of the vocabulary entries. For a list of languages
@@ -5058,8 +5358,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -5109,8 +5413,12 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -5158,8 +5466,12 @@ module Aws::Connect
     # instance and resource type.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :resource_type
     #   A valid resource type.
@@ -5183,7 +5495,7 @@ module Aws::Connect
     #
     #   resp = client.list_instance_storage_configs({
     #     instance_id: "InstanceId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -5271,8 +5583,12 @@ module Aws::Connect
     # associations for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :integration_type
     #   The integration type.
@@ -5330,8 +5646,12 @@ module Aws::Connect
     # dropdown options in the relevant flow blocks.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -5383,8 +5703,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListBots.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -5446,8 +5770,12 @@ module Aws::Connect
     # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Array<String>] :phone_number_types
     #   The type of phone number.
@@ -5629,8 +5957,12 @@ module Aws::Connect
     # Lists the quick connects associated with a queue.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -5694,8 +6026,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Array<String>] :queue_types
     #   The type of queue.
@@ -5747,8 +6083,12 @@ module Aws::Connect
     # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -5802,8 +6142,12 @@ module Aws::Connect
     # Lists the queues associated with a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -5866,8 +6210,12 @@ module Aws::Connect
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -5913,8 +6261,12 @@ module Aws::Connect
     # List all rules for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :publish_status
     #   The publish status of the rule.
@@ -5977,8 +6329,12 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -6029,8 +6385,12 @@ module Aws::Connect
     #   The identifier for the security profle.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -6082,8 +6442,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -6136,7 +6500,14 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource. All Amazon Connect
+    #   resources (instances, queues, flows, routing profiles, etc) have an
+    #   ARN. To locate the ARN for an instance, for example, see [Find your
+    #   Amazon Connect instance ID/ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6165,8 +6536,12 @@ module Aws::Connect
     # Lists task templates for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -6239,8 +6614,12 @@ module Aws::Connect
     #   results.
     #
     # @option params [String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Types::ListTrafficDistributionGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6279,8 +6658,12 @@ module Aws::Connect
     # Lists the use cases for the integration association.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :integration_association_id
     #   The identifier for the integration association.
@@ -6337,8 +6720,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -6385,8 +6772,12 @@ module Aws::Connect
     # Connect instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -6506,8 +6897,12 @@ module Aws::Connect
     #   The identifier of the user.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :agent_status_id
     #   The identifier of the agent status.
@@ -6589,9 +6984,13 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance. You can provide the
-    #   `InstanceId`, or the entire ARN.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance. You
+    #   can provide the `InstanceId`, or the entire ARN.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :replica_region
     #   The Amazon Web Services Region where to replicate the Amazon Connect
@@ -6648,8 +7047,12 @@ module Aws::Connect
     # Only voice recordings are supported at this time.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -6747,8 +7150,12 @@ module Aws::Connect
     # filtering.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -6861,8 +7268,12 @@ module Aws::Connect
     # filtering.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -6975,8 +7386,12 @@ module Aws::Connect
     # optional filtering.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -7086,8 +7501,12 @@ module Aws::Connect
     #  </note>
     #
     # @option params [String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -7204,8 +7623,12 @@ module Aws::Connect
     # using `State`, `NameStartsWith`, and `LanguageCode`.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -7303,8 +7726,12 @@ module Aws::Connect
     # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/chat.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_flow_id
     #   The identifier of the flow for initiating the chat. To see the
@@ -7439,8 +7866,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -7485,8 +7916,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact. This is the identifier of the contact
@@ -7581,8 +8016,12 @@ module Aws::Connect
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -7672,8 +8111,12 @@ module Aws::Connect
     # Initiates a flow to start a new task.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :previous_contact_id
     #   The identifier of the previous chat, voice, or task contact.
@@ -7786,8 +8229,12 @@ module Aws::Connect
     #   The ID of the contact.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7818,8 +8265,12 @@ module Aws::Connect
     # Only voice recordings are supported at this time.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -7855,8 +8306,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact. This is the identifier of the contact
@@ -7895,8 +8350,12 @@ module Aws::Connect
     # Only voice recordings are supported at this time.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -7988,8 +8447,12 @@ module Aws::Connect
     # * A contact cannot be transferred more than 11 times.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact in this instance of Amazon Connect.
@@ -8078,8 +8541,12 @@ module Aws::Connect
     # Updates agent status.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :agent_status_id
     #   The identifier of the agent status.
@@ -8133,8 +8600,12 @@ module Aws::Connect
     # ongoing and completed contacts.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact. This is the identifier of the contact
@@ -8204,8 +8675,12 @@ module Aws::Connect
     #   associated with the first interaction with the contact center.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, Hash<String,String>] :attributes
     #   The Amazon Connect attributes. These attributes can be accessed in
@@ -8281,8 +8756,12 @@ module Aws::Connect
     # Updates metadata about specified flow.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_flow_id
     #   The identifier of the flow.
@@ -8321,8 +8800,12 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_flow_module_id
     #   The identifier of the flow module.
@@ -8352,8 +8835,12 @@ module Aws::Connect
     # Updates metadata about specified flow module.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_flow_module_id
     #   The identifier of the flow module.
@@ -8433,8 +8920,12 @@ module Aws::Connect
     # scheduled.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -8469,8 +8960,12 @@ module Aws::Connect
     # Updates the hours of operation.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :hours_of_operation_id
     #   The identifier of the hours of operation.
@@ -8527,8 +9022,12 @@ module Aws::Connect
     # Updates the value for the specified attribute type.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :attribute_type
     #   The type of attribute.
@@ -8568,8 +9067,12 @@ module Aws::Connect
     # idempotent.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :association_id
     #   The existing association identifier that uniquely identifies the
@@ -8588,7 +9091,7 @@ module Aws::Connect
     #   resp = client.update_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
     #     storage_config: { # required
     #       association_id: "AssociationId",
     #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
@@ -8646,8 +9149,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact in this instance of Amazon Connect.
@@ -8753,8 +9260,12 @@ module Aws::Connect
     # Updates the hours of operation for the specified queue.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -8788,8 +9299,12 @@ module Aws::Connect
     # considered full.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -8824,8 +9339,12 @@ module Aws::Connect
     # `Description` must be provided.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -8879,8 +9398,12 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -8917,8 +9440,12 @@ module Aws::Connect
     # Updates the status of the queue.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
@@ -8948,8 +9475,12 @@ module Aws::Connect
     # Updates the configuration settings for the specified quick connect.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :quick_connect_id
     #   The identifier for the quick connect.
@@ -8994,8 +9525,12 @@ module Aws::Connect
     # `Description` must be provided.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :quick_connect_id
     #   The identifier for the quick connect.
@@ -9030,8 +9565,12 @@ module Aws::Connect
     # Panel (CCP) for a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -9067,8 +9606,12 @@ module Aws::Connect
     # Updates the default outbound queue of a routing profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -9100,8 +9643,12 @@ module Aws::Connect
     # `Description` must be provided.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -9137,8 +9684,12 @@ module Aws::Connect
     # profile.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
@@ -9188,8 +9739,12 @@ module Aws::Connect
     #   A unique identifier for the rule.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
     #   The name of the rule. You can change the name only if
@@ -9280,8 +9835,12 @@ module Aws::Connect
     #   The identifier for the security profle.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Hash<String,String>] :allowed_access_control_tags
     #   The list of tags that a security profile uses to restrict access to
@@ -9323,8 +9882,12 @@ module Aws::Connect
     #   A unique identifier for the task template.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :name
     #   The name of the task template.
@@ -9511,8 +10074,12 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9542,8 +10109,12 @@ module Aws::Connect
     #   The identifier of the hierarchy group.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9571,8 +10142,12 @@ module Aws::Connect
     #   The hierarchy levels to update.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9629,8 +10204,12 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9666,8 +10245,12 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9702,8 +10285,12 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9733,8 +10320,12 @@ module Aws::Connect
     #   The identifier of the user account.
     #
     # @option params [required, String] :instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9768,7 +10359,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

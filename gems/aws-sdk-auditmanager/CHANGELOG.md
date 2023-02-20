@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2023-02-20)
+------------------
+
+* Feature - This release introduces a ServiceQuotaExceededException to the UpdateAssessmentFrameworkShare API operation.
+
 1.30.0 (2023-01-18)
 ------------------
 

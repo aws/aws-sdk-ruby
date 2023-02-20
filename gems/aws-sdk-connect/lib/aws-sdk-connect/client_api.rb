@@ -1842,8 +1842,8 @@ module Aws::Connect
     KinesisVideoStreamConfig.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, required: true, location_name: "EncryptionConfig"))
     KinesisVideoStreamConfig.struct_class = Types::KinesisVideoStreamConfig
 
-    LexBot.add_member(:name, Shapes::ShapeRef.new(shape: BotName, location_name: "Name"))
-    LexBot.add_member(:lex_region, Shapes::ShapeRef.new(shape: LexRegion, location_name: "LexRegion"))
+    LexBot.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location_name: "Name"))
+    LexBot.add_member(:lex_region, Shapes::ShapeRef.new(shape: LexRegion, required: true, location_name: "LexRegion"))
     LexBot.struct_class = Types::LexBot
 
     LexBotConfig.add_member(:lex_bot, Shapes::ShapeRef.new(shape: LexBot, location_name: "LexBot"))

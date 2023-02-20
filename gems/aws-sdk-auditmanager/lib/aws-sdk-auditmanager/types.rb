@@ -38,6 +38,19 @@ module Aws::AuditManager
 
     # An Amazon Web Service such as Amazon S3 or CloudTrail.
     #
+    # For an example of how to find an Amazon Web Service name and how to
+    # define it in your assessment scope, see the following:
+    #
+    # * [Finding an Amazon Web Service name to use in your assessment
+    #   scope][1]
+    #
+    # * [Defining an Amazon Web Service name in your assessment scope][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3
+    #
     # @!attribute [rw] service_name
     #   The name of the Amazon Web Service.
     #   @return [String]
@@ -1085,7 +1098,7 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   The IAM user or role that performed the action.
+    #   The user or role that performed the action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ChangeLog AWS API Documentation
@@ -1154,11 +1167,11 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   The IAM user or role that created the control.
+    #   The user or role that created the control.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_by
-    #   The IAM user or role that most recently updated the control.
+    #   The user or role that most recently updated the control.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1887,7 +1900,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   The IAM user or role that created the delegation.
+    #   The user or role that created the delegation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Delegation AWS API Documentation
@@ -2184,8 +2197,8 @@ module Aws::AuditManager
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] iam_id
-    #   The unique identifier for the IAM user or role that's associated
-    #   with the evidence.
+    #   The unique identifier for the user or role that's associated with
+    #   the evidence.
     #   @return [String]
     #
     # @!attribute [rw] compliance_check
@@ -2413,11 +2426,11 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   The IAM user or role that created the framework.
+    #   The user or role that created the framework.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_by
-    #   The IAM user or role that most recently updated the framework.
+    #   The user or role that most recently updated the framework.
     #   @return [String]
     #
     # @!attribute [rw] tags

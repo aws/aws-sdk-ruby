@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2023-02-20)
+------------------
+
+* Feature - Reasons for failed diff has been approved by SDK Reviewer
+
 1.96.0 (2023-02-10)
 ------------------
 
