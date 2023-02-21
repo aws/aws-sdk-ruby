@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Improve performance of URL signing
+
 1.75.1 (2023-02-15)
 ------------------
 
