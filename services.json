@@ -1080,6 +1080,9 @@
   "TimestreamWrite": {
     "models": "timestream-write/2018-11-01"
   },
+  "Tnb": {
+    "models": "tnb/2008-10-21"
+  },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"
   },

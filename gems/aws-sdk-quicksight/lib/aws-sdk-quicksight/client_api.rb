@@ -5183,6 +5183,7 @@ module Aws::QuickSight
     RowSortList.member = Shapes::ShapeRef.new(shape: FieldSortOptions)
 
     S3Parameters.add_member(:manifest_file_location, Shapes::ShapeRef.new(shape: ManifestFileLocation, required: true, location_name: "ManifestFileLocation"))
+    S3Parameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     S3Parameters.struct_class = Types::S3Parameters
 
     S3Source.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DataSourceArn"))

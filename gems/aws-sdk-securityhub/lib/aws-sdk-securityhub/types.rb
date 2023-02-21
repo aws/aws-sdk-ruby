@@ -383,11 +383,29 @@ module Aws::SecurityHub
     # @!attribute [rw] first_seen
     #   An ISO8601-formatted timestamp that indicates when the API call was
     #   first observed.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] last_seen
     #   An ISO8601-formatted timestamp that indicates when the API call was
     #   most recently observed.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallAction AWS API Documentation
@@ -611,8 +629,9 @@ module Aws::SecurityHub
     #   Indicates when the API was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -737,8 +756,9 @@ module Aws::SecurityHub
     #   Indicates when the stage was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -749,8 +769,9 @@ module Aws::SecurityHub
     #   Indicates when the stage was most recently updated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -807,8 +828,9 @@ module Aws::SecurityHub
     #   Indicates when the API was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -920,8 +942,9 @@ module Aws::SecurityHub
     #   Indicates when the stage was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -944,8 +967,9 @@ module Aws::SecurityHub
     #   Indicates when the stage was most recently updated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -1051,8 +1075,9 @@ module Aws::SecurityHub
     #   Indicates when the auto scaling group was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -1393,8 +1418,9 @@ module Aws::SecurityHub
     #   The creation date and time for the launch configuration.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -2065,8 +2091,9 @@ module Aws::SecurityHub
     #   Indicates when the certificate was requested.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -2109,8 +2136,9 @@ module Aws::SecurityHub
     #   certificate type is `IMPORTED`.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -2127,8 +2155,9 @@ module Aws::SecurityHub
     #   certificate type is `AMAZON_ISSUED`.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -2155,8 +2184,9 @@ module Aws::SecurityHub
     #   The time after which the certificate becomes invalid.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -2167,8 +2197,9 @@ module Aws::SecurityHub
     #   The time before which the certificate is not valid.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -2396,8 +2427,9 @@ module Aws::SecurityHub
     #   Indicates when the renewal summary was last updated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -2664,8 +2696,9 @@ module Aws::SecurityHub
     #   Indicates when that the distribution was last modified.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -3770,8 +3803,9 @@ module Aws::SecurityHub
     #   mode was set to that value.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -3801,8 +3835,9 @@ module Aws::SecurityHub
     #   Indicates when the table was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -4064,8 +4099,9 @@ module Aws::SecurityHub
     #   Indicates when the provisioned throughput was last decreased.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -4076,8 +4112,9 @@ module Aws::SecurityHub
     #   Indicates when the provisioned throughput was last increased.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -4210,8 +4247,9 @@ module Aws::SecurityHub
     #   Indicates the point in time that the table was restored to.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -4240,8 +4278,9 @@ module Aws::SecurityHub
     #   that the key was inaccessible.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -4396,8 +4435,9 @@ module Aws::SecurityHub
     #   Indicates when the instance was launched.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -5880,8 +5920,9 @@ module Aws::SecurityHub
     #   Indicates when the attachment initiated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -6430,8 +6471,9 @@ module Aws::SecurityHub
     #   Indicates when the volume was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -6966,8 +7008,9 @@ module Aws::SecurityHub
     #   The date and time of the last change in status.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -7033,8 +7076,9 @@ module Aws::SecurityHub
     #   The date and time when the image was pushed to the repository.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10196,8 +10240,9 @@ module Aws::SecurityHub
     #   Indicates when the load balancer was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10492,8 +10537,9 @@ module Aws::SecurityHub
     #   Indicates when the load balancer was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10571,8 +10617,9 @@ module Aws::SecurityHub
     #   Indicates when the IAM access key was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10649,8 +10696,9 @@ module Aws::SecurityHub
     #   Indicates when the session was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10732,8 +10780,9 @@ module Aws::SecurityHub
     #   Indicates when the IAM group was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10793,8 +10842,9 @@ module Aws::SecurityHub
     #   Indicates when the instance profile was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10844,8 +10894,9 @@ module Aws::SecurityHub
     #   Indicates when the role was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10908,8 +10959,9 @@ module Aws::SecurityHub
     #   When the policy was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10953,8 +11005,9 @@ module Aws::SecurityHub
     #   When the policy was most recently updated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -10993,8 +11046,9 @@ module Aws::SecurityHub
     #   Indicates when the version was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -11026,8 +11080,9 @@ module Aws::SecurityHub
     #   Indicates when the role was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -11105,8 +11160,9 @@ module Aws::SecurityHub
     #   Indicates when the user was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -11236,8 +11292,9 @@ module Aws::SecurityHub
     #   Indicates when the KMS key was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -11388,8 +11445,9 @@ module Aws::SecurityHub
     #   Indicates when the function was last updated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -11590,8 +11648,9 @@ module Aws::SecurityHub
     #   Indicates when the version was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -12372,8 +12431,9 @@ module Aws::SecurityHub
     #   Time (UTC).
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -12569,8 +12629,9 @@ module Aws::SecurityHub
     #   Indicates when the snapshot was taken.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -12604,8 +12665,9 @@ module Aws::SecurityHub
     #   Time (UTC).
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -12840,8 +12902,9 @@ module Aws::SecurityHub
     #   Indicates when the DB instance was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -12947,8 +13010,9 @@ module Aws::SecurityHub
     #   point-in-time restore.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -13760,8 +13824,9 @@ module Aws::SecurityHub
     #   The datetime when the event notification subscription was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -13949,8 +14014,9 @@ module Aws::SecurityHub
     #   The end of the time window for which maintenance was deferred.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -13965,8 +14031,9 @@ module Aws::SecurityHub
     #   The start of the time window for which maintenance was deferred.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -14019,8 +14086,9 @@ module Aws::SecurityHub
     #   Indicates when the cluster was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -14122,8 +14190,9 @@ module Aws::SecurityHub
     #   enabled.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -14176,8 +14245,9 @@ module Aws::SecurityHub
     #   Indicates the start of the next maintenance window.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -14410,8 +14480,9 @@ module Aws::SecurityHub
     #   The last time when logs failed to be delivered.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -14422,8 +14493,9 @@ module Aws::SecurityHub
     #   The last time that logs were delivered successfully.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -14701,8 +14773,9 @@ module Aws::SecurityHub
     #   The date when objects are moved or deleted.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -14910,8 +14983,9 @@ module Aws::SecurityHub
     #   class. If you provide `Date`, you cannot provide `Days`.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -14990,8 +15064,9 @@ module Aws::SecurityHub
     #   Indicates when the S3 bucket was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -15360,8 +15435,9 @@ module Aws::SecurityHub
     #   Indicates when the object was last modified.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -15723,8 +15799,9 @@ module Aws::SecurityHub
     #   potential security issue that a finding captured.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -15736,8 +15813,9 @@ module Aws::SecurityHub
     #   the potential security issue that a finding captured.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -15749,8 +15827,9 @@ module Aws::SecurityHub
     #   security issue that a finding captured.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -15762,8 +15841,9 @@ module Aws::SecurityHub
     #   finding record.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -16010,23 +16090,59 @@ module Aws::SecurityHub
     #   An ISO8601-formatted timestamp that indicates when the
     #   security-findings provider first observed the potential security
     #   issue that a finding captured.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] last_observed_at
     #   An ISO8601-formatted timestamp that indicates when the
     #   security-findings provider most recently observed the potential
     #   security issue that a finding captured.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] created_at
     #   An ISO8601-formatted timestamp that indicates when the
     #   security-findings provider captured the potential security issue
     #   that a finding captured.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] updated_at
     #   An ISO8601-formatted timestamp that indicates when the
     #   security-findings provider last updated the finding record.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] severity_product
@@ -16182,11 +16298,29 @@ module Aws::SecurityHub
     #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] process_launched_at
-    #   The date/time that the process was launched.
+    #   A timestamp that identifies when the process was launched.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] process_terminated_at
-    #   The date/time that the process was terminated.
+    #   A timestamp that identifies when the process was terminated.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] threat_intel_indicator_type
@@ -16202,8 +16336,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] threat_intel_indicator_last_observed_at
-    #   The date/time of the last observation of a threat intelligence
-    #   indicator.
+    #   A timestamp that identifies the last observation of a threat
+    #   intelligence indicator.
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] threat_intel_indicator_source
@@ -16314,7 +16448,16 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_container_launched_at
-    #   The date/time that the container was started.
+    #   A timestamp that identifies when the container was started.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] resource_details_other
@@ -18549,8 +18692,9 @@ module Aws::SecurityHub
     #   Indicates when the container started.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -18888,11 +19032,29 @@ module Aws::SecurityHub
     # A date filter for querying findings.
     #
     # @!attribute [rw] start
-    #   A start date for the date filter.
+    #   A timestamp that provides the start date for the date filter.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] end
-    #   An end date for the date filter.
+    #   A timestamp that provides the end date for the date filter.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] date_range
@@ -21026,8 +21188,9 @@ module Aws::SecurityHub
     #   The timestamp of when the note was updated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -21200,8 +21363,9 @@ module Aws::SecurityHub
     #   Indicates when the operation started.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -21212,8 +21376,9 @@ module Aws::SecurityHub
     #   Indicates when the operation completed.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -21356,8 +21521,9 @@ module Aws::SecurityHub
     #   Indicates when the process was launched.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -21368,8 +21534,9 @@ module Aws::SecurityHub
     #   Indicates when the process was terminated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -23307,8 +23474,9 @@ module Aws::SecurityHub
     #   indicator was observed.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -23764,8 +23932,9 @@ module Aws::SecurityHub
     #   Indicates when the vulnerability advisory was created.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #
@@ -23776,8 +23945,9 @@ module Aws::SecurityHub
     #   Indicates when the vulnerability advisory was last updated.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For example,
+    #   `2020-03-22T13:22:13.933Z`.
     #
     #
     #

@@ -368,14 +368,15 @@ module Aws::ResilienceHub
 
     # @!group API Operations
 
-    # Adds the resource mapping for the draft application version.
+    # Adds the resource mapping for the draft application version. You can
+    # also update an existing resource mapping to a new physical resource.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -442,15 +443,15 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Creates a Resilience Hub application. A Resilience Hub application is
-    # a collection of Amazon Web Services resources structured to prevent
-    # and recover Amazon Web Services application disruptions. To describe a
-    # Resilience Hub application, you provide an application name, resources
-    # from one or more–up to five–CloudFormation stacks, and an appropriate
-    # resiliency policy.
+    # Creates an AWS Resilience Hub application. An AWS Resilience Hub
+    # application is a collection of Amazon Web Services resources
+    # structured to prevent and recover Amazon Web Services application
+    # disruptions. To describe a AWS Resilience Hub application, you provide
+    # an application name, resources from one or more–up to
+    # five–CloudFormation stacks, and an appropriate resiliency policy.
     #
-    # After you create a Resilience Hub application, you publish it so that
-    # you can run a resiliency assessment on it. You can then use
+    # After you create an AWS Resilience Hub application, you publish it so
+    # that you can run a resiliency assessment on it. You can then use
     # recommendations from the assessment to improve resiliency by running
     # another assessment, comparing results, and then iterating the process
     # until you achieve your goals for recovery time objective (RTO) and
@@ -478,7 +479,7 @@ module Aws::ResilienceHub
     #   for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -531,14 +532,227 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Creates a new recommendation template.
+    # Creates a new Application Component in the AWS Resilience Hub
+    # application.
+    #
+    # <note markdown="1"> This API updates the AWS Resilience Hub application draft version. To
+    # use this Application Component for running assessments, you must
+    # publish the AWS Resilience Hub application using the
+    # `PublishAppVersion` API.
+    #
+    #  </note>
+    #
+    # @option params [Hash<String,Array>] :additional_info
+    #   Currently, there is no supported additional information for
+    #   Application Components.
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [String] :client_token
+    #   Used for an idempotency token. A client token is a unique,
+    #   case-sensitive string of up to 64 ASCII characters. You should not
+    #   reuse the same client token for other API requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :id
+    #   The identifier of the Application Component.
+    #
+    # @option params [required, String] :name
+    #   The name of the Application Component.
+    #
+    # @option params [required, String] :type
+    #   The type of Application Component. For more information about the
+    #   types of Application Component, see [Grouping resources in an
+    #   AppComponent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html
+    #
+    # @return [Types::CreateAppVersionAppComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppVersionAppComponentResponse#app_arn #app_arn} => String
+    #   * {Types::CreateAppVersionAppComponentResponse#app_component #app_component} => Types::AppComponent
+    #   * {Types::CreateAppVersionAppComponentResponse#app_version #app_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_version_app_component({
+    #     additional_info: {
+    #       "String128WithoutWhitespace" => ["String1024"],
+    #     },
+    #     app_arn: "Arn", # required
+    #     client_token: "ClientToken",
+    #     id: "String255",
+    #     name: "String255", # required
+    #     type: "String255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_component.additional_info #=> Hash
+    #   resp.app_component.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.app_component.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.app_component.id #=> String
+    #   resp.app_component.name #=> String
+    #   resp.app_component.type #=> String
+    #   resp.app_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/CreateAppVersionAppComponent AWS API Documentation
+    #
+    # @overload create_app_version_app_component(params = {})
+    # @param [Hash] params ({})
+    def create_app_version_app_component(params = {}, options = {})
+      req = build_request(:create_app_version_app_component, params)
+      req.send_request(options)
+    end
+
+    # Adds a resource to the AWS Resilience Hub applicationand assigns it to
+    # the specified Application Components. If you specify a new Application
+    # Component, AWS Resilience Hub will automatically create the
+    # Application Component.
+    #
+    # <note markdown="1"> * This action has no effect outside AWS Resilience Hub.
+    #
+    # * This API updates the AWS Resilience Hub application draft version.
+    #   To use this resource for running resiliency assessments, you must
+    #   publish the AWS Resilience Hub application using the
+    #   `PublishAppVersion` API.
+    #
+    # * To update application version with new `physicalResourceID`, you
+    #   must call `ResolveAppVersionResources` API.
+    #
+    #  </note>
+    #
+    # @option params [Hash<String,Array>] :additional_info
+    #   Currently, there is no supported additional information for resources.
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, Array<String>] :app_components
+    #   The list of Application Components that this resource belongs to. If
+    #   an Application Component is not part of the AWS Resilience Hub
+    #   application, it will be added.
+    #
+    # @option params [String] :aws_account_id
+    #   The Amazon Web Services account that owns the physical resource.
+    #
+    # @option params [String] :aws_region
+    #   The Amazon Web Services region that owns the physical resource.
+    #
+    # @option params [String] :client_token
+    #   Used for an idempotency token. A client token is a unique,
+    #   case-sensitive string of up to 64 ASCII characters. You should not
+    #   reuse the same client token for other API requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::LogicalResourceId] :logical_resource_id
+    #   The logical identifier of the resource.
+    #
+    # @option params [required, String] :physical_resource_id
+    #   The physical identifier of the resource.
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the resource.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource.
+    #
+    # @return [Types::CreateAppVersionResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppVersionResourceResponse#app_arn #app_arn} => String
+    #   * {Types::CreateAppVersionResourceResponse#app_version #app_version} => String
+    #   * {Types::CreateAppVersionResourceResponse#physical_resource #physical_resource} => Types::PhysicalResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_version_resource({
+    #     additional_info: {
+    #       "String128WithoutWhitespace" => ["String1024"],
+    #     },
+    #     app_arn: "Arn", # required
+    #     app_components: ["String255"], # required
+    #     aws_account_id: "CustomerId",
+    #     aws_region: "AwsRegion",
+    #     client_token: "ClientToken",
+    #     logical_resource_id: { # required
+    #       identifier: "String255", # required
+    #       logical_stack_name: "String255",
+    #       resource_group_name: "EntityName",
+    #       terraform_source_name: "String255",
+    #     },
+    #     physical_resource_id: "String2048", # required
+    #     resource_name: "EntityName", # required
+    #     resource_type: "String255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_version #=> String
+    #   resp.physical_resource.additional_info #=> Hash
+    #   resp.physical_resource.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resource.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resource.app_components #=> Array
+    #   resp.physical_resource.app_components[0].additional_info #=> Hash
+    #   resp.physical_resource.app_components[0].additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resource.app_components[0].additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resource.app_components[0].id #=> String
+    #   resp.physical_resource.app_components[0].name #=> String
+    #   resp.physical_resource.app_components[0].type #=> String
+    #   resp.physical_resource.excluded #=> Boolean
+    #   resp.physical_resource.logical_resource_id.identifier #=> String
+    #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
+    #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
+    #   resp.physical_resource.logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resource.physical_resource_id.aws_account_id #=> String
+    #   resp.physical_resource.physical_resource_id.aws_region #=> String
+    #   resp.physical_resource.physical_resource_id.identifier #=> String
+    #   resp.physical_resource.physical_resource_id.type #=> String, one of "Arn", "Native"
+    #   resp.physical_resource.resource_name #=> String
+    #   resp.physical_resource.resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/CreateAppVersionResource AWS API Documentation
+    #
+    # @overload create_app_version_resource(params = {})
+    # @param [Hash] params ({})
+    def create_app_version_resource(params = {}, options = {})
+      req = build_request(:create_app_version_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates a new recommendation template for the AWS Resilience Hub
+    # application.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -728,11 +942,11 @@ module Aws::ResilienceHub
     # action that can't be undone.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -747,7 +961,7 @@ module Aws::ResilienceHub
     #   not need to pass this option.**
     #
     # @option params [Boolean] :force_delete
-    #   A boolean option to force the deletion of a Resilience Hub
+    #   A boolean option to force the deletion of an AWS Resilience Hub
     #   application.
     #
     # @return [Types::DeleteAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -783,7 +997,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -820,6 +1034,252 @@ module Aws::ResilienceHub
     # @param [Hash] params ({})
     def delete_app_assessment(params = {}, options = {})
       req = build_request(:delete_app_assessment, params)
+      req.send_request(options)
+    end
+
+    # Deletes the input source and all of its imported resources from the
+    # AWS Resilience Hub application.
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [String] :client_token
+    #   Used for an idempotency token. A client token is a unique,
+    #   case-sensitive string of up to 64 ASCII characters. You should not
+    #   reuse the same client token for other API requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :source_arn
+    #   The Amazon Resource Name (ARN) of the imported resource you want to
+    #   remove from the AWS Resilience Hub application. For more information
+    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *AWS General
+    #   Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Types::TerraformSource] :terraform_source
+    #   The imported Terraform s3 state ﬁle you want to remove from the AWS
+    #   Resilience Hub application.
+    #
+    # @return [Types::DeleteAppInputSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAppInputSourceResponse#app_arn #app_arn} => String
+    #   * {Types::DeleteAppInputSourceResponse#app_input_source #app_input_source} => Types::AppInputSource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_input_source({
+    #     app_arn: "Arn", # required
+    #     client_token: "ClientToken",
+    #     source_arn: "Arn",
+    #     terraform_source: {
+    #       s3_state_file_url: "S3Url", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_input_source.import_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform"
+    #   resp.app_input_source.resource_count #=> Integer
+    #   resp.app_input_source.source_arn #=> String
+    #   resp.app_input_source.source_name #=> String
+    #   resp.app_input_source.terraform_source.s3_state_file_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DeleteAppInputSource AWS API Documentation
+    #
+    # @overload delete_app_input_source(params = {})
+    # @param [Hash] params ({})
+    def delete_app_input_source(params = {}, options = {})
+      req = build_request(:delete_app_input_source, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Application Component from the AWS Resilience Hub
+    # application.
+    #
+    # <note markdown="1"> * This API updates the AWS Resilience Hub application draft version.
+    #   To use this Application Component for running assessments, you must
+    #   publish the AWS Resilience Hub application using the
+    #   `PublishAppVersion` API.
+    #
+    # * You will not be able to delete an Application Component if it has
+    #   resources associated with it.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [String] :client_token
+    #   Used for an idempotency token. A client token is a unique,
+    #   case-sensitive string of up to 64 ASCII characters. You should not
+    #   reuse the same client token for other API requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :id
+    #   The identifier of the Application Component.
+    #
+    # @return [Types::DeleteAppVersionAppComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAppVersionAppComponentResponse#app_arn #app_arn} => String
+    #   * {Types::DeleteAppVersionAppComponentResponse#app_component #app_component} => Types::AppComponent
+    #   * {Types::DeleteAppVersionAppComponentResponse#app_version #app_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_version_app_component({
+    #     app_arn: "Arn", # required
+    #     client_token: "ClientToken",
+    #     id: "String255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_component.additional_info #=> Hash
+    #   resp.app_component.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.app_component.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.app_component.id #=> String
+    #   resp.app_component.name #=> String
+    #   resp.app_component.type #=> String
+    #   resp.app_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DeleteAppVersionAppComponent AWS API Documentation
+    #
+    # @overload delete_app_version_app_component(params = {})
+    # @param [Hash] params ({})
+    def delete_app_version_app_component(params = {}, options = {})
+      req = build_request(:delete_app_version_app_component, params)
+      req.send_request(options)
+    end
+
+    # Deletes a resource from the AWS Resilience Hub application.
+    #
+    # <note markdown="1"> * You can only delete a manually added resource. To exclude
+    #   non-manually added resources, use the `UpdateAppVersionResource`
+    #   API.
+    #
+    # * This action has no effect outside AWS Resilience Hub.
+    #
+    # * This API updates the AWS Resilience Hub application draft version.
+    #   To use this resource for running resiliency assessments, you must
+    #   publish the AWS Resilience Hub application using the
+    #   `PublishAppVersion` API.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [String] :aws_account_id
+    #   The Amazon Web Services account that owns the physical resource.
+    #
+    # @option params [String] :aws_region
+    #   The Amazon Web Services region that owns the physical resource.
+    #
+    # @option params [String] :client_token
+    #   Used for an idempotency token. A client token is a unique,
+    #   case-sensitive string of up to 64 ASCII characters. You should not
+    #   reuse the same client token for other API requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::LogicalResourceId] :logical_resource_id
+    #   The logical identifier of the resource.
+    #
+    # @option params [String] :physical_resource_id
+    #   The physical identifier of the resource.
+    #
+    # @option params [String] :resource_name
+    #   The name of the resource.
+    #
+    # @return [Types::DeleteAppVersionResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAppVersionResourceResponse#app_arn #app_arn} => String
+    #   * {Types::DeleteAppVersionResourceResponse#app_version #app_version} => String
+    #   * {Types::DeleteAppVersionResourceResponse#physical_resource #physical_resource} => Types::PhysicalResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_version_resource({
+    #     app_arn: "Arn", # required
+    #     aws_account_id: "CustomerId",
+    #     aws_region: "AwsRegion",
+    #     client_token: "ClientToken",
+    #     logical_resource_id: {
+    #       identifier: "String255", # required
+    #       logical_stack_name: "String255",
+    #       resource_group_name: "EntityName",
+    #       terraform_source_name: "String255",
+    #     },
+    #     physical_resource_id: "String2048",
+    #     resource_name: "EntityName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_version #=> String
+    #   resp.physical_resource.additional_info #=> Hash
+    #   resp.physical_resource.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resource.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resource.app_components #=> Array
+    #   resp.physical_resource.app_components[0].additional_info #=> Hash
+    #   resp.physical_resource.app_components[0].additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resource.app_components[0].additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resource.app_components[0].id #=> String
+    #   resp.physical_resource.app_components[0].name #=> String
+    #   resp.physical_resource.app_components[0].type #=> String
+    #   resp.physical_resource.excluded #=> Boolean
+    #   resp.physical_resource.logical_resource_id.identifier #=> String
+    #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
+    #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
+    #   resp.physical_resource.logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resource.physical_resource_id.aws_account_id #=> String
+    #   resp.physical_resource.physical_resource_id.aws_region #=> String
+    #   resp.physical_resource.physical_resource_id.identifier #=> String
+    #   resp.physical_resource.physical_resource_id.type #=> String, one of "Arn", "Native"
+    #   resp.physical_resource.resource_name #=> String
+    #   resp.physical_resource.resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DeleteAppVersionResource AWS API Documentation
+    #
+    # @overload delete_app_version_resource(params = {})
+    # @param [Hash] params ({})
+    def delete_app_version_resource(params = {}, options = {})
+      req = build_request(:delete_app_version_resource, params)
       req.send_request(options)
     end
 
@@ -879,7 +1339,7 @@ module Aws::ResilienceHub
     #   for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -912,11 +1372,11 @@ module Aws::ResilienceHub
     # Describes an AWS Resilience Hub application.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -964,7 +1424,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -1038,16 +1498,217 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
+    # Describes the AWS Resilience Hub application version.
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, String] :app_version
+    #   The AWS Resilience Hub application version.
+    #
+    # @return [Types::DescribeAppVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppVersionResponse#additional_info #additional_info} => Hash&lt;String,Array&lt;String&gt;&gt;
+    #   * {Types::DescribeAppVersionResponse#app_arn #app_arn} => String
+    #   * {Types::DescribeAppVersionResponse#app_version #app_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_version({
+    #     app_arn: "Arn", # required
+    #     app_version: "EntityVersion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.additional_info #=> Hash
+    #   resp.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.app_arn #=> String
+    #   resp.app_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeAppVersion AWS API Documentation
+    #
+    # @overload describe_app_version(params = {})
+    # @param [Hash] params ({})
+    def describe_app_version(params = {}, options = {})
+      req = build_request(:describe_app_version, params)
+      req.send_request(options)
+    end
+
+    # Describes an Application Component in the AWS Resilience Hub
+    # application.
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, String] :app_version
+    #   The AWS Resilience Hub application version.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the Application Component.
+    #
+    # @return [Types::DescribeAppVersionAppComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppVersionAppComponentResponse#app_arn #app_arn} => String
+    #   * {Types::DescribeAppVersionAppComponentResponse#app_component #app_component} => Types::AppComponent
+    #   * {Types::DescribeAppVersionAppComponentResponse#app_version #app_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_version_app_component({
+    #     app_arn: "Arn", # required
+    #     app_version: "EntityVersion", # required
+    #     id: "String255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_component.additional_info #=> Hash
+    #   resp.app_component.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.app_component.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.app_component.id #=> String
+    #   resp.app_component.name #=> String
+    #   resp.app_component.type #=> String
+    #   resp.app_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeAppVersionAppComponent AWS API Documentation
+    #
+    # @overload describe_app_version_app_component(params = {})
+    # @param [Hash] params ({})
+    def describe_app_version_app_component(params = {}, options = {})
+      req = build_request(:describe_app_version_app_component, params)
+      req.send_request(options)
+    end
+
+    # Describes a resource of the AWS Resilience Hub application.
+    #
+    # <note markdown="1"> This API accepts only one of the following parameters to descibe the
+    # resource:
+    #
+    #  * `resourceName`
+    #
+    # * `logicalResourceId`
+    #
+    # * `physicalResourceId` (Along with `physicalResourceId`, you can also
+    #   provide `awsAccountId`, and `awsRegion`)
+    #
+    #  </note>
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, String] :app_version
+    #   The AWS Resilience Hub application version.
+    #
+    # @option params [String] :aws_account_id
+    #   The Amazon Web Services account that owns the physical resource.
+    #
+    # @option params [String] :aws_region
+    #   The Amazon Web Services region that owns the physical resource.
+    #
+    # @option params [Types::LogicalResourceId] :logical_resource_id
+    #   The logical identifier of the resource.
+    #
+    # @option params [String] :physical_resource_id
+    #   The physical identifier of the resource.
+    #
+    # @option params [String] :resource_name
+    #   The name of the resource.
+    #
+    # @return [Types::DescribeAppVersionResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppVersionResourceResponse#app_arn #app_arn} => String
+    #   * {Types::DescribeAppVersionResourceResponse#app_version #app_version} => String
+    #   * {Types::DescribeAppVersionResourceResponse#physical_resource #physical_resource} => Types::PhysicalResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_version_resource({
+    #     app_arn: "Arn", # required
+    #     app_version: "EntityVersion", # required
+    #     aws_account_id: "CustomerId",
+    #     aws_region: "AwsRegion",
+    #     logical_resource_id: {
+    #       identifier: "String255", # required
+    #       logical_stack_name: "String255",
+    #       resource_group_name: "EntityName",
+    #       terraform_source_name: "String255",
+    #     },
+    #     physical_resource_id: "String2048",
+    #     resource_name: "EntityName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_version #=> String
+    #   resp.physical_resource.additional_info #=> Hash
+    #   resp.physical_resource.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resource.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resource.app_components #=> Array
+    #   resp.physical_resource.app_components[0].additional_info #=> Hash
+    #   resp.physical_resource.app_components[0].additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resource.app_components[0].additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resource.app_components[0].id #=> String
+    #   resp.physical_resource.app_components[0].name #=> String
+    #   resp.physical_resource.app_components[0].type #=> String
+    #   resp.physical_resource.excluded #=> Boolean
+    #   resp.physical_resource.logical_resource_id.identifier #=> String
+    #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
+    #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
+    #   resp.physical_resource.logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resource.physical_resource_id.aws_account_id #=> String
+    #   resp.physical_resource.physical_resource_id.aws_region #=> String
+    #   resp.physical_resource.physical_resource_id.identifier #=> String
+    #   resp.physical_resource.physical_resource_id.type #=> String, one of "Arn", "Native"
+    #   resp.physical_resource.resource_name #=> String
+    #   resp.physical_resource.resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeAppVersionResource AWS API Documentation
+    #
+    # @overload describe_app_version_resource(params = {})
+    # @param [Hash] params ({})
+    def describe_app_version_resource(params = {}, options = {})
+      req = build_request(:describe_app_version_resource, params)
+      req.send_request(options)
+    end
+
     # Returns the resolution status for the specified resolution identifier
     # for an application version. If `resolutionId` is not specified, the
     # current resolution status is returned.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -1092,14 +1753,14 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Describes details about an AWS Resilience Hub
+    # Describes details about an AWS Resilience Hub application.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -1138,12 +1799,20 @@ module Aws::ResilienceHub
 
     # Describes the status of importing resources to an application version.
     #
+    # <note markdown="1"> If you get a 404 error with
+    # `ResourceImportStatusNotFoundAppMetadataException`, you must call
+    # `importResourcesToDraftAppVersion` after creating the application and
+    # before calling `describeDraftAppVersionResourcesImportStatus` to
+    # obtain the status.
+    #
+    #  </note>
+    #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -1190,7 +1859,7 @@ module Aws::ResilienceHub
     #   for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -1230,20 +1899,29 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Imports resources from sources such as a CloudFormation stack,
-    # resource-groups, or application registry app to a draft application
-    # version.
+    # Imports resources to AWS Resilience Hub application draft version from
+    # different input sources. For more information about the input sources
+    # supported by AWS Resilience Hub, see [Discover the structure and
+    # describe your Resilience Hub application][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [String] :import_strategy
+    #   The import strategy you would like to set to import resources into AWS
+    #   Resilience Hub application.
     #
     # @option params [Array<String>] :source_arns
     #   The Amazon Resource Names (ARNs) for the resources that you want to
@@ -1264,6 +1942,7 @@ module Aws::ResilienceHub
     #
     #   resp = client.import_resources_to_draft_app_version({
     #     app_arn: "Arn", # required
+    #     import_strategy: "AddOnly", # accepts AddOnly, ReplaceAll
     #     source_arns: ["Arn"],
     #     terraform_sources: [
     #       {
@@ -1291,14 +1970,14 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the alarm recommendations for a AWS Resilience Hub application.
+    # Lists the alarm recommendations for an AWS Resilience Hub application.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -1359,11 +2038,11 @@ module Aws::ResilienceHub
     # use request parameters to refine the results for the response object.
     #
     # @option params [String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -1444,14 +2123,14 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the compliances for an AWS Resilience Hub component.
+    # Lists the compliances for an AWS Resilience Hub Application Component.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -1516,14 +2195,15 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the recommendations for an AWS Resilience Hub component.
+    # Lists the recommendations for an AWS Resilience Hub Application
+    # Component.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -1599,16 +2279,147 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
+    # Lists all the input sources of the AWS Resilience Hub application. For
+    # more information about the input sources supported by AWS Resilience
+    # Hub, see [Discover the structure and describe your Resilience Hub
+    # application][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, String] :app_version
+    #   The AWS Resilience Hub application version.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of input sources to be displayed per AWS Resilience Hub
+    #   application.
+    #
+    # @option params [String] :next_token
+    #   Null, or the token from a previous call to get the next set of
+    #   results.
+    #
+    # @return [Types::ListAppInputSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppInputSourcesResponse#app_input_sources #app_input_sources} => Array&lt;Types::AppInputSource&gt;
+    #   * {Types::ListAppInputSourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_input_sources({
+    #     app_arn: "Arn", # required
+    #     app_version: "EntityVersion", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_input_sources #=> Array
+    #   resp.app_input_sources[0].import_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform"
+    #   resp.app_input_sources[0].resource_count #=> Integer
+    #   resp.app_input_sources[0].source_arn #=> String
+    #   resp.app_input_sources[0].source_name #=> String
+    #   resp.app_input_sources[0].terraform_source.s3_state_file_url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppInputSources AWS API Documentation
+    #
+    # @overload list_app_input_sources(params = {})
+    # @param [Hash] params ({})
+    def list_app_input_sources(params = {}, options = {})
+      req = build_request(:list_app_input_sources, params)
+      req.send_request(options)
+    end
+
+    # Lists all the Application Components in the AWS Resilience Hub
+    # application.
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, String] :app_version
+    #   The version of the Application Component.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of Application Components to be displayed per AWS
+    #   Resilience Hub application version.
+    #
+    # @option params [String] :next_token
+    #   Null, or the token from a previous call to get the next set of
+    #   results.
+    #
+    # @return [Types::ListAppVersionAppComponentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppVersionAppComponentsResponse#app_arn #app_arn} => String
+    #   * {Types::ListAppVersionAppComponentsResponse#app_components #app_components} => Array&lt;Types::AppComponent&gt;
+    #   * {Types::ListAppVersionAppComponentsResponse#app_version #app_version} => String
+    #   * {Types::ListAppVersionAppComponentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_version_app_components({
+    #     app_arn: "Arn", # required
+    #     app_version: "EntityVersion", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_components #=> Array
+    #   resp.app_components[0].additional_info #=> Hash
+    #   resp.app_components[0].additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.app_components[0].additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.app_components[0].id #=> String
+    #   resp.app_components[0].name #=> String
+    #   resp.app_components[0].type #=> String
+    #   resp.app_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppVersionAppComponents AWS API Documentation
+    #
+    # @overload list_app_version_app_components(params = {})
+    # @param [Hash] params ({})
+    def list_app_version_app_components(params = {}, options = {})
+      req = build_request(:list_app_version_app_components, params)
+      req.send_request(options)
+    end
+
     # Lists how the resources in an application version are mapped/sourced
     # from. Mappings can be physical resource identifiers, CloudFormation
     # stacks, resource-groups, or an application registry app.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -1667,14 +2478,14 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists all the resources in an application version.
+    # Lists all the resources in an AWS Resilience Hub application.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -1718,9 +2529,17 @@ module Aws::ResilienceHub
     #
     #   resp.next_token #=> String
     #   resp.physical_resources #=> Array
+    #   resp.physical_resources[0].additional_info #=> Hash
+    #   resp.physical_resources[0].additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resources[0].additional_info["String128WithoutWhitespace"][0] #=> String
     #   resp.physical_resources[0].app_components #=> Array
+    #   resp.physical_resources[0].app_components[0].additional_info #=> Hash
+    #   resp.physical_resources[0].app_components[0].additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resources[0].app_components[0].additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resources[0].app_components[0].id #=> String
     #   resp.physical_resources[0].app_components[0].name #=> String
     #   resp.physical_resources[0].app_components[0].type #=> String
+    #   resp.physical_resources[0].excluded #=> Boolean
     #   resp.physical_resources[0].logical_resource_id.identifier #=> String
     #   resp.physical_resources[0].logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resources[0].logical_resource_id.resource_group_name #=> String
@@ -1742,14 +2561,14 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the different versions for the Resilience Hub applications.
+    # Lists the different versions for the AWS Resilience Hub applications.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -1795,14 +2614,23 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists your Resilience Hub applications.
+    # Lists your AWS Resilience Hub applications.
+    #
+    # <note markdown="1"> You can filter applications using only one filter at a time or without
+    # using any filter. If you try to filter applications using multiple
+    # filters, you will get the following error:
+    #
+    #  `An error occurred (ValidationException) when calling the ListApps
+    # operation: Only one filter is supported for this operation.`
+    #
+    #  </note>
     #
     # @option params [String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -1859,7 +2687,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the recommendation templates for the Resilience Hub
+    # Lists the recommendation templates for the AWS Resilience Hub
     # applications.
     #
     # @option params [required, String] :assessment_arn
@@ -1867,7 +2695,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -1947,7 +2775,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the resiliency policies for the Resilience Hub applications.
+    # Lists the resiliency policies for the AWS Resilience Hub applications.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
@@ -2004,14 +2832,14 @@ module Aws::ResilienceHub
     end
 
     # Lists the standard operating procedure (SOP) recommendations for the
-    # Resilience Hub applications.
+    # AWS Resilience Hub applications.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -2068,7 +2896,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the suggested resiliency policies for the Resilience Hub
+    # Lists the suggested resiliency policies for the AWS Resilience Hub
     # applications.
     #
     # @option params [Integer] :max_results
@@ -2121,10 +2949,11 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the tags for your resources in your Resilience Hub applications.
+    # Lists the tags for your resources in your AWS Resilience Hub
+    # applications.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) for a specific resource in your
+    #   The Amazon Resource Name (ARN) for a specific resource in your AWS
     #   Resilience Hub application.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2151,14 +2980,14 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the test recommendations for the Resilience Hub application.
+    # Lists the test recommendations for the AWS Resilience Hub application.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -2221,15 +3050,15 @@ module Aws::ResilienceHub
 
     # Lists the resources that are not currently supported in AWS Resilience
     # Hub. An unsupported resource is a resource that exists in the object
-    # that was used to create an app, but is not supported by Resilience
+    # that was used to create an app, but is not supported by AWS Resilience
     # Hub.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -2293,14 +3122,14 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Publishes a new version of a specific Resilience Hub application.
+    # Publishes a new version of a specific AWS Resilience Hub application.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -2331,22 +3160,190 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Adds or updates the app template for a draft version of a Resilience
-    # Hub app.
+    # Adds or updates the app template for an AWS Resilience Hub application
+    # draft version.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :app_template_body
-    #   A JSON string that contains the body of the app template.
+    #   A JSON string that provides information about your application
+    #   structure. To learn more about the `appTemplateBody` template, see the
+    #   sample template provided in the *Examples* section.
+    #
+    #   The `appTemplateBody` JSON string has the following structure:
+    #
+    #   * <b> <code>resources</code> </b>
+    #
+    #     The list of logical resources that needs to be included in the
+    #     application.
+    #
+    #     Type: Array
+    #
+    #     <note markdown="1"> Don't add the resources that you want to exclude.
+    #
+    #      </note>
+    #
+    #     Each `resources` array item includes the following fields:
+    #
+    #     * <i> <code>logicalResourceId</code> </i>
+    #
+    #       The logical identifier of the resource.
+    #
+    #       Type: Object
+    #
+    #       Each `logicalResourceId` object includes the following fields:
+    #
+    #       * `identifier`
+    #
+    #         The identifier of the resource.
+    #
+    #         Type: String
+    #
+    #       * `logicalStackName`
+    #
+    #         The name of the CloudFormation stack this resource belongs to.
+    #
+    #         Type: String
+    #
+    #       * `resourceGroupName`
+    #
+    #         The name of the resource group this resource belongs to.
+    #
+    #         Type: String
+    #
+    #       * `terraformSourceName`
+    #
+    #         The name of the Terraform S3 state file this resource belongs
+    #         to.
+    #
+    #         Type: String
+    #
+    #     * <i> <code>type</code> </i>
+    #
+    #       The type of resource.
+    #
+    #       Type: string
+    #
+    #     * <i> <code>name</code> </i>
+    #
+    #       The name of the resource.
+    #
+    #       Type: String
+    #
+    #   * <b> <code>appComponents</code> </b>
+    #
+    #     The list of Application Components that this resource belongs to. If
+    #     an Application Component is not part of the AWS Resilience Hub
+    #     application, it will be added.
+    #
+    #     Type: Array
+    #
+    #     Each `appComponents` array item includes the following fields:
+    #
+    #     * `name`
+    #
+    #       The name of the Application Component.
+    #
+    #       Type: String
+    #
+    #     * `type`
+    #
+    #       The type of Application Component. For more information about the
+    #       types of Application Component, see [Grouping resources in an
+    #       AppComponent][1].
+    #
+    #       Type: String
+    #
+    #     * `resourceNames`
+    #
+    #       The list of included resources that are assigned to the
+    #       Application Component.
+    #
+    #       Type: Array of strings
+    #
+    #     * `additionalInfo`
+    #
+    #       Additional configuration parameters for an AWS Resilience Hub
+    #       application.
+    #
+    #       <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
+    #       format) of only one failover region and one associated account.
+    #
+    #        Key: `"failover-regions"`
+    #
+    #        Value: `"[\{"region":"<REGION>",
+    #       "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #
+    #        </note>
+    #
+    #   * <b> <code>excludedResources</code> </b>
+    #
+    #     The list of logical resource identifiers to be excluded from the
+    #     application.
+    #
+    #     Type: Array
+    #
+    #     <note markdown="1"> Don't add the resources that you want to include.
+    #
+    #      </note>
+    #
+    #     Each `excludedResources` array item includes the following fields:
+    #
+    #     * <i> <code>logicalResourceIds</code> </i>
+    #
+    #       The logical identifier of the resource.
+    #
+    #       Type: Object
+    #
+    #       <note markdown="1"> You can configure only one of the following fields:
+    #
+    #        * `logicalStackName`
+    #
+    #       * `resourceGroupName`
+    #
+    #       * `terraformSourceName`
+    #
+    #        </note>
+    #
+    #       Each `logicalResourceIds` object includes the following fields:
+    #
+    #       * `identifier`
+    #
+    #         The identifier of the resource.
+    #
+    #         Type: String
+    #
+    #       * `logicalStackName`
+    #
+    #         The name of the CloudFormation stack this resource belongs to.
+    #
+    #         Type: String
+    #
+    #       * `resourceGroupName`
+    #
+    #         The name of the resource group this resource belongs to.
+    #
+    #         Type: String
+    #
+    #       * `terraformSourceName`
+    #
+    #         The name of the Terraform S3 state file this resource belongs
+    #         to.
+    #
+    #         Type: String
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html
     #
     # @return [Types::PutDraftAppVersionTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2377,32 +3374,35 @@ module Aws::ResilienceHub
     # Removes resource mappings from a draft application version.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :app_registry_app_names
-    #   The names of the registered applications to remove from the resource
-    #   mappings.
+    #   The names of the registered applications you want to remove from the
+    #   resource mappings.
     #
     # @option params [Array<String>] :logical_stack_names
-    #   The names of the CloudFormation stacks to remove from the resource
-    #   mappings.
+    #   The names of the CloudFormation stacks you want to remove from the
+    #   resource mappings.
     #
     # @option params [Array<String>] :resource_group_names
-    #   The names of the resource groups to remove from the resource mappings.
+    #   The names of the resource groups you want to remove from the resource
+    #   mappings.
     #
     # @option params [Array<String>] :resource_names
-    #   The names of the resources to remove from the resource mappings.
+    #   The names of the resources you want to remove from the resource
+    #   mappings.
     #
     # @option params [Array<String>] :terraform_source_names
-    #   </p>
+    #   The names of the Terraform sources you want to remove from the
+    #   resource mappings.
     #
     # @return [Types::RemoveDraftAppVersionResourceMappingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2437,11 +3437,11 @@ module Aws::ResilienceHub
     # Resolves the resources for an application version.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -2483,11 +3483,11 @@ module Aws::ResilienceHub
     # Creates a new application assessment for an application.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -2621,7 +3621,7 @@ module Aws::ResilienceHub
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The keys of the tags to remove.
+    #   The keys of the tags you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2644,11 +3644,11 @@ module Aws::ResilienceHub
     # Updates an application.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the application. The format for this
-    #   ARN is:
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference*.
+    #   the *AWS General Reference* guide.
     #
     #
     #
@@ -2668,7 +3668,7 @@ module Aws::ResilienceHub
     #   for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -2713,6 +3713,273 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
+    # Updates the AWS Resilience Hub application version.
+    #
+    # <note markdown="1"> This API updates the AWS Resilience Hub application draft version. To
+    # use this information for running resiliency assessments, you must
+    # publish the AWS Resilience Hub application using the
+    # `PublishAppVersion` API.
+    #
+    #  </note>
+    #
+    # @option params [Hash<String,Array>] :additional_info
+    #   Additional configuration parameters for an AWS Resilience Hub
+    #   application.
+    #
+    #   <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
+    #   format) of only one failover region and one associated account.
+    #
+    #    Key: `"failover-regions"`
+    #
+    #    Value: `"[\{"region":"<REGION>",
+    #   "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #
+    #    </note>
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @return [Types::UpdateAppVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppVersionResponse#additional_info #additional_info} => Hash&lt;String,Array&lt;String&gt;&gt;
+    #   * {Types::UpdateAppVersionResponse#app_arn #app_arn} => String
+    #   * {Types::UpdateAppVersionResponse#app_version #app_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_version({
+    #     additional_info: {
+    #       "String128WithoutWhitespace" => ["String1024"],
+    #     },
+    #     app_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.additional_info #=> Hash
+    #   resp.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.app_arn #=> String
+    #   resp.app_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/UpdateAppVersion AWS API Documentation
+    #
+    # @overload update_app_version(params = {})
+    # @param [Hash] params ({})
+    def update_app_version(params = {}, options = {})
+      req = build_request(:update_app_version, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing Application Component in the AWS Resilience Hub
+    # application.
+    #
+    # <note markdown="1"> This API updates the AWS Resilience Hub application draft version. To
+    # use this Application Component for running assessments, you must
+    # publish the AWS Resilience Hub application using the
+    # `PublishAppVersion` API.
+    #
+    #  </note>
+    #
+    # @option params [Hash<String,Array>] :additional_info
+    #   Currently, there is no supported additional information for
+    #   Application Components.
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of the Application Component.
+    #
+    # @option params [String] :name
+    #   The name of the Application Component.
+    #
+    # @option params [String] :type
+    #   The type of Application Component. For more information about the
+    #   types of Application Component, see [Grouping resources in an
+    #   AppComponent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html
+    #
+    # @return [Types::UpdateAppVersionAppComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppVersionAppComponentResponse#app_arn #app_arn} => String
+    #   * {Types::UpdateAppVersionAppComponentResponse#app_component #app_component} => Types::AppComponent
+    #   * {Types::UpdateAppVersionAppComponentResponse#app_version #app_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_version_app_component({
+    #     additional_info: {
+    #       "String128WithoutWhitespace" => ["String1024"],
+    #     },
+    #     app_arn: "Arn", # required
+    #     id: "String255", # required
+    #     name: "String255",
+    #     type: "String255",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_component.additional_info #=> Hash
+    #   resp.app_component.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.app_component.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.app_component.id #=> String
+    #   resp.app_component.name #=> String
+    #   resp.app_component.type #=> String
+    #   resp.app_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/UpdateAppVersionAppComponent AWS API Documentation
+    #
+    # @overload update_app_version_app_component(params = {})
+    # @param [Hash] params ({})
+    def update_app_version_app_component(params = {}, options = {})
+      req = build_request(:update_app_version_app_component, params)
+      req.send_request(options)
+    end
+
+    # Updates the resource details in the AWS Resilience Hub application.
+    #
+    # <note markdown="1"> * This action has no effect outside AWS Resilience Hub.
+    #
+    # * This API updates the AWS Resilience Hub application draft version.
+    #   To use this resource for running resiliency assessments, you must
+    #   publish the AWS Resilience Hub application using the
+    #   `PublishAppVersion` API.
+    #
+    # * To update application version with new `physicalResourceID`, you
+    #   must call `ResolveAppVersionResources` API.
+    #
+    #  </note>
+    #
+    # @option params [Hash<String,Array>] :additional_info
+    #   Currently, there is no supported additional information for resources.
+    #
+    # @option params [required, String] :app_arn
+    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
+    #   The format for this ARN is:
+    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Array<String>] :app_components
+    #   The list of Application Components that this resource belongs to. If
+    #   an Application Component is not part of the AWS Resilience Hub
+    #   application, it will be added.
+    #
+    # @option params [String] :aws_account_id
+    #   The Amazon Web Services account that owns the physical resource.
+    #
+    # @option params [String] :aws_region
+    #   The Amazon Web Services region that owns the physical resource.
+    #
+    # @option params [Boolean] :excluded
+    #   Indicates if a resource is excluded from an AWS Resilience Hub
+    #   application.
+    #
+    #   <note markdown="1"> You can exclude only imported resources from an AWS Resilience Hub
+    #   application.
+    #
+    #    </note>
+    #
+    # @option params [Types::LogicalResourceId] :logical_resource_id
+    #   The logical identifier of the resource.
+    #
+    # @option params [String] :physical_resource_id
+    #   The physical identifier of the resource.
+    #
+    # @option params [String] :resource_name
+    #   The name of the resource.
+    #
+    # @option params [String] :resource_type
+    #   The type of resource.
+    #
+    # @return [Types::UpdateAppVersionResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppVersionResourceResponse#app_arn #app_arn} => String
+    #   * {Types::UpdateAppVersionResourceResponse#app_version #app_version} => String
+    #   * {Types::UpdateAppVersionResourceResponse#physical_resource #physical_resource} => Types::PhysicalResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_version_resource({
+    #     additional_info: {
+    #       "String128WithoutWhitespace" => ["String1024"],
+    #     },
+    #     app_arn: "Arn", # required
+    #     app_components: ["String255"],
+    #     aws_account_id: "CustomerId",
+    #     aws_region: "AwsRegion",
+    #     excluded: false,
+    #     logical_resource_id: {
+    #       identifier: "String255", # required
+    #       logical_stack_name: "String255",
+    #       resource_group_name: "EntityName",
+    #       terraform_source_name: "String255",
+    #     },
+    #     physical_resource_id: "String2048",
+    #     resource_name: "EntityName",
+    #     resource_type: "String255",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.app_version #=> String
+    #   resp.physical_resource.additional_info #=> Hash
+    #   resp.physical_resource.additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resource.additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resource.app_components #=> Array
+    #   resp.physical_resource.app_components[0].additional_info #=> Hash
+    #   resp.physical_resource.app_components[0].additional_info["String128WithoutWhitespace"] #=> Array
+    #   resp.physical_resource.app_components[0].additional_info["String128WithoutWhitespace"][0] #=> String
+    #   resp.physical_resource.app_components[0].id #=> String
+    #   resp.physical_resource.app_components[0].name #=> String
+    #   resp.physical_resource.app_components[0].type #=> String
+    #   resp.physical_resource.excluded #=> Boolean
+    #   resp.physical_resource.logical_resource_id.identifier #=> String
+    #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
+    #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
+    #   resp.physical_resource.logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resource.physical_resource_id.aws_account_id #=> String
+    #   resp.physical_resource.physical_resource_id.aws_region #=> String
+    #   resp.physical_resource.physical_resource_id.identifier #=> String
+    #   resp.physical_resource.physical_resource_id.type #=> String, one of "Arn", "Native"
+    #   resp.physical_resource.resource_name #=> String
+    #   resp.physical_resource.resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/UpdateAppVersionResource AWS API Documentation
+    #
+    # @overload update_app_version_resource(params = {})
+    # @param [Hash] params ({})
+    def update_app_version_resource(params = {}, options = {})
+      req = build_request(:update_app_version_resource, params)
+      req.send_request(options)
+    end
+
     # Updates a resiliency policy.
     #
     # @option params [String] :data_location_constraint
@@ -2728,7 +3995,7 @@ module Aws::ResilienceHub
     #   for this ARN is:
     #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *AWS General Reference* guide.
     #
     #
     #
@@ -2801,7 +4068,7 @@ module Aws::ResilienceHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

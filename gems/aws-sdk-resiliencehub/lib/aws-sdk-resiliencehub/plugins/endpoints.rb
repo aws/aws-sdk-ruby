@@ -60,6 +60,10 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::AddDraftAppVersionResourceMappings.build(context)
           when :create_app
             Aws::ResilienceHub::Endpoints::CreateApp.build(context)
+          when :create_app_version_app_component
+            Aws::ResilienceHub::Endpoints::CreateAppVersionAppComponent.build(context)
+          when :create_app_version_resource
+            Aws::ResilienceHub::Endpoints::CreateAppVersionResource.build(context)
           when :create_recommendation_template
             Aws::ResilienceHub::Endpoints::CreateRecommendationTemplate.build(context)
           when :create_resiliency_policy
@@ -68,6 +72,12 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::DeleteApp.build(context)
           when :delete_app_assessment
             Aws::ResilienceHub::Endpoints::DeleteAppAssessment.build(context)
+          when :delete_app_input_source
+            Aws::ResilienceHub::Endpoints::DeleteAppInputSource.build(context)
+          when :delete_app_version_app_component
+            Aws::ResilienceHub::Endpoints::DeleteAppVersionAppComponent.build(context)
+          when :delete_app_version_resource
+            Aws::ResilienceHub::Endpoints::DeleteAppVersionResource.build(context)
           when :delete_recommendation_template
             Aws::ResilienceHub::Endpoints::DeleteRecommendationTemplate.build(context)
           when :delete_resiliency_policy
@@ -76,6 +86,12 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::DescribeApp.build(context)
           when :describe_app_assessment
             Aws::ResilienceHub::Endpoints::DescribeAppAssessment.build(context)
+          when :describe_app_version
+            Aws::ResilienceHub::Endpoints::DescribeAppVersion.build(context)
+          when :describe_app_version_app_component
+            Aws::ResilienceHub::Endpoints::DescribeAppVersionAppComponent.build(context)
+          when :describe_app_version_resource
+            Aws::ResilienceHub::Endpoints::DescribeAppVersionResource.build(context)
           when :describe_app_version_resources_resolution_status
             Aws::ResilienceHub::Endpoints::DescribeAppVersionResourcesResolutionStatus.build(context)
           when :describe_app_version_template
@@ -94,6 +110,10 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::ListAppComponentCompliances.build(context)
           when :list_app_component_recommendations
             Aws::ResilienceHub::Endpoints::ListAppComponentRecommendations.build(context)
+          when :list_app_input_sources
+            Aws::ResilienceHub::Endpoints::ListAppInputSources.build(context)
+          when :list_app_version_app_components
+            Aws::ResilienceHub::Endpoints::ListAppVersionAppComponents.build(context)
           when :list_app_version_resource_mappings
             Aws::ResilienceHub::Endpoints::ListAppVersionResourceMappings.build(context)
           when :list_app_version_resources
@@ -132,6 +152,12 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::UntagResource.build(context)
           when :update_app
             Aws::ResilienceHub::Endpoints::UpdateApp.build(context)
+          when :update_app_version
+            Aws::ResilienceHub::Endpoints::UpdateAppVersion.build(context)
+          when :update_app_version_app_component
+            Aws::ResilienceHub::Endpoints::UpdateAppVersionAppComponent.build(context)
+          when :update_app_version_resource
+            Aws::ResilienceHub::Endpoints::UpdateAppVersionResource.build(context)
           when :update_resiliency_policy
             Aws::ResilienceHub::Endpoints::UpdateResiliencyPolicy.build(context)
           end

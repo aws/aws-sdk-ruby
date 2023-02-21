@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.159.0 (2023-02-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-tnb` gem.
+
 3.158.0 (2023-01-31)
 ------------------
 

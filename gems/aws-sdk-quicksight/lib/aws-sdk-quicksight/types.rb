@@ -19166,10 +19166,21 @@ module Aws::QuickSight
     #   manifest file was uploaded into Amazon QuickSight.
     #   @return [Types::ManifestFileLocation]
     #
+    # @!attribute [rw] role_arn
+    #   Use the `RoleArn` structure to override an account-wide role for a
+    #   specific S3 data source. For example, say an account administrator
+    #   has turned off all S3 access with an account-wide role. The
+    #   administrator can then use `RoleArn` to bypass the account-wide role
+    #   and allow S3 access for the single S3 data source that is specified
+    #   in the structure, even if the account-wide role forbidding S3 access
+    #   is still active.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/S3Parameters AWS API Documentation
     #
     class S3Parameters < Struct.new(
-      :manifest_file_location)
+      :manifest_file_location,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

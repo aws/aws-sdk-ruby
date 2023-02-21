@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.715.0 (2023-02-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Tnb`.
+
 1.714.0 (2023-02-17)
 ------------------
 

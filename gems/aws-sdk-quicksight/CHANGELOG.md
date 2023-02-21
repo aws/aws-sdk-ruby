@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-02-21)
+------------------
+
+* Feature - S3 data sources now accept a custom IAM role.
+
 1.75.0 (2023-02-02)
 ------------------
 

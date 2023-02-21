@@ -1272,6 +1272,7 @@ module Aws::QuickSight
     #           bucket: "S3Bucket", # required
     #           key: "S3Key", # required
     #         },
+    #         role_arn: "RoleArn",
     #       },
     #       service_now_parameters: {
     #         site_base_url: "SiteBaseUrl", # required
@@ -1381,6 +1382,7 @@ module Aws::QuickSight
     #                 bucket: "S3Bucket", # required
     #                 key: "S3Key", # required
     #               },
+    #               role_arn: "RoleArn",
     #             },
     #             service_now_parameters: {
     #               site_base_url: "SiteBaseUrl", # required
@@ -3781,6 +3783,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.redshift_parameters.cluster_id #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.key #=> String
+    #   resp.data_source.data_source_parameters.s3_parameters.role_arn #=> String
     #   resp.data_source.data_source_parameters.service_now_parameters.site_base_url #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.host #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.database #=> String
@@ -3836,6 +3839,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
     #   resp.data_source.alternate_data_source_parameters[0].service_now_parameters.site_base_url #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.database #=> String
@@ -5557,6 +5561,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
+    #   resp.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
     #   resp.data_sources[0].data_source_parameters.service_now_parameters.site_base_url #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.database #=> String
@@ -5612,6 +5617,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].service_now_parameters.site_base_url #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.database #=> String
@@ -8155,6 +8161,7 @@ module Aws::QuickSight
     #           bucket: "S3Bucket", # required
     #           key: "S3Key", # required
     #         },
+    #         role_arn: "RoleArn",
     #       },
     #       service_now_parameters: {
     #         site_base_url: "SiteBaseUrl", # required
@@ -8264,6 +8271,7 @@ module Aws::QuickSight
     #                 bucket: "S3Bucket", # required
     #                 key: "S3Key", # required
     #               },
+    #               role_arn: "RoleArn",
     #             },
     #             service_now_parameters: {
     #               site_base_url: "SiteBaseUrl", # required
@@ -9314,7 +9322,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

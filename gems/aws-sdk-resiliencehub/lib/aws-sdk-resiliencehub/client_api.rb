@@ -16,6 +16,8 @@ module Aws::ResilienceHub
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AddDraftAppVersionResourceMappingsRequest = Shapes::StructureShape.new(name: 'AddDraftAppVersionResourceMappingsRequest')
     AddDraftAppVersionResourceMappingsResponse = Shapes::StructureShape.new(name: 'AddDraftAppVersionResourceMappingsResponse')
+    AdditionalInfoMap = Shapes::MapShape.new(name: 'AdditionalInfoMap')
+    AdditionalInfoValueList = Shapes::ListShape.new(name: 'AdditionalInfoValueList')
     AlarmRecommendation = Shapes::StructureShape.new(name: 'AlarmRecommendation')
     AlarmRecommendationList = Shapes::ListShape.new(name: 'AlarmRecommendationList')
     AlarmReferenceIdList = Shapes::ListShape.new(name: 'AlarmReferenceIdList')
@@ -29,6 +31,9 @@ module Aws::ResilienceHub
     AppComponent = Shapes::StructureShape.new(name: 'AppComponent')
     AppComponentCompliance = Shapes::StructureShape.new(name: 'AppComponentCompliance')
     AppComponentList = Shapes::ListShape.new(name: 'AppComponentList')
+    AppComponentNameList = Shapes::ListShape.new(name: 'AppComponentNameList')
+    AppInputSource = Shapes::StructureShape.new(name: 'AppInputSource')
+    AppInputSourceList = Shapes::ListShape.new(name: 'AppInputSourceList')
     AppStatusType = Shapes::StringShape.new(name: 'AppStatusType')
     AppSummary = Shapes::StructureShape.new(name: 'AppSummary')
     AppSummaryList = Shapes::ListShape.new(name: 'AppSummaryList')
@@ -56,6 +61,10 @@ module Aws::ResilienceHub
     CostFrequency = Shapes::StringShape.new(name: 'CostFrequency')
     CreateAppRequest = Shapes::StructureShape.new(name: 'CreateAppRequest')
     CreateAppResponse = Shapes::StructureShape.new(name: 'CreateAppResponse')
+    CreateAppVersionAppComponentRequest = Shapes::StructureShape.new(name: 'CreateAppVersionAppComponentRequest')
+    CreateAppVersionAppComponentResponse = Shapes::StructureShape.new(name: 'CreateAppVersionAppComponentResponse')
+    CreateAppVersionResourceRequest = Shapes::StructureShape.new(name: 'CreateAppVersionResourceRequest')
+    CreateAppVersionResourceResponse = Shapes::StructureShape.new(name: 'CreateAppVersionResourceResponse')
     CreateRecommendationTemplateRequest = Shapes::StructureShape.new(name: 'CreateRecommendationTemplateRequest')
     CreateRecommendationTemplateResponse = Shapes::StructureShape.new(name: 'CreateRecommendationTemplateResponse')
     CreateResiliencyPolicyRequest = Shapes::StructureShape.new(name: 'CreateResiliencyPolicyRequest')
@@ -65,8 +74,14 @@ module Aws::ResilienceHub
     DataLocationConstraint = Shapes::StringShape.new(name: 'DataLocationConstraint')
     DeleteAppAssessmentRequest = Shapes::StructureShape.new(name: 'DeleteAppAssessmentRequest')
     DeleteAppAssessmentResponse = Shapes::StructureShape.new(name: 'DeleteAppAssessmentResponse')
+    DeleteAppInputSourceRequest = Shapes::StructureShape.new(name: 'DeleteAppInputSourceRequest')
+    DeleteAppInputSourceResponse = Shapes::StructureShape.new(name: 'DeleteAppInputSourceResponse')
     DeleteAppRequest = Shapes::StructureShape.new(name: 'DeleteAppRequest')
     DeleteAppResponse = Shapes::StructureShape.new(name: 'DeleteAppResponse')
+    DeleteAppVersionAppComponentRequest = Shapes::StructureShape.new(name: 'DeleteAppVersionAppComponentRequest')
+    DeleteAppVersionAppComponentResponse = Shapes::StructureShape.new(name: 'DeleteAppVersionAppComponentResponse')
+    DeleteAppVersionResourceRequest = Shapes::StructureShape.new(name: 'DeleteAppVersionResourceRequest')
+    DeleteAppVersionResourceResponse = Shapes::StructureShape.new(name: 'DeleteAppVersionResourceResponse')
     DeleteRecommendationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteRecommendationTemplateRequest')
     DeleteRecommendationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteRecommendationTemplateResponse')
     DeleteResiliencyPolicyRequest = Shapes::StructureShape.new(name: 'DeleteResiliencyPolicyRequest')
@@ -75,8 +90,14 @@ module Aws::ResilienceHub
     DescribeAppAssessmentResponse = Shapes::StructureShape.new(name: 'DescribeAppAssessmentResponse')
     DescribeAppRequest = Shapes::StructureShape.new(name: 'DescribeAppRequest')
     DescribeAppResponse = Shapes::StructureShape.new(name: 'DescribeAppResponse')
+    DescribeAppVersionAppComponentRequest = Shapes::StructureShape.new(name: 'DescribeAppVersionAppComponentRequest')
+    DescribeAppVersionAppComponentResponse = Shapes::StructureShape.new(name: 'DescribeAppVersionAppComponentResponse')
+    DescribeAppVersionRequest = Shapes::StructureShape.new(name: 'DescribeAppVersionRequest')
+    DescribeAppVersionResourceRequest = Shapes::StructureShape.new(name: 'DescribeAppVersionResourceRequest')
+    DescribeAppVersionResourceResponse = Shapes::StructureShape.new(name: 'DescribeAppVersionResourceResponse')
     DescribeAppVersionResourcesResolutionStatusRequest = Shapes::StructureShape.new(name: 'DescribeAppVersionResourcesResolutionStatusRequest')
     DescribeAppVersionResourcesResolutionStatusResponse = Shapes::StructureShape.new(name: 'DescribeAppVersionResourcesResolutionStatusResponse')
+    DescribeAppVersionResponse = Shapes::StructureShape.new(name: 'DescribeAppVersionResponse')
     DescribeAppVersionTemplateRequest = Shapes::StructureShape.new(name: 'DescribeAppVersionTemplateRequest')
     DescribeAppVersionTemplateResponse = Shapes::StructureShape.new(name: 'DescribeAppVersionTemplateResponse')
     DescribeDraftAppVersionResourcesImportStatusRequest = Shapes::StructureShape.new(name: 'DescribeDraftAppVersionResourcesImportStatusRequest')
@@ -100,6 +121,7 @@ module Aws::ResilienceHub
     HaArchitecture = Shapes::StringShape.new(name: 'HaArchitecture')
     ImportResourcesToDraftAppVersionRequest = Shapes::StructureShape.new(name: 'ImportResourcesToDraftAppVersionRequest')
     ImportResourcesToDraftAppVersionResponse = Shapes::StructureShape.new(name: 'ImportResourcesToDraftAppVersionResponse')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListAlarmRecommendationsRequest = Shapes::StructureShape.new(name: 'ListAlarmRecommendationsRequest')
     ListAlarmRecommendationsResponse = Shapes::StructureShape.new(name: 'ListAlarmRecommendationsResponse')
@@ -109,6 +131,10 @@ module Aws::ResilienceHub
     ListAppComponentCompliancesResponse = Shapes::StructureShape.new(name: 'ListAppComponentCompliancesResponse')
     ListAppComponentRecommendationsRequest = Shapes::StructureShape.new(name: 'ListAppComponentRecommendationsRequest')
     ListAppComponentRecommendationsResponse = Shapes::StructureShape.new(name: 'ListAppComponentRecommendationsResponse')
+    ListAppInputSourcesRequest = Shapes::StructureShape.new(name: 'ListAppInputSourcesRequest')
+    ListAppInputSourcesResponse = Shapes::StructureShape.new(name: 'ListAppInputSourcesResponse')
+    ListAppVersionAppComponentsRequest = Shapes::StructureShape.new(name: 'ListAppVersionAppComponentsRequest')
+    ListAppVersionAppComponentsResponse = Shapes::StructureShape.new(name: 'ListAppVersionAppComponentsResponse')
     ListAppVersionResourceMappingsRequest = Shapes::StructureShape.new(name: 'ListAppVersionResourceMappingsRequest')
     ListAppVersionResourceMappingsResponse = Shapes::StructureShape.new(name: 'ListAppVersionResourceMappingsResponse')
     ListAppVersionResourcesRequest = Shapes::StructureShape.new(name: 'ListAppVersionResourcesRequest')
@@ -167,6 +193,7 @@ module Aws::ResilienceHub
     ResourceErrorsDetails = Shapes::StructureShape.new(name: 'ResourceErrorsDetails')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceImportStatusType = Shapes::StringShape.new(name: 'ResourceImportStatusType')
+    ResourceImportStrategyType = Shapes::StringShape.new(name: 'ResourceImportStrategyType')
     ResourceMapping = Shapes::StructureShape.new(name: 'ResourceMapping')
     ResourceMappingList = Shapes::ListShape.new(name: 'ResourceMappingList')
     ResourceMappingType = Shapes::StringShape.new(name: 'ResourceMappingType')
@@ -184,6 +211,9 @@ module Aws::ResilienceHub
     SpecReferenceId = Shapes::StringShape.new(name: 'SpecReferenceId')
     StartAppAssessmentRequest = Shapes::StructureShape.new(name: 'StartAppAssessmentRequest')
     StartAppAssessmentResponse = Shapes::StructureShape.new(name: 'StartAppAssessmentResponse')
+    String1024 = Shapes::StringShape.new(name: 'String1024')
+    String128WithoutWhitespace = Shapes::StringShape.new(name: 'String128WithoutWhitespace')
+    String2048 = Shapes::StringShape.new(name: 'String2048')
     String255 = Shapes::StringShape.new(name: 'String255')
     String255List = Shapes::ListShape.new(name: 'String255List')
     String500 = Shapes::StringShape.new(name: 'String500')
@@ -209,6 +239,12 @@ module Aws::ResilienceHub
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAppRequest = Shapes::StructureShape.new(name: 'UpdateAppRequest')
     UpdateAppResponse = Shapes::StructureShape.new(name: 'UpdateAppResponse')
+    UpdateAppVersionAppComponentRequest = Shapes::StructureShape.new(name: 'UpdateAppVersionAppComponentRequest')
+    UpdateAppVersionAppComponentResponse = Shapes::StructureShape.new(name: 'UpdateAppVersionAppComponentResponse')
+    UpdateAppVersionRequest = Shapes::StructureShape.new(name: 'UpdateAppVersionRequest')
+    UpdateAppVersionResourceRequest = Shapes::StructureShape.new(name: 'UpdateAppVersionResourceRequest')
+    UpdateAppVersionResourceResponse = Shapes::StructureShape.new(name: 'UpdateAppVersionResourceResponse')
+    UpdateAppVersionResponse = Shapes::StructureShape.new(name: 'UpdateAppVersionResponse')
     UpdateResiliencyPolicyRequest = Shapes::StructureShape.new(name: 'UpdateResiliencyPolicyRequest')
     UpdateResiliencyPolicyResponse = Shapes::StructureShape.new(name: 'UpdateResiliencyPolicyResponse')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
@@ -225,6 +261,11 @@ module Aws::ResilienceHub
     AddDraftAppVersionResourceMappingsResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
     AddDraftAppVersionResourceMappingsResponse.add_member(:resource_mappings, Shapes::ShapeRef.new(shape: ResourceMappingList, required: true, location_name: "resourceMappings"))
     AddDraftAppVersionResourceMappingsResponse.struct_class = Types::AddDraftAppVersionResourceMappingsResponse
+
+    AdditionalInfoMap.key = Shapes::ShapeRef.new(shape: String128WithoutWhitespace)
+    AdditionalInfoMap.value = Shapes::ShapeRef.new(shape: AdditionalInfoValueList)
+
+    AdditionalInfoValueList.member = Shapes::ShapeRef.new(shape: String1024)
 
     AlarmRecommendation.add_member(:app_component_name, Shapes::ShapeRef.new(shape: EntityId, location_name: "appComponentName"))
     AlarmRecommendation.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
@@ -288,6 +329,8 @@ module Aws::ResilienceHub
 
     AppAssessmentSummaryList.member = Shapes::ShapeRef.new(shape: AppAssessmentSummary)
 
+    AppComponent.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
+    AppComponent.add_member(:id, Shapes::ShapeRef.new(shape: String255, location_name: "id"))
     AppComponent.add_member(:name, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "name"))
     AppComponent.add_member(:type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "type"))
     AppComponent.struct_class = Types::AppComponent
@@ -301,6 +344,17 @@ module Aws::ResilienceHub
     AppComponentCompliance.struct_class = Types::AppComponentCompliance
 
     AppComponentList.member = Shapes::ShapeRef.new(shape: AppComponent)
+
+    AppComponentNameList.member = Shapes::ShapeRef.new(shape: String255)
+
+    AppInputSource.add_member(:import_type, Shapes::ShapeRef.new(shape: ResourceMappingType, required: true, location_name: "importType"))
+    AppInputSource.add_member(:resource_count, Shapes::ShapeRef.new(shape: Integer, location_name: "resourceCount"))
+    AppInputSource.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn"))
+    AppInputSource.add_member(:source_name, Shapes::ShapeRef.new(shape: String255, location_name: "sourceName"))
+    AppInputSource.add_member(:terraform_source, Shapes::ShapeRef.new(shape: TerraformSource, location_name: "terraformSource"))
+    AppInputSource.struct_class = Types::AppInputSource
+
+    AppInputSourceList.member = Shapes::ShapeRef.new(shape: AppInputSource)
 
     AppSummary.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     AppSummary.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
@@ -370,6 +424,36 @@ module Aws::ResilienceHub
     CreateAppResponse.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))
     CreateAppResponse.struct_class = Types::CreateAppResponse
 
+    CreateAppVersionAppComponentRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
+    CreateAppVersionAppComponentRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    CreateAppVersionAppComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppVersionAppComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: String255, location_name: "id"))
+    CreateAppVersionAppComponentRequest.add_member(:name, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "name"))
+    CreateAppVersionAppComponentRequest.add_member(:type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "type"))
+    CreateAppVersionAppComponentRequest.struct_class = Types::CreateAppVersionAppComponentRequest
+
+    CreateAppVersionAppComponentResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    CreateAppVersionAppComponentResponse.add_member(:app_component, Shapes::ShapeRef.new(shape: AppComponent, location_name: "appComponent"))
+    CreateAppVersionAppComponentResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    CreateAppVersionAppComponentResponse.struct_class = Types::CreateAppVersionAppComponentResponse
+
+    CreateAppVersionResourceRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
+    CreateAppVersionResourceRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    CreateAppVersionResourceRequest.add_member(:app_components, Shapes::ShapeRef.new(shape: AppComponentNameList, required: true, location_name: "appComponents"))
+    CreateAppVersionResourceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "awsAccountId"))
+    CreateAppVersionResourceRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
+    CreateAppVersionResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppVersionResourceRequest.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "logicalResourceId"))
+    CreateAppVersionResourceRequest.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String2048, required: true, location_name: "physicalResourceId"))
+    CreateAppVersionResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "resourceName"))
+    CreateAppVersionResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "resourceType"))
+    CreateAppVersionResourceRequest.struct_class = Types::CreateAppVersionResourceRequest
+
+    CreateAppVersionResourceResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    CreateAppVersionResourceResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    CreateAppVersionResourceResponse.add_member(:physical_resource, Shapes::ShapeRef.new(shape: PhysicalResource, location_name: "physicalResource"))
+    CreateAppVersionResourceResponse.struct_class = Types::CreateAppVersionResourceResponse
+
     CreateRecommendationTemplateRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentArn"))
     CreateRecommendationTemplateRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "bucketName"))
     CreateRecommendationTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
@@ -403,6 +487,16 @@ module Aws::ResilienceHub
     DeleteAppAssessmentResponse.add_member(:assessment_status, Shapes::ShapeRef.new(shape: AssessmentStatus, required: true, location_name: "assessmentStatus"))
     DeleteAppAssessmentResponse.struct_class = Types::DeleteAppAssessmentResponse
 
+    DeleteAppInputSourceRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DeleteAppInputSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppInputSourceRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn"))
+    DeleteAppInputSourceRequest.add_member(:terraform_source, Shapes::ShapeRef.new(shape: TerraformSource, location_name: "terraformSource"))
+    DeleteAppInputSourceRequest.struct_class = Types::DeleteAppInputSourceRequest
+
+    DeleteAppInputSourceResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "appArn"))
+    DeleteAppInputSourceResponse.add_member(:app_input_source, Shapes::ShapeRef.new(shape: AppInputSource, location_name: "appInputSource"))
+    DeleteAppInputSourceResponse.struct_class = Types::DeleteAppInputSourceResponse
+
     DeleteAppRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     DeleteAppRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteAppRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "forceDelete"))
@@ -410,6 +504,30 @@ module Aws::ResilienceHub
 
     DeleteAppResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     DeleteAppResponse.struct_class = Types::DeleteAppResponse
+
+    DeleteAppVersionAppComponentRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DeleteAppVersionAppComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppVersionAppComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "id"))
+    DeleteAppVersionAppComponentRequest.struct_class = Types::DeleteAppVersionAppComponentRequest
+
+    DeleteAppVersionAppComponentResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DeleteAppVersionAppComponentResponse.add_member(:app_component, Shapes::ShapeRef.new(shape: AppComponent, location_name: "appComponent"))
+    DeleteAppVersionAppComponentResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DeleteAppVersionAppComponentResponse.struct_class = Types::DeleteAppVersionAppComponentResponse
+
+    DeleteAppVersionResourceRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DeleteAppVersionResourceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "awsAccountId"))
+    DeleteAppVersionResourceRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
+    DeleteAppVersionResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppVersionResourceRequest.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "logicalResourceId"))
+    DeleteAppVersionResourceRequest.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String2048, location_name: "physicalResourceId"))
+    DeleteAppVersionResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
+    DeleteAppVersionResourceRequest.struct_class = Types::DeleteAppVersionResourceRequest
+
+    DeleteAppVersionResourceResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DeleteAppVersionResourceResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DeleteAppVersionResourceResponse.add_member(:physical_resource, Shapes::ShapeRef.new(shape: PhysicalResource, location_name: "physicalResource"))
+    DeleteAppVersionResourceResponse.struct_class = Types::DeleteAppVersionResourceResponse
 
     DeleteRecommendationTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteRecommendationTemplateRequest.add_member(:recommendation_template_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommendationTemplateArn"))
@@ -438,6 +556,34 @@ module Aws::ResilienceHub
     DescribeAppResponse.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))
     DescribeAppResponse.struct_class = Types::DescribeAppResponse
 
+    DescribeAppVersionAppComponentRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DescribeAppVersionAppComponentRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DescribeAppVersionAppComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "id"))
+    DescribeAppVersionAppComponentRequest.struct_class = Types::DescribeAppVersionAppComponentRequest
+
+    DescribeAppVersionAppComponentResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DescribeAppVersionAppComponentResponse.add_member(:app_component, Shapes::ShapeRef.new(shape: AppComponent, location_name: "appComponent"))
+    DescribeAppVersionAppComponentResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DescribeAppVersionAppComponentResponse.struct_class = Types::DescribeAppVersionAppComponentResponse
+
+    DescribeAppVersionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DescribeAppVersionRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DescribeAppVersionRequest.struct_class = Types::DescribeAppVersionRequest
+
+    DescribeAppVersionResourceRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DescribeAppVersionResourceRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DescribeAppVersionResourceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "awsAccountId"))
+    DescribeAppVersionResourceRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
+    DescribeAppVersionResourceRequest.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "logicalResourceId"))
+    DescribeAppVersionResourceRequest.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String2048, location_name: "physicalResourceId"))
+    DescribeAppVersionResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
+    DescribeAppVersionResourceRequest.struct_class = Types::DescribeAppVersionResourceRequest
+
+    DescribeAppVersionResourceResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DescribeAppVersionResourceResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DescribeAppVersionResourceResponse.add_member(:physical_resource, Shapes::ShapeRef.new(shape: PhysicalResource, location_name: "physicalResource"))
+    DescribeAppVersionResourceResponse.struct_class = Types::DescribeAppVersionResourceResponse
+
     DescribeAppVersionResourcesResolutionStatusRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     DescribeAppVersionResourcesResolutionStatusRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
     DescribeAppVersionResourcesResolutionStatusRequest.add_member(:resolution_id, Shapes::ShapeRef.new(shape: String255, location_name: "resolutionId"))
@@ -449,6 +595,11 @@ module Aws::ResilienceHub
     DescribeAppVersionResourcesResolutionStatusResponse.add_member(:resolution_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "resolutionId"))
     DescribeAppVersionResourcesResolutionStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourceResolutionStatusType, required: true, location_name: "status"))
     DescribeAppVersionResourcesResolutionStatusResponse.struct_class = Types::DescribeAppVersionResourcesResolutionStatusResponse
+
+    DescribeAppVersionResponse.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
+    DescribeAppVersionResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DescribeAppVersionResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DescribeAppVersionResponse.struct_class = Types::DescribeAppVersionResponse
 
     DescribeAppVersionTemplateRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     DescribeAppVersionTemplateRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
@@ -500,6 +651,7 @@ module Aws::ResilienceHub
     FailurePolicy.struct_class = Types::FailurePolicy
 
     ImportResourcesToDraftAppVersionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    ImportResourcesToDraftAppVersionRequest.add_member(:import_strategy, Shapes::ShapeRef.new(shape: ResourceImportStrategyType, location_name: "importStrategy"))
     ImportResourcesToDraftAppVersionRequest.add_member(:source_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "sourceArns"))
     ImportResourcesToDraftAppVersionRequest.add_member(:terraform_sources, Shapes::ShapeRef.new(shape: TerraformSourceList, location_name: "terraformSources"))
     ImportResourcesToDraftAppVersionRequest.struct_class = Types::ImportResourcesToDraftAppVersionRequest
@@ -554,6 +706,28 @@ module Aws::ResilienceHub
     ListAppComponentRecommendationsResponse.add_member(:component_recommendations, Shapes::ShapeRef.new(shape: ComponentRecommendationList, required: true, location_name: "componentRecommendations"))
     ListAppComponentRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAppComponentRecommendationsResponse.struct_class = Types::ListAppComponentRecommendationsResponse
+
+    ListAppInputSourcesRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    ListAppInputSourcesRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    ListAppInputSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAppInputSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAppInputSourcesRequest.struct_class = Types::ListAppInputSourcesRequest
+
+    ListAppInputSourcesResponse.add_member(:app_input_sources, Shapes::ShapeRef.new(shape: AppInputSourceList, required: true, location_name: "appInputSources"))
+    ListAppInputSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAppInputSourcesResponse.struct_class = Types::ListAppInputSourcesResponse
+
+    ListAppVersionAppComponentsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    ListAppVersionAppComponentsRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    ListAppVersionAppComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAppVersionAppComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAppVersionAppComponentsRequest.struct_class = Types::ListAppVersionAppComponentsRequest
+
+    ListAppVersionAppComponentsResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    ListAppVersionAppComponentsResponse.add_member(:app_components, Shapes::ShapeRef.new(shape: AppComponentList, location_name: "appComponents"))
+    ListAppVersionAppComponentsResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    ListAppVersionAppComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAppVersionAppComponentsResponse.struct_class = Types::ListAppVersionAppComponentsResponse
 
     ListAppVersionResourceMappingsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     ListAppVersionResourceMappingsRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
@@ -668,7 +842,9 @@ module Aws::ResilienceHub
     LogicalResourceId.add_member(:terraform_source_name, Shapes::ShapeRef.new(shape: String255, location_name: "terraformSourceName"))
     LogicalResourceId.struct_class = Types::LogicalResourceId
 
+    PhysicalResource.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
     PhysicalResource.add_member(:app_components, Shapes::ShapeRef.new(shape: AppComponentList, location_name: "appComponents"))
+    PhysicalResource.add_member(:excluded, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "excluded"))
     PhysicalResource.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "logicalResourceId"))
     PhysicalResource.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, required: true, location_name: "physicalResourceId"))
     PhysicalResource.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
@@ -897,6 +1073,44 @@ module Aws::ResilienceHub
     UpdateAppResponse.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))
     UpdateAppResponse.struct_class = Types::UpdateAppResponse
 
+    UpdateAppVersionAppComponentRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
+    UpdateAppVersionAppComponentRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    UpdateAppVersionAppComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "id"))
+    UpdateAppVersionAppComponentRequest.add_member(:name, Shapes::ShapeRef.new(shape: String255, location_name: "name"))
+    UpdateAppVersionAppComponentRequest.add_member(:type, Shapes::ShapeRef.new(shape: String255, location_name: "type"))
+    UpdateAppVersionAppComponentRequest.struct_class = Types::UpdateAppVersionAppComponentRequest
+
+    UpdateAppVersionAppComponentResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    UpdateAppVersionAppComponentResponse.add_member(:app_component, Shapes::ShapeRef.new(shape: AppComponent, location_name: "appComponent"))
+    UpdateAppVersionAppComponentResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    UpdateAppVersionAppComponentResponse.struct_class = Types::UpdateAppVersionAppComponentResponse
+
+    UpdateAppVersionRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
+    UpdateAppVersionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    UpdateAppVersionRequest.struct_class = Types::UpdateAppVersionRequest
+
+    UpdateAppVersionResourceRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
+    UpdateAppVersionResourceRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    UpdateAppVersionResourceRequest.add_member(:app_components, Shapes::ShapeRef.new(shape: AppComponentNameList, location_name: "appComponents"))
+    UpdateAppVersionResourceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "awsAccountId"))
+    UpdateAppVersionResourceRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
+    UpdateAppVersionResourceRequest.add_member(:excluded, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "excluded"))
+    UpdateAppVersionResourceRequest.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "logicalResourceId"))
+    UpdateAppVersionResourceRequest.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String2048, location_name: "physicalResourceId"))
+    UpdateAppVersionResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
+    UpdateAppVersionResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String255, location_name: "resourceType"))
+    UpdateAppVersionResourceRequest.struct_class = Types::UpdateAppVersionResourceRequest
+
+    UpdateAppVersionResourceResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    UpdateAppVersionResourceResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    UpdateAppVersionResourceResponse.add_member(:physical_resource, Shapes::ShapeRef.new(shape: PhysicalResource, location_name: "physicalResource"))
+    UpdateAppVersionResourceResponse.struct_class = Types::UpdateAppVersionResourceResponse
+
+    UpdateAppVersionResponse.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
+    UpdateAppVersionResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    UpdateAppVersionResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    UpdateAppVersionResponse.struct_class = Types::UpdateAppVersionResponse
+
     UpdateResiliencyPolicyRequest.add_member(:data_location_constraint, Shapes::ShapeRef.new(shape: DataLocationConstraint, location_name: "dataLocationConstraint"))
     UpdateResiliencyPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: DisruptionPolicy, location_name: "policy"))
     UpdateResiliencyPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "policyArn"))
@@ -958,6 +1172,36 @@ module Aws::ResilienceHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_app_version_app_component, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppVersionAppComponent"
+        o.http_method = "POST"
+        o.http_request_uri = "/create-app-version-app-component"
+        o.input = Shapes::ShapeRef.new(shape: CreateAppVersionAppComponentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppVersionAppComponentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_app_version_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppVersionResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/create-app-version-resource"
+        o.input = Shapes::ShapeRef.new(shape: CreateAppVersionResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppVersionResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_recommendation_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRecommendationTemplate"
         o.http_method = "POST"
@@ -967,6 +1211,7 @@ module Aws::ResilienceHub
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1005,6 +1250,48 @@ module Aws::ResilienceHub
         o.http_request_uri = "/delete-app-assessment"
         o.input = Shapes::ShapeRef.new(shape: DeleteAppAssessmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAppAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_app_input_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppInputSource"
+        o.http_method = "POST"
+        o.http_request_uri = "/delete-app-input-source"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppInputSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAppInputSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_app_version_app_component, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppVersionAppComponent"
+        o.http_method = "POST"
+        o.http_request_uri = "/delete-app-version-app-component"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppVersionAppComponentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAppVersionAppComponentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_app_version_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppVersionResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/delete-app-version-resource"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppVersionResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAppVersionResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1061,6 +1348,47 @@ module Aws::ResilienceHub
         o.output = Shapes::ShapeRef.new(shape: DescribeAppAssessmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_app_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/describe-app-version"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_app_version_app_component, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppVersionAppComponent"
+        o.http_method = "POST"
+        o.http_request_uri = "/describe-app-version-app-component"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppVersionAppComponentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppVersionAppComponentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_app_version_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppVersionResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/describe-app-version-resource"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppVersionResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppVersionResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1197,6 +1525,45 @@ module Aws::ResilienceHub
         o.output = Shapes::ShapeRef.new(shape: ListAppComponentRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_app_input_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAppInputSources"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-app-input-sources"
+        o.input = Shapes::ShapeRef.new(shape: ListAppInputSourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppInputSourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_app_version_app_components, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAppVersionAppComponents"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-app-version-app-components"
+        o.input = Shapes::ShapeRef.new(shape: ListAppVersionAppComponentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppVersionAppComponentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1518,6 +1885,49 @@ module Aws::ResilienceHub
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_app_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/update-app-version"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_app_version_app_component, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppVersionAppComponent"
+        o.http_method = "POST"
+        o.http_request_uri = "/update-app-version-app-component"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppVersionAppComponentRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppVersionAppComponentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_app_version_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppVersionResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/update-app-version-resource"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppVersionResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppVersionResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

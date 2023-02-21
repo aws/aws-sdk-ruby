@@ -330,6 +330,7 @@ module Aws
   autoload :Textract, 'aws-sdk-textract'
   autoload :TimestreamQuery, 'aws-sdk-timestreamquery'
   autoload :TimestreamWrite, 'aws-sdk-timestreamwrite'
+  autoload :Tnb, 'aws-sdk-tnb'
   autoload :TranscribeService, 'aws-sdk-transcribeservice'
   autoload :TranscribeStreamingService, 'aws-sdk-transcribestreamingservice'
   autoload :Transfer, 'aws-sdk-transfer'

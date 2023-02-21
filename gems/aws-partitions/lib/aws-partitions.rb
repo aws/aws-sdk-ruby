@@ -567,6 +567,7 @@ module Aws
             'Textract' => 'textract',
             'TimestreamQuery' => 'query.timestream',
             'TimestreamWrite' => 'ingest.timestream',
+            'Tnb' => 'tnb',
             'TranscribeService' => 'transcribe',
             'TranscribeStreamingService' => 'transcribestreaming',
             'Transfer' => 'transfer',
