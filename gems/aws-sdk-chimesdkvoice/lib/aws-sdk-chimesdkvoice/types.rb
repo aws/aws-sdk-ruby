@@ -1380,10 +1380,14 @@ module Aws::ChimeSDKVoice
     # @!attribute [rw] enable_sip_logs
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_media_metric_logs
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/LoggingConfiguration AWS API Documentation
     #
     class LoggingConfiguration < Struct.new(
-      :enable_sip_logs)
+      :enable_sip_logs,
+      :enable_media_metric_logs)
       SENSITIVE = []
       include Aws::Structure
     end

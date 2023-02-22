@@ -750,8 +750,8 @@ module Aws::SSM
     #   contains the configuration information for the managed node.
     #
     #   You can specify Amazon Web Services-predefined documents, documents
-    #   you created, or a document that is shared with you from another
-    #   account.
+    #   you created, or a document that is shared with you from another Amazon
+    #   Web Services account.
     #
     #   For Systems Manager documents (SSM documents) that are shared with you
     #   from other Amazon Web Services accounts, you must specify the complete
@@ -1293,9 +1293,11 @@ module Aws::SSM
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html
     #
     # @option params [required, String] :content
-    #   The content for the new SSM document in JSON or YAML format. We
-    #   recommend storing the contents for your new document in an external
-    #   JSON or YAML file and referencing the file in a command.
+    #   The content for the new SSM document in JSON or YAML format. The
+    #   content of the document must not exceed 64KB. This quota also includes
+    #   the content specified for input parameters at runtime. We recommend
+    #   storing the contents for your new document in an external JSON or YAML
+    #   file and referencing the file in a command.
     #
     #   For examples, see the following topics in the *Amazon Web Services
     #   Systems Manager User Guide*.
@@ -6992,6 +6994,8 @@ module Aws::SSM
     #   The ID of the service setting to get. The setting ID can be one of the
     #   following.
     #
+    #   * `/ssm/managed-instance/default-ec2-instance-management-role`
+    #
     #   * `/ssm/automation/customer-script-log-destination`
     #
     #   * `/ssm/automation/customer-script-log-group-name`
@@ -8269,9 +8273,9 @@ module Aws::SSM
 
     # Shares a Amazon Web Services Systems Manager document (SSM
     # document)publicly or privately. If you share a document privately, you
-    # must specify the Amazon Web Services user account IDs for those people
-    # who can use the document. If you share a document publicly, you must
-    # specify *All* as the account ID.
+    # must specify the Amazon Web Services user IDs for those people who can
+    # use the document. If you share a document publicly, you must specify
+    # *All* as the account ID.
     #
     # @option params [required, String] :name
     #   The name of the document that you want to share.
@@ -8281,16 +8285,15 @@ module Aws::SSM
     #   *Share*.
     #
     # @option params [Array<String>] :account_ids_to_add
-    #   The Amazon Web Services user accounts that should have access to the
-    #   document. The account IDs can either be a group of account IDs or
-    #   *All*.
+    #   The Amazon Web Services users that should have access to the document.
+    #   The account IDs can either be a group of account IDs or *All*.
     #
     # @option params [Array<String>] :account_ids_to_remove
-    #   The Amazon Web Services user accounts that should no longer have
-    #   access to the document. The Amazon Web Services user account can
-    #   either be a group of account IDs or *All*. This action has a higher
-    #   priority than *AccountIdsToAdd*. If you specify an account ID to add
-    #   and the same ID to remove, the system removes access to the document.
+    #   The Amazon Web Services users that should no longer have access to the
+    #   document. The Amazon Web Services user can either be a group of
+    #   account IDs or *All*. This action has a higher priority than
+    #   *AccountIdsToAdd*. If you specify an ID to add and the same ID to
+    #   remove, the system removes access to the document.
     #
     # @option params [String] :shared_document_version
     #   (Optional) The version of the document to share. If it isn't
@@ -8574,19 +8577,17 @@ module Aws::SSM
     #
     # @option params [String] :key_id
     #   The Key Management Service (KMS) ID that you want to use to encrypt a
-    #   parameter. Either the default KMS key automatically assigned to your
-    #   Amazon Web Services account or a custom key. Required for parameters
-    #   that use the `SecureString` data type.
+    #   parameter. Use a custom key for better security. Required for
+    #   parameters that use the `SecureString` data type.
     #
     #   If you don't specify a key ID, the system uses the default key
-    #   associated with your Amazon Web Services account.
-    #
-    #   * To use your default KMS key, choose the `SecureString` data type,
-    #     and do *not* specify the `Key ID` when you create the parameter. The
-    #     system automatically populates `Key ID` with your default KMS key.
+    #   associated with your Amazon Web Services account which is not as
+    #   secure as using a custom key.
     #
     #   * To use a custom KMS key, choose the `SecureString` data type with
     #     the `Key ID` parameter.
+    #
+    #   ^
     #
     # @option params [Boolean] :overwrite
     #   Overwrite an existing parameter. The default value is `false`.
@@ -8737,14 +8738,29 @@ module Aws::SSM
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
     #   in the required format, such as `ami-12345abcdeEXAMPLE`, and that the
-    #   specified AMI is available in your Amazon Web Services account. For
-    #   more information, see [Native parameter support for Amazon Machine
-    #   Image (AMI) IDs][1] in the *Amazon Web Services Systems Manager User
-    #   Guide*.
+    #   specified AMI is available in your Amazon Web Services account.
+    #
+    #   <note markdown="1"> If the action is successful, the service sends back an HTTP 200
+    #   response which indicates a successful `PutParameter` call for all
+    #   cases except for data type `aws:ec2:image`. If you call `PutParameter`
+    #   with `aws:ec2:image` data type, a successful HTTP 200 response does
+    #   not guarantee that your parameter was successfully created or updated.
+    #   The `aws:ec2:image` value is validated asynchronously, and the
+    #   `PutParameter` call returns before the validation is complete. If you
+    #   submit an invalid AMI value, the PutParameter operation will return
+    #   success, but the asynchronous validation will fail and the parameter
+    #   will not be created or updated. To monitor whether your
+    #   `aws:ec2:image` parameters are created successfully, see [Setting up
+    #   notifications or trigger actions based on Parameter Store events][1].
+    #   For more information about AMI format validation , see [Native
+    #   parameter support for Amazon Machine Image (AMI) IDs][2].
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
     #
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10298,14 +10314,13 @@ module Aws::SSM
     # the DescribeAssociation API operation and make a note of all optional
     # parameters required for your `UpdateAssociation` call.
     #
-    # In order to call this API operation, your Identity and Access
-    # Management (IAM) user account, group, or role must be configured with
-    # permission to call the DescribeAssociation API operation. If you
-    # don't have permission to call `DescribeAssociation`, then you receive
-    # the following error: `An error occurred (AccessDeniedException) when
-    # calling the UpdateAssociation operation: User: <user_arn> isn't
-    # authorized to perform: ssm:DescribeAssociation on resource:
-    # <resource_arn>`
+    # In order to call this API operation, a user, group, or role must be
+    # granted permission to call the DescribeAssociation API operation. If
+    # you don't have permission to call `DescribeAssociation`, then you
+    # receive the following error: `An error occurred
+    # (AccessDeniedException) when calling the UpdateAssociation operation:
+    # User: <user_arn> isn't authorized to perform: ssm:DescribeAssociation
+    # on resource: <resource_arn>`
     #
     # When you update an association, the association immediately runs
     # against the specified targets. You can add the
@@ -12065,6 +12080,8 @@ module Aws::SSM
     #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
     #   The setting ID can be one of the following.
     #
+    #   * `/ssm/managed-instance/default-ec2-instance-management-role`
+    #
     #   * `/ssm/automation/customer-script-log-destination`
     #
     #   * `/ssm/automation/customer-script-log-group-name`
@@ -12131,7 +12148,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

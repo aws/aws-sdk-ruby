@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-02-22)
+------------------
+
+* Feature - This release introduces support for Voice Connector media metrics in the Amazon Chime SDK Voice namespace
+
 1.1.0 (2023-01-18)
 ------------------
 

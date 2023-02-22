@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-02-22)
+------------------
+
+* Feature - CloudFront now supports block lists in origin request policies so that you can forward all headers, cookies, or query string from viewer requests to the origin *except* for those specified in the block list.
+
 1.75.2 (2023-02-21)
 ------------------
 

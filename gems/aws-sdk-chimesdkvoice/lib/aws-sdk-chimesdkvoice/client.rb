@@ -1492,6 +1492,7 @@ module Aws::ChimeSDKVoice
     # @example Response structure
     #
     #   resp.logging_configuration.enable_sip_logs #=> Boolean
+    #   resp.logging_configuration.enable_media_metric_logs #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceConnectorLoggingConfiguration AWS API Documentation
     #
@@ -2162,12 +2163,14 @@ module Aws::ChimeSDKVoice
     #     voice_connector_id: "NonEmptyString", # required
     #     logging_configuration: { # required
     #       enable_sip_logs: false,
+    #       enable_media_metric_logs: false,
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.logging_configuration.enable_sip_logs #=> Boolean
+    #   resp.logging_configuration.enable_media_metric_logs #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/PutVoiceConnectorLoggingConfiguration AWS API Documentation
     #
@@ -2892,7 +2895,7 @@ module Aws::ChimeSDKVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkvoice'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

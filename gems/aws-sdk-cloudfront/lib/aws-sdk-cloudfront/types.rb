@@ -649,11 +649,11 @@ module Aws::CloudFront
     #   want objects to stay in the CloudFront cache.
     #
     # The headers, cookies, and query strings that are included in the cache
-    # key are automatically included in requests that CloudFront sends to
-    # the origin. CloudFront sends a request when it can't find a valid
-    # object in its cache that matches the request's cache key. If you want
-    # to send values to the origin but *not* include them in the cache key,
-    # use `OriginRequestPolicy`.
+    # key are also included in requests that CloudFront sends to the origin.
+    # CloudFront sends a request when it can't find a valid object in its
+    # cache that matches the request's cache key. If you want to send
+    # values to the origin but *not* include them in the cache key, use
+    # `OriginRequestPolicy`.
     #
     # @!attribute [rw] id
     #   The unique identifier for the cache policy.
@@ -705,11 +705,11 @@ module Aws::CloudFront
     #   want objects to stay in the CloudFront cache.
     #
     # The headers, cookies, and query strings that are included in the cache
-    # key are automatically included in requests that CloudFront sends to
-    # the origin. CloudFront sends a request when it can't find a valid
-    # object in its cache that matches the request's cache key. If you want
-    # to send values to the origin but *not* include them in the cache key,
-    # use `OriginRequestPolicy`.
+    # key are also included in requests that CloudFront sends to the origin.
+    # CloudFront sends a request when it can't find a valid object in its
+    # cache that matches the request's cache key. If you want to send
+    # values to the origin but *not* include them in the cache key, use
+    # `OriginRequestPolicy`.
     #
     # @!attribute [rw] comment
     #   A comment to describe the cache policy. The comment cannot be longer
@@ -772,8 +772,8 @@ module Aws::CloudFront
     #
     # @!attribute [rw] parameters_in_cache_key_and_forwarded_to_origin
     #   The HTTP headers, cookies, and URL query strings to include in the
-    #   cache key. The values included in the cache key are automatically
-    #   included in requests that CloudFront sends to the origin.
+    #   cache key. The values included in the cache key are also included in
+    #   requests that CloudFront sends to the origin.
     #   @return [Types::ParametersInCacheKeyAndForwardedToOrigin]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyConfig AWS API Documentation
@@ -790,33 +790,30 @@ module Aws::CloudFront
     end
 
     # An object that determines whether any cookies in viewer requests (and
-    # if so, which cookies) are included in the cache key and automatically
-    # included in requests that CloudFront sends to the origin.
+    # if so, which cookies) are included in the cache key and in requests
+    # that CloudFront sends to the origin.
     #
     # @!attribute [rw] cookie_behavior
     #   Determines whether any cookies in viewer requests are included in
-    #   the cache key and automatically included in requests that CloudFront
-    #   sends to the origin. Valid values are:
+    #   the cache key and in requests that CloudFront sends to the origin.
+    #   Valid values are:
     #
-    #   * `none` – Cookies in viewer requests are not included in the cache
-    #     key and are not automatically included in requests that CloudFront
-    #     sends to the origin. Even when this field is set to `none`, any
-    #     cookies that are listed in an `OriginRequestPolicy` *are* included
-    #     in origin requests.
+    #   * `none` – No cookies in viewer requests are included in the cache
+    #     key or in requests that CloudFront sends to the origin. Even when
+    #     this field is set to `none`, any cookies that are listed in an
+    #     `OriginRequestPolicy` *are* included in origin requests.
     #
-    #   * `whitelist` – The cookies in viewer requests that are listed in
-    #     the `CookieNames` type are included in the cache key and
-    #     automatically included in requests that CloudFront sends to the
-    #     origin.
+    #   * `whitelist` – Only the cookies in viewer requests that are listed
+    #     in the `CookieNames` type are included in the cache key and in
+    #     requests that CloudFront sends to the origin.
     #
-    #   * `allExcept` – All cookies in viewer requests that are <i>
-    #     <b>not</b> </i> listed in the `CookieNames` type are included in
-    #     the cache key and automatically included in requests that
-    #     CloudFront sends to the origin.
+    #   * `allExcept` – All cookies in viewer requests are included in the
+    #     cache key and in requests that CloudFront sends to the origin, <i>
+    #     <b>except</b> </i> for those that are listed in the `CookieNames`
+    #     type, which are not included.
     #
     #   * `all` – All cookies in viewer requests are included in the cache
-    #     key and are automatically included in requests that CloudFront
-    #     sends to the origin.
+    #     key and in requests that CloudFront sends to the origin.
     #   @return [String]
     #
     # @!attribute [rw] cookies
@@ -833,23 +830,22 @@ module Aws::CloudFront
     end
 
     # An object that determines whether any HTTP headers (and if so, which
-    # headers) are included in the cache key and automatically included in
-    # requests that CloudFront sends to the origin.
+    # headers) are included in the cache key and in requests that CloudFront
+    # sends to the origin.
     #
     # @!attribute [rw] header_behavior
     #   Determines whether any HTTP headers are included in the cache key
-    #   and automatically included in requests that CloudFront sends to the
-    #   origin. Valid values are:
+    #   and in requests that CloudFront sends to the origin. Valid values
+    #   are:
     #
-    #   * `none` – HTTP headers are not included in the cache key and are
-    #     not automatically included in requests that CloudFront sends to
-    #     the origin. Even when this field is set to `none`, any headers
-    #     that are listed in an `OriginRequestPolicy` *are* included in
-    #     origin requests.
+    #   * `none` – No HTTP headers are included in the cache key or in
+    #     requests that CloudFront sends to the origin. Even when this field
+    #     is set to `none`, any headers that are listed in an
+    #     `OriginRequestPolicy` *are* included in origin requests.
     #
-    #   * `whitelist` – The HTTP headers that are listed in the `Headers`
-    #     type are included in the cache key and are automatically included
-    #     in requests that CloudFront sends to the origin.
+    #   * `whitelist` – Only the HTTP headers that are listed in the
+    #     `Headers` type are included in the cache key and in requests that
+    #     CloudFront sends to the origin.
     #   @return [String]
     #
     # @!attribute [rw] headers
@@ -913,44 +909,41 @@ module Aws::CloudFront
 
     # An object that determines whether any URL query strings in viewer
     # requests (and if so, which query strings) are included in the cache
-    # key and automatically included in requests that CloudFront sends to
-    # the origin.
+    # key and in requests that CloudFront sends to the origin.
     #
     # @!attribute [rw] query_string_behavior
     #   Determines whether any URL query strings in viewer requests are
-    #   included in the cache key and automatically included in requests
-    #   that CloudFront sends to the origin. Valid values are:
+    #   included in the cache key and in requests that CloudFront sends to
+    #   the origin. Valid values are:
     #
-    #   * `none` – Query strings in viewer requests are not included in the
-    #     cache key and are not automatically included in requests that
-    #     CloudFront sends to the origin. Even when this field is set to
-    #     `none`, any query strings that are listed in an
-    #     `OriginRequestPolicy` *are* included in origin requests.
+    #   * `none` – No query strings in viewer requests are included in the
+    #     cache key or in requests that CloudFront sends to the origin. Even
+    #     when this field is set to `none`, any query strings that are
+    #     listed in an `OriginRequestPolicy` *are* included in origin
+    #     requests.
     #
-    #   * `whitelist` – The query strings in viewer requests that are listed
-    #     in the `QueryStringNames` type are included in the cache key and
-    #     automatically included in requests that CloudFront sends to the
-    #     origin.
+    #   * `whitelist` – Only the query strings in viewer requests that are
+    #     listed in the `QueryStringNames` type are included in the cache
+    #     key and in requests that CloudFront sends to the origin.
     #
-    #   * `allExcept` – All query strings in viewer requests that are <i>
-    #     <b>not</b> </i> listed in the `QueryStringNames` type are included
-    #     in the cache key and automatically included in requests that
-    #     CloudFront sends to the origin.
+    #   * `allExcept` – All query strings in viewer requests are included in
+    #     the cache key and in requests that CloudFront sends to the origin,
+    #     <i> <b>except</b> </i> those that are listed in the
+    #     `QueryStringNames` type, which are not included.
     #
     #   * `all` – All query strings in viewer requests are included in the
-    #     cache key and are automatically included in requests that
-    #     CloudFront sends to the origin.
+    #     cache key and in requests that CloudFront sends to the origin.
     #   @return [String]
     #
     # @!attribute [rw] query_strings
     #   Contains the specific query strings in viewer requests that either
     #   <i> <b>are</b> </i> or <i> <b>are not</b> </i> included in the cache
-    #   key and automatically included in requests that CloudFront sends to
-    #   the origin. The behavior depends on whether the
-    #   `QueryStringBehavior` field in the `CachePolicyQueryStringsConfig`
-    #   type is set to `whitelist` (the listed query strings <i> <b>are</b>
-    #   </i> included) or `allExcept` (the listed query strings <i> <b>are
-    #   not</b> </i> included, but all other query strings are).
+    #   key and in requests that CloudFront sends to the origin. The
+    #   behavior depends on whether the `QueryStringBehavior` field in the
+    #   `CachePolicyQueryStringsConfig` type is set to `whitelist` (the
+    #   listed query strings <i> <b>are</b> </i> included) or `allExcept`
+    #   (the listed query strings <i> <b>are not</b> </i> included, but all
+    #   other query strings are).
     #   @return [Types::QueryStringNames]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachePolicyQueryStringsConfig AWS API Documentation
@@ -8403,17 +8396,22 @@ module Aws::CloudFront
     #   Determines whether cookies in viewer requests are included in
     #   requests that CloudFront sends to the origin. Valid values are:
     #
-    #   * `none` – Cookies in viewer requests are not included in requests
+    #   * `none` – No cookies in viewer requests are included in requests
     #     that CloudFront sends to the origin. Even when this field is set
     #     to `none`, any cookies that are listed in a `CachePolicy` *are*
     #     included in origin requests.
     #
-    #   * `whitelist` – The cookies in viewer requests that are listed in
-    #     the `CookieNames` type are included in requests that CloudFront
+    #   * `whitelist` – Only the cookies in viewer requests that are listed
+    #     in the `CookieNames` type are included in requests that CloudFront
     #     sends to the origin.
     #
     #   * `all` – All cookies in viewer requests are included in requests
     #     that CloudFront sends to the origin.
+    #
+    #   * `allExcept` – All cookies in viewer requests are included in
+    #     requests that CloudFront sends to the origin, <i> <b>except</b>
+    #     </i> for those listed in the `CookieNames` type, which are not
+    #     included.
     #   @return [String]
     #
     # @!attribute [rw] cookies
@@ -8436,13 +8434,14 @@ module Aws::CloudFront
     #   Determines whether any HTTP headers are included in requests that
     #   CloudFront sends to the origin. Valid values are:
     #
-    #   * `none` – HTTP headers are not included in requests that CloudFront
-    #     sends to the origin. Even when this field is set to `none`, any
-    #     headers that are listed in a `CachePolicy` *are* included in
-    #     origin requests.
+    #   * `none` – No HTTP headers in viewer requests are included in
+    #     requests that CloudFront sends to the origin. Even when this field
+    #     is set to `none`, any headers that are listed in a `CachePolicy`
+    #     *are* included in origin requests.
     #
-    #   * `whitelist` – The HTTP headers that are listed in the `Headers`
-    #     type are included in requests that CloudFront sends to the origin.
+    #   * `whitelist` – Only the HTTP headers that are listed in the
+    #     `Headers` type are included in requests that CloudFront sends to
+    #     the origin.
     #
     #   * `allViewer` – All HTTP headers in viewer requests are included in
     #     requests that CloudFront sends to the origin.
@@ -8451,6 +8450,11 @@ module Aws::CloudFront
     #     requests and the additional CloudFront headers that are listed in
     #     the `Headers` type are included in requests that CloudFront sends
     #     to the origin. The additional headers are added by CloudFront.
+    #
+    #   * `allExcept` – All HTTP headers in viewer requests are included in
+    #     requests that CloudFront sends to the origin, <i> <b>except</b>
+    #     </i> for those listed in the `Headers` type, which are not
+    #     included.
     #   @return [String]
     #
     # @!attribute [rw] headers
@@ -8522,22 +8526,33 @@ module Aws::CloudFront
     #   included in requests that CloudFront sends to the origin. Valid
     #   values are:
     #
-    #   * `none` – Query strings in viewer requests are not included in
+    #   * `none` – No query strings in viewer requests are included in
     #     requests that CloudFront sends to the origin. Even when this field
     #     is set to `none`, any query strings that are listed in a
     #     `CachePolicy` *are* included in origin requests.
     #
-    #   * `whitelist` – The query strings in viewer requests that are listed
-    #     in the `QueryStringNames` type are included in requests that
-    #     CloudFront sends to the origin.
+    #   * `whitelist` – Only the query strings in viewer requests that are
+    #     listed in the `QueryStringNames` type are included in requests
+    #     that CloudFront sends to the origin.
     #
     #   * `all` – All query strings in viewer requests are included in
     #     requests that CloudFront sends to the origin.
+    #
+    #   * `allExcept` – All query strings in viewer requests are included in
+    #     requests that CloudFront sends to the origin, <i> <b>except</b>
+    #     </i> for those listed in the `QueryStringNames` type, which are
+    #     not included.
     #   @return [String]
     #
     # @!attribute [rw] query_strings
-    #   Contains a list of the query strings in viewer requests that are
-    #   included in requests that CloudFront sends to the origin.
+    #   Contains the specific query strings in viewer requests that either
+    #   <i> <b>are</b> </i> or <i> <b>are not</b> </i> included in requests
+    #   that CloudFront sends to the origin. The behavior depends on whether
+    #   the `QueryStringBehavior` field in the
+    #   `OriginRequestPolicyQueryStringsConfig` type is set to `whitelist`
+    #   (the listed query strings <i> <b>are</b> </i> included) or
+    #   `allExcept` (the listed query strings <i> <b>are not</b> </i>
+    #   included, but all other query strings are).
     #   @return [Types::QueryStringNames]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginRequestPolicyQueryStringsConfig AWS API Documentation
@@ -8666,10 +8681,10 @@ module Aws::CloudFront
     # cache that it can return to the viewer.
     #
     # The headers, cookies, and query strings that are included in the cache
-    # key are automatically included in requests that CloudFront sends to
-    # the origin. CloudFront sends a request when it can't find an object
-    # in its cache that matches the request's cache key. If you want to
-    # send values to the origin but *not* include them in the cache key, use
+    # key are also included in requests that CloudFront sends to the origin.
+    # CloudFront sends a request when it can't find an object in its cache
+    # that matches the request's cache key. If you want to send values to
+    # the origin but *not* include them in the cache key, use
     # `OriginRequestPolicy`.
     #
     # @!attribute [rw] enable_accept_encoding_gzip
@@ -8752,22 +8767,20 @@ module Aws::CloudFront
     #
     # @!attribute [rw] headers_config
     #   An object that determines whether any HTTP headers (and if so, which
-    #   headers) are included in the cache key and automatically included in
-    #   requests that CloudFront sends to the origin.
+    #   headers) are included in the cache key and in requests that
+    #   CloudFront sends to the origin.
     #   @return [Types::CachePolicyHeadersConfig]
     #
     # @!attribute [rw] cookies_config
     #   An object that determines whether any cookies in viewer requests
-    #   (and if so, which cookies) are included in the cache key and
-    #   automatically included in requests that CloudFront sends to the
-    #   origin.
+    #   (and if so, which cookies) are included in the cache key and in
+    #   requests that CloudFront sends to the origin.
     #   @return [Types::CachePolicyCookiesConfig]
     #
     # @!attribute [rw] query_strings_config
     #   An object that determines whether any URL query strings in viewer
     #   requests (and if so, which query strings) are included in the cache
-    #   key and automatically included in requests that CloudFront sends to
-    #   the origin.
+    #   key and in requests that CloudFront sends to the origin.
     #   @return [Types::CachePolicyQueryStringsConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ParametersInCacheKeyAndForwardedToOrigin AWS API Documentation

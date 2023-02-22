@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-02-22)
+------------------
+
+* Feature - CloudWatch RUM now supports CloudWatch Custom Metrics
+
 1.8.0 (2023-01-18)
 ------------------
 

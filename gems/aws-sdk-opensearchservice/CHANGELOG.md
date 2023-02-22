@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-02-22)
+------------------
+
+* Feature - This release lets customers configure Off-peak window and software update related properties for a new/existing domain. It enhances the capabilities of StartServiceSoftwareUpdate API; adds 2 new APIs - ListScheduledActions & UpdateScheduledAction; and allows Auto-tune to make use of Off-peak window.
+
 1.16.0 (2023-01-31)
 ------------------
 

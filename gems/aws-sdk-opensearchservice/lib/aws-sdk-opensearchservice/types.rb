@@ -439,12 +439,20 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # <note markdown="1"> This object is deprecated. Use the domain's [off-peak window][1] to
+    # schedule Auto-Tune optimizations. For migration instructions, see
+    # [Migrating from Auto-Tune maintenance windows][2].
+    #
+    #  </note>
+    #
     # The Auto-Tune maintenance schedule. For more information, see
-    # [Auto-Tune for Amazon OpenSearch Service][1].
+    # [Auto-Tune for Amazon OpenSearch Service][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html
+    # [2]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html#off-peak-migrate
+    # [3]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
     # @!attribute [rw] start_at
     #   The Epoch timestamp at which the Auto-Tune maintenance schedule
@@ -491,22 +499,39 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] maintenance_schedules
+    #   DEPRECATED. Use [off-peak window][1] instead.
+    #
     #   A list of maintenance schedules during which Auto-Tune can deploy
     #   changes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html
     #   @return [Array<Types::AutoTuneMaintenanceSchedule>]
+    #
+    # @!attribute [rw] use_off_peak_window
+    #   Whether to use the domain's [off-peak window][1] to deploy
+    #   configuration changes on the domain rather than a maintenance
+    #   schedule.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneOptions AWS API Documentation
     #
     class AutoTuneOptions < Struct.new(
       :desired_state,
       :rollback_on_disable,
-      :maintenance_schedules)
+      :maintenance_schedules,
+      :use_off_peak_window)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Options for configuring Auto-Tune. For more information, see
-    # [Auto-Tune for Amazon OpenSearch Service][1].
+    # [Auto-Tune for Amazon OpenSearch Service][1]
     #
     #
     #
@@ -518,18 +543,25 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] maintenance_schedules
     #   A list of maintenance schedules during which Auto-Tune can deploy
-    #   changes. Maintenance schedules are overwrite, not append. If your
-    #   request includes no schedules, the request deletes all existing
-    #   schedules. To preserve existing schedules, make a call to
-    #   `DescribeDomainConfig` first and use the `MaintenanceSchedules`
-    #   portion of the response as the basis for this section.
+    #   changes. Maintenance windows are deprecated and have been replaced
+    #   with [off-peak windows][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html
     #   @return [Array<Types::AutoTuneMaintenanceSchedule>]
+    #
+    # @!attribute [rw] use_off_peak_window
+    #   Whether to schedule Auto-Tune optimizations that require blue/green
+    #   deployments during the domain's configured daily off-peak window.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneOptionsInput AWS API Documentation
     #
     class AutoTuneOptionsInput < Struct.new(
       :desired_state,
-      :maintenance_schedules)
+      :maintenance_schedules,
+      :use_off_peak_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -545,11 +577,17 @@ module Aws::OpenSearchService
     #   Any errors that occurred while enabling or disabling Auto-Tune.
     #   @return [String]
     #
+    # @!attribute [rw] use_off_peak_window
+    #   Whether the domain's off-peak window will be used to deploy
+    #   Auto-Tune changes rather than a maintenance schedule.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneOptionsOutput AWS API Documentation
     #
     class AutoTuneOptionsOutput < Struct.new(
       :state,
-      :error_message)
+      :error_message,
+      :use_off_peak_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -963,7 +1001,7 @@ module Aws::OpenSearchService
     end
 
     # An error occurred because the client attempts to remove a resource
-    # that's currently in use.
+    # that is currently in use.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ConflictException AWS API Documentation
     #
@@ -1103,6 +1141,19 @@ module Aws::OpenSearchService
     #   Options for Auto-Tune.
     #   @return [Types::AutoTuneOptionsInput]
     #
+    # @!attribute [rw] off_peak_window_options
+    #   Specifies a daily 10-hour time block during which OpenSearch Service
+    #   can perform configuration changes on the domain, including service
+    #   software updates and Auto-Tune enhancements that require a
+    #   blue/green deployment. If no options are specified, the default
+    #   start time of 10:00 P.M. local time (for the Region that the domain
+    #   is created in) is used.
+    #   @return [Types::OffPeakWindowOptions]
+    #
+    # @!attribute [rw] software_update_options
+    #   Software update options for the domain.
+    #   @return [Types::SoftwareUpdateOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -1121,7 +1172,9 @@ module Aws::OpenSearchService
       :domain_endpoint_options,
       :advanced_security_options,
       :tag_list,
-      :auto_tune_options)
+      :auto_tune_options,
+      :off_peak_window_options,
+      :software_update_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2022,7 +2075,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # An error occured because the client wanted to access an unsupported
+    # An error occured because the client wanted to access a not supported
     # operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DisabledOperationException AWS API Documentation
@@ -2077,8 +2130,7 @@ module Aws::OpenSearchService
     #   @return [Types::ClusterConfigStatus]
     #
     # @!attribute [rw] ebs_options
-    #   Container for EBS options configured for an OpenSearch Service
-    #   domain.
+    #   Container for EBS options configured for the domain.
     #   @return [Types::EBSOptionsStatus]
     #
     # @!attribute [rw] access_policies
@@ -2138,6 +2190,14 @@ module Aws::OpenSearchService
     #   configuration change.
     #   @return [Types::ChangeProgressDetails]
     #
+    # @!attribute [rw] off_peak_window_options
+    #   Container for off-peak window options for the domain.
+    #   @return [Types::OffPeakWindowOptionsStatus]
+    #
+    # @!attribute [rw] software_update_options
+    #   Software update options for the domain.
+    #   @return [Types::SoftwareUpdateOptionsStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainConfig AWS API Documentation
     #
     class DomainConfig < Struct.new(
@@ -2155,7 +2215,9 @@ module Aws::OpenSearchService
       :domain_endpoint_options,
       :advanced_security_options,
       :auto_tune_options,
-      :change_progress_details)
+      :change_progress_details,
+      :off_peak_window_options,
+      :software_update_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2447,6 +2509,15 @@ module Aws::OpenSearchService
     #   Information about a configuration change happening on the domain.
     #   @return [Types::ChangeProgressDetails]
     #
+    # @!attribute [rw] off_peak_window_options
+    #   Options that specify a custom 10-hour window during which OpenSearch
+    #   Service can perform configuration changes on the domain.
+    #   @return [Types::OffPeakWindowOptions]
+    #
+    # @!attribute [rw] software_update_options
+    #   Service software update options for the domain.
+    #   @return [Types::SoftwareUpdateOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainStatus AWS API Documentation
     #
     class DomainStatus < Struct.new(
@@ -2474,7 +2545,9 @@ module Aws::OpenSearchService
       :domain_endpoint_options,
       :advanced_security_options,
       :auto_tune_options,
-      :change_progress_details)
+      :change_progress_details,
+      :off_peak_window_options,
+      :software_update_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3302,6 +3375,52 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListScheduledActions` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListScheduledActions` operations, which returns results in the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListScheduledActionsRequest AWS API Documentation
+    #
+    class ListScheduledActionsRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_actions
+    #   A list of actions that are scheduled for the domain.
+    #   @return [Array<Types::ScheduledAction>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListScheduledActionsResponse AWS API Documentation
+    #
+    class ListScheduledActionsResponse < Struct.new(
+      :scheduled_actions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `ListTags` operation.
     #
     # @!attribute [rw] arn
@@ -3609,6 +3728,91 @@ module Aws::OpenSearchService
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/NodeToNodeEncryptionOptionsStatus AWS API Documentation
     #
     class NodeToNodeEncryptionOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom 10-hour, low-traffic window during which OpenSearch Service
+    # can perform mandatory configuration changes on the domain. These
+    # actions can include scheduled service software updates and blue/green
+    # Auto-Tune enhancements. OpenSearch Service will schedule these actions
+    # during the window that you specify.
+    #
+    # If you don't specify a window start time, it defaults to 10:00 P.M.
+    # local time.
+    #
+    # For more information, see [Defining off-peak maintenance windows for
+    # Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html
+    #
+    # @!attribute [rw] window_start_time
+    #   A custom start time for the off-peak window, in Coordinated
+    #   Universal Time (UTC). The window length will always be 10 hours, so
+    #   you can't specify an end time. For example, if you specify 11:00
+    #   P.M. UTC as a start time, the end time will automatically be set to
+    #   9:00 A.M.
+    #   @return [Types::WindowStartTime]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/OffPeakWindow AWS API Documentation
+    #
+    class OffPeakWindow < Struct.new(
+      :window_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for a domain's [off-peak window][1], during which OpenSearch
+    # Service can perform mandatory configuration changes on the domain.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html
+    #
+    # @!attribute [rw] enabled
+    #   Whether to enable an off-peak window.
+    #
+    #   This option is only available when modifying a domain created prior
+    #   to February 13, 2023, not when creating a new domain. All domains
+    #   created after this date have the off-peak window enabled by default.
+    #   You can't disable the off-peak window after it's enabled for a
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] off_peak_window
+    #   Off-peak window settings for the domain.
+    #   @return [Types::OffPeakWindow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/OffPeakWindowOptions AWS API Documentation
+    #
+    class OffPeakWindowOptions < Struct.new(
+      :enabled,
+      :off_peak_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of [off-peak window][1] options for a domain.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html
+    #
+    # @!attribute [rw] options
+    #   The domain's off-peak window configuration.
+    #   @return [Types::OffPeakWindowOptions]
+    #
+    # @!attribute [rw] status
+    #   The current status of off-peak window options.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/OffPeakWindowOptionsStatus AWS API Documentation
+    #
+    class OffPeakWindowOptionsStatus < Struct.new(
       :options,
       :status)
       SENSITIVE = []
@@ -4096,7 +4300,8 @@ module Aws::OpenSearchService
     #
     class ResourceAlreadyExistsException < Aws::EmptyStructure; end
 
-    # An exception for accessing or deleting a resource that doesn't exist.
+    # An exception for accessing or deleting a resource that does not
+    # exist..
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ResourceNotFoundException AWS API Documentation
     #
@@ -4228,6 +4433,68 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Information about a scheduled configuration change for an OpenSearch
+    # Service domain. This actions can be a [service software update][1] or
+    # a [blue/green Auto-Tune enhancement][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
+    # [2]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of action that will be taken on the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_time
+    #   The time when the change is scheduled to happen.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the action to be taken.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_by
+    #   Whether the action was scheduled manually (`CUSTOMER`, or by
+    #   OpenSearch Service automatically (`SYSTEM`).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] mandatory
+    #   Whether the action is required or optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cancellable
+    #   Whether or not the scheduled action is cancellable.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ScheduledAction AWS API Documentation
+    #
+    class ScheduledAction < Struct.new(
+      :id,
+      :type,
+      :severity,
+      :scheduled_time,
+      :description,
+      :scheduled_by,
+      :status,
+      :mandatory,
+      :cancellable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies details about a scheduled Auto-Tune action. For more
     # information, see [Auto-Tune for Amazon OpenSearch Service][1].
     #
@@ -4325,6 +4592,22 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # An exception for attempting to schedule a domain action during an
+    # unavailable time slot.
+    #
+    # @!attribute [rw] slot_suggestions
+    #   Alternate time slots during which OpenSearch Service has available
+    #   capacity to schedule a domain action.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/SlotNotAvailableException AWS API Documentation
+    #
+    class SlotNotAvailableException < Struct.new(
+      :slot_suggestions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The time, in UTC format, when OpenSearch Service takes a daily
     # automated snapshot of the specified domain. Default is `0` hours.
     #
@@ -4361,6 +4644,41 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Options for configuring service software updates for a domain.
+    #
+    # @!attribute [rw] auto_software_update_enabled
+    #   Whether automatic service software updates are enabled for the
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/SoftwareUpdateOptions AWS API Documentation
+    #
+    class SoftwareUpdateOptions < Struct.new(
+      :auto_software_update_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the service software options for a domain.
+    #
+    # @!attribute [rw] options
+    #   The service software update options for a domain.
+    #   @return [Types::SoftwareUpdateOptions]
+    #
+    # @!attribute [rw] status
+    #   The status of service software update options, including creation
+    #   date and last updated date.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/SoftwareUpdateOptionsStatus AWS API Documentation
+    #
+    class SoftwareUpdateOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the request parameters to the
     # `StartServiceSoftwareUpdate` operation.
     #
@@ -4369,10 +4687,37 @@ module Aws::OpenSearchService
     #   software.
     #   @return [String]
     #
+    # @!attribute [rw] schedule_at
+    #   When to start the service software update.
+    #
+    #   * `NOW` - Immediately schedules the update to happen in the current
+    #     hour if there's capacity available.
+    #
+    #   * `TIMESTAMP` - Lets you specify a custom date and time to apply the
+    #     update. If you specify this value, you must also provide a value
+    #     for `DesiredStartTime`.
+    #
+    #   * `OFF_PEAK_WINDOW` - Marks the update to be picked up during an
+    #     upcoming off-peak window. There's no guarantee that the update
+    #     will happen during the next immediate window. Depending on
+    #     capacity, it might happen in subsequent days.
+    #
+    #   Default: `NOW` if you don't specify a value for `DesiredStartTime`,
+    #   and `TIMESTAMP` if you do.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_start_time
+    #   The Epoch timestamp when you want the service software update to
+    #   start. You only need to specify this parameter if you set
+    #   `ScheduleAt` to `TIMESTAMP`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartServiceSoftwareUpdateRequest AWS API Documentation
     #
     class StartServiceSoftwareUpdateRequest < Struct.new(
-      :domain_name)
+      :domain_name,
+      :schedule_at,
+      :desired_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4558,7 +4903,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_options
-    #   Options to publish OpenSearch lots to Amazon CloudWatch Logs.
+    #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
     # @!attribute [rw] encryption_at_rest_options
@@ -4571,7 +4916,7 @@ module Aws::OpenSearchService
     #   @return [Types::DomainEndpointOptions]
     #
     # @!attribute [rw] node_to_node_encryption_options
-    #   Node-To-Node Encryption options for the domain.
+    #   Node-to-node encryption options for the domain.
     #   @return [Types::NodeToNodeEncryptionOptions]
     #
     # @!attribute [rw] advanced_security_options
@@ -4603,6 +4948,14 @@ module Aws::OpenSearchService
     #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
     #   @return [String]
     #
+    # @!attribute [rw] off_peak_window_options
+    #   Off-peak window options for the domain.
+    #   @return [Types::OffPeakWindowOptions]
+    #
+    # @!attribute [rw] software_update_options
+    #   Service software update options for the domain.
+    #   @return [Types::SoftwareUpdateOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
     #
     class UpdateDomainConfigRequest < Struct.new(
@@ -4621,7 +4974,9 @@ module Aws::OpenSearchService
       :advanced_security_options,
       :auto_tune_options,
       :dry_run,
-      :dry_run_mode)
+      :dry_run_mode,
+      :off_peak_window_options,
+      :software_update_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4691,6 +5046,76 @@ module Aws::OpenSearchService
     #
     class UpdatePackageResponse < Struct.new(
       :package_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of the domain to reschedule an action for.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   The unique identifier of the action to reschedule. To retrieve this
+    #   ID, send a [ListScheduledActions][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] action_type
+    #   The type of action to reschedule. Can be one of
+    #   `SERVICE_SOFTWARE_UPDATE`, `JVM_HEAP_SIZE_TUNING`, or
+    #   `JVM_YOUNG_GEN_TUNING`. To retrieve this value, send a
+    #   [ListScheduledActions][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_at
+    #   When to schedule the action.
+    #
+    #   * `NOW` - Immediately schedules the update to happen in the current
+    #     hour if there's capacity available.
+    #
+    #   * `TIMESTAMP` - Lets you specify a custom date and time to apply the
+    #     update. If you specify this value, you must also provide a value
+    #     for `DesiredStartTime`.
+    #
+    #   * `OFF_PEAK_WINDOW` - Marks the action to be picked up during an
+    #     upcoming off-peak window. There's no guarantee that the change
+    #     will be implemented during the next immediate window. Depending on
+    #     capacity, it might happen in subsequent days.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_start_time
+    #   The time to implement the change, in Coordinated Universal Time
+    #   (UTC). Only specify this parameter if you set `ScheduleAt` to
+    #   `TIMESTAMP`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateScheduledActionRequest AWS API Documentation
+    #
+    class UpdateScheduledActionRequest < Struct.new(
+      :domain_name,
+      :action_id,
+      :action_type,
+      :schedule_at,
+      :desired_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_action
+    #   Information about the rescheduled action.
+    #   @return [Types::ScheduledAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateScheduledActionResponse AWS API Documentation
+    #
+    class UpdateScheduledActionResponse < Struct.new(
+      :scheduled_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4977,7 +5402,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # An exception for missing or invalid input fields.
+    # An exception for accessing or deleting a resource that doesn't exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ValidationException AWS API Documentation
     #
@@ -5117,6 +5542,30 @@ module Aws::OpenSearchService
       :vpc_endpoint_owner,
       :domain_arn,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The desired start time for an [off-peak maintenance window][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html
+    #
+    # @!attribute [rw] hours
+    #   The start hour of the window in Coordinated Universal Time (UTC),
+    #   using 24-hour time. For example, `17` refers to 5:00 P.M. UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minutes
+    #   The start minute of the window, in UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/WindowStartTime AWS API Documentation
+    #
+    class WindowStartTime < Struct.new(
+      :hours,
+      :minutes)
       SENSITIVE = []
       include Aws::Structure
     end

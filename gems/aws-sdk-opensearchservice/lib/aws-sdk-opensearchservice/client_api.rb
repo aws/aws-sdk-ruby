@@ -20,6 +20,9 @@ module Aws::OpenSearchService
     AcceptInboundConnectionResponse = Shapes::StructureShape.new(name: 'AcceptInboundConnectionResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessPoliciesStatus = Shapes::StructureShape.new(name: 'AccessPoliciesStatus')
+    ActionSeverity = Shapes::StringShape.new(name: 'ActionSeverity')
+    ActionStatus = Shapes::StringShape.new(name: 'ActionStatus')
+    ActionType = Shapes::StringShape.new(name: 'ActionType')
     AddTagsRequest = Shapes::StructureShape.new(name: 'AddTagsRequest')
     AdditionalLimit = Shapes::StructureShape.new(name: 'AdditionalLimit')
     AdditionalLimitList = Shapes::ListShape.new(name: 'AdditionalLimitList')
@@ -212,6 +215,8 @@ module Aws::OpenSearchService
     ListInstanceTypeDetailsResponse = Shapes::StructureShape.new(name: 'ListInstanceTypeDetailsResponse')
     ListPackagesForDomainRequest = Shapes::StructureShape.new(name: 'ListPackagesForDomainRequest')
     ListPackagesForDomainResponse = Shapes::StructureShape.new(name: 'ListPackagesForDomainResponse')
+    ListScheduledActionsRequest = Shapes::StructureShape.new(name: 'ListScheduledActionsRequest')
+    ListScheduledActionsResponse = Shapes::StructureShape.new(name: 'ListScheduledActionsResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     ListVersionsRequest = Shapes::StructureShape.new(name: 'ListVersionsRequest')
@@ -236,6 +241,9 @@ module Aws::OpenSearchService
     NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
     NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    OffPeakWindow = Shapes::StructureShape.new(name: 'OffPeakWindow')
+    OffPeakWindowOptions = Shapes::StructureShape.new(name: 'OffPeakWindowOptions')
+    OffPeakWindowOptionsStatus = Shapes::StructureShape.new(name: 'OffPeakWindowOptionsStatus')
     OpenSearchPartitionInstanceType = Shapes::StringShape.new(name: 'OpenSearchPartitionInstanceType')
     OpenSearchWarmPartitionInstanceType = Shapes::StringShape.new(name: 'OpenSearchWarmPartitionInstanceType')
     OptionState = Shapes::StringShape.new(name: 'OptionState')
@@ -288,17 +296,27 @@ module Aws::OpenSearchService
     SAMLMetadata = Shapes::StringShape.new(name: 'SAMLMetadata')
     SAMLOptionsInput = Shapes::StructureShape.new(name: 'SAMLOptionsInput')
     SAMLOptionsOutput = Shapes::StructureShape.new(name: 'SAMLOptionsOutput')
+    ScheduleAt = Shapes::StringShape.new(name: 'ScheduleAt')
+    ScheduledAction = Shapes::StructureShape.new(name: 'ScheduledAction')
+    ScheduledActionsList = Shapes::ListShape.new(name: 'ScheduledActionsList')
     ScheduledAutoTuneActionType = Shapes::StringShape.new(name: 'ScheduledAutoTuneActionType')
     ScheduledAutoTuneDescription = Shapes::StringShape.new(name: 'ScheduledAutoTuneDescription')
     ScheduledAutoTuneDetails = Shapes::StructureShape.new(name: 'ScheduledAutoTuneDetails')
     ScheduledAutoTuneSeverityType = Shapes::StringShape.new(name: 'ScheduledAutoTuneSeverityType')
+    ScheduledBy = Shapes::StringShape.new(name: 'ScheduledBy')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
+    SlotList = Shapes::ListShape.new(name: 'SlotList')
+    SlotNotAvailableException = Shapes::StructureShape.new(name: 'SlotNotAvailableException')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
     SnapshotOptionsStatus = Shapes::StructureShape.new(name: 'SnapshotOptionsStatus')
+    SoftwareUpdateOptions = Shapes::StructureShape.new(name: 'SoftwareUpdateOptions')
+    SoftwareUpdateOptionsStatus = Shapes::StructureShape.new(name: 'SoftwareUpdateOptionsStatus')
     StartAt = Shapes::TimestampShape.new(name: 'StartAt')
     StartServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'StartServiceSoftwareUpdateRequest')
     StartServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'StartServiceSoftwareUpdateResponse')
+    StartTimeHours = Shapes::IntegerShape.new(name: 'StartTimeHours')
+    StartTimeMinutes = Shapes::IntegerShape.new(name: 'StartTimeMinutes')
     StartTimestamp = Shapes::TimestampShape.new(name: 'StartTimestamp')
     StorageSubTypeName = Shapes::StringShape.new(name: 'StorageSubTypeName')
     StorageType = Shapes::StructureShape.new(name: 'StorageType')
@@ -320,6 +338,8 @@ module Aws::OpenSearchService
     UpdateDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateDomainConfigResponse')
     UpdatePackageRequest = Shapes::StructureShape.new(name: 'UpdatePackageRequest')
     UpdatePackageResponse = Shapes::StructureShape.new(name: 'UpdatePackageResponse')
+    UpdateScheduledActionRequest = Shapes::StructureShape.new(name: 'UpdateScheduledActionRequest')
+    UpdateScheduledActionResponse = Shapes::StructureShape.new(name: 'UpdateScheduledActionResponse')
     UpdateTimestamp = Shapes::TimestampShape.new(name: 'UpdateTimestamp')
     UpdateVpcEndpointRequest = Shapes::StructureShape.new(name: 'UpdateVpcEndpointRequest')
     UpdateVpcEndpointResponse = Shapes::StructureShape.new(name: 'UpdateVpcEndpointResponse')
@@ -355,6 +375,7 @@ module Aws::OpenSearchService
     VpcEndpointSummary = Shapes::StructureShape.new(name: 'VpcEndpointSummary')
     VpcEndpointSummaryList = Shapes::ListShape.new(name: 'VpcEndpointSummaryList')
     VpcEndpoints = Shapes::ListShape.new(name: 'VpcEndpoints')
+    WindowStartTime = Shapes::StructureShape.new(name: 'WindowStartTime')
     ZoneAwarenessConfig = Shapes::StructureShape.new(name: 'ZoneAwarenessConfig')
 
     AWSDomainInformation.add_member(:owner_id, Shapes::ShapeRef.new(shape: OwnerId, location_name: "OwnerId"))
@@ -448,14 +469,17 @@ module Aws::OpenSearchService
     AutoTuneOptions.add_member(:desired_state, Shapes::ShapeRef.new(shape: AutoTuneDesiredState, location_name: "DesiredState"))
     AutoTuneOptions.add_member(:rollback_on_disable, Shapes::ShapeRef.new(shape: RollbackOnDisable, location_name: "RollbackOnDisable"))
     AutoTuneOptions.add_member(:maintenance_schedules, Shapes::ShapeRef.new(shape: AutoTuneMaintenanceScheduleList, location_name: "MaintenanceSchedules"))
+    AutoTuneOptions.add_member(:use_off_peak_window, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseOffPeakWindow"))
     AutoTuneOptions.struct_class = Types::AutoTuneOptions
 
     AutoTuneOptionsInput.add_member(:desired_state, Shapes::ShapeRef.new(shape: AutoTuneDesiredState, location_name: "DesiredState"))
     AutoTuneOptionsInput.add_member(:maintenance_schedules, Shapes::ShapeRef.new(shape: AutoTuneMaintenanceScheduleList, location_name: "MaintenanceSchedules"))
+    AutoTuneOptionsInput.add_member(:use_off_peak_window, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseOffPeakWindow"))
     AutoTuneOptionsInput.struct_class = Types::AutoTuneOptionsInput
 
     AutoTuneOptionsOutput.add_member(:state, Shapes::ShapeRef.new(shape: AutoTuneState, location_name: "State"))
     AutoTuneOptionsOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    AutoTuneOptionsOutput.add_member(:use_off_peak_window, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseOffPeakWindow"))
     AutoTuneOptionsOutput.struct_class = Types::AutoTuneOptionsOutput
 
     AutoTuneOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AutoTuneOptions, location_name: "Options"))
@@ -557,6 +581,8 @@ module Aws::OpenSearchService
     CreateDomainRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     CreateDomainRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     CreateDomainRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsInput, location_name: "AutoTuneOptions"))
+    CreateDomainRequest.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "OffPeakWindowOptions"))
+    CreateDomainRequest.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     CreateDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
@@ -760,6 +786,8 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
     DomainConfig.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsStatus, location_name: "AutoTuneOptions"))
     DomainConfig.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
+    DomainConfig.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptionsStatus, location_name: "OffPeakWindowOptions"))
+    DomainConfig.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptionsStatus, location_name: "SoftwareUpdateOptions"))
     DomainConfig.struct_class = Types::DomainConfig
 
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
@@ -822,6 +850,8 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
     DomainStatus.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsOutput, location_name: "AutoTuneOptions"))
     DomainStatus.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
+    DomainStatus.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "OffPeakWindowOptions"))
+    DomainStatus.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
     DomainStatus.struct_class = Types::DomainStatus
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
@@ -993,6 +1023,15 @@ module Aws::OpenSearchService
     ListPackagesForDomainResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListPackagesForDomainResponse.struct_class = Types::ListPackagesForDomainResponse
 
+    ListScheduledActionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    ListScheduledActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListScheduledActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListScheduledActionsRequest.struct_class = Types::ListScheduledActionsRequest
+
+    ListScheduledActionsResponse.add_member(:scheduled_actions, Shapes::ShapeRef.new(shape: ScheduledActionsList, location_name: "ScheduledActions"))
+    ListScheduledActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListScheduledActionsResponse.struct_class = Types::ListScheduledActionsResponse
+
     ListTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "arn"))
     ListTagsRequest.struct_class = Types::ListTagsRequest
 
@@ -1052,6 +1091,17 @@ module Aws::OpenSearchService
     NodeToNodeEncryptionOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, required: true, location_name: "Options"))
     NodeToNodeEncryptionOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     NodeToNodeEncryptionOptionsStatus.struct_class = Types::NodeToNodeEncryptionOptionsStatus
+
+    OffPeakWindow.add_member(:window_start_time, Shapes::ShapeRef.new(shape: WindowStartTime, location_name: "WindowStartTime"))
+    OffPeakWindow.struct_class = Types::OffPeakWindow
+
+    OffPeakWindowOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    OffPeakWindowOptions.add_member(:off_peak_window, Shapes::ShapeRef.new(shape: OffPeakWindow, location_name: "OffPeakWindow"))
+    OffPeakWindowOptions.struct_class = Types::OffPeakWindowOptions
+
+    OffPeakWindowOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "Options"))
+    OffPeakWindowOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, location_name: "Status"))
+    OffPeakWindowOptionsStatus.struct_class = Types::OffPeakWindowOptionsStatus
 
     OptionStatus.add_member(:creation_date, Shapes::ShapeRef.new(shape: UpdateTimestamp, required: true, location_name: "CreationDate"))
     OptionStatus.add_member(:update_date, Shapes::ShapeRef.new(shape: UpdateTimestamp, required: true, location_name: "UpdateDate"))
@@ -1184,6 +1234,19 @@ module Aws::OpenSearchService
     SAMLOptionsOutput.add_member(:session_timeout_minutes, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "SessionTimeoutMinutes"))
     SAMLOptionsOutput.struct_class = Types::SAMLOptionsOutput
 
+    ScheduledAction.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
+    ScheduledAction.add_member(:type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "Type"))
+    ScheduledAction.add_member(:severity, Shapes::ShapeRef.new(shape: ActionSeverity, required: true, location_name: "Severity"))
+    ScheduledAction.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ScheduledTime"))
+    ScheduledAction.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ScheduledAction.add_member(:scheduled_by, Shapes::ShapeRef.new(shape: ScheduledBy, location_name: "ScheduledBy"))
+    ScheduledAction.add_member(:status, Shapes::ShapeRef.new(shape: ActionStatus, location_name: "Status"))
+    ScheduledAction.add_member(:mandatory, Shapes::ShapeRef.new(shape: Boolean, location_name: "Mandatory"))
+    ScheduledAction.add_member(:cancellable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Cancellable"))
+    ScheduledAction.struct_class = Types::ScheduledAction
+
+    ScheduledActionsList.member = Shapes::ShapeRef.new(shape: ScheduledAction)
+
     ScheduledAutoTuneDetails.add_member(:date, Shapes::ShapeRef.new(shape: AutoTuneDate, location_name: "Date"))
     ScheduledAutoTuneDetails.add_member(:action_type, Shapes::ShapeRef.new(shape: ScheduledAutoTuneActionType, location_name: "ActionType"))
     ScheduledAutoTuneDetails.add_member(:action, Shapes::ShapeRef.new(shape: ScheduledAutoTuneDescription, location_name: "Action"))
@@ -1200,6 +1263,11 @@ module Aws::OpenSearchService
     ServiceSoftwareOptions.add_member(:optional_deployment, Shapes::ShapeRef.new(shape: Boolean, location_name: "OptionalDeployment"))
     ServiceSoftwareOptions.struct_class = Types::ServiceSoftwareOptions
 
+    SlotList.member = Shapes::ShapeRef.new(shape: Long)
+
+    SlotNotAvailableException.add_member(:slot_suggestions, Shapes::ShapeRef.new(shape: SlotList, location_name: "SlotSuggestions"))
+    SlotNotAvailableException.struct_class = Types::SlotNotAvailableException
+
     SnapshotOptions.add_member(:automated_snapshot_start_hour, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AutomatedSnapshotStartHour"))
     SnapshotOptions.struct_class = Types::SnapshotOptions
 
@@ -1207,7 +1275,16 @@ module Aws::OpenSearchService
     SnapshotOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     SnapshotOptionsStatus.struct_class = Types::SnapshotOptionsStatus
 
+    SoftwareUpdateOptions.add_member(:auto_software_update_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoSoftwareUpdateEnabled"))
+    SoftwareUpdateOptions.struct_class = Types::SoftwareUpdateOptions
+
+    SoftwareUpdateOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "Options"))
+    SoftwareUpdateOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, location_name: "Status"))
+    SoftwareUpdateOptionsStatus.struct_class = Types::SoftwareUpdateOptionsStatus
+
     StartServiceSoftwareUpdateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    StartServiceSoftwareUpdateRequest.add_member(:schedule_at, Shapes::ShapeRef.new(shape: ScheduleAt, location_name: "ScheduleAt"))
+    StartServiceSoftwareUpdateRequest.add_member(:desired_start_time, Shapes::ShapeRef.new(shape: Long, location_name: "DesiredStartTime"))
     StartServiceSoftwareUpdateRequest.struct_class = Types::StartServiceSoftwareUpdateRequest
 
     StartServiceSoftwareUpdateResponse.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
@@ -1250,6 +1327,8 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptions, location_name: "AutoTuneOptions"))
     UpdateDomainConfigRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
     UpdateDomainConfigRequest.add_member(:dry_run_mode, Shapes::ShapeRef.new(shape: DryRunMode, location_name: "DryRunMode"))
+    UpdateDomainConfigRequest.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "OffPeakWindowOptions"))
+    UpdateDomainConfigRequest.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
     UpdateDomainConfigRequest.struct_class = Types::UpdateDomainConfigRequest
 
     UpdateDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: DomainConfig, required: true, location_name: "DomainConfig"))
@@ -1265,6 +1344,16 @@ module Aws::OpenSearchService
 
     UpdatePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
     UpdatePackageResponse.struct_class = Types::UpdatePackageResponse
+
+    UpdateScheduledActionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    UpdateScheduledActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ActionID"))
+    UpdateScheduledActionRequest.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "ActionType"))
+    UpdateScheduledActionRequest.add_member(:schedule_at, Shapes::ShapeRef.new(shape: ScheduleAt, required: true, location_name: "ScheduleAt"))
+    UpdateScheduledActionRequest.add_member(:desired_start_time, Shapes::ShapeRef.new(shape: Long, location_name: "DesiredStartTime"))
+    UpdateScheduledActionRequest.struct_class = Types::UpdateScheduledActionRequest
+
+    UpdateScheduledActionResponse.add_member(:scheduled_action, Shapes::ShapeRef.new(shape: ScheduledAction, location_name: "ScheduledAction"))
+    UpdateScheduledActionResponse.struct_class = Types::UpdateScheduledActionResponse
 
     UpdateVpcEndpointRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, required: true, location_name: "VpcEndpointId"))
     UpdateVpcEndpointRequest.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCOptions, required: true, location_name: "VpcOptions"))
@@ -1359,6 +1448,10 @@ module Aws::OpenSearchService
     VpcEndpointSummaryList.member = Shapes::ShapeRef.new(shape: VpcEndpointSummary)
 
     VpcEndpoints.member = Shapes::ShapeRef.new(shape: VpcEndpoint)
+
+    WindowStartTime.add_member(:hours, Shapes::ShapeRef.new(shape: StartTimeHours, required: true, location_name: "Hours"))
+    WindowStartTime.add_member(:minutes, Shapes::ShapeRef.new(shape: StartTimeMinutes, required: true, location_name: "Minutes"))
+    WindowStartTime.struct_class = Types::WindowStartTime
 
     ZoneAwarenessConfig.add_member(:availability_zone_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AvailabilityZoneCount"))
     ZoneAwarenessConfig.struct_class = Types::ZoneAwarenessConfig
@@ -1891,6 +1984,25 @@ module Aws::OpenSearchService
         )
       end)
 
+      api.add_operation(:list_scheduled_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScheduledActions"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/scheduledActions"
+        o.input = Shapes::ShapeRef.new(shape: ListScheduledActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListScheduledActionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTags"
         o.http_method = "GET"
@@ -2041,6 +2153,21 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateScheduledAction"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/scheduledAction/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateScheduledActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateScheduledActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: SlotNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

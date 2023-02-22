@@ -178,9 +178,11 @@ module Aws::SSM
     # automation or command.
     #
     # @!attribute [rw] ignore_poll_alarm_failure
-    #   If you specify `true` for this value, your automation or command
-    #   continue to run even if we can't gather information about the state
-    #   of your CloudWatch alarm. The default value is `false`.
+    #   When this value is *true*, your automation or command continues to
+    #   run in cases where we can’t retrieve alarm status information from
+    #   CloudWatch. In cases where we successfully retrieve an alarm status
+    #   of OK or INSUFFICIENT\_DATA, the automation or command continues to
+    #   run, regardless of this value. Default is *false*.
     #   @return [Boolean]
     #
     # @!attribute [rw] alarms
@@ -2991,7 +2993,7 @@ module Aws::SSM
     #
     #   You can specify Amazon Web Services-predefined documents, documents
     #   you created, or a document that is shared with you from another
-    #   account.
+    #   Amazon Web Services account.
     #
     #   For Systems Manager documents (SSM documents) that are shared with
     #   you from other Amazon Web Services accounts, you must specify the
@@ -3232,7 +3234,9 @@ module Aws::SSM
     end
 
     # @!attribute [rw] content
-    #   The content for the new SSM document in JSON or YAML format. We
+    #   The content for the new SSM document in JSON or YAML format. The
+    #   content of the document must not exceed 64KB. This quota also
+    #   includes the content specified for input parameters at runtime. We
     #   recommend storing the contents for your new document in an external
     #   JSON or YAML file and referencing the file in a command.
     #
@@ -6344,7 +6348,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The Amazon Web Services user account that created the document.
+    #   The Amazon Web Services user that created the document.
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -6529,7 +6533,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The Amazon Web Services user account that created the document.
+    #   The Amazon Web Services user that created the document.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -6730,7 +6734,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Parameters specified in a System Manager document that run on the
+    # Parameters specified in a Systems Manager document that run on the
     # server when the command is run.
     #
     # @!attribute [rw] name
@@ -6763,9 +6767,9 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The document can't be shared with more Amazon Web Services user
-    # accounts. You can specify a maximum of 20 accounts per API operation
-    # to share a private document.
+    # The document can't be shared with more Amazon Web Services accounts.
+    # You can specify a maximum of 20 accounts per API operation to share a
+    # private document.
     #
     # By default, you can share a private document with a maximum of 1,000
     # accounts and publicly share up to five documents.
@@ -8904,6 +8908,8 @@ module Aws::SSM
     # @!attribute [rw] setting_id
     #   The ID of the service setting to get. The setting ID can be one of
     #   the following.
+    #
+    #   * `/ssm/managed-instance/default-ec2-instance-management-role`
     #
     #   * `/ssm/automation/customer-script-log-destination`
     #
@@ -12453,18 +12459,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] account_ids_to_add
-    #   The Amazon Web Services user accounts that should have access to the
+    #   The Amazon Web Services users that should have access to the
     #   document. The account IDs can either be a group of account IDs or
     #   *All*.
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_ids_to_remove
-    #   The Amazon Web Services user accounts that should no longer have
-    #   access to the document. The Amazon Web Services user account can
-    #   either be a group of account IDs or *All*. This action has a higher
-    #   priority than *AccountIdsToAdd*. If you specify an account ID to add
-    #   and the same ID to remove, the system removes access to the
-    #   document.
+    #   The Amazon Web Services users that should no longer have access to
+    #   the document. The Amazon Web Services user can either be a group of
+    #   account IDs or *All*. This action has a higher priority than
+    #   *AccountIdsToAdd*. If you specify an ID to add and the same ID to
+    #   remove, the system removes access to the document.
     #   @return [Array<String>]
     #
     # @!attribute [rw] shared_document_version
@@ -14695,20 +14700,17 @@ module Aws::SSM
     #
     # @!attribute [rw] key_id
     #   The Key Management Service (KMS) ID that you want to use to encrypt
-    #   a parameter. Either the default KMS key automatically assigned to
-    #   your Amazon Web Services account or a custom key. Required for
+    #   a parameter. Use a custom key for better security. Required for
     #   parameters that use the `SecureString` data type.
     #
     #   If you don't specify a key ID, the system uses the default key
-    #   associated with your Amazon Web Services account.
-    #
-    #   * To use your default KMS key, choose the `SecureString` data type,
-    #     and do *not* specify the `Key ID` when you create the parameter.
-    #     The system automatically populates `Key ID` with your default KMS
-    #     key.
+    #   associated with your Amazon Web Services account which is not as
+    #   secure as using a custom key.
     #
     #   * To use a custom KMS key, choose the `SecureString` data type with
     #     the `Key ID` parameter.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] overwrite
@@ -14867,13 +14869,29 @@ module Aws::SSM
     #   Amazon Web Services Systems Manager validates the parameter value is
     #   in the required format, such as `ami-12345abcdeEXAMPLE`, and that
     #   the specified AMI is available in your Amazon Web Services account.
-    #   For more information, see [Native parameter support for Amazon
-    #   Machine Image (AMI) IDs][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #
+    #   <note markdown="1"> If the action is successful, the service sends back an HTTP 200
+    #   response which indicates a successful `PutParameter` call for all
+    #   cases except for data type `aws:ec2:image`. If you call
+    #   `PutParameter` with `aws:ec2:image` data type, a successful HTTP 200
+    #   response does not guarantee that your parameter was successfully
+    #   created or updated. The `aws:ec2:image` value is validated
+    #   asynchronously, and the `PutParameter` call returns before the
+    #   validation is complete. If you submit an invalid AMI value, the
+    #   PutParameter operation will return success, but the asynchronous
+    #   validation will fail and the parameter will not be created or
+    #   updated. To monitor whether your `aws:ec2:image` parameters are
+    #   created successfully, see [Setting up notifications or trigger
+    #   actions based on Parameter Store events][1]. For more information
+    #   about AMI format validation , see [Native parameter support for
+    #   Amazon Machine Image (AMI) IDs][2].
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
@@ -16625,8 +16643,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The ID of the Amazon Web Services user account that started the
-    #   session.
+    #   The ID of the Amazon Web Services user that started the session.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -16683,8 +16700,8 @@ module Aws::SSM
     #   * Target: Specify a managed node to which session connections have
     #     been made.
     #
-    #   * Owner: Specify an Amazon Web Services user account to see a list
-    #     of sessions started by that user.
+    #   * Owner: Specify an Amazon Web Services user to see a list of
+    #     sessions started by that user.
     #
     #   * Status: Specify a valid session status to see a list of all
     #     sessions with that status. Status values you can specify include:
@@ -19197,6 +19214,8 @@ module Aws::SSM
     #   example,
     #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
     #   The setting ID can be one of the following.
+    #
+    #   * `/ssm/managed-instance/default-ec2-instance-management-role`
     #
     #   * `/ssm/automation/customer-script-log-destination`
     #

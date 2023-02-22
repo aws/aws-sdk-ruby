@@ -81,8 +81,11 @@ module Aws::CloudWatchRUM
     MetricDestinationSummary = Shapes::StructureShape.new(name: 'MetricDestinationSummary')
     MetricDestinationSummaryList = Shapes::ListShape.new(name: 'MetricDestinationSummaryList')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    Namespace = Shapes::StringShape.new(name: 'Namespace')
     Pages = Shapes::ListShape.new(name: 'Pages')
     PutRumEventsRequest = Shapes::StructureShape.new(name: 'PutRumEventsRequest')
+    PutRumEventsRequestBatchIdString = Shapes::StringShape.new(name: 'PutRumEventsRequestBatchIdString')
+    PutRumEventsRequestIdString = Shapes::StringShape.new(name: 'PutRumEventsRequestIdString')
     PutRumEventsResponse = Shapes::StructureShape.new(name: 'PutRumEventsResponse')
     PutRumMetricsDestinationRequest = Shapes::StructureShape.new(name: 'PutRumMetricsDestinationRequest')
     PutRumMetricsDestinationResponse = Shapes::StructureShape.new(name: 'PutRumMetricsDestinationResponse')
@@ -94,6 +97,7 @@ module Aws::CloudWatchRUM
     QueryTimestamp = Shapes::IntegerShape.new(name: 'QueryTimestamp')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RumEvent = Shapes::StructureShape.new(name: 'RumEvent')
+    RumEventIdString = Shapes::StringShape.new(name: 'RumEventIdString')
     RumEventList = Shapes::ListShape.new(name: 'RumEventList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionSampleRate = Shapes::FloatShape.new(name: 'SessionSampleRate')
@@ -120,6 +124,8 @@ module Aws::CloudWatchRUM
     UpdateRumMetricDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateRumMetricDefinitionResponse')
     Url = Shapes::StringShape.new(name: 'Url')
     UserDetails = Shapes::StructureShape.new(name: 'UserDetails')
+    UserDetailsSessionIdString = Shapes::StringShape.new(name: 'UserDetailsSessionIdString')
+    UserDetailsUserIdString = Shapes::StringShape.new(name: 'UserDetailsUserIdString')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueKey = Shapes::StringShape.new(name: 'ValueKey')
 
@@ -302,6 +308,7 @@ module Aws::CloudWatchRUM
     MetricDefinition.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
     MetricDefinition.add_member(:metric_definition_id, Shapes::ShapeRef.new(shape: MetricDefinitionId, required: true, location_name: "MetricDefinitionId"))
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
+    MetricDefinition.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     MetricDefinition.add_member(:unit_label, Shapes::ShapeRef.new(shape: UnitLabel, location_name: "UnitLabel"))
     MetricDefinition.add_member(:value_key, Shapes::ShapeRef.new(shape: ValueKey, location_name: "ValueKey"))
     MetricDefinition.struct_class = Types::MetricDefinition
@@ -311,6 +318,7 @@ module Aws::CloudWatchRUM
     MetricDefinitionRequest.add_member(:dimension_keys, Shapes::ShapeRef.new(shape: DimensionKeysMap, location_name: "DimensionKeys"))
     MetricDefinitionRequest.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
     MetricDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
+    MetricDefinitionRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     MetricDefinitionRequest.add_member(:unit_label, Shapes::ShapeRef.new(shape: UnitLabel, location_name: "UnitLabel"))
     MetricDefinitionRequest.add_member(:value_key, Shapes::ShapeRef.new(shape: ValueKey, location_name: "ValueKey"))
     MetricDefinitionRequest.struct_class = Types::MetricDefinitionRequest
@@ -329,8 +337,8 @@ module Aws::CloudWatchRUM
     Pages.member = Shapes::ShapeRef.new(shape: Url)
 
     PutRumEventsRequest.add_member(:app_monitor_details, Shapes::ShapeRef.new(shape: AppMonitorDetails, required: true, location_name: "AppMonitorDetails"))
-    PutRumEventsRequest.add_member(:batch_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BatchId"))
-    PutRumEventsRequest.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, required: true, location: "uri", location_name: "Id"))
+    PutRumEventsRequest.add_member(:batch_id, Shapes::ShapeRef.new(shape: PutRumEventsRequestBatchIdString, required: true, location_name: "BatchId"))
+    PutRumEventsRequest.add_member(:id, Shapes::ShapeRef.new(shape: PutRumEventsRequestIdString, required: true, location: "uri", location_name: "Id"))
     PutRumEventsRequest.add_member(:rum_events, Shapes::ShapeRef.new(shape: RumEventList, required: true, location_name: "RumEvents"))
     PutRumEventsRequest.add_member(:user_details, Shapes::ShapeRef.new(shape: UserDetails, required: true, location_name: "UserDetails"))
     PutRumEventsRequest.struct_class = Types::PutRumEventsRequest
@@ -359,7 +367,7 @@ module Aws::CloudWatchRUM
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RumEvent.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "details", metadata: {"jsonvalue"=>true}))
-    RumEvent.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    RumEvent.add_member(:id, Shapes::ShapeRef.new(shape: RumEventIdString, required: true, location_name: "id"))
     RumEvent.add_member(:metadata, Shapes::ShapeRef.new(shape: JsonValue, location_name: "metadata", metadata: {"jsonvalue"=>true}))
     RumEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
     RumEvent.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
@@ -417,8 +425,8 @@ module Aws::CloudWatchRUM
 
     UpdateRumMetricDefinitionResponse.struct_class = Types::UpdateRumMetricDefinitionResponse
 
-    UserDetails.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location_name: "sessionId"))
-    UserDetails.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "userId"))
+    UserDetails.add_member(:session_id, Shapes::ShapeRef.new(shape: UserDetailsSessionIdString, location_name: "sessionId"))
+    UserDetails.add_member(:user_id, Shapes::ShapeRef.new(shape: UserDetailsUserIdString, location_name: "userId"))
     UserDetails.struct_class = Types::UserDetails
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))

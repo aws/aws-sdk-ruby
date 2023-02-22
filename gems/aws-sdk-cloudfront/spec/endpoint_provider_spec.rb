@@ -14,27 +14,13 @@ module Aws::CloudFront
   describe EndpointProvider do
     subject { Aws::CloudFront::EndpointProvider.new }
 
-    context 'For region aws-cn-global with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://cloudfront.cn-northwest-1.amazonaws.com.cn"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"aws-cn-global"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
     context 'For region aws-global with FIPS disabled and DualStack disabled' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]}, "url"=>"https://cloudfront.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"aws-global"})
+        params = EndpointParameters.new(**{:region=>"aws-global", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -42,13 +28,279 @@ module Aws::CloudFront
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack disabled' do
+    context 'For region aws-global with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]}, "url"=>"https://cloudfront-fips.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"aws-global", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]}, "url"=>"https://cloudfront-fips.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>true, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]}, "url"=>"https://cloudfront.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region aws-cn-global with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://cloudfront.cn-northwest-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"aws-cn-global", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront-fips.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://cloudfront.cn-northwest-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront-fips.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront-fips.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_dual_stack=>true, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront-fips.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cloudfront.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>false, :use_fips=>false, :endpoint=>"https://example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :endpoint=>"https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -62,7 +314,7 @@ module Aws::CloudFront
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>true, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>false, :use_fips=>true, :endpoint=>"https://example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -75,7 +327,7 @@ module Aws::CloudFront
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :use_fips=>false, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>true, :use_fips=>false, :endpoint=>"https://example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

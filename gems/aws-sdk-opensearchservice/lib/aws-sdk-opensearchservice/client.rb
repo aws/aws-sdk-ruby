@@ -688,6 +688,17 @@ module Aws::OpenSearchService
     # @option params [Types::AutoTuneOptionsInput] :auto_tune_options
     #   Options for Auto-Tune.
     #
+    # @option params [Types::OffPeakWindowOptions] :off_peak_window_options
+    #   Specifies a daily 10-hour time block during which OpenSearch Service
+    #   can perform configuration changes on the domain, including service
+    #   software updates and Auto-Tune enhancements that require a blue/green
+    #   deployment. If no options are specified, the default start time of
+    #   10:00 P.M. local time (for the Region that the domain is created in)
+    #   is used.
+    #
+    # @option params [Types::SoftwareUpdateOptions] :software_update_options
+    #   Software update options for the domain.
+    #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResponse#domain_status #domain_status} => Types::DomainStatus
@@ -798,6 +809,19 @@ module Aws::OpenSearchService
     #           cron_expression_for_recurrence: "String",
     #         },
     #       ],
+    #       use_off_peak_window: false,
+    #     },
+    #     off_peak_window_options: {
+    #       enabled: false,
+    #       off_peak_window: {
+    #         window_start_time: {
+    #           hours: 1, # required
+    #           minutes: 1, # required
+    #         },
+    #       },
+    #     },
+    #     software_update_options: {
+    #       auto_software_update_enabled: false,
     #     },
     #   })
     #
@@ -876,8 +900,13 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
+    #   resp.domain_status.auto_tune_options.use_off_peak_window #=> Boolean
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.off_peak_window_options.enabled #=> Boolean
+    #   resp.domain_status.off_peak_window_options.off_peak_window.window_start_time.hours #=> Integer
+    #   resp.domain_status.off_peak_window_options.off_peak_window.window_start_time.minutes #=> Integer
+    #   resp.domain_status.software_update_options.auto_software_update_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomain AWS API Documentation
     #
@@ -1165,8 +1194,13 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
+    #   resp.domain_status.auto_tune_options.use_off_peak_window #=> Boolean
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.off_peak_window_options.enabled #=> Boolean
+    #   resp.domain_status.off_peak_window_options.off_peak_window.window_start_time.hours #=> Integer
+    #   resp.domain_status.off_peak_window_options.off_peak_window.window_start_time.minutes #=> Integer
+    #   resp.domain_status.software_update_options.auto_software_update_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDomain AWS API Documentation
     #
@@ -1433,8 +1467,13 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
+    #   resp.domain_status.auto_tune_options.use_off_peak_window #=> Boolean
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.off_peak_window_options.enabled #=> Boolean
+    #   resp.domain_status.off_peak_window_options.off_peak_window.window_start_time.hours #=> Integer
+    #   resp.domain_status.off_peak_window_options.off_peak_window.window_start_time.minutes #=> Integer
+    #   resp.domain_status.software_update_options.auto_software_update_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomain AWS API Documentation
     #
@@ -1695,6 +1734,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.auto_tune_options.options.maintenance_schedules[0].duration.value #=> Integer
     #   resp.domain_config.auto_tune_options.options.maintenance_schedules[0].duration.unit #=> String, one of "HOURS"
     #   resp.domain_config.auto_tune_options.options.maintenance_schedules[0].cron_expression_for_recurrence #=> String
+    #   resp.domain_config.auto_tune_options.options.use_off_peak_window #=> Boolean
     #   resp.domain_config.auto_tune_options.status.creation_date #=> Time
     #   resp.domain_config.auto_tune_options.status.update_date #=> Time
     #   resp.domain_config.auto_tune_options.status.update_version #=> Integer
@@ -1703,6 +1743,20 @@ module Aws::OpenSearchService
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.change_progress_details.change_id #=> String
     #   resp.domain_config.change_progress_details.message #=> String
+    #   resp.domain_config.off_peak_window_options.options.enabled #=> Boolean
+    #   resp.domain_config.off_peak_window_options.options.off_peak_window.window_start_time.hours #=> Integer
+    #   resp.domain_config.off_peak_window_options.options.off_peak_window.window_start_time.minutes #=> Integer
+    #   resp.domain_config.off_peak_window_options.status.creation_date #=> Time
+    #   resp.domain_config.off_peak_window_options.status.update_date #=> Time
+    #   resp.domain_config.off_peak_window_options.status.update_version #=> Integer
+    #   resp.domain_config.off_peak_window_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.off_peak_window_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.software_update_options.options.auto_software_update_enabled #=> Boolean
+    #   resp.domain_config.software_update_options.status.creation_date #=> Time
+    #   resp.domain_config.software_update_options.status.update_date #=> Time
+    #   resp.domain_config.software_update_options.status.update_version #=> Integer
+    #   resp.domain_config.software_update_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.software_update_options.status.pending_deletion #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainConfig AWS API Documentation
     #
@@ -1807,8 +1861,13 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status_list[0].auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status_list[0].auto_tune_options.error_message #=> String
+    #   resp.domain_status_list[0].auto_tune_options.use_off_peak_window #=> Boolean
     #   resp.domain_status_list[0].change_progress_details.change_id #=> String
     #   resp.domain_status_list[0].change_progress_details.message #=> String
+    #   resp.domain_status_list[0].off_peak_window_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].off_peak_window_options.off_peak_window.window_start_time.hours #=> Integer
+    #   resp.domain_status_list[0].off_peak_window_options.off_peak_window.window_start_time.minutes #=> Integer
+    #   resp.domain_status_list[0].software_update_options.auto_software_update_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomains AWS API Documentation
     #
@@ -1934,8 +1993,13 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.dry_run_config.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.dry_run_config.auto_tune_options.error_message #=> String
+    #   resp.dry_run_config.auto_tune_options.use_off_peak_window #=> Boolean
     #   resp.dry_run_config.change_progress_details.change_id #=> String
     #   resp.dry_run_config.change_progress_details.message #=> String
+    #   resp.dry_run_config.off_peak_window_options.enabled #=> Boolean
+    #   resp.dry_run_config.off_peak_window_options.off_peak_window.window_start_time.hours #=> Integer
+    #   resp.dry_run_config.off_peak_window_options.off_peak_window.window_start_time.minutes #=> Integer
+    #   resp.dry_run_config.software_update_options.auto_software_update_enabled #=> Boolean
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -2812,6 +2876,66 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Retrieves a list of configuration changes that are scheduled for a
+    # domain. These changes can be [service software updates][1] or
+    # [blue/green Auto-Tune enhancements][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
+    # [2]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListScheduledActions` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListScheduledActions` operations, which returns results in the next
+    #   page.
+    #
+    # @return [Types::ListScheduledActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScheduledActionsResponse#scheduled_actions #scheduled_actions} => Array&lt;Types::ScheduledAction&gt;
+    #   * {Types::ListScheduledActionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scheduled_actions({
+    #     domain_name: "DomainName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_actions #=> Array
+    #   resp.scheduled_actions[0].id #=> String
+    #   resp.scheduled_actions[0].type #=> String, one of "SERVICE_SOFTWARE_UPDATE", "JVM_HEAP_SIZE_TUNING", "JVM_YOUNG_GEN_TUNING"
+    #   resp.scheduled_actions[0].severity #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.scheduled_actions[0].scheduled_time #=> Integer
+    #   resp.scheduled_actions[0].description #=> String
+    #   resp.scheduled_actions[0].scheduled_by #=> String, one of "CUSTOMER", "SYSTEM"
+    #   resp.scheduled_actions[0].status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "FAILED", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.scheduled_actions[0].mandatory #=> Boolean
+    #   resp.scheduled_actions[0].cancellable #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListScheduledActions AWS API Documentation
+    #
+    # @overload list_scheduled_actions(params = {})
+    # @param [Hash] params ({})
+    def list_scheduled_actions(params = {}, options = {})
+      req = build_request(:list_scheduled_actions, params)
+      req.send_request(options)
+    end
+
     # Returns all resource tags for an Amazon OpenSearch Service domain. For
     # more information, see [Tagging Amazon OpenSearch Service domains][1].
     #
@@ -3157,6 +3281,29 @@ module Aws::OpenSearchService
     #   The name of the domain that you want to update to the latest service
     #   software.
     #
+    # @option params [String] :schedule_at
+    #   When to start the service software update.
+    #
+    #   * `NOW` - Immediately schedules the update to happen in the current
+    #     hour if there's capacity available.
+    #
+    #   * `TIMESTAMP` - Lets you specify a custom date and time to apply the
+    #     update. If you specify this value, you must also provide a value for
+    #     `DesiredStartTime`.
+    #
+    #   * `OFF_PEAK_WINDOW` - Marks the update to be picked up during an
+    #     upcoming off-peak window. There's no guarantee that the update will
+    #     happen during the next immediate window. Depending on capacity, it
+    #     might happen in subsequent days.
+    #
+    #   Default: `NOW` if you don't specify a value for `DesiredStartTime`,
+    #   and `TIMESTAMP` if you do.
+    #
+    # @option params [Integer] :desired_start_time
+    #   The Epoch timestamp when you want the service software update to
+    #   start. You only need to specify this parameter if you set `ScheduleAt`
+    #   to `TIMESTAMP`.
+    #
     # @return [Types::StartServiceSoftwareUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartServiceSoftwareUpdateResponse#service_software_options #service_software_options} => Types::ServiceSoftwareOptions
@@ -3165,6 +3312,8 @@ module Aws::OpenSearchService
     #
     #   resp = client.start_service_software_update({
     #     domain_name: "DomainName", # required
+    #     schedule_at: "NOW", # accepts NOW, TIMESTAMP, OFF_PEAK_WINDOW
+    #     desired_start_time: 1,
     #   })
     #
     # @example Response structure
@@ -3256,7 +3405,7 @@ module Aws::OpenSearchService
     #   string.
     #
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
-    #   Options to publish OpenSearch lots to Amazon CloudWatch Logs.
+    #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
     #
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
     #   Encryption at rest options for the domain.
@@ -3266,7 +3415,7 @@ module Aws::OpenSearchService
     #   HTTPS for all traffic.
     #
     # @option params [Types::NodeToNodeEncryptionOptions] :node_to_node_encryption_options
-    #   Node-To-Node Encryption options for the domain.
+    #   Node-to-node encryption options for the domain.
     #
     # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
     #   Options for fine-grained access control.
@@ -3292,6 +3441,12 @@ module Aws::OpenSearchService
     #
     #
     #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
+    #
+    # @option params [Types::OffPeakWindowOptions] :off_peak_window_options
+    #   Off-peak window options for the domain.
+    #
+    # @option params [Types::SoftwareUpdateOptions] :software_update_options
+    #   Service software update options for the domain.
     #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3399,9 +3554,22 @@ module Aws::OpenSearchService
     #           cron_expression_for_recurrence: "String",
     #         },
     #       ],
+    #       use_off_peak_window: false,
     #     },
     #     dry_run: false,
     #     dry_run_mode: "Basic", # accepts Basic, Verbose
+    #     off_peak_window_options: {
+    #       enabled: false,
+    #       off_peak_window: {
+    #         window_start_time: {
+    #           hours: 1, # required
+    #           minutes: 1, # required
+    #         },
+    #       },
+    #     },
+    #     software_update_options: {
+    #       auto_software_update_enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3531,6 +3699,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.auto_tune_options.options.maintenance_schedules[0].duration.value #=> Integer
     #   resp.domain_config.auto_tune_options.options.maintenance_schedules[0].duration.unit #=> String, one of "HOURS"
     #   resp.domain_config.auto_tune_options.options.maintenance_schedules[0].cron_expression_for_recurrence #=> String
+    #   resp.domain_config.auto_tune_options.options.use_off_peak_window #=> Boolean
     #   resp.domain_config.auto_tune_options.status.creation_date #=> Time
     #   resp.domain_config.auto_tune_options.status.update_date #=> Time
     #   resp.domain_config.auto_tune_options.status.update_version #=> Integer
@@ -3539,6 +3708,20 @@ module Aws::OpenSearchService
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.change_progress_details.change_id #=> String
     #   resp.domain_config.change_progress_details.message #=> String
+    #   resp.domain_config.off_peak_window_options.options.enabled #=> Boolean
+    #   resp.domain_config.off_peak_window_options.options.off_peak_window.window_start_time.hours #=> Integer
+    #   resp.domain_config.off_peak_window_options.options.off_peak_window.window_start_time.minutes #=> Integer
+    #   resp.domain_config.off_peak_window_options.status.creation_date #=> Time
+    #   resp.domain_config.off_peak_window_options.status.update_date #=> Time
+    #   resp.domain_config.off_peak_window_options.status.update_version #=> Integer
+    #   resp.domain_config.off_peak_window_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.off_peak_window_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.software_update_options.options.auto_software_update_enabled #=> Boolean
+    #   resp.domain_config.software_update_options.status.creation_date #=> Time
+    #   resp.domain_config.software_update_options.status.update_date #=> Time
+    #   resp.domain_config.software_update_options.status.update_version #=> Integer
+    #   resp.domain_config.software_update_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.software_update_options.status.pending_deletion #=> Boolean
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #   resp.dry_run_progress_status.dry_run_id #=> String
@@ -3614,6 +3797,90 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def update_package(params = {}, options = {})
       req = build_request(:update_package, params)
+      req.send_request(options)
+    end
+
+    # Reschedules a planned domain configuration change for a later time.
+    # This change can be a scheduled [service software update][1] or a
+    # [blue/green Auto-Tune enhancement][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
+    # [2]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain to reschedule an action for.
+    #
+    # @option params [required, String] :action_id
+    #   The unique identifier of the action to reschedule. To retrieve this
+    #   ID, send a [ListScheduledActions][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html
+    #
+    # @option params [required, String] :action_type
+    #   The type of action to reschedule. Can be one of
+    #   `SERVICE_SOFTWARE_UPDATE`, `JVM_HEAP_SIZE_TUNING`, or
+    #   `JVM_YOUNG_GEN_TUNING`. To retrieve this value, send a
+    #   [ListScheduledActions][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html
+    #
+    # @option params [required, String] :schedule_at
+    #   When to schedule the action.
+    #
+    #   * `NOW` - Immediately schedules the update to happen in the current
+    #     hour if there's capacity available.
+    #
+    #   * `TIMESTAMP` - Lets you specify a custom date and time to apply the
+    #     update. If you specify this value, you must also provide a value for
+    #     `DesiredStartTime`.
+    #
+    #   * `OFF_PEAK_WINDOW` - Marks the action to be picked up during an
+    #     upcoming off-peak window. There's no guarantee that the change will
+    #     be implemented during the next immediate window. Depending on
+    #     capacity, it might happen in subsequent days.
+    #
+    # @option params [Integer] :desired_start_time
+    #   The time to implement the change, in Coordinated Universal Time (UTC).
+    #   Only specify this parameter if you set `ScheduleAt` to `TIMESTAMP`.
+    #
+    # @return [Types::UpdateScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateScheduledActionResponse#scheduled_action #scheduled_action} => Types::ScheduledAction
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scheduled_action({
+    #     domain_name: "DomainName", # required
+    #     action_id: "String", # required
+    #     action_type: "SERVICE_SOFTWARE_UPDATE", # required, accepts SERVICE_SOFTWARE_UPDATE, JVM_HEAP_SIZE_TUNING, JVM_YOUNG_GEN_TUNING
+    #     schedule_at: "NOW", # required, accepts NOW, TIMESTAMP, OFF_PEAK_WINDOW
+    #     desired_start_time: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_action.id #=> String
+    #   resp.scheduled_action.type #=> String, one of "SERVICE_SOFTWARE_UPDATE", "JVM_HEAP_SIZE_TUNING", "JVM_YOUNG_GEN_TUNING"
+    #   resp.scheduled_action.severity #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.scheduled_action.scheduled_time #=> Integer
+    #   resp.scheduled_action.description #=> String
+    #   resp.scheduled_action.scheduled_by #=> String, one of "CUSTOMER", "SYSTEM"
+    #   resp.scheduled_action.status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "FAILED", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
+    #   resp.scheduled_action.mandatory #=> Boolean
+    #   resp.scheduled_action.cancellable #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateScheduledAction AWS API Documentation
+    #
+    # @overload update_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def update_scheduled_action(params = {}, options = {})
+      req = build_request(:update_scheduled_action, params)
       req.send_request(options)
     end
 
@@ -3738,7 +4005,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

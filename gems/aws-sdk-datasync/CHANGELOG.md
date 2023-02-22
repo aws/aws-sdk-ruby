@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-02-22)
+------------------
+
+* Feature - AWS DataSync has relaxed the minimum length constraint of AccessKey for Object Storage locations to 1.
+
 1.54.0 (2023-02-14)
 ------------------
 

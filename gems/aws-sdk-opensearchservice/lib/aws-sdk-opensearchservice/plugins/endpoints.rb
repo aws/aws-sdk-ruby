@@ -128,6 +128,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::ListInstanceTypeDetails.build(context)
           when :list_packages_for_domain
             Aws::OpenSearchService::Endpoints::ListPackagesForDomain.build(context)
+          when :list_scheduled_actions
+            Aws::OpenSearchService::Endpoints::ListScheduledActions.build(context)
           when :list_tags
             Aws::OpenSearchService::Endpoints::ListTags.build(context)
           when :list_versions
@@ -152,6 +154,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::UpdateDomainConfig.build(context)
           when :update_package
             Aws::OpenSearchService::Endpoints::UpdatePackage.build(context)
+          when :update_scheduled_action
+            Aws::OpenSearchService::Endpoints::UpdateScheduledAction.build(context)
           when :update_vpc_endpoint
             Aws::OpenSearchService::Endpoints::UpdateVpcEndpoint.build(context)
           when :upgrade_domain

@@ -666,6 +666,7 @@ module Aws::ChimeSDKVoice
     ListVoiceConnectorsResponse.struct_class = Types::ListVoiceConnectorsResponse
 
     LoggingConfiguration.add_member(:enable_sip_logs, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableSIPLogs"))
+    LoggingConfiguration.add_member(:enable_media_metric_logs, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableMediaMetricLogs"))
     LoggingConfiguration.struct_class = Types::LoggingConfiguration
 
     NonEmptyStringList.member = Shapes::ShapeRef.new(shape: String)

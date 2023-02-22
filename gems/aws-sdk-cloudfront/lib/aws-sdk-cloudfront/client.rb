@@ -669,10 +669,10 @@ module Aws::CloudFront
     #   want objects to stay in the CloudFront cache.
     #
     # The headers, cookies, and query strings that are included in the cache
-    # key are automatically included in requests that CloudFront sends to
-    # the origin. CloudFront sends a request when it can't find an object
-    # in its cache that matches the request's cache key. If you want to
-    # send values to the origin but *not* include them in the cache key, use
+    # key are also included in requests that CloudFront sends to the origin.
+    # CloudFront sends a request when it can't find an object in its cache
+    # that matches the request's cache key. If you want to send values to
+    # the origin but *not* include them in the cache key, use
     # `OriginRequestPolicy`.
     #
     # For more information about cache policies, see [Controlling the cache
@@ -2290,21 +2290,21 @@ module Aws::CloudFront
     #       comment: "string",
     #       name: "string", # required
     #       headers_config: { # required
-    #         header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront
+    #         header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront, allExcept
     #         headers: {
     #           quantity: 1, # required
     #           items: ["string"],
     #         },
     #       },
     #       cookies_config: { # required
-    #         cookie_behavior: "none", # required, accepts none, whitelist, all
+    #         cookie_behavior: "none", # required, accepts none, whitelist, all, allExcept
     #         cookies: {
     #           quantity: 1, # required
     #           items: ["string"],
     #         },
     #       },
     #       query_strings_config: { # required
-    #         query_string_behavior: "none", # required, accepts none, whitelist, all
+    #         query_string_behavior: "none", # required, accepts none, whitelist, all, allExcept
     #         query_strings: {
     #           quantity: 1, # required
     #           items: ["string"],
@@ -2319,15 +2319,15 @@ module Aws::CloudFront
     #   resp.origin_request_policy.last_modified_time #=> Time
     #   resp.origin_request_policy.origin_request_policy_config.comment #=> String
     #   resp.origin_request_policy.origin_request_policy_config.name #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items[0] #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
@@ -4549,15 +4549,15 @@ module Aws::CloudFront
     #   resp.origin_request_policy.last_modified_time #=> Time
     #   resp.origin_request_policy.origin_request_policy_config.comment #=> String
     #   resp.origin_request_policy.origin_request_policy_config.name #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items[0] #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
@@ -4604,15 +4604,15 @@ module Aws::CloudFront
     #
     #   resp.origin_request_policy_config.comment #=> String
     #   resp.origin_request_policy_config.name #=> String
-    #   resp.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront", "allExcept"
     #   resp.origin_request_policy_config.headers_config.headers.quantity #=> Integer
     #   resp.origin_request_policy_config.headers_config.headers.items #=> Array
     #   resp.origin_request_policy_config.headers_config.headers.items[0] #=> String
-    #   resp.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
     #   resp.origin_request_policy_config.cookies_config.cookies.items #=> Array
     #   resp.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
-    #   resp.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
     #   resp.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
     #   resp.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
@@ -6551,15 +6551,15 @@ module Aws::CloudFront
     #   resp.origin_request_policy_list.items[0].origin_request_policy.last_modified_time #=> Time
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.comment #=> String
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.name #=> String
-    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront", "allExcept"
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.headers.quantity #=> Integer
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.headers.items #=> Array
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.headers_config.headers.items[0] #=> String
-    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookies.items #=> Array
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
-    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
@@ -8408,21 +8408,21 @@ module Aws::CloudFront
     #       comment: "string",
     #       name: "string", # required
     #       headers_config: { # required
-    #         header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront
+    #         header_behavior: "none", # required, accepts none, whitelist, allViewer, allViewerAndWhitelistCloudFront, allExcept
     #         headers: {
     #           quantity: 1, # required
     #           items: ["string"],
     #         },
     #       },
     #       cookies_config: { # required
-    #         cookie_behavior: "none", # required, accepts none, whitelist, all
+    #         cookie_behavior: "none", # required, accepts none, whitelist, all, allExcept
     #         cookies: {
     #           quantity: 1, # required
     #           items: ["string"],
     #         },
     #       },
     #       query_strings_config: { # required
-    #         query_string_behavior: "none", # required, accepts none, whitelist, all
+    #         query_string_behavior: "none", # required, accepts none, whitelist, all, allExcept
     #         query_strings: {
     #           quantity: 1, # required
     #           items: ["string"],
@@ -8439,15 +8439,15 @@ module Aws::CloudFront
     #   resp.origin_request_policy.last_modified_time #=> Time
     #   resp.origin_request_policy.origin_request_policy_config.comment #=> String
     #   resp.origin_request_policy.origin_request_policy_config.name #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront"
+    #   resp.origin_request_policy.origin_request_policy_config.headers_config.header_behavior #=> String, one of "none", "whitelist", "allViewer", "allViewerAndWhitelistCloudFront", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.headers_config.headers.items[0] #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookie_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.cookies_config.cookies.items[0] #=> String
-    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all"
+    #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_string_behavior #=> String, one of "none", "whitelist", "all", "allExcept"
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.quantity #=> Integer
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
@@ -8876,7 +8876,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.75.2'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
