@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2023-02-23)
+------------------
+
+* Feature - You can now associate an AWS WAF v2 web ACL with an AWS App Runner service.
+
 1.49.0 (2023-02-16)
 ------------------
 

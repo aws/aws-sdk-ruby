@@ -43,14 +43,6 @@ module Aws::WAFV2
     #   Amazon CloudFront distributions.
     #
     #    </note>
-    #
-    #   <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1,
-    #   it's possible to configure response inspection through the APIs,
-    #   but ATP response inspection will not be enabled. You can only use
-    #   the response inspection capabilities of the ATP managed rule group
-    #   in web ACLs that protect CloudFront distributions.
-    #
-    #    </note>
     #   @return [Types::ResponseInspection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesATPRuleSet AWS API Documentation
@@ -202,6 +194,10 @@ module Aws::WAFV2
     #
     #   * For an Amazon Cognito user pool:
     #     `arn:aws:cognito-idp:region:account-id:userpool/user-pool-id `
+    #
+    #   * For an App Runner service:
+    #     `arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+    #     `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AssociateWebACLRequest AWS API Documentation
@@ -600,7 +596,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -785,7 +782,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -891,7 +889,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -951,7 +950,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1061,7 +1061,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1411,7 +1412,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1500,7 +1502,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1553,7 +1556,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1606,7 +1610,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1664,7 +1669,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1784,6 +1790,10 @@ module Aws::WAFV2
     #
     #   * For an Amazon Cognito user pool:
     #     `arn:aws:cognito-idp:region:account-id:userpool/user-pool-id `
+    #
+    #   * For an App Runner service:
+    #     `arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+    #     `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisassociateWebACLRequest AWS API Documentation
@@ -2233,7 +2243,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2321,7 +2332,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2433,7 +2445,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2506,7 +2519,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2566,7 +2580,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2636,7 +2651,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2726,6 +2742,10 @@ module Aws::WAFV2
     #
     #   * For an Amazon Cognito user pool:
     #     `arn:aws:cognito-idp:region:account-id:userpool/user-pool-id `
+    #
+    #   * For an App Runner service:
+    #     `arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+    #     `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLForResourceRequest AWS API Documentation
@@ -2758,7 +2778,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3516,7 +3537,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3585,7 +3607,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3645,7 +3668,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3707,7 +3731,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3767,7 +3792,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3878,7 +3904,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3941,8 +3968,8 @@ module Aws::WAFV2
     # @!attribute [rw] resource_type
     #   Used for web ACLs that are scoped for regional applications. A
     #   regional application can be an Application Load Balancer (ALB), an
-    #   Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-    #   Cognito user pool.
+    #   Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon
+    #   Cognito user pool, or an App Runner service.
     #
     #   <note markdown="1"> If you don't provide a resource type, the call uses the resource
     #   type `APPLICATION_LOAD_BALANCER`.
@@ -3978,7 +4005,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4088,7 +4116,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4203,7 +4232,7 @@ module Aws::WAFV2
     # @!attribute [rw] redacted_fields
     #   The parts of the request that you want to keep out of the logs. For
     #   example, if you redact the `SingleHeader` field, the `HEADER` field
-    #   in the logs will be `xxx`.
+    #   in the logs will be `REDACTED`.
     #
     #   <note markdown="1"> You can specify only the following fields for redaction: `UriPath`,
     #   `QueryString`, `SingleHeader`, `Method`, and `JsonBody`.
@@ -4321,14 +4350,6 @@ module Aws::WAFV2
     #   provide login request information to the rule group. For web ACLs
     #   that protect CloudFront distributions, use this to also provide the
     #   information about how your distribution responds to login requests.
-    #
-    #   <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1,
-    #   it's possible to configure response inspection through the APIs,
-    #   but ATP response inspection will not be enabled. You can only use
-    #   the response inspection capabilities of the ATP managed rule group
-    #   in web ACLs that protect CloudFront distributions.
-    #
-    #    </note>
     #
     #   This configuration replaces the individual configuration fields in
     #   `ManagedRuleGroupConfig` and provides additional feature
@@ -4939,7 +4960,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5470,14 +5492,6 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
-    # possible to configure response inspection through the APIs, but ATP
-    # response inspection will not be enabled. You can only use the response
-    # inspection capabilities of the ATP managed rule group in web ACLs that
-    # protect CloudFront distributions.
-    #
-    #  </note>
-    #
     # This is part of the `AWSManagedRulesATPRuleSet` configuration in
     # `ManagedRuleGroupConfig`.
     #
@@ -5495,11 +5509,13 @@ module Aws::WAFV2
     #   @return [Types::ResponseInspectionHeader]
     #
     # @!attribute [rw] body_contains
-    #   Configures inspection of the response body.
+    #   Configures inspection of the response body. WAF can inspect the
+    #   first 65,536 bytes (64 KB) of the response body.
     #   @return [Types::ResponseInspectionBodyContains]
     #
     # @!attribute [rw] json
-    #   Configures inspection of the response JSON.
+    #   Configures inspection of the response JSON. WAF can inspect the
+    #   first 65,536 bytes (64 KB) of the response JSON.
     #   @return [Types::ResponseInspectionJson]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspection AWS API Documentation
@@ -5513,19 +5529,12 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Configures inspection of the response body. This is part of the
+    # Configures inspection of the response body. WAF can inspect the first
+    # 65,536 bytes (64 KB) of the response body. This is part of the
     # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
     #
     # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
     # CloudFront distributions.
-    #
-    #  </note>
-    #
-    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
-    # possible to configure response inspection through the APIs, but ATP
-    # response inspection will not be enabled. You can only use the response
-    # inspection capabilities of the ATP managed rule group in web ACLs that
-    # protect CloudFront distributions.
     #
     #  </note>
     #
@@ -5565,14 +5574,6 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
-    # possible to configure response inspection through the APIs, but ATP
-    # response inspection will not be enabled. You can only use the response
-    # inspection capabilities of the ATP managed rule group in web ACLs that
-    # protect CloudFront distributions.
-    #
-    #  </note>
-    #
     # @!attribute [rw] name
     #   The name of the header to match against. The name must be an exact
     #   match, including case.
@@ -5609,19 +5610,12 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Configures inspection of the response JSON. This is part of the
+    # Configures inspection of the response JSON. WAF can inspect the first
+    # 65,536 bytes (64 KB) of the response JSON. This is part of the
     # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
     #
     # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
     # CloudFront distributions.
-    #
-    #  </note>
-    #
-    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
-    # possible to configure response inspection through the APIs, but ATP
-    # response inspection will not be enabled. You can only use the response
-    # inspection capabilities of the ATP managed rule group in web ACLs that
-    # protect CloudFront distributions.
     #
     #  </note>
     #
@@ -5665,14 +5659,6 @@ module Aws::WAFV2
     #
     # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
     # CloudFront distributions.
-    #
-    #  </note>
-    #
-    # <note markdown="1"> For regional web ACLs in Region US East (N. Virginia) us-east-1, it's
-    # possible to configure response inspection through the APIs, but ATP
-    # response inspection will not be enabled. You can only use the response
-    # inspection capabilities of the ATP managed rule group in web ACLs that
-    # protect CloudFront distributions.
     #
     #  </note>
     #
@@ -6907,7 +6893,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -7025,7 +7012,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -7123,7 +7111,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -7195,7 +7184,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -7299,7 +7289,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
     #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
-    #   AppSync GraphQL API, or an Amazon Cognito user pool.
+    #   AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
+    #   service.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -7880,7 +7871,7 @@ module Aws::WAFV2
     # can associate a web ACL with one or more Amazon Web Services resources
     # to protect. The resources can be an Amazon CloudFront distribution, an
     # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
-    # GraphQL API, or an Amazon Cognito user pool.
+    # GraphQL API, Amazon Cognito user pool, or an App Runner service.
     #
     # @!attribute [rw] name
     #   The name of the web ACL. You cannot change the name of a web ACL

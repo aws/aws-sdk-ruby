@@ -402,7 +402,7 @@ module Aws::Macie2
     end
 
     # Provides information about the number of S3 buckets that are publicly
-    # accessible based on a combination of permissions settings for each
+    # accessible due to a combination of permissions settings for each
     # bucket.
     #
     # @!attribute [rw] publicly_accessible
@@ -462,7 +462,12 @@ module Aws::Macie2
     end
 
     # Provides information about the number of S3 buckets that are or
-    # aren't shared with other Amazon Web Services accounts.
+    # aren't shared with other Amazon Web Services accounts, Amazon
+    # CloudFront origin access identities (OAIs), or CloudFront origin
+    # access controls (OACs). In this data, an *Amazon Macie organization*
+    # is defined as a set of Macie accounts that are centrally managed as a
+    # group of related accounts through Organizations or by Macie
+    # invitation.
     #
     # @!attribute [rw] external
     #   @return [Integer]
@@ -584,13 +589,22 @@ module Aws::Macie2
     end
 
     # Provides statistical data and other information about an S3 bucket
-    # that Amazon Macie monitors and analyzes for your account. If an error
-    # occurs when Macie attempts to retrieve and process metadata from
-    # Amazon S3 for the bucket and the bucket's objects, the value for the
-    # versioning property is false and the value for most other properties
-    # is null. Key exceptions are accountId, bucketArn, bucketCreatedAt,
-    # bucketName, lastUpdated, and region. To identify the cause of the
-    # error, refer to the errorCode and errorMessage values.
+    # that Amazon Macie monitors and analyzes for your account. By default,
+    # object count and storage size values include data for object parts
+    # that are the result of incomplete multipart uploads. For more
+    # information, see [How Macie monitors Amazon S3 data security][1] in
+    # the *Amazon Macie User Guide*.
+    #
+    # If an error occurs when Macie attempts to retrieve and process
+    # metadata from Amazon S3 for the bucket or the bucket's objects, the
+    # value for the versioning property is false and the value for most
+    # other properties is null. Key exceptions are accountId, bucketArn,
+    # bucketCreatedAt, bucketName, lastUpdated, and region. To identify the
+    # cause of the error, refer to the errorCode and errorMessage values.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -2599,15 +2613,22 @@ module Aws::Macie2
 
     # Provides the results of a query that retrieved aggregated statistical
     # data for all the S3 buckets that Amazon Macie monitors and analyzes
-    # for your account.
+    # for your account. By default, object count and storage size values
+    # include data for object parts that are the result of incomplete
+    # multipart uploads. For more information, see [How Macie monitors
+    # Amazon S3 data security][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html
     #
     # @!attribute [rw] bucket_count
     #   @return [Integer]
     #
     # @!attribute [rw] bucket_count_by_effective_permission
     #   Provides information about the number of S3 buckets that are
-    #   publicly accessible based on a combination of permissions settings
-    #   for each bucket.
+    #   publicly accessible due to a combination of permissions settings for
+    #   each bucket.
     #   @return [Types::BucketCountByEffectivePermission]
     #
     # @!attribute [rw] bucket_count_by_encryption_type
@@ -2630,7 +2651,12 @@ module Aws::Macie2
     #
     # @!attribute [rw] bucket_count_by_shared_access_type
     #   Provides information about the number of S3 buckets that are or
-    #   aren't shared with other Amazon Web Services accounts.
+    #   aren't shared with other Amazon Web Services accounts, Amazon
+    #   CloudFront origin access identities (OAIs), or CloudFront origin
+    #   access controls (OACs). In this data, an *Amazon Macie organization*
+    #   is defined as a set of Macie accounts that are centrally managed as
+    #   a group of related accounts through Organizations or by Macie
+    #   invitation.
     #   @return [Types::BucketCountBySharedAccessType]
     #
     # @!attribute [rw] bucket_statistics_by_sensitivity
@@ -4454,12 +4480,21 @@ module Aws::Macie2
     end
 
     # Provides statistical data and other information about an S3 bucket
-    # that Amazon Macie monitors and analyzes for your account. If an error
-    # occurs when Macie attempts to retrieve and process information about
-    # the bucket or the bucket's objects, the value for most of these
-    # properties is null. Key exceptions are accountId and bucketName. To
-    # identify the cause of the error, refer to the errorCode and
-    # errorMessage values.
+    # that Amazon Macie monitors and analyzes for your account. By default,
+    # object count and storage size values include data for object parts
+    # that are the result of incomplete multipart uploads. For more
+    # information, see [How Macie monitors Amazon S3 data security][1] in
+    # the *Amazon Macie User Guide*.
+    #
+    # If an error occurs when Macie attempts to retrieve and process
+    # information about the bucket or the bucket's objects, the value for
+    # most of these properties is null. Key exceptions are accountId and
+    # bucketName. To identify the cause of the error, refer to the errorCode
+    # and errorMessage values.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -4559,12 +4594,21 @@ module Aws::Macie2
     #
     # @!attribute [rw] matching_bucket
     #   Provides statistical data and other information about an S3 bucket
-    #   that Amazon Macie monitors and analyzes for your account. If an
-    #   error occurs when Macie attempts to retrieve and process information
-    #   about the bucket or the bucket's objects, the value for most of
-    #   these properties is null. Key exceptions are accountId and
+    #   that Amazon Macie monitors and analyzes for your account. By
+    #   default, object count and storage size values include data for
+    #   object parts that are the result of incomplete multipart uploads.
+    #   For more information, see [How Macie monitors Amazon S3 data
+    #   security][1] in the *Amazon Macie User Guide*.
+    #
+    #   If an error occurs when Macie attempts to retrieve and process
+    #   information about the bucket or the bucket's objects, the value for
+    #   most of these properties is null. Key exceptions are accountId and
     #   bucketName. To identify the cause of the error, refer to the
     #   errorCode and errorMessage values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html
     #   @return [Types::MatchingBucket]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/MatchingResource AWS API Documentation
@@ -4742,13 +4786,15 @@ module Aws::Macie2
     # Portable Document Format file.
     #
     # @!attribute [rw] line_range
-    #   Specifies the location of an occurrence of sensitive data in a
-    #   non-binary text file, such as an HTML, TXT, or XML file.
+    #   Specifies the location of an occurrence of sensitive data in an
+    #   email message or a non-binary text file such as an HTML, TXT, or XML
+    #   file.
     #   @return [Types::Range]
     #
     # @!attribute [rw] offset_range
-    #   Specifies the location of an occurrence of sensitive data in a
-    #   non-binary text file, such as an HTML, TXT, or XML file.
+    #   Specifies the location of an occurrence of sensitive data in an
+    #   email message or a non-binary text file such as an HTML, TXT, or XML
+    #   file.
     #   @return [Types::Range]
     #
     # @!attribute [rw] page_number
@@ -4851,8 +4897,8 @@ module Aws::Macie2
     #
     class PutFindingsPublicationConfigurationResponse < Aws::EmptyStructure; end
 
-    # Specifies the location of an occurrence of sensitive data in a
-    # non-binary text file, such as an HTML, TXT, or XML file.
+    # Specifies the location of an occurrence of sensitive data in an email
+    # message or a non-binary text file such as an HTML, TXT, or XML file.
     #
     # @!attribute [rw] end
     #   @return [Integer]

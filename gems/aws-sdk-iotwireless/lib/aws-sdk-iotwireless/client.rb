@@ -758,6 +758,23 @@ module Aws::IoTWireless
     #   The tag to attach to the specified resource. Tags are metadata that
     #   you can use to manage a resource.
     #
+    # @option params [Integer] :redundancy_percent
+    #   The percentage of added redundant fragments. For example, if firmware
+    #   file is 100 bytes and fragment size is 10 bytes, with
+    #   `RedundancyPercent` set to 50(%), the final number of encoded
+    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #
+    # @option params [Integer] :fragment_size_bytes
+    #   The size of each fragment in bytes. Currently only supported in fuota
+    #   tasks with multicast groups.
+    #
+    # @option params [Integer] :fragment_interval_ms
+    #   The interval of sending fragments in milliseconds. Currently the
+    #   interval will be rounded to the nearest second. Note that this
+    #   interval only controls the timing when the cloud sends the fragments
+    #   down. The actual delay of receiving fragments at device side depends
+    #   on the device's class and the communication delay with the cloud.
+    #
     # @return [Types::CreateFuotaTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFuotaTaskResponse#arn #arn} => String
@@ -780,6 +797,9 @@ module Aws::IoTWireless
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     redundancy_percent: 1,
+    #     fragment_size_bytes: 1,
+    #     fragment_interval_ms: 1,
     #   })
     #
     # @example Response structure
@@ -1794,6 +1814,9 @@ module Aws::IoTWireless
     #   * {Types::GetFuotaTaskResponse#firmware_update_image #firmware_update_image} => String
     #   * {Types::GetFuotaTaskResponse#firmware_update_role #firmware_update_role} => String
     #   * {Types::GetFuotaTaskResponse#created_at #created_at} => Time
+    #   * {Types::GetFuotaTaskResponse#redundancy_percent #redundancy_percent} => Integer
+    #   * {Types::GetFuotaTaskResponse#fragment_size_bytes #fragment_size_bytes} => Integer
+    #   * {Types::GetFuotaTaskResponse#fragment_interval_ms #fragment_interval_ms} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1813,6 +1836,9 @@ module Aws::IoTWireless
     #   resp.firmware_update_image #=> String
     #   resp.firmware_update_role #=> String
     #   resp.created_at #=> Time
+    #   resp.redundancy_percent #=> Integer
+    #   resp.fragment_size_bytes #=> Integer
+    #   resp.fragment_interval_ms #=> Integer
     #
     # @overload get_fuota_task(params = {})
     # @param [Hash] params ({})
@@ -2118,7 +2144,7 @@ module Aws::IoTWireless
     #
     # @option params [Time,DateTime,Date,Integer,String] :timestamp
     #   Optional information that specifies the time when the position
-    #   information will be resolved. It uses the UNIX timestamp format. If
+    #   information will be resolved. It uses the Unix timestamp format. If
     #   not specified, the time at which the request was received will be
     #   used.
     #
@@ -2367,7 +2393,7 @@ module Aws::IoTWireless
     end
 
     # Get the position information for a given wireless device or a wireless
-    # gateway resource. The postion information uses the [ World Geodetic
+    # gateway resource. The position information uses the [ World Geodetic
     # System (WGS84)][1].
     #
     #
@@ -2376,8 +2402,8 @@ module Aws::IoTWireless
     #
     # @option params [required, String] :resource_identifier
     #   The identifier of the resource for which position information is
-    #   retrieved. It can be the wireless device ID or the wireless gateway ID
-    #   depending on the resource type.
+    #   retrieved. It can be the wireless device ID or the wireless gateway
+    #   ID, depending on the resource type.
     #
     # @option params [required, String] :resource_type
     #   The type of resource for which position information is retrieved,
@@ -4062,6 +4088,23 @@ module Aws::IoTWireless
     # @option params [String] :firmware_update_role
     #   The firmware update role that is to be used with a FUOTA task.
     #
+    # @option params [Integer] :redundancy_percent
+    #   The percentage of added redundant fragments. For example, if firmware
+    #   file is 100 bytes and fragment size is 10 bytes, with
+    #   `RedundancyPercent` set to 50(%), the final number of encoded
+    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #
+    # @option params [Integer] :fragment_size_bytes
+    #   The size of each fragment in bytes. Currently only supported in fuota
+    #   tasks with multicast groups.
+    #
+    # @option params [Integer] :fragment_interval_ms
+    #   The interval of sending fragments in milliseconds. Currently the
+    #   interval will be rounded to the nearest second. Note that this
+    #   interval only controls the timing when the cloud sends the fragments
+    #   down. The actual delay of receiving fragments at device side depends
+    #   on the device's class and the communication delay with the cloud.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4075,6 +4118,9 @@ module Aws::IoTWireless
     #     },
     #     firmware_update_image: "FirmwareUpdateImage",
     #     firmware_update_role: "FirmwareUpdateRole",
+    #     redundancy_percent: 1,
+    #     fragment_size_bytes: 1,
+    #     fragment_interval_ms: 1,
     #   })
     #
     # @overload update_fuota_task(params = {})
@@ -4371,7 +4417,7 @@ module Aws::IoTWireless
     end
 
     # Update the position information of a given wireless device or a
-    # wireless gateway resource. The postion coordinates are based on the [
+    # wireless gateway resource. The position coordinates are based on the [
     # World Geodetic System (WGS84)][1].
     #
     #
@@ -4380,7 +4426,7 @@ module Aws::IoTWireless
     #
     # @option params [required, String] :resource_identifier
     #   The identifier of the resource for which position information is
-    #   updated. It can be the wireless device ID or the wireless gateway ID
+    #   updated. It can be the wireless device ID or the wireless gateway ID,
     #   depending on the resource type.
     #
     # @option params [required, String] :resource_type
@@ -4530,7 +4576,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

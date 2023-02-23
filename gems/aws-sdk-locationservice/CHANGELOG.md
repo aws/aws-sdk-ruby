@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2023-02-23)
+------------------
+
+* Feature - This release adds support for using Maps APIs with an API Key in addition to AWS Cognito. This includes support for adding, listing, updating and deleting API Keys.
+
 1.28.0 (2023-01-18)
 ------------------
 

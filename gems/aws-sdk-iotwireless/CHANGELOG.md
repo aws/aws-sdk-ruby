@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-02-23)
+------------------
+
+* Feature - In this release, we add additional capabilities for the FUOTA which allows user to configure the fragment size, the sending interval and the redundancy ratio of the FUOTA tasks
+
 1.29.0 (2023-01-18)
 ------------------
 

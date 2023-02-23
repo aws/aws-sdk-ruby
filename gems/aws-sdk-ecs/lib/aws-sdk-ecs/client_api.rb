@@ -96,6 +96,8 @@ module Aws::ECS
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DeleteServiceRequest = Shapes::StructureShape.new(name: 'DeleteServiceRequest')
     DeleteServiceResponse = Shapes::StructureShape.new(name: 'DeleteServiceResponse')
+    DeleteTaskDefinitionsRequest = Shapes::StructureShape.new(name: 'DeleteTaskDefinitionsRequest')
+    DeleteTaskDefinitionsResponse = Shapes::StructureShape.new(name: 'DeleteTaskDefinitionsResponse')
     DeleteTaskSetRequest = Shapes::StructureShape.new(name: 'DeleteTaskSetRequest')
     DeleteTaskSetResponse = Shapes::StructureShape.new(name: 'DeleteTaskSetResponse')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
@@ -335,6 +337,7 @@ module Aws::ECS
     TaskDefinitionFamilyStatus = Shapes::StringShape.new(name: 'TaskDefinitionFamilyStatus')
     TaskDefinitionField = Shapes::StringShape.new(name: 'TaskDefinitionField')
     TaskDefinitionFieldList = Shapes::ListShape.new(name: 'TaskDefinitionFieldList')
+    TaskDefinitionList = Shapes::ListShape.new(name: 'TaskDefinitionList')
     TaskDefinitionPlacementConstraint = Shapes::StructureShape.new(name: 'TaskDefinitionPlacementConstraint')
     TaskDefinitionPlacementConstraintType = Shapes::StringShape.new(name: 'TaskDefinitionPlacementConstraintType')
     TaskDefinitionPlacementConstraints = Shapes::ListShape.new(name: 'TaskDefinitionPlacementConstraints')
@@ -718,6 +721,13 @@ module Aws::ECS
 
     DeleteServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     DeleteServiceResponse.struct_class = Types::DeleteServiceResponse
+
+    DeleteTaskDefinitionsRequest.add_member(:task_definitions, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "taskDefinitions"))
+    DeleteTaskDefinitionsRequest.struct_class = Types::DeleteTaskDefinitionsRequest
+
+    DeleteTaskDefinitionsResponse.add_member(:task_definitions, Shapes::ShapeRef.new(shape: TaskDefinitionList, location_name: "taskDefinitions"))
+    DeleteTaskDefinitionsResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
+    DeleteTaskDefinitionsResponse.struct_class = Types::DeleteTaskDefinitionsResponse
 
     DeleteTaskSetRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
     DeleteTaskSetRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
@@ -1620,6 +1630,8 @@ module Aws::ECS
 
     TaskDefinitionFieldList.member = Shapes::ShapeRef.new(shape: TaskDefinitionField)
 
+    TaskDefinitionList.member = Shapes::ShapeRef.new(shape: TaskDefinition)
+
     TaskDefinitionPlacementConstraint.add_member(:type, Shapes::ShapeRef.new(shape: TaskDefinitionPlacementConstraintType, location_name: "type"))
     TaskDefinitionPlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: String, location_name: "expression"))
     TaskDefinitionPlacementConstraint.struct_class = Types::TaskDefinitionPlacementConstraint
@@ -1943,6 +1955,18 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+      end)
+
+      api.add_operation(:delete_task_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTaskDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTaskDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTaskDefinitionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
       api.add_operation(:delete_task_set, Seahorse::Model::Operation.new.tap do |o|

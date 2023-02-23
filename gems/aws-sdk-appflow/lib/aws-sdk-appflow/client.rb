@@ -449,6 +449,7 @@ module Aws::Appflow
     #         salesforce: {
     #           instance_url: "InstanceUrl",
     #           is_sandbox_environment: false,
+    #           use_private_link_for_metadata_and_authorization: false,
     #         },
     #         service_now: {
     #           instance_url: "InstanceUrl", # required
@@ -1329,6 +1330,7 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.redshift.database_name #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.salesforce.instance_url #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.salesforce.is_sandbox_environment #=> Boolean
+    #   resp.connector_profile_details[0].connector_profile_properties.salesforce.use_private_link_for_metadata_and_authorization #=> Boolean
     #   resp.connector_profile_details[0].connector_profile_properties.service_now.instance_url #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.slack.instance_url #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.snowflake.warehouse #=> String
@@ -2264,6 +2266,7 @@ module Aws::Appflow
     #         salesforce: {
     #           instance_url: "InstanceUrl",
     #           is_sandbox_environment: false,
+    #           use_private_link_for_metadata_and_authorization: false,
     #         },
     #         service_now: {
     #           instance_url: "InstanceUrl", # required
@@ -2865,7 +2868,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

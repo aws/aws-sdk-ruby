@@ -76,6 +76,8 @@ module Aws::LocationService
             Aws::LocationService::Endpoints::CalculateRouteMatrix.build(context)
           when :create_geofence_collection
             Aws::LocationService::Endpoints::CreateGeofenceCollection.build(context)
+          when :create_key
+            Aws::LocationService::Endpoints::CreateKey.build(context)
           when :create_map
             Aws::LocationService::Endpoints::CreateMap.build(context)
           when :create_place_index
@@ -86,6 +88,8 @@ module Aws::LocationService
             Aws::LocationService::Endpoints::CreateTracker.build(context)
           when :delete_geofence_collection
             Aws::LocationService::Endpoints::DeleteGeofenceCollection.build(context)
+          when :delete_key
+            Aws::LocationService::Endpoints::DeleteKey.build(context)
           when :delete_map
             Aws::LocationService::Endpoints::DeleteMap.build(context)
           when :delete_place_index
@@ -96,6 +100,8 @@ module Aws::LocationService
             Aws::LocationService::Endpoints::DeleteTracker.build(context)
           when :describe_geofence_collection
             Aws::LocationService::Endpoints::DescribeGeofenceCollection.build(context)
+          when :describe_key
+            Aws::LocationService::Endpoints::DescribeKey.build(context)
           when :describe_map
             Aws::LocationService::Endpoints::DescribeMap.build(context)
           when :describe_place_index
@@ -128,6 +134,8 @@ module Aws::LocationService
             Aws::LocationService::Endpoints::ListGeofenceCollections.build(context)
           when :list_geofences
             Aws::LocationService::Endpoints::ListGeofences.build(context)
+          when :list_keys
+            Aws::LocationService::Endpoints::ListKeys.build(context)
           when :list_maps
             Aws::LocationService::Endpoints::ListMaps.build(context)
           when :list_place_indexes
@@ -154,6 +162,8 @@ module Aws::LocationService
             Aws::LocationService::Endpoints::UntagResource.build(context)
           when :update_geofence_collection
             Aws::LocationService::Endpoints::UpdateGeofenceCollection.build(context)
+          when :update_key
+            Aws::LocationService::Endpoints::UpdateKey.build(context)
           when :update_map
             Aws::LocationService::Endpoints::UpdateMap.build(context)
           when :update_place_index

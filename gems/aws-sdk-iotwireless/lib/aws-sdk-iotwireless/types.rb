@@ -377,7 +377,7 @@ module Aws::IoTWireless
     #   @return [Float]
     #
     # @!attribute [rw] base_lng
-    #   CDMA base station longtitude in degrees.
+    #   CDMA base station longitude in degrees.
     #   @return [Float]
     #
     # @!attribute [rw] cdma_nmr
@@ -648,6 +648,26 @@ module Aws::IoTWireless
     #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] redundancy_percent
+    #   The percentage of added redundant fragments. For example, if
+    #   firmware file is 100 bytes and fragment size is 10 bytes, with
+    #   `RedundancyPercent` set to 50(%), the final number of encoded
+    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_size_bytes
+    #   The size of each fragment in bytes. Currently only supported in
+    #   fuota tasks with multicast groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_interval_ms
+    #   The interval of sending fragments in milliseconds. Currently the
+    #   interval will be rounded to the nearest second. Note that this
+    #   interval only controls the timing when the cloud sends the fragments
+    #   down. The actual delay of receiving fragments at device side depends
+    #   on the device's class and the communication delay with the cloud.
+    #   @return [Integer]
+    #
     class CreateFuotaTaskRequest < Struct.new(
       :name,
       :description,
@@ -655,7 +675,10 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :firmware_update_image,
       :firmware_update_role,
-      :tags)
+      :tags,
+      :redundancy_percent,
+      :fragment_size_bytes,
+      :fragment_interval_ms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1725,6 +1748,26 @@ module Aws::IoTWireless
     #   Created at timestamp for the resource.
     #   @return [Time]
     #
+    # @!attribute [rw] redundancy_percent
+    #   The percentage of added redundant fragments. For example, if
+    #   firmware file is 100 bytes and fragment size is 10 bytes, with
+    #   `RedundancyPercent` set to 50(%), the final number of encoded
+    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_size_bytes
+    #   The size of each fragment in bytes. Currently only supported in
+    #   fuota tasks with multicast groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_interval_ms
+    #   The interval of sending fragments in milliseconds. Currently the
+    #   interval will be rounded to the nearest second. Note that this
+    #   interval only controls the timing when the cloud sends the fragments
+    #   down. The actual delay of receiving fragments at device side depends
+    #   on the device's class and the communication delay with the cloud.
+    #   @return [Integer]
+    #
     class GetFuotaTaskResponse < Struct.new(
       :arn,
       :id,
@@ -1734,7 +1777,10 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :firmware_update_image,
       :firmware_update_role,
-      :created_at)
+      :created_at,
+      :redundancy_percent,
+      :fragment_size_bytes,
+      :fragment_interval_ms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1972,7 +2018,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] timestamp
     #   Optional information that specifies the time when the position
-    #   information will be resolved. It uses the UNIX timestamp format. If
+    #   information will be resolved. It uses the Unix timestamp format. If
     #   not specified, the time at which the request was received will be
     #   used.
     #   @return [Time]
@@ -2144,7 +2190,7 @@ module Aws::IoTWireless
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource for which position information is
     #   retrieved. It can be the wireless device ID or the wireless gateway
-    #   ID depending on the resource type.
+    #   ID, depending on the resource type.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -2603,7 +2649,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] assist_position
     #   Optional assistance position information, specified using latitude
-    #   and longitude values in degrees. The co-ordinates are inside the
+    #   and longitude values in degrees. The coordinates are inside the
     #   WGS84 reference frame.
     #   @return [Array<Float>]
     #
@@ -5339,13 +5385,36 @@ module Aws::IoTWireless
     #   The firmware update role that is to be used with a FUOTA task.
     #   @return [String]
     #
+    # @!attribute [rw] redundancy_percent
+    #   The percentage of added redundant fragments. For example, if
+    #   firmware file is 100 bytes and fragment size is 10 bytes, with
+    #   `RedundancyPercent` set to 50(%), the final number of encoded
+    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_size_bytes
+    #   The size of each fragment in bytes. Currently only supported in
+    #   fuota tasks with multicast groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_interval_ms
+    #   The interval of sending fragments in milliseconds. Currently the
+    #   interval will be rounded to the nearest second. Note that this
+    #   interval only controls the timing when the cloud sends the fragments
+    #   down. The actual delay of receiving fragments at device side depends
+    #   on the device's class and the communication delay with the cloud.
+    #   @return [Integer]
+    #
     class UpdateFuotaTaskRequest < Struct.new(
       :id,
       :name,
       :description,
       :lo_ra_wan,
       :firmware_update_image,
-      :firmware_update_role)
+      :firmware_update_role,
+      :redundancy_percent,
+      :fragment_size_bytes,
+      :fragment_interval_ms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5549,8 +5618,8 @@ module Aws::IoTWireless
 
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource for which position information is
-    #   updated. It can be the wireless device ID or the wireless gateway ID
-    #   depending on the resource type.
+    #   updated. It can be the wireless device ID or the wireless gateway
+    #   ID, depending on the resource type.
     #   @return [String]
     #
     # @!attribute [rw] resource_type

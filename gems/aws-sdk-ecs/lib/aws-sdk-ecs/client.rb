@@ -488,7 +488,7 @@ module Aws::ECS
     # <note markdown="1"> When you call the CreateCluster API operation, Amazon ECS attempts to
     # create the Amazon ECS service-linked role for your account. This is so
     # that it can manage required resources in other Amazon Web Services
-    # services on your behalf. However, if the IAM user that makes the call
+    # services on your behalf. However, if the user that makes the call
     # doesn't have permissions to create the service-linked role, it isn't
     # created. For more information, see [Using service-linked roles for
     # Amazon ECS][1] in the *Amazon Elastic Container Service Developer
@@ -550,32 +550,44 @@ module Aws::ECS
     #   cluster. A capacity provider must be associated with a cluster before
     #   it can be included as part of the default capacity provider strategy
     #   of the cluster or used in a capacity provider strategy when calling
-    #   the CreateService or RunTask actions.
+    #   the [CreateService][1] or [RunTask][2] actions.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
     #   capacity provider must be created but not associated with another
     #   cluster. New Auto Scaling group capacity providers can be created with
-    #   the CreateCapacityProvider API operation.
+    #   the [CreateCapacityProvider][3] API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
     #   available to all accounts and only need to be associated with a
     #   cluster to be used.
     #
-    #   The PutClusterCapacityProviders API operation is used to update the
-    #   list of available capacity providers for a cluster after the cluster
-    #   is created.
+    #   The [PutCapacityProvider][4] API operation is used to update the list
+    #   of available capacity providers for a cluster after the cluster is
+    #   created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProvider.html
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :default_capacity_provider_strategy
     #   The capacity provider strategy to set as the default for the cluster.
     #   After a default capacity provider strategy is set for a cluster, when
-    #   you call the RunTask or CreateService APIs with no capacity provider
-    #   strategy or launch type specified, the default capacity provider
-    #   strategy for the cluster is used.
+    #   you call the [CreateService][1] or [RunTask][2] APIs with no capacity
+    #   provider strategy or launch type specified, the default capacity
+    #   provider strategy for the cluster is used.
     #
     #   If a default capacity provider strategy isn't defined for a cluster
     #   when it was created, it can be defined later with the
     #   PutClusterCapacityProviders API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
     #
     # @option params [Types::ClusterServiceConnectDefaultsRequest] :service_connect_defaults
     #   Use this parameter to set a default Service Connect namespace. After
@@ -1788,8 +1800,8 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Disables an account setting for a specified IAM user, IAM role, or the
-    # root user for an account.
+    # Disables an account setting for a specified user, role, or the root
+    # user for an account.
     #
     # @option params [required, String] :name
     #   The resource name to disable the account setting for. If
@@ -1802,12 +1814,12 @@ module Aws::ECS
     #   container instances is affected.
     #
     # @option params [String] :principal_arn
-    #   The Amazon Resource Name (ARN) of the principal. It can be an IAM
-    #   user, IAM role, or the root user. If you specify the root user, it
-    #   disables the account setting for all IAM users, IAM roles, and the
-    #   root user of the account unless an IAM user or role explicitly
-    #   overrides these settings. If this field is omitted, the setting is
-    #   changed only for the authenticated user.
+    #   The Amazon Resource Name (ARN) of the principal. It can be an user,
+    #   role, or the root user. If you specify the root user, it disables the
+    #   account setting for all users, roles, and the root user of the account
+    #   unless a user or role explicitly overrides these settings. If this
+    #   field is omitted, the setting is changed only for the authenticated
+    #   user.
     #
     # @return [Types::DeleteAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2297,6 +2309,226 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Deletes one or more task definitions.
+    #
+    # You must deregister a task definition revision before you delete it.
+    # For more information, see [DeregisterTaskDefinition][1].
+    #
+    # When you delete a task definition revision, it is immediately
+    # transitions from the `INACTIVE` to `DELETE_IN_PROGRESS`. Existing
+    # tasks and services that reference a `DELETE_IN_PROGRESS` task
+    # definition revision continue to run without disruption. Existing
+    # services that reference a `DELETE_IN_PROGRESS` task definition
+    # revision can still scale up or down by modifying the service's
+    # desired count.
+    #
+    # You can't use a `DELETE_IN_PROGRESS` task definition revision to run
+    # new tasks or create new services. You also can't update an existing
+    # service to reference a `DELETE_IN_PROGRESS` task definition revision.
+    #
+    # A task definition revision will stay in `DELETE_IN_PROGRESS` status
+    # until all the associated tasks and services have been terminated.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterTaskDefinition.html
+    #
+    # @option params [required, Array<String>] :task_definitions
+    #   The `family` and `revision` (`family:revision`) or full Amazon
+    #   Resource Name (ARN) of the task definition to delete. You must specify
+    #   a `revision`.
+    #
+    #   You can specify up to 10 task definitions as a comma separated list.
+    #
+    # @return [Types::DeleteTaskDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTaskDefinitionsResponse#task_definitions #task_definitions} => Array&lt;Types::TaskDefinition&gt;
+    #   * {Types::DeleteTaskDefinitionsResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_task_definitions({
+    #     task_definitions: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_definitions #=> Array
+    #   resp.task_definitions[0].task_definition_arn #=> String
+    #   resp.task_definitions[0].container_definitions #=> Array
+    #   resp.task_definitions[0].container_definitions[0].name #=> String
+    #   resp.task_definitions[0].container_definitions[0].image #=> String
+    #   resp.task_definitions[0].container_definitions[0].repository_credentials.credentials_parameter #=> String
+    #   resp.task_definitions[0].container_definitions[0].cpu #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].memory #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].memory_reservation #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].links #=> Array
+    #   resp.task_definitions[0].container_definitions[0].links[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].port_mappings #=> Array
+    #   resp.task_definitions[0].container_definitions[0].port_mappings[0].container_port #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].port_mappings[0].host_port #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].port_mappings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.task_definitions[0].container_definitions[0].port_mappings[0].name #=> String
+    #   resp.task_definitions[0].container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
+    #   resp.task_definitions[0].container_definitions[0].port_mappings[0].container_port_range #=> String
+    #   resp.task_definitions[0].container_definitions[0].essential #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].entry_point #=> Array
+    #   resp.task_definitions[0].container_definitions[0].entry_point[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].command #=> Array
+    #   resp.task_definitions[0].container_definitions[0].command[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].environment #=> Array
+    #   resp.task_definitions[0].container_definitions[0].environment[0].name #=> String
+    #   resp.task_definitions[0].container_definitions[0].environment[0].value #=> String
+    #   resp.task_definitions[0].container_definitions[0].environment_files #=> Array
+    #   resp.task_definitions[0].container_definitions[0].environment_files[0].value #=> String
+    #   resp.task_definitions[0].container_definitions[0].environment_files[0].type #=> String, one of "s3"
+    #   resp.task_definitions[0].container_definitions[0].mount_points #=> Array
+    #   resp.task_definitions[0].container_definitions[0].mount_points[0].source_volume #=> String
+    #   resp.task_definitions[0].container_definitions[0].mount_points[0].container_path #=> String
+    #   resp.task_definitions[0].container_definitions[0].mount_points[0].read_only #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].volumes_from #=> Array
+    #   resp.task_definitions[0].container_definitions[0].volumes_from[0].source_container #=> String
+    #   resp.task_definitions[0].container_definitions[0].volumes_from[0].read_only #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.capabilities.add #=> Array
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.capabilities.add[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.capabilities.drop #=> Array
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.devices #=> Array
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].linux_parameters.swappiness #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].secrets #=> Array
+    #   resp.task_definitions[0].container_definitions[0].secrets[0].name #=> String
+    #   resp.task_definitions[0].container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definitions[0].container_definitions[0].depends_on #=> Array
+    #   resp.task_definitions[0].container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definitions[0].container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definitions[0].container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].stop_timeout #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].hostname #=> String
+    #   resp.task_definitions[0].container_definitions[0].user #=> String
+    #   resp.task_definitions[0].container_definitions[0].working_directory #=> String
+    #   resp.task_definitions[0].container_definitions[0].disable_networking #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].privileged #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].readonly_root_filesystem #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].dns_servers #=> Array
+    #   resp.task_definitions[0].container_definitions[0].dns_servers[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].dns_search_domains #=> Array
+    #   resp.task_definitions[0].container_definitions[0].dns_search_domains[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].extra_hosts #=> Array
+    #   resp.task_definitions[0].container_definitions[0].extra_hosts[0].hostname #=> String
+    #   resp.task_definitions[0].container_definitions[0].extra_hosts[0].ip_address #=> String
+    #   resp.task_definitions[0].container_definitions[0].docker_security_options #=> Array
+    #   resp.task_definitions[0].container_definitions[0].docker_security_options[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].interactive #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].pseudo_terminal #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].docker_labels #=> Hash
+    #   resp.task_definitions[0].container_definitions[0].docker_labels["String"] #=> String
+    #   resp.task_definitions[0].container_definitions[0].ulimits #=> Array
+    #   resp.task_definitions[0].container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
+    #   resp.task_definitions[0].container_definitions[0].ulimits[0].soft_limit #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].ulimits[0].hard_limit #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
+    #   resp.task_definitions[0].container_definitions[0].log_configuration.options #=> Hash
+    #   resp.task_definitions[0].container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definitions[0].container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.task_definitions[0].container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.task_definitions[0].container_definitions[0].log_configuration.secret_options[0].value_from #=> String
+    #   resp.task_definitions[0].container_definitions[0].health_check.command #=> Array
+    #   resp.task_definitions[0].container_definitions[0].health_check.command[0] #=> String
+    #   resp.task_definitions[0].container_definitions[0].health_check.interval #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].health_check.timeout #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].health_check.retries #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].health_check.start_period #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].system_controls #=> Array
+    #   resp.task_definitions[0].container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.task_definitions[0].container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definitions[0].container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definitions[0].container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definitions[0].container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task_definitions[0].container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definitions[0].container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definitions[0].container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definitions[0].family #=> String
+    #   resp.task_definitions[0].task_role_arn #=> String
+    #   resp.task_definitions[0].execution_role_arn #=> String
+    #   resp.task_definitions[0].network_mode #=> String, one of "bridge", "host", "awsvpc", "none"
+    #   resp.task_definitions[0].revision #=> Integer
+    #   resp.task_definitions[0].volumes #=> Array
+    #   resp.task_definitions[0].volumes[0].name #=> String
+    #   resp.task_definitions[0].volumes[0].host.source_path #=> String
+    #   resp.task_definitions[0].volumes[0].docker_volume_configuration.scope #=> String, one of "task", "shared"
+    #   resp.task_definitions[0].volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.task_definitions[0].volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.task_definitions[0].volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.task_definitions[0].volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
+    #   resp.task_definitions[0].volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.task_definitions[0].volumes[0].docker_volume_configuration.labels["String"] #=> String
+    #   resp.task_definitions[0].volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.task_definitions[0].volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.task_definitions[0].volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definitions[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.task_definitions[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.task_definitions[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
+    #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
+    #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
+    #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
+    #   resp.task_definitions[0].status #=> String, one of "ACTIVE", "INACTIVE", "DELETE_IN_PROGRESS"
+    #   resp.task_definitions[0].requires_attributes #=> Array
+    #   resp.task_definitions[0].requires_attributes[0].name #=> String
+    #   resp.task_definitions[0].requires_attributes[0].value #=> String
+    #   resp.task_definitions[0].requires_attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.task_definitions[0].requires_attributes[0].target_id #=> String
+    #   resp.task_definitions[0].placement_constraints #=> Array
+    #   resp.task_definitions[0].placement_constraints[0].type #=> String, one of "memberOf"
+    #   resp.task_definitions[0].placement_constraints[0].expression #=> String
+    #   resp.task_definitions[0].compatibilities #=> Array
+    #   resp.task_definitions[0].compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definitions[0].runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
+    #   resp.task_definitions[0].runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
+    #   resp.task_definitions[0].requires_compatibilities #=> Array
+    #   resp.task_definitions[0].requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definitions[0].cpu #=> String
+    #   resp.task_definitions[0].memory #=> String
+    #   resp.task_definitions[0].inference_accelerators #=> Array
+    #   resp.task_definitions[0].inference_accelerators[0].device_name #=> String
+    #   resp.task_definitions[0].inference_accelerators[0].device_type #=> String
+    #   resp.task_definitions[0].pid_mode #=> String, one of "host", "task"
+    #   resp.task_definitions[0].ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definitions[0].proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definitions[0].proxy_configuration.container_name #=> String
+    #   resp.task_definitions[0].proxy_configuration.properties #=> Array
+    #   resp.task_definitions[0].proxy_configuration.properties[0].name #=> String
+    #   resp.task_definitions[0].proxy_configuration.properties[0].value #=> String
+    #   resp.task_definitions[0].registered_at #=> Time
+    #   resp.task_definitions[0].deregistered_at #=> Time
+    #   resp.task_definitions[0].registered_by #=> String
+    #   resp.task_definitions[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskDefinitions AWS API Documentation
+    #
+    # @overload delete_task_definitions(params = {})
+    # @param [Hash] params ({})
+    def delete_task_definitions(params = {}, options = {})
+      req = build_request(:delete_task_definitions, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified task set within a service. This is used when a
     # service uses the `EXTERNAL` deployment controller type. For more
     # information, see [Amazon ECS deployment types][1] in the *Amazon
@@ -2534,7 +2766,8 @@ module Aws::ECS
     # tasks and services that reference an `INACTIVE` task definition
     # continue to run without disruption. Existing services that reference
     # an `INACTIVE` task definition can still scale up or down by modifying
-    # the service's desired count.
+    # the service's desired count. If you want to delete a task definition
+    # revision, you must first deregister the task definition revision.
     #
     # You can't use an `INACTIVE` task definition to run new tasks or
     # create new services, and you can't update an existing service to
@@ -2549,6 +2782,13 @@ module Aws::ECS
     # and services.
     #
     #  </note>
+    #
+    # You must deregister a task definition revision before you delete it.
+    # For more information, see [DeleteTaskDefinitions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskDefinitions.html
     #
     # @option params [required, String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full Amazon
@@ -2697,7 +2937,7 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
-    #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE", "DELETE_IN_PROGRESS"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
     #   resp.task_definition.requires_attributes[0].value #=> String
@@ -3613,7 +3853,7 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
-    #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE", "DELETE_IN_PROGRESS"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
     #   resp.task_definition.requires_attributes[0].value #=> String
@@ -4163,9 +4403,9 @@ module Aws::ECS
     #   also specify an account setting name to use this parameter.
     #
     # @option params [String] :principal_arn
-    #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If this field is omitted, the account settings are listed
-    #   only for the authenticated user.
+    #   The ARN of the principal, which can be a user, role, or the root user.
+    #   If this field is omitted, the account settings are listed only for the
+    #   authenticated user.
     #
     #   <note markdown="1"> Federated users assume the account setting of the root user and can't
     #   have explicit account settings set for them.
@@ -4976,7 +5216,7 @@ module Aws::ECS
     #
     #   resp = client.list_task_definitions({
     #     family_prefix: "String",
-    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE, DELETE_IN_PROGRESS
     #     sort: "ASC", # accepts ASC, DESC
     #     next_token: "String",
     #     max_results: 1,
@@ -5148,7 +5388,7 @@ module Aws::ECS
     # basis.
     #
     # If you change the account setting for the root user, the default
-    # settings for all of the IAM users and roles that no individual account
+    # settings for all of the users and roles that no individual account
     # setting was specified are reset for. For more information, see
     # [Account Settings][1] in the *Amazon Elastic Container Service
     # Developer Guide*.
@@ -5156,12 +5396,12 @@ module Aws::ECS
     # When `serviceLongArnFormat`, `taskLongArnFormat`, or
     # `containerInstanceLongArnFormat` are specified, the Amazon Resource
     # Name (ARN) and resource ID format of the resource type for a specified
-    # IAM user, IAM role, or the root user for an account is affected. The
-    # opt-in and opt-out account setting must be set for each Amazon ECS
-    # resource separately. The ARN and resource ID format of a resource is
-    # defined by the opt-in status of the IAM user or role that created the
-    # resource. You must turn on this setting to use Amazon ECS features
-    # such as resource tagging.
+    # user, role, or the root user for an account is affected. The opt-in
+    # and opt-out account setting must be set for each Amazon ECS resource
+    # separately. The ARN and resource ID format of a resource is defined by
+    # the opt-in status of the user or role that created the resource. You
+    # must turn on this setting to use Amazon ECS features such as resource
+    # tagging.
     #
     # When `awsvpcTrunking` is specified, the elastic network interface
     # (ENI) limit for any new container instances that support the feature
@@ -5202,12 +5442,11 @@ module Aws::ECS
     #   values are `enabled` and `disabled`.
     #
     # @option params [String] :principal_arn
-    #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If you specify the root user, it modifies the account
-    #   setting for all IAM users, IAM roles, and the root user of the account
-    #   unless an IAM user or role explicitly overrides these settings. If
-    #   this field is omitted, the setting is changed only for the
-    #   authenticated user.
+    #   The ARN of the principal, which can be a user, role, or the root user.
+    #   If you specify the root user, it modifies the account setting for all
+    #   users, roles, and the root user of the account unless a user or role
+    #   explicitly overrides these settings. If this field is omitted, the
+    #   setting is changed only for the authenticated user.
     #
     #   <note markdown="1"> Federated users assume the account setting of the root user and can't
     #   have explicit account settings set for them.
@@ -5283,8 +5522,8 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Modifies an account setting for all IAM users on an account for whom
-    # no individual account setting has been specified. Account settings are
+    # Modifies an account setting for all users on an account for whom no
+    # individual account setting has been specified. Account settings are
     # set on a per-Region basis.
     #
     # @option params [required, String] :name
@@ -5734,13 +5973,12 @@ module Aws::ECS
     # Definitions][1] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
-    # You can specify an IAM role for your task with the `taskRoleArn`
-    # parameter. When you specify an IAM role for a task, its containers can
-    # then use the latest versions of the CLI or SDKs to make API requests
-    # to the Amazon Web Services services that are specified in the IAM
-    # policy that's associated with the role. For more information, see
-    # [IAM Roles for Tasks][2] in the *Amazon Elastic Container Service
-    # Developer Guide*.
+    # You can specify a role for your task with the `taskRoleArn` parameter.
+    # When you specify a role for a task, its containers can then use the
+    # latest versions of the CLI or SDKs to make API requests to the Amazon
+    # Web Services services that are specified in the policy that's
+    # associated with the role. For more information, see [IAM Roles for
+    # Tasks][2] in the *Amazon Elastic Container Service Developer Guide*.
     #
     # You can specify a Docker networking mode for the containers in your
     # task definition with the `networkMode` parameter. The available
@@ -6522,7 +6760,7 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
-    #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE", "DELETE_IN_PROGRESS"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
     #   resp.task_definition.requires_attributes[0].value #=> String
@@ -6785,11 +7023,11 @@ module Aws::ECS
     #   task definition to run. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
-    #   When you create an IAM policy for run-task, you can set the resource
-    #   to be the latest task definition revision, or a specific revision.
+    #   When you create a policy for run-task, you can set the resource to be
+    #   the latest task definition revision, or a specific revision.
     #
     #   The full ARN value must match the value that you specified as the
-    #   `Resource` of the IAM principal's permissions policy.
+    #   `Resource` of the principal's permissions policy.
     #
     #   When you specify the policy resource as the latest task definition
     #   version (by setting the `Resource` in the policy to
@@ -7403,7 +7641,7 @@ module Aws::ECS
     #   cluster is assumed.
     #
     # @option params [required, String] :task
-    #   The task ID or full Amazon Resource Name (ARN) of the task to stop.
+    #   The task ID of the task to stop.
     #
     # @option params [String] :reason
     #   An optional message specified when a task is stopped. For example, if
@@ -8518,8 +8756,8 @@ module Aws::ECS
     #   with the largest number of running tasks for this service.
     #
     # <note markdown="1"> You must have a service-linked role when you update any of the
-    # following service properties. If you specified a custom IAM role when
-    # you created the service, Amazon ECS automatically replaces the
+    # following service properties. If you specified a custom role when you
+    # created the service, Amazon ECS automatically replaces the
     # [roleARN][2] associated with the service with the ARN of your
     # service-linked role. For more information, see [Service-linked
     # roles][3] in the *Amazon Elastic Container Service Developer Guide*.
@@ -9399,7 +9637,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

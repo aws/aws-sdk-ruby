@@ -74,6 +74,8 @@ module Aws::ECS
             Aws::ECS::Endpoints::DeleteCluster.build(context)
           when :delete_service
             Aws::ECS::Endpoints::DeleteService.build(context)
+          when :delete_task_definitions
+            Aws::ECS::Endpoints::DeleteTaskDefinitions.build(context)
           when :delete_task_set
             Aws::ECS::Endpoints::DeleteTaskSet.build(context)
           when :deregister_container_instance

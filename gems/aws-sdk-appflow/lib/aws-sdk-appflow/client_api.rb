@@ -1244,6 +1244,7 @@ module Aws::Appflow
 
     SalesforceConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, location_name: "instanceUrl"))
     SalesforceConnectorProfileProperties.add_member(:is_sandbox_environment, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSandboxEnvironment"))
+    SalesforceConnectorProfileProperties.add_member(:use_private_link_for_metadata_and_authorization, Shapes::ShapeRef.new(shape: Boolean, location_name: "usePrivateLinkForMetadataAndAuthorization"))
     SalesforceConnectorProfileProperties.struct_class = Types::SalesforceConnectorProfileProperties
 
     SalesforceDataTransferApiList.member = Shapes::ShapeRef.new(shape: SalesforceDataTransferApi)

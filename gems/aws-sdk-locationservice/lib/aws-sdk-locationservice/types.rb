@@ -24,10 +24,114 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # Options for filtering API keys.
+    #
+    # @!attribute [rw] key_status
+    #   Filter on `Active` or `Expired` API keys.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ApiKeyFilter AWS API Documentation
+    #
+    class ApiKeyFilter < Struct.new(
+      :key_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # API Restrictions on the allowed actions, resources, and referers for
+    # an API key resource.
+    #
+    # @!attribute [rw] allow_actions
+    #   A list of allowed actions that an API key resource grants
+    #   permissions to perform
+    #
+    #   <note markdown="1"> Currently, the only valid action is `geo:GetMap*` as an input to the
+    #   list. For example, `["geo:GetMap*"]` is valid but
+    #   `["geo:GetMapTile"]` is not.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_referers
+    #   An optional list of allowed HTTP referers for which requests must
+    #   originate from. Requests using this API key from other domains will
+    #   not be allowed.
+    #
+    #   Requirements:
+    #
+    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9) or any
+    #     symbols in this list `` $\-._+!*`(),;/?:@=& ``
+    #
+    #   * May contain a percent (%) if followed by 2 hexadecimal digits
+    #     (A-F, a-f, 0-9); this is used for URL encoding purposes.
+    #
+    #   * May contain wildcard characters question mark (?) and asterisk
+    #     (*).
+    #
+    #     Question mark (?) will replace any single character (including
+    #     hexadecimal digits).
+    #
+    #     Asterisk (*) will replace any multiple characters (including
+    #     multiple hexadecimal digits).
+    #
+    #   * No spaces allowed. For example, `https://example.com`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_resources
+    #   A list of allowed resource ARNs that a API key bearer can perform
+    #   actions on
+    #
+    #   For more information about ARN format, see [Amazon Resource Names
+    #   (ARNs)][1].
+    #
+    #   <note markdown="1"> In this preview, you can allow only map resources.
+    #
+    #    </note>
+    #
+    #   Requirements:
+    #
+    #   * Must be prefixed with `arn`.
+    #
+    #   * `partition` and `service` must not be empty and should begin with
+    #     only alphanumeric characters (A–Z, a–z, 0–9) and contain only
+    #     alphanumeric numbers, hyphens (-) and periods (.).
+    #
+    #   * `region` and `account-id` can be empty or should begin with only
+    #     alphanumeric characters (A–Z, a–z, 0–9) and contain only
+    #     alphanumeric numbers, hyphens (-) and periods (.).
+    #
+    #   * `resource-id` can begin with any character except for forward
+    #     slash (/) and contain any characters after, including forward
+    #     slashes to form a path.
+    #
+    #     `resource-id` can also include wildcard characters, denoted by an
+    #     asterisk (*).
+    #
+    #   * `arn`, `partition`, `service`, `region`, `account-id` and
+    #     `resource-id` must be delimited by a colon (:).
+    #
+    #   * No spaces allowed. For example,
+    #     `arn:aws:geo:region:account-id:map/ExampleMap*`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ApiKeyRestrictions AWS API Documentation
+    #
+    class ApiKeyRestrictions < Struct.new(
+      :allow_actions,
+      :allow_referers,
+      :allow_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   associated to tracker resource. Used when you need to specify a
-    #   resource across all AWS.
+    #   resource across all Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
@@ -1157,8 +1261,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1]. Enter a
-    #   key ID, key ARN, alias name, or alias ARN.
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
     #
     #
     #
@@ -1212,7 +1316,8 @@ module Aws::LocationService
 
     # @!attribute [rw] collection_arn
     #   The Amazon Resource Name (ARN) for the geofence collection resource.
-    #   Used when you need to specify a resource across all AWS.
+    #   Used when you need to specify a resource across all Amazon Web
+    #   Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection`
@@ -1240,6 +1345,120 @@ module Aws::LocationService
       :collection_name,
       :create_time)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   An optional description for the API key resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] expire_time
+    #   The optional timestamp for when the API key resource will expire in
+    #   [ ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. One of `NoExpiry`
+    #   or `ExpireTime` must be set.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] key_name
+    #   A custom name for the API key resource.
+    #
+    #   Requirements:
+    #
+    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+    #     periods (.), and underscores (\_).
+    #
+    #   * Must be a unique API key name.
+    #
+    #   * No spaces allowed. For example, `ExampleAPIKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] no_expiry
+    #   Optionally set to `true` to set no expiration time for the API key.
+    #   One of `NoExpiry` or `ExpireTime` must be set.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrictions
+    #   The API key restrictions for the API key resource.
+    #   @return [Types::ApiKeyRestrictions]
+    #
+    # @!attribute [rw] tags
+    #   Applies one or more tags to the map resource. A tag is a key-value
+    #   pair that helps manage, identify, search, and filter your resources
+    #   by labelling them.
+    #
+    #   Format: `"key" : "value"`
+    #
+    #   Restrictions:
+    #
+    #   * Maximum 50 tags per resource
+    #
+    #   * Each resource tag must be unique with a maximum of one value.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8
+    #
+    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateKeyRequest AWS API Documentation
+    #
+    class CreateKeyRequest < Struct.new(
+      :description,
+      :expire_time,
+      :key_name,
+      :no_expiry,
+      :restrictions,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_time
+    #   The timestamp for when the API key resource was created in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] key
+    #   The key value/string of an API key. This value is used when making
+    #   API calls to authorize the call. For example, see [GetMapGlyphs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/APIReference/API_GetMapGlyphs.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key_arn
+    #   The Amazon Resource Name (ARN) for the API key resource. Used when
+    #   you need to specify a resource across all Amazon Web Services.
+    #
+    #   * Format example: `arn:aws:geo:region:account-id:key/ExampleKey`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the API key resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateKeyResponse AWS API Documentation
+    #
+    class CreateKeyResponse < Struct.new(
+      :create_time,
+      :key,
+      :key_arn,
+      :key_name)
+      SENSITIVE = [:key]
       include Aws::Structure
     end
 
@@ -1317,7 +1536,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] map_arn
     #   The Amazon Resource Name (ARN) for the map resource. Used to specify
-    #   a resource across all AWS.
+    #   a resource across all Amazon Web Services.
     #
     #   * Format example: `arn:aws:geo:region:account-id:map/ExampleMap`
     #
@@ -1362,8 +1581,8 @@ module Aws::LocationService
     #
     #     If you specify HERE Technologies (`Here`) as the data provider,
     #     you may not [store results][7] for locations in Japan. For more
-    #     information, see the [AWS Service Terms][8] for Amazon Location
-    #     Service.
+    #     information, see the [Amazon Web Services Service Terms][8] for
+    #     Amazon Location Service.
     #
     #   For additional information , see [Data providers][9] on the *Amazon
     #   Location Service Developer Guide*.
@@ -1377,7 +1596,7 @@ module Aws::LocationService
     #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
     #   [6]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
     #   [7]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
-    #   [8]: https://aws.amazon.com/service-terms/
+    #   [8]: http://aws.amazon.com/service-terms/
     #   [9]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
@@ -1455,7 +1674,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] index_arn
     #   The Amazon Resource Name (ARN) for the place index resource. Used to
-    #   specify a resource across AWS.
+    #   specify a resource across Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex`
@@ -1580,7 +1799,8 @@ module Aws::LocationService
 
     # @!attribute [rw] calculator_arn
     #   The Amazon Resource Name (ARN) for the route calculator resource.
-    #   Use the ARN when you specify a resource across all AWS.
+    #   Use the ARN when you specify a resource across all Amazon Web
+    #   Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:route-calculator/ExampleCalculator`
@@ -1624,8 +1844,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1]. Enter a
-    #   key ID, key ARN, alias name, or alias ARN.
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
     #
     #
     #
@@ -1734,7 +1954,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] tracker_arn
     #   The Amazon Resource Name (ARN) for the tracker resource. Used when
-    #   you need to specify a resource across all AWS.
+    #   you need to specify a resource across all Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:tracker/ExampleTracker`
@@ -1814,6 +2034,22 @@ module Aws::LocationService
     #
     class DeleteGeofenceCollectionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] key_name
+    #   The name of the API key to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteKeyRequest AWS API Documentation
+    #
+    class DeleteKeyRequest < Struct.new(
+      :key_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteKeyResponse AWS API Documentation
+    #
+    class DeleteKeyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] map_name
     #   The name of the map resource to be deleted.
     #   @return [String]
@@ -1892,7 +2128,8 @@ module Aws::LocationService
 
     # @!attribute [rw] collection_arn
     #   The Amazon Resource Name (ARN) for the geofence collection resource.
-    #   Used when you need to specify a resource across all AWS.
+    #   Used when you need to specify a resource across all Amazon Web
+    #   Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection`
@@ -1918,8 +2155,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1] assigned
-    #   to the Amazon Location resource
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1] assigned to the Amazon Location resource
     #
     #
     #
@@ -1963,6 +2200,91 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] key_name
+    #   The name of the API key resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeKeyRequest AWS API Documentation
+    #
+    class DescribeKeyRequest < Struct.new(
+      :key_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_time
+    #   The timestamp for when the API key resource was created in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The optional description for the API key resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] expire_time
+    #   The timestamp for when the API key resource will expire in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] key
+    #   The key value/string of an API key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_arn
+    #   The Amazon Resource Name (ARN) for the API key resource. Used when
+    #   you need to specify a resource across all Amazon Web Services.
+    #
+    #   * Format example: `arn:aws:geo:region:account-id:key/ExampleKey`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the API key resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] restrictions
+    #   API Restrictions on the allowed actions, resources, and referers for
+    #   an API key resource.
+    #   @return [Types::ApiKeyRestrictions]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the API key resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] update_time
+    #   The timestamp for when the API key resource was last updated in [
+    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeKeyResponse AWS API Documentation
+    #
+    class DescribeKeyResponse < Struct.new(
+      :create_time,
+      :description,
+      :expire_time,
+      :key,
+      :key_arn,
+      :key_name,
+      :restrictions,
+      :tags,
+      :update_time)
+      SENSITIVE = [:key]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] map_name
     #   The name of the map resource.
     #   @return [String]
@@ -1998,7 +2320,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] map_arn
     #   The Amazon Resource Name (ARN) for the map resource. Used to specify
-    #   a resource across all AWS.
+    #   a resource across all Amazon Web Services.
     #
     #   * Format example: `arn:aws:geo:region:account-id:map/ExampleMap`
     #
@@ -2091,7 +2413,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] index_arn
     #   The Amazon Resource Name (ARN) for the place index resource. Used to
-    #   specify a resource across AWS.
+    #   specify a resource across Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex`
@@ -2150,7 +2472,7 @@ module Aws::LocationService
 
     # @!attribute [rw] calculator_arn
     #   The Amazon Resource Name (ARN) for the Route calculator resource.
-    #   Use the ARN when you specify a resource across AWS.
+    #   Use the ARN when you specify a resource across Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:route-calculator/ExampleCalculator`
@@ -2259,8 +2581,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1] assigned
-    #   to the Amazon Location resource.
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1] assigned to the Amazon Location resource.
     #
     #
     #
@@ -2285,7 +2607,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] tracker_arn
     #   The Amazon Resource Name (ARN) for the tracker resource. Used when
-    #   you need to specify a resource across all AWS.
+    #   you need to specify a resource across all Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:tracker/ExampleTracker`
@@ -2423,7 +2745,7 @@ module Aws::LocationService
     # @!attribute [rw] consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   disassociated from the tracker resource. Used when you need to
-    #   specify a resource across all AWS.
+    #   specify a resource across all Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
@@ -2792,6 +3114,14 @@ module Aws::LocationService
     #   multiples of 256.
     #   @return [String]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] map_name
     #   The map resource associated with the glyph ﬁle.
     #   @return [String]
@@ -2801,13 +3131,18 @@ module Aws::LocationService
     class GetMapGlyphsRequest < Struct.new(
       :font_stack,
       :font_unicode_range,
+      :key,
       :map_name)
-      SENSITIVE = []
+      SENSITIVE = [:key]
       include Aws::Structure
     end
 
     # @!attribute [rw] blob
-    #   The blob's content type.
+    #   The glyph, as binary blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   The HTTP Cache-Control directive for the value.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -2818,6 +3153,7 @@ module Aws::LocationService
     #
     class GetMapGlyphsResponse < Struct.new(
       :blob,
+      :cache_control,
       :content_type)
       SENSITIVE = []
       include Aws::Structure
@@ -2839,6 +3175,14 @@ module Aws::LocationService
     #   * `sprites@2x.json` for high pixel density displays
     #   @return [String]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] map_name
     #   The map resource associated with the sprite ﬁle.
     #   @return [String]
@@ -2847,13 +3191,18 @@ module Aws::LocationService
     #
     class GetMapSpritesRequest < Struct.new(
       :file_name,
+      :key,
       :map_name)
-      SENSITIVE = []
+      SENSITIVE = [:key]
       include Aws::Structure
     end
 
     # @!attribute [rw] blob
     #   Contains the body of the sprite sheet or JSON offset ﬁle.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   The HTTP Cache-Control directive for the value.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -2866,11 +3215,20 @@ module Aws::LocationService
     #
     class GetMapSpritesResponse < Struct.new(
       :blob,
+      :cache_control,
       :content_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] map_name
     #   The map resource to retrieve the style descriptor from.
     #   @return [String]
@@ -2878,13 +3236,18 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapStyleDescriptorRequest AWS API Documentation
     #
     class GetMapStyleDescriptorRequest < Struct.new(
+      :key,
       :map_name)
-      SENSITIVE = []
+      SENSITIVE = [:key]
       include Aws::Structure
     end
 
     # @!attribute [rw] blob
     #   Contains the body of the style descriptor.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   The HTTP Cache-Control directive for the value.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -2896,11 +3259,20 @@ module Aws::LocationService
     #
     class GetMapStyleDescriptorResponse < Struct.new(
       :blob,
+      :cache_control,
       :content_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] map_name
     #   The map resource to retrieve the map tiles from.
     #   @return [String]
@@ -2920,16 +3292,21 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapTileRequest AWS API Documentation
     #
     class GetMapTileRequest < Struct.new(
+      :key,
       :map_name,
       :x,
       :y,
       :z)
-      SENSITIVE = []
+      SENSITIVE = [:key]
       include Aws::Structure
     end
 
     # @!attribute [rw] blob
     #   Contains Mapbox Vector Tile (MVT) data.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   The HTTP Cache-Control directive for the value.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -2941,6 +3318,7 @@ module Aws::LocationService
     #
     class GetMapTileResponse < Struct.new(
       :blob,
+      :cache_control,
       :content_type)
       SENSITIVE = []
       include Aws::Structure
@@ -3248,7 +3626,8 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] entries
-    #   Lists the geofence collections that exist in your AWS account.
+    #   Lists the geofence collections that exist in your Amazon Web
+    #   Services account.
     #   @return [Array<Types::ListGeofenceCollectionsResponseEntry>]
     #
     # @!attribute [rw] next_token
@@ -3419,6 +3798,111 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] filter
+    #   Optionally filter the list to only `Active` or `Expired` API keys.
+    #   @return [Types::ApiKeyFilter]
+    #
+    # @!attribute [rw] max_results
+    #   An optional limit for the number of resources returned in a single
+    #   call.
+    #
+    #   Default value: `100`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token specifying which page of results to return in
+    #   the response. If no token is provided, the default page is the first
+    #   page.
+    #
+    #   Default value: `null`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListKeysRequest AWS API Documentation
+    #
+    class ListKeysRequest < Struct.new(
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entries
+    #   Contains API key resources in your Amazon Web Services account.
+    #   Details include API key name, allowed referers and timestamp for
+    #   when the API key will expire.
+    #   @return [Array<Types::ListKeysResponseEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token indicating there are additional pages available.
+    #   You can use the token in a following request to fetch the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListKeysResponse AWS API Documentation
+    #
+    class ListKeysResponse < Struct.new(
+      :entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An API key resource listed in your Amazon Web Services account.
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp of when the API key was created, in [ ISO 8601][1]
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The optional description for the API key resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] expire_time
+    #   The timestamp for when the API key resource will expire, in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the API key resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] restrictions
+    #   API Restrictions on the allowed actions, resources, and referers for
+    #   an API key resource.
+    #   @return [Types::ApiKeyRestrictions]
+    #
+    # @!attribute [rw] update_time
+    #   The timestamp of when the API key was last updated, in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListKeysResponseEntry AWS API Documentation
+    #
+    class ListKeysResponseEntry < Struct.new(
+      :create_time,
+      :description,
+      :expire_time,
+      :key_name,
+      :restrictions,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   An optional limit for the number of resources returned in a single
     #   call.
@@ -3444,7 +3928,7 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] entries
-    #   Contains a list of maps in your AWS account
+    #   Contains a list of maps in your Amazon Web Services account
     #   @return [Array<Types::ListMapsResponseEntry>]
     #
     # @!attribute [rw] next_token
@@ -3462,7 +3946,8 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # Contains details of an existing map resource in your AWS account.
+    # Contains details of an existing map resource in your Amazon Web
+    # Services account.
     #
     # @!attribute [rw] create_time
     #   The timestamp for when the map resource was created in [ISO 8601][1]
@@ -3536,7 +4021,8 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] entries
-    #   Lists the place index resources that exist in your AWS account
+    #   Lists the place index resources that exist in your Amazon Web
+    #   Services account
     #   @return [Array<Types::ListPlaceIndexesResponseEntry>]
     #
     # @!attribute [rw] next_token
@@ -3554,7 +4040,7 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # A place index resource listed in your AWS account.
+    # A place index resource listed in your Amazon Web Services account.
     #
     # @!attribute [rw] create_time
     #   The timestamp for when the place index resource was created in [ISO
@@ -3641,7 +4127,8 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] entries
-    #   Lists the route calculator resources that exist in your AWS account
+    #   Lists the route calculator resources that exist in your Amazon Web
+    #   Services account
     #   @return [Array<Types::ListRouteCalculatorsResponseEntry>]
     #
     # @!attribute [rw] next_token
@@ -3659,7 +4146,8 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # A route calculator resource listed in your AWS account.
+    # A route calculator resource listed in your Amazon Web Services
+    # account.
     #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource.
@@ -3840,9 +4328,9 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] entries
-    #   Contains tracker resources in your AWS account. Details include
-    #   tracker name, description and timestamps for when the tracker was
-    #   created and last updated.
+    #   Contains tracker resources in your Amazon Web Services account.
+    #   Details include tracker name, description and timestamps for when
+    #   the tracker was created and last updated.
     #   @return [Array<Types::ListTrackersResponseEntry>]
     #
     # @!attribute [rw] next_token
@@ -5294,7 +5782,7 @@ module Aws::LocationService
 
     # @!attribute [rw] collection_arn
     #   The Amazon Resource Name (ARN) of the updated geofence collection.
-    #   Used to specify a resource across AWS.
+    #   Used to specify a resource across Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection`
@@ -5320,6 +5808,89 @@ module Aws::LocationService
     class UpdateGeofenceCollectionResponse < Struct.new(
       :collection_arn,
       :collection_name,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   Updates the description for the API key resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] expire_time
+    #   Updates the timestamp for when the API key resource will expire in [
+    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] force_update
+    #   The boolean flag to be included for updating `ExpireTime` or
+    #   `Restrictions` details.
+    #
+    #   Must be set to `true` to update an API key resource that has been
+    #   used in the past 7 days.
+    #
+    #   `False` if force update is not preferred
+    #
+    #   Default value: `False`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the API key resource to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] no_expiry
+    #   Whether the API key should expire. Set to `true` to set the API key
+    #   to have no expiration time.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrictions
+    #   Updates the API key restrictions for the API key resource.
+    #   @return [Types::ApiKeyRestrictions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateKeyRequest AWS API Documentation
+    #
+    class UpdateKeyRequest < Struct.new(
+      :description,
+      :expire_time,
+      :force_update,
+      :key_name,
+      :no_expiry,
+      :restrictions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_arn
+    #   The Amazon Resource Name (ARN) for the API key resource. Used when
+    #   you need to specify a resource across all Amazon Web Services.
+    #
+    #   * Format example: `arn:aws:geo:region:account-id:key/ExampleKey`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the API key resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_time
+    #   The timestamp for when the API key resource was last updated in [
+    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateKeyResponse AWS API Documentation
+    #
+    class UpdateKeyResponse < Struct.new(
+      :key_arn,
+      :key_name,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -5410,7 +5981,7 @@ module Aws::LocationService
 
     # @!attribute [rw] index_arn
     #   The Amazon Resource Name (ARN) of the upated place index resource.
-    #   Used to specify a resource across AWS.
+    #   Used to specify a resource across Amazon Web Services.
     #
     #   * Format example: `arn:aws:geo:region:account-id:place-
     #     index/ExamplePlaceIndex`

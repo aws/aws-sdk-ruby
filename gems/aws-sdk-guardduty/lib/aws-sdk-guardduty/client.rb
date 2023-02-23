@@ -473,6 +473,15 @@ module Aws::GuardDuty
     # You can have only one detector per account per Region. All data
     # sources are enabled in a new detector by default.
     #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    #
     # @option params [required, Boolean] :enable
     #   A Boolean value that specifies whether the detector is to be enabled.
     #
@@ -487,6 +496,15 @@ module Aws::GuardDuty
     #
     # @option params [Types::DataSourceConfigurations] :data_sources
     #   Describes which data sources will be enabled for the detector.
+    #
+    #   There might be regional differences because some data sources might
+    #   not be available in all the Amazon Web Services Regions where
+    #   GuardDuty is presently supported. For more information, see [Regions
+    #   and endpoints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new detector resource.
@@ -550,9 +568,9 @@ module Aws::GuardDuty
     #   is considered to be an invalid character.
     #
     # @option params [String] :description
-    #   The description of the filter. Valid special characters include period
-    #   (.), underscore (\_), dash (-), and whitespace. The new line character
-    #   is considered to be an invalid input for description.
+    #   The description of the filter. Valid characters include alphanumeric
+    #   characters, and special characters such as `-`, `.`, `:`, `\{ \}`, `[
+    #   ]`, `( )`, `/`, `\t`, `\n`, `\x0B`, `\f`, `\r`, `_`, and whitespace.
     #
     # @option params [String] :action
     #   Specifies the action that is to be applied to the findings that match
@@ -572,8 +590,6 @@ module Aws::GuardDuty
     #   * accountId
     #
     #   * region
-    #
-    #   * confidence
     #
     #   * id
     #
@@ -673,13 +689,6 @@ module Aws::GuardDuty
     #
     #   * resource.s3BucketDetails.type
     #
-    #   * service.archived
-    #
-    #     When this attribute is set to TRUE, only archived findings are
-    #     listed. When it's set to FALSE, only unarchived findings are
-    #     listed. When this attribute is not set, all existing findings are
-    #     listed.
-    #
     #   * service.resourceRole
     #
     #   * severity
@@ -764,7 +773,7 @@ module Aws::GuardDuty
     # @option params [required, String] :name
     #   The user-friendly name to identify the IPSet.
     #
-    #   Allowed characters are alphanumerics, spaces, hyphens (-), and
+    #   Allowed characters are alphanumeric, whitespace, dash (-), and
     #   underscores (\_).
     #
     # @option params [required, String] :format
@@ -828,9 +837,9 @@ module Aws::GuardDuty
     # administrator account, which must enable GuardDuty prior to being
     # added as a member.
     #
-    # If you are adding accounts by invitation use this action after
-    # GuardDuty has been enabled in potential member accounts and before
-    # using [ `Invite Members` ][1].
+    # If you are adding accounts by invitation, use this action after
+    # GuardDuty has bee enabled in potential member accounts and before
+    # using [InviteMembers][1].
     #
     #
     #
@@ -925,9 +934,9 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Generates example findings of types specified by the list of finding
+    # Generates sample findings of types specified by the list of finding
     # types. If 'NULL' is specified for `findingTypes`, the API generates
-    # example findings of all supported finding types.
+    # sample findings of all supported finding types.
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector to create sample findings for.
@@ -1254,6 +1263,15 @@ module Aws::GuardDuty
     # malware scans for their own accounts. An administrator can view the
     # malware scans for all the member accounts.
     #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that the request is associated with.
     #
@@ -1274,7 +1292,12 @@ module Aws::GuardDuty
     #   entries.
     #
     # @option params [Types::SortCriteria] :sort_criteria
-    #   Represents the criteria used for sorting scan entries.
+    #   Represents the criteria used for sorting scan entries. The [
+    #   `attributeName` ][1] is required and it must be `scanStartTime`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_SortCriteria.html#guardduty-Type-SortCriteria-attributeName
     #
     # @return [Types::DescribeMalwareScansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1345,6 +1368,15 @@ module Aws::GuardDuty
 
     # Returns information about the account selected as the delegated
     # administrator for GuardDuty.
+    #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector to retrieve information about the delegated
@@ -1586,6 +1618,15 @@ module Aws::GuardDuty
     end
 
     # Retrieves an Amazon GuardDuty detector specified by the detectorId.
+    #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that you want to get.
@@ -2128,6 +2169,15 @@ module Aws::GuardDuty
 
     # Returns the details of the malware scan settings.
     #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that the scan setting is associated
     #   with.
@@ -2198,6 +2248,15 @@ module Aws::GuardDuty
 
     # Describes which data sources are enabled for the member account's
     # detector.
+    #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The detector ID for the administrator account.
@@ -3278,6 +3337,15 @@ module Aws::GuardDuty
 
     # Updates the Amazon GuardDuty detector specified by the detectorId.
     #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector to update.
     #
@@ -3290,6 +3358,15 @@ module Aws::GuardDuty
     #
     # @option params [Types::DataSourceConfigurations] :data_sources
     #   Describes which data sources will be updated.
+    #
+    #   There might be regional differences because some data sources might
+    #   not be available in all the Amazon Web Services Regions where
+    #   GuardDuty is presently supported. For more information, see [Regions
+    #   and endpoints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3335,9 +3412,11 @@ module Aws::GuardDuty
     #   The name of the filter.
     #
     # @option params [String] :description
-    #   The description of the filter. Valid special characters include period
-    #   (.), underscore (\_), dash (-), and whitespace. The new line character
-    #   is considered to be an invalid input for description.
+    #   The description of the filter. Valid characters include alphanumeric
+    #   characters, and special characters such as hyphen, period, colon,
+    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
+    #   horizontal tab, vertical tab, newline, form feed, return, and
+    #   whitespace.
     #
     # @option params [String] :action
     #   Specifies the action that is to be applied to the findings that match
@@ -3474,6 +3553,15 @@ module Aws::GuardDuty
 
     # Updates the malware scan settings.
     #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that specifies the GuardDuty service
     #   where you want to update scan settings.
@@ -3527,6 +3615,15 @@ module Aws::GuardDuty
 
     # Contains information on member accounts to be updated.
     #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    #
     # @option params [required, String] :detector_id
     #   The detector ID of the administrator account.
     #
@@ -3578,6 +3675,15 @@ module Aws::GuardDuty
     end
 
     # Updates the delegated administrator account with the values provided.
+    #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector to update the delegated administrator for.
@@ -3715,7 +3821,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

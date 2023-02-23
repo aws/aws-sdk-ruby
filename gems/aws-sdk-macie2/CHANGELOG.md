@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-02-23)
+------------------
+
+* Feature - This release adds support for a new finding type, Policy:IAMUser/S3BucketSharedWithCloudFront, and S3 bucket metadata that indicates if a bucket is shared with an Amazon CloudFront OAI or OAC.
+
 1.51.0 (2023-01-18)
 ------------------
 

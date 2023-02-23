@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-02-23)
+------------------
+
+* Feature - Updated API and data types descriptions for CreateFilter, UpdateFilter, and TriggerDetails.
+
 1.63.0 (2023-01-18)
 ------------------
 

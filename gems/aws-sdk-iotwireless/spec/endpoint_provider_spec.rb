@@ -14,489 +14,13 @@ module Aws::IoTWireless
   describe EndpointProvider do
     subject { Aws::IoTWireless::EndpointProvider.new }
 
-    context 'For region ap-south-1 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ap-south-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ap-south-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-south-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ap-south-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ap-south-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-south-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.ap-south-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ap-south-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-south-1 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.ap-south-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ap-south-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ca-central-1 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ca-central-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ca-central-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ca-central-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ca-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ca-central-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ca-central-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.ca-central-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ca-central-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ca-central-1 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.ca-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ca-central-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-central-1 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.eu-central-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"eu-central-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-central-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.eu-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"eu-central-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-central-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.eu-central-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"eu-central-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-central-1 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.eu-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"eu-central-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-west-2.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"us-west-2", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"us-west-2", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.us-west-2.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"us-west-2", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.us-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"us-west-2", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-west-1 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.eu-west-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"eu-west-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-west-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.eu-west-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"eu-west-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-west-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.eu-west-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"eu-west-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-west-1 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.eu-west-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"eu-west-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-northeast-1 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ap-northeast-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ap-northeast-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-northeast-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ap-northeast-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ap-northeast-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-northeast-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.ap-northeast-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ap-northeast-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
     context 'For region ap-northeast-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotwireless.ap-northeast-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ap-northeast-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region sa-east-1 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.sa-east-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"sa-east-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region sa-east-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.sa-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"sa-east-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region sa-east-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.sa-east-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"sa-east-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region sa-east-1 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.sa-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"sa-east-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-1 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ap-southeast-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ap-southeast-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ap-southeast-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ap-southeast-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.ap-southeast-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ap-southeast-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-1 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.ap-southeast-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ap-southeast-1", :use_fips=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-2 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ap-southeast-2.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ap-southeast-2", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-2 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.ap-southeast-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ap-southeast-2", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-2 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.ap-southeast-2.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"ap-southeast-2", :use_fips=>false})
+        params = EndpointParameters.new(**{:region=>"ap-northeast-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -510,7 +34,7 @@ module Aws::IoTWireless
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"ap-southeast-2", :use_fips=>false})
+        params = EndpointParameters.new(**{:region=>"ap-southeast-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -518,41 +42,13 @@ module Aws::IoTWireless
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context 'For region eu-west-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://api.iotwireless.eu-west-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"us-east-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"us-east-1", :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotwireless.us-east-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"us-east-1", :use_fips=>false})
+        params = EndpointParameters.new(**{:region=>"eu-west-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -566,7 +62,7 @@ module Aws::IoTWireless
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"us-east-1", :use_fips=>false})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -574,13 +70,251 @@ module Aws::IoTWireless
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack disabled' do
+    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>true, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_dual_stack=>true, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless-fips.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_dual_stack=>false, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://api.iotwireless.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_dual_stack=>false, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"us-east-1", :use_fips=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>false, :use_fips=>false, :endpoint=>"https://example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_dual_stack=>false, :use_fips=>false, :endpoint=>"https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -594,7 +328,7 @@ module Aws::IoTWireless
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>false, :region=>"us-east-1", :use_fips=>true, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>false, :use_fips=>true, :endpoint=>"https://example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -607,7 +341,7 @@ module Aws::IoTWireless
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_dual_stack=>true, :region=>"us-east-1", :use_fips=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>true, :use_fips=>false, :endpoint=>"https://example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

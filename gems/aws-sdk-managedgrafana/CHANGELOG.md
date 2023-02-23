@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-02-23)
+------------------
+
+* Feature - Doc-only update. Updated information on attached role policies for customer provided roles
+
 1.12.0 (2023-02-16)
 ------------------
 

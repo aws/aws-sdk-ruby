@@ -139,20 +139,20 @@ module Aws::ECS
     #   The managed termination protection setting to use for the Auto
     #   Scaling group capacity provider. This determines whether the Auto
     #   Scaling group has managed termination protection. The default is
-    #   disabled.
+    #   off.
     #
     #   When using managed termination protection, managed scaling must also
     #   be used otherwise managed termination protection doesn't work.
     #
-    #   When managed termination protection is enabled, Amazon ECS prevents
-    #   the Amazon EC2 instances in an Auto Scaling group that contain tasks
+    #   When managed termination protection is on, Amazon ECS prevents the
+    #   Amazon EC2 instances in an Auto Scaling group that contain tasks
     #   from being terminated during a scale-in action. The Auto Scaling
     #   group and each instance in the Auto Scaling group must have instance
     #   protection from scale-in actions enabled as well. For more
     #   information, see [Instance Protection][1] in the *Auto Scaling User
     #   Guide*.
     #
-    #   When managed termination protection is disabled, your Amazon EC2
+    #   When managed termination protection is off, your Amazon EC2
     #   instances aren't protected from termination when the Auto Scaling
     #   group scales in.
     #
@@ -186,14 +186,14 @@ module Aws::ECS
     #   When using managed termination protection, managed scaling must also
     #   be used otherwise managed termination protection doesn't work.
     #
-    #   When managed termination protection is enabled, Amazon ECS prevents
-    #   the Amazon EC2 instances in an Auto Scaling group that contain tasks
+    #   When managed termination protection is on, Amazon ECS prevents the
+    #   Amazon EC2 instances in an Auto Scaling group that contain tasks
     #   from being terminated during a scale-in action. The Auto Scaling
     #   group and each instance in the Auto Scaling group must have instance
-    #   protection from scale-in actions enabled. For more information, see
+    #   protection from scale-in actions on. For more information, see
     #   [Instance Protection][1] in the *Auto Scaling User Guide*.
     #
-    #   When managed termination protection is disabled, your Amazon EC2
+    #   When managed termination protection is off, your Amazon EC2
     #   instances aren't protected from termination when the Auto Scaling
     #   group scales in.
     #
@@ -563,7 +563,7 @@ module Aws::ECS
     #
     # @!attribute [rw] settings
     #   The settings for the cluster. This parameter indicates whether
-    #   CloudWatch Container Insights is enabled or disabled for a cluster.
+    #   CloudWatch Container Insights is on or off for a cluster.
     #   @return [Array<Types::ClusterSetting>]
     #
     # @!attribute [rw] capacity_providers
@@ -797,10 +797,15 @@ module Aws::ECS
     #   The value to set for the cluster setting. The supported values are
     #   `enabled` and `disabled`. If `enabled` is specified, CloudWatch
     #   Container Insights will be enabled for the cluster, otherwise it
-    #   will be disabled unless the `containerInsights` account setting is
-    #   enabled. If a cluster value is specified, it will override the
-    #   `containerInsights` value set with PutAccountSetting or
-    #   PutAccountSettingDefault.
+    #   will be off unless the `containerInsights` account setting is turned
+    #   on. If a cluster value is specified, it will override the
+    #   `containerInsights` value set with [PutAccountSetting][1] or
+    #   [PutAccountSettingDefault][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterSetting AWS API Documentation
@@ -1516,8 +1521,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] disable_networking
-    #   When this parameter is true, networking is disabled within the
-    #   container. This parameter maps to `NetworkDisabled` in the [Create a
+    #   When this parameter is true, networking is off within the container.
+    #   This parameter maps to `NetworkDisabled` in the [Create a
     #   container][1] section of the [Docker Remote API][2].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1713,7 +1718,7 @@ module Aws::ECS
     #   `nofile` resource limit parameter which Fargate overrides. The
     #   `nofile` resource limit sets a restriction on the number of open
     #   files that a container can use. The default `nofile` soft limit is
-    #   `1024` and hard limit is `4096`.
+    #   `1024` and the default hard limit is `4096`.
     #
     #   This parameter requires version 1.18 of the Docker Remote API or
     #   greater on your container instance. To check the Docker Remote API
@@ -2394,33 +2399,45 @@ module Aws::ECS
     #   the cluster. A capacity provider must be associated with a cluster
     #   before it can be included as part of the default capacity provider
     #   strategy of the cluster or used in a capacity provider strategy when
-    #   calling the CreateService or RunTask actions.
+    #   calling the [CreateService][1] or [RunTask][2] actions.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group,
     #   the capacity provider must be created but not associated with
     #   another cluster. New Auto Scaling group capacity providers can be
-    #   created with the CreateCapacityProvider API operation.
+    #   created with the [CreateCapacityProvider][3] API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
     #   are available to all accounts and only need to be associated with a
     #   cluster to be used.
     #
-    #   The PutClusterCapacityProviders API operation is used to update the
+    #   The [PutCapacityProvider][4] API operation is used to update the
     #   list of available capacity providers for a cluster after the cluster
     #   is created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProvider.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_capacity_provider_strategy
     #   The capacity provider strategy to set as the default for the
     #   cluster. After a default capacity provider strategy is set for a
-    #   cluster, when you call the RunTask or CreateService APIs with no
-    #   capacity provider strategy or launch type specified, the default
-    #   capacity provider strategy for the cluster is used.
+    #   cluster, when you call the [CreateService][1] or [RunTask][2] APIs
+    #   with no capacity provider strategy or launch type specified, the
+    #   default capacity provider strategy for the cluster is used.
     #
     #   If a default capacity provider strategy isn't defined for a cluster
     #   when it was created, it can be defined later with the
     #   PutClusterCapacityProviders API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] service_connect_defaults
@@ -3075,12 +3092,12 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The Amazon Resource Name (ARN) of the principal. It can be an IAM
-    #   user, IAM role, or the root user. If you specify the root user, it
-    #   disables the account setting for all IAM users, IAM roles, and the
-    #   root user of the account unless an IAM user or role explicitly
-    #   overrides these settings. If this field is omitted, the setting is
-    #   changed only for the authenticated user.
+    #   The Amazon Resource Name (ARN) of the principal. It can be an user,
+    #   role, or the root user. If you specify the root user, it disables
+    #   the account setting for all users, roles, and the root user of the
+    #   account unless a user or role explicitly overrides these settings.
+    #   If this field is omitted, the setting is changed only for the
+    #   authenticated user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAccountSettingRequest AWS API Documentation
@@ -3224,6 +3241,39 @@ module Aws::ECS
     #
     class DeleteServiceResponse < Struct.new(
       :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_definitions
+    #   The `family` and `revision` (`family:revision`) or full Amazon
+    #   Resource Name (ARN) of the task definition to delete. You must
+    #   specify a `revision`.
+    #
+    #   You can specify up to 10 task definitions as a comma separated list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskDefinitionsRequest AWS API Documentation
+    #
+    class DeleteTaskDefinitionsRequest < Struct.new(
+      :task_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_definitions
+    #   The list of deleted task definitions.
+    #   @return [Array<Types::TaskDefinition>]
+    #
+    # @!attribute [rw] failures
+    #   Any failures associated with the call.
+    #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskDefinitionsResponse AWS API Documentation
+    #
+    class DeleteTaskDefinitionsResponse < Struct.new(
+      :task_definitions,
+      :failures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3499,8 +3549,7 @@ module Aws::ECS
     end
 
     # <note markdown="1"> The deployment circuit breaker can only be used for services using the
-    # rolling update (`ECS`) deployment type that aren't behind a Classic
-    # Load Balancer.
+    # rolling update (`ECS`) deployment type.
     #
     #  </note>
     #
@@ -3548,10 +3597,16 @@ module Aws::ECS
     #
     #   The **deployment circuit breaker** determines whether a service
     #   deployment will fail if the service can't reach a steady state. If
-    #   deployment circuit breaker is enabled, a service deployment will
-    #   transition to a failed state and stop launching new tasks. If
-    #   rollback is enabled, when a service deployment fails, the service is
-    #   rolled back to the last deployment that completed successfully.
+    #   you use the deployment circuit breaker, a service deployment will
+    #   transition to a failed state and stop launching new tasks. If you
+    #   use the rollback option, when a service deployment fails, the
+    #   service is rolled back to the last deployment that completed
+    #   successfully. For more information, see [Rolling update][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
     #   @return [Types::DeploymentCircuitBreaker]
     #
     # @!attribute [rw] maximum_percent
@@ -4336,13 +4391,12 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] iam
-    #   Determines whether to use the Amazon ECS task IAM role defined in a
-    #   task definition when mounting the Amazon EFS file system. If
-    #   enabled, transit encryption must be enabled in the
-    #   `EFSVolumeConfiguration`. If this parameter is omitted, the default
-    #   value of `DISABLED` is used. For more information, see [Using Amazon
-    #   EFS access points][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
+    #   Determines whether to use the Amazon ECS task role defined in a task
+    #   definition when mounting the Amazon EFS file system. If enabled,
+    #   transit encryption must be enabled in the `EFSVolumeConfiguration`.
+    #   If this parameter is omitted, the default value of `DISABLED` is
+    #   used. For more information, see [Using Amazon EFS access points][1]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -4554,7 +4608,7 @@ module Aws::ECS
     #
     # @!attribute [rw] cloud_watch_encryption_enabled
     #   Determines whether to use encryption on the CloudWatch logs. If not
-    #   specified, encryption will be disabled.
+    #   specified, encryption will be off.
     #   @return [Boolean]
     #
     # @!attribute [rw] s3_bucket_name
@@ -4937,14 +4991,14 @@ module Aws::ECS
     #
     #   When you use the Amazon Web Services Management Console JSON panel,
     #   the Command Line Interface, or the APIs, enclose the list of
-    #   commands in brackets.
+    #   commands in double quotes and brackets.
     #
     #   `[ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]`
     #
-    #   You don't need to include the brackets when you use the Amazon Web
-    #   Services Management Console.
+    #   You don't include the double quotes and brackets when you use the
+    #   Amazon Web Services Management Console.
     #
-    #   ` "CMD-SHELL", "curl -f http://localhost/ || exit 1" `
+    #   ` CMD-SHELL, curl -f http://localhost/ || exit 1`
     #
     #   An exit code of 0 indicates success, and non-zero exit code
     #   indicates failure. For more information, see `HealthCheck` in the
@@ -4978,7 +5032,7 @@ module Aws::ECS
     #   The optional grace period to provide containers time to bootstrap
     #   before failed health checks count towards the maximum number of
     #   retries. You can specify between 0 and 300 seconds. By default, the
-    #   `startPeriod` is disabled.
+    #   `startPeriod` is off.
     #
     #   <note markdown="1"> If a health check succeeds within the `startPeriod`, then the
     #   container is considered healthy and any subsequent failures count
@@ -5382,9 +5436,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If this field is omitted, the account settings are listed
-    #   only for the authenticated user.
+    #   The ARN of the principal, which can be a user, role, or the root
+    #   user. If this field is omitted, the account settings are listed only
+    #   for the authenticated user.
     #
     #   <note markdown="1"> Federated users assume the account setting of the root user and
     #   can't have explicit account settings set for them.
@@ -6384,8 +6438,8 @@ module Aws::ECS
     # for the metric. For more information, see [Using managed scaling][1]
     # in the *Amazon Elastic Container Service Developer Guide*.
     #
-    # If managed scaling is disabled, the user must manage the scaling of
-    # the Auto Scaling group.
+    # If managed scaling is off, the user must manage the scaling of the
+    # Auto Scaling group.
     #
     #
     #
@@ -6593,8 +6647,7 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # An object representing the network configuration for a task or
-    # service.
+    # The network configuration for a task or service.
     #
     # @!attribute [rw] awsvpc_configuration
     #   The VPC subnets and security groups that are associated with a task.
@@ -6973,8 +7026,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] protection_enabled
-    #   The protection status of the task. If scale-in protection is enabled
-    #   for a task, the value is `true`. Otherwise, it is `false`.
+    #   The protection status of the task. If scale-in protection is on for
+    #   a task, the value is `true`. Otherwise, it is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] expiration_date
@@ -7124,12 +7177,11 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If you specify the root user, it modifies the account
-    #   setting for all IAM users, IAM roles, and the root user of the
-    #   account unless an IAM user or role explicitly overrides these
-    #   settings. If this field is omitted, the setting is changed only for
-    #   the authenticated user.
+    #   The ARN of the principal, which can be a user, role, or the root
+    #   user. If you specify the root user, it modifies the account setting
+    #   for all users, roles, and the root user of the account unless a user
+    #   or role explicitly overrides these settings. If this field is
+    #   omitted, the setting is changed only for the authenticated user.
     #
     #   <note markdown="1"> Federated users assume the account setting of the root user and
     #   can't have explicit account settings set for them.
@@ -8072,11 +8124,11 @@ module Aws::ECS
     #   task definition to run. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
-    #   When you create an IAM policy for run-task, you can set the resource
-    #   to be the latest task definition revision, or a specific revision.
+    #   When you create a policy for run-task, you can set the resource to
+    #   be the latest task definition revision, or a specific revision.
     #
     #   The full ARN value must match the value that you specified as the
-    #   `Resource` of the IAM principal's permissions policy.
+    #   `Resource` of the principal's permissions policy.
     #
     #   When you specify the policy resource as the latest task definition
     #   version (by setting the `Resource` in the policy to
@@ -8959,14 +9011,13 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Determines whether the account setting is enabled or disabled for
-    #   the specified resource.
+    #   Determines whether the account setting is on or off for the
+    #   specified resource.
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal. It can be an IAM user, IAM role, or the
-    #   root user. If this field is omitted, the authenticated user is
-    #   assumed.
+    #   The ARN of the principal. It can be a user, role, or the root user.
+    #   If this field is omitted, the authenticated user is assumed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Setting AWS API Documentation
@@ -9139,7 +9190,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] task
-    #   The task ID or full Amazon Resource Name (ARN) of the task to stop.
+    #   The task ID of the task to stop.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -10341,10 +10392,10 @@ module Aws::ECS
     #   @return [Array<Types::InferenceAcceleratorOverride>]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the task execution IAM role
-    #   override for the task. For more information, see [Amazon ECS task
-    #   execution IAM role][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
+    #   The Amazon Resource Name (ARN) of the task execution role override
+    #   for the task. For more information, see [Amazon ECS task execution
+    #   IAM role][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
     #
     #
     #
@@ -10356,8 +10407,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] task_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that containers in
-    #   this task can assume. All containers in this task are granted the
+    #   The Amazon Resource Name (ARN) of the role that containers in this
+    #   task can assume. All containers in this task are granted the
     #   permissions that are specified in this role. For more information,
     #   see [IAM Role for Tasks][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
@@ -10675,8 +10726,11 @@ module Aws::ECS
     # values set by the operating system with the exception of the `nofile`
     # resource limit parameter which Fargate overrides. The `nofile`
     # resource limit sets a restriction on the number of open files that a
-    # container can use. The default `nofile` soft limit is `1024` and hard
-    # limit is `4096`.
+    # container can use. The default `nofile` soft limit is `1024` and the
+    # default hard limit is `4096`.
+    #
+    # You can specify the `ulimit` settings for a container in a task
+    # definition.
     #
     # @!attribute [rw] name
     #   The `type` of the `ulimit`.

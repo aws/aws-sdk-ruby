@@ -189,6 +189,8 @@ module Aws::IoTWireless
     Fingerprint = Shapes::StringShape.new(name: 'Fingerprint')
     FirmwareUpdateImage = Shapes::StringShape.new(name: 'FirmwareUpdateImage')
     FirmwareUpdateRole = Shapes::StringShape.new(name: 'FirmwareUpdateRole')
+    FragmentIntervalMS = Shapes::IntegerShape.new(name: 'FragmentIntervalMS')
+    FragmentSizeBytes = Shapes::IntegerShape.new(name: 'FragmentSizeBytes')
     FuotaDeviceStatus = Shapes::StringShape.new(name: 'FuotaDeviceStatus')
     FuotaTask = Shapes::StructureShape.new(name: 'FuotaTask')
     FuotaTaskArn = Shapes::StringShape.new(name: 'FuotaTaskArn')
@@ -427,6 +429,7 @@ module Aws::IoTWireless
     RSRQ = Shapes::FloatShape.new(name: 'RSRQ')
     RSS = Shapes::IntegerShape.new(name: 'RSS')
     RaAllowed = Shapes::BooleanShape.new(name: 'RaAllowed')
+    RedundancyPercent = Shapes::IntegerShape.new(name: 'RedundancyPercent')
     RegParamsRevision = Shapes::StringShape.new(name: 'RegParamsRevision')
     RegistrationZone = Shapes::IntegerShape.new(name: 'RegistrationZone')
     ReportDevStatusBattery = Shapes::BooleanShape.new(name: 'ReportDevStatusBattery')
@@ -765,6 +768,9 @@ module Aws::IoTWireless
     CreateFuotaTaskRequest.add_member(:firmware_update_image, Shapes::ShapeRef.new(shape: FirmwareUpdateImage, required: true, location_name: "FirmwareUpdateImage"))
     CreateFuotaTaskRequest.add_member(:firmware_update_role, Shapes::ShapeRef.new(shape: FirmwareUpdateRole, required: true, location_name: "FirmwareUpdateRole"))
     CreateFuotaTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateFuotaTaskRequest.add_member(:redundancy_percent, Shapes::ShapeRef.new(shape: RedundancyPercent, location_name: "RedundancyPercent"))
+    CreateFuotaTaskRequest.add_member(:fragment_size_bytes, Shapes::ShapeRef.new(shape: FragmentSizeBytes, location_name: "FragmentSizeBytes"))
+    CreateFuotaTaskRequest.add_member(:fragment_interval_ms, Shapes::ShapeRef.new(shape: FragmentIntervalMS, location_name: "FragmentIntervalMS"))
     CreateFuotaTaskRequest.struct_class = Types::CreateFuotaTaskRequest
 
     CreateFuotaTaskResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FuotaTaskArn, location_name: "Arn"))
@@ -1057,6 +1063,9 @@ module Aws::IoTWireless
     GetFuotaTaskResponse.add_member(:firmware_update_image, Shapes::ShapeRef.new(shape: FirmwareUpdateImage, location_name: "FirmwareUpdateImage"))
     GetFuotaTaskResponse.add_member(:firmware_update_role, Shapes::ShapeRef.new(shape: FirmwareUpdateRole, location_name: "FirmwareUpdateRole"))
     GetFuotaTaskResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
+    GetFuotaTaskResponse.add_member(:redundancy_percent, Shapes::ShapeRef.new(shape: RedundancyPercent, location_name: "RedundancyPercent"))
+    GetFuotaTaskResponse.add_member(:fragment_size_bytes, Shapes::ShapeRef.new(shape: FragmentSizeBytes, location_name: "FragmentSizeBytes"))
+    GetFuotaTaskResponse.add_member(:fragment_interval_ms, Shapes::ShapeRef.new(shape: FragmentIntervalMS, location_name: "FragmentIntervalMS"))
     GetFuotaTaskResponse.struct_class = Types::GetFuotaTaskResponse
 
     GetLogLevelsByResourceTypesRequest.struct_class = Types::GetLogLevelsByResourceTypesRequest
@@ -1937,6 +1946,9 @@ module Aws::IoTWireless
     UpdateFuotaTaskRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANFuotaTask, location_name: "LoRaWAN"))
     UpdateFuotaTaskRequest.add_member(:firmware_update_image, Shapes::ShapeRef.new(shape: FirmwareUpdateImage, location_name: "FirmwareUpdateImage"))
     UpdateFuotaTaskRequest.add_member(:firmware_update_role, Shapes::ShapeRef.new(shape: FirmwareUpdateRole, location_name: "FirmwareUpdateRole"))
+    UpdateFuotaTaskRequest.add_member(:redundancy_percent, Shapes::ShapeRef.new(shape: RedundancyPercent, location_name: "RedundancyPercent"))
+    UpdateFuotaTaskRequest.add_member(:fragment_size_bytes, Shapes::ShapeRef.new(shape: FragmentSizeBytes, location_name: "FragmentSizeBytes"))
+    UpdateFuotaTaskRequest.add_member(:fragment_interval_ms, Shapes::ShapeRef.new(shape: FragmentIntervalMS, location_name: "FragmentIntervalMS"))
     UpdateFuotaTaskRequest.struct_class = Types::UpdateFuotaTaskRequest
 
     UpdateFuotaTaskResponse.struct_class = Types::UpdateFuotaTaskResponse

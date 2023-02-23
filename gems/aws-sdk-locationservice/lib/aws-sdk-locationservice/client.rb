@@ -384,7 +384,7 @@ module Aws::LocationService
     # @option params [required, String] :consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   associated to tracker resource. Used when you need to specify a
-    #   resource across all AWS.
+    #   resource across all Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
@@ -1284,8 +1284,8 @@ module Aws::LocationService
     #   An optional description for the geofence collection.
     #
     # @option params [String] :kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1]. Enter a key
-    #   ID, key ARN, alias name, or alias ARN.
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
     #
     #
     #
@@ -1354,13 +1354,119 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Creates a map resource in your AWS account, which provides map tiles
-    # of different styles sourced from global location data providers.
+    # Creates an API key resource in your Amazon Web Services account, which
+    # lets you grant `geo:GetMap*` actions for Amazon Location Map resources
+    # to the API key bearer.
+    #
+    # The API keys feature is in preview. We may add, change, or remove
+    # features before announcing general availability. For more information,
+    # see [Using API keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
+    # @option params [String] :description
+    #   An optional description for the API key resource.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expire_time
+    #   The optional timestamp for when the API key resource will expire in [
+    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. One of `NoExpiry` or
+    #   `ExpireTime` must be set.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #
+    # @option params [required, String] :key_name
+    #   A custom name for the API key resource.
+    #
+    #   Requirements:
+    #
+    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+    #     periods (.), and underscores (\_).
+    #
+    #   * Must be a unique API key name.
+    #
+    #   * No spaces allowed. For example, `ExampleAPIKey`.
+    #
+    # @option params [Boolean] :no_expiry
+    #   Optionally set to `true` to set no expiration time for the API key.
+    #   One of `NoExpiry` or `ExpireTime` must be set.
+    #
+    # @option params [required, Types::ApiKeyRestrictions] :restrictions
+    #   The API key restrictions for the API key resource.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Applies one or more tags to the map resource. A tag is a key-value
+    #   pair that helps manage, identify, search, and filter your resources by
+    #   labelling them.
+    #
+    #   Format: `"key" : "value"`
+    #
+    #   Restrictions:
+    #
+    #   * Maximum 50 tags per resource
+    #
+    #   * Each resource tag must be unique with a maximum of one value.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8
+    #
+    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
+    #
+    # @return [Types::CreateKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKeyResponse#create_time #create_time} => Time
+    #   * {Types::CreateKeyResponse#key #key} => String
+    #   * {Types::CreateKeyResponse#key_arn #key_arn} => String
+    #   * {Types::CreateKeyResponse#key_name #key_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_key({
+    #     description: "ResourceDescription",
+    #     expire_time: Time.now,
+    #     key_name: "ResourceName", # required
+    #     no_expiry: false,
+    #     restrictions: { # required
+    #       allow_actions: ["ApiKeyAction"], # required
+    #       allow_referers: ["RefererPattern"],
+    #       allow_resources: ["GeoArn"], # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_time #=> Time
+    #   resp.key #=> String
+    #   resp.key_arn #=> String
+    #   resp.key_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateKey AWS API Documentation
+    #
+    # @overload create_key(params = {})
+    # @param [Hash] params ({})
+    def create_key(params = {}, options = {})
+      req = build_request(:create_key, params)
+      req.send_request(options)
+    end
+
+    # Creates a map resource in your Amazon Web Services account, which
+    # provides map tiles of different styles sourced from global location
+    # data providers.
     #
     # <note markdown="1"> If your application is tracking or routing assets you use in your
     # business, such as delivery vehicles or employees, you must not use
-    # Esri as your geolocation provider. See section 82 of the [AWS service
-    # terms][1] for more details.
+    # Esri as your geolocation provider. See section 82 of the [Amazon Web
+    # Services service terms][1] for more details.
     #
     #  </note>
     #
@@ -1449,17 +1555,17 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Creates a place index resource in your AWS account. Use a place index
-    # resource to geocode addresses and other text queries by using the
-    # `SearchPlaceIndexForText` operation, and reverse geocode coordinates
-    # by using the `SearchPlaceIndexForPosition` operation, and enable
-    # autosuggestions by using the `SearchPlaceIndexForSuggestions`
+    # Creates a place index resource in your Amazon Web Services account.
+    # Use a place index resource to geocode addresses and other text queries
+    # by using the `SearchPlaceIndexForText` operation, and reverse geocode
+    # coordinates by using the `SearchPlaceIndexForPosition` operation, and
+    # enable autosuggestions by using the `SearchPlaceIndexForSuggestions`
     # operation.
     #
     # <note markdown="1"> If your application is tracking or routing assets you use in your
     # business, such as delivery vehicles or employees, you must not use
-    # Esri as your geolocation provider. See section 82 of the [AWS service
-    # terms][1] for more details.
+    # Esri as your geolocation provider. See section 82 of the [Amazon Web
+    # Services service terms][1] for more details.
     #
     #  </note>
     #
@@ -1491,8 +1597,8 @@ module Aws::LocationService
     #
     #     If you specify HERE Technologies (`Here`) as the data provider, you
     #     may not [store results][7] for locations in Japan. For more
-    #     information, see the [AWS Service Terms][8] for Amazon Location
-    #     Service.
+    #     information, see the [Amazon Web Services Service Terms][8] for
+    #     Amazon Location Service.
     #
     #   For additional information , see [Data providers][9] on the *Amazon
     #   Location Service Developer Guide*.
@@ -1506,7 +1612,7 @@ module Aws::LocationService
     #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
     #   [6]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
     #   [7]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
-    #   [8]: https://aws.amazon.com/service-terms/
+    #   [8]: http://aws.amazon.com/service-terms/
     #   [9]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #
     # @option params [Types::DataSourceConfiguration] :data_source_configuration
@@ -1590,7 +1696,8 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Creates a route calculator resource in your AWS account.
+    # Creates a route calculator resource in your Amazon Web Services
+    # account.
     #
     # You can send requests to a route calculator resource to estimate
     # travel time, distance, and get directions. A route calculator sources
@@ -1598,8 +1705,8 @@ module Aws::LocationService
     #
     # <note markdown="1"> If your application is tracking or routing assets you use in your
     # business, such as delivery vehicles or employees, you must not use
-    # Esri as your geolocation provider. See section 82 of the [AWS service
-    # terms][1] for more details.
+    # Esri as your geolocation provider. See section 82 of the [Amazon Web
+    # Services service terms][1] for more details.
     #
     #  </note>
     #
@@ -1724,15 +1831,15 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Creates a tracker resource in your AWS account, which lets you
-    # retrieve current and historical location of devices.
+    # Creates a tracker resource in your Amazon Web Services account, which
+    # lets you retrieve current and historical location of devices.
     #
     # @option params [String] :description
     #   An optional description for the tracker resource.
     #
     # @option params [String] :kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1]. Enter a key
-    #   ID, key ARN, alias name, or alias ARN.
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
     #
     #
     #
@@ -1845,7 +1952,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Deletes a geofence collection from your AWS account.
+    # Deletes a geofence collection from your Amazon Web Services account.
     #
     # <note markdown="1"> This operation deletes the resource permanently. If the geofence
     # collection is the target of a tracker resource, the devices will no
@@ -1873,7 +1980,30 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Deletes a map resource from your AWS account.
+    # Deletes the specified API key. The API key must have been deactivated
+    # more than 90 days previously.
+    #
+    # @option params [required, String] :key_name
+    #   The name of the API key to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_key({
+    #     key_name: "ResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteKey AWS API Documentation
+    #
+    # @overload delete_key(params = {})
+    # @param [Hash] params ({})
+    def delete_key(params = {}, options = {})
+      req = build_request(:delete_key, params)
+      req.send_request(options)
+    end
+
+    # Deletes a map resource from your Amazon Web Services account.
     #
     # <note markdown="1"> This operation deletes the resource permanently. If the map is being
     # used in an application, the map may not render.
@@ -1900,7 +2030,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Deletes a place index resource from your AWS account.
+    # Deletes a place index resource from your Amazon Web Services account.
     #
     # <note markdown="1"> This operation deletes the resource permanently.
     #
@@ -1926,7 +2056,8 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Deletes a route calculator resource from your AWS account.
+    # Deletes a route calculator resource from your Amazon Web Services
+    # account.
     #
     # <note markdown="1"> This operation deletes the resource permanently.
     #
@@ -1952,7 +2083,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Deletes a tracker resource from your AWS account.
+    # Deletes a tracker resource from your Amazon Web Services account.
     #
     # <note markdown="1"> This operation deletes the resource permanently. If the tracker
     # resource is in use, you may encounter an error. Make sure that the
@@ -2022,6 +2153,64 @@ module Aws::LocationService
     # @param [Hash] params ({})
     def describe_geofence_collection(params = {}, options = {})
       req = build_request(:describe_geofence_collection, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the API key resource details.
+    #
+    # The API keys feature is in preview. We may add, change, or remove
+    # features before announcing general availability. For more information,
+    # see [Using API keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
+    # @option params [required, String] :key_name
+    #   The name of the API key resource.
+    #
+    # @return [Types::DescribeKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeKeyResponse#create_time #create_time} => Time
+    #   * {Types::DescribeKeyResponse#description #description} => String
+    #   * {Types::DescribeKeyResponse#expire_time #expire_time} => Time
+    #   * {Types::DescribeKeyResponse#key #key} => String
+    #   * {Types::DescribeKeyResponse#key_arn #key_arn} => String
+    #   * {Types::DescribeKeyResponse#key_name #key_name} => String
+    #   * {Types::DescribeKeyResponse#restrictions #restrictions} => Types::ApiKeyRestrictions
+    #   * {Types::DescribeKeyResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeKeyResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_key({
+    #     key_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_time #=> Time
+    #   resp.description #=> String
+    #   resp.expire_time #=> Time
+    #   resp.key #=> String
+    #   resp.key_arn #=> String
+    #   resp.key_name #=> String
+    #   resp.restrictions.allow_actions #=> Array
+    #   resp.restrictions.allow_actions[0] #=> String
+    #   resp.restrictions.allow_referers #=> Array
+    #   resp.restrictions.allow_referers[0] #=> String
+    #   resp.restrictions.allow_resources #=> Array
+    #   resp.restrictions.allow_resources[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeKey AWS API Documentation
+    #
+    # @overload describe_key(params = {})
+    # @param [Hash] params ({})
+    def describe_key(params = {}, options = {})
+      req = build_request(:describe_key, params)
       req.send_request(options)
     end
 
@@ -2217,7 +2406,7 @@ module Aws::LocationService
     # @option params [required, String] :consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   disassociated from the tracker resource. Used when you need to specify
-    #   a resource across all AWS.
+    #   a resource across all Amazon Web Services.
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
@@ -2507,12 +2696,20 @@ module Aws::LocationService
     #   characters from range `U+0000` to `00FF`. Must be aligned to multiples
     #   of 256.
     #
+    # @option params [String] :key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
     # @option params [required, String] :map_name
     #   The map resource associated with the glyph ﬁle.
     #
     # @return [Types::GetMapGlyphsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMapGlyphsResponse#blob #blob} => IO
+    #   * {Types::GetMapGlyphsResponse#cache_control #cache_control} => String
     #   * {Types::GetMapGlyphsResponse#content_type #content_type} => String
     #
     # @example Request syntax with placeholder values
@@ -2520,12 +2717,14 @@ module Aws::LocationService
     #   resp = client.get_map_glyphs({
     #     font_stack: "String", # required
     #     font_unicode_range: "GetMapGlyphsRequestFontUnicodeRangeString", # required
+    #     key: "ApiKey",
     #     map_name: "ResourceName", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.blob #=> IO
+    #   resp.cache_control #=> String
     #   resp.content_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapGlyphs AWS API Documentation
@@ -2556,24 +2755,34 @@ module Aws::LocationService
     #
     #   * `sprites@2x.json` for high pixel density displays
     #
+    # @option params [String] :key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
     # @option params [required, String] :map_name
     #   The map resource associated with the sprite ﬁle.
     #
     # @return [Types::GetMapSpritesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMapSpritesResponse#blob #blob} => IO
+    #   * {Types::GetMapSpritesResponse#cache_control #cache_control} => String
     #   * {Types::GetMapSpritesResponse#content_type #content_type} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_map_sprites({
     #     file_name: "GetMapSpritesRequestFileNameString", # required
+    #     key: "ApiKey",
     #     map_name: "ResourceName", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.blob #=> IO
+    #   resp.cache_control #=> String
     #   resp.content_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapSprites AWS API Documentation
@@ -2592,23 +2801,33 @@ module Aws::LocationService
     # data in, and the style for the data. Style descriptors follow the
     # Mapbox Style Specification.
     #
+    # @option params [String] :key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
     # @option params [required, String] :map_name
     #   The map resource to retrieve the style descriptor from.
     #
     # @return [Types::GetMapStyleDescriptorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMapStyleDescriptorResponse#blob #blob} => IO
+    #   * {Types::GetMapStyleDescriptorResponse#cache_control #cache_control} => String
     #   * {Types::GetMapStyleDescriptorResponse#content_type #content_type} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_map_style_descriptor({
+    #     key: "ApiKey",
     #     map_name: "ResourceName", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.blob #=> IO
+    #   resp.cache_control #=> String
     #   resp.content_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapStyleDescriptor AWS API Documentation
@@ -2629,6 +2848,13 @@ module Aws::LocationService
     # data for the entire world at (0/0/0) will be split into 4 tiles at
     # zoom 1 (1/0/0, 1/0/1, 1/1/0, 1/1/1).
     #
+    # @option params [String] :key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
     # @option params [required, String] :map_name
     #   The map resource to retrieve the map tiles from.
     #
@@ -2644,11 +2870,13 @@ module Aws::LocationService
     # @return [Types::GetMapTileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMapTileResponse#blob #blob} => IO
+    #   * {Types::GetMapTileResponse#cache_control #cache_control} => String
     #   * {Types::GetMapTileResponse#content_type #content_type} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_map_tile({
+    #     key: "ApiKey",
     #     map_name: "ResourceName", # required
     #     x: "GetMapTileRequestXString", # required
     #     y: "GetMapTileRequestYString", # required
@@ -2658,6 +2886,7 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.blob #=> IO
+    #   resp.cache_control #=> String
     #   resp.content_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapTile AWS API Documentation
@@ -2675,9 +2904,9 @@ module Aws::LocationService
     # <note markdown="1"> A PlaceId is valid only if all of the following are the same in the
     # original search request and the call to `GetPlace`.
     #
-    #  * Customer AWS account
+    #  * Customer Amazon Web Services account
     #
-    # * AWS Region
+    # * Amazon Web Services Region
     #
     # * Data provider specified in the place index resource
     #
@@ -2806,7 +3035,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Lists geofence collections in your AWS account.
+    # Lists geofence collections in your Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of resources returned in a single
@@ -2911,7 +3140,74 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Lists map resources in your AWS account.
+    # Lists API key resources in your Amazon Web Services account.
+    #
+    # The API keys feature is in preview. We may add, change, or remove
+    # features before announcing general availability. For more information,
+    # see [Using API keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
+    # @option params [Types::ApiKeyFilter] :filter
+    #   Optionally filter the list to only `Active` or `Expired` API keys.
+    #
+    # @option params [Integer] :max_results
+    #   An optional limit for the number of resources returned in a single
+    #   call.
+    #
+    #   Default value: `100`
+    #
+    # @option params [String] :next_token
+    #   The pagination token specifying which page of results to return in the
+    #   response. If no token is provided, the default page is the first page.
+    #
+    #   Default value: `null`
+    #
+    # @return [Types::ListKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKeysResponse#entries #data.entries} => Array&lt;Types::ListKeysResponseEntry&gt; (This method conflicts with a method on Response, call it through the data member)
+    #   * {Types::ListKeysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_keys({
+    #     filter: {
+    #       key_status: "Active", # accepts Active, Expired
+    #     },
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].create_time #=> Time
+    #   resp.data.entries[0].description #=> String
+    #   resp.data.entries[0].expire_time #=> Time
+    #   resp.data.entries[0].key_name #=> String
+    #   resp.data.entries[0].restrictions.allow_actions #=> Array
+    #   resp.data.entries[0].restrictions.allow_actions[0] #=> String
+    #   resp.data.entries[0].restrictions.allow_referers #=> Array
+    #   resp.data.entries[0].restrictions.allow_referers[0] #=> String
+    #   resp.data.entries[0].restrictions.allow_resources #=> Array
+    #   resp.data.entries[0].restrictions.allow_resources[0] #=> String
+    #   resp.data.entries[0].update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListKeys AWS API Documentation
+    #
+    # @overload list_keys(params = {})
+    # @param [Hash] params ({})
+    def list_keys(params = {}, options = {})
+      req = build_request(:list_keys, params)
+      req.send_request(options)
+    end
+
+    # Lists map resources in your Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of resources returned in a single
@@ -2959,7 +3255,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Lists place index resources in your AWS account.
+    # Lists place index resources in your Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   An optional limit for the maximum number of results returned in a
@@ -3007,7 +3303,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Lists route calculator resources in your AWS account.
+    # Lists route calculator resources in your Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   An optional maximum number of results returned in a single call.
@@ -3139,7 +3435,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Lists tracker resources in your AWS account.
+    # Lists tracker resources in your Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of resources returned in a single
@@ -3795,6 +4091,84 @@ module Aws::LocationService
       req.send_request(options)
     end
 
+    # Updates the specified properties of a given API key resource.
+    #
+    # The API keys feature is in preview. We may add, change, or remove
+    # features before announcing general availability. For more information,
+    # see [Using API keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
+    # @option params [String] :description
+    #   Updates the description for the API key resource.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expire_time
+    #   Updates the timestamp for when the API key resource will expire in [
+    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #
+    # @option params [Boolean] :force_update
+    #   The boolean flag to be included for updating `ExpireTime` or
+    #   `Restrictions` details.
+    #
+    #   Must be set to `true` to update an API key resource that has been used
+    #   in the past 7 days.
+    #
+    #   `False` if force update is not preferred
+    #
+    #   Default value: `False`
+    #
+    # @option params [required, String] :key_name
+    #   The name of the API key resource to update.
+    #
+    # @option params [Boolean] :no_expiry
+    #   Whether the API key should expire. Set to `true` to set the API key to
+    #   have no expiration time.
+    #
+    # @option params [Types::ApiKeyRestrictions] :restrictions
+    #   Updates the API key restrictions for the API key resource.
+    #
+    # @return [Types::UpdateKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKeyResponse#key_arn #key_arn} => String
+    #   * {Types::UpdateKeyResponse#key_name #key_name} => String
+    #   * {Types::UpdateKeyResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_key({
+    #     description: "ResourceDescription",
+    #     expire_time: Time.now,
+    #     force_update: false,
+    #     key_name: "ResourceName", # required
+    #     no_expiry: false,
+    #     restrictions: {
+    #       allow_actions: ["ApiKeyAction"], # required
+    #       allow_referers: ["RefererPattern"],
+    #       allow_resources: ["GeoArn"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_arn #=> String
+    #   resp.key_name #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateKey AWS API Documentation
+    #
+    # @overload update_key(params = {})
+    # @param [Hash] params ({})
+    def update_key(params = {}, options = {})
+      req = build_request(:update_key, params)
+      req.send_request(options)
+    end
+
     # Updates the specified properties of a given map resource.
     #
     # @option params [String] :description
@@ -4012,7 +4386,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

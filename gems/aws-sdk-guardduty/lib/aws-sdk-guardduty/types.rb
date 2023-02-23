@@ -647,6 +647,15 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] data_sources
     #   Describes which data sources will be enabled for the detector.
+    #
+    #   There might be regional differences because some data sources might
+    #   not be available in all the Amazon Web Services Regions where
+    #   GuardDuty is presently supported. For more information, see [Regions
+    #   and endpoints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #   @return [Types::DataSourceConfigurations]
     #
     # @!attribute [rw] tags
@@ -695,9 +704,10 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the filter. Valid special characters include
-    #   period (.), underscore (\_), dash (-), and whitespace. The new line
-    #   character is considered to be an invalid input for description.
+    #   The description of the filter. Valid characters include alphanumeric
+    #   characters, and special characters such as `-`, `.`, `:`, `\{ \}`,
+    #   `[ ]`, `( )`, `/`, `\t`, `\n`, `\x0B`, `\f`, `\r`, `_`, and
+    #   whitespace.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -720,8 +730,6 @@ module Aws::GuardDuty
     #   * accountId
     #
     #   * region
-    #
-    #   * confidence
     #
     #   * id
     #
@@ -821,13 +829,6 @@ module Aws::GuardDuty
     #
     #   * resource.s3BucketDetails.type
     #
-    #   * service.archived
-    #
-    #     When this attribute is set to TRUE, only archived findings are
-    #     listed. When it's set to FALSE, only unarchived findings are
-    #     listed. When this attribute is not set, all existing findings are
-    #     listed.
-    #
     #   * service.resourceRole
     #
     #   * severity
@@ -887,7 +888,7 @@ module Aws::GuardDuty
     # @!attribute [rw] name
     #   The user-friendly name to identify the IPSet.
     #
-    #   Allowed characters are alphanumerics, spaces, hyphens (-), and
+    #   Allowed characters are alphanumeric, whitespace, dash (-), and
     #   underscores (\_).
     #   @return [String]
     #
@@ -1476,7 +1477,12 @@ module Aws::GuardDuty
     #   @return [Types::FilterCriteria]
     #
     # @!attribute [rw] sort_criteria
-    #   Represents the criteria used for sorting scan entries.
+    #   Represents the criteria used for sorting scan entries. The [
+    #   `attributeName` ][1] is required and it must be `scanStartTime`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_SortCriteria.html#guardduty-Type-SortCriteria-attributeName
     #   @return [Types::SortCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeMalwareScansRequest AWS API Documentation
@@ -4584,9 +4590,8 @@ module Aws::GuardDuty
     # with the activity that prompted GuardDuty to generate a finding.
     #
     # @!attribute [rw] access_key_details
-    #   The IAM access key details (IAM user information) of a user that
-    #   engaged in the activity that prompted GuardDuty to generate a
-    #   finding.
+    #   The IAM access key details (user information) of a user that engaged
+    #   in the activity that prompted GuardDuty to generate a finding.
     #   @return [Types::AccessKeyDetails]
     #
     # @!attribute [rw] s3_bucket_details
@@ -5163,8 +5168,8 @@ module Aws::GuardDuty
     # Contains information about the criteria used for sorting findings.
     #
     # @!attribute [rw] attribute_name
-    #   Represents the finding attribute (for example, accountId) to sort
-    #   findings by.
+    #   Represents the finding attribute, such as `accountId`, that sorts
+    #   the findings.
     #   @return [String]
     #
     # @!attribute [rw] order_by
@@ -5374,7 +5379,7 @@ module Aws::GuardDuty
     # Represents the reason the scan was triggered.
     #
     # @!attribute [rw] guard_duty_finding_id
-    #   The ID of the GuardDuty finding that triggered the BirdDog scan.
+    #   The ID of the GuardDuty finding that triggered the malware scan.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5481,6 +5486,15 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] data_sources
     #   Describes which data sources will be updated.
+    #
+    #   There might be regional differences because some data sources might
+    #   not be available in all the Amazon Web Services Regions where
+    #   GuardDuty is presently supported. For more information, see [Regions
+    #   and endpoints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #   @return [Types::DataSourceConfigurations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest AWS API Documentation
@@ -5508,9 +5522,11 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the filter. Valid special characters include
-    #   period (.), underscore (\_), dash (-), and whitespace. The new line
-    #   character is considered to be an invalid input for description.
+    #   The description of the filter. Valid characters include alphanumeric
+    #   characters, and special characters such as hyphen, period, colon,
+    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
+    #   horizontal tab, vertical tab, newline, form feed, return, and
+    #   whitespace.
     #   @return [String]
     #
     # @!attribute [rw] action

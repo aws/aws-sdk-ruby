@@ -906,7 +906,7 @@ module Aws::Macie2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_sample_findings({
-    #     finding_types: ["SensitiveData:S3Object/Multiple"], # accepts SensitiveData:S3Object/Multiple, SensitiveData:S3Object/Financial, SensitiveData:S3Object/Personal, SensitiveData:S3Object/Credentials, SensitiveData:S3Object/CustomIdentifier, Policy:IAMUser/S3BucketPublic, Policy:IAMUser/S3BucketSharedExternally, Policy:IAMUser/S3BucketReplicatedExternally, Policy:IAMUser/S3BucketEncryptionDisabled, Policy:IAMUser/S3BlockPublicAccessDisabled
+    #     finding_types: ["SensitiveData:S3Object/Multiple"], # accepts SensitiveData:S3Object/Multiple, SensitiveData:S3Object/Financial, SensitiveData:S3Object/Personal, SensitiveData:S3Object/Credentials, SensitiveData:S3Object/CustomIdentifier, Policy:IAMUser/S3BucketPublic, Policy:IAMUser/S3BucketSharedExternally, Policy:IAMUser/S3BucketReplicatedExternally, Policy:IAMUser/S3BucketEncryptionDisabled, Policy:IAMUser/S3BlockPublicAccessDisabled, Policy:IAMUser/S3BucketSharedWithCloudFront
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateSampleFindings AWS API Documentation
@@ -2022,7 +2022,7 @@ module Aws::Macie2
     #   resp.findings[0].severity.description #=> String, one of "Low", "Medium", "High"
     #   resp.findings[0].severity.score #=> Integer
     #   resp.findings[0].title #=> String
-    #   resp.findings[0].type #=> String, one of "SensitiveData:S3Object/Multiple", "SensitiveData:S3Object/Financial", "SensitiveData:S3Object/Personal", "SensitiveData:S3Object/Credentials", "SensitiveData:S3Object/CustomIdentifier", "Policy:IAMUser/S3BucketPublic", "Policy:IAMUser/S3BucketSharedExternally", "Policy:IAMUser/S3BucketReplicatedExternally", "Policy:IAMUser/S3BucketEncryptionDisabled", "Policy:IAMUser/S3BlockPublicAccessDisabled"
+    #   resp.findings[0].type #=> String, one of "SensitiveData:S3Object/Multiple", "SensitiveData:S3Object/Financial", "SensitiveData:S3Object/Personal", "SensitiveData:S3Object/Credentials", "SensitiveData:S3Object/CustomIdentifier", "Policy:IAMUser/S3BucketPublic", "Policy:IAMUser/S3BucketSharedExternally", "Policy:IAMUser/S3BucketReplicatedExternally", "Policy:IAMUser/S3BucketEncryptionDisabled", "Policy:IAMUser/S3BlockPublicAccessDisabled", "Policy:IAMUser/S3BucketSharedWithCloudFront"
     #   resp.findings[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindings AWS API Documentation
@@ -3842,7 +3842,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

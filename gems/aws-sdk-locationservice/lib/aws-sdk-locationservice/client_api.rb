@@ -14,6 +14,13 @@ module Aws::LocationService
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    ApiKey = Shapes::StringShape.new(name: 'ApiKey')
+    ApiKeyAction = Shapes::StringShape.new(name: 'ApiKeyAction')
+    ApiKeyFilter = Shapes::StructureShape.new(name: 'ApiKeyFilter')
+    ApiKeyRestrictions = Shapes::StructureShape.new(name: 'ApiKeyRestrictions')
+    ApiKeyRestrictionsAllowActionsList = Shapes::ListShape.new(name: 'ApiKeyRestrictionsAllowActionsList')
+    ApiKeyRestrictionsAllowReferersList = Shapes::ListShape.new(name: 'ApiKeyRestrictionsAllowReferersList')
+    ApiKeyRestrictionsAllowResourcesList = Shapes::ListShape.new(name: 'ApiKeyRestrictionsAllowResourcesList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssociateTrackerConsumerRequest = Shapes::StructureShape.new(name: 'AssociateTrackerConsumerRequest')
@@ -80,6 +87,8 @@ module Aws::LocationService
     CountryCodeList = Shapes::ListShape.new(name: 'CountryCodeList')
     CreateGeofenceCollectionRequest = Shapes::StructureShape.new(name: 'CreateGeofenceCollectionRequest')
     CreateGeofenceCollectionResponse = Shapes::StructureShape.new(name: 'CreateGeofenceCollectionResponse')
+    CreateKeyRequest = Shapes::StructureShape.new(name: 'CreateKeyRequest')
+    CreateKeyResponse = Shapes::StructureShape.new(name: 'CreateKeyResponse')
     CreateMapRequest = Shapes::StructureShape.new(name: 'CreateMapRequest')
     CreateMapResponse = Shapes::StructureShape.new(name: 'CreateMapResponse')
     CreatePlaceIndexRequest = Shapes::StructureShape.new(name: 'CreatePlaceIndexRequest')
@@ -91,6 +100,8 @@ module Aws::LocationService
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DeleteGeofenceCollectionRequest = Shapes::StructureShape.new(name: 'DeleteGeofenceCollectionRequest')
     DeleteGeofenceCollectionResponse = Shapes::StructureShape.new(name: 'DeleteGeofenceCollectionResponse')
+    DeleteKeyRequest = Shapes::StructureShape.new(name: 'DeleteKeyRequest')
+    DeleteKeyResponse = Shapes::StructureShape.new(name: 'DeleteKeyResponse')
     DeleteMapRequest = Shapes::StructureShape.new(name: 'DeleteMapRequest')
     DeleteMapResponse = Shapes::StructureShape.new(name: 'DeleteMapResponse')
     DeletePlaceIndexRequest = Shapes::StructureShape.new(name: 'DeletePlaceIndexRequest')
@@ -101,6 +112,8 @@ module Aws::LocationService
     DeleteTrackerResponse = Shapes::StructureShape.new(name: 'DeleteTrackerResponse')
     DescribeGeofenceCollectionRequest = Shapes::StructureShape.new(name: 'DescribeGeofenceCollectionRequest')
     DescribeGeofenceCollectionResponse = Shapes::StructureShape.new(name: 'DescribeGeofenceCollectionResponse')
+    DescribeKeyRequest = Shapes::StructureShape.new(name: 'DescribeKeyRequest')
+    DescribeKeyResponse = Shapes::StructureShape.new(name: 'DescribeKeyResponse')
     DescribeMapRequest = Shapes::StructureShape.new(name: 'DescribeMapRequest')
     DescribeMapResponse = Shapes::StructureShape.new(name: 'DescribeMapResponse')
     DescribePlaceIndexRequest = Shapes::StructureShape.new(name: 'DescribePlaceIndexRequest')
@@ -170,6 +183,11 @@ module Aws::LocationService
     ListGeofencesRequest = Shapes::StructureShape.new(name: 'ListGeofencesRequest')
     ListGeofencesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListGeofencesRequestMaxResultsInteger')
     ListGeofencesResponse = Shapes::StructureShape.new(name: 'ListGeofencesResponse')
+    ListKeysRequest = Shapes::StructureShape.new(name: 'ListKeysRequest')
+    ListKeysRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListKeysRequestMaxResultsInteger')
+    ListKeysResponse = Shapes::StructureShape.new(name: 'ListKeysResponse')
+    ListKeysResponseEntry = Shapes::StructureShape.new(name: 'ListKeysResponseEntry')
+    ListKeysResponseEntryList = Shapes::ListShape.new(name: 'ListKeysResponseEntryList')
     ListMapsRequest = Shapes::StructureShape.new(name: 'ListMapsRequest')
     ListMapsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListMapsRequestMaxResultsInteger')
     ListMapsResponse = Shapes::StructureShape.new(name: 'ListMapsResponse')
@@ -211,6 +229,7 @@ module Aws::LocationService
     PropertyMapValueString = Shapes::StringShape.new(name: 'PropertyMapValueString')
     PutGeofenceRequest = Shapes::StructureShape.new(name: 'PutGeofenceRequest')
     PutGeofenceResponse = Shapes::StructureShape.new(name: 'PutGeofenceResponse')
+    RefererPattern = Shapes::StringShape.new(name: 'RefererPattern')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -244,6 +263,7 @@ module Aws::LocationService
     SearchPlaceIndexForTextSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextSummary')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Status = Shapes::StringShape.new(name: 'Status')
     Step = Shapes::StructureShape.new(name: 'Step')
     StepDistanceDouble = Shapes::FloatShape.new(name: 'StepDistanceDouble')
     StepDurationSecondsDouble = Shapes::FloatShape.new(name: 'StepDurationSecondsDouble')
@@ -271,6 +291,8 @@ module Aws::LocationService
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateGeofenceCollectionRequest = Shapes::StructureShape.new(name: 'UpdateGeofenceCollectionRequest')
     UpdateGeofenceCollectionResponse = Shapes::StructureShape.new(name: 'UpdateGeofenceCollectionResponse')
+    UpdateKeyRequest = Shapes::StructureShape.new(name: 'UpdateKeyRequest')
+    UpdateKeyResponse = Shapes::StructureShape.new(name: 'UpdateKeyResponse')
     UpdateMapRequest = Shapes::StructureShape.new(name: 'UpdateMapRequest')
     UpdateMapResponse = Shapes::StructureShape.new(name: 'UpdateMapResponse')
     UpdatePlaceIndexRequest = Shapes::StructureShape.new(name: 'UpdatePlaceIndexRequest')
@@ -287,6 +309,20 @@ module Aws::LocationService
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ApiKeyFilter.add_member(:key_status, Shapes::ShapeRef.new(shape: Status, location_name: "KeyStatus"))
+    ApiKeyFilter.struct_class = Types::ApiKeyFilter
+
+    ApiKeyRestrictions.add_member(:allow_actions, Shapes::ShapeRef.new(shape: ApiKeyRestrictionsAllowActionsList, required: true, location_name: "AllowActions"))
+    ApiKeyRestrictions.add_member(:allow_referers, Shapes::ShapeRef.new(shape: ApiKeyRestrictionsAllowReferersList, location_name: "AllowReferers"))
+    ApiKeyRestrictions.add_member(:allow_resources, Shapes::ShapeRef.new(shape: ApiKeyRestrictionsAllowResourcesList, required: true, location_name: "AllowResources"))
+    ApiKeyRestrictions.struct_class = Types::ApiKeyRestrictions
+
+    ApiKeyRestrictionsAllowActionsList.member = Shapes::ShapeRef.new(shape: ApiKeyAction)
+
+    ApiKeyRestrictionsAllowReferersList.member = Shapes::ShapeRef.new(shape: RefererPattern)
+
+    ApiKeyRestrictionsAllowResourcesList.member = Shapes::ShapeRef.new(shape: GeoArn)
 
     ArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
@@ -496,6 +532,20 @@ module Aws::LocationService
     CreateGeofenceCollectionResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     CreateGeofenceCollectionResponse.struct_class = Types::CreateGeofenceCollectionResponse
 
+    CreateKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    CreateKeyRequest.add_member(:expire_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpireTime"))
+    CreateKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "KeyName"))
+    CreateKeyRequest.add_member(:no_expiry, Shapes::ShapeRef.new(shape: Boolean, location_name: "NoExpiry"))
+    CreateKeyRequest.add_member(:restrictions, Shapes::ShapeRef.new(shape: ApiKeyRestrictions, required: true, location_name: "Restrictions"))
+    CreateKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateKeyRequest.struct_class = Types::CreateKeyRequest
+
+    CreateKeyResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
+    CreateKeyResponse.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, required: true, location_name: "Key"))
+    CreateKeyResponse.add_member(:key_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "KeyArn"))
+    CreateKeyResponse.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "KeyName"))
+    CreateKeyResponse.struct_class = Types::CreateKeyResponse
+
     CreateMapRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: MapConfiguration, required: true, location_name: "Configuration"))
     CreateMapRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateMapRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
@@ -555,6 +605,11 @@ module Aws::LocationService
 
     DeleteGeofenceCollectionResponse.struct_class = Types::DeleteGeofenceCollectionResponse
 
+    DeleteKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "KeyName"))
+    DeleteKeyRequest.struct_class = Types::DeleteKeyRequest
+
+    DeleteKeyResponse.struct_class = Types::DeleteKeyResponse
+
     DeleteMapRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
     DeleteMapRequest.struct_class = Types::DeleteMapRequest
 
@@ -588,6 +643,20 @@ module Aws::LocationService
     DescribeGeofenceCollectionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeGeofenceCollectionResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     DescribeGeofenceCollectionResponse.struct_class = Types::DescribeGeofenceCollectionResponse
+
+    DescribeKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "KeyName"))
+    DescribeKeyRequest.struct_class = Types::DescribeKeyRequest
+
+    DescribeKeyResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
+    DescribeKeyResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    DescribeKeyResponse.add_member(:expire_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ExpireTime"))
+    DescribeKeyResponse.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, required: true, location_name: "Key"))
+    DescribeKeyResponse.add_member(:key_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "KeyArn"))
+    DescribeKeyResponse.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "KeyName"))
+    DescribeKeyResponse.add_member(:restrictions, Shapes::ShapeRef.new(shape: ApiKeyRestrictions, required: true, location_name: "Restrictions"))
+    DescribeKeyResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    DescribeKeyResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    DescribeKeyResponse.struct_class = Types::DescribeKeyResponse
 
     DescribeMapRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
     DescribeMapRequest.struct_class = Types::DescribeMapRequest
@@ -709,34 +778,41 @@ module Aws::LocationService
 
     GetMapGlyphsRequest.add_member(:font_stack, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "FontStack"))
     GetMapGlyphsRequest.add_member(:font_unicode_range, Shapes::ShapeRef.new(shape: GetMapGlyphsRequestFontUnicodeRangeString, required: true, location: "uri", location_name: "FontUnicodeRange"))
+    GetMapGlyphsRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetMapGlyphsRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
     GetMapGlyphsRequest.struct_class = Types::GetMapGlyphsRequest
 
     GetMapGlyphsResponse.add_member(:blob, Shapes::ShapeRef.new(shape: Blob, location_name: "Blob"))
+    GetMapGlyphsResponse.add_member(:cache_control, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Cache-Control"))
     GetMapGlyphsResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
     GetMapGlyphsResponse.struct_class = Types::GetMapGlyphsResponse
     GetMapGlyphsResponse[:payload] = :blob
     GetMapGlyphsResponse[:payload_member] = GetMapGlyphsResponse.member(:blob)
 
     GetMapSpritesRequest.add_member(:file_name, Shapes::ShapeRef.new(shape: GetMapSpritesRequestFileNameString, required: true, location: "uri", location_name: "FileName"))
+    GetMapSpritesRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetMapSpritesRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
     GetMapSpritesRequest.struct_class = Types::GetMapSpritesRequest
 
     GetMapSpritesResponse.add_member(:blob, Shapes::ShapeRef.new(shape: Blob, location_name: "Blob"))
+    GetMapSpritesResponse.add_member(:cache_control, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Cache-Control"))
     GetMapSpritesResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
     GetMapSpritesResponse.struct_class = Types::GetMapSpritesResponse
     GetMapSpritesResponse[:payload] = :blob
     GetMapSpritesResponse[:payload_member] = GetMapSpritesResponse.member(:blob)
 
+    GetMapStyleDescriptorRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetMapStyleDescriptorRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
     GetMapStyleDescriptorRequest.struct_class = Types::GetMapStyleDescriptorRequest
 
     GetMapStyleDescriptorResponse.add_member(:blob, Shapes::ShapeRef.new(shape: Blob, location_name: "Blob"))
+    GetMapStyleDescriptorResponse.add_member(:cache_control, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Cache-Control"))
     GetMapStyleDescriptorResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
     GetMapStyleDescriptorResponse.struct_class = Types::GetMapStyleDescriptorResponse
     GetMapStyleDescriptorResponse[:payload] = :blob
     GetMapStyleDescriptorResponse[:payload_member] = GetMapStyleDescriptorResponse.member(:blob)
 
+    GetMapTileRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetMapTileRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
     GetMapTileRequest.add_member(:x, Shapes::ShapeRef.new(shape: GetMapTileRequestXString, required: true, location: "uri", location_name: "X"))
     GetMapTileRequest.add_member(:y, Shapes::ShapeRef.new(shape: GetMapTileRequestYString, required: true, location: "uri", location_name: "Y"))
@@ -744,6 +820,7 @@ module Aws::LocationService
     GetMapTileRequest.struct_class = Types::GetMapTileRequest
 
     GetMapTileResponse.add_member(:blob, Shapes::ShapeRef.new(shape: Blob, location_name: "Blob"))
+    GetMapTileResponse.add_member(:cache_control, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Cache-Control"))
     GetMapTileResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
     GetMapTileResponse.struct_class = Types::GetMapTileResponse
     GetMapTileResponse[:payload] = :blob
@@ -832,6 +909,25 @@ module Aws::LocationService
     ListGeofencesResponse.add_member(:entries, Shapes::ShapeRef.new(shape: ListGeofenceResponseEntryList, required: true, location_name: "Entries"))
     ListGeofencesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListGeofencesResponse.struct_class = Types::ListGeofencesResponse
+
+    ListKeysRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ApiKeyFilter, location_name: "Filter"))
+    ListKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListKeysRequestMaxResultsInteger, location_name: "MaxResults"))
+    ListKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListKeysRequest.struct_class = Types::ListKeysRequest
+
+    ListKeysResponse.add_member(:entries, Shapes::ShapeRef.new(shape: ListKeysResponseEntryList, required: true, location_name: "Entries"))
+    ListKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListKeysResponse.struct_class = Types::ListKeysResponse
+
+    ListKeysResponseEntry.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
+    ListKeysResponseEntry.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    ListKeysResponseEntry.add_member(:expire_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ExpireTime"))
+    ListKeysResponseEntry.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "KeyName"))
+    ListKeysResponseEntry.add_member(:restrictions, Shapes::ShapeRef.new(shape: ApiKeyRestrictions, required: true, location_name: "Restrictions"))
+    ListKeysResponseEntry.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    ListKeysResponseEntry.struct_class = Types::ListKeysResponseEntry
+
+    ListKeysResponseEntryList.member = Shapes::ShapeRef.new(shape: ListKeysResponseEntry)
 
     ListMapsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMapsRequestMaxResultsInteger, location_name: "MaxResults"))
     ListMapsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -1115,6 +1211,19 @@ module Aws::LocationService
     UpdateGeofenceCollectionResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     UpdateGeofenceCollectionResponse.struct_class = Types::UpdateGeofenceCollectionResponse
 
+    UpdateKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    UpdateKeyRequest.add_member(:expire_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpireTime"))
+    UpdateKeyRequest.add_member(:force_update, Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceUpdate"))
+    UpdateKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "KeyName"))
+    UpdateKeyRequest.add_member(:no_expiry, Shapes::ShapeRef.new(shape: Boolean, location_name: "NoExpiry"))
+    UpdateKeyRequest.add_member(:restrictions, Shapes::ShapeRef.new(shape: ApiKeyRestrictions, location_name: "Restrictions"))
+    UpdateKeyRequest.struct_class = Types::UpdateKeyRequest
+
+    UpdateKeyResponse.add_member(:key_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "KeyArn"))
+    UpdateKeyResponse.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "KeyName"))
+    UpdateKeyResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    UpdateKeyResponse.struct_class = Types::UpdateKeyResponse
+
     UpdateMapRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateMapRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
     UpdateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage."}))
@@ -1350,6 +1459,23 @@ module Aws::LocationService
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/metadata/v0/keys"
+        o.endpoint_pattern = {
+          "hostPrefix" => "metadata.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_map, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMap"
         o.http_method = "POST"
@@ -1433,6 +1559,22 @@ module Aws::LocationService
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKey"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/metadata/v0/keys/{KeyName}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "metadata.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_map, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMap"
         o.http_method = "DELETE"
@@ -1506,6 +1648,22 @@ module Aws::LocationService
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeGeofenceCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeGeofenceCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeKey"
+        o.http_method = "GET"
+        o.http_request_uri = "/metadata/v0/keys/{KeyName}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "metadata.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeKeyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1791,6 +1949,27 @@ module Aws::LocationService
         )
       end)
 
+      api.add_operation(:list_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/metadata/v0/list-keys"
+        o.endpoint_pattern = {
+          "hostPrefix" => "metadata.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKeysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_maps, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMaps"
         o.http_method = "POST"
@@ -2019,6 +2198,22 @@ module Aws::LocationService
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateGeofenceCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateGeofenceCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKey"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/metadata/v0/keys/{KeyName}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "metadata.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKeyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
