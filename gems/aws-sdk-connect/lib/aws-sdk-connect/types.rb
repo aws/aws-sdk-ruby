@@ -9994,6 +9994,14 @@ module Aws::Connect
     #   The identifier for the quick connect.
     #   @return [String]
     #
+    # @!attribute [rw] related_contact_id
+    #   The contactId that is [related][1] to this contact.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContactRequest AWS API Documentation
     #
     class StartTaskContactRequest < Struct.new(
@@ -10007,7 +10015,8 @@ module Aws::Connect
       :client_token,
       :scheduled_time,
       :task_template_id,
-      :quick_connect_id)
+      :quick_connect_id,
+      :related_contact_id)
       SENSITIVE = []
       include Aws::Structure
     end

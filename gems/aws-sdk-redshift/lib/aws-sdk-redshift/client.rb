@@ -735,8 +735,8 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
+    #   parameter is required if your IAM user or role has a policy containing
+    #   a snapshot resource element that specifies anything other than * for
     #   the cluster name.
     #
     # @option params [required, String] :account_with_restore_access
@@ -995,9 +995,9 @@ module Aws::Redshift
     #
     # @option params [String] :source_snapshot_cluster_identifier
     #   The identifier of the cluster the source snapshot was created from.
-    #   This parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
-    #   the cluster name.
+    #   This parameter is required if your IAM user or role has a policy
+    #   containing a snapshot resource element that specifies anything other
+    #   than * for the cluster name.
     #
     #   Constraints:
     #
@@ -1213,8 +1213,8 @@ module Aws::Redshift
     #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
     #
     # @option params [required, String] :master_username
-    #   The user name associated with the admin user account for the cluster
-    #   that is being created.
+    #   The user name associated with the admin user for the cluster that is
+    #   being created.
     #
     #   Constraints:
     #
@@ -1236,8 +1236,8 @@ module Aws::Redshift
     #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
     # @option params [required, String] :master_user_password
-    #   The password associated with the admin user account for the cluster
-    #   that is being created.
+    #   The password associated with the admin user for the cluster that is
+    #   being created.
     #
     #   Constraints:
     #
@@ -3135,9 +3135,9 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The unique identifier of the cluster the snapshot was created from.
-    #   This parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
-    #   the cluster name.
+    #   This parameter is required if your IAM user or role has a policy
+    #   containing a snapshot resource element that specifies anything other
+    #   than * for the cluster name.
     #
     #   Constraints: Must be the name of valid cluster.
     #
@@ -4019,7 +4019,7 @@ module Aws::Redshift
     #
     #   Default: `100`
     #
-    #   Constraints: minimum 20, maximum 100.
+    #   Constraints: minimum 20, maximum 500.
     #
     # @option params [String] :marker
     #   An optional parameter that specifies the starting point to return a
@@ -7741,8 +7741,8 @@ module Aws::Redshift
     #   response.
     #
     #   <note markdown="1"> Operations never return the password, so this operation provides a way
-    #   to regain access to the admin user account for a cluster if the
-    #   password is lost.
+    #   to regain access to the admin user for a cluster if the password is
+    #   lost.
     #
     #    </note>
     #
@@ -10086,8 +10086,8 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The name of the cluster the source snapshot was created from. This
-    #   parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
+    #   parameter is required if your IAM user or role has a policy containing
+    #   a snapshot resource element that specifies anything other than * for
     #   the cluster name.
     #
     # @option params [Integer] :port
@@ -10890,8 +10890,8 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
+    #   parameter is required if your IAM user or role has a policy containing
+    #   a snapshot resource element that specifies anything other than * for
     #   the cluster name.
     #
     # @option params [required, String] :account_with_restore_access
@@ -11176,7 +11176,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

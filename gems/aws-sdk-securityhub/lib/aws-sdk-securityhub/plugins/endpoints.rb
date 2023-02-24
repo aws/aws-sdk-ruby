@@ -64,10 +64,16 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::BatchDisableStandards.build(context)
           when :batch_enable_standards
             Aws::SecurityHub::Endpoints::BatchEnableStandards.build(context)
+          when :batch_get_security_controls
+            Aws::SecurityHub::Endpoints::BatchGetSecurityControls.build(context)
+          when :batch_get_standards_control_associations
+            Aws::SecurityHub::Endpoints::BatchGetStandardsControlAssociations.build(context)
           when :batch_import_findings
             Aws::SecurityHub::Endpoints::BatchImportFindings.build(context)
           when :batch_update_findings
             Aws::SecurityHub::Endpoints::BatchUpdateFindings.build(context)
+          when :batch_update_standards_control_associations
+            Aws::SecurityHub::Endpoints::BatchUpdateStandardsControlAssociations.build(context)
           when :create_action_target
             Aws::SecurityHub::Endpoints::CreateActionTarget.build(context)
           when :create_finding_aggregator
@@ -148,6 +154,10 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::ListMembers.build(context)
           when :list_organization_admin_accounts
             Aws::SecurityHub::Endpoints::ListOrganizationAdminAccounts.build(context)
+          when :list_security_control_definitions
+            Aws::SecurityHub::Endpoints::ListSecurityControlDefinitions.build(context)
+          when :list_standards_control_associations
+            Aws::SecurityHub::Endpoints::ListStandardsControlAssociations.build(context)
           when :list_tags_for_resource
             Aws::SecurityHub::Endpoints::ListTagsForResource.build(context)
           when :tag_resource

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-02-24)
+------------------
+
+* Feature - New Security Hub APIs and updates to existing APIs that help you consolidate control findings and enable and disable controls across all supported standards
+
 1.77.0 (2023-02-21)
 ------------------
 

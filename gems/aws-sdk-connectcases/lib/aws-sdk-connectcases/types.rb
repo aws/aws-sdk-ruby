@@ -553,6 +553,22 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteDomainRequest AWS API Documentation
+    #
+    class DeleteDomainRequest < Struct.new(
+      :domain_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteDomainResponse AWS API Documentation
+    #
+    class DeleteDomainResponse < Aws::EmptyStructure; end
+
     # Object for the summarized details of the domain.
     #
     # @!attribute [rw] domain_arn

@@ -2722,6 +2722,7 @@ module Aws::Connect
     StartTaskContactRequest.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ScheduledTime"))
     StartTaskContactRequest.add_member(:task_template_id, Shapes::ShapeRef.new(shape: TaskTemplateId, location_name: "TaskTemplateId"))
     StartTaskContactRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, location_name: "QuickConnectId"))
+    StartTaskContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     StartTaskContactRequest.struct_class = Types::StartTaskContactRequest
 
     StartTaskContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))

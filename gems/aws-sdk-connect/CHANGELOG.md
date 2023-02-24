@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2023-02-24)
+------------------
+
+* Feature - StartTaskContact API now supports linked task creation with a new optional RelatedContactId parameter
+
 1.97.0 (2023-02-20)
 ------------------
 

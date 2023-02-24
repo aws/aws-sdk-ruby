@@ -468,7 +468,9 @@ module Aws::ConnectCases
     # fields are taken as an array id/value pairs with a declared data
     # types.
     #
-    # <note markdown="1"> `customer_id` is a required field when creating a case.
+    # <note markdown="1"> The following fields are required when creating a case:
+    #
+    #       <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul> </note>
     #
     #  </note>
     #
@@ -538,10 +540,13 @@ module Aws::ConnectCases
     #
     # This will not associate your connect instance to Cases domain.
     # Instead, use the Amazon Connect [CreateIntegrationAssociation][1] API.
+    # You need specific IAM permissions to successfully associate the Cases
+    # domain. For more information, see [Onboard to Cases][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam
     #
     # @option params [required, String] :name
     #   The name for your Cases domain. It must be unique for your Amazon Web
@@ -820,6 +825,28 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def create_template(params = {}, options = {})
       req = build_request(:create_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes a domain.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_domain({
+    #     domain_id: "DomainId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteDomain AWS API Documentation
+    #
+    # @overload delete_domain(params = {})
+    # @param [Hash] params ({})
+    def delete_domain(params = {}, options = {})
+      req = build_request(:delete_domain, params)
       req.send_request(options)
     end
 
@@ -1408,6 +1435,12 @@ module Aws::ConnectCases
     # Searches for cases within their associated Cases domain. Search
     # results are returned as a paginated list of abridged case documents.
     #
+    # <note markdown="1"> For `customer_id` you must provide the full customer profile ARN in
+    # this format: ` arn:aws:profile:your AWS Region:your AWS account
+    # ID:domains/profiles domain name/profiles/profile ID`.
+    #
+    #  </note>
+    #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
     #
@@ -1901,7 +1934,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

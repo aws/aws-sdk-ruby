@@ -336,9 +336,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
-    #   the cluster name.
+    #   parameter is required if your IAM user or role has a policy
+    #   containing a snapshot resource element that specifies anything other
+    #   than * for the cluster name.
     #   @return [String]
     #
     # @!attribute [rw] account_with_restore_access
@@ -1662,9 +1662,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] source_snapshot_cluster_identifier
     #   The identifier of the cluster the source snapshot was created from.
-    #   This parameter is required if your IAM user has a policy containing
-    #   a snapshot resource element that specifies anything other than *
-    #   for the cluster name.
+    #   This parameter is required if your IAM user or role has a policy
+    #   containing a snapshot resource element that specifies anything other
+    #   than * for the cluster name.
     #
     #   Constraints:
     #
@@ -1841,8 +1841,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] master_username
-    #   The user name associated with the admin user account for the cluster
-    #   that is being created.
+    #   The user name associated with the admin user for the cluster that is
+    #   being created.
     #
     #   Constraints:
     #
@@ -1866,8 +1866,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
-    #   The password associated with the admin user account for the cluster
-    #   that is being created.
+    #   The password associated with the admin user for the cluster that is
+    #   being created.
     #
     #   Constraints:
     #
@@ -3242,9 +3242,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_cluster_identifier
     #   The unique identifier of the cluster the snapshot was created from.
-    #   This parameter is required if your IAM user has a policy containing
-    #   a snapshot resource element that specifies anything other than *
-    #   for the cluster name.
+    #   This parameter is required if your IAM user or role has a policy
+    #   containing a snapshot resource element that specifies anything other
+    #   than * for the cluster name.
     #
     #   Constraints: Must be the name of valid cluster.
     #   @return [String]
@@ -3728,7 +3728,7 @@ module Aws::Redshift
     #
     #   Default: `100`
     #
-    #   Constraints: minimum 20, maximum 100.
+    #   Constraints: minimum 20, maximum 500.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -7169,8 +7169,8 @@ module Aws::Redshift
     #   operation response.
     #
     #   <note markdown="1"> Operations never return the password, so this operation provides a
-    #   way to regain access to the admin user account for a cluster if the
-    #   password is lost.
+    #   way to regain access to the admin user for a cluster if the password
+    #   is lost.
     #
     #    </note>
     #
@@ -8954,9 +8954,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_cluster_identifier
     #   The name of the cluster the source snapshot was created from. This
-    #   parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
-    #   the cluster name.
+    #   parameter is required if your IAM user or role has a policy
+    #   containing a snapshot resource element that specifies anything other
+    #   than * for the cluster name.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -9538,9 +9538,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
-    #   the cluster name.
+    #   parameter is required if your IAM user or role has a policy
+    #   containing a snapshot resource element that specifies anything other
+    #   than * for the cluster name.
     #   @return [String]
     #
     # @!attribute [rw] account_with_restore_access

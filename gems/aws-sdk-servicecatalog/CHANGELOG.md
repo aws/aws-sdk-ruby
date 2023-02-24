@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-02-24)
+------------------
+
+* Feature - Documentation updates for Service Catalog
+
 1.75.0 (2023-01-18)
 ------------------
 

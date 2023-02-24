@@ -1838,8 +1838,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] sns_topic_arn
-    #   An ARN that uniquely identifies the Amazon SNS topic for a backup
-    #   vault’s events.
+    #   The Amazon Resource Name (ARN) that uniquely identifies the Amazon
+    #   SNS topic for a backup vault's events.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupVaultNotificationsDetails AWS API Documentation
@@ -5216,7 +5216,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
     #   The price protection threshold for On-Demand Instances. This is the
-    #   maximum you’ll pay for an On-Demand Instance, expressed as a
+    #   maximum you'll pay for an On-Demand Instance, expressed as a
     #   percentage above the least expensive current generation M, C, or R
     #   instance type with your specified attributes. When Amazon EC2
     #   selects instance types with your attributes, it excludes instance
@@ -5235,7 +5235,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
     #   The price protection threshold for Spot Instances. This is the
-    #   maximum you’ll pay for a Spot Instance, expressed as a percentage
+    #   maximum you'll pay for a Spot Instance, expressed as a percentage
     #   above the least expensive current generation M, C, or R instance
     #   type with your specified attributes. When Amazon EC2 selects
     #   instance types with your attributes, it excludes instance types
@@ -5418,7 +5418,7 @@ module Aws::SecurityHub
     # @!attribute [rw] http_endpoint
     #   Enables or disables the HTTP metadata endpoint on your instances. If
     #   the parameter is not specified, the default state is enabled, and
-    #   you won’t be able to access your instance metadata.
+    #   you won't be able to access your instance metadata.
     #   @return [String]
     #
     # @!attribute [rw] http_protocol_ipv_6
@@ -13970,7 +13970,9 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Information about a cross-Region snapshot copy.
+    # You can configure Amazon Redshift to copy snapshots for a cluster to
+    # another Amazon Web Services Region. This parameter provides
+    # information about a cross-Region snapshot copy.
     #
     # @!attribute [rw] destination_region
     #   The destination Region that snapshots are automatically copied to
@@ -13979,7 +13981,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] manual_snapshot_retention_period
     #   The number of days that manual snapshots are retained in the
-    #   destination region after they are copied from a source region.
+    #   destination Region after they are copied from a source Region.
     #
     #   If the value is `-1`, then the manual snapshot is retained
     #   indefinitely.
@@ -18234,6 +18236,81 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] security_control_ids
+    #   A list of security controls (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters). The security
+    #   control ID or Amazon Resource Name (ARN) is the same across
+    #   standards.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetSecurityControlsRequest AWS API Documentation
+    #
+    class BatchGetSecurityControlsRequest < Struct.new(
+      :security_control_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_controls
+    #   An array that returns the identifier, Amazon Resource Name (ARN),
+    #   and other details about a security control. The same information is
+    #   returned whether the request includes `SecurityControlId` or
+    #   `SecurityControlArn`.
+    #   @return [Array<Types::SecurityControl>]
+    #
+    # @!attribute [rw] unprocessed_ids
+    #   A security control (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters) for which details
+    #   cannot be returned.
+    #   @return [Array<Types::UnprocessedSecurityControl>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetSecurityControlsResponse AWS API Documentation
+    #
+    class BatchGetSecurityControlsResponse < Struct.new(
+      :security_controls,
+      :unprocessed_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] standards_control_association_ids
+    #   An array with one or more objects that includes a security control
+    #   (identified with `SecurityControlId`, `SecurityControlArn`, or a mix
+    #   of both parameters) and the Amazon Resource Name (ARN) of a
+    #   standard. This field is used to query the enablement status of a
+    #   control in a specified standard. The security control ID or ARN is
+    #   the same across standards.
+    #   @return [Array<Types::StandardsControlAssociationId>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetStandardsControlAssociationsRequest AWS API Documentation
+    #
+    class BatchGetStandardsControlAssociationsRequest < Struct.new(
+      :standards_control_association_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] standards_control_association_details
+    #   Provides the enablement status of a security control in a specified
+    #   standard and other details for the control in relation to the
+    #   specified standard.
+    #   @return [Array<Types::StandardsControlAssociationDetail>]
+    #
+    # @!attribute [rw] unprocessed_associations
+    #   A security control (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters) whose enablement
+    #   status in a specified standard cannot be returned.
+    #   @return [Array<Types::UnprocessedStandardsControlAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetStandardsControlAssociationsResponse AWS API Documentation
+    #
+    class BatchGetStandardsControlAssociationsResponse < Struct.new(
+      :standards_control_association_details,
+      :unprocessed_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] findings
     #   A list of findings to import. To successfully import a finding, it
     #   must follow the [Amazon Web Services Security Finding Format][1].
@@ -18451,6 +18528,33 @@ module Aws::SecurityHub
       :finding_identifier,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] standards_control_association_updates
+    #   Updates the enablement status of a security control in a specified
+    #   standard.
+    #   @return [Array<Types::StandardsControlAssociationUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateStandardsControlAssociationsRequest AWS API Documentation
+    #
+    class BatchUpdateStandardsControlAssociationsRequest < Struct.new(
+      :standards_control_association_updates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unprocessed_association_updates
+    #   A security control (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters) whose enablement
+    #   status in a specified standard couldn't be updated.
+    #   @return [Array<Types::UnprocessedStandardsControlAssociationUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateStandardsControlAssociationsResponse AWS API Documentation
+    #
+    class BatchUpdateStandardsControlAssociationsResponse < Struct.new(
+      :unprocessed_association_updates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18769,7 +18873,7 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] action_target_arn
-    #   The ARN for the custom action target.
+    #   The Amazon Resource Name (ARN) for the custom action target.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateActionTargetResponse AWS API Documentation
@@ -19118,7 +19222,8 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] action_target_arn
-    #   The ARN of the custom action target to delete.
+    #   The Amazon Resource Name (ARN) of the custom action target to
+    #   delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteActionTargetRequest AWS API Documentation
@@ -19311,12 +19416,30 @@ module Aws::SecurityHub
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] control_finding_generator
+    #   Specifies whether the calling account has consolidated control
+    #   findings turned on. If the value for this field is set to
+    #   `SECURITY_CONTROL`, Security Hub generates a single finding for a
+    #   control check even when the check applies to multiple enabled
+    #   standards.
+    #
+    #   If the value for this field is set to `STANDARD_CONTROL`, Security
+    #   Hub generates separate findings for a control check when the check
+    #   applies to multiple enabled standards.
+    #
+    #   The value for this field in a member account matches the value in
+    #   the administrator account. For accounts that aren't part of an
+    #   organization, the default value of this field is `SECURITY_CONTROL`
+    #   if you enabled Security Hub on or after February 9, 2023.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHubResponse AWS API Documentation
     #
     class DescribeHubResponse < Struct.new(
       :hub_arn,
       :subscribed_at,
-      :auto_enable_controls)
+      :auto_enable_controls,
+      :control_finding_generator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19657,11 +19780,29 @@ module Aws::SecurityHub
     #   `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] control_finding_generator
+    #   This field, used when enabling Security Hub, specifies whether the
+    #   calling account has consolidated control findings turned on. If the
+    #   value for this field is set to `SECURITY_CONTROL`, Security Hub
+    #   generates a single finding for a control check even when the check
+    #   applies to multiple enabled standards.
+    #
+    #   If the value for this field is set to `STANDARD_CONTROL`, Security
+    #   Hub generates separate findings for a control check when the check
+    #   applies to multiple enabled standards.
+    #
+    #   The value for this field in a member account matches the value in
+    #   the administrator account. For accounts that aren't part of an
+    #   organization, the default value of this field is `SECURITY_CONTROL`
+    #   if you enabled Security Hub on or after February 9, 2023.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubRequest AWS API Documentation
     #
     class EnableSecurityHubRequest < Struct.new(
       :tags,
-      :enable_default_standards)
+      :enable_default_standards,
+      :control_finding_generator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20771,6 +20912,104 @@ module Aws::SecurityHub
     #
     class ListOrganizationAdminAccountsResponse < Struct.new(
       :admin_accounts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] standards_arn
+    #   The Amazon Resource Name (ARN) of the standard that you want to view
+    #   controls for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Optional pagination parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that limits the total results of the API
+    #   response to the specified number. If this parameter isn't provided
+    #   in the request, the results include the first 25 security controls
+    #   that apply to the specified standard. The results also include a
+    #   `NextToken` parameter that you can use in a subsequent API call to
+    #   get the next 25 controls. This repeats until all controls for the
+    #   standard are returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitionsRequest AWS API Documentation
+    #
+    class ListSecurityControlDefinitionsRequest < Struct.new(
+      :standards_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_control_definitions
+    #   An array of controls that apply to the specified standard.
+    #   @return [Array<Types::SecurityControlDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination parameter that's included in the response only if it
+    #   was included in the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitionsResponse AWS API Documentation
+    #
+    class ListSecurityControlDefinitionsResponse < Struct.new(
+      :security_control_definitions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_control_id
+    #   The identifier of the control (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters) that you want to
+    #   determine the enablement status of in each enabled standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Optional pagination parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that limits the total results of the API
+    #   response to the specified number. If this parameter isn't provided
+    #   in the request, the results include the first 25 standard and
+    #   control associations. The results also include a `NextToken`
+    #   parameter that you can use in a subsequent API call to get the next
+    #   25 associations. This repeats until all associations for the
+    #   specified control are returned. The number of results is limited by
+    #   the number of supported Security Hub standards that you've enabled
+    #   in the calling account.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListStandardsControlAssociationsRequest AWS API Documentation
+    #
+    class ListStandardsControlAssociationsRequest < Struct.new(
+      :security_control_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] standards_control_association_summaries
+    #   An array that provides the enablement status and other details for
+    #   each security control that applies to each enabled standard.
+    #   @return [Array<Types::StandardsControlAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination parameter that's included in the response only if it
+    #   was included in the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListStandardsControlAssociationsResponse AWS API Documentation
+    #
+    class ListStandardsControlAssociationsResponse < Struct.new(
+      :standards_control_association_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -22754,6 +22993,132 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A security control in Security Hub describes a security best practice
+    # related to a specific resource.
+    #
+    # @!attribute [rw] security_control_id
+    #   The unique identifier of a security control across standards. Values
+    #   for this field typically consist of an Amazon Web Service name and a
+    #   number, such as APIGateway.3.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_control_arn
+    #   The Amazon Resource Name (ARN) for a security control across
+    #   standards, such as
+    #   `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`.
+    #   This parameter doesn't mention a specific standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of a security control.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a security control across standards. This
+    #   typically summarizes how Security Hub evaluates the control and the
+    #   conditions under which it produces a failed finding. This parameter
+    #   doesn't reference a specific standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_url
+    #   A link to Security Hub documentation that explains how to remediate
+    #   a failed finding for a security control.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_rating
+    #   The severity of a security control. For more information about how
+    #   Security Hub determines control severity, see [Assigning severity to
+    #   control findings][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity
+    #   @return [String]
+    #
+    # @!attribute [rw] security_control_status
+    #   The status of a security control based on the compliance status of
+    #   its findings. For more information about how control status is
+    #   determined, see [Determining the overall status of a control from
+    #   its findings][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControl AWS API Documentation
+    #
+    class SecurityControl < Struct.new(
+      :security_control_id,
+      :security_control_arn,
+      :title,
+      :description,
+      :remediation_url,
+      :severity_rating,
+      :security_control_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides metadata for a security control, including its unique
+    # standard-agnostic identifier, title, description, severity,
+    # availability in Amazon Web Services Regions, and a link to remediation
+    # steps.
+    #
+    # @!attribute [rw] security_control_id
+    #   The unique identifier of a security control across standards. Values
+    #   for this field typically consist of an Amazon Web Service name and a
+    #   number (for example, APIGateway.3). This parameter differs from
+    #   `SecurityControlArn`, which is a unique Amazon Resource Name (ARN)
+    #   assigned to a control. The ARN references the security control ID
+    #   (for example,
+    #   arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3).
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of a security control.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a security control across standards. This
+    #   typically summarizes how Security Hub evaluates the control and the
+    #   conditions under which it produces a failed finding. This parameter
+    #   doesn't reference a specific standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_url
+    #   A link to Security Hub documentation that explains how to remediate
+    #   a failed finding for a security control.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_rating
+    #   The severity of a security control. For more information about how
+    #   Security Hub determines control severity, see [Assigning severity to
+    #   control findings][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity
+    #   @return [String]
+    #
+    # @!attribute [rw] current_region_availability
+    #   Specifies whether a security control is available in the current
+    #   Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlDefinition AWS API Documentation
+    #
+    class SecurityControlDefinition < Struct.new(
+      :security_control_id,
+      :title,
+      :description,
+      :remediation_url,
+      :severity_rating,
+      :current_region_availability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The list of detected instances of sensitive data.
     #
     # @!attribute [rw] count
@@ -22810,7 +23175,7 @@ module Aws::SecurityHub
     # The severity of the finding.
     #
     # The finding provider can provide the initial severity. The finding
-    # provider can only update the severity if it has not been updated using
+    # provider can only update the severity if it hasn't been updated using
     # `BatchUpdateFindings`.
     #
     # The finding must have either `Label` or `Normalized` populated. If
@@ -23133,6 +23498,207 @@ module Aws::SecurityHub
       :remediation_url,
       :severity_rating,
       :related_requirements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a control's enablement status in a specified
+    # standard.
+    #
+    # @!attribute [rw] standards_arn
+    #   The Amazon Resource Name (ARN) of a security standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_control_id
+    #   The unique identifier of a security control across standards. Values
+    #   for this field typically consist of an Amazon Web Service name and a
+    #   number, such as APIGateway.3.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_control_arn
+    #   The ARN of a security control across standards, such as
+    #   `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`.
+    #   This parameter doesn't mention a specific standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   Specifies whether a control is enabled or disabled in a specified
+    #   standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_requirements
+    #   The requirement that underlies a control in the compliance framework
+    #   related to the standard.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the enablement status of the control in the
+    #   specified standard was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_reason
+    #   The reason for updating the enablement status of a control in a
+    #   specified standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] standards_control_title
+    #   The title of a control. This field may reference a specific
+    #   standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] standards_control_description
+    #   The description of a control. This typically summarizes how Security
+    #   Hub evaluates the control and the conditions under which it produces
+    #   a failed finding. This parameter may reference a specific standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] standards_control_arns
+    #   Provides the input parameter that Security Hub uses to call the
+    #   [UpdateStandardsControl][1] API. This API can be used to enable or
+    #   disable a control in a specified standard.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsControlAssociationDetail AWS API Documentation
+    #
+    class StandardsControlAssociationDetail < Struct.new(
+      :standards_arn,
+      :security_control_id,
+      :security_control_arn,
+      :association_status,
+      :related_requirements,
+      :updated_at,
+      :updated_reason,
+      :standards_control_title,
+      :standards_control_description,
+      :standards_control_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array with one or more objects that includes a security control
+    # (identified with `SecurityControlId`, `SecurityControlArn`, or a mix
+    # of both parameters) and the Amazon Resource Name (ARN) of a standard.
+    # The security control ID or ARN is the same across standards.
+    #
+    # @!attribute [rw] security_control_id
+    #   The unique identifier (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters) of a security
+    #   control across standards.
+    #   @return [String]
+    #
+    # @!attribute [rw] standards_arn
+    #   The ARN of a standard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsControlAssociationId AWS API Documentation
+    #
+    class StandardsControlAssociationId < Struct.new(
+      :security_control_id,
+      :standards_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array that provides the enablement status and other details for
+    # each control that applies to each enabled standard.
+    #
+    # @!attribute [rw] standards_arn
+    #   The Amazon Resource Name (ARN) of a standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_control_id
+    #   A unique standard-agnostic identifier for a control. Values for this
+    #   field typically consist of an Amazon Web Service and a number, such
+    #   as APIGateway.5. This field doesn't reference a specific standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_control_arn
+    #   The ARN of a control, such as
+    #   `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`.
+    #   This parameter doesn't mention a specific standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   The enablement status of a control in a specific standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_requirements
+    #   The requirement that underlies this control in the compliance
+    #   framework related to the standard.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] updated_at
+    #   The last time that a control's enablement status in a specified
+    #   standard was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_reason
+    #   The reason for updating the control's enablement status in a
+    #   specified standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] standards_control_title
+    #   The title of a control.
+    #   @return [String]
+    #
+    # @!attribute [rw] standards_control_description
+    #   The description of a control. This typically summarizes how Security
+    #   Hub evaluates the control and the conditions under which it produces
+    #   a failed finding. The parameter may reference a specific standard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsControlAssociationSummary AWS API Documentation
+    #
+    class StandardsControlAssociationSummary < Struct.new(
+      :standards_arn,
+      :security_control_id,
+      :security_control_arn,
+      :association_status,
+      :related_requirements,
+      :updated_at,
+      :updated_reason,
+      :standards_control_title,
+      :standards_control_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of requested updates to the enablement status of controls in
+    # specified standards. The objects in the array include a security
+    # control ID, the Amazon Resource Name (ARN) of the standard, the
+    # requested enablement status, and the reason for updating the
+    # enablement status.
+    #
+    # @!attribute [rw] standards_arn
+    #   The Amazon Resource Name (ARN) of the standard in which you want to
+    #   update the control's enablement status.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_control_id
+    #   The unique identifier for the security control whose enablement
+    #   status you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   The desired enablement status of the control in the standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_reason
+    #   The reason for updating the control's enablement status in the
+    #   standard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsControlAssociationUpdate AWS API Documentation
+    #
+    class StandardsControlAssociationUpdate < Struct.new(
+      :standards_arn,
+      :security_control_id,
+      :association_status,
+      :updated_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23505,6 +24071,111 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about a security control for which a response
+    # couldn't be returned.
+    #
+    # @!attribute [rw] security_control_id
+    #   The control (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters) for which a
+    #   response couldn't be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the unprocessed security control.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_reason
+    #   The reason why the security control was unprocessed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UnprocessedSecurityControl AWS API Documentation
+    #
+    class UnprocessedSecurityControl < Struct.new(
+      :security_control_id,
+      :error_code,
+      :error_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about which control's enablement status couldn't be
+    # retrieved in a specified standard when calling
+    # [BatchUpdateStandardsControlAssociations][1]. This parameter also
+    # provides details about why the request was unprocessed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
+    #
+    # @!attribute [rw] standards_control_association_id
+    #   An array with one or more objects that includes a security control
+    #   (identified with `SecurityControlId`, `SecurityControlArn`, or a mix
+    #   of both parameters) and the Amazon Resource Name (ARN) of a
+    #   standard. This parameter shows the specific controls for which the
+    #   enablement status couldn't be retrieved in specified standards when
+    #   calling [BatchUpdateStandardsControlAssociations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
+    #   @return [Types::StandardsControlAssociationId]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the unprocessed standard and control association.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_reason
+    #   The reason why the standard and control association was unprocessed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UnprocessedStandardsControlAssociation AWS API Documentation
+    #
+    class UnprocessedStandardsControlAssociation < Struct.new(
+      :standards_control_association_id,
+      :error_code,
+      :error_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about which control's enablement status could not be
+    # updated in a specified standard when calling the
+    # [BatchUpdateStandardsControlAssociations][1] API. This parameter also
+    # provides details about why the request was unprocessed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
+    #
+    # @!attribute [rw] standards_control_association_update
+    #   An array of control and standard associations for which an update
+    #   failed when calling [BatchUpdateStandardsControlAssociations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
+    #   @return [Types::StandardsControlAssociationUpdate]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the unprocessed update of the control's
+    #   enablement status in the specified standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_reason
+    #   The reason why a control's enablement status in the specified
+    #   standard couldn't be updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UnprocessedStandardsControlAssociationUpdate AWS API Documentation
+    #
+    class UnprocessedStandardsControlAssociationUpdate < Struct.new(
+      :standards_control_association_update,
+      :error_code,
+      :error_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to remove the tags from.
     #   @return [String]
@@ -23741,10 +24412,26 @@ module Aws::SecurityHub
     #   `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] control_finding_generator
+    #   Updates whether the calling account has consolidated control
+    #   findings turned on. If the value for this field is set to
+    #   `SECURITY_CONTROL`, Security Hub generates a single finding for a
+    #   control check even when the check applies to multiple enabled
+    #   standards.
+    #
+    #   If the value for this field is set to `STANDARD_CONTROL`, Security
+    #   Hub generates separate findings for a control check when the check
+    #   applies to multiple enabled standards.
+    #
+    #   For accounts that are part of an organization, this value can only
+    #   be updated in the administrator account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityHubConfigurationRequest AWS API Documentation
     #
     class UpdateSecurityHubConfigurationRequest < Struct.new(
-      :auto_enable_controls)
+      :auto_enable_controls,
+      :control_finding_generator)
       SENSITIVE = []
       include Aws::Structure
     end

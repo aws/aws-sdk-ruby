@@ -38,6 +38,7 @@ module Aws::SecurityHub
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssociatedStandard = Shapes::StructureShape.new(name: 'AssociatedStandard')
     AssociatedStandardsList = Shapes::ListShape.new(name: 'AssociatedStandardsList')
+    AssociationStatus = Shapes::StringShape.new(name: 'AssociationStatus')
     AutoEnableStandards = Shapes::StringShape.new(name: 'AutoEnableStandards')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
@@ -603,6 +604,10 @@ module Aws::SecurityHub
     BatchDisableStandardsResponse = Shapes::StructureShape.new(name: 'BatchDisableStandardsResponse')
     BatchEnableStandardsRequest = Shapes::StructureShape.new(name: 'BatchEnableStandardsRequest')
     BatchEnableStandardsResponse = Shapes::StructureShape.new(name: 'BatchEnableStandardsResponse')
+    BatchGetSecurityControlsRequest = Shapes::StructureShape.new(name: 'BatchGetSecurityControlsRequest')
+    BatchGetSecurityControlsResponse = Shapes::StructureShape.new(name: 'BatchGetSecurityControlsResponse')
+    BatchGetStandardsControlAssociationsRequest = Shapes::StructureShape.new(name: 'BatchGetStandardsControlAssociationsRequest')
+    BatchGetStandardsControlAssociationsResponse = Shapes::StructureShape.new(name: 'BatchGetStandardsControlAssociationsResponse')
     BatchImportFindingsRequest = Shapes::StructureShape.new(name: 'BatchImportFindingsRequest')
     BatchImportFindingsRequestFindingList = Shapes::ListShape.new(name: 'BatchImportFindingsRequestFindingList')
     BatchImportFindingsResponse = Shapes::StructureShape.new(name: 'BatchImportFindingsResponse')
@@ -610,6 +615,8 @@ module Aws::SecurityHub
     BatchUpdateFindingsResponse = Shapes::StructureShape.new(name: 'BatchUpdateFindingsResponse')
     BatchUpdateFindingsUnprocessedFinding = Shapes::StructureShape.new(name: 'BatchUpdateFindingsUnprocessedFinding')
     BatchUpdateFindingsUnprocessedFindingsList = Shapes::ListShape.new(name: 'BatchUpdateFindingsUnprocessedFindingsList')
+    BatchUpdateStandardsControlAssociationsRequest = Shapes::StructureShape.new(name: 'BatchUpdateStandardsControlAssociationsRequest')
+    BatchUpdateStandardsControlAssociationsResponse = Shapes::StructureShape.new(name: 'BatchUpdateStandardsControlAssociationsResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanFilter = Shapes::StructureShape.new(name: 'BooleanFilter')
     BooleanFilterList = Shapes::ListShape.new(name: 'BooleanFilterList')
@@ -624,6 +631,7 @@ module Aws::SecurityHub
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
     ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
     ContainerDetails = Shapes::StructureShape.new(name: 'ContainerDetails')
+    ControlFindingGenerator = Shapes::StringShape.new(name: 'ControlFindingGenerator')
     ControlStatus = Shapes::StringShape.new(name: 'ControlStatus')
     Country = Shapes::StructureShape.new(name: 'Country')
     CreateActionTargetRequest = Shapes::StructureShape.new(name: 'CreateActionTargetRequest')
@@ -759,6 +767,10 @@ module Aws::SecurityHub
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
     ListOrganizationAdminAccountsRequest = Shapes::StructureShape.new(name: 'ListOrganizationAdminAccountsRequest')
     ListOrganizationAdminAccountsResponse = Shapes::StructureShape.new(name: 'ListOrganizationAdminAccountsResponse')
+    ListSecurityControlDefinitionsRequest = Shapes::StructureShape.new(name: 'ListSecurityControlDefinitionsRequest')
+    ListSecurityControlDefinitionsResponse = Shapes::StructureShape.new(name: 'ListSecurityControlDefinitionsResponse')
+    ListStandardsControlAssociationsRequest = Shapes::StructureShape.new(name: 'ListStandardsControlAssociationsRequest')
+    ListStandardsControlAssociationsResponse = Shapes::StructureShape.new(name: 'ListStandardsControlAssociationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LoadBalancerState = Shapes::StructureShape.new(name: 'LoadBalancerState')
@@ -809,6 +821,7 @@ module Aws::SecurityHub
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordState = Shapes::StringShape.new(name: 'RecordState')
     Records = Shapes::ListShape.new(name: 'Records')
+    RegionAvailabilityStatus = Shapes::StringShape.new(name: 'RegionAvailabilityStatus')
     RelatedFinding = Shapes::StructureShape.new(name: 'RelatedFinding')
     RelatedFindingList = Shapes::ListShape.new(name: 'RelatedFindingList')
     RelatedRequirementsList = Shapes::ListShape.new(name: 'RelatedRequirementsList')
@@ -851,6 +864,10 @@ module Aws::SecurityHub
     RuleGroupVariables = Shapes::StructureShape.new(name: 'RuleGroupVariables')
     RuleGroupVariablesIpSetsDetails = Shapes::StructureShape.new(name: 'RuleGroupVariablesIpSetsDetails')
     RuleGroupVariablesPortSetsDetails = Shapes::StructureShape.new(name: 'RuleGroupVariablesPortSetsDetails')
+    SecurityControl = Shapes::StructureShape.new(name: 'SecurityControl')
+    SecurityControlDefinition = Shapes::StructureShape.new(name: 'SecurityControlDefinition')
+    SecurityControlDefinitions = Shapes::ListShape.new(name: 'SecurityControlDefinitions')
+    SecurityControls = Shapes::ListShape.new(name: 'SecurityControls')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     SensitiveDataDetections = Shapes::StructureShape.new(name: 'SensitiveDataDetections')
     SensitiveDataDetectionsList = Shapes::ListShape.new(name: 'SensitiveDataDetectionsList')
@@ -869,6 +886,15 @@ module Aws::SecurityHub
     Standard = Shapes::StructureShape.new(name: 'Standard')
     Standards = Shapes::ListShape.new(name: 'Standards')
     StandardsControl = Shapes::StructureShape.new(name: 'StandardsControl')
+    StandardsControlArnList = Shapes::ListShape.new(name: 'StandardsControlArnList')
+    StandardsControlAssociationDetail = Shapes::StructureShape.new(name: 'StandardsControlAssociationDetail')
+    StandardsControlAssociationDetails = Shapes::ListShape.new(name: 'StandardsControlAssociationDetails')
+    StandardsControlAssociationId = Shapes::StructureShape.new(name: 'StandardsControlAssociationId')
+    StandardsControlAssociationIds = Shapes::ListShape.new(name: 'StandardsControlAssociationIds')
+    StandardsControlAssociationSummaries = Shapes::ListShape.new(name: 'StandardsControlAssociationSummaries')
+    StandardsControlAssociationSummary = Shapes::StructureShape.new(name: 'StandardsControlAssociationSummary')
+    StandardsControlAssociationUpdate = Shapes::StructureShape.new(name: 'StandardsControlAssociationUpdate')
+    StandardsControlAssociationUpdates = Shapes::ListShape.new(name: 'StandardsControlAssociationUpdates')
     StandardsControls = Shapes::ListShape.new(name: 'StandardsControls')
     StandardsInputParameterMap = Shapes::MapShape.new(name: 'StandardsInputParameterMap')
     StandardsManagedBy = Shapes::StructureShape.new(name: 'StandardsManagedBy')
@@ -904,6 +930,13 @@ module Aws::SecurityHub
     ThreatList = Shapes::ListShape.new(name: 'ThreatList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     TypeList = Shapes::ListShape.new(name: 'TypeList')
+    UnprocessedErrorCode = Shapes::StringShape.new(name: 'UnprocessedErrorCode')
+    UnprocessedSecurityControl = Shapes::StructureShape.new(name: 'UnprocessedSecurityControl')
+    UnprocessedSecurityControls = Shapes::ListShape.new(name: 'UnprocessedSecurityControls')
+    UnprocessedStandardsControlAssociation = Shapes::StructureShape.new(name: 'UnprocessedStandardsControlAssociation')
+    UnprocessedStandardsControlAssociationUpdate = Shapes::StructureShape.new(name: 'UnprocessedStandardsControlAssociationUpdate')
+    UnprocessedStandardsControlAssociationUpdates = Shapes::ListShape.new(name: 'UnprocessedStandardsControlAssociationUpdates')
+    UnprocessedStandardsControlAssociations = Shapes::ListShape.new(name: 'UnprocessedStandardsControlAssociations')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateActionTargetRequest = Shapes::StructureShape.new(name: 'UpdateActionTargetRequest')
@@ -4273,6 +4306,20 @@ module Aws::SecurityHub
     BatchEnableStandardsResponse.add_member(:standards_subscriptions, Shapes::ShapeRef.new(shape: StandardsSubscriptions, location_name: "StandardsSubscriptions"))
     BatchEnableStandardsResponse.struct_class = Types::BatchEnableStandardsResponse
 
+    BatchGetSecurityControlsRequest.add_member(:security_control_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "SecurityControlIds"))
+    BatchGetSecurityControlsRequest.struct_class = Types::BatchGetSecurityControlsRequest
+
+    BatchGetSecurityControlsResponse.add_member(:security_controls, Shapes::ShapeRef.new(shape: SecurityControls, required: true, location_name: "SecurityControls"))
+    BatchGetSecurityControlsResponse.add_member(:unprocessed_ids, Shapes::ShapeRef.new(shape: UnprocessedSecurityControls, location_name: "UnprocessedIds"))
+    BatchGetSecurityControlsResponse.struct_class = Types::BatchGetSecurityControlsResponse
+
+    BatchGetStandardsControlAssociationsRequest.add_member(:standards_control_association_ids, Shapes::ShapeRef.new(shape: StandardsControlAssociationIds, required: true, location_name: "StandardsControlAssociationIds"))
+    BatchGetStandardsControlAssociationsRequest.struct_class = Types::BatchGetStandardsControlAssociationsRequest
+
+    BatchGetStandardsControlAssociationsResponse.add_member(:standards_control_association_details, Shapes::ShapeRef.new(shape: StandardsControlAssociationDetails, required: true, location_name: "StandardsControlAssociationDetails"))
+    BatchGetStandardsControlAssociationsResponse.add_member(:unprocessed_associations, Shapes::ShapeRef.new(shape: UnprocessedStandardsControlAssociations, location_name: "UnprocessedAssociations"))
+    BatchGetStandardsControlAssociationsResponse.struct_class = Types::BatchGetStandardsControlAssociationsResponse
+
     BatchImportFindingsRequest.add_member(:findings, Shapes::ShapeRef.new(shape: BatchImportFindingsRequestFindingList, required: true, location_name: "Findings"))
     BatchImportFindingsRequest.struct_class = Types::BatchImportFindingsRequest
 
@@ -4305,6 +4352,12 @@ module Aws::SecurityHub
     BatchUpdateFindingsUnprocessedFinding.struct_class = Types::BatchUpdateFindingsUnprocessedFinding
 
     BatchUpdateFindingsUnprocessedFindingsList.member = Shapes::ShapeRef.new(shape: BatchUpdateFindingsUnprocessedFinding)
+
+    BatchUpdateStandardsControlAssociationsRequest.add_member(:standards_control_association_updates, Shapes::ShapeRef.new(shape: StandardsControlAssociationUpdates, required: true, location_name: "StandardsControlAssociationUpdates"))
+    BatchUpdateStandardsControlAssociationsRequest.struct_class = Types::BatchUpdateStandardsControlAssociationsRequest
+
+    BatchUpdateStandardsControlAssociationsResponse.add_member(:unprocessed_association_updates, Shapes::ShapeRef.new(shape: UnprocessedStandardsControlAssociationUpdates, location_name: "UnprocessedAssociationUpdates"))
+    BatchUpdateStandardsControlAssociationsResponse.struct_class = Types::BatchUpdateStandardsControlAssociationsResponse
 
     BooleanFilter.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     BooleanFilter.struct_class = Types::BooleanFilter
@@ -4481,6 +4534,7 @@ module Aws::SecurityHub
     DescribeHubResponse.add_member(:hub_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HubArn"))
     DescribeHubResponse.add_member(:subscribed_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubscribedAt"))
     DescribeHubResponse.add_member(:auto_enable_controls, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoEnableControls"))
+    DescribeHubResponse.add_member(:control_finding_generator, Shapes::ShapeRef.new(shape: ControlFindingGenerator, location_name: "ControlFindingGenerator"))
     DescribeHubResponse.struct_class = Types::DescribeHubResponse
 
     DescribeOrganizationConfigurationRequest.struct_class = Types::DescribeOrganizationConfigurationRequest
@@ -4561,6 +4615,7 @@ module Aws::SecurityHub
 
     EnableSecurityHubRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     EnableSecurityHubRequest.add_member(:enable_default_standards, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableDefaultStandards"))
+    EnableSecurityHubRequest.add_member(:control_finding_generator, Shapes::ShapeRef.new(shape: ControlFindingGenerator, location_name: "ControlFindingGenerator"))
     EnableSecurityHubRequest.struct_class = Types::EnableSecurityHubRequest
 
     EnableSecurityHubResponse.struct_class = Types::EnableSecurityHubResponse
@@ -4812,6 +4867,24 @@ module Aws::SecurityHub
     ListOrganizationAdminAccountsResponse.add_member(:admin_accounts, Shapes::ShapeRef.new(shape: AdminAccounts, location_name: "AdminAccounts"))
     ListOrganizationAdminAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOrganizationAdminAccountsResponse.struct_class = Types::ListOrganizationAdminAccountsResponse
+
+    ListSecurityControlDefinitionsRequest.add_member(:standards_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "StandardsArn"))
+    ListSecurityControlDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListSecurityControlDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListSecurityControlDefinitionsRequest.struct_class = Types::ListSecurityControlDefinitionsRequest
+
+    ListSecurityControlDefinitionsResponse.add_member(:security_control_definitions, Shapes::ShapeRef.new(shape: SecurityControlDefinitions, required: true, location_name: "SecurityControlDefinitions"))
+    ListSecurityControlDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSecurityControlDefinitionsResponse.struct_class = Types::ListSecurityControlDefinitionsResponse
+
+    ListStandardsControlAssociationsRequest.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "querystring", location_name: "SecurityControlId"))
+    ListStandardsControlAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListStandardsControlAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListStandardsControlAssociationsRequest.struct_class = Types::ListStandardsControlAssociationsRequest
+
+    ListStandardsControlAssociationsResponse.add_member(:standards_control_association_summaries, Shapes::ShapeRef.new(shape: StandardsControlAssociationSummaries, required: true, location_name: "StandardsControlAssociationSummaries"))
+    ListStandardsControlAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStandardsControlAssociationsResponse.struct_class = Types::ListStandardsControlAssociationsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -5222,6 +5295,27 @@ module Aws::SecurityHub
     RuleGroupVariablesPortSetsDetails.add_member(:definition, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Definition"))
     RuleGroupVariablesPortSetsDetails.struct_class = Types::RuleGroupVariablesPortSetsDetails
 
+    SecurityControl.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
+    SecurityControl.add_member(:security_control_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlArn"))
+    SecurityControl.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Title"))
+    SecurityControl.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Description"))
+    SecurityControl.add_member(:remediation_url, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RemediationUrl"))
+    SecurityControl.add_member(:severity_rating, Shapes::ShapeRef.new(shape: SeverityRating, required: true, location_name: "SeverityRating"))
+    SecurityControl.add_member(:security_control_status, Shapes::ShapeRef.new(shape: ControlStatus, required: true, location_name: "SecurityControlStatus"))
+    SecurityControl.struct_class = Types::SecurityControl
+
+    SecurityControlDefinition.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
+    SecurityControlDefinition.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Title"))
+    SecurityControlDefinition.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Description"))
+    SecurityControlDefinition.add_member(:remediation_url, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RemediationUrl"))
+    SecurityControlDefinition.add_member(:severity_rating, Shapes::ShapeRef.new(shape: SeverityRating, required: true, location_name: "SeverityRating"))
+    SecurityControlDefinition.add_member(:current_region_availability, Shapes::ShapeRef.new(shape: RegionAvailabilityStatus, required: true, location_name: "CurrentRegionAvailability"))
+    SecurityControlDefinition.struct_class = Types::SecurityControlDefinition
+
+    SecurityControlDefinitions.member = Shapes::ShapeRef.new(shape: SecurityControlDefinition)
+
+    SecurityControls.member = Shapes::ShapeRef.new(shape: SecurityControl)
+
     SecurityGroups.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     SensitiveDataDetections.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "Count"))
@@ -5290,6 +5384,49 @@ module Aws::SecurityHub
     StandardsControl.add_member(:severity_rating, Shapes::ShapeRef.new(shape: SeverityRating, location_name: "SeverityRating"))
     StandardsControl.add_member(:related_requirements, Shapes::ShapeRef.new(shape: RelatedRequirementsList, location_name: "RelatedRequirements"))
     StandardsControl.struct_class = Types::StandardsControl
+
+    StandardsControlArnList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    StandardsControlAssociationDetail.add_member(:standards_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "StandardsArn"))
+    StandardsControlAssociationDetail.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
+    StandardsControlAssociationDetail.add_member(:security_control_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlArn"))
+    StandardsControlAssociationDetail.add_member(:association_status, Shapes::ShapeRef.new(shape: AssociationStatus, required: true, location_name: "AssociationStatus"))
+    StandardsControlAssociationDetail.add_member(:related_requirements, Shapes::ShapeRef.new(shape: RelatedRequirementsList, location_name: "RelatedRequirements"))
+    StandardsControlAssociationDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    StandardsControlAssociationDetail.add_member(:updated_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UpdatedReason"))
+    StandardsControlAssociationDetail.add_member(:standards_control_title, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StandardsControlTitle"))
+    StandardsControlAssociationDetail.add_member(:standards_control_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StandardsControlDescription"))
+    StandardsControlAssociationDetail.add_member(:standards_control_arns, Shapes::ShapeRef.new(shape: StandardsControlArnList, location_name: "StandardsControlArns"))
+    StandardsControlAssociationDetail.struct_class = Types::StandardsControlAssociationDetail
+
+    StandardsControlAssociationDetails.member = Shapes::ShapeRef.new(shape: StandardsControlAssociationDetail)
+
+    StandardsControlAssociationId.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
+    StandardsControlAssociationId.add_member(:standards_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "StandardsArn"))
+    StandardsControlAssociationId.struct_class = Types::StandardsControlAssociationId
+
+    StandardsControlAssociationIds.member = Shapes::ShapeRef.new(shape: StandardsControlAssociationId)
+
+    StandardsControlAssociationSummaries.member = Shapes::ShapeRef.new(shape: StandardsControlAssociationSummary)
+
+    StandardsControlAssociationSummary.add_member(:standards_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "StandardsArn"))
+    StandardsControlAssociationSummary.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
+    StandardsControlAssociationSummary.add_member(:security_control_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlArn"))
+    StandardsControlAssociationSummary.add_member(:association_status, Shapes::ShapeRef.new(shape: AssociationStatus, required: true, location_name: "AssociationStatus"))
+    StandardsControlAssociationSummary.add_member(:related_requirements, Shapes::ShapeRef.new(shape: RelatedRequirementsList, location_name: "RelatedRequirements"))
+    StandardsControlAssociationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    StandardsControlAssociationSummary.add_member(:updated_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UpdatedReason"))
+    StandardsControlAssociationSummary.add_member(:standards_control_title, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StandardsControlTitle"))
+    StandardsControlAssociationSummary.add_member(:standards_control_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StandardsControlDescription"))
+    StandardsControlAssociationSummary.struct_class = Types::StandardsControlAssociationSummary
+
+    StandardsControlAssociationUpdate.add_member(:standards_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "StandardsArn"))
+    StandardsControlAssociationUpdate.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
+    StandardsControlAssociationUpdate.add_member(:association_status, Shapes::ShapeRef.new(shape: AssociationStatus, required: true, location_name: "AssociationStatus"))
+    StandardsControlAssociationUpdate.add_member(:updated_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UpdatedReason"))
+    StandardsControlAssociationUpdate.struct_class = Types::StandardsControlAssociationUpdate
+
+    StandardsControlAssociationUpdates.member = Shapes::ShapeRef.new(shape: StandardsControlAssociationUpdate)
 
     StandardsControls.member = Shapes::ShapeRef.new(shape: StandardsControl)
 
@@ -5376,6 +5513,27 @@ module Aws::SecurityHub
 
     TypeList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    UnprocessedSecurityControl.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
+    UnprocessedSecurityControl.add_member(:error_code, Shapes::ShapeRef.new(shape: UnprocessedErrorCode, required: true, location_name: "ErrorCode"))
+    UnprocessedSecurityControl.add_member(:error_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ErrorReason"))
+    UnprocessedSecurityControl.struct_class = Types::UnprocessedSecurityControl
+
+    UnprocessedSecurityControls.member = Shapes::ShapeRef.new(shape: UnprocessedSecurityControl)
+
+    UnprocessedStandardsControlAssociation.add_member(:standards_control_association_id, Shapes::ShapeRef.new(shape: StandardsControlAssociationId, required: true, location_name: "StandardsControlAssociationId"))
+    UnprocessedStandardsControlAssociation.add_member(:error_code, Shapes::ShapeRef.new(shape: UnprocessedErrorCode, required: true, location_name: "ErrorCode"))
+    UnprocessedStandardsControlAssociation.add_member(:error_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ErrorReason"))
+    UnprocessedStandardsControlAssociation.struct_class = Types::UnprocessedStandardsControlAssociation
+
+    UnprocessedStandardsControlAssociationUpdate.add_member(:standards_control_association_update, Shapes::ShapeRef.new(shape: StandardsControlAssociationUpdate, required: true, location_name: "StandardsControlAssociationUpdate"))
+    UnprocessedStandardsControlAssociationUpdate.add_member(:error_code, Shapes::ShapeRef.new(shape: UnprocessedErrorCode, required: true, location_name: "ErrorCode"))
+    UnprocessedStandardsControlAssociationUpdate.add_member(:error_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ErrorReason"))
+    UnprocessedStandardsControlAssociationUpdate.struct_class = Types::UnprocessedStandardsControlAssociationUpdate
+
+    UnprocessedStandardsControlAssociationUpdates.member = Shapes::ShapeRef.new(shape: UnprocessedStandardsControlAssociationUpdate)
+
+    UnprocessedStandardsControlAssociations.member = Shapes::ShapeRef.new(shape: UnprocessedStandardsControlAssociation)
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -5422,6 +5580,7 @@ module Aws::SecurityHub
     UpdateOrganizationConfigurationResponse.struct_class = Types::UpdateOrganizationConfigurationResponse
 
     UpdateSecurityHubConfigurationRequest.add_member(:auto_enable_controls, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoEnableControls"))
+    UpdateSecurityHubConfigurationRequest.add_member(:control_finding_generator, Shapes::ShapeRef.new(shape: ControlFindingGenerator, location_name: "ControlFindingGenerator"))
     UpdateSecurityHubConfigurationRequest.struct_class = Types::UpdateSecurityHubConfigurationRequest
 
     UpdateSecurityHubConfigurationResponse.struct_class = Types::UpdateSecurityHubConfigurationResponse
@@ -5558,6 +5717,30 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:batch_get_security_controls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetSecurityControls"
+        o.http_method = "POST"
+        o.http_request_uri = "/securityControls/batchGet"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetSecurityControlsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetSecurityControlsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:batch_get_standards_control_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetStandardsControlAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/associations/batchGet"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetStandardsControlAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetStandardsControlAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:batch_import_findings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchImportFindings"
         o.http_method = "POST"
@@ -5580,6 +5763,18 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+      end)
+
+      api.add_operation(:batch_update_standards_control_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateStandardsControlAssociations"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/associations"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateStandardsControlAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateStandardsControlAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:create_action_target, Seahorse::Model::Operation.new.tap do |o|
@@ -6151,6 +6346,42 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_security_control_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSecurityControlDefinitions"
+        o.http_method = "GET"
+        o.http_request_uri = "/securityControls/definitions"
+        o.input = Shapes::ShapeRef.new(shape: ListSecurityControlDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSecurityControlDefinitionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_standards_control_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStandardsControlAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/associations"
+        o.input = Shapes::ShapeRef.new(shape: ListStandardsControlAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStandardsControlAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

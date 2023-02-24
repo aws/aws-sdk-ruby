@@ -61,6 +61,8 @@ module Aws::ConnectCases
     CreateTemplateRequest = Shapes::StructureShape.new(name: 'CreateTemplateRequest')
     CreateTemplateResponse = Shapes::StructureShape.new(name: 'CreateTemplateResponse')
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime', timestampFormat: "iso8601")
+    DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
+    DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
     DomainArn = Shapes::StringShape.new(name: 'DomainArn')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
@@ -332,6 +334,11 @@ module Aws::ConnectCases
     CreateTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location_name: "templateArn"))
     CreateTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "templateId"))
     CreateTemplateResponse.struct_class = Types::CreateTemplateResponse
+
+    DeleteDomainRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    DeleteDomainRequest.struct_class = Types::DeleteDomainRequest
+
+    DeleteDomainResponse.struct_class = Types::DeleteDomainResponse
 
     DomainSummary.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "domainArn"))
     DomainSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
@@ -876,6 +883,20 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:delete_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDomain"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{domainId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_case, Seahorse::Model::Operation.new.tap do |o|

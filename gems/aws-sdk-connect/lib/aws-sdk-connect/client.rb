@@ -8176,6 +8176,13 @@ module Aws::Connect
     # @option params [String] :quick_connect_id
     #   The identifier for the quick connect.
     #
+    # @option params [String] :related_contact_id
+    #   The contactId that is [related][1] to this contact.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks
+    #
     # @return [Types::StartTaskContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTaskContactResponse#contact_id #contact_id} => String
@@ -8201,6 +8208,7 @@ module Aws::Connect
     #     scheduled_time: Time.now,
     #     task_template_id: "TaskTemplateId",
     #     quick_connect_id: "QuickConnectId",
+    #     related_contact_id: "ContactId",
     #   })
     #
     # @example Response structure
@@ -10359,7 +10367,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

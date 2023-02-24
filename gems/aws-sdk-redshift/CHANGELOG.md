@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-02-24)
+------------------
+
+* Feature - Documentation updates for Redshift API bringing it in line with IAM best practices.
+
 1.90.0 (2023-02-03)
 ------------------
 

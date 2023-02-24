@@ -72,6 +72,8 @@ module Aws::ConnectCases
             Aws::ConnectCases::Endpoints::CreateRelatedItem.build(context)
           when :create_template
             Aws::ConnectCases::Endpoints::CreateTemplate.build(context)
+          when :delete_domain
+            Aws::ConnectCases::Endpoints::DeleteDomain.build(context)
           when :get_case
             Aws::ConnectCases::Endpoints::GetCase.build(context)
           when :get_case_event_configuration

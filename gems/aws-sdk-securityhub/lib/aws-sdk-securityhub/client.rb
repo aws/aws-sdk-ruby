@@ -542,6 +542,106 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Provides details about a batch of security controls for the current
+    # Amazon Web Services account and Amazon Web Services Region.
+    #
+    # @option params [required, Array<String>] :security_control_ids
+    #   A list of security controls (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters). The security
+    #   control ID or Amazon Resource Name (ARN) is the same across standards.
+    #
+    # @return [Types::BatchGetSecurityControlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetSecurityControlsResponse#security_controls #security_controls} => Array&lt;Types::SecurityControl&gt;
+    #   * {Types::BatchGetSecurityControlsResponse#unprocessed_ids #unprocessed_ids} => Array&lt;Types::UnprocessedSecurityControl&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_security_controls({
+    #     security_control_ids: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_controls #=> Array
+    #   resp.security_controls[0].security_control_id #=> String
+    #   resp.security_controls[0].security_control_arn #=> String
+    #   resp.security_controls[0].title #=> String
+    #   resp.security_controls[0].description #=> String
+    #   resp.security_controls[0].remediation_url #=> String
+    #   resp.security_controls[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.security_controls[0].security_control_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.unprocessed_ids #=> Array
+    #   resp.unprocessed_ids[0].security_control_id #=> String
+    #   resp.unprocessed_ids[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "LIMIT_EXCEEDED"
+    #   resp.unprocessed_ids[0].error_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetSecurityControls AWS API Documentation
+    #
+    # @overload batch_get_security_controls(params = {})
+    # @param [Hash] params ({})
+    def batch_get_security_controls(params = {}, options = {})
+      req = build_request(:batch_get_security_controls, params)
+      req.send_request(options)
+    end
+
+    # For a batch of security controls and standards, identifies whether
+    # each control is currently enabled or disabled in a standard.
+    #
+    # @option params [required, Array<Types::StandardsControlAssociationId>] :standards_control_association_ids
+    #   An array with one or more objects that includes a security control
+    #   (identified with `SecurityControlId`, `SecurityControlArn`, or a mix
+    #   of both parameters) and the Amazon Resource Name (ARN) of a standard.
+    #   This field is used to query the enablement status of a control in a
+    #   specified standard. The security control ID or ARN is the same across
+    #   standards.
+    #
+    # @return [Types::BatchGetStandardsControlAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetStandardsControlAssociationsResponse#standards_control_association_details #standards_control_association_details} => Array&lt;Types::StandardsControlAssociationDetail&gt;
+    #   * {Types::BatchGetStandardsControlAssociationsResponse#unprocessed_associations #unprocessed_associations} => Array&lt;Types::UnprocessedStandardsControlAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_standards_control_associations({
+    #     standards_control_association_ids: [ # required
+    #       {
+    #         security_control_id: "NonEmptyString", # required
+    #         standards_arn: "NonEmptyString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.standards_control_association_details #=> Array
+    #   resp.standards_control_association_details[0].standards_arn #=> String
+    #   resp.standards_control_association_details[0].security_control_id #=> String
+    #   resp.standards_control_association_details[0].security_control_arn #=> String
+    #   resp.standards_control_association_details[0].association_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.standards_control_association_details[0].related_requirements #=> Array
+    #   resp.standards_control_association_details[0].related_requirements[0] #=> String
+    #   resp.standards_control_association_details[0].updated_at #=> Time
+    #   resp.standards_control_association_details[0].updated_reason #=> String
+    #   resp.standards_control_association_details[0].standards_control_title #=> String
+    #   resp.standards_control_association_details[0].standards_control_description #=> String
+    #   resp.standards_control_association_details[0].standards_control_arns #=> Array
+    #   resp.standards_control_association_details[0].standards_control_arns[0] #=> String
+    #   resp.unprocessed_associations #=> Array
+    #   resp.unprocessed_associations[0].standards_control_association_id.security_control_id #=> String
+    #   resp.unprocessed_associations[0].standards_control_association_id.standards_arn #=> String
+    #   resp.unprocessed_associations[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "LIMIT_EXCEEDED"
+    #   resp.unprocessed_associations[0].error_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetStandardsControlAssociations AWS API Documentation
+    #
+    # @overload batch_get_standards_control_associations(params = {})
+    # @param [Hash] params ({})
+    def batch_get_standards_control_associations(params = {}, options = {})
+      req = build_request(:batch_get_standards_control_associations, params)
+      req.send_request(options)
+    end
+
     # Imports security findings generated by a finding provider into
     # Security Hub. This action is requested by the finding provider to
     # import its findings into Security Hub.
@@ -797,6 +897,49 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def batch_update_findings(params = {}, options = {})
       req = build_request(:batch_update_findings, params)
+      req.send_request(options)
+    end
+
+    # For a batch of security controls and standards, this operation updates
+    # the enablement status of a control in a standard.
+    #
+    # @option params [required, Array<Types::StandardsControlAssociationUpdate>] :standards_control_association_updates
+    #   Updates the enablement status of a security control in a specified
+    #   standard.
+    #
+    # @return [Types::BatchUpdateStandardsControlAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateStandardsControlAssociationsResponse#unprocessed_association_updates #unprocessed_association_updates} => Array&lt;Types::UnprocessedStandardsControlAssociationUpdate&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_standards_control_associations({
+    #     standards_control_association_updates: [ # required
+    #       {
+    #         standards_arn: "NonEmptyString", # required
+    #         security_control_id: "NonEmptyString", # required
+    #         association_status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         updated_reason: "NonEmptyString",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unprocessed_association_updates #=> Array
+    #   resp.unprocessed_association_updates[0].standards_control_association_update.standards_arn #=> String
+    #   resp.unprocessed_association_updates[0].standards_control_association_update.security_control_id #=> String
+    #   resp.unprocessed_association_updates[0].standards_control_association_update.association_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.unprocessed_association_updates[0].standards_control_association_update.updated_reason #=> String
+    #   resp.unprocessed_association_updates[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "LIMIT_EXCEEDED"
+    #   resp.unprocessed_association_updates[0].error_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateStandardsControlAssociations AWS API Documentation
+    #
+    # @overload batch_update_standards_control_associations(params = {})
+    # @param [Hash] params ({})
+    def batch_update_standards_control_associations(params = {}, options = {})
+      req = build_request(:batch_update_standards_control_associations, params)
       req.send_request(options)
     end
 
@@ -1720,7 +1863,7 @@ module Aws::SecurityHub
     # custom action.
     #
     # @option params [required, String] :action_target_arn
-    #   The ARN of the custom action target to delete.
+    #   The Amazon Resource Name (ARN) of the custom action target to delete.
     #
     # @return [Types::DeleteActionTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1931,6 +2074,7 @@ module Aws::SecurityHub
     #   * {Types::DescribeHubResponse#hub_arn #hub_arn} => String
     #   * {Types::DescribeHubResponse#subscribed_at #subscribed_at} => String
     #   * {Types::DescribeHubResponse#auto_enable_controls #auto_enable_controls} => Boolean
+    #   * {Types::DescribeHubResponse#control_finding_generator #control_finding_generator} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1943,6 +2087,7 @@ module Aws::SecurityHub
     #   resp.hub_arn #=> String
     #   resp.subscribed_at #=> String
     #   resp.auto_enable_controls #=> Boolean
+    #   resp.control_finding_generator #=> String, one of "STANDARD_CONTROL", "SECURITY_CONTROL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHub AWS API Documentation
     #
@@ -2401,6 +2546,22 @@ module Aws::SecurityHub
     #   automatically enabled standards, set `EnableDefaultStandards` to
     #   `false`.
     #
+    # @option params [String] :control_finding_generator
+    #   This field, used when enabling Security Hub, specifies whether the
+    #   calling account has consolidated control findings turned on. If the
+    #   value for this field is set to `SECURITY_CONTROL`, Security Hub
+    #   generates a single finding for a control check even when the check
+    #   applies to multiple enabled standards.
+    #
+    #   If the value for this field is set to `STANDARD_CONTROL`, Security Hub
+    #   generates separate findings for a control check when the check applies
+    #   to multiple enabled standards.
+    #
+    #   The value for this field in a member account matches the value in the
+    #   administrator account. For accounts that aren't part of an
+    #   organization, the default value of this field is `SECURITY_CONTROL` if
+    #   you enabled Security Hub on or after February 9, 2023.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2410,6 +2571,7 @@ module Aws::SecurityHub
     #       "TagKey" => "TagValue",
     #     },
     #     enable_default_standards: false,
+    #     control_finding_generator: "STANDARD_CONTROL", # accepts STANDARD_CONTROL, SECURITY_CONTROL
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHub AWS API Documentation
@@ -4024,6 +4186,119 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Lists all of the security controls that apply to a specified standard.
+    #
+    # @option params [String] :standards_arn
+    #   The Amazon Resource Name (ARN) of the standard that you want to view
+    #   controls for.
+    #
+    # @option params [String] :next_token
+    #   Optional pagination parameter.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that limits the total results of the API
+    #   response to the specified number. If this parameter isn't provided in
+    #   the request, the results include the first 25 security controls that
+    #   apply to the specified standard. The results also include a
+    #   `NextToken` parameter that you can use in a subsequent API call to get
+    #   the next 25 controls. This repeats until all controls for the standard
+    #   are returned.
+    #
+    # @return [Types::ListSecurityControlDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityControlDefinitionsResponse#security_control_definitions #security_control_definitions} => Array&lt;Types::SecurityControlDefinition&gt;
+    #   * {Types::ListSecurityControlDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_control_definitions({
+    #     standards_arn: "NonEmptyString",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_control_definitions #=> Array
+    #   resp.security_control_definitions[0].security_control_id #=> String
+    #   resp.security_control_definitions[0].title #=> String
+    #   resp.security_control_definitions[0].description #=> String
+    #   resp.security_control_definitions[0].remediation_url #=> String
+    #   resp.security_control_definitions[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.security_control_definitions[0].current_region_availability #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitions AWS API Documentation
+    #
+    # @overload list_security_control_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_security_control_definitions(params = {}, options = {})
+      req = build_request(:list_security_control_definitions, params)
+      req.send_request(options)
+    end
+
+    # Specifies whether a control is currently enabled or disabled in each
+    # enabled standard in the calling account.
+    #
+    # @option params [required, String] :security_control_id
+    #   The identifier of the control (identified with `SecurityControlId`,
+    #   `SecurityControlArn`, or a mix of both parameters) that you want to
+    #   determine the enablement status of in each enabled standard.
+    #
+    # @option params [String] :next_token
+    #   Optional pagination parameter.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that limits the total results of the API
+    #   response to the specified number. If this parameter isn't provided in
+    #   the request, the results include the first 25 standard and control
+    #   associations. The results also include a `NextToken` parameter that
+    #   you can use in a subsequent API call to get the next 25 associations.
+    #   This repeats until all associations for the specified control are
+    #   returned. The number of results is limited by the number of supported
+    #   Security Hub standards that you've enabled in the calling account.
+    #
+    # @return [Types::ListStandardsControlAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStandardsControlAssociationsResponse#standards_control_association_summaries #standards_control_association_summaries} => Array&lt;Types::StandardsControlAssociationSummary&gt;
+    #   * {Types::ListStandardsControlAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_standards_control_associations({
+    #     security_control_id: "NonEmptyString", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.standards_control_association_summaries #=> Array
+    #   resp.standards_control_association_summaries[0].standards_arn #=> String
+    #   resp.standards_control_association_summaries[0].security_control_id #=> String
+    #   resp.standards_control_association_summaries[0].security_control_arn #=> String
+    #   resp.standards_control_association_summaries[0].association_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.standards_control_association_summaries[0].related_requirements #=> Array
+    #   resp.standards_control_association_summaries[0].related_requirements[0] #=> String
+    #   resp.standards_control_association_summaries[0].updated_at #=> Time
+    #   resp.standards_control_association_summaries[0].updated_reason #=> String
+    #   resp.standards_control_association_summaries[0].standards_control_title #=> String
+    #   resp.standards_control_association_summaries[0].standards_control_description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListStandardsControlAssociations AWS API Documentation
+    #
+    # @overload list_standards_control_associations(params = {})
+    # @param [Hash] params ({})
+    def list_standards_control_associations(params = {}, options = {})
+      req = build_request(:list_standards_control_associations, params)
+      req.send_request(options)
+    end
+
     # Returns a list of tags associated with a resource.
     #
     # @option params [required, String] :resource_arn
@@ -5615,12 +5890,26 @@ module Aws::SecurityHub
     #   automatically. To not automatically enable new controls, set this to
     #   `false`.
     #
+    # @option params [String] :control_finding_generator
+    #   Updates whether the calling account has consolidated control findings
+    #   turned on. If the value for this field is set to `SECURITY_CONTROL`,
+    #   Security Hub generates a single finding for a control check even when
+    #   the check applies to multiple enabled standards.
+    #
+    #   If the value for this field is set to `STANDARD_CONTROL`, Security Hub
+    #   generates separate findings for a control check when the check applies
+    #   to multiple enabled standards.
+    #
+    #   For accounts that are part of an organization, this value can only be
+    #   updated in the administrator account.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_security_hub_configuration({
     #     auto_enable_controls: false,
+    #     control_finding_generator: "STANDARD_CONTROL", # accepts STANDARD_CONTROL, SECURITY_CONTROL
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityHubConfiguration AWS API Documentation
@@ -5677,7 +5966,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
