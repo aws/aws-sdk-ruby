@@ -499,6 +499,9 @@
   "Inspector2": {
     "models": "inspector2/2020-06-08"
   },
+  "InternetMonitor": {
+    "models": "internetmonitor/2021-06-03"
+  },
   "IoT": {
     "models": "iot/2015-05-28"
   },

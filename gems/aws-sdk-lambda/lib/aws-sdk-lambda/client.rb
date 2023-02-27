@@ -531,9 +531,9 @@ module Aws::Lambda
     #
     # @option params [String] :function_url_auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
-    #   only. Set to `NONE` if you want to bypass IAM authentication to create
-    #   a public endpoint. For more information, see [Security and auth model
+    #   `AWS_IAM` if you want to restrict access to authenticated users only.
+    #   Set to `NONE` if you want to bypass IAM authentication to create a
+    #   public endpoint. For more information, see [Security and auth model
     #   for Lambda function URLs][1].
     #
     #
@@ -934,6 +934,9 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
     #
+    # @option params [Types::DocumentDBEventSourceConfig] :document_db_event_source_config
+    #   Specific configuration settings for a DocumentDB event source.
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
@@ -962,6 +965,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
+    #   * {Types::EventSourceMappingConfiguration#document_db_event_source_config #document_db_event_source_config} => Types::DocumentDBEventSourceConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -1016,6 +1020,11 @@ module Aws::Lambda
     #     scaling_config: {
     #       maximum_concurrency: 1,
     #     },
+    #     document_db_event_source_config: {
+    #       database_name: "DatabaseName",
+    #       collection_name: "CollectionName",
+    #       full_document: "UpdateLookup", # accepts UpdateLookup, Default
+    #     },
     #   })
     #
     # @example Response structure
@@ -1055,6 +1064,9 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.scaling_config.maximum_concurrency #=> Integer
+    #   resp.document_db_event_source_config.database_name #=> String
+    #   resp.document_db_event_source_config.collection_name #=> String
+    #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping AWS API Documentation
     #
@@ -1156,9 +1168,13 @@ module Aws::Lambda
     #   The identifier of the function's [runtime][1]. Runtime is required if
     #   the deployment package is a .zip file archive.
     #
+    #   The following list includes deprecated runtimes. For more information,
+    #   see [Runtime deprecation policy][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #
     # @option params [required, String] :role
     #   The Amazon Resource Name (ARN) of the function's execution role.
@@ -1232,9 +1248,16 @@ module Aws::Lambda
     #   execution.
     #
     # @option params [String] :kms_key_arn
-    #   The ARN of the Key Management Service (KMS) key that's used to
-    #   encrypt your function's environment variables. If it's not provided,
-    #   Lambda uses a default service key.
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that's used to encrypt your function's [environment variables][1].
+    #   When [Lambda SnapStart][2] is activated, this key is also used to
+    #   encrypt your function's snapshot. If you don't provide a customer
+    #   managed key, Lambda uses a default service key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
     #
     # @option params [Types::TracingConfig] :tracing_config
     #   Set `Mode` to `Active` to sample and trace a subset of incoming
@@ -1484,9 +1507,9 @@ module Aws::Lambda
     #
     # @option params [required, String] :auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
-    #   only. Set to `NONE` if you want to bypass IAM authentication to create
-    #   a public endpoint. For more information, see [Security and auth model
+    #   `AWS_IAM` if you want to restrict access to authenticated users only.
+    #   Set to `NONE` if you want to bypass IAM authentication to create a
+    #   public endpoint. For more information, see [Security and auth model
     #   for Lambda function URLs][1].
     #
     #
@@ -1657,6 +1680,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
+    #   * {Types::EventSourceMappingConfiguration#document_db_event_source_config #document_db_event_source_config} => Types::DocumentDBEventSourceConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -1701,6 +1725,9 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.scaling_config.maximum_concurrency #=> Integer
+    #   resp.document_db_event_source_config.database_name #=> String
+    #   resp.document_db_event_source_config.collection_name #=> String
+    #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping AWS API Documentation
     #
@@ -2139,6 +2166,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
+    #   * {Types::EventSourceMappingConfiguration#document_db_event_source_config #document_db_event_source_config} => Types::DocumentDBEventSourceConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2183,6 +2211,9 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.scaling_config.maximum_concurrency #=> Integer
+    #   resp.document_db_event_source_config.database_name #=> String
+    #   resp.document_db_event_source_config.collection_name #=> String
+    #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping AWS API Documentation
     #
@@ -2969,11 +3000,12 @@ module Aws::Lambda
     #
     #   * {Types::GetRuntimeManagementConfigResponse#update_runtime_on #update_runtime_on} => String
     #   * {Types::GetRuntimeManagementConfigResponse#runtime_version_arn #runtime_version_arn} => String
+    #   * {Types::GetRuntimeManagementConfigResponse#function_arn #function_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_runtime_management_config({
-    #     function_name: "FunctionName", # required
+    #     function_name: "NamespacedFunctionName", # required
     #     qualifier: "Qualifier",
     #   })
     #
@@ -2981,6 +3013,7 @@ module Aws::Lambda
     #
     #   resp.update_runtime_on #=> String, one of "Auto", "Manual", "FunctionUpdate"
     #   resp.runtime_version_arn #=> String
+    #   resp.function_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetRuntimeManagementConfig AWS API Documentation
     #
@@ -3395,6 +3428,9 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.event_source_mappings[0].scaling_config.maximum_concurrency #=> Integer
+    #   resp.event_source_mappings[0].document_db_event_source_config.database_name #=> String
+    #   resp.event_source_mappings[0].document_db_event_source_config.collection_name #=> String
+    #   resp.event_source_mappings[0].document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings AWS API Documentation
     #
@@ -5176,6 +5212,9 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
     #
+    # @option params [Types::DocumentDBEventSourceConfig] :document_db_event_source_config
+    #   Specific configuration settings for a DocumentDB event source.
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
@@ -5204,6 +5243,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
+    #   * {Types::EventSourceMappingConfiguration#document_db_event_source_config #document_db_event_source_config} => Types::DocumentDBEventSourceConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5242,6 +5282,11 @@ module Aws::Lambda
     #     function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
     #     scaling_config: {
     #       maximum_concurrency: 1,
+    #     },
+    #     document_db_event_source_config: {
+    #       database_name: "DatabaseName",
+    #       collection_name: "CollectionName",
+    #       full_document: "UpdateLookup", # accepts UpdateLookup, Default
     #     },
     #   })
     #
@@ -5282,6 +5327,9 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
     #   resp.scaling_config.maximum_concurrency #=> Integer
+    #   resp.document_db_event_source_config.database_name #=> String
+    #   resp.document_db_event_source_config.collection_name #=> String
+    #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping AWS API Documentation
     #
@@ -5597,9 +5645,13 @@ module Aws::Lambda
     #   The identifier of the function's [runtime][1]. Runtime is required if
     #   the deployment package is a .zip file archive.
     #
+    #   The following list includes deprecated runtimes. For more information,
+    #   see [Runtime deprecation policy][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
     #   A dead-letter queue configuration that specifies the queue or topic
@@ -5611,9 +5663,16 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq
     #
     # @option params [String] :kms_key_arn
-    #   The ARN of the Key Management Service (KMS) key that's used to
-    #   encrypt your function's environment variables. If it's not provided,
-    #   Lambda uses a default service key.
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that's used to encrypt your function's [environment variables][1].
+    #   When [Lambda SnapStart][2] is activated, this key is also used to
+    #   encrypt your function's snapshot. If you don't provide a customer
+    #   managed key, Lambda uses a default service key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
     #
     # @option params [Types::TracingConfig] :tracing_config
     #   Set `Mode` to `Active` to sample and trace a subset of incoming
@@ -5926,9 +5985,9 @@ module Aws::Lambda
     #
     # @option params [String] :auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
-    #   only. Set to `NONE` if you want to bypass IAM authentication to create
-    #   a public endpoint. For more information, see [Security and auth model
+    #   `AWS_IAM` if you want to restrict access to authenticated users only.
+    #   Set to `NONE` if you want to bypass IAM authentication to create a
+    #   public endpoint. For more information, see [Security and auth model
     #   for Lambda function URLs][1].
     #
     #
@@ -6008,7 +6067,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

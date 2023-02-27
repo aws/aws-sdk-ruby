@@ -614,6 +614,7 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomaly.anomaly_resources #=> Array
     #   resp.proactive_anomaly.anomaly_resources[0].name #=> String
     #   resp.proactive_anomaly.anomaly_resources[0].type #=> String
+    #   resp.proactive_anomaly.description #=> String
     #   resp.reactive_anomaly.id #=> String
     #   resp.reactive_anomaly.severity #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.reactive_anomaly.status #=> String, one of "ONGOING", "CLOSED"
@@ -1294,6 +1295,7 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomalies[0].anomaly_resources #=> Array
     #   resp.proactive_anomalies[0].anomaly_resources[0].name #=> String
     #   resp.proactive_anomalies[0].anomaly_resources[0].type #=> String
+    #   resp.proactive_anomalies[0].description #=> String
     #   resp.reactive_anomalies #=> Array
     #   resp.reactive_anomalies[0].id #=> String
     #   resp.reactive_anomalies[0].severity #=> String, one of "LOW", "MEDIUM", "HIGH"
@@ -2332,7 +2334,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -48,6 +48,7 @@ module Aws::Lambda
     CodeSigningPolicy = Shapes::StringShape.new(name: 'CodeSigningPolicy')
     CodeStorageExceededException = Shapes::StructureShape.new(name: 'CodeStorageExceededException')
     CodeVerificationFailedException = Shapes::StructureShape.new(name: 'CodeVerificationFailedException')
+    CollectionName = Shapes::StringShape.new(name: 'CollectionName')
     CompatibleArchitectures = Shapes::ListShape.new(name: 'CompatibleArchitectures')
     CompatibleRuntimes = Shapes::ListShape.new(name: 'CompatibleRuntimes')
     Concurrency = Shapes::StructureShape.new(name: 'Concurrency')
@@ -59,6 +60,7 @@ module Aws::Lambda
     CreateFunctionRequest = Shapes::StructureShape.new(name: 'CreateFunctionRequest')
     CreateFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'CreateFunctionUrlConfigRequest')
     CreateFunctionUrlConfigResponse = Shapes::StructureShape.new(name: 'CreateFunctionUrlConfigResponse')
+    DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeadLetterConfig = Shapes::StructureShape.new(name: 'DeadLetterConfig')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
@@ -75,6 +77,7 @@ module Aws::Lambda
     Description = Shapes::StringShape.new(name: 'Description')
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DestinationConfig = Shapes::StructureShape.new(name: 'DestinationConfig')
+    DocumentDBEventSourceConfig = Shapes::StructureShape.new(name: 'DocumentDBEventSourceConfig')
     EC2AccessDeniedException = Shapes::StructureShape.new(name: 'EC2AccessDeniedException')
     EC2ThrottledException = Shapes::StructureShape.new(name: 'EC2ThrottledException')
     EC2UnexpectedException = Shapes::StructureShape.new(name: 'EC2UnexpectedException')
@@ -106,6 +109,7 @@ module Aws::Lambda
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterCriteria = Shapes::StructureShape.new(name: 'FilterCriteria')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FullDocument = Shapes::StringShape.new(name: 'FullDocument')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     FunctionArnList = Shapes::ListShape.new(name: 'FunctionArnList')
     FunctionCode = Shapes::StructureShape.new(name: 'FunctionCode')
@@ -496,6 +500,7 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:amazon_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: AmazonManagedKafkaEventSourceConfig, location_name: "AmazonManagedKafkaEventSourceConfig"))
     CreateEventSourceMappingRequest.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     CreateEventSourceMappingRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
+    CreateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
     CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
@@ -581,6 +586,11 @@ module Aws::Lambda
     DestinationConfig.add_member(:on_failure, Shapes::ShapeRef.new(shape: OnFailure, location_name: "OnFailure"))
     DestinationConfig.struct_class = Types::DestinationConfig
 
+    DocumentDBEventSourceConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "DatabaseName"))
+    DocumentDBEventSourceConfig.add_member(:collection_name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "CollectionName"))
+    DocumentDBEventSourceConfig.add_member(:full_document, Shapes::ShapeRef.new(shape: FullDocument, location_name: "FullDocument"))
+    DocumentDBEventSourceConfig.struct_class = Types::DocumentDBEventSourceConfig
+
     EC2AccessDeniedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     EC2AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     EC2AccessDeniedException.struct_class = Types::EC2AccessDeniedException
@@ -662,6 +672,7 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:amazon_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: AmazonManagedKafkaEventSourceConfig, location_name: "AmazonManagedKafkaEventSourceConfig"))
     EventSourceMappingConfiguration.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     EventSourceMappingConfiguration.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
+    EventSourceMappingConfiguration.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
 
     EventSourceMappingsList.member = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
@@ -863,12 +874,13 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     GetProvisionedConcurrencyConfigResponse.struct_class = Types::GetProvisionedConcurrencyConfigResponse
 
-    GetRuntimeManagementConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetRuntimeManagementConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetRuntimeManagementConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     GetRuntimeManagementConfigRequest.struct_class = Types::GetRuntimeManagementConfigRequest
 
     GetRuntimeManagementConfigResponse.add_member(:update_runtime_on, Shapes::ShapeRef.new(shape: UpdateRuntimeOn, location_name: "UpdateRuntimeOn"))
     GetRuntimeManagementConfigResponse.add_member(:runtime_version_arn, Shapes::ShapeRef.new(shape: RuntimeVersionArn, location_name: "RuntimeVersionArn"))
+    GetRuntimeManagementConfigResponse.add_member(:function_arn, Shapes::ShapeRef.new(shape: NameSpacedFunctionArn, location_name: "FunctionArn"))
     GetRuntimeManagementConfigResponse.struct_class = Types::GetRuntimeManagementConfigResponse
 
     HeadersList.member = Shapes::ShapeRef.new(shape: Header)
@@ -1361,6 +1373,7 @@ module Aws::Lambda
     UpdateEventSourceMappingRequest.add_member(:tumbling_window_in_seconds, Shapes::ShapeRef.new(shape: TumblingWindowInSeconds, location_name: "TumblingWindowInSeconds"))
     UpdateEventSourceMappingRequest.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
     UpdateEventSourceMappingRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
+    UpdateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
     UpdateEventSourceMappingRequest.struct_class = Types::UpdateEventSourceMappingRequest
 
     UpdateFunctionCodeRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))

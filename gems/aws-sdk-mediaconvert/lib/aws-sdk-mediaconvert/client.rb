@@ -1198,6 +1198,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -1430,6 +1432,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -2228,6 +2231,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -2460,6 +2465,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -2956,6 +2962,10 @@ module Aws::MediaConvert
     #           },
     #           h264_settings: {
     #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             bandwidth_reduction_filter: {
+    #               sharpening: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #               strength: "LOW", # accepts LOW, MEDIUM, HIGH, AUTO, OFF
+    #             },
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -3228,6 +3238,7 @@ module Aws::MediaConvert
     #               white_point_x: 1,
     #               white_point_y: 1,
     #             },
+    #             hdr_to_sdr_tone_mapper: "PRESERVE_DETAILS", # accepts PRESERVE_DETAILS, VIBRANT
     #             hue: 1,
     #             sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE, LIMITED_RANGE_CLIP
     #             saturation: 1,
@@ -3624,6 +3635,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -3856,6 +3869,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -4857,6 +4871,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -5089,6 +5105,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -5846,6 +5863,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -6078,6 +6097,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -6493,6 +6513,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -6725,6 +6747,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -7541,6 +7564,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -7773,6 +7798,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -8581,6 +8607,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -8813,6 +8841,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -9245,6 +9274,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -9477,6 +9508,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -10449,6 +10481,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -10681,6 +10715,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -11171,6 +11206,10 @@ module Aws::MediaConvert
     #           },
     #           h264_settings: {
     #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             bandwidth_reduction_filter: {
+    #               sharpening: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #               strength: "LOW", # accepts LOW, MEDIUM, HIGH, AUTO, OFF
+    #             },
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -11443,6 +11482,7 @@ module Aws::MediaConvert
     #               white_point_x: 1,
     #               white_point_y: 1,
     #             },
+    #             hdr_to_sdr_tone_mapper: "PRESERVE_DETAILS", # accepts PRESERVE_DETAILS, VIBRANT
     #             hue: 1,
     #             sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE, LIMITED_RANGE_CLIP
     #             saturation: 1,
@@ -11836,6 +11876,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.quality #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.adaptive_quantization #=> String, one of "OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
@@ -12068,6 +12110,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_to_sdr_tone_mapper #=> String, one of "PRESERVE_DETAILS", "VIBRANT"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hue #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.sample_range_conversion #=> String, one of "LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.saturation #=> Integer
@@ -12204,7 +12247,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-02-27)
+------------------
+
+* Feature - New fields were added to reflect availability zone data in source server and recovery instance description commands responses, as well as source server launch status.
+
 1.10.0 (2023-01-18)
 ------------------
 

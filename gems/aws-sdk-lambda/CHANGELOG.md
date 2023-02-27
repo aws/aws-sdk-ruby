@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2023-02-27)
+------------------
+
+* Feature - This release adds the ability to create ESMs with Document DB change streams as event source. For more information see  https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html.
+
 1.91.0 (2023-01-23)
 ------------------
 

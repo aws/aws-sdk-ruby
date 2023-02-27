@@ -157,6 +157,7 @@ module Aws
   autoload :ImportExport, 'aws-sdk-importexport'
   autoload :Inspector, 'aws-sdk-inspector'
   autoload :Inspector2, 'aws-sdk-inspector2'
+  autoload :InternetMonitor, 'aws-sdk-internetmonitor'
   autoload :IoT, 'aws-sdk-iot'
   autoload :IoT1ClickDevicesService, 'aws-sdk-iot1clickdevicesservice'
   autoload :IoT1ClickProjects, 'aws-sdk-iot1clickprojects'

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-02-27)
+------------------
+
+* Feature - This release adds the ability to ingest batched historical data or migrate data in bulk from S3 into Timestream using CSV files.
+
 1.16.0 (2023-01-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.717.0 (2023-02-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::InternetMonitor`.
+
 1.716.0 (2023-02-23)
 ------------------
 

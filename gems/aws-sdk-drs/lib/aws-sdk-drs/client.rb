@@ -410,6 +410,7 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.staging_availability_zone #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -417,6 +418,7 @@ module Aws::Drs
     #   resp.source_server.life_cycle.last_launch.initiated.api_call_date_time #=> String
     #   resp.source_server.life_cycle.last_launch.initiated.job_id #=> String
     #   resp.source_server.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.source_server.life_cycle.last_launch.status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.source_server.life_cycle.last_seen_by_service_date_time #=> String
     #   resp.source_server.recovery_instance_id #=> String
     #   resp.source_server.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
@@ -853,6 +855,7 @@ module Aws::Drs
     #   resp.items[0].data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.items[0].data_replication_info.staging_availability_zone #=> String
     #   resp.items[0].ec2_instance_id #=> String
     #   resp.items[0].ec2_instance_state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "SHUTTING-DOWN", "TERMINATED", "NOT_FOUND"
     #   resp.items[0].failback.agent_last_seen_by_service_date_time #=> String
@@ -867,6 +870,7 @@ module Aws::Drs
     #   resp.items[0].failback.state #=> String, one of "FAILBACK_NOT_STARTED", "FAILBACK_IN_PROGRESS", "FAILBACK_READY_FOR_LAUNCH", "FAILBACK_COMPLETED", "FAILBACK_ERROR", "FAILBACK_NOT_READY_FOR_LAUNCH", "FAILBACK_LAUNCH_STATE_NOT_AVAILABLE"
     #   resp.items[0].is_drill #=> Boolean
     #   resp.items[0].job_id #=> String
+    #   resp.items[0].origin_availability_zone #=> String
     #   resp.items[0].origin_environment #=> String, one of "ON_PREMISES", "AWS"
     #   resp.items[0].point_in_time_snapshot_date_time #=> String
     #   resp.items[0].recovery_instance_id #=> String
@@ -1076,6 +1080,7 @@ module Aws::Drs
     #   resp.items[0].data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.items[0].data_replication_info.staging_availability_zone #=> String
     #   resp.items[0].last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.items[0].life_cycle.added_to_service_date_time #=> String
     #   resp.items[0].life_cycle.elapsed_replication_duration #=> String
@@ -1083,6 +1088,7 @@ module Aws::Drs
     #   resp.items[0].life_cycle.last_launch.initiated.api_call_date_time #=> String
     #   resp.items[0].life_cycle.last_launch.initiated.job_id #=> String
     #   resp.items[0].life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.items[0].life_cycle.last_launch.status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.items[0].life_cycle.last_seen_by_service_date_time #=> String
     #   resp.items[0].recovery_instance_id #=> String
     #   resp.items[0].replication_direction #=> String, one of "FAILOVER", "FAILBACK"
@@ -1219,6 +1225,7 @@ module Aws::Drs
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.staging_availability_zone #=> String
     #   resp.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -1226,6 +1233,7 @@ module Aws::Drs
     #   resp.life_cycle.last_launch.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_launch.initiated.job_id #=> String
     #   resp.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.life_cycle.last_launch.status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
     #   resp.recovery_instance_id #=> String
     #   resp.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
@@ -1595,6 +1603,7 @@ module Aws::Drs
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.staging_availability_zone #=> String
     #   resp.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -1602,6 +1611,7 @@ module Aws::Drs
     #   resp.life_cycle.last_launch.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_launch.initiated.job_id #=> String
     #   resp.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.life_cycle.last_launch.status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
     #   resp.recovery_instance_id #=> String
     #   resp.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
@@ -1820,6 +1830,7 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.staging_availability_zone #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -1827,6 +1838,7 @@ module Aws::Drs
     #   resp.source_server.life_cycle.last_launch.initiated.api_call_date_time #=> String
     #   resp.source_server.life_cycle.last_launch.initiated.job_id #=> String
     #   resp.source_server.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.source_server.life_cycle.last_launch.status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.source_server.life_cycle.last_seen_by_service_date_time #=> String
     #   resp.source_server.recovery_instance_id #=> String
     #   resp.source_server.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
@@ -1930,6 +1942,7 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.staging_availability_zone #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -1937,6 +1950,7 @@ module Aws::Drs
     #   resp.source_server.life_cycle.last_launch.initiated.api_call_date_time #=> String
     #   resp.source_server.life_cycle.last_launch.initiated.job_id #=> String
     #   resp.source_server.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.source_server.life_cycle.last_launch.status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.source_server.life_cycle.last_seen_by_service_date_time #=> String
     #   resp.source_server.recovery_instance_id #=> String
     #   resp.source_server.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
@@ -2499,7 +2513,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

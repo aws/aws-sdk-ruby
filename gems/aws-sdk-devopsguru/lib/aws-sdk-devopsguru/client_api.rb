@@ -863,6 +863,7 @@ module Aws::DevOpsGuru
     ProactiveAnomaly.add_member(:limit, Shapes::ShapeRef.new(shape: AnomalyLimit, location_name: "Limit"))
     ProactiveAnomaly.add_member(:source_metadata, Shapes::ShapeRef.new(shape: AnomalySourceMetadata, location_name: "SourceMetadata"))
     ProactiveAnomaly.add_member(:anomaly_resources, Shapes::ShapeRef.new(shape: AnomalyResources, location_name: "AnomalyResources"))
+    ProactiveAnomaly.add_member(:description, Shapes::ShapeRef.new(shape: AnomalyDescription, location_name: "Description"))
     ProactiveAnomaly.struct_class = Types::ProactiveAnomaly
 
     ProactiveAnomalySummary.add_member(:id, Shapes::ShapeRef.new(shape: AnomalyId, location_name: "Id"))
@@ -878,6 +879,7 @@ module Aws::DevOpsGuru
     ProactiveAnomalySummary.add_member(:limit, Shapes::ShapeRef.new(shape: AnomalyLimit, location_name: "Limit"))
     ProactiveAnomalySummary.add_member(:source_metadata, Shapes::ShapeRef.new(shape: AnomalySourceMetadata, location_name: "SourceMetadata"))
     ProactiveAnomalySummary.add_member(:anomaly_resources, Shapes::ShapeRef.new(shape: AnomalyResources, location_name: "AnomalyResources"))
+    ProactiveAnomalySummary.add_member(:description, Shapes::ShapeRef.new(shape: AnomalyDescription, location_name: "Description"))
     ProactiveAnomalySummary.struct_class = Types::ProactiveAnomalySummary
 
     ProactiveInsight.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, location_name: "Id"))

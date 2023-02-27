@@ -167,6 +167,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-importexport', '~> 1')
   spec.add_dependency('aws-sdk-inspector', '~> 1')
   spec.add_dependency('aws-sdk-inspector2', '~> 1')
+  spec.add_dependency('aws-sdk-internetmonitor', '~> 1')
   spec.add_dependency('aws-sdk-iot', '~> 1')
   spec.add_dependency('aws-sdk-iot1clickdevicesservice', '~> 1')
   spec.add_dependency('aws-sdk-iot1clickprojects', '~> 1')

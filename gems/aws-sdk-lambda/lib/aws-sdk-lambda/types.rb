@@ -214,7 +214,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] function_url_auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
+    #   `AWS_IAM` if you want to restrict access to authenticated users
     #   only. Set to `NONE` if you want to bypass IAM authentication to
     #   create a public endpoint. For more information, see [Security and
     #   auth model for Lambda function URLs][1].
@@ -823,6 +823,10 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
     #   @return [Types::ScalingConfig]
     #
+    # @!attribute [rw] document_db_event_source_config
+    #   Specific configuration settings for a DocumentDB event source.
+    #   @return [Types::DocumentDBEventSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
     #
     class CreateEventSourceMappingRequest < Struct.new(
@@ -847,7 +851,8 @@ module Aws::Lambda
       :function_response_types,
       :amazon_managed_kafka_event_source_config,
       :self_managed_kafka_event_source_config,
-      :scaling_config)
+      :scaling_config,
+      :document_db_event_source_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -872,9 +877,13 @@ module Aws::Lambda
     #   The identifier of the function's [runtime][1]. Runtime is required
     #   if the deployment package is a .zip file archive.
     #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -960,9 +969,16 @@ module Aws::Lambda
     #   @return [Types::Environment]
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the Key Management Service (KMS) key that's used to
-    #   encrypt your function's environment variables. If it's not
-    #   provided, Lambda uses a default service key.
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that's used to encrypt your function's [environment variables][1].
+    #   When [Lambda SnapStart][2] is activated, this key is also used to
+    #   encrypt your function's snapshot. If you don't provide a customer
+    #   managed key, Lambda uses a default service key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -1082,7 +1098,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
+    #   `AWS_IAM` if you want to restrict access to authenticated users
     #   only. Set to `NONE` if you want to bypass IAM authentication to
     #   create a public endpoint. For more information, see [Security and
     #   auth model for Lambda function URLs][1].
@@ -1122,7 +1138,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
+    #   `AWS_IAM` if you want to restrict access to authenticated users
     #   only. Set to `NONE` if you want to bypass IAM authentication to
     #   create a public endpoint. For more information, see [Security and
     #   auth model for Lambda function URLs][1].
@@ -1441,6 +1457,35 @@ module Aws::Lambda
     class DestinationConfig < Struct.new(
       :on_success,
       :on_failure)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specific configuration settings for a DocumentDB event source.
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database to consume within the DocumentDB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_name
+    #   The name of the collection to consume within the database. If you do
+    #   not specify a collection, Lambda consumes all collections.
+    #   @return [String]
+    #
+    # @!attribute [rw] full_document
+    #   Determines what DocumentDB sends to your event stream during
+    #   document update operations. If set to UpdateLookup, DocumentDB sends
+    #   a delta describing the changes, along with a copy of the entire
+    #   document. Otherwise, DocumentDB sends only a partial document that
+    #   contains the changes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DocumentDBEventSourceConfig AWS API Documentation
+    #
+    class DocumentDBEventSourceConfig < Struct.new(
+      :database_name,
+      :collection_name,
+      :full_document)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1839,6 +1884,10 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
     #   @return [Types::ScalingConfig]
     #
+    # @!attribute [rw] document_db_event_source_config
+    #   Specific configuration settings for a DocumentDB event source.
+    #   @return [Types::DocumentDBEventSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
     #
     class EventSourceMappingConfiguration < Struct.new(
@@ -1867,7 +1916,8 @@ module Aws::Lambda
       :function_response_types,
       :amazon_managed_kafka_event_source_config,
       :self_managed_kafka_event_source_config,
-      :scaling_config)
+      :scaling_config,
+      :document_db_event_source_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2079,9 +2129,15 @@ module Aws::Lambda
     #   @return [Types::EnvironmentResponse]
     #
     # @!attribute [rw] kms_key_arn
-    #   The KMS key that's used to encrypt the function's environment
-    #   variables. This key is returned only if you've configured a
-    #   customer managed key.
+    #   The KMS key that's used to encrypt the function's [environment
+    #   variables][1]. When [Lambda SnapStart][2] is activated, this key is
+    #   also used to encrypt the function's snapshot. This key is returned
+    #   only if you've configured a customer managed key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -2310,7 +2366,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
+    #   `AWS_IAM` if you want to restrict access to authenticated users
     #   only. Set to `NONE` if you want to bypass IAM authentication to
     #   create a public endpoint. For more information, see [Security and
     #   auth model for Lambda function URLs][1].
@@ -2682,7 +2738,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
+    #   `AWS_IAM` if you want to restrict access to authenticated users
     #   only. Set to `NONE` if you want to bypass IAM authentication to
     #   create a public endpoint. For more information, see [Security and
     #   auth model for Lambda function URLs][1].
@@ -3020,11 +3076,16 @@ module Aws::Lambda
     #   `null` is returned.
     #   @return [String]
     #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of your function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetRuntimeManagementConfigResponse AWS API Documentation
     #
     class GetRuntimeManagementConfigResponse < Struct.new(
       :update_runtime_on,
-      :runtime_version_arn)
+      :runtime_version_arn,
+      :function_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5695,6 +5756,10 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
     #   @return [Types::ScalingConfig]
     #
+    # @!attribute [rw] document_db_event_source_config
+    #   Specific configuration settings for a DocumentDB event source.
+    #   @return [Types::DocumentDBEventSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
     #
     class UpdateEventSourceMappingRequest < Struct.new(
@@ -5712,7 +5777,8 @@ module Aws::Lambda
       :source_access_configurations,
       :tumbling_window_in_seconds,
       :function_response_types,
-      :scaling_config)
+      :scaling_config,
+      :document_db_event_source_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5879,9 +5945,13 @@ module Aws::Lambda
     #   The identifier of the function's [runtime][1]. Runtime is required
     #   if the deployment package is a .zip file archive.
     #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [String]
     #
     # @!attribute [rw] dead_letter_config
@@ -5895,9 +5965,16 @@ module Aws::Lambda
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the Key Management Service (KMS) key that's used to
-    #   encrypt your function's environment variables. If it's not
-    #   provided, Lambda uses a default service key.
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that's used to encrypt your function's [environment variables][1].
+    #   When [Lambda SnapStart][2] is activated, this key is also used to
+    #   encrypt your function's snapshot. If you don't provide a customer
+    #   managed key, Lambda uses a default service key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -6057,7 +6134,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
+    #   `AWS_IAM` if you want to restrict access to authenticated users
     #   only. Set to `NONE` if you want to bypass IAM authentication to
     #   create a public endpoint. For more information, see [Security and
     #   auth model for Lambda function URLs][1].
@@ -6097,7 +6174,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
+    #   `AWS_IAM` if you want to restrict access to authenticated users
     #   only. Set to `NONE` if you want to bypass IAM authentication to
     #   create a public endpoint. For more information, see [Security and
     #   auth model for Lambda function URLs][1].

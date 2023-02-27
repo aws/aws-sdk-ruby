@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-02-27)
+------------------
+
+* Feature - This release adds the description field on ListAnomaliesForInsight and DescribeAnomaly API responses for proactive anomalies.
+
 1.29.0 (2023-02-01)
 ------------------
 

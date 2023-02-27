@@ -23,6 +23,153 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
+    # Details about the progress of a batch load task.
+    #
+    # @!attribute [rw] records_processed
+    #   @return [Integer]
+    #
+    # @!attribute [rw] records_ingested
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parse_failures
+    #   @return [Integer]
+    #
+    # @!attribute [rw] record_ingestion_failures
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_failures
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_metered
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/BatchLoadProgressReport AWS API Documentation
+    #
+    class BatchLoadProgressReport < Struct.new(
+      :records_processed,
+      :records_ingested,
+      :parse_failures,
+      :record_ingestion_failures,
+      :file_failures,
+      :bytes_metered)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a batch load task.
+    #
+    # @!attribute [rw] task_id
+    #   The ID of the batch load task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status
+    #   Status of the batch load task.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Database name for the database into which a batch load task loads
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Table name for the table into which a batch load task loads data.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the Timestream batch load task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the Timestream batch load task was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resumable_until
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/BatchLoadTask AWS API Documentation
+    #
+    class BatchLoadTask < Struct.new(
+      :task_id,
+      :task_status,
+      :database_name,
+      :table_name,
+      :creation_time,
+      :last_updated_time,
+      :resumable_until)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a batch load task.
+    #
+    # @!attribute [rw] task_id
+    #   The ID of the batch load task.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_configuration
+    #   Configuration details about the data source for a batch load task.
+    #   @return [Types::DataSourceConfiguration]
+    #
+    # @!attribute [rw] progress_report
+    #   @return [Types::BatchLoadProgressReport]
+    #
+    # @!attribute [rw] report_configuration
+    #   Report configuration for a batch load task. This contains details
+    #   about where error reports are stored.
+    #   @return [Types::ReportConfiguration]
+    #
+    # @!attribute [rw] data_model_configuration
+    #   Data model configuration for a batch load task. This contains
+    #   details about where a data model for a batch load task is stored.
+    #   @return [Types::DataModelConfiguration]
+    #
+    # @!attribute [rw] target_database_name
+    #   @return [String]
+    #
+    # @!attribute [rw] target_table_name
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status
+    #   Status of the batch load task.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_version
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the Timestream batch load task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the Timestream batch load task was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resumable_until
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/BatchLoadTaskDescription AWS API Documentation
+    #
+    class BatchLoadTaskDescription < Struct.new(
+      :task_id,
+      :error_message,
+      :data_source_configuration,
+      :progress_report,
+      :report_configuration,
+      :data_model_configuration,
+      :target_database_name,
+      :target_table_name,
+      :task_status,
+      :record_version,
+      :creation_time,
+      :last_updated_time,
+      :resumable_until)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Timestream was unable to process this request because it contains
     # resource that already exists.
     #
@@ -37,6 +184,61 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_model_configuration
+    #   @return [Types::DataModelConfiguration]
+    #
+    # @!attribute [rw] data_source_configuration
+    #   Defines configuration details about the data source for a batch load
+    #   task.
+    #   @return [Types::DataSourceConfiguration]
+    #
+    # @!attribute [rw] report_configuration
+    #   Report configuration for a batch load task. This contains details
+    #   about where error reports are stored.
+    #   @return [Types::ReportConfiguration]
+    #
+    # @!attribute [rw] target_database_name
+    #   Target Timestream database for a batch load task.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_table_name
+    #   Target Timestream table for a batch load task.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_version
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CreateBatchLoadTaskRequest AWS API Documentation
+    #
+    class CreateBatchLoadTaskRequest < Struct.new(
+      :client_token,
+      :data_model_configuration,
+      :data_source_configuration,
+      :report_configuration,
+      :target_database_name,
+      :target_table_name,
+      :record_version)
+      SENSITIVE = [:client_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The ID of the batch load task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CreateBatchLoadTaskResponse AWS API Documentation
+    #
+    class CreateBatchLoadTaskResponse < Struct.new(
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] database_name
     #   The name of the Timestream database.
     #   @return [String]
@@ -44,8 +246,8 @@ module Aws::TimestreamWrite
     # @!attribute [rw] kms_key_id
     #   The KMS key for the database. If the KMS key is not specified, the
     #   database will be encrypted with a Timestream managed KMS key located
-    #   in your account. Refer to [Amazon Web Services managed KMS keys][1]
-    #   for more info.
+    #   in your account. For more information, see [Amazon Web Services
+    #   managed keys][1].
     #
     #
     #
@@ -87,7 +289,7 @@ module Aws::TimestreamWrite
     #   @return [String]
     #
     # @!attribute [rw] retention_properties
-    #   The duration for which your time series data must be stored in the
+    #   The duration for which your time-series data must be stored in the
     #   memory store and the magnetic store.
     #   @return [Types::RetentionProperties]
     #
@@ -124,7 +326,155 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # A top level container for a table. Databases and tables are the
+    # A delimited data format where the column separator can be a comma and
+    # the record separator is a newline character.
+    #
+    # @!attribute [rw] column_separator
+    #   Column separator can be one of comma (','), pipe ('\|), semicolon
+    #   (';'), tab('/t'), or blank space (' ').
+    #   @return [String]
+    #
+    # @!attribute [rw] escape_char
+    #   Escape character can be one of
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_char
+    #   Can be single quote (') or double quote (").
+    #   @return [String]
+    #
+    # @!attribute [rw] null_value
+    #   Can be blank space (' ').
+    #   @return [String]
+    #
+    # @!attribute [rw] trim_white_space
+    #   Specifies to trim leading and trailing white space.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CsvConfiguration AWS API Documentation
+    #
+    class CsvConfiguration < Struct.new(
+      :column_separator,
+      :escape_char,
+      :quote_char,
+      :null_value,
+      :trim_white_space)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Data model for a batch load task.
+    #
+    # @!attribute [rw] time_column
+    #   Source column to be mapped to time.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_unit
+    #   The granularity of the timestamp unit. It indicates if the time
+    #   value is in seconds, milliseconds, nanoseconds, or other supported
+    #   values. Default is `MILLISECONDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_mappings
+    #   Source to target mappings for dimensions.
+    #   @return [Array<Types::DimensionMapping>]
+    #
+    # @!attribute [rw] multi_measure_mappings
+    #   Source to target mappings for multi-measure records.
+    #   @return [Types::MultiMeasureMappings]
+    #
+    # @!attribute [rw] mixed_measure_mappings
+    #   Source to target mappings for measures.
+    #   @return [Array<Types::MixedMeasureMapping>]
+    #
+    # @!attribute [rw] measure_name_column
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DataModel AWS API Documentation
+    #
+    class DataModel < Struct.new(
+      :time_column,
+      :time_unit,
+      :dimension_mappings,
+      :multi_measure_mappings,
+      :mixed_measure_mappings,
+      :measure_name_column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_model
+    #   @return [Types::DataModel]
+    #
+    # @!attribute [rw] data_model_s3_configuration
+    #   @return [Types::DataModelS3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DataModelConfiguration AWS API Documentation
+    #
+    class DataModelConfiguration < Struct.new(
+      :data_model,
+      :data_model_s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket_name
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DataModelS3Configuration AWS API Documentation
+    #
+    class DataModelS3Configuration < Struct.new(
+      :bucket_name,
+      :object_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines configuration details about the data source.
+    #
+    # @!attribute [rw] data_source_s3_configuration
+    #   Configuration of an S3 location for a file which contains data to
+    #   load.
+    #   @return [Types::DataSourceS3Configuration]
+    #
+    # @!attribute [rw] csv_configuration
+    #   A delimited data format where the column separator can be a comma
+    #   and the record separator is a newline character.
+    #   @return [Types::CsvConfiguration]
+    #
+    # @!attribute [rw] data_format
+    #   This is currently CSV.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DataSourceConfiguration AWS API Documentation
+    #
+    class DataSourceConfiguration < Struct.new(
+      :data_source_s3_configuration,
+      :csv_configuration,
+      :data_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket_name
+    #   The bucket name of the customer S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key_prefix
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DataSourceS3Configuration AWS API Documentation
+    #
+    class DataSourceS3Configuration < Struct.new(
+      :bucket_name,
+      :object_key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A top-level container for a table. Databases and tables are the
     # fundamental management concepts in Amazon Timestream. All tables in a
     # database are encrypted with the same KMS key.
     #
@@ -193,6 +543,30 @@ module Aws::TimestreamWrite
     class DeleteTableRequest < Struct.new(
       :database_name,
       :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The ID of the batch load task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DescribeBatchLoadTaskRequest AWS API Documentation
+    #
+    class DescribeBatchLoadTaskRequest < Struct.new(
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] batch_load_task_description
+    #   Description of the batch load task.
+    #   @return [Types::BatchLoadTaskDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DescribeBatchLoadTaskResponse AWS API Documentation
+    #
+    class DescribeBatchLoadTaskResponse < Struct.new(
+      :batch_load_task_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -269,16 +643,16 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # Dimension represents the meta data attributes of the time series. For
-    # example, the name and availability zone of an EC2 instance or the name
-    # of the manufacturer of a wind turbine are dimensions.
+    # Represents the metadata attributes of the time series. For example,
+    # the name and Availability Zone of an EC2 instance or the name of the
+    # manufacturer of a wind turbine are dimensions.
     #
     # @!attribute [rw] name
-    #   Dimension represents the meta data attributes of the time series.
-    #   For example, the name and availability zone of an EC2 instance or
-    #   the name of the manufacturer of a wind turbine are dimensions.
+    #   Dimension represents the metadata attributes of the time series. For
+    #   example, the name and Availability Zone of an EC2 instance or the
+    #   name of the manufacturer of a wind turbine are dimensions.
     #
-    #   For constraints on Dimension names, see [Naming Constraints][1].
+    #   For constraints on dimension names, see [Naming Constraints][1].
     #
     #
     #
@@ -290,7 +664,7 @@ module Aws::TimestreamWrite
     #   @return [String]
     #
     # @!attribute [rw] dimension_value_type
-    #   The data type of the dimension for the time series data point.
+    #   The data type of the dimension for the time-series data point.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/Dimension AWS API Documentation
@@ -303,8 +677,23 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_column
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_column
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DimensionMapping AWS API Documentation
+    #
+    class DimensionMapping < Struct.new(
+      :source_column,
+      :destination_column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an available endpoint against which to make API calls
-    # agaisnt, as well as the TTL for that endpoint.
+    # against, as well as the TTL for that endpoint.
     #
     # @!attribute [rw] address
     #   An endpoint address.
@@ -337,7 +726,7 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # The requested endpoint was invalid.
+    # The requested endpoint was not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -346,6 +735,50 @@ module Aws::TimestreamWrite
     #
     class InvalidEndpointException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The total number of items to return in the output. If the total
+    #   number of items available is more than the value specified, a
+    #   NextToken is provided in the output. To resume pagination, provide
+    #   the NextToken value as argument of a subsequent API invocation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] task_status
+    #   Status of the batch load task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ListBatchLoadTasksRequest AWS API Documentation
+    #
+    class ListBatchLoadTasksRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :task_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. Provide the next
+    #   ListBatchLoadTasksRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_load_tasks
+    #   A list of batch load task details.
+    #   @return [Array<Types::BatchLoadTask>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ListBatchLoadTasksResponse AWS API Documentation
+    #
+    class ListBatchLoadTasksResponse < Struct.new(
+      :next_token,
+      :batch_load_tasks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -495,19 +928,19 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # MeasureValue represents the data attribute of the time series. For
-    # example, the CPU utilization of an EC2 instance or the RPM of a wind
-    # turbine are measures. MeasureValue has both name and value.
+    # Represents the data attribute of the time series. For example, the CPU
+    # utilization of an EC2 instance or the RPM of a wind turbine are
+    # measures. MeasureValue has both name and value.
     #
     # MeasureValue is only allowed for type `MULTI`. Using `MULTI` type, you
     # can pass multiple data attributes associated with the same time series
     # in a single record
     #
     # @!attribute [rw] name
-    #   Name of the MeasureValue.
+    #   The name of the MeasureValue.
     #
-    #   For constraints on MeasureValue names, refer to [ Naming
-    #   Constraints][1] in the Timestream developer guide.
+    #   For constraints on MeasureValue names, see [ Naming Constraints][1]
+    #   in the Amazon Timestream Developer Guide.
     #
     #
     #
@@ -515,11 +948,11 @@ module Aws::TimestreamWrite
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Value for the MeasureValue.
+    #   The value for the MeasureValue.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Contains the data type of the MeasureValue for the time series data
+    #   Contains the data type of the MeasureValue for the time-series data
     #   point.
     #   @return [String]
     #
@@ -533,16 +966,77 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # Record represents a time series data point being written into
-    # Timestream. Each record contains an array of dimensions. Dimensions
-    # represent the meta data attributes of a time series data point such as
-    # the instance name or availability zone of an EC2 instance. A record
-    # also contains the measure name which is the name of the measure being
-    # collected for example the CPU utilization of an EC2 instance. A record
-    # also contains the measure value and the value type which is the data
-    # type of the measure value. In addition, the record contains the
-    # timestamp when the measure was collected that the timestamp unit which
-    # represents the granularity of the timestamp.
+    # @!attribute [rw] measure_name
+    #   @return [String]
+    #
+    # @!attribute [rw] source_column
+    #   @return [String]
+    #
+    # @!attribute [rw] target_measure_name
+    #   @return [String]
+    #
+    # @!attribute [rw] measure_value_type
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_measure_attribute_mappings
+    #   @return [Array<Types::MultiMeasureAttributeMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/MixedMeasureMapping AWS API Documentation
+    #
+    class MixedMeasureMapping < Struct.new(
+      :measure_name,
+      :source_column,
+      :target_measure_name,
+      :measure_value_type,
+      :multi_measure_attribute_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_column
+    #   @return [String]
+    #
+    # @!attribute [rw] target_multi_measure_attribute_name
+    #   @return [String]
+    #
+    # @!attribute [rw] measure_value_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/MultiMeasureAttributeMapping AWS API Documentation
+    #
+    class MultiMeasureAttributeMapping < Struct.new(
+      :source_column,
+      :target_multi_measure_attribute_name,
+      :measure_value_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_multi_measure_name
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_measure_attribute_mappings
+    #   @return [Array<Types::MultiMeasureAttributeMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/MultiMeasureMappings AWS API Documentation
+    #
+    class MultiMeasureMappings < Struct.new(
+      :target_multi_measure_name,
+      :multi_measure_attribute_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a time-series data point being written into Timestream.
+    # Each record contains an array of dimensions. Dimensions represent the
+    # metadata attributes of a time-series data point, such as the instance
+    # name or Availability Zone of an EC2 instance. A record also contains
+    # the measure name, which is the name of the measure being collected
+    # (for example, the CPU utilization of an EC2 instance). Additionally, a
+    # record contains the measure value and the value type, which is the
+    # data type of the measure value. Also, the record contains the
+    # timestamp of when the measure was collected and the timestamp unit,
+    # which represents the granularity of the timestamp.
     #
     # Records have a `Version` field, which is a 64-bit `long` that you can
     # use for updating data points. Writes of a duplicate record with the
@@ -553,7 +1047,7 @@ module Aws::TimestreamWrite
     # `Version` field.
     #
     # @!attribute [rw] dimensions
-    #   Contains the list of dimensions for time series data points.
+    #   Contains the list of dimensions for time-series data points.
     #   @return [Array<Types::Dimension>]
     #
     # @!attribute [rw] measure_name
@@ -563,11 +1057,11 @@ module Aws::TimestreamWrite
     #   @return [String]
     #
     # @!attribute [rw] measure_value
-    #   Contains the measure value for the time series data point.
+    #   Contains the measure value for the time-series data point.
     #   @return [String]
     #
     # @!attribute [rw] measure_value_type
-    #   Contains the data type of the measure value for the time series data
+    #   Contains the data type of the measure value for the time-series data
     #   point. Default type is `DOUBLE`.
     #   @return [String]
     #
@@ -580,7 +1074,7 @@ module Aws::TimestreamWrite
     #
     # @!attribute [rw] time_unit
     #   The granularity of the timestamp unit. It indicates if the time
-    #   value is in seconds, milliseconds, nanoseconds or other supported
+    #   value is in seconds, milliseconds, nanoseconds, or other supported
     #   values. Default is `MILLISECONDS`.
     #   @return [String]
     #
@@ -588,7 +1082,7 @@ module Aws::TimestreamWrite
     #   64-bit attribute used for record updates. Write requests for
     #   duplicate data with a higher version number will update the existing
     #   measure value and version. In cases where the measure value is the
-    #   same, `Version` will still be updated . Default value is `1`.
+    #   same, `Version` will still be updated. Default value is `1`.
     #
     #   <note markdown="1"> `Version` must be `1` or greater, or you will receive a
     #   `ValidationException` error.
@@ -597,10 +1091,10 @@ module Aws::TimestreamWrite
     #   @return [Integer]
     #
     # @!attribute [rw] measure_values
-    #   Contains the list of MeasureValue for time series data points.
+    #   Contains the list of MeasureValue for time-series data points.
     #
     #   This is only allowed for type `MULTI`. For scalar values, use
-    #   `MeasureValue` attribute of the Record directly.
+    #   `MeasureValue` attribute of the record directly.
     #   @return [Array<Types::MeasureValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/Record AWS API Documentation
@@ -642,9 +1136,9 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # Records that were not successfully inserted into Timestream due to
-    # data validation issues that must be resolved prior to reinserting time
-    # series data into the system.
+    # Represents records that were not successfully inserted into Timestream
+    # due to data validation issues that must be resolved before reinserting
+    # time-series data into the system.
     #
     # @!attribute [rw] record_index
     #   The index of the record in the input request for WriteRecords.
@@ -660,7 +1154,7 @@ module Aws::TimestreamWrite
     #
     #     * Measure values are different
     #
-    #     * Version is not present in the request *or* the value of version
+    #     * Version is not present in the request, *or* the value of version
     #       in the new record is equal to or lower than the existing value
     #
     #     If Timestream rejects data for this case, the `ExistingVersion`
@@ -670,7 +1164,7 @@ module Aws::TimestreamWrite
     #     `ExistingVersion`.
     #
     #   * Records with timestamps that lie outside the retention duration of
-    #     the memory store
+    #     the memory store.
     #
     #     <note markdown="1"> When the retention window is updated, you will receive a
     #     `RejectedRecords` exception if you immediately try to ingest data
@@ -728,13 +1222,13 @@ module Aws::TimestreamWrite
     #   `ExistingVersion`.
     #
     # * Records with timestamps that lie outside the retention duration of
-    #   the memory store
+    #   the memory store.
     #
     # * Records with dimensions or measures that exceed the Timestream
     #   defined limits.
     #
-    # For more information, see [Quotas][1] in the Timestream Developer
-    # Guide.
+    # For more information, see [Quotas][1] in the Amazon Timestream
+    # Developer Guide.
     #
     #
     #
@@ -755,6 +1249,45 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
+    # Report configuration for a batch load task. This contains details
+    # about where error reports are stored.
+    #
+    # @!attribute [rw] report_s3_configuration
+    #   Configuration of an S3 location to write error reports and events
+    #   for a batch load.
+    #   @return [Types::ReportS3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ReportConfiguration AWS API Documentation
+    #
+    class ReportConfiguration < Struct.new(
+      :report_s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket_name
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key_prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_option
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ReportS3Configuration AWS API Documentation
+    #
+    class ReportS3Configuration < Struct.new(
+      :bucket_name,
+      :object_key_prefix,
+      :encryption_option,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation tried to access a nonexistent resource. The resource
     # might not be specified correctly, or its status might not be ACTIVE.
     #
@@ -769,7 +1302,23 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # Retention properties contain the duration for which your time series
+    # @!attribute [rw] task_id
+    #   The ID of the batch load task to resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ResumeBatchLoadTaskRequest AWS API Documentation
+    #
+    class ResumeBatchLoadTaskRequest < Struct.new(
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ResumeBatchLoadTaskResponse AWS API Documentation
+    #
+    class ResumeBatchLoadTaskResponse < Aws::EmptyStructure; end
+
+    # Retention properties contain the duration for which your time-series
     # data must be stored in the magnetic store and the memory store.
     #
     # @!attribute [rw] memory_store_retention_period_in_hours
@@ -789,24 +1338,25 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # Configuration specifing an S3 location.
+    # The configuration that specifies an S3 location.
     #
     # @!attribute [rw] bucket_name
-    #   &gt;Bucket name of the customer S3 bucket.
+    #   The bucket name of the customer S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] object_key_prefix
-    #   Object key preview for the customer S3 location.
+    #   The object key preview for the customer S3 location.
     #   @return [String]
     #
     # @!attribute [rw] encryption_option
-    #   Encryption option for the customer s3 location. Options are S3
-    #   server side encryption with an S3-managed key or KMS managed key.
+    #   The encryption option for the customer S3 location. Options are S3
+    #   server-side encryption with an S3 managed key or Amazon Web Services
+    #   managed key.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   KMS key id for the customer s3 location when encrypting with a KMS
-    #   managed key.
+    #   The KMS key ID for the customer S3 location when encrypting with an
+    #   Amazon Web Services managed key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/S3Configuration AWS API Documentation
@@ -820,7 +1370,7 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # Instance quota of resource exceeded for this account.
+    # The instance quota of resource exceeded for this account.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -833,8 +1383,8 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # Table represents a database table in Timestream. Tables contain one or
-    # more related time series. You can modify the retention duration of the
+    # Represents a database table in Timestream. Tables contain one or more
+    # related time series. You can modify the retention duration of the
     # memory store and the magnetic store for a table.
     #
     # @!attribute [rw] arn
@@ -891,7 +1441,7 @@ module Aws::TimestreamWrite
 
     # A tag is a label that you assign to a Timestream database and/or
     # table. Each tag consists of a key and an optional value, both of which
-    # you define. Tags enable you to categorize databases and/or tables, for
+    # you define. With tags, you can categorize databases and/or tables, for
     # example, by purpose, owner, or environment.
     #
     # @!attribute [rw] key
@@ -933,8 +1483,8 @@ module Aws::TimestreamWrite
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # Too many requests were made by a user exceeding service quotas. The
-    # request was throttled.
+    # Too many requests were made by a user and they exceeded the service
+    # quotas. The request was throttled.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1002,7 +1552,7 @@ module Aws::TimestreamWrite
     end
 
     # @!attribute [rw] database
-    #   A top level container for a table. Databases and tables are the
+    #   A top-level container for a table. Databases and tables are the
     #   fundamental management concepts in Amazon Timestream. All tables in
     #   a database are encrypted with the same KMS key.
     #   @return [Types::Database]
@@ -1055,7 +1605,7 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # Invalid or malformed request.
+    # An invalid or malformed request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1077,18 +1627,18 @@ module Aws::TimestreamWrite
     #   @return [String]
     #
     # @!attribute [rw] common_attributes
-    #   A record containing the common measure, dimension, time, and version
-    #   attributes shared across all the records in the request. The measure
-    #   and dimension attributes specified will be merged with the measure
-    #   and dimension attributes in the records object when the data is
-    #   written into Timestream. Dimensions may not overlap, or a
+    #   A record that contains the common measure, dimension, time, and
+    #   version attributes shared across all the records in the request. The
+    #   measure and dimension attributes specified will be merged with the
+    #   measure and dimension attributes in the records object when the data
+    #   is written into Timestream. Dimensions may not overlap, or a
     #   `ValidationException` will be thrown. In other words, a record must
     #   contain dimensions with unique names.
     #   @return [Types::Record]
     #
     # @!attribute [rw] records
-    #   An array of records containing the unique measure, dimension, time,
-    #   and version attributes for each time series data point.
+    #   An array of records that contain the unique measure, dimension,
+    #   time, and version attributes for each time-series data point.
     #   @return [Array<Types::Record>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/WriteRecordsRequest AWS API Documentation

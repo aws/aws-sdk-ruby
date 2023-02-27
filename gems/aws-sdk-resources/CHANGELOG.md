@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.160.0 (2023-02-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-internetmonitor` gem.
+
 3.159.0 (2023-02-21)
 ------------------
 

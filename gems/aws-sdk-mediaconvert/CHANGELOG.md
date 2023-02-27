@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2023-02-27)
+------------------
+
+* Feature - The AWS Elemental MediaConvert SDK has added support for HDR10 to SDR tone mapping, and animated GIF video input sources.
+
 1.100.0 (2023-02-06)
 ------------------
 

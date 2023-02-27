@@ -553,7 +553,7 @@ module Aws::DevOpsGuru
     #
     #
     #
-    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #   @return [Array<Types::TagCostEstimationResourceCollectionFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CostEstimationResourceCollectionFilter AWS API Documentation
@@ -1000,7 +1000,7 @@ module Aws::DevOpsGuru
     #
     #
     #
-    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #   @return [Array<Types::TagHealth>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationResourceCollectionHealthResponse AWS API Documentation
@@ -1096,7 +1096,7 @@ module Aws::DevOpsGuru
     #
     #
     #
-    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #   @return [Array<Types::TagHealth>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeResourceCollectionHealthResponse AWS API Documentation
@@ -2800,6 +2800,10 @@ module Aws::DevOpsGuru
     #   behavior.
     #   @return [Array<Types::AnomalyResource>]
     #
+    # @!attribute [rw] description
+    #   A description of the proactive anomaly.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveAnomaly AWS API Documentation
     #
     class ProactiveAnomaly < Struct.new(
@@ -2815,7 +2819,8 @@ module Aws::DevOpsGuru
       :resource_collection,
       :limit,
       :source_metadata,
-      :anomaly_resources)
+      :anomaly_resources,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2900,6 +2905,10 @@ module Aws::DevOpsGuru
     #   behavior.
     #   @return [Array<Types::AnomalyResource>]
     #
+    # @!attribute [rw] description
+    #   A description of the proactive anomaly.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveAnomalySummary AWS API Documentation
     #
     class ProactiveAnomalySummary < Struct.new(
@@ -2915,7 +2924,8 @@ module Aws::DevOpsGuru
       :resource_collection,
       :limit,
       :source_metadata,
-      :anomaly_resources)
+      :anomaly_resources,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3822,7 +3832,7 @@ module Aws::DevOpsGuru
     #
     #
     #
-    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #   @return [Array<Types::TagCollection>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceCollection AWS API Documentation
@@ -3886,7 +3896,7 @@ module Aws::DevOpsGuru
     #
     #
     #
-    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #   @return [Array<Types::TagCollectionFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceCollectionFilter AWS API Documentation
@@ -3922,8 +3932,12 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Specifies one or more severity values and one or more status values
-    # that are used to search for insights.
+    # Specifies values used to filter responses when searching for insights.
+    # You can use a `ResourceCollection`, `ServiceCollection`, array of
+    # severities, and an array of status values. Each filter type contains
+    # one or more values to search for. If you specify multiple filter
+    # types, the filter types are joined with an `AND`, and the request
+    # returns only results that match all of the specified filters.
     #
     # @!attribute [rw] severities
     #   An array of severity values used to search for insights.
@@ -4399,7 +4413,7 @@ module Aws::DevOpsGuru
     #
     #
     #
-    # [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    # [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #
     # @!attribute [rw] app_boundary_key
     #   An Amazon Web Services tag *key* that is used to identify the Amazon
@@ -4721,7 +4735,7 @@ module Aws::DevOpsGuru
     #
     #
     #
-    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #   @return [Array<Types::UpdateTagCollectionFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateResourceCollectionFilter AWS API Documentation

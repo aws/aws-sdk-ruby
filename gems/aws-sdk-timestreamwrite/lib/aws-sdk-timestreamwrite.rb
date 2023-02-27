@@ -32,7 +32,7 @@ require_relative 'aws-sdk-timestreamwrite/customizations'
 # structure.
 #
 #     timestream_write = Aws::TimestreamWrite::Client.new
-#     resp = timestream_write.create_database(params)
+#     resp = timestream_write.create_batch_load_task(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-timestreamwrite/customizations'
 # @!group service
 module Aws::TimestreamWrite
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.17.0'
 
 end

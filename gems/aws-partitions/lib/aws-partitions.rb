@@ -395,6 +395,7 @@ module Aws
             'ImportExport' => 'importexport',
             'Inspector' => 'inspector',
             'Inspector2' => 'inspector2',
+            'InternetMonitor' => 'internetmonitor',
             'IoT' => 'iot',
             'IoT1ClickDevicesService' => 'devices.iot1click',
             'IoT1ClickProjects' => 'projects.iot1click',

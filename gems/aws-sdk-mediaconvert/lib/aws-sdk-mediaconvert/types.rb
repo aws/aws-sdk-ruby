@@ -1330,6 +1330,46 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # The Bandwidth reduction filter increases the video quality of your
+    # output relative to its bitrate. Use to lower the bitrate of your
+    # constant quality QVBR output, with little or no perceptual decrease in
+    # quality. Or, use to increase the video quality of outputs with other
+    # rate control modes relative to the bitrate that you specify. Bandwidth
+    # reduction increases further when your input is low quality or
+    # noisy.Outputs that use this feature incur pro-tier pricing.When you
+    # include Bandwidth reduction filter, you cannot include the Noise
+    # reducer preprocessor.
+    #
+    # @!attribute [rw] sharpening
+    #   Optionally specify the level of sharpening to apply when you use the
+    #   Bandwidth reduction filter. Sharpening adds contrast to the edges of
+    #   your video content and can reduce softness. Keep the default value
+    #   Off to apply no sharpening. Set Sharpening strength to Low to apply
+    #   a minimal amount of sharpening, or High to apply a maximum amount of
+    #   sharpening.
+    #   @return [String]
+    #
+    # @!attribute [rw] strength
+    #   Specify the strength of the Bandwidth reduction filter. For most
+    #   workflows, we recommend that you choose Auto. Your output bandwidth
+    #   will be reduced by at least 8 percent with no perceptual decrease in
+    #   video quality. If your output bandwidth isn't constrained, set
+    #   Filter strength to Low or Medium. Low results in minimal to no
+    #   impact in perceptual quality. For more bandwidth reduction, choose
+    #   High. The filter helps equalize quality between all scenes and
+    #   increases video softness. We recommend that you choose High for low
+    #   bitrate outputs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/BandwidthReductionFilter AWS API Documentation
+    #
+    class BandwidthReductionFilter < Struct.new(
+      :sharpening,
+      :strength)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Burn-in is a captions delivery method, rather than a captions format.
     # Burn-in writes the captions directly on your video frames, replacing
     # pixels of video content with the captions. Set up burn-in captions in
@@ -2585,7 +2625,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] timed_metadata_scheme_id_uri
     #   Specify the event message box (eMSG) scheme ID URI (scheme\_id\_uri)
-    #   for ID3 timed metadata in your output. For more informaiton, see
+    #   for ID3 timed metadata in your output. For more information, see
     #   ISO/IEC 23009-1:2022 section 5.10.3.3.4 Semantics. Leave blank to
     #   use the default value: https://aomedia.org/emsg/ID3 When you specify
     #   a value for ID3 metadata scheme ID URI, you must also set ID3
@@ -2594,7 +2634,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] timed_metadata_value
     #   Specify the event message box (eMSG) value for ID3 timed metadata in
-    #   your output. For more informaiton, see ISO/IEC 23009-1:2022 section
+    #   your output. For more information, see ISO/IEC 23009-1:2022 section
     #   5.10.3.3.4 Semantics. When you specify a value for ID3 Metadata
     #   Value, you must also set ID3 metadata (timedMetadata) to
     #   Passthrough.
@@ -2666,6 +2706,22 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/console/mediaconvert/hdr.
     #   @return [Types::Hdr10Metadata]
     #
+    # @!attribute [rw] hdr_to_sdr_tone_mapper
+    #   Specify how MediaConvert maps brightness and colors from your HDR
+    #   input to your SDR output. The mode that you select represents a
+    #   creative choice, with different tradeoffs in the details and tones
+    #   of your output. To maintain details in bright or saturated areas of
+    #   your output: Choose Preserve details. For some sources, your SDR
+    #   output may look less bright and less saturated when compared to your
+    #   HDR source. MediaConvert automatically applies this mode for HLG
+    #   sources, regardless of your choice. For a bright and saturated
+    #   output: Choose Vibrant. We recommend that you choose this mode when
+    #   any of your source content is HDR10, and for the best results when
+    #   it is mastered for 1000 nits. You may notice loss of details in
+    #   bright or saturated areas of your output. HDR to SDR tone mapping
+    #   has no effect when your input is SDR.
+    #   @return [String]
+    #
     # @!attribute [rw] hue
     #   Hue in degrees.
     #   @return [Integer]
@@ -2715,6 +2771,7 @@ module Aws::MediaConvert
       :color_space_conversion,
       :contrast,
       :hdr_10_metadata,
+      :hdr_to_sdr_tone_mapper,
       :hue,
       :sample_range_conversion,
       :saturation,
@@ -4746,9 +4803,9 @@ module Aws::MediaConvert
     # EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.
     #
     # @!attribute [rw] copy_protection_action
-    #   The action to take on content advisory XDS packets. If you select
-    #   PASSTHROUGH, packets will not be changed. If you select STRIP, any
-    #   packets will be removed in output captions.
+    #   The action to take on copy and redistribution control XDS packets.
+    #   If you select PASSTHROUGH, packets will not be changed. If you
+    #   select STRIP, any packets will be removed in output captions.
     #   @return [String]
     #
     # @!attribute [rw] vchip_action
@@ -5183,6 +5240,18 @@ module Aws::MediaConvert
     #   H264TemporalAdaptiveQuantization.
     #   @return [String]
     #
+    # @!attribute [rw] bandwidth_reduction_filter
+    #   The Bandwidth reduction filter increases the video quality of your
+    #   output relative to its bitrate. Use to lower the bitrate of your
+    #   constant quality QVBR output, with little or no perceptual decrease
+    #   in quality. Or, use to increase the video quality of outputs with
+    #   other rate control modes relative to the bitrate that you specify.
+    #   Bandwidth reduction increases further when your input is low quality
+    #   or noisy.Outputs that use this feature incur pro-tier pricing.When
+    #   you include Bandwidth reduction filter, you cannot include the Noise
+    #   reducer preprocessor.
+    #   @return [Types::BandwidthReductionFilter]
+    #
     # @!attribute [rw] bitrate
     #   Specify the average bitrate in bits per second. Required for VBR and
     #   CBR. For MS Smooth outputs, bitrates must be unique when rounded
@@ -5609,6 +5678,7 @@ module Aws::MediaConvert
     #
     class H264Settings < Struct.new(
       :adaptive_quantization,
+      :bandwidth_reduction_filter,
       :bitrate,
       :codec_level,
       :codec_profile,
@@ -9470,7 +9540,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] timed_metadata_scheme_id_uri
     #   Specify the event message box (eMSG) scheme ID URI (scheme\_id\_uri)
-    #   for ID3 timed metadata in your output. For more informaiton, see
+    #   for ID3 timed metadata in your output. For more information, see
     #   ISO/IEC 23009-1:2022 section 5.10.3.3.4 Semantics. Leave blank to
     #   use the default value: https://aomedia.org/emsg/ID3 When you specify
     #   a value for ID3 metadata scheme ID URI, you must also set ID3
@@ -9479,7 +9549,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] timed_metadata_value
     #   Specify the event message box (eMSG) value for ID3 timed metadata in
-    #   your output. For more informaiton, see ISO/IEC 23009-1:2022 section
+    #   your output. For more information, see ISO/IEC 23009-1:2022 section
     #   5.10.3.3.4 Semantics. When you specify a value for ID3 Metadata
     #   Value, you must also set ID3 metadata (timedMetadata) to
     #   Passthrough.
@@ -10263,11 +10333,12 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Enable the Noise reducer (NoiseReducer) feature to remove noise from
-    # your video output if necessary. Enable or disable this feature for
-    # each output individually. This setting is disabled by default. When
-    # you enable Noise reducer (NoiseReducer), you must also select a value
-    # for Noise reducer filter (NoiseReducerFilter).
+    # Enable the Noise reducer feature to remove noise from your video
+    # output if necessary. Enable or disable this feature for each output
+    # individually. This setting is disabled by default. When you enable
+    # Noise reducer, you must also select a value for Noise reducer filter.
+    # For AVC outputs, when you include Noise reducer, you cannot include
+    # the Bandwidth reduction filter.
     #
     # @!attribute [rw] filter
     #   Use Noise reducer filter (NoiseReducerFilter) to select one of the
@@ -12527,9 +12598,12 @@ module Aws::MediaConvert
     #   @return [Types::ImageInserter]
     #
     # @!attribute [rw] noise_reducer
-    #   Enable the Noise reducer (NoiseReducer) feature to remove noise from
-    #   your video output if necessary. Enable or disable this feature for
-    #   each output individually. This setting is disabled by default.
+    #   Enable the Noise reducer feature to remove noise from your video
+    #   output if necessary. Enable or disable this feature for each output
+    #   individually. This setting is disabled by default. When you enable
+    #   Noise reducer, you must also select a value for Noise reducer
+    #   filter. For AVC outputs, when you include Noise reducer, you cannot
+    #   include the Bandwidth reduction filter.
     #   @return [Types::NoiseReducer]
     #
     # @!attribute [rw] partner_watermarking

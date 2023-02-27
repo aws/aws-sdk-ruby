@@ -56,6 +56,8 @@ module Aws::TimestreamWrite
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :create_batch_load_task
+            Aws::TimestreamWrite::Endpoints::CreateBatchLoadTask.build(context)
           when :create_database
             Aws::TimestreamWrite::Endpoints::CreateDatabase.build(context)
           when :create_table
@@ -64,18 +66,24 @@ module Aws::TimestreamWrite
             Aws::TimestreamWrite::Endpoints::DeleteDatabase.build(context)
           when :delete_table
             Aws::TimestreamWrite::Endpoints::DeleteTable.build(context)
+          when :describe_batch_load_task
+            Aws::TimestreamWrite::Endpoints::DescribeBatchLoadTask.build(context)
           when :describe_database
             Aws::TimestreamWrite::Endpoints::DescribeDatabase.build(context)
           when :describe_endpoints
             Aws::TimestreamWrite::Endpoints::DescribeEndpoints.build(context)
           when :describe_table
             Aws::TimestreamWrite::Endpoints::DescribeTable.build(context)
+          when :list_batch_load_tasks
+            Aws::TimestreamWrite::Endpoints::ListBatchLoadTasks.build(context)
           when :list_databases
             Aws::TimestreamWrite::Endpoints::ListDatabases.build(context)
           when :list_tables
             Aws::TimestreamWrite::Endpoints::ListTables.build(context)
           when :list_tags_for_resource
             Aws::TimestreamWrite::Endpoints::ListTagsForResource.build(context)
+          when :resume_batch_load_task
+            Aws::TimestreamWrite::Endpoints::ResumeBatchLoadTask.build(context)
           when :tag_resource
             Aws::TimestreamWrite::Endpoints::TagResource.build(context)
           when :untag_resource

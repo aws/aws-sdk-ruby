@@ -282,6 +282,10 @@ module Aws::Drs
     #   The disks that should be replicated.
     #   @return [Array<Types::DataReplicationInfoReplicatedDisk>]
     #
+    # @!attribute [rw] staging_availability_zone
+    #   AWS Availability zone into which data is being replicated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DataReplicationInfo AWS API Documentation
     #
     class DataReplicationInfo < Struct.new(
@@ -290,7 +294,8 @@ module Aws::Drs
       :data_replication_state,
       :eta_date_time,
       :lag_duration,
-      :replicated_disks)
+      :replicated_disks,
+      :staging_availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1165,10 +1170,15 @@ module Aws::Drs
     #   last launch of a Source Server.
     #   @return [Types::LifeCycleLastLaunchInitiated]
     #
+    # @!attribute [rw] status
+    #   Status of Source Server's last launch.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LifeCycleLastLaunch AWS API Documentation
     #
     class LifeCycleLastLaunch < Struct.new(
-      :initiated)
+      :initiated,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1425,6 +1435,10 @@ module Aws::Drs
     #   The ID of the Job that created the Recovery Instance.
     #   @return [String]
     #
+    # @!attribute [rw] origin_availability_zone
+    #   AWS availability zone associated with the recovery instance.
+    #   @return [String]
+    #
     # @!attribute [rw] origin_environment
     #   Environment (On Premises / AWS) of the instance that the recovery
     #   instance originated from.
@@ -1461,6 +1475,7 @@ module Aws::Drs
       :failback,
       :is_drill,
       :job_id,
+      :origin_availability_zone,
       :origin_environment,
       :point_in_time_snapshot_date_time,
       :recovery_instance_id,
@@ -1516,6 +1531,10 @@ module Aws::Drs
     #   The disks that should be replicated.
     #   @return [Array<Types::RecoveryInstanceDataReplicationInfoReplicatedDisk>]
     #
+    # @!attribute [rw] staging_availability_zone
+    #   AWS Availability zone into which data is being replicated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstanceDataReplicationInfo AWS API Documentation
     #
     class RecoveryInstanceDataReplicationInfo < Struct.new(
@@ -1524,7 +1543,8 @@ module Aws::Drs
       :data_replication_state,
       :eta_date_time,
       :lag_duration,
-      :replicated_disks)
+      :replicated_disks,
+      :staging_availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1883,9 +1903,8 @@ module Aws::Drs
     #   @return [Boolean]
     #
     # @!attribute [rw] optimized_staging_disk_type
-    #   When `stagingDiskType` is set to Auto, this field shows the current
-    #   staging disk EBS volume type as it is constantly updated by the
-    #   service. This is a read-only field.
+    #   The Staging Disk EBS volume type to be used during replication when
+    #   `stagingDiskType` is set to Auto. This is a read-only field.
     #   @return [String]
     #
     # @!attribute [rw] staging_disk_type
