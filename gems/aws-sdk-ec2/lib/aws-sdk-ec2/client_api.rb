@@ -1187,6 +1187,7 @@ module Aws::EC2
     EgressOnlyInternetGatewayId = Shapes::StringShape.new(name: 'EgressOnlyInternetGatewayId')
     EgressOnlyInternetGatewayIdList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayIdList')
     EgressOnlyInternetGatewayList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayList')
+    EipAllocationPublicIp = Shapes::StringShape.new(name: 'EipAllocationPublicIp')
     EipAssociationIdList = Shapes::ListShape.new(name: 'EipAssociationIdList')
     ElasticGpuAssociation = Shapes::StructureShape.new(name: 'ElasticGpuAssociation')
     ElasticGpuAssociationList = Shapes::ListShape.new(name: 'ElasticGpuAssociationList')
@@ -3344,7 +3345,7 @@ module Aws::EC2
 
     AssociateAddressRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     AssociateAddressRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
-    AssociateAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "PublicIp"))
+    AssociateAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: EipAllocationPublicIp, location_name: "PublicIp"))
     AssociateAddressRequest.add_member(:allow_reassociation, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowReassociation"))
     AssociateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AssociateAddressRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
@@ -7635,7 +7636,7 @@ module Aws::EC2
     DisableVpcClassicLinkResult.struct_class = Types::DisableVpcClassicLinkResult
 
     DisassociateAddressRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: ElasticIpAssociationId, location_name: "AssociationId"))
-    DisassociateAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "PublicIp"))
+    DisassociateAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: EipAllocationPublicIp, location_name: "PublicIp"))
     DisassociateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateAddressRequest.struct_class = Types::DisassociateAddressRequest
 
@@ -10689,6 +10690,7 @@ module Aws::EC2
     ModifyImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     ModifyImageAttributeRequest.add_member(:organization_arns, Shapes::ShapeRef.new(shape: OrganizationArnStringList, location_name: "OrganizationArn"))
     ModifyImageAttributeRequest.add_member(:organizational_unit_arns, Shapes::ShapeRef.new(shape: OrganizationalUnitArnStringList, location_name: "OrganizationalUnitArn"))
+    ModifyImageAttributeRequest.add_member(:imds_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "ImdsSupport"))
     ModifyImageAttributeRequest.struct_class = Types::ModifyImageAttributeRequest
 
     ModifyInstanceAttributeRequest.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "SourceDestCheck"))

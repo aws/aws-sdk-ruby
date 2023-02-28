@@ -583,12 +583,13 @@ module Aws::EC2
     #     dry_run: false,
     #     organization_arns: ["String"],
     #     organizational_unit_arns: ["String"],
+    #     imds_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   })
     # @param [Hash] options ({})
     # @option options [String] :attribute
     #   The name of the attribute to modify.
     #
-    #   Valid values: `description` \| `launchPermission`
+    #   Valid values: `description` \| `imdsSupport` \| `launchPermission`
     # @option options [Types::AttributeValue] :description
     #   A new description for the AMI.
     # @option options [Types::LaunchPermissionModifications] :launch_permission
@@ -606,7 +607,7 @@ module Aws::EC2
     #   when the `Attribute` parameter is `launchPermission`.
     # @option options [String] :value
     #   The value of the attribute being modified. This parameter can be used
-    #   only when the `Attribute` parameter is `description`.
+    #   only when the `Attribute` parameter is `description` or `imdsSupport`.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -619,6 +620,21 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of an organizational unit (OU). This
     #   parameter can be used only when the `Attribute` parameter is
     #   `launchPermission`.
+    # @option options [Types::AttributeValue] :imds_support
+    #   Set to `v2.0` to indicate that IMDSv2 is specified in the AMI.
+    #   Instances launched from this AMI will have `HttpTokens` automatically
+    #   set to `required` so that, by default, the instance requires that
+    #   IMDSv2 is used when requesting instance metadata. In addition,
+    #   `HttpPutResponseHopLimit` is set to `2`. For more information, see
+    #   [Configure the AMI][1] in the *Amazon EC2 User Guide*.
+    #
+    #   Do not use this parameter unless your AMI software supports IMDSv2.
+    #   After you set the value to `v2.0`, you can't undo it. The only way to
+    #   “reset” your AMI is to create a new AMI from the underlying snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(image_id: @id)

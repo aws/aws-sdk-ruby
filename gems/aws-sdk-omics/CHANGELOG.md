@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-02-28)
+------------------
+
+* Feature - Minor model changes to accomodate batch imports feature
+
 1.1.0 (2023-01-18)
 ------------------
 

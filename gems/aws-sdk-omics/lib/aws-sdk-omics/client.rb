@@ -523,7 +523,7 @@ module Aws::Omics
     #         },
     #         schema: [
     #           {
-    #             "String" => "LONG", # accepts LONG, INT, STRING, FLOAT, DOUBLE, BOOLEAN
+    #             "SchemaItemKeyString" => "LONG", # accepts LONG, INT, STRING, FLOAT, DOUBLE, BOOLEAN
     #           },
     #         ],
     #       },
@@ -546,7 +546,7 @@ module Aws::Omics
     #   resp.store_options.tsv_store_options.format_to_header["FormatToHeaderKey"] #=> String
     #   resp.store_options.tsv_store_options.schema #=> Array
     #   resp.store_options.tsv_store_options.schema[0] #=> Hash
-    #   resp.store_options.tsv_store_options.schema[0]["String"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
+    #   resp.store_options.tsv_store_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateAnnotationStore AWS API Documentation
     #
@@ -624,7 +624,7 @@ module Aws::Omics
     #   The maximum number of CPUs to use in the group.
     #
     # @option params [Integer] :max_duration
-    #   A max duration for the group.
+    #   A maximum run time for the group in minutes.
     #
     # @option params [Integer] :max_runs
     #   The maximum number of concurrent runs for the group.
@@ -633,7 +633,8 @@ module Aws::Omics
     #   A name for the group.
     #
     # @option params [required, String] :request_id
-    #   A request ID for the group.
+    #   To ensure that requests don't run multiple times, specify a unique ID
+    #   for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -820,13 +821,14 @@ module Aws::Omics
     #   A parameter template for the workflow.
     #
     # @option params [required, String] :request_id
-    #   A request ID for the workflow.
+    #   To ensure that requests don't run multiple times, specify a unique ID
+    #   for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the workflow.
+    #   A storage capacity for the workflow in gigabytes.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the workflow.
@@ -864,7 +866,7 @@ module Aws::Omics
     #
     #   resp.arn #=> String
     #   resp.id #=> String
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1120,11 +1122,11 @@ module Aws::Omics
     #   resp.format_options.vcf_options.ignore_qual_field #=> Boolean
     #   resp.id #=> String
     #   resp.items #=> Array
-    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.items[0].source #=> String
     #   resp.role_arn #=> String
     #   resp.run_left_normalization #=> Boolean
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.status_message #=> String
     #   resp.update_time #=> Time
     #
@@ -1188,7 +1190,7 @@ module Aws::Omics
     #   resp.store_options.tsv_store_options.format_to_header["FormatToHeaderKey"] #=> String
     #   resp.store_options.tsv_store_options.schema #=> Array
     #   resp.store_options.tsv_store_options.schema[0] #=> Hash
-    #   resp.store_options.tsv_store_options.schema[0]["String"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
+    #   resp.store_options.tsv_store_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
     #   resp.store_size_bytes #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -1748,7 +1750,7 @@ module Aws::Omics
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.workflow_id #=> String
-    #   resp.workflow_type #=> String, one of "PRIVATE"
+    #   resp.workflow_type #=> String, one of "PRIVATE", "SERVICE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1934,11 +1936,12 @@ module Aws::Omics
     #   resp.destination_name #=> String
     #   resp.id #=> String
     #   resp.items #=> Array
-    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.items[0].source #=> String
+    #   resp.items[0].status_message #=> String
     #   resp.role_arn #=> String
     #   resp.run_left_normalization #=> Boolean
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.status_message #=> String
     #   resp.update_time #=> Time
     #
@@ -2048,7 +2051,7 @@ module Aws::Omics
     #   resp = client.get_workflow({
     #     export: ["DEFINITION"], # accepts DEFINITION
     #     id: "WorkflowId", # required
-    #     type: "PRIVATE", # accepts PRIVATE
+    #     type: "PRIVATE", # accepts PRIVATE, SERVICE
     #   })
     #
     # @example Response structure
@@ -2065,12 +2068,12 @@ module Aws::Omics
     #   resp.parameter_template #=> Hash
     #   resp.parameter_template["WorkflowParameterName"].description #=> String
     #   resp.parameter_template["WorkflowParameterName"].optional #=> Boolean
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
     #   resp.status_message #=> String
     #   resp.storage_capacity #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.type #=> String, one of "PRIVATE"
+    #   resp.type #=> String, one of "PRIVATE", "SERVICE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2112,7 +2115,7 @@ module Aws::Omics
     #
     #   resp = client.list_annotation_import_jobs({
     #     filter: {
-    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED
+    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED, COMPLETED_WITH_FAILURES
     #       store_name: "String",
     #     },
     #     ids: ["ResourceIdentifier"],
@@ -2129,7 +2132,7 @@ module Aws::Omics
     #   resp.annotation_import_jobs[0].id #=> String
     #   resp.annotation_import_jobs[0].role_arn #=> String
     #   resp.annotation_import_jobs[0].run_left_normalization #=> Boolean
-    #   resp.annotation_import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.annotation_import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.annotation_import_jobs[0].update_time #=> Time
     #   resp.next_token #=> String
     #
@@ -2862,7 +2865,7 @@ module Aws::Omics
     #
     #   resp = client.list_variant_import_jobs({
     #     filter: {
-    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED
+    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED, COMPLETED_WITH_FAILURES
     #       store_name: "String",
     #     },
     #     ids: ["ResourceIdentifier"],
@@ -2880,7 +2883,7 @@ module Aws::Omics
     #   resp.variant_import_jobs[0].id #=> String
     #   resp.variant_import_jobs[0].role_arn #=> String
     #   resp.variant_import_jobs[0].run_left_normalization #=> Boolean
-    #   resp.variant_import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.variant_import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.variant_import_jobs[0].update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListVariantImportJobs AWS API Documentation
@@ -2979,7 +2982,7 @@ module Aws::Omics
     #     max_results: 1,
     #     name: "WorkflowName",
     #     starting_token: "WorkflowListToken",
-    #     type: "PRIVATE", # accepts PRIVATE
+    #     type: "PRIVATE", # accepts PRIVATE, SERVICE
     #   })
     #
     # @example Response structure
@@ -2990,8 +2993,8 @@ module Aws::Omics
     #   resp.items[0].digest #=> String
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
-    #   resp.items[0].type #=> String, one of "PRIVATE"
+    #   resp.items[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
+    #   resp.items[0].type #=> String, one of "PRIVATE", "SERVICE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListWorkflows AWS API Documentation
@@ -3069,7 +3072,8 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Starts a read set activation job.
+    # Activates an archived read set. To reduce storage charges, Amazon
+    # Omics archives unused read sets after 30 days.
     #
     # @option params [String] :client_token
     #   To ensure that jobs don't run multiple times, specify a unique token
@@ -3079,7 +3083,7 @@ module Aws::Omics
     #   The read set's sequence store ID.
     #
     # @option params [required, Array<Types::StartReadSetActivationJobSourceItem>] :sources
-    #   The job's sources.
+    #   The job's source files.
     #
     # @return [Types::StartReadSetActivationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3116,7 +3120,7 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Starts a read set export job.
+    # Exports a read set to Amazon S3.
     #
     # @option params [String] :client_token
     #   To ensure that jobs don't run multiple times, specify a unique token
@@ -3132,7 +3136,7 @@ module Aws::Omics
     #   The read set's sequence store ID.
     #
     # @option params [required, Array<Types::ExportReadSet>] :sources
-    #   Sources for the job.
+    #   The job's source files.
     #
     # @return [Types::StartReadSetExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3186,7 +3190,7 @@ module Aws::Omics
     #   The read set's sequence store ID.
     #
     # @option params [required, Array<Types::StartReadSetImportJobSourceItem>] :sources
-    #   Source files to import.
+    #   The job's source files.
     #
     # @return [Types::StartReadSetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3252,7 +3256,7 @@ module Aws::Omics
     #   A service role for the job.
     #
     # @option params [required, Array<Types::StartReferenceImportJobSourceItem>] :sources
-    #   Sources for the job.
+    #   The job's source files.
     #
     # @return [Types::StartReferenceImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3320,7 +3324,8 @@ module Aws::Omics
     #   A priority for the run.
     #
     # @option params [required, String] :request_id
-    #   A request ID for the run.
+    #   To ensure that requests don't run multiple times, specify a unique ID
+    #   for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3335,7 +3340,7 @@ module Aws::Omics
     #   The run's ID.
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the run.
+    #   A storage capacity for the run in gigabytes.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the run.
@@ -3371,7 +3376,7 @@ module Aws::Omics
     #       "TagKey" => "TagValue",
     #     },
     #     workflow_id: "WorkflowId",
-    #     workflow_type: "PRIVATE", # accepts PRIVATE
+    #     workflow_type: "PRIVATE", # accepts PRIVATE, SERVICE
     #   })
     #
     # @example Response structure
@@ -3530,7 +3535,7 @@ module Aws::Omics
     #   resp.store_options.tsv_store_options.format_to_header["FormatToHeaderKey"] #=> String
     #   resp.store_options.tsv_store_options.schema #=> Array
     #   resp.store_options.tsv_store_options.schema[0] #=> Hash
-    #   resp.store_options.tsv_store_options.schema[0]["String"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
+    #   resp.store_options.tsv_store_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
     #   resp.update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateAnnotationStore AWS API Documentation
@@ -3551,7 +3556,7 @@ module Aws::Omics
     #   The maximum number of CPUs to use.
     #
     # @option params [Integer] :max_duration
-    #   The maximum amount of time to run.
+    #   A maximum run time for the group in minutes.
     #
     # @option params [Integer] :max_runs
     #   The maximum number of concurrent runs for the group.
@@ -3667,7 +3672,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

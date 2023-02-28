@@ -100,6 +100,8 @@ module Aws::Lightsail
             Aws::Lightsail::Endpoints::CreateDomain.build(context)
           when :create_domain_entry
             Aws::Lightsail::Endpoints::CreateDomainEntry.build(context)
+          when :create_gui_session_access_details
+            Aws::Lightsail::Endpoints::CreateGUISessionAccessDetails.build(context)
           when :create_instance_snapshot
             Aws::Lightsail::Endpoints::CreateInstanceSnapshot.build(context)
           when :create_instances
@@ -214,6 +216,8 @@ module Aws::Lightsail
             Aws::Lightsail::Endpoints::GetContainerServicePowers.build(context)
           when :get_container_services
             Aws::Lightsail::Endpoints::GetContainerServices.build(context)
+          when :get_cost_estimate
+            Aws::Lightsail::Endpoints::GetCostEstimate.build(context)
           when :get_disk
             Aws::Lightsail::Endpoints::GetDisk.build(context)
           when :get_disk_snapshot
@@ -330,10 +334,14 @@ module Aws::Lightsail
             Aws::Lightsail::Endpoints::SetIpAddressType.build(context)
           when :set_resource_access_for_bucket
             Aws::Lightsail::Endpoints::SetResourceAccessForBucket.build(context)
+          when :start_gui_session
+            Aws::Lightsail::Endpoints::StartGUISession.build(context)
           when :start_instance
             Aws::Lightsail::Endpoints::StartInstance.build(context)
           when :start_relational_database
             Aws::Lightsail::Endpoints::StartRelationalDatabase.build(context)
+          when :stop_gui_session
+            Aws::Lightsail::Endpoints::StopGUISession.build(context)
           when :stop_instance
             Aws::Lightsail::Endpoints::StopInstance.build(context)
           when :stop_relational_database

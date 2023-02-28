@@ -368,14 +368,9 @@ module Aws::ManagedBlockchain
 
     # @!group API Operations
 
-    # The token based access feature is in preview release for Ethereum on
-    # Amazon Managed Blockchain and is subject to change. We recommend that
-    # you use this feature only with test scenarios, and not in production
-    # environments.
-    #
     # Creates a new accessor for use with Managed Blockchain Ethereum nodes.
-    # An accessor object is a container that has the information required
-    # for token based access to your Ethereum nodes.
+    # An accessor contains information required for token based access to
+    # your Ethereum nodes.
     #
     # @option params [required, String] :client_request_token
     #   This is a unique, case-sensitive identifier that you provide to ensure
@@ -394,6 +389,23 @@ module Aws::ManagedBlockchain
     #
     #    </note>
     #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to assign to the Accessor.
+    #
+    #   Each tag consists of a key and an optional value. You can specify
+    #   multiple key-value pairs in a single request with an overall maximum
+    #   of 50 tags allowed per resource.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #
     # @return [Types::CreateAccessorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessorOutput#accessor_id #accessor_id} => String
@@ -404,6 +416,9 @@ module Aws::ManagedBlockchain
     #   resp = client.create_accessor({
     #     client_request_token: "ClientRequestTokenString", # required
     #     accessor_type: "BILLING_TOKEN", # required, accepts BILLING_TOKEN
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -530,12 +545,11 @@ module Aws::ManagedBlockchain
     #   Configuration properties for the first member within the network.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags to assign to the network. Each tag consists of a key and optional
-    #   value.
+    #   Tags to assign to the network.
     #
-    #   When specifying tags during creation, you can specify multiple
-    #   key-value pairs in a single request, with an overall maximum of 50
-    #   tags added to each resource.
+    #   Each tag consists of a key and an optional value. You can specify
+    #   multiple key-value pairs in a single request with an overall maximum
+    #   of 50 tags allowed per resource.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -650,12 +664,11 @@ module Aws::ManagedBlockchain
     #   The properties of a node configuration.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags to assign to the node. Each tag consists of a key and optional
-    #   value.
+    #   Tags to assign to the node.
     #
-    #   When specifying tags during creation, you can specify multiple
-    #   key-value pairs in a single request, with an overall maximum of 50
-    #   tags added to each resource.
+    #   Each tag consists of a key and an optional value. You can specify
+    #   multiple key-value pairs in a single request with an overall maximum
+    #   of 50 tags allowed per resource.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -750,13 +763,11 @@ module Aws::ManagedBlockchain
     #   example, "Proposal to add Example Corp. as member."
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags to assign to the proposal. Each tag consists of a key and
-    #   optional value.
+    #   Tags to assign to the proposal.
     #
-    #   When specifying tags during creation, you can specify multiple
-    #   key-value pairs in a single request, with an overall maximum of 50
-    #   tags added to each resource. If the proposal is for a network
-    #   invitation, the invitation inherits the tags added to the proposal.
+    #   Each tag consists of a key and an optional value. You can specify
+    #   multiple key-value pairs in a single request with an overall maximum
+    #   of 50 tags allowed per resource.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -809,11 +820,6 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # The token based access feature is in preview release for Ethereum on
-    # Amazon Managed Blockchain and is subject to change. We recommend that
-    # you use this feature only with test scenarios, and not in production
-    # environments.
-    #
     # Deletes an accessor that your Amazon Web Services account owns. An
     # accessor object is a container that has the information required for
     # token based access to your Ethereum nodes including, the
@@ -925,11 +931,6 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # The token based access feature is in preview release for Ethereum on
-    # Amazon Managed Blockchain and is subject to change. We recommend that
-    # you use this feature only with test scenarios, and not in production
-    # environments.
-    #
     # Returns detailed information about an accessor. An accessor object is
     # a container that has the information required for token based access
     # to your Ethereum nodes.
@@ -955,6 +956,8 @@ module Aws::ManagedBlockchain
     #   resp.accessor.status #=> String, one of "AVAILABLE", "PENDING_DELETION", "DELETED"
     #   resp.accessor.creation_date #=> Time
     #   resp.accessor.arn #=> String
+    #   resp.accessor.tags #=> Hash
+    #   resp.accessor.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetAccessor AWS API Documentation
     #
@@ -1166,11 +1169,6 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # The token based access feature is in preview release for Ethereum on
-    # Amazon Managed Blockchain and is subject to change. We recommend that
-    # you use this feature only with test scenarios, and not in production
-    # environments.
-    #
     # Returns a list of the accessors and their properties. Accessor objects
     # are containers that have the information required for token based
     # access to your Ethereum nodes.
@@ -1876,7 +1874,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

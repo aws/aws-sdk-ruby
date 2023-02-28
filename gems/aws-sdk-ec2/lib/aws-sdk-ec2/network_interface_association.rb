@@ -205,7 +205,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface_association.delete({
-    #     public_ip: "String",
+    #     public_ip: "EipAllocationPublicIp",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

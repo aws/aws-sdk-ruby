@@ -177,6 +177,7 @@ module Aws::ManagedBlockchain
     Accessor.add_member(:status, Shapes::ShapeRef.new(shape: AccessorStatus, location_name: "Status"))
     Accessor.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Accessor.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
+    Accessor.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
     Accessor.struct_class = Types::Accessor
 
     AccessorSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "Id"))
@@ -195,6 +196,7 @@ module Aws::ManagedBlockchain
 
     CreateAccessorInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateAccessorInput.add_member(:accessor_type, Shapes::ShapeRef.new(shape: AccessorType, required: true, location_name: "AccessorType"))
+    CreateAccessorInput.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, location_name: "Tags"))
     CreateAccessorInput.struct_class = Types::CreateAccessorInput
 
     CreateAccessorOutput.add_member(:accessor_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "AccessorId"))
@@ -692,6 +694,7 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_member, Seahorse::Model::Operation.new.tap do |o|

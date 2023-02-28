@@ -369,13 +369,28 @@ module Aws::Lightsail
     #   to 45 minutes after.
     #   @return [String]
     #
+    # @!attribute [rw] threshold
+    #   The trigger threshold of the action.
+    #
+    #   This add-on only applies to Lightsail for Research resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The amount of idle time in minutes after which your virtual computer
+    #   will automatically stop.
+    #
+    #   This add-on only applies to Lightsail for Research resources.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AddOn AWS API Documentation
     #
     class AddOn < Struct.new(
       :name,
       :status,
       :snapshot_time_of_day,
-      :next_snapshot_time_of_day)
+      :next_snapshot_time_of_day,
+      :threshold,
+      :duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -401,11 +416,19 @@ module Aws::Lightsail
     #   modifying the automatic snapshot add-on.
     #   @return [Types::AutoSnapshotAddOnRequest]
     #
+    # @!attribute [rw] stop_instance_on_idle_request
+    #   An object that represents additional parameters when enabling or
+    #   modifying the `StopInstanceOnIdle` add-on.
+    #
+    #   This object only applies to Lightsail for Research resources.
+    #   @return [Types::StopInstanceOnIdleRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AddOnRequest AWS API Documentation
     #
     class AddOnRequest < Struct.new(
       :add_on_type,
-      :auto_snapshot_add_on_request)
+      :auto_snapshot_add_on_request,
+      :stop_instance_on_idle_request)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -670,12 +693,20 @@ module Aws::Lightsail
     #   The disk path to expose to the instance (e.g., `/dev/xvdf`).
     #   @return [String]
     #
+    # @!attribute [rw] auto_mounting
+    #   A Boolean value used to determine the automatic mounting of a
+    #   storage volume to a virtual computer. The default value is `False`.
+    #
+    #   This value only applies to Lightsail for Research resources.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachDiskRequest AWS API Documentation
     #
     class AttachDiskRequest < Struct.new(
       :disk_name,
       :instance_name,
-      :disk_path)
+      :disk_path,
+      :auto_mounting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -987,6 +1018,13 @@ module Aws::Lightsail
     #   Server-based) of the blueprint.
     #   @return [String]
     #
+    # @!attribute [rw] app_category
+    #   Virtual computer blueprints that are supported by Lightsail for
+    #   Research.
+    #
+    #   This parameter only applies to Lightsail for Research resources.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Blueprint AWS API Documentation
     #
     class Blueprint < Struct.new(
@@ -1001,7 +1039,8 @@ module Aws::Lightsail
       :version_code,
       :product_url,
       :license_url,
-      :platform)
+      :platform,
+      :app_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1322,6 +1361,13 @@ module Aws::Lightsail
     #   platform. `LINUX_UNIX` blueprints require a `LINUX_UNIX` bundle.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_app_categories
+    #   Virtual computer blueprints that are supported by a Lightsail for
+    #   Research bundle.
+    #
+    #   This parameter only applies to Lightsail for Research resources.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bundle AWS API Documentation
     #
     class Bundle < Struct.new(
@@ -1335,7 +1381,8 @@ module Aws::Lightsail
       :power,
       :ram_size_in_gb,
       :transfer_per_month_in_gb,
-      :supported_platforms)
+      :supported_platforms,
+      :supported_app_categories)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2765,6 +2812,27 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the estimated cost for resources in your Lightsail for
+    # Research account.
+    #
+    # @!attribute [rw] usage_type
+    #   The types of usage that are included in the estimate, such as costs,
+    #   usage, or data transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] results_by_time
+    #   The cost estimate result that's associated with a time period.
+    #   @return [Array<Types::EstimateByTime>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CostEstimate AWS API Documentation
+    #
+    class CostEstimate < Struct.new(
+      :usage_type,
+      :results_by_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] bucket_name
     #   The name of the bucket that the new access key will belong to, and
     #   grant access to.
@@ -3629,6 +3697,50 @@ module Aws::Lightsail
     #
     class CreateDomainResult < Struct.new(
       :operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_name
+    #   The resource name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateGUISessionAccessDetailsRequest AWS API Documentation
+    #
+    class CreateGUISessionAccessDetailsRequest < Struct.new(
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_name
+    #   The resource name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] percentage_complete
+    #   The percentage of completion for the operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason the operation failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] sessions
+    #   Returns information about the specified NICE DCV GUI session.
+    #   @return [Array<Types::Session>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateGUISessionAccessDetailsResult AWS API Documentation
+    #
+    class CreateGUISessionAccessDetailsResult < Struct.new(
+      :resource_name,
+      :status,
+      :percentage_complete,
+      :failure_reason,
+      :sessions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5523,6 +5635,13 @@ module Aws::Lightsail
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] auto_mount_status
+    #   The status of automatically mounting a storage disk to a virtual
+    #   computer.
+    #
+    #   This parameter only applies to Lightsail for Research resources.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Disk AWS API Documentation
     #
     class Disk < Struct.new(
@@ -5542,7 +5661,8 @@ module Aws::Lightsail
       :attached_to,
       :is_attached,
       :attachment_state,
-      :gb_in_use)
+      :gb_in_use,
+      :auto_mount_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6060,6 +6180,43 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # An estimate that's associated with a time period.
+    #
+    # @!attribute [rw] usage_cost
+    #   The amount of cost or usage that's measured for the cost estimate.
+    #   @return [Float]
+    #
+    # @!attribute [rw] pricing_unit
+    #   The unit of measurement that's used for the cost estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The number of pricing units used to calculate the total number of
+    #   hours. For example, 1 unit equals 1 hour.
+    #   @return [Float]
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimate in USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_period
+    #   The period of time, in days, that an estimate covers. The period has
+    #   a start date and an end date. The start date must come before the
+    #   end date.
+    #   @return [Types::TimePeriod]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/EstimateByTime AWS API Documentation
+    #
+    class EstimateByTime < Struct.new(
+      :usage_cost,
+      :pricing_unit,
+      :unit,
+      :currency,
+      :time_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an export snapshot record.
     #
     # @!attribute [rw] name
@@ -6336,11 +6493,20 @@ module Aws::Lightsail
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] app_category
+    #   Returns a list of blueprints that are specific to Lightsail for
+    #   Research.
+    #
+    #   You must use this parameter to view Lightsail for Research
+    #   blueprints.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprintsRequest AWS API Documentation
     #
     class GetBlueprintsRequest < Struct.new(
       :include_inactive,
-      :page_token)
+      :page_token,
+      :app_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6628,11 +6794,19 @@ module Aws::Lightsail
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] app_category
+    #   Returns a list of bundles that are specific to Lightsail for
+    #   Research.
+    #
+    #   You must use this parameter to view Lightsail for Research bundles.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundlesRequest AWS API Documentation
     #
     class GetBundlesRequest < Struct.new(
       :include_inactive,
-      :page_token)
+      :page_token,
+      :app_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7101,6 +7275,72 @@ module Aws::Lightsail
     #
     class GetContainerServicesRequest < Struct.new(
       :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_name
+    #   The resource name.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The cost estimate start time.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Coordinated Universal Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use a start time of October 1, 2018,
+    #     at 8 PM UTC, specify `1538424000` as the start time.
+    #
+    #   You can convert a human-friendly time to Unix time format using a
+    #   converter like [Epoch converter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The cost estimate end time.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Coordinated Universal Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use an end time of October 1, 2018, at
+    #     9 PM UTC, specify `1538427600` as the end time.
+    #
+    #   You can convert a human-friendly time to Unix time format using a
+    #   converter like [Epoch converter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCostEstimateRequest AWS API Documentation
+    #
+    class GetCostEstimateRequest < Struct.new(
+      :resource_name,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resources_budget_estimate
+    #   Returns the estimate's forecasted cost or usage.
+    #   @return [Array<Types::ResourceBudgetEstimate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCostEstimateResult AWS API Documentation
+    #
+    class GetCostEstimateResult < Struct.new(
+      :resources_budget_estimate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13090,6 +13330,40 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the estimated cost or usage that a budget tracks.
+    #
+    # @!attribute [rw] resource_name
+    #   The resource name.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource the budget will track.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_estimates
+    #   The cost estimate for the specified budget.
+    #   @return [Array<Types::CostEstimate>]
+    #
+    # @!attribute [rw] start_time
+    #   The estimate start time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The estimate end time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ResourceBudgetEstimate AWS API Documentation
+    #
+    class ResourceBudgetEstimate < Struct.new(
+      :resource_name,
+      :resource_type,
+      :cost_estimates,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the resource location.
     #
     # @!attribute [rw] availability_zone
@@ -13206,6 +13480,33 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes a web-based, remote graphical user interface (GUI), NICE DCV
+    # session. The session is used to access a virtual computer’s operating
+    # system or application.
+    #
+    # @!attribute [rw] name
+    #   The session name.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The session URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_primary
+    #   When true, this Boolean value indicates the primary session for the
+    #   specified resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Session AWS API Documentation
+    #
+    class Session < Struct.new(
+      :name,
+      :url,
+      :is_primary)
+      SENSITIVE = [:url]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_type
     #   The resource type.
     #
@@ -13295,6 +13596,30 @@ module Aws::Lightsail
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetResourceAccessForBucketResult AWS API Documentation
     #
     class SetResourceAccessForBucketResult < Struct.new(
+      :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_name
+    #   The resource name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartGUISessionRequest AWS API Documentation
+    #
+    class StartGUISessionRequest < Struct.new(
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   The available API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartGUISessionResult AWS API Documentation
+    #
+    class StartGUISessionResult < Struct.new(
       :operations)
       SENSITIVE = []
       include Aws::Structure
@@ -13408,6 +13733,52 @@ module Aws::Lightsail
       :ip_address,
       :attached_to,
       :is_attached)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_name
+    #   The resource name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopGUISessionRequest AWS API Documentation
+    #
+    class StopGUISessionRequest < Struct.new(
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   The available API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopGUISessionResult AWS API Documentation
+    #
+    class StopGUISessionResult < Struct.new(
+      :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a request to create or edit the `StopInstanceOnIdle` add-on.
+    #
+    # This add-on only applies to Lightsail for Research resources.
+    #
+    # @!attribute [rw] threshold
+    #   The value to compare with the duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The amount of idle time in minutes after which your virtual computer
+    #   will automatically stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstanceOnIdleRequest AWS API Documentation
+    #
+    class StopInstanceOnIdleRequest < Struct.new(
+      :threshold,
+      :duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13587,6 +13958,36 @@ module Aws::Lightsail
     #
     class TestAlarmResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sets the start date and end date for retrieving a cost estimate. The
+    # start date is inclusive, but the end date is exclusive. For example,
+    # if `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost
+    # and usage data is retrieved from `2017-01-01` up to and including
+    # `2017-04-30` but not including `2017-05-01`.
+    #
+    # @!attribute [rw] start
+    #   The beginning of the time period. The start date is inclusive. For
+    #   example, if `start` is `2017-01-01`, Lightsail for Research
+    #   retrieves cost and usage data starting at `2017-01-01` up to the end
+    #   date. The start date must be equal to or no later than the current
+    #   date to avoid a validation error.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end
+    #   The end of the time period. The end date is exclusive. For example,
+    #   if `end` is `2017-05-01`, Lightsail for Research retrieves cost and
+    #   usage data from the start date up to, but not including,
+    #   `2017-05-01`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TimePeriod AWS API Documentation
+    #
+    class TimePeriod < Struct.new(
+      :start,
+      :end)
       SENSITIVE = []
       include Aws::Structure
     end

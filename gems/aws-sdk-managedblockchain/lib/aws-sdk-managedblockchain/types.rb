@@ -23,11 +23,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # The token based access feature is in preview release for Ethereum on
-    # Amazon Managed Blockchain and is subject to change. We recommend that
-    # you use this feature only with test scenarios, and not in production
-    # environments.
-    #
     # The properties of the Accessor.
     #
     # @!attribute [rw] id
@@ -67,6 +62,20 @@ module Aws::ManagedBlockchain
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Accessor.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Accessor AWS API Documentation
     #
     class Accessor < Struct.new(
@@ -75,16 +84,12 @@ module Aws::ManagedBlockchain
       :billing_token,
       :status,
       :creation_date,
-      :arn)
+      :arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The token based access feature is in preview release for Ethereum on
-    # Amazon Managed Blockchain and is subject to change. We recommend that
-    # you use this feature only with test scenarios, and not in production
-    # environments.
-    #
     # A summary of accessor properties.
     #
     # @!attribute [rw] id
@@ -191,11 +196,30 @@ module Aws::ManagedBlockchain
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to assign to the Accessor.
+    #
+    #   Each tag consists of a key and an optional value. You can specify
+    #   multiple key-value pairs in a single request with an overall maximum
+    #   of 50 tags allowed per resource.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateAccessorInput AWS API Documentation
     #
     class CreateAccessorInput < Struct.new(
       :client_request_token,
-      :accessor_type)
+      :accessor_type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -310,12 +334,11 @@ module Aws::ManagedBlockchain
     #   @return [Types::MemberConfiguration]
     #
     # @!attribute [rw] tags
-    #   Tags to assign to the network. Each tag consists of a key and
-    #   optional value.
+    #   Tags to assign to the network.
     #
-    #   When specifying tags during creation, you can specify multiple
-    #   key-value pairs in a single request, with an overall maximum of 50
-    #   tags added to each resource.
+    #   Each tag consists of a key and an optional value. You can specify
+    #   multiple key-value pairs in a single request with an overall maximum
+    #   of 50 tags allowed per resource.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -397,12 +420,11 @@ module Aws::ManagedBlockchain
     #   @return [Types::NodeConfiguration]
     #
     # @!attribute [rw] tags
-    #   Tags to assign to the node. Each tag consists of a key and optional
-    #   value.
+    #   Tags to assign to the node.
     #
-    #   When specifying tags during creation, you can specify multiple
-    #   key-value pairs in a single request, with an overall maximum of 50
-    #   tags added to each resource.
+    #   Each tag consists of a key and an optional value. You can specify
+    #   multiple key-value pairs in a single request with an overall maximum
+    #   of 50 tags allowed per resource.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -474,13 +496,11 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags to assign to the proposal. Each tag consists of a key and
-    #   optional value.
+    #   Tags to assign to the proposal.
     #
-    #   When specifying tags during creation, you can specify multiple
-    #   key-value pairs in a single request, with an overall maximum of 50
-    #   tags added to each resource. If the proposal is for a network
-    #   invitation, the invitation inherits the tags added to the proposal.
+    #   Each tag consists of a key and an optional value. You can specify
+    #   multiple key-value pairs in a single request with an overall maximum
+    #   of 50 tags allowed per resource.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -1318,13 +1338,17 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] tags
     #   Tags assigned to the member. Tags consist of a key and optional
-    #   value. For more information about tags, see [Tagging Resources][1]
-    #   in the *Amazon Managed Blockchain Hyperledger Fabric Developer
-    #   Guide*.
+    #   value.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] arn
@@ -1394,17 +1418,21 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] tags
     #   Tags assigned to the member. Tags consist of a key and optional
-    #   value. For more information about tags, see [Tagging Resources][1]
-    #   in the *Amazon Managed Blockchain Hyperledger Fabric Developer
-    #   Guide*.
+    #   value.
     #
     #   When specifying tags during creation, you can specify multiple
     #   key-value pairs in a single request, with an overall maximum of 50
     #   tags added to each resource.
     #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
     #
     #
-    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] kms_key_arn

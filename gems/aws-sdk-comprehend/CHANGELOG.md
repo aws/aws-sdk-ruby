@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2023-02-28)
+------------------
+
+* Feature - Amazon Comprehend now supports flywheels to help you train and manage new model versions for custom models.
+
 1.65.0 (2023-01-18)
 ------------------
 

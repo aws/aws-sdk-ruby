@@ -398,7 +398,8 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] reference
-    #   The store's genome reference.
+    #   The store's genome reference. Required for all stores except TSV
+    #   format with generic annotations.
     #   @return [Types::ReferenceItem]
     #
     # @!attribute [rw] status
@@ -502,7 +503,7 @@ module Aws::Omics
     #   @return [Integer]
     #
     # @!attribute [rw] max_duration
-    #   A max duration for the group.
+    #   A maximum run time for the group in minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] max_runs
@@ -514,7 +515,8 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   A request ID for the group.
+    #   To ensure that requests don't run multiple times, specify a unique
+    #   ID for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -722,14 +724,15 @@ module Aws::Omics
     #   @return [Hash<String,Types::WorkflowParameter>]
     #
     # @!attribute [rw] request_id
-    #   A request ID for the workflow.
+    #   To ensure that requests don't run multiple times, specify a unique
+    #   ID for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
-    #   A storage capacity for the workflow.
+    #   A storage capacity for the workflow in gigabytes.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -1278,7 +1281,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   The job's sources.
+    #   The job's source files.
     #   @return [Array<Types::ActivateReadSetSourceItem>]
     #
     # @!attribute [rw] status
@@ -1405,7 +1408,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   The job's sources.
+    #   The job's source files.
     #   @return [Array<Types::ImportReadSetSourceItem>]
     #
     # @!attribute [rw] status
@@ -1597,7 +1600,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   The job's sources.
+    #   The job's source files.
     #   @return [Array<Types::ImportReferenceSourceItem>]
     #
     # @!attribute [rw] status
@@ -1819,7 +1822,7 @@ module Aws::Omics
     #   @return [Integer]
     #
     # @!attribute [rw] max_duration
-    #   The group's maximum run duration.
+    #   The group's maximum run time in minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] max_runs
@@ -1943,7 +1946,7 @@ module Aws::Omics
     #   @return [Time]
     #
     # @!attribute [rw] storage_capacity
-    #   The run's storage capacity.
+    #   The run's storage capacity in gigabytes.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -2018,7 +2021,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] memory
-    #   The task's memory setting.
+    #   The task's memory use in gigabytes.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -2330,7 +2333,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
-    #   The workflow's storage capacity.
+    #   The workflow's storage capacity in gigabytes.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -3853,7 +3856,7 @@ module Aws::Omics
     #   @return [Integer]
     #
     # @!attribute [rw] max_duration
-    #   The group's maximum duration setting.
+    #   The group's maximum duration setting in minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] max_runs
@@ -4134,7 +4137,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   The job's sources.
+    #   The job's source files.
     #   @return [Array<Types::StartReadSetActivationJobSourceItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartReadSetActivationJobRequest AWS API Documentation
@@ -4206,7 +4209,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   Sources for the job.
+    #   The job's source files.
     #   @return [Array<Types::ExportReadSet>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartReadSetExportJobRequest AWS API Documentation
@@ -4267,7 +4270,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   Source files to import.
+    #   The job's source files.
     #   @return [Array<Types::StartReadSetImportJobSourceItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartReadSetImportJobRequest AWS API Documentation
@@ -4381,7 +4384,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   Sources for the job.
+    #   The job's source files.
     #   @return [Array<Types::StartReferenceImportJobSourceItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartReferenceImportJobRequest AWS API Documentation
@@ -4477,7 +4480,8 @@ module Aws::Omics
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   A request ID for the run.
+    #   To ensure that requests don't run multiple times, specify a unique
+    #   ID for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -4496,7 +4500,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
-    #   A storage capacity for the run.
+    #   A storage capacity for the run in gigabytes.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -4652,7 +4656,7 @@ module Aws::Omics
     #   @return [Time]
     #
     # @!attribute [rw] memory
-    #   The task's memory.
+    #   The task's memory use in gigabyes.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -4840,7 +4844,7 @@ module Aws::Omics
     #   @return [Integer]
     #
     # @!attribute [rw] max_duration
-    #   The maximum amount of time to run.
+    #   A maximum run time for the group in minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] max_runs
@@ -4968,11 +4972,16 @@ module Aws::Omics
     #   The source file's location in Amazon S3.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   A message that provides additional context about a job
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/VariantImportItemDetail AWS API Documentation
     #
     class VariantImportItemDetail < Struct.new(
       :job_status,
-      :source)
+      :source,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end

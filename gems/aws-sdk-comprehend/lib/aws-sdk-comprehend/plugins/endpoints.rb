@@ -72,20 +72,28 @@ module Aws::Comprehend
             Aws::Comprehend::Endpoints::ClassifyDocument.build(context)
           when :contains_pii_entities
             Aws::Comprehend::Endpoints::ContainsPiiEntities.build(context)
+          when :create_dataset
+            Aws::Comprehend::Endpoints::CreateDataset.build(context)
           when :create_document_classifier
             Aws::Comprehend::Endpoints::CreateDocumentClassifier.build(context)
           when :create_endpoint
             Aws::Comprehend::Endpoints::CreateEndpoint.build(context)
           when :create_entity_recognizer
             Aws::Comprehend::Endpoints::CreateEntityRecognizer.build(context)
+          when :create_flywheel
+            Aws::Comprehend::Endpoints::CreateFlywheel.build(context)
           when :delete_document_classifier
             Aws::Comprehend::Endpoints::DeleteDocumentClassifier.build(context)
           when :delete_endpoint
             Aws::Comprehend::Endpoints::DeleteEndpoint.build(context)
           when :delete_entity_recognizer
             Aws::Comprehend::Endpoints::DeleteEntityRecognizer.build(context)
+          when :delete_flywheel
+            Aws::Comprehend::Endpoints::DeleteFlywheel.build(context)
           when :delete_resource_policy
             Aws::Comprehend::Endpoints::DeleteResourcePolicy.build(context)
+          when :describe_dataset
+            Aws::Comprehend::Endpoints::DescribeDataset.build(context)
           when :describe_document_classification_job
             Aws::Comprehend::Endpoints::DescribeDocumentClassificationJob.build(context)
           when :describe_document_classifier
@@ -100,6 +108,10 @@ module Aws::Comprehend
             Aws::Comprehend::Endpoints::DescribeEntityRecognizer.build(context)
           when :describe_events_detection_job
             Aws::Comprehend::Endpoints::DescribeEventsDetectionJob.build(context)
+          when :describe_flywheel
+            Aws::Comprehend::Endpoints::DescribeFlywheel.build(context)
+          when :describe_flywheel_iteration
+            Aws::Comprehend::Endpoints::DescribeFlywheelIteration.build(context)
           when :describe_key_phrases_detection_job
             Aws::Comprehend::Endpoints::DescribeKeyPhrasesDetectionJob.build(context)
           when :describe_pii_entities_detection_job
@@ -128,6 +140,8 @@ module Aws::Comprehend
             Aws::Comprehend::Endpoints::DetectTargetedSentiment.build(context)
           when :import_model
             Aws::Comprehend::Endpoints::ImportModel.build(context)
+          when :list_datasets
+            Aws::Comprehend::Endpoints::ListDatasets.build(context)
           when :list_document_classification_jobs
             Aws::Comprehend::Endpoints::ListDocumentClassificationJobs.build(context)
           when :list_document_classifier_summaries
@@ -146,6 +160,10 @@ module Aws::Comprehend
             Aws::Comprehend::Endpoints::ListEntityRecognizers.build(context)
           when :list_events_detection_jobs
             Aws::Comprehend::Endpoints::ListEventsDetectionJobs.build(context)
+          when :list_flywheel_iteration_history
+            Aws::Comprehend::Endpoints::ListFlywheelIterationHistory.build(context)
+          when :list_flywheels
+            Aws::Comprehend::Endpoints::ListFlywheels.build(context)
           when :list_key_phrases_detection_jobs
             Aws::Comprehend::Endpoints::ListKeyPhrasesDetectionJobs.build(context)
           when :list_pii_entities_detection_jobs
@@ -168,6 +186,8 @@ module Aws::Comprehend
             Aws::Comprehend::Endpoints::StartEntitiesDetectionJob.build(context)
           when :start_events_detection_job
             Aws::Comprehend::Endpoints::StartEventsDetectionJob.build(context)
+          when :start_flywheel_iteration
+            Aws::Comprehend::Endpoints::StartFlywheelIteration.build(context)
           when :start_key_phrases_detection_job
             Aws::Comprehend::Endpoints::StartKeyPhrasesDetectionJob.build(context)
           when :start_pii_entities_detection_job
@@ -202,6 +222,8 @@ module Aws::Comprehend
             Aws::Comprehend::Endpoints::UntagResource.build(context)
           when :update_endpoint
             Aws::Comprehend::Endpoints::UpdateEndpoint.build(context)
+          when :update_flywheel
+            Aws::Comprehend::Endpoints::UpdateFlywheel.build(context)
           end
         end
       end

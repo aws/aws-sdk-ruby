@@ -994,10 +994,8 @@ module Aws::EC2
     #
     # @!attribute [rw] host_maintenance
     #   Indicates whether to enable or disable host maintenance for the
-    #   Dedicated Host. For more information, see [ Host maintenance][1] in
+    #   Dedicated Host. For more information, see [Host maintenance][1] in
     #   the *Amazon EC2 User Guide*.
-    #
-    #   Default: `on`
     #
     #
     #
@@ -3940,8 +3938,12 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminate_instances
-    #   Indicates whether to terminate instances for a Spot Fleet request if
-    #   it is canceled successfully.
+    #   Indicates whether to terminate the associated instances when the
+    #   Spot Fleet request is canceled. The default is to terminate the
+    #   instances.
+    #
+    #   To let the instances continue to run after the Spot Fleet request is
+    #   canceled, specify `no-terminate-instances`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsRequest AWS API Documentation
@@ -12951,11 +12953,11 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminate_instances
-    #   Indicates whether to terminate the instances when the EC2 Fleet is
-    #   deleted. The default is to terminate the instances.
+    #   Indicates whether to terminate the associated instances when the EC2
+    #   Fleet is deleted. The default is to terminate the instances.
     #
     #   To let the instances continue to run after the EC2 Fleet is deleted,
-    #   specify `NoTerminateInstances`. Supported only for fleets of type
+    #   specify `no-terminate-instances`. Supported only for fleets of type
     #   `maintain` and `request`.
     #
     #   For `instant` fleets, you cannot specify `NoTerminateInstances`. A
@@ -15209,7 +15211,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] cidr
-    #   The CIDR you want to deprovision from the pool.
+    #   The CIDR you want to deprovision from the pool. Enter the CIDR you
+    #   want to deprovision with a netmask of `/32`. You must rerun this
+    #   command for each IP address in the CIDR range. If your CIDR is a
+    #   `/24`, you will have to run this command to deprovision each of the
+    #   256 IP addresses in the `/24` CIDR.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionPublicIpv4PoolCidrRequest AWS API Documentation
@@ -17073,14 +17079,19 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another request with the
-    #   returned NextToken value. If this parameter is not specified, then
-    #   all results are returned.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -17108,8 +17119,8 @@ module Aws::EC2
     #   @return [Array<Types::DescribeFastLaunchImagesSuccessItem>]
     #
     # @!attribute [rw] next_token
-    #   The token to use for the next set of results. This value is null
-    #   when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastLaunchImagesResult AWS API Documentation
@@ -17145,8 +17156,9 @@ module Aws::EC2
     #   @return [Types::FastLaunchLaunchTemplateSpecificationResponse]
     #
     # @!attribute [rw] max_parallel_launches
-    #   The maximum number of parallel instances that are launched for
-    #   creating resources.
+    #   The maximum number of instances that Amazon EC2 can launch at the
+    #   same time to create pre-provisioned snapshots for Windows faster
+    #   launching.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
@@ -17386,14 +17398,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] fleet_id
@@ -17427,12 +17444,13 @@ module Aws::EC2
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). All records up to this time
     #   were retrieved.
     #
-    #   If `nextToken` indicates that there are more results, this value is
+    #   If `nextToken` indicates that there are more items, this value is
     #   not present.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] fleet_id
@@ -17464,14 +17482,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] fleet_id
@@ -17504,7 +17527,8 @@ module Aws::EC2
     #   @return [Array<Types::ActiveInstance>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] fleet_id
@@ -17567,14 +17591,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] fleet_ids
@@ -17620,7 +17649,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] fleets
@@ -18384,13 +18414,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesRequest AWS API Documentation
@@ -18413,8 +18449,8 @@ module Aws::EC2
     #   @return [Array<Types::Image>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesResult AWS API Documentation
@@ -18590,9 +18626,10 @@ module Aws::EC2
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1000. You cannot specify
-    #   this parameter and the instance IDs parameter in the same call. For
-    #   more information, see [Pagination][1].
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the instance IDs parameter in
+    #   the same call.
     #
     #
     #
@@ -18813,11 +18850,12 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return for this request. To retrieve
-    #   the next page of items, make another request with the token returned
-    #   in the output. This value can be between 5 and 1000. You cannot
-    #   specify this parameter and the instance IDs parameter in the same
-    #   call. For more information, see [Pagination][1].
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the instance IDs parameter in
+    #   the same request.
     #
     #
     #
@@ -19471,9 +19509,10 @@ module Aws::EC2
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1000. You cannot specify
-    #   this parameter and the instance IDs parameter in the same request.
-    #   For more information, see [Pagination][1].
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the instance IDs parameter in
+    #   the same request.
     #
     #
     #
@@ -23192,14 +23231,18 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
@@ -23225,8 +23268,8 @@ module Aws::EC2
     #   @return [Array<Types::ActiveInstance>]
     #
     # @!attribute [rw] next_token
-    #   The token required to retrieve the next set of results. This value
-    #   is `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
@@ -23258,14 +23301,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
@@ -23302,13 +23349,13 @@ module Aws::EC2
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). All records up to this time
     #   were retrieved.
     #
-    #   If `nextToken` indicates that there are more results, this value is
+    #   If `nextToken` indicates that there are more items, this value is
     #   not present.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
-    #   The token required to retrieve the next set of results. This value
-    #   is `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
@@ -23342,14 +23389,18 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_ids
@@ -23370,8 +23421,8 @@ module Aws::EC2
     # Contains the output of DescribeSpotFleetRequests.
     #
     # @!attribute [rw] next_token
-    #   The token required to retrieve the next set of results. This value
-    #   is `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_configs
@@ -23524,14 +23575,19 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next set of results. This value is `null`
-    #   when there are no more results to return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 5 and 1000. To retrieve the remaining results, make
-    #   another call with the returned `NextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsRequest AWS API Documentation
@@ -23553,8 +23609,8 @@ module Aws::EC2
     #   @return [Array<Types::SpotInstanceRequest>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsResult AWS API Documentation
@@ -23614,14 +23670,19 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] product_descriptions
@@ -23653,8 +23714,8 @@ module Aws::EC2
     # Contains the output of DescribeSpotPriceHistory.
     #
     # @!attribute [rw] next_token
-    #   The token required to retrieve the next set of results. This value
-    #   is null or an empty string when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_price_history
@@ -23750,15 +23811,22 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value. This value can be between 1 and 200. You cannot
-    #   specify this parameter and the `ImageIDs` parameter in the same
-    #   call.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the `ImageIDs` parameter in
+    #   the same call.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasksRequest AWS API Documentation
@@ -23778,8 +23846,8 @@ module Aws::EC2
     #   @return [Array<Types::StoreImageTaskResult>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasksResult AWS API Documentation
@@ -27123,8 +27191,9 @@ module Aws::EC2
     #   @return [Types::FastLaunchLaunchTemplateSpecificationResponse]
     #
     # @!attribute [rw] max_parallel_launches
-    #   The maximum number of parallel instances to launch for creating
-    #   resources.
+    #   The maximum number of instances that Amazon EC2 can launch at the
+    #   same time to create pre-provisioned snapshots for Windows faster
+    #   launching.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
@@ -29002,8 +29071,9 @@ module Aws::EC2
     #   @return [Types::FastLaunchLaunchTemplateSpecificationRequest]
     #
     # @!attribute [rw] max_parallel_launches
-    #   The maximum number of parallel instances to launch for creating
-    #   resources. Value must be `6` or greater.
+    #   The maximum number of instances that Amazon EC2 can launch at the
+    #   same time to create pre-provisioned snapshots for Windows faster
+    #   launching. Value must be `6` or greater.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -29037,10 +29107,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
-    #   The configuration settings that were defined for creating and
-    #   managing the pre-provisioned snapshots for faster launching of the
-    #   Windows AMI. This property is returned when the associated
-    #   `resourceType` is `snapshot`.
+    #   Settings to create and manage the pre-provisioned snapshots that
+    #   Amazon EC2 uses for faster launches from the Windows AMI. This
+    #   property is returned when the associated `resourceType` is
+    #   `snapshot`.
     #   @return [Types::FastLaunchSnapshotConfigurationResponse]
     #
     # @!attribute [rw] launch_template
@@ -29049,8 +29119,9 @@ module Aws::EC2
     #   @return [Types::FastLaunchLaunchTemplateSpecificationResponse]
     #
     # @!attribute [rw] max_parallel_launches
-    #   The maximum number of parallel instances to launch for creating
-    #   resources.
+    #   The maximum number of instances that Amazon EC2 can launch at the
+    #   same time to create pre-provisioned snapshots for Windows faster
+    #   launching.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
@@ -30944,6 +31015,8 @@ module Aws::EC2
     # @!attribute [rw] instance_type
     #   The instance type.
     #
+    #   `mac1.metal` is not supported as a launch template override.
+    #
     #   <note markdown="1"> If you specify `InstanceType`, you can't specify
     #   `InstanceRequirements`.
     #
@@ -31031,6 +31104,8 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_type
     #   The instance type.
+    #
+    #   `mac1.metal` is not supported as a launch template override.
     #
     #   <note markdown="1"> If you specify `InstanceType`, you can't specify
     #   `InstanceRequirements`.
@@ -32322,14 +32397,19 @@ module Aws::EC2
     #   @return [Types::InstanceRequirementsRequest]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and  1000. The default value is 1000. To retrieve
-    #   the remaining results, make another call with  the returned
-    #   `NextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTypesFromInstanceRequirementsRequest AWS API Documentation
@@ -32350,7 +32430,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceTypeInfoFromInstanceRequirements>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTypesFromInstanceRequirementsResult AWS API Documentation
@@ -33237,14 +33318,19 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and  1000. The default value is 1000. To retrieve
-    #   the remaining results, make another call with  the returned
-    #   `NextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSpotPlacementScoresRequest AWS API Documentation
@@ -33291,7 +33377,8 @@ module Aws::EC2
     #   @return [Array<Types::SpotPlacementScore>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSpotPlacementScoresResult AWS API Documentation
@@ -40483,7 +40570,8 @@ module Aws::EC2
     # Describes the launch specification for an instance.
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data for the instance.
+    #   The base64-encoded user data that instances use when starting up.
+    #   User data is limited to 16 KB.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -42218,17 +42306,15 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
-    #
-    #   If you do not specify a value for *MaxResults*, the request returns
-    #   1,000 items per page by default. For more information, see [
-    #   Pagination][1].
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -42258,8 +42344,8 @@ module Aws::EC2
     #   @return [Array<Types::ImageRecycleBinInfo>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ListImagesInRecycleBinResult AWS API Documentation
@@ -43693,7 +43779,7 @@ module Aws::EC2
     # @!attribute [rw] attribute
     #   The name of the attribute to modify.
     #
-    #   Valid values: `description` \| `launchPermission`
+    #   Valid values: `description` \| `imdsSupport` \| `launchPermission`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -43729,7 +43815,8 @@ module Aws::EC2
     #
     # @!attribute [rw] value
     #   The value of the attribute being modified. This parameter can be
-    #   used only when the `Attribute` parameter is `description`.
+    #   used only when the `Attribute` parameter is `description` or
+    #   `imdsSupport`.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -43751,6 +43838,25 @@ module Aws::EC2
     #   `launchPermission`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] imds_support
+    #   Set to `v2.0` to indicate that IMDSv2 is specified in the AMI.
+    #   Instances launched from this AMI will have `HttpTokens`
+    #   automatically set to `required` so that, by default, the instance
+    #   requires that IMDSv2 is used when requesting instance metadata. In
+    #   addition, `HttpPutResponseHopLimit` is set to `2`. For more
+    #   information, see [Configure the AMI][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #   Do not use this parameter unless your AMI software supports IMDSv2.
+    #   After you set the value to `v2.0`, you can't undo it. The only way
+    #   to “reset” your AMI is to create a new AMI from the underlying
+    #   snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
+    #   @return [Types::AttributeValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttributeRequest AWS API Documentation
     #
     class ModifyImageAttributeRequest < Struct.new(
@@ -43765,7 +43871,8 @@ module Aws::EC2
       :value,
       :dry_run,
       :organization_arns,
-      :organizational_unit_arns)
+      :organizational_unit_arns,
+      :imds_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52369,8 +52476,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data for the instance. User data is limited
-    #   to 16 KB.
+    #   The base64-encoded user data that instances use when starting up.
+    #   User data is limited to 16 KB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotLaunchSpecification AWS API Documentation
@@ -56846,7 +56953,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data that instances use when starting up.
+    #   The base64-encoded user data that instances use when starting up.
+    #   User data is limited to 16 KB.
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity

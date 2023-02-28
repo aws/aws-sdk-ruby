@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.367.0 (2023-02-28)
+------------------
+
+* Feature - This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default.
+
 1.366.0 (2023-02-14)
 ------------------
 

@@ -853,6 +853,104 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Creates a dataset to upload training or test data for a model
+    # associated with a flywheel. For more information about datasets, see [
+    # Flywheel overview][1] in the *Amazon Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [required, String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel of the flywheel to
+    #   receive the data.
+    #
+    # @option params [required, String] :dataset_name
+    #   Name of the dataset.
+    #
+    # @option params [String] :dataset_type
+    #   The dataset type. You can specify that the data in a dataset is for
+    #   training the model or for testing the model.
+    #
+    # @option params [String] :description
+    #   Description of the dataset.
+    #
+    # @option params [required, Types::DatasetInputDataConfig] :input_data_config
+    #   Information about the input data configuration. The type of input data
+    #   varies based on the format of the input and whether the data is for a
+    #   classifier model or an entity recognition model.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags for the dataset.
+    #
+    # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDatasetResponse#dataset_arn #dataset_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dataset({
+    #     flywheel_arn: "ComprehendFlywheelArn", # required
+    #     dataset_name: "ComprehendArnName", # required
+    #     dataset_type: "TRAIN", # accepts TRAIN, TEST
+    #     description: "Description",
+    #     input_data_config: { # required
+    #       augmented_manifests: [
+    #         {
+    #           attribute_names: ["AttributeNamesListItem"], # required
+    #           s3_uri: "S3Uri", # required
+    #           annotation_data_s3_uri: "S3Uri",
+    #           source_documents_s3_uri: "S3Uri",
+    #           document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
+    #         },
+    #       ],
+    #       data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
+    #       document_classifier_input_data_config: {
+    #         s3_uri: "S3Uri", # required
+    #         label_delimiter: "LabelDelimiter",
+    #       },
+    #       entity_recognizer_input_data_config: {
+    #         annotations: {
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         documents: { # required
+    #           s3_uri: "S3Uri", # required
+    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #         },
+    #         entity_list: {
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestTokenString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDataset AWS API Documentation
+    #
+    # @overload create_dataset(params = {})
+    # @param [Hash] params ({})
+    def create_dataset(params = {}, options = {})
+      req = build_request(:create_dataset, params)
+      req.send_request(options)
+    end
+
     # Creates a new document classifier that you can use to categorize
     # documents. To create a classifier, you provide a set of training
     # documents that labeled with the categories that you want to use. After
@@ -875,15 +973,15 @@ module Aws::Comprehend
     #   Region.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the document classifier being created. A
-    #   tag is a key-value pair that adds as a metadata to a resource used by
-    #   Amazon Comprehend. For example, a tag with "Sales" as the key might
-    #   be added to a resource to indicate its use by the sales department.
+    #   Tags to associate with the document classifier. A tag is a key-value
+    #   pair that adds as a metadata to a resource used by Amazon Comprehend.
+    #   For example, a tag with "Sales" as the key might be added to a
+    #   resource to indicate its use by the sales department.
     #
     # @option params [required, Types::DocumentClassifierInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data for the job.
@@ -901,9 +999,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   following languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   languages supported by Amazon Comprehend. All documents must be in the
+    #   same language.
     #
     # @option params [String] :volume_kms_key_id
     #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
@@ -996,6 +1093,7 @@ module Aws::Comprehend
     #     output_data_config: {
     #       s3_uri: "S3Uri",
     #       kms_key_id: "KmsKeyId",
+    #       flywheel_stats_s3_prefix: "S3Uri",
     #     },
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
@@ -1034,7 +1132,7 @@ module Aws::Comprehend
     #   This is the descriptive suffix that becomes part of the `EndpointArn`
     #   used for all subsequent requests to this resource.
     #
-    # @option params [required, String] :model_arn
+    # @option params [String] :model_arn
     #   The Amazon Resource Number (ARN) of the model to which the endpoint
     #   will be attached.
     #
@@ -1052,26 +1150,31 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags associated with the endpoint being created. A tag is a key-value
-    #   pair that adds metadata to the endpoint. For example, a tag with
-    #   "Sales" as the key might be added to an endpoint to indicate its use
-    #   by the sales department.
+    #   Tags to associate with the endpoint. A tag is a key-value pair that
+    #   adds metadata to the endpoint. For example, a tag with "Sales" as
+    #   the key might be added to an endpoint to indicate its use by the sales
+    #   department.
     #
     # @option params [String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS identity and Access
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that grants Amazon Comprehend read access to
     #   trained custom models encrypted with a customer managed key
     #   (ModelKmsKeyId).
     #
+    # @option params [String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel to which the endpoint
+    #   will be attached.
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint_arn #endpoint_arn} => String
+    #   * {Types::CreateEndpointResponse#model_arn #model_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_endpoint({
     #     endpoint_name: "ComprehendEndpointName", # required
-    #     model_arn: "ComprehendModelArn", # required
+    #     model_arn: "ComprehendModelArn",
     #     desired_inference_units: 1, # required
     #     client_request_token: "ClientRequestTokenString",
     #     tags: [
@@ -1081,11 +1184,13 @@ module Aws::Comprehend
     #       },
     #     ],
     #     data_access_role_arn: "IamRoleArn",
+    #     flywheel_arn: "ComprehendFlywheelArn",
     #   })
     #
     # @example Response structure
     #
     #   resp.endpoint_arn #=> String
+    #   resp.model_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEndpoint AWS API Documentation
     #
@@ -1098,7 +1203,7 @@ module Aws::Comprehend
 
     # Creates an entity recognizer using submitted files. After your
     # `CreateEntityRecognizer` request is submitted, you can check job
-    # status using the API.
+    # status using the `DescribeEntityRecognizer` API.
     #
     # @option params [required, String] :recognizer_name
     #   The name given to the newly created recognizer. Recognizer names can
@@ -1114,15 +1219,15 @@ module Aws::Comprehend
     #   Region.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
-    #   data.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the entity recognizer being created. A tag
-    #   is a key-value pair that adds as a metadata to a resource used by
-    #   Amazon Comprehend. For example, a tag with "Sales" as the key might
-    #   be added to a resource to indicate its use by the sales department.
+    #   Tags to associate with the entity recognizer. A tag is a key-value
+    #   pair that adds as a metadata to a resource used by Amazon Comprehend.
+    #   For example, a tag with "Sales" as the key might be added to a
+    #   resource to indicate its use by the sales department.
     #
     # @option params [required, Types::EntityRecognizerInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data. The S3 bucket
@@ -1166,7 +1271,7 @@ module Aws::Comprehend
     # @option params [String] :model_kms_key_id
     #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
     #   uses to encrypt trained custom models. The ModelKmsKeyId can be either
-    #   of the following formats
+    #   of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1261,6 +1366,126 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # A flywheel is an AWS resource that orchestrates the ongoing training
+    # of a model for custom classification or custom entity recognition. You
+    # can create a flywheel to start with an existing trained model, or
+    # Comprehend can create and train a new model.
+    #
+    # When you create the flywheel, Comprehend creates a data lake in your
+    # account. The data lake holds the training data and test data for all
+    # versions of the model.
+    #
+    # To use a flywheel with an existing trained model, you specify the
+    # active model version. Comprehend copies the model's training data and
+    # test data into the flywheel's data lake.
+    #
+    # To use the flywheel with a new model, you need to provide a dataset
+    # for training data (and optional test data) when you create the
+    # flywheel.
+    #
+    # For more information about flywheels, see [ Flywheel overview][1] in
+    # the *Amazon Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [required, String] :flywheel_name
+    #   Name for the flywheel.
+    #
+    # @option params [String] :active_model_arn
+    #   To associate an existing model with the flywheel, specify the Amazon
+    #   Resource Number (ARN) of the model version.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend the permissions
+    #   required to access the flywheel data in the data lake.
+    #
+    # @option params [Types::TaskConfig] :task_config
+    #   Configuration about the custom classifier associated with the
+    #   flywheel.
+    #
+    # @option params [String] :model_type
+    #   The model type.
+    #
+    # @option params [required, String] :data_lake_s3_uri
+    #   Enter the S3 location for the data lake. You can specify a new S3
+    #   bucket or a new folder of an existing S3 bucket. The flywheel creates
+    #   the data lake at this location.
+    #
+    # @option params [Types::DataSecurityConfig] :data_security_config
+    #   Data security configurations.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with this flywheel.
+    #
+    # @return [Types::CreateFlywheelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFlywheelResponse#flywheel_arn #flywheel_arn} => String
+    #   * {Types::CreateFlywheelResponse#active_model_arn #active_model_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_flywheel({
+    #     flywheel_name: "ComprehendArnName", # required
+    #     active_model_arn: "ComprehendModelArn",
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     task_config: {
+    #       language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #       document_classification_config: {
+    #         mode: "MULTI_CLASS", # required, accepts MULTI_CLASS, MULTI_LABEL
+    #         labels: ["LabelListItem"],
+    #       },
+    #       entity_recognition_config: {
+    #         entity_types: [ # required
+    #           {
+    #             type: "EntityTypeName", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     model_type: "DOCUMENT_CLASSIFIER", # accepts DOCUMENT_CLASSIFIER, ENTITY_RECOGNIZER
+    #     data_lake_s3_uri: "FlywheelS3Uri", # required
+    #     data_security_config: {
+    #       model_kms_key_id: "KmsKeyId",
+    #       volume_kms_key_id: "KmsKeyId",
+    #       data_lake_kms_key_id: "KmsKeyId",
+    #       vpc_config: {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestTokenString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flywheel_arn #=> String
+    #   resp.active_model_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateFlywheel AWS API Documentation
+    #
+    # @overload create_flywheel(params = {})
+    # @param [Hash] params ({})
+    def create_flywheel(params = {}, options = {})
+      req = build_request(:create_flywheel, params)
+      req.send_request(options)
+    end
+
     # Deletes a previously created document classifier
     #
     # Only those classifiers that are in terminated states (IN\_ERROR,
@@ -1352,6 +1577,37 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Deletes a flywheel. When you delete the flywheel, Amazon Comprehend
+    # does not delete the data lake or the model associated with the
+    # flywheel.
+    #
+    # For more information about flywheels, see [ Flywheel overview][1] in
+    # the *Amazon Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [required, String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_flywheel({
+    #     flywheel_arn: "ComprehendFlywheelArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteFlywheel AWS API Documentation
+    #
+    # @overload delete_flywheel(params = {})
+    # @param [Hash] params ({})
+    def delete_flywheel(params = {}, options = {})
+      req = build_request(:delete_flywheel, params)
+      req.send_request(options)
+    end
+
     # Deletes a resource-based policy that is attached to a custom model.
     #
     # @option params [required, String] :resource_arn
@@ -1379,12 +1635,56 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Returns information about the dataset that you specify. For more
+    # information about datasets, see [ Flywheel overview][1] in the *Amazon
+    # Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [required, String] :dataset_arn
+    #   The ARN of the dataset.
+    #
+    # @return [Types::DescribeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDatasetResponse#dataset_properties #dataset_properties} => Types::DatasetProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dataset({
+    #     dataset_arn: "ComprehendDatasetArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_properties.dataset_arn #=> String
+    #   resp.dataset_properties.dataset_name #=> String
+    #   resp.dataset_properties.dataset_type #=> String, one of "TRAIN", "TEST"
+    #   resp.dataset_properties.dataset_s3_uri #=> String
+    #   resp.dataset_properties.description #=> String
+    #   resp.dataset_properties.status #=> String, one of "CREATING", "COMPLETED", "FAILED"
+    #   resp.dataset_properties.message #=> String
+    #   resp.dataset_properties.number_of_documents #=> Integer
+    #   resp.dataset_properties.creation_time #=> Time
+    #   resp.dataset_properties.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDataset AWS API Documentation
+    #
+    # @overload describe_dataset(params = {})
+    # @param [Hash] params ({})
+    def describe_dataset(params = {}, options = {})
+      req = build_request(:describe_dataset, params)
+      req.send_request(options)
+    end
+
     # Gets the properties associated with a document classification job. Use
     # this operation to get the status of a classification job.
     #
     # @option params [required, String] :job_id
     #   The identifier that Amazon Comprehend generated for the job. The
-    #   operation returns this identifier in its response.
+    #   `StartDocumentClassificationJob` operation returns this identifier in
+    #   its response.
     #
     # @return [Types::DescribeDocumentClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1420,6 +1720,7 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties.vpc_config.security_group_ids[0] #=> String
     #   resp.document_classification_job_properties.vpc_config.subnets #=> Array
     #   resp.document_classification_job_properties.vpc_config.subnets[0] #=> String
+    #   resp.document_classification_job_properties.flywheel_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassificationJob AWS API Documentation
     #
@@ -1434,7 +1735,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :document_classifier_arn
     #   The Amazon Resource Name (ARN) that identifies the document
-    #   classifier. The operation returns this identifier in its response.
+    #   classifier. The `CreateDocumentClassifier` operation returns this
+    #   identifier in its response.
     #
     # @return [Types::DescribeDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1470,6 +1772,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
     #   resp.document_classifier_properties.output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties.output_data_config.kms_key_id #=> String
+    #   resp.document_classifier_properties.output_data_config.flywheel_stats_s3_prefix #=> String
     #   resp.document_classifier_properties.classifier_metadata.number_of_labels #=> Integer
     #   resp.document_classifier_properties.classifier_metadata.number_of_trained_documents #=> Integer
     #   resp.document_classifier_properties.classifier_metadata.number_of_test_documents #=> Integer
@@ -1491,6 +1794,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.model_kms_key_id #=> String
     #   resp.document_classifier_properties.version_name #=> String
     #   resp.document_classifier_properties.source_model_arn #=> String
+    #   resp.document_classifier_properties.flywheel_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -1506,7 +1810,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :job_id
     #   The identifier that Amazon Comprehend generated for the job. The
-    #   operation returns this identifier in its response.
+    #   `StartDominantLanguageDetectionJob` operation returns this identifier
+    #   in its response.
     #
     # @return [Types::DescribeDominantLanguageDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1585,6 +1890,7 @@ module Aws::Comprehend
     #   resp.endpoint_properties.last_modified_time #=> Time
     #   resp.endpoint_properties.data_access_role_arn #=> String
     #   resp.endpoint_properties.desired_data_access_role_arn #=> String
+    #   resp.endpoint_properties.flywheel_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpoint AWS API Documentation
     #
@@ -1600,7 +1906,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :job_id
     #   The identifier that Amazon Comprehend generated for the job. The
-    #   operation returns this identifier in its response.
+    #   `StartEntitiesDetectionJob` operation returns this identifier in its
+    #   response.
     #
     # @return [Types::DescribeEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1711,6 +2018,8 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.model_kms_key_id #=> String
     #   resp.entity_recognizer_properties.version_name #=> String
     #   resp.entity_recognizer_properties.source_model_arn #=> String
+    #   resp.entity_recognizer_properties.flywheel_arn #=> String
+    #   resp.entity_recognizer_properties.output_data_config.flywheel_stats_s3_prefix #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
     #
@@ -1767,12 +2076,121 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Provides configuration information about the flywheel. For more
+    # information about flywheels, see [ Flywheel overview][1] in the
+    # *Amazon Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [required, String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel.
+    #
+    # @return [Types::DescribeFlywheelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFlywheelResponse#flywheel_properties #flywheel_properties} => Types::FlywheelProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_flywheel({
+    #     flywheel_arn: "ComprehendFlywheelArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flywheel_properties.flywheel_arn #=> String
+    #   resp.flywheel_properties.active_model_arn #=> String
+    #   resp.flywheel_properties.data_access_role_arn #=> String
+    #   resp.flywheel_properties.task_config.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
+    #   resp.flywheel_properties.task_config.document_classification_config.mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
+    #   resp.flywheel_properties.task_config.document_classification_config.labels #=> Array
+    #   resp.flywheel_properties.task_config.document_classification_config.labels[0] #=> String
+    #   resp.flywheel_properties.task_config.entity_recognition_config.entity_types #=> Array
+    #   resp.flywheel_properties.task_config.entity_recognition_config.entity_types[0].type #=> String
+    #   resp.flywheel_properties.data_lake_s3_uri #=> String
+    #   resp.flywheel_properties.data_security_config.model_kms_key_id #=> String
+    #   resp.flywheel_properties.data_security_config.volume_kms_key_id #=> String
+    #   resp.flywheel_properties.data_security_config.data_lake_kms_key_id #=> String
+    #   resp.flywheel_properties.data_security_config.vpc_config.security_group_ids #=> Array
+    #   resp.flywheel_properties.data_security_config.vpc_config.security_group_ids[0] #=> String
+    #   resp.flywheel_properties.data_security_config.vpc_config.subnets #=> Array
+    #   resp.flywheel_properties.data_security_config.vpc_config.subnets[0] #=> String
+    #   resp.flywheel_properties.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.flywheel_properties.model_type #=> String, one of "DOCUMENT_CLASSIFIER", "ENTITY_RECOGNIZER"
+    #   resp.flywheel_properties.message #=> String
+    #   resp.flywheel_properties.creation_time #=> Time
+    #   resp.flywheel_properties.last_modified_time #=> Time
+    #   resp.flywheel_properties.latest_flywheel_iteration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeFlywheel AWS API Documentation
+    #
+    # @overload describe_flywheel(params = {})
+    # @param [Hash] params ({})
+    def describe_flywheel(params = {}, options = {})
+      req = build_request(:describe_flywheel, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the configuration properties of a flywheel iteration. For
+    # more information about flywheels, see [ Flywheel overview][1] in the
+    # *Amazon Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [required, String] :flywheel_arn
+    #
+    # @option params [required, String] :flywheel_iteration_id
+    #
+    # @return [Types::DescribeFlywheelIterationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFlywheelIterationResponse#flywheel_iteration_properties #flywheel_iteration_properties} => Types::FlywheelIterationProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_flywheel_iteration({
+    #     flywheel_arn: "ComprehendFlywheelArn", # required
+    #     flywheel_iteration_id: "FlywheelIterationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flywheel_iteration_properties.flywheel_arn #=> String
+    #   resp.flywheel_iteration_properties.flywheel_iteration_id #=> String
+    #   resp.flywheel_iteration_properties.creation_time #=> Time
+    #   resp.flywheel_iteration_properties.end_time #=> Time
+    #   resp.flywheel_iteration_properties.status #=> String, one of "TRAINING", "EVALUATING", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.flywheel_iteration_properties.message #=> String
+    #   resp.flywheel_iteration_properties.evaluated_model_arn #=> String
+    #   resp.flywheel_iteration_properties.evaluated_model_metrics.average_f1_score #=> Float
+    #   resp.flywheel_iteration_properties.evaluated_model_metrics.average_precision #=> Float
+    #   resp.flywheel_iteration_properties.evaluated_model_metrics.average_recall #=> Float
+    #   resp.flywheel_iteration_properties.evaluated_model_metrics.average_accuracy #=> Float
+    #   resp.flywheel_iteration_properties.trained_model_arn #=> String
+    #   resp.flywheel_iteration_properties.trained_model_metrics.average_f1_score #=> Float
+    #   resp.flywheel_iteration_properties.trained_model_metrics.average_precision #=> Float
+    #   resp.flywheel_iteration_properties.trained_model_metrics.average_recall #=> Float
+    #   resp.flywheel_iteration_properties.trained_model_metrics.average_accuracy #=> Float
+    #   resp.flywheel_iteration_properties.evaluation_manifest_s3_prefix #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeFlywheelIteration AWS API Documentation
+    #
+    # @overload describe_flywheel_iteration(params = {})
+    # @param [Hash] params ({})
+    def describe_flywheel_iteration(params = {}, options = {})
+      req = build_request(:describe_flywheel_iteration, params)
+      req.send_request(options)
+    end
+
     # Gets the properties associated with a key phrases detection job. Use
     # this operation to get the status of a detection job.
     #
     # @option params [required, String] :job_id
     #   The identifier that Amazon Comprehend generated for the job. The
-    #   operation returns this identifier in its response.
+    #   `StartKeyPhrasesDetectionJob` operation returns this identifier in its
+    #   response.
     #
     # @return [Types::DescribeKeyPhrasesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1961,7 +2379,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :job_id
     #   The identifier that Amazon Comprehend generated for the job. The
-    #   operation returns this identifier in its response.
+    #   `StartTargetedSentimentDetectionJob` operation returns this identifier
+    #   in its response.
     #
     # @return [Types::DescribeTargetedSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2516,12 +2935,13 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
     # @option params [String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that allows Amazon Comprehend to use Amazon Key Management
-    #   Service (KMS) to encrypt or decrypt the custom model.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend permission to use
+    #   Amazon Key Management Service (KMS) to encrypt or decrypt the custom
+    #   model.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the custom model that is created by this
+    #   Tags to associate with the custom model that is created by this
     #   import. A tag is a key-value pair that adds as a metadata to a
     #   resource used by Amazon Comprehend. For example, a tag with "Sales"
     #   as the key might be added to a resource to indicate its use by the
@@ -2557,6 +2977,71 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def import_model(params = {}, options = {})
       req = build_request(:import_model, params)
+      req.send_request(options)
+    end
+
+    # List the datasets that you have configured in this region. For more
+    # information about datasets, see [ Flywheel overview][1] in the *Amazon
+    # Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel.
+    #
+    # @option params [Types::DatasetFilter] :filter
+    #   Filters the datasets to be returned in the response.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a response. The default is 100.
+    #
+    # @return [Types::ListDatasetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetsResponse#dataset_properties_list #dataset_properties_list} => Array&lt;Types::DatasetProperties&gt;
+    #   * {Types::ListDatasetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_datasets({
+    #     flywheel_arn: "ComprehendFlywheelArn",
+    #     filter: {
+    #       status: "CREATING", # accepts CREATING, COMPLETED, FAILED
+    #       dataset_type: "TRAIN", # accepts TRAIN, TEST
+    #       creation_time_after: Time.now,
+    #       creation_time_before: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_properties_list #=> Array
+    #   resp.dataset_properties_list[0].dataset_arn #=> String
+    #   resp.dataset_properties_list[0].dataset_name #=> String
+    #   resp.dataset_properties_list[0].dataset_type #=> String, one of "TRAIN", "TEST"
+    #   resp.dataset_properties_list[0].dataset_s3_uri #=> String
+    #   resp.dataset_properties_list[0].description #=> String
+    #   resp.dataset_properties_list[0].status #=> String, one of "CREATING", "COMPLETED", "FAILED"
+    #   resp.dataset_properties_list[0].message #=> String
+    #   resp.dataset_properties_list[0].number_of_documents #=> Integer
+    #   resp.dataset_properties_list[0].creation_time #=> Time
+    #   resp.dataset_properties_list[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDatasets AWS API Documentation
+    #
+    # @overload list_datasets(params = {})
+    # @param [Hash] params ({})
+    def list_datasets(params = {}, options = {})
+      req = build_request(:list_datasets, params)
       req.send_request(options)
     end
 
@@ -2620,6 +3105,7 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
     #   resp.document_classification_job_properties_list[0].vpc_config.subnets #=> Array
     #   resp.document_classification_job_properties_list[0].vpc_config.subnets[0] #=> String
+    #   resp.document_classification_job_properties_list[0].flywheel_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassificationJobs AWS API Documentation
@@ -2733,6 +3219,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
     #   resp.document_classifier_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties_list[0].output_data_config.kms_key_id #=> String
+    #   resp.document_classifier_properties_list[0].output_data_config.flywheel_stats_s3_prefix #=> String
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_labels #=> Integer
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_trained_documents #=> Integer
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_test_documents #=> Integer
@@ -2754,6 +3241,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].model_kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].version_name #=> String
     #   resp.document_classifier_properties_list[0].source_model_arn #=> String
+    #   resp.document_classifier_properties_list[0].flywheel_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -2888,6 +3376,7 @@ module Aws::Comprehend
     #   resp.endpoint_properties_list[0].last_modified_time #=> Time
     #   resp.endpoint_properties_list[0].data_access_role_arn #=> String
     #   resp.endpoint_properties_list[0].desired_data_access_role_arn #=> String
+    #   resp.endpoint_properties_list[0].flywheel_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpoints AWS API Documentation
@@ -3102,6 +3591,8 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].model_kms_key_id #=> String
     #   resp.entity_recognizer_properties_list[0].version_name #=> String
     #   resp.entity_recognizer_properties_list[0].source_model_arn #=> String
+    #   resp.entity_recognizer_properties_list[0].flywheel_arn #=> String
+    #   resp.entity_recognizer_properties_list[0].output_data_config.flywheel_stats_s3_prefix #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
@@ -3176,6 +3667,131 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def list_events_detection_jobs(params = {}, options = {})
       req = build_request(:list_events_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Information about the history of a flywheel iteration. For more
+    # information about flywheels, see [ Flywheel overview][1] in the
+    # *Amazon Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [required, String] :flywheel_arn
+    #   The ARN of the flywheel.
+    #
+    # @option params [Types::FlywheelIterationFilter] :filter
+    #   Filter the flywheel iteration history based on creation time.
+    #
+    # @option params [String] :next_token
+    #   Next token
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of iteration history results to return
+    #
+    # @return [Types::ListFlywheelIterationHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlywheelIterationHistoryResponse#flywheel_iteration_properties_list #flywheel_iteration_properties_list} => Array&lt;Types::FlywheelIterationProperties&gt;
+    #   * {Types::ListFlywheelIterationHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flywheel_iteration_history({
+    #     flywheel_arn: "ComprehendFlywheelArn", # required
+    #     filter: {
+    #       creation_time_after: Time.now,
+    #       creation_time_before: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flywheel_iteration_properties_list #=> Array
+    #   resp.flywheel_iteration_properties_list[0].flywheel_arn #=> String
+    #   resp.flywheel_iteration_properties_list[0].flywheel_iteration_id #=> String
+    #   resp.flywheel_iteration_properties_list[0].creation_time #=> Time
+    #   resp.flywheel_iteration_properties_list[0].end_time #=> Time
+    #   resp.flywheel_iteration_properties_list[0].status #=> String, one of "TRAINING", "EVALUATING", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.flywheel_iteration_properties_list[0].message #=> String
+    #   resp.flywheel_iteration_properties_list[0].evaluated_model_arn #=> String
+    #   resp.flywheel_iteration_properties_list[0].evaluated_model_metrics.average_f1_score #=> Float
+    #   resp.flywheel_iteration_properties_list[0].evaluated_model_metrics.average_precision #=> Float
+    #   resp.flywheel_iteration_properties_list[0].evaluated_model_metrics.average_recall #=> Float
+    #   resp.flywheel_iteration_properties_list[0].evaluated_model_metrics.average_accuracy #=> Float
+    #   resp.flywheel_iteration_properties_list[0].trained_model_arn #=> String
+    #   resp.flywheel_iteration_properties_list[0].trained_model_metrics.average_f1_score #=> Float
+    #   resp.flywheel_iteration_properties_list[0].trained_model_metrics.average_precision #=> Float
+    #   resp.flywheel_iteration_properties_list[0].trained_model_metrics.average_recall #=> Float
+    #   resp.flywheel_iteration_properties_list[0].trained_model_metrics.average_accuracy #=> Float
+    #   resp.flywheel_iteration_properties_list[0].evaluation_manifest_s3_prefix #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListFlywheelIterationHistory AWS API Documentation
+    #
+    # @overload list_flywheel_iteration_history(params = {})
+    # @param [Hash] params ({})
+    def list_flywheel_iteration_history(params = {}, options = {})
+      req = build_request(:list_flywheel_iteration_history, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the flywheels that you have created.
+    #
+    # @option params [Types::FlywheelFilter] :filter
+    #   Filters the flywheels that are returned. You can filter flywheels on
+    #   their status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a response. The default is 100.
+    #
+    # @return [Types::ListFlywheelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlywheelsResponse#flywheel_summary_list #flywheel_summary_list} => Array&lt;Types::FlywheelSummary&gt;
+    #   * {Types::ListFlywheelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flywheels({
+    #     filter: {
+    #       status: "CREATING", # accepts CREATING, ACTIVE, UPDATING, DELETING, FAILED
+    #       creation_time_after: Time.now,
+    #       creation_time_before: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flywheel_summary_list #=> Array
+    #   resp.flywheel_summary_list[0].flywheel_arn #=> String
+    #   resp.flywheel_summary_list[0].active_model_arn #=> String
+    #   resp.flywheel_summary_list[0].data_lake_s3_uri #=> String
+    #   resp.flywheel_summary_list[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.flywheel_summary_list[0].model_type #=> String, one of "DOCUMENT_CLASSIFIER", "ENTITY_RECOGNIZER"
+    #   resp.flywheel_summary_list[0].message #=> String
+    #   resp.flywheel_summary_list[0].creation_time #=> Time
+    #   resp.flywheel_summary_list[0].last_modified_time #=> Time
+    #   resp.flywheel_summary_list[0].latest_flywheel_iteration #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListFlywheels AWS API Documentation
+    #
+    # @overload list_flywheels(params = {})
+    # @param [Hash] params ({})
+    def list_flywheels(params = {}, options = {})
+      req = build_request(:list_flywheels, params)
       req.send_request(options)
     end
 
@@ -3616,13 +4232,14 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Starts an asynchronous document classification job. Use the operation
-    # to track the progress of the job.
+    # Starts an asynchronous document classification job. Use the
+    # `DescribeDocumentClassificationJob` operation to track the progress of
+    # the job.
     #
     # @option params [String] :job_name
     #   The identifier of the job.
     #
-    # @option params [required, String] :document_classifier_arn
+    # @option params [String] :document_classifier_arn
     #   The Amazon Resource Name (ARN) of the document classifier to use to
     #   process the job.
     #
@@ -3665,22 +4282,27 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the document classification job. A tag is a
+    #   Tags to associate with the document classification job. A tag is a
     #   key-value pair that adds metadata to a resource used by Amazon
     #   Comprehend. For example, a tag with "Sales" as the key might be
     #   added to a resource to indicate its use by the sales department.
+    #
+    # @option params [String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel associated with the
+    #   model to use.
     #
     # @return [Types::StartDocumentClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentClassificationJobResponse#job_id #job_id} => String
     #   * {Types::StartDocumentClassificationJobResponse#job_arn #job_arn} => String
     #   * {Types::StartDocumentClassificationJobResponse#job_status #job_status} => String
+    #   * {Types::StartDocumentClassificationJobResponse#document_classifier_arn #document_classifier_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_document_classification_job({
     #     job_name: "JobName",
-    #     document_classifier_arn: "DocumentClassifierArn", # required
+    #     document_classifier_arn: "DocumentClassifierArn",
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
@@ -3707,6 +4329,7 @@ module Aws::Comprehend
     #         value: "TagValue",
     #       },
     #     ],
+    #     flywheel_arn: "ComprehendFlywheelArn",
     #   })
     #
     # @example Response structure
@@ -3714,6 +4337,7 @@ module Aws::Comprehend
     #   resp.job_id #=> String
     #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.document_classifier_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJob AWS API Documentation
     #
@@ -3775,8 +4399,8 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the dominant language detection job. A tag
-    #   is a key-value pair that adds metadata to a resource used by Amazon
+    #   Tags to associate with the dominant language detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
     #   Comprehend. For example, a tag with "Sales" as the key might be
     #   added to a resource to indicate its use by the sales department.
     #
@@ -3899,16 +4523,21 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the entities detection job. A tag is a
+    #   Tags to associate with the entities detection job. A tag is a
     #   key-value pair that adds metadata to a resource used by Amazon
     #   Comprehend. For example, a tag with "Sales" as the key might be
     #   added to a resource to indicate its use by the sales department.
+    #
+    # @option params [String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel associated with the
+    #   model to use.
     #
     # @return [Types::StartEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEntitiesDetectionJobResponse#job_id #job_id} => String
     #   * {Types::StartEntitiesDetectionJobResponse#job_arn #job_arn} => String
     #   * {Types::StartEntitiesDetectionJobResponse#job_status #job_status} => String
+    #   * {Types::StartEntitiesDetectionJobResponse#entity_recognizer_arn #entity_recognizer_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3942,6 +4571,7 @@ module Aws::Comprehend
     #         value: "TagValue",
     #       },
     #     ],
+    #     flywheel_arn: "ComprehendFlywheelArn",
     #   })
     #
     # @example Response structure
@@ -3949,6 +4579,7 @@ module Aws::Comprehend
     #   resp.job_id #=> String
     #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.entity_recognizer_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJob AWS API Documentation
     #
@@ -3990,10 +4621,10 @@ module Aws::Comprehend
     #   The types of events to detect in the input documents.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the events detection job. A tag is a
-    #   key-value pair that adds metadata to a resource used by Amazon
-    #   Comprehend. For example, a tag with "Sales" as the key might be
-    #   added to a resource to indicate its use by the sales department.
+    #   Tags to associate with the events detection job. A tag is a key-value
+    #   pair that adds metadata to a resource used by Amazon Comprehend. For
+    #   example, a tag with "Sales" as the key might be added to a resource
+    #   to indicate its use by the sales department.
     #
     # @return [Types::StartEventsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4042,6 +4673,47 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def start_events_detection_job(params = {}, options = {})
       req = build_request(:start_events_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Start the flywheel iteration.This operation uses any new datasets to
+    # train a new model version. For more information about flywheels, see [
+    # Flywheel overview][1] in the *Amazon Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
+    #
+    # @option params [required, String] :flywheel_arn
+    #   The ARN of the flywheel.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    # @return [Types::StartFlywheelIterationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartFlywheelIterationResponse#flywheel_arn #flywheel_arn} => String
+    #   * {Types::StartFlywheelIterationResponse#flywheel_iteration_id #flywheel_iteration_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_flywheel_iteration({
+    #     flywheel_arn: "ComprehendFlywheelArn", # required
+    #     client_request_token: "ClientRequestTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flywheel_arn #=> String
+    #   resp.flywheel_iteration_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartFlywheelIteration AWS API Documentation
+    #
+    # @overload start_flywheel_iteration(params = {})
+    # @param [Hash] params ({})
+    def start_flywheel_iteration(params = {}, options = {})
+      req = build_request(:start_flywheel_iteration, params)
       req.send_request(options)
     end
 
@@ -4100,7 +4772,7 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the key phrases detection job. A tag is a
+    #   Tags to associate with the key phrases detection job. A tag is a
     #   key-value pair that adds metadata to a resource used by Amazon
     #   Comprehend. For example, a tag with "Sales" as the key might be
     #   added to a resource to indicate its use by the sales department.
@@ -4200,7 +4872,7 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the PII entities detection job. A tag is a
+    #   Tags to associate with the PII entities detection job. A tag is a
     #   key-value pair that adds metadata to a resource used by Amazon
     #   Comprehend. For example, a tag with "Sales" as the key might be
     #   added to a resource to indicate its use by the sales department.
@@ -4315,7 +4987,7 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the sentiment detection job. A tag is a
+    #   Tags to associate with the sentiment detection job. A tag is a
     #   key-value pair that adds metadata to a resource used by Amazon
     #   Comprehend. For example, a tag with "Sales" as the key might be
     #   added to a resource to indicate its use by the sales department.
@@ -4375,8 +5047,9 @@ module Aws::Comprehend
     end
 
     # Starts an asynchronous targeted sentiment detection job for a
-    # collection of documents. Use the operation to track the status of a
-    # job.
+    # collection of documents. Use the
+    # `DescribeTargetedSentimentDetectionJob` operation to track the status
+    # of a job.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   The input properties for an inference job. The document reader config
@@ -4430,8 +5103,8 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the targeted sentiment detection job. A tag
-    #   is a key-value pair that adds metadata to a resource used by Amazon
+    #   Tags to associate with the targeted sentiment detection job. A tag is
+    #   a key-value pair that adds metadata to a resource used by Amazon
     #   Comprehend. For example, a tag with "Sales" as the key might be
     #   added to a resource to indicate its use by the sales department.
     #
@@ -4545,10 +5218,10 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the topics detection job. A tag is a
-    #   key-value pair that adds metadata to a resource used by Amazon
-    #   Comprehend. For example, a tag with "Sales" as the key might be
-    #   added to a resource to indicate its use by the sales department.
+    #   Tags to associate with the topics detection job. A tag is a key-value
+    #   pair that adds metadata to a resource used by Amazon Comprehend. For
+    #   example, a tag with "Sales" as the key might be added to a resource
+    #   to indicate its use by the sales department.
     #
     # @return [Types::StartTopicsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5024,7 +5697,12 @@ module Aws::Comprehend
     #   Data access role ARN to use in case the new model is encrypted with a
     #   customer CMK.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel
+    #
+    # @return [Types::UpdateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEndpointResponse#desired_model_arn #desired_model_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5033,7 +5711,12 @@ module Aws::Comprehend
     #     desired_model_arn: "ComprehendModelArn",
     #     desired_inference_units: 1,
     #     desired_data_access_role_arn: "IamRoleArn",
+    #     flywheel_arn: "ComprehendFlywheelArn",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.desired_model_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpoint AWS API Documentation
     #
@@ -5041,6 +5724,77 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def update_endpoint(params = {}, options = {})
       req = build_request(:update_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Update the configuration information for an existing flywheel.
+    #
+    # @option params [required, String] :flywheel_arn
+    #   The Amazon Resource Number (ARN) of the flywheel to update.
+    #
+    # @option params [String] :active_model_arn
+    #   The Amazon Resource Number (ARN) of the active model version.
+    #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend permission to
+    #   access the flywheel data.
+    #
+    # @option params [Types::UpdateDataSecurityConfig] :data_security_config
+    #   Flywheel data security configuration.
+    #
+    # @return [Types::UpdateFlywheelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFlywheelResponse#flywheel_properties #flywheel_properties} => Types::FlywheelProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_flywheel({
+    #     flywheel_arn: "ComprehendFlywheelArn", # required
+    #     active_model_arn: "ComprehendModelArn",
+    #     data_access_role_arn: "IamRoleArn",
+    #     data_security_config: {
+    #       model_kms_key_id: "KmsKeyId",
+    #       volume_kms_key_id: "KmsKeyId",
+    #       vpc_config: {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flywheel_properties.flywheel_arn #=> String
+    #   resp.flywheel_properties.active_model_arn #=> String
+    #   resp.flywheel_properties.data_access_role_arn #=> String
+    #   resp.flywheel_properties.task_config.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
+    #   resp.flywheel_properties.task_config.document_classification_config.mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
+    #   resp.flywheel_properties.task_config.document_classification_config.labels #=> Array
+    #   resp.flywheel_properties.task_config.document_classification_config.labels[0] #=> String
+    #   resp.flywheel_properties.task_config.entity_recognition_config.entity_types #=> Array
+    #   resp.flywheel_properties.task_config.entity_recognition_config.entity_types[0].type #=> String
+    #   resp.flywheel_properties.data_lake_s3_uri #=> String
+    #   resp.flywheel_properties.data_security_config.model_kms_key_id #=> String
+    #   resp.flywheel_properties.data_security_config.volume_kms_key_id #=> String
+    #   resp.flywheel_properties.data_security_config.data_lake_kms_key_id #=> String
+    #   resp.flywheel_properties.data_security_config.vpc_config.security_group_ids #=> Array
+    #   resp.flywheel_properties.data_security_config.vpc_config.security_group_ids[0] #=> String
+    #   resp.flywheel_properties.data_security_config.vpc_config.subnets #=> Array
+    #   resp.flywheel_properties.data_security_config.vpc_config.subnets[0] #=> String
+    #   resp.flywheel_properties.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.flywheel_properties.model_type #=> String, one of "DOCUMENT_CLASSIFIER", "ENTITY_RECOGNIZER"
+    #   resp.flywheel_properties.message #=> String
+    #   resp.flywheel_properties.creation_time #=> Time
+    #   resp.flywheel_properties.last_modified_time #=> Time
+    #   resp.flywheel_properties.latest_flywheel_iteration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateFlywheel AWS API Documentation
+    #
+    # @overload update_flywheel(params = {})
+    # @param [Hash] params ({})
+    def update_flywheel(params = {}, options = {})
+      req = build_request(:update_flywheel, params)
       req.send_request(options)
     end
 
@@ -5057,7 +5811,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

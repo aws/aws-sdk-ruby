@@ -319,6 +319,20 @@ module Aws::Lightsail
       end
     end
 
+    class CreateGUISessionAccessDetails
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Lightsail::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateInstanceSnapshot
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1104,6 +1118,20 @@ module Aws::Lightsail
     end
 
     class GetContainerServices
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Lightsail::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetCostEstimate
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1929,6 +1957,20 @@ module Aws::Lightsail
       end
     end
 
+    class StartGUISession
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Lightsail::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class StartInstance
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1944,6 +1986,20 @@ module Aws::Lightsail
     end
 
     class StartRelationalDatabase
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Lightsail::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StopGUISession
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

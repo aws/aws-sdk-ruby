@@ -1059,10 +1059,8 @@ module Aws::EC2
     #
     # @option params [String] :host_maintenance
     #   Indicates whether to enable or disable host maintenance for the
-    #   Dedicated Host. For more information, see [ Host maintenance][1] in
-    #   the *Amazon EC2 User Guide*.
-    #
-    #   Default: `on`
+    #   Dedicated Host. For more information, see [Host maintenance][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -1666,7 +1664,7 @@ module Aws::EC2
     #   resp = client.associate_address({
     #     allocation_id: "AllocationId",
     #     instance_id: "InstanceId",
-    #     public_ip: "String",
+    #     public_ip: "EipAllocationPublicIp",
     #     allow_reassociation: false,
     #     dry_run: false,
     #     network_interface_id: "NetworkInterfaceId",
@@ -4093,12 +4091,14 @@ module Aws::EC2
     # Cancels the specified Spot Fleet requests.
     #
     # After you cancel a Spot Fleet request, the Spot Fleet launches no new
-    # Spot Instances. You must specify whether the Spot Fleet should also
-    # terminate its Spot Instances. If you terminate the instances, the Spot
-    # Fleet request enters the `cancelled_terminating` state. Otherwise, the
-    # Spot Fleet request enters the `cancelled_running` state and the
-    # instances continue to run until they are interrupted or you terminate
-    # them manually.
+    # instances.
+    #
+    # You must also specify whether a canceled Spot Fleet request should
+    # terminate its instances. If you choose to terminate the instances, the
+    # Spot Fleet request enters the `cancelled_terminating` state.
+    # Otherwise, the Spot Fleet request enters the `cancelled_running` state
+    # and the instances continue to run until they are interrupted or you
+    # terminate them manually.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4110,8 +4110,11 @@ module Aws::EC2
     #   The IDs of the Spot Fleet requests.
     #
     # @option params [required, Boolean] :terminate_instances
-    #   Indicates whether to terminate instances for a Spot Fleet request if
-    #   it is canceled successfully.
+    #   Indicates whether to terminate the associated instances when the Spot
+    #   Fleet request is canceled. The default is to terminate the instances.
+    #
+    #   To let the instances continue to run after the Spot Fleet request is
+    #   canceled, specify `no-terminate-instances`.
     #
     # @return [Types::CancelSpotFleetRequestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15274,11 +15277,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the specified EC2 Fleet.
+    # Deletes the specified EC2 Fleets.
     #
     # After you delete an EC2 Fleet, it launches no new instances.
     #
-    # You must specify whether a deleted EC2 Fleet should also terminate its
+    # You must also specify whether a deleted EC2 Fleet should terminate its
     # instances. If you choose to terminate the instances, the EC2 Fleet
     # enters the `deleted_terminating` state. Otherwise, the EC2 Fleet
     # enters the `deleted_running` state, and the instances continue to run
@@ -15315,11 +15318,11 @@ module Aws::EC2
     #   The IDs of the EC2 Fleets.
     #
     # @option params [required, Boolean] :terminate_instances
-    #   Indicates whether to terminate the instances when the EC2 Fleet is
-    #   deleted. The default is to terminate the instances.
+    #   Indicates whether to terminate the associated instances when the EC2
+    #   Fleet is deleted. The default is to terminate the instances.
     #
     #   To let the instances continue to run after the EC2 Fleet is deleted,
-    #   specify `NoTerminateInstances`. Supported only for fleets of type
+    #   specify `no-terminate-instances`. Supported only for fleets of type
     #   `maintain` and `request`.
     #
     #   For `instant` fleets, you cannot specify `NoTerminateInstances`. A
@@ -18541,7 +18544,11 @@ module Aws::EC2
     #   The ID of the pool that you want to deprovision the CIDR from.
     #
     # @option params [required, String] :cidr
-    #   The CIDR you want to deprovision from the pool.
+    #   The CIDR you want to deprovision from the pool. Enter the CIDR you
+    #   want to deprovision with a netmask of `/32`. You must rerun this
+    #   command for each IP address in the CIDR range. If your CIDR is a
+    #   `/24`, you will have to run this command to deprovision each of the
+    #   256 IP addresses in the `/24` CIDR.
     #
     # @return [Types::DeprovisionPublicIpv4PoolCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21254,13 +21261,17 @@ module Aws::EC2
     #   * `state` - The current state of fast launching for the Windows AMI.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another request with the returned
-    #   NextToken value. If this parameter is not specified, then all results
-    #   are returned.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21421,13 +21432,17 @@ module Aws::EC2
     #   The type of events to describe. By default, all events are described.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [required, String] :fleet_id
     #   The ID of the EC2 Fleet.
@@ -21493,13 +21508,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [required, String] :fleet_id
     #   The ID of the EC2 Fleet.
@@ -21567,13 +21586,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<String>] :fleet_ids
     #   The IDs of the EC2 Fleets.
@@ -22914,12 +22937,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23436,9 +23464,10 @@ module Aws::EC2
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1000. You cannot specify
-    #   this parameter and the instance IDs parameter in the same call. For
-    #   more information, see [Pagination][1].
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the instance IDs parameter in
+    #   the same call.
     #
     #
     #
@@ -23731,11 +23760,12 @@ module Aws::EC2
     #   Constraints: Maximum 100 explicitly specified instance IDs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To retrieve
-    #   the next page of items, make another request with the token returned
-    #   in the output. This value can be between 5 and 1000. You cannot
-    #   specify this parameter and the instance IDs parameter in the same
-    #   call. For more information, see [Pagination][1].
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the instance IDs parameter in
+    #   the same request.
     #
     #
     #
@@ -24558,9 +24588,10 @@ module Aws::EC2
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1000. You cannot specify
-    #   this parameter and the instance IDs parameter in the same request. For
-    #   more information, see [Pagination][1].
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the instance IDs parameter in
+    #   the same request.
     #
     #
     #
@@ -31007,13 +31038,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of items.
+    #   This value is `null` when there are no more items to return.
     #
     # @option params [required, String] :spot_fleet_request_id
     #   The ID of the Spot Fleet request.
@@ -31098,13 +31133,17 @@ module Aws::EC2
     #   The type of events to describe. By default, all events are described.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of items.
+    #   This value is `null` when there are no more items to return.
     #
     # @option params [required, String] :spot_fleet_request_id
     #   The ID of the Spot Fleet request.
@@ -31215,13 +31254,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token to include in another request to get the next page of items.
+    #   This value is `null` when there are no more items to return.
     #
     # @option params [Array<String>] :spot_fleet_request_ids
     #   The IDs of the Spot Fleet requests.
@@ -31517,12 +31560,12 @@ module Aws::EC2
     # instance lifecycle is `spot`.
     #
     # We recommend that you set `MaxResults` to a value between 5 and 1000
-    # to limit the number of results returned. This paginates the output,
-    # which makes the list more manageable and returns the results faster.
-    # If the list of results exceeds your `MaxResults` value, then that
-    # number of results is returned along with a `NextToken` value that can
-    # be passed to a subsequent `DescribeSpotInstanceRequests` request to
-    # retrieve the remaining results.
+    # to limit the number of items returned. This paginates the output,
+    # which makes the list more manageable and returns the items faster. If
+    # the list of items exceeds your `MaxResults` value, then that number of
+    # items is returned along with a `NextToken` value that can be passed to
+    # a subsequent `DescribeSpotInstanceRequests` request to retrieve the
+    # remaining items.
     #
     # Spot Instance requests are deleted four hours after they are canceled
     # and their instances are terminated.
@@ -31663,13 +31706,17 @@ module Aws::EC2
     #   One or more Spot Instance request IDs.
     #
     # @option params [String] :next_token
-    #   The token to request the next set of results. This value is `null`
-    #   when there are no more results to return.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 5 and 1000. To retrieve the remaining results, make
-    #   another call with the returned `NextToken` value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeSpotInstanceRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -31899,13 +31946,17 @@ module Aws::EC2
     #   Filters the results by the specified instance types.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and 1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<String>] :product_descriptions
     #   Filters the results by the specified basic product descriptions.
@@ -32134,13 +32185,20 @@ module Aws::EC2
     #     specific bucket. For the filter value, specify the bucket name.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned `NextToken`
-    #   value. This value can be between 1 and 200. You cannot specify this
-    #   parameter and the `ImageIDs` parameter in the same call.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the `ImageIDs` parameter in the
+    #   same call.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeStoreImageTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -37184,7 +37242,7 @@ module Aws::EC2
     #
     #   resp = client.disassociate_address({
     #     association_id: "ElasticIpAssociationId",
-    #     public_ip: "String",
+    #     public_ip: "EipAllocationPublicIp",
     #     dry_run: false,
     #   })
     #
@@ -38060,8 +38118,9 @@ module Aws::EC2
     #   either the name or ID of the launch template, but not both.
     #
     # @option params [Integer] :max_parallel_launches
-    #   The maximum number of parallel instances to launch for creating
-    #   resources. Value must be `6` or greater.
+    #   The maximum number of instances that Amazon EC2 can launch at the same
+    #   time to create pre-provisioned snapshots for Windows faster launching.
+    #   Value must be `6` or greater.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -39655,13 +39714,17 @@ module Aws::EC2
     #   The attributes required for the instance types.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and  1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with  the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::GetInstanceTypesFromInstanceRequirementsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -41290,13 +41353,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Specify a
-    #   value between 1 and  1000. The default value is 1000. To retrieve the
-    #   remaining results, make another call with  the returned `NextToken`
-    #   value.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::GetSpotPlacementScoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -42221,6 +42288,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> To import your virtual machines (VMs) with a console-based experience,
+    # you can use the *Import virtual machine images to Amazon Web Services*
+    # template in the [Migration Hub Orchestrator console][1]. For more
+    # information, see the [ *Migration Hub Orchestrator User Guide* ][2].
+    #
+    #  </note>
+    #
     # Import single or multi-volume disk images or EBS snapshots into an
     # Amazon Machine Image (AMI).
     #
@@ -42230,11 +42304,13 @@ module Aws::EC2
     # system is licensed appropriately and your billing is optimized.
     #
     # For more information, see [Importing a VM as an image using VM
-    # Import/Export][1] in the *VM Import/Export User Guide*.
+    # Import/Export][3] in the *VM Import/Export User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html
+    # [1]: https://console.aws.amazon.com/migrationhub/orchestrator
+    # [2]: https://docs.aws.amazon.com/migrationhub-orchestrator/latest/userguide/import-vm-images.html
+    # [3]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html
     #
     # @option params [String] :architecture
     #   The architecture of the virtual machine.
@@ -42949,16 +43025,13 @@ module Aws::EC2
     #   single request.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
-    #
-    #   If you do not specify a value for *MaxResults*, the request returns
-    #   1,000 items per page by default. For more information, see [
-    #   Pagination][1].
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -44109,9 +44182,11 @@ module Aws::EC2
     end
 
     # Modifies the specified attribute of the specified AMI. You can specify
-    # only one attribute at a time. You can use the `Attribute` parameter to
-    # specify the attribute or one of the following parameters:
-    # `Description` or `LaunchPermission`.
+    # only one attribute at a time.
+    #
+    # To specify the attribute, you can use the `Attribute` parameter, or
+    # one of the following parameters: `Description`, `ImdsSupport`, or
+    # `LaunchPermission`.
     #
     # Images with an Amazon Web Services Marketplace product code cannot be
     # made public.
@@ -44123,7 +44198,7 @@ module Aws::EC2
     # @option params [String] :attribute
     #   The name of the attribute to modify.
     #
-    #   Valid values: `description` \| `launchPermission`
+    #   Valid values: `description` \| `imdsSupport` \| `launchPermission`
     #
     # @option params [Types::AttributeValue] :description
     #   A new description for the AMI.
@@ -44151,7 +44226,7 @@ module Aws::EC2
     #
     # @option params [String] :value
     #   The value of the attribute being modified. This parameter can be used
-    #   only when the `Attribute` parameter is `description`.
+    #   only when the `Attribute` parameter is `description` or `imdsSupport`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -44167,6 +44242,22 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of an organizational unit (OU). This
     #   parameter can be used only when the `Attribute` parameter is
     #   `launchPermission`.
+    #
+    # @option params [Types::AttributeValue] :imds_support
+    #   Set to `v2.0` to indicate that IMDSv2 is specified in the AMI.
+    #   Instances launched from this AMI will have `HttpTokens` automatically
+    #   set to `required` so that, by default, the instance requires that
+    #   IMDSv2 is used when requesting instance metadata. In addition,
+    #   `HttpPutResponseHopLimit` is set to `2`. For more information, see
+    #   [Configure the AMI][1] in the *Amazon EC2 User Guide*.
+    #
+    #   Do not use this parameter unless your AMI software supports IMDSv2.
+    #   After you set the value to `v2.0`, you can't undo it. The only way to
+    #   “reset” your AMI is to create a new AMI from the underlying snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -44241,6 +44332,7 @@ module Aws::EC2
     #     dry_run: false,
     #     organization_arns: ["String"],
     #     organizational_unit_arns: ["String"],
+    #     imds_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttribute AWS API Documentation
@@ -48116,12 +48208,12 @@ module Aws::EC2
     # can enable DNS resolution for queries from the local VPC. This ensures
     # that queries from the local VPC resolve to private IP addresses in the
     # peer VPC. This option is not available if the peered VPCs are in
-    # different different Amazon Web Services accounts or different Regions.
-    # For peered VPCs in different Amazon Web Services accounts, each Amazon
-    # Web Services account owner must initiate a separate request to modify
-    # the peering connection options. For inter-region peering connections,
-    # you must use the Region for the requester VPC to modify the requester
-    # VPC peering options and the Region for the accepter VPC to modify the
+    # different Amazon Web Services accounts or different Regions. For
+    # peered VPCs in different Amazon Web Services accounts, each Amazon Web
+    # Services account owner must initiate a separate request to modify the
+    # peering connection options. For inter-region peering connections, you
+    # must use the Region for the requester VPC to modify the requester VPC
+    # peering options and the Region for the accepter VPC to modify the
     # accepter VPC peering options. To verify which VPCs are the accepter
     # and the requester for a VPC peering connection, use the
     # DescribeVpcPeeringConnections command.
@@ -56006,7 +56098,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.366.0'
+      context[:gem_version] = '1.367.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

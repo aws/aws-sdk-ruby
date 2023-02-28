@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2023-02-28)
+------------------
+
+* Feature - This release adds support for tagging to the accessor resource in Amazon Managed Blockchain
+
 1.36.0 (2023-01-18)
 ------------------
 

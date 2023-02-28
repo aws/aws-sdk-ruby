@@ -257,7 +257,7 @@ module Aws::EC2
     #
     #   vpc_address.associate({
     #     instance_id: "InstanceId",
-    #     public_ip: "String",
+    #     public_ip: "EipAllocationPublicIp",
     #     allow_reassociation: false,
     #     dry_run: false,
     #     network_interface_id: "NetworkInterfaceId",

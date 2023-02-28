@@ -314,6 +314,7 @@ module Aws::Omics
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SampleId = Shapes::StringShape.new(name: 'SampleId')
     SchemaItem = Shapes::MapShape.new(name: 'SchemaItem')
+    SchemaItemKeyString = Shapes::StringShape.new(name: 'SchemaItemKeyString')
     SchemaValueType = Shapes::StringShape.new(name: 'SchemaValueType')
     Separator = Shapes::StringShape.new(name: 'Separator')
     SequenceInformation = Shapes::StructureShape.new(name: 'SequenceInformation')
@@ -1343,7 +1344,7 @@ module Aws::Omics
     RunResourceDigests.key = Shapes::ShapeRef.new(shape: RunResourceDigestKey)
     RunResourceDigests.value = Shapes::ShapeRef.new(shape: RunResourceDigest)
 
-    SchemaItem.key = Shapes::ShapeRef.new(shape: String)
+    SchemaItem.key = Shapes::ShapeRef.new(shape: SchemaItemKeyString)
     SchemaItem.value = Shapes::ShapeRef.new(shape: SchemaValueType)
 
     SequenceInformation.add_member(:alignment, Shapes::ShapeRef.new(shape: String, location_name: "alignment"))
@@ -1593,6 +1594,7 @@ module Aws::Omics
 
     VariantImportItemDetail.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "jobStatus"))
     VariantImportItemDetail.add_member(:source, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "source"))
+    VariantImportItemDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: JobStatusMsg, location_name: "statusMessage"))
     VariantImportItemDetail.struct_class = Types::VariantImportItemDetail
 
     VariantImportItemDetails.member = Shapes::ShapeRef.new(shape: VariantImportItemDetail)
