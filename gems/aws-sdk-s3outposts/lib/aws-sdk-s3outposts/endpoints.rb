@@ -53,6 +53,20 @@ module Aws::S3Outposts
       end
     end
 
+    class ListOutpostsWithS3
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Outposts::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListSharedEndpoints
       def self.build(context)
         unless context.config.regional_endpoint

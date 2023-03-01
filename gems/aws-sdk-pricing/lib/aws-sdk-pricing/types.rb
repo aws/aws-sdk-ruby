@@ -10,6 +10,19 @@
 module Aws::Pricing
   module Types
 
+    # General authentication failure. The request wasn't signed correctly.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The values of a given attribute, such as `Throughput Optimized HDD` or
     # `Provisioned IOPS` for the `Amazon EC2` `volumeType` attribute.
     #
@@ -119,8 +132,8 @@ module Aws::Pricing
     #
     # @!attribute [rw] value
     #   The service code or attribute value that you want to filter by. If
-    #   you are filtering by service code this is the actual service code,
-    #   such as `AmazonEC2`. If you are filtering by attribute name, this is
+    #   you're filtering by service code this is the actual service code,
+    #   such as `AmazonEC2`. If you're filtering by attribute name, this is
     #   the attribute value that you want the returned products to match,
     #   such as a `Provisioned IOPS` volume.
     #   @return [String]
@@ -182,6 +195,47 @@ module Aws::Pricing
     class GetAttributeValuesResponse < Struct.new(
       :attribute_values,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] price_list_arn
+    #   The unique identifier that maps to where your Price List files are
+    #   located. `PriceListArn` can be obtained from the [ `ListPriceLists`
+    #   ][1] response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html
+    #   @return [String]
+    #
+    # @!attribute [rw] file_format
+    #   The format that you want to retrieve your Price List files in. The
+    #   `FileFormat` can be obtained from the [ `ListPriceLists` ][1]
+    #   response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetPriceListFileUrlRequest AWS API Documentation
+    #
+    class GetPriceListFileUrlRequest < Struct.new(
+      :price_list_arn,
+      :file_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] url
+    #   The URL to download your Price List file from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetPriceListFileUrlResponse AWS API Documentation
+    #
+    class GetPriceListFileUrlResponse < Struct.new(
+      :url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -286,6 +340,84 @@ module Aws::Pricing
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_code
+    #   The service code or the Savings Plan service code for the attributes
+    #   that you want to retrieve. For example, to get the list of
+    #   applicable Amazon EC2 price lists, use `AmazonEC2`. For a full list
+    #   of service codes containing On-Demand and Reserved Instance (RI)
+    #   pricing, use the [ `DescribeServices` ][1] API.
+    #
+    #   To retrieve the Compute Savings Plan price lists, use
+    #   `ComputeSavingsPlans`. To retrieve Machine Learning Savings Plans
+    #   price lists, use `MachineLearningSavingsPlans`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_date
+    #   The date that the Price List file prices are effective from.
+    #   @return [Time]
+    #
+    # @!attribute [rw] region_code
+    #   This is used to filter the Price List by Amazon Web Services Region.
+    #   For example, to get the price list only for the `US East (N.
+    #   Virginia)` Region, use `us-east-1`. If nothing is specified, you
+    #   retrieve price lists for all applicable Regions. The available
+    #   `RegionCode` list can be retrieved from [ `GetAttributeValues` ][1]
+    #   API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The three alphabetical character ISO-4217 currency code that the
+    #   Price List files are denominated in.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results that you
+    #   want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/ListPriceListsRequest AWS API Documentation
+    #
+    class ListPriceListsRequest < Struct.new(
+      :service_code,
+      :effective_date,
+      :region_code,
+      :currency_code,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] price_lists
+    #   The type of price list references that match your request.
+    #   @return [Array<Types::PriceList>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/ListPriceListsResponse AWS API Documentation
+    #
+    class ListPriceListsResponse < Struct.new(
+      :price_lists,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested resource can't be found.
     #
     # @!attribute [rw] message
@@ -295,6 +427,63 @@ module Aws::Pricing
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # <i> <b>This feature is in preview release and is subject to change.
+    # Your use of Amazon Web Services Price List API is subject to the Beta
+    # Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Section 1.10).</b> </i>
+    #
+    # This is the type of price list references that match your request.
+    #
+    # @!attribute [rw] price_list_arn
+    #   The unique identifier that maps to where your Price List files are
+    #   located. `PriceListArn` can be obtained from the [ `ListPriceList`
+    #   ][1] response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html
+    #   @return [String]
+    #
+    # @!attribute [rw] region_code
+    #   This is used to filter the Price List by Amazon Web Services Region.
+    #   For example, to get the price list only for the `US East (N.
+    #   Virginia)` Region, use `us-east-1`. If nothing is specified, you
+    #   retrieve price lists for all applicable Regions. The available
+    #   `RegionCode` list can be retrieved from [ `GetAttributeValues` ][1]
+    #   API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The three alphabetical character ISO-4217 currency code the Price
+    #   List files are denominated in.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_formats
+    #   The format you want to retrieve your Price List files. The
+    #   `FileFormat` can be obtained from the [ `ListPriceList` ][1]
+    #   response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/PriceList AWS API Documentation
+    #
+    class PriceList < Struct.new(
+      :price_list_arn,
+      :region_code,
+      :currency_code,
+      :file_formats)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -31,6 +31,7 @@ module Aws::S3Outposts
   # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {ThrottlingException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -89,6 +90,21 @@ module Aws::S3Outposts
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::S3Outposts::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3Outposts::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

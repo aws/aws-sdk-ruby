@@ -111,12 +111,17 @@ module Aws::CodeCatalyst
     #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Time]
     #
+    # @!attribute [rw] access_token_id
+    #   The system-generated unique ID of the access token.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateAccessTokenResponse AWS API Documentation
     #
     class CreateAccessTokenResponse < Struct.new(
       :secret,
       :name,
-      :expires_time)
+      :expires_time,
+      :access_token_id)
       SENSITIVE = [:secret]
       include Aws::Structure
     end
@@ -169,11 +174,13 @@ module Aws::CodeCatalyst
     #
     # @!attribute [rw] persistent_storage
     #   Information about the amount of storage allocated to the Dev
-    #   Environment. By default, a Dev Environment is configured to have
-    #   16GB of persistent storage.
+    #   Environment.
     #
-    #   <note markdown="1"> Valid values for persistent storage are based on memory sizes in
-    #   16GB increments. Valid values are 16, 32, and 64.
+    #   <note markdown="1"> By default, a Dev Environment is configured to have 16GB of
+    #   persistent storage when created from the Amazon CodeCatalyst
+    #   console, but there is no default when programmatically creating a
+    #   Dev Environment. Valid values for persistent storage are based on
+    #   memory sizes in 16GB increments. Valid values are 16, 32, and 64.
     #
     #    </note>
     #   @return [Types::PersistentStorageConfiguration]
@@ -1038,10 +1045,15 @@ module Aws::CodeCatalyst
     #
     # @!attribute [rw] runtime
     #   A link to the IDE runtime image.
+    #
+    #   <note markdown="1"> This parameter is not required for `VSCode`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the IDE.
+    #   The name of the IDE. Valid values include `Cloud9`, `IntelliJ`,
+    #   `PyCharm`, `GoLand`, and `VSCode`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/IdeConfiguration AWS API Documentation
@@ -1645,8 +1657,7 @@ module Aws::CodeCatalyst
     # Information about an space.
     #
     # @!attribute [rw] name
-    #   *We need to know what this is and the basic usage information so
-    #   that third-party developers know how to use this data type.*
+    #   The name of the space.
     #   @return [String]
     #
     # @!attribute [rw] region_name
@@ -1843,6 +1854,62 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The system-generated unique ID of the Dev Environment. To obtain
+    #   this ID, use ListDevEnvironments.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The system-generated unique ID of the Dev Environment session. This
+    #   ID is returned by StartDevEnvironmentSession.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/StopDevEnvironmentSessionRequest AWS API Documentation
+    #
+    class StopDevEnvironmentSessionRequest < Struct.new(
+      :space_name,
+      :project_name,
+      :id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The system-generated unique ID of the Dev Environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The system-generated unique ID of the Dev Environment session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/StopDevEnvironmentSessionResponse AWS API Documentation
+    #
+    class StopDevEnvironmentSessionResponse < Struct.new(
+      :space_name,
+      :project_name,
+      :id,
+      :session_id)
       SENSITIVE = []
       include Aws::Structure
     end

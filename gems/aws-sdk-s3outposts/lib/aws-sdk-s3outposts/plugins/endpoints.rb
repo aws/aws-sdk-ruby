@@ -62,6 +62,8 @@ module Aws::S3Outposts
             Aws::S3Outposts::Endpoints::DeleteEndpoint.build(context)
           when :list_endpoints
             Aws::S3Outposts::Endpoints::ListEndpoints.build(context)
+          when :list_outposts_with_s3
+            Aws::S3Outposts::Endpoints::ListOutpostsWithS3.build(context)
           when :list_shared_endpoints
             Aws::S3Outposts::Endpoints::ListSharedEndpoints.build(context)
           end

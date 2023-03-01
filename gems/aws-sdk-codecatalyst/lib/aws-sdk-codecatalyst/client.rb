@@ -396,6 +396,7 @@ module Aws::CodeCatalyst
     #   * {Types::CreateAccessTokenResponse#secret #secret} => String
     #   * {Types::CreateAccessTokenResponse#name #name} => String
     #   * {Types::CreateAccessTokenResponse#expires_time #expires_time} => Time
+    #   * {Types::CreateAccessTokenResponse#access_token_id #access_token_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -409,6 +410,7 @@ module Aws::CodeCatalyst
     #   resp.secret #=> String
     #   resp.name #=> String
     #   resp.expires_time #=> Time
+    #   resp.access_token_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateAccessToken AWS API Documentation
     #
@@ -421,9 +423,14 @@ module Aws::CodeCatalyst
 
     # Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based
     # development Dev Environment that you can use to quickly work on the
-    # code stored in the source repositories of your project. By default, a
-    # Dev Environment is configured to have a 2 core processor, 4GB of RAM,
-    # and 16GB of persistent storage.
+    # code stored in the source repositories of your project.
+    #
+    # <note markdown="1"> When created in the Amazon CodeCatalyst console, by default a Dev
+    # Environment is configured to have a 2 core processor, 4GB of RAM, and
+    # 16GB of persistent storage. None of these defaults apply to a Dev
+    # Environment created programmatically.
+    #
+    #  </note>
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -465,10 +472,12 @@ module Aws::CodeCatalyst
     #
     # @option params [required, Types::PersistentStorageConfiguration] :persistent_storage
     #   Information about the amount of storage allocated to the Dev
-    #   Environment. By default, a Dev Environment is configured to have 16GB
-    #   of persistent storage.
+    #   Environment.
     #
-    #   <note markdown="1"> Valid values for persistent storage are based on memory sizes in 16GB
+    #   <note markdown="1"> By default, a Dev Environment is configured to have 16GB of persistent
+    #   storage when created from the Amazon CodeCatalyst console, but there
+    #   is no default when programmatically creating a Dev Environment. Valid
+    #   values for persistent storage are based on memory sizes in 16GB
     #   increments. Valid values are 16, 32, and 64.
     #
     #    </note>
@@ -1513,6 +1522,54 @@ module Aws::CodeCatalyst
       req.send_request(options)
     end
 
+    # Stops a session for a specified Dev Environment.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @option params [required, String] :id
+    #   The system-generated unique ID of the Dev Environment. To obtain this
+    #   ID, use ListDevEnvironments.
+    #
+    # @option params [required, String] :session_id
+    #   The system-generated unique ID of the Dev Environment session. This ID
+    #   is returned by StartDevEnvironmentSession.
+    #
+    # @return [Types::StopDevEnvironmentSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopDevEnvironmentSessionResponse#space_name #space_name} => String
+    #   * {Types::StopDevEnvironmentSessionResponse#project_name #project_name} => String
+    #   * {Types::StopDevEnvironmentSessionResponse#id #id} => String
+    #   * {Types::StopDevEnvironmentSessionResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_dev_environment_session({
+    #     space_name: "NameString", # required
+    #     project_name: "NameString", # required
+    #     id: "Uuid", # required
+    #     session_id: "StopDevEnvironmentSessionRequestSessionIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.project_name #=> String
+    #   resp.id #=> String
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/StopDevEnvironmentSession AWS API Documentation
+    #
+    # @overload stop_dev_environment_session(params = {})
+    # @param [Hash] params ({})
+    def stop_dev_environment_session(params = {}, options = {})
+      req = build_request(:stop_dev_environment_session, params)
+      req.send_request(options)
+    end
+
     # Changes one or more values for a Dev Environment. Updating certain
     # values of the Dev Environment will cause a restart.
     #
@@ -1643,7 +1700,7 @@ module Aws::CodeCatalyst
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecatalyst'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

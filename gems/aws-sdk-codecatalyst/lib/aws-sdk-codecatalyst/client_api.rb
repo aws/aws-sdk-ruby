@@ -148,6 +148,10 @@ module Aws::CodeCatalyst
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     StopDevEnvironmentRequest = Shapes::StructureShape.new(name: 'StopDevEnvironmentRequest')
     StopDevEnvironmentResponse = Shapes::StructureShape.new(name: 'StopDevEnvironmentResponse')
+    StopDevEnvironmentSessionRequest = Shapes::StructureShape.new(name: 'StopDevEnvironmentSessionRequest')
+    StopDevEnvironmentSessionRequestSessionIdString = Shapes::StringShape.new(name: 'StopDevEnvironmentSessionRequestSessionIdString')
+    StopDevEnvironmentSessionResponse = Shapes::StructureShape.new(name: 'StopDevEnvironmentSessionResponse')
+    StopDevEnvironmentSessionResponseSessionIdString = Shapes::StringShape.new(name: 'StopDevEnvironmentSessionResponseSessionIdString')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
@@ -182,8 +186,9 @@ module Aws::CodeCatalyst
     CreateAccessTokenRequest.struct_class = Types::CreateAccessTokenRequest
 
     CreateAccessTokenResponse.add_member(:secret, Shapes::ShapeRef.new(shape: AccessTokenSecret, required: true, location_name: "secret"))
-    CreateAccessTokenResponse.add_member(:name, Shapes::ShapeRef.new(shape: AccessTokenName, location_name: "name"))
-    CreateAccessTokenResponse.add_member(:expires_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "expiresTime"))
+    CreateAccessTokenResponse.add_member(:name, Shapes::ShapeRef.new(shape: AccessTokenName, required: true, location_name: "name"))
+    CreateAccessTokenResponse.add_member(:expires_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "expiresTime"))
+    CreateAccessTokenResponse.add_member(:access_token_id, Shapes::ShapeRef.new(shape: AccessTokenId, required: true, location_name: "accessTokenId"))
     CreateAccessTokenResponse.struct_class = Types::CreateAccessTokenResponse
 
     CreateDevEnvironmentRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
@@ -465,7 +470,7 @@ module Aws::CodeCatalyst
     ListSourceRepositoryBranchesRequest.struct_class = Types::ListSourceRepositoryBranchesRequest
 
     ListSourceRepositoryBranchesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListSourceRepositoryBranchesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ListSourceRepositoryBranchesItems, location_name: "items"))
+    ListSourceRepositoryBranchesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ListSourceRepositoryBranchesItems, required: true, location_name: "items"))
     ListSourceRepositoryBranchesResponse.struct_class = Types::ListSourceRepositoryBranchesResponse
 
     ListSpacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListSpacesRequestNextTokenString, location_name: "nextToken"))
@@ -556,6 +561,18 @@ module Aws::CodeCatalyst
     StopDevEnvironmentResponse.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
     StopDevEnvironmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: DevEnvironmentStatus, required: true, location_name: "status"))
     StopDevEnvironmentResponse.struct_class = Types::StopDevEnvironmentResponse
+
+    StopDevEnvironmentSessionRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    StopDevEnvironmentSessionRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
+    StopDevEnvironmentSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
+    StopDevEnvironmentSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StopDevEnvironmentSessionRequestSessionIdString, required: true, location: "uri", location_name: "sessionId"))
+    StopDevEnvironmentSessionRequest.struct_class = Types::StopDevEnvironmentSessionRequest
+
+    StopDevEnvironmentSessionResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    StopDevEnvironmentSessionResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
+    StopDevEnvironmentSessionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    StopDevEnvironmentSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: StopDevEnvironmentSessionResponseSessionIdString, required: true, location_name: "sessionId"))
+    StopDevEnvironmentSessionResponse.struct_class = Types::StopDevEnvironmentSessionResponse
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -953,6 +970,20 @@ module Aws::CodeCatalyst
         o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/stop"
         o.input = Shapes::ShapeRef.new(shape: StopDevEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: StopDevEnvironmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:stop_dev_environment_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopDevEnvironmentSession"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/session/{sessionId}"
+        o.input = Shapes::ShapeRef.new(shape: StopDevEnvironmentSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopDevEnvironmentSessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2023-03-01)
+------------------
+
+* Feature - S3 on Outposts introduces a new API ListOutpostsWithS3, with this API you can list all your Outposts with S3 capacity.
+
 1.15.0 (2023-01-18)
 ------------------
 

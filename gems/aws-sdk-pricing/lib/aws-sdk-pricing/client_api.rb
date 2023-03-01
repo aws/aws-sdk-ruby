@@ -13,30 +13,48 @@ module Aws::Pricing
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AttributeNameList = Shapes::ListShape.new(name: 'AttributeNameList')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
+    CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     DescribeServicesRequest = Shapes::StructureShape.new(name: 'DescribeServicesRequest')
     DescribeServicesResponse = Shapes::StructureShape.new(name: 'DescribeServicesResponse')
+    EffectiveDate = Shapes::TimestampShape.new(name: 'EffectiveDate')
     ExpiredNextTokenException = Shapes::StructureShape.new(name: 'ExpiredNextTokenException')
+    FileFormat = Shapes::StringShape.new(name: 'FileFormat')
+    FileFormats = Shapes::ListShape.new(name: 'FileFormats')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterType = Shapes::StringShape.new(name: 'FilterType')
     Filters = Shapes::ListShape.new(name: 'Filters')
     GetAttributeValuesRequest = Shapes::StructureShape.new(name: 'GetAttributeValuesRequest')
     GetAttributeValuesResponse = Shapes::StructureShape.new(name: 'GetAttributeValuesResponse')
+    GetPriceListFileUrlRequest = Shapes::StructureShape.new(name: 'GetPriceListFileUrlRequest')
+    GetPriceListFileUrlResponse = Shapes::StructureShape.new(name: 'GetPriceListFileUrlResponse')
     GetProductsRequest = Shapes::StructureShape.new(name: 'GetProductsRequest')
     GetProductsResponse = Shapes::StructureShape.new(name: 'GetProductsResponse')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    ListPriceListsRequest = Shapes::StructureShape.new(name: 'ListPriceListsRequest')
+    ListPriceListsResponse = Shapes::StructureShape.new(name: 'ListPriceListsResponse')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    PriceList = Shapes::StructureShape.new(name: 'PriceList')
+    PriceListArn = Shapes::StringShape.new(name: 'PriceListArn')
     PriceListJsonItem = Shapes::StringShape.new(name: 'PriceListJsonItem')
     PriceListJsonItems = Shapes::ListShape.new(name: 'PriceListJsonItems')
+    PriceLists = Shapes::ListShape.new(name: 'PriceLists')
+    RegionCode = Shapes::StringShape.new(name: 'RegionCode')
     Service = Shapes::StructureShape.new(name: 'Service')
+    ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
     String = Shapes::StringShape.new(name: 'String')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AttributeNameList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -59,6 +77,8 @@ module Aws::Pricing
     ExpiredNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
 
+    FileFormats.member = Shapes::ShapeRef.new(shape: FileFormat)
+
     Filter.add_member(:type, Shapes::ShapeRef.new(shape: FilterType, required: true, location_name: "Type"))
     Filter.add_member(:field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Field"))
     Filter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
@@ -75,6 +95,13 @@ module Aws::Pricing
     GetAttributeValuesResponse.add_member(:attribute_values, Shapes::ShapeRef.new(shape: AttributeValueList, location_name: "AttributeValues"))
     GetAttributeValuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetAttributeValuesResponse.struct_class = Types::GetAttributeValuesResponse
+
+    GetPriceListFileUrlRequest.add_member(:price_list_arn, Shapes::ShapeRef.new(shape: PriceListArn, required: true, location_name: "PriceListArn"))
+    GetPriceListFileUrlRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, required: true, location_name: "FileFormat"))
+    GetPriceListFileUrlRequest.struct_class = Types::GetPriceListFileUrlRequest
+
+    GetPriceListFileUrlResponse.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "Url"))
+    GetPriceListFileUrlResponse.struct_class = Types::GetPriceListFileUrlResponse
 
     GetProductsRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     GetProductsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
@@ -97,10 +124,30 @@ module Aws::Pricing
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
+    ListPriceListsRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "ServiceCode"))
+    ListPriceListsRequest.add_member(:effective_date, Shapes::ShapeRef.new(shape: EffectiveDate, required: true, location_name: "EffectiveDate"))
+    ListPriceListsRequest.add_member(:region_code, Shapes::ShapeRef.new(shape: RegionCode, location_name: "RegionCode"))
+    ListPriceListsRequest.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "CurrencyCode"))
+    ListPriceListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListPriceListsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPriceListsRequest.struct_class = Types::ListPriceListsRequest
+
+    ListPriceListsResponse.add_member(:price_lists, Shapes::ShapeRef.new(shape: PriceLists, location_name: "PriceLists"))
+    ListPriceListsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListPriceListsResponse.struct_class = Types::ListPriceListsResponse
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    PriceList.add_member(:price_list_arn, Shapes::ShapeRef.new(shape: PriceListArn, location_name: "PriceListArn"))
+    PriceList.add_member(:region_code, Shapes::ShapeRef.new(shape: RegionCode, location_name: "RegionCode"))
+    PriceList.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "CurrencyCode"))
+    PriceList.add_member(:file_formats, Shapes::ShapeRef.new(shape: FileFormats, location_name: "FileFormats"))
+    PriceList.struct_class = Types::PriceList
+
     PriceListJsonItems.member = Shapes::ShapeRef.new(shape: PriceListJsonItem, metadata: {"jsonvalue"=>true})
+
+    PriceLists.member = Shapes::ShapeRef.new(shape: PriceList)
 
     Service.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     Service.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
@@ -166,6 +213,18 @@ module Aws::Pricing
         )
       end)
 
+      api.add_operation(:get_price_list_file_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPriceListFileUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPriceListFileUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPriceListFileUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_products, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetProducts"
         o.http_method = "POST"
@@ -177,6 +236,26 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_price_lists, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPriceLists"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPriceListsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPriceListsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

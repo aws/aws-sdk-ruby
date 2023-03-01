@@ -14,6 +14,8 @@ module Aws::S3Outposts
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    CapacityInBytes = Shapes::IntegerShape.new(name: 'CapacityInBytes')
     CidrBlock = Shapes::StringShape.new(name: 'CidrBlock')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateEndpointRequest = Shapes::StructureShape.new(name: 'CreateEndpointRequest')
@@ -31,6 +33,8 @@ module Aws::S3Outposts
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListEndpointsRequest = Shapes::StructureShape.new(name: 'ListEndpointsRequest')
     ListEndpointsResult = Shapes::StructureShape.new(name: 'ListEndpointsResult')
+    ListOutpostsWithS3Request = Shapes::StructureShape.new(name: 'ListOutpostsWithS3Request')
+    ListOutpostsWithS3Result = Shapes::StructureShape.new(name: 'ListOutpostsWithS3Result')
     ListSharedEndpointsRequest = Shapes::StructureShape.new(name: 'ListSharedEndpointsRequest')
     ListSharedEndpointsResult = Shapes::StructureShape.new(name: 'ListSharedEndpointsResult')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -38,10 +42,14 @@ module Aws::S3Outposts
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    Outpost = Shapes::StructureShape.new(name: 'Outpost')
+    OutpostArn = Shapes::StringShape.new(name: 'OutpostArn')
     OutpostId = Shapes::StringShape.new(name: 'OutpostId')
+    Outposts = Shapes::ListShape.new(name: 'Outposts')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
 
@@ -91,6 +99,14 @@ module Aws::S3Outposts
     ListEndpointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEndpointsResult.struct_class = Types::ListEndpointsResult
 
+    ListOutpostsWithS3Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListOutpostsWithS3Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListOutpostsWithS3Request.struct_class = Types::ListOutpostsWithS3Request
+
+    ListOutpostsWithS3Result.add_member(:outposts, Shapes::ShapeRef.new(shape: Outposts, location_name: "Outposts"))
+    ListOutpostsWithS3Result.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOutpostsWithS3Result.struct_class = Types::ListOutpostsWithS3Result
+
     ListSharedEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListSharedEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSharedEndpointsRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "querystring", location_name: "outpostId"))
@@ -105,8 +121,19 @@ module Aws::S3Outposts
 
     NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
 
+    Outpost.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "OutpostArn"))
+    Outpost.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
+    Outpost.add_member(:owner_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "OwnerId"))
+    Outpost.add_member(:capacity_in_bytes, Shapes::ShapeRef.new(shape: CapacityInBytes, location_name: "CapacityInBytes"))
+    Outpost.struct_class = Types::Outpost
+
+    Outposts.member = Shapes::ShapeRef.new(shape: Outpost)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -141,6 +168,7 @@ module Aws::S3Outposts
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -153,6 +181,7 @@ module Aws::S3Outposts
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_endpoints, Seahorse::Model::Operation.new.tap do |o|
@@ -165,6 +194,25 @@ module Aws::S3Outposts
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_outposts_with_s3, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOutpostsWithS3"
+        o.http_method = "GET"
+        o.http_request_uri = "/S3Outposts/ListOutpostsWithS3"
+        o.input = Shapes::ShapeRef.new(shape: ListOutpostsWithS3Request)
+        o.output = Shapes::ShapeRef.new(shape: ListOutpostsWithS3Result)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -183,6 +231,7 @@ module Aws::S3Outposts
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

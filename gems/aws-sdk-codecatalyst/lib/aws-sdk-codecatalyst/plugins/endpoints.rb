@@ -100,6 +100,8 @@ module Aws::CodeCatalyst
             Aws::CodeCatalyst::Endpoints::StartDevEnvironmentSession.build(context)
           when :stop_dev_environment
             Aws::CodeCatalyst::Endpoints::StopDevEnvironment.build(context)
+          when :stop_dev_environment_session
+            Aws::CodeCatalyst::Endpoints::StopDevEnvironmentSession.build(context)
           when :update_dev_environment
             Aws::CodeCatalyst::Endpoints::UpdateDevEnvironment.build(context)
           when :verify_session

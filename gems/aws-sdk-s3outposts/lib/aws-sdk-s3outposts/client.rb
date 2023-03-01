@@ -542,6 +542,52 @@ module Aws::S3Outposts
       req.send_request(options)
     end
 
+    # Lists the Outposts with S3 on Outposts capacity for your Amazon Web
+    # Services account. Includes S3 on Outposts that you have access to as
+    # the Outposts owner, or as a shared user from Resource Access Manager
+    # (RAM).
+    #
+    # @option params [String] :next_token
+    #   When you can get additional results from the `ListOutpostsWithS3`
+    #   call, a `NextToken` parameter is returned in the output. You can then
+    #   pass in a subsequent command to the `NextToken` parameter to continue
+    #   listing additional Outposts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of Outposts to return. The limit is 100.
+    #
+    # @return [Types::ListOutpostsWithS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOutpostsWithS3Result#outposts #outposts} => Array&lt;Types::Outpost&gt;
+    #   * {Types::ListOutpostsWithS3Result#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_outposts_with_s3({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outposts #=> Array
+    #   resp.outposts[0].outpost_arn #=> String
+    #   resp.outposts[0].outpost_id #=> String
+    #   resp.outposts[0].owner_id #=> String
+    #   resp.outposts[0].capacity_in_bytes #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListOutpostsWithS3 AWS API Documentation
+    #
+    # @overload list_outposts_with_s3(params = {})
+    # @param [Hash] params ({})
+    def list_outposts_with_s3(params = {}, options = {})
+      req = build_request(:list_outposts_with_s3, params)
+      req.send_request(options)
+    end
+
     # Lists all endpoints associated with an Outpost that has been shared by
     # Amazon Web Services Resource Access Manager (RAM).
     #
@@ -621,7 +667,7 @@ module Aws::S3Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3outposts'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -60,8 +60,12 @@ module Aws::Pricing
             Aws::Pricing::Endpoints::DescribeServices.build(context)
           when :get_attribute_values
             Aws::Pricing::Endpoints::GetAttributeValues.build(context)
+          when :get_price_list_file_url
+            Aws::Pricing::Endpoints::GetPriceListFileUrl.build(context)
           when :get_products
             Aws::Pricing::Endpoints::GetProducts.build(context)
+          when :list_price_lists
+            Aws::Pricing::Endpoints::ListPriceLists.build(context)
           end
         end
       end

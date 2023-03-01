@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-03-01)
+------------------
+
+* Feature - This release adds 2 new APIs - ListPriceLists which returns a list of applicable price lists, and GetPriceListFileUrl which outputs a URL to retrieve your price lists from the generated file from ListPriceLists
+
 1.42.0 (2023-01-18)
 ------------------
 
