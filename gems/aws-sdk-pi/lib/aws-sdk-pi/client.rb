@@ -759,6 +759,10 @@ module Aws::PI
     #   parameter is specified, the response includes only records beyond the
     #   token, up to the value specified by `MaxRecords`.
     #
+    # @option params [String] :period_alignment
+    #   The returned timestamp which is the start or end time of the time
+    #   periods. The default value is `END_TIME`.
+    #
     # @return [Types::GetResourceMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetResourceMetricsResponse#aligned_start_time #aligned_start_time} => Time
@@ -792,6 +796,7 @@ module Aws::PI
     #     period_in_seconds: 1,
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     period_alignment: "END_TIME", # accepts END_TIME, START_TIME
     #   })
     #
     # @example Response structure
@@ -967,7 +972,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

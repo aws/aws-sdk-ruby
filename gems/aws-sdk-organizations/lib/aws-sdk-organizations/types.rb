@@ -457,6 +457,10 @@ module Aws::Organizations
     # * ACCOUNT\_CREATION\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed
     #   the number of accounts that you can create in one day.
     #
+    # * ACCOUNT\_CREATION\_NOT\_COMPLETE: Your account setup isn't complete
+    #   or your account isn't fully active. You must complete the account
+    #   setup before you create an organization.
+    #
     # * ACCOUNT\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the limit
     #   on the number of accounts in an organization. If you need more
     #   accounts, contact [Amazon Web Services Support][2] to request an
@@ -720,7 +724,7 @@ module Aws::Organizations
     #   it to `null`. For more information about tagging, see [Tagging
     #   Organizations resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the maximum
     #   allowed number of tags for an account, then the entire request fails
     #   and the account is not created.
     #
@@ -1018,7 +1022,7 @@ module Aws::Organizations
     #   it to `null`. For more information about tagging, see [Tagging
     #   Organizations resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the maximum
     #   allowed number of tags for an account, then the entire request fails
     #   and the account is not created.
     #
@@ -1132,7 +1136,7 @@ module Aws::Organizations
     #   `null`. For more information about tagging, see [Tagging
     #   Organizations resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the allowed
     #   number of tags for an OU, then the entire request fails and the OU
     #   is not created.
     #
@@ -1213,7 +1217,7 @@ module Aws::Organizations
     #   it to `null`. For more information about tagging, see [Tagging
     #   Organizations resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the allowed
     #   number of tags for a policy, then the entire request fails and the
     #   policy is not created.
     #
@@ -2530,7 +2534,7 @@ module Aws::Organizations
     #   changes between the invitation and the acceptance, then that tags
     #   could potentially be non-compliant.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the allowed
     #   number of tags for an account, then the entire request fails and
     #   invitations are not sent.
     #
@@ -4227,18 +4231,18 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Updates the list of tags that you want to attach to the
-    #   newly-created resource policy. For each tag in the list, you must
-    #   specify both a tag key and a value. You can set the value to an
-    #   empty string, but you can't set it to `null`. For more information
-    #   about tagging, see [Tagging Organizations resources][1] in the
-    #   Organizations User Guide.
+    #   A list of tags that you want to attach to the newly created resource
+    #   policy. For each tag in the list, you must specify both a tag key
+    #   and a value. You can set the value to an empty string, but you
+    #   can't set it to `null`. For more information about tagging, see
+    #   [Tagging Organizations resources][1] in the Organizations User
+    #   Guide.
     #
     #   <note markdown="1"> Calls with tags apply to the initial creation of the resource
     #   policy, otherwise an exception is thrown. If any one of the tags is
-    #   invalid or if you exceed the allowed number of tags for the resource
-    #   policy, then the entire request fails and the resource policy is not
-    #   created.
+    #   not valid or if you exceed the allowed number of tags for the
+    #   resource policy, then the entire request fails and the resource
+    #   policy is not created.
     #
     #    </note>
     #
@@ -4520,7 +4524,7 @@ module Aws::Organizations
     #   value. The value can be an empty string, but you can't set it to
     #   `null`.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the maximum
     #   allowed number of tags for a resource, then the entire request
     #   fails.
     #

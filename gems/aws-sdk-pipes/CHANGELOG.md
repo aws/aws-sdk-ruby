@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-03-02)
+------------------
+
+* Feature - This release fixes some input parameter range and patterns.
+
 1.1.0 (2023-01-18)
 ------------------
 

@@ -5136,8 +5136,14 @@ module Aws::SageMaker
     #
     # @option params [String] :sample_payload_url
     #   The Amazon Simple Storage Service (Amazon S3) path where the sample
-    #   payload are stored. This path must point to a single gzip compressed
-    #   tar archive (.tar.gz suffix).
+    #   payload is stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix). This archive can hold multiple files
+    #   that are all equally used in the load test. Each file in the archive
+    #   must satisfy the size constraints of the [InvokeEndpoint][1] call.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax
     #
     # @option params [Array<Types::AdditionalInferenceSpecificationDefinition>] :additional_inference_specifications
     #   An array of additional Inference Specification objects. Each
@@ -5607,7 +5613,7 @@ module Aws::SageMaker
     end
 
     # Creates a schedule that regularly starts Amazon SageMaker Processing
-    # Jobs to monitor the data captured for an Amazon SageMaker Endoint.
+    # Jobs to monitor the data captured for an Amazon SageMaker Endpoint.
     #
     # @option params [required, String] :monitoring_schedule_name
     #   The name of the monitoring schedule. The name must be unique within an
@@ -13963,13 +13969,13 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # An auto-complete API for the search functionality in the Amazon
-    # SageMaker console. It returns suggestions of possible matches for the
-    # property name to use in `Search` queries. Provides suggestions for
+    # An auto-complete API for the search functionality in the SageMaker
+    # console. It returns suggestions of possible matches for the property
+    # name to use in `Search` queries. Provides suggestions for
     # `HyperParameters`, `Tags`, and `Metrics`.
     #
     # @option params [required, String] :resource
-    #   The name of the Amazon SageMaker resource to search for.
+    #   The name of the SageMaker resource to search for.
     #
     # @option params [Types::SuggestionQuery] :suggestion_query
     #   Limits the property names that are included in the response.
@@ -16473,6 +16479,8 @@ module Aws::SageMaker
     #   resp.steps[0].inference_benchmark.model_configuration.environment_parameters[0].value #=> String
     #   resp.steps[0].inference_benchmark.model_configuration.compilation_job_name #=> String
     #   resp.steps[0].inference_benchmark.failure_reason #=> String
+    #   resp.steps[0].inference_benchmark.endpoint_metrics.max_invocations #=> Integer
+    #   resp.steps[0].inference_benchmark.endpoint_metrics.model_latency #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobSteps AWS API Documentation
@@ -19706,7 +19714,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Finds Amazon SageMaker resources that match a search query. Matching
+    # Finds SageMaker resources that match a search query. Matching
     # resources are returned as a list of `SearchRecord` objects in the
     # response. You can sort the search results by any resource property in
     # a ascending or descending order.
@@ -19714,8 +19722,18 @@ module Aws::SageMaker
     # You can query against the following value types: numeric, text,
     # Boolean, and timestamp.
     #
+    # <note markdown="1"> The Search API may provide access to otherwise restricted data. See
+    # [Amazon SageMaker API Permissions: Actions, Permissions, and Resources
+    # Reference][1] for more information.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
+    #
     # @option params [required, String] :resource
-    #   The name of the Amazon SageMaker resource to search for.
+    #   The name of the SageMaker resource to search for.
     #
     # @option params [Types::SearchExpression] :search_expression
     #   A Boolean conditional statement. Resources must satisfy this condition
@@ -22401,21 +22419,27 @@ module Aws::SageMaker
     #
     # @option params [Hash<String,Types::TrialComponentParameterValue>] :parameters
     #   Replaces all of the component's hyperparameters with the specified
-    #   hyperparameters.
+    #   hyperparameters or add new hyperparameters. Existing hyperparameters
+    #   are replaced if the trial component is updated with an identical
+    #   hyperparameter key.
     #
     # @option params [Array<String>] :parameters_to_remove
     #   The hyperparameters to remove from the component.
     #
     # @option params [Hash<String,Types::TrialComponentArtifact>] :input_artifacts
     #   Replaces all of the component's input artifacts with the specified
-    #   artifacts.
+    #   artifacts or adds new input artifacts. Existing input artifacts are
+    #   replaced if the trial component is updated with an identical input
+    #   artifact key.
     #
     # @option params [Array<String>] :input_artifacts_to_remove
     #   The input artifacts to remove from the component.
     #
     # @option params [Hash<String,Types::TrialComponentArtifact>] :output_artifacts
     #   Replaces all of the component's output artifacts with the specified
-    #   artifacts.
+    #   artifacts or adds new output artifacts. Existing output artifacts are
+    #   replaced if the trial component is updated with an identical output
+    #   artifact key.
     #
     # @option params [Array<String>] :output_artifacts_to_remove
     #   The output artifacts to remove from the component.
@@ -22812,7 +22836,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.166.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

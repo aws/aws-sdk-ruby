@@ -65,6 +65,7 @@ module Aws::PI
     MetricValuesList = Shapes::ListShape.new(name: 'MetricValuesList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
+    PeriodAlignment = Shapes::StringShape.new(name: 'PeriodAlignment')
     RequestString = Shapes::StringShape.new(name: 'RequestString')
     RequestStringList = Shapes::ListShape.new(name: 'RequestStringList')
     RequestedDimensionList = Shapes::ListShape.new(name: 'RequestedDimensionList')
@@ -176,6 +177,7 @@ module Aws::PI
     GetResourceMetricsRequest.add_member(:period_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "PeriodInSeconds"))
     GetResourceMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetResourceMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetResourceMetricsRequest.add_member(:period_alignment, Shapes::ShapeRef.new(shape: PeriodAlignment, location_name: "PeriodAlignment"))
     GetResourceMetricsRequest.struct_class = Types::GetResourceMetricsRequest
 
     GetResourceMetricsResponse.add_member(:aligned_start_time, Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedStartTime"))

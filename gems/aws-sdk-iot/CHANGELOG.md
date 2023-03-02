@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2023-03-02)
+------------------
+
+* Feature - A recurring maintenance window is an optional configuration used for rolling out the job document to all devices in the target group observing a predetermined start time, duration, and frequency that the maintenance window occurs.
+
 1.100.0 (2023-01-31)
 ------------------
 

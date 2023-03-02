@@ -755,6 +755,11 @@ module Aws::PI
     #   the token, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @!attribute [rw] period_alignment
+    #   The returned timestamp which is the start or end time of the time
+    #   periods. The default value is `END_TIME`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetResourceMetricsRequest AWS API Documentation
     #
     class GetResourceMetricsRequest < Struct.new(
@@ -765,7 +770,8 @@ module Aws::PI
       :end_time,
       :period_in_seconds,
       :max_results,
-      :next_token)
+      :next_token,
+      :period_alignment)
       SENSITIVE = []
       include Aws::Structure
     end

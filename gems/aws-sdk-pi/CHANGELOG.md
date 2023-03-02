@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-03-02)
+------------------
+
+* Feature - This release adds a new field PeriodAlignment to allow the customer specifying the returned timestamp of time periods to be either the start or end time.
+
 1.42.0 (2023-01-18)
 ------------------
 

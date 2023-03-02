@@ -88,7 +88,6 @@ module Aws::Pipes
     LaunchType = Shapes::StringShape.new(name: 'LaunchType')
     LimitMax10 = Shapes::IntegerShape.new(name: 'LimitMax10')
     LimitMax100 = Shapes::IntegerShape.new(name: 'LimitMax100')
-    LimitMax1000 = Shapes::IntegerShape.new(name: 'LimitMax1000')
     LimitMax10000 = Shapes::IntegerShape.new(name: 'LimitMax10000')
     LimitMin1 = Shapes::IntegerShape.new(name: 'LimitMin1')
     ListPipesRequest = Shapes::StructureShape.new(name: 'ListPipesRequest')
@@ -456,7 +455,7 @@ module Aws::Pipes
     PipeSourceActiveMQBrokerParameters.add_member(:queue_name, Shapes::ShapeRef.new(shape: MQBrokerQueueName, required: true, location_name: "QueueName"))
     PipeSourceActiveMQBrokerParameters.struct_class = Types::PipeSourceActiveMQBrokerParameters
 
-    PipeSourceDynamoDBStreamParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax1000, location_name: "BatchSize"))
+    PipeSourceDynamoDBStreamParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     PipeSourceDynamoDBStreamParameters.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     PipeSourceDynamoDBStreamParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceDynamoDBStreamParameters.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
@@ -728,7 +727,7 @@ module Aws::Pipes
     UpdatePipeSourceActiveMQBrokerParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdatePipeSourceActiveMQBrokerParameters.struct_class = Types::UpdatePipeSourceActiveMQBrokerParameters
 
-    UpdatePipeSourceDynamoDBStreamParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax1000, location_name: "BatchSize"))
+    UpdatePipeSourceDynamoDBStreamParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))

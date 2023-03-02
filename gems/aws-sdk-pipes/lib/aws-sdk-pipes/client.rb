@@ -1242,7 +1242,12 @@ module Aws::Pipes
     # Parameters objects, that field will be set to its system-default value
     # after the update.
     #
-    #      <p>For more information about pipes, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html"> Amazon EventBridge Pipes</a> in the Amazon EventBridge User Guide.</p>
+    # For more information about pipes, see [ Amazon EventBridge Pipes][1]
+    # in the Amazon EventBridge User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html
     #
     # @option params [String] :description
     #   A description of the pipe.
@@ -1578,7 +1583,7 @@ module Aws::Pipes
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pipes'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

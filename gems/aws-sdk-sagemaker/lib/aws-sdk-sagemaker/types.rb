@@ -6709,8 +6709,14 @@ module Aws::SageMaker
     #
     # @!attribute [rw] sample_payload_url
     #   The Amazon Simple Storage Service (Amazon S3) path where the sample
-    #   payload are stored. This path must point to a single gzip compressed
-    #   tar archive (.tar.gz suffix).
+    #   payload is stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix). This archive can hold multiple files
+    #   that are all equally used in the load test. Each file in the archive
+    #   must satisfy the size constraints of the [InvokeEndpoint][1] call.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax
     #   @return [String]
     #
     # @!attribute [rw] additional_inference_specifications
@@ -17071,8 +17077,8 @@ module Aws::SageMaker
     # resource property, a Boolean operator, and a value. Resources that
     # match the statement are returned in the results from the Search API.
     #
-    # If you specify a `Value`, but not an `Operator`, Amazon SageMaker uses
-    # the equals operator.
+    # If you specify a `Value`, but not an `Operator`, SageMaker uses the
+    # equals operator.
     #
     # In search, there are several property types:
     #
@@ -17482,7 +17488,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] resource
-    #   The name of the Amazon SageMaker resource to search for.
+    #   The name of the SageMaker resource to search for.
     #   @return [String]
     #
     # @!attribute [rw] suggestion_query
@@ -20376,7 +20382,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InferenceRecommendationsJobStep.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListInferenceRecommendationsJobSteps.html
     #
     # @!attribute [rw] step_type
     #   The type of the subtask.
@@ -32064,7 +32070,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] property_name
     #   A suggested property name based on what you entered in the search
-    #   textbox in the Amazon SageMaker console.
+    #   textbox in the SageMaker console.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameSuggestion AWS API Documentation
@@ -32822,13 +32828,19 @@ module Aws::SageMaker
     #   The reason why a benchmark failed.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_metrics
+    #   The metrics for an existing endpoint compared in an Inference
+    #   Recommender job.
+    #   @return [Types::InferenceMetrics]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInferenceBenchmark AWS API Documentation
     #
     class RecommendationJobInferenceBenchmark < Struct.new(
       :metrics,
       :endpoint_configuration,
       :model_configuration,
-      :failure_reason)
+      :failure_reason,
+      :endpoint_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33543,8 +33555,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_in_seconds
-    #   The maximum time in seconds that a training job launched by a
-    #   hyperparameter tuning job can run.
+    #   The maximum time in seconds that a hyperparameter tuning job can
+    #   run.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceLimits AWS API Documentation
@@ -34032,7 +34044,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] resource
-    #   The name of the Amazon SageMaker resource to search for.
+    #   The name of the SageMaker resource to search for.
     #   @return [String]
     #
     # @!attribute [rw] search_expression
@@ -38700,7 +38712,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] parameters
     #   Replaces all of the component's hyperparameters with the specified
-    #   hyperparameters.
+    #   hyperparameters or add new hyperparameters. Existing hyperparameters
+    #   are replaced if the trial component is updated with an identical
+    #   hyperparameter key.
     #   @return [Hash<String,Types::TrialComponentParameterValue>]
     #
     # @!attribute [rw] parameters_to_remove
@@ -38709,7 +38723,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] input_artifacts
     #   Replaces all of the component's input artifacts with the specified
-    #   artifacts.
+    #   artifacts or adds new input artifacts. Existing input artifacts are
+    #   replaced if the trial component is updated with an identical input
+    #   artifact key.
     #   @return [Hash<String,Types::TrialComponentArtifact>]
     #
     # @!attribute [rw] input_artifacts_to_remove
@@ -38718,7 +38734,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] output_artifacts
     #   Replaces all of the component's output artifacts with the specified
-    #   artifacts.
+    #   artifacts or adds new output artifacts. Existing output artifacts
+    #   are replaced if the trial component is updated with an identical
+    #   output artifact key.
     #   @return [Hash<String,Types::TrialComponentArtifact>]
     #
     # @!attribute [rw] output_artifacts_to_remove

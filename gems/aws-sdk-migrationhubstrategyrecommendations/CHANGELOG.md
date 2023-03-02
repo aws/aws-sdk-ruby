@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2023-03-02)
+------------------
+
+* Feature - This release updates the File Import API to allow importing servers already discovered by customers with reduced pre-requisites.
+
 1.7.0 (2023-01-18)
 ------------------
 

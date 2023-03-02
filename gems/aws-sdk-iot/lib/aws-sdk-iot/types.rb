@@ -2659,7 +2659,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2915,6 +2915,12 @@ module Aws::IoT
     #   Allows you to create the criteria to retry a job.
     #   @return [Types::JobExecutionsRetryConfig]
     #
+    # @!attribute [rw] maintenance_windows
+    #   Allows you to configure an optional maintenance window for the
+    #   rollout of a job document to all devices in the target group for a
+    #   job.
+    #   @return [Array<Types::MaintenanceWindow>]
+    #
     class CreateJobTemplateRequest < Struct.new(
       :job_template_id,
       :job_arn,
@@ -2926,7 +2932,8 @@ module Aws::IoT
       :abort_config,
       :timeout_config,
       :tags,
-      :job_executions_retry_config)
+      :job_executions_retry_config,
+      :maintenance_windows)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5159,7 +5166,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -5354,6 +5361,12 @@ module Aws::IoT
     #   each failure type for a job.
     #   @return [Types::JobExecutionsRetryConfig]
     #
+    # @!attribute [rw] maintenance_windows
+    #   Allows you to configure an optional maintenance window for the
+    #   rollout of a job document to all devices in the target group for a
+    #   job.
+    #   @return [Array<Types::MaintenanceWindow>]
+    #
     class DescribeJobTemplateResponse < Struct.new(
       :job_template_arn,
       :job_template_id,
@@ -5365,7 +5378,8 @@ module Aws::IoT
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config,
-      :job_executions_retry_config)
+      :job_executions_retry_config,
+      :maintenance_windows)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7816,6 +7830,11 @@ module Aws::IoT
     #   job execution.
     #   @return [Types::SchedulingConfig]
     #
+    # @!attribute [rw] scheduled_job_rollouts
+    #   Displays the next seven maintenance window occurrences and their
+    #   start times.
+    #   @return [Array<Types::ScheduledJobRollout>]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -7839,7 +7858,8 @@ module Aws::IoT
       :job_executions_retry_config,
       :document_parameters,
       :is_concurrent,
-      :scheduling_config)
+      :scheduling_config,
+      :scheduled_job_rollouts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10917,6 +10937,26 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # An optional configuration within the `SchedulingConfig` to setup a
+    # recurring maintenance window with a predetermined start time and
+    # duration for the rollout of a job document to all devices in a target
+    # group for a job.
+    #
+    # @!attribute [rw] start_time
+    #   Displays the start time of the next maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_in_minutes
+    #   Displays the duration of the next maintenance window.
+    #   @return [Integer]
+    #
+    class MaintenanceWindow < Struct.new(
+      :start_time,
+      :duration_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The policy documentation is not valid.
     #
     # @!attribute [rw] message
@@ -12556,6 +12596,20 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Displays the next seven maintenance window occurrences and their start
+    # times.
+    #
+    # @!attribute [rw] start_time
+    #   Displays the start times of the next seven maintenance window
+    #   occurrences.
+    #   @return [String]
+    #
+    class ScheduledJobRollout < Struct.new(
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the date and time that a job will begin the rollout of the
     # job document to all devices in the target group. Additionally, you can
     # specify the end behavior for each job execution when it reaches the
@@ -12565,7 +12619,8 @@ module Aws::IoT
     #   The time a job will begin rollout of the job document to all devices
     #   in the target group for a job. The `startTime` can be scheduled up
     #   to a year in advance and must be scheduled a minimum of thirty
-    #   minutes from the current time.
+    #   minutes from the current time. The date and time format for the
+    #   `startTime` is YYYY-MM-DD for the date and HH:MM for the time.
     #   @return [String]
     #
     # @!attribute [rw] end_time
@@ -12574,7 +12629,9 @@ module Aws::IoT
     #   later than two years from the current time and be scheduled a
     #   minimum of thirty minutes from the current time. The minimum
     #   duration between `startTime` and `endTime` is thirty minutes. The
-    #   maximum duration between `startTime` and `endTime` is two years.
+    #   maximum duration between `startTime` and `endTime` is two years. The
+    #   date and time format for the `endTime` is YYYY-MM-DD for the date
+    #   and HH:MM for the time.
     #   @return [String]
     #
     # @!attribute [rw] end_behavior
@@ -12583,10 +12640,18 @@ module Aws::IoT
     #   creating the job, then `endBehavior` does not apply.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance_windows
+    #   An optional configuration within the `SchedulingConfig` to setup a
+    #   recurring maintenance window with a predetermined start time and
+    #   duration for the rollout of a job document to all devices in a
+    #   target group for a job.
+    #   @return [Array<Types::MaintenanceWindow>]
+    #
     class SchedulingConfig < Struct.new(
       :start_time,
       :end_time,
-      :end_behavior)
+      :end_behavior,
+      :maintenance_windows)
       SENSITIVE = []
       include Aws::Structure
     end

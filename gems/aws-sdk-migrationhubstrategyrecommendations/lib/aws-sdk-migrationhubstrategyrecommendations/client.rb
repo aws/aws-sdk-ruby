@@ -866,7 +866,7 @@ module Aws::MigrationHubStrategyRecommendations
     #     filter_value: "ListApplicationComponentsRequestFilterValueString",
     #     group_id_filter: [
     #       {
-    #         name: "ExternalId", # accepts ExternalId
+    #         name: "ExternalId", # accepts ExternalId, ExternalSourceType
     #         value: "String",
     #       },
     #     ],
@@ -1077,7 +1077,7 @@ module Aws::MigrationHubStrategyRecommendations
     #     filter_value: "String",
     #     group_id_filter: [
     #       {
-    #         name: "ExternalId", # accepts ExternalId
+    #         name: "ExternalId", # accepts ExternalId, ExternalSourceType
     #         value: "String",
     #       },
     #     ],
@@ -1276,10 +1276,10 @@ module Aws::MigrationHubStrategyRecommendations
     #
     #   resp = client.start_import_file_task({
     #     s3_bucket: "importS3Bucket", # required
-    #     data_source_type: "ApplicationDiscoveryService", # accepts ApplicationDiscoveryService, MPA
+    #     data_source_type: "ApplicationDiscoveryService", # accepts ApplicationDiscoveryService, MPA, Import
     #     group_id: [
     #       {
-    #         name: "ExternalId", # accepts ExternalId
+    #         name: "ExternalId", # accepts ExternalId, ExternalSourceType
     #         value: "String",
     #       },
     #     ],
@@ -1319,7 +1319,7 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp = client.start_recommendation_report_generation({
     #     group_id_filter: [
     #       {
-    #         name: "ExternalId", # accepts ExternalId
+    #         name: "ExternalId", # accepts ExternalId, ExternalSourceType
     #         value: "String",
     #       },
     #     ],
@@ -1471,7 +1471,7 @@ module Aws::MigrationHubStrategyRecommendations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubstrategyrecommendations'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

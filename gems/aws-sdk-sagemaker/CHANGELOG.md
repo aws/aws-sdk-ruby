@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2023-03-02)
+------------------
+
+* Feature - Add a new field "EndpointMetrics" in SageMaker Inference Recommender "ListInferenceRecommendationsJobSteps" API response.
+
 1.166.0 (2023-02-10)
 ------------------
 

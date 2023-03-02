@@ -293,6 +293,7 @@ module Aws::IoT
     CreatedAtDate = Shapes::TimestampShape.new(name: 'CreatedAtDate')
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     CredentialDurationSeconds = Shapes::IntegerShape.new(name: 'CredentialDurationSeconds')
+    CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     CustomCodeSigning = Shapes::StructureShape.new(name: 'CustomCodeSigning')
     CustomMetricArn = Shapes::StringShape.new(name: 'CustomMetricArn')
     CustomMetricDisplayName = Shapes::StringShape.new(name: 'CustomMetricDisplayName')
@@ -475,6 +476,7 @@ module Aws::IoT
     DomainConfigurations = Shapes::ListShape.new(name: 'DomainConfigurations')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainType = Shapes::StringShape.new(name: 'DomainType')
+    DurationInMinutes = Shapes::IntegerShape.new(name: 'DurationInMinutes')
     DurationSeconds = Shapes::IntegerShape.new(name: 'DurationSeconds')
     DynamicGroupStatus = Shapes::StringShape.new(name: 'DynamicGroupStatus')
     DynamoDBAction = Shapes::StructureShape.new(name: 'DynamoDBAction')
@@ -788,6 +790,8 @@ module Aws::IoT
     LogTargetType = Shapes::StringShape.new(name: 'LogTargetType')
     LoggingOptionsPayload = Shapes::StructureShape.new(name: 'LoggingOptionsPayload')
     MachineLearningDetectionConfig = Shapes::StructureShape.new(name: 'MachineLearningDetectionConfig')
+    MaintenanceWindow = Shapes::StructureShape.new(name: 'MaintenanceWindow')
+    MaintenanceWindows = Shapes::ListShape.new(name: 'MaintenanceWindows')
     MalformedPolicyException = Shapes::StructureShape.new(name: 'MalformedPolicyException')
     ManagedJobTemplateName = Shapes::StringShape.new(name: 'ManagedJobTemplateName')
     ManagedJobTemplateSummary = Shapes::StructureShape.new(name: 'ManagedJobTemplateSummary')
@@ -1006,6 +1010,8 @@ module Aws::IoT
     ScheduledAuditMetadata = Shapes::StructureShape.new(name: 'ScheduledAuditMetadata')
     ScheduledAuditMetadataList = Shapes::ListShape.new(name: 'ScheduledAuditMetadataList')
     ScheduledAuditName = Shapes::StringShape.new(name: 'ScheduledAuditName')
+    ScheduledJobRollout = Shapes::StructureShape.new(name: 'ScheduledJobRollout')
+    ScheduledJobRolloutList = Shapes::ListShape.new(name: 'ScheduledJobRolloutList')
     SchedulingConfig = Shapes::StructureShape.new(name: 'SchedulingConfig')
     SearchIndexRequest = Shapes::StructureShape.new(name: 'SearchIndexRequest')
     SearchIndexResponse = Shapes::StructureShape.new(name: 'SearchIndexResponse')
@@ -1944,6 +1950,7 @@ module Aws::IoT
     CreateJobTemplateRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     CreateJobTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateJobTemplateRequest.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
+    CreateJobTemplateRequest.add_member(:maintenance_windows, Shapes::ShapeRef.new(shape: MaintenanceWindows, location_name: "maintenanceWindows"))
     CreateJobTemplateRequest.struct_class = Types::CreateJobTemplateRequest
 
     CreateJobTemplateResponse.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
@@ -2506,6 +2513,7 @@ module Aws::IoT
     DescribeJobTemplateResponse.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
     DescribeJobTemplateResponse.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     DescribeJobTemplateResponse.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
+    DescribeJobTemplateResponse.add_member(:maintenance_windows, Shapes::ShapeRef.new(shape: MaintenanceWindows, location_name: "maintenanceWindows"))
     DescribeJobTemplateResponse.struct_class = Types::DescribeJobTemplateResponse
 
     DescribeManagedJobTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: ManagedJobTemplateName, required: true, location: "uri", location_name: "templateName"))
@@ -3064,6 +3072,7 @@ module Aws::IoT
     Job.add_member(:document_parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "documentParameters"))
     Job.add_member(:is_concurrent, Shapes::ShapeRef.new(shape: BooleanWrapperObject, location_name: "isConcurrent"))
     Job.add_member(:scheduling_config, Shapes::ShapeRef.new(shape: SchedulingConfig, location_name: "schedulingConfig"))
+    Job.add_member(:scheduled_job_rollouts, Shapes::ShapeRef.new(shape: ScheduledJobRolloutList, location_name: "scheduledJobRollouts"))
     Job.struct_class = Types::Job
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -3756,6 +3765,12 @@ module Aws::IoT
     MachineLearningDetectionConfig.add_member(:confidence_level, Shapes::ShapeRef.new(shape: ConfidenceLevel, required: true, location_name: "confidenceLevel"))
     MachineLearningDetectionConfig.struct_class = Types::MachineLearningDetectionConfig
 
+    MaintenanceWindow.add_member(:start_time, Shapes::ShapeRef.new(shape: CronExpression, required: true, location_name: "startTime"))
+    MaintenanceWindow.add_member(:duration_in_minutes, Shapes::ShapeRef.new(shape: DurationInMinutes, required: true, location_name: "durationInMinutes"))
+    MaintenanceWindow.struct_class = Types::MaintenanceWindow
+
+    MaintenanceWindows.member = Shapes::ShapeRef.new(shape: MaintenanceWindow)
+
     MalformedPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     MalformedPolicyException.struct_class = Types::MalformedPolicyException
 
@@ -4162,9 +4177,15 @@ module Aws::IoT
 
     ScheduledAuditMetadataList.member = Shapes::ShapeRef.new(shape: ScheduledAuditMetadata)
 
+    ScheduledJobRollout.add_member(:start_time, Shapes::ShapeRef.new(shape: StringDateTime, location_name: "startTime"))
+    ScheduledJobRollout.struct_class = Types::ScheduledJobRollout
+
+    ScheduledJobRolloutList.member = Shapes::ShapeRef.new(shape: ScheduledJobRollout)
+
     SchedulingConfig.add_member(:start_time, Shapes::ShapeRef.new(shape: StringDateTime, location_name: "startTime"))
     SchedulingConfig.add_member(:end_time, Shapes::ShapeRef.new(shape: StringDateTime, location_name: "endTime"))
     SchedulingConfig.add_member(:end_behavior, Shapes::ShapeRef.new(shape: JobEndBehavior, location_name: "endBehavior"))
+    SchedulingConfig.add_member(:maintenance_windows, Shapes::ShapeRef.new(shape: MaintenanceWindows, location_name: "maintenanceWindows"))
     SchedulingConfig.struct_class = Types::SchedulingConfig
 
     SearchIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))

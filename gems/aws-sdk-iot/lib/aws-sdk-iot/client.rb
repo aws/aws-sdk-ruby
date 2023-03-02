@@ -1201,61 +1201,63 @@ module Aws::IoT
     # Creates an X.509 certificate using the specified certificate signing
     # request.
     #
-    # **Note:** The CSR must include a public key that is either an RSA key
-    # with a length of at least 2048 bits or an ECC key from NIST P-256,
-    # NIST P-384, or NIST P-512 curves. For supported certificates, consult
-    # [ Certificate signing algorithms supported by IoT][1].
-    #
-    # **Note:** Reusing the same certificate signing request (CSR) results
-    # in a distinct certificate.
-    #
-    # Requires permission to access the [CreateCertificateFromCsr][2]
+    # Requires permission to access the [CreateCertificateFromCsr][1]
     # action.
     #
-    # You can create multiple certificates in a batch by creating a
-    # directory, copying multiple .csr files into that directory, and then
-    # specifying that directory on the command line. The following commands
-    # show how to create a batch of certificates given a batch of CSRs.
+    # <note markdown="1"> The CSR must include a public key that is either an RSA key with a
+    # length of at least 2048 bits or an ECC key from NIST P-25 or NIST
+    # P-384 curves. For supported certificates, consult [ Certificate
+    # signing algorithms supported by IoT][2].
     #
-    # Assuming a set of CSRs are located inside of the directory
-    # my-csr-directory:
+    #  </note>
+    #
+    # <note markdown="1"> Reusing the same certificate signing request (CSR) results in a
+    # distinct certificate.
+    #
+    #  </note>
+    #
+    # You can create multiple certificates in a batch by creating a
+    # directory, copying multiple `.csr` files into that directory, and then
+    # specifying that directory on the command line. The following commands
+    # show how to create a batch of certificates given a batch of CSRs. In
+    # the following commands, we assume that a set of CSRs are located
+    # inside of the directory my-csr-directory:
     #
     # On Linux and OS X, the command is:
     #
-    # $ ls my-csr-directory/ \| xargs -I \\\{\\} aws iot
+    # `$ ls my-csr-directory/ | xargs -I \{\} aws iot
     # create-certificate-from-csr --certificate-signing-request
-    # file://my-csr-directory/\\\{\\}
+    # file://my-csr-directory/\{\}`
     #
     # This command lists all of the CSRs in my-csr-directory and pipes each
-    # CSR file name to the aws iot create-certificate-from-csr Amazon Web
+    # CSR file name to the `aws iot create-certificate-from-csr` Amazon Web
     # Services CLI command to create a certificate for the corresponding
     # CSR.
     #
-    # The aws iot create-certificate-from-csr part of the command can also
-    # be run in parallel to speed up the certificate creation process:
+    # You can also run the `aws iot create-certificate-from-csr` part of the
+    # command in parallel to speed up the certificate creation process:
     #
-    # $ ls my-csr-directory/ \| xargs -P 10 -I \\\{\\} aws iot
+    # `$ ls my-csr-directory/ | xargs -P 10 -I \{\} aws iot
     # create-certificate-from-csr --certificate-signing-request
-    # file://my-csr-directory/\\\{\\}
+    # file://my-csr-directory/\{\} `
     #
     # On Windows PowerShell, the command to create certificates for all CSRs
     # in my-csr-directory is:
     #
-    # &gt; ls -Name my-csr-directory \| %\\\{aws iot
-    # create-certificate-from-csr --certificate-signing-request
-    # file://my-csr-directory/$\_\\}
+    # `> ls -Name my-csr-directory | %\{aws iot create-certificate-from-csr
+    # --certificate-signing-request file://my-csr-directory/$_\} `
     #
     # On a Windows command prompt, the command to create certificates for
     # all CSRs in my-csr-directory is:
     #
-    # &gt; forfiles /p my-csr-directory /c "cmd /c aws iot
+    # `> forfiles /p my-csr-directory /c "cmd /c aws iot
     # create-certificate-from-csr --certificate-signing-request
-    # file://@path"
+    # file://@path" `
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms
     #
     # @option params [required, String] :certificate_signing_request
     #   The certificate signing request (CSR).
@@ -1646,7 +1648,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata, which can be used to manage the fleet metric.
@@ -1864,6 +1866,12 @@ module Aws::IoT
     #       start_time: "StringDateTime",
     #       end_time: "StringDateTime",
     #       end_behavior: "STOP_ROLLOUT", # accepts STOP_ROLLOUT, CANCEL, FORCE_CANCEL
+    #       maintenance_windows: [
+    #         {
+    #           start_time: "CronExpression", # required
+    #           duration_in_minutes: 1, # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1940,6 +1948,10 @@ module Aws::IoT
     # @option params [Types::JobExecutionsRetryConfig] :job_executions_retry_config
     #   Allows you to create the criteria to retry a job.
     #
+    # @option params [Array<Types::MaintenanceWindow>] :maintenance_windows
+    #   Allows you to configure an optional maintenance window for the rollout
+    #   of a job document to all devices in the target group for a job.
+    #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobTemplateResponse#job_template_arn #job_template_arn} => String
@@ -1995,6 +2007,12 @@ module Aws::IoT
     #         },
     #       ],
     #     },
+    #     maintenance_windows: [
+    #       {
+    #         start_time: "CronExpression", # required
+    #         duration_in_minutes: 1, # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5672,6 +5690,11 @@ module Aws::IoT
     #   resp.job.scheduling_config.start_time #=> String
     #   resp.job.scheduling_config.end_time #=> String
     #   resp.job.scheduling_config.end_behavior #=> String, one of "STOP_ROLLOUT", "CANCEL", "FORCE_CANCEL"
+    #   resp.job.scheduling_config.maintenance_windows #=> Array
+    #   resp.job.scheduling_config.maintenance_windows[0].start_time #=> String
+    #   resp.job.scheduling_config.maintenance_windows[0].duration_in_minutes #=> Integer
+    #   resp.job.scheduled_job_rollouts #=> Array
+    #   resp.job.scheduled_job_rollouts[0].start_time #=> String
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -5750,6 +5773,7 @@ module Aws::IoT
     #   * {Types::DescribeJobTemplateResponse#abort_config #abort_config} => Types::AbortConfig
     #   * {Types::DescribeJobTemplateResponse#timeout_config #timeout_config} => Types::TimeoutConfig
     #   * {Types::DescribeJobTemplateResponse#job_executions_retry_config #job_executions_retry_config} => Types::JobExecutionsRetryConfig
+    #   * {Types::DescribeJobTemplateResponse#maintenance_windows #maintenance_windows} => Array&lt;Types::MaintenanceWindow&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5781,6 +5805,9 @@ module Aws::IoT
     #   resp.job_executions_retry_config.criteria_list #=> Array
     #   resp.job_executions_retry_config.criteria_list[0].failure_type #=> String, one of "FAILED", "TIMED_OUT", "ALL"
     #   resp.job_executions_retry_config.criteria_list[0].number_of_retries #=> Integer
+    #   resp.maintenance_windows #=> Array
+    #   resp.maintenance_windows[0].start_time #=> String
+    #   resp.maintenance_windows[0].duration_in_minutes #=> Integer
     #
     # @overload describe_job_template(params = {})
     # @param [Hash] params ({})
@@ -14067,7 +14094,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

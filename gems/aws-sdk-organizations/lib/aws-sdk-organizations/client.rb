@@ -728,7 +728,8 @@ module Aws::Organizations
     end
 
     # Closes an Amazon Web Services member account within an organization.
-    # You can't close the management account with this API. This is an
+    # You can close an account when [all features are enabled ][1]. You
+    # can't close the management account with this API. This is an
     # asynchronous request that Amazon Web Services performs in the
     # background. Because `CloseAccount` operates asynchronously, it can
     # return a successful completion message even though account closure
@@ -746,12 +747,15 @@ module Aws::Organizations
     # * Check the CloudTrail log for the `CloseAccountResult` event that
     #   gets published after the account closes successfully. For
     #   information on using CloudTrail with Organizations, see [Logging and
-    #   monitoring in Organizations][1] in the *Organizations User Guide.*
+    #   monitoring in Organizations][2] in the *Organizations User Guide.*
     #
-    # <note markdown="1"> * You can only close 10% of active member accounts within a rolling 30
-    #   day period. This quota is not bound by a calendar month, but starts
-    #   when you close an account. Within 30 days of that initial account
-    #   closure, you can't exceed the 10% account closure limit.
+    # <note markdown="1"> * You can close only 10% of member accounts, between 10 and 200,
+    #   within a rolling 30 day period. This quota is not bound by a
+    #   calendar month, but starts when you close an account.
+    #
+    #   After you reach this limit, you can close additional accounts in the
+    #   Billing console. For more information, see [Closing an account][3]
+    #   in the Amazon Web Services Billing and Cost Management User Guide.
     #
     # * To reinstate a closed account, contact Amazon Web Services Support
     #   within the 90-day grace period while the account is in SUSPENDED
@@ -761,18 +765,20 @@ module Aws::Organizations
     #   an Amazon Web Services GovCloud (US) account, the `CloseAccount`
     #   request will close both accounts. To learn important pre-closure
     #   details, see [ Closing an Amazon Web Services GovCloud (US)
-    #   account][2] in the <i> Amazon Web Services GovCloud User Guide</i>.
+    #   account][4] in the <i> Amazon Web Services GovCloud User Guide</i>.
     #
     #  </note>
     #
     # For more information about closing accounts, see [Closing an Amazon
-    # Web Services account][3] in the *Organizations User Guide.*
+    # Web Services account][5] in the *Organizations User Guide.*
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
-    # [2]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
-    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
+    # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html
+    # [4]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
+    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
     #
     # @option params [required, String] :account_id
     #   Retrieves the Amazon Web Services account Id for the current
@@ -969,9 +975,9 @@ module Aws::Organizations
     #   `null`. For more information about tagging, see [Tagging Organizations
     #   resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum allowed
-    #   number of tags for an account, then the entire request fails and the
-    #   account is not created.
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the maximum
+    #   allowed number of tags for an account, then the entire request fails
+    #   and the account is not created.
     #
     #    </note>
     #
@@ -1277,9 +1283,9 @@ module Aws::Organizations
     #   `null`. For more information about tagging, see [Tagging Organizations
     #   resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum allowed
-    #   number of tags for an account, then the entire request fails and the
-    #   account is not created.
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the maximum
+    #   allowed number of tags for an account, then the entire request fails
+    #   and the account is not created.
     #
     #    </note>
     #
@@ -1500,9 +1506,9 @@ module Aws::Organizations
     #   For more information about tagging, see [Tagging Organizations
     #   resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags for an OU, then the entire request fails and the OU is not
-    #   created.
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the allowed
+    #   number of tags for an OU, then the entire request fails and the OU is
+    #   not created.
     #
     #    </note>
     #
@@ -1622,9 +1628,9 @@ module Aws::Organizations
     #   `null`. For more information about tagging, see [Tagging Organizations
     #   resources][1] in the Organizations User Guide.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags for a policy, then the entire request fails and the policy is
-    #   not created.
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the allowed
+    #   number of tags for a policy, then the entire request fails and the
+    #   policy is not created.
     #
     #    </note>
     #
@@ -2505,7 +2511,7 @@ module Aws::Organizations
     #
     # You can only call this operation from the organization's management
     # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # an Amazon Web Services service.
     #
     # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3140,9 +3146,9 @@ module Aws::Organizations
     #   invitation and the acceptance, then that tags could potentially be
     #   non-compliant.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags for an account, then the entire request fails and invitations
-    #   are not sent.
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the allowed
+    #   number of tags for an account, then the entire request fails and
+    #   invitations are not sent.
     #
     #    </note>
     #
@@ -5207,16 +5213,16 @@ module Aws::Organizations
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Updates the list of tags that you want to attach to the newly-created
-    #   resource policy. For each tag in the list, you must specify both a tag
-    #   key and a value. You can set the value to an empty string, but you
-    #   can't set it to `null`. For more information about tagging, see
-    #   [Tagging Organizations resources][1] in the Organizations User Guide.
+    #   A list of tags that you want to attach to the newly created resource
+    #   policy. For each tag in the list, you must specify both a tag key and
+    #   a value. You can set the value to an empty string, but you can't set
+    #   it to `null`. For more information about tagging, see [Tagging
+    #   Organizations resources][1] in the Organizations User Guide.
     #
     #   <note markdown="1"> Calls with tags apply to the initial creation of the resource policy,
-    #   otherwise an exception is thrown. If any one of the tags is invalid or
-    #   if you exceed the allowed number of tags for the resource policy, then
-    #   the entire request fails and the resource policy is not created.
+    #   otherwise an exception is thrown. If any one of the tags is not valid
+    #   or if you exceed the allowed number of tags for the resource policy,
+    #   then the entire request fails and the resource policy is not created.
     #
     #    </note>
     #
@@ -5418,8 +5424,8 @@ module Aws::Organizations
     #   For each tag in the list, you must specify both a tag key and a value.
     #   The value can be an empty string, but you can't set it to `null`.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the maximum allowed
-    #   number of tags for a resource, then the entire request fails.
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the maximum
+    #   allowed number of tags for a resource, then the entire request fails.
     #
     #    </note>
     #
@@ -5711,7 +5717,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
