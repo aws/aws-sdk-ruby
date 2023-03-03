@@ -5651,7 +5651,7 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/cgw-options.html
     #
-    # @option params [required, Integer] :bgp_asn
+    # @option params [Integer] :bgp_asn
     #   For devices that support BGP, the customer gateway's BGP ASN.
     #
     #   Default: 65000
@@ -5715,7 +5715,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_customer_gateway({
-    #     bgp_asn: 1, # required
+    #     bgp_asn: 1,
     #     public_ip: "String",
     #     certificate_arn: "String",
     #     type: "ipsec.1", # required, accepts ipsec.1
@@ -23064,7 +23064,7 @@ module Aws::EC2
     #   resp.images[0].tags[0].key #=> String
     #   resp.images[0].tags[0].value #=> String
     #   resp.images[0].virtualization_type #=> String, one of "hvm", "paravirtual"
-    #   resp.images[0].boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.images[0].boot_mode #=> String, one of "legacy-bios", "uefi", "uefi-preferred"
     #   resp.images[0].tpm_support #=> String, one of "v2.0"
     #   resp.images[0].deprecation_time #=> String
     #   resp.images[0].imds_support #=> String, one of "v2.0"
@@ -23162,7 +23162,7 @@ module Aws::EC2
     #   resp.import_image_tasks[0].license_specifications #=> Array
     #   resp.import_image_tasks[0].license_specifications[0].license_configuration_arn #=> String
     #   resp.import_image_tasks[0].usage_operation #=> String
-    #   resp.import_image_tasks[0].boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.import_image_tasks[0].boot_mode #=> String, one of "legacy-bios", "uefi", "uefi-preferred"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasks AWS API Documentation
@@ -24820,7 +24820,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.reservations[0].instances[0].metadata_options.instance_metadata_tags #=> String, one of "disabled", "enabled"
     #   resp.reservations[0].instances[0].enclave_options.enabled #=> Boolean
-    #   resp.reservations[0].instances[0].boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.reservations[0].instances[0].boot_mode #=> String, one of "legacy-bios", "uefi", "uefi-preferred"
     #   resp.reservations[0].instances[0].platform_details #=> String
     #   resp.reservations[0].instances[0].usage_operation #=> String
     #   resp.reservations[0].instances[0].usage_operation_update_time #=> Time
@@ -24830,6 +24830,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].ipv_6_address #=> String
     #   resp.reservations[0].instances[0].tpm_support #=> String
     #   resp.reservations[0].instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
+    #   resp.reservations[0].instances[0].current_instance_boot_mode #=> String, one of "legacy-bios", "uefi"
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -42504,7 +42505,7 @@ module Aws::EC2
     #       },
     #     ],
     #     usage_operation: "String",
-    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
+    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi, uefi-preferred
     #   })
     #
     # @example Response structure
@@ -49823,8 +49824,16 @@ module Aws::EC2
     #   Default: `paravirtual`
     #
     # @option params [String] :boot_mode
-    #   The boot mode of the AMI. For more information, see [Boot modes][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   The boot mode of the AMI. A value of `uefi-preferred` indicates that
+    #   the AMI supports both UEFI and Legacy BIOS.
+    #
+    #   <note markdown="1"> The operating system contained in the AMI must be configured to
+    #   support the specified boot mode.
+    #
+    #    </note>
+    #
+    #   For more information, see [Boot modes][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -49905,7 +49914,7 @@ module Aws::EC2
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
-    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
+    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi, uefi-preferred
     #     tpm_support: "v2.0", # accepts v2.0
     #     uefi_data: "StringType",
     #     imds_support: "v2.0", # accepts v2.0
@@ -53775,7 +53784,7 @@ module Aws::EC2
     #   resp.instances[0].metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.instances[0].metadata_options.instance_metadata_tags #=> String, one of "disabled", "enabled"
     #   resp.instances[0].enclave_options.enabled #=> Boolean
-    #   resp.instances[0].boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.instances[0].boot_mode #=> String, one of "legacy-bios", "uefi", "uefi-preferred"
     #   resp.instances[0].platform_details #=> String
     #   resp.instances[0].usage_operation #=> String
     #   resp.instances[0].usage_operation_update_time #=> Time
@@ -53785,6 +53794,7 @@ module Aws::EC2
     #   resp.instances[0].ipv_6_address #=> String
     #   resp.instances[0].tpm_support #=> String
     #   resp.instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
+    #   resp.instances[0].current_instance_boot_mode #=> String, one of "legacy-bios", "uefi"
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -56098,7 +56108,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.367.0'
+      context[:gem_version] = '1.368.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

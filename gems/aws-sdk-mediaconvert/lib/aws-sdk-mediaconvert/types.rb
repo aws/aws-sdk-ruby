@@ -1335,10 +1335,10 @@ module Aws::MediaConvert
     # constant quality QVBR output, with little or no perceptual decrease in
     # quality. Or, use to increase the video quality of outputs with other
     # rate control modes relative to the bitrate that you specify. Bandwidth
-    # reduction increases further when your input is low quality or
-    # noisy.Outputs that use this feature incur pro-tier pricing.When you
-    # include Bandwidth reduction filter, you cannot include the Noise
-    # reducer preprocessor.
+    # reduction increases further when your input is low quality or noisy.
+    # Outputs that use this feature incur pro-tier pricing. When you include
+    # Bandwidth reduction filter, you cannot include the Noise reducer
+    # preprocessor.
     #
     # @!attribute [rw] sharpening
     #   Optionally specify the level of sharpening to apply when you use the
@@ -1351,14 +1351,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] strength
     #   Specify the strength of the Bandwidth reduction filter. For most
-    #   workflows, we recommend that you choose Auto. Your output bandwidth
-    #   will be reduced by at least 8 percent with no perceptual decrease in
-    #   video quality. If your output bandwidth isn't constrained, set
-    #   Filter strength to Low or Medium. Low results in minimal to no
-    #   impact in perceptual quality. For more bandwidth reduction, choose
-    #   High. The filter helps equalize quality between all scenes and
-    #   increases video softness. We recommend that you choose High for low
-    #   bitrate outputs.
+    #   workflows, we recommend that you choose Auto to reduce the bandwidth
+    #   of your output with little to no perceptual decrease in video
+    #   quality. For high quality and high bitrate outputs, choose Low. For
+    #   the most bandwidth reduction, choose High. We recommend that you
+    #   choose High for low bitrate outputs. Note that High may incur a
+    #   slight increase in the softness of your output.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/BandwidthReductionFilter AWS API Documentation
@@ -2678,11 +2676,14 @@ module Aws::MediaConvert
     #   SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn't
     #   upgrade the dynamic range. The converted video has an HDR format,
     #   but visually appears the same as an unconverted output. HDR to SDR
-    #   conversion uses Elemental tone mapping technology to approximate the
-    #   outcome of manually regrading from HDR to SDR. Select Force P3D65
-    #   (SDR) to set the output color space metadata to the following: *
-    #   Color primaries: Display P3 * Transfer characteristics: SMPTE 428M
-    #   * Matrix coefficients: BT.709
+    #   conversion uses tone mapping to approximate the outcome of manually
+    #   regrading from HDR to SDR. When you specify an output color space,
+    #   MediaConvert uses the following color space metadata, which includes
+    #   color primaries, transfer characteristics, and matrix coefficients:
+    #   * HDR 10: BT.2020, PQ, BT.2020 non-constant * HLG 2020: BT.2020,
+    #   HLG, BT.2020 non-constant * P3DCI (Theater): DCIP3, SMPTE 428M,
+    #   BT.709 * P3D65 (SDR): Display P3, sRGB, BT.709 * P3D65 (HDR):
+    #   Display P3, PQ, BT.709
     #   @return [String]
     #
     # @!attribute [rw] contrast
@@ -5247,7 +5248,7 @@ module Aws::MediaConvert
     #   in quality. Or, use to increase the video quality of outputs with
     #   other rate control modes relative to the bitrate that you specify.
     #   Bandwidth reduction increases further when your input is low quality
-    #   or noisy.Outputs that use this feature incur pro-tier pricing.When
+    #   or noisy. Outputs that use this feature incur pro-tier pricing. When
     #   you include Bandwidth reduction filter, you cannot include the Noise
     #   reducer preprocessor.
     #   @return [Types::BandwidthReductionFilter]
@@ -12647,19 +12648,22 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] color_space
     #   If your input video has accurate color space metadata, or if you
-    #   don't know about color space, leave this set to the default value
-    #   Follow. The service will automatically detect your input color
-    #   space. If your input video has metadata indicating the wrong color
-    #   space, specify the accurate color space here. If your input video is
-    #   HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static
-    #   metadata isn't present in your video stream, or if that metadata is
-    #   present but not accurate, choose Force HDR 10 here and specify
-    #   correct values in the input HDR 10 metadata settings. For more
-    #   information about MediaConvert HDR jobs, see
-    #   https://docs.aws.amazon.com/console/mediaconvert/hdr. Select P3D65
-    #   (SDR) to set the input color space metadata to the following: *
-    #   Color primaries: Display P3 * Transfer characteristics: SMPTE 428M
-    #   * Matrix coefficients: BT.709
+    #   don't know about color space: Keep the default value, Follow.
+    #   MediaConvert will automatically detect your input color space. If
+    #   your input video has metadata indicating the wrong color space, or
+    #   has missing metadata: Specify the accurate color space here. If your
+    #   input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color
+    #   Volume static metadata isn't present in your video stream, or if
+    #   that metadata is present but not accurate: Choose Force HDR 10.
+    #   Specify correct values in the input HDR 10 metadata settings. For
+    #   more information about HDR jobs, see
+    #   https://docs.aws.amazon.com/console/mediaconvert/hdr. When you
+    #   specify an input color space, MediaConvert uses the following color
+    #   space metadata, which includes color primaries, transfer
+    #   characteristics, and matrix coefficients: * HDR 10: BT.2020, PQ,
+    #   BT.2020 non-constant * HLG 2020: BT.2020, HLG, BT.2020 non-constant
+    #   * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709 * P3D65 (SDR):
+    #   Display P3, sRGB, BT.709 * P3D65 (HDR): Display P3, PQ, BT.709
     #   @return [String]
     #
     # @!attribute [rw] color_space_usage

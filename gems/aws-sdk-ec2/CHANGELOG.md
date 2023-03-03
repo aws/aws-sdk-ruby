@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.368.0 (2023-03-03)
+------------------
+
+* Feature - This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.
+
 1.367.0 (2023-02-28)
 ------------------
 

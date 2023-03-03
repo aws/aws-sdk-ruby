@@ -36309,8 +36309,18 @@ module Aws::EC2
     #   @return [Types::EnclaveOptions]
     #
     # @!attribute [rw] boot_mode
-    #   The boot mode of the instance. For more information, see [Boot
-    #   modes][1] in the *Amazon EC2 User Guide*.
+    #   The boot mode that was specified by the AMI. If the value is
+    #   `uefi-preferred`, the AMI supports both UEFI and Legacy BIOS. The
+    #   `currentInstanceBootMode` parameter is the boot mode that is used to
+    #   boot the instance at launch or start.
+    #
+    #   <note markdown="1"> The operating system contained in the AMI must be configured to
+    #   support the specified boot mode.
+    #
+    #    </note>
+    #
+    #   For more information, see [Boot modes][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -36363,6 +36373,16 @@ module Aws::EC2
     #   Provides information on the recovery and maintenance options of your
     #   instance.
     #   @return [Types::InstanceMaintenanceOptions]
+    #
+    # @!attribute [rw] current_instance_boot_mode
+    #   The boot mode that is used to boot the instance at launch or start.
+    #   For more information, see [Boot modes][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
@@ -36422,7 +36442,8 @@ module Aws::EC2
       :private_dns_name_options,
       :ipv_6_address,
       :tpm_support,
-      :maintenance_options)
+      :maintenance_options,
+      :current_instance_boot_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50805,8 +50826,16 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] boot_mode
-    #   The boot mode of the AMI. For more information, see [Boot modes][1]
-    #   in the *Amazon EC2 User Guide*.
+    #   The boot mode of the AMI. A value of `uefi-preferred` indicates that
+    #   the AMI supports both UEFI and Legacy BIOS.
+    #
+    #   <note markdown="1"> The operating system contained in the AMI must be configured to
+    #   support the specified boot mode.
+    #
+    #    </note>
+    #
+    #   For more information, see [Boot modes][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #

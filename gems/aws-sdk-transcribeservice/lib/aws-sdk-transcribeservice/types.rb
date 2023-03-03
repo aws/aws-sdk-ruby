@@ -601,19 +601,19 @@ module Aws::TranscribeService
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] input_type
-    #   Choose whether you want to create a streaming or a batch category
-    #   for your Call Analytics transcription.
+    #   Choose whether you want to create a real-time or a post-call
+    #   category for your Call Analytics transcription.
     #
-    #   Specifying `POST_CALL` assigns your category to batch
+    #   Specifying `POST_CALL` assigns your category to post-call
     #   transcriptions; categories with this input type cannot be applied to
     #   streaming (real-time) transcriptions.
     #
     #   Specifying `REAL_TIME` assigns your category to streaming
     #   transcriptions; categories with this input type cannot be applied to
-    #   batch (post-call) transcriptions.
+    #   post-call transcriptions.
     #
     #   If you do not include `InputType`, your category is created as a
-    #   batch category by default.
+    #   post-call category by default.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateCallAnalyticsCategoryRequest AWS API Documentation
@@ -924,6 +924,24 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions
+    #   to access the Amazon S3 bucket that contains your input files (in
+    #   this case, your custom vocabulary filter). If the role that you
+    #   specify doesn’t have the appropriate permissions to access the
+    #   specified Amazon S3 location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilterRequest AWS API Documentation
     #
     class CreateVocabularyFilterRequest < Struct.new(
@@ -931,7 +949,8 @@ module Aws::TranscribeService
       :language_code,
       :words,
       :vocabulary_filter_file_uri,
-      :tags)
+      :tags,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1036,6 +1055,24 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions
+    #   to access the Amazon S3 bucket that contains your input files (in
+    #   this case, your custom vocabulary). If the role that you specify
+    #   doesn’t have the appropriate permissions to access the specified
+    #   Amazon S3 location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyRequest AWS API Documentation
     #
     class CreateVocabularyRequest < Struct.new(
@@ -1043,7 +1080,8 @@ module Aws::TranscribeService
       :language_code,
       :phrases,
       :vocabulary_file_uri,
-      :tags)
+      :tags,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1598,7 +1636,7 @@ module Aws::TranscribeService
     #
     # * A lack of interruptions
     #
-    # See [Rule criteria for batch categories][1] for usage examples.
+    # See [Rule criteria for post-call categories][1] for usage examples.
     #
     #
     #
@@ -1661,8 +1699,6 @@ module Aws::TranscribeService
     #   `AllowDeferredExecution` is set to `false` and the number of
     #   transcription job requests exceed the concurrent request limit, you
     #   get a `LimitExceededException` error.
-    #
-    #   Note that job queuing is enabled by default for Call Analytics jobs.
     #
     #   If you include `AllowDeferredExecution` in your request, you must
     #   also include `DataAccessRoleArn`.
@@ -1798,11 +1834,23 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Provides information about a custom language model, including the base
-    # model name, when the model was created, the location of the files used
-    # to train the model, when the model was last modified, the name you
-    # chose for the model, its language, its processing state, and if there
-    # is an upgrade available for the base model.
+    # Provides information about a custom language model, including:
+    #
+    # * The base model name
+    #
+    # * When the model was created
+    #
+    # * The location of the files used to train the model
+    #
+    # * When the model was last modified
+    #
+    # * The name you chose for the model
+    #
+    # * The model's language
+    #
+    # * The model's processing state
+    #
+    # * Any available upgrades for the base model
     #
     # @!attribute [rw] model_name
     #   A unique name, chosen by you, for your custom language model.
@@ -2969,7 +3017,7 @@ module Aws::TranscribeService
     #
     # * The presence of speech at specified periods throughout the call
     #
-    # See [Rule criteria for batch categories][1] for usage examples.
+    # See [Rule criteria for post-call categories][1] for usage examples.
     #
     #
     #
@@ -3082,8 +3130,8 @@ module Aws::TranscribeService
     # Rules can include these parameters: , , , and .
     #
     # To learn more about Call Analytics rules and categories, see [Creating
-    # categories for batch transcriptions][1] and [Creating categories for
-    # streaming transcriptions][2].
+    # categories for post-call transcriptions][1] and [Creating categories
+    # for real-time transcriptions][2].
     #
     # To learn more about Call Analytics, see [Analyzing call center audio
     # with Call Analytics][3].
@@ -3154,7 +3202,7 @@ module Aws::TranscribeService
     # * The presence or absence of a mixed sentiment felt by the customer,
     #   the agent, or both at specified points in the call
     #
-    # See [Rule criteria for batch categories][1] for usage examples.
+    # See [Rule criteria for post-call categories][1] for usage examples.
     #
     #
     #
@@ -3406,7 +3454,7 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also
     #   specify an output location using the `OutputLocation` parameter.
     #
-    #   Note that the user making the request must have permission to use
+    #   Note that the role making the request must have permission to use
     #   the specified KMS key.
     #   @return [String]
     #
@@ -3615,7 +3663,7 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also
     #   specify an output location using the `OutputLocation` parameter.
     #
-    #   Note that the user making the request must have permission to use
+    #   Note that the role making the request must have permission to use
     #   the specified KMS key.
     #   @return [String]
     #
@@ -3871,7 +3919,7 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also
     #   specify an output location using the `OutputLocation` parameter.
     #
-    #   Note that the user making the request must have permission to use
+    #   Note that the role making the request must have permission to use
     #   the specified KMS key.
     #   @return [String]
     #
@@ -4322,7 +4370,7 @@ module Aws::TranscribeService
     #
     # * Custom words or phrases that occur at a specific time frame
     #
-    # See [Rule criteria for batch categories][1] and [Rule criteria for
+    # See [Rule criteria for post-call categories][1] and [Rule criteria for
     # streaming categories][2] for usage examples.
     #
     #
@@ -4783,11 +4831,11 @@ module Aws::TranscribeService
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] input_type
-    #   Choose whether you want to update a streaming or a batch Call
-    #   Analytics category. The input type you specify must match the input
-    #   type specified when the category was created. For example, if you
-    #   created a category with the `POST_CALL` input type, you must use
-    #   `POST_CALL` as the input type when updating this category.
+    #   Choose whether you want to update a real-time or a post-call
+    #   category. The input type you specify must match the input type
+    #   specified when the category was created. For example, if you created
+    #   a category with the `POST_CALL` input type, you must use `POST_CALL`
+    #   as the input type when updating this category.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateCallAnalyticsCategoryRequest AWS API Documentation
@@ -4918,12 +4966,31 @@ module Aws::TranscribeService
     #   you cannot use `Words`; you must choose one or the other.
     #   @return [String]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions
+    #   to access the Amazon S3 bucket that contains your input files (in
+    #   this case, your custom vocabulary filter). If the role that you
+    #   specify doesn’t have the appropriate permissions to access the
+    #   specified Amazon S3 location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilterRequest AWS API Documentation
     #
     class UpdateVocabularyFilterRequest < Struct.new(
       :vocabulary_filter_name,
       :words,
-      :vocabulary_filter_file_uri)
+      :vocabulary_filter_file_uri,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5012,13 +5079,32 @@ module Aws::TranscribeService
     #   cannot use the `Phrases` flag; you must choose one or the other.
     #   @return [String]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions
+    #   to access the Amazon S3 bucket that contains your input files (in
+    #   this case, your custom vocabulary). If the role that you specify
+    #   doesn’t have the appropriate permissions to access the specified
+    #   Amazon S3 location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyRequest AWS API Documentation
     #
     class UpdateVocabularyRequest < Struct.new(
       :vocabulary_name,
       :language_code,
       :phrases,
-      :vocabulary_file_uri)
+      :vocabulary_file_uri,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

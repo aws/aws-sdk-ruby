@@ -338,8 +338,18 @@ module Aws::EC2
       data[:enclave_options]
     end
 
-    # The boot mode of the instance. For more information, see [Boot
-    # modes][1] in the *Amazon EC2 User Guide*.
+    # The boot mode that was specified by the AMI. If the value is
+    # `uefi-preferred`, the AMI supports both UEFI and Legacy BIOS. The
+    # `currentInstanceBootMode` parameter is the boot mode that is used to
+    # boot the instance at launch or start.
+    #
+    # <note markdown="1"> The operating system contained in the AMI must be configured to
+    # support the specified boot mode.
+    #
+    #  </note>
+    #
+    # For more information, see [Boot modes][1] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
@@ -406,6 +416,18 @@ module Aws::EC2
     # @return [Types::InstanceMaintenanceOptions]
     def maintenance_options
       data[:maintenance_options]
+    end
+
+    # The boot mode that is used to boot the instance at launch or start.
+    # For more information, see [Boot modes][1] in the *Amazon EC2 User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    # @return [String]
+    def current_instance_boot_mode
+      data[:current_instance_boot_mode]
     end
 
     # @!endgroup

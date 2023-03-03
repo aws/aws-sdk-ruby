@@ -1770,7 +1770,7 @@ module Aws::EC2
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
-    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
+    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi, uefi-preferred
     #     tpm_support: "v2.0", # accepts v2.0
     #     uefi_data: "StringType",
     #     imds_support: "v2.0", # accepts v2.0
@@ -1859,8 +1859,16 @@ module Aws::EC2
     #
     #   Default: `paravirtual`
     # @option options [String] :boot_mode
-    #   The boot mode of the AMI. For more information, see [Boot modes][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   The boot mode of the AMI. A value of `uefi-preferred` indicates that
+    #   the AMI supports both UEFI and Legacy BIOS.
+    #
+    #   <note markdown="1"> The operating system contained in the AMI must be configured to
+    #   support the specified boot mode.
+    #
+    #    </note>
+    #
+    #   For more information, see [Boot modes][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #

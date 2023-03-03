@@ -428,11 +428,12 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the number of S3 buckets that use certain
-    # types of server-side encryption by default or don't encrypt new
-    # objects by default. For detailed information about these settings, see
-    # [Setting default server-side encryption behavior for Amazon S3
-    # buckets][1] in the *Amazon Simple Storage Service User Guide*.
+    # Provides information about the number of S3 buckets whose settings do
+    # or don't specify default server-side encryption behavior for objects
+    # that are added to the buckets. For detailed information about these
+    # settings, see [Setting default server-side encryption behavior for
+    # Amazon S3 buckets][1] in the *Amazon Simple Storage Service User
+    # Guide*.
     #
     #
     #
@@ -494,7 +495,7 @@ module Aws::Macie2
 
     # Provides information about the number of S3 buckets whose bucket
     # policies do or don't require server-side encryption of objects when
-    # objects are uploaded to the buckets.
+    # objects are added to the buckets.
     #
     # @!attribute [rw] allows_unencrypted_object_uploads
     #   @return [Integer]
@@ -2632,11 +2633,12 @@ module Aws::Macie2
     #   @return [Types::BucketCountByEffectivePermission]
     #
     # @!attribute [rw] bucket_count_by_encryption_type
-    #   Provides information about the number of S3 buckets that use certain
-    #   types of server-side encryption by default or don't encrypt new
-    #   objects by default. For detailed information about these settings,
-    #   see [Setting default server-side encryption behavior for Amazon S3
-    #   buckets][1] in the *Amazon Simple Storage Service User Guide*.
+    #   Provides information about the number of S3 buckets whose settings
+    #   do or don't specify default server-side encryption behavior for
+    #   objects that are added to the buckets. For detailed information
+    #   about these settings, see [Setting default server-side encryption
+    #   behavior for Amazon S3 buckets][1] in the *Amazon Simple Storage
+    #   Service User Guide*.
     #
     #
     #
@@ -2646,7 +2648,7 @@ module Aws::Macie2
     # @!attribute [rw] bucket_count_by_object_encryption_requirement
     #   Provides information about the number of S3 buckets whose bucket
     #   policies do or don't require server-side encryption of objects when
-    #   objects are uploaded to the buckets.
+    #   objects are added to the buckets.
     #   @return [Types::BucketCountPolicyAllowsUnencryptedObjectUploads]
     #
     # @!attribute [rw] bucket_count_by_shared_access_type
@@ -5105,8 +5107,9 @@ module Aws::Macie2
     #   @return [Time]
     #
     # @!attribute [rw] default_server_side_encryption
-    #   Provides information about the server-side encryption settings for
-    #   an S3 bucket or S3 object.
+    #   Provides information about the default server-side encryption
+    #   settings for an S3 bucket or the encryption settings for an S3
+    #   object.
     #   @return [Types::ServerSideEncryption]
     #
     # @!attribute [rw] name
@@ -5351,8 +5354,9 @@ module Aws::Macie2
     #   @return [Boolean]
     #
     # @!attribute [rw] server_side_encryption
-    #   Provides information about the server-side encryption settings for
-    #   an S3 bucket or S3 object.
+    #   Provides information about the default server-side encryption
+    #   settings for an S3 bucket or the encryption settings for an S3
+    #   object.
     #   @return [Types::ServerSideEncryption]
     #
     # @!attribute [rw] size
@@ -5792,12 +5796,13 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the server-side encryption settings for an
-    # S3 bucket or S3 object.
+    # Provides information about the default server-side encryption settings
+    # for an S3 bucket or the encryption settings for an S3 object.
     #
     # @!attribute [rw] encryption_type
-    #   The type of server-side encryption that's used to encrypt an S3
-    #   object or objects in an S3 bucket. Possible values are:
+    #   The server-side encryption algorithm that was used to encrypt an S3
+    #   object or is used by default to encrypt objects that are added to an
+    #   S3 bucket. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id

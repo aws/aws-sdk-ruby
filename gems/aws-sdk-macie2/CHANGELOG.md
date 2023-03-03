@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2023-03-03)
+------------------
+
+* Feature - Documentation updates for Amazon Macie
+
 1.52.0 (2023-02-23)
 ------------------
 

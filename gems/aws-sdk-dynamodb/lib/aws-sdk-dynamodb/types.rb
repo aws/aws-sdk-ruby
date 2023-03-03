@@ -1462,16 +1462,32 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] condition_expression
     #   A condition that must be satisfied in order for a conditional update
-    #   to succeed.
+    #   to succeed. For more information, see [Condition expressions][1] in
+    #   the *Amazon DynamoDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
     #   One or more substitution tokens for attribute names in an
-    #   expression.
+    #   expression. For more information, see [Expression attribute
+    #   names][1] in the *Amazon DynamoDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] expression_attribute_values
-    #   One or more values that can be substituted in an expression.
+    #   One or more values that can be substituted in an expression. For
+    #   more information, see [Condition expressions][1] in the *Amazon
+    #   DynamoDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] return_values_on_condition_check_failure
@@ -2147,7 +2163,7 @@ module Aws::DynamoDB
     #   A map of attribute names to `AttributeValue` objects, representing
     #   the primary key of the item to delete.
     #
-    #   For the primary key, you must provide all of the attributes. For
+    #   For the primary key, you must provide all of the key attributes. For
     #   example, with a simple primary key, you only need to provide a value
     #   for the partition key. For a composite primary key, you must provide
     #   values for both the partition key and the sort key.
@@ -2359,7 +2375,7 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Provisioned Mode][1] in the *Amazon DynamoDB
+    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
     #   Developer Guide*.
     #
     #
@@ -3791,12 +3807,12 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Read/Write Capacity Mode][1] in the *Amazon
-    #   DynamoDB Developer Guide*.
+    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads
     #   @return [Types::ConsumedCapacity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItemOutput AWS API Documentation
@@ -5920,8 +5936,8 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Read/Write Capacity Mode][1] in the *Amazon
-    #   DynamoDB Developer Guide*.
+    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -6013,7 +6029,9 @@ module Aws::DynamoDB
     #     value is equivalent to specifying `ALL_ATTRIBUTES`.
     #
     #   * `COUNT` - Returns the number of matching items, rather than the
-    #     matching items themselves.
+    #     matching items themselves. Note that this uses the same quantity
+    #     of read capacity units as getting the items, and is subject to the
+    #     same item size calculations.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
     #     `ProjectionExpression`. This return value is equivalent to
@@ -7423,7 +7441,9 @@ module Aws::DynamoDB
     #     value is equivalent to specifying `ALL_ATTRIBUTES`.
     #
     #   * `COUNT` - Returns the number of matching items, rather than the
-    #     matching items themselves.
+    #     matching items themselves. Note that this uses the same quantity
+    #     of read capacity units as getting the items, and is subject to the
+    #     same item size calculations.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
     #     `ProjectionExpression`. This return value is equivalent to
@@ -7763,7 +7783,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads
     #   @return [Types::ConsumedCapacity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanOutput AWS API Documentation
@@ -8627,7 +8647,7 @@ module Aws::DynamoDB
     #   Although multiple identical calls using the same client request
     #   token produce the same result on the server (no side effects), the
     #   responses to the calls might not be the same. If the
-    #   `ReturnConsumedCapacity>` parameter is set, then the initial
+    #   `ReturnConsumedCapacity` parameter is set, then the initial
     #   `TransactWriteItems` call returns the amount of write capacity units
     #   consumed in making the changes. Subsequent `TransactWriteItems`
     #   calls with the same client token return the number of read capacity
@@ -8798,7 +8818,7 @@ module Aws::DynamoDB
     #       secondary indexes. DynamoDB is automatically scaling your index
     #       so please try again shortly.
     #
-    #       <note markdown="1"> This message is returned when when writes get throttled on an
+    #       <note markdown="1"> This message is returned when writes get throttled on an
     #       On-Demand GSI as DynamoDB is automatically scaling the GSI.
     #
     #        </note>
@@ -8865,6 +8885,54 @@ module Aws::DynamoDB
     end
 
     # The transaction with the given request token is already in progress.
+    #
+    # Recommended Settings
+    #
+    # <note markdown="1"> This is a general recommendation for handling the
+    # `TransactionInProgressException`. These settings help ensure that the
+    # client retries will trigger completion of the ongoing
+    # `TransactWriteItems` request.
+    #
+    #  </note>
+    #
+    # * Set `clientExecutionTimeout` to a value that allows at least one
+    #   retry to be processed after 5 seconds have elapsed since the first
+    #   attempt for the `TransactWriteItems` operation.
+    #
+    # * Set `socketTimeout` to a value a little lower than the
+    #   `requestTimeout` setting.
+    #
+    # * `requestTimeout` should be set based on the time taken for the
+    #   individual retries of a single HTTP request for your use case, but
+    #   setting it to 1 second or higher should work well to reduce chances
+    #   of retries and `TransactionInProgressException` errors.
+    #
+    # * Use exponential backoff when retrying and tune backoff if needed.
+    #
+    # Assuming [default retry policy][1], example timeout settings based on
+    # the guidelines above are as follows:
+    #
+    # Example timeline:
+    #
+    # * 0-1000 first attempt
+    #
+    # * 1000-1500 first sleep/delay (default retry policy uses 500 ms as
+    #   base delay for 4xx errors)
+    #
+    # * 1500-2500 second attempt
+    #
+    # * 2500-3500 second sleep/delay (500 * 2, exponential backoff)
+    #
+    # * 3500-4500 third attempt
+    #
+    # * 4500-6500 third sleep/delay (500 * 2^2)
+    #
+    # * 6500-7500 fourth attempt (this can trigger inline recovery since 5
+    #   seconds have elapsed since the first attempt reached TC)
+    #
+    #
+    #
+    # [1]: https://github.com/aws/aws-sdk-java/blob/fd409dee8ae23fb8953e0bb4dbde65536a7e0514/aws-java-sdk-core/src/main/java/com/amazonaws/retry/PredefinedRetryPolicies.java#L97
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -9201,8 +9269,8 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
-    #   appear before or after they are updated. For `UpdateItem`, the valid
-    #   values are:
+    #   appear before or after they are successfully updated. For
+    #   `UpdateItem`, the valid values are:
     #
     #   * `NONE` - If `ReturnValues` is not specified, or if its value is
     #     `NONE`, then nothing is returned. (This setting is the default for
@@ -9480,9 +9548,9 @@ module Aws::DynamoDB
     #   `UpdateItem` operation, as determined by the `ReturnValues`
     #   parameter.
     #
-    #   The `Attributes` map is only present if `ReturnValues` was specified
-    #   as something other than `NONE` in the request. Each element
-    #   represents one attribute.
+    #   The `Attributes` map is only present if the update was successful
+    #   and `ReturnValues` was specified as something other than `NONE` in
+    #   the request. Each element represents one attribute.
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] consumed_capacity
@@ -9496,7 +9564,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads
     #   @return [Types::ConsumedCapacity]
     #
     # @!attribute [rw] item_collection_metrics
@@ -9654,8 +9722,8 @@ module Aws::DynamoDB
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
     #
-    #   <note markdown="1"> This property only applies to [Version 2019.11.21][1] of global
-    #   tables.
+    #   <note markdown="1"> This property only applies to [Version 2019.11.21 (Current)][1] of
+    #   global tables.
     #
     #    </note>
     #

@@ -916,6 +916,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_distribution_type #=> String, one of "FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.check_digit_string #=> String
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.sid #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.timezone #=> String, one of "AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.input_type #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
@@ -2007,6 +2008,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_distribution_type #=> String, one of "FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.check_digit_string #=> String
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.sid #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.timezone #=> String, one of "AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.input_type #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
@@ -2971,6 +2973,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_distribution_type #=> String, one of "FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.check_digit_string #=> String
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.sid #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.timezone #=> String, one of "AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.input_type #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
@@ -5000,6 +5003,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_distribution_type #=> String, one of "FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.check_digit_string #=> String
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.sid #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.timezone #=> String, one of "AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.input_type #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
@@ -5772,6 +5776,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_distribution_type #=> String, one of "FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.check_digit_string #=> String
     #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.sid #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.timezone #=> String, one of "AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.input_type #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
@@ -6543,6 +6548,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_distribution_type #=> String, one of "FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.check_digit_string #=> String
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.sid #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.timezone #=> String, one of "AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.input_type #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
@@ -7246,6 +7252,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_distribution_type #=> String, one of "FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.check_digit_string #=> String
     #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.sid #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_watermarking_settings.nielsen_watermarks_settings.nielsen_naes_ii_nw_settings.timezone #=> String, one of "AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.aac_settings.input_type #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
@@ -8315,7 +8322,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

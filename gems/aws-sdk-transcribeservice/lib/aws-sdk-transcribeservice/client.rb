@@ -386,11 +386,11 @@ module Aws::TranscribeService
     # transcription request, as categories cannot be applied retroactively.
     #
     # When creating a new category, you can use the `InputType` parameter to
-    # label the category as a batch category (`POST_CALL`) or a streaming
-    # category (`REAL_TIME`). Batch categories can only be applied to batch
-    # transcriptions and streaming categories can only be applied to
-    # streaming transcriptions. If you do not include `InputType`, your
-    # category is created as a batch category by default.
+    # label the category as a `POST_CALL` or a `REAL_TIME` category.
+    # `POST_CALL` categories can only be applied to post-call transcriptions
+    # and `REAL_TIME` categories can only be applied to real-time
+    # transcriptions. If you do not include `InputType`, your category is
+    # created as a `POST_CALL` category by default.
     #
     # Call Analytics categories are composed of rules. For each category,
     # you must create between 1 and 20 rules. Rules can include these
@@ -399,8 +399,8 @@ module Aws::TranscribeService
     # To update an existing category, see .
     #
     # To learn more about Call Analytics categories, see [Creating
-    # categories for batch transcriptions][1] and [Creating categories for
-    # streaming transcriptions][2].
+    # categories for post-call transcriptions][1] and [Creating categories
+    # for real-time transcriptions][2].
     #
     #
     #
@@ -425,19 +425,19 @@ module Aws::TranscribeService
     #   call.
     #
     # @option params [String] :input_type
-    #   Choose whether you want to create a streaming or a batch category for
-    #   your Call Analytics transcription.
+    #   Choose whether you want to create a real-time or a post-call category
+    #   for your Call Analytics transcription.
     #
-    #   Specifying `POST_CALL` assigns your category to batch transcriptions;
-    #   categories with this input type cannot be applied to streaming
-    #   (real-time) transcriptions.
+    #   Specifying `POST_CALL` assigns your category to post-call
+    #   transcriptions; categories with this input type cannot be applied to
+    #   streaming (real-time) transcriptions.
     #
     #   Specifying `REAL_TIME` assigns your category to streaming
     #   transcriptions; categories with this input type cannot be applied to
-    #   batch (post-call) transcriptions.
+    #   post-call transcriptions.
     #
-    #   If you do not include `InputType`, your category is created as a batch
-    #   category by default.
+    #   If you do not include `InputType`, your category is created as a
+    #   post-call category by default.
     #
     # @return [Types::CreateCallAnalyticsCategoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -710,10 +710,11 @@ module Aws::TranscribeService
     # Creates a new custom medical vocabulary.
     #
     # Before creating a new custom medical vocabulary, you must first upload
-    # a text file that contains your new entries, phrases, and terms into an
-    # Amazon S3 bucket. Note that this differs from , where you can include
-    # a list of terms within your request using the `Phrases` flag;
-    # `CreateMedicalVocabulary` does not support the `Phrases` flag.
+    # a text file that contains your vocabulary table into an Amazon S3
+    # bucket. Note that this differs from , where you can include a list of
+    # terms within your request using the `Phrases` flag;
+    # `CreateMedicalVocabulary` does not support the `Phrases` flag and only
+    # accepts vocabularies in table format.
     #
     # Each language has a character set that contains all allowed characters
     # for that specific language. If you use unsupported characters, your
@@ -886,6 +887,23 @@ module Aws::TranscribeService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
+    #   access the Amazon S3 bucket that contains your input files (in this
+    #   case, your custom vocabulary). If the role that you specify doesn’t
+    #   have the appropriate permissions to access the specified Amazon S3
+    #   location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVocabularyResponse#vocabulary_name #vocabulary_name} => String
@@ -907,6 +925,7 @@ module Aws::TranscribeService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     data_access_role_arn: "DataAccessRoleArn",
     #   })
     #
     # @example Response structure
@@ -1012,6 +1031,23 @@ module Aws::TranscribeService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
+    #   access the Amazon S3 bucket that contains your input files (in this
+    #   case, your custom vocabulary filter). If the role that you specify
+    #   doesn’t have the appropriate permissions to access the specified
+    #   Amazon S3 location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
     # @return [Types::CreateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVocabularyFilterResponse#vocabulary_filter_name #vocabulary_filter_name} => String
@@ -1031,6 +1067,7 @@ module Aws::TranscribeService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     data_access_role_arn: "DataAccessRoleArn",
     #   })
     #
     # @example Response structure
@@ -2370,12 +2407,14 @@ module Aws::TranscribeService
     # create them before submitting your job request. Categories cannot be
     # retroactively applied to a job. To create a new category, use the
     # operation. To learn more about Call Analytics categories, see
-    # [Creating categories for batch transcriptions][2] and [Creating
-    # categories for streaming transcriptions][3].
+    # [Creating categories for post-call transcriptions][2] and [Creating
+    # categories for real-time transcriptions][3].
     #
     # To make a `StartCallAnalyticsJob` request, you must first upload your
     # media file into an Amazon S3 bucket; you can then specify the Amazon
     # S3 location of the file using the `Media` parameter.
+    #
+    # Note that job queuing is enabled by default for Call Analytics jobs.
     #
     # You must include the following parameters in your
     # `StartCallAnalyticsJob` request:
@@ -2482,7 +2521,7 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also specify
     #   an output location using the `OutputLocation` parameter.
     #
-    #   Note that the user making the request must have permission to use the
+    #   Note that the role making the request must have permission to use the
     #   specified KMS key.
     #
     # @option params [String] :data_access_role_arn
@@ -2782,7 +2821,7 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also specify
     #   an output location using the `OutputLocation` parameter.
     #
-    #   Note that the user making the request must have permission to use the
+    #   Note that the role making the request must have permission to use the
     #   specified KMS key.
     #
     # @option params [Hash<String,String>] :kms_encryption_context
@@ -3097,7 +3136,7 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also specify
     #   an output location using the `OutputLocation` parameter.
     #
-    #   Note that the user making the request must have permission to use the
+    #   Note that the role making the request must have permission to use the
     #   specified KMS key.
     #
     # @option params [Hash<String,String>] :kms_encryption_context
@@ -3504,11 +3543,11 @@ module Aws::TranscribeService
     #   in the specified category.
     #
     # @option params [String] :input_type
-    #   Choose whether you want to update a streaming or a batch Call
-    #   Analytics category. The input type you specify must match the input
-    #   type specified when the category was created. For example, if you
-    #   created a category with the `POST_CALL` input type, you must use
-    #   `POST_CALL` as the input type when updating this category.
+    #   Choose whether you want to update a real-time or a post-call category.
+    #   The input type you specify must match the input type specified when
+    #   the category was created. For example, if you created a category with
+    #   the `POST_CALL` input type, you must use `POST_CALL` as the input type
+    #   when updating this category.
     #
     # @return [Types::UpdateCallAnalyticsCategoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3764,6 +3803,23 @@ module Aws::TranscribeService
     #   Note that if you include `VocabularyFileUri` in your request, you
     #   cannot use the `Phrases` flag; you must choose one or the other.
     #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
+    #   access the Amazon S3 bucket that contains your input files (in this
+    #   case, your custom vocabulary). If the role that you specify doesn’t
+    #   have the appropriate permissions to access the specified Amazon S3
+    #   location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
     # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateVocabularyResponse#vocabulary_name #vocabulary_name} => String
@@ -3778,6 +3834,7 @@ module Aws::TranscribeService
     #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
+    #     data_access_role_arn: "DataAccessRoleArn",
     #   })
     #
     # @example Response structure
@@ -3835,6 +3892,23 @@ module Aws::TranscribeService
     #   Note that if you include `VocabularyFilterFileUri` in your request,
     #   you cannot use `Words`; you must choose one or the other.
     #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
+    #   access the Amazon S3 bucket that contains your input files (in this
+    #   case, your custom vocabulary filter). If the role that you specify
+    #   doesn’t have the appropriate permissions to access the specified
+    #   Amazon S3 location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
     # @return [Types::UpdateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateVocabularyFilterResponse#vocabulary_filter_name #vocabulary_filter_name} => String
@@ -3847,6 +3921,7 @@ module Aws::TranscribeService
     #     vocabulary_filter_name: "VocabularyFilterName", # required
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
+    #     data_access_role_arn: "DataAccessRoleArn",
     #   })
     #
     # @example Response structure
@@ -3877,7 +3952,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -633,7 +633,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].timecode_start #=> String
     #   resp.job.settings.inputs[0].video_generator.duration #=> Integer
     #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
-    #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR"
+    #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -1418,7 +1418,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -1666,7 +1666,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job_template.settings.inputs[0].timecode_start #=> String
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
-    #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR"
+    #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job_template.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -2451,7 +2451,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -3222,7 +3222,7 @@ module Aws::MediaConvert
     #               minimum_rgb_tolerance: 1,
     #               minimum_yuv: 1,
     #             },
-    #             color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
+    #             color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR, FORCE_P3D65_HDR
     #             contrast: 1,
     #             hdr_10_metadata: {
     #               blue_primary_x: 1,
@@ -3855,7 +3855,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -4306,7 +4306,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].timecode_start #=> String
     #   resp.job.settings.inputs[0].video_generator.duration #=> Integer
     #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
-    #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR"
+    #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -5091,7 +5091,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -5298,7 +5298,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job_template.settings.inputs[0].timecode_start #=> String
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
-    #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR"
+    #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job_template.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -6083,7 +6083,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -6733,7 +6733,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -6999,7 +6999,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job_templates[0].settings.inputs[0].timecode_start #=> String
     #   resp.job_templates[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
-    #   resp.job_templates[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR"
+    #   resp.job_templates[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job_templates[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job_templates[0].settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -7784,7 +7784,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -8042,7 +8042,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].timecode_start #=> String
     #   resp.jobs[0].settings.inputs[0].video_generator.duration #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
-    #   resp.jobs[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR"
+    #   resp.jobs[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.jobs[0].settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -8827,7 +8827,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -9494,7 +9494,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -9916,7 +9916,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job_template.settings.inputs[0].timecode_start #=> String
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
-    #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR"
+    #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job_template.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -10701,7 +10701,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -11466,7 +11466,7 @@ module Aws::MediaConvert
     #               minimum_rgb_tolerance: 1,
     #               minimum_yuv: 1,
     #             },
-    #             color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
+    #             color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR, FORCE_P3D65_HDR
     #             contrast: 1,
     #             hdr_10_metadata: {
     #               blue_primary_x: 1,
@@ -12096,7 +12096,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.maximum_yuv #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_rgb_tolerance #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.clip_limits.minimum_yuv #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR"
+    #   resp.preset.settings.video_description.video_preprocessors.color_corrector.color_space_conversion #=> String, one of "NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.contrast #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.hdr_10_metadata.blue_primary_y #=> Integer
@@ -12247,7 +12247,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

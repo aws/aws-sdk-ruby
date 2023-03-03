@@ -772,7 +772,11 @@ module Aws::MediaLive
     # Avail Configuration
     #
     # @!attribute [rw] avail_settings
-    #   Ad avail settings.
+    #   Controls how SCTE-35 messages create cues. Splice Insert mode treats
+    #   all segmentation signals traditionally. With Time Signal APOS mode
+    #   only Time Signal Placement Opportunity and Break messages create
+    #   segment breaks. With ESAM mode, signals are forwarded to an ESAM
+    #   server for possible update.
     #   @return [Types::AvailSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailConfiguration AWS API Documentation
@@ -790,11 +794,14 @@ module Aws::MediaLive
     #   @return [Types::Esam]
     #
     # @!attribute [rw] scte_35_splice_insert
-    #   Scte35 Splice Insert
+    #   Typical configuration that applies breaks on splice inserts in
+    #   addition to time signal placement opportunities, breaks, and
+    #   advertisements.
     #   @return [Types::Scte35SpliceInsert]
     #
     # @!attribute [rw] scte_35_time_signal_apos
-    #   Scte35 Time Signal Apos
+    #   Atypical configuration that applies segment breaks only on SCTE-35
+    #   time signal placement opportunities and breaks.
     #   @return [Types::Scte35TimeSignalApos]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailSettings AWS API Documentation
@@ -1633,8 +1640,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Output groups for this Live Event. Output groups contain information
-    # about where streams should be distributed.
+    # Caption Selector
     #
     # @!attribute [rw] language_code
     #   When specified this field indicates the three letter language code
@@ -5284,7 +5290,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] num_retries
     #   Number of retry attempts that will be made before the Live Event is
-    #   put into an error state.
+    #   put into an error state. Applies only if the CDN destination URI
+    #   begins with "s3" or "mediastore". For other URIs, the value is
+    #   always 3.
     #   @return [Integer]
     #
     # @!attribute [rw] restart_delay
@@ -5328,7 +5336,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] num_retries
     #   Number of retry attempts that will be made before the Live Event is
-    #   put into an error state.
+    #   put into an error state. Applies only if the CDN destination URI
+    #   begins with "s3" or "mediastore". For other URIs, the value is
+    #   always 3.
     #   @return [Integer]
     #
     # @!attribute [rw] restart_delay
@@ -5805,7 +5815,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] num_retries
     #   Number of retry attempts that will be made before the Live Event is
-    #   put into an error state.
+    #   put into an error state. Applies only if the CDN destination URI
+    #   begins with "s3" or "mediastore". For other URIs, the value is
+    #   always 3.
     #   @return [Integer]
     #
     # @!attribute [rw] restart_delay
@@ -5934,7 +5946,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] num_retries
     #   Number of retry attempts that will be made before the Live Event is
-    #   put into an error state.
+    #   put into an error state. Applies only if the CDN destination URI
+    #   begins with "s3" or "mediastore". For other URIs, the value is
+    #   always 3.
     #   @return [Integer]
     #
     # @!attribute [rw] restart_delay
@@ -9189,11 +9203,17 @@ module Aws::MediaLive
     #   Enter the Nielsen Source ID (SID) to include in the watermark
     #   @return [Float]
     #
+    # @!attribute [rw] timezone
+    #   Choose the timezone for the time stamps in the watermark. If not
+    #   provided, the timestamps will be in Coordinated Universal Time (UTC)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NielsenNaesIiNw AWS API Documentation
     #
     class NielsenNaesIiNw < Struct.new(
       :check_digit_string,
-      :sid)
+      :sid,
+      :timezone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10521,7 +10541,9 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Scte35 Splice Insert
+    # Typical configuration that applies breaks on splice inserts in
+    # addition to time signal placement opportunities, breaks, and
+    # advertisements.
     #
     # @!attribute [rw] ad_avail_offset
     #   When specified, this offset (in milliseconds) is added to the input
@@ -10575,7 +10597,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Scte35 Time Signal Apos
+    # Atypical configuration that applies segment breaks only on SCTE-35
+    # time signal placement opportunities and breaks.
     #
     # @!attribute [rw] ad_avail_offset
     #   When specified, this offset (in milliseconds) is added to the input
