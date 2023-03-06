@@ -690,8 +690,8 @@ module Aws::IVS
     # If you try to delete a live channel, you will get an error (409
     # ConflictException). To delete a channel that is live, call StopStream,
     # wait for the Amazon EventBridge "Stream End" event (to verify that
-    # the stream's state was changed from Live to Offline), then call
-    # DeleteChannel. (See [ Using EventBridge with Amazon IVS][1].)
+    # the stream's state is no longer Live), then call DeleteChannel. (See
+    # [ Using EventBridge with Amazon IVS][1].)
     #
     #
     #
@@ -1661,7 +1661,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2023-03-06)
+------------------
+
+* Feature - Updated text description in DeleteChannel, Stream, and StreamSummary.
+
 1.27.0 (2023-02-16)
 ------------------
 

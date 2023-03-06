@@ -231,11 +231,12 @@ module Aws::Account
     #
     # @!attribute [rw] region_name
     #   Specifies the Region-code for a given Region name (for example,
-    #   `af-south-1`). When you disable a Region, AWS performs actions to
-    #   deactivate that Region in your account, such as destroying IAM
-    #   resources in the Region. This process takes a few minutes for most
-    #   accounts, but this can take several hours. You cannot enable the
-    #   Region until the disabling process is fully completed.
+    #   `af-south-1`). When you disable a Region, Amazon Web Services
+    #   performs actions to deactivate that Region in your account, such as
+    #   destroying IAM resources in the Region. This process takes a few
+    #   minutes for most accounts, but this can take several hours. You
+    #   cannot enable the Region until the disabling process is fully
+    #   completed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/DisableRegionRequest AWS API Documentation
@@ -281,12 +282,13 @@ module Aws::Account
     #
     # @!attribute [rw] region_name
     #   Specifies the Region-code for a given Region name (for example,
-    #   `af-south-1`). When you enable a Region, AWS performs actions to
-    #   prepare your account in that Region, such as distributing your IAM
-    #   resources to the Region. This process takes a few minutes for most
-    #   accounts, but it can take several hours. You cannot use the Region
-    #   until this process is complete. Furthermore, you cannot disable the
-    #   Region until the enabling process is fully completed.
+    #   `af-south-1`). When you enable a Region, Amazon Web Services
+    #   performs actions to prepare your account in that Region, such as
+    #   distributing your IAM resources to the Region. This process takes a
+    #   few minutes for most accounts, but it can take several hours. You
+    #   cannot use the Region until this process is complete. Furthermore,
+    #   you cannot disable the Region until the enabling process is fully
+    #   completed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/EnableRegionRequest AWS API Documentation
@@ -774,8 +776,8 @@ module Aws::Account
       include Aws::Structure
     end
 
-    # The input failed to meet the constraints specified by the AWS service
-    # in a specified field.
+    # The input failed to meet the constraints specified by the Amazon Web
+    # Services service in a specified field.
     #
     # @!attribute [rw] message
     #   A message about the validation exception.

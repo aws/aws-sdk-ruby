@@ -1321,7 +1321,9 @@ module Aws::IVS
     #   @return [Time]
     #
     # @!attribute [rw] state
-    #   The stream’s state.
+    #   The stream’s state. Do not rely on the `OFFLINE` state, as the API
+    #   may not return it; instead, a "NotBroadcasting" error will
+    #   indicate that the stream is not live.
     #   @return [String]
     #
     # @!attribute [rw] stream_id
@@ -1570,7 +1572,9 @@ module Aws::IVS
     #   @return [Time]
     #
     # @!attribute [rw] state
-    #   The stream’s state.
+    #   The stream’s state. Do not rely on the `OFFLINE` state, as the API
+    #   may not return it; instead, a "NotBroadcasting" error will
+    #   indicate that the stream is not live.
     #   @return [String]
     #
     # @!attribute [rw] stream_id

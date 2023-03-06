@@ -476,9 +476,9 @@ module Aws::Account
     #
     # @option params [required, String] :region_name
     #   Specifies the Region-code for a given Region name (for example,
-    #   `af-south-1`). When you disable a Region, AWS performs actions to
-    #   deactivate that Region in your account, such as destroying IAM
-    #   resources in the Region. This process takes a few minutes for most
+    #   `af-south-1`). When you disable a Region, Amazon Web Services performs
+    #   actions to deactivate that Region in your account, such as destroying
+    #   IAM resources in the Region. This process takes a few minutes for most
     #   accounts, but this can take several hours. You cannot enable the
     #   Region until the disabling process is fully completed.
     #
@@ -535,12 +535,12 @@ module Aws::Account
     #
     # @option params [required, String] :region_name
     #   Specifies the Region-code for a given Region name (for example,
-    #   `af-south-1`). When you enable a Region, AWS performs actions to
-    #   prepare your account in that Region, such as distributing your IAM
-    #   resources to the Region. This process takes a few minutes for most
-    #   accounts, but it can take several hours. You cannot use the Region
-    #   until this process is complete. Furthermore, you cannot disable the
-    #   Region until the enabling process is fully completed.
+    #   `af-south-1`). When you enable a Region, Amazon Web Services performs
+    #   actions to prepare your account in that Region, such as distributing
+    #   your IAM resources to the Region. This process takes a few minutes for
+    #   most accounts, but it can take several hours. You cannot use the
+    #   Region until this process is complete. Furthermore, you cannot disable
+    #   the Region until the enabling process is fully completed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1057,7 +1057,7 @@ module Aws::Account
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-account'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

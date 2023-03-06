@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-03-06)
+------------------
+
+* Feature - AWS Account alternate contact email addresses can now have a length of 254 characters and contain the character "|".
+
 1.10.0 (2023-02-13)
 ------------------
 
