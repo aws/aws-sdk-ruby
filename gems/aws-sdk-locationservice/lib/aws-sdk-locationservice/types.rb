@@ -3083,18 +3083,20 @@ module Aws::LocationService
     #
     #   ^
     #
-    #   Valid font stacks for [Open Data (Preview)][4] styles:
+    #   Valid font stacks for [Open Data][4] styles:
     #
-    #   * VectorOpenDataStandardLight – `Amazon Ember Regular,Noto Sans
-    #     Regular` \| `Amazon Ember Bold,Noto Sans Bold` \| `Amazon Ember
-    #     Medium,Noto Sans Medium` \| `Amazon Ember Regular Italic,Noto Sans
-    #     Italic` \| `Amazon Ember Condensed RC Regular,Noto Sans Regular`
-    #     \| `Amazon Ember Condensed RC Bold,Noto Sans Bold`
+    #   * VectorOpenDataStandardLight, VectorOpenDataStandardDark,
+    #     VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark
+    #     – `Amazon Ember Regular,Noto Sans Regular` \| `Amazon Ember
+    #     Bold,Noto Sans Bold` \| `Amazon Ember Medium,Noto Sans Medium` \|
+    #     `Amazon Ember Regular Italic,Noto Sans Italic` \| `Amazon Ember
+    #     Condensed RC Regular,Noto Sans Regular` \| `Amazon Ember Condensed
+    #     RC Bold,Noto Sans Bold`
     #
     #   ^
     #
-    #   <note markdown="1"> The fonts used by `VectorOpenDataStandardLight` are combined fonts
-    #   that use `Amazon Ember` for most glyphs but `Noto Sans` for glyphs
+    #   <note markdown="1"> The fonts used by the Open Data map styles are combined fonts that
+    #   use `Amazon Ember` for most glyphs but `Noto Sans` for glyphs
     #   unsupported by `Amazon Ember`.
     #
     #    </note>
@@ -4485,18 +4487,28 @@ module Aws::LocationService
     #
     #    </note>
     #
-    #   Valid [Open Data (Preview) map styles][5]\:
+    #   Valid [Open Data map styles][5]\:
     #
-    #   * `VectorOpenDataStandardLight` – The Open Data Standard Light
-    #     (preview) map style provides a detailed basemap for the world
-    #     suitable for website and mobile application use. The map includes
-    #     highways major roads, minor roads, railways, water features,
-    #     cities, parks, landmarks, building footprints, and administrative
-    #     boundaries.
+    #   * `VectorOpenDataStandardLight` – The Open Data Standard Light map
+    #     style provides a detailed basemap for the world suitable for
+    #     website and mobile application use. The map includes highways
+    #     major roads, minor roads, railways, water features, cities, parks,
+    #     landmarks, building footprints, and administrative boundaries.
     #
-    #     Open Data maps is in preview. We may add, change, or remove
-    #     features before announcing general availability. For more
-    #     information, see [Open Data is in preview release][6].
+    #   * `VectorOpenDataStandardDark` – Open Data Standard Dark is a
+    #     dark-themed map style that provides a detailed basemap for the
+    #     world suitable for website and mobile application use. The map
+    #     includes highways major roads, minor roads, railways, water
+    #     features, cities, parks, landmarks, building footprints, and
+    #     administrative boundaries.
+    #
+    #   * `VectorOpenDataVisualizationLight` – The Open Data Visualization
+    #     Light map style is a light-themed style with muted colors and
+    #     fewer features that aids in understanding overlaid data.
+    #
+    #   * `VectorOpenDataVisualizationDark` – The Open Data Visualization
+    #     Dark map style is a dark-themed style with muted colors and fewer
+    #     features that aids in understanding overlaid data.
     #
     #
     #
@@ -4505,7 +4517,6 @@ module Aws::LocationService
     #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
     #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
     #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
-    #   [6]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html#open-data-preview
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation

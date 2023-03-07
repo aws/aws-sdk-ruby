@@ -2667,19 +2667,21 @@ module Aws::LocationService
     #
     #   ^
     #
-    #   Valid font stacks for [Open Data (Preview)][4] styles:
+    #   Valid font stacks for [Open Data][4] styles:
     #
-    #   * VectorOpenDataStandardLight – `Amazon Ember Regular,Noto Sans
-    #     Regular` \| `Amazon Ember Bold,Noto Sans Bold` \| `Amazon Ember
-    #     Medium,Noto Sans Medium` \| `Amazon Ember Regular Italic,Noto Sans
-    #     Italic` \| `Amazon Ember Condensed RC Regular,Noto Sans Regular` \|
-    #     `Amazon Ember Condensed RC Bold,Noto Sans Bold`
+    #   * VectorOpenDataStandardLight, VectorOpenDataStandardDark,
+    #     VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark –
+    #     `Amazon Ember Regular,Noto Sans Regular` \| `Amazon Ember Bold,Noto
+    #     Sans Bold` \| `Amazon Ember Medium,Noto Sans Medium` \| `Amazon
+    #     Ember Regular Italic,Noto Sans Italic` \| `Amazon Ember Condensed RC
+    #     Regular,Noto Sans Regular` \| `Amazon Ember Condensed RC Bold,Noto
+    #     Sans Bold`
     #
     #   ^
     #
-    #   <note markdown="1"> The fonts used by `VectorOpenDataStandardLight` are combined fonts
-    #   that use `Amazon Ember` for most glyphs but `Noto Sans` for glyphs
-    #   unsupported by `Amazon Ember`.
+    #   <note markdown="1"> The fonts used by the Open Data map styles are combined fonts that use
+    #   `Amazon Ember` for most glyphs but `Noto Sans` for glyphs unsupported
+    #   by `Amazon Ember`.
     #
     #    </note>
     #
@@ -4386,7 +4388,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

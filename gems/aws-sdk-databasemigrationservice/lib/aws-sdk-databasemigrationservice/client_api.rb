@@ -25,6 +25,10 @@ module Aws::DatabaseMigrationService
     AuthTypeValue = Shapes::StringShape.new(name: 'AuthTypeValue')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZonesList = Shapes::ListShape.new(name: 'AvailabilityZonesList')
+    BatchStartRecommendationsErrorEntry = Shapes::StructureShape.new(name: 'BatchStartRecommendationsErrorEntry')
+    BatchStartRecommendationsErrorEntryList = Shapes::ListShape.new(name: 'BatchStartRecommendationsErrorEntryList')
+    BatchStartRecommendationsRequest = Shapes::StructureShape.new(name: 'BatchStartRecommendationsRequest')
+    BatchStartRecommendationsResponse = Shapes::StructureShape.new(name: 'BatchStartRecommendationsResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     CancelReplicationTaskAssessmentRunMessage = Shapes::StructureShape.new(name: 'CancelReplicationTaskAssessmentRunMessage')
@@ -116,6 +120,10 @@ module Aws::DatabaseMigrationService
     DescribeOrderableReplicationInstancesResponse = Shapes::StructureShape.new(name: 'DescribeOrderableReplicationInstancesResponse')
     DescribePendingMaintenanceActionsMessage = Shapes::StructureShape.new(name: 'DescribePendingMaintenanceActionsMessage')
     DescribePendingMaintenanceActionsResponse = Shapes::StructureShape.new(name: 'DescribePendingMaintenanceActionsResponse')
+    DescribeRecommendationLimitationsRequest = Shapes::StructureShape.new(name: 'DescribeRecommendationLimitationsRequest')
+    DescribeRecommendationLimitationsResponse = Shapes::StructureShape.new(name: 'DescribeRecommendationLimitationsResponse')
+    DescribeRecommendationsRequest = Shapes::StructureShape.new(name: 'DescribeRecommendationsRequest')
+    DescribeRecommendationsResponse = Shapes::StructureShape.new(name: 'DescribeRecommendationsResponse')
     DescribeRefreshSchemasStatusMessage = Shapes::StructureShape.new(name: 'DescribeRefreshSchemasStatusMessage')
     DescribeRefreshSchemasStatusResponse = Shapes::StructureShape.new(name: 'DescribeRefreshSchemasStatusResponse')
     DescribeReplicationInstanceTaskLogsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationInstanceTaskLogsMessage')
@@ -193,6 +201,8 @@ module Aws::DatabaseMigrationService
     KafkaSettings = Shapes::StructureShape.new(name: 'KafkaSettings')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KinesisSettings = Shapes::StructureShape.new(name: 'KinesisSettings')
+    Limitation = Shapes::StructureShape.new(name: 'Limitation')
+    LimitationList = Shapes::ListShape.new(name: 'LimitationList')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -225,8 +235,15 @@ module Aws::DatabaseMigrationService
     PendingMaintenanceActions = Shapes::ListShape.new(name: 'PendingMaintenanceActions')
     PluginNameValue = Shapes::StringShape.new(name: 'PluginNameValue')
     PostgreSQLSettings = Shapes::StructureShape.new(name: 'PostgreSQLSettings')
+    RdsConfiguration = Shapes::StructureShape.new(name: 'RdsConfiguration')
+    RdsRecommendation = Shapes::StructureShape.new(name: 'RdsRecommendation')
+    RdsRequirements = Shapes::StructureShape.new(name: 'RdsRequirements')
     RebootReplicationInstanceMessage = Shapes::StructureShape.new(name: 'RebootReplicationInstanceMessage')
     RebootReplicationInstanceResponse = Shapes::StructureShape.new(name: 'RebootReplicationInstanceResponse')
+    Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    RecommendationData = Shapes::StructureShape.new(name: 'RecommendationData')
+    RecommendationList = Shapes::ListShape.new(name: 'RecommendationList')
+    RecommendationSettings = Shapes::StructureShape.new(name: 'RecommendationSettings')
     RedisAuthTypeValue = Shapes::StringShape.new(name: 'RedisAuthTypeValue')
     RedisSettings = Shapes::StructureShape.new(name: 'RedisSettings')
     RedshiftSettings = Shapes::StructureShape.new(name: 'RedshiftSettings')
@@ -282,6 +299,9 @@ module Aws::DatabaseMigrationService
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     SslSecurityProtocolValue = Shapes::StringShape.new(name: 'SslSecurityProtocolValue')
+    StartRecommendationsRequest = Shapes::StructureShape.new(name: 'StartRecommendationsRequest')
+    StartRecommendationsRequestEntry = Shapes::StructureShape.new(name: 'StartRecommendationsRequestEntry')
+    StartRecommendationsRequestEntryList = Shapes::ListShape.new(name: 'StartRecommendationsRequestEntryList')
     StartReplicationTaskAssessmentMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentMessage')
     StartReplicationTaskAssessmentResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentResponse')
     StartReplicationTaskAssessmentRunMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentRunMessage')
@@ -349,6 +369,19 @@ module Aws::DatabaseMigrationService
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZonesList.member = Shapes::ShapeRef.new(shape: String)
+
+    BatchStartRecommendationsErrorEntry.add_member(:database_id, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseId"))
+    BatchStartRecommendationsErrorEntry.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BatchStartRecommendationsErrorEntry.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    BatchStartRecommendationsErrorEntry.struct_class = Types::BatchStartRecommendationsErrorEntry
+
+    BatchStartRecommendationsErrorEntryList.member = Shapes::ShapeRef.new(shape: BatchStartRecommendationsErrorEntry)
+
+    BatchStartRecommendationsRequest.add_member(:data, Shapes::ShapeRef.new(shape: StartRecommendationsRequestEntryList, location_name: "Data"))
+    BatchStartRecommendationsRequest.struct_class = Types::BatchStartRecommendationsRequest
+
+    BatchStartRecommendationsResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: BatchStartRecommendationsErrorEntryList, location_name: "ErrorEntries"))
+    BatchStartRecommendationsResponse.struct_class = Types::BatchStartRecommendationsResponse
 
     CancelReplicationTaskAssessmentRunMessage.add_member(:replication_task_assessment_run_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskAssessmentRunArn"))
     CancelReplicationTaskAssessmentRunMessage.struct_class = Types::CancelReplicationTaskAssessmentRunMessage
@@ -765,6 +798,24 @@ module Aws::DatabaseMigrationService
     DescribePendingMaintenanceActionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribePendingMaintenanceActionsResponse.struct_class = Types::DescribePendingMaintenanceActionsResponse
 
+    DescribeRecommendationLimitationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeRecommendationLimitationsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeRecommendationLimitationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeRecommendationLimitationsRequest.struct_class = Types::DescribeRecommendationLimitationsRequest
+
+    DescribeRecommendationLimitationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeRecommendationLimitationsResponse.add_member(:limitations, Shapes::ShapeRef.new(shape: LimitationList, location_name: "Limitations"))
+    DescribeRecommendationLimitationsResponse.struct_class = Types::DescribeRecommendationLimitationsResponse
+
+    DescribeRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeRecommendationsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeRecommendationsRequest.struct_class = Types::DescribeRecommendationsRequest
+
+    DescribeRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: RecommendationList, location_name: "Recommendations"))
+    DescribeRecommendationsResponse.struct_class = Types::DescribeRecommendationsResponse
+
     DescribeRefreshSchemasStatusMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     DescribeRefreshSchemasStatusMessage.struct_class = Types::DescribeRefreshSchemasStatusMessage
 
@@ -1112,6 +1163,16 @@ module Aws::DatabaseMigrationService
     KinesisSettings.add_member(:no_hex_prefix, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoHexPrefix"))
     KinesisSettings.struct_class = Types::KinesisSettings
 
+    Limitation.add_member(:database_id, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseId"))
+    Limitation.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
+    Limitation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    Limitation.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    Limitation.add_member(:impact, Shapes::ShapeRef.new(shape: String, location_name: "Impact"))
+    Limitation.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    Limitation.struct_class = Types::Limitation
+
+    LimitationList.member = Shapes::ShapeRef.new(shape: Limitation)
+
     ListTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
     ListTagsForResourceMessage.add_member(:resource_arn_list, Shapes::ShapeRef.new(shape: ArnList, location_name: "ResourceArnList"))
     ListTagsForResourceMessage.struct_class = Types::ListTagsForResourceMessage
@@ -1360,6 +1421,28 @@ module Aws::DatabaseMigrationService
     PostgreSQLSettings.add_member(:trim_space_in_char, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TrimSpaceInChar"))
     PostgreSQLSettings.struct_class = Types::PostgreSQLSettings
 
+    RdsConfiguration.add_member(:engine_edition, Shapes::ShapeRef.new(shape: String, location_name: "EngineEdition"))
+    RdsConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
+    RdsConfiguration.add_member(:instance_vcpu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "InstanceVcpu"))
+    RdsConfiguration.add_member(:instance_memory, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "InstanceMemory"))
+    RdsConfiguration.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
+    RdsConfiguration.add_member(:storage_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageSize"))
+    RdsConfiguration.add_member(:storage_iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageIops"))
+    RdsConfiguration.add_member(:deployment_option, Shapes::ShapeRef.new(shape: String, location_name: "DeploymentOption"))
+    RdsConfiguration.struct_class = Types::RdsConfiguration
+
+    RdsRecommendation.add_member(:requirements_to_target, Shapes::ShapeRef.new(shape: RdsRequirements, location_name: "RequirementsToTarget"))
+    RdsRecommendation.add_member(:target_configuration, Shapes::ShapeRef.new(shape: RdsConfiguration, location_name: "TargetConfiguration"))
+    RdsRecommendation.struct_class = Types::RdsRecommendation
+
+    RdsRequirements.add_member(:engine_edition, Shapes::ShapeRef.new(shape: String, location_name: "EngineEdition"))
+    RdsRequirements.add_member(:instance_vcpu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "InstanceVcpu"))
+    RdsRequirements.add_member(:instance_memory, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "InstanceMemory"))
+    RdsRequirements.add_member(:storage_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageSize"))
+    RdsRequirements.add_member(:storage_iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageIops"))
+    RdsRequirements.add_member(:deployment_option, Shapes::ShapeRef.new(shape: String, location_name: "DeploymentOption"))
+    RdsRequirements.struct_class = Types::RdsRequirements
+
     RebootReplicationInstanceMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
     RebootReplicationInstanceMessage.add_member(:force_failover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForceFailover"))
     RebootReplicationInstanceMessage.add_member(:force_planned_failover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForcePlannedFailover"))
@@ -1367,6 +1450,24 @@ module Aws::DatabaseMigrationService
 
     RebootReplicationInstanceResponse.add_member(:replication_instance, Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance"))
     RebootReplicationInstanceResponse.struct_class = Types::RebootReplicationInstanceResponse
+
+    Recommendation.add_member(:database_id, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseId"))
+    Recommendation.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
+    Recommendation.add_member(:created_date, Shapes::ShapeRef.new(shape: String, location_name: "CreatedDate"))
+    Recommendation.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    Recommendation.add_member(:preferred, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Preferred"))
+    Recommendation.add_member(:settings, Shapes::ShapeRef.new(shape: RecommendationSettings, location_name: "Settings"))
+    Recommendation.add_member(:data, Shapes::ShapeRef.new(shape: RecommendationData, location_name: "Data"))
+    Recommendation.struct_class = Types::Recommendation
+
+    RecommendationData.add_member(:rds_engine, Shapes::ShapeRef.new(shape: RdsRecommendation, location_name: "RdsEngine"))
+    RecommendationData.struct_class = Types::RecommendationData
+
+    RecommendationList.member = Shapes::ShapeRef.new(shape: Recommendation)
+
+    RecommendationSettings.add_member(:instance_sizing_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceSizingType"))
+    RecommendationSettings.add_member(:workload_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "WorkloadType"))
+    RecommendationSettings.struct_class = Types::RecommendationSettings
 
     RedisSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerName"))
     RedisSettings.add_member(:port, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Port"))
@@ -1674,6 +1775,16 @@ module Aws::DatabaseMigrationService
 
     SourceIdsList.member = Shapes::ShapeRef.new(shape: String)
 
+    StartRecommendationsRequest.add_member(:database_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DatabaseId"))
+    StartRecommendationsRequest.add_member(:settings, Shapes::ShapeRef.new(shape: RecommendationSettings, required: true, location_name: "Settings"))
+    StartRecommendationsRequest.struct_class = Types::StartRecommendationsRequest
+
+    StartRecommendationsRequestEntry.add_member(:database_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DatabaseId"))
+    StartRecommendationsRequestEntry.add_member(:settings, Shapes::ShapeRef.new(shape: RecommendationSettings, required: true, location_name: "Settings"))
+    StartRecommendationsRequestEntry.struct_class = Types::StartRecommendationsRequestEntry
+
+    StartRecommendationsRequestEntryList.member = Shapes::ShapeRef.new(shape: StartRecommendationsRequestEntry)
+
     StartReplicationTaskAssessmentMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
     StartReplicationTaskAssessmentMessage.struct_class = Types::StartReplicationTaskAssessmentMessage
 
@@ -1842,6 +1953,17 @@ module Aws::DatabaseMigrationService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ApplyPendingMaintenanceActionMessage)
         o.output = Shapes::ShapeRef.new(shape: ApplyPendingMaintenanceActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:batch_start_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchStartRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchStartRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchStartRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
       end)
 
@@ -2289,6 +2411,38 @@ module Aws::DatabaseMigrationService
         )
       end)
 
+      api.add_operation(:describe_recommendation_limitations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRecommendationLimitations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRecommendationLimitationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRecommendationLimitationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_refresh_schemas_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeRefreshSchemasStatus"
         o.http_method = "POST"
@@ -2589,6 +2743,17 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: RunFleetAdvisorLsaAnalysisResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:start_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
       end)
 

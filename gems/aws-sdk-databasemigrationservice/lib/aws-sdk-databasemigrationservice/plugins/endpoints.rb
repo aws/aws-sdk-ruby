@@ -60,6 +60,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::AddTagsToResource.build(context)
           when :apply_pending_maintenance_action
             Aws::DatabaseMigrationService::Endpoints::ApplyPendingMaintenanceAction.build(context)
+          when :batch_start_recommendations
+            Aws::DatabaseMigrationService::Endpoints::BatchStartRecommendations.build(context)
           when :cancel_replication_task_assessment_run
             Aws::DatabaseMigrationService::Endpoints::CancelReplicationTaskAssessmentRun.build(context)
           when :create_endpoint
@@ -128,6 +130,10 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DescribeOrderableReplicationInstances.build(context)
           when :describe_pending_maintenance_actions
             Aws::DatabaseMigrationService::Endpoints::DescribePendingMaintenanceActions.build(context)
+          when :describe_recommendation_limitations
+            Aws::DatabaseMigrationService::Endpoints::DescribeRecommendationLimitations.build(context)
+          when :describe_recommendations
+            Aws::DatabaseMigrationService::Endpoints::DescribeRecommendations.build(context)
           when :describe_refresh_schemas_status
             Aws::DatabaseMigrationService::Endpoints::DescribeRefreshSchemasStatus.build(context)
           when :describe_replication_instance_task_logs
@@ -174,6 +180,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::RemoveTagsFromResource.build(context)
           when :run_fleet_advisor_lsa_analysis
             Aws::DatabaseMigrationService::Endpoints::RunFleetAdvisorLsaAnalysis.build(context)
+          when :start_recommendations
+            Aws::DatabaseMigrationService::Endpoints::StartRecommendations.build(context)
           when :start_replication_task
             Aws::DatabaseMigrationService::Endpoints::StartReplicationTask.build(context)
           when :start_replication_task_assessment

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-03-07)
+------------------
+
+* Feature - This release adds DMS Fleet Advisor Target Recommendation APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to start Target Recommendation calculation.
+
 1.75.0 (2023-01-18)
 ------------------
 

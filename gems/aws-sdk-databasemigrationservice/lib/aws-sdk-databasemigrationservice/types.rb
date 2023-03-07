@@ -149,6 +149,59 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information about the errors that occurred during the
+    # analysis of the source database.
+    #
+    # @!attribute [rw] database_id
+    #   The identifier of the source database.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The information about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The code of an error that occurred during the analysis of the source
+    #   database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/BatchStartRecommendationsErrorEntry AWS API Documentation
+    #
+    class BatchStartRecommendationsErrorEntry < Struct.new(
+      :database_id,
+      :message,
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data
+    #   Provides information about source databases to analyze. After this
+    #   analysis, Fleet Advisor recommends target engines for each source
+    #   database.
+    #   @return [Array<Types::StartRecommendationsRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/BatchStartRecommendationsRequest AWS API Documentation
+    #
+    class BatchStartRecommendationsRequest < Struct.new(
+      :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list with error details about the analysis of each source
+    #   database.
+    #   @return [Array<Types::BatchStartRecommendationsErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/BatchStartRecommendationsResponse AWS API Documentation
+    #
+    class BatchStartRecommendationsResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] replication_task_assessment_run_arn
     #   Amazon Resource Name (ARN) of the premigration assessment run to be
     #   canceled.
@@ -1011,6 +1064,15 @@ module Aws::DatabaseMigrationService
     #   window. This parameter defaults to `true`.
     #
     #   Default: `true`
+    #
+    #   When `AutoMinorVersionUpgrade` is enabled, DMS uses the current
+    #   default engine version when you create a replication instance. For
+    #   example, if you set `EngineVersion` to a lower version number than
+    #   the current default version, DMS uses the default version.
+    #
+    #   If `AutoMinorVersionUpgrade` *isn’t* enabled when you create a
+    #   replication instance, DMS uses the engine version specified by the
+    #   `EngineVersion` parameter.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -1242,7 +1304,7 @@ module Aws::DatabaseMigrationService
     #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12“
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2584,6 +2646,118 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   Filters applied to the limitations described in the form of
+    #   key-value pairs.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, Fleet Advisor
+    #   includes a pagination token in the response so that you can retrieve
+    #   the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRecommendationLimitationsRequest AWS API Documentation
+    #
+    class DescribeRecommendationLimitationsRequest < Struct.new(
+      :filters,
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The unique pagination token returned for you to pass to a subsequent
+    #   request. Fleet Advisor returns this token when the number of records
+    #   in the response is greater than the `MaxRecords` value. To retrieve
+    #   the next page, make the call again using the returned token and
+    #   keeping all other arguments unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] limitations
+    #   The list of limitations for recommendations of target Amazon Web
+    #   Services engines.
+    #   @return [Array<Types::Limitation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRecommendationLimitationsResponse AWS API Documentation
+    #
+    class DescribeRecommendationLimitationsResponse < Struct.new(
+      :next_token,
+      :limitations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters applied to the target engine recommendations described in
+    #   the form of key-value pairs.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, Fleet Advisor
+    #   includes a pagination token in the response so that you can retrieve
+    #   the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRecommendationsRequest AWS API Documentation
+    #
+    class DescribeRecommendationsRequest < Struct.new(
+      :filters,
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The unique pagination token returned for you to pass to a subsequent
+    #   request. Fleet Advisor returns this token when the number of records
+    #   in the response is greater than the `MaxRecords` value. To retrieve
+    #   the next page, make the call again using the returned token and
+    #   keeping all other arguments unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendations
+    #   The list of recommendations of target engines that Fleet Advisor
+    #   created for the source database.
+    #   @return [Array<Types::Recommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRecommendationsResponse AWS API Documentation
+    #
+    class DescribeRecommendationsResponse < Struct.new(
+      :next_token,
+      :recommendations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -3820,10 +3994,10 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] clean_source_metadata_on_mismatch
-    #   Adjusts the behavior of DMS when migrating from an SQL Server source
-    #   database that is hosted as part of an Always On availability group
-    #   cluster. If you need DMS to poll all the nodes in the Always On
-    #   cluster for transaction backups, set this attribute to `false`.
+    #   Cleans and recreates table metadata information on the replication
+    #   instance when a mismatch occurs. For example, in a situation where
+    #   running an alter DDL on the table could result in different
+    #   information about the table cached in the replication instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] database_name
@@ -3877,10 +4051,11 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] port
+    #   Endpoint TCP port.
     #   @return [Integer]
     #
     # @!attribute [rw] server_name
-    #   Endpoint TCP port.
+    #   The MySQL host name.
     #   @return [String]
     #
     # @!attribute [rw] server_timezone
@@ -4494,6 +4669,61 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information about the limitations of target Amazon Web
+    # Services engines.
+    #
+    # Your source database might include features that the target Amazon Web
+    # Services engine doesn't support. Fleet Advisor lists these features
+    # as limitations. You should consider these limitations during database
+    # migration. For each limitation, Fleet Advisor recommends an action
+    # that you can take to address or avoid this limitation.
+    #
+    # @!attribute [rw] database_id
+    #   The identifier of the source database.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_name
+    #   The name of the target engine that Fleet Advisor should use in the
+    #   target engine recommendation. Valid values include
+    #   `"rds-aurora-mysql"`, `"rds-aurora-postgresql"`, `"rds-mysql"`,
+    #   `"rds-oracle"`, `"rds-sql-server"`, and `"rds-postgresql"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the limitation. Describes unsupported database features,
+    #   migration action items, and other limitations.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the limitation. Provides additional information
+    #   about the limitation, and includes recommended actions that you can
+    #   take to address or avoid this limitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact
+    #   The impact of the limitation. You can use this parameter to
+    #   prioritize limitations that you want to address. Valid values
+    #   include `"Blocker"`, `"High"`, `"Medium"`, and `"Low"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the limitation, such as action required, upgrade
+    #   required, and limited feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Limitation AWS API Documentation
+    #
+    class Limitation < Struct.new(
+      :database_id,
+      :engine_name,
+      :name,
+      :description,
+      :impact,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   DMS resource to list tags for. This returns a list of keys (names of
@@ -4594,7 +4824,13 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] server_name
-    #   Fully qualified domain name of the endpoint.
+    #   Fully qualified domain name of the endpoint. For an Amazon RDS SQL
+    #   Server instance, this is the output of [DescribeDBInstances][1], in
+    #   the ` Endpoint.Address` field.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -5157,6 +5393,15 @@ module Aws::DatabaseMigrationService
     #   * A newer minor version is available.
     #
     #   * DMS has enabled automatic patching for the given engine version.
+    #
+    #   When `AutoMinorVersionUpgrade` is enabled, DMS uses the current
+    #   default engine version when you modify a replication instance. For
+    #   example, if you set `EngineVersion` to a lower version number than
+    #   the current default version, DMS uses the default version.
+    #
+    #   If `AutoMinorVersionUpgrade` *isn’t* enabled when you modify a
+    #   replication instance, DMS uses the engine version specified by the
+    #   `EngineVersion` parameter.
     #   @return [Boolean]
     #
     # @!attribute [rw] replication_instance_identifier
@@ -5314,7 +5559,7 @@ module Aws::DatabaseMigrationService
     #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12“
     #   @return [String]
     #
     # @!attribute [rw] task_data
@@ -5529,10 +5774,10 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] clean_source_metadata_on_mismatch
-    #   Adjusts the behavior of DMS when migrating from an SQL Server source
-    #   database that is hosted as part of an Always On availability group
-    #   cluster. If you need DMS to poll all the nodes in the Always On
-    #   cluster for transaction backups, set this attribute to `false`.
+    #   Cleans and recreates table metadata information on the replication
+    #   instance when a mismatch occurs. For example, in a situation where
+    #   running an alter DDL on the table could result in different
+    #   information about the table cached in the replication instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] database_name
@@ -5592,7 +5837,18 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] server_name
-    #   Fully qualified domain name of the endpoint.
+    #   The host name of the endpoint database.
+    #
+    #   For an Amazon RDS MySQL instance, this is the output of
+    #   [DescribeDBInstances][1], in the ` Endpoint.Address` field.
+    #
+    #   For an Aurora MySQL instance, this is the output of
+    #   [DescribeDBClusters][2], in the `Endpoint` field.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html
     #   @return [String]
     #
     # @!attribute [rw] server_timezone
@@ -6000,6 +6256,13 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] server_name
     #   Fully qualified domain name of the endpoint.
+    #
+    #   For an Amazon RDS Oracle instance, this is the output of
+    #   [DescribeDBInstances][1], in the ` Endpoint.Address` field.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
     #   @return [String]
     #
     # @!attribute [rw] spatial_data_option_to_geo_json_function_name
@@ -6387,7 +6650,18 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] server_name
-    #   Fully qualified domain name of the endpoint.
+    #   The host name of the endpoint database.
+    #
+    #   For an Amazon RDS PostgreSQL instance, this is the output of
+    #   [DescribeDBInstances][1], in the ` Endpoint.Address` field.
+    #
+    #   For an Aurora PostgreSQL instance, this is the output of
+    #   [DescribeDBClusters][2], in the `Endpoint` field.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -6487,6 +6761,134 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that describes the configuration of the
+    # recommended target engine on Amazon RDS.
+    #
+    # @!attribute [rw] engine_edition
+    #   Describes the recommended target Amazon RDS engine edition.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   Describes the recommended target Amazon RDS instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_vcpu
+    #   Describes the number of virtual CPUs (vCPU) on the recommended
+    #   Amazon RDS DB instance that meets your requirements.
+    #   @return [Float]
+    #
+    # @!attribute [rw] instance_memory
+    #   Describes the memory on the recommended Amazon RDS DB instance that
+    #   meets your requirements.
+    #   @return [Float]
+    #
+    # @!attribute [rw] storage_type
+    #   Describes the storage type of the recommended Amazon RDS DB instance
+    #   that meets your requirements.
+    #
+    #   Amazon RDS provides three storage types: General Purpose SSD (also
+    #   known as gp2 and gp3), Provisioned IOPS SSD (also known as io1), and
+    #   magnetic (also known as standard).
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_size
+    #   Describes the storage size of the recommended Amazon RDS DB instance
+    #   that meets your requirements.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_iops
+    #   Describes the number of I/O operations completed each second (IOPS)
+    #   on the recommended Amazon RDS DB instance that meets your
+    #   requirements.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deployment_option
+    #   Describes the deployment option for the recommended Amazon RDS DB
+    #   instance. The deployment options include Multi-AZ and Single-AZ
+    #   deployments. Valid values include `"MULTI_AZ"` and `"SINGLE_AZ"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RdsConfiguration AWS API Documentation
+    #
+    class RdsConfiguration < Struct.new(
+      :engine_edition,
+      :instance_type,
+      :instance_vcpu,
+      :instance_memory,
+      :storage_type,
+      :storage_size,
+      :storage_iops,
+      :deployment_option)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that describes a recommendation of a target
+    # engine on Amazon RDS.
+    #
+    # @!attribute [rw] requirements_to_target
+    #   Supplemental information about the requirements to the recommended
+    #   target database on Amazon RDS.
+    #   @return [Types::RdsRequirements]
+    #
+    # @!attribute [rw] target_configuration
+    #   Supplemental information about the configuration of the recommended
+    #   target database on Amazon RDS.
+    #   @return [Types::RdsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RdsRecommendation AWS API Documentation
+    #
+    class RdsRecommendation < Struct.new(
+      :requirements_to_target,
+      :target_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that describes the requirements to the target
+    # engine on Amazon RDS.
+    #
+    # @!attribute [rw] engine_edition
+    #   The required target Amazon RDS engine edition.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_vcpu
+    #   The required number of virtual CPUs (vCPU) on the Amazon RDS DB
+    #   instance.
+    #   @return [Float]
+    #
+    # @!attribute [rw] instance_memory
+    #   The required memory on the Amazon RDS DB instance.
+    #   @return [Float]
+    #
+    # @!attribute [rw] storage_size
+    #   The required Amazon RDS DB instance storage size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_iops
+    #   The required number of I/O operations completed each second (IOPS)
+    #   on your Amazon RDS DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deployment_option
+    #   The required deployment option for the Amazon RDS DB instance. Valid
+    #   values include `"MULTI_AZ"` for Multi-AZ deployments and
+    #   `"SINGLE_AZ"` for Single-AZ deployments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RdsRequirements AWS API Documentation
+    #
+    class RdsRequirements < Struct.new(
+      :engine_edition,
+      :instance_vcpu,
+      :instance_memory,
+      :storage_size,
+      :storage_iops,
+      :deployment_option)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the replication instance.
     #   @return [String]
@@ -6525,6 +6927,111 @@ module Aws::DatabaseMigrationService
     #
     class RebootReplicationInstanceResponse < Struct.new(
       :replication_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that describes a recommendation of a target
+    # engine.
+    #
+    # A *recommendation* is a set of possible Amazon Web Services target
+    # engines that you can choose to migrate your source on-premises
+    # database. In this set, Fleet Advisor suggests a single target engine
+    # as the right sized migration destination. To determine this rightsized
+    # migration destination, Fleet Advisor uses the inventory metadata and
+    # metrics from data collector. You can use recommendations before the
+    # start of migration to save costs and reduce risks.
+    #
+    # With recommendations, you can explore different target options and
+    # compare metrics, so you can make an informed decision when you choose
+    # the migration target.
+    #
+    # @!attribute [rw] database_id
+    #   The identifier of the source database for which Fleet Advisor
+    #   provided this recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_name
+    #   The name of the target engine. Valid values include
+    #   `"rds-aurora-mysql"`, `"rds-aurora-postgresql"`, `"rds-mysql"`,
+    #   `"rds-oracle"`, `"rds-sql-server"`, and `"rds-postgresql"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date when Fleet Advisor created the target engine
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the target engine recommendation. Valid values include
+    #   `"alternate"`, `"in-progress"`, `"not-viable"`, and `"recommended"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred
+    #   Indicates that this target is the rightsized migration destination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] settings
+    #   The settings in JSON format for the preferred target engine
+    #   parameters. These parameters include capacity, resource utilization,
+    #   and the usage type (production, development, or testing).
+    #   @return [Types::RecommendationSettings]
+    #
+    # @!attribute [rw] data
+    #   The recommendation of a target engine for the specified source
+    #   database.
+    #   @return [Types::RecommendationData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Recommendation AWS API Documentation
+    #
+    class Recommendation < Struct.new(
+      :database_id,
+      :engine_name,
+      :created_date,
+      :status,
+      :preferred,
+      :settings,
+      :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the target engine for the specified source
+    # database.
+    #
+    # @!attribute [rw] rds_engine
+    #   The recommendation of a target Amazon RDS database engine.
+    #   @return [Types::RdsRecommendation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RecommendationData AWS API Documentation
+    #
+    class RecommendationData < Struct.new(
+      :rds_engine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the required target engine settings.
+    #
+    # @!attribute [rw] instance_sizing_type
+    #   The size of your target instance. Fleet Advisor calculates this
+    #   value based on your data collection type, such as total capacity and
+    #   resource utilization. Valid values include `"total-capacity"` and
+    #   `"utilization"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_type
+    #   The deployment option for your target engine. For production
+    #   databases, Fleet Advisor chooses Multi-AZ deployment. For
+    #   development or test databases, Fleet Advisor chooses Single-AZ
+    #   deployment. Valid values include `"development"` and `"production"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RecommendationSettings AWS API Documentation
+    #
+    class RecommendationSettings < Struct.new(
+      :instance_sizing_type,
+      :workload_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7534,7 +8041,7 @@ module Aws::DatabaseMigrationService
     #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12“
     #   @return [String]
     #
     # @!attribute [rw] recovery_checkpoint
@@ -8785,6 +9292,51 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] database_id
+    #   The identifier of the source database to analyze and provide
+    #   recommendations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   The settings in JSON format that Fleet Advisor uses to determine
+    #   target engine recommendations. These parameters include target
+    #   instance sizing and availability and durability settings. For target
+    #   instance sizing, Fleet Advisor supports the following two options:
+    #   total capacity and resource utilization. For availability and
+    #   durability, Fleet Advisor supports the following two options:
+    #   production (Multi-AZ deployments) and Dev/Test (Single-AZ
+    #   deployments).
+    #   @return [Types::RecommendationSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartRecommendationsRequest AWS API Documentation
+    #
+    class StartRecommendationsRequest < Struct.new(
+      :database_id,
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the source database to analyze and provide
+    # target recommendations according to the specified requirements.
+    #
+    # @!attribute [rw] database_id
+    #   The identifier of the source database.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   The required target engine settings.
+    #   @return [Types::RecommendationSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartRecommendationsRequestEntry AWS API Documentation
+    #
+    class StartRecommendationsRequestEntry < Struct.new(
+      :database_id,
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #   @return [String]
@@ -8924,13 +9476,20 @@ module Aws::DatabaseMigrationService
     #
     #   When the migration type is `full-load` or `full-load-and-cdc`, the
     #   only valid value for the first run of the task is
-    #   `start-replication`. You use `reload-target` to restart the task and
-    #   `resume-processing` to resume the task.
+    #   `start-replication`. This option will start the migration.
     #
-    #   When the migration type is `cdc`, you use `start-replication` to
-    #   start or restart the task, and `resume-processing` to resume the
-    #   task. `reload-target` is not a valid value for a task with migration
-    #   type of `cdc`.
+    #   You can also use ReloadTables to reload specific tables that failed
+    #   during migration instead of restarting the task.
+    #
+    #   The `resume-processing` option isn't applicable for a full-load
+    #   task, because you can't resume partially loaded tables during the
+    #   full load phase.
+    #
+    #   For a `full-load-and-cdc` task, DMS migrates table data, and then
+    #   applies data changes that occur on the source. To load all the
+    #   tables again, and start capturing source changes, use
+    #   `reload-target`. Otherwise use `resume-processing`, to replicate the
+    #   changes from the last stop position.
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time
@@ -8979,7 +9538,7 @@ module Aws::DatabaseMigrationService
     #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12“
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskMessage AWS API Documentation

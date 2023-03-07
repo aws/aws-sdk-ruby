@@ -379,7 +379,7 @@ module Aws::DatabaseMigrationService
     # @!group API Operations
 
     # Adds metadata tags to an DMS resource, including replication instance,
-    # endpoint, security group, and migration task. These tags can also be
+    # endpoint, subnet group, and migration task. These tags can also be
     # used with cost allocation reporting to track cost associated with DMS
     # resources, or used in a Condition statement in an IAM policy for DMS.
     # For more information, see [ `Tag` ][1] data type description.
@@ -498,6 +498,59 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def apply_pending_maintenance_action(params = {}, options = {})
       req = build_request(:apply_pending_maintenance_action, params)
+      req.send_request(options)
+    end
+
+    # Starts the analysis of up to 20 source databases to recommend target
+    # engines for each source database. This is a batch version of
+    # [StartRecommendations][1].
+    #
+    # The result of analysis of each source database is reported
+    # individually in the response. Because the batch request can result in
+    # a combination of successful and unsuccessful actions, you should check
+    # for batch errors even when the call returns an HTTP status code of
+    # `200`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html
+    #
+    # @option params [Array<Types::StartRecommendationsRequestEntry>] :data
+    #   Provides information about source databases to analyze. After this
+    #   analysis, Fleet Advisor recommends target engines for each source
+    #   database.
+    #
+    # @return [Types::BatchStartRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchStartRecommendationsResponse#error_entries #error_entries} => Array&lt;Types::BatchStartRecommendationsErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_start_recommendations({
+    #     data: [
+    #       {
+    #         database_id: "String", # required
+    #         settings: { # required
+    #           instance_sizing_type: "String", # required
+    #           workload_type: "String", # required
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].database_id #=> String
+    #   resp.error_entries[0].message #=> String
+    #   resp.error_entries[0].code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/BatchStartRecommendations AWS API Documentation
+    #
+    # @overload batch_start_recommendations(params = {})
+    # @param [Hash] params ({})
+    def batch_start_recommendations(params = {}, options = {})
+      req = build_request(:batch_start_recommendations, params)
       req.send_request(options)
     end
 
@@ -1733,6 +1786,15 @@ module Aws::DatabaseMigrationService
     #
     #   Default: `true`
     #
+    #   When `AutoMinorVersionUpgrade` is enabled, DMS uses the current
+    #   default engine version when you create a replication instance. For
+    #   example, if you set `EngineVersion` to a lower version number than the
+    #   current default version, DMS uses the default version.
+    #
+    #   If `AutoMinorVersionUpgrade` *isn’t* enabled when you create a
+    #   replication instance, DMS uses the engine version specified by the
+    #   `EngineVersion` parameter.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the replication instance.
     #
@@ -2126,7 +2188,7 @@ module Aws::DatabaseMigrationService
     #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12“
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the replication task.
@@ -4591,7 +4653,7 @@ module Aws::DatabaseMigrationService
     #   resp.orderable_replication_instances[0].included_allocated_storage #=> Integer
     #   resp.orderable_replication_instances[0].availability_zones #=> Array
     #   resp.orderable_replication_instances[0].availability_zones[0] #=> String
-    #   resp.orderable_replication_instances[0].release_status #=> String, one of "beta"
+    #   resp.orderable_replication_instances[0].release_status #=> String, one of "beta", "prod"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstances AWS API Documentation
@@ -4665,6 +4727,149 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_pending_maintenance_actions(params = {}, options = {})
       req = build_request(:describe_pending_maintenance_actions, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of limitations for recommendations of target
+    # Amazon Web Services engines.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the limitations described in the form of key-value
+    #   pairs.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, Fleet Advisor
+    #   includes a pagination token in the response so that you can retrieve
+    #   the remaining results.
+    #
+    # @option params [String] :next_token
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #
+    # @return [Types::DescribeRecommendationLimitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRecommendationLimitationsResponse#next_token #next_token} => String
+    #   * {Types::DescribeRecommendationLimitationsResponse#limitations #limitations} => Array&lt;Types::Limitation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_recommendation_limitations({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.limitations #=> Array
+    #   resp.limitations[0].database_id #=> String
+    #   resp.limitations[0].engine_name #=> String
+    #   resp.limitations[0].name #=> String
+    #   resp.limitations[0].description #=> String
+    #   resp.limitations[0].impact #=> String
+    #   resp.limitations[0].type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRecommendationLimitations AWS API Documentation
+    #
+    # @overload describe_recommendation_limitations(params = {})
+    # @param [Hash] params ({})
+    def describe_recommendation_limitations(params = {}, options = {})
+      req = build_request(:describe_recommendation_limitations, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of target engine recommendations for your
+    # source databases.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the target engine recommendations described in the
+    #   form of key-value pairs.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, Fleet Advisor
+    #   includes a pagination token in the response so that you can retrieve
+    #   the remaining results.
+    #
+    # @option params [String] :next_token
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #
+    # @return [Types::DescribeRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRecommendationsResponse#next_token #next_token} => String
+    #   * {Types::DescribeRecommendationsResponse#recommendations #recommendations} => Array&lt;Types::Recommendation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_recommendations({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.recommendations #=> Array
+    #   resp.recommendations[0].database_id #=> String
+    #   resp.recommendations[0].engine_name #=> String
+    #   resp.recommendations[0].created_date #=> String
+    #   resp.recommendations[0].status #=> String
+    #   resp.recommendations[0].preferred #=> Boolean
+    #   resp.recommendations[0].settings.instance_sizing_type #=> String
+    #   resp.recommendations[0].settings.workload_type #=> String
+    #   resp.recommendations[0].data.rds_engine.requirements_to_target.engine_edition #=> String
+    #   resp.recommendations[0].data.rds_engine.requirements_to_target.instance_vcpu #=> Float
+    #   resp.recommendations[0].data.rds_engine.requirements_to_target.instance_memory #=> Float
+    #   resp.recommendations[0].data.rds_engine.requirements_to_target.storage_size #=> Integer
+    #   resp.recommendations[0].data.rds_engine.requirements_to_target.storage_iops #=> Integer
+    #   resp.recommendations[0].data.rds_engine.requirements_to_target.deployment_option #=> String
+    #   resp.recommendations[0].data.rds_engine.target_configuration.engine_edition #=> String
+    #   resp.recommendations[0].data.rds_engine.target_configuration.instance_type #=> String
+    #   resp.recommendations[0].data.rds_engine.target_configuration.instance_vcpu #=> Float
+    #   resp.recommendations[0].data.rds_engine.target_configuration.instance_memory #=> Float
+    #   resp.recommendations[0].data.rds_engine.target_configuration.storage_type #=> String
+    #   resp.recommendations[0].data.rds_engine.target_configuration.storage_size #=> Integer
+    #   resp.recommendations[0].data.rds_engine.target_configuration.storage_iops #=> Integer
+    #   resp.recommendations[0].data.rds_engine.target_configuration.deployment_option #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRecommendations AWS API Documentation
+    #
+    # @overload describe_recommendations(params = {})
+    # @param [Hash] params ({})
+    def describe_recommendations(params = {}, options = {})
+      req = build_request(:describe_recommendations, params)
       req.send_request(options)
     end
 
@@ -5595,8 +5800,8 @@ module Aws::DatabaseMigrationService
     end
 
     # Lists all metadata tags attached to an DMS resource, including
-    # replication instance, endpoint, security group, and migration task.
-    # For more information, see [ `Tag` ][1] data type description.
+    # replication instance, endpoint, subnet group, and migration task. For
+    # more information, see [ `Tag` ][1] data type description.
     #
     #
     #
@@ -6719,6 +6924,15 @@ module Aws::DatabaseMigrationService
     #
     #   * DMS has enabled automatic patching for the given engine version.
     #
+    #   When `AutoMinorVersionUpgrade` is enabled, DMS uses the current
+    #   default engine version when you modify a replication instance. For
+    #   example, if you set `EngineVersion` to a lower version number than the
+    #   current default version, DMS uses the default version.
+    #
+    #   If `AutoMinorVersionUpgrade` *isn’t* enabled when you modify a
+    #   replication instance, DMS uses the engine version specified by the
+    #   `EngineVersion` parameter.
+    #
     # @option params [String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
     #   lowercase string.
@@ -7025,7 +7239,7 @@ module Aws::DatabaseMigrationService
     #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12“
     #
     # @option params [String] :task_data
     #   Supplemental information that the task requires to migrate the data
@@ -7356,7 +7570,7 @@ module Aws::DatabaseMigrationService
     end
 
     # Removes metadata tags from an DMS resource, including replication
-    # instance, endpoint, security group, and migration task. For more
+    # instance, endpoint, subnet group, and migration task. For more
     # information, see [ `Tag` ][1] data type description.
     #
     #
@@ -7425,6 +7639,51 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Starts the analysis of your source database to provide recommendations
+    # of target engines.
+    #
+    # You can create recommendations for multiple source databases using
+    # [BatchStartRecommendations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html
+    #
+    # @option params [required, String] :database_id
+    #   The identifier of the source database to analyze and provide
+    #   recommendations for.
+    #
+    # @option params [required, Types::RecommendationSettings] :settings
+    #   The settings in JSON format that Fleet Advisor uses to determine
+    #   target engine recommendations. These parameters include target
+    #   instance sizing and availability and durability settings. For target
+    #   instance sizing, Fleet Advisor supports the following two options:
+    #   total capacity and resource utilization. For availability and
+    #   durability, Fleet Advisor supports the following two options:
+    #   production (Multi-AZ deployments) and Dev/Test (Single-AZ
+    #   deployments).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_recommendations({
+    #     database_id: "String", # required
+    #     settings: { # required
+    #       instance_sizing_type: "String", # required
+    #       workload_type: "String", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartRecommendations AWS API Documentation
+    #
+    # @overload start_recommendations(params = {})
+    # @param [Hash] params ({})
+    def start_recommendations(params = {}, options = {})
+      req = build_request(:start_recommendations, params)
+      req.send_request(options)
+    end
+
     # Starts the replication task.
     #
     # For more information about DMS tasks, see [Working with Migration
@@ -7442,13 +7701,20 @@ module Aws::DatabaseMigrationService
     #
     #   When the migration type is `full-load` or `full-load-and-cdc`, the
     #   only valid value for the first run of the task is `start-replication`.
-    #   You use `reload-target` to restart the task and `resume-processing` to
-    #   resume the task.
+    #   This option will start the migration.
     #
-    #   When the migration type is `cdc`, you use `start-replication` to start
-    #   or restart the task, and `resume-processing` to resume the task.
-    #   `reload-target` is not a valid value for a task with migration type of
-    #   `cdc`.
+    #   You can also use ReloadTables to reload specific tables that failed
+    #   during migration instead of restarting the task.
+    #
+    #   The `resume-processing` option isn't applicable for a full-load task,
+    #   because you can't resume partially loaded tables during the full load
+    #   phase.
+    #
+    #   For a `full-load-and-cdc` task, DMS migrates table data, and then
+    #   applies data changes that occur on the source. To load all the tables
+    #   again, and start capturing source changes, use `reload-target`.
+    #   Otherwise use `resume-processing`, to replicate the changes from the
+    #   last stop position.
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
     #   Indicates the start time for a change data capture (CDC) operation.
@@ -7493,7 +7759,7 @@ module Aws::DatabaseMigrationService
     #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12“
     #
     # @return [Types::StartReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7970,7 +8236,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
