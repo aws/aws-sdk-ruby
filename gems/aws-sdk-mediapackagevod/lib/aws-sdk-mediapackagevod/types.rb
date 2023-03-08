@@ -289,6 +289,9 @@ module Aws::MediaPackageVod
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name
     #   @return [String]
     #
@@ -308,6 +311,7 @@ module Aws::MediaPackageVod
     class ConfigureLogsResponse < Struct.new(
       :arn,
       :authorization,
+      :created_at,
       :domain_name,
       :egress_access_logs,
       :id,
@@ -440,6 +444,9 @@ module Aws::MediaPackageVod
     #   A CMAF packaging configuration.
     #   @return [Types::CmafPackage]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -468,6 +475,7 @@ module Aws::MediaPackageVod
     class CreatePackagingConfigurationResponse < Struct.new(
       :arn,
       :cmaf_package,
+      :created_at,
       :dash_package,
       :hls_package,
       :id,
@@ -511,6 +519,9 @@ module Aws::MediaPackageVod
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name
     #   @return [String]
     #
@@ -530,6 +541,7 @@ module Aws::MediaPackageVod
     class CreatePackagingGroupResponse < Struct.new(
       :arn,
       :authorization,
+      :created_at,
       :domain_name,
       :egress_access_logs,
       :id,
@@ -583,10 +595,7 @@ module Aws::MediaPackageVod
     #   The source of scte markers used. When set to SEGMENTS, the scte
     #   markers are sourced from the segments of the ingested content. When
     #   set to MANIFEST, the scte markers are sourced from the manifest of
-    #   the ingested content. The MANIFEST value is compatible with source
-    #   HLS playlists using the SCTE-35 Enhanced syntax (#EXT-OATCLS-SCTE35
-    #   tags). SCTE-35 Elemental and SCTE-35 Daterange syntaxes are not
-    #   supported with this option.
+    #   the ingested content.
     #   @return [String]
     #
     # @!attribute [rw] stream_selection
@@ -786,6 +795,9 @@ module Aws::MediaPackageVod
     #   A CMAF packaging configuration.
     #   @return [Types::CmafPackage]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -814,6 +826,7 @@ module Aws::MediaPackageVod
     class DescribePackagingConfigurationResponse < Struct.new(
       :arn,
       :cmaf_package,
+      :created_at,
       :dash_package,
       :hls_package,
       :id,
@@ -845,6 +858,9 @@ module Aws::MediaPackageVod
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name
     #   @return [String]
     #
@@ -865,6 +881,7 @@ module Aws::MediaPackageVod
       :approximate_asset_count,
       :arn,
       :authorization,
+      :created_at,
       :domain_name,
       :egress_access_logs,
       :id,
@@ -1283,6 +1300,10 @@ module Aws::MediaPackageVod
     #   A CMAF packaging configuration.
     #   @return [Types::CmafPackage]
     #
+    # @!attribute [rw] created_at
+    #   The time the PackagingConfiguration was created.
+    #   @return [String]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -1313,6 +1334,7 @@ module Aws::MediaPackageVod
     class PackagingConfiguration < Struct.new(
       :arn,
       :cmaf_package,
+      :created_at,
       :dash_package,
       :hls_package,
       :id,
@@ -1403,6 +1425,10 @@ module Aws::MediaPackageVod
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
     #
+    # @!attribute [rw] created_at
+    #   The time the PackagingGroup was created.
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name
     #   The fully qualified domain name for Assets in the PackagingGroup.
     #   @return [String]
@@ -1425,6 +1451,7 @@ module Aws::MediaPackageVod
       :approximate_asset_count,
       :arn,
       :authorization,
+      :created_at,
       :domain_name,
       :egress_access_logs,
       :id,
@@ -1662,6 +1689,9 @@ module Aws::MediaPackageVod
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name
     #   @return [String]
     #
@@ -1682,6 +1712,7 @@ module Aws::MediaPackageVod
       :approximate_asset_count,
       :arn,
       :authorization,
+      :created_at,
       :domain_name,
       :egress_access_logs,
       :id,

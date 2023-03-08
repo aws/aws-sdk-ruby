@@ -496,6 +496,9 @@ module Aws::LakeFormation
     #   `ColumnWildCard`.
     #   @return [Types::ColumnWildcard]
     #
+    # @!attribute [rw] version_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataCellsFilter AWS API Documentation
     #
     class DataCellsFilter < Struct.new(
@@ -505,7 +508,8 @@ module Aws::LakeFormation
       :name,
       :row_filter,
       :column_names,
-      :column_wildcard)
+      :column_wildcard,
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1028,6 +1032,45 @@ module Aws::LakeFormation
       :field,
       :comparison_operator,
       :string_value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_catalog_id
+    #   The ID of the catalog to which the table belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   A database in the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   A table in the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name given by the user to the data filter cell.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataCellsFilterRequest AWS API Documentation
+    #
+    class GetDataCellsFilterRequest < Struct.new(
+      :table_catalog_id,
+      :database_name,
+      :table_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_cells_filter
+    #   A structure that describes certain columns on certain rows.
+    #   @return [Types::DataCellsFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataCellsFilterResponse AWS API Documentation
+    #
+    class GetDataCellsFilterResponse < Struct.new(
+      :data_cells_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3062,6 +3105,23 @@ module Aws::LakeFormation
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] table_data
+    #   A `DataCellsFilter` structure containing information about the data
+    #   cells filter.
+    #   @return [Types::DataCellsFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateDataCellsFilterRequest AWS API Documentation
+    #
+    class UpdateDataCellsFilterRequest < Struct.new(
+      :table_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateDataCellsFilterResponse AWS API Documentation
+    #
+    class UpdateDataCellsFilterResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The

@@ -1433,6 +1433,10 @@ module Aws::DynamoDB
     #   The table class of the new table. Valid values are `STANDARD` and
     #   `STANDARD_INFREQUENT_ACCESS`.
     #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
+    #
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
@@ -1576,6 +1580,7 @@ module Aws::DynamoDB
     #       },
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
+    #     deletion_protection_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1660,6 +1665,7 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.deletion_protection_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
     #
@@ -2170,6 +2176,7 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.deletion_protection_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
     #
@@ -2955,6 +2962,7 @@ module Aws::DynamoDB
     #   resp.table.archival_summary.archival_backup_arn #=> String
     #   resp.table.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table.table_class_summary.last_update_date_time #=> Time
+    #   resp.table.deletion_protection_enabled #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5257,6 +5265,7 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.deletion_protection_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
     #
@@ -5484,6 +5493,7 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.deletion_protection_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime AWS API Documentation
     #
@@ -7241,6 +7251,10 @@ module Aws::DynamoDB
     #   The table class of the table to be updated. Valid values are
     #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
     #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
+    #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
@@ -7390,6 +7404,7 @@ module Aws::DynamoDB
     #       },
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
+    #     deletion_protection_enabled: false,
     #   })
     #
     # @example Response structure
@@ -7474,6 +7489,7 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.deletion_protection_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
     #
@@ -7738,7 +7754,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

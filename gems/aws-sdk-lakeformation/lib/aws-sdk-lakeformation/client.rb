@@ -873,6 +873,7 @@ module Aws::LakeFormation
     #       column_wildcard: {
     #         excluded_column_names: ["NameString"],
     #       },
+    #       version_id: "VersionString",
     #     },
     #   })
     #
@@ -1155,6 +1156,55 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def extend_transaction(params = {}, options = {})
       req = build_request(:extend_transaction, params)
+      req.send_request(options)
+    end
+
+    # Returns a data cells filter.
+    #
+    # @option params [required, String] :table_catalog_id
+    #   The ID of the catalog to which the table belongs.
+    #
+    # @option params [required, String] :database_name
+    #   A database in the Glue Data Catalog.
+    #
+    # @option params [required, String] :table_name
+    #   A table in the database.
+    #
+    # @option params [required, String] :name
+    #   The name given by the user to the data filter cell.
+    #
+    # @return [Types::GetDataCellsFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataCellsFilterResponse#data_cells_filter #data_cells_filter} => Types::DataCellsFilter
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_cells_filter({
+    #     table_catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_cells_filter.table_catalog_id #=> String
+    #   resp.data_cells_filter.database_name #=> String
+    #   resp.data_cells_filter.table_name #=> String
+    #   resp.data_cells_filter.name #=> String
+    #   resp.data_cells_filter.row_filter.filter_expression #=> String
+    #   resp.data_cells_filter.column_names #=> Array
+    #   resp.data_cells_filter.column_names[0] #=> String
+    #   resp.data_cells_filter.column_wildcard.excluded_column_names #=> Array
+    #   resp.data_cells_filter.column_wildcard.excluded_column_names[0] #=> String
+    #   resp.data_cells_filter.version_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataCellsFilter AWS API Documentation
+    #
+    # @overload get_data_cells_filter(params = {})
+    # @param [Hash] params ({})
+    def get_data_cells_filter(params = {}, options = {})
+      req = build_request(:get_data_cells_filter, params)
       req.send_request(options)
     end
 
@@ -1823,7 +1873,7 @@ module Aws::LakeFormation
     #
     #
     #
-    # [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html
+    # [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -1971,6 +2021,7 @@ module Aws::LakeFormation
     #   resp.data_cells_filters[0].column_names[0] #=> String
     #   resp.data_cells_filters[0].column_wildcard.excluded_column_names #=> Array
     #   resp.data_cells_filters[0].column_wildcard.excluded_column_names[0] #=> String
+    #   resp.data_cells_filters[0].version_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListDataCellsFilter AWS API Documentation
@@ -2923,6 +2974,44 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Updates a data cell filter.
+    #
+    # @option params [required, Types::DataCellsFilter] :table_data
+    #   A `DataCellsFilter` structure containing information about the data
+    #   cells filter.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_cells_filter({
+    #     table_data: { # required
+    #       table_catalog_id: "CatalogIdString", # required
+    #       database_name: "NameString", # required
+    #       table_name: "NameString", # required
+    #       name: "NameString", # required
+    #       row_filter: {
+    #         filter_expression: "PredicateString",
+    #         all_rows_wildcard: {
+    #         },
+    #       },
+    #       column_names: ["NameString"],
+    #       column_wildcard: {
+    #         excluded_column_names: ["NameString"],
+    #       },
+    #       version_id: "VersionString",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateDataCellsFilter AWS API Documentation
+    #
+    # @overload update_data_cells_filter(params = {})
+    # @param [Hash] params ({})
+    def update_data_cells_filter(params = {}, options = {})
+      req = build_request(:update_data_cells_filter, params)
+      req.send_request(options)
+    end
+
     # Updates the list of possible values for the specified LF-tag key. If
     # the LF-tag does not exist, the operation throws an
     # EntityNotFoundException. The values in the delete key values will be
@@ -3106,7 +3195,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

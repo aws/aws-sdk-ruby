@@ -9194,10 +9194,16 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.metadata_properties.commit_id #=> String
     #   resp.metadata_properties.repository #=> String
     #   resp.metadata_properties.generated_by #=> String
@@ -9525,10 +9531,16 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.metadata_properties.commit_id #=> String
     #   resp.metadata_properties.repository #=> String
     #   resp.metadata_properties.generated_by #=> String
@@ -9821,10 +9833,16 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.lineage_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeContext AWS API Documentation
@@ -10618,10 +10636,16 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeExperiment AWS API Documentation
     #
@@ -11709,10 +11733,16 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLineageGroup AWS API Documentation
     #
@@ -11922,10 +11952,16 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.model_card_processing_status #=> String, one of "DeleteInProgress", "DeletePending", "ContentDeleted", "ExportJobsDeleted", "DeleteCompleted", "DeleteFailed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelCard AWS API Documentation
@@ -12184,6 +12220,9 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.metadata_properties.commit_id #=> String
     #   resp.metadata_properties.repository #=> String
     #   resp.metadata_properties.generated_by #=> String
@@ -12216,6 +12255,9 @@ module Aws::SageMaker
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.approval_description #=> String
     #   resp.customer_metadata_properties #=> Hash
     #   resp.customer_metadata_properties["CustomerMetadataKey"] #=> String
@@ -12311,6 +12353,9 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.model_package_group_status #=> String, one of "Pending", "InProgress", "Completed", "Failed", "Deleting", "DeleteFailed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageGroup AWS API Documentation
@@ -12693,9 +12738,15 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.parallelism_configuration.max_parallel_execution_steps #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipeline AWS API Documentation
@@ -12778,9 +12829,15 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.parallelism_configuration.max_parallel_execution_steps #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecution AWS API Documentation
@@ -12960,11 +13017,17 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeProject AWS API Documentation
     #
@@ -13454,10 +13517,16 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.metadata_properties.commit_id #=> String
     #   resp.metadata_properties.repository #=> String
     #   resp.metadata_properties.generated_by #=> String
@@ -13519,10 +13588,16 @@ module Aws::SageMaker
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.parameters #=> Hash
     #   resp.parameters["TrialComponentKey256"].string_value #=> String
     #   resp.parameters["TrialComponentKey256"].number_value #=> Float
@@ -14591,6 +14666,9 @@ module Aws::SageMaker
     #   resp.association_summaries[0].created_by.user_profile_arn #=> String
     #   resp.association_summaries[0].created_by.user_profile_name #=> String
     #   resp.association_summaries[0].created_by.domain_id #=> String
+    #   resp.association_summaries[0].created_by.iam_identity.arn #=> String
+    #   resp.association_summaries[0].created_by.iam_identity.principal_id #=> String
+    #   resp.association_summaries[0].created_by.iam_identity.source_identity #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAssociations AWS API Documentation
@@ -19133,10 +19211,16 @@ module Aws::SageMaker
     #   resp.trial_component_summaries[0].created_by.user_profile_arn #=> String
     #   resp.trial_component_summaries[0].created_by.user_profile_name #=> String
     #   resp.trial_component_summaries[0].created_by.domain_id #=> String
+    #   resp.trial_component_summaries[0].created_by.iam_identity.arn #=> String
+    #   resp.trial_component_summaries[0].created_by.iam_identity.principal_id #=> String
+    #   resp.trial_component_summaries[0].created_by.iam_identity.source_identity #=> String
     #   resp.trial_component_summaries[0].last_modified_time #=> Time
     #   resp.trial_component_summaries[0].last_modified_by.user_profile_arn #=> String
     #   resp.trial_component_summaries[0].last_modified_by.user_profile_name #=> String
     #   resp.trial_component_summaries[0].last_modified_by.domain_id #=> String
+    #   resp.trial_component_summaries[0].last_modified_by.iam_identity.arn #=> String
+    #   resp.trial_component_summaries[0].last_modified_by.iam_identity.principal_id #=> String
+    #   resp.trial_component_summaries[0].last_modified_by.iam_identity.source_identity #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrialComponents AWS API Documentation
@@ -22618,7 +22702,7 @@ module Aws::SageMaker
     # message on the worker portal.
     #
     # To restrict access to all the workers in public internet, add the
-    # `SourceIpConfig` CIDR value as "0.0.0.0/0".
+    # `SourceIpConfig` CIDR value as "10.0.0.0/16".
     #
     # Amazon SageMaker does not support Source Ip restriction for worker
     # portals in VPC.
@@ -22836,7 +22920,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

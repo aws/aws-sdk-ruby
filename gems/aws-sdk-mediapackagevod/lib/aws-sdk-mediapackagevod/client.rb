@@ -380,6 +380,7 @@ module Aws::MediaPackageVod
     #
     #   * {Types::ConfigureLogsResponse#arn #arn} => String
     #   * {Types::ConfigureLogsResponse#authorization #authorization} => Types::Authorization
+    #   * {Types::ConfigureLogsResponse#created_at #created_at} => String
     #   * {Types::ConfigureLogsResponse#domain_name #domain_name} => String
     #   * {Types::ConfigureLogsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::ConfigureLogsResponse#id #id} => String
@@ -399,6 +400,7 @@ module Aws::MediaPackageVod
     #   resp.arn #=> String
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
+    #   resp.created_at #=> String
     #   resp.domain_name #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
@@ -504,6 +506,7 @@ module Aws::MediaPackageVod
     #
     #   * {Types::CreatePackagingConfigurationResponse#arn #arn} => String
     #   * {Types::CreatePackagingConfigurationResponse#cmaf_package #cmaf_package} => Types::CmafPackage
+    #   * {Types::CreatePackagingConfigurationResponse#created_at #created_at} => String
     #   * {Types::CreatePackagingConfigurationResponse#dash_package #dash_package} => Types::DashPackage
     #   * {Types::CreatePackagingConfigurationResponse#hls_package #hls_package} => Types::HlsPackage
     #   * {Types::CreatePackagingConfigurationResponse#id #id} => String
@@ -660,6 +663,7 @@ module Aws::MediaPackageVod
     #   resp.cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.cmaf_package.segment_duration_seconds #=> Integer
+    #   resp.created_at #=> String
     #   resp.dash_package.dash_manifests #=> Array
     #   resp.dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.dash_package.dash_manifests[0].manifest_name #=> String
@@ -744,6 +748,7 @@ module Aws::MediaPackageVod
     #
     #   * {Types::CreatePackagingGroupResponse#arn #arn} => String
     #   * {Types::CreatePackagingGroupResponse#authorization #authorization} => Types::Authorization
+    #   * {Types::CreatePackagingGroupResponse#created_at #created_at} => String
     #   * {Types::CreatePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::CreatePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::CreatePackagingGroupResponse#id #id} => String
@@ -770,6 +775,7 @@ module Aws::MediaPackageVod
     #   resp.arn #=> String
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
+    #   resp.created_at #=> String
     #   resp.domain_name #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
@@ -904,6 +910,7 @@ module Aws::MediaPackageVod
     #
     #   * {Types::DescribePackagingConfigurationResponse#arn #arn} => String
     #   * {Types::DescribePackagingConfigurationResponse#cmaf_package #cmaf_package} => Types::CmafPackage
+    #   * {Types::DescribePackagingConfigurationResponse#created_at #created_at} => String
     #   * {Types::DescribePackagingConfigurationResponse#dash_package #dash_package} => Types::DashPackage
     #   * {Types::DescribePackagingConfigurationResponse#hls_package #hls_package} => Types::HlsPackage
     #   * {Types::DescribePackagingConfigurationResponse#id #id} => String
@@ -938,6 +945,7 @@ module Aws::MediaPackageVod
     #   resp.cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.cmaf_package.segment_duration_seconds #=> Integer
+    #   resp.created_at #=> String
     #   resp.dash_package.dash_manifests #=> Array
     #   resp.dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.dash_package.dash_manifests[0].manifest_name #=> String
@@ -1014,6 +1022,7 @@ module Aws::MediaPackageVod
     #   * {Types::DescribePackagingGroupResponse#approximate_asset_count #approximate_asset_count} => Integer
     #   * {Types::DescribePackagingGroupResponse#arn #arn} => String
     #   * {Types::DescribePackagingGroupResponse#authorization #authorization} => Types::Authorization
+    #   * {Types::DescribePackagingGroupResponse#created_at #created_at} => String
     #   * {Types::DescribePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::DescribePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::DescribePackagingGroupResponse#id #id} => String
@@ -1031,6 +1040,7 @@ module Aws::MediaPackageVod
     #   resp.arn #=> String
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
+    #   resp.created_at #=> String
     #   resp.domain_name #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
@@ -1139,6 +1149,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.packaging_configurations[0].cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.packaging_configurations[0].cmaf_package.segment_duration_seconds #=> Integer
+    #   resp.packaging_configurations[0].created_at #=> String
     #   resp.packaging_configurations[0].dash_package.dash_manifests #=> Array
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].manifest_name #=> String
@@ -1234,6 +1245,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_groups[0].arn #=> String
     #   resp.packaging_groups[0].authorization.cdn_identifier_secret #=> String
     #   resp.packaging_groups[0].authorization.secrets_role_arn #=> String
+    #   resp.packaging_groups[0].created_at #=> String
     #   resp.packaging_groups[0].domain_name #=> String
     #   resp.packaging_groups[0].egress_access_logs.log_group_name #=> String
     #   resp.packaging_groups[0].id #=> String
@@ -1342,6 +1354,7 @@ module Aws::MediaPackageVod
     #   * {Types::UpdatePackagingGroupResponse#approximate_asset_count #approximate_asset_count} => Integer
     #   * {Types::UpdatePackagingGroupResponse#arn #arn} => String
     #   * {Types::UpdatePackagingGroupResponse#authorization #authorization} => Types::Authorization
+    #   * {Types::UpdatePackagingGroupResponse#created_at #created_at} => String
     #   * {Types::UpdatePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::UpdatePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::UpdatePackagingGroupResponse#id #id} => String
@@ -1363,6 +1376,7 @@ module Aws::MediaPackageVod
     #   resp.arn #=> String
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
+    #   resp.created_at #=> String
     #   resp.domain_name #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
@@ -1391,7 +1405,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -363,6 +363,13 @@ module Aws::DynamoDB
       data[:table_class_summary]
     end
 
+    # Indicates whether deletion protection is enabled (true) or disabled
+    # (false) on the table.
+    # @return [Boolean]
+    def deletion_protection_enabled
+      data[:deletion_protection_enabled]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1842,6 +1849,7 @@ module Aws::DynamoDB
     #       },
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
+    #     deletion_protection_enabled: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
@@ -1917,6 +1925,9 @@ module Aws::DynamoDB
     # @option options [String] :table_class
     #   The table class of the table to be updated. Valid values are
     #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
+    # @option options [Boolean] :deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)

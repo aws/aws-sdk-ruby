@@ -2013,6 +2013,11 @@ module Aws::DynamoDB
     #   `STANDARD_INFREQUENT_ACCESS`.
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
     #
     class CreateTableInput < Struct.new(
@@ -2026,7 +2031,8 @@ module Aws::DynamoDB
       :stream_specification,
       :sse_specification,
       :tags,
-      :table_class)
+      :table_class,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8353,6 +8359,11 @@ module Aws::DynamoDB
     #   Contains details of the table class.
     #   @return [Types::TableClassSummary]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Indicates whether deletion protection is enabled (true) or disabled
+    #   (false) on the table.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
     #
     class TableDescription < Struct.new(
@@ -8377,7 +8388,8 @@ module Aws::DynamoDB
       :restore_summary,
       :sse_description,
       :archival_summary,
-      :table_class_summary)
+      :table_class_summary,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9737,6 +9749,11 @@ module Aws::DynamoDB
     #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
     #
     class UpdateTableInput < Struct.new(
@@ -9748,7 +9765,8 @@ module Aws::DynamoDB
       :stream_specification,
       :sse_specification,
       :replica_updates,
-      :table_class)
+      :table_class,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

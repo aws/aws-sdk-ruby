@@ -19921,6 +19921,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The IAM Identity details associated with the user. These details are
+    # associated with model package groups, model packages and project
+    # entities only.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the IAM identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_id
+    #   The ID of the principal that assumes the IAM identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_identity
+    #   The person or application which assumes the IAM identity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IamIdentity AWS API Documentation
+    #
+    class IamIdentity < Struct.new(
+      :arn,
+      :principal_id,
+      :source_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A SageMaker image. A SageMaker image represents a set of container
     # images that are derived from a common base container image. Each of
     # these container images is represented by a SageMaker `ImageVersion`.
@@ -38976,12 +39002,19 @@ module Aws::SageMaker
     #   The domain associated with the user.
     #   @return [String]
     #
+    # @!attribute [rw] iam_identity
+    #   The IAM Identity details associated with the user. These details are
+    #   associated with model package groups, model packages, and project
+    #   entities only.
+    #   @return [Types::IamIdentity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserContext AWS API Documentation
     #
     class UserContext < Struct.new(
       :user_profile_arn,
       :user_profile_name,
-      :domain_id)
+      :domain_id,
+      :iam_identity)
       SENSITIVE = []
       include Aws::Structure
     end

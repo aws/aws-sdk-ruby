@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-03-08)
+------------------
+
+* Feature - A new field SubstatementType is added to GetQueryExecution API, so customers have an error free way to detect the query type and interpret the result.
+
 1.61.0 (2023-01-18)
 ------------------
 

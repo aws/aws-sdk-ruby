@@ -38,6 +38,10 @@ module Aws::MediaPackage
     #   The Amazon Resource Name (ARN) assigned to the Channel.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The date and time the Channel was created.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A short text description of the Channel.
     #   @return [String]
@@ -66,6 +70,7 @@ module Aws::MediaPackage
     #
     class Channel < Struct.new(
       :arn,
+      :created_at,
       :description,
       :egress_access_logs,
       :hls_ingest,
@@ -284,6 +289,9 @@ module Aws::MediaPackage
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   @return [String]
     #
@@ -310,6 +318,7 @@ module Aws::MediaPackage
     #
     class ConfigureLogsResponse < Struct.new(
       :arn,
+      :created_at,
       :description,
       :egress_access_logs,
       :hls_ingest,
@@ -343,6 +352,9 @@ module Aws::MediaPackage
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   @return [String]
     #
@@ -369,6 +381,7 @@ module Aws::MediaPackage
     #
     class CreateChannelResponse < Struct.new(
       :arn,
+      :created_at,
       :description,
       :egress_access_logs,
       :hls_ingest,
@@ -537,6 +550,9 @@ module Aws::MediaPackage
     #   A Common Media Application Format (CMAF) packaging configuration.
     #   @return [Types::CmafPackage]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -585,6 +601,7 @@ module Aws::MediaPackage
       :authorization,
       :channel_id,
       :cmaf_package,
+      :created_at,
       :dash_package,
       :description,
       :hls_package,
@@ -793,6 +810,9 @@ module Aws::MediaPackage
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   @return [String]
     #
@@ -819,6 +839,7 @@ module Aws::MediaPackage
     #
     class DescribeChannelResponse < Struct.new(
       :arn,
+      :created_at,
       :description,
       :egress_access_logs,
       :hls_ingest,
@@ -910,6 +931,9 @@ module Aws::MediaPackage
     #   A Common Media Application Format (CMAF) packaging configuration.
     #   @return [Types::CmafPackage]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -958,6 +982,7 @@ module Aws::MediaPackage
       :authorization,
       :channel_id,
       :cmaf_package,
+      :created_at,
       :dash_package,
       :description,
       :hls_package,
@@ -1038,7 +1063,7 @@ module Aws::MediaPackage
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time the HarvestJob was submitted
+    #   The date and time the HarvestJob was submitted.
     #   @return [String]
     #
     # @!attribute [rw] end_time
@@ -1710,6 +1735,10 @@ module Aws::MediaPackage
     #   A Common Media Application Format (CMAF) packaging configuration.
     #   @return [Types::CmafPackage]
     #
+    # @!attribute [rw] created_at
+    #   The date and time the OriginEndpoint was created.
+    #   @return [String]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -1775,6 +1804,7 @@ module Aws::MediaPackage
       :authorization,
       :channel_id,
       :cmaf_package,
+      :created_at,
       :dash_package,
       :description,
       :hls_package,
@@ -1991,6 +2021,9 @@ module Aws::MediaPackage
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   @return [String]
     #
@@ -2017,6 +2050,7 @@ module Aws::MediaPackage
     #
     class RotateChannelCredentialsResponse < Struct.new(
       :arn,
+      :created_at,
       :description,
       :egress_access_logs,
       :hls_ingest,
@@ -2045,6 +2079,9 @@ module Aws::MediaPackage
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   @return [String]
     #
@@ -2071,6 +2108,7 @@ module Aws::MediaPackage
     #
     class RotateIngestEndpointCredentialsResponse < Struct.new(
       :arn,
+      :created_at,
       :description,
       :egress_access_logs,
       :hls_ingest,
@@ -2276,6 +2314,9 @@ module Aws::MediaPackage
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   @return [String]
     #
@@ -2302,6 +2343,7 @@ module Aws::MediaPackage
     #
     class UpdateChannelResponse < Struct.new(
       :arn,
+      :created_at,
       :description,
       :egress_access_logs,
       :hls_ingest,
@@ -2387,6 +2429,9 @@ module Aws::MediaPackage
     #   A Common Media Application Format (CMAF) packaging configuration.
     #   @return [Types::CmafPackage]
     #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -2435,6 +2480,7 @@ module Aws::MediaPackage
       :authorization,
       :channel_id,
       :cmaf_package,
+      :created_at,
       :dash_package,
       :description,
       :hls_package,

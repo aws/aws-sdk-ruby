@@ -120,6 +120,7 @@ module Aws::DynamoDB
     DeleteRequest = Shapes::StructureShape.new(name: 'DeleteRequest')
     DeleteTableInput = Shapes::StructureShape.new(name: 'DeleteTableInput')
     DeleteTableOutput = Shapes::StructureShape.new(name: 'DeleteTableOutput')
+    DeletionProtectionEnabled = Shapes::BooleanShape.new(name: 'DeletionProtectionEnabled')
     DescribeBackupInput = Shapes::StructureShape.new(name: 'DescribeBackupInput')
     DescribeBackupOutput = Shapes::StructureShape.new(name: 'DescribeBackupOutput')
     DescribeContinuousBackupsInput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsInput')
@@ -147,7 +148,7 @@ module Aws::DynamoDB
     DescribeTimeToLiveInput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveInput')
     DescribeTimeToLiveOutput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveOutput')
     DestinationStatus = Shapes::StringShape.new(name: 'DestinationStatus')
-    Double = Shapes::FloatShape.new(name: 'Double')
+    DoubleObject = Shapes::FloatShape.new(name: 'DoubleObject')
     DuplicateItemException = Shapes::StructureShape.new(name: 'DuplicateItemException')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
@@ -285,6 +286,7 @@ module Aws::DynamoDB
     LocalSecondaryIndexList = Shapes::ListShape.new(name: 'LocalSecondaryIndexList')
     LocalSecondaryIndexes = Shapes::ListShape.new(name: 'LocalSecondaryIndexes')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    LongObject = Shapes::IntegerShape.new(name: 'LongObject')
     MapAttributeValue = Shapes::MapShape.new(name: 'MapAttributeValue')
     NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
     NonKeyAttributeName = Shapes::StringShape.new(name: 'NonKeyAttributeName')
@@ -522,13 +524,13 @@ module Aws::DynamoDB
     AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableScaleIn"))
     AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleInCooldown"))
     AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleOutCooldown"))
-    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationDescription.add_member(:target_value, Shapes::ShapeRef.new(shape: DoubleObject, required: true, location_name: "TargetValue"))
     AutoScalingTargetTrackingScalingPolicyConfigurationDescription.struct_class = Types::AutoScalingTargetTrackingScalingPolicyConfigurationDescription
 
     AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableScaleIn"))
     AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleInCooldown"))
     AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "ScaleOutCooldown"))
-    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
+    AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.add_member(:target_value, Shapes::ShapeRef.new(shape: DoubleObject, required: true, location_name: "TargetValue"))
     AutoScalingTargetTrackingScalingPolicyConfigurationUpdate.struct_class = Types::AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
 
     BackupDescription.add_member(:backup_details, Shapes::ShapeRef.new(shape: BackupDetails, location_name: "BackupDetails"))
@@ -716,6 +718,7 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     CreateTableInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTableInput.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
+    CreateTableInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
     CreateTableInput.struct_class = Types::CreateTableInput
 
     CreateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1001,8 +1004,8 @@ module Aws::DynamoDB
     GlobalSecondaryIndexDescription.add_member(:index_status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "IndexStatus"))
     GlobalSecondaryIndexDescription.add_member(:backfilling, Shapes::ShapeRef.new(shape: Backfilling, location_name: "Backfilling"))
     GlobalSecondaryIndexDescription.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughputDescription, location_name: "ProvisionedThroughput"))
-    GlobalSecondaryIndexDescription.add_member(:index_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "IndexSizeBytes"))
-    GlobalSecondaryIndexDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: Long, location_name: "ItemCount"))
+    GlobalSecondaryIndexDescription.add_member(:index_size_bytes, Shapes::ShapeRef.new(shape: LongObject, location_name: "IndexSizeBytes"))
+    GlobalSecondaryIndexDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: LongObject, location_name: "ItemCount"))
     GlobalSecondaryIndexDescription.add_member(:index_arn, Shapes::ShapeRef.new(shape: String, location_name: "IndexArn"))
     GlobalSecondaryIndexDescription.struct_class = Types::GlobalSecondaryIndexDescription
 
@@ -1086,7 +1089,7 @@ module Aws::DynamoDB
     ImportTableDescription.add_member(:table_creation_parameters, Shapes::ShapeRef.new(shape: TableCreationParameters, location_name: "TableCreationParameters"))
     ImportTableDescription.add_member(:start_time, Shapes::ShapeRef.new(shape: ImportStartTime, location_name: "StartTime"))
     ImportTableDescription.add_member(:end_time, Shapes::ShapeRef.new(shape: ImportEndTime, location_name: "EndTime"))
-    ImportTableDescription.add_member(:processed_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "ProcessedSizeBytes"))
+    ImportTableDescription.add_member(:processed_size_bytes, Shapes::ShapeRef.new(shape: LongObject, location_name: "ProcessedSizeBytes"))
     ImportTableDescription.add_member(:processed_item_count, Shapes::ShapeRef.new(shape: ProcessedItemCount, location_name: "ProcessedItemCount"))
     ImportTableDescription.add_member(:imported_item_count, Shapes::ShapeRef.new(shape: ImportedItemCount, location_name: "ImportedItemCount"))
     ImportTableDescription.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
@@ -1257,8 +1260,8 @@ module Aws::DynamoDB
     LocalSecondaryIndexDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     LocalSecondaryIndexDescription.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, location_name: "KeySchema"))
     LocalSecondaryIndexDescription.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, location_name: "Projection"))
-    LocalSecondaryIndexDescription.add_member(:index_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "IndexSizeBytes"))
-    LocalSecondaryIndexDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: Long, location_name: "ItemCount"))
+    LocalSecondaryIndexDescription.add_member(:index_size_bytes, Shapes::ShapeRef.new(shape: LongObject, location_name: "IndexSizeBytes"))
+    LocalSecondaryIndexDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: LongObject, location_name: "ItemCount"))
     LocalSecondaryIndexDescription.add_member(:index_arn, Shapes::ShapeRef.new(shape: String, location_name: "IndexArn"))
     LocalSecondaryIndexDescription.struct_class = Types::LocalSecondaryIndexDescription
 
@@ -1588,7 +1591,7 @@ module Aws::DynamoDB
     SourceTableDetails.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
     SourceTableDetails.add_member(:table_id, Shapes::ShapeRef.new(shape: TableId, required: true, location_name: "TableId"))
     SourceTableDetails.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableArn"))
-    SourceTableDetails.add_member(:table_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "TableSizeBytes"))
+    SourceTableDetails.add_member(:table_size_bytes, Shapes::ShapeRef.new(shape: LongObject, location_name: "TableSizeBytes"))
     SourceTableDetails.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
     SourceTableDetails.add_member(:table_creation_date_time, Shapes::ShapeRef.new(shape: TableCreationDateTime, required: true, location_name: "TableCreationDateTime"))
     SourceTableDetails.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, required: true, location_name: "ProvisionedThroughput"))
@@ -1636,8 +1639,8 @@ module Aws::DynamoDB
     TableDescription.add_member(:table_status, Shapes::ShapeRef.new(shape: TableStatus, location_name: "TableStatus"))
     TableDescription.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationDateTime"))
     TableDescription.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughputDescription, location_name: "ProvisionedThroughput"))
-    TableDescription.add_member(:table_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "TableSizeBytes"))
-    TableDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: Long, location_name: "ItemCount"))
+    TableDescription.add_member(:table_size_bytes, Shapes::ShapeRef.new(shape: LongObject, location_name: "TableSizeBytes"))
+    TableDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: LongObject, location_name: "ItemCount"))
     TableDescription.add_member(:table_arn, Shapes::ShapeRef.new(shape: String, location_name: "TableArn"))
     TableDescription.add_member(:table_id, Shapes::ShapeRef.new(shape: TableId, location_name: "TableId"))
     TableDescription.add_member(:billing_mode_summary, Shapes::ShapeRef.new(shape: BillingModeSummary, location_name: "BillingModeSummary"))
@@ -1652,6 +1655,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     TableDescription.add_member(:archival_summary, Shapes::ShapeRef.new(shape: ArchivalSummary, location_name: "ArchivalSummary"))
     TableDescription.add_member(:table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "TableClassSummary"))
+    TableDescription.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
     TableDescription.struct_class = Types::TableDescription
 
     TableInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1811,6 +1815,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     UpdateTableInput.add_member(:replica_updates, Shapes::ShapeRef.new(shape: ReplicationGroupUpdateList, location_name: "ReplicaUpdates"))
     UpdateTableInput.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
+    UpdateTableInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))

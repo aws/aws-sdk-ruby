@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-03-08)
+------------------
+
+* Feature - This release provides the date and time live resources were created.
+
 1.58.0 (2023-01-18)
 ------------------
 

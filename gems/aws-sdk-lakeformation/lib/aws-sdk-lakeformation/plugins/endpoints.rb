@@ -86,6 +86,8 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::DescribeTransaction.build(context)
           when :extend_transaction
             Aws::LakeFormation::Endpoints::ExtendTransaction.build(context)
+          when :get_data_cells_filter
+            Aws::LakeFormation::Endpoints::GetDataCellsFilter.build(context)
           when :get_data_lake_settings
             Aws::LakeFormation::Endpoints::GetDataLakeSettings.build(context)
           when :get_effective_permissions_for_path
@@ -138,6 +140,8 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::StartQueryPlanning.build(context)
           when :start_transaction
             Aws::LakeFormation::Endpoints::StartTransaction.build(context)
+          when :update_data_cells_filter
+            Aws::LakeFormation::Endpoints::UpdateDataCellsFilter.build(context)
           when :update_lf_tag
             Aws::LakeFormation::Endpoints::UpdateLFTag.build(context)
           when :update_resource

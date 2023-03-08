@@ -743,6 +743,11 @@ module Aws::Athena
     # Contains information about a data catalog in an Amazon Web Services
     # account.
     #
+    # <note markdown="1"> In the Athena console, data catalogs are listed as "data sources" on
+    # the **Data sources** page under the **Data source name** column.
+    #
+    #  </note>
+    #
     # @!attribute [rw] name
     #   The name of the data catalog. The catalog name must be unique for
     #   the Amazon Web Services account and can use a maximum of 127
@@ -1040,8 +1045,8 @@ module Aws::Athena
     #
     # @!attribute [rw] selected_engine_version
     #   The engine version requested by the user. Possible values are
-    #   determined by the output of `ListEngineVersions`, including Auto.
-    #   The default is Auto.
+    #   determined by the output of `ListEngineVersions`, including AUTO.
+    #   The default is AUTO.
     #   @return [String]
     #
     # @!attribute [rw] effective_engine_version
@@ -2718,6 +2723,10 @@ module Aws::Athena
     #   which the parameters occur.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] substatement_type
+    #   The kind of query statement that was run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecution AWS API Documentation
     #
     class QueryExecution < Struct.new(
@@ -2731,7 +2740,8 @@ module Aws::Athena
       :statistics,
       :work_group,
       :engine_version,
-      :execution_parameters)
+      :execution_parameters,
+      :substatement_type)
       SENSITIVE = []
       include Aws::Structure
     end

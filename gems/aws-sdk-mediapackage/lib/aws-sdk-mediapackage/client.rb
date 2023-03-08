@@ -381,6 +381,7 @@ module Aws::MediaPackage
     # @return [Types::ConfigureLogsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfigureLogsResponse#arn #arn} => String
+    #   * {Types::ConfigureLogsResponse#created_at #created_at} => String
     #   * {Types::ConfigureLogsResponse#description #description} => String
     #   * {Types::ConfigureLogsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::ConfigureLogsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
@@ -403,6 +404,7 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created_at #=> String
     #   resp.description #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
@@ -436,6 +438,7 @@ module Aws::MediaPackage
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#arn #arn} => String
+    #   * {Types::CreateChannelResponse#created_at #created_at} => String
     #   * {Types::CreateChannelResponse#description #description} => String
     #   * {Types::CreateChannelResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::CreateChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
@@ -456,6 +459,7 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created_at #=> String
     #   resp.description #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
@@ -582,6 +586,7 @@ module Aws::MediaPackage
     #   * {Types::CreateOriginEndpointResponse#authorization #authorization} => Types::Authorization
     #   * {Types::CreateOriginEndpointResponse#channel_id #channel_id} => String
     #   * {Types::CreateOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
+    #   * {Types::CreateOriginEndpointResponse#created_at #created_at} => String
     #   * {Types::CreateOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
     #   * {Types::CreateOriginEndpointResponse#description #description} => String
     #   * {Types::CreateOriginEndpointResponse#hls_package #hls_package} => Types::HlsPackage
@@ -775,6 +780,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.created_at #=> String
     #   resp.dash_package.ad_triggers #=> Array
     #   resp.dash_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
     #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
@@ -912,6 +918,7 @@ module Aws::MediaPackage
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeChannelResponse#arn #arn} => String
+    #   * {Types::DescribeChannelResponse#created_at #created_at} => String
     #   * {Types::DescribeChannelResponse#description #description} => String
     #   * {Types::DescribeChannelResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::DescribeChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
@@ -928,6 +935,7 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created_at #=> String
     #   resp.description #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
@@ -1004,6 +1012,7 @@ module Aws::MediaPackage
     #   * {Types::DescribeOriginEndpointResponse#authorization #authorization} => Types::Authorization
     #   * {Types::DescribeOriginEndpointResponse#channel_id #channel_id} => String
     #   * {Types::DescribeOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
+    #   * {Types::DescribeOriginEndpointResponse#created_at #created_at} => String
     #   * {Types::DescribeOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
     #   * {Types::DescribeOriginEndpointResponse#description #description} => String
     #   * {Types::DescribeOriginEndpointResponse#hls_package #hls_package} => Types::HlsPackage
@@ -1054,6 +1063,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.created_at #=> String
     #   resp.dash_package.ad_triggers #=> Array
     #   resp.dash_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
     #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
@@ -1166,6 +1176,7 @@ module Aws::MediaPackage
     #
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
+    #   resp.channels[0].created_at #=> String
     #   resp.channels[0].description #=> String
     #   resp.channels[0].egress_access_logs.log_group_name #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints #=> Array
@@ -1295,6 +1306,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.origin_endpoints[0].created_at #=> String
     #   resp.origin_endpoints[0].dash_package.ad_triggers #=> Array
     #   resp.origin_endpoints[0].dash_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
     #   resp.origin_endpoints[0].dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
@@ -1418,6 +1430,7 @@ module Aws::MediaPackage
     # @return [Types::RotateChannelCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RotateChannelCredentialsResponse#arn #arn} => String
+    #   * {Types::RotateChannelCredentialsResponse#created_at #created_at} => String
     #   * {Types::RotateChannelCredentialsResponse#description #description} => String
     #   * {Types::RotateChannelCredentialsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::RotateChannelCredentialsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
@@ -1434,6 +1447,7 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created_at #=> String
     #   resp.description #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
@@ -1465,6 +1479,7 @@ module Aws::MediaPackage
     # @return [Types::RotateIngestEndpointCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RotateIngestEndpointCredentialsResponse#arn #arn} => String
+    #   * {Types::RotateIngestEndpointCredentialsResponse#created_at #created_at} => String
     #   * {Types::RotateIngestEndpointCredentialsResponse#description #description} => String
     #   * {Types::RotateIngestEndpointCredentialsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::RotateIngestEndpointCredentialsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
@@ -1482,6 +1497,7 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created_at #=> String
     #   resp.description #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
@@ -1558,6 +1574,7 @@ module Aws::MediaPackage
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#arn #arn} => String
+    #   * {Types::UpdateChannelResponse#created_at #created_at} => String
     #   * {Types::UpdateChannelResponse#description #description} => String
     #   * {Types::UpdateChannelResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::UpdateChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
@@ -1575,6 +1592,7 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.created_at #=> String
     #   resp.description #=> String
     #   resp.egress_access_logs.log_group_name #=> String
     #   resp.hls_ingest.ingest_endpoints #=> Array
@@ -1633,6 +1651,7 @@ module Aws::MediaPackage
     #   * {Types::UpdateOriginEndpointResponse#authorization #authorization} => Types::Authorization
     #   * {Types::UpdateOriginEndpointResponse#channel_id #channel_id} => String
     #   * {Types::UpdateOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
+    #   * {Types::UpdateOriginEndpointResponse#created_at #created_at} => String
     #   * {Types::UpdateOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
     #   * {Types::UpdateOriginEndpointResponse#description #description} => String
     #   * {Types::UpdateOriginEndpointResponse#hls_package #hls_package} => Types::HlsPackage
@@ -1822,6 +1841,7 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.created_at #=> String
     #   resp.dash_package.ad_triggers #=> Array
     #   resp.dash_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
     #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
@@ -1923,7 +1943,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

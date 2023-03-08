@@ -165,6 +165,7 @@ module Aws::MediaPackageVod
 
     ConfigureLogsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     ConfigureLogsResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
+    ConfigureLogsResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     ConfigureLogsResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     ConfigureLogsResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     ConfigureLogsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -201,6 +202,7 @@ module Aws::MediaPackageVod
 
     CreatePackagingConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     CreatePackagingConfigurationResponse.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
+    CreatePackagingConfigurationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     CreatePackagingConfigurationResponse.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     CreatePackagingConfigurationResponse.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
     CreatePackagingConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -217,6 +219,7 @@ module Aws::MediaPackageVod
 
     CreatePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     CreatePackagingGroupResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
+    CreatePackagingGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     CreatePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     CreatePackagingGroupResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     CreatePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -277,6 +280,7 @@ module Aws::MediaPackageVod
 
     DescribePackagingConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     DescribePackagingConfigurationResponse.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
+    DescribePackagingConfigurationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     DescribePackagingConfigurationResponse.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     DescribePackagingConfigurationResponse.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
     DescribePackagingConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -291,6 +295,7 @@ module Aws::MediaPackageVod
     DescribePackagingGroupResponse.add_member(:approximate_asset_count, Shapes::ShapeRef.new(shape: __integer, location_name: "approximateAssetCount"))
     DescribePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     DescribePackagingGroupResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
+    DescribePackagingGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     DescribePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     DescribePackagingGroupResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     DescribePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -384,6 +389,7 @@ module Aws::MediaPackageVod
 
     PackagingConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     PackagingConfiguration.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
+    PackagingConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     PackagingConfiguration.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     PackagingConfiguration.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
     PackagingConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -408,6 +414,7 @@ module Aws::MediaPackageVod
     PackagingGroup.add_member(:approximate_asset_count, Shapes::ShapeRef.new(shape: __integer, location_name: "approximateAssetCount"))
     PackagingGroup.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     PackagingGroup.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
+    PackagingGroup.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     PackagingGroup.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     PackagingGroup.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     PackagingGroup.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -468,6 +475,7 @@ module Aws::MediaPackageVod
     UpdatePackagingGroupResponse.add_member(:approximate_asset_count, Shapes::ShapeRef.new(shape: __integer, location_name: "approximateAssetCount"))
     UpdatePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     UpdatePackagingGroupResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
+    UpdatePackagingGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "createdAt"))
     UpdatePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     UpdatePackagingGroupResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     UpdatePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))

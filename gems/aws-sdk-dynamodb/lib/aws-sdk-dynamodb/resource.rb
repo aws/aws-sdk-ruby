@@ -316,6 +316,7 @@ module Aws::DynamoDB
     #       },
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
+    #     deletion_protection_enabled: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
@@ -512,6 +513,9 @@ module Aws::DynamoDB
     # @option options [String] :table_class
     #   The table class of the new table. Valid values are `STANDARD` and
     #   `STANDARD_INFREQUENT_ACCESS`.
+    # @option options [Boolean] :deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
     # @return [Table]
     def create_table(options = {})
       resp = @client.create_table(options)

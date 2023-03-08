@@ -877,6 +877,7 @@ module Aws::SageMaker
     HyperbandStrategyConfig = Shapes::StructureShape.new(name: 'HyperbandStrategyConfig')
     HyperbandStrategyMaxResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMaxResource')
     HyperbandStrategyMinResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMinResource')
+    IamIdentity = Shapes::StructureShape.new(name: 'IamIdentity')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
@@ -5258,6 +5259,11 @@ module Aws::SageMaker
     HyperbandStrategyConfig.add_member(:max_resource, Shapes::ShapeRef.new(shape: HyperbandStrategyMaxResource, location_name: "MaxResource"))
     HyperbandStrategyConfig.struct_class = Types::HyperbandStrategyConfig
 
+    IamIdentity.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    IamIdentity.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "PrincipalId"))
+    IamIdentity.add_member(:source_identity, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentity"))
+    IamIdentity.struct_class = Types::IamIdentity
+
     Image.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     Image.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
     Image.add_member(:display_name, Shapes::ShapeRef.new(shape: ImageDisplayName, location_name: "DisplayName"))
@@ -8688,6 +8694,7 @@ module Aws::SageMaker
     UserContext.add_member(:user_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "UserProfileArn"))
     UserContext.add_member(:user_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "UserProfileName"))
     UserContext.add_member(:domain_id, Shapes::ShapeRef.new(shape: String, location_name: "DomainId"))
+    UserContext.add_member(:iam_identity, Shapes::ShapeRef.new(shape: IamIdentity, location_name: "IamIdentity"))
     UserContext.struct_class = Types::UserContext
 
     UserProfileDetails.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))

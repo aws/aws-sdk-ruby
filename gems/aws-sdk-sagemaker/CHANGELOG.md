@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2023-03-08)
+------------------
+
+* Feature - There needs to be a user identity to specify the SageMaker user who perform each action regarding the entity. However, these is a not a unified concept of user identity across SageMaker service that could be used today.
+
 1.167.0 (2023-03-02)
 ------------------
 

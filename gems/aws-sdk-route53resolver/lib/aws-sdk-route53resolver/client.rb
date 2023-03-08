@@ -502,6 +502,7 @@ module Aws::Route53Resolver
     #       ip_id: "ResourceId",
     #       subnet_id: "SubnetId",
     #       ip: "Ip",
+    #       ipv_6: "Ipv6",
     #     },
     #   })
     #
@@ -520,6 +521,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -935,6 +937,11 @@ module Aws::Route53Resolver
     #   A list of the tag keys and values that you want to associate with the
     #   endpoint.
     #
+    # @option params [String] :resolver_endpoint_type
+    #   For the endpoint type you can choose either IPv4, IPv6. or dual-stack.
+    #   A dual-stack endpoint means that it will resolve via both IPv4 and
+    #   IPv6. This endpoint type is applied to all IP addresses.
+    #
     # @return [Types::CreateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverEndpointResponse#resolver_endpoint #resolver_endpoint} => Types::ResolverEndpoint
@@ -950,6 +957,7 @@ module Aws::Route53Resolver
     #       {
     #         subnet_id: "SubnetId", # required
     #         ip: "Ip",
+    #         ipv_6: "Ipv6",
     #       },
     #     ],
     #     tags: [
@@ -958,6 +966,7 @@ module Aws::Route53Resolver
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     resolver_endpoint_type: "IPV6", # accepts IPV6, IPV4, DUALSTACK
     #   })
     #
     # @example Response structure
@@ -975,6 +984,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpoint AWS API Documentation
     #
@@ -1149,8 +1159,9 @@ module Aws::Route53Resolver
     #     domain_name: "DomainName", # required
     #     target_ips: [
     #       {
-    #         ip: "Ip", # required
+    #         ip: "Ip",
     #         port: 1,
+    #         ipv_6: "Ipv6",
     #       },
     #     ],
     #     resolver_endpoint_id: "ResourceId",
@@ -1175,6 +1186,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips #=> Array
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
+    #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -1348,6 +1360,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverEndpoint AWS API Documentation
     #
@@ -1451,6 +1464,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips #=> Array
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
+    #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -1537,6 +1551,7 @@ module Aws::Route53Resolver
     #       ip_id: "ResourceId",
     #       subnet_id: "SubnetId",
     #       ip: "Ip",
+    #       ipv_6: "Ipv6",
     #     },
     #   })
     #
@@ -1555,6 +1570,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -1684,7 +1700,7 @@ module Aws::Route53Resolver
     #   resp.firewall_config.id #=> String
     #   resp.firewall_config.resource_id #=> String
     #   resp.firewall_config.owner_id #=> String
-    #   resp.firewall_config.firewall_fail_open #=> String, one of "ENABLED", "DISABLED"
+    #   resp.firewall_config.firewall_fail_open #=> String, one of "ENABLED", "DISABLED", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallConfig AWS API Documentation
     #
@@ -1843,7 +1859,7 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Retrieves the behavior configuration of Route 53 Resolver behavior for
+    # Retrieves the behavior configuration of Route 53 Resolver behavior for
     # a single VPC from Amazon Virtual Private Cloud.
     #
     # @option params [required, String] :resource_id
@@ -1864,7 +1880,7 @@ module Aws::Route53Resolver
     #   resp.resolver_config.id #=> String
     #   resp.resolver_config.resource_id #=> String
     #   resp.resolver_config.owner_id #=> String
-    #   resp.resolver_config.autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.resolver_config.autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverConfig AWS API Documentation
     #
@@ -1896,7 +1912,7 @@ module Aws::Route53Resolver
     #   resp.resolver_dnssec_config.id #=> String
     #   resp.resolver_dnssec_config.owner_id #=> String
     #   resp.resolver_dnssec_config.resource_id #=> String
-    #   resp.resolver_dnssec_config.validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.resolver_dnssec_config.validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverDnssecConfig AWS API Documentation
     #
@@ -1940,6 +1956,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverEndpoint AWS API Documentation
     #
@@ -2089,6 +2106,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips #=> Array
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
+    #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -2284,7 +2302,7 @@ module Aws::Route53Resolver
     #   resp.firewall_configs[0].id #=> String
     #   resp.firewall_configs[0].resource_id #=> String
     #   resp.firewall_configs[0].owner_id #=> String
-    #   resp.firewall_configs[0].firewall_fail_open #=> String, one of "ENABLED", "DISABLED"
+    #   resp.firewall_configs[0].firewall_fail_open #=> String, one of "ENABLED", "DISABLED", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallConfigs AWS API Documentation
     #
@@ -2652,7 +2670,7 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Retrieves the Resolver configurations that you have defined. Route 53
+    # Retrieves the Resolver configurations that you have defined. Route 53
     # Resolver uses the configurations to manage DNS resolution behavior for
     # your VPCs.
     #
@@ -2694,7 +2712,7 @@ module Aws::Route53Resolver
     #   resp.resolver_configs[0].id #=> String
     #   resp.resolver_configs[0].resource_id #=> String
     #   resp.resolver_configs[0].owner_id #=> String
-    #   resp.resolver_configs[0].autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.resolver_configs[0].autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverConfigs AWS API Documentation
     #
@@ -2755,7 +2773,7 @@ module Aws::Route53Resolver
     #   resp.resolver_dnssec_configs[0].id #=> String
     #   resp.resolver_dnssec_configs[0].owner_id #=> String
     #   resp.resolver_dnssec_configs[0].resource_id #=> String
-    #   resp.resolver_dnssec_configs[0].validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.resolver_dnssec_configs[0].validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverDnssecConfigs AWS API Documentation
     #
@@ -2810,7 +2828,8 @@ module Aws::Route53Resolver
     #   resp.ip_addresses[0].ip_id #=> String
     #   resp.ip_addresses[0].subnet_id #=> String
     #   resp.ip_addresses[0].ip #=> String
-    #   resp.ip_addresses[0].status #=> String, one of "CREATING", "FAILED_CREATION", "ATTACHING", "ATTACHED", "REMAP_DETACHING", "REMAP_ATTACHING", "DETACHING", "FAILED_RESOURCE_GONE", "DELETING", "DELETE_FAILED_FAS_EXPIRED"
+    #   resp.ip_addresses[0].ipv_6 #=> String
+    #   resp.ip_addresses[0].status #=> String, one of "CREATING", "FAILED_CREATION", "ATTACHING", "ATTACHED", "REMAP_DETACHING", "REMAP_ATTACHING", "DETACHING", "FAILED_RESOURCE_GONE", "DELETING", "DELETE_FAILED_FAS_EXPIRED", "UPDATING"
     #   resp.ip_addresses[0].status_message #=> String
     #   resp.ip_addresses[0].creation_time #=> String
     #   resp.ip_addresses[0].modification_time #=> String
@@ -2890,6 +2909,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoints[0].status_message #=> String
     #   resp.resolver_endpoints[0].creation_time #=> String
     #   resp.resolver_endpoints[0].modification_time #=> String
+    #   resp.resolver_endpoints[0].resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverEndpoints AWS API Documentation
     #
@@ -3321,6 +3341,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rules[0].target_ips #=> Array
     #   resp.resolver_rules[0].target_ips[0].ip #=> String
     #   resp.resolver_rules[0].target_ips[0].port #=> Integer
+    #   resp.resolver_rules[0].target_ips[0].ipv_6 #=> String
     #   resp.resolver_rules[0].resolver_endpoint_id #=> String
     #   resp.resolver_rules[0].owner_id #=> String
     #   resp.resolver_rules[0].share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -3662,7 +3683,7 @@ module Aws::Route53Resolver
     #
     #   resp = client.update_firewall_config({
     #     resource_id: "ResourceId", # required
-    #     firewall_fail_open: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     firewall_fail_open: "ENABLED", # required, accepts ENABLED, DISABLED, USE_LOCAL_RESOURCE_SETTING
     #   })
     #
     # @example Response structure
@@ -3670,7 +3691,7 @@ module Aws::Route53Resolver
     #   resp.firewall_config.id #=> String
     #   resp.firewall_config.resource_id #=> String
     #   resp.firewall_config.owner_id #=> String
-    #   resp.firewall_config.firewall_fail_open #=> String, one of "ENABLED", "DISABLED"
+    #   resp.firewall_config.firewall_fail_open #=> String, one of "ENABLED", "DISABLED", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallConfig AWS API Documentation
     #
@@ -3702,6 +3723,8 @@ module Aws::Route53Resolver
     #
     # @option params [required, Array<String>] :domains
     #   A list of domains to use in the update operation.
+    #
+    #   There is a limit of 1000 domains per request.
     #
     #   Each domain specification in your domain list must satisfy the
     #   following requirements:
@@ -3911,7 +3934,7 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Updates the behavior configuration of Route 53 Resolver behavior for a
+    # Updates the behavior configuration of Route 53 Resolver behavior for a
     # single VPC from Amazon Virtual Private Cloud.
     #
     # @option params [required, String] :resource_id
@@ -3924,6 +3947,11 @@ module Aws::Route53Resolver
     #   option will also affect EC2-Classic instances using ClassicLink. For
     #   more information, see [ClassicLink][1] in the *Amazon EC2 guide*.
     #
+    #   We are retiring EC2-Classic on August 15, 2022. We recommend that you
+    #   migrate from EC2-Classic to a VPC. For more information, see [Migrate
+    #   from EC2-Classic to a VPC][2] in the *Amazon EC2 guide* and the blog
+    #   [EC2-Classic Networking is Retiring – Here’s How to Prepare][3].
+    #
     #   <note markdown="1"> It can take some time for the status change to be completed.
     #
     #    </note>
@@ -3933,6 +3961,8 @@ module Aws::Route53Resolver
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    #   [3]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
     #
     # @return [Types::UpdateResolverConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3942,7 +3972,7 @@ module Aws::Route53Resolver
     #
     #   resp = client.update_resolver_config({
     #     resource_id: "ResourceId", # required
-    #     autodefined_reverse_flag: "ENABLE", # required, accepts ENABLE, DISABLE
+    #     autodefined_reverse_flag: "ENABLE", # required, accepts ENABLE, DISABLE, USE_LOCAL_RESOURCE_SETTING
     #   })
     #
     # @example Response structure
@@ -3950,7 +3980,7 @@ module Aws::Route53Resolver
     #   resp.resolver_config.id #=> String
     #   resp.resolver_config.resource_id #=> String
     #   resp.resolver_config.owner_id #=> String
-    #   resp.resolver_config.autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.resolver_config.autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverConfig AWS API Documentation
     #
@@ -3981,7 +4011,7 @@ module Aws::Route53Resolver
     #
     #   resp = client.update_resolver_dnssec_config({
     #     resource_id: "ResourceId", # required
-    #     validation: "ENABLE", # required, accepts ENABLE, DISABLE
+    #     validation: "ENABLE", # required, accepts ENABLE, DISABLE, USE_LOCAL_RESOURCE_SETTING
     #   })
     #
     # @example Response structure
@@ -3989,7 +4019,7 @@ module Aws::Route53Resolver
     #   resp.resolver_dnssec_config.id #=> String
     #   resp.resolver_dnssec_config.owner_id #=> String
     #   resp.resolver_dnssec_config.resource_id #=> String
-    #   resp.resolver_dnssec_config.validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.resolver_dnssec_config.validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING", "USE_LOCAL_RESOURCE_SETTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverDnssecConfig AWS API Documentation
     #
@@ -4000,13 +4030,22 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Updates the name of an inbound or an outbound Resolver endpoint.
+    # Updates the name, or enpoint type for an inbound or an outbound
+    # Resolver endpoint. You can only update between IPV4 and DUALSTACK,
+    # IPV6 endpoint type can't be updated to other type.
     #
     # @option params [required, String] :resolver_endpoint_id
     #   The ID of the Resolver endpoint that you want to update.
     #
     # @option params [String] :name
     #   The name of the Resolver endpoint that you want to update.
+    #
+    # @option params [String] :resolver_endpoint_type
+    #   Specifies the endpoint type for what type of IP address the endpoint
+    #   uses to forward DNS queries.
+    #
+    # @option params [Array<Types::UpdateIpAddress>] :update_ip_addresses
+    #   Updates the Resolver endpoint type to IpV4, Ipv6, or dual-stack.
     #
     # @return [Types::UpdateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4017,6 +4056,13 @@ module Aws::Route53Resolver
     #   resp = client.update_resolver_endpoint({
     #     resolver_endpoint_id: "ResourceId", # required
     #     name: "Name",
+    #     resolver_endpoint_type: "IPV6", # accepts IPV6, IPV4, DUALSTACK
+    #     update_ip_addresses: [
+    #       {
+    #         ip_id: "ResourceId", # required
+    #         ipv_6: "Ipv6", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4034,6 +4080,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpoint AWS API Documentation
     #
@@ -4066,8 +4113,9 @@ module Aws::Route53Resolver
     #       name: "Name",
     #       target_ips: [
     #         {
-    #           ip: "Ip", # required
+    #           ip: "Ip",
     #           port: 1,
+    #           ipv_6: "Ipv6",
     #         },
     #       ],
     #       resolver_endpoint_id: "ResourceId",
@@ -4087,6 +4135,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips #=> Array
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
+    #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -4115,7 +4164,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -91,6 +91,8 @@ module Aws::LakeFormation
     FieldNameString = Shapes::StringShape.new(name: 'FieldNameString')
     FilterCondition = Shapes::StructureShape.new(name: 'FilterCondition')
     FilterConditionList = Shapes::ListShape.new(name: 'FilterConditionList')
+    GetDataCellsFilterRequest = Shapes::StructureShape.new(name: 'GetDataCellsFilterRequest')
+    GetDataCellsFilterResponse = Shapes::StructureShape.new(name: 'GetDataCellsFilterResponse')
     GetDataLakeSettingsRequest = Shapes::StructureShape.new(name: 'GetDataLakeSettingsRequest')
     GetDataLakeSettingsResponse = Shapes::StructureShape.new(name: 'GetDataLakeSettingsResponse')
     GetEffectivePermissionsForPathRequest = Shapes::StructureShape.new(name: 'GetEffectivePermissionsForPathRequest')
@@ -253,6 +255,8 @@ module Aws::LakeFormation
     TrueFalseString = Shapes::StringShape.new(name: 'TrueFalseString')
     TrustedResourceOwners = Shapes::ListShape.new(name: 'TrustedResourceOwners')
     URI = Shapes::StringShape.new(name: 'URI')
+    UpdateDataCellsFilterRequest = Shapes::StructureShape.new(name: 'UpdateDataCellsFilterRequest')
+    UpdateDataCellsFilterResponse = Shapes::StructureShape.new(name: 'UpdateDataCellsFilterResponse')
     UpdateLFTagRequest = Shapes::StructureShape.new(name: 'UpdateLFTagRequest')
     UpdateLFTagResponse = Shapes::StructureShape.new(name: 'UpdateLFTagResponse')
     UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
@@ -263,6 +267,7 @@ module Aws::LakeFormation
     UpdateTableStorageOptimizerResponse = Shapes::StructureShape.new(name: 'UpdateTableStorageOptimizerResponse')
     ValueString = Shapes::StringShape.new(name: 'ValueString')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
+    VersionString = Shapes::StringShape.new(name: 'VersionString')
     VirtualObject = Shapes::StructureShape.new(name: 'VirtualObject')
     VirtualObjectList = Shapes::ListShape.new(name: 'VirtualObjectList')
     WorkUnitIdLong = Shapes::IntegerShape.new(name: 'WorkUnitIdLong')
@@ -387,6 +392,7 @@ module Aws::LakeFormation
     DataCellsFilter.add_member(:row_filter, Shapes::ShapeRef.new(shape: RowFilter, location_name: "RowFilter"))
     DataCellsFilter.add_member(:column_names, Shapes::ShapeRef.new(shape: ColumnNames, location_name: "ColumnNames"))
     DataCellsFilter.add_member(:column_wildcard, Shapes::ShapeRef.new(shape: ColumnWildcard, location_name: "ColumnWildcard"))
+    DataCellsFilter.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
     DataCellsFilter.struct_class = Types::DataCellsFilter
 
     DataCellsFilterList.member = Shapes::ShapeRef.new(shape: DataCellsFilter)
@@ -498,6 +504,15 @@ module Aws::LakeFormation
     FilterCondition.struct_class = Types::FilterCondition
 
     FilterConditionList.member = Shapes::ShapeRef.new(shape: FilterCondition)
+
+    GetDataCellsFilterRequest.add_member(:table_catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "TableCatalogId"))
+    GetDataCellsFilterRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetDataCellsFilterRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetDataCellsFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetDataCellsFilterRequest.struct_class = Types::GetDataCellsFilterRequest
+
+    GetDataCellsFilterResponse.add_member(:data_cells_filter, Shapes::ShapeRef.new(shape: DataCellsFilter, location_name: "DataCellsFilter"))
+    GetDataCellsFilterResponse.struct_class = Types::GetDataCellsFilterResponse
 
     GetDataLakeSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetDataLakeSettingsRequest.struct_class = Types::GetDataLakeSettingsRequest
@@ -943,6 +958,11 @@ module Aws::LakeFormation
 
     TrustedResourceOwners.member = Shapes::ShapeRef.new(shape: CatalogIdString)
 
+    UpdateDataCellsFilterRequest.add_member(:table_data, Shapes::ShapeRef.new(shape: DataCellsFilter, required: true, location_name: "TableData"))
+    UpdateDataCellsFilterRequest.struct_class = Types::UpdateDataCellsFilterRequest
+
+    UpdateDataCellsFilterResponse.struct_class = Types::UpdateDataCellsFilterResponse
+
     UpdateLFTagRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateLFTagRequest.add_member(:tag_key, Shapes::ShapeRef.new(shape: LFTagKey, required: true, location_name: "TagKey"))
     UpdateLFTagRequest.add_member(:tag_values_to_delete, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValuesToDelete"))
@@ -1213,6 +1233,19 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: TransactionCommittedException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionCanceledException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionCommitInProgressException)
+      end)
+
+      api.add_operation(:get_data_cells_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataCellsFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetDataCellsFilter"
+        o.input = Shapes::ShapeRef.new(shape: GetDataCellsFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataCellsFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_data_lake_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1620,6 +1653,20 @@ module Aws::LakeFormation
         o.output = Shapes::ShapeRef.new(shape: StartTransactionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:update_data_cells_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataCellsFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateDataCellsFilter"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDataCellsFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDataCellsFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_lf_tag, Seahorse::Model::Operation.new.tap do |o|
