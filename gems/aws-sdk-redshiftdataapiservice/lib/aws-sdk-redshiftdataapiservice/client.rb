@@ -444,9 +444,9 @@ module Aws::RedshiftDataAPIService
     #   EventBridge event bus after the SQL statements run.
     #
     # @option params [String] :workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary credentials.
     #
     # @return [Types::BatchExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -695,9 +695,9 @@ module Aws::RedshiftDataAPIService
     #   then all tables for all schemas in the database are returned
     #
     # @option params [String] :workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary credentials.
     #
     # @return [Types::DescribeTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -815,9 +815,9 @@ module Aws::RedshiftDataAPIService
     #   EventBridge event bus after the SQL statement runs.
     #
     # @option params [String] :workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary credentials.
     #
     # @return [Types::ExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1004,9 +1004,9 @@ module Aws::RedshiftDataAPIService
     #   This parameter is required when authenticating using Secrets Manager.
     #
     # @option params [String] :workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary credentials.
     #
     # @return [Types::ListDatabasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1109,9 +1109,9 @@ module Aws::RedshiftDataAPIService
     #   This parameter is required when authenticating using Secrets Manager.
     #
     # @option params [String] :workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary credentials.
     #
     # @return [Types::ListSchemasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1332,9 +1332,9 @@ module Aws::RedshiftDataAPIService
     #   returned.
     #
     # @option params [String] :workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary credentials.
     #
     # @return [Types::ListTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1388,7 +1388,7 @@ module Aws::RedshiftDataAPIService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

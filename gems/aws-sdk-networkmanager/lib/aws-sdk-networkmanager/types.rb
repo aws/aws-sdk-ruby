@@ -5264,7 +5264,9 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_route_table_arn
-    #   The ARN of the transit gateway attachment route table.
+    #   The ARN of the transit gateway attachment route table. For example,
+    #   `"TransitGatewayRouteTableArn":
+    #   "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/TransitGatewayRouteTableAttachment AWS API Documentation

@@ -17264,18 +17264,27 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Shows the final value for the objective metric for a training job that
-    # was launched by a hyperparameter tuning job. You define the objective
+    # Shows the latest objective metric emitted by a training job that was
+    # launched by a hyperparameter tuning job. You define the objective
     # metric in the `HyperParameterTuningJobObjective` parameter of
     # HyperParameterTuningJobConfig.
     #
     # @!attribute [rw] type
-    #   Whether to minimize or maximize the objective metric. Valid values
-    #   are Minimize and Maximize.
+    #   Select if you want to minimize or maximize the objective metric
+    #   during hyperparameter tuning.
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The name of the objective metric.
+    #   The name of the objective metric. For SageMaker built-in algorithms,
+    #   metrics are defined per algorithm. See the [metrics for XGBoost][1]
+    #   as an example. You can also use a custom algorithm for training and
+    #   define your own metrics. For more information, see [Define metrics
+    #   and environment variables][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost-tuning.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -29872,9 +29881,9 @@ module Aws::SageMaker
     # The security configuration for `OnlineStore`.
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Amazon Web Services Key Management Service (Amazon Web
-    #   Services KMS) key that SageMaker Feature Store uses to encrypt the
-    #   Amazon S3 objects at rest using Amazon S3 server-side encryption.
+    #   The Amazon Web Services Key Management Service (KMS) key ARN that
+    #   SageMaker Feature Store uses to encrypt the Amazon S3 objects at
+    #   rest using Amazon S3 server-side encryption.
     #
     #   The caller (either IAM user or IAM role) of `CreateFeatureGroup`
     #   must have below permissions to the `OnlineStore` `KmsKeyId`\:
@@ -31499,7 +31508,12 @@ module Aws::SageMaker
     # Identifies a model that you want to host and the resources chosen to
     # deploy for hosting it. If you are deploying multiple models, tell
     # SageMaker how to distribute traffic among the models by specifying
-    # variant weights.
+    # variant weights. For more information on production variants, check [
+    # Production variants][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html
     #
     # @!attribute [rw] variant_name
     #   The name of the production variant.
@@ -31571,6 +31585,15 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_ssm_access
+    #   You can use this parameter to turn on native Amazon Web Services
+    #   Systems Manager (SSM) access for a production variant behind an
+    #   endpoint. By default, SSM access is disabled for all production
+    #   variants behind an endpoints. You can turn on or turn off SSM access
+    #   for a production variant behind an existing endpoint by creating a
+    #   new endpoint configuration and calling `UpdateEndpoint`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -31584,7 +31607,8 @@ module Aws::SageMaker
       :serverless_config,
       :volume_size_in_gb,
       :model_data_download_timeout_in_seconds,
-      :container_startup_health_check_timeout_in_seconds)
+      :container_startup_health_check_timeout_in_seconds,
+      :enable_ssm_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33848,7 +33872,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Web Services Key Management Service (KMS) key ID of the
+    #   The Amazon Web Services Key Management Service (KMS) key ARN of the
     #   key used to encrypt any objects written into the `OfflineStore` S3
     #   location.
     #

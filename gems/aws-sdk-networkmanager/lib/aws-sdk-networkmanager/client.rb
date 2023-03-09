@@ -4323,10 +4323,18 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
-    # Registers a transit gateway in your global network. The transit
-    # gateway can be in any Amazon Web Services Region, but it must be owned
-    # by the same Amazon Web Services account that owns the global network.
-    # You cannot register a transit gateway in more than one global network.
+    # Registers a transit gateway in your global network. Not all Regions
+    # support transit gateways for global networks. For a list of the
+    # supported Regions, see [Region Availability][1] in the *Amazon Web
+    # Services Transit Gateways for Global Networks User Guide*. The transit
+    # gateway can be in any of the supported Amazon Web Services Regions,
+    # but it must be owned by the same Amazon Web Services account that owns
+    # the global network. You cannot register a transit gateway in more than
+    # one global network.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-manager/latest/tgwnm/what-are-global-networks.html#nm-available-regions
     #
     # @option params [required, String] :global_network_id
     #   The ID of the global network.
@@ -5145,7 +5153,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

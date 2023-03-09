@@ -208,6 +208,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::GetFederationToken.build(context)
           when :get_metric_data
             Aws::Connect::Endpoints::GetMetricData.build(context)
+          when :get_metric_data_v2
+            Aws::Connect::Endpoints::GetMetricDataV2.build(context)
           when :get_task_template
             Aws::Connect::Endpoints::GetTaskTemplate.build(context)
           when :get_traffic_distribution

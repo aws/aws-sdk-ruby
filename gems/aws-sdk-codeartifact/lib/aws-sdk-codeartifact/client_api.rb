@@ -137,6 +137,8 @@ module Aws::CodeArtifact
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PolicyRevision = Shapes::StringShape.new(name: 'PolicyRevision')
+    PublishPackageVersionRequest = Shapes::StructureShape.new(name: 'PublishPackageVersionRequest')
+    PublishPackageVersionResult = Shapes::StructureShape.new(name: 'PublishPackageVersionResult')
     PutDomainPermissionsPolicyRequest = Shapes::StructureShape.new(name: 'PutDomainPermissionsPolicyRequest')
     PutDomainPermissionsPolicyResult = Shapes::StructureShape.new(name: 'PutDomainPermissionsPolicyResult')
     PutPackageOriginConfigurationRequest = Shapes::StructureShape.new(name: 'PutPackageOriginConfigurationRequest')
@@ -153,6 +155,7 @@ module Aws::CodeArtifact
     ResourcePolicy = Shapes::StructureShape.new(name: 'ResourcePolicy')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
+    SHA256 = Shapes::StringShape.new(name: 'SHA256')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     String255 = Shapes::StringShape.new(name: 'String255')
@@ -643,6 +646,30 @@ module Aws::CodeArtifact
     PackageVersionSummary.struct_class = Types::PackageVersionSummary
 
     PackageVersionSummaryList.member = Shapes::ShapeRef.new(shape: PackageVersionSummary)
+
+    PublishPackageVersionRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "querystring", location_name: "domain"))
+    PublishPackageVersionRequest.add_member(:domain_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "domain-owner"))
+    PublishPackageVersionRequest.add_member(:repository, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location: "querystring", location_name: "repository"))
+    PublishPackageVersionRequest.add_member(:format, Shapes::ShapeRef.new(shape: PackageFormat, required: true, location: "querystring", location_name: "format"))
+    PublishPackageVersionRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: PackageNamespace, location: "querystring", location_name: "namespace"))
+    PublishPackageVersionRequest.add_member(:package, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "querystring", location_name: "package"))
+    PublishPackageVersionRequest.add_member(:package_version, Shapes::ShapeRef.new(shape: PackageVersion, required: true, location: "querystring", location_name: "version"))
+    PublishPackageVersionRequest.add_member(:asset_content, Shapes::ShapeRef.new(shape: Asset, required: true, location_name: "assetContent"))
+    PublishPackageVersionRequest.add_member(:asset_name, Shapes::ShapeRef.new(shape: AssetName, required: true, location: "querystring", location_name: "asset"))
+    PublishPackageVersionRequest.add_member(:asset_sha256, Shapes::ShapeRef.new(shape: SHA256, required: true, location: "header", location_name: "x-amz-content-sha256"))
+    PublishPackageVersionRequest.add_member(:unfinished, Shapes::ShapeRef.new(shape: BooleanOptional, location: "querystring", location_name: "unfinished"))
+    PublishPackageVersionRequest.struct_class = Types::PublishPackageVersionRequest
+    PublishPackageVersionRequest[:payload] = :asset_content
+    PublishPackageVersionRequest[:payload_member] = PublishPackageVersionRequest.member(:asset_content)
+
+    PublishPackageVersionResult.add_member(:format, Shapes::ShapeRef.new(shape: PackageFormat, location_name: "format"))
+    PublishPackageVersionResult.add_member(:namespace, Shapes::ShapeRef.new(shape: PackageNamespace, location_name: "namespace"))
+    PublishPackageVersionResult.add_member(:package, Shapes::ShapeRef.new(shape: PackageName, location_name: "package"))
+    PublishPackageVersionResult.add_member(:version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "version"))
+    PublishPackageVersionResult.add_member(:version_revision, Shapes::ShapeRef.new(shape: PackageVersionRevision, location_name: "versionRevision"))
+    PublishPackageVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: PackageVersionStatus, location_name: "status"))
+    PublishPackageVersionResult.add_member(:asset, Shapes::ShapeRef.new(shape: AssetSummary, location_name: "asset"))
+    PublishPackageVersionResult.struct_class = Types::PublishPackageVersionResult
 
     PutDomainPermissionsPolicyRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     PutDomainPermissionsPolicyRequest.add_member(:domain_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "domainOwner"))
@@ -1243,6 +1270,21 @@ module Aws::CodeArtifact
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:publish_package_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PublishPackageVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/package/version/publish"
+        o.input = Shapes::ShapeRef.new(shape: PublishPackageVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PublishPackageVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

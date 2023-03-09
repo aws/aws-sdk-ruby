@@ -957,7 +957,9 @@ module Aws::QuickSight
     ReferenceLineValueLabelRelativePosition = Shapes::StringShape.new(name: 'ReferenceLineValueLabelRelativePosition')
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
+    RegisteredUserConsoleFeatureConfigurations = Shapes::StructureShape.new(name: 'RegisteredUserConsoleFeatureConfigurations')
     RegisteredUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserDashboardEmbeddingConfiguration')
+    RegisteredUserDashboardFeatureConfigurations = Shapes::StructureShape.new(name: 'RegisteredUserDashboardFeatureConfigurations')
     RegisteredUserDashboardVisualEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserDashboardVisualEmbeddingConfiguration')
     RegisteredUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserEmbeddingExperienceConfiguration')
     RegisteredUserQSearchBarEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQSearchBarEmbeddingConfiguration')
@@ -1110,6 +1112,7 @@ module Aws::QuickSight
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlServerParameters = Shapes::StructureShape.new(name: 'SqlServerParameters')
     SslProperties = Shapes::StructureShape.new(name: 'SslProperties')
+    StatePersistenceConfigurations = Shapes::StructureShape.new(name: 'StatePersistenceConfigurations')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     String = Shapes::StringShape.new(name: 'String')
@@ -4871,6 +4874,7 @@ module Aws::QuickSight
     PivotTableOptions.add_member(:cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "CellStyle"))
     PivotTableOptions.add_member(:row_field_names_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "RowFieldNamesStyle"))
     PivotTableOptions.add_member(:row_alternate_color_options, Shapes::ShapeRef.new(shape: RowAlternateColorOptions, location_name: "RowAlternateColorOptions"))
+    PivotTableOptions.add_member(:collapsed_row_dimensions_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "CollapsedRowDimensionsVisibility"))
     PivotTableOptions.struct_class = Types::PivotTableOptions
 
     PivotTablePaginatedReportOptions.add_member(:vertical_overflow_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "VerticalOverflowVisibility"))
@@ -5070,8 +5074,15 @@ module Aws::QuickSight
     RegisterUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     RegisterUserResponse.struct_class = Types::RegisterUserResponse
 
+    RegisteredUserConsoleFeatureConfigurations.add_member(:state_persistence, Shapes::ShapeRef.new(shape: StatePersistenceConfigurations, location_name: "StatePersistence"))
+    RegisteredUserConsoleFeatureConfigurations.struct_class = Types::RegisteredUserConsoleFeatureConfigurations
+
     RegisteredUserDashboardEmbeddingConfiguration.add_member(:initial_dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "InitialDashboardId"))
+    RegisteredUserDashboardEmbeddingConfiguration.add_member(:feature_configurations, Shapes::ShapeRef.new(shape: RegisteredUserDashboardFeatureConfigurations, location_name: "FeatureConfigurations"))
     RegisteredUserDashboardEmbeddingConfiguration.struct_class = Types::RegisteredUserDashboardEmbeddingConfiguration
+
+    RegisteredUserDashboardFeatureConfigurations.add_member(:state_persistence, Shapes::ShapeRef.new(shape: StatePersistenceConfigurations, location_name: "StatePersistence"))
+    RegisteredUserDashboardFeatureConfigurations.struct_class = Types::RegisteredUserDashboardFeatureConfigurations
 
     RegisteredUserDashboardVisualEmbeddingConfiguration.add_member(:initial_dashboard_visual_id, Shapes::ShapeRef.new(shape: DashboardVisualId, required: true, location_name: "InitialDashboardVisualId"))
     RegisteredUserDashboardVisualEmbeddingConfiguration.struct_class = Types::RegisteredUserDashboardVisualEmbeddingConfiguration
@@ -5086,6 +5097,7 @@ module Aws::QuickSight
     RegisteredUserQSearchBarEmbeddingConfiguration.struct_class = Types::RegisteredUserQSearchBarEmbeddingConfiguration
 
     RegisteredUserQuickSightConsoleEmbeddingConfiguration.add_member(:initial_path, Shapes::ShapeRef.new(shape: EntryPath, location_name: "InitialPath"))
+    RegisteredUserQuickSightConsoleEmbeddingConfiguration.add_member(:feature_configurations, Shapes::ShapeRef.new(shape: RegisteredUserConsoleFeatureConfigurations, location_name: "FeatureConfigurations"))
     RegisteredUserQuickSightConsoleEmbeddingConfiguration.struct_class = Types::RegisteredUserQuickSightConsoleEmbeddingConfiguration
 
     RelationalTable.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DataSourceArn"))
@@ -5508,6 +5520,9 @@ module Aws::QuickSight
 
     SslProperties.add_member(:disable_ssl, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableSsl"))
     SslProperties.struct_class = Types::SslProperties
+
+    StatePersistenceConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    StatePersistenceConfigurations.struct_class = Types::StatePersistenceConfigurations
 
     StringDefaultValueList.member = Shapes::ShapeRef.new(shape: SensitiveStringObject)
 

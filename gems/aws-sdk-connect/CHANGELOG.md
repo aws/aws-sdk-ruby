@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2023-03-09)
+------------------
+
+* Feature - This release adds a new API, GetMetricDataV2, which returns metric data for Amazon Connect.
+
 1.98.0 (2023-02-24)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-03-09)
+------------------
+
+* Feature - Added support for Redshift Serverless workgroup-arn wherever the WorkgroupName parameter is available.
+
 1.24.0 (2023-01-18)
 ------------------
 

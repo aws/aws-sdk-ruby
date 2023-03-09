@@ -229,6 +229,9 @@ module Aws::Connect
     Description250 = Shapes::StringShape.new(name: 'Description250')
     DestinationNotAllowedException = Shapes::StructureShape.new(name: 'DestinationNotAllowedException')
     Dimensions = Shapes::StructureShape.new(name: 'Dimensions')
+    DimensionsV2Key = Shapes::StringShape.new(name: 'DimensionsV2Key')
+    DimensionsV2Map = Shapes::MapShape.new(name: 'DimensionsV2Map')
+    DimensionsV2Value = Shapes::StringShape.new(name: 'DimensionsV2Value')
     DirectoryAlias = Shapes::StringShape.new(name: 'DirectoryAlias')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     DirectoryType = Shapes::StringShape.new(name: 'DirectoryType')
@@ -255,7 +258,10 @@ module Aws::Connect
     EventBridgeActionDefinition = Shapes::StructureShape.new(name: 'EventBridgeActionDefinition')
     EventBridgeActionName = Shapes::StringShape.new(name: 'EventBridgeActionName')
     EventSourceName = Shapes::StringShape.new(name: 'EventSourceName')
+    FilterV2 = Shapes::StructureShape.new(name: 'FilterV2')
+    FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     Filters = Shapes::StructureShape.new(name: 'Filters')
+    FiltersV2List = Shapes::ListShape.new(name: 'FiltersV2List')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     FunctionArnsList = Shapes::ListShape.new(name: 'FunctionArnsList')
     GetContactAttributesRequest = Shapes::StructureShape.new(name: 'GetContactAttributesRequest')
@@ -268,12 +274,16 @@ module Aws::Connect
     GetFederationTokenResponse = Shapes::StructureShape.new(name: 'GetFederationTokenResponse')
     GetMetricDataRequest = Shapes::StructureShape.new(name: 'GetMetricDataRequest')
     GetMetricDataResponse = Shapes::StructureShape.new(name: 'GetMetricDataResponse')
+    GetMetricDataV2Request = Shapes::StructureShape.new(name: 'GetMetricDataV2Request')
+    GetMetricDataV2Response = Shapes::StructureShape.new(name: 'GetMetricDataV2Response')
     GetTaskTemplateRequest = Shapes::StructureShape.new(name: 'GetTaskTemplateRequest')
     GetTaskTemplateResponse = Shapes::StructureShape.new(name: 'GetTaskTemplateResponse')
     GetTrafficDistributionRequest = Shapes::StructureShape.new(name: 'GetTrafficDistributionRequest')
     GetTrafficDistributionResponse = Shapes::StructureShape.new(name: 'GetTrafficDistributionResponse')
     Grouping = Shapes::StringShape.new(name: 'Grouping')
+    GroupingV2 = Shapes::StringShape.new(name: 'GroupingV2')
     Groupings = Shapes::ListShape.new(name: 'Groupings')
+    GroupingsV2 = Shapes::ListShape.new(name: 'GroupingsV2')
     HierarchyGroup = Shapes::StructureShape.new(name: 'HierarchyGroup')
     HierarchyGroupCondition = Shapes::StructureShape.new(name: 'HierarchyGroupCondition')
     HierarchyGroupId = Shapes::StringShape.new(name: 'HierarchyGroupId')
@@ -426,6 +436,16 @@ module Aws::Connect
     MediaConcurrencies = Shapes::ListShape.new(name: 'MediaConcurrencies')
     MediaConcurrency = Shapes::StructureShape.new(name: 'MediaConcurrency')
     Message = Shapes::StringShape.new(name: 'Message')
+    MetricDataCollectionsV2 = Shapes::ListShape.new(name: 'MetricDataCollectionsV2')
+    MetricDataV2 = Shapes::StructureShape.new(name: 'MetricDataV2')
+    MetricFilterV2 = Shapes::StructureShape.new(name: 'MetricFilterV2')
+    MetricFilterValueList = Shapes::ListShape.new(name: 'MetricFilterValueList')
+    MetricFiltersV2List = Shapes::ListShape.new(name: 'MetricFiltersV2List')
+    MetricNameV2 = Shapes::StringShape.new(name: 'MetricNameV2')
+    MetricResultV2 = Shapes::StructureShape.new(name: 'MetricResultV2')
+    MetricResultsV2 = Shapes::ListShape.new(name: 'MetricResultsV2')
+    MetricV2 = Shapes::StructureShape.new(name: 'MetricV2')
+    MetricsV2 = Shapes::ListShape.new(name: 'MetricsV2')
     MinutesLimit60 = Shapes::IntegerShape.new(name: 'MinutesLimit60')
     MonitorCapability = Shapes::StringShape.new(name: 'MonitorCapability')
     MonitorContactRequest = Shapes::StructureShape.new(name: 'MonitorContactRequest')
@@ -532,6 +552,7 @@ module Aws::Connect
     ReplicateInstanceResponse = Shapes::StructureShape.new(name: 'ReplicateInstanceResponse')
     RequiredFieldInfo = Shapes::StructureShape.new(name: 'RequiredFieldInfo')
     RequiredTaskTemplateFields = Shapes::ListShape.new(name: 'RequiredTaskTemplateFields')
+    ResourceArnOrId = Shapes::StringShape.new(name: 'ResourceArnOrId')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -668,6 +689,8 @@ module Aws::Connect
     TaskTemplateStatus = Shapes::StringShape.new(name: 'TaskTemplateStatus')
     TelephonyConfig = Shapes::StructureShape.new(name: 'TelephonyConfig')
     Threshold = Shapes::StructureShape.new(name: 'Threshold')
+    ThresholdCollections = Shapes::ListShape.new(name: 'ThresholdCollections')
+    ThresholdV2 = Shapes::StructureShape.new(name: 'ThresholdV2')
     ThresholdValue = Shapes::FloatShape.new(name: 'ThresholdValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeZone = Shapes::StringShape.new(name: 'TimeZone')
@@ -1491,6 +1514,9 @@ module Aws::Connect
     Dimensions.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: "RoutingProfile"))
     Dimensions.struct_class = Types::Dimensions
 
+    DimensionsV2Map.key = Shapes::ShapeRef.new(shape: DimensionsV2Key)
+    DimensionsV2Map.value = Shapes::ShapeRef.new(shape: DimensionsV2Value)
+
     DisassociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DisassociateApprovedOriginRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, required: true, location: "querystring", location_name: "origin"))
     DisassociateApprovedOriginRequest.struct_class = Types::DisassociateApprovedOriginRequest
@@ -1559,10 +1585,18 @@ module Aws::Connect
     EventBridgeActionDefinition.add_member(:name, Shapes::ShapeRef.new(shape: EventBridgeActionName, required: true, location_name: "Name"))
     EventBridgeActionDefinition.struct_class = Types::EventBridgeActionDefinition
 
+    FilterV2.add_member(:filter_key, Shapes::ShapeRef.new(shape: ResourceArnOrId, location_name: "FilterKey"))
+    FilterV2.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValueList, location_name: "FilterValues"))
+    FilterV2.struct_class = Types::FilterV2
+
+    FilterValueList.member = Shapes::ShapeRef.new(shape: ResourceArnOrId)
+
     Filters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
     Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
     Filters.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: "RoutingProfiles"))
     Filters.struct_class = Types::Filters
+
+    FiltersV2List.member = Shapes::ShapeRef.new(shape: FilterV2)
 
     FunctionArnsList.member = Shapes::ShapeRef.new(shape: FunctionArn)
 
@@ -1622,6 +1656,20 @@ module Aws::Connect
     GetMetricDataResponse.add_member(:metric_results, Shapes::ShapeRef.new(shape: HistoricalMetricResults, location_name: "MetricResults"))
     GetMetricDataResponse.struct_class = Types::GetMetricDataResponse
 
+    GetMetricDataV2Request.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ResourceArn"))
+    GetMetricDataV2Request.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    GetMetricDataV2Request.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetMetricDataV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: FiltersV2List, required: true, location_name: "Filters"))
+    GetMetricDataV2Request.add_member(:groupings, Shapes::ShapeRef.new(shape: GroupingsV2, location_name: "Groupings"))
+    GetMetricDataV2Request.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricsV2, required: true, location_name: "Metrics"))
+    GetMetricDataV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    GetMetricDataV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetMetricDataV2Request.struct_class = Types::GetMetricDataV2Request
+
+    GetMetricDataV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    GetMetricDataV2Response.add_member(:metric_results, Shapes::ShapeRef.new(shape: MetricResultsV2, location_name: "MetricResults"))
+    GetMetricDataV2Response.struct_class = Types::GetMetricDataV2Response
+
     GetTaskTemplateRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     GetTaskTemplateRequest.add_member(:task_template_id, Shapes::ShapeRef.new(shape: TaskTemplateId, required: true, location: "uri", location_name: "TaskTemplateId"))
     GetTaskTemplateRequest.add_member(:snapshot_version, Shapes::ShapeRef.new(shape: SnapshotVersion, location: "querystring", location_name: "snapshotVersion"))
@@ -1651,6 +1699,8 @@ module Aws::Connect
     GetTrafficDistributionResponse.struct_class = Types::GetTrafficDistributionResponse
 
     Groupings.member = Shapes::ShapeRef.new(shape: Grouping)
+
+    GroupingsV2.member = Shapes::ShapeRef.new(shape: GroupingV2)
 
     HierarchyGroup.add_member(:id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "Id"))
     HierarchyGroup.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -2182,6 +2232,33 @@ module Aws::Connect
     MediaConcurrency.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
     MediaConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, required: true, location_name: "Concurrency"))
     MediaConcurrency.struct_class = Types::MediaConcurrency
+
+    MetricDataCollectionsV2.member = Shapes::ShapeRef.new(shape: MetricDataV2)
+
+    MetricDataV2.add_member(:metric, Shapes::ShapeRef.new(shape: MetricV2, location_name: "Metric"))
+    MetricDataV2.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value", metadata: {"box"=>true}))
+    MetricDataV2.struct_class = Types::MetricDataV2
+
+    MetricFilterV2.add_member(:metric_filter_key, Shapes::ShapeRef.new(shape: String, location_name: "MetricFilterKey"))
+    MetricFilterV2.add_member(:metric_filter_values, Shapes::ShapeRef.new(shape: MetricFilterValueList, location_name: "MetricFilterValues"))
+    MetricFilterV2.struct_class = Types::MetricFilterV2
+
+    MetricFilterValueList.member = Shapes::ShapeRef.new(shape: String)
+
+    MetricFiltersV2List.member = Shapes::ShapeRef.new(shape: MetricFilterV2)
+
+    MetricResultV2.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionsV2Map, location_name: "Dimensions"))
+    MetricResultV2.add_member(:collections, Shapes::ShapeRef.new(shape: MetricDataCollectionsV2, location_name: "Collections"))
+    MetricResultV2.struct_class = Types::MetricResultV2
+
+    MetricResultsV2.member = Shapes::ShapeRef.new(shape: MetricResultV2)
+
+    MetricV2.add_member(:name, Shapes::ShapeRef.new(shape: MetricNameV2, location_name: "Name"))
+    MetricV2.add_member(:threshold, Shapes::ShapeRef.new(shape: ThresholdCollections, location_name: "Threshold"))
+    MetricV2.add_member(:metric_filters, Shapes::ShapeRef.new(shape: MetricFiltersV2List, location_name: "MetricFilters"))
+    MetricV2.struct_class = Types::MetricV2
+
+    MetricsV2.member = Shapes::ShapeRef.new(shape: MetricV2)
 
     MonitorContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     MonitorContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
@@ -2833,6 +2910,12 @@ module Aws::Connect
     Threshold.add_member(:comparison, Shapes::ShapeRef.new(shape: Comparison, location_name: "Comparison"))
     Threshold.add_member(:threshold_value, Shapes::ShapeRef.new(shape: ThresholdValue, location_name: "ThresholdValue", metadata: {"box"=>true}))
     Threshold.struct_class = Types::Threshold
+
+    ThresholdCollections.member = Shapes::ShapeRef.new(shape: ThresholdV2)
+
+    ThresholdV2.add_member(:comparison, Shapes::ShapeRef.new(shape: ResourceArnOrId, location_name: "Comparison"))
+    ThresholdV2.add_member(:threshold_value, Shapes::ShapeRef.new(shape: ThresholdValue, location_name: "ThresholdValue", metadata: {"box"=>true}))
+    ThresholdV2.struct_class = Types::ThresholdV2
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
@@ -4319,6 +4402,25 @@ module Aws::Connect
         o.http_request_uri = "/metrics/historical/{InstanceId}"
         o.input = Shapes::ShapeRef.new(shape: GetMetricDataRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMetricDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_metric_data_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetricDataV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/metrics/data"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricDataV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricDataV2Response)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)

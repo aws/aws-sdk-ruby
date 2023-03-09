@@ -4805,6 +4805,389 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Gets metric data from the specified Amazon Connect instance.
+    #
+    # `GetMetricDataV2` offers more features than [GetMetricData][1], the
+    # previous version of this API. It has new metrics, offers filtering at
+    # a metric level, and offers the ability to filter and group data by
+    # channels, queues, routing profiles, agents, and agent hierarchy
+    # levels. It can retrieve historical data for last the 14 days, in
+    # 24-hour intervals.
+    #
+    # For a description of the historical metrics that are supported by
+    # `GetMetricDataV2` and `GetMetricData`, see [Historical metrics
+    # definitions][2] in the *Amazon Connect Administrator's Guide*.
+    #
+    # This API is not available in the Amazon Web Services GovCloud (US)
+    # Regions.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. This includes the
+    #   `instanceId` an Amazon Connect instance.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The timestamp, in UNIX Epoch time format, at which to start the
+    #   reporting interval for the retrieval of historical metrics data. The
+    #   time must be before the end time timestamp. The time range between the
+    #   start and end time must be less than 24 hours. The start time cannot
+    #   be earlier than 14 days before the time of the request. Historical
+    #   metrics are available for 14 days.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The timestamp, in UNIX Epoch time format, at which to end the
+    #   reporting interval for the retrieval of historical metrics data. The
+    #   time must be later than the start time timestamp.
+    #
+    #   The time range between the start and end time must be less than 24
+    #   hours.
+    #
+    # @option params [required, Array<Types::FilterV2>] :filters
+    #   The filters to apply to returned metrics. You can filter on the
+    #   following resources:
+    #
+    #   * Queues
+    #
+    #   * Routing profiles
+    #
+    #   * Agents
+    #
+    #   * Channels
+    #
+    #   * User hierarchy groups
+    #
+    #   At least one filter must be passed from queues, routing profiles,
+    #   agents, or user hierarchy groups.
+    #
+    #   To filter by phone number, see [Create a historical metrics report][1]
+    #   in the *Amazon Connect Administrator's Guide*.
+    #
+    #   Note the following limits:
+    #
+    #   * **Filter keys**\: A maximum of 5 filter keys are supported in a
+    #     single request. Valid filter keys: `QUEUE` \| `ROUTING_PROFILE` \|
+    #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
+    #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
+    #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
+    #
+    #   * **Filter values**\: A maximum of 100 filter values are supported in
+    #     a single request. For example, a `GetMetricDataV2` request can
+    #     filter by 50 queues, 35 agents, and 15 routing profiles for a total
+    #     of 100 filter values. `VOICE`, `CHAT`, and `TASK` are valid
+    #     `filterValue` for the `CHANNEL` filter key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html
+    #
+    # @option params [Array<String>] :groupings
+    #   The grouping applied to the metrics that are returned. For example,
+    #   when results are grouped by queue, the metrics returned are grouped by
+    #   queue. The values that are returned apply to the metrics for each
+    #   queue. They are not aggregated for all queues.
+    #
+    #   If no grouping is specified, a summary of all metrics is returned.
+    #
+    #   Valid grouping keys: `QUEUE` \| `ROUTING_PROFILE` \| `AGENT` \|
+    #   `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
+    #   `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
+    #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
+    #
+    # @option params [required, Array<Types::MetricV2>] :metrics
+    #   The metrics to retrieve. Specify the name, groupings, and filters for
+    #   each metric. The following historical metrics are available. For a
+    #   description of each metric, see [Historical metrics definitions][1] in
+    #   the *Amazon Connect Administrator's Guide*.
+    #
+    #   AGENT\_ADHERENT\_TIME
+    #
+    #   : This metric is available only in Amazon Web Services Regions where
+    #     [Forecasting, capacity planning, and scheduling][2] is available.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AGENT\_NON\_RESPONSE
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AGENT\_OCCUPANCY
+    #
+    #   : Unit: Percentage
+    #
+    #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+    #
+    #   AGENT\_SCHEDULE\_ADHERENCE
+    #
+    #   : This metric is available only in Amazon Web Services Regions where
+    #     [Forecasting, capacity planning, and scheduling][2] is available.
+    #
+    #     Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AGENT\_SCHEDULED\_TIME
+    #
+    #   : This metric is available only in Amazon Web Services Regions where
+    #     [Forecasting, capacity planning, and scheduling][2] is available.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_ABANDON\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_AFTER\_CONTACT\_WORK\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_AGENT\_CONNECTING\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
+    #     only supports the following as `INITIATION_METHOD`\: `INBOUND` \|
+    #     `OUTBOUND` \| `CALLBACK` \| `API`
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_HANDLE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_HOLD\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_INTERACTION\_AND\_HOLD\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_INTERACTION\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #   AVG\_QUEUE\_ANSWER\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #   CONTACTS\_ABANDONED
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_CREATED
+    #
+    #   : Unit: Count
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #   CONTACTS\_HANDLED
+    #
+    #   : Unit: Count
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`, `DISCONNECT_REASON`
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_HOLD\_ABANDONS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_QUEUED
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_BY\_AGENT
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   MAX\_QUEUED\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   SERVICE\_LEVEL
+    #
+    #   : You can include up to 20 SERVICE\_LEVEL metrics in a request.
+    #
+    #     Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
+    #
+    #   SUM\_CONTACTS\_ANSWERED\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #   SUM\_CONTACTS\_ABANDONED\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #   SUM\_CONTACTS\_DISCONNECTED
+    #
+    #   : Valid metric filter key: `DISCONNECT_REASON`
+    #
+    #     Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #   SUM\_RETRY\_CALLBACK\_ATTEMPTS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::GetMetricDataV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricDataV2Response#next_token #next_token} => String
+    #   * {Types::GetMetricDataV2Response#metric_results #metric_results} => Array&lt;Types::MetricResultV2&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metric_data_v2({
+    #     resource_arn: "ARN", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     filters: [ # required
+    #       {
+    #         filter_key: "ResourceArnOrId",
+    #         filter_values: ["ResourceArnOrId"],
+    #       },
+    #     ],
+    #     groupings: ["GroupingV2"],
+    #     metrics: [ # required
+    #       {
+    #         name: "MetricNameV2",
+    #         threshold: [
+    #           {
+    #             comparison: "ResourceArnOrId",
+    #             threshold_value: 1.0,
+    #           },
+    #         ],
+    #         metric_filters: [
+    #           {
+    #             metric_filter_key: "String",
+    #             metric_filter_values: ["String"],
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.metric_results #=> Array
+    #   resp.metric_results[0].dimensions #=> Hash
+    #   resp.metric_results[0].dimensions["DimensionsV2Key"] #=> String
+    #   resp.metric_results[0].collections #=> Array
+    #   resp.metric_results[0].collections[0].metric.name #=> String
+    #   resp.metric_results[0].collections[0].metric.threshold #=> Array
+    #   resp.metric_results[0].collections[0].metric.threshold[0].comparison #=> String
+    #   resp.metric_results[0].collections[0].metric.threshold[0].threshold_value #=> Float
+    #   resp.metric_results[0].collections[0].metric.metric_filters #=> Array
+    #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_key #=> String
+    #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_values #=> Array
+    #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_values[0] #=> String
+    #   resp.metric_results[0].collections[0].value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataV2 AWS API Documentation
+    #
+    # @overload get_metric_data_v2(params = {})
+    # @param [Hash] params ({})
+    def get_metric_data_v2(params = {}, options = {})
+      req = build_request(:get_metric_data_v2, params)
+      req.send_request(options)
+    end
+
     # Gets details about a specific task template in the specified Amazon
     # Connect instance.
     #
@@ -10367,7 +10750,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

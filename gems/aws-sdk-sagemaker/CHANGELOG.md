@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.169.0 (2023-03-09)
+------------------
+
+* Feature - Amazon SageMaker Inference now allows SSM access to customer's model container by setting the "EnableSSMAccess" parameter for a ProductionVariant in CreateEndpointConfig API.
+
 1.168.0 (2023-03-08)
 ------------------
 

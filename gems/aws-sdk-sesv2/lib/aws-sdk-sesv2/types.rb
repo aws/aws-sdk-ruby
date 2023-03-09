@@ -2055,6 +2055,54 @@ module Aws::SESV2
     # @!attribute [rw] matching_event_types
     #   The types of events that Amazon SES sends to the specified event
     #   destinations.
+    #
+    #   * `SEND` - The send request was successful and SES will attempt to
+    #     deliver the message to the recipient’s mail server. (If
+    #     account-level or global suppression is being used, SES will still
+    #     count it as a send, but delivery is suppressed.)
+    #
+    #   * `REJECT` - SES accepted the email, but determined that it
+    #     contained a virus and didn’t attempt to deliver it to the
+    #     recipient’s mail server.
+    #
+    #   * `BOUNCE` - (*Hard bounce*) The recipient's mail server
+    #     permanently rejected the email. (*Soft bounces* are only included
+    #     when SES fails to deliver the email after retrying for a period of
+    #     time.)
+    #
+    #   * `COMPLAINT` - The email was successfully delivered to the
+    #     recipient’s mail server, but the recipient marked it as spam.
+    #
+    #   * `DELIVERY` - SES successfully delivered the email to the
+    #     recipient's mail server.
+    #
+    #   * `OPEN` - The recipient received the message and opened it in their
+    #     email client.
+    #
+    #   * `CLICK` - The recipient clicked one or more links in the email.
+    #
+    #   * `RENDERING_FAILURE` - The email wasn't sent because of a template
+    #     rendering issue. This event type can occur when template data is
+    #     missing, or when there is a mismatch between template parameters
+    #     and data. (This event type only occurs when you send email using
+    #     the [ `SendTemplatedEmail` ][1] or [ `SendBulkTemplatedEmail` ][2]
+    #     API operations.)
+    #
+    #   * `DELIVERY_DELAY` - The email couldn't be delivered to the
+    #     recipient’s mail server because a temporary issue occurred.
+    #     Delivery delays can occur, for example, when the recipient's
+    #     inbox is full, or when the receiving email server experiences a
+    #     transient issue.
+    #
+    #   * `SUBSCRIPTION` - The email was successfully delivered, but the
+    #     recipient updated their subscription preferences by clicking on an
+    #     *unsubscribe* link as part of your [subscription management][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference/API_SendTemplatedEmail.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/APIReference/API_SendBulkTemplatedEmail.html
+    #   [3]: https://docs.aws.amazon.com/ses/latest/dg/sending-email-subscription-management.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] kinesis_firehose_destination
@@ -5223,7 +5271,8 @@ module Aws::SESV2
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The recommendation type, with values like `DKIM`, `SPF` or `DMARC`.
+    #   The recommendation type, with values like `DKIM`, `SPF`, `DMARC` or
+    #   `BIMI`.
     #   @return [String]
     #
     # @!attribute [rw] description

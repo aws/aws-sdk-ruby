@@ -2945,9 +2945,8 @@ module Aws::QuickSight
     end
 
     # Deletes the Amazon QuickSight user that is associated with the
-    # identity of the Identity and Access Management (IAM) user or role
-    # that's making the call. The IAM user isn't deleted as a result of
-    # this call.
+    # identity of the IAM user or role that's making the call. The IAM user
+    # isn't deleted as a result of this call.
     #
     # @option params [required, String] :user_name
     #   The name of the user that you want to delete.
@@ -5003,9 +5002,19 @@ module Aws::QuickSight
     #     experience_configuration: { # required
     #       dashboard: {
     #         initial_dashboard_id: "ShortRestrictiveResourceId", # required
+    #         feature_configurations: {
+    #           state_persistence: {
+    #             enabled: false, # required
+    #           },
+    #         },
     #       },
     #       quick_sight_console: {
     #         initial_path: "EntryPath",
+    #         feature_configurations: {
+    #           state_persistence: {
+    #             enabled: false, # required
+    #           },
+    #         },
     #       },
     #       q_search_bar: {
     #         initial_topic_id: "RestrictiveResourceId",
@@ -5227,9 +5236,9 @@ module Aws::QuickSight
     #
     #   2.  Invited nonfederated users
     #
-    #   3.  Identity and Access Management (IAM) users and IAM role-based
-    #       sessions authenticated through Federated Single Sign-On using
-    #       SAML, OpenID Connect, or IAM federation
+    #   3.  IAM users and IAM role-based sessions authenticated through
+    #       Federated Single Sign-On using SAML, OpenID Connect, or IAM
+    #       federation
     #
     #   Omit this parameter for users in the third group, IAM users and IAM
     #   role-based sessions.
@@ -7361,9 +7370,9 @@ module Aws::QuickSight
     #
     # @option params [required, String] :default_namespace
     #   The default namespace for this Amazon Web Services account. Currently,
-    #   the default is `default`. Identity and Access Management (IAM) users
-    #   that register for the first time with Amazon QuickSight provide an
-    #   email address that becomes associated with the default namespace.
+    #   the default is `default`. IAM users that register for the first time
+    #   with Amazon QuickSight provide an email address that becomes
+    #   associated with the default namespace.
     #
     # @option params [String] :notification_email
     #   The email address that you want Amazon QuickSight to send
@@ -9322,7 +9331,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

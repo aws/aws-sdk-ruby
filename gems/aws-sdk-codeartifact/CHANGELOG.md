@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-03-09)
+------------------
+
+* Feature - This release introduces the generic package format, a mechanism for storing arbitrary binary assets. It also adds a new API, PublishPackageVersion, to allow for publishing generic packages.
+
 1.25.0 (2023-01-31)
 ------------------
 

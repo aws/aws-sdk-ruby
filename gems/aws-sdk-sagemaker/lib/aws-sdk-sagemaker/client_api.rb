@@ -1497,6 +1497,7 @@ module Aws::SageMaker
     ProductionVariantInstanceType = Shapes::StringShape.new(name: 'ProductionVariantInstanceType')
     ProductionVariantList = Shapes::ListShape.new(name: 'ProductionVariantList')
     ProductionVariantModelDataDownloadTimeoutInSeconds = Shapes::IntegerShape.new(name: 'ProductionVariantModelDataDownloadTimeoutInSeconds')
+    ProductionVariantSSMAccess = Shapes::BooleanShape.new(name: 'ProductionVariantSSMAccess')
     ProductionVariantServerlessConfig = Shapes::StructureShape.new(name: 'ProductionVariantServerlessConfig')
     ProductionVariantStatus = Shapes::StructureShape.new(name: 'ProductionVariantStatus')
     ProductionVariantStatusList = Shapes::ListShape.new(name: 'ProductionVariantStatusList')
@@ -7441,6 +7442,7 @@ module Aws::SageMaker
     ProductionVariant.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ProductionVariantVolumeSizeInGB, location_name: "VolumeSizeInGB"))
     ProductionVariant.add_member(:model_data_download_timeout_in_seconds, Shapes::ShapeRef.new(shape: ProductionVariantModelDataDownloadTimeoutInSeconds, location_name: "ModelDataDownloadTimeoutInSeconds"))
     ProductionVariant.add_member(:container_startup_health_check_timeout_in_seconds, Shapes::ShapeRef.new(shape: ProductionVariantContainerStartupHealthCheckTimeoutInSeconds, location_name: "ContainerStartupHealthCheckTimeoutInSeconds"))
+    ProductionVariant.add_member(:enable_ssm_access, Shapes::ShapeRef.new(shape: ProductionVariantSSMAccess, location_name: "EnableSSMAccess"))
     ProductionVariant.struct_class = Types::ProductionVariant
 
     ProductionVariantCoreDumpConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "DestinationS3Uri"))

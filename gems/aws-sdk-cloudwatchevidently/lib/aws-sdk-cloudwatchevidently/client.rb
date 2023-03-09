@@ -647,6 +647,9 @@ module Aws::CloudWatchEvidently
     #   identifier. For the value, specify the name of the variation that they
     #   are to be served.
     #
+    #   This parameter is limited to 2500 overrides or a total of 40KB. The
+    #   40KB limit includes an overhead of 6 bytes per override.
+    #
     # @option params [String] :evaluation_strategy
     #   Specify `ALL_RULES` to activate the traffic allocation specified by
     #   any ongoing launches or experiments. Specify `DEFAULT_VARIATION` to
@@ -2730,6 +2733,9 @@ module Aws::CloudWatchEvidently
     #   identifier. For the value, specify the name of the variation that they
     #   are to be served.
     #
+    #   This parameter is limited to 2500 overrides or a total of 40KB. The
+    #   40KB limit includes an overhead of 6 bytes per override.
+    #
     # @option params [String] :evaluation_strategy
     #   Specify `ALL_RULES` to activate the traffic allocation specified by
     #   any ongoing launches or experiments. Specify `DEFAULT_VARIATION` to
@@ -3113,7 +3119,7 @@ module Aws::CloudWatchEvidently
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevidently'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

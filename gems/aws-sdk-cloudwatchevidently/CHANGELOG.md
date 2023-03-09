@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-03-09)
+------------------
+
+* Feature - Updated entity override documentation
+
 1.11.0 (2023-02-09)
 ------------------
 

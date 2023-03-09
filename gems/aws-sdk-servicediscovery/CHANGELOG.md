@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2023-03-09)
+------------------
+
+* Feature - Updated all AWS Cloud Map APIs to provide consistent throttling exception (RequestLimitExceeded)
+
 1.49.0 (2023-01-18)
 ------------------
 

@@ -14,7 +14,7 @@ module Aws::QuickSight
     # couldn't be validated. You might not be authorized to carry out the
     # request. Make sure that your account is authorized to use the Amazon
     # QuickSight service, that your policies have the correct permissions,
-    # and that you are using the correct access keys.
+    # and that you are using the correct credentials.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -442,6 +442,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] violated_entities
+    #   Lists the violated entities that caused the analysis error
     #   @return [Array<Types::Entity>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisError AWS API Documentation
@@ -12209,9 +12210,9 @@ module Aws::QuickSight
     #
     #   2.  Invited nonfederated users
     #
-    #   3.  Identity and Access Management (IAM) users and IAM role-based
-    #       sessions authenticated through Federated Single Sign-On using
-    #       SAML, OpenID Connect, or IAM federation
+    #   3.  IAM users and IAM role-based sessions authenticated through
+    #       Federated Single Sign-On using SAML, OpenID Connect, or IAM
+    #       federation
     #
     #   Omit this parameter for users in the third group, IAM users and IAM
     #   role-based sessions.
@@ -17477,6 +17478,13 @@ module Aws::QuickSight
     #   colors).
     #   @return [Types::RowAlternateColorOptions]
     #
+    # @!attribute [rw] collapsed_row_dimensions_visibility
+    #   The visibility setting of a pivot table's collapsed row dimension
+    #   fields. If the value of this structure is `HIDDEN`, all collapsed
+    #   columns in a pivot table are automatically hidden. The default value
+    #   is `VISIBLE`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableOptions AWS API Documentation
     #
     class PivotTableOptions < Struct.new(
@@ -17488,7 +17496,8 @@ module Aws::QuickSight
       :row_header_style,
       :cell_style,
       :row_field_names_style,
-      :row_alternate_color_options)
+      :row_alternate_color_options,
+      :collapsed_row_dimensions_visibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18517,6 +18526,21 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The feature configurations of an embedded Amazon QuickSight console.
+    #
+    # @!attribute [rw] state_persistence
+    #   The state persistence configurations of an embedded Amazon
+    #   QuickSight console.
+    #   @return [Types::StatePersistenceConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserConsoleFeatureConfigurations AWS API Documentation
+    #
+    class RegisteredUserConsoleFeatureConfigurations < Struct.new(
+      :state_persistence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the dashboard you want to embed.
     #
     # @!attribute [rw] initial_dashboard_id
@@ -18529,10 +18553,30 @@ module Aws::QuickSight
     #   see a permissions error message.
     #   @return [String]
     #
+    # @!attribute [rw] feature_configurations
+    #   The feature configurations of an embbedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Types::RegisteredUserDashboardFeatureConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserDashboardEmbeddingConfiguration AWS API Documentation
     #
     class RegisteredUserDashboardEmbeddingConfiguration < Struct.new(
-      :initial_dashboard_id)
+      :initial_dashboard_id,
+      :feature_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The feature configuration for an embedded dashboard.
+    #
+    # @!attribute [rw] state_persistence
+    #   The state persistence settings of an embedded dashboard.
+    #   @return [Types::StatePersistenceConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserDashboardFeatureConfigurations AWS API Documentation
+    #
+    class RegisteredUserDashboardFeatureConfigurations < Struct.new(
+      :state_persistence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18681,10 +18725,16 @@ module Aws::QuickSight
     #     Amazon QuickSight console URL of the analysis.
     #   @return [String]
     #
+    # @!attribute [rw] feature_configurations
+    #   The embedding configuration of an embedded Amazon QuickSight
+    #   console.
+    #   @return [Types::RegisteredUserConsoleFeatureConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserQuickSightConsoleEmbeddingConfiguration AWS API Documentation
     #
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration < Struct.new(
-      :initial_path)
+      :initial_path,
+      :feature_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20739,6 +20789,21 @@ module Aws::QuickSight
     #
     class SslProperties < Struct.new(
       :disable_ssl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The state perssitence configuration of an embedded dashboard.
+    #
+    # @!attribute [rw] enabled
+    #   Determines if a Amazon QuickSight dashboard's state persistence
+    #   settings are turned on or off.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StatePersistenceConfigurations AWS API Documentation
+    #
+    class StatePersistenceConfigurations < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23417,10 +23482,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] default_namespace
     #   The default namespace for this Amazon Web Services account.
-    #   Currently, the default is `default`. Identity and Access Management
-    #   (IAM) users that register for the first time with Amazon QuickSight
-    #   provide an email address that becomes associated with the default
-    #   namespace.
+    #   Currently, the default is `default`. IAM users that register for the
+    #   first time with Amazon QuickSight provide an email address that
+    #   becomes associated with the default namespace.
     #   @return [String]
     #
     # @!attribute [rw] notification_email
@@ -25146,7 +25210,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] active
     #   The active status of user. When you create an Amazon QuickSight user
-    #   that’s not an IAM user or an Active Directory user, that user is
+    #   that's not an IAM user or an Active Directory user, that user is
     #   inactive until they sign in and provide a password.
     #   @return [Boolean]
     #

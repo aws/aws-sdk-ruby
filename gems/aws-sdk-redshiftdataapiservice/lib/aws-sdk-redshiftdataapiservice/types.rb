@@ -92,9 +92,10 @@ module Aws::RedshiftDataAPIService
     #   @return [Boolean]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatementInput AWS API Documentation
@@ -142,8 +143,8 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name. This element is not returned when
-    #   connecting to a provisioned cluster.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   element is not returned when connecting to a provisioned cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatementOutput AWS API Documentation
@@ -397,7 +398,7 @@ module Aws::RedshiftDataAPIService
     #   @return [Time]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name.
+    #   The serverless workgroup name or Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeStatementResponse AWS API Documentation
@@ -482,9 +483,10 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeTableRequest AWS API Documentation
@@ -600,9 +602,10 @@ module Aws::RedshiftDataAPIService
     #   @return [Boolean]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatementInput AWS API Documentation
@@ -650,8 +653,8 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name. This element is not returned when
-    #   connecting to a provisioned cluster.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   element is not returned when connecting to a provisioned cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatementOutput AWS API Documentation
@@ -834,9 +837,10 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListDatabasesRequest AWS API Documentation
@@ -926,9 +930,10 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListSchemasRequest AWS API Documentation
@@ -1119,9 +1124,10 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] workgroup_name
-    #   The serverless workgroup name. This parameter is required when
-    #   connecting to a serverless workgroup and authenticating using either
-    #   Secrets Manager or temporary credentials.
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListTablesRequest AWS API Documentation

@@ -2601,6 +2601,7 @@ module Aws::SageMaker
     #         volume_size_in_gb: 1,
     #         model_data_download_timeout_in_seconds: 1,
     #         container_startup_health_check_timeout_in_seconds: 1,
+    #         enable_ssm_access: false,
     #       },
     #     ],
     #     data_capture_config: {
@@ -2689,6 +2690,7 @@ module Aws::SageMaker
     #         volume_size_in_gb: 1,
     #         model_data_download_timeout_in_seconds: 1,
     #         container_startup_health_check_timeout_in_seconds: 1,
+    #         enable_ssm_access: false,
     #       },
     #     ],
     #   })
@@ -10537,6 +10539,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].volume_size_in_gb #=> Integer
     #   resp.production_variants[0].model_data_download_timeout_in_seconds #=> Integer
     #   resp.production_variants[0].container_startup_health_check_timeout_in_seconds #=> Integer
+    #   resp.production_variants[0].enable_ssm_access #=> Boolean
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -10591,6 +10594,7 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].volume_size_in_gb #=> Integer
     #   resp.shadow_production_variants[0].model_data_download_timeout_in_seconds #=> Integer
     #   resp.shadow_production_variants[0].container_startup_health_check_timeout_in_seconds #=> Integer
+    #   resp.shadow_production_variants[0].enable_ssm_access #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig AWS API Documentation
     #
@@ -22920,7 +22924,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.168.0'
+      context[:gem_version] = '1.169.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2849,7 +2849,7 @@ module Aws::SESV2
     #
     #   resp.recommendations #=> Array
     #   resp.recommendations[0].resource_arn #=> String
-    #   resp.recommendations[0].type #=> String, one of "DKIM", "DMARC", "SPF"
+    #   resp.recommendations[0].type #=> String, one of "DKIM", "DMARC", "SPF", "BIMI"
     #   resp.recommendations[0].description #=> String
     #   resp.recommendations[0].status #=> String, one of "OPEN", "FIXED"
     #   resp.recommendations[0].created_timestamp #=> Time
@@ -4487,7 +4487,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

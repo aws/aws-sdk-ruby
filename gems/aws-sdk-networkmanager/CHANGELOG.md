@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2023-03-09)
+------------------
+
+* Feature - This update provides example usage for TransitGatewayRouteTableArn.
+
 1.28.0 (2023-01-18)
 ------------------
 

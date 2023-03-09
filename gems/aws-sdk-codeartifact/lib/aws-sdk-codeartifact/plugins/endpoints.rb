@@ -116,6 +116,8 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::ListRepositoriesInDomain.build(context)
           when :list_tags_for_resource
             Aws::CodeArtifact::Endpoints::ListTagsForResource.build(context)
+          when :publish_package_version
+            Aws::CodeArtifact::Endpoints::PublishPackageVersion.build(context)
           when :put_domain_permissions_policy
             Aws::CodeArtifact::Endpoints::PutDomainPermissionsPolicy.build(context)
           when :put_package_origin_configuration

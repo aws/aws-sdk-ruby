@@ -165,6 +165,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -537,6 +539,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -740,6 +744,8 @@ module Aws::CodeArtifact
     #
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -806,6 +812,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -958,6 +966,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1263,6 +1273,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1344,11 +1356,6 @@ module Aws::CodeArtifact
     # @!attribute [rw] format
     #   A format that specifies the type of the package version with the
     #   requested readme file.
-    #
-    #   <note markdown="1"> Although `maven` is listed as a valid value, CodeArtifact does not
-    #   support displaying readme files for Maven packages.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1621,6 +1628,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1748,6 +1757,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1855,7 +1866,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the returned package versions.
+    #   The format of the package versions you want to list.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1869,6 +1880,8 @@ module Aws::CodeArtifact
     #
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1996,9 +2009,12 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace used to filter requested packages. Only packages with
-    #   the provided namespace will be returned. The package component that
-    #   specifies its namespace depends on its type. For example:
+    #   The namespace prefix used to filter requested packages. Only
+    #   packages with a namespace that starts with the provided string value
+    #   are returned. Note that although this option is called `--namespace`
+    #   and not `--namespace-prefix`, it has prefix-matching behavior.
+    #
+    #   Each package format uses namespace as follows:
     #
     #   * The namespace of a Maven package is its `groupId`.
     #
@@ -2006,6 +2022,8 @@ module Aws::CodeArtifact
     #
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package_prefix
@@ -2238,8 +2256,22 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] dependency_type
     #   The type of a package dependency. The possible values depend on the
-    #   package type. Example types are `compile`, `runtime`, and `test` for
-    #   Maven packages, and `dev`, `prod`, and `optional` for npm packages.
+    #   package type.
+    #
+    #   * npm: `regular`, `dev`, `peer`, `optional`
+    #
+    #   * maven: `optional`, `parent`, `compile`, `runtime`, `test`,
+    #     `system`, `provided`.
+    #
+    #     <note markdown="1"> Note that `parent` is not a regular Maven dependency type; instead
+    #     this is extracted from the `<parent>` element if one is defined in
+    #     the package version's POM file.
+    #
+    #      </note>
+    #
+    #   * nuget: The `dependencyType` field is never set for NuGet packages.
+    #
+    #   * pypi: `Requires-Dist`
     #   @return [String]
     #
     # @!attribute [rw] version_requirement
@@ -2276,6 +2308,8 @@ module Aws::CodeArtifact
     #
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2353,6 +2387,8 @@ module Aws::CodeArtifact
     #
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2398,6 +2434,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package_name
@@ -2578,6 +2616,139 @@ module Aws::CodeArtifact
     end
 
     # @!attribute [rw] domain
+    #   The name of the domain that contains the repository that contains
+    #   the package version to publish.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_owner
+    #   The 12-digit account number of the AWS account that owns the domain.
+    #   It does not include dashes or spaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The name of the repository that the package version will be
+    #   published to.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   A format that specifies the type of the package version with the
+    #   requested asset file.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the package version to publish.
+    #   @return [String]
+    #
+    # @!attribute [rw] package
+    #   The name of the package version to publish.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_version
+    #   The package version to publish (for example, `3.5.2`).
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_content
+    #   The content of the asset to publish.
+    #   @return [IO]
+    #
+    # @!attribute [rw] asset_name
+    #   The name of the asset to publish. Asset names can include Unicode
+    #   letters and numbers, and the following special characters: `` ~ ! @
+    #   ^ & ( ) - ` _ + [ ] \{ \} ; , . ` ``
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_sha256
+    #   The SHA256 hash of the `assetContent` to publish. This value must be
+    #   calculated by the caller and provided with the request.
+    #
+    #   This value is used as an integrity check to verify that the
+    #   `assetContent` has not changed after it was originally sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] unfinished
+    #   Specifies whether the package version should remain in the
+    #   `unfinished` state. If omitted, the package version status will be
+    #   set to `Published` (see [Package version status][1] in the
+    #   *CodeArtifact User Guide*).
+    #
+    #   Valid values: `unfinished`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PublishPackageVersionRequest AWS API Documentation
+    #
+    class PublishPackageVersionRequest < Struct.new(
+      :domain,
+      :domain_owner,
+      :repository,
+      :format,
+      :namespace,
+      :package,
+      :package_version,
+      :asset_content,
+      :asset_name,
+      :asset_sha256,
+      :unfinished)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] format
+    #   The format of the package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] package
+    #   The name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_revision
+    #   The revision of the package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A string that contains the status of the package version. For more
+    #   information, see [Package version status][1] in the *CodeArtifact
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status
+    #   @return [String]
+    #
+    # @!attribute [rw] asset
+    #   An [AssetSummary][1] for the published asset.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html
+    #   @return [Types::AssetSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PublishPackageVersionResult AWS API Documentation
+    #
+    class PublishPackageVersionResult < Struct.new(
+      :format,
+      :namespace,
+      :package,
+      :version,
+      :version_revision,
+      :status,
+      :asset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain
     #   The name of the domain on which to set the resource policy.
     #   @return [String]
     #
@@ -2648,6 +2819,8 @@ module Aws::CodeArtifact
     #
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -3108,6 +3281,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
+    #
+    #   * The namespace of a generic package is it’s `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package

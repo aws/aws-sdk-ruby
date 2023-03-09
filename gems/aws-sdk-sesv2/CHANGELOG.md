@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2023-03-09)
+------------------
+
+* Feature - This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects missing or misconfigured Brand Indicator for Message Identification (BIMI) DNS records for customer sending identities.
+
 1.31.0 (2023-01-18)
 ------------------
 
