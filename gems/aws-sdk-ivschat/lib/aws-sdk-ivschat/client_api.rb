@@ -608,6 +608,7 @@ module Aws::Ivschat
         o.http_request_uri = "/UpdateLoggingConfiguration"
         o.input = Shapes::ShapeRef.new(shape: UpdateLoggingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
