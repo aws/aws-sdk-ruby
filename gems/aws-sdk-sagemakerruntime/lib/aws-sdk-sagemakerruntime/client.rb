@@ -583,7 +583,7 @@ module Aws::SageMakerRuntime
     #   custom attributes in the response. If your code does not set this
     #   value in the response, an empty value is returned. For example, if a
     #   custom attribute represents the trace ID, your model can prepend the
-    #   custom attribute with `Trace ID`\: in your post-processing function.
+    #   custom attribute with `Trace ID`: in your post-processing function.
     #
     #   This feature is currently supported in the Amazon Web Services SDKs
     #   but not in the Amazon SageMaker Python SDK.

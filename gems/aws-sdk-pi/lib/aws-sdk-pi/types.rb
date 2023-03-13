@@ -123,7 +123,7 @@ module Aws::PI
     #   dimension group in the `GroupBy` parameter is `db.sql_tokenized`,
     #   you can specify per-SQL metrics to get the values for the top `N`
     #   SQL digests. The response syntax is as follows: `"AdditionalMetrics"
-    #   : \{ "string" : "string" \}`.
+    #   \: \{ "string" : "string" \}`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] partition_by

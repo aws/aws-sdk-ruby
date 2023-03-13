@@ -424,9 +424,9 @@ module Aws::AppSync
     # @option params [required, String] :api_caching_behavior
     #   Caching behavior.
     #
-    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #   * **FULL\_REQUEST\_CACHING**: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
+    #   * **PER\_RESOLVER\_CACHING**: Individual resolvers that you specify
     #     are cached.
     #
     # @option params [required, String] :type
@@ -455,19 +455,19 @@ module Aws::AppSync
     #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
-    #   * **T2\_SMALL**\: A t2.small instance type.
+    #   * **T2\_SMALL**: A t2.small instance type.
     #
-    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #   * **T2\_MEDIUM**: A t2.medium instance type.
     #
-    #   * **R4\_LARGE**\: A r4.large instance type.
+    #   * **R4\_LARGE**: A r4.large instance type.
     #
-    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #   * **R4\_XLARGE**: A r4.xlarge instance type.
     #
-    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #   * **R4\_2XLARGE**: A r4.2xlarge instance type.
     #
-    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #   * **R4\_4XLARGE**: A r4.4xlarge instance type.
     #
-    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #
     # @return [Types::CreateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1008,11 +1008,11 @@ module Aws::AppSync
     # @option params [String] :kind
     #   The resolver type.
     #
-    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #   * **UNIT**: A UNIT resolver type. A UNIT resolver is the default
     #     resolver type. You can use a UNIT resolver to run a GraphQL query
     #     against a single data source.
     #
-    #   * **PIPELINE**\: A PIPELINE resolver type. You can use a PIPELINE
+    #   * **PIPELINE**: A PIPELINE resolver type. You can use a PIPELINE
     #     resolver to invoke a series of `Function` objects in a serial
     #     manner. You can use a pipeline resolver to run a GraphQL query
     #     against multiple data sources.
@@ -2528,9 +2528,9 @@ module Aws::AppSync
     # @option params [required, String] :api_caching_behavior
     #   Caching behavior.
     #
-    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #   * **FULL\_REQUEST\_CACHING**: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
+    #   * **PER\_RESOLVER\_CACHING**: Individual resolvers that you specify
     #     are cached.
     #
     # @option params [required, String] :type
@@ -2559,19 +2559,19 @@ module Aws::AppSync
     #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
-    #   * **T2\_SMALL**\: A t2.small instance type.
+    #   * **T2\_SMALL**: A t2.small instance type.
     #
-    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #   * **T2\_MEDIUM**: A t2.medium instance type.
     #
-    #   * **R4\_LARGE**\: A r4.large instance type.
+    #   * **R4\_LARGE**: A r4.large instance type.
     #
-    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #   * **R4\_XLARGE**: A r4.xlarge instance type.
     #
-    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #   * **R4\_2XLARGE**: A r4.2xlarge instance type.
     #
-    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #   * **R4\_4XLARGE**: A r4.4xlarge instance type.
     #
-    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #
     # @return [Types::UpdateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3100,11 +3100,11 @@ module Aws::AppSync
     # @option params [String] :kind
     #   The resolver type.
     #
-    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #   * **UNIT**: A UNIT resolver type. A UNIT resolver is the default
     #     resolver type. You can use a UNIT resolver to run a GraphQL query
     #     against a single data source.
     #
-    #   * **PIPELINE**\: A PIPELINE resolver type. You can use a PIPELINE
+    #   * **PIPELINE**: A PIPELINE resolver type. You can use a PIPELINE
     #     resolver to invoke a series of `Function` objects in a serial
     #     manner. You can use a pipeline resolver to run a GraphQL query
     #     against multiple data sources.

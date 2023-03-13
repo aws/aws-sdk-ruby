@@ -440,7 +440,7 @@ module Aws::FinSpaceData
     #
     #   Both `s3SourcePath` and `sourceType` are required attributes.
     #
-    #   Here is an example of how you could specify the `sourceParams`\:
+    #   Here is an example of how you could specify the `sourceParams`:
     #
     #   ` "sourceParams": \{ "s3SourcePath":
     #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
@@ -471,7 +471,7 @@ module Aws::FinSpaceData
     #
     #   * `XML` – XML source file format.
     #
-    #   Here is an example of how you could specify the `formatParams`\:
+    #   Here is an example of how you could specify the `formatParams`:
     #
     #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
     #   "separator": ",", "compression":"None" \} `
@@ -1788,7 +1788,7 @@ module Aws::FinSpaceData
     #
     #   Both `s3SourcePath` and `sourceType` are required attributes.
     #
-    #   Here is an example of how you could specify the `sourceParams`\:
+    #   Here is an example of how you could specify the `sourceParams`:
     #
     #   ` "sourceParams": \{ "s3SourcePath":
     #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
@@ -1819,7 +1819,7 @@ module Aws::FinSpaceData
     #
     #   * `XML` – XML source file format.
     #
-    #   Here is an example of how you could specify the `formatParams`\:
+    #   Here is an example of how you could specify the `formatParams`:
     #
     #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
     #   "separator": ",", "compression":"None" \} `

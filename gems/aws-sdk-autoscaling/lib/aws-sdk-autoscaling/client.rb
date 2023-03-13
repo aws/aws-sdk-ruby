@@ -6510,7 +6510,7 @@ module Aws::AutoScaling
     # performance or availability of your application.
     #
     # Note the following about changing `DesiredCapacity`, `MaxSize`, or
-    # `MinSize`\:
+    # `MinSize`:
     #
     # * If a scale-in activity occurs as a result of a new `DesiredCapacity`
     #   value that is lower than the current size of the group, the Auto

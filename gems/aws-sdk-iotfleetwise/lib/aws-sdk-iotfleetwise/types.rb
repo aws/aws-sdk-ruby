@@ -845,7 +845,7 @@ module Aws::IoTFleetWise
     #
     # @!attribute [rw] attributes
     #   Static information about a vehicle in a key-value pair. For example:
-    #   `"engineType"`\: `"1.3 L R2"`
+    #   `"engineType"` : `"1.3 L R2"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] association_behavior
@@ -889,7 +889,7 @@ module Aws::IoTFleetWise
     #
     # @!attribute [rw] attributes
     #   Static information about a vehicle in a key-value pair. For example:
-    #   `"engine Type"`\: `"v6"`
+    #   `"engine Type"` : `"v6"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] association_behavior
@@ -1680,7 +1680,7 @@ module Aws::IoTFleetWise
     # @!attribute [rw] attributes
     #   Static information about a vehicle in a key-value pair. For example:
     #
-    #   `"engineType"`\: `"1.3 L R2"`
+    #   `"engineType"` : `"1.3 L R2"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] creation_time
@@ -3504,7 +3504,7 @@ module Aws::IoTFleetWise
     # @!attribute [rw] attributes
     #   Static information about a vehicle in a key-value pair. For example:
     #
-    #   `"engineType"`\: `"1.3 L R2"`
+    #   `"engineType"` : `"1.3 L R2"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attribute_update_mode
@@ -3545,7 +3545,7 @@ module Aws::IoTFleetWise
     # @!attribute [rw] attributes
     #   Static information about a vehicle in a key-value pair. For example:
     #
-    #   `"engineType"`\: `"1.3 L R2"`
+    #   `"engineType"` : `"1.3 L R2"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attribute_update_mode

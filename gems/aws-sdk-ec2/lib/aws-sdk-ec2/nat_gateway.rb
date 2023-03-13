@@ -104,20 +104,20 @@ module Aws::EC2
 
     # The state of the NAT gateway.
     #
-    # * `pending`\: The NAT gateway is being created and is not ready to
+    # * `pending`: The NAT gateway is being created and is not ready to
     #   process traffic.
     #
-    # * `failed`\: The NAT gateway could not be created. Check the
+    # * `failed`: The NAT gateway could not be created. Check the
     #   `failureCode` and `failureMessage` fields for the reason.
     #
-    # * `available`\: The NAT gateway is able to process traffic. This
-    #   status remains until you delete the NAT gateway, and does not
-    #   indicate the health of the NAT gateway.
+    # * `available`: The NAT gateway is able to process traffic. This status
+    #   remains until you delete the NAT gateway, and does not indicate the
+    #   health of the NAT gateway.
     #
-    # * `deleting`\: The NAT gateway is in the process of being terminated
+    # * `deleting`: The NAT gateway is in the process of being terminated
     #   and may still be processing traffic.
     #
-    # * `deleted`\: The NAT gateway has been terminated and is no longer
+    # * `deleted`: The NAT gateway has been terminated and is no longer
     #   processing traffic.
     # @return [String]
     def state

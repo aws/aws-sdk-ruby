@@ -1135,7 +1135,7 @@ module Aws::DAX
     #   @return [String]
     #
     # @!attribute [rw] data_type
-    #   The data type of the parameter. For example, `integer`\:
+    #   The data type of the parameter. For example, `integer`:
     #   @return [String]
     #
     # @!attribute [rw] allowed_values

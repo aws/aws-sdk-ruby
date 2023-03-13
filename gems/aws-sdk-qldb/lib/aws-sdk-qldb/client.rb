@@ -430,7 +430,7 @@ module Aws::QLDB
     #   The permissions mode to assign to the ledger that you want to create.
     #   This parameter can have one of the following values:
     #
-    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access control
+    #   * `ALLOW_ALL`: A legacy permissions mode that enables access control
     #     with API-level granularity for ledgers.
     #
     #     This mode allows users who have the `SendCommand` API permission for
@@ -439,7 +439,7 @@ module Aws::QLDB
     #     or command-level IAM permissions policies that you create for the
     #     ledger.
     #
-    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables access
+    #   * `STANDARD`: (*Recommended*) A permissions mode that enables access
     #     control with finer granularity for ledgers, tables, and PartiQL
     #     commands.
     #
@@ -476,13 +476,12 @@ module Aws::QLDB
     #
     #   Use one of the following options to specify this parameter:
     #
-    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #   * `AWS_OWNED_KMS_KEY`: Use an KMS key that is owned and managed by
     #     Amazon Web Services on your behalf.
     #
-    #   * **Undefined**\: By default, use an Amazon Web Services owned KMS
-    #     key.
+    #   * **Undefined**: By default, use an Amazon Web Services owned KMS key.
     #
-    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #   * **A valid symmetric customer managed KMS key**: Use the specified
     #     KMS key in your account that you create, own, and manage.
     #
     #     Amazon QLDB does not support asymmetric keys. For more information,
@@ -1479,12 +1478,12 @@ module Aws::QLDB
     #
     #   Use one of the following options to specify this parameter:
     #
-    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #   * `AWS_OWNED_KMS_KEY`: Use an KMS key that is owned and managed by
     #     Amazon Web Services on your behalf.
     #
-    #   * **Undefined**\: Make no changes to the KMS key of the ledger.
+    #   * **Undefined**: Make no changes to the KMS key of the ledger.
     #
-    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #   * **A valid symmetric customer managed KMS key**: Use the specified
     #     KMS key in your account that you create, own, and manage.
     #
     #     Amazon QLDB does not support asymmetric keys. For more information,
@@ -1571,7 +1570,7 @@ module Aws::QLDB
     #   The permissions mode to assign to the ledger. This parameter can have
     #   one of the following values:
     #
-    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access control
+    #   * `ALLOW_ALL`: A legacy permissions mode that enables access control
     #     with API-level granularity for ledgers.
     #
     #     This mode allows users who have the `SendCommand` API permission for
@@ -1580,7 +1579,7 @@ module Aws::QLDB
     #     or command-level IAM permissions policies that you create for the
     #     ledger.
     #
-    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables access
+    #   * `STANDARD`: (*Recommended*) A permissions mode that enables access
     #     control with finer granularity for ledgers, tables, and PartiQL
     #     commands.
     #

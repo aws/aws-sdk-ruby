@@ -4659,14 +4659,14 @@ module Aws::Connect
     #
     #   Note the following limits:
     #
-    #   * **Filter keys**\: A maximum of 5 filter keys are supported in a
+    #   * **Filter keys**: A maximum of 5 filter keys are supported in a
     #     single request. Valid filter keys: `QUEUE` \| `ROUTING_PROFILE` \|
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
     #
-    #   * **Filter values**\: A maximum of 100 filter values are supported
-    #     in a single request. For example, a `GetMetricDataV2` request can
+    #   * **Filter values**: A maximum of 100 filter values are supported in
+    #     a single request. For example, a `GetMetricDataV2` request can
     #     filter by 50 queues, 35 agents, and 15 routing profiles for a
     #     total of 100 filter values. `VOICE`, `CHAT`, and `TASK` are valid
     #     `filterValue` for the `CHANNEL` filter key.
@@ -4759,7 +4759,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
-    #     only supports the following as `INITIATION_METHOD`\: `INBOUND` \|
+    #     only supports the following as `INITIATION_METHOD`: `INBOUND` \|
     #     `OUTBOUND` \| `CALLBACK` \| `API`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
@@ -7704,11 +7704,11 @@ module Aws::Connect
     #   The number of contacts an agent can have on a channel
     #   simultaneously.
     #
-    #   Valid Range for `VOICE`\: Minimum value of 1. Maximum value of 1.
+    #   Valid Range for `VOICE`: Minimum value of 1. Maximum value of 1.
     #
-    #   Valid Range for `CHAT`\: Minimum value of 1. Maximum value of 10.
+    #   Valid Range for `CHAT`: Minimum value of 1. Maximum value of 10.
     #
-    #   Valid Range for `TASK`\: Minimum value of 1. Maximum value of 10.
+    #   Valid Range for `TASK`: Minimum value of 1. Maximum value of 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaConcurrency AWS API Documentation
@@ -7754,10 +7754,10 @@ module Aws::Connect
     # @!attribute [rw] metric_filter_values
     #   The values to use for filtering data.
     #
-    #   Valid metric filter values for `INITIATION_METHOD`\: `INBOUND` \|
+    #   Valid metric filter values for `INITIATION_METHOD`: `INBOUND` \|
     #   `OUTBOUND` \| `TRANSFER` \| `QUEUE_TRANSFER` \| `CALLBACK` \| `API`
     #
-    #   Valid metric filter values for `DISCONNECT_REASON`\:
+    #   Valid metric filter values for `DISCONNECT_REASON`:
     #   `CUSTOMER_DISCONNECT` \| `AGENT_DISCONNECT` \|
     #   `THIRD_PARTY_DISCONNECT` \| `TELECOM_PROBLEM` \| `BARGED` \|
     #   `CONTACT_FLOW_DISCONNECT` \| `OTHER` \| `EXPIRED` \| `API`
@@ -8058,7 +8058,7 @@ module Aws::Connect
     #   The contactId that is used for rehydration depends on the
     #   rehydration type. RehydrationType is required for persistent chat.
     #
-    #   * `ENTIRE_PAST_SESSION`\: Rehydrates a chat from the most recently
+    #   * `ENTIRE_PAST_SESSION`: Rehydrates a chat from the most recently
     #     terminated past chat contact of the specified past ended chat
     #     session. To use this type, provide the `initialContactId` of the
     #     past ended chat session in the `sourceContactId` field. In this
@@ -8066,7 +8066,7 @@ module Aws::Connect
     #     the specified chat session that has ended, and uses it to start a
     #     persistent chat.
     #
-    #   * `FROM_SEGMENT`\: Rehydrates a chat from the past chat contact that
+    #   * `FROM_SEGMENT`: Rehydrates a chat from the past chat contact that
     #     is specified in the `sourceContactId` field.
     #
     #   The actual contactId used for rehydration is provided in the
@@ -8427,7 +8427,7 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #   <note markdown="1"> The currently supported value for `FieldName`: `name`
     #
     #    </note>
     #   @return [Types::StringCondition]
@@ -9119,7 +9119,7 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #   <note markdown="1"> The currently supported value for `FieldName`: `name`
     #
     #    </note>
     #   @return [Types::StringCondition]
@@ -9607,7 +9607,7 @@ module Aws::Connect
     #
     #    </note>
     #
-    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #   <note markdown="1"> The currently supported value for `FieldName`: `name`
     #
     #    </note>
     #   @return [Types::SecurityProfileSearchCriteria]
@@ -9889,7 +9889,7 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #   <note markdown="1"> The currently supported value for `FieldName`: `name`
     #
     #    </note>
     #   @return [Types::StringCondition]
@@ -10113,7 +10113,7 @@ module Aws::Connect
     #   The supported chat message content types. Content types must always
     #   contain `text/plain`. You can then put any other supported type in
     #   the list. For example, all the following lists are valid because
-    #   they contain `text/plain`\: `[text/plain, text/markdown,
+    #   they contain `text/plain`: `[text/plain, text/markdown,
     #   application/json]`, `[text/markdown, text/plain]`, `[text/plain,
     #   application/json]`.
     #   @return [Array<String>]
@@ -10589,7 +10589,7 @@ module Aws::Connect
 
     # A leaf node condition which can be used to specify a string condition.
     #
-    # <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    # <note markdown="1"> The currently supported value for `FieldName`: `name`
     #
     #  </note>
     #

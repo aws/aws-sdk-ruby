@@ -527,7 +527,7 @@ module Aws::MachineLearning
     #   A user-supplied name or description of the `DataSource`.
     #
     # @option params [required, Types::RDSDataSpec] :rds_data
-    #   The data specification of an Amazon RDS `DataSource`\:
+    #   The data specification of an Amazon RDS `DataSource`:
     #
     #   * DatabaseInformation -
     #
@@ -680,7 +680,7 @@ module Aws::MachineLearning
     #   A user-supplied name or description of the `DataSource`.
     #
     # @option params [required, Types::RedshiftDataSpec] :data_spec
-    #   The data specification of an Amazon Redshift `DataSource`\:
+    #   The data specification of an Amazon Redshift `DataSource`:
     #
     #   * DatabaseInformation -
     #
@@ -809,7 +809,7 @@ module Aws::MachineLearning
     #   A user-supplied name or description of the `DataSource`.
     #
     # @option params [required, Types::S3DataSpec] :data_spec
-    #   The data specification of a `DataSource`\:
+    #   The data specification of a `DataSource`:
     #
     #   * DataLocationS3 - The Amazon S3 location of the observation data.
     #
@@ -869,7 +869,7 @@ module Aws::MachineLearning
     # provides a summary so that you know how effective the `MLModel`
     # functions on the test data. Evaluation generates a relevant
     # performance metric, such as BinaryAUC, RegressionRMSE or
-    # MulticlassAvgFScore based on the corresponding `MLModelType`\:
+    # MulticlassAvgFScore based on the corresponding `MLModelType`:
     # `BINARY`, `REGRESSION` or `MULTICLASS`.
     #
     # `CreateEvaluation` is an asynchronous operation. In response to
@@ -1296,7 +1296,7 @@ module Aws::MachineLearning
     #
     # @option params [String] :filter_variable
     #   Use one of the following variables to filter a list of
-    #   `BatchPrediction`\:
+    #   `BatchPrediction`:
     #
     #   * `CreatedAt` - Sets the search criteria to the `BatchPrediction`
     #     creation date.
@@ -1355,7 +1355,7 @@ module Aws::MachineLearning
     #   For example, a `Batch Prediction` operation could have the `Name`
     #   `2014-09-09-HolidayGiftMailer`. To search for this `BatchPrediction`,
     #   select `Name` for the `FilterVariable` and any of the following
-    #   strings for the `Prefix`\:
+    #   strings for the `Prefix`:
     #
     #   * 2014-09
     #
@@ -1440,7 +1440,7 @@ module Aws::MachineLearning
     # request.
     #
     # @option params [String] :filter_variable
-    #   Use one of the following variables to filter a list of `DataSource`\:
+    #   Use one of the following variables to filter a list of `DataSource`:
     #
     #   * `CreatedAt` - Sets the search criteria to `DataSource` creation
     #     dates.
@@ -1493,7 +1493,7 @@ module Aws::MachineLearning
     #   For example, a `DataSource` could have the `Name`
     #   `2014-09-09-HolidayGiftMailer`. To search for this `DataSource`,
     #   select `Name` for the `FilterVariable` and any of the following
-    #   strings for the `Prefix`\:
+    #   strings for the `Prefix`:
     #
     #   * 2014-09
     #
@@ -1648,7 +1648,7 @@ module Aws::MachineLearning
     #   For example, an `Evaluation` could have the `Name`
     #   `2014-09-09-HolidayGiftMailer`. To search for this `Evaluation`,
     #   select `Name` for the `FilterVariable` and any of the following
-    #   strings for the `Prefix`\:
+    #   strings for the `Prefix`:
     #
     #   * 2014-09
     #
@@ -1731,7 +1731,7 @@ module Aws::MachineLearning
     # request.
     #
     # @option params [String] :filter_variable
-    #   Use one of the following variables to filter a list of `MLModel`\:
+    #   Use one of the following variables to filter a list of `MLModel`:
     #
     #   * `CreatedAt` - Sets the search criteria to `MLModel` creation date.
     #
@@ -1795,7 +1795,7 @@ module Aws::MachineLearning
     #   For example, an `MLModel` could have the `Name`
     #   `2014-09-09-HolidayGiftMailer`. To search for this `MLModel`, select
     #   `Name` for the `FilterVariable` and any of the following strings for
-    #   the `Prefix`\:
+    #   the `Prefix`:
     #
     #   * 2014-09
     #

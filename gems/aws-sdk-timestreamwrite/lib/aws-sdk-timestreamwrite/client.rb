@@ -867,7 +867,7 @@ module Aws::TimestreamWrite
     # Because the Timestream SDKs are designed to transparently work with
     # the service’s architecture, including the management and mapping of
     # the service endpoints, *we don't recommend that you use this API
-    # operation unless*\:
+    # operation unless*:
     #
     # * You are using [VPC endpoints (Amazon Web Services PrivateLink) with
     #   Timestream][1]

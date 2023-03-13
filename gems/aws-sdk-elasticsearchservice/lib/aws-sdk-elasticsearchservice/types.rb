@@ -2196,7 +2196,7 @@ module Aws::ElasticsearchService
     #
     # @!attribute [rw] endpoints
     #   Map containing the Elasticsearch domain endpoints used to submit
-    #   index and search requests. Example `key, value`\:
+    #   index and search requests. Example `key, value`:
     #   `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
     #   @return [Hash<String,String>]
     #

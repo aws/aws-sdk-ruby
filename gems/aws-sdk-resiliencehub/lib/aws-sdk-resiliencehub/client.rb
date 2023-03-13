@@ -374,7 +374,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -477,7 +477,7 @@ module Aws::ResilienceHub
     # @option params [String] :policy_arn
     #   The Amazon Resource Name (ARN) of the resiliency policy. The format
     #   for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -549,7 +549,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -642,7 +642,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -750,7 +750,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -944,7 +944,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -995,7 +995,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -1043,7 +1043,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1123,7 +1123,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1194,7 +1194,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1337,7 +1337,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the resiliency policy. The format
     #   for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -1374,7 +1374,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1422,7 +1422,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -1503,7 +1503,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1550,7 +1550,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1615,7 +1615,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1706,7 +1706,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1758,7 +1758,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1810,7 +1810,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1857,7 +1857,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the resiliency policy. The format
     #   for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -1911,7 +1911,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -1975,7 +1975,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -2040,7 +2040,7 @@ module Aws::ResilienceHub
     # @option params [String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -2128,7 +2128,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -2201,7 +2201,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -2291,7 +2291,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -2351,7 +2351,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -2417,7 +2417,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -2483,7 +2483,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -2566,7 +2566,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -2628,7 +2628,7 @@ module Aws::ResilienceHub
     # @option params [String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -2693,7 +2693,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -2837,7 +2837,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -2985,7 +2985,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
     #   ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app-assessment/`app-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -3056,7 +3056,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3127,7 +3127,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3166,7 +3166,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3376,7 +3376,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3439,7 +3439,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3485,7 +3485,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3646,7 +3646,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3666,7 +3666,7 @@ module Aws::ResilienceHub
     # @option params [String] :policy_arn
     #   The Amazon Resource Name (ARN) of the resiliency policy. The format
     #   for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #
@@ -3739,7 +3739,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3796,7 +3796,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3877,7 +3877,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
     #   The format for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:app/`app-id`. For
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
     #   the *AWS General Reference* guide.
     #
@@ -3993,7 +3993,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the resiliency policy. The format
     #   for this ARN is:
-    #   arn:`partition`\:resiliencehub:`region`\:`account`\:resiliency-policy/`policy-id`.
+    #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
     #   (ARNs)][1] in the *AWS General Reference* guide.
     #

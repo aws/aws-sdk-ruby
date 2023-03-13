@@ -790,7 +790,7 @@ module Aws::ServiceCatalog
     #   share recipient account end users with a principal that matches any
     #   of the associated IAM patterns can provision products from the
     #   portfolio. Once shared, the share recipient can view associations of
-    #   `PrincipalType`\: `IAM_PATTERN` on their portfolio. You can create
+    #   `PrincipalType`: `IAM_PATTERN` on their portfolio. You can create
     #   the principals in the recipient account before or after creating the
     #   share.
     #   @return [Boolean]
@@ -5037,7 +5037,7 @@ module Aws::ServiceCatalog
     #   `"LoadTemplateFromURL":
     #   "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."`
     #
-    #   `ImportFromPhysicalId`\: The physical id of the resource that
+    #   `ImportFromPhysicalId`: The physical id of the resource that
     #   contains the template. Currently only supports CloudFormation stack
     #   arn. Specify the physical id in JSON format as follows:
     #   `ImportFromPhysicalId:
@@ -6125,20 +6125,20 @@ module Aws::ServiceCatalog
     #   The status of the stack instance, in terms of its synchronization
     #   with its associated stack set.
     #
-    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #   * `INOPERABLE`: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
     #     excluded from further `UpdateStackSet` operations. You might need
     #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
     #     set to true, to delete the stack instance, and then delete the
     #     stack manually.
     #
-    #   * `OUTDATED`\: The stack isn't currently up to date with the stack
+    #   * `OUTDATED`: The stack isn't currently up to date with the stack
     #     set because either the associated stack failed during a
     #     `CreateStackSet` or `UpdateStackSet` operation, or the stack was
     #     part of a `CreateStackSet` or `UpdateStackSet` operation that
     #     failed or was stopped before the stack was created or updated.
     #
-    #   * `CURRENT`\: The stack is currently up to date with the stack set.
+    #   * `CURRENT`: The stack is currently up to date with the stack set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/StackInstance AWS API Documentation

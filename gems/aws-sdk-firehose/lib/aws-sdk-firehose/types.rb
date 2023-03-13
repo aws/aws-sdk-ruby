@@ -698,10 +698,10 @@ module Aws::Firehose
     #   The delivery stream type. This parameter can be one of the following
     #   values:
     #
-    #   * `DirectPut`\: Provider applications access the delivery stream
+    #   * `DirectPut`: Provider applications access the delivery stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis data
+    #   * `KinesisStreamAsSource`: The delivery stream uses a Kinesis data
     #     stream as a source.
     #   @return [String]
     #
@@ -921,10 +921,10 @@ module Aws::Firehose
     # @!attribute [rw] delivery_stream_type
     #   The delivery stream type. This can be one of the following values:
     #
-    #   * `DirectPut`\: Provider applications access the delivery stream
+    #   * `DirectPut`: Provider applications access the delivery stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis data
+    #   * `KinesisStreamAsSource`: The delivery stream uses a Kinesis data
     #     stream as a source.
     #   @return [String]
     #
@@ -2517,10 +2517,10 @@ module Aws::Firehose
     # @!attribute [rw] delivery_stream_type
     #   The delivery stream type. This can be one of the following values:
     #
-    #   * `DirectPut`\: Provider applications access the delivery stream
+    #   * `DirectPut`: Provider applications access the delivery stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis data
+    #   * `KinesisStreamAsSource`: The delivery stream uses a Kinesis data
     #     stream as a source.
     #
     #   This parameter is optional. If this parameter is omitted, delivery

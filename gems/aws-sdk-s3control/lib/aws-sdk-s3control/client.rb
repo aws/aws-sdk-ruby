@@ -404,7 +404,7 @@ module Aws::S3Control
     #
     #
     #
-    # The following actions are related to `CreateAccessPoint`\:
+    # The following actions are related to `CreateAccessPoint`:
     #
     # * [GetAccessPoint][4]
     #
@@ -504,7 +504,7 @@ module Aws::S3Control
     # *Amazon S3 User Guide*.
     #
     # The following actions are related to
-    # `CreateAccessPointForObjectLambda`\:
+    # `CreateAccessPointForObjectLambda`:
     #
     # * [DeleteAccessPointForObjectLambda][2]
     #
@@ -1005,7 +1005,7 @@ module Aws::S3Control
     # a response, it provides a token that you can use to monitor the status
     # of the request with `DescribeMultiRegionAccessPointOperation`.
     #
-    # The following actions are related to `CreateMultiRegionAccessPoint`\:
+    # The following actions are related to `CreateMultiRegionAccessPoint`:
     #
     # * [DeleteMultiRegionAccessPoint][3]
     #
@@ -1088,7 +1088,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][1] section.
     #
-    # The following actions are related to `DeleteAccessPoint`\:
+    # The following actions are related to `DeleteAccessPoint`:
     #
     # * [CreateAccessPoint][2]
     #
@@ -1144,7 +1144,7 @@ module Aws::S3Control
     # Deletes the specified Object Lambda Access Point.
     #
     # The following actions are related to
-    # `DeleteAccessPointForObjectLambda`\:
+    # `DeleteAccessPointForObjectLambda`:
     #
     # * [CreateAccessPointForObjectLambda][1]
     #
@@ -1195,7 +1195,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][1] section.
     #
-    # The following actions are related to `DeleteAccessPointPolicy`\:
+    # The following actions are related to `DeleteAccessPointPolicy`:
     #
     # * [PutAccessPointPolicy][2]
     #
@@ -1247,7 +1247,7 @@ module Aws::S3Control
     # Removes the resource policy for an Object Lambda Access Point.
     #
     # The following actions are related to
-    # `DeleteAccessPointPolicyForObjectLambda`\:
+    # `DeleteAccessPointPolicyForObjectLambda`:
     #
     # * [GetAccessPointPolicyForObjectLambda][1]
     #
@@ -1474,7 +1474,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][4] section.
     #
-    # The following actions are related to `DeleteBucketPolicy`\:
+    # The following actions are related to `DeleteBucketPolicy`:
     #
     # * [GetBucketPolicy][5]
     #
@@ -1547,7 +1547,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][3] section.
     #
-    # The following actions are related to `DeleteBucketTagging`\:
+    # The following actions are related to `DeleteBucketTagging`:
     #
     # * [GetBucketTagging][4]
     #
@@ -1660,7 +1660,7 @@ module Aws::S3Control
     # a response, it provides a token that you can use to monitor the status
     # of the request with `DescribeMultiRegionAccessPointOperation`.
     #
-    # The following actions are related to `DeleteMultiRegionAccessPoint`\:
+    # The following actions are related to `DeleteMultiRegionAccessPoint`:
     #
     # * [CreateMultiRegionAccessPoint][2]
     #
@@ -1998,7 +1998,7 @@ module Aws::S3Control
     # [Managing Multi-Region Access Points][1] in the *Amazon S3 User
     # Guide*.
     #
-    # The following actions are related to `GetMultiRegionAccessPoint`\:
+    # The following actions are related to `GetMultiRegionAccessPoint`:
     #
     # * [CreateMultiRegionAccessPoint][2]
     #
@@ -2082,7 +2082,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][1] section.
     #
-    # The following actions are related to `GetAccessPoint`\:
+    # The following actions are related to `GetAccessPoint`:
     #
     # * [CreateAccessPoint][2]
     #
@@ -2167,7 +2167,7 @@ module Aws::S3Control
     # Returns configuration for an Object Lambda Access Point.
     #
     # The following actions are related to
-    # `GetAccessPointConfigurationForObjectLambda`\:
+    # `GetAccessPointConfigurationForObjectLambda`:
     #
     # * [PutAccessPointConfigurationForObjectLambda][1]
     #
@@ -2220,7 +2220,7 @@ module Aws::S3Control
     # Returns configuration information about the specified Object Lambda
     # Access Point
     #
-    # The following actions are related to `GetAccessPointForObjectLambda`\:
+    # The following actions are related to `GetAccessPointForObjectLambda`:
     #
     # * [CreateAccessPointForObjectLambda][1]
     #
@@ -2275,7 +2275,7 @@ module Aws::S3Control
     # Returns the access point policy associated with the specified access
     # point.
     #
-    # The following actions are related to `GetAccessPointPolicy`\:
+    # The following actions are related to `GetAccessPointPolicy`:
     #
     # * [PutAccessPointPolicy][1]
     #
@@ -2332,7 +2332,7 @@ module Aws::S3Control
     # Returns the resource policy for an Object Lambda Access Point.
     #
     # The following actions are related to
-    # `GetAccessPointPolicyForObjectLambda`\:
+    # `GetAccessPointPolicyForObjectLambda`:
     #
     # * [DeleteAccessPointPolicyForObjectLambda][1]
     #
@@ -2571,7 +2571,7 @@ module Aws::S3Control
     #   * SOAP Fault Code Prefix: Client
     #
     # The following actions are related to
-    # `GetBucketLifecycleConfiguration`\:
+    # `GetBucketLifecycleConfiguration`:
     #
     # * [PutBucketLifecycleConfiguration][7]
     #
@@ -2694,7 +2694,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][4] section.
     #
-    # The following actions are related to `GetBucketPolicy`\:
+    # The following actions are related to `GetBucketPolicy`:
     #
     # * [GetObject][5]
     #
@@ -2785,7 +2785,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][3] section.
     #
-    # The following actions are related to `GetBucketTagging`\:
+    # The following actions are related to `GetBucketTagging`:
     #
     # * [PutBucketTagging][4]
     #
@@ -2983,7 +2983,7 @@ module Aws::S3Control
     # Access Points, see [Managing Multi-Region Access Points][1] in the
     # *Amazon S3 User Guide*.
     #
-    # The following actions are related to `GetMultiRegionAccessPoint`\:
+    # The following actions are related to `GetMultiRegionAccessPoint`:
     #
     # * [CreateMultiRegionAccessPoint][2]
     #
@@ -3060,7 +3060,7 @@ module Aws::S3Control
     # *Amazon S3 User Guide*.
     #
     # The following actions are related to
-    # `GetMultiRegionAccessPointPolicy`\:
+    # `GetMultiRegionAccessPointPolicy`:
     #
     # * [GetMultiRegionAccessPointPolicyStatus][2]
     #
@@ -3121,7 +3121,7 @@ module Aws::S3Control
     # *Amazon S3 User Guide*.
     #
     # The following actions are related to
-    # `GetMultiRegionAccessPointPolicyStatus`\:
+    # `GetMultiRegionAccessPointPolicyStatus`:
     #
     # * [GetMultiRegionAccessPointPolicy][2]
     #
@@ -3420,7 +3420,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][1] section.
     #
-    # The following actions are related to `ListAccessPoints`\:
+    # The following actions are related to `ListAccessPoints`:
     #
     # * [CreateAccessPoint][2]
     #
@@ -3512,7 +3512,7 @@ module Aws::S3Control
     # points.
     #
     # The following actions are related to
-    # `ListAccessPointsForObjectLambda`\:
+    # `ListAccessPointsForObjectLambda`:
     #
     # * [CreateAccessPointForObjectLambda][1]
     #
@@ -3670,7 +3670,7 @@ module Aws::S3Control
     # Access Points, see [Managing Multi-Region Access Points][1] in the
     # *Amazon S3 User Guide*.
     #
-    # The following actions are related to `ListMultiRegionAccessPoint`\:
+    # The following actions are related to `ListMultiRegionAccessPoint`:
     #
     # * [CreateMultiRegionAccessPoint][2]
     #
@@ -3858,7 +3858,7 @@ module Aws::S3Control
     # Replaces configuration for an Object Lambda Access Point.
     #
     # The following actions are related to
-    # `PutAccessPointConfigurationForObjectLambda`\:
+    # `PutAccessPointConfigurationForObjectLambda`:
     #
     # * [GetAccessPointConfigurationForObjectLambda][1]
     #
@@ -3927,7 +3927,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][1] section.
     #
-    # The following actions are related to `PutAccessPointPolicy`\:
+    # The following actions are related to `PutAccessPointPolicy`:
     #
     # * [GetAccessPointPolicy][2]
     #
@@ -3993,7 +3993,7 @@ module Aws::S3Control
     # in the *Amazon S3 User Guide*.
     #
     # The following actions are related to
-    # `PutAccessPointPolicyForObjectLambda`\:
+    # `PutAccessPointPolicyForObjectLambda`:
     #
     # * [DeleteAccessPointPolicyForObjectLambda][2]
     #
@@ -4056,7 +4056,7 @@ module Aws::S3Control
     # point ARN, see the [Examples][2] section.
     #
     # The following actions are related to
-    # `PutBucketLifecycleConfiguration`\:
+    # `PutBucketLifecycleConfiguration`:
     #
     # * [GetBucketLifecycleConfiguration][3]
     #
@@ -4186,7 +4186,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][4] section.
     #
-    # The following actions are related to `PutBucketPolicy`\:
+    # The following actions are related to `PutBucketPolicy`:
     #
     # * [GetBucketPolicy][5]
     #
@@ -4323,7 +4323,7 @@ module Aws::S3Control
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
     # point ARN, see the [Examples][9] section.
     #
-    # The following actions are related to `PutBucketTagging`\:
+    # The following actions are related to `PutBucketTagging`:
     #
     # * [GetBucketTagging][10]
     #
@@ -4598,7 +4598,7 @@ module Aws::S3Control
     # *Amazon S3 User Guide*.
     #
     # The following actions are related to
-    # `PutMultiRegionAccessPointPolicy`\:
+    # `PutMultiRegionAccessPointPolicy`:
     #
     # * [GetMultiRegionAccessPointPolicy][2]
     #

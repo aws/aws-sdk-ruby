@@ -176,9 +176,9 @@ module Aws::Cloud9
     #   The type of environment member permissions you want to associate
     #   with this environment member. Available values include:
     #
-    #   * `read-only`\: Has read-only access to the environment.
+    #   * `read-only`: Has read-only access to the environment.
     #
-    #   * `read-write`\: Has read-write access to the environment.
+    #   * `read-write`: Has read-write access to the environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentMembershipRequest AWS API Documentation
@@ -256,11 +256,11 @@ module Aws::Cloud9
     #   The type of environment member permissions to get information about.
     #   Available values include:
     #
-    #   * `owner`\: Owns the environment.
+    #   * `owner`: Owns the environment.
     #
-    #   * `read-only`\: Has read-only access to the environment.
+    #   * `read-only`: Has read-only access to the environment.
     #
-    #   * `read-write`\: Has read-write access to the environment.
+    #   * `read-write`: Has read-write access to the environment.
     #
     #   If no value is specified, information about all environment members
     #   are returned.
@@ -327,19 +327,19 @@ module Aws::Cloud9
     # @!attribute [rw] status
     #   The status of the environment. Available values include:
     #
-    #   * `connecting`\: The environment is connecting.
+    #   * `connecting`: The environment is connecting.
     #
-    #   * `creating`\: The environment is being created.
+    #   * `creating`: The environment is being created.
     #
-    #   * `deleting`\: The environment is being deleted.
+    #   * `deleting`: The environment is being deleted.
     #
-    #   * `error`\: The environment is in an error state.
+    #   * `error`: The environment is in an error state.
     #
-    #   * `ready`\: The environment is ready.
+    #   * `ready`: The environment is ready.
     #
-    #   * `stopped`\: The environment is stopped.
+    #   * `stopped`: The environment is stopped.
     #
-    #   * `stopping`\: The environment is stopping.
+    #   * `stopping`: The environment is stopping.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -396,10 +396,10 @@ module Aws::Cloud9
     # @!attribute [rw] type
     #   The type of environment. Valid values include the following:
     #
-    #   * `ec2`\: An Amazon Elastic Compute Cloud (Amazon EC2) instance
+    #   * `ec2`: An Amazon Elastic Compute Cloud (Amazon EC2) instance
     #     connects to the environment.
     #
-    #   * `ssh`\: Your own server connects to the environment.
+    #   * `ssh`: Your own server connects to the environment.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
@@ -466,15 +466,15 @@ module Aws::Cloud9
     # @!attribute [rw] status
     #   The current creation or deletion lifecycle state of the environment.
     #
-    #   * `CREATING`\: The environment is in the process of being created.
+    #   * `CREATING`: The environment is in the process of being created.
     #
-    #   * `CREATED`\: The environment was successfully created.
+    #   * `CREATED`: The environment was successfully created.
     #
-    #   * `CREATE_FAILED`\: The environment failed to be created.
+    #   * `CREATE_FAILED`: The environment failed to be created.
     #
-    #   * `DELETING`\: The environment is in the process of being deleted.
+    #   * `DELETING`: The environment is in the process of being deleted.
     #
-    #   * `DELETE_FAILED`\: The environment failed to delete.
+    #   * `DELETE_FAILED`: The environment failed to delete.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -504,11 +504,11 @@ module Aws::Cloud9
     #   The type of environment member permissions associated with this
     #   environment member. Available values include:
     #
-    #   * `owner`\: Owns the environment.
+    #   * `owner`: Owns the environment.
     #
-    #   * `read-only`\: Has read-only access to the environment.
+    #   * `read-only`: Has read-only access to the environment.
     #
-    #   * `read-write`\: Has read-write access to the environment.
+    #   * `read-write`: Has read-write access to the environment.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -722,9 +722,9 @@ module Aws::Cloud9
     #   The replacement type of environment member permissions you want to
     #   associate with this environment member. Available values include:
     #
-    #   * `read-only`\: Has read-only access to the environment.
+    #   * `read-only`: Has read-only access to the environment.
     #
-    #   * `read-write`\: Has read-write access to the environment.
+    #   * `read-write`: Has read-write access to the environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentMembershipRequest AWS API Documentation

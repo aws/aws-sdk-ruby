@@ -1373,7 +1373,7 @@ module Aws::AuditManager
     #
     #   To learn more about the supported keywords that you can use when
     #   mapping a control data source, see the following pages in the *Audit
-    #   Manager User Guide*\:
+    #   Manager User Guide*:
     #
     #   * [Config rules supported by Audit Manager][1]
     #
@@ -1712,7 +1712,7 @@ module Aws::AuditManager
     #
     #   To learn more about the supported keywords that you can use when
     #   mapping a control data source, see the following pages in the *Audit
-    #   Manager User Guide*\:
+    #   Manager User Guide*:
     #
     #   * [Config rules supported by Audit Manager][1]
     #
@@ -4015,7 +4015,7 @@ module Aws::AuditManager
     #
     # To learn more about the supported keywords that you can use when
     # mapping a control data source, see the following pages in the *Audit
-    # Manager User Guide*\:
+    # Manager User Guide*:
     #
     # * [Config rules supported by Audit Manager][1]
     #
@@ -4051,7 +4051,7 @@ module Aws::AuditManager
     #
     #     * Managed rule name: [s3-bucket-acl-prohibited][3]
     #
-    #       `keywordValue`\: `S3_BUCKET_ACL_PROHIBITED`
+    #       `keywordValue`: `S3_BUCKET_ACL_PROHIBITED`
     #
     #   * For [custom rules][4], you form the `keywordValue` by adding the
     #     `Custom_` prefix to the rule name. This prefix distinguishes the
@@ -4059,7 +4059,7 @@ module Aws::AuditManager
     #
     #     * Custom rule name: my-custom-config-rule
     #
-    #       `keywordValue`\: `Custom_my-custom-config-rule`
+    #       `keywordValue`: `Custom_my-custom-config-rule`
     #
     #   * For [service-linked rules][5], you form the `keywordValue` by
     #     adding the `Custom_` prefix to the rule name. In addition, you
@@ -4068,12 +4068,12 @@ module Aws::AuditManager
     #     * Service-linked rule name:
     #       CustomRuleForAccount-conformance-pack-szsm1uv0w
     #
-    #       `keywordValue`\: `Custom_CustomRuleForAccount-conformance-pack`
+    #       `keywordValue`: `Custom_CustomRuleForAccount-conformance-pack`
     #
     #     * Service-linked rule name:
     #       OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba
     #
-    #       `keywordValue`\:
+    #       `keywordValue`:
     #       `Custom_OrgConfigRule-s3-bucket-versioning-enabled`
     #
     #

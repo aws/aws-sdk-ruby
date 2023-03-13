@@ -3156,7 +3156,7 @@ module Aws::LicenseManager
     #   `ProductInformationFilterComparator`.
     #
     #   The following filters and are supported when the resource type is
-    #   `SSM_MANAGED`\:
+    #   `SSM_MANAGED`:
     #
     #   * `Application Name` - The name of the application. Logical operator
     #     is `EQUALS`.
@@ -3189,7 +3189,7 @@ module Aws::LicenseManager
     #     `sql-server-web` \| `windows-server-datacenter`.
     #
     #   The following filters and logical operators are supported when the
-    #   resource type is `RDS`\:
+    #   resource type is `RDS`:
     #
     #   * `Engine Edition` - The edition of the database engine. Logical
     #     operator is `EQUALS`. Possible values are: `oracle-ee` \|

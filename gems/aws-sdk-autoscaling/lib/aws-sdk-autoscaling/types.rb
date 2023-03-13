@@ -2597,13 +2597,13 @@ module Aws::AutoScaling
     #   The volume size, in GiBs. The following are the supported volumes
     #   sizes for each volume type:
     #
-    #   * `gp2` and `gp3`\: 1-16,384
+    #   * `gp2` and `gp3`: 1-16,384
     #
-    #   * `io1`\: 4-16,384
+    #   * `io1`: 4-16,384
     #
-    #   * `st1` and `sc1`\: 125-16,384
+    #   * `st1` and `sc1`: 125-16,384
     #
-    #   * `standard`\: 1-1,024
+    #   * `standard`: 1-1,024
     #
     #   You must specify either a `SnapshotId` or a `VolumeSize`. If you
     #   specify both `SnapshotId` and `VolumeSize`, the volume size must be
@@ -2637,9 +2637,9 @@ module Aws::AutoScaling
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`\: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000-16,000 IOPS
     #
-    #   * `io1`\: 100-64,000 IOPS
+    #   * `io1`: 100-64,000 IOPS
     #
     #   For `io1` volumes, we guarantee 64,000 IOPS only for [Instances
     #   built on the Nitro System][1]. Other instance families guarantee

@@ -445,13 +445,13 @@ module Aws::ConnectParticipant
     # ConnectionExpiry parameter, clients need to call this API again to
     # obtain a new websocket URL and perform the same steps as before.
     #
-    # **Message streaming support**\: This API can also be used together
-    # with the [StartContactStreaming][1] API to create a participant
-    # connection for chat contacts that are not using a websocket. For more
-    # information about message streaming, [Enable real-time chat message
-    # streaming][2] in the *Amazon Connect Administrator Guide*.
+    # **Message streaming support**: This API can also be used together with
+    # the [StartContactStreaming][1] API to create a participant connection
+    # for chat contacts that are not using a websocket. For more information
+    # about message streaming, [Enable real-time chat message streaming][2]
+    # in the *Amazon Connect Administrator Guide*.
     #
-    # **Feature specifications**\: For information about feature
+    # **Feature specifications**: For information about feature
     # specifications, such as the allowed number of open websocket
     # connections per participant, see [Feature specifications][3] in the
     # *Amazon Connect Administrator Guide*.

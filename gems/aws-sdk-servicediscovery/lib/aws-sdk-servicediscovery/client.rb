@@ -696,7 +696,7 @@ module Aws::ServiceDiscovery
     #
     #   If you want Cloud Map to create an `SRV` record when you register an
     #   instance and you're using a system that requires a specific `SRV`
-    #   format, such as [HAProxy][1], specify the following for `Name`\:
+    #   format, such as [HAProxy][1], specify the following for `Name`:
     #
     #   * Start the name with an underscore (\_), such as `_exampleservice`.
     #
@@ -1994,13 +1994,13 @@ module Aws::ServiceDiscovery
     # When Cloud Map receives a DNS query for the specified DNS name, it
     # returns the applicable value:
     #
-    # * **If the health check is healthy**\: returns all the records
+    # * **If the health check is healthy**: returns all the records
     #
-    # * **If the health check is unhealthy**\: returns the applicable value
+    # * **If the health check is unhealthy**: returns the applicable value
     #   for the last healthy instance
     #
-    # * **If you didn't specify a health check configuration**\: returns
-    #   all the records
+    # * **If you didn't specify a health check configuration**: returns all
+    #   the records
     #
     # For the current quota on the number of instances that you can register
     # using the same namespace and using the same service, see [Cloud Map
@@ -2064,7 +2064,7 @@ module Aws::ServiceDiscovery
     #
     # @option params [required, Hash<String,String>] :attributes
     #   A string map that contains the following information for the service
-    #   that you specify in `ServiceId`\:
+    #   that you specify in `ServiceId`:
     #
     #   * The attributes that apply to the records that are defined in the
     #     service.

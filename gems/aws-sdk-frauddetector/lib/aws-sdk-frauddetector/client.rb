@@ -3501,7 +3501,7 @@ module Aws::FraudDetector
     end
 
     # Updates the detector version’s status. You can perform the following
-    # promotions or demotions using `UpdateDetectorVersionStatus`\: `DRAFT`
+    # promotions or demotions using `UpdateDetectorVersionStatus`: `DRAFT`
     # to `ACTIVE`, `ACTIVE` to `INACTIVE`, and `INACTIVE` to `ACTIVE`.
     #
     # @option params [required, String] :detector_id

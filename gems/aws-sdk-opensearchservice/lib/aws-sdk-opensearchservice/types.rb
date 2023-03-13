@@ -2424,7 +2424,7 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] endpoints
     #   The key-value pair that exists if the OpenSearch Service domain uses
-    #   VPC endpoints.. Example `key, value`\:
+    #   VPC endpoints.. Example `key, value`:
     #   `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
     #   @return [Hash<String,String>]
     #
@@ -3017,20 +3017,20 @@ module Aws::OpenSearchService
     #   * **PENDING\_ACCEPTANCE** - Inbound connection is not yet accepted
     #     by the remote domain owner.
     #
-    #   * **APPROVED**\: Inbound connection is pending acceptance by the
+    #   * **APPROVED**: Inbound connection is pending acceptance by the
     #     remote domain owner.
     #
-    #   * **PROVISIONING**\: Inbound connection is being provisioned.
+    #   * **PROVISIONING**: Inbound connection is being provisioned.
     #
-    #   * **ACTIVE**\: Inbound connection is active and ready to use.
+    #   * **ACTIVE**: Inbound connection is active and ready to use.
     #
-    #   * **REJECTING**\: Inbound connection rejection is in process.
+    #   * **REJECTING**: Inbound connection rejection is in process.
     #
-    #   * **REJECTED**\: Inbound connection is rejected.
+    #   * **REJECTED**: Inbound connection is rejected.
     #
-    #   * **DELETING**\: Inbound connection deletion is in progress.
+    #   * **DELETING**: Inbound connection deletion is in progress.
     #
-    #   * **DELETED**\: Inbound connection is deleted and can no longer be
+    #   * **DELETED**: Inbound connection is deleted and can no longer be
     #     used.
     #   @return [String]
     #
@@ -3909,7 +3909,7 @@ module Aws::OpenSearchService
     #   * **VALIDATION\_FAILED** - Validation failed for the connection
     #     request.
     #
-    #   * **PENDING\_ACCEPTANCE**\: Outbound connection request is validated
+    #   * **PENDING\_ACCEPTANCE**: Outbound connection request is validated
     #     and is not yet accepted by the remote domain owner.
     #
     #   * **APPROVED** - Outbound connection has been approved by the remote

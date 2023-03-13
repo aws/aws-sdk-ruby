@@ -854,7 +854,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -1023,7 +1023,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -3822,7 +3822,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -3994,7 +3994,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see

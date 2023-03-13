@@ -756,7 +756,7 @@ module Aws::CodeCommit
     #   <note markdown="1"> When you create the content of the approval rule template, you can
     #   specify approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**\: This option only requires an AWS account
+    #    * **CodeCommitApprovers**: This option only requires an AWS account
     #     and a resource. It can be used for both IAM users and federated
     #     access users whose name matches the provided resource name. This is
     #     a very powerful option that offers a great deal of flexibility. For
@@ -765,19 +765,19 @@ module Aws::CodeCommit
     #     from that user:
     #
     #     * An IAM user in the account
-    #       (arn:aws:iam::*123456789012*\:user/*Mary\_Major*)
+    #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)
     #
     #     * A federated user identified in IAM as Mary\_Major
-    #       (arn:aws:sts::*123456789012*\:federated-user/*Mary\_Major*)
+    #       (arn:aws:sts::*123456789012*:federated-user/*Mary\_Major*)
     #
     #     This option does not recognize an active session of someone assuming
     #     the role of CodeCommitReview with a role session name of
     #     *Mary\_Major*
-    #     (arn:aws:sts::*123456789012*\:assumed-role/CodeCommitReview/*Mary\_Major*)
+    #     (arn:aws:sts::*123456789012*:assumed-role/CodeCommitReview/*Mary\_Major*)
     #     unless you include a wildcard (*Mary\_Major).
     #
-    #   * **Fully qualified ARN**\: This option allows you to specify the
-    #     fully qualified Amazon Resource Name (ARN) of the IAM user or role.
+    #   * **Fully qualified ARN**: This option allows you to specify the fully
+    #     qualified Amazon Resource Name (ARN) of the IAM user or role.
     #
     #    For more information about IAM ARNs, wildcards, and formats, see [IAM
     #   Identifiers][1] in the *IAM User Guide*.
@@ -1076,7 +1076,7 @@ module Aws::CodeCommit
     #   <note markdown="1"> When you create the content of the approval rule, you can specify
     #   approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**\: This option only requires an AWS account
+    #    * **CodeCommitApprovers**: This option only requires an AWS account
     #     and a resource. It can be used for both IAM users and federated
     #     access users whose name matches the provided resource name. This is
     #     a very powerful option that offers a great deal of flexibility. For
@@ -1085,19 +1085,19 @@ module Aws::CodeCommit
     #     coming from that user:
     #
     #     * An IAM user in the account
-    #       (arn:aws:iam::*123456789012*\:user/*Mary\_Major*)
+    #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)
     #
     #     * A federated user identified in IAM as Mary\_Major
-    #       (arn:aws:sts::*123456789012*\:federated-user/*Mary\_Major*)
+    #       (arn:aws:sts::*123456789012*:federated-user/*Mary\_Major*)
     #
     #     This option does not recognize an active session of someone assuming
     #     the role of CodeCommitReview with a role session name of
     #     *Mary\_Major*
-    #     (arn:aws:sts::*123456789012*\:assumed-role/CodeCommitReview/*Mary\_Major*)
+    #     (arn:aws:sts::*123456789012*:assumed-role/CodeCommitReview/*Mary\_Major*)
     #     unless you include a wildcard (*Mary\_Major).
     #
-    #   * **Fully qualified ARN**\: This option allows you to specify the
-    #     fully qualified Amazon Resource Name (ARN) of the IAM user or role.
+    #   * **Fully qualified ARN**: This option allows you to specify the fully
+    #     qualified Amazon Resource Name (ARN) of the IAM user or role.
     #
     #    For more information about IAM ARNs, wildcards, and formats, see [IAM
     #   Identifiers][1] in the *IAM User Guide*.
@@ -4581,7 +4581,7 @@ module Aws::CodeCommit
     #   <note markdown="1"> When you update the content of the approval rule, you can specify
     #   approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**\: This option only requires an AWS account
+    #    * **CodeCommitApprovers**: This option only requires an AWS account
     #     and a resource. It can be used for both IAM users and federated
     #     access users whose name matches the provided resource name. This is
     #     a very powerful option that offers a great deal of flexibility. For
@@ -4590,19 +4590,19 @@ module Aws::CodeCommit
     #     from that user:
     #
     #     * An IAM user in the account
-    #       (arn:aws:iam::*123456789012*\:user/*Mary\_Major*)
+    #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)
     #
     #     * A federated user identified in IAM as Mary\_Major
-    #       (arn:aws:sts::*123456789012*\:federated-user/*Mary\_Major*)
+    #       (arn:aws:sts::*123456789012*:federated-user/*Mary\_Major*)
     #
     #     This option does not recognize an active session of someone assuming
     #     the role of CodeCommitReview with a role session name of
     #     *Mary\_Major*
-    #     (arn:aws:sts::*123456789012*\:assumed-role/CodeCommitReview/*Mary\_Major*)
+    #     (arn:aws:sts::*123456789012*:assumed-role/CodeCommitReview/*Mary\_Major*)
     #     unless you include a wildcard (*Mary\_Major).
     #
-    #   * **Fully qualified ARN**\: This option allows you to specify the
-    #     fully qualified Amazon Resource Name (ARN) of the IAM user or role.
+    #   * **Fully qualified ARN**: This option allows you to specify the fully
+    #     qualified Amazon Resource Name (ARN) of the IAM user or role.
     #
     #    For more information about IAM ARNs, wildcards, and formats, see [IAM
     #   Identifiers][1] in the *IAM User Guide*.

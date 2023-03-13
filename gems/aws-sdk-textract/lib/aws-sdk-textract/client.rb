@@ -383,7 +383,7 @@ module Aws::Textract
     # The types of information returned are as follows:
     #
     # * Form data (key-value pairs). The related information is returned in
-    #   two Block objects, each of type `KEY_VALUE_SET`\: a KEY `Block`
+    #   two Block objects, each of type `KEY_VALUE_SET`: a KEY `Block`
     #   object and a VALUE `Block` object. For example, *Name: Ana Silva
     #   Carolina* contains a key and value. *Name:* is the key. *Ana Silva
     #   Carolina* is the value.
@@ -893,7 +893,7 @@ module Aws::Textract
     # types of information are returned:
     #
     # * Form data (key-value pairs). The related information is returned in
-    #   two Block objects, each of type `KEY_VALUE_SET`\: a KEY `Block`
+    #   two Block objects, each of type `KEY_VALUE_SET`: a KEY `Block`
     #   object and a VALUE `Block` object. For example, *Name: Ana Silva
     #   Carolina* contains a key and value. *Name:* is the key. *Ana Silva
     #   Carolina* is the value.

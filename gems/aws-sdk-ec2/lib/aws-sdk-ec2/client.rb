@@ -384,11 +384,11 @@ module Aws::EC2
     #   The Elastic IP address you are accepting for transfer.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
-    #   the resource. Use the tag key in the filter name and the tag value as
-    #   the filter value. For example, to find all resources that have a tag
-    #   with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-    #   the filter name and `TeamA` for the filter value.
+    #   `tag`:&lt;key&gt; - The key/value combination of a tag assigned to the
+    #   resource. Use the tag key in the filter name and the tag value as the
+    #   filter value. For example, to find all resources that have a tag with
+    #   the key `Owner` and the value `TeamA`, specify `tag:Owner` for the
+    #   filter name and `TeamA` for the filter value.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5931,7 +5931,7 @@ module Aws::EC2
     #   another Region, specify `region.compute.internal` (for example,
     #   `ap-northeast-1.compute.internal`). Otherwise, specify a domain name
     #   (for example, `ExampleCompany.com`). This value is used to complete
-    #   unqualified DNS hostnames. **Important**\: Some Linux operating
+    #   unqualified DNS hostnames. **Important**: Some Linux operating
     #   systems accept multiple domain names separated by spaces. However,
     #   Windows and other Linux operating systems treat the value as a
     #   single domain, which results in unexpected behavior. If your DHCP
@@ -6207,12 +6207,12 @@ module Aws::EC2
     #
     # @option params [Time,DateTime,Date,Integer,String] :valid_from
     #   The start date and time of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
-    #   fulfilling the request immediately.
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z). The default is to start fulfilling
+    #   the request immediately.
     #
     # @option params [Time,DateTime,Date,Integer,String] :valid_until
     #   The end date and time of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new EC2 Fleet
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z). At this point, no new EC2 Fleet
     #   requests are placed or able to fulfill the request. If no value is
     #   specified, the request remains until you cancel it.
     #
@@ -6598,7 +6598,7 @@ module Aws::EC2
     #   * If the destination type is `cloud-watch-logs`, specify the ARN of a
     #     CloudWatch Logs log group. For example:
     #
-    #     arn:aws:logs:*region*\:*account\_id*\:log-group:*my\_group*
+    #     arn:aws:logs:*region*:*account\_id*:log-group:*my\_group*
     #
     #     Alternatively, use the `LogGroupName` parameter.
     #
@@ -6613,7 +6613,7 @@ module Aws::EC2
     #   * If the destination type is `kinesis-data-firehose`, specify the ARN
     #     of a Kinesis Data Firehose delivery stream. For example:
     #
-    #     arn:aws:firehose:*region*\:*account\_id*\:deliverystream:*my\_stream*
+    #     arn:aws:firehose:*region*:*account\_id*:deliverystream:*my\_stream*
     #
     # @option params [String] :log_format
     #   The fields to include in the flow log record. List the fields in the
@@ -11737,13 +11737,13 @@ module Aws::EC2
     #
     #   The following are valid values:
     #
-    #   * `prefix`\: The Amazon EC2 Prefix Delegation feature assigns the IP
+    #   * `prefix`: The Amazon EC2 Prefix Delegation feature assigns the IP
     #     addresses to network interfaces that are associated with an
     #     instance. For information about Prefix Delegation, see [Prefix
     #     Delegation for Amazon EC2 network interfaces][1] in the *Amazon
     #     Elastic Compute Cloud User Guide*.
     #
-    #   * `explicit`\: You manually assign the IP addresses to resources that
+    #   * `explicit`: You manually assign the IP addresses to resources that
     #     reside in your subnet.
     #
     #
@@ -13658,11 +13658,11 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`\: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000-16,000 IOPS
     #
-    #   * `io1`\: 100-64,000 IOPS
+    #   * `io1`: 100-64,000 IOPS
     #
-    #   * `io2`\: 100-64,000 IOPS
+    #   * `io2`: 100-64,000 IOPS
     #
     #   `io1` and `io2` volumes support up to 64,000 IOPS only on [Instances
     #   built on the Nitro System][1]. Other instance families support
@@ -13709,13 +13709,13 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`\: 1-16,384
+    #   * `gp2` and `gp3`: 1-16,384
     #
-    #   * `io1` and `io2`\: 4-16,384
+    #   * `io1` and `io2`: 4-16,384
     #
-    #   * `st1` and `sc1`\: 125-16,384
+    #   * `st1` and `sc1`: 125-16,384
     #
-    #   * `standard`\: 1-1,024
+    #   * `standard`: 1-1,024
     #
     # @option params [String] :snapshot_id
     #   The snapshot from which to create the volume. You must specify either
@@ -14199,8 +14199,8 @@ module Aws::EC2
     #   generated by the VPC endpoint service.
     #
     #   To use a private hosted zone, you must set the following VPC
-    #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
-    #   Use ModifyVpcAttribute to set the VPC attributes.
+    #   attributes to `true`: `enableDnsHostnames` and `enableDnsSupport`. Use
+    #   ModifyVpcAttribute to set the VPC attributes.
     #
     #   Default: `true`
     #
@@ -18766,24 +18766,24 @@ module Aws::EC2
     # Describes attributes of your Amazon Web Services account. The
     # following are the supported account attributes:
     #
-    # * `supported-platforms`\: Indicates whether your account can launch
+    # * `supported-platforms`: Indicates whether your account can launch
     #   instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.
     #
-    # * `default-vpc`\: The ID of the default VPC for your account, or
+    # * `default-vpc`: The ID of the default VPC for your account, or
     #   `none`.
     #
-    # * `max-instances`\: This attribute is no longer supported. The
-    #   returned value does not reflect your actual vCPU limit for running
-    #   On-Demand Instances. For more information, see [On-Demand Instance
-    #   Limits][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # * `max-instances`: This attribute is no longer supported. The returned
+    #   value does not reflect your actual vCPU limit for running On-Demand
+    #   Instances. For more information, see [On-Demand Instance Limits][1]
+    #   in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    # * `vpc-max-security-groups-per-interface`\: The maximum number of
+    # * `vpc-max-security-groups-per-interface`: The maximum number of
     #   security groups that you can assign to a network interface.
     #
-    # * `max-elastic-ips`\: The maximum number of Elastic IP addresses that
+    # * `max-elastic-ips`: The maximum number of Elastic IP addresses that
     #   you can allocate for use with EC2-Classic.
     #
-    # * `vpc-max-elastic-ips`\: The maximum number of Elastic IP addresses
+    # * `vpc-max-elastic-ips`: The maximum number of Elastic IP addresses
     #   that you can allocate for use with EC2-VPC.
     #
     # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
@@ -19033,7 +19033,7 @@ module Aws::EC2
     #
     #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -19959,7 +19959,7 @@ module Aws::EC2
     #   * `owner-id` - The Amazon Web Services account ID of the owner of the
     #     carrier gateway.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -20052,7 +20052,7 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -20730,7 +20730,7 @@ module Aws::EC2
     #   * `type` - The type of customer gateway. Currently, the only supported
     #     type is `ipsec.1`.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -20841,7 +20841,7 @@ module Aws::EC2
     #   * `owner-id` - The ID of the Amazon Web Services account that owns the
     #     DHCP options set.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -20975,7 +20975,7 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -21331,14 +21331,14 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   The filters. The possible values are:
     #
-    #   * `availability-zone`\: The Availability Zone of the snapshot.
+    #   * `availability-zone`: The Availability Zone of the snapshot.
     #
-    #   * `owner-id`\: The ID of the Amazon Web Services account that enabled
+    #   * `owner-id`: The ID of the Amazon Web Services account that enabled
     #     fast snapshot restore on the snapshot.
     #
-    #   * `snapshot-id`\: The ID of the snapshot.
+    #   * `snapshot-id`: The ID of the snapshot.
     #
-    #   * `state`\: The state of fast snapshot restores for the snapshot
+    #   * `state`: The state of fast snapshot restores for the snapshot
     #     (`enabling` \| `optimizing` \| `enabled` \| `disabling` \|
     #     `disabled`).
     #
@@ -21449,7 +21449,7 @@ module Aws::EC2
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The start date and time for the events, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     #
     # @return [Types::DescribeFleetHistoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21893,7 +21893,7 @@ module Aws::EC2
     #   * `traffic-type` - The type of traffic (`ACCEPT` \| `REJECT` \|
     #     `ALL`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -22065,7 +22065,7 @@ module Aws::EC2
     #   * `state` - The state of the AFI (`pending` \| `failed` \| `available`
     #     \| `unavailable`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -22679,10 +22679,10 @@ module Aws::EC2
     # @option params [required, String] :attribute
     #   The AMI attribute.
     #
-    #   **Note**\: The `blockDeviceMapping` attribute is deprecated. Using
-    #   this attribute returns the `Client.AuthFailure` error. To get
-    #   information about the block device mappings for an AMI, use the
-    #   DescribeImages action.
+    #   **Note**: The `blockDeviceMapping` attribute is deprecated. Using this
+    #   attribute returns the `Client.AuthFailure` error. To get information
+    #   about the block device mappings for an AMI, use the DescribeImages
+    #   action.
     #
     # @option params [required, String] :image_id
     #   The ID of the AMI.
@@ -22895,7 +22895,7 @@ module Aws::EC2
     #   * `sriov-net-support` - A value of `simple` indicates that enhanced
     #     networking with the Intel 82599 VF interface is enabled.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -24869,7 +24869,7 @@ module Aws::EC2
     #   * `owner-id` - The ID of the Amazon Web Services account that owns the
     #     internet gateway.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -25399,7 +25399,7 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -25474,7 +25474,7 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -25949,7 +25949,7 @@ module Aws::EC2
     #
     #   * `launch-template-name` - The name of the launch template.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -26728,7 +26728,7 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet in which the NAT gateway resides.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -26916,7 +26916,7 @@ module Aws::EC2
     #   * `owner-id` - The ID of the Amazon Web Services account that owns the
     #     network ACL.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -28327,7 +28327,7 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the network interface.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -28634,9 +28634,9 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `prefix-list-id`\: The ID of a prefix list.
+    #   * `prefix-list-id`: The ID of a prefix list.
     #
-    #   * `prefix-list-name`\: The name of a prefix list.
+    #   * `prefix-list-name`: The name of a prefix list.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -28787,7 +28787,7 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -29676,7 +29676,7 @@ module Aws::EC2
     #   * `route.vpc-peering-connection-id` - The ID of a VPC peering
     #     connection specified in a route in the table.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -30199,7 +30199,7 @@ module Aws::EC2
     #
     #   * `security-group-rule-id` - The ID of the security group rule.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -30376,7 +30376,7 @@ module Aws::EC2
     #   * `owner-id` - The Amazon Web Services account ID of the owner of the
     #     security group.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -30717,15 +30717,15 @@ module Aws::EC2
     #
     # The create volume permissions fall into the following categories:
     #
-    # * *public*\: The owner of the snapshot granted create volume
+    # * *public*: The owner of the snapshot granted create volume
     #   permissions for the snapshot to the `all` group. All Amazon Web
     #   Services accounts have create volume permissions for these
     #   snapshots.
     #
-    # * *explicit*\: The owner of the snapshot granted create volume
+    # * *explicit*: The owner of the snapshot granted create volume
     #   permissions to a specific Amazon Web Services account.
     #
-    # * *implicit*\: An Amazon Web Services account has implicit create
+    # * *implicit*: An Amazon Web Services account has implicit create
     #   volume permissions for all snapshots it owns.
     #
     # The list of snapshots returned can be filtered by specifying snapshot
@@ -30794,7 +30794,7 @@ module Aws::EC2
     #   * `storage-tier` - The storage tier of the snapshot (`archive` \|
     #     `standard`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -31151,7 +31151,7 @@ module Aws::EC2
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The starting date and time for the events, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     #
     # @return [Types::DescribeSpotFleetRequestHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -31925,9 +31925,9 @@ module Aws::EC2
     #     wildcards; greater than or less than comparison is not supported).
     #
     #   * `timestamp` - The time stamp of the Spot price history, in UTC
-    #     format (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). You can
-    #     use wildcards (* and ?). Greater than or less than comparison is
-    #     not supported.
+    #     format (for example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z). You can use
+    #     wildcards (* and ?). Greater than or less than comparison is not
+    #     supported.
     #
     # @option params [String] :availability_zone
     #   Filters the results by the specified Availability Zone.
@@ -31941,7 +31941,7 @@ module Aws::EC2
     # @option params [Time,DateTime,Date,Integer,String] :end_time
     #   The date and time, up to the current date, from which to stop
     #   retrieving the price history data, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     #
     # @option params [Array<String>] :instance_types
     #   Filters the results by the specified instance types.
@@ -31965,7 +31965,7 @@ module Aws::EC2
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The date and time, up to the past 90 days, from which to start
     #   retrieving the price history data, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     #
     # @return [Types::DescribeSpotPriceHistoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -32331,7 +32331,7 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -32502,7 +32502,7 @@ module Aws::EC2
     #     `vpc-endpoint-service` \| `vpc-peering-connection` \|
     #     `vpn-connection` \| `vpn-gateway`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
+    #   * `tag`:&lt;key&gt; - The key/value combination of the tag. For
     #     example, specify "tag:Owner" for the filter name and "TeamA" for
     #     the filter value to find resources with the tag "Owner=TeamA".
     #
@@ -32609,9 +32609,9 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `description`\: The Traffic Mirror filter description.
+    #   * `description`: The Traffic Mirror filter description.
     #
-    #   * `traffic-mirror-filter-id`\: The ID of the Traffic Mirror filter.
+    #   * `traffic-mirror-filter-id`: The ID of the Traffic Mirror filter.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -32708,25 +32708,25 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `description`\: The Traffic Mirror session description.
+    #   * `description`: The Traffic Mirror session description.
     #
-    #   * `network-interface-id`\: The ID of the Traffic Mirror session
-    #     network interface.
+    #   * `network-interface-id`: The ID of the Traffic Mirror session network
+    #     interface.
     #
-    #   * `owner-id`\: The ID of the account that owns the Traffic Mirror
+    #   * `owner-id`: The ID of the account that owns the Traffic Mirror
     #     session.
     #
-    #   * `packet-length`\: The assigned number of packets to mirror.
+    #   * `packet-length`: The assigned number of packets to mirror.
     #
-    #   * `session-number`\: The assigned session number.
+    #   * `session-number`: The assigned session number.
     #
-    #   * `traffic-mirror-filter-id`\: The ID of the Traffic Mirror filter.
+    #   * `traffic-mirror-filter-id`: The ID of the Traffic Mirror filter.
     #
-    #   * `traffic-mirror-session-id`\: The ID of the Traffic Mirror session.
+    #   * `traffic-mirror-session-id`: The ID of the Traffic Mirror session.
     #
-    #   * `traffic-mirror-target-id`\: The ID of the Traffic Mirror target.
+    #   * `traffic-mirror-target-id`: The ID of the Traffic Mirror target.
     #
-    #   * `virtual-network-id`\: The virtual network ID of the Traffic Mirror
+    #   * `virtual-network-id`: The virtual network ID of the Traffic Mirror
     #     session.
     #
     # @option params [Integer] :max_results
@@ -32799,18 +32799,18 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `description`\: The Traffic Mirror target description.
+    #   * `description`: The Traffic Mirror target description.
     #
-    #   * `network-interface-id`\: The ID of the Traffic Mirror session
-    #     network interface.
+    #   * `network-interface-id`: The ID of the Traffic Mirror session network
+    #     interface.
     #
-    #   * `network-load-balancer-arn`\: The Amazon Resource Name (ARN) of the
+    #   * `network-load-balancer-arn`: The Amazon Resource Name (ARN) of the
     #     Network Load Balancer that is associated with the session.
     #
-    #   * `owner-id`\: The ID of the account that owns the Traffic Mirror
+    #   * `owner-id`: The ID of the account that owns the Traffic Mirror
     #     session.
     #
-    #   * `traffic-mirror-target-id`\: The ID of the Traffic Mirror target.
+    #   * `traffic-mirror-target-id`: The ID of the Traffic Mirror target.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -33229,7 +33229,7 @@ module Aws::EC2
     #     `initiatingRequest` \| `modifying` \| `pendingAcceptance` \|
     #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -34278,7 +34278,7 @@ module Aws::EC2
     # The `DescribeVolumeStatus` operation provides the following
     # information about the specified volumes:
     #
-    # *Status*\: Reflects the current status of the volume. The possible
+    # *Status*: Reflects the current status of the volume. The possible
     # values are `ok`, `impaired` , `warning`, or `insufficient-data`. If
     # all checks pass, the overall status of the volume is `ok`. If the
     # check fails, the overall status is `impaired`. If the status is
@@ -34287,14 +34287,14 @@ module Aws::EC2
     # more information about volume status, see [Monitor the status of your
     # volumes][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    # *Events*\: Reflect the cause of a volume status and might require you
+    # *Events*: Reflect the cause of a volume status and might require you
     # to take action. For example, if your volume returns an `impaired`
     # status, then the volume event might be `potential-data-inconsistency`.
     # This means that your volume has been affected by an issue with the
     # underlying host, has all I/O operations disabled, and might have
     # inconsistent data.
     #
-    # *Actions*\: Reflect the actions you might have to take in response to
+    # *Actions*: Reflect the actions you might have to take in response to
     # an event. For example, if the status of the volume is `impaired` and
     # the volume event shows `potential-data-inconsistency`, then the action
     # shows `enable-volume-io`. This means that you may want to enable the
@@ -34326,8 +34326,8 @@ module Aws::EC2
     #
     #   * `event.event-id` - The event ID.
     #
-    #   * `event.event-type` - The event type (for `io-enabled`\: `passed` \|
-    #     `failed`; for `io-performance`\: `io-performance:degraded` \|
+    #   * `event.event-type` - The event type (for `io-enabled`: `passed` \|
+    #     `failed`; for `io-performance`: `io-performance:degraded` \|
     #     `io-performance:severely-degraded` \| `io-performance:stalled`).
     #
     #   * `event.not-after` - The latest end time for the event.
@@ -34338,8 +34338,8 @@ module Aws::EC2
     #     (`io-enabled` \| `io-performance`).
     #
     #   * `volume-status.details-status` - The status of
-    #     `volume-status.details-name` (for `io-enabled`\: `passed` \|
-    #     `failed`; for `io-performance`\: `normal` \| `degraded` \|
+    #     `volume-status.details-name` (for `io-enabled`: `passed` \|
+    #     `failed`; for `io-performance`: `normal` \| `degraded` \|
     #     `severely-degraded` \| `stalled`).
     #
     #   * `volume-status.status` - The status of the volume (`ok` \|
@@ -34545,7 +34545,7 @@ module Aws::EC2
     #   * `status` - The state of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -34958,7 +34958,7 @@ module Aws::EC2
     #   * `is-classic-link-enabled` - Whether the VPC is enabled for
     #     ClassicLink (`true` \| `false`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -35273,7 +35273,7 @@ module Aws::EC2
     #   * `supported-ip-address-types` - The IP address type (`ipv4` \|
     #     `ipv6`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -35461,7 +35461,7 @@ module Aws::EC2
     #   * `supported-ip-address-types` - The IP address type (`ipv4` \|
     #     `ipv6`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -35560,7 +35560,7 @@ module Aws::EC2
     #
     #   * `service-name` - The name of the service.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -35689,7 +35689,7 @@ module Aws::EC2
     #   * `status-message` - A message that provides more information about
     #     the status of the VPC peering connection, if applicable.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -35836,7 +35836,7 @@ module Aws::EC2
     #
     #   * `state` - The state of the VPC (`pending` \| `available`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -35998,7 +35998,7 @@ module Aws::EC2
     #   * `bgp-asn` - The BGP Autonomous System Number (ASN) associated with a
     #     BGP device.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -36157,7 +36157,7 @@ module Aws::EC2
     #   * `state` - The state of the virtual private gateway (`pending` \|
     #     `available` \| `deleting` \| `deleted`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -38268,7 +38268,7 @@ module Aws::EC2
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :deprecate_at
     #   The date and time to deprecate the AMI, in UTC, in the following
-    #   format: *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z. If you specify a value for
+    #   format: *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z. If you specify a value for
     #   seconds, Amazon EC2 rounds the seconds to the nearest minute.
     #
     #   You can’t specify a date in the past. The upper limit for
@@ -41469,7 +41469,7 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -42368,19 +42368,19 @@ module Aws::EC2
     #     followed by the Region of the key, the Amazon Web Services account
     #     ID of the key owner, the `alias` namespace, and then the key alias.
     #     For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:*us-east-1*:*012345678910*:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the Region of the key, the Amazon Web Services account
     #     ID of the key owner, the `key` namespace, and then the key ID. For
     #     example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:*us-east-1*:*012345678910*:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
     #     namespace, followed by the Region of the key, the Amazon Web
     #     Services account ID of the key owner, the `alias` namespace, and
     #     then the key alias. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:*us-east-1*:*012345678910*:alias/*ExampleAlias*.
     #
     #   Amazon Web Services parses `KmsKeyId` asynchronously, meaning that the
     #   action you call may appear to complete even though you provided an
@@ -42809,19 +42809,19 @@ module Aws::EC2
     #     followed by the Region of the key, the Amazon Web Services account
     #     ID of the key owner, the `alias` namespace, and then the key alias.
     #     For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:*us-east-1*:*012345678910*:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the Region of the key, the Amazon Web Services account
     #     ID of the key owner, the `key` namespace, and then the key ID. For
     #     example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #     arn:aws:kms:*us-east-1*:*012345678910*:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
     #     namespace, followed by the Region of the key, the Amazon Web
     #     Services account ID of the key owner, the `alias` namespace, and
     #     then the key alias. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #     arn:aws:kms:*us-east-1*:*012345678910*:alias/*ExampleAlias*.
     #
     #   Amazon Web Services parses `KmsKeyId` asynchronously, meaning that the
     #   action you call may appear to complete even though you provided an
@@ -47606,13 +47606,13 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`\: 1-16,384
+    #   * `gp2` and `gp3`: 1-16,384
     #
-    #   * `io1` and `io2`\: 4-16,384
+    #   * `io1` and `io2`: 4-16,384
     #
-    #   * `st1` and `sc1`\: 125-16,384
+    #   * `st1` and `sc1`: 125-16,384
     #
-    #   * `standard`\: 1-1,024
+    #   * `standard`: 1-1,024
     #
     #   Default: The existing size is retained.
     #
@@ -47633,11 +47633,11 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`\: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000-16,000 IOPS
     #
-    #   * `io1`\: 100-64,000 IOPS
+    #   * `io1`: 100-64,000 IOPS
     #
-    #   * `io2`\: 100-64,000 IOPS
+    #   * `io2`: 100-64,000 IOPS
     #
     #   Default: The existing value is retained if you keep the same volume
     #   type. If you change the volume type to `io1`, `io2`, or `gp3`, the
@@ -49444,7 +49444,7 @@ module Aws::EC2
     #
     # @option params [Time,DateTime,Date,Integer,String] :purchase_time
     #   The time at which to purchase the Reserved Instance, in UTC format
-    #   (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   (for example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     #
     # @return [Types::PurchaseReservedInstancesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -51023,30 +51023,30 @@ module Aws::EC2
     # @option params [required, Array<String>] :reason_codes
     #   The reason codes that describe the health state of your instance.
     #
-    #   * `instance-stuck-in-state`\: My instance is stuck in a state.
+    #   * `instance-stuck-in-state`: My instance is stuck in a state.
     #
-    #   * `unresponsive`\: My instance is unresponsive.
+    #   * `unresponsive`: My instance is unresponsive.
     #
-    #   * `not-accepting-credentials`\: My instance is not accepting my
+    #   * `not-accepting-credentials`: My instance is not accepting my
     #     credentials.
     #
-    #   * `password-not-available`\: A password is not available for my
+    #   * `password-not-available`: A password is not available for my
     #     instance.
     #
-    #   * `performance-network`\: My instance is experiencing performance
+    #   * `performance-network`: My instance is experiencing performance
     #     problems that I believe are network related.
     #
-    #   * `performance-instance-store`\: My instance is experiencing
+    #   * `performance-instance-store`: My instance is experiencing
     #     performance problems that I believe are related to the instance
     #     stores.
     #
-    #   * `performance-ebs-volume`\: My instance is experiencing performance
+    #   * `performance-ebs-volume`: My instance is experiencing performance
     #     problems that I believe are related to an EBS volume.
     #
-    #   * `performance-other`\: My instance is experiencing performance
+    #   * `performance-other`: My instance is experiencing performance
     #     problems.
     #
-    #   * `other`\: \[explain using the description parameter\]
+    #   * `other`: \[explain using the description parameter\]
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The time at which the reported instance health state began.
@@ -51686,7 +51686,7 @@ module Aws::EC2
     #
     # @option params [Time,DateTime,Date,Integer,String] :valid_until
     #   The end date of the request, in UTC format
-    #   (*YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   (*YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     #
     #   * For a persistent request, the request remains active until the
     #     `ValidUntil` date and time is reached. Otherwise, the request

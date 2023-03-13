@@ -16,14 +16,14 @@ module Aws::SageMakerMetrics
     #   The error code of an error that occured when attempting to put
     #   metrics.
     #
-    #   * `METRIC_LIMIT_EXCEEDED`\: The maximum amount of metrics per
+    #   * `METRIC_LIMIT_EXCEEDED`: The maximum amount of metrics per
     #     resource is exceeded.
     #
-    #   * `INTERNAL_ERROR`\: An internal error occured.
+    #   * `INTERNAL_ERROR`: An internal error occured.
     #
-    #   * `VALIDATION_ERROR`\: The metric data failed validation.
+    #   * `VALIDATION_ERROR`: The metric data failed validation.
     #
-    #   * `CONFLICT_ERROR`\: Multiple requests attempted to modify the same
+    #   * `CONFLICT_ERROR`: Multiple requests attempted to modify the same
     #     data simultaneously.
     #   @return [String]
     #

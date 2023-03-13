@@ -54,12 +54,12 @@ module Aws::WAF
     #   request matches the conditions in the `Rule`. Valid values for
     #   `Action` include the following:
     #
-    #   * `ALLOW`\: CloudFront responds with the requested object.
+    #   * `ALLOW`: CloudFront responds with the requested object.
     #
-    #   * `BLOCK`\: CloudFront responds with an HTTP 403 (Forbidden) status
+    #   * `BLOCK`: CloudFront responds with an HTTP 403 (Forbidden) status
     #     code.
     #
-    #   * `COUNT`\: AWS WAF increments a counter of requests that match the
+    #   * `COUNT`: AWS WAF increments a counter of requests that match the
     #     conditions in the rule and then continues to inspect the web
     #     request based on the remaining rules in the web ACL.
     #
@@ -327,26 +327,26 @@ module Aws::WAF
     #   in `FieldToMatch`. The maximum length of the value is 50 bytes.
     #
     #   Valid values depend on the values that you specified for
-    #   `FieldToMatch`\:
+    #   `FieldToMatch`:
     #
-    #   * `HEADER`\: The value that you want AWS WAF to search for in the
+    #   * `HEADER`: The value that you want AWS WAF to search for in the
     #     request header that you specified in FieldToMatch, for example,
     #     the value of the `User-Agent` or `Referer` header.
     #
-    #   * `METHOD`\: The HTTP method, which indicates the type of operation
+    #   * `METHOD`: The HTTP method, which indicates the type of operation
     #     specified in the request. CloudFront supports the following
     #     methods: `DELETE`, `GET`, `HEAD`, `OPTIONS`, `PATCH`, `POST`, and
     #     `PUT`.
     #
-    #   * `QUERY_STRING`\: The value that you want AWS WAF to search for in
+    #   * `QUERY_STRING`: The value that you want AWS WAF to search for in
     #     the query string, which is the part of a URL that appears after a
     #     `?` character.
     #
-    #   * `URI`\: The value that you want AWS WAF to search for in the part
+    #   * `URI`: The value that you want AWS WAF to search for in the part
     #     of a URL that identifies a resource, for example,
     #     `/images/daily-ad.jpg`.
     #
-    #   * `BODY`\: The part of a request that contains any additional data
+    #   * `BODY`: The part of a request that contains any additional data
     #     that you want to send to your web server as the HTTP request body,
     #     such as data from a form. The request body immediately follows the
     #     request headers. Note that only the first `8192` bytes of the
@@ -355,11 +355,11 @@ module Aws::WAF
     #     size constraint set. For more information, see
     #     CreateSizeConstraintSet.
     #
-    #   * `SINGLE_QUERY_ARG`\: The parameter in the query string that you
+    #   * `SINGLE_QUERY_ARG`: The parameter in the query string that you
     #     will inspect, such as *UserName* or *SalesRegion*. The maximum
     #     length for `SINGLE_QUERY_ARG` is 30 characters.
     #
-    #   * `ALL_QUERY_ARGS`\: Similar to `SINGLE_QUERY_ARG`, but instead of
+    #   * `ALL_QUERY_ARGS`: Similar to `SINGLE_QUERY_ARG`, but instead of
     #     inspecting a single parameter, AWS WAF inspects all parameters
     #     within the query string for the value or regex pattern that you
     #     specify in `TargetString`.
@@ -1607,22 +1607,22 @@ module Aws::WAF
     #   specified string. Parts of a request that you can search include the
     #   following:
     #
-    #   * `HEADER`\: A specified request header, for example, the value of
+    #   * `HEADER`: A specified request header, for example, the value of
     #     the `User-Agent` or `Referer` header. If you choose `HEADER` for
     #     the type, specify the name of the header in `Data`.
     #
-    #   * `METHOD`\: The HTTP method, which indicated the type of operation
+    #   * `METHOD`: The HTTP method, which indicated the type of operation
     #     that the request is asking the origin to perform. Amazon
     #     CloudFront supports the following methods: `DELETE`, `GET`,
     #     `HEAD`, `OPTIONS`, `PATCH`, `POST`, and `PUT`.
     #
-    #   * `QUERY_STRING`\: A query string, which is the part of a URL that
+    #   * `QUERY_STRING`: A query string, which is the part of a URL that
     #     appears after a `?` character, if any.
     #
-    #   * `URI`\: The part of a web request that identifies a resource, for
+    #   * `URI`: The part of a web request that identifies a resource, for
     #     example, `/images/daily-ad.jpg`.
     #
-    #   * `BODY`\: The part of a request that contains any additional data
+    #   * `BODY`: The part of a request that contains any additional data
     #     that you want to send to your web server as the HTTP request body,
     #     such as data from a form. The request body immediately follows the
     #     request headers. Note that only the first `8192` bytes of the
@@ -1631,11 +1631,11 @@ module Aws::WAF
     #     size constraint set. For more information, see
     #     CreateSizeConstraintSet.
     #
-    #   * `SINGLE_QUERY_ARG`\: The parameter in the query string that you
+    #   * `SINGLE_QUERY_ARG`: The parameter in the query string that you
     #     will inspect, such as *UserName* or *SalesRegion*. The maximum
     #     length for `SINGLE_QUERY_ARG` is 30 characters.
     #
-    #   * `ALL_QUERY_ARGS`\: Similar to `SINGLE_QUERY_ARG`, but rather than
+    #   * `ALL_QUERY_ARGS`: Similar to `SINGLE_QUERY_ARG`, but rather than
     #     inspecting a single parameter, AWS WAF will inspect all parameters
     #     within the query for the value or regex pattern that you specify
     #     in `TargetString`.
@@ -1839,7 +1839,7 @@ module Aws::WAF
     #   * ByteMatchSet: Contains `ByteMatchSetId`, `ByteMatchTuples`, and
     #     `Name`
     #
-    #   * `ByteMatchTuples`\: Contains an array of ByteMatchTuple objects.
+    #   * `ByteMatchTuples`: Contains an array of ByteMatchTuple objects.
     #     Each `ByteMatchTuple` object contains FieldToMatch,
     #     `PositionalConstraint`, `TargetString`, and `TextTransformation`
     #
@@ -1947,7 +1947,7 @@ module Aws::WAF
     #
     #   * IPSet: Contains `IPSetDescriptors`, `IPSetId`, and `Name`
     #
-    #   * `IPSetDescriptors`\: Contains an array of IPSetDescriptor objects.
+    #   * `IPSetDescriptors`: Contains an array of IPSetDescriptor objects.
     #     Each `IPSetDescriptor` object contains `Type` and `Value`
     #   @return [Types::IPSet]
     #
@@ -2286,7 +2286,7 @@ module Aws::WAF
     #   * SizeConstraintSet: Contains `SizeConstraintSetId`,
     #     `SizeConstraints`, and `Name`
     #
-    #   * `SizeConstraints`\: Contains an array of SizeConstraint objects.
+    #   * `SizeConstraints`: Contains an array of SizeConstraint objects.
     #     Each `SizeConstraint` object contains FieldToMatch,
     #     `TextTransformation`, `ComparisonOperator`, and `Size`
     #
@@ -2363,10 +2363,10 @@ module Aws::WAF
     #
     #   * `DefaultAction` (Data type is WafAction): Contains `Type`
     #
-    #   * `Rules`\: Contains an array of `ActivatedRule` objects, which
+    #   * `Rules`: Contains an array of `ActivatedRule` objects, which
     #     contain `Action`, `Priority`, and `RuleId`
     #
-    #   * `Action`\: Contains `Type`
+    #   * `Action`: Contains `Type`
     #   @return [Types::WebACL]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACLResponse AWS API Documentation
@@ -4588,23 +4588,23 @@ module Aws::WAF
     #   size in bytes of `FieldToMatch`". If that expression is true, the
     #   `SizeConstraint` is considered to match.
     #
-    #   **EQ**\: Used to test if the `Size` is equal to the size of the
+    #   **EQ**: Used to test if the `Size` is equal to the size of the
     #   `FieldToMatch`
     #
-    #   **NE**\: Used to test if the `Size` is not equal to the size of the
+    #   **NE**: Used to test if the `Size` is not equal to the size of the
     #   `FieldToMatch`
     #
-    #   **LE**\: Used to test if the `Size` is less than or equal to the
-    #   size of the `FieldToMatch`
-    #
-    #   **LT**\: Used to test if the `Size` is strictly less than the size
+    #   **LE**: Used to test if the `Size` is less than or equal to the size
     #   of the `FieldToMatch`
     #
-    #   **GE**\: Used to test if the `Size` is greater than or equal to the
+    #   **LT**: Used to test if the `Size` is strictly less than the size of
+    #   the `FieldToMatch`
+    #
+    #   **GE**: Used to test if the `Size` is greater than or equal to the
     #   size of the `FieldToMatch`
     #
-    #   **GT**\: Used to test if the `Size` is strictly greater than the
-    #   size of the `FieldToMatch`
+    #   **GT**: Used to test if the `Size` is strictly greater than the size
+    #   of the `FieldToMatch`
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -5827,7 +5827,7 @@ module Aws::WAF
     end
 
     # The operation failed due to a problem with the migration. The failure
-    # cause is provided in the exception, in the `MigrationErrorType`\:
+    # cause is provided in the exception, in the `MigrationErrorType`:
     #
     # * `ENTITY_NOT_SUPPORTED` - The web ACL has an unsupported entity but
     #   the `IgnoreUnsupportedType` is not set to true.
@@ -6212,11 +6212,11 @@ module Aws::WAF
     #   Specifies how you want AWS WAF to respond to requests that match the
     #   settings in a `Rule`. Valid settings include the following:
     #
-    #   * `ALLOW`\: AWS WAF allows requests
+    #   * `ALLOW`: AWS WAF allows requests
     #
-    #   * `BLOCK`\: AWS WAF blocks requests
+    #   * `BLOCK`: AWS WAF blocks requests
     #
-    #   * `COUNT`\: AWS WAF increments a counter of the requests that match
+    #   * `COUNT`: AWS WAF increments a counter of the requests that match
     #     all of the conditions in the rule. AWS WAF then continues to
     #     inspect the web request based on the remaining rules in the web
     #     ACL. You can't specify `COUNT` for the default action for a

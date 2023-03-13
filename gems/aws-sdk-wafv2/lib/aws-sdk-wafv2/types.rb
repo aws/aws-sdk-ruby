@@ -292,12 +292,12 @@ module Aws::WAFV2
     #   FieldToMatch. The maximum length of the value is 200 bytes.
     #
     #   Valid values depend on the component that you specify for inspection
-    #   in `FieldToMatch`\:
+    #   in `FieldToMatch`:
     #
-    #   * `Method`\: The HTTP method that you want WAF to search for. This
+    #   * `Method`: The HTTP method that you want WAF to search for. This
     #     indicates the type of operation specified in the request.
     #
-    #   * `UriPath`\: The value that you want WAF to search for in the URI
+    #   * `UriPath`: The value that you want WAF to search for in the URI
     #     path, for example, `/images/daily-ad.jpg`.
     #
     #   If `SearchString` includes alphabetic characters A-Z and a-z, note
@@ -1735,7 +1735,7 @@ module Aws::WAFV2
     #   * The syntax for the label namespace prefix for a managed rule group
     #     is the following:
     #
-    #     `awswaf:managed:<vendor>:<rule group name>`\:
+    #     `awswaf:managed:<vendor>:<rule group name>`:
     #
     #   * When a rule with a label matches a web request, WAF adds the fully
     #     qualified label to the request. A fully qualified label is made up
@@ -4592,7 +4592,7 @@ module Aws::WAFV2
     #   * The syntax for the label namespace prefix for a managed rule group
     #     is the following:
     #
-    #     `awswaf:managed:<vendor>:<rule group name>`\:
+    #     `awswaf:managed:<vendor>:<rule group name>`:
     #
     #   * When a rule with a label matches a web request, WAF adds the fully
     #     qualified label to the request. A fully qualified label is made up
@@ -4671,7 +4671,7 @@ module Aws::WAFV2
     #   * The syntax for the label namespace prefix for a managed rule group
     #     is the following:
     #
-    #     `awswaf:managed:<vendor>:<rule group name>`\:
+    #     `awswaf:managed:<vendor>:<rule group name>`:
     #
     #   * When a rule with a label matches a web request, WAF adds the fully
     #     qualified label to the request. A fully qualified label is made up

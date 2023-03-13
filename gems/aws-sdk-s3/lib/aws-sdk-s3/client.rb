@@ -469,7 +469,7 @@ module Aws::S3
     # For information about permissions required to use the multipart
     # upload, see [Multipart Upload and Permissions][2].
     #
-    # The following operations are related to `AbortMultipartUpload`\:
+    # The following operations are related to `AbortMultipartUpload`:
     #
     # * [CreateMultipartUpload][3]
     #
@@ -649,7 +649,7 @@ module Aws::S3
     #
     #   * 404 Not Found
     #
-    # The following operations are related to `CompleteMultipartUpload`\:
+    # The following operations are related to `CompleteMultipartUpload`:
     #
     # * [CreateMultipartUpload][5]
     #
@@ -1075,7 +1075,7 @@ module Aws::S3
     # copy of this object before you can use it as a source object for the
     # copy operation. For more information, see [RestoreObject][14].
     #
-    # The following operations are related to `CopyObject`\:
+    # The following operations are related to `CopyObject`:
     #
     # * [PutObject][15]
     #
@@ -1162,7 +1162,7 @@ module Aws::S3
     # @option params [required, String] :copy_source
     #   Specifies the source object for the copy operation. You specify the
     #   value in one of two formats, depending on whether you want to access
-    #   the source object through an [access point][1]\:
+    #   the source object through an [access point][1]:
     #
     #   * For objects not accessed through an access point, specify the name
     #     of the source bucket and the key of the source object, separated by
@@ -1605,7 +1605,7 @@ module Aws::S3
     #   the `x-amz-object-ownership` header, `s3:PutBucketOwnershipControls`
     #   permission is required.
     #
-    # The following operations are related to `CreateBucket`\:
+    # The following operations are related to `CreateBucket`:
     #
     # * [PutObject][9]
     #
@@ -1945,7 +1945,7 @@ module Aws::S3
     #
     #     `x-amz-grant-read: id="11112222333", id="444455556666" `
     #
-    # The following operations are related to `CreateMultipartUpload`\:
+    # The following operations are related to `CreateMultipartUpload`:
     #
     # * [UploadPart][1]
     #
@@ -2317,7 +2317,7 @@ module Aws::S3
     # Analytics – Storage Class Analysis][3].
     #
     # The following operations are related to
-    # `DeleteBucketAnalyticsConfiguration`\:
+    # `DeleteBucketAnalyticsConfiguration`:
     #
     # * [GetBucketAnalyticsConfiguration][4]
     #
@@ -2678,7 +2678,7 @@ module Aws::S3
     # [Monitoring Metrics with Amazon CloudWatch][3].
     #
     # The following operations are related to
-    # `DeleteBucketMetricsConfiguration`\:
+    # `DeleteBucketMetricsConfiguration`:
     #
     # * [GetBucketMetricsConfiguration][4]
     #
@@ -2736,7 +2736,7 @@ module Aws::S3
     # Ownership][2].
     #
     # The following operations are related to
-    # `DeleteBucketOwnershipControls`\:
+    # `DeleteBucketOwnershipControls`:
     #
     # * GetBucketOwnershipControls
     #
@@ -2857,7 +2857,7 @@ module Aws::S3
     # For information about replication configuration, see [Replication][3]
     # in the *Amazon S3 User Guide*.
     #
-    # The following operations are related to `DeleteBucketReplication`\:
+    # The following operations are related to `DeleteBucketReplication`:
     #
     # * [PutBucketReplication][4]
     #
@@ -2912,7 +2912,7 @@ module Aws::S3
     # `s3:PutBucketTagging` action. By default, the bucket owner has this
     # permission and can grant this permission to others.
     #
-    # The following operations are related to `DeleteBucketTagging`\:
+    # The following operations are related to `DeleteBucketTagging`:
     #
     # * [GetBucketTagging][1]
     #
@@ -2974,7 +2974,7 @@ module Aws::S3
     # For more information about hosting websites, see [Hosting Websites on
     # Amazon S3][1].
     #
-    # The following operations are related to `DeleteBucketWebsite`\:
+    # The following operations are related to `DeleteBucketWebsite`:
     #
     # * [GetBucketWebsite][2]
     #
@@ -3048,7 +3048,7 @@ module Aws::S3
     # `s3:DeleteObject`, `s3:DeleteObjectVersion`, and
     # `s3:PutLifeCycleConfiguration` actions.
     #
-    # The following action is related to `DeleteObject`\:
+    # The following action is related to `DeleteObject`:
     #
     # * [PutObject][4]
     #
@@ -3186,7 +3186,7 @@ module Aws::S3
     # `s3:DeleteObjectVersionTagging` action.
     #
     # The following operations are related to
-    # `DeleteBucketMetricsConfiguration`\:
+    # `DeleteBucketMetricsConfiguration`:
     #
     # * [PutObjectTagging][2]
     #
@@ -3325,7 +3325,7 @@ module Aws::S3
     # Delete requests. Amazon S3 uses the header value to ensure that your
     # request body has not been altered in transit.
     #
-    # The following operations are related to `DeleteObjects`\:
+    # The following operations are related to `DeleteObjects`:
     #
     # * [CreateMultipartUpload][2]
     #
@@ -3549,7 +3549,7 @@ module Aws::S3
     # Operations][1] and [Managing Access Permissions to Your Amazon S3
     # Resources][2].
     #
-    # The following operations are related to `DeletePublicAccessBlock`\:
+    # The following operations are related to `DeletePublicAccessBlock`:
     #
     # * [Using Amazon S3 Block Public Access][3]
     #
@@ -3824,7 +3824,7 @@ module Aws::S3
     # For more information about CORS, see [ Enabling Cross-Origin Resource
     # Sharing][1].
     #
-    # The following operations are related to `GetBucketCors`\:
+    # The following operations are related to `GetBucketCors`:
     #
     # * [PutBucketCors][2]
     #
@@ -3920,7 +3920,7 @@ module Aws::S3
     # Related to Bucket Subresource Operations][2] and [Managing Access
     # Permissions to Your Amazon S3 Resources][3].
     #
-    # The following operations are related to `GetBucketEncryption`\:
+    # The following operations are related to `GetBucketEncryption`:
     #
     # * [PutBucketEncryption][4]
     #
@@ -4064,7 +4064,7 @@ module Aws::S3
     # Inventory][3].
     #
     # The following operations are related to
-    # `GetBucketInventoryConfiguration`\:
+    # `GetBucketInventoryConfiguration`:
     #
     # * [DeleteBucketInventoryConfiguration][4]
     #
@@ -4156,7 +4156,7 @@ module Aws::S3
     #
     #   * SOAP Fault Code Prefix: Client
     #
-    # The following operations are related to `GetBucketLifecycle`\:
+    # The following operations are related to `GetBucketLifecycle`:
     #
     # * [GetBucketLifecycleConfiguration][1]
     #
@@ -4276,7 +4276,7 @@ module Aws::S3
     #   * SOAP Fault Code Prefix: Client
     #
     # The following operations are related to
-    # `GetBucketLifecycleConfiguration`\:
+    # `GetBucketLifecycleConfiguration`:
     #
     # * [GetBucketLifecycle][1]
     #
@@ -4389,7 +4389,7 @@ module Aws::S3
     # To use this API against an access point, provide the alias of the
     # access point in place of the bucket name.
     #
-    # The following operations are related to `GetBucketLocation`\:
+    # The following operations are related to `GetBucketLocation`:
     #
     # * [GetObject][2]
     #
@@ -4450,7 +4450,7 @@ module Aws::S3
     # to view and modify that status. To use GET, you must be the bucket
     # owner.
     #
-    # The following operations are related to `GetBucketLogging`\:
+    # The following operations are related to `GetBucketLogging`:
     #
     # * [CreateBucket][1]
     #
@@ -4516,7 +4516,7 @@ module Aws::S3
     # [Monitoring Metrics with Amazon CloudWatch][3].
     #
     # The following operations are related to
-    # `GetBucketMetricsConfiguration`\:
+    # `GetBucketMetricsConfiguration`:
     #
     # * [PutBucketMetricsConfiguration][4]
     #
@@ -4709,7 +4709,7 @@ module Aws::S3
     # Events][1]. For more information about bucket policies, see [Using
     # Bucket Policies][2].
     #
-    # The following action is related to `GetBucketNotification`\:
+    # The following action is related to `GetBucketNotification`:
     #
     # * [PutBucketNotification][3]
     #
@@ -4788,7 +4788,7 @@ module Aws::S3
     # For information about Amazon S3 Object Ownership, see [Using Object
     # Ownership][2].
     #
-    # The following operations are related to `GetBucketOwnershipControls`\:
+    # The following operations are related to `GetBucketOwnershipControls`:
     #
     # * PutBucketOwnershipControls
     #
@@ -4852,7 +4852,7 @@ module Aws::S3
     # For more information about bucket policies, see [Using Bucket Policies
     # and User Policies][1].
     #
-    # The following action is related to `GetBucketPolicy`\:
+    # The following action is related to `GetBucketPolicy`:
     #
     # * [GetObject][2]
     #
@@ -4918,7 +4918,7 @@ module Aws::S3
     # For more information about when Amazon S3 considers a bucket public,
     # see [The Meaning of "Public"][2].
     #
-    # The following operations are related to `GetBucketPolicyStatus`\:
+    # The following operations are related to `GetBucketPolicyStatus`:
     #
     # * [Using Amazon S3 Block Public Access][3]
     #
@@ -4992,7 +4992,7 @@ module Aws::S3
     # For information about `GetBucketReplication` errors, see [List of
     # replication-related error codes][3]
     #
-    # The following operations are related to `GetBucketReplication`\:
+    # The following operations are related to `GetBucketReplication`:
     #
     # * [PutBucketReplication][4]
     #
@@ -5093,7 +5093,7 @@ module Aws::S3
     # version of the operation, you must be the bucket owner. For more
     # information, see [Requester Pays Buckets][1].
     #
-    # The following operations are related to `GetBucketRequestPayment`\:
+    # The following operations are related to `GetBucketRequestPayment`:
     #
     # * [ListObjects][2]
     #
@@ -5165,7 +5165,7 @@ module Aws::S3
     #
     #   ^
     #
-    # The following operations are related to `GetBucketTagging`\:
+    # The following operations are related to `GetBucketTagging`:
     #
     # * [PutBucketTagging][1]
     #
@@ -5243,7 +5243,7 @@ module Aws::S3
     # owner must use an authentication device to change the versioning state
     # of the bucket.
     #
-    # The following operations are related to `GetBucketVersioning`\:
+    # The following operations are related to `GetBucketVersioning`:
     #
     # * [GetObject][1]
     #
@@ -5317,7 +5317,7 @@ module Aws::S3
     # the website configuration by writing a bucket policy granting them the
     # `S3:GetBucketWebsite` permission.
     #
-    # The following operations are related to `DeleteBucketWebsite`\:
+    # The following operations are related to `DeleteBucketWebsite`:
     #
     # * [DeleteBucketWebsite][2]
     #
@@ -5532,7 +5532,7 @@ module Aws::S3
     #
     # For more information about conditional requests, see [RFC 7232][9].
     #
-    # The following operations are related to `GetObject`\:
+    # The following operations are related to `GetObject`:
     #
     # * [ListBuckets][10]
     #
@@ -5891,7 +5891,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # The following operations are related to `GetObjectAcl`\:
+    # The following operations are related to `GetObjectAcl`:
     #
     # * [GetObject][3]
     #
@@ -6088,7 +6088,7 @@ module Aws::S3
     #
     # * If both of the `If-None-Match` and `If-Modified-Since` headers are
     #   present in the request as follows, then Amazon S3 returns the HTTP
-    #   status code `304 Not Modified`\:
+    #   status code `304 Not Modified`:
     #
     #   * `If-None-Match` condition evaluates to `false`.
     #
@@ -6114,7 +6114,7 @@ module Aws::S3
     # * If you don't have the `s3:ListBucket` permission, Amazon S3 returns
     #   an HTTP status code `403 Forbidden` ("access denied") error.
     #
-    # The following actions are related to `GetObjectAttributes`\:
+    # The following actions are related to `GetObjectAttributes`:
     #
     # * [GetObject][4]
     #
@@ -6289,7 +6289,7 @@ module Aws::S3
     #
     # This action is not supported by Amazon S3 on Outposts.
     #
-    # The following action is related to `GetObjectLegalHold`\:
+    # The following action is related to `GetObjectLegalHold`:
     #
     # * [GetObjectAttributes][2]
     #
@@ -6372,7 +6372,7 @@ module Aws::S3
     # object placed in the specified bucket. For more information, see
     # [Locking Objects][1].
     #
-    # The following action is related to `GetObjectLockConfiguration`\:
+    # The following action is related to `GetObjectLockConfiguration`:
     #
     # * [GetObjectAttributes][2]
     #
@@ -6435,7 +6435,7 @@ module Aws::S3
     #
     # This action is not supported by Amazon S3 on Outposts.
     #
-    # The following action is related to `GetObjectRetention`\:
+    # The following action is related to `GetObjectRetention`:
     #
     # * [GetObjectAttributes][2]
     #
@@ -6530,7 +6530,7 @@ module Aws::S3
     # For information about the Amazon S3 object tagging feature, see
     # [Object Tagging][1].
     #
-    # The following actions are related to `GetObjectTagging`\:
+    # The following actions are related to `GetObjectTagging`:
     #
     # * [DeleteObjectTagging][2]
     #
@@ -6684,7 +6684,7 @@ module Aws::S3
     #
     # This action is not supported by Amazon S3 on Outposts.
     #
-    # The following action is related to `GetObjectTorrent`\:
+    # The following action is related to `GetObjectTorrent`:
     #
     # * [GetObject][2]
     #
@@ -6779,7 +6779,7 @@ module Aws::S3
     # For more information about when Amazon S3 considers a bucket or an
     # object public, see [The Meaning of "Public"][2].
     #
-    # The following operations are related to `GetPublicAccessBlock`\:
+    # The following operations are related to `GetPublicAccessBlock`:
     #
     # * [Using Amazon S3 Block Public Access][3]
     #
@@ -7003,7 +7003,7 @@ module Aws::S3
     # * If you don’t have the `s3:ListBucket` permission, Amazon S3 returns
     #   an HTTP status code 403 ("access denied") error.
     #
-    # The following actions are related to `HeadObject`\:
+    # The following actions are related to `HeadObject`:
     #
     # * [GetObject][5]
     #
@@ -7272,7 +7272,7 @@ module Aws::S3
     # Analytics – Storage Class Analysis][3].
     #
     # The following operations are related to
-    # `ListBucketAnalyticsConfigurations`\:
+    # `ListBucketAnalyticsConfigurations`:
     #
     # * [GetBucketAnalyticsConfiguration][4]
     #
@@ -7457,7 +7457,7 @@ module Aws::S3
     # Inventory][3]
     #
     # The following operations are related to
-    # `ListBucketInventoryConfigurations`\:
+    # `ListBucketInventoryConfigurations`:
     #
     # * [GetBucketInventoryConfiguration][4]
     #
@@ -7557,7 +7557,7 @@ module Aws::S3
     # request metrics, see [Monitoring Metrics with Amazon CloudWatch][3].
     #
     # The following operations are related to
-    # `ListBucketMetricsConfigurations`\:
+    # `ListBucketMetricsConfigurations`:
     #
     # * [PutBucketMetricsConfiguration][4]
     #
@@ -7714,7 +7714,7 @@ module Aws::S3
     # For information on permissions required to use the multipart upload
     # API, see [Multipart Upload and Permissions][2].
     #
-    # The following operations are related to `ListMultipartUploads`\:
+    # The following operations are related to `ListMultipartUploads`:
     #
     # * [CreateMultipartUpload][3]
     #
@@ -7993,7 +7993,7 @@ module Aws::S3
     #
     # This action is not supported by Amazon S3 on Outposts.
     #
-    # The following operations are related to `ListObjectVersions`\:
+    # The following operations are related to `ListObjectVersions`:
     #
     # * [ListObjectsV2][1]
     #
@@ -8184,7 +8184,7 @@ module Aws::S3
     # version, [ListObjectsV2][1], when developing applications. For
     # backward compatibility, Amazon S3 continues to support `ListObjects`.
     #
-    # The following operations are related to `ListObjects`\:
+    # The following operations are related to `ListObjects`:
     #
     # * [ListObjectsV2][1]
     #
@@ -8387,7 +8387,7 @@ module Aws::S3
     #
     # To get a list of your buckets, see [ListBuckets][5].
     #
-    # The following operations are related to `ListObjectsV2`\:
+    # The following operations are related to `ListObjectsV2`:
     #
     # * [GetObject][6]
     #
@@ -8596,7 +8596,7 @@ module Aws::S3
     # For information on permissions required to use the multipart upload
     # API, see [Multipart Upload and Permissions][3].
     #
-    # The following operations are related to `ListParts`\:
+    # The following operations are related to `ListParts`:
     #
     # * [CreateMultipartUpload][1]
     #
@@ -8848,7 +8848,7 @@ module Aws::S3
     # Acceleration][4].
     #
     # The following operations are related to
-    # `PutBucketAccelerateConfiguration`\:
+    # `PutBucketAccelerateConfiguration`:
     #
     # * [GetBucketAccelerateConfiguration][3]
     #
@@ -10090,7 +10090,7 @@ module Aws::S3
     # For more information about permissions, see [Managing Access
     # Permissions to Your Amazon S3 Resources][5].
     #
-    # The following are related to `PutBucketLifecycleConfiguration`\:
+    # The following are related to `PutBucketLifecycleConfiguration`:
     #
     # * [Examples of Lifecycle Configuration][6]
     #
@@ -10295,7 +10295,7 @@ module Aws::S3
     # For more information about returning the logging status of a bucket,
     # see [GetBucketLogging][4].
     #
-    # The following operations are related to `PutBucketLogging`\:
+    # The following operations are related to `PutBucketLogging`:
     #
     # * [PutObject][5]
     #
@@ -10429,7 +10429,7 @@ module Aws::S3
     # [Monitoring Metrics with Amazon CloudWatch][3].
     #
     # The following operations are related to
-    # `PutBucketMetricsConfiguration`\:
+    # `PutBucketMetricsConfiguration`:
     #
     # * [DeleteBucketMetricsConfiguration][4]
     #
@@ -10651,7 +10651,7 @@ module Aws::S3
     # ID of the test notification sent to the topic.
     #
     # The following action is related to
-    # `PutBucketNotificationConfiguration`\:
+    # `PutBucketNotificationConfiguration`:
     #
     # * [GetBucketNotificationConfiguration][3]
     #
@@ -10781,7 +10781,7 @@ module Aws::S3
     # For information about Amazon S3 Object Ownership, see [Using object
     # ownership][2].
     #
-    # The following operations are related to `PutBucketOwnershipControls`\:
+    # The following operations are related to `PutBucketOwnershipControls`:
     #
     # * GetBucketOwnershipControls
     #
@@ -10856,7 +10856,7 @@ module Aws::S3
     #
     # For more information, see [Bucket policy examples][1].
     #
-    # The following operations are related to `PutBucketPolicy`\:
+    # The following operations are related to `PutBucketPolicy`:
     #
     # * [CreateBucket][2]
     #
@@ -10999,7 +10999,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # The following operations are related to `PutBucketReplication`\:
+    # The following operations are related to `PutBucketReplication`:
     #
     # * [GetBucketReplication][9]
     #
@@ -11175,7 +11175,7 @@ module Aws::S3
     # requesting the download will be charged for the download. For more
     # information, see [Requester Pays Buckets][1].
     #
-    # The following operations are related to `PutBucketRequestPayment`\:
+    # The following operations are related to `PutBucketRequestPayment`:
     #
     # * [CreateBucket][2]
     #
@@ -11320,7 +11320,7 @@ module Aws::S3
     #
     #   ^
     #
-    # The following operations are related to `PutBucketTagging`\:
+    # The following operations are related to `PutBucketTagging`:
     #
     # * [GetBucketTagging][7]
     #
@@ -13890,7 +13890,7 @@ module Aws::S3
     # The `SelectObjectContent` action does not support the following
     # `GetObject` functionality. For more information, see [GetObject][5].
     #
-    # * `Range`\: Although you can specify a scan range for an Amazon S3
+    # * `Range`: Although you can specify a scan range for an Amazon S3
     #   Select request (see [SelectObjectContentRequest - ScanRange][9] in
     #   the request parameters), you cannot specify the range of bytes of an
     #   object to return.
@@ -14608,7 +14608,7 @@ module Aws::S3
     # Note the following additional considerations about the request headers
     # `x-amz-copy-source-if-match`, `x-amz-copy-source-if-none-match`,
     # `x-amz-copy-source-if-unmodified-since`, and
-    # `x-amz-copy-source-if-modified-since`\:
+    # `x-amz-copy-source-if-modified-since`:
     #
     #
     #
@@ -14726,7 +14726,7 @@ module Aws::S3
     # @option params [required, String] :copy_source
     #   Specifies the source object for the copy operation. You specify the
     #   value in one of two formats, depending on whether you want to access
-    #   the source object through an [access point][1]\:
+    #   the source object through an [access point][1]:
     #
     #   * For objects not accessed through an access point, specify the name
     #     of the source bucket and key of the source object, separated by a

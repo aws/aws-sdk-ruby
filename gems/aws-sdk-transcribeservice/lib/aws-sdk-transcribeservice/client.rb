@@ -2419,16 +2419,16 @@ module Aws::TranscribeService
     # You must include the following parameters in your
     # `StartCallAnalyticsJob` request:
     #
-    # * `region`\: The Amazon Web Services Region where you are making your
+    # * `region`: The Amazon Web Services Region where you are making your
     #   request. For a list of Amazon Web Services Regions supported with
     #   Amazon Transcribe, refer to [Amazon Transcribe endpoints and
     #   quotas][4].
     #
-    # * `CallAnalyticsJobName`\: A custom name that you create for your
+    # * `CallAnalyticsJobName`: A custom name that you create for your
     #   transcription job that's unique within your Amazon Web Services
     #   account.
     #
-    # * `DataAccessRoleArn`\: The Amazon Resource Name (ARN) of an IAM role
+    # * `DataAccessRoleArn`: The Amazon Resource Name (ARN) of an IAM role
     #   that has permissions to access the Amazon S3 bucket that contains
     #   your input files.
     #
@@ -2656,26 +2656,26 @@ module Aws::TranscribeService
     # You must include the following parameters in your
     # `StartMedicalTranscriptionJob` request:
     #
-    # * `region`\: The Amazon Web Services Region where you are making your
+    # * `region`: The Amazon Web Services Region where you are making your
     #   request. For a list of Amazon Web Services Regions supported with
     #   Amazon Transcribe, refer to [Amazon Transcribe endpoints and
     #   quotas][2].
     #
-    # * `MedicalTranscriptionJobName`\: A custom name you create for your
+    # * `MedicalTranscriptionJobName`: A custom name you create for your
     #   transcription job that is unique within your Amazon Web Services
     #   account.
     #
     # * `Media` (`MediaFileUri`): The Amazon S3 location of your media file.
     #
-    # * `LanguageCode`\: This must be `en-US`.
+    # * `LanguageCode`: This must be `en-US`.
     #
-    # * `OutputBucketName`\: The Amazon S3 bucket where you want your
+    # * `OutputBucketName`: The Amazon S3 bucket where you want your
     #   transcript stored. If you want your output stored in a sub-folder of
     #   this bucket, you must also include `OutputKey`.
     #
-    # * `Specialty`\: This must be `PRIMARYCARE`.
+    # * `Specialty`: This must be `PRIMARYCARE`.
     #
-    # * `Type`\: Choose whether your audio is a conversation or a dictation.
+    # * `Type`: Choose whether your audio is a conversation or a dictation.
     #
     #
     #
@@ -2759,7 +2759,7 @@ module Aws::TranscribeService
     #   same as the name you specified for your medical transcription job
     #   (`MedicalTranscriptionJobName`).
     #
-    #   Here are some examples of how you can use `OutputKey`\:
+    #   Here are some examples of how you can use `OutputKey`:
     #
     #   * If you specify 'DOC-EXAMPLE-BUCKET' as the `OutputBucketName` and
     #     'my-transcript.json' as the `OutputKey`, your transcription output
@@ -2962,19 +2962,19 @@ module Aws::TranscribeService
     # You must include the following parameters in your
     # `StartTranscriptionJob` request:
     #
-    # * `region`\: The Amazon Web Services Region where you are making your
+    # * `region`: The Amazon Web Services Region where you are making your
     #   request. For a list of Amazon Web Services Regions supported with
     #   Amazon Transcribe, refer to [Amazon Transcribe endpoints and
     #   quotas][1].
     #
-    # * `TranscriptionJobName`\: A custom name you create for your
+    # * `TranscriptionJobName`: A custom name you create for your
     #   transcription job that is unique within your Amazon Web Services
     #   account.
     #
     # * `Media` (`MediaFileUri`): The Amazon S3 location of your media file.
     #
     # * One of `LanguageCode`, `IdentifyLanguage`, or
-    #   `IdentifyMultipleLanguages`\: If you know the language of your media
+    #   `IdentifyMultipleLanguages`: If you know the language of your media
     #   file, specify it using the `LanguageCode` parameter; you can find
     #   all valid language codes in the [Supported languages][2] table. If
     #   you don't know the languages spoken in your media, use either
@@ -3075,7 +3075,7 @@ module Aws::TranscribeService
     #   same as the name you specified for your transcription job
     #   (`TranscriptionJobName`).
     #
-    #   Here are some examples of how you can use `OutputKey`\:
+    #   Here are some examples of how you can use `OutputKey`:
     #
     #   * If you specify 'DOC-EXAMPLE-BUCKET' as the `OutputBucketName` and
     #     'my-transcript.json' as the `OutputKey`, your transcription output

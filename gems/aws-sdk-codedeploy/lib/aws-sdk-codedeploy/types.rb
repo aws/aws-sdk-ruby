@@ -60,10 +60,10 @@ module Aws::CodeDeploy
     #   the current state of alarms cannot be retrieved from Amazon
     #   CloudWatch. The default value is false.
     #
-    #   * `true`\: The deployment proceeds even if alarm status information
+    #   * `true`: The deployment proceeds even if alarm status information
     #     can't be retrieved from Amazon CloudWatch.
     #
-    #   * `false`\: The deployment stops if alarm status information can't
+    #   * `false`: The deployment stops if alarm status information can't
     #     be retrieved from Amazon CloudWatch.
     #   @return [Boolean]
     #
@@ -438,15 +438,15 @@ module Aws::CodeDeploy
     #   events. The type of the target objects depends on the deployment'
     #   compute platform.
     #
-    #   * **EC2/On-premises**\: Each target object is an Amazon EC2 or
+    #   * **EC2/On-premises**: Each target object is an Amazon EC2 or
     #     on-premises instance.
     #
-    #   * **Lambda**\: The target object is a specific version of an Lambda
+    #   * **Lambda**: The target object is a specific version of an Lambda
     #     function.
     #
-    #   * **Amazon ECS**\: The target object is an Amazon ECS service.
+    #   * **Amazon ECS**: The target object is an Amazon ECS service.
     #
-    #   * **CloudFormation**\: The target object is an CloudFormation
+    #   * **CloudFormation**: The target object is an CloudFormation
     #     blue/green deployment.
     #   @return [Array<Types::DeploymentTarget>]
     #
@@ -560,10 +560,9 @@ module Aws::CodeDeploy
     #   The action to take on instances in the original environment after a
     #   successful blue/green deployment.
     #
-    #   * `TERMINATE`\: Instances are terminated after a specified wait
-    #     time.
+    #   * `TERMINATE`: Instances are terminated after a specified wait time.
     #
-    #   * `KEEP_ALIVE`\: Instances are left running after they are
+    #   * `KEEP_ALIVE`: Instances are left running after they are
     #     deregistered from the load balancer and removed from the
     #     deployment group.
     #   @return [String]
@@ -1549,13 +1548,13 @@ module Aws::CodeDeploy
     # @!attribute [rw] creator
     #   The means by which the deployment was created:
     #
-    #   * `user`\: A user created the deployment.
+    #   * `user`: A user created the deployment.
     #
-    #   * `autoscaling`\: Amazon EC2 Auto Scaling created the deployment.
+    #   * `autoscaling`: Amazon EC2 Auto Scaling created the deployment.
     #
-    #   * `codeDeployRollback`\: A rollback process created the deployment.
+    #   * `codeDeployRollback`: A rollback process created the deployment.
     #
-    #   * `CodeDeployAutoUpdate`\: An auto-update process created the
+    #   * `CodeDeployAutoUpdate`: An auto-update process created the
     #     deployment when it detected outdated Amazon EC2 instances.
     #   @return [String]
     #
@@ -1639,14 +1638,14 @@ module Aws::CodeDeploy
     #   a deployment target location but weren't part of the previous
     #   successful deployment.
     #
-    #   * `DISALLOW`\: The deployment fails. This is also the default
+    #   * `DISALLOW`: The deployment fails. This is also the default
     #     behavior if no option is specified.
     #
-    #   * `OVERWRITE`\: The version of the file from the application
-    #     revision currently being deployed replaces the version already on
-    #     the instance.
+    #   * `OVERWRITE`: The version of the file from the application revision
+    #     currently being deployed replaces the version already on the
+    #     instance.
     #
-    #   * `RETAIN`\: The version of the file already on the instance is kept
+    #   * `RETAIN`: The version of the file already on the instance is kept
     #     and used as part of the new deployment.
     #   @return [String]
     #
@@ -1971,11 +1970,11 @@ module Aws::CodeDeploy
     # @!attribute [rw] type
     #   The tag filter type:
     #
-    #   * `KEY_ONLY`\: Key only.
+    #   * `KEY_ONLY`: Key only.
     #
-    #   * `VALUE_ONLY`\: Value only.
+    #   * `VALUE_ONLY`: Value only.
     #
-    #   * `KEY_AND_VALUE`\: Key and value.
+    #   * `KEY_AND_VALUE`: Key and value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2TagFilter AWS API Documentation
@@ -2115,12 +2114,12 @@ module Aws::CodeDeploy
     # @!attribute [rw] status
     #   The status of the task set. There are three valid task set statuses:
     #
-    #   * `PRIMARY`\: Indicates the task set is serving production traffic.
+    #   * `PRIMARY`: Indicates the task set is serving production traffic.
     #
-    #   * `ACTIVE`\: Indicates the task set is not serving production
+    #   * `ACTIVE`: Indicates the task set is not serving production
     #     traffic.
     #
-    #   * `DRAINING`\: Indicates the tasks in the task set are being stopped
+    #   * `DRAINING`: Indicates the tasks in the task set are being stopped
     #     and their corresponding targets are being deregistered from their
     #     target group.
     #   @return [String]
@@ -2581,10 +2580,10 @@ module Aws::CodeDeploy
     # @!attribute [rw] action
     #   The method used to add instances to a replacement environment.
     #
-    #   * `DISCOVER_EXISTING`\: Use instances that already exist or will be
+    #   * `DISCOVER_EXISTING`: Use instances that already exist or will be
     #     created manually.
     #
-    #   * `COPY_AUTO_SCALING_GROUP`\: Use settings from a specified Auto
+    #   * `COPY_AUTO_SCALING_GROUP`: Use settings from a specified Auto
     #     Scaling group to define and create instances in a new Auto Scaling
     #     group.
     #   @return [String]
@@ -2719,17 +2718,17 @@ module Aws::CodeDeploy
     # @!attribute [rw] status
     #   The deployment status for this instance:
     #
-    #   * `Pending`\: The deployment is pending for this instance.
+    #   * `Pending`: The deployment is pending for this instance.
     #
-    #   * `In Progress`\: The deployment is in progress for this instance.
+    #   * `In Progress`: The deployment is in progress for this instance.
     #
-    #   * `Succeeded`\: The deployment has succeeded for this instance.
+    #   * `Succeeded`: The deployment has succeeded for this instance.
     #
-    #   * `Failed`\: The deployment has failed for this instance.
+    #   * `Failed`: The deployment has failed for this instance.
     #
-    #   * `Skipped`\: The deployment has been skipped for this instance.
+    #   * `Skipped`: The deployment has been skipped for this instance.
     #
-    #   * `Unknown`\: The deployment status is unknown for this instance.
+    #   * `Unknown`: The deployment status is unknown for this instance.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -3393,14 +3392,14 @@ module Aws::CodeDeploy
     # @!attribute [rw] sort_by
     #   The column name to use to sort the list results:
     #
-    #   * `registerTime`\: Sort by the time the revisions were registered
+    #   * `registerTime`: Sort by the time the revisions were registered
     #     with CodeDeploy.
     #
-    #   * `firstUsedTime`\: Sort by the time the revisions were first used
-    #     in a deployment.
-    #
-    #   * `lastUsedTime`\: Sort by the time the revisions were last used in
+    #   * `firstUsedTime`: Sort by the time the revisions were first used in
     #     a deployment.
+    #
+    #   * `lastUsedTime`: Sort by the time the revisions were last used in a
+    #     deployment.
     #
     #   If not specified or set to null, the results are returned in an
     #   arbitrary order.
@@ -3409,9 +3408,9 @@ module Aws::CodeDeploy
     # @!attribute [rw] sort_order
     #   The order in which to sort the list results:
     #
-    #   * `ascending`\: ascending order.
+    #   * `ascending`: ascending order.
     #
-    #   * `descending`\: descending order.
+    #   * `descending`: descending order.
     #
     #   If not specified, the results are sorted in ascending order.
     #
@@ -3433,13 +3432,13 @@ module Aws::CodeDeploy
     #   Whether to list revisions based on whether the revision is the
     #   target revision of a deployment group:
     #
-    #   * `include`\: List revisions that are target revisions of a
+    #   * `include`: List revisions that are target revisions of a
     #     deployment group.
     #
-    #   * `exclude`\: Do not list revisions that are target revisions of a
+    #   * `exclude`: Do not list revisions that are target revisions of a
     #     deployment group.
     #
-    #   * `ignore`\: List all revisions.
+    #   * `ignore`: List all revisions.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3621,18 +3620,18 @@ module Aws::CodeDeploy
     # @!attribute [rw] instance_status_filter
     #   A subset of instances to list by status:
     #
-    #   * `Pending`\: Include those instances with pending deployments.
+    #   * `Pending`: Include those instances with pending deployments.
     #
-    #   * `InProgress`\: Include those instances where deployments are still
+    #   * `InProgress`: Include those instances where deployments are still
     #     in progress.
     #
-    #   * `Succeeded`\: Include those instances with successful deployments.
+    #   * `Succeeded`: Include those instances with successful deployments.
     #
-    #   * `Failed`\: Include those instances with failed deployments.
+    #   * `Failed`: Include those instances with failed deployments.
     #
-    #   * `Skipped`\: Include those instances with skipped deployments.
+    #   * `Skipped`: Include those instances with skipped deployments.
     #
-    #   * `Unknown`\: Include those instances with deployments in an unknown
+    #   * `Unknown`: Include those instances with deployments in an unknown
     #     state.
     #   @return [Array<String>]
     #
@@ -3757,19 +3756,18 @@ module Aws::CodeDeploy
     # @!attribute [rw] include_only_statuses
     #   A subset of deployments to list by status:
     #
-    #   * `Created`\: Include created deployments in the resulting list.
+    #   * `Created`: Include created deployments in the resulting list.
     #
-    #   * `Queued`\: Include queued deployments in the resulting list.
+    #   * `Queued`: Include queued deployments in the resulting list.
     #
-    #   * `In Progress`\: Include in-progress deployments in the resulting
+    #   * `In Progress`: Include in-progress deployments in the resulting
     #     list.
     #
-    #   * `Succeeded`\: Include successful deployments in the resulting
-    #     list.
+    #   * `Succeeded`: Include successful deployments in the resulting list.
     #
-    #   * `Failed`\: Include failed deployments in the resulting list.
+    #   * `Failed`: Include failed deployments in the resulting list.
     #
-    #   * `Stopped`\: Include stopped deployments in the resulting list.
+    #   * `Stopped`: Include stopped deployments in the resulting list.
     #   @return [Array<String>]
     #
     # @!attribute [rw] create_time_range
@@ -3859,10 +3857,10 @@ module Aws::CodeDeploy
     # @!attribute [rw] registration_status
     #   The registration status of the on-premises instances:
     #
-    #   * `Deregistered`\: Include deregistered on-premises instances in the
+    #   * `Deregistered`: Include deregistered on-premises instances in the
     #     resulting list.
     #
-    #   * `Registered`\: Include registered on-premises instances in the
+    #   * `Registered`: Include registered on-premises instances in the
     #     resulting list.
     #   @return [String]
     #
@@ -3992,10 +3990,10 @@ module Aws::CodeDeploy
     # @!attribute [rw] type
     #   The minimum healthy instance type:
     #
-    #   * `HOST_COUNT`\: The minimum number of healthy instances as an
+    #   * `HOST_COUNT`: The minimum number of healthy instances as an
     #     absolute value.
     #
-    #   * `FLEET_PERCENT`\: The minimum number of healthy instances as a
+    #   * `FLEET_PERCENT`: The minimum number of healthy instances as a
     #     percentage of the total number of instances in the deployment.
     #
     #   In an example of nine instances, if a HOST\_COUNT of six is
@@ -4371,11 +4369,11 @@ module Aws::CodeDeploy
     #   The file type of the application revision. Must be one of the
     #   following:
     #
-    #   * `tar`\: A tar archive file.
+    #   * `tar`: A tar archive file.
     #
-    #   * `tgz`\: A compressed tar archive file.
+    #   * `tgz`: A compressed tar archive file.
     #
-    #   * `zip`\: A zip archive file.
+    #   * `zip`: A zip archive file.
     #   @return [String]
     #
     # @!attribute [rw] version

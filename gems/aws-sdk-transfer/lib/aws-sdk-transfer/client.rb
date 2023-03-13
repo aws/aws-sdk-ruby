@@ -2728,7 +2728,7 @@ module Aws::Transfer
     #
     #   This is useful for pagination, for instance. If you have 100
     #   executions for a workflow, you might only want to list first 10. If
-    #   so, call the API by specifying the `max-results`\:
+    #   so, call the API by specifying the `max-results`:
     #
     #   `aws transfer list-executions --max-results 10`
     #

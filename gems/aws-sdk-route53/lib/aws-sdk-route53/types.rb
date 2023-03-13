@@ -16,23 +16,23 @@ module Aws::Route53
     # @!attribute [rw] type
     #   The limit that you requested. Valid values include the following:
     #
-    #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**\: The maximum number of health
+    #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**: The maximum number of health
     #     checks that you can create using the current account.
     #
-    #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**\: The maximum number of hosted
+    #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**: The maximum number of hosted
     #     zones that you can create using the current account.
     #
-    #   * **MAX\_REUSABLE\_DELEGATION\_SETS\_BY\_OWNER**\: The maximum
-    #     number of reusable delegation sets that you can create using the
-    #     current account.
+    #   * **MAX\_REUSABLE\_DELEGATION\_SETS\_BY\_OWNER**: The maximum number
+    #     of reusable delegation sets that you can create using the current
+    #     account.
     #
-    #   * **MAX\_TRAFFIC\_POLICIES\_BY\_OWNER**\: The maximum number of
+    #   * **MAX\_TRAFFIC\_POLICIES\_BY\_OWNER**: The maximum number of
     #     traffic policies that you can create using the current account.
     #
-    #   * **MAX\_TRAFFIC\_POLICY\_INSTANCES\_BY\_OWNER**\: The maximum
-    #     number of traffic policy instances that you can create using the
-    #     current account. (Traffic policy instances are referred to as
-    #     traffic flow policy records in the Amazon Route 53 console.)
+    #   * **MAX\_TRAFFIC\_POLICY\_INSTANCES\_BY\_OWNER**: The maximum number
+    #     of traffic policy instances that you can create using the current
+    #     account. (Traffic policy instances are referred to as traffic flow
+    #     policy records in the Amazon Route 53 console.)
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -150,13 +150,13 @@ module Aws::Route53
     # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
     #
     # @!attribute [rw] hosted_zone_id
-    #   *Alias resource records sets only*\: The value used depends on where
+    #   *Alias resource records sets only*: The value used depends on where
     #   you want to route traffic:
     #
     #   Amazon API Gateway custom regional APIs and edge-optimized APIs
     #
     #   : Specify the hosted zone ID for your API. You can get the
-    #     applicable value using the CLI command [get-domain-names][1]\:
+    #     applicable value using the CLI command [get-domain-names][1]:
     #
     #     * For regional APIs, specify the value of `regionalHostedZoneId`.
     #
@@ -192,17 +192,17 @@ module Aws::Route53
     #     the following methods to get the hosted zone ID:
     #
     #     * [Elastic Load Balancing endpoints and quotas][4] topic in the
-    #       *Amazon Web Services General Reference*\: Use the value that
+    #       *Amazon Web Services General Reference*: Use the value that
     #       corresponds with the region that you created your load balancer
     #       in. Note that there are separate columns for Application and
     #       Classic Load Balancers and for Network Load Balancers.
     #
-    #     * **Amazon Web Services Management Console**\: Go to the Amazon
-    #       EC2 page, choose **Load Balancers** in the navigation pane,
-    #       select the load balancer, and get the value of the **Hosted
-    #       zone** field on the **Description** tab.
+    #     * **Amazon Web Services Management Console**: Go to the Amazon EC2
+    #       page, choose **Load Balancers** in the navigation pane, select
+    #       the load balancer, and get the value of the **Hosted zone**
+    #       field on the **Description** tab.
     #
-    #     * **Elastic Load Balancing API**\: Use `DescribeLoadBalancers` to
+    #     * **Elastic Load Balancing API**: Use `DescribeLoadBalancers` to
     #       get the applicable value. For more information, see the
     #       applicable guide:
     #
@@ -213,7 +213,7 @@ module Aws::Route53
     #         [DescribeLoadBalancers][6] to get the value of
     #         `CanonicalHostedZoneId`.
     #
-    #     * **CLI**\: Use `describe-load-balancers` to get the applicable
+    #     * **CLI**: Use `describe-load-balancers` to get the applicable
     #       value. For more information, see the applicable guide:
     #
     #       * Classic Load Balancers: Use [describe-load-balancers][7] to
@@ -260,7 +260,7 @@ module Aws::Route53
     #   Amazon API Gateway custom regional APIs and edge-optimized APIs
     #
     #   : Specify the applicable domain name for your API. You can get the
-    #     applicable value using the CLI command [get-domain-names][1]\:
+    #     applicable value using the CLI command [get-domain-names][1]:
     #
     #     * For regional APIs, specify the value of `regionalDomainName`.
     #
@@ -329,17 +329,17 @@ module Aws::Route53
     #     can use the following methods to get the value of the CNAME
     #     attribute:
     #
-    #     * *Amazon Web Services Management Console*\: For information about
+    #     * *Amazon Web Services Management Console*: For information about
     #       how to get the value by using the console, see [Using Custom
     #       Domains with Elastic Beanstalk][4] in the *Elastic Beanstalk
     #       Developer Guide*.
     #
-    #     * *Elastic Beanstalk API*\: Use the `DescribeEnvironments` action
+    #     * *Elastic Beanstalk API*: Use the `DescribeEnvironments` action
     #       to get the value of the `CNAME` attribute. For more information,
     #       see [DescribeEnvironments][5] in the *Elastic Beanstalk API
     #       Reference*.
     #
-    #     * *CLI*\: Use the `describe-environments` command to get the value
+    #     * *CLI*: Use the `describe-environments` command to get the value
     #       of the `CNAME` attribute. For more information, see
     #       [describe-environments][6] in the *CLI Command Reference*.
     #
@@ -349,7 +349,7 @@ module Aws::Route53
     #     Get the DNS name by using the Amazon Web Services Management
     #     Console, the ELB API, or the CLI.
     #
-    #     * **Amazon Web Services Management Console**\: Go to the EC2 page,
+    #     * **Amazon Web Services Management Console**: Go to the EC2 page,
     #       choose **Load Balancers** in the navigation pane, choose the
     #       load balancer, choose the **Description** tab, and get the value
     #       of the **DNS name** field.
@@ -359,7 +359,7 @@ module Aws::Route53
     #       to another type of load balancer, get the value that applies to
     #       the record type, A or AAAA.
     #
-    #     * **Elastic Load Balancing API**\: Use `DescribeLoadBalancers` to
+    #     * **Elastic Load Balancing API**: Use `DescribeLoadBalancers` to
     #       get the value of `DNSName`. For more information, see the
     #       applicable guide:
     #
@@ -368,7 +368,7 @@ module Aws::Route53
     #       * Application and Network Load Balancers:
     #         [DescribeLoadBalancers][8]
     #
-    #     * **CLI**\: Use `describe-load-balancers` to get the value of
+    #     * **CLI**: Use `describe-load-balancers` to get the value of
     #       `DNSName`. For more information, see the applicable guide:
     #
     #       * Classic Load Balancers: [describe-load-balancers][9]
@@ -462,7 +462,7 @@ module Aws::Route53
     #
     #   : Health checking behavior depends on the type of load balancer:
     #
-    #     * **Classic Load Balancers**\: If you specify an ELB Classic Load
+    #     * **Classic Load Balancers**: If you specify an ELB Classic Load
     #       Balancer in `DNSName`, Elastic Load Balancing routes queries
     #       only to the healthy Amazon EC2 instances that are registered
     #       with the load balancer. If you set `EvaluateTargetHealth` to
@@ -470,7 +470,7 @@ module Aws::Route53
     #       balancer itself is unhealthy, Route 53 routes queries to other
     #       resources.
     #
-    #     * **Application and Network Load Balancers**\: If you specify an
+    #     * **Application and Network Load Balancers**: If you specify an
     #       ELB Application or Network Load Balancer and you set
     #       `EvaluateTargetHealth` to `true`, Route 53 routes queries to the
     #       load balancer based on the health of the target groups that are
@@ -578,10 +578,10 @@ module Aws::Route53
     # @!attribute [rw] action
     #   The action to perform:
     #
-    #   * `CREATE`\: Creates a resource record set that has the specified
+    #   * `CREATE`: Creates a resource record set that has the specified
     #     values.
     #
-    #   * `DELETE`\: Deletes a existing resource record set.
+    #   * `DELETE`: Deletes a existing resource record set.
     #
     #     To delete the resource record set that is associated with a
     #     traffic policy instance, use [DeleteTrafficPolicyInstance][1].
@@ -591,7 +591,7 @@ module Aws::Route53
     #     the traffic policy instance, and you'll continue to be charged
     #     for it even though it's no longer in use.
     #
-    #   * `UPSERT`\: If a resource record set doesn't already exist, Route
+    #   * `UPSERT`: If a resource record set doesn't already exist, Route
     #     53 creates it. If a resource record set does exist, Route 53
     #     updates it with the values in the request.
     #
@@ -1467,7 +1467,7 @@ module Aws::Route53
     #   Amazon Route 53 to send query logs to. This is the format of the
     #   ARN:
     #
-    #   arn:aws:logs:*region*\:*account-id*\:log-group:*log\_group\_name*
+    #   arn:aws:logs:*region*:*account-id*:log-group:*log\_group\_name*
     #
     #   To get the ARN for a log group, you can use the CloudWatch console,
     #   the [DescribeLogGroups][1] API action, the [describe-log-groups][2]
@@ -2294,19 +2294,19 @@ module Aws::Route53
     #
     #   Amazon Route 53 supports the following continent codes:
     #
-    #   * **AF**\: Africa
+    #   * **AF**: Africa
     #
-    #   * **AN**\: Antarctica
+    #   * **AN**: Antarctica
     #
-    #   * **AS**\: Asia
+    #   * **AS**: Asia
     #
-    #   * **EU**\: Europe
+    #   * **EU**: Europe
     #
-    #   * **OC**\: Oceania
+    #   * **OC**: Oceania
     #
-    #   * **NA**\: North America
+    #   * **NA**: North America
     #
-    #   * **SA**\: South America
+    #   * **SA**: South America
     #
     #   Constraint: Specifying `ContinentCode` with either `CountryCode` or
     #   `SubdivisionCode` returns an `InvalidInput` error.
@@ -2405,23 +2405,23 @@ module Aws::Route53
     # @!attribute [rw] type
     #   The limit that you want to get. Valid values include the following:
     #
-    #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**\: The maximum number of health
+    #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**: The maximum number of health
     #     checks that you can create using the current account.
     #
-    #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**\: The maximum number of hosted
+    #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**: The maximum number of hosted
     #     zones that you can create using the current account.
     #
-    #   * **MAX\_REUSABLE\_DELEGATION\_SETS\_BY\_OWNER**\: The maximum
-    #     number of reusable delegation sets that you can create using the
-    #     current account.
+    #   * **MAX\_REUSABLE\_DELEGATION\_SETS\_BY\_OWNER**: The maximum number
+    #     of reusable delegation sets that you can create using the current
+    #     account.
     #
-    #   * **MAX\_TRAFFIC\_POLICIES\_BY\_OWNER**\: The maximum number of
+    #   * **MAX\_TRAFFIC\_POLICIES\_BY\_OWNER**: The maximum number of
     #     traffic policies that you can create using the current account.
     #
-    #   * **MAX\_TRAFFIC\_POLICY\_INSTANCES\_BY\_OWNER**\: The maximum
-    #     number of traffic policy instances that you can create using the
-    #     current account. (Traffic policy instances are referred to as
-    #     traffic flow policy records in the Amazon Route 53 console.)
+    #   * **MAX\_TRAFFIC\_POLICY\_INSTANCES\_BY\_OWNER**: The maximum number
+    #     of traffic policy instances that you can create using the current
+    #     account. (Traffic policy instances are referred to as traffic flow
+    #     policy records in the Amazon Route 53 console.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimitRequest AWS API Documentation
@@ -2550,19 +2550,19 @@ module Aws::Route53
     #   identifies a continent. Amazon Route 53 supports the following
     #   continent codes:
     #
-    #   * **AF**\: Africa
+    #   * **AF**: Africa
     #
-    #   * **AN**\: Antarctica
+    #   * **AN**: Antarctica
     #
-    #   * **AS**\: Asia
+    #   * **AS**: Asia
     #
-    #   * **EU**\: Europe
+    #   * **EU**: Europe
     #
-    #   * **OC**\: Oceania
+    #   * **OC**: Oceania
     #
-    #   * **NA**\: North America
+    #   * **NA**: North America
     #
-    #   * **SA**\: South America
+    #   * **SA**: South America
     #   @return [String]
     #
     # @!attribute [rw] country_code
@@ -2781,10 +2781,10 @@ module Aws::Route53
     # @!attribute [rw] type
     #   The limit that you want to get. Valid values include the following:
     #
-    #   * **MAX\_RRSETS\_BY\_ZONE**\: The maximum number of records that you
+    #   * **MAX\_RRSETS\_BY\_ZONE**: The maximum number of records that you
     #     can create in the specified hosted zone.
     #
-    #   * **MAX\_VPCS\_ASSOCIATED\_BY\_ZONE**\: The maximum number of Amazon
+    #   * **MAX\_VPCS\_ASSOCIATED\_BY\_ZONE**: The maximum number of Amazon
     #     VPCs that you can associate with the specified private hosted
     #     zone.
     #   @return [String]
@@ -3149,12 +3149,12 @@ module Aws::Route53
     #   that you specify in `RequestInterval`. Using an IP address returned
     #   by DNS, Route 53 then checks the health of the endpoint.
     #
-    #   Use one of the following formats for the value of `IPAddress`\:
+    #   Use one of the following formats for the value of `IPAddress`:
     #
-    #   * **IPv4 address**\: four values between 0 and 255, separated by
+    #   * **IPv4 address**: four values between 0 and 255, separated by
     #     periods (.), for example, `192.0.2.44`.
     #
-    #   * **IPv6 address**\: eight groups of four hexadecimal values,
+    #   * **IPv6 address**: eight groups of four hexadecimal values,
     #     separated by colons (:), for example,
     #     `2001:0db8:85a3:0000:0000:abcd:0001:2345`. You can also shorten
     #     IPv6 addresses as described in RFC 5952, for example,
@@ -3208,44 +3208,44 @@ module Aws::Route53
     #
     #   You can create the following types of health checks:
     #
-    #   * **HTTP**\: Route 53 tries to establish a TCP connection. If
+    #   * **HTTP**: Route 53 tries to establish a TCP connection. If
     #     successful, Route 53 submits an HTTP request and waits for an HTTP
     #     status code of 200 or greater and less than 400.
     #
-    #   * **HTTPS**\: Route 53 tries to establish a TCP connection. If
+    #   * **HTTPS**: Route 53 tries to establish a TCP connection. If
     #     successful, Route 53 submits an HTTPS request and waits for an
     #     HTTP status code of 200 or greater and less than 400.
     #
     #     If you specify `HTTPS` for the value of `Type`, the endpoint must
     #     support TLS v1.0 or later.
     #
-    #   * **HTTP\_STR\_MATCH**\: Route 53 tries to establish a TCP
+    #   * **HTTP\_STR\_MATCH**: Route 53 tries to establish a TCP
     #     connection. If successful, Route 53 submits an HTTP request and
     #     searches the first 5,120 bytes of the response body for the string
     #     that you specify in `SearchString`.
     #
-    #   * **HTTPS\_STR\_MATCH**\: Route 53 tries to establish a TCP
+    #   * **HTTPS\_STR\_MATCH**: Route 53 tries to establish a TCP
     #     connection. If successful, Route 53 submits an `HTTPS` request and
     #     searches the first 5,120 bytes of the response body for the string
     #     that you specify in `SearchString`.
     #
-    #   * **TCP**\: Route 53 tries to establish a TCP connection.
+    #   * **TCP**: Route 53 tries to establish a TCP connection.
     #
-    #   * **CLOUDWATCH\_METRIC**\: The health check is associated with a
+    #   * **CLOUDWATCH\_METRIC**: The health check is associated with a
     #     CloudWatch alarm. If the state of the alarm is `OK`, the health
     #     check is considered healthy. If the state is `ALARM`, the health
     #     check is considered unhealthy. If CloudWatch doesn't have
     #     sufficient data to determine whether the state is `OK` or `ALARM`,
     #     the health check status depends on the setting for
-    #     `InsufficientDataHealthStatus`\: `Healthy`, `Unhealthy`, or
+    #     `InsufficientDataHealthStatus`: `Healthy`, `Unhealthy`, or
     #     `LastKnownStatus`.
     #
-    #   * **CALCULATED**\: For health checks that monitor the status of
-    #     other health checks, Route 53 adds up the number of health checks
-    #     that Route 53 health checkers consider to be healthy and compares
-    #     that number with the value of `HealthThreshold`.
+    #   * **CALCULATED**: For health checks that monitor the status of other
+    #     health checks, Route 53 adds up the number of health checks that
+    #     Route 53 health checkers consider to be healthy and compares that
+    #     number with the value of `HealthThreshold`.
     #
-    #   * **RECOVERY\_CONTROL**\: The health check is assocated with a
+    #   * **RECOVERY\_CONTROL**: The health check is assocated with a
     #     Route53 Application Recovery Controller routing control. If the
     #     routing control state is `ON`, the health check is considered
     #     healthy. If the state is `OFF`, the health check is considered
@@ -3272,7 +3272,7 @@ module Aws::Route53
     #   Amazon Route 53 behavior depends on whether you specify a value for
     #   `IPAddress`.
     #
-    #   **If you specify a value for** `IPAddress`\:
+    #   **If you specify a value for** `IPAddress`:
     #
     #   Amazon Route 53 sends health check requests to the specified IPv4 or
     #   IPv6 address and passes the value of `FullyQualifiedDomainName` in
@@ -3299,7 +3299,7 @@ module Aws::Route53
     #   53 substitutes the value of `IPAddress` in the `Host` header in each
     #   of the preceding cases.
     #
-    #   **If you don't specify a value for** `IPAddress`\:
+    #   **If you don't specify a value for** `IPAddress`:
     #
     #   Route 53 sends a DNS request to the domain that you specify for
     #   `FullyQualifiedDomainName` at the interval that you specify for
@@ -3498,11 +3498,11 @@ module Aws::Route53
     #   the alarm state, the status that you want Amazon Route 53 to assign
     #   to the health check:
     #
-    #   * `Healthy`\: Route 53 considers the health check to be healthy.
+    #   * `Healthy`: Route 53 considers the health check to be healthy.
     #
-    #   * `Unhealthy`\: Route 53 considers the health check to be unhealthy.
+    #   * `Unhealthy`: Route 53 considers the health check to be unhealthy.
     #
-    #   * `LastKnownStatus`\: Route 53 uses the status of the health check
+    #   * `LastKnownStatus`: Route 53 uses the status of the health check
     #     from the last time that CloudWatch had sufficient data to
     #     determine the alarm state. For new health checks that have no last
     #     known status, the default status for the health check is healthy.
@@ -3699,10 +3699,10 @@ module Aws::Route53
     # @!attribute [rw] type
     #   The limit that you requested. Valid values include the following:
     #
-    #   * **MAX\_RRSETS\_BY\_ZONE**\: The maximum number of records that you
+    #   * **MAX\_RRSETS\_BY\_ZONE**: The maximum number of records that you
     #     can create in the specified hosted zone.
     #
-    #   * **MAX\_VPCS\_ASSOCIATED\_BY\_ZONE**\: The maximum number of Amazon
+    #   * **MAX\_VPCS\_ASSOCIATED\_BY\_ZONE**: The maximum number of Amazon
     #     VPCs that you can associate with the specified private hosted
     #     zone.
     #   @return [String]
@@ -5063,18 +5063,18 @@ module Aws::Route53
     #
     #   Values for alias resource record sets:
     #
-    #   * **API Gateway custom regional API or edge-optimized API**\: A
+    #   * **API Gateway custom regional API or edge-optimized API**: A
     #
-    #   * **CloudFront distribution**\: A or AAAA
+    #   * **CloudFront distribution**: A or AAAA
     #
     #   * **Elastic Beanstalk environment that has a regionalized
-    #     subdomain**\: A
+    #     subdomain**: A
     #
-    #   * **Elastic Load Balancing load balancer**\: A \| AAAA
+    #   * **Elastic Load Balancing load balancer**: A \| AAAA
     #
-    #   * **S3 bucket**\: A
+    #   * **S3 bucket**: A
     #
-    #   * **VPC interface VPC endpoint**\: A
+    #   * **VPC interface VPC endpoint**: A
     #
     #   * **Another resource record set in this hosted zone:** The type of
     #     the resource record set that the alias references.
@@ -5852,7 +5852,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   *Optional*\: If a response includes a `NextToken` element, there are
+    #   *Optional*: If a response includes a `NextToken` element, there are
     #   more VPCs that can be associated with the specified hosted zone. To
     #   get the next page of results, submit another request, and include
     #   the value of `NextToken` from the response in the `nexttoken`
@@ -5860,7 +5860,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   *Optional*\: An integer that specifies the maximum number of VPCs
+    #   *Optional*: An integer that specifies the maximum number of VPCs
     #   that you want Amazon Route 53 to return. If you don't specify a
     #   value for `MaxResults`, Route 53 returns up to 50 VPCs per page.
     #   @return [String]
@@ -6294,7 +6294,7 @@ module Aws::Route53
     #     value of `A` and one with a value of `AAAA`.
     #
     #   * **Amazon API Gateway environment that has a regionalized
-    #     subdomain**\: `A`
+    #     subdomain**: `A`
     #
     #   * **ELB load balancers:** `A` \| `AAAA`
     #
@@ -6499,7 +6499,7 @@ module Aws::Route53
     #   `EvaluateTargetHealth` element and set the value to true.
     #
     #   For more information about configuring failover for Route 53, see
-    #   the following topics in the *Amazon Route 53 Developer Guide*\:
+    #   the following topics in the *Amazon Route 53 Developer Guide*:
     #
     #   * [Route 53 Health Checks and DNS Failover][1]
     #
@@ -6512,7 +6512,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] multi_value_answer
-    #   *Multivalue answer resource record sets only*\: To route traffic
+    #   *Multivalue answer resource record sets only*: To route traffic
     #   approximately randomly to multiple resources, such as web servers,
     #   create one multivalue answer record for each resource and specify
     #   `true` for `MultiValueAnswer`. Note the following:
@@ -6621,7 +6621,7 @@ module Aws::Route53
     #   the health of the endpoint that you specified in the health check.
     #
     #   For more information, see the following topics in the *Amazon Route
-    #   53 Developer Guide*\:
+    #   53 Developer Guide*:
     #
     #   * [How Amazon Route 53 Determines Whether an Endpoint Is Healthy][1]
     #
@@ -6637,8 +6637,8 @@ module Aws::Route53
     #   status of a health check. Configuring health checks makes sense only
     #   in the following configurations:
     #
-    #   * **Non-alias resource record sets**\: You're checking the health
-    #     of a group of non-alias resource record sets that have the same
+    #   * **Non-alias resource record sets**: You're checking the health of
+    #     a group of non-alias resource record sets that have the same
     #     routing policy, name, and type (such as multiple weighted records
     #     named www.example.com with a type of A) and you specify health
     #     check IDs for all the resource record sets.
@@ -6655,7 +6655,7 @@ module Aws::Route53
     #     group is unhealthy, Route 53 considers all resource record sets in
     #     the group healthy and responds to DNS queries accordingly.
     #
-    #   * **Alias resource record sets**\: You specify the following
+    #   * **Alias resource record sets**: You specify the following
     #     settings:
     #
     #     * You set `EvaluateTargetHealth` to true for an alias resource
@@ -6858,17 +6858,17 @@ module Aws::Route53
     #   The value of `Key` depends on the operation that you want to
     #   perform:
     #
-    #   * **Add a tag to a health check or hosted zone**\: `Key` is the name
+    #   * **Add a tag to a health check or hosted zone**: `Key` is the name
     #     that you want to give the new tag.
     #
-    #   * **Edit a tag**\: `Key` is the name of the tag that you want to
+    #   * **Edit a tag**: `Key` is the name of the tag that you want to
     #     change the `Value` for.
     #
-    #   * <b> Delete a key</b>\: `Key` is the name of the tag you want to
+    #   * <b> Delete a key</b>: `Key` is the name of the tag you want to
     #     remove.
     #
-    #   * **Give a name to a health check**\: Edit the default `Name` tag.
-    #     In the Amazon Route 53 console, the list of your health checks
+    #   * **Give a name to a health check**: Edit the default `Name` tag. In
+    #     the Amazon Route 53 console, the list of your health checks
     #     includes a **Name** column that lets you see the name that you've
     #     given to each health check.
     #   @return [String]
@@ -6877,10 +6877,10 @@ module Aws::Route53
     #   The value of `Value` depends on the operation that you want to
     #   perform:
     #
-    #   * **Add a tag to a health check or hosted zone**\: `Value` is the
+    #   * **Add a tag to a health check or hosted zone**: `Value` is the
     #     value that you want to give the new tag.
     #
-    #   * **Edit a tag**\: `Value` is the new value that you want to assign
+    #   * **Edit a tag**: `Value` is the new value that you want to assign
     #     the tag.
     #   @return [String]
     #
@@ -6938,9 +6938,9 @@ module Aws::Route53
     #   The range of valid values depends on whether `edns0clientsubnetip`
     #   is an IPv4 or an IPv6 address:
     #
-    #   * **IPv4**\: Specify a value between 0 and 32
+    #   * **IPv4**: Specify a value between 0 and 32
     #
-    #   * **IPv6**\: Specify a value between 0 and 128
+    #   * **IPv6**: Specify a value between 0 and 128
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswerRequest AWS API Documentation
@@ -7454,12 +7454,12 @@ module Aws::Route53
     #   that you specify in `RequestInterval`. Using an IP address that is
     #   returned by DNS, Route 53 then checks the health of the endpoint.
     #
-    #   Use one of the following formats for the value of `IPAddress`\:
+    #   Use one of the following formats for the value of `IPAddress`:
     #
-    #   * **IPv4 address**\: four values between 0 and 255, separated by
+    #   * **IPv4 address**: four values between 0 and 255, separated by
     #     periods (.), for example, `192.0.2.44`.
     #
-    #   * **IPv6 address**\: eight groups of four hexadecimal values,
+    #   * **IPv6 address**: eight groups of four hexadecimal values,
     #     separated by colons (:), for example,
     #     `2001:0db8:85a3:0000:0000:abcd:0001:2345`. You can also shorten
     #     IPv6 addresses as described in RFC 5952, for example,
@@ -7537,7 +7537,7 @@ module Aws::Route53
     #
     #    </note>
     #
-    #   **If you specify a value for** `IPAddress`\:
+    #   **If you specify a value for** `IPAddress`:
     #
     #   Route 53 sends health check requests to the specified IPv4 or IPv6
     #   address and passes the value of `FullyQualifiedDomainName` in the
@@ -7558,14 +7558,14 @@ module Aws::Route53
     #
     #   * If you specify another value for `Port` and any value except `TCP`
     #     for `Type`, Route 53 passes <i>
-    #     <code>FullyQualifiedDomainName</code>\:<code>Port</code> </i> to
+    #     <code>FullyQualifiedDomainName</code>:<code>Port</code> </i> to
     #     the endpoint in the `Host` header.
     #
     #   If you don't specify a value for `FullyQualifiedDomainName`, Route
     #   53 substitutes the value of `IPAddress` in the `Host` header in each
     #   of the above cases.
     #
-    #   **If you don't specify a value for** `IPAddress`\:
+    #   **If you don't specify a value for** `IPAddress`:
     #
     #   If you don't specify a value for `IPAddress`, Route 53 sends a DNS
     #   request to the domain that you specify in `FullyQualifiedDomainName`
@@ -7727,11 +7727,11 @@ module Aws::Route53
     #   the alarm state, the status that you want Amazon Route 53 to assign
     #   to the health check:
     #
-    #   * `Healthy`\: Route 53 considers the health check to be healthy.
+    #   * `Healthy`: Route 53 considers the health check to be healthy.
     #
-    #   * `Unhealthy`\: Route 53 considers the health check to be unhealthy.
+    #   * `Unhealthy`: Route 53 considers the health check to be unhealthy.
     #
-    #   * `LastKnownStatus`\: By default, Route 53 uses the status of the
+    #   * `LastKnownStatus`: By default, Route 53 uses the status of the
     #     health check from the last time CloudWatch had sufficient data to
     #     determine the alarm state. For new health checks that have no last
     #     known status, the status for the health check is healthy.
@@ -7742,16 +7742,16 @@ module Aws::Route53
     #   each element that you want to reset to the default value. Valid
     #   values for `ResettableElementName` include the following:
     #
-    #   * `ChildHealthChecks`\: Amazon Route 53 resets
-    #     [ChildHealthChecks][1] to null.
+    #   * `ChildHealthChecks`: Amazon Route 53 resets [ChildHealthChecks][1]
+    #     to null.
     #
-    #   * `FullyQualifiedDomainName`\: Route 53 resets
+    #   * `FullyQualifiedDomainName`: Route 53 resets
     #     [FullyQualifiedDomainName][2]. to null.
     #
-    #   * `Regions`\: Route 53 resets the [Regions][3] list to the default
+    #   * `Regions`: Route 53 resets the [Regions][3] list to the default
     #     set of regions.
     #
-    #   * `ResourcePath`\: Route 53 resets [ResourcePath][4] to null.
+    #   * `ResourcePath`: Route 53 resets [ResourcePath][4] to null.
     #
     #
     #

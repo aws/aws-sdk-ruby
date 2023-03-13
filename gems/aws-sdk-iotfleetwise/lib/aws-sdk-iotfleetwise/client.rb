@@ -1014,7 +1014,7 @@ module Aws::IoTFleetWise
     #
     # @option params [Hash<String,String>] :attributes
     #   Static information about a vehicle in a key-value pair. For example:
-    #   `"engineType"`\: `"1.3 L R2"`
+    #   `"engineType"` : `"1.3 L R2"`
     #
     # @option params [String] :association_behavior
     #   An option to create a new Amazon Web Services IoT thing when creating
@@ -3093,7 +3093,7 @@ module Aws::IoTFleetWise
     # @option params [Hash<String,String>] :attributes
     #   Static information about a vehicle in a key-value pair. For example:
     #
-    #   `"engineType"`\: `"1.3 L R2"`
+    #   `"engineType"` : `"1.3 L R2"`
     #
     # @option params [String] :attribute_update_mode
     #   The method the specified attributes will update the existing

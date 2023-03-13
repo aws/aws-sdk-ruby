@@ -1686,11 +1686,11 @@ module Aws::Comprehend
     #   @return [Array<Types::DatasetAugmentedManifestsListItem>]
     #
     # @!attribute [rw] data_format
-    #   `COMPREHEND_CSV`\: The data format is a two-column CSV file, where
+    #   `COMPREHEND_CSV`: The data format is a two-column CSV file, where
     #   the first column contains labels and the second column contains
     #   documents.
     #
-    #   `AUGMENTED_MANIFEST`\: The data format
+    #   `AUGMENTED_MANIFEST`: The data format
     #   @return [String]
     #
     # @!attribute [rw] document_classifier_input_data_config
@@ -2892,15 +2892,15 @@ module Aws::Comprehend
     # @!attribute [rw] data_format
     #   The format of your training data:
     #
-    #   * `COMPREHEND_CSV`\: A two-column CSV file, where labels are
-    #     provided in the first column, and documents are provided in the
-    #     second. If you use this value, you must provide the `S3Uri`
-    #     parameter in your request.
+    #   * `COMPREHEND_CSV`: A two-column CSV file, where labels are provided
+    #     in the first column, and documents are provided in the second. If
+    #     you use this value, you must provide the `S3Uri` parameter in your
+    #     request.
     #
-    #   * `AUGMENTED_MANIFEST`\: A labeled dataset that is produced by
-    #     Amazon SageMaker Ground Truth. This file is in JSON lines format.
-    #     Each line is a complete JSON object that contains a training
-    #     document and its associated labels.
+    #   * `AUGMENTED_MANIFEST`: A labeled dataset that is produced by Amazon
+    #     SageMaker Ground Truth. This file is in JSON lines format. Each
+    #     line is a complete JSON object that contains a training document
+    #     and its associated labels.
     #
     #     If you use this value, you must provide the `AugmentedManifests`
     #     parameter in your request.
@@ -3991,7 +3991,7 @@ module Aws::Comprehend
     # @!attribute [rw] data_format
     #   The format of your training data:
     #
-    #   * `COMPREHEND_CSV`\: A CSV file that supplements your training
+    #   * `COMPREHEND_CSV`: A CSV file that supplements your training
     #     documents. The CSV file contains information about the custom
     #     entities that your trained model will detect. The required format
     #     of the file depends on whether you are providing annotations or an
@@ -4002,11 +4002,11 @@ module Aws::Comprehend
     #     provide your training documents by using the `Documents`
     #     parameter.
     #
-    #   * `AUGMENTED_MANIFEST`\: A labeled dataset that is produced by
-    #     Amazon SageMaker Ground Truth. This file is in JSON lines format.
-    #     Each line is a complete JSON object that contains a training
-    #     document and its labels. Each label annotates a named entity in
-    #     the training document.
+    #   * `AUGMENTED_MANIFEST`: A labeled dataset that is produced by Amazon
+    #     SageMaker Ground Truth. This file is in JSON lines format. Each
+    #     line is a complete JSON object that contains a training document
+    #     and its labels. Each label annotates a named entity in the
+    #     training document.
     #
     #     If you use this value, you must provide the `AugmentedManifests`
     #     parameter in your request.

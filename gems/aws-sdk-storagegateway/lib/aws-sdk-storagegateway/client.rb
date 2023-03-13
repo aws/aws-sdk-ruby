@@ -1362,11 +1362,11 @@ module Aws::StorageGateway
     #
     #   Valid values are the following:
     #
-    #   * `RootSquash`\: Only root is mapped to anonymous user.
+    #   * `RootSquash`: Only root is mapped to anonymous user.
     #
-    #   * `NoSquash`\: No one is mapped to anonymous user.
+    #   * `NoSquash`: No one is mapped to anonymous user.
     #
-    #   * `AllSquash`\: Everyone is mapped to anonymous user.
+    #   * `AllSquash`: Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
     #   A value that sets the write status of a file share. Set this value to
@@ -6617,11 +6617,11 @@ module Aws::StorageGateway
     #
     #   Valid values are the following:
     #
-    #   * `RootSquash`\: Only root is mapped to anonymous user.
+    #   * `RootSquash`: Only root is mapped to anonymous user.
     #
-    #   * `NoSquash`\: No one is mapped to anonymous user.
+    #   * `NoSquash`: No one is mapped to anonymous user.
     #
-    #   * `AllSquash`\: Everyone is mapped to anonymous user.
+    #   * `AllSquash`: Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
     #   A value that sets the write status of a file share. Set this value to

@@ -402,13 +402,13 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `tagFilter.tag`\: String constraint. The key is
+    #   * `tagFilter.tag`: String constraint. The key is
     #     `swf:tagFilter.tag`.
     #
-    #   * `typeFilter.name`\: String constraint. The key is
+    #   * `typeFilter.name`: String constraint. The key is
     #     `swf:typeFilter.name`.
     #
-    #   * `typeFilter.version`\: String constraint. The key is
+    #   * `typeFilter.version`: String constraint. The key is
     #     `swf:typeFilter.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -550,13 +550,13 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `tagFilter.tag`\: String constraint. The key is
+    #   * `tagFilter.tag`: String constraint. The key is
     #     `swf:tagFilter.tag`.
     #
-    #   * `typeFilter.name`\: String constraint. The key is
+    #   * `typeFilter.name`: String constraint. The key is
     #     `swf:typeFilter.name`.
     #
-    #   * `typeFilter.version`\: String constraint. The key is
+    #   * `typeFilter.version`: String constraint. The key is
     #     `swf:typeFilter.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -790,10 +790,10 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `activityType.name`\: String constraint. The key is
+    #   * `activityType.name`: String constraint. The key is
     #     `swf:activityType.name`.
     #
-    #   * `activityType.version`\: String constraint. The key is
+    #   * `activityType.version`: String constraint. The key is
     #     `swf:activityType.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -911,10 +911,10 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `workflowType.name`\: String constraint. The key is
+    #   * `workflowType.name`: String constraint. The key is
     #     `swf:workflowType.name`.
     #
-    #   * `workflowType.version`\: String constraint. The key is
+    #   * `workflowType.version`: String constraint. The key is
     #     `swf:workflowType.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -971,10 +971,10 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `activityType.name`\: String constraint. The key is
+    #   * `activityType.name`: String constraint. The key is
     #     `swf:activityType.name`.
     #
-    #   * `activityType.version`\: String constraint. The key is
+    #   * `activityType.version`: String constraint. The key is
     #     `swf:activityType.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -1199,10 +1199,10 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `workflowType.name`\: String constraint. The key is
+    #   * `workflowType.name`: String constraint. The key is
     #     `swf:workflowType.name`.
     #
-    #   * `workflowType.version`\: String constraint. The key is
+    #   * `workflowType.version`: String constraint. The key is
     #     `swf:workflowType.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -1718,13 +1718,13 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `tagFilter.tag`\: String constraint. The key is
+    #   * `tagFilter.tag`: String constraint. The key is
     #     `swf:tagFilter.tag`.
     #
-    #   * `typeFilter.name`\: String constraint. The key is
+    #   * `typeFilter.name`: String constraint. The key is
     #     `swf:typeFilter.name`.
     #
-    #   * `typeFilter.version`\: String constraint. The key is
+    #   * `typeFilter.version`: String constraint. The key is
     #     `swf:typeFilter.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -2001,13 +2001,13 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `tagFilter.tag`\: String constraint. The key is
+    #   * `tagFilter.tag`: String constraint. The key is
     #     `swf:tagFilter.tag`.
     #
-    #   * `typeFilter.name`\: String constraint. The key is
+    #   * `typeFilter.name`: String constraint. The key is
     #     `swf:typeFilter.name`.
     #
-    #   * `typeFilter.version`\: String constraint. The key is
+    #   * `typeFilter.version`: String constraint. The key is
     #     `swf:typeFilter.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -2851,12 +2851,12 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `defaultTaskList.name`\: String constraint. The key is
+    #   * `defaultTaskList.name`: String constraint. The key is
     #     `swf:defaultTaskList.name`.
     #
-    #   * `name`\: String constraint. The key is `swf:name`.
+    #   * `name`: String constraint. The key is `swf:name`.
     #
-    #   * `version`\: String constraint. The key is `swf:version`.
+    #   * `version`: String constraint. The key is `swf:version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
@@ -3091,12 +3091,12 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `defaultTaskList.name`\: String constraint. The key is
+    #   * `defaultTaskList.name`: String constraint. The key is
     #     `swf:defaultTaskList.name`.
     #
-    #   * `name`\: String constraint. The key is `swf:name`.
+    #   * `name`: String constraint. The key is `swf:name`.
     #
-    #   * `version`\: String constraint. The key is `swf:version`.
+    #   * `version`: String constraint. The key is `swf:version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
@@ -3765,22 +3765,22 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `tagList.member.0`\: The key is `swf:tagList.member.0`.
+    #   * `tagList.member.0`: The key is `swf:tagList.member.0`.
     #
-    #   * `tagList.member.1`\: The key is `swf:tagList.member.1`.
+    #   * `tagList.member.1`: The key is `swf:tagList.member.1`.
     #
-    #   * `tagList.member.2`\: The key is `swf:tagList.member.2`.
+    #   * `tagList.member.2`: The key is `swf:tagList.member.2`.
     #
-    #   * `tagList.member.3`\: The key is `swf:tagList.member.3`.
+    #   * `tagList.member.3`: The key is `swf:tagList.member.3`.
     #
-    #   * `tagList.member.4`\: The key is `swf:tagList.member.4`.
+    #   * `tagList.member.4`: The key is `swf:tagList.member.4`.
     #
-    #   * `taskList`\: String constraint. The key is `swf:taskList.name`.
+    #   * `taskList`: String constraint. The key is `swf:taskList.name`.
     #
-    #   * `workflowType.name`\: String constraint. The key is
+    #   * `workflowType.name`: String constraint. The key is
     #     `swf:workflowType.name`.
     #
-    #   * `workflowType.version`\: String constraint. The key is
+    #   * `workflowType.version`: String constraint. The key is
     #     `swf:workflowType.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -4134,10 +4134,10 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `activityType.name`\: String constraint. The key is
+    #   * `activityType.name`: String constraint. The key is
     #     `swf:activityType.name`.
     #
-    #   * `activityType.version`\: String constraint. The key is
+    #   * `activityType.version`: String constraint. The key is
     #     `swf:activityType.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the
@@ -4250,10 +4250,10 @@ module Aws::SWF
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
     #
-    #   * `workflowType.name`\: String constraint. The key is
+    #   * `workflowType.name`: String constraint. The key is
     #     `swf:workflowType.name`.
     #
-    #   * `workflowType.version`\: String constraint. The key is
+    #   * `workflowType.version`: String constraint. The key is
     #     `swf:workflowType.version`.
     #
     # If the caller doesn't have sufficient permissions to invoke the

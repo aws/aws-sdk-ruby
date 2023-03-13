@@ -3362,21 +3362,21 @@ module Aws::APIGateway
     #   template is defined in the integration or the content type does not
     #   match any of the mapped content types, as specified in
     #   `requestTemplates`. The valid value is one of the following:
-    #   `WHEN_NO_MATCH`\: passes the method request body through the
+    #   `WHEN_NO_MATCH`: passes the method request body through the
     #   integration request to the back end without transformation when the
     #   method request content type does not match any content type
     #   associated with the mapping templates defined in the integration
-    #   request. `WHEN_NO_TEMPLATES`\: passes the method request body
-    #   through the integration request to the back end without
-    #   transformation when no mapping template is defined in the
-    #   integration request. If a template is defined when this option is
-    #   selected, the method request of an unmapped content-type will be
-    #   rejected with an HTTP 415 Unsupported Media Type response. `NEVER`\:
-    #   rejects the method request with an HTTP 415 Unsupported Media Type
-    #   response when either the method request content type does not match
-    #   any content type associated with the mapping templates defined in
-    #   the integration request or no mapping template is defined in the
-    #   integration request.
+    #   request. `WHEN_NO_TEMPLATES`: passes the method request body through
+    #   the integration request to the back end without transformation when
+    #   no mapping template is defined in the integration request. If a
+    #   template is defined when this option is selected, the method request
+    #   of an unmapped content-type will be rejected with an HTTP 415
+    #   Unsupported Media Type response. `NEVER`: rejects the method request
+    #   with an HTTP 415 Unsupported Media Type response when either the
+    #   method request content type does not match any content type
+    #   associated with the mapping templates defined in the integration
+    #   request or no mapping template is defined in the integration
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] content_handling

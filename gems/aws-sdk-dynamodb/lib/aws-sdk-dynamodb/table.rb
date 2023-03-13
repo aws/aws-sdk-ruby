@@ -630,8 +630,7 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
-    #   The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   The following are some use cases for using `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB reserved
     #     word.
@@ -653,7 +652,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -779,8 +778,7 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
-    #   The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   The following are some use cases for using `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB reserved
     #     word.
@@ -802,7 +800,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -970,8 +968,7 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
-    #   The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   The following are some use cases for using `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB reserved
     #     word.
@@ -993,7 +990,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -1359,8 +1356,7 @@ module Aws::DynamoDB
     #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
-    #   The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   The following are some use cases for using `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB reserved
     #     word.
@@ -1382,7 +1378,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -1658,8 +1654,7 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
-    #   The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   The following are some use cases for using `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB reserved
     #     word.
@@ -1681,7 +1676,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -2162,8 +2157,7 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
-    #   The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   The following are some use cases for using `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB reserved
     #     word.
@@ -2185,7 +2179,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*.) To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #

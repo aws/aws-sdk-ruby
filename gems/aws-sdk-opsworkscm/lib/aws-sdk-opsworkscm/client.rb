@@ -414,17 +414,17 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a AssociateNode request for Chef**
     #
-    #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node is
+    #   * `CHEF_ORGANIZATION`: The Chef organization with which the node is
     #     associated. By default only one organization named `default` can
     #     exist.
     #
-    #   * `CHEF_NODE_PUBLIC_KEY`\: A PEM-formatted public key. This key is
+    #   * `CHEF_NODE_PUBLIC_KEY`: A PEM-formatted public key. This key is
     #     required for the `chef-client` agent to access the Chef API.
     #
     #   **Attributes accepted in a AssociateNode request for Puppet**
     #
-    #   * `PUPPET_NODE_CSR`\: A PEM-formatted certificate-signing request
-    #     (CSR) that is created by the node.
+    #   * `PUPPET_NODE_CSR`: A PEM-formatted certificate-signing request (CSR)
+    #     that is created by the node.
     #
     #   ^
     #
@@ -658,12 +658,12 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Chef createServer request:**
     #
-    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
+    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`: A base64-encoded RSA public key. The
     #     corresponding private key is required to access the Chef API. When
     #     no CHEF\_AUTOMATE\_PIVOTAL\_KEY is set, a private key is generated
     #     and returned in the response.
     #
-    #   * `CHEF_AUTOMATE_ADMIN_PASSWORD`\: The password for the administrative
+    #   * `CHEF_AUTOMATE_ADMIN_PASSWORD`: The password for the administrative
     #     user in the Chef Automate web-based dashboard. The password length
     #     is a minimum of eight characters, and a maximum of 32. The password
     #     can contain letters, numbers, and special characters
@@ -674,15 +674,15 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Puppet createServer request:**
     #
-    #   * `PUPPET_ADMIN_PASSWORD`\: To work with the Puppet Enterprise
-    #     console, a password must use ASCII characters.
+    #   * `PUPPET_ADMIN_PASSWORD`: To work with the Puppet Enterprise console,
+    #     a password must use ASCII characters.
     #
-    #   * `PUPPET_R10K_REMOTE`\: The r10k remote is the URL of your control
+    #   * `PUPPET_R10K_REMOTE`: The r10k remote is the URL of your control
     #     repository (for example,
     #     ssh://git@your.git-repo.com:user/control-repo.git). Specifying an
     #     r10k remote opens TCP port 8170.
     #
-    #   * `PUPPET_R10K_PRIVATE_KEY`\: If you are using a private Git
+    #   * `PUPPET_R10K_PRIVATE_KEY`: If you are using a private Git
     #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify a PEM-encoded
     #     private SSH key.
     #
@@ -1261,7 +1261,7 @@ module Aws::OpsWorksCM
     #
     #   **Attributes required in a DisassociateNode request for Chef**
     #
-    #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node was
+    #   * `CHEF_ORGANIZATION`: The Chef organization with which the node was
     #     associated. By default only one organization named `default` can
     #     exist.
     #
@@ -1541,7 +1541,7 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a StartMaintenance request for Chef**
     #
-    #   * `CHEF_MAJOR_UPGRADE`\: If a Chef Automate server is eligible for
+    #   * `CHEF_MAJOR_UPGRADE`: If a Chef Automate server is eligible for
     #     upgrade to Chef Automate 2, add this engine attribute to a
     #     `StartMaintenance` request and set the value to `true` to upgrade
     #     the server to Chef Automate 2. For more information, see [Upgrade an

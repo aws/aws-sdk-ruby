@@ -485,7 +485,7 @@ module Aws::IVS
     #   probably will disconnect immediately.* Default: `STANDARD`. Valid
     #   values:
     #
-    #   * `STANDARD`\: Video is transcoded: multiple qualities are generated
+    #   * `STANDARD`: Video is transcoded: multiple qualities are generated
     #     from the original input, to automatically give viewers the best
     #     experience for their devices and network conditions. Transcoding
     #     allows higher playback quality across a range of download speeds.
@@ -493,11 +493,11 @@ module Aws::IVS
     #     Audio is transcoded only for renditions 360p and below; above that,
     #     audio is passed through. This is the default.
     #
-    #   * `BASIC`\: Video is transmuxed: Amazon IVS delivers the original
-    #     input to viewers. The viewer’s video-quality choice is limited to
-    #     the original input. Resolution can be up to 1080p and bitrate can be
-    #     up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between
-    #     480p and 1080p.
+    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original input
+    #     to viewers. The viewer’s video-quality choice is limited to the
+    #     original input. Resolution can be up to 1080p and bitrate can be up
+    #     to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p
+    #     and 1080p.
     #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1597,7 +1597,7 @@ module Aws::IVS
     #   *If you exceed the allowable resolution or bitrate, the stream
     #   probably will disconnect immediately*. Valid values:
     #
-    #   * `STANDARD`\: Video is transcoded: multiple qualities are generated
+    #   * `STANDARD`: Video is transcoded: multiple qualities are generated
     #     from the original input, to automatically give viewers the best
     #     experience for their devices and network conditions. Transcoding
     #     allows higher playback quality across a range of download speeds.
@@ -1605,11 +1605,11 @@ module Aws::IVS
     #     Audio is transcoded only for renditions 360p and below; above that,
     #     audio is passed through. This is the default.
     #
-    #   * `BASIC`\: Video is transmuxed: Amazon IVS delivers the original
-    #     input to viewers. The viewer’s video-quality choice is limited to
-    #     the original input. Resolution can be up to 1080p and bitrate can be
-    #     up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between
-    #     480p and 1080p.
+    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original input
+    #     to viewers. The viewer’s video-quality choice is limited to the
+    #     original input. Resolution can be up to 1080p and bitrate can be up
+    #     to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p
+    #     and 1080p.
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #

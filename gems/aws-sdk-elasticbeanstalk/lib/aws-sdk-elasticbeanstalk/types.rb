@@ -582,9 +582,9 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] available
     #   Indicates if the specified CNAME is available:
     #
-    #   * `true`\: The CNAME is available.
+    #   * `true` : The CNAME is available.
     #
-    #   * `false`\: The CNAME is not available.
+    #   * `false` : The CNAME is not available.
     #   @return [Boolean]
     #
     # @!attribute [rw] fully_qualified_cname
@@ -662,14 +662,14 @@ module Aws::ElasticBeanstalk
     #   An indication of which action is required if the value for this
     #   configuration option changes:
     #
-    #   * `NoInterruption`\: There is no interruption to the environment or
+    #   * `NoInterruption` : There is no interruption to the environment or
     #     application availability.
     #
-    #   * `RestartEnvironment`\: The environment is entirely restarted, all
+    #   * `RestartEnvironment` : The environment is entirely restarted, all
     #     AWS resources are deleted and recreated, and the environment is
     #     unavailable during the process.
     #
-    #   * `RestartApplicationServer`\: The environment is available the
+    #   * `RestartApplicationServer` : The environment is available the
     #     entire time. However, a short application outage occurs when the
     #     application servers on the running Amazon EC2 instances are
     #     restarted.
@@ -678,11 +678,11 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] user_defined
     #   An indication of whether the user defined this configuration option:
     #
-    #   * `true`\: This configuration option was defined by the user. It is
+    #   * `true` : This configuration option was defined by the user. It is
     #     a valid choice for specifying if this as an `Option to Remove`
     #     when updating configuration settings.
     #
-    #   * `false`\: This configuration was not defined by the user.
+    #   * `false` : This configuration was not defined by the user.
     #
     #   Constraint: You can remove only `UserDefined` options from a
     #   configuration.
@@ -694,16 +694,16 @@ module Aws::ElasticBeanstalk
     #   An indication of which type of values this option has and whether it
     #   is allowable to select one or more than one of the possible values:
     #
-    #   * `Scalar`\: Values for this option are a single selection from the
+    #   * `Scalar` : Values for this option are a single selection from the
     #     possible values, or an unformatted string, or numeric value
     #     governed by the `MIN/MAX/Regex` constraints.
     #
-    #   * `List`\: Values for this option are multiple selections from the
+    #   * `List` : Values for this option are multiple selections from the
     #     possible values.
     #
-    #   * `Boolean`\: Values for this option are either `true` or `false` .
+    #   * `Boolean` : Values for this option are either `true` or `false` .
     #
-    #   * `Json`\: Values for this option are a JSON representation of a
+    #   * `Json` : Values for this option are a JSON representation of a
     #     `ConfigDocument`.
     #   @return [String]
     #
@@ -846,16 +846,16 @@ module Aws::ElasticBeanstalk
     #   `DeploymentStatus` parameter indicates the deployment status of this
     #   configuration set:
     #
-    #   * `null`\: This configuration is not associated with a running
+    #   * `null`: This configuration is not associated with a running
     #     environment.
     #
-    #   * `pending`\: This is a draft configuration that is not deployed to
+    #   * `pending`: This is a draft configuration that is not deployed to
     #     the associated environment but is in the process of deploying.
     #
-    #   * `deployed`\: This is the configuration that is currently deployed
+    #   * `deployed`: This is the configuration that is currently deployed
     #     to the associated running environment.
     #
-    #   * `failed`\: This is a draft configuration that failed to
+    #   * `failed`: This is a draft configuration that failed to
     #     successfully deploy.
     #   @return [String]
     #
@@ -1520,11 +1520,11 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] status
     #   The status of the deployment:
     #
-    #   * `In Progress`\: The deployment is in progress.
+    #   * `In Progress` : The deployment is in progress.
     #
-    #   * `Deployed`\: The deployment succeeded.
+    #   * `Deployed` : The deployment succeeded.
     #
-    #   * `Failed`\: The deployment failed.
+    #   * `Failed` : The deployment failed.
     #   @return [String]
     #
     # @!attribute [rw] deployment_time
@@ -1925,10 +1925,10 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] include_deleted
     #   Indicates whether to include deleted environments:
     #
-    #   `true`\: Environments that have been deleted after
+    #   `true`: Environments that have been deleted after
     #   `IncludedDeletedBackTo` are displayed.
     #
-    #   `false`\: Do not include deleted environments.
+    #   `false`: Do not include deleted environments.
     #   @return [Boolean]
     #
     # @!attribute [rw] included_deleted_back_to
@@ -2220,17 +2220,17 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] status
     #   The current operational status of the environment:
     #
-    #   * `Launching`\: Environment is in the process of initial deployment.
+    #   * `Launching`: Environment is in the process of initial deployment.
     #
-    #   * `Updating`\: Environment is in the process of updating its
+    #   * `Updating`: Environment is in the process of updating its
     #     configuration settings or application version.
     #
-    #   * `Ready`\: Environment is available to have an action performed on
+    #   * `Ready`: Environment is available to have an action performed on
     #     it, such as update or terminate.
     #
-    #   * `Terminating`\: Environment is in the shut-down process.
+    #   * `Terminating`: Environment is in the shut-down process.
     #
-    #   * `Terminated`\: Environment is not running.
+    #   * `Terminated`: Environment is not running.
     #   @return [String]
     #
     # @!attribute [rw] abortable_operation_in_progress
@@ -2246,16 +2246,16 @@ module Aws::ElasticBeanstalk
     #   Describes the health status of the environment. AWS Elastic
     #   Beanstalk indicates the failure levels for a running environment:
     #
-    #   * `Red`\: Indicates the environment is not responsive. Occurs when
+    #   * `Red`: Indicates the environment is not responsive. Occurs when
     #     three or more consecutive failures occur for an environment.
     #
-    #   * `Yellow`\: Indicates that something is wrong. Occurs when two
+    #   * `Yellow`: Indicates that something is wrong. Occurs when two
     #     consecutive failures occur for an environment.
     #
-    #   * `Green`\: Indicates the environment is healthy and fully
+    #   * `Green`: Indicates the environment is healthy and fully
     #     functional.
     #
-    #   * `Grey`\: Default health for a new environment. The environment is
+    #   * `Grey`: Default health for a new environment. The environment is
     #     not fully launched and health checks have not started or health
     #     checks are suspended during an `UpdateEnvironment` or
     #     `RestartEnvironment` request.
@@ -2809,31 +2809,31 @@ module Aws::ElasticBeanstalk
     #   `SearchFilter` terms. Most operators take a single value. The `in`
     #   and `not_in` operators can take multiple values.
     #
-    #   * `Attribute = BranchName`\:
+    #   * `Attribute = BranchName`:
     #
-    #     * `Operator`\: `=` \| `!=` \| `begins_with` \| `ends_with` \|
+    #     * `Operator`: `=` \| `!=` \| `begins_with` \| `ends_with` \|
     #       `contains` \| `in` \| `not_in`
     #
     #     ^
     #
-    #   * `Attribute = LifecycleState`\:
+    #   * `Attribute = LifecycleState`:
     #
-    #     * `Operator`\: `=` \| `!=` \| `in` \| `not_in`
+    #     * `Operator`: `=` \| `!=` \| `in` \| `not_in`
     #
-    #     * `Values`\: `beta` \| `supported` \| `deprecated` \| `retired`
+    #     * `Values`: `beta` \| `supported` \| `deprecated` \| `retired`
     #
-    #   * `Attribute = PlatformName`\:
+    #   * `Attribute = PlatformName`:
     #
-    #     * `Operator`\: `=` \| `!=` \| `begins_with` \| `ends_with` \|
+    #     * `Operator`: `=` \| `!=` \| `begins_with` \| `ends_with` \|
     #       `contains` \| `in` \| `not_in`
     #
     #     ^
     #
-    #   * `Attribute = TierType`\:
+    #   * `Attribute = TierType`:
     #
-    #     * `Operator`\: `=` \| `!=`
+    #     * `Operator`: `=` \| `!=`
     #
-    #     * `Values`\: `WebServer/Standard` \| `Worker/SQS/HTTP`
+    #     * `Values`: `WebServer/Standard` \| `Worker/SQS/HTTP`
     #
     #   Array size: limited to 10 `SearchFilter` objects.
     #
@@ -3393,14 +3393,14 @@ module Aws::ElasticBeanstalk
     #   The following list shows valid filter values for some filter
     #   attributes.
     #
-    #   * `PlatformStatus`\: `Creating` \| `Failed` \| `Ready` \| `Deleting`
+    #   * `PlatformStatus`: `Creating` \| `Failed` \| `Ready` \| `Deleting`
     #     \| `Deleted`
     #
-    #   * `PlatformLifecycleState`\: `recommended`
+    #   * `PlatformLifecycleState`: `recommended`
     #
-    #   * `SupportedTier`\: `WebServer/Standard` \| `Worker/SQS/HTTP`
+    #   * `SupportedTier`: `WebServer/Standard` \| `Worker/SQS/HTTP`
     #
-    #   * `SupportedAddon`\: `Log/S3` \| `Monitoring/Healthd` \|
+    #   * `SupportedAddon`: `Log/S3` \| `Monitoring/Healthd` \|
     #     `WorkerDaemon/SQSD`
     #   @return [Array<String>]
     #
@@ -4170,12 +4170,12 @@ module Aws::ElasticBeanstalk
     #   Indicates whether the associated AWS resources should shut down when
     #   the environment is terminated:
     #
-    #   * `true`\: The specified environment as well as the associated AWS
+    #   * `true`: The specified environment as well as the associated AWS
     #     resources, such as Auto Scaling group and LoadBalancer, are
     #     terminated.
     #
-    #   * `false`\: AWS Elastic Beanstalk resource management is removed
-    #     from the environment, but the AWS resources continue to operate.
+    #   * `false`: AWS Elastic Beanstalk resource management is removed from
+    #     the environment, but the AWS resources continue to operate.
     #
     #   For more information, see the [ AWS Elastic Beanstalk User Guide.
     #   ][1]
@@ -4565,10 +4565,10 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] severity
     #   An indication of the severity of this message:
     #
-    #   * `error`\: This message indicates that this is not a valid setting
+    #   * `error`: This message indicates that this is not a valid setting
     #     for an option.
     #
-    #   * `warning`\: This message is providing information you should take
+    #   * `warning`: This message is providing information you should take
     #     into account.
     #   @return [String]
     #

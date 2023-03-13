@@ -3600,7 +3600,7 @@ module Aws::TranscribeService
     #   same as the name you specified for your medical transcription job
     #   (`MedicalTranscriptionJobName`).
     #
-    #   Here are some examples of how you can use `OutputKey`\:
+    #   Here are some examples of how you can use `OutputKey`:
     #
     #   * If you specify 'DOC-EXAMPLE-BUCKET' as the `OutputBucketName`
     #     and 'my-transcript.json' as the `OutputKey`, your transcription
@@ -3857,7 +3857,7 @@ module Aws::TranscribeService
     #   same as the name you specified for your transcription job
     #   (`TranscriptionJobName`).
     #
-    #   Here are some examples of how you can use `OutputKey`\:
+    #   Here are some examples of how you can use `OutputKey`:
     #
     #   * If you specify 'DOC-EXAMPLE-BUCKET' as the `OutputBucketName`
     #     and 'my-transcript.json' as the `OutputKey`, your transcription

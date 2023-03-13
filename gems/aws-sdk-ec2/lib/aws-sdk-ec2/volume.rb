@@ -499,8 +499,8 @@ module Aws::EC2
     #
     #   * `event.event-id` - The event ID.
     #
-    #   * `event.event-type` - The event type (for `io-enabled`\: `passed` \|
-    #     `failed`; for `io-performance`\: `io-performance:degraded` \|
+    #   * `event.event-type` - The event type (for `io-enabled`: `passed` \|
+    #     `failed`; for `io-performance`: `io-performance:degraded` \|
     #     `io-performance:severely-degraded` \| `io-performance:stalled`).
     #
     #   * `event.not-after` - The latest end time for the event.
@@ -511,8 +511,8 @@ module Aws::EC2
     #     (`io-enabled` \| `io-performance`).
     #
     #   * `volume-status.details-status` - The status of
-    #     `volume-status.details-name` (for `io-enabled`\: `passed` \|
-    #     `failed`; for `io-performance`\: `normal` \| `degraded` \|
+    #     `volume-status.details-name` (for `io-enabled`: `passed` \|
+    #     `failed`; for `io-performance`: `normal` \| `degraded` \|
     #     `severely-degraded` \| `stalled`).
     #
     #   * `volume-status.status` - The status of the volume (`ok` \|
@@ -667,7 +667,7 @@ module Aws::EC2
     #   * `storage-tier` - The storage tier of the snapshot (`archive` \|
     #     `standard`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`

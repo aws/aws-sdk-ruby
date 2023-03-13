@@ -2109,10 +2109,10 @@ module Aws::CodeBuild
     # @option params [String] :sort_order
     #   Specifies the sort order of the returned items. Valid values include:
     #
-    #   * `ASCENDING`\: List the batch build identifiers in ascending order by
+    #   * `ASCENDING`: List the batch build identifiers in ascending order by
     #     identifier.
     #
-    #   * `DESCENDING`\: List the batch build identifiers in descending order
+    #   * `DESCENDING`: List the batch build identifiers in descending order
     #     by identifier.
     #
     # @option params [String] :next_token
@@ -2167,10 +2167,10 @@ module Aws::CodeBuild
     # @option params [String] :sort_order
     #   Specifies the sort order of the returned items. Valid values include:
     #
-    #   * `ASCENDING`\: List the batch build identifiers in ascending order by
+    #   * `ASCENDING`: List the batch build identifiers in ascending order by
     #     identifier.
     #
-    #   * `DESCENDING`\: List the batch build identifiers in descending order
+    #   * `DESCENDING`: List the batch build identifiers in descending order
     #     by identifier.
     #
     # @option params [String] :next_token
@@ -2218,9 +2218,9 @@ module Aws::CodeBuild
     # @option params [String] :sort_order
     #   The order to list build IDs. Valid values include:
     #
-    #   * `ASCENDING`\: List the build IDs in ascending order by build ID.
+    #   * `ASCENDING`: List the build IDs in ascending order by build ID.
     #
-    #   * `DESCENDING`\: List the build IDs in descending order by build ID.
+    #   * `DESCENDING`: List the build IDs in descending order by build ID.
     #
     # @option params [String] :next_token
     #   During a previous call, if there are more than 100 items in the list,
@@ -2273,10 +2273,10 @@ module Aws::CodeBuild
     #
     #   Valid values include:
     #
-    #   * `ASCENDING`\: List the build identifiers in ascending order, by
-    #     build number.
+    #   * `ASCENDING`: List the build identifiers in ascending order, by build
+    #     number.
     #
-    #   * `DESCENDING`\: List the build identifiers in descending order, by
+    #   * `DESCENDING`: List the build identifiers in descending order, by
     #     build number.
     #
     #   If the project has more than 100 builds, setting the sort order will
@@ -2355,12 +2355,12 @@ module Aws::CodeBuild
     #   The criterion to be used to list build project names. Valid values
     #   include:
     #
-    #   * `CREATED_TIME`\: List based on when each build project was created.
+    #   * `CREATED_TIME`: List based on when each build project was created.
     #
-    #   * `LAST_MODIFIED_TIME`\: List based on when information about each
+    #   * `LAST_MODIFIED_TIME`: List based on when information about each
     #     build project was last changed.
     #
-    #   * `NAME`\: List based on each build project's name.
+    #   * `NAME`: List based on each build project's name.
     #
     #   Use `sortOrder` to specify in what order to list the build project
     #   names based on the preceding criteria.
@@ -2368,9 +2368,9 @@ module Aws::CodeBuild
     # @option params [String] :sort_order
     #   The order in which to list build projects. Valid values include:
     #
-    #   * `ASCENDING`\: List in ascending order.
+    #   * `ASCENDING`: List in ascending order.
     #
-    #   * `DESCENDING`\: List in descending order.
+    #   * `DESCENDING`: List in descending order.
     #
     #   Use `sortBy` to specify the criterion to be used to list build project
     #   names.
@@ -2425,12 +2425,12 @@ module Aws::CodeBuild
     #   The criterion to be used to list build report groups. Valid values
     #   include:
     #
-    #   * `CREATED_TIME`\: List based on when each report group was created.
+    #   * `CREATED_TIME`: List based on when each report group was created.
     #
-    #   * `LAST_MODIFIED_TIME`\: List based on when each report group was last
+    #   * `LAST_MODIFIED_TIME`: List based on when each report group was last
     #     changed.
     #
-    #   * `NAME`\: List based on each report group's name.
+    #   * `NAME`: List based on each report group's name.
     #
     # @option params [String] :next_token
     #   During a previous call, the maximum number of items that can be
@@ -2484,10 +2484,10 @@ module Aws::CodeBuild
     #   Specifies the sort order for the list of returned reports. Valid
     #   values are:
     #
-    #   * `ASCENDING`\: return reports in chronological order based on their
+    #   * `ASCENDING`: return reports in chronological order based on their
     #     creation date.
     #
-    #   * `DESCENDING`\: return reports in the reverse chronological order
+    #   * `DESCENDING`: return reports in the reverse chronological order
     #     based on their creation date.
     #
     # @option params [String] :next_token
@@ -2607,18 +2607,18 @@ module Aws::CodeBuild
     #   The criterion to be used to list build projects shared with the
     #   current Amazon Web Services account or user. Valid values include:
     #
-    #   * `ARN`\: List based on the ARN.
+    #   * `ARN`: List based on the ARN.
     #
-    #   * `MODIFIED_TIME`\: List based on when information about the shared
+    #   * `MODIFIED_TIME`: List based on when information about the shared
     #     project was last changed.
     #
     # @option params [String] :sort_order
     #   The order in which to list shared build projects. Valid values
     #   include:
     #
-    #   * `ASCENDING`\: List in ascending order.
+    #   * `ASCENDING`: List in ascending order.
     #
-    #   * `DESCENDING`\: List in descending order.
+    #   * `DESCENDING`: List in descending order.
     #
     # @option params [Integer] :max_results
     #   The maximum number of paginated shared build projects returned per
@@ -2671,17 +2671,17 @@ module Aws::CodeBuild
     # @option params [String] :sort_order
     #   The order in which to list shared report groups. Valid values include:
     #
-    #   * `ASCENDING`\: List in ascending order.
+    #   * `ASCENDING`: List in ascending order.
     #
-    #   * `DESCENDING`\: List in descending order.
+    #   * `DESCENDING`: List in descending order.
     #
     # @option params [String] :sort_by
     #   The criterion to be used to list report groups shared with the current
     #   Amazon Web Services account or user. Valid values include:
     #
-    #   * `ARN`\: List based on the ARN.
+    #   * `ARN`: List based on the ARN.
     #
-    #   * `MODIFIED_TIME`\: List based on when information about the shared
+    #   * `MODIFIED_TIME`: List based on when information about the shared
     #     report group was last changed.
     #
     # @option params [String] :next_token
@@ -4923,9 +4923,9 @@ module Aws::CodeBuild
     # @option params [Types::ReportExportConfig] :export_config
     #   Used to specify an updated export type. Valid values are:
     #
-    #   * `S3`\: The report results are exported to an S3 bucket.
+    #   * `S3`: The report results are exported to an S3 bucket.
     #
-    #   * `NO_EXPORT`\: The report results are not exported.
+    #   * `NO_EXPORT`: The report results are not exported.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An updated list of tag key and value pairs associated with this report

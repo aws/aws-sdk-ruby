@@ -2098,7 +2098,7 @@ module Aws::RedshiftServerless
     #   cluster. Must not be specified at the same time as `snapshotName`.
     #
     #   The format of the ARN is
-    #   arn:aws:redshift:&lt;region&gt;\:&lt;account\_id&gt;\:snapshot:&lt;cluster\_identifier&gt;/&lt;snapshot\_identifier&gt;.
+    #   arn:aws:redshift:&lt;region&gt;:&lt;account\_id&gt;:snapshot:&lt;cluster\_identifier&gt;/&lt;snapshot\_identifier&gt;.
     #
     # @option params [String] :snapshot_name
     #   The name of the snapshot to restore from. Must not be specified at the

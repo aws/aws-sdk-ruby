@@ -1809,7 +1809,7 @@ module Aws::Glue
     #
     # @!attribute [rw] split_fields
     #   Specifies a transform that splits data property keys into two
-    #   `DynamicFrames`. The output is a collection of `DynamicFrames`\: one
+    #   `DynamicFrames`. The output is a collection of `DynamicFrames`: one
     #   with selected data property keys, and one with the remaining data
     #   property keys.
     #   @return [Types::SplitFields]
@@ -3243,14 +3243,13 @@ module Aws::Glue
     #   A key used to filter the crawler runs for a specified crawler. Valid
     #   values for each of the field names are:
     #
-    #   * `CRAWL_ID`\: A string representing the UUID identifier for a
-    #     crawl.
+    #   * `CRAWL_ID`: A string representing the UUID identifier for a crawl.
     #
-    #   * `STATE`\: A string representing the state of the crawl.
+    #   * `STATE`: A string representing the state of the crawl.
     #
-    #   * `START_TIME` and `END_TIME`\: The epoch timestamp in milliseconds.
+    #   * `START_TIME` and `END_TIME`: The epoch timestamp in milliseconds.
     #
-    #   * `DPU_HOUR`\: The number of data processing unit (DPU) hours used
+    #   * `DPU_HOUR`: The number of data processing unit (DPU) hours used
     #     for the crawl.
     #   @return [String]
     #
@@ -3258,17 +3257,17 @@ module Aws::Glue
     #   A defined comparator that operates on the value. The available
     #   operators are:
     #
-    #   * `GT`\: Greater than.
+    #   * `GT`: Greater than.
     #
-    #   * `GE`\: Greater than or equal to.
+    #   * `GE`: Greater than or equal to.
     #
-    #   * `LT`\: Less than.
+    #   * `LT`: Less than.
     #
-    #   * `LE`\: Less than or equal to.
+    #   * `LE`: Less than or equal to.
     #
-    #   * `EQ`\: Equal to.
+    #   * `EQ`: Equal to.
     #
-    #   * `NE`\: Not equal to.
+    #   * `NE`: Not equal to.
     #   @return [String]
     #
     # @!attribute [rw] field_value
@@ -4579,46 +4578,46 @@ module Aws::Glue
     # @!attribute [rw] compatibility
     #   The compatibility mode of the schema. The possible values are:
     #
-    #   * *NONE*\: No compatibility mode applies. You can use this choice in
+    #   * *NONE*: No compatibility mode applies. You can use this choice in
     #     development scenarios or if you do not know the compatibility mode
     #     that you want to apply to schemas. Any new version added will be
     #     accepted without undergoing a compatibility check.
     #
-    #   * *DISABLED*\: This compatibility choice prevents versioning for a
+    #   * *DISABLED*: This compatibility choice prevents versioning for a
     #     particular schema. You can use this choice to prevent future
     #     versioning of a schema.
     #
-    #   * *BACKWARD*\: This compatibility choice is recommended as it allows
+    #   * *BACKWARD*: This compatibility choice is recommended as it allows
     #     data receivers to read both the current and one previous schema
     #     version. This means that for instance, a new schema version cannot
     #     drop data fields or change the type of these fields, so they
     #     can't be read by readers using the previous version.
     #
-    #   * *BACKWARD\_ALL*\: This compatibility choice allows data receivers
+    #   * *BACKWARD\_ALL*: This compatibility choice allows data receivers
     #     to read both the current and all previous schema versions. You can
     #     use this choice when you need to delete fields or add optional
     #     fields, and check compatibility against all previous schema
     #     versions.
     #
-    #   * *FORWARD*\: This compatibility choice allows data receivers to
-    #     read both the current and one next schema version, but not
-    #     necessarily later versions. You can use this choice when you need
-    #     to add fields or delete optional fields, but only check
-    #     compatibility against the last schema version.
+    #   * *FORWARD*: This compatibility choice allows data receivers to read
+    #     both the current and one next schema version, but not necessarily
+    #     later versions. You can use this choice when you need to add
+    #     fields or delete optional fields, but only check compatibility
+    #     against the last schema version.
     #
-    #   * *FORWARD\_ALL*\: This compatibility choice allows data receivers
-    #     to read written by producers of any new registered schema. You can
+    #   * *FORWARD\_ALL*: This compatibility choice allows data receivers to
+    #     read written by producers of any new registered schema. You can
     #     use this choice when you need to add fields or delete optional
     #     fields, and check compatibility against all previous schema
     #     versions.
     #
-    #   * *FULL*\: This compatibility choice allows data receivers to read
+    #   * *FULL*: This compatibility choice allows data receivers to read
     #     data written by producers using the previous or next version of
     #     the schema, but not necessarily earlier or later versions. You can
     #     use this choice when you need to add or remove optional fields,
     #     but only check compatibility against the last schema version.
     #
-    #   * *FULL\_ALL*\: This compatibility choice allows data receivers to
+    #   * *FULL\_ALL*: This compatibility choice allows data receivers to
     #     read data written by producers using all previous schema versions.
     #     You can use this choice when you need to add or remove optional
     #     fields, and check compatibility against all previous schema
@@ -9543,8 +9542,8 @@ module Aws::Glue
     #   clause. The SQL statement parser [JSQLParser][1] parses the
     #   expression.
     #
-    #   *Operators*\: The following are the operators that you can use in
-    #   the `Expression` API call:
+    #   *Operators*: The following are the operators that you can use in the
+    #   `Expression` API call:
     #
     #   =
     #
@@ -9599,7 +9598,7 @@ module Aws::Glue
     #
     #   : Logical operators.
     #
-    #   *Supported Partition Key Types*\: The following are the supported
+    #   *Supported Partition Key Types*: The following are the supported
     #   partition keys.
     #
     #   * `string`
@@ -9626,7 +9625,7 @@ module Aws::Glue
     #   define a crawler, the `partitionKey` type is created as a `STRING`,
     #   to be compatible with the catalog partitions.
     #
-    #   *Sample API Call*\:
+    #   *Sample API Call*:
     #
     #
     #
@@ -10675,8 +10674,8 @@ module Aws::Glue
     #   clause. The SQL statement parser [JSQLParser][1] parses the
     #   expression.
     #
-    #   *Operators*\: The following are the operators that you can use in
-    #   the `Expression` API call:
+    #   *Operators*: The following are the operators that you can use in the
+    #   `Expression` API call:
     #
     #   =
     #
@@ -10731,7 +10730,7 @@ module Aws::Glue
     #
     #   : Logical operators.
     #
-    #   *Supported Partition Key Types*\: The following are the supported
+    #   *Supported Partition Key Types*: The following are the supported
     #   partition keys.
     #
     #   * `string`
@@ -11204,10 +11203,10 @@ module Aws::Glue
     #   Additional options for the table. Currently there are two keys
     #   supported:
     #
-    #   * `pushDownPredicate`\: to filter on partitions without having to
+    #   * `pushDownPredicate`: to filter on partitions without having to
     #     list and read all the files in your dataset.
     #
-    #   * `catalogPartitionPredicate`\: to use server-side partition pruning
+    #   * `catalogPartitionPredicate`: to use server-side partition pruning
     #     using partition indexes in the Glue Data Catalog.
     #   @return [Hash<String,String>]
     #
@@ -17561,7 +17560,7 @@ module Aws::Glue
     end
 
     # Specifies a transform that splits data property keys into two
-    # `DynamicFrames`. The output is a collection of `DynamicFrames`\: one
+    # `DynamicFrames`. The output is a collection of `DynamicFrames`: one
     # with selected data property keys, and one with the remaining data
     # property keys.
     #

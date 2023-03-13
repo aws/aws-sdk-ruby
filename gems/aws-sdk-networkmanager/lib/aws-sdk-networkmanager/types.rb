@@ -1550,11 +1550,11 @@ module Aws::NetworkManager
     #   Network Manager console. If you specify the address, the latitude
     #   and longitude are automatically calculated.
     #
-    #   * `Address`\: The physical address of the site.
+    #   * `Address`: The physical address of the site.
     #
-    #   * `Latitude`\: The latitude of the site.
+    #   * `Latitude`: The latitude of the site.
     #
-    #   * `Longitude`\: The longitude of the site.
+    #   * `Longitude`: The longitude of the site.
     #   @return [Types::Location]
     #
     # @!attribute [rw] tags
@@ -5595,11 +5595,11 @@ module Aws::NetworkManager
     # @!attribute [rw] location
     #   The site location:
     #
-    #   * `Address`\: The physical address of the site.
+    #   * `Address`: The physical address of the site.
     #
-    #   * `Latitude`\: The latitude of the site.
+    #   * `Latitude`: The latitude of the site.
     #
-    #   * `Longitude`\: The longitude of the site.
+    #   * `Longitude`: The longitude of the site.
     #   @return [Types::Location]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateSiteRequest AWS API Documentation

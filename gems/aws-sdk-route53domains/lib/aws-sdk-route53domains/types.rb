@@ -1142,7 +1142,7 @@ module Aws::Route53Domains
     #
     #       * The value of `ES_IDENTIFICATION_TYPE`
     #
-    #       **If `ES_LEGAL_FORM` is any value other than `INDIVIDUAL`\:**
+    #       **If `ES_LEGAL_FORM` is any value other than `INDIVIDUAL`:**
     #
     #       * Specify 1 letter + 8 numbers (CIF \[Certificado de
     #         Identificación Fiscal\])
@@ -1151,7 +1151,7 @@ module Aws::Route53Domains
     #
     #       **If `ES_LEGAL_FORM` is `INDIVIDUAL`, the value that you specify
     #       for `ES_IDENTIFICATION` depends on the value of
-    #       `ES_IDENTIFICATION_TYPE`\:**
+    #       `ES_IDENTIFICATION_TYPE`:**
     #
     #       * If `ES_IDENTIFICATION_TYPE` is `DNI_AND_NIF` (for Spanish
     #         contacts):
@@ -1312,11 +1312,11 @@ module Aws::Route53Domains
     #
     #     * `BIRTH_DATE_IN_YYYY_MM_DD`
     #
-    #     * `BIRTH_DEPARTMENT`\: Specify the INSEE code that corresponds
-    #       with the department where the contact was born. If the contact
-    #       was born somewhere other than France or its overseas
-    #       departments, specify `99`. For more information, including a
-    #       list of departments and the corresponding INSEE numbers, see the
+    #     * `BIRTH_DEPARTMENT`: Specify the INSEE code that corresponds with
+    #       the department where the contact was born. If the contact was
+    #       born somewhere other than France or its overseas departments,
+    #       specify `99`. For more information, including a list of
+    #       departments and the corresponding INSEE numbers, see the
     #       Wikipedia entry [Departments of France][1].
     #
     #     * `BRAND_NUMBER`
@@ -1433,11 +1433,11 @@ module Aws::Route53Domains
     # @!attribute [rw] operator
     #   The operator values for filtering domain names. The values can be:
     #
-    #   * `LE`\: Less than, or equal to
+    #   * `LE`: Less than, or equal to
     #
-    #   * `GE`\: Greater than, or equal to
+    #   * `GE`: Greater than, or equal to
     #
-    #   * `BEGINS_WITH`\: Begins with
+    #   * `BEGINS_WITH`: Begins with
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1803,20 +1803,20 @@ module Aws::Route53Domains
     #   Lists any outstanding operations that require customer action. Valid
     #   values are:
     #
-    #   * `PENDING_ACCEPTANCE`\: The operation is waiting for acceptance
-    #     from the account that is receiving the domain.
+    #   * `PENDING_ACCEPTANCE`: The operation is waiting for acceptance from
+    #     the account that is receiving the domain.
     #
-    #   * `PENDING_CUSTOMER_ACTION`\: The operation is waiting for customer
+    #   * `PENDING_CUSTOMER_ACTION`: The operation is waiting for customer
     #     action, for example, returning an email.
     #
-    #   * `PENDING_AUTHORIZATION`\: The operation is waiting for the form of
+    #   * `PENDING_AUTHORIZATION`: The operation is waiting for the form of
     #     authorization. For more information, see
     #     [ResendOperationAuthorization][1].
     #
-    #   * `PENDING_PAYMENT_VERIFICATION`\: The operation is waiting for the
+    #   * `PENDING_PAYMENT_VERIFICATION`: The operation is waiting for the
     #     payment method to validate.
     #
-    #   * `PENDING_SUPPORT_CASE`\: The operation includes a support case and
+    #   * `PENDING_SUPPORT_CASE`: The operation includes a support case and
     #     is waiting for its resolution.
     #
     #
@@ -2164,20 +2164,20 @@ module Aws::Route53Domains
     #
     #   Valid values are:
     #
-    #   * `PENDING_ACCEPTANCE`\: The operation is waiting for acceptance
-    #     from the account that is receiving the domain.
+    #   * `PENDING_ACCEPTANCE`: The operation is waiting for acceptance from
+    #     the account that is receiving the domain.
     #
-    #   * `PENDING_CUSTOMER_ACTION`\: The operation is waiting for customer
+    #   * `PENDING_CUSTOMER_ACTION`: The operation is waiting for customer
     #     action, for example, returning an email.
     #
-    #   * `PENDING_AUTHORIZATION`\: The operation is waiting for the form of
+    #   * `PENDING_AUTHORIZATION`: The operation is waiting for the form of
     #     authorization. For more information, see
     #     [ResendOperationAuthorization][1].
     #
-    #   * `PENDING_PAYMENT_VERIFICATION`\: The operation is waiting for the
+    #   * `PENDING_PAYMENT_VERIFICATION`: The operation is waiting for the
     #     payment method to validate.
     #
-    #   * `PENDING_SUPPORT_CASE`\: The operation includes a support case and
+    #   * `PENDING_SUPPORT_CASE`: The operation includes a support case and
     #     is waiting for its resolution.
     #
     #

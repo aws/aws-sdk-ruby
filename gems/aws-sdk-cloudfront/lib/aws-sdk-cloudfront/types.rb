@@ -362,14 +362,14 @@ module Aws::CloudFront
     #   specified by `TargetOriginId` when a request matches the path
     #   pattern in `PathPattern`. You can specify the following options:
     #
-    #   * `allow-all`\: Viewers can use HTTP or HTTPS.
+    #   * `allow-all`: Viewers can use HTTP or HTTPS.
     #
-    #   * `redirect-to-https`\: If a viewer submits an HTTP request,
+    #   * `redirect-to-https`: If a viewer submits an HTTP request,
     #     CloudFront returns an HTTP status code of 301 (Moved Permanently)
     #     to the viewer along with the HTTPS URL. The viewer then resubmits
     #     the request using the new URL.
     #
-    #   * `https-only`\: If a viewer sends an HTTP request, CloudFront
+    #   * `https-only`: If a viewer sends an HTTP request, CloudFront
     #     returns an HTTP status code of 403 (Forbidden).
     #
     #   For more information about requiring the HTTPS protocol, see
@@ -2525,7 +2525,7 @@ module Aws::CloudFront
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   **Optional**\: A list that contains one `OriginCustomHeader` element
+    #   **Optional**: A list that contains one `OriginCustomHeader` element
     #   for each custom header that you want CloudFront to forward to the
     #   origin. If Quantity is `0`, omit `Items`.
     #   @return [Array<Types::OriginCustomHeader>]
@@ -2678,14 +2678,14 @@ module Aws::CloudFront
     #   specified by `TargetOriginId` when a request matches the path
     #   pattern in `PathPattern`. You can specify the following options:
     #
-    #   * `allow-all`\: Viewers can use HTTP or HTTPS.
+    #   * `allow-all`: Viewers can use HTTP or HTTPS.
     #
-    #   * `redirect-to-https`\: If a viewer submits an HTTP request,
+    #   * `redirect-to-https`: If a viewer submits an HTTP request,
     #     CloudFront returns an HTTP status code of 301 (Moved Permanently)
     #     to the viewer along with the HTTPS URL. The viewer then resubmits
     #     the request using the new URL.
     #
-    #   * `https-only`\: If a viewer sends an HTTP request, CloudFront
+    #   * `https-only`: If a viewer sends an HTTP request, CloudFront
     #     returns an HTTP status code of 403 (Forbidden).
     #
     #   For more information about requiring the HTTPS protocol, see
@@ -4732,13 +4732,13 @@ module Aws::CloudFront
     #   The method that you want to use to restrict distribution of your
     #   content by country:
     #
-    #   * `none`\: No geo restriction is enabled, meaning access to content
+    #   * `none`: No geo restriction is enabled, meaning access to content
     #     is not restricted by client geo location.
     #
-    #   * `blacklist`\: The `Location` elements specify the countries in
+    #   * `blacklist`: The `Location` elements specify the countries in
     #     which you don't want CloudFront to distribute your content.
     #
-    #   * `whitelist`\: The `Location` elements specify the countries in
+    #   * `whitelist`: The `Location` elements specify the countries in
     #     which you want CloudFront to distribute your content.
     #   @return [String]
     #
@@ -6485,21 +6485,21 @@ module Aws::CloudFront
     #   Specifies the event type that triggers a Lambda@Edge function
     #   invocation. You can specify the following values:
     #
-    #   * `viewer-request`\: The function executes when CloudFront receives
-    #     a request from a viewer and before it checks to see whether the
+    #   * `viewer-request`: The function executes when CloudFront receives a
+    #     request from a viewer and before it checks to see whether the
     #     requested object is in the edge cache.
     #
-    #   * `origin-request`\: The function executes only when CloudFront
-    #     sends a request to your origin. When the requested object is in
-    #     the edge cache, the function doesn't execute.
-    #
-    #   * `origin-response`\: The function executes after CloudFront
-    #     receives a response from the origin and before it caches the
-    #     object in the response. When the requested object is in the edge
+    #   * `origin-request`: The function executes only when CloudFront sends
+    #     a request to your origin. When the requested object is in the edge
     #     cache, the function doesn't execute.
     #
-    #   * `viewer-response`\: The function executes before CloudFront
-    #     returns the requested object to the viewer. The function executes
+    #   * `origin-response`: The function executes after CloudFront receives
+    #     a response from the origin and before it caches the object in the
+    #     response. When the requested object is in the edge cache, the
+    #     function doesn't execute.
+    #
+    #   * `viewer-response`: The function executes before CloudFront returns
+    #     the requested object to the viewer. The function executes
     #     regardless of whether the object was already in the edge cache.
     #
     #     If the origin returns an HTTP status code other than HTTP 200
@@ -6547,7 +6547,7 @@ module Aws::CloudFront
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   **Optional**\: A complex type that contains
+    #   **Optional**: A complex type that contains
     #   `LambdaFunctionAssociation` items for this cache behavior. If
     #   `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<Types::LambdaFunctionAssociation>]

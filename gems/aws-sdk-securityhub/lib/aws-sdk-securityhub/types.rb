@@ -8091,15 +8091,15 @@ module Aws::SecurityHub
     #
     #   * ` user `
     #
-    #   * ` user `\:` group `
+    #   * ` user `:` group `
     #
     #   * ` uid `
     #
-    #   * ` uid `\:` gid `
+    #   * ` uid `:` gid `
     #
-    #   * ` user `\:` gid `
+    #   * ` user `:` gid `
     #
-    #   * ` uid `\:` group `
+    #   * ` uid `:` group `
     #   @return [String]
     #
     # @!attribute [rw] volumes_from
@@ -16505,7 +16505,7 @@ module Aws::SecurityHub
     #     owner.
     #
     #     If one of the following occurs, the workflow status is changed
-    #     automatically from `NOTIFIED` to `NEW`\:
+    #     automatically from `NOTIFIED` to `NEW`:
     #
     #     * `RecordState` changes from `ARCHIVED` to `ACTIVE`.
     #

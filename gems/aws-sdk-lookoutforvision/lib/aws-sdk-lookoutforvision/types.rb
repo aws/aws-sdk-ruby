@@ -1929,10 +1929,10 @@ module Aws::LookoutforVision
     #   the GreengrassConfiguration$CompilerOptions field. For example, you
     #   can use the following compiler options for CPU:
     #
-    #   * `mcpu`\: CPU micro-architecture. For example, `\{'mcpu':
+    #   * `mcpu`: CPU micro-architecture. For example, `\{'mcpu':
     #     'skylake-avx512'\}`
     #
-    #   * `mattr`\: CPU flags. For example, `\{'mattr': ['+neon',
+    #   * `mattr`: CPU flags. For example, `\{'mattr': ['+neon',
     #     '+vfpv4']\}`
     #   @return [String]
     #

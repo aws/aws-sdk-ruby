@@ -1114,7 +1114,7 @@ module Aws::ServiceCatalog
     #   share recipient account end users with a principal that matches any of
     #   the associated IAM patterns can provision products from the portfolio.
     #   Once shared, the share recipient can view associations of
-    #   `PrincipalType`\: `IAM_PATTERN` on their portfolio. You can create the
+    #   `PrincipalType`: `IAM_PATTERN` on their portfolio. You can create the
     #   principals in the recipient account before or after creating the
     #   share.
     #

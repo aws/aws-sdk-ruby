@@ -203,11 +203,11 @@ module Aws::ChimeSDKIdentity
     #   A read-only field that represents the state of an
     #   `AppInstanceUserEndpoint`. Supported values:
     #
-    #   * `ACTIVE`\: The `AppInstanceUserEndpoint` is active and able to
+    #   * `ACTIVE`: The `AppInstanceUserEndpoint` is active and able to
     #     receive messages. When `ACTIVE`, the `EndpointStatusReason`
     #     remains empty.
     #
-    #   * `INACTIVE`\: The `AppInstanceUserEndpoint` is inactive and can't
+    #   * `INACTIVE`: The `AppInstanceUserEndpoint` is inactive and can't
     #     receive message. When `INACTIVE`, the corresponding reason will be
     #     conveyed through `EndpointStatusReason`.
     #
@@ -612,7 +612,7 @@ module Aws::ChimeSDKIdentity
     end
 
     # @!attribute [rw] app_instance_user_endpoint
-    #   The full details of an `AppInstanceUserEndpoint`\: the
+    #   The full details of an `AppInstanceUserEndpoint`: the
     #   `AppInstanceUserArn`, ID, name, type, resource ARN, attributes,
     #   allow messages, state, and created and last updated timestamps. All
     #   timestamps use epoch milliseconds.
@@ -673,11 +673,11 @@ module Aws::ChimeSDKIdentity
     # A read-only field that represents the state of an
     # `AppInstanceUserEndpoint`. Supported values:
     #
-    # * `ACTIVE`\: The `AppInstanceUserEndpoint` is active and able to
+    # * `ACTIVE`: The `AppInstanceUserEndpoint` is active and able to
     #   receive messages. When `ACTIVE`, the `EndpointStatusReason` remains
     #   empty.
     #
-    # * `INACTIVE`\: The `AppInstanceUserEndpoint` is inactive and can't
+    # * `INACTIVE`: The `AppInstanceUserEndpoint` is inactive and can't
     #   receive message. When INACTIVE, the corresponding reason will be
     #   conveyed through EndpointStatusReason.
     #
@@ -1009,12 +1009,12 @@ module Aws::ChimeSDKIdentity
     # @!attribute [rw] type
     #   The type of the `AppInstanceUserEndpoint`. Supported types:
     #
-    #   * `APNS`\: The mobile notification service for an Apple device.
+    #   * `APNS`: The mobile notification service for an Apple device.
     #
-    #   * `APNS_SANDBOX`\: The sandbox environment of the mobile
-    #     notification service for an Apple device.
+    #   * `APNS_SANDBOX`: The sandbox environment of the mobile notification
+    #     service for an Apple device.
     #
-    #   * `GCM`\: The mobile notification service for an Android device.
+    #   * `GCM`: The mobile notification service for an Android device.
     #
     #   Populate the `ResourceArn` value of each type as `PinpointAppArn`.
     #   @return [String]

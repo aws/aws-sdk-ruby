@@ -4901,11 +4901,11 @@ module Aws::SES
     # To create the CNAME records for DKIM authentication, use the following
     # values:
     #
-    # * **Name**\: *token*.\_domainkey.*example.com*
+    # * **Name**: *token*.\_domainkey.*example.com*
     #
-    # * **Type**\: CNAME
+    # * **Type**: CNAME
     #
-    # * **Value**\: *token*.dkim.amazonses.com
+    # * **Value**: *token*.dkim.amazonses.com
     #
     # In the preceding example, replace *token* with one of the tokens that
     # are generated when you execute this operation. Replace *example.com*

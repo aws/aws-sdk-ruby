@@ -6476,10 +6476,9 @@ module Aws::IoT
     #   The principal.
     #
     #   Valid principals are CertificateArn
-    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
-    #   thingGroupArn
-    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
-    #   CognitoId (*region*\:*id*).
+    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*), thingGroupArn
+    #   (arn:aws:iot:*region*:*accountId*:thinggroup/*groupName*) and
+    #   CognitoId (*region*:*id*).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6787,10 +6786,9 @@ module Aws::IoT
     #
     # @option params [String] :principal
     #   The principal. Valid principals are CertificateArn
-    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
-    #   thingGroupArn
-    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
-    #   CognitoId (*region*\:*id*).
+    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*), thingGroupArn
+    #   (arn:aws:iot:*region*:*accountId*:thinggroup/*groupName*) and
+    #   CognitoId (*region*:*id*).
     #
     # @option params [String] :cognito_identity_pool_id
     #   The Cognito identity pool ID.
@@ -7700,10 +7698,9 @@ module Aws::IoT
     # @option params [required, String] :target
     #   The group or principal for which the policies will be listed. Valid
     #   principals are CertificateArn
-    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
-    #   thingGroupArn
-    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
-    #   CognitoId (*region*\:*id*).
+    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*), thingGroupArn
+    #   (arn:aws:iot:*region*:*accountId*:thinggroup/*groupName*) and
+    #   CognitoId (*region*:*id*).
     #
     # @option params [Boolean] :recursive
     #   When true, recursively list attached policies.
@@ -9499,10 +9496,9 @@ module Aws::IoT
     #
     # @option params [required, String] :principal
     #   The principal. Valid principals are CertificateArn
-    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
-    #   thingGroupArn
-    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
-    #   CognitoId (*region*\:*id*).
+    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*), thingGroupArn
+    #   (arn:aws:iot:*region*:*accountId*:thinggroup/*groupName*) and
+    #   CognitoId (*region*:*id*).
     #
     # @option params [String] :marker
     #   The marker for the next set of results.
@@ -12301,10 +12297,9 @@ module Aws::IoT
     #
     # @option params [String] :principal
     #   The principal. Valid principals are CertificateArn
-    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
-    #   thingGroupArn
-    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
-    #   CognitoId (*region*\:*id*).
+    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*), thingGroupArn
+    #   (arn:aws:iot:*region*:*accountId*:thinggroup/*groupName*) and
+    #   CognitoId (*region*:*id*).
     #
     # @option params [String] :cognito_identity_pool_id
     #   The Cognito identity pool ID.

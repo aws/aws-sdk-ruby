@@ -1054,12 +1054,12 @@ module Aws::ChimeSDKIdentity
     # @option params [required, String] :type
     #   The type of the `AppInstanceUserEndpoint`. Supported types:
     #
-    #   * `APNS`\: The mobile notification service for an Apple device.
+    #   * `APNS`: The mobile notification service for an Apple device.
     #
-    #   * `APNS_SANDBOX`\: The sandbox environment of the mobile notification
+    #   * `APNS_SANDBOX`: The sandbox environment of the mobile notification
     #     service for an Apple device.
     #
-    #   * `GCM`\: The mobile notification service for an Android device.
+    #   * `GCM`: The mobile notification service for an Android device.
     #
     #   Populate the `ResourceArn` value of each type as `PinpointAppArn`.
     #

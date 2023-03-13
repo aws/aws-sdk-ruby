@@ -711,13 +711,13 @@ module Aws::CodeDeploy
     # The type of targets returned depends on the deployment's compute
     # platform or deployment method:
     #
-    # * **EC2/On-premises**\: Information about Amazon EC2 instance targets.
+    # * **EC2/On-premises**: Information about Amazon EC2 instance targets.
     #
-    # * **Lambda**\: Information about Lambda functions targets.
+    # * **Lambda**: Information about Lambda functions targets.
     #
-    # * **Amazon ECS**\: Information about Amazon ECS service targets.
+    # * **Amazon ECS**: Information about Amazon ECS service targets.
     #
-    # * **CloudFormation**\: Information about targets of blue/green
+    # * **CloudFormation**: Information about targets of blue/green
     #   deployments initiated by a CloudFormation stack update.
     #
     # @option params [String] :deployment_id
@@ -2338,13 +2338,13 @@ module Aws::CodeDeploy
     # @option params [String] :sort_by
     #   The column name to use to sort the list results:
     #
-    #   * `registerTime`\: Sort by the time the revisions were registered with
+    #   * `registerTime`: Sort by the time the revisions were registered with
     #     CodeDeploy.
     #
-    #   * `firstUsedTime`\: Sort by the time the revisions were first used in
-    #     a deployment.
+    #   * `firstUsedTime`: Sort by the time the revisions were first used in a
+    #     deployment.
     #
-    #   * `lastUsedTime`\: Sort by the time the revisions were last used in a
+    #   * `lastUsedTime`: Sort by the time the revisions were last used in a
     #     deployment.
     #
     #   If not specified or set to null, the results are returned in an
@@ -2353,9 +2353,9 @@ module Aws::CodeDeploy
     # @option params [String] :sort_order
     #   The order in which to sort the list results:
     #
-    #   * `ascending`\: ascending order.
+    #   * `ascending`: ascending order.
     #
-    #   * `descending`\: descending order.
+    #   * `descending`: descending order.
     #
     #   If not specified, the results are sorted in ascending order.
     #
@@ -2374,13 +2374,13 @@ module Aws::CodeDeploy
     #   Whether to list revisions based on whether the revision is the target
     #   revision of a deployment group:
     #
-    #   * `include`\: List revisions that are target revisions of a deployment
+    #   * `include`: List revisions that are target revisions of a deployment
     #     group.
     #
-    #   * `exclude`\: Do not list revisions that are target revisions of a
+    #   * `exclude`: Do not list revisions that are target revisions of a
     #     deployment group.
     #
-    #   * `ignore`\: List all revisions.
+    #   * `ignore`: List all revisions.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous `ListApplicationRevisions`
@@ -2567,18 +2567,18 @@ module Aws::CodeDeploy
     # @option params [Array<String>] :instance_status_filter
     #   A subset of instances to list by status:
     #
-    #   * `Pending`\: Include those instances with pending deployments.
+    #   * `Pending`: Include those instances with pending deployments.
     #
-    #   * `InProgress`\: Include those instances where deployments are still
-    #     in progress.
+    #   * `InProgress`: Include those instances where deployments are still in
+    #     progress.
     #
-    #   * `Succeeded`\: Include those instances with successful deployments.
+    #   * `Succeeded`: Include those instances with successful deployments.
     #
-    #   * `Failed`\: Include those instances with failed deployments.
+    #   * `Failed`: Include those instances with failed deployments.
     #
-    #   * `Skipped`\: Include those instances with skipped deployments.
+    #   * `Skipped`: Include those instances with skipped deployments.
     #
-    #   * `Unknown`\: Include those instances with deployments in an unknown
+    #   * `Unknown`: Include those instances with deployments in an unknown
     #     state.
     #
     # @option params [Array<String>] :instance_type_filter
@@ -2697,18 +2697,18 @@ module Aws::CodeDeploy
     # @option params [Array<String>] :include_only_statuses
     #   A subset of deployments to list by status:
     #
-    #   * `Created`\: Include created deployments in the resulting list.
+    #   * `Created`: Include created deployments in the resulting list.
     #
-    #   * `Queued`\: Include queued deployments in the resulting list.
+    #   * `Queued`: Include queued deployments in the resulting list.
     #
-    #   * `In Progress`\: Include in-progress deployments in the resulting
+    #   * `In Progress`: Include in-progress deployments in the resulting
     #     list.
     #
-    #   * `Succeeded`\: Include successful deployments in the resulting list.
+    #   * `Succeeded`: Include successful deployments in the resulting list.
     #
-    #   * `Failed`\: Include failed deployments in the resulting list.
+    #   * `Failed`: Include failed deployments in the resulting list.
     #
-    #   * `Stopped`\: Include stopped deployments in the resulting list.
+    #   * `Stopped`: Include stopped deployments in the resulting list.
     #
     # @option params [Types::TimeRange] :create_time_range
     #   A time range (start and end) for returning a subset of the list of
@@ -2796,10 +2796,10 @@ module Aws::CodeDeploy
     # @option params [String] :registration_status
     #   The registration status of the on-premises instances:
     #
-    #   * `Deregistered`\: Include deregistered on-premises instances in the
+    #   * `Deregistered`: Include deregistered on-premises instances in the
     #     resulting list.
     #
-    #   * `Registered`\: Include registered on-premises instances in the
+    #   * `Registered`: Include registered on-premises instances in the
     #     resulting list.
     #
     # @option params [Array<Types::TagFilter>] :tag_filters

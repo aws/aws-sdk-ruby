@@ -652,7 +652,7 @@ module Aws::WAF
     # If you add more than one predicate to a `RateBasedRule`, a request not
     # only must exceed the `RateLimit`, but it also must match all the
     # conditions to be counted or blocked. For example, suppose you add the
-    # following to a `RateBasedRule`\:
+    # following to a `RateBasedRule`:
     #
     # * An `IPSet` that matches the IP address `192.0.2.44/32`
     #
@@ -672,7 +672,7 @@ module Aws::WAF
     #
     # As a second example, suppose you want to limit requests to a
     # particular page on your site. To do this, you could add the following
-    # to a `RateBasedRule`\:
+    # to a `RateBasedRule`:
     #
     # * A `ByteMatchSet` with `FieldToMatch` of `URI`
     #
@@ -958,7 +958,7 @@ module Aws::WAF
     # objects, and other predicates that identify the requests that you want
     # to block. If you add more than one predicate to a `Rule`, a request
     # must match all of the specifications to be allowed or blocked. For
-    # example, suppose that you add the following to a `Rule`\:
+    # example, suppose that you add the following to a `Rule`:
     #
     # * An `IPSet` that matches the IP address `192.0.2.44/32`
     #
@@ -2778,14 +2778,14 @@ module Aws::WAF
     # Returns the status of a `ChangeToken` that you got by calling
     # GetChangeToken. `ChangeTokenStatus` is one of the following values:
     #
-    # * `PROVISIONED`\: You requested the change token by calling
+    # * `PROVISIONED`: You requested the change token by calling
     #   `GetChangeToken`, but you haven't used it yet in a call to create,
     #   update, or delete an AWS WAF object.
     #
-    # * `PENDING`\: AWS WAF is propagating the create, update, or delete
+    # * `PENDING`: AWS WAF is propagating the create, update, or delete
     #   request to all AWS WAF servers.
     #
-    # * `INSYNC`\: Propagation is complete.
+    # * `INSYNC`: Propagation is complete.
     #
     #
     #
@@ -5564,7 +5564,7 @@ module Aws::WAF
     # If you add more than one predicate to a `RateBasedRule`, a request
     # must match all the predicates and exceed the `RateLimit` to be counted
     # or blocked. For example, suppose you add the following to a
-    # `RateBasedRule`\:
+    # `RateBasedRule`:
     #
     # * An `IPSet` that matches the IP address `192.0.2.44/32`
     #
@@ -5582,7 +5582,7 @@ module Aws::WAF
     #
     # As a second example, suppose you want to limit requests to a
     # particular page on your site. To do this, you could add the following
-    # to a `RateBasedRule`\:
+    # to a `RateBasedRule`:
     #
     # * A `ByteMatchSet` with `FieldToMatch` of `URI`
     #
@@ -5865,7 +5865,7 @@ module Aws::WAF
     # that specifies the web requests that you want to allow, block, or
     # count. If you add more than one predicate to a `Rule`, a request must
     # match all of the specifications to be allowed, blocked, or counted.
-    # For example, suppose that you add the following to a `Rule`\:
+    # For example, suppose that you add the following to a `Rule`:
     #
     # * A `ByteMatchSet` that matches the value `BadBot` in the `User-Agent`
     #   header
@@ -6251,15 +6251,15 @@ module Aws::WAF
     # SqlInjectionMatchSet. For each `SqlInjectionMatchTuple` object, you
     # specify the following values:
     #
-    # * `Action`\: Whether to insert the object into or delete the object
+    # * `Action`: Whether to insert the object into or delete the object
     #   from the array. To change a `SqlInjectionMatchTuple`, you delete the
     #   existing object and add a new one.
     #
-    # * `FieldToMatch`\: The part of web requests that you want AWS WAF to
+    # * `FieldToMatch`: The part of web requests that you want AWS WAF to
     #   inspect and, if you want AWS WAF to inspect a header or custom query
     #   parameter, the name of the header or parameter.
     #
-    # * `TextTransformation`\: Which text transformation, if any, to perform
+    # * `TextTransformation`: Which text transformation, if any, to perform
     #   on the web request before inspecting the request for snippets of
     #   malicious SQL code.
     #
@@ -6575,15 +6575,15 @@ module Aws::WAF
     # Inserts or deletes XssMatchTuple objects (filters) in an XssMatchSet.
     # For each `XssMatchTuple` object, you specify the following values:
     #
-    # * `Action`\: Whether to insert the object into or delete the object
+    # * `Action`: Whether to insert the object into or delete the object
     #   from the array. To change an `XssMatchTuple`, you delete the
     #   existing object and add a new one.
     #
-    # * `FieldToMatch`\: The part of web requests that you want AWS WAF to
+    # * `FieldToMatch`: The part of web requests that you want AWS WAF to
     #   inspect and, if you want AWS WAF to inspect a header or custom query
     #   parameter, the name of the header or parameter.
     #
-    # * `TextTransformation`\: Which text transformation, if any, to perform
+    # * `TextTransformation`: Which text transformation, if any, to perform
     #   on the web request before inspecting the request for cross-site
     #   scripting attacks.
     #

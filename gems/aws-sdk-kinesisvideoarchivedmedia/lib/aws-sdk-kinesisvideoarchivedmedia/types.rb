@@ -340,7 +340,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   Features of the three types of sessions include the following:
     #
-    #   * <b> <code>LIVE</code> </b>\: For sessions of this type, the
+    #   * <b> <code>LIVE</code> </b>: For sessions of this type, the
     #     MPEG-DASH manifest is continually updated with the latest
     #     fragments as they become available. We recommend that the media
     #     player retrieve a new manifest on a one-second interval. When this
@@ -361,7 +361,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     #      </note>
     #
-    #   * <b> <code>LIVE_REPLAY</code> </b>\: For sessions of this type, the
+    #   * <b> <code>LIVE_REPLAY</code> </b>: For sessions of this type, the
     #     MPEG-DASH manifest is updated similarly to how it is updated for
     #     `LIVE` mode except that it starts by including fragments from a
     #     given start time. Instead of fragments being added as they are
@@ -375,7 +375,7 @@ module Aws::KinesisVideoArchivedMedia
     #     without being limited by the 1,000 fragment limit in the
     #     `ON_DEMAND` mode.
     #
-    #   * <b> <code>ON_DEMAND</code> </b>\: For sessions of this type, the
+    #   * <b> <code>ON_DEMAND</code> </b>: For sessions of this type, the
     #     MPEG-DASH manifest contains all the fragments for the session, up
     #     to the number that is specified in `MaxManifestFragmentResults`.
     #     The manifest must be retrieved only once for each session. When
@@ -522,7 +522,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   Features of the three types of sessions include the following:
     #
-    #   * <b> <code>LIVE</code> </b>\: For sessions of this type, the HLS
+    #   * <b> <code>LIVE</code> </b>: For sessions of this type, the HLS
     #     media playlist is continually updated with the latest fragments as
     #     they become available. We recommend that the media player retrieve
     #     a new playlist on a one-second interval. When this type of session
@@ -542,7 +542,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     #      </note>
     #
-    #   * <b> <code>LIVE_REPLAY</code> </b>\: For sessions of this type, the
+    #   * <b> <code>LIVE_REPLAY</code> </b>: For sessions of this type, the
     #     HLS media playlist is updated similarly to how it is updated for
     #     `LIVE` mode except that it starts by including fragments from a
     #     given start time. Instead of fragments being added as they are
@@ -556,7 +556,7 @@ module Aws::KinesisVideoArchivedMedia
     #     previously archived media without being limited by the 1,000
     #     fragment limit in the `ON_DEMAND` mode.
     #
-    #   * <b> <code>ON_DEMAND</code> </b>\: For sessions of this type, the
+    #   * <b> <code>ON_DEMAND</code> </b>: For sessions of this type, the
     #     HLS media playlist contains all the fragments for the session, up
     #     to the number that is specified in
     #     `MaxMediaPlaylistFragmentResults`. The playlist must be retrieved
@@ -621,15 +621,15 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   The following modes are supported:
     #
-    #   * `ALWAYS`\: a discontinuity marker is placed between every fragment
+    #   * `ALWAYS`: a discontinuity marker is placed between every fragment
     #     in the HLS media playlist. It is recommended to use a value of
     #     `ALWAYS` if the fragment timestamps are not accurate.
     #
-    #   * `NEVER`\: no discontinuity markers are placed anywhere. It is
+    #   * `NEVER`: no discontinuity markers are placed anywhere. It is
     #     recommended to use a value of `NEVER` to ensure the media player
     #     timeline most accurately maps to the producer timestamps.
     #
-    #   * `ON_DISCONTINUITY`\: a discontinuity marker is placed between
+    #   * `ON_DISCONTINUITY`: a discontinuity marker is placed between
     #     fragments that have a gap or overlap of more than 50 milliseconds.
     #     For most playback scenarios, it is recommended to use a value of
     #     `ON_DISCONTINUITY` so that the media player timeline is only reset

@@ -5291,10 +5291,10 @@ module Aws::Pinpoint
     #   to.
     #
     #   For a Kinesis data stream, the ARN format is:
-    #   arn:aws:kinesis:*region*\:*account-id*\:stream/*stream\_name*
+    #   arn:aws:kinesis:*region*:*account-id*:stream/*stream\_name*
     #
     #   For a Kinesis Data Firehose delivery stream, the ARN format is:
-    #   arn:aws:firehose:*region*\:*account-id*\:deliverystream/*stream\_name*
+    #   arn:aws:firehose:*region*:*account-id*:deliverystream/*stream\_name*
     #   @return [String]
     #
     # @!attribute [rw] external_id
@@ -13206,10 +13206,10 @@ module Aws::Pinpoint
     #   publish event data to.
     #
     #   For a Kinesis data stream, the ARN format is:
-    #   arn:aws:kinesis:*region*\:*account-id*\:stream/*stream\_name*
+    #   arn:aws:kinesis:*region*:*account-id*:stream/*stream\_name*
     #
     #   For a Kinesis Data Firehose delivery stream, the ARN format is:
-    #   arn:aws:firehose:*region*\:*account-id*\:deliverystream/*stream\_name*
+    #   arn:aws:firehose:*region*:*account-id*:deliverystream/*stream\_name*
     #   @return [String]
     #
     # @!attribute [rw] role_arn

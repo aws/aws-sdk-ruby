@@ -2316,21 +2316,20 @@ module Aws::NetworkFirewall
     #   * For an Amazon S3 bucket, provide the name of the bucket, with key
     #     `bucketName`, and optionally provide a prefix, with key `prefix`.
     #     The following example specifies an Amazon S3 bucket named
-    #     `DOC-EXAMPLE-BUCKET` and the prefix `alerts`\:
+    #     `DOC-EXAMPLE-BUCKET` and the prefix `alerts`:
     #
     #     `"LogDestination": \{ "bucketName": "DOC-EXAMPLE-BUCKET",
     #     "prefix": "alerts" \}`
     #
     #   * For a CloudWatch log group, provide the name of the CloudWatch log
     #     group, with key `logGroup`. The following example specifies a log
-    #     group named `alert-log-group`\:
+    #     group named `alert-log-group`:
     #
     #     `"LogDestination": \{ "logGroup": "alert-log-group" \}`
     #
     #   * For a Kinesis Data Firehose delivery stream, provide the name of
     #     the delivery stream, with key `deliveryStream`. The following
-    #     example specifies a delivery stream named
-    #     `alert-delivery-stream`\:
+    #     example specifies a delivery stream named `alert-delivery-stream`:
     #
     #     `"LogDestination": \{ "deliveryStream": "alert-delivery-stream"
     #     \}`

@@ -316,7 +316,7 @@ module Aws::CloudWatchEvents
     # the only supported condition is membership in a certain Amazon Web
     # Services organization. The string must contain `Type`, `Key`, and
     # `Value` fields. The `Value` field specifies the ID of the Amazon Web
-    # Services organization. Following is an example value for `Condition`\:
+    # Services organization. Following is an example value for `Condition`:
     #
     # `'\{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
     # "o-1234567890"\}'`

@@ -490,7 +490,7 @@ module Aws::AppConfig
     #     `ssm-parameter://<parameter name>` or the ARN.
     #
     #   * For an Secrets Manager secret, specify the URI in the following
-    #     format: `secrets-manager`\://&lt;secret name&gt;.
+    #     format: `secrets-manager`://&lt;secret name&gt;.
     #
     #   * For an Amazon S3 object, specify the URI in the following format:
     #     `s3://<bucket>/<objectKey> `. Here is an example:
@@ -521,7 +521,7 @@ module Aws::AppConfig
     #   you create feature flag configurations to enable or disable new
     #   features and freeform configurations to distribute configurations to
     #   an application. When calling this API, enter one of the following
-    #   values for `Type`\:
+    #   values for `Type`:
     #
     #   `AWS.AppConfig.FeatureFlags`
     #
@@ -639,7 +639,7 @@ module Aws::AppConfig
     #   The algorithm used to define how percentage grows over time. AppConfig
     #   supports the following growth types:
     #
-    #   **Linear**\: For this type, AppConfig processes the deployment by
+    #   **Linear**: For this type, AppConfig processes the deployment by
     #   dividing the total number of targets by the value specified for `Step
     #   percentage`. For example, a linear deployment that uses a `Step
     #   percentage` of 10 deploys the configuration to 10 percent of the
@@ -647,7 +647,7 @@ module Aws::AppConfig
     #   configuration to the next 10 percent. This continues until 100% of the
     #   targets have successfully received the configuration.
     #
-    #   **Exponential**\: For this type, AppConfig processes the deployment
+    #   **Exponential**: For this type, AppConfig processes the deployment
     #   exponentially using the following formula: `G*(2^N)`. In this formula,
     #   `G` is the growth factor specified by the user and `N` is the number
     #   of steps until the configuration is deployed to all targets. For
@@ -3214,7 +3214,7 @@ module Aws::AppConfig
     #   The algorithm used to define how percentage grows over time. AppConfig
     #   supports the following growth types:
     #
-    #   **Linear**\: For this type, AppConfig processes the deployment by
+    #   **Linear**: For this type, AppConfig processes the deployment by
     #   increments of the growth factor evenly distributed over the deployment
     #   time. For example, a linear deployment that uses a growth factor of 20
     #   initially makes the configuration available to 20 percent of the
@@ -3222,7 +3222,7 @@ module Aws::AppConfig
     #   updates the percentage to 40 percent. This continues until 100% of the
     #   targets are set to receive the deployed configuration.
     #
-    #   **Exponential**\: For this type, AppConfig processes the deployment
+    #   **Exponential**: For this type, AppConfig processes the deployment
     #   exponentially using the following formula: `G*(2^N)`. In this formula,
     #   `G` is the growth factor specified by the user and `N` is the number
     #   of steps until the configuration is deployed to all targets. For

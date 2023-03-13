@@ -5211,8 +5211,8 @@ module Aws::DeviceFarm
     #
     #   For all tests:
     #
-    #   * `app_performance_monitoring`\: Performance monitoring is enabled
-    #     by default. Set this parameter to false to disable it.
+    #   * `app_performance_monitoring`: Performance monitoring is enabled by
+    #     default. Set this parameter to false to disable it.
     #
     #   ^
     #

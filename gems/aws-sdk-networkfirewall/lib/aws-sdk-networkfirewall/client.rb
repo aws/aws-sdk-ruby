@@ -2604,7 +2604,7 @@ module Aws::NetworkFirewall
     # LoggingConfiguration object.
     #
     # You can perform only one of the following actions in any call to
-    # `UpdateLoggingConfiguration`\:
+    # `UpdateLoggingConfiguration`:
     #
     # * Create a new log destination object by adding a single
     #   `LogDestinationConfig` array element to `LogDestinationConfigs`.

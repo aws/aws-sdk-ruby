@@ -6435,7 +6435,7 @@ module Aws::Redshift
     # by specifying an ARN, or you can return all tags for a given type of
     # resource, such as clusters, snapshots, and so on.
     #
-    # The following are limitations for `DescribeTags`\:
+    # The following are limitations for `DescribeTags`:
     #
     # * You cannot specify an ARN and a resource-type value together in the
     #   same request.

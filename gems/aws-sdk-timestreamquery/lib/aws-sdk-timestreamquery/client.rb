@@ -601,7 +601,7 @@ module Aws::TimestreamQuery
     # Because the Timestream SDKs are designed to transparently work with
     # the service’s architecture, including the management and mapping of
     # the service endpoints, *it is not recommended that you use this API
-    # unless*\:
+    # unless*:
     #
     # * You are using [VPC endpoints (Amazon Web Services PrivateLink) with
     #   Timestream ][1]

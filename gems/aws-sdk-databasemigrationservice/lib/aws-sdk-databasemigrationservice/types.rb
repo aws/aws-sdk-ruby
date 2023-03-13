@@ -4813,7 +4813,7 @@ module Aws::DatabaseMigrationService
     #   truncated. If you need Microsoft Replication to be enabled in your
     #   database, then you must choose this method.
     #
-    #   *Exclusively use sp\_repldone within a single task*\: When this
+    #   *Exclusively use sp\_repldone within a single task*: When this
     #   method is used, DMS reads the changes and then uses sp\_repldone to
     #   mark the TLOG transactions as ready for truncation. Although this
     #   method doesn't involve any transactional activities, it can only be
@@ -8628,10 +8628,10 @@ module Aws::DatabaseMigrationService
     #   The format of the data that you want to use for output. You can
     #   choose one of the following:
     #
-    #   * `csv`\: This is a row-based file format with comma-separated
+    #   * `csv` : This is a row-based file format with comma-separated
     #     values (.csv).
     #
-    #   * `parquet`\: Apache Parquet (.parquet) is a columnar storage file
+    #   * `parquet` : Apache Parquet (.parquet) is a columnar storage file
     #     format that features efficient compression and provides faster
     #     query response.
     #   @return [String]

@@ -1040,12 +1040,12 @@ module Aws::BillingConductor
     #   The filter on the account ID of the linked account, or any of the
     #   following:
     #
-    #   `MONITORED`\: linked accounts that are associated to billing groups.
+    #   `MONITORED`: linked accounts that are associated to billing groups.
     #
-    #   `UNMONITORED`\: linked accounts that aren't associated to billing
+    #   `UNMONITORED`: linked accounts that aren't associated to billing
     #   groups.
     #
-    #   `Billing Group Arn`\: linked accounts that are associated to the
+    #   `Billing Group Arn`: linked accounts that are associated to the
     #   provided billing group Arn.
     #
     # @option params [String] :next_token

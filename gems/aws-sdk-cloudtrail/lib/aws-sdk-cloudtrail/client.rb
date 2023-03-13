@@ -1292,7 +1292,7 @@ module Aws::CloudTrail
     #   you are logging data events.
     #
     # For more information about logging management and data events, see the
-    # following topics in the *CloudTrail User Guide*\:
+    # following topics in the *CloudTrail User Guide*:
     #
     # * [Logging management events for trails ][1]
     #

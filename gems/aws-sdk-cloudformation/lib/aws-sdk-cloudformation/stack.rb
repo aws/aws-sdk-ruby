@@ -100,9 +100,9 @@ module Aws::CloudFormation
 
     # Boolean to enable or disable rollback on stack creation failures:
     #
-    # * `true`\: disable rollback.
+    # * `true`: disable rollback.
     #
-    # * `false`\: enable rollback.
+    # * `false`: enable rollback.
     # @return [Boolean]
     def disable_rollback
       data[:disable_rollback]

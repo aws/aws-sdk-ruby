@@ -4868,17 +4868,17 @@ module Aws::Connect
     #
     #   Note the following limits:
     #
-    #   * **Filter keys**\: A maximum of 5 filter keys are supported in a
+    #   * **Filter keys**: A maximum of 5 filter keys are supported in a
     #     single request. Valid filter keys: `QUEUE` \| `ROUTING_PROFILE` \|
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
     #
-    #   * **Filter values**\: A maximum of 100 filter values are supported in
-    #     a single request. For example, a `GetMetricDataV2` request can
-    #     filter by 50 queues, 35 agents, and 15 routing profiles for a total
-    #     of 100 filter values. `VOICE`, `CHAT`, and `TASK` are valid
-    #     `filterValue` for the `CHANNEL` filter key.
+    #   * **Filter values**: A maximum of 100 filter values are supported in a
+    #     single request. For example, a `GetMetricDataV2` request can filter
+    #     by 50 queues, 35 agents, and 15 routing profiles for a total of 100
+    #     filter values. `VOICE`, `CHAT`, and `TASK` are valid `filterValue`
+    #     for the `CHANNEL` filter key.
     #
     #
     #
@@ -4965,7 +4965,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
-    #     only supports the following as `INITIATION_METHOD`\: `INBOUND` \|
+    #     only supports the following as `INITIATION_METHOD`: `INBOUND` \|
     #     `OUTBOUND` \| `CALLBACK` \| `API`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
@@ -7793,7 +7793,7 @@ module Aws::Connect
     #
     #    </note>
     #
-    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #   <note markdown="1"> The currently supported value for `FieldName`: `name`
     #
     #    </note>
     #
@@ -8164,9 +8164,8 @@ module Aws::Connect
     #   The supported chat message content types. Content types must always
     #   contain `text/plain`. You can then put any other supported type in the
     #   list. For example, all the following lists are valid because they
-    #   contain `text/plain`\: `[text/plain, text/markdown,
-    #   application/json]`, `[text/markdown, text/plain]`, `[text/plain,
-    #   application/json]`.
+    #   contain `text/plain`: `[text/plain, text/markdown, application/json]`,
+    #   `[text/markdown, text/plain]`, `[text/plain, application/json]`.
     #
     # @option params [Types::PersistentChat] :persistent_chat
     #   Enable persistent chats. For more information about enabling

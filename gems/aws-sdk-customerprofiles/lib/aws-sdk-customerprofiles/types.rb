@@ -370,9 +370,9 @@ module Aws::CustomerProfiles
     #   How the auto-merging process should resolve conflicts between
     #   different profiles.
     #
-    #   * `RECENCY`\: Uses the data that was most recently updated.
+    #   * `RECENCY`: Uses the data that was most recently updated.
     #
-    #   * `SOURCE`\: Uses the data from a specific source. For example, if a
+    #   * `SOURCE`: Uses the data from a specific source. For example, if a
     #     company has been aquired or two departments have merged, data from
     #     the specified source is used. If two duplicate profiles are from
     #     the same source, then `RECENCY` is used again.
@@ -1405,27 +1405,26 @@ module Aws::CustomerProfiles
     # @!attribute [rw] status
     #   The status of the Identity Resolution Job.
     #
-    #   * `PENDING`\: The Identity Resolution Job is scheduled but has not
+    #   * `PENDING`: The Identity Resolution Job is scheduled but has not
     #     started yet. If you turn off the Identity Resolution feature in
     #     your domain, jobs in the `PENDING` state are deleted.
     #
-    #   * `PREPROCESSING`\: The Identity Resolution Job is loading your
-    #     data.
+    #   * `PREPROCESSING`: The Identity Resolution Job is loading your data.
     #
-    #   * `FIND_MATCHING`\: The Identity Resolution Job is using the machine
+    #   * `FIND_MATCHING`: The Identity Resolution Job is using the machine
     #     learning model to identify profiles that belong to the same
     #     matching group.
     #
-    #   * `MERGING`\: The Identity Resolution Job is merging duplicate
+    #   * `MERGING`: The Identity Resolution Job is merging duplicate
     #     profiles.
     #
-    #   * `COMPLETED`\: The Identity Resolution Job completed successfully.
+    #   * `COMPLETED`: The Identity Resolution Job completed successfully.
     #
-    #   * `PARTIAL_SUCCESS`\: There's a system error and not all of the
-    #     data is merged. The Identity Resolution Job writes a message
-    #     indicating the source of the problem.
+    #   * `PARTIAL_SUCCESS`: There's a system error and not all of the data
+    #     is merged. The Identity Resolution Job writes a message indicating
+    #     the source of the problem.
     #
-    #   * `FAILED`\: The Identity Resolution Job did not merge any data. It
+    #   * `FAILED`: The Identity Resolution Job did not merge any data. It
     #     writes a message indicating the source of the problem.
     #   @return [String]
     #
@@ -1902,27 +1901,26 @@ module Aws::CustomerProfiles
     # @!attribute [rw] status
     #   The status of the Identity Resolution Job.
     #
-    #   * `PENDING`\: The Identity Resolution Job is scheduled but has not
+    #   * `PENDING`: The Identity Resolution Job is scheduled but has not
     #     started yet. If you turn off the Identity Resolution feature in
     #     your domain, jobs in the `PENDING` state are deleted.
     #
-    #   * `PREPROCESSING`\: The Identity Resolution Job is loading your
-    #     data.
+    #   * `PREPROCESSING`: The Identity Resolution Job is loading your data.
     #
-    #   * `FIND_MATCHING`\: The Identity Resolution Job is using the machine
+    #   * `FIND_MATCHING`: The Identity Resolution Job is using the machine
     #     learning model to identify profiles that belong to the same
     #     matching group.
     #
-    #   * `MERGING`\: The Identity Resolution Job is merging duplicate
+    #   * `MERGING`: The Identity Resolution Job is merging duplicate
     #     profiles.
     #
-    #   * `COMPLETED`\: The Identity Resolution Job completed successfully.
+    #   * `COMPLETED`: The Identity Resolution Job completed successfully.
     #
-    #   * `PARTIAL_SUCCESS`\: There's a system error and not all of the
-    #     data is merged. The Identity Resolution Job writes a message
-    #     indicating the source of the problem.
+    #   * `PARTIAL_SUCCESS`: There's a system error and not all of the data
+    #     is merged. The Identity Resolution Job writes a message indicating
+    #     the source of the problem.
     #
-    #   * `FAILED`\: The Identity Resolution Job did not merge any data. It
+    #   * `FAILED`: The Identity Resolution Job did not merge any data. It
     #     writes a message indicating the source of the problem.
     #   @return [String]
     #

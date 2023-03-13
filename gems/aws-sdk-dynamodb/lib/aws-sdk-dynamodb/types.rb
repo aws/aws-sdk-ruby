@@ -747,8 +747,7 @@ module Aws::DynamoDB
     #
     #   * `ExpressionAttributeNames` - One or more substitution tokens for
     #     attribute names in the `ProjectionExpression` parameter. The
-    #     following are some use cases for using
-    #     `ExpressionAttributeNames`\:
+    #     following are some use cases for using `ExpressionAttributeNames`:
     #
     #     * To access an attribute whose name conflicts with a DynamoDB
     #       reserved word.
@@ -771,7 +770,7 @@ module Aws::DynamoDB
     #     cannot be used directly in an expression. (For the complete list
     #     of reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #     Developer Guide*). To work around this, you could specify the
-    #     following for `ExpressionAttributeNames`\:
+    #     following for `ExpressionAttributeNames`:
     #
     #     * `\{"#P":"Percentile"\}`
     #
@@ -1276,7 +1275,7 @@ module Aws::DynamoDB
     #
     #   The following are descriptions of each comparison operator.
     #
-    #   * `EQ`\: Equal. `EQ` is supported for all data types, including
+    #   * `EQ` : Equal. `EQ` is supported for all data types, including
     #     lists and maps.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
@@ -1289,7 +1288,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `NE`\: Not equal. `NE` is supported for all data types, including
+    #   * `NE` : Not equal. `NE` is supported for all data types, including
     #     lists and maps.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` of type
@@ -1301,7 +1300,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `LE`\: Less than or equal.
+    #   * `LE` : Less than or equal.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
     #     of type String, Number, or Binary (not a set type). If an item
@@ -1312,7 +1311,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `LT`\: Less than.
+    #   * `LT` : Less than.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` of type
     #     String, Number, or Binary (not a set type). If an item contains an
@@ -1323,7 +1322,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `GE`\: Greater than or equal.
+    #   * `GE` : Greater than or equal.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
     #     of type String, Number, or Binary (not a set type). If an item
@@ -1334,7 +1333,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `GT`\: Greater than.
+    #   * `GT` : Greater than.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
     #     of type String, Number, or Binary (not a set type). If an item
@@ -1345,7 +1344,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `NOT_NULL`\: The attribute exists. `NOT_NULL` is supported for all
+    #   * `NOT_NULL` : The attribute exists. `NOT_NULL` is supported for all
     #     data types, including lists and maps.
     #
     #     <note markdown="1"> This operator tests for the existence of an attribute, not its
@@ -1356,7 +1355,7 @@ module Aws::DynamoDB
     #
     #      </note>
     #
-    #   * `NULL`\: The attribute does not exist. `NULL` is supported for all
+    #   * `NULL` : The attribute does not exist. `NULL` is supported for all
     #     data types, including lists and maps.
     #
     #     <note markdown="1"> This operator tests for the nonexistence of an attribute, not its
@@ -1367,7 +1366,7 @@ module Aws::DynamoDB
     #
     #      </note>
     #
-    #   * `CONTAINS`\: Checks for a subsequence, or value in a set.
+    #   * `CONTAINS` : Checks for a subsequence, or value in a set.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
     #     of type String, Number, or Binary (not a set type). If the target
@@ -1383,7 +1382,7 @@ module Aws::DynamoDB
     #     b`", "`a`" can be a list; however, "`b`" cannot be a set, a
     #     map, or a list.
     #
-    #   * `NOT_CONTAINS`\: Checks for absence of a subsequence, or absence
+    #   * `NOT_CONTAINS` : Checks for absence of a subsequence, or absence
     #     of a value in a set.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
@@ -1400,7 +1399,7 @@ module Aws::DynamoDB
     #     CONTAINS b`", "`a`" can be a list; however, "`b`" cannot be a
     #     set, a map, or a list.
     #
-    #   * `BEGINS_WITH`\: Checks for a prefix.
+    #   * `BEGINS_WITH` : Checks for a prefix.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` of type
     #     String or Binary (not a Number or a set type). The target
@@ -1409,7 +1408,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `IN`\: Checks for matching elements in a list.
+    #   * `IN` : Checks for matching elements in a list.
     #
     #     `AttributeValueList` can contain one or more `AttributeValue`
     #     elements of type String, Number, or Binary. These attributes are
@@ -1417,7 +1416,7 @@ module Aws::DynamoDB
     #     of the input are equal to the item attribute, the expression
     #     evaluates to true.
     #
-    #   * `BETWEEN`\: Greater than or equal to the first value, and less
+    #   * `BETWEEN` : Greater than or equal to the first value, and less
     #     than or equal to the second value.
     #
     #     `AttributeValueList` must contain two `AttributeValue` elements of
@@ -2271,7 +2270,7 @@ module Aws::DynamoDB
     # @!attribute [rw] expression_attribute_names
     #   One or more substitution tokens for attribute names in an
     #   expression. The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB
     #     reserved word.
@@ -2293,7 +2292,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -3163,7 +3162,7 @@ module Aws::DynamoDB
     #
     #   The following are descriptions of each comparison operator.
     #
-    #   * `EQ`\: Equal. `EQ` is supported for all data types, including
+    #   * `EQ` : Equal. `EQ` is supported for all data types, including
     #     lists and maps.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
@@ -3176,7 +3175,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `NE`\: Not equal. `NE` is supported for all data types, including
+    #   * `NE` : Not equal. `NE` is supported for all data types, including
     #     lists and maps.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` of type
@@ -3188,7 +3187,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `LE`\: Less than or equal.
+    #   * `LE` : Less than or equal.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
     #     of type String, Number, or Binary (not a set type). If an item
@@ -3199,7 +3198,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `LT`\: Less than.
+    #   * `LT` : Less than.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` of type
     #     String, Number, or Binary (not a set type). If an item contains an
@@ -3210,7 +3209,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `GE`\: Greater than or equal.
+    #   * `GE` : Greater than or equal.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
     #     of type String, Number, or Binary (not a set type). If an item
@@ -3221,7 +3220,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `GT`\: Greater than.
+    #   * `GT` : Greater than.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
     #     of type String, Number, or Binary (not a set type). If an item
@@ -3232,7 +3231,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `NOT_NULL`\: The attribute exists. `NOT_NULL` is supported for all
+    #   * `NOT_NULL` : The attribute exists. `NOT_NULL` is supported for all
     #     data types, including lists and maps.
     #
     #     <note markdown="1"> This operator tests for the existence of an attribute, not its
@@ -3243,7 +3242,7 @@ module Aws::DynamoDB
     #
     #      </note>
     #
-    #   * `NULL`\: The attribute does not exist. `NULL` is supported for all
+    #   * `NULL` : The attribute does not exist. `NULL` is supported for all
     #     data types, including lists and maps.
     #
     #     <note markdown="1"> This operator tests for the nonexistence of an attribute, not its
@@ -3254,7 +3253,7 @@ module Aws::DynamoDB
     #
     #      </note>
     #
-    #   * `CONTAINS`\: Checks for a subsequence, or value in a set.
+    #   * `CONTAINS` : Checks for a subsequence, or value in a set.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
     #     of type String, Number, or Binary (not a set type). If the target
@@ -3270,7 +3269,7 @@ module Aws::DynamoDB
     #     b`", "`a`" can be a list; however, "`b`" cannot be a set, a
     #     map, or a list.
     #
-    #   * `NOT_CONTAINS`\: Checks for absence of a subsequence, or absence
+    #   * `NOT_CONTAINS` : Checks for absence of a subsequence, or absence
     #     of a value in a set.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` element
@@ -3287,7 +3286,7 @@ module Aws::DynamoDB
     #     CONTAINS b`", "`a`" can be a list; however, "`b`" cannot be a
     #     set, a map, or a list.
     #
-    #   * `BEGINS_WITH`\: Checks for a prefix.
+    #   * `BEGINS_WITH` : Checks for a prefix.
     #
     #     `AttributeValueList` can contain only one `AttributeValue` of type
     #     String or Binary (not a Number or a set type). The target
@@ -3296,7 +3295,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   * `IN`\: Checks for matching elements in a list.
+    #   * `IN` : Checks for matching elements in a list.
     #
     #     `AttributeValueList` can contain one or more `AttributeValue`
     #     elements of type String, Number, or Binary. These attributes are
@@ -3304,7 +3303,7 @@ module Aws::DynamoDB
     #     of the input are equal to the item attribute, the expression
     #     evaluates to true.
     #
-    #   * `BETWEEN`\: Greater than or equal to the first value, and less
+    #   * `BETWEEN` : Greater than or equal to the first value, and less
     #     than or equal to the second value.
     #
     #     `AttributeValueList` must contain two `AttributeValue` elements of
@@ -3736,7 +3735,7 @@ module Aws::DynamoDB
     # @!attribute [rw] expression_attribute_names
     #   One or more substitution tokens for attribute names in an
     #   expression. The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB
     #     reserved word.
@@ -3758,7 +3757,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -4746,7 +4745,7 @@ module Aws::DynamoDB
     # @!attribute [rw] expression_attribute_names
     #   One or more substitution tokens for attribute names in an
     #   expression. The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB
     #     reserved word.
@@ -4768,7 +4767,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -5832,7 +5831,7 @@ module Aws::DynamoDB
     # @!attribute [rw] expression_attribute_names
     #   One or more substitution tokens for attribute names in an
     #   expression. The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB
     #     reserved word.
@@ -5854,7 +5853,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -6316,7 +6315,7 @@ module Aws::DynamoDB
     # @!attribute [rw] expression_attribute_names
     #   One or more substitution tokens for attribute names in an
     #   expression. The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB
     #     reserved word.
@@ -6338,7 +6337,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -7611,7 +7610,7 @@ module Aws::DynamoDB
     # @!attribute [rw] expression_attribute_names
     #   One or more substitution tokens for attribute names in an
     #   expression. The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB
     #     reserved word.
@@ -7633,7 +7632,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*). To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #
@@ -9419,7 +9418,7 @@ module Aws::DynamoDB
     #
     #   You can have many actions in a single expression, such as the
     #   following: `SET a=:value1, b=:value2 DELETE :value3, :value4,
-    #   :value5`
+    #   \:value5`
     #
     #   For more information on update expressions, see [Modifying Items and
     #   Attributes][1] in the *Amazon DynamoDB Developer Guide*.
@@ -9455,7 +9454,7 @@ module Aws::DynamoDB
     # @!attribute [rw] expression_attribute_names
     #   One or more substitution tokens for attribute names in an
     #   expression. The following are some use cases for using
-    #   `ExpressionAttributeNames`\:
+    #   `ExpressionAttributeNames`:
     #
     #   * To access an attribute whose name conflicts with a DynamoDB
     #     reserved word.
@@ -9477,7 +9476,7 @@ module Aws::DynamoDB
     #   cannot be used directly in an expression. (For the complete list of
     #   reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #   Developer Guide*.) To work around this, you could specify the
-    #   following for `ExpressionAttributeNames`\:
+    #   following for `ExpressionAttributeNames`:
     #
     #   * `\{"#P":"Percentile"\}`
     #

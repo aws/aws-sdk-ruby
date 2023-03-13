@@ -431,11 +431,11 @@ module Aws::SSM
     #
     #   Use the ID of the resource. Here are some examples:
     #
-    #   `MaintenanceWindow`\: `mw-012345abcde`
+    #   `MaintenanceWindow`: `mw-012345abcde`
     #
-    #   `PatchBaseline`\: `pb-012345abcde`
+    #   `PatchBaseline`: `pb-012345abcde`
     #
-    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #   `Automation`: `example-c160-4567-8519-012345abcde`
     #
     #   `OpsMetadata` object: `ResourceID` for tagging is created from the
     #   Amazon Resource Name (ARN) for the object. Specifically, `ResourceID`
@@ -448,7 +448,7 @@ module Aws::SSM
     #   For the `Document` and `Parameter` values, use the name of the
     #   resource.
     #
-    #   `ManagedInstance`\: `mi-012345abcde`
+    #   `ManagedInstance`: `mi-012345abcde`
     #
     #   <note markdown="1"> The `ManagedInstance` type for this API operation is only for
     #   on-premises managed nodes. You must specify the name of the managed
@@ -504,9 +504,9 @@ module Aws::SSM
     #   The type of resource that you want to associate with an OpsItem.
     #   OpsCenter supports the following types:
     #
-    #   `AWS::SSMIncidents::IncidentRecord`\: an Incident Manager incident.
+    #   `AWS::SSMIncidents::IncidentRecord`: an Incident Manager incident.
     #
-    #   `AWS::SSM::Document`\: a Systems Manager (SSM) document.
+    #   `AWS::SSM::Document`: a Systems Manager (SSM) document.
     #
     # @option params [required, String] :resource_uri
     #   The Amazon Resource Name (ARN) of the Amazon Web Services resource
@@ -1949,17 +1949,17 @@ module Aws::SSM
     #   The action for Patch Manager to take on patches included in the
     #   `RejectedPackages` list.
     #
-    #   * <b> <code>ALLOW_AS_DEPENDENCY</code> </b>\: A package in the
+    #   * <b> <code>ALLOW_AS_DEPENDENCY</code> </b>: A package in the
     #     `Rejected` patches list is installed only if it is a dependency of
     #     another package. It is considered compliant with the patch baseline,
     #     and its status is reported as `InstalledOther`. This is the default
     #     action if no option is specified.
     #
-    #   * <b> <code>BLOCK</code> </b>\: Packages in the `RejectedPatches`
-    #     list, and packages that include them as dependencies, aren't
-    #     installed under any circumstances. If a package was installed before
-    #     it was added to the Rejected patches list, it is considered
-    #     non-compliant with the patch baseline, and its status is reported as
+    #   * <b> <code>BLOCK</code> </b>: Packages in the `RejectedPatches` list,
+    #     and packages that include them as dependencies, aren't installed
+    #     under any circumstances. If a package was installed before it was
+    #     added to the Rejected patches list, it is considered non-compliant
+    #     with the patch baseline, and its status is reported as
     #     `InstalledRejected`.
     #
     # @option params [String] :description
@@ -6735,11 +6735,11 @@ module Aws::SSM
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
     #
-    #   <note markdown="1"> The following `Key` values are supported for `GetParametersByPath`\:
+    #   <note markdown="1"> The following `Key` values are supported for `GetParametersByPath`:
     #   `Type`, `KeyId`, and `Label`.
     #
     #    The following `Key` values aren't supported for
-    #   `GetParametersByPath`\: `tag`, `DataType`, `Name`, `Path`, and `Tier`.
+    #   `GetParametersByPath`: `tag`, `DataType`, `Name`, `Path`, and `Tier`.
     #
     #    </note>
     #
@@ -8659,12 +8659,11 @@ module Aws::SSM
     #   standard-parameter tier. If you use the advanced-parameter tier, you
     #   can specify one of the following as the default:
     #
-    #   * **Advanced**\: With this option, Parameter Store evaluates all
+    #   * **Advanced**: With this option, Parameter Store evaluates all
     #     requests as advanced parameters.
     #
-    #   * **Intelligent-Tiering**\: With this option, Parameter Store
-    #     evaluates each request to determine if the parameter is standard or
-    #     advanced.
+    #   * **Intelligent-Tiering**: With this option, Parameter Store evaluates
+    #     each request to determine if the parameter is standard or advanced.
     #
     #     If the request doesn't include any options that require an advanced
     #     parameter, the parameter is created in the standard-parameter tier.
@@ -8945,23 +8944,23 @@ module Aws::SSM
     #   You can specify targets using managed node IDs, resource group names,
     #   or tags that have been applied to managed nodes.
     #
-    #   **Example 1**\: Specify managed node IDs
+    #   **Example 1**: Specify managed node IDs
     #
     #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>,<instance-id-3>`
     #
-    #   **Example 2**\: Use tag key-pairs applied to managed nodes
+    #   **Example 2**: Use tag key-pairs applied to managed nodes
     #
     #   `Key=tag:<my-tag-key>,Values=<my-tag-value-1>,<my-tag-value-2>`
     #
-    #   **Example 3**\: Use tag-keys applied to managed nodes
+    #   **Example 3**: Use tag-keys applied to managed nodes
     #
     #   `Key=tag-key,Values=<my-tag-key-1>,<my-tag-key-2>`
     #
-    #   **Example 4**\: Use resource group names
+    #   **Example 4**: Use resource group names
     #
     #   `Key=resource-groups:Name,Values=<resource-group-name>`
     #
-    #   **Example 5**\: Use filters for resource group types
+    #   **Example 5**: Use filters for resource group types
     #
     #   `Key=resource-groups:ResourceTypeFilters,Values=<resource-type-1>,<resource-type-2>`
     #
@@ -9073,7 +9072,7 @@ module Aws::SSM
     #   `RegisterTaskWithMaintenanceWindow`.
     #
     #   For more information, see the following topics in the in the *Amazon
-    #   Web Services Systems Manager User Guide*\:
+    #   Web Services Systems Manager User Guide*:
     #
     #   * [Using service-linked roles for Systems Manager][1]
     #
@@ -9177,10 +9176,10 @@ module Aws::SSM
     #   Indicates whether tasks should continue to run after the cutoff time
     #   specified in the maintenance windows is reached.
     #
-    #   * `CONTINUE_TASK`\: When the cutoff time is reached, any tasks that
-    #     are running continue. The default value.
+    #   * `CONTINUE_TASK`: When the cutoff time is reached, any tasks that are
+    #     running continue. The default value.
     #
-    #   * `CANCEL_TASK`\:
+    #   * `CANCEL_TASK`:
     #
     #     * For Automation, Lambda, Step Functions tasks: When the cutoff time
     #       is reached, any task invocations that are already running
@@ -9313,7 +9312,7 @@ module Aws::SSM
     #
     #   MaintenanceWindow: mw-012345abcde
     #
-    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #   `Automation`: `example-c160-4567-8519-012345abcde`
     #
     #   PatchBaseline: pb-012345abcde
     #
@@ -11273,7 +11272,7 @@ module Aws::SSM
     #   `RegisterTaskWithMaintenanceWindow`.
     #
     #   For more information, see the following topics in the in the *Amazon
-    #   Web Services Systems Manager User Guide*\:
+    #   Web Services Systems Manager User Guide*:
     #
     #   * [Using service-linked roles for Systems Manager][1]
     #
@@ -11390,10 +11389,10 @@ module Aws::SSM
     #   Indicates whether tasks should continue to run after the cutoff time
     #   specified in the maintenance windows is reached.
     #
-    #   * `CONTINUE_TASK`\: When the cutoff time is reached, any tasks that
-    #     are running continue. The default value.
+    #   * `CONTINUE_TASK`: When the cutoff time is reached, any tasks that are
+    #     running continue. The default value.
     #
-    #   * `CANCEL_TASK`\:
+    #   * `CANCEL_TASK`:
     #
     #     * For Automation, Lambda, Step Functions tasks: When the cutoff time
     #       is reached, any task invocations that are already running
@@ -11867,17 +11866,17 @@ module Aws::SSM
     #   The action for Patch Manager to take on patches included in the
     #   `RejectedPackages` list.
     #
-    #   * <b> <code>ALLOW_AS_DEPENDENCY</code> </b>\: A package in the
+    #   * <b> <code>ALLOW_AS_DEPENDENCY</code> </b>: A package in the
     #     `Rejected` patches list is installed only if it is a dependency of
     #     another package. It is considered compliant with the patch baseline,
     #     and its status is reported as `InstalledOther`. This is the default
     #     action if no option is specified.
     #
-    #   * <b> <code>BLOCK</code> </b>\: Packages in the `RejectedPatches`
-    #     list, and packages that include them as dependencies, aren't
-    #     installed under any circumstances. If a package was installed before
-    #     it was added to the `Rejected` patches list, it is considered
-    #     non-compliant with the patch baseline, and its status is reported as
+    #   * <b> <code>BLOCK</code> </b>: Packages in the `RejectedPatches` list,
+    #     and packages that include them as dependencies, aren't installed
+    #     under any circumstances. If a package was installed before it was
+    #     added to the `Rejected` patches list, it is considered non-compliant
+    #     with the patch baseline, and its status is reported as
     #     `InstalledRejected`.
     #
     # @option params [String] :description
@@ -12100,22 +12099,22 @@ module Aws::SSM
     #   The new value to specify for the service setting. The following list
     #   specifies the available values for each setting.
     #
-    #   * `/ssm/automation/customer-script-log-destination`\: `CloudWatch`
+    #   * `/ssm/automation/customer-script-log-destination`: `CloudWatch`
     #
-    #   * `/ssm/automation/customer-script-log-group-name`\: the name of an
+    #   * `/ssm/automation/customer-script-log-group-name`: the name of an
     #     Amazon CloudWatch Logs log group
     #
-    #   * `/ssm/documents/console/public-sharing-permission`\: `Enable` or
+    #   * `/ssm/documents/console/public-sharing-permission`: `Enable` or
     #     `Disable`
     #
-    #   * `/ssm/managed-instance/activation-tier`\: `standard` or `advanced`
+    #   * `/ssm/managed-instance/activation-tier`: `standard` or `advanced`
     #
-    #   * `/ssm/opsinsights/opscenter`\: `Enabled` or `Disabled`
+    #   * `/ssm/opsinsights/opscenter`: `Enabled` or `Disabled`
     #
-    #   * `/ssm/parameter-store/default-parameter-tier`\: `Standard`,
+    #   * `/ssm/parameter-store/default-parameter-tier`: `Standard`,
     #     `Advanced`, `Intelligent-Tiering`
     #
-    #   * `/ssm/parameter-store/high-throughput-enabled`\: `true` or `false`
+    #   * `/ssm/parameter-store/high-throughput-enabled`: `true` or `false`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #

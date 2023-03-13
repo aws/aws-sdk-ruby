@@ -135,7 +135,7 @@ module Aws::FIS
     #
     # @!attribute [rw] action_id
     #   The ID of the action. The format of the action ID is:
-    #   aws:*service-name*\:*action-type*.
+    #   aws:*service-name*:*action-type*.
     #   @return [String]
     #
     # @!attribute [rw] description

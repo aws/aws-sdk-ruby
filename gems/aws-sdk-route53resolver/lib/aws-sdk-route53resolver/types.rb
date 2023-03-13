@@ -455,11 +455,11 @@ module Aws::Route53Resolver
     # @!attribute [rw] direction
     #   Specify the applicable value:
     #
-    #   * `INBOUND`\: Resolver forwards DNS queries to the DNS service for a
+    #   * `INBOUND`: Resolver forwards DNS queries to the DNS service for a
     #     VPC from your network
     #
-    #   * `OUTBOUND`\: Resolver forwards DNS queries from the DNS service
-    #     for a VPC to your network
+    #   * `OUTBOUND`: Resolver forwards DNS queries from the DNS service for
+    #     a VPC to your network
     #   @return [String]
     #
     # @!attribute [rw] ip_addresses
@@ -517,7 +517,7 @@ module Aws::Route53Resolver
     #   group, or a Kinesis Data Firehose delivery stream. Examples of valid
     #   values include the following:
     #
-    #   * **S3 bucket**\:
+    #   * **S3 bucket**:
     #
     #     `arn:aws:s3:::examplebucket`
     #
@@ -525,11 +525,11 @@ module Aws::Route53Resolver
     #
     #     `arn:aws:s3:::examplebucket/development/`
     #
-    #   * **CloudWatch Logs log group**\:
+    #   * **CloudWatch Logs log group**:
     #
     #     `arn:aws:logs:us-west-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*`
     #
-    #   * **Kinesis Data Firehose delivery stream**\:
+    #   * **Kinesis Data Firehose delivery stream**:
     #
     #     `arn:aws:kinesis:us-east-2:0123456789:stream/my_stream_name`
     #   @return [String]
@@ -970,14 +970,14 @@ module Aws::Route53Resolver
     #
     #   Valid values for `Name` include the following:
     #
-    #   * `CreatorRequestId`\: The value that you specified when you created
+    #   * `CreatorRequestId`: The value that you specified when you created
     #     the Resolver endpoint.
     #
-    #   * `Direction`\: Whether you want to return inbound or outbound
+    #   * `Direction`: Whether you want to return inbound or outbound
     #     Resolver endpoints. If you specify `DIRECTION` for `Name`, specify
     #     `INBOUND` or `OUTBOUND` for `Values`.
     #
-    #   * `HostVPCId`\: The ID of the VPC that inbound DNS queries pass
+    #   * `HostVPCId`: The ID of the VPC that inbound DNS queries pass
     #     through on the way from your network to your VPCs in a region, or
     #     the VPC that outbound queries pass through on the way from your
     #     VPCs to your network. In a [CreateResolverEndpoint][6] request,
@@ -985,17 +985,17 @@ module Aws::Route53Resolver
     #     [GetResolverEndpoint][7] request, the VPC ID for a Resolver
     #     endpoint is returned in the `HostVPCId` element.
     #
-    #   * `IpAddressCount`\: The number of IP addresses that you have
+    #   * `IpAddressCount`: The number of IP addresses that you have
     #     associated with the Resolver endpoint.
     #
-    #   * `Name`\: The name of the Resolver endpoint.
+    #   * `Name`: The name of the Resolver endpoint.
     #
-    #   * `SecurityGroupIds`\: The IDs of the VPC security groups that you
+    #   * `SecurityGroupIds`: The IDs of the VPC security groups that you
     #     specified when you created the Resolver endpoint.
     #
-    #   * `Status`\: The status of the Resolver endpoint. If you specify
+    #   * `Status`: The status of the Resolver endpoint. If you specify
     #     `Status` for `Name`, specify one of the following status codes for
-    #     `Values`\: `CREATING`, `OPERATIONAL`, `UPDATING`,
+    #     `Values`: `CREATING`, `OPERATIONAL`, `UPDATING`,
     #     `AUTO_RECOVERING`, `ACTION_NEEDED`, or `DELETING`. For more
     #     information, see `Status` in [ResolverEndpoint][8].
     #
@@ -1003,20 +1003,20 @@ module Aws::Route53Resolver
     #
     #   Valid values for `Name` include the following:
     #
-    #   * `CreatorRequestId`\: The value that you specified when you created
+    #   * `CreatorRequestId`: The value that you specified when you created
     #     the Resolver rule.
     #
-    #   * `DomainName`\: The domain name for which Resolver is forwarding
-    #     DNS queries to your network. In the value that you specify for
+    #   * `DomainName`: The domain name for which Resolver is forwarding DNS
+    #     queries to your network. In the value that you specify for
     #     `Values`, include a trailing dot (.) after the domain name. For
     #     example, if the domain name is example.com, specify the following
-    #     value. Note the "." after `com`\:
+    #     value. Note the "." after `com`:
     #
     #     `example.com.`
     #
-    #   * `Name`\: The name of the Resolver rule.
+    #   * `Name`: The name of the Resolver rule.
     #
-    #   * `ResolverEndpointId`\: The ID of the Resolver endpoint that the
+    #   * `ResolverEndpointId`: The ID of the Resolver endpoint that the
     #     Resolver rule is associated with.
     #
     #     <note markdown="1"> You can filter on the Resolver endpoint only for rules that have a
@@ -1024,47 +1024,47 @@ module Aws::Route53Resolver
     #
     #      </note>
     #
-    #   * `Status`\: The status of the Resolver rule. If you specify
-    #     `Status` for `Name`, specify one of the following status codes for
-    #     `Values`\: `COMPLETE`, `DELETING`, `UPDATING`, or `FAILED`.
+    #   * `Status`: The status of the Resolver rule. If you specify `Status`
+    #     for `Name`, specify one of the following status codes for
+    #     `Values`: `COMPLETE`, `DELETING`, `UPDATING`, or `FAILED`.
     #
-    #   * `Type`\: The type of the Resolver rule. If you specify `TYPE` for
+    #   * `Type`: The type of the Resolver rule. If you specify `TYPE` for
     #     `Name`, specify `FORWARD` or `SYSTEM` for `Values`.
     #
     #   **ListResolverRuleAssociations**
     #
     #   Valid values for `Name` include the following:
     #
-    #   * `Name`\: The name of the Resolver rule association.
+    #   * `Name`: The name of the Resolver rule association.
     #
-    #   * `ResolverRuleId`\: The ID of the Resolver rule that is associated
+    #   * `ResolverRuleId`: The ID of the Resolver rule that is associated
     #     with one or more VPCs.
     #
-    #   * `Status`\: The status of the Resolver rule association. If you
+    #   * `Status`: The status of the Resolver rule association. If you
     #     specify `Status` for `Name`, specify one of the following status
-    #     codes for `Values`\: `CREATING`, `COMPLETE`, `DELETING`, or
+    #     codes for `Values`: `CREATING`, `COMPLETE`, `DELETING`, or
     #     `FAILED`.
     #
-    #   * `VPCId`\: The ID of the VPC that the Resolver rule is associated
+    #   * `VPCId`: The ID of the VPC that the Resolver rule is associated
     #     with.
     #
     #   **ListResolverQueryLogConfigs**
     #
     #   Valid values for `Name` include the following:
     #
-    #   * `Arn`\: The ARN for the query logging configuration.
+    #   * `Arn`: The ARN for the query logging configuration.
     #
-    #   * `AssociationCount`\: The number of VPCs that are associated with
+    #   * `AssociationCount`: The number of VPCs that are associated with
     #     the query logging configuration.
     #
-    #   * `CreationTime`\: The date and time that the query logging
+    #   * `CreationTime`: The date and time that the query logging
     #     configuration was created, in Unix time format and Coordinated
     #     Universal Time (UTC).
     #
-    #   * `CreatorRequestId`\: A unique string that identifies the request
+    #   * `CreatorRequestId`: A unique string that identifies the request
     #     that created the query logging configuration.
     #
-    #   * `Destination`\: The Amazon Web Services service that you want to
+    #   * `Destination`: The Amazon Web Services service that you want to
     #     forward query logs to. Valid values include the following:
     #
     #     * `S3`
@@ -1073,51 +1073,51 @@ module Aws::Route53Resolver
     #
     #     * `KinesisFirehose`
     #
-    #   * `DestinationArn`\: The ARN of the location that Resolver is
-    #     sending query logs to. This value can be the ARN for an S3 bucket,
-    #     a CloudWatch Logs log group, or a Kinesis Data Firehose delivery
+    #   * `DestinationArn`: The ARN of the location that Resolver is sending
+    #     query logs to. This value can be the ARN for an S3 bucket, a
+    #     CloudWatch Logs log group, or a Kinesis Data Firehose delivery
     #     stream.
     #
-    #   * `Id`\: The ID of the query logging configuration
+    #   * `Id`: The ID of the query logging configuration
     #
-    #   * `Name`\: The name of the query logging configuration
+    #   * `Name`: The name of the query logging configuration
     #
-    #   * `OwnerId`\: The Amazon Web Services account ID for the account
-    #     that created the query logging configuration.
+    #   * `OwnerId`: The Amazon Web Services account ID for the account that
+    #     created the query logging configuration.
     #
-    #   * `ShareStatus`\: An indication of whether the query logging
+    #   * `ShareStatus`: An indication of whether the query logging
     #     configuration is shared with other Amazon Web Services accounts,
     #     or was shared with the current account by another Amazon Web
     #     Services account. Valid values include: `NOT_SHARED`,
     #     `SHARED_WITH_ME`, or `SHARED_BY_ME`.
     #
-    #   * `Status`\: The status of the query logging configuration. If you
+    #   * `Status`: The status of the query logging configuration. If you
     #     specify `Status` for `Name`, specify the applicable status code
-    #     for `Values`\: `CREATING`, `CREATED`, `DELETING`, or `FAILED`. For
+    #     for `Values`: `CREATING`, `CREATED`, `DELETING`, or `FAILED`. For
     #     more information, see [Status][9].
     #
     #   **ListResolverQueryLogConfigAssociations**
     #
     #   Valid values for `Name` include the following:
     #
-    #   * `CreationTime`\: The date and time that the VPC was associated
-    #     with the query logging configuration, in Unix time format and
+    #   * `CreationTime`: The date and time that the VPC was associated with
+    #     the query logging configuration, in Unix time format and
     #     Coordinated Universal Time (UTC).
     #
-    #   * `Error`\: If the value of `Status` is `FAILED`, specify the cause:
+    #   * `Error`: If the value of `Status` is `FAILED`, specify the cause:
     #     `DESTINATION_NOT_FOUND` or `ACCESS_DENIED`.
     #
-    #   * `Id`\: The ID of the query logging association.
+    #   * `Id`: The ID of the query logging association.
     #
-    #   * `ResolverQueryLogConfigId`\: The ID of the query logging
+    #   * `ResolverQueryLogConfigId`: The ID of the query logging
     #     configuration that a VPC is associated with.
     #
-    #   * `ResourceId`\: The ID of the Amazon VPC that is associated with
-    #     the query logging configuration.
+    #   * `ResourceId`: The ID of the Amazon VPC that is associated with the
+    #     query logging configuration.
     #
-    #   * `Status`\: The status of the query logging association. If you
+    #   * `Status`: The status of the query logging association. If you
     #     specify `Status` for `Name`, specify the applicable status code
-    #     for `Values`\: `CREATING`, `CREATED`, `DELETING`, or `FAILED`. For
+    #     for `Values`: `CREATING`, `CREATED`, `DELETING`, or `FAILED`. For
     #     more information, see [Status][10].
     #
     #
@@ -2231,7 +2231,7 @@ module Aws::Route53Resolver
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html
     #
     # @!attribute [rw] ip_id
-    #   *Only when removing an IP address from a Resolver endpoint*\: The ID
+    #   *Only when removing an IP address from a Resolver endpoint*: The ID
     #   of the IP address that you want to remove. To get this ID, use
     #   [GetResolverEndpoint][1].
     #
@@ -2713,7 +2713,7 @@ module Aws::Route53Resolver
     end
 
     # @!attribute [rw] max_results
-    #   *Optional*\: An integer that specifies the maximum number of DNSSEC
+    #   *Optional*: An integer that specifies the maximum number of DNSSEC
     #   configuration results that you want Amazon Route 53 to return. If
     #   you don't specify a value for `MaxResults`, Route 53 returns up to
     #   100 configuration per page.
@@ -2945,41 +2945,40 @@ module Aws::Route53Resolver
     #
     #   Valid values include the following elements:
     #
-    #   * `CreationTime`\: The ID of the query logging association.
+    #   * `CreationTime`: The ID of the query logging association.
     #
-    #   * `Error`\: If the value of `Status` is `FAILED`, the value of
+    #   * `Error`: If the value of `Status` is `FAILED`, the value of
     #     `Error` indicates the cause:
     #
-    #     * `DESTINATION_NOT_FOUND`\: The specified destination (for
-    #       example, an Amazon S3 bucket) was deleted.
+    #     * `DESTINATION_NOT_FOUND`: The specified destination (for example,
+    #       an Amazon S3 bucket) was deleted.
     #
-    #     * `ACCESS_DENIED`\: Permissions don't allow sending logs to the
+    #     * `ACCESS_DENIED`: Permissions don't allow sending logs to the
     #       destination.
     #
     #     If `Status` is a value other than `FAILED`, `ERROR` is null.
     #
-    #   * `Id`\: The ID of the query logging association
+    #   * `Id`: The ID of the query logging association
     #
-    #   * `ResolverQueryLogConfigId`\: The ID of the query logging
+    #   * `ResolverQueryLogConfigId`: The ID of the query logging
     #     configuration
     #
-    #   * `ResourceId`\: The ID of the VPC that is associated with the query
+    #   * `ResourceId`: The ID of the VPC that is associated with the query
     #     logging configuration
     #
-    #   * `Status`\: The current status of the configuration. Valid values
+    #   * `Status`: The current status of the configuration. Valid values
     #     include the following:
     #
-    #     * `CREATING`\: Resolver is creating an association between an
+    #     * `CREATING`: Resolver is creating an association between an
     #       Amazon VPC and a query logging configuration.
     #
-    #     * `CREATED`\: The association between an Amazon VPC and a query
+    #     * `CREATED`: The association between an Amazon VPC and a query
     #       logging configuration was successfully created. Resolver is
     #       logging queries that originate in the specified VPC.
     #
-    #     * `DELETING`\: Resolver is deleting this query logging
-    #       association.
+    #     * `DELETING`: Resolver is deleting this query logging association.
     #
-    #     * `FAILED`\: Resolver either couldn't create or couldn't delete
+    #     * `FAILED`: Resolver either couldn't create or couldn't delete
     #       the query logging association. Here are two common causes:
     #
     #       * The specified destination (for example, an Amazon S3 bucket)
@@ -3094,45 +3093,45 @@ module Aws::Route53Resolver
     #
     #   Valid values include the following elements:
     #
-    #   * `Arn`\: The ARN of the query logging configuration
+    #   * `Arn`: The ARN of the query logging configuration
     #
-    #   * `AssociationCount`\: The number of VPCs that are associated with
+    #   * `AssociationCount`: The number of VPCs that are associated with
     #     the specified configuration
     #
-    #   * `CreationTime`\: The date and time that Resolver returned when the
+    #   * `CreationTime`: The date and time that Resolver returned when the
     #     configuration was created
     #
-    #   * `CreatorRequestId`\: The value that was specified for
+    #   * `CreatorRequestId`: The value that was specified for
     #     `CreatorRequestId` when the configuration was created
     #
-    #   * `DestinationArn`\: The location that logs are sent to
+    #   * `DestinationArn`: The location that logs are sent to
     #
-    #   * `Id`\: The ID of the configuration
+    #   * `Id`: The ID of the configuration
     #
-    #   * `Name`\: The name of the configuration
+    #   * `Name`: The name of the configuration
     #
-    #   * `OwnerId`\: The Amazon Web Services account number of the account
+    #   * `OwnerId`: The Amazon Web Services account number of the account
     #     that created the configuration
     #
-    #   * `ShareStatus`\: Whether the configuration is shared with other
+    #   * `ShareStatus`: Whether the configuration is shared with other
     #     Amazon Web Services accounts or shared with the current account by
     #     another Amazon Web Services account. Sharing is configured through
     #     Resource Access Manager (RAM).
     #
-    #   * `Status`\: The current status of the configuration. Valid values
+    #   * `Status`: The current status of the configuration. Valid values
     #     include the following:
     #
-    #     * `CREATING`\: Resolver is creating the query logging
+    #     * `CREATING`: Resolver is creating the query logging
     #       configuration.
     #
-    #     * `CREATED`\: The query logging configuration was successfully
+    #     * `CREATED`: The query logging configuration was successfully
     #       created. Resolver is logging queries that originate in the
     #       specified VPC.
     #
-    #     * `DELETING`\: Resolver is deleting this query logging
+    #     * `DELETING`: Resolver is deleting this query logging
     #       configuration.
     #
-    #     * `FAILED`\: Resolver either couldn't create or couldn't delete
+    #     * `FAILED`: Resolver either couldn't create or couldn't delete
     #       the query logging configuration. Here are two common causes:
     #
     #       * The specified destination (for example, an Amazon S3 bucket)
@@ -3650,9 +3649,9 @@ module Aws::Route53Resolver
     #   Indicates whether the Resolver endpoint allows inbound or outbound
     #   DNS queries:
     #
-    #   * `INBOUND`\: allows DNS queries to your VPC from your network
+    #   * `INBOUND`: allows DNS queries to your VPC from your network
     #
-    #   * `OUTBOUND`\: allows DNS queries from your VPC to your network
+    #   * `OUTBOUND`: allows DNS queries from your VPC to your network
     #   @return [String]
     #
     # @!attribute [rw] ip_address_count
@@ -3668,24 +3667,24 @@ module Aws::Route53Resolver
     #   A code that specifies the current status of the Resolver endpoint.
     #   Valid values include the following:
     #
-    #   * `CREATING`\: Resolver is creating and configuring one or more
+    #   * `CREATING`: Resolver is creating and configuring one or more
     #     Amazon VPC network interfaces for this endpoint.
     #
-    #   * `OPERATIONAL`\: The Amazon VPC network interfaces for this
-    #     endpoint are correctly configured and able to pass inbound or
-    #     outbound DNS queries between your network and Resolver.
+    #   * `OPERATIONAL`: The Amazon VPC network interfaces for this endpoint
+    #     are correctly configured and able to pass inbound or outbound DNS
+    #     queries between your network and Resolver.
     #
-    #   * `UPDATING`\: Resolver is associating or disassociating one or more
+    #   * `UPDATING`: Resolver is associating or disassociating one or more
     #     network interfaces with this endpoint.
     #
-    #   * `AUTO_RECOVERING`\: Resolver is trying to recover one or more of
+    #   * `AUTO_RECOVERING`: Resolver is trying to recover one or more of
     #     the network interfaces that are associated with this endpoint.
     #     During the recovery process, the endpoint functions with limited
     #     capacity because of the limit on the number of DNS queries per IP
     #     address (per network interface). For the current limit, see
     #     [Limits on Route 53 Resolver][1].
     #
-    #   * `ACTION_NEEDED`\: This endpoint is unhealthy, and Resolver can't
+    #   * `ACTION_NEEDED`: This endpoint is unhealthy, and Resolver can't
     #     automatically recover it. To resolve the problem, we recommend
     #     that you check each IP address that you associated with the
     #     endpoint. For each IP address that isn't available, add another
@@ -3700,7 +3699,7 @@ module Aws::Route53Resolver
     #     * The network interface couldn't be created for some reason
     #       that's outside the control of Resolver.
     #
-    #   * `DELETING`\: Resolver is deleting this endpoint and the associated
+    #   * `DELETING`: Resolver is deleting this endpoint and the associated
     #     network interfaces.
     #
     #
@@ -3771,16 +3770,15 @@ module Aws::Route53Resolver
     #   The status of the specified query logging configuration. Valid
     #   values include the following:
     #
-    #   * `CREATING`\: Resolver is creating the query logging configuration.
+    #   * `CREATING`: Resolver is creating the query logging configuration.
     #
-    #   * `CREATED`\: The query logging configuration was successfully
+    #   * `CREATED`: The query logging configuration was successfully
     #     created. Resolver is logging queries that originate in the
     #     specified VPC.
     #
-    #   * `DELETING`\: Resolver is deleting this query logging
-    #     configuration.
+    #   * `DELETING`: Resolver is deleting this query logging configuration.
     #
-    #   * `FAILED`\: Resolver can't deliver logs to the location that is
+    #   * `FAILED`: Resolver can't deliver logs to the location that is
     #     specified in the query logging configuration. Here are two common
     #     causes:
     #
@@ -3876,27 +3874,27 @@ module Aws::Route53Resolver
     #   The status of the specified query logging association. Valid values
     #   include the following:
     #
-    #   * `CREATING`\: Resolver is creating an association between an Amazon
+    #   * `CREATING`: Resolver is creating an association between an Amazon
     #     VPC and a query logging configuration.
     #
-    #   * `CREATED`\: The association between an Amazon VPC and a query
+    #   * `CREATED`: The association between an Amazon VPC and a query
     #     logging configuration was successfully created. Resolver is
     #     logging queries that originate in the specified VPC.
     #
-    #   * `DELETING`\: Resolver is deleting this query logging association.
+    #   * `DELETING`: Resolver is deleting this query logging association.
     #
-    #   * `FAILED`\: Resolver either couldn't create or couldn't delete
-    #     the query logging association.
+    #   * `FAILED`: Resolver either couldn't create or couldn't delete the
+    #     query logging association.
     #   @return [String]
     #
     # @!attribute [rw] error
     #   If the value of `Status` is `FAILED`, the value of `Error` indicates
     #   the cause:
     #
-    #   * `DESTINATION_NOT_FOUND`\: The specified destination (for example,
+    #   * `DESTINATION_NOT_FOUND`: The specified destination (for example,
     #     an Amazon S3 bucket) was deleted.
     #
-    #   * `ACCESS_DENIED`\: Permissions don't allow sending logs to the
+    #   * `ACCESS_DENIED`: Permissions don't allow sending logs to the
     #     destination.
     #
     #   If the value of `Status` is a value other than `FAILED`, `Error` is

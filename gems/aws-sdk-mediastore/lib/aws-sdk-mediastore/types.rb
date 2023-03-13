@@ -28,8 +28,8 @@ module Aws::MediaStore
     #   The Amazon Resource Name (ARN) of the container. The ARN has the
     #   following format:
     #
-    #   arn:aws:&lt;region&gt;\:&lt;account that owns this
-    #   container&gt;\:container/&lt;name of container&gt;
+    #   arn:aws:&lt;region&gt;:&lt;account that owns this
+    #   container&gt;:container/&lt;name of container&gt;
     #
     #   For example:
     #   arn:aws:mediastore:us-west-2:111122223333:container/movies
@@ -202,8 +202,8 @@ module Aws::MediaStore
     # @!attribute [rw] container
     #   ContainerARN: The Amazon Resource Name (ARN) of the newly created
     #   container. The ARN has the following format:
-    #   arn:aws:&lt;region&gt;\:&lt;account that owns this
-    #   container&gt;\:container/&lt;name of container&gt;. For example:
+    #   arn:aws:&lt;region&gt;:&lt;account that owns this
+    #   container&gt;:container/&lt;name of container&gt;. For example:
     #   arn:aws:mediastore:us-west-2:111122223333:container/movies
     #
     #   ContainerName: The container name as specified in the request.

@@ -2721,13 +2721,13 @@ module Aws::Batch
     #
     #     ECS\_AL2
     #
-    #     : [Amazon Linux 2][1]\: Default for all non-GPU instance families.
+    #     : [Amazon Linux 2][1]: Default for all non-GPU instance families.
     #
     #     ECS\_AL2\_NVIDIA
     #
-    #     : [Amazon Linux 2 (GPU)][2]\: Default for all GPU instance
-    #       families (for example `P4` and `G4`) and can be used for all non
-    #       Amazon Web Services Graviton-based instance types.
+    #     : [Amazon Linux 2 (GPU)][2]: Default for all GPU instance families
+    #       (for example `P4` and `G4`) and can be used for all non Amazon
+    #       Web Services Graviton-based instance types.
     #
     #     ECS\_AL1
     #
@@ -2746,11 +2746,11 @@ module Aws::Batch
     #
     #     EKS\_AL2
     #
-    #     : [Amazon Linux 2][5]\: Default for all non-GPU instance families.
+    #     : [Amazon Linux 2][5]: Default for all non-GPU instance families.
     #
     #     EKS\_AL2\_NVIDIA
     #
-    #     : [Amazon Linux 2 (accelerated)][5]\: Default for all GPU instance
+    #     : [Amazon Linux 2 (accelerated)][5]: Default for all GPU instance
     #       families (for example, `P4` and `G4`) and can be used for all
     #       non Amazon Web Services Graviton-based instance types.
     #

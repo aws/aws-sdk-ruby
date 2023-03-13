@@ -2191,7 +2191,7 @@ module Aws::ElasticLoadBalancing
     # for your load balancer.
     #
     # For more information, see the following in the *Classic Load Balancers
-    # Guide*\:
+    # Guide*:
     #
     # * [Cross-Zone Load Balancing][1]
     #

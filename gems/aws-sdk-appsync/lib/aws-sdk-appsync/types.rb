@@ -66,13 +66,13 @@ module Aws::AppSync
     # @!attribute [rw] association_status
     #   Identifies the status of an association.
     #
-    #   * **PROCESSING**\: The API association is being created. You cannot
+    #   * **PROCESSING**: The API association is being created. You cannot
     #     modify association requests during processing.
     #
-    #   * **SUCCESS**\: The API association was successful. You can modify
+    #   * **SUCCESS**: The API association was successful. You can modify
     #     associations after success.
     #
-    #   * **FAILED**\: The API association has failed. You can modify
+    #   * **FAILED**: The API association has failed. You can modify
     #     associations after failure.
     #   @return [String]
     #
@@ -102,9 +102,9 @@ module Aws::AppSync
     # @!attribute [rw] api_caching_behavior
     #   Caching behavior.
     #
-    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #   * **FULL\_REQUEST\_CACHING**: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
+    #   * **PER\_RESOLVER\_CACHING**: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -144,33 +144,33 @@ module Aws::AppSync
     #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
-    #   * **T2\_SMALL**\: A t2.small instance type.
+    #   * **T2\_SMALL**: A t2.small instance type.
     #
-    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #   * **T2\_MEDIUM**: A t2.medium instance type.
     #
-    #   * **R4\_LARGE**\: A r4.large instance type.
+    #   * **R4\_LARGE**: A r4.large instance type.
     #
-    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #   * **R4\_XLARGE**: A r4.xlarge instance type.
     #
-    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #   * **R4\_2XLARGE**: A r4.2xlarge instance type.
     #
-    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #   * **R4\_4XLARGE**: A r4.4xlarge instance type.
     #
-    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The cache instance status.
     #
-    #   * **AVAILABLE**\: The instance is available for use.
+    #   * **AVAILABLE**: The instance is available for use.
     #
-    #   * **CREATING**\: The instance is currently creating.
+    #   * **CREATING**: The instance is currently creating.
     #
-    #   * **DELETING**\: The instance is currently deleting.
+    #   * **DELETING**: The instance is currently deleting.
     #
-    #   * **MODIFYING**\: The instance is currently modifying.
+    #   * **MODIFYING**: The instance is currently modifying.
     #
-    #   * **FAILED**\: The instance has failed creation.
+    #   * **FAILED**: The instance has failed creation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiCache AWS API Documentation
@@ -191,7 +191,7 @@ module Aws::AppSync
     # Customers invoke AppSync GraphQL API operations with API keys as an
     # identity mechanism. There are two key versions:
     #
-    # **da1**\: We introduced this version at launch in November 2017. These
+    # **da1**: We introduced this version at launch in November 2017. These
     # keys always expire after 7 days. Amazon DynamoDB TTL manages key
     # expiration. These keys ceased to be valid after February 21, 2018, and
     # they should no longer be used.
@@ -209,7 +209,7 @@ module Aws::AppSync
     #   expects the TTL to be stored in seconds. As a one-time action, we
     #   deleted these keys from the table on February 21, 2018.
     #
-    # **da2**\: We introduced this version in February 2018 when AppSync
+    # **da2**: We introduced this version in February 2018 when AppSync
     # added support to extend key expiration.
     #
     # * `ListApiKeys` returns the expiration time and deletion time in
@@ -362,7 +362,7 @@ module Aws::AppSync
     # @!attribute [rw] authorization_type
     #   The authorization type that the HTTP endpoint requires.
     #
-    #   * **AWS\_IAM**\: The authorization type is Signature Version 4
+    #   * **AWS\_IAM**: The authorization type is Signature Version 4
     #     (SigV4).
     #
     #   ^
@@ -586,9 +586,9 @@ module Aws::AppSync
     # @!attribute [rw] api_caching_behavior
     #   Caching behavior.
     #
-    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #   * **FULL\_REQUEST\_CACHING**: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
+    #   * **PER\_RESOLVER\_CACHING**: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -618,19 +618,19 @@ module Aws::AppSync
     #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
-    #   * **T2\_SMALL**\: A t2.small instance type.
+    #   * **T2\_SMALL**: A t2.small instance type.
     #
-    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #   * **T2\_MEDIUM**: A t2.medium instance type.
     #
-    #   * **R4\_LARGE**\: A r4.large instance type.
+    #   * **R4\_LARGE**: A r4.large instance type.
     #
-    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #   * **R4\_XLARGE**: A r4.xlarge instance type.
     #
-    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #   * **R4\_2XLARGE**: A r4.2xlarge instance type.
     #
-    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #   * **R4\_4XLARGE**: A r4.4xlarge instance type.
     #
-    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCacheRequest AWS API Documentation
@@ -1005,11 +1005,11 @@ module Aws::AppSync
     # @!attribute [rw] kind
     #   The resolver type.
     #
-    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #   * **UNIT**: A UNIT resolver type. A UNIT resolver is the default
     #     resolver type. You can use a UNIT resolver to run a GraphQL query
     #     against a single data source.
     #
-    #   * **PIPELINE**\: A PIPELINE resolver type. You can use a PIPELINE
+    #   * **PIPELINE**: A PIPELINE resolver type. You can use a PIPELINE
     #     resolver to invoke a series of `Function` objects in a serial
     #     manner. You can use a pipeline resolver to run a GraphQL query
     #     against multiple data sources.
@@ -1134,28 +1134,27 @@ module Aws::AppSync
     # @!attribute [rw] type
     #   The type of the data source.
     #
-    #   * **AWS\_LAMBDA**\: The data source is an Lambda function.
+    #   * **AWS\_LAMBDA**: The data source is an Lambda function.
     #
-    #   * **AMAZON\_DYNAMODB**\: The data source is an Amazon DynamoDB
-    #     table.
+    #   * **AMAZON\_DYNAMODB**: The data source is an Amazon DynamoDB table.
     #
-    #   * **AMAZON\_ELASTICSEARCH**\: The data source is an Amazon
+    #   * **AMAZON\_ELASTICSEARCH**: The data source is an Amazon OpenSearch
+    #     Service domain.
+    #
+    #   * **AMAZON\_OPENSEARCH\_SERVICE**: The data source is an Amazon
     #     OpenSearch Service domain.
     #
-    #   * **AMAZON\_OPENSEARCH\_SERVICE**\: The data source is an Amazon
-    #     OpenSearch Service domain.
-    #
-    #   * **AMAZON\_EVENTBRIDGE**\: The data source is an Amazon EventBridge
+    #   * **AMAZON\_EVENTBRIDGE**: The data source is an Amazon EventBridge
     #     configuration.
     #
-    #   * **NONE**\: There is no data source. Use this type when you want to
+    #   * **NONE**: There is no data source. Use this type when you want to
     #     invoke a GraphQL operation without connecting to a data source,
     #     such as when you're performing data transformation with resolvers
     #     or invoking a subscription from a mutation.
     #
-    #   * **HTTP**\: The data source is an HTTP endpoint.
+    #   * **HTTP**: The data source is an HTTP endpoint.
     #
-    #   * **RELATIONAL\_DATABASE**\: The data source is a relational
+    #   * **RELATIONAL\_DATABASE**: The data source is a relational
     #     database.
     #   @return [String]
     #
@@ -2201,7 +2200,7 @@ module Aws::AppSync
     #   for authorization. This can be a standard Lambda ARN, a version ARN
     #   (`.../v3`), or an alias ARN.
     #
-    #   **Note**\: This Lambda function must have the following
+    #   **Note**: This Lambda function must have the following
     #   resource-based policy assigned to it. When configuring Lambda
     #   authorizers in the console, this is done for you. To use the Command
     #   Line Interface (CLI), run the following:
@@ -2638,10 +2637,10 @@ module Aws::AppSync
     # @!attribute [rw] field_log_level
     #   The field logging level. Values can be NONE, ERROR, or ALL.
     #
-    #   * **NONE**\: No field-level logs are captured.
+    #   * **NONE**: No field-level logs are captured.
     #
-    #   * **ERROR**\: Logs the following information only for the fields
-    #     that are in error:
+    #   * **ERROR**: Logs the following information only for the fields that
+    #     are in error:
     #
     #     * The error section in the server response.
     #
@@ -2650,8 +2649,8 @@ module Aws::AppSync
     #     * The generated request/response functions that got resolved for
     #       error fields.
     #
-    #   * **ALL**\: The following information is logged for all fields in
-    #     the query:
+    #   * **ALL**: The following information is logged for all fields in the
+    #     query:
     #
     #     * Field-level tracing information.
     #
@@ -2804,8 +2803,8 @@ module Aws::AppSync
     # @!attribute [rw] relational_database_source_type
     #   Source type for the relational database.
     #
-    #   * **RDS\_HTTP\_ENDPOINT**\: The relational database source type is
-    #     an Amazon Relational Database Service (Amazon RDS) HTTP endpoint.
+    #   * **RDS\_HTTP\_ENDPOINT**: The relational database source type is an
+    #     Amazon Relational Database Service (Amazon RDS) HTTP endpoint.
     #
     #   ^
     #   @return [String]
@@ -2852,11 +2851,11 @@ module Aws::AppSync
     # @!attribute [rw] kind
     #   The resolver type.
     #
-    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #   * **UNIT**: A UNIT resolver type. A UNIT resolver is the default
     #     resolver type. You can use a UNIT resolver to run a GraphQL query
     #     against a single data source.
     #
-    #   * **PIPELINE**\: A PIPELINE resolver type. You can use a PIPELINE
+    #   * **PIPELINE**: A PIPELINE resolver type. You can use a PIPELINE
     #     resolver to invoke a series of `Function` objects in a serial
     #     manner. You can use a pipeline resolver to run a GraphQL query
     #     against multiple data sources.
@@ -2951,24 +2950,24 @@ module Aws::AppSync
     #   The Conflict Resolution strategy to perform in the event of a
     #   conflict.
     #
-    #   * **OPTIMISTIC\_CONCURRENCY**\: Resolve conflicts by rejecting
+    #   * **OPTIMISTIC\_CONCURRENCY**: Resolve conflicts by rejecting
     #     mutations when versions don't match the latest version at the
     #     server.
     #
-    #   * **AUTOMERGE**\: Resolve conflicts with the Automerge conflict
+    #   * **AUTOMERGE**: Resolve conflicts with the Automerge conflict
     #     resolution strategy.
     #
-    #   * **LAMBDA**\: Resolve conflicts with an Lambda function supplied in
+    #   * **LAMBDA**: Resolve conflicts with an Lambda function supplied in
     #     the `LambdaConflictHandlerConfig`.
     #   @return [String]
     #
     # @!attribute [rw] conflict_detection
     #   The Conflict Detection strategy to use.
     #
-    #   * **VERSION**\: Detect conflicts based on object versions for this
+    #   * **VERSION**: Detect conflicts based on object versions for this
     #     resolver.
     #
-    #   * **NONE**\: Do not detect conflicts when invoking this resolver.
+    #   * **NONE**: Do not detect conflicts when invoking this resolver.
     #   @return [String]
     #
     # @!attribute [rw] lambda_conflict_handler_config
@@ -3090,9 +3089,9 @@ module Aws::AppSync
     # @!attribute [rw] api_caching_behavior
     #   Caching behavior.
     #
-    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #   * **FULL\_REQUEST\_CACHING**: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
+    #   * **PER\_RESOLVER\_CACHING**: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -3122,19 +3121,19 @@ module Aws::AppSync
     #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
-    #   * **T2\_SMALL**\: A t2.small instance type.
+    #   * **T2\_SMALL**: A t2.small instance type.
     #
-    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #   * **T2\_MEDIUM**: A t2.medium instance type.
     #
-    #   * **R4\_LARGE**\: A r4.large instance type.
+    #   * **R4\_LARGE**: A r4.large instance type.
     #
-    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #   * **R4\_XLARGE**: A r4.xlarge instance type.
     #
-    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #   * **R4\_2XLARGE**: A r4.2xlarge instance type.
     #
-    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #   * **R4\_4XLARGE**: A r4.4xlarge instance type.
     #
-    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCacheRequest AWS API Documentation
@@ -3508,11 +3507,11 @@ module Aws::AppSync
     # @!attribute [rw] kind
     #   The resolver type.
     #
-    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #   * **UNIT**: A UNIT resolver type. A UNIT resolver is the default
     #     resolver type. You can use a UNIT resolver to run a GraphQL query
     #     against a single data source.
     #
-    #   * **PIPELINE**\: A PIPELINE resolver type. You can use a PIPELINE
+    #   * **PIPELINE**: A PIPELINE resolver type. You can use a PIPELINE
     #     resolver to invoke a series of `Function` objects in a serial
     #     manner. You can use a pipeline resolver to run a GraphQL query
     #     against multiple data sources.

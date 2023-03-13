@@ -1054,7 +1054,7 @@ module Aws::LocationService
     #
     #   For example, a route with a departure position and destination
     #   position returns one leg with the positions [snapped to a nearby
-    #   road][1]\:
+    #   road][1]:
     #
     #   * The `StartPosition` is the departure position.
     #
@@ -3402,7 +3402,7 @@ module Aws::LocationService
     #
     # For example, a route with a departure position and destination
     # position returns one leg with the positions [snapped to a nearby
-    # road][1]\:
+    # road][1]:
     #
     # * The `StartPosition` is the departure position.
     #
@@ -4404,7 +4404,7 @@ module Aws::LocationService
     # @!attribute [rw] style
     #   Specifies the map style selected from an available data provider.
     #
-    #   Valid [Esri map styles][1]\:
+    #   Valid [Esri map styles][1]:
     #
     #   * `VectorEsriDarkGrayCanvas` – The Esri Dark Gray Canvas map style.
     #     A vector basemap with a dark gray, neutral background with minimal
@@ -4434,7 +4434,7 @@ module Aws::LocationService
     #     custom navigation map style that's designed for use during the
     #     day in mobile devices.
     #
-    #   Valid [HERE Technologies map styles][2]\:
+    #   Valid [HERE Technologies map styles][2]:
     #
     #   * `VectorHereContrast` – The HERE Contrast (Berlin) map style is a
     #     high contrast detailed base map of the world that blends 3D and 2D
@@ -4471,7 +4471,7 @@ module Aws::LocationService
     #
     #      </note>
     #
-    #   Valid [GrabMaps map styles][3]\:
+    #   Valid [GrabMaps map styles][3]:
     #
     #   * `VectorGrabStandardLight` – The Grab Standard Light map style
     #     provides a basemap with detailed land use coloring, area names,
@@ -4487,7 +4487,7 @@ module Aws::LocationService
     #
     #    </note>
     #
-    #   Valid [Open Data map styles][5]\:
+    #   Valid [Open Data map styles][5]:
     #
     #   * `VectorOpenDataStandardLight` – The Open Data Standard Light map
     #     style provides a detailed basemap for the world suitable for

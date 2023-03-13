@@ -897,13 +897,13 @@ module Aws::CodeGuruReviewer
     #
     #   The valid code review states are:
     #
-    #   * `Completed`\: The code review is complete.
+    #   * `Completed`: The code review is complete.
     #
-    #   * `Pending`\: The code review started and has not completed or failed.
+    #   * `Pending`: The code review started and has not completed or failed.
     #
-    #   * `Failed`\: The code review failed.
+    #   * `Failed`: The code review failed.
     #
-    #   * `Deleting`\: The code review is being deleted.
+    #   * `Deleting`: The code review is being deleted.
     #
     # @option params [Array<String>] :repository_names
     #   List of repository names for filtering that needs to be applied before
@@ -1138,9 +1138,9 @@ module Aws::CodeGuruReviewer
     #
     #   The valid repository association states are:
     #
-    #   * **Associated**\: The repository association is complete.
+    #   * **Associated**: The repository association is complete.
     #
-    #   * **Associating**\: CodeGuru Reviewer is:
+    #   * **Associating**: CodeGuru Reviewer is:
     #
     #     * Setting up pull request notifications. This is required for pull
     #       requests to trigger a CodeGuru Reviewer review.
@@ -1156,12 +1156,12 @@ module Aws::CodeGuruReviewer
     #     * Setting up source code access. This is required for CodeGuru
     #       Reviewer to securely clone code in your repository.
     #
-    #   * **Failed**\: The repository failed to associate or disassociate.
+    #   * **Failed**: The repository failed to associate or disassociate.
     #
-    #   * **Disassociating**\: CodeGuru Reviewer is removing the repository's
+    #   * **Disassociating**: CodeGuru Reviewer is removing the repository's
     #     pull request notifications and source code access.
     #
-    #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated the
+    #   * **Disassociated**: CodeGuru Reviewer successfully disassociated the
     #     repository. You can create a new association with this repository if
     #     you want to review source code in it later. You can control access
     #     to code reviews created in anassociated repository with tags after

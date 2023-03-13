@@ -1199,7 +1199,7 @@ module Aws::ResourceGroups
     #   A list of `QueryError` objects. Each error is an object that
     #   contains `ErrorCode` and `Message` structures.
     #
-    #   Possible values for `ErrorCode`\:
+    #   Possible values for `ErrorCode`:
     #
     #   * `CLOUDFORMATION_STACK_INACTIVE`
     #

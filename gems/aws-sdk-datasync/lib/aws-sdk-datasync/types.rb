@@ -298,9 +298,9 @@ module Aws::DataSync
     #   The security groups must allow outbound traffic on the following
     #   ports (depending on the protocol you use):
     #
-    #   * **Network File System (NFS)**\: TCP ports 111, 635, and 2049
+    #   * **Network File System (NFS)**: TCP ports 111, 635, and 2049
     #
-    #   * **Server Message Block (SMB)**\: TCP port 445
+    #   * **Server Message Block (SMB)**: TCP port 445
     #
     #   Your file system's security groups must also allow inbound traffic
     #   on the same ports.
@@ -2287,11 +2287,11 @@ module Aws::DataSync
     #   Make sure that the user has the permissions it needs to copy the
     #   data you want:
     #
-    #   * `SE_TCB_NAME`\: Required to set object ownership and file
-    #     metadata. With this privilege, you also can copy NTFS
-    #     discretionary access lists (DACLs).
+    #   * `SE_TCB_NAME`: Required to set object ownership and file metadata.
+    #     With this privilege, you also can copy NTFS discretionary access
+    #     lists (DACLs).
     #
-    #   * `SE_SECURITY_NAME`\: May be needed to copy NTFS system access
+    #   * `SE_SECURITY_NAME`: May be needed to copy NTFS system access
     #     control lists (SACLs). This operation specifically requires the
     #     Windows privilege, which is granted to members of the Domain
     #     Admins group. If you configure your task to copy SACLs, make sure
@@ -2708,13 +2708,13 @@ module Aws::DataSync
     #
     #   * `AUTOMATIC` (default): DataSync chooses NFS version 4.1.
     #
-    #   * `NFS3`\: Stateless protocol version that allows for asynchronous
+    #   * `NFS3`: Stateless protocol version that allows for asynchronous
     #     writes on the server.
     #
-    #   * `NFSv4_0`\: Stateful, firewall-friendly protocol version that
+    #   * `NFSv4_0`: Stateful, firewall-friendly protocol version that
     #     supports delegations and pseudo file systems.
     #
-    #   * `NFSv4_1`\: Stateful protocol version that supports sessions,
+    #   * `NFSv4_1`: Stateful protocol version that supports sessions,
     #     directory delegations, and parallel data processing. NFS version
     #     4.1 also includes all features available in version 4.0.
     #
@@ -2771,7 +2771,7 @@ module Aws::DataSync
     #   information, see [Storage class considerations with Amazon S3
     #   locations][1].
     #
-    #   `POINT_IN_TIME_CONSISTENT`\: At the end of the transfer, DataSync
+    #   `POINT_IN_TIME_CONSISTENT`: At the end of the transfer, DataSync
     #   scans the entire source and destination to verify that both
     #   locations are fully synchronized.
     #
@@ -2780,7 +2780,7 @@ module Aws::DataSync
     #   information, see [Storage class considerations with Amazon S3
     #   locations][1].
     #
-    #   `NONE`\: DataSync doesn't run additional verification at the end of
+    #   `NONE`: DataSync doesn't run additional verification at the end of
     #   the transfer. All data transmissions are still integrity-checked
     #   with checksum verification during the transfer.
     #
@@ -2821,10 +2821,10 @@ module Aws::DataSync
     #
     #   Default value: `BEST_EFFORT`
     #
-    #   `BEST_EFFORT`\: Attempt to preserve the per-file `Atime` value
+    #   `BEST_EFFORT`: Attempt to preserve the per-file `Atime` value
     #   (recommended).
     #
-    #   `NONE`\: Ignore `Atime`.
+    #   `NONE`: Ignore `Atime`.
     #
     #   <note markdown="1"> If `Atime` is set to `BEST_EFFORT`, `Mtime` must be set to
     #   `PRESERVE`.
@@ -2842,9 +2842,9 @@ module Aws::DataSync
     #
     #   Default Value: `PRESERVE`
     #
-    #   `PRESERVE`\: Preserve original `Mtime` (recommended)
+    #   `PRESERVE`: Preserve original `Mtime` (recommended)
     #
-    #   `NONE`\: Ignore `Mtime`.
+    #   `NONE`: Ignore `Mtime`.
     #
     #   <note markdown="1"> If `Mtime` is set to `PRESERVE`, `Atime` must be set to
     #   `BEST_EFFORT`.
@@ -2862,10 +2862,10 @@ module Aws::DataSync
     #   Default value: `INT_VALUE`. This preserves the integer value of the
     #   ID.
     #
-    #   `INT_VALUE`\: Preserve the integer value of UID and group ID (GID)
+    #   `INT_VALUE`: Preserve the integer value of UID and group ID (GID)
     #   (recommended).
     #
-    #   `NONE`\: Ignore UID and GID.
+    #   `NONE`: Ignore UID and GID.
     #
     #
     #
@@ -2880,10 +2880,10 @@ module Aws::DataSync
     #   Default value: `INT_VALUE`. This preserves the integer value of the
     #   ID.
     #
-    #   `INT_VALUE`\: Preserve the integer value of user ID (UID) and GID
+    #   `INT_VALUE`: Preserve the integer value of user ID (UID) and GID
     #   (recommended).
     #
-    #   `NONE`\: Ignore UID and GID.
+    #   `NONE`: Ignore UID and GID.
     #
     #
     #
@@ -2900,9 +2900,9 @@ module Aws::DataSync
     #
     #   Default value: `PRESERVE`
     #
-    #   `PRESERVE`\: Ignore such destination files (recommended).
+    #   `PRESERVE`: Ignore such destination files (recommended).
     #
-    #   `REMOVE`\: Delete destination files that aren’t present in the
+    #   `REMOVE`: Delete destination files that aren’t present in the
     #   source.
     #
     #   <note markdown="1"> If you set this parameter to `REMOVE`, you can't set `TransferMode`
@@ -2929,9 +2929,9 @@ module Aws::DataSync
     #
     #   Default value: `NONE`
     #
-    #   `NONE`\: Ignore special devices (recommended).
+    #   `NONE`: Ignore special devices (recommended).
     #
-    #   `PRESERVE`\: Preserve character and block device metadata. This
+    #   `PRESERVE`: Preserve character and block device metadata. This
     #   option currently isn't supported for Amazon EFS.
     #   @return [String]
     #
@@ -2943,9 +2943,9 @@ module Aws::DataSync
     #
     #   Default value: `PRESERVE`
     #
-    #   `PRESERVE`\: Preserve POSIX-style permissions (recommended).
+    #   `PRESERVE`: Preserve POSIX-style permissions (recommended).
     #
-    #   `NONE`\: Ignore permissions.
+    #   `NONE`: Ignore permissions.
     #
     #   <note markdown="1"> DataSync can preserve extant permissions of a source location.
     #
@@ -2996,11 +2996,11 @@ module Aws::DataSync
     #   transfers all the content from the source (without comparing what's
     #   in the destination).
     #
-    #   `CHANGED`\: DataSync copies only data or metadata that is new or
+    #   `CHANGED`: DataSync copies only data or metadata that is new or
     #   different content from the source location to the destination
     #   location.
     #
-    #   `ALL`\: DataSync copies all source location content to the
+    #   `ALL`: DataSync copies all source location content to the
     #   destination (without comparing what's in the destination).
     #   @return [String]
     #
@@ -3015,7 +3015,7 @@ module Aws::DataSync
     #
     #   Default value: `OWNER_DACL`
     #
-    #   `OWNER_DACL`\: For each copied object, DataSync copies the following
+    #   `OWNER_DACL`: For each copied object, DataSync copies the following
     #   metadata:
     #
     #   * The object owner.
@@ -3026,7 +3026,7 @@ module Aws::DataSync
     #     DataSync won't copy NTFS system access control lists (SACLs) with
     #     this option.
     #
-    #   `OWNER_DACL_SACL`\: For each copied object, DataSync copies the
+    #   `OWNER_DACL_SACL`: For each copied object, DataSync copies the
     #   following metadata:
     #
     #   * The object owner.
@@ -3043,7 +3043,7 @@ module Aws::DataSync
     #     permissions to files, folders, and metadata, see
     #     [user](create-smb-location.html#SMBuser).
     #
-    #   `NONE`\: None of the SMB security descriptor components are copied.
+    #   `NONE`: None of the SMB security descriptor components are copied.
     #   Destination objects are owned by the user that was provided for
     #   accessing the destination location. DACLs and SACLs are set based on
     #   the destination server’s configuration.
@@ -3188,16 +3188,16 @@ module Aws::DataSync
     #     version that your file server doesn't support, you may get an
     #     `Operation Not Supported` error.
     #
-    #   * `SMB3`\: Restricts the protocol negotiation to only SMB version
+    #   * `SMB3`: Restricts the protocol negotiation to only SMB version
     #     3.0.2.
     #
-    #   * `SMB2`\: Restricts the protocol negotiation to only SMB version
+    #   * `SMB2`: Restricts the protocol negotiation to only SMB version
     #     2.1.
     #
-    #   * `SMB2_0`\: Restricts the protocol negotiation to only SMB version
+    #   * `SMB2_0`: Restricts the protocol negotiation to only SMB version
     #     2.0.
     #
-    #   * `SMB1`\: Restricts the protocol negotiation to only SMB version
+    #   * `SMB1`: Restricts the protocol negotiation to only SMB version
     #     1.0.
     #
     #     <note markdown="1"> The `SMB1` option isn't available when [creating an Amazon FSx

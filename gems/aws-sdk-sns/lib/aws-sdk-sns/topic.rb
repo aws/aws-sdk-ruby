@@ -86,7 +86,7 @@ module Aws::SNS
     #   segment data to topic owner account if the sampled flag in the
     #   tracing header is true. This is only supported on standard topics.
     #
-    # The following attribute applies only to [server-side-encryption][1]\:
+    # The following attribute applies only to [server-side-encryption][1]:
     #
     # * `KmsMasterKeyId` - The ID of an Amazon Web Services managed customer
     #   master key (CMK) for Amazon SNS or a custom CMK. For more
@@ -95,7 +95,7 @@ module Aws::SNS
     #
     # ^
     #
-    # The following attributes apply only to [FIFO topics][4]\:
+    # The following attributes apply only to [FIFO topics][4]:
     #
     # * `FifoTopic` – When this is set to `true`, a FIFO topic is created.
     #
@@ -507,7 +507,7 @@ module Aws::SNS
     #
     #    </note>
     #
-    #   The following attribute applies only to [server-side-encryption][2]\:
+    #   The following attribute applies only to [server-side-encryption][2]:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
     #     master key (CMK) for Amazon SNS or a custom CMK. For more
@@ -520,7 +520,7 @@ module Aws::SNS
     #     confirmation messages sent by Amazon SNS. By default,
     #     `SignatureVersion` is set to `1`.
     #
-    #   The following attribute applies only to [FIFO topics][5]\:
+    #   The following attribute applies only to [FIFO topics][5]:
     #
     #   * `ContentBasedDeduplication` – Enables content-based deduplication
     #     for FIFO topics.

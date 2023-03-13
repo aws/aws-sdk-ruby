@@ -1037,13 +1037,13 @@ module Aws::Redshift
     #
     #   The following are possible statuses and descriptions.
     #
-    #   * `in-sync`\: The role is available for use by the cluster.
+    #   * `in-sync`: The role is available for use by the cluster.
     #
-    #   * `adding`\: The role is in the process of being associated with the
+    #   * `adding`: The role is in the process of being associated with the
     #     cluster.
     #
-    #   * `removing`\: The role is in the process of being disassociated
-    #     with the cluster.
+    #   * `removing`: The role is in the process of being disassociated with
+    #     the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterIamRole AWS API Documentation
@@ -1262,23 +1262,23 @@ module Aws::Redshift
     #
     #   The following are possible statuses and descriptions.
     #
-    #   * `in-sync`\: The parameter value is in sync with the database.
+    #   * `in-sync`: The parameter value is in sync with the database.
     #
-    #   * `pending-reboot`\: The parameter value will be applied after the
+    #   * `pending-reboot`: The parameter value will be applied after the
     #     cluster reboots.
     #
-    #   * `applying`\: The parameter value is being applied to the database.
+    #   * `applying`: The parameter value is being applied to the database.
     #
-    #   * `invalid-parameter`\: Cannot apply the parameter value because it
+    #   * `invalid-parameter`: Cannot apply the parameter value because it
     #     has an invalid value or syntax.
     #
-    #   * `apply-deferred`\: The parameter contains static property changes.
+    #   * `apply-deferred`: The parameter contains static property changes.
     #     The changes are deferred until the cluster reboots.
     #
-    #   * `apply-error`\: Cannot connect to the cluster. The parameter
-    #     change will be applied after the cluster reboots.
+    #   * `apply-error`: Cannot connect to the cluster. The parameter change
+    #     will be applied after the cluster reboots.
     #
-    #   * `unknown-error`\: Cannot apply the parameter change right now. The
+    #   * `unknown-error`: Cannot apply the parameter change right now. The
     #     change will be applied after the cluster reboots.
     #   @return [String]
     #

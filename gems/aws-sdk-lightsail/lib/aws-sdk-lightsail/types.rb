@@ -7548,32 +7548,32 @@ module Aws::Lightsail
     #     requests received by your Lightsail distribution, for all HTTP
     #     methods, and for both HTTP and HTTPS requests.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `None`.
+    #     `Unit`: The published unit is `None`.
     #
     #   * <b> <code>BytesDownloaded</code> </b> - The number of bytes
     #     downloaded by viewers for GET, HEAD, and OPTIONS requests.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `None`.
+    #     `Unit`: The published unit is `None`.
     #
     #   * <b> <code>BytesUploaded </code> </b> - The number of bytes
     #     uploaded to your origin by your Lightsail distribution, using POST
     #     and PUT requests.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `None`.
+    #     `Unit`: The published unit is `None`.
     #
     #   * <b> <code>TotalErrorRate</code> </b> - The percentage of all
     #     viewer requests for which the response's HTTP status code was 4xx
     #     or 5xx.
     #
-    #     `Statistics`\: The most useful statistic is `Average`.
+    #     `Statistics`: The most useful statistic is `Average`.
     #
-    #     `Unit`\: The published unit is `Percent`.
+    #     `Unit`: The published unit is `Percent`.
     #
     #   * <b> <code>4xxErrorRate</code> </b> - The percentage of all viewer
     #     requests for which the response's HTTP status cod was 4xx. In
@@ -7581,9 +7581,9 @@ module Aws::Lightsail
     #     For example, a status code of 404 (Not Found) means that the
     #     client requested an object that could not be found.
     #
-    #     `Statistics`\: The most useful statistic is `Average`.
+    #     `Statistics`: The most useful statistic is `Average`.
     #
-    #     `Unit`\: The published unit is `Percent`.
+    #     `Unit`: The published unit is `Percent`.
     #
     #   * <b> <code>5xxErrorRate</code> </b> - The percentage of all viewer
     #     requests for which the response's HTTP status code was 5xx. In
@@ -7591,9 +7591,9 @@ module Aws::Lightsail
     #     example, a status code of 503 (Service Unavailable) means that the
     #     origin server is currently unavailable.
     #
-    #     `Statistics`\: The most useful statistic is `Average`.
+    #     `Statistics`: The most useful statistic is `Average`.
     #
-    #     `Unit`\: The published unit is `Percent`.
+    #     `Unit`: The published unit is `Percent`.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -7912,10 +7912,10 @@ module Aws::Lightsail
     #     `BurstCapacityPercentage` reaches 100%. For more information, see
     #     [Viewing instance burst capacity in Amazon Lightsail][1].
     #
-    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Statistics`: The most useful statistics are `Maximum` and
     #     `Average`.
     #
-    #     `Unit`\: The published unit is `Percent`.
+    #     `Unit`: The published unit is `Percent`.
     #
     #   * <b> <code>BurstCapacityTime</code> </b> - The available amount of
     #     time for your instance to burst at 100% CPU utilization. Your
@@ -7932,10 +7932,10 @@ module Aws::Lightsail
     #     more information, see [Viewing instance burst capacity in Amazon
     #     Lightsail][1].
     #
-    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Statistics`: The most useful statistics are `Maximum` and
     #     `Average`.
     #
-    #     `Unit`\: The published unit is `Seconds`.
+    #     `Unit`: The published unit is `Seconds`.
     #
     #   * <b> <code>CPUUtilization</code> </b> - The percentage of allocated
     #     compute units that are currently in use on the instance. This
@@ -7944,10 +7944,10 @@ module Aws::Lightsail
     #     percentage than Lightsail when the instance is not allocated a
     #     full processor core.
     #
-    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Statistics`: The most useful statistics are `Maximum` and
     #     `Average`.
     #
-    #     `Unit`\: The published unit is `Percent`.
+    #     `Unit`: The published unit is `Percent`.
     #
     #   * <b> <code>NetworkIn</code> </b> - The number of bytes received on
     #     all network interfaces by the instance. This metric identifies the
@@ -7956,9 +7956,9 @@ module Aws::Lightsail
     #     Because this metric is reported in 5-minute intervals, divide the
     #     reported number by 300 to find Bytes/second.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Bytes`.
+    #     `Unit`: The published unit is `Bytes`.
     #
     #   * <b> <code>NetworkOut</code> </b> - The number of bytes sent out on
     #     all network interfaces by the instance. This metric identifies the
@@ -7967,9 +7967,9 @@ module Aws::Lightsail
     #     this metric is reported in 5-minute intervals, divide the reported
     #     number by 300 to find Bytes/second.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Bytes`.
+    #     `Unit`: The published unit is `Bytes`.
     #
     #   * <b> <code>StatusCheckFailed</code> </b> - Reports whether the
     #     instance passed or failed both the instance status check and the
@@ -7977,27 +7977,27 @@ module Aws::Lightsail
     #     (failed). This metric data is available in 1-minute (60 seconds)
     #     granularity.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>StatusCheckFailed_Instance</code> </b> - Reports whether
     #     the instance passed or failed the instance status check. This
     #     metric can be either 0 (passed) or 1 (failed). This metric data is
     #     available in 1-minute (60 seconds) granularity.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>StatusCheckFailed_System</code> </b> - Reports whether
     #     the instance passed or failed the system status check. This metric
     #     can be either 0 (passed) or 1 (failed). This metric data is
     #     available in 1-minute (60 seconds) granularity.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>MetadataNoToken</code> </b> - Reports the number of
     #     times that the instance metadata service was successfully accessed
@@ -8007,9 +8007,9 @@ module Aws::Lightsail
     #     token-backed sessions, such as Instance Metadata Service Version
     #     2, then the value is 0.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #
     #
@@ -8371,57 +8371,57 @@ module Aws::Lightsail
     #     the load balancer. Possible causes include a mismatch of ciphers
     #     or protocols.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>HealthyHostCount</code> </b> - The number of target
     #     instances that are considered healthy.
     #
-    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
+    #     `Statistics`: The most useful statistic are `Average`, `Minimum`,
     #     and `Maximum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of
     #     HTTP 2XX response codes generated by the target instances. This
     #     does not include any response codes generated by the load
     #     balancer.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Statistics`: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of
     #     HTTP 3XX response codes generated by the target instances. This
     #     does not include any response codes generated by the load
     #     balancer.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Statistics`: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of
     #     HTTP 4XX response codes generated by the target instances. This
     #     does not include any response codes generated by the load
     #     balancer.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Statistics`: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of
     #     HTTP 5XX response codes generated by the target instances. This
     #     does not include any response codes generated by the load
     #     balancer.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Statistics`: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP
     #     4XX client error codes that originated from the load balancer.
@@ -8430,10 +8430,10 @@ module Aws::Lightsail
     #     instance. This count does not include response codes generated by
     #     the target instances.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Statistics`: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP
     #     5XX server error codes that originated from the load balancer.
@@ -8443,43 +8443,43 @@ module Aws::Lightsail
     #     exceeds the capacity of the instances (spillover) or the load
     #     balancer.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Statistics`: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in
     #     seconds, after the request leaves the load balancer until a
     #     response from the target instance is received.
     #
-    #     `Statistics`\: The most useful statistic is `Average`.
+    #     `Statistics`: The most useful statistic is `Average`.
     #
-    #     `Unit`\: The published unit is `Seconds`.
+    #     `Unit`: The published unit is `Seconds`.
     #
     #   * <b> <code>RejectedConnectionCount</code> </b> - The number of
     #     connections that were rejected because the load balancer had
     #     reached its maximum number of connections.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>RequestCount</code> </b> - The number of requests
     #     processed over IPv4. This count includes only the requests with a
     #     response generated by a target instance of the load balancer.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Statistics`: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
     #     instances that are considered unhealthy.
     #
-    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
+    #     `Statistics`: The most useful statistic are `Average`, `Minimum`,
     #     and `Maximum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #   @return [String]
     #
     # @!attribute [rw] period
@@ -9182,49 +9182,49 @@ module Aws::Lightsail
     #   * <b> <code>CPUUtilization</code> </b> - The percentage of CPU
     #     utilization currently in use on the database.
     #
-    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Statistics`: The most useful statistics are `Maximum` and
     #     `Average`.
     #
-    #     `Unit`\: The published unit is `Percent`.
+    #     `Unit`: The published unit is `Percent`.
     #
     #   * <b> <code>DatabaseConnections</code> </b> - The number of database
     #     connections in use.
     #
-    #     `Statistics`\: The most useful statistics are `Maximum` and `Sum`.
+    #     `Statistics`: The most useful statistics are `Maximum` and `Sum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>DiskQueueDepth</code> </b> - The number of outstanding
     #     IOs (read/write requests) that are waiting to access the disk.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Count`.
+    #     `Unit`: The published unit is `Count`.
     #
     #   * <b> <code>FreeStorageSpace</code> </b> - The amount of available
     #     storage space.
     #
-    #     `Statistics`\: The most useful statistic is `Sum`.
+    #     `Statistics`: The most useful statistic is `Sum`.
     #
-    #     `Unit`\: The published unit is `Bytes`.
+    #     `Unit`: The published unit is `Bytes`.
     #
     #   * <b> <code>NetworkReceiveThroughput</code> </b> - The incoming
     #     (Receive) network traffic on the database, including both customer
     #     database traffic and AWS traffic used for monitoring and
     #     replication.
     #
-    #     `Statistics`\: The most useful statistic is `Average`.
+    #     `Statistics`: The most useful statistic is `Average`.
     #
-    #     `Unit`\: The published unit is `Bytes/Second`.
+    #     `Unit`: The published unit is `Bytes/Second`.
     #
     #   * <b> <code>NetworkTransmitThroughput</code> </b> - The outgoing
     #     (Transmit) network traffic on the database, including both
     #     customer database traffic and AWS traffic used for monitoring and
     #     replication.
     #
-    #     `Statistics`\: The most useful statistic is `Average`.
+    #     `Statistics`: The most useful statistic is `Average`.
     #
-    #     `Unit`\: The published unit is `Bytes/Second`.
+    #     `Unit`: The published unit is `Bytes/Second`.
     #   @return [String]
     #
     # @!attribute [rw] period
@@ -12245,20 +12245,20 @@ module Aws::Lightsail
     #
     #   The following metrics are available for each resource type:
     #
-    #   * **Instances**\: `BurstCapacityPercentage`, `BurstCapacityTime`,
+    #   * **Instances**: `BurstCapacityPercentage`, `BurstCapacityTime`,
     #     `CPUUtilization`, `NetworkIn`, `NetworkOut`, `StatusCheckFailed`,
     #     `StatusCheckFailed_Instance`, and `StatusCheckFailed_System`.
     #
-    #   * **Load balancers**\: `ClientTLSNegotiationErrorCount`,
+    #   * **Load balancers**: `ClientTLSNegotiationErrorCount`,
     #     `HealthyHostCount`, `UnhealthyHostCount`, `HTTPCode_LB_4XX_Count`,
     #     `HTTPCode_LB_5XX_Count`, `HTTPCode_Instance_2XX_Count`,
     #     `HTTPCode_Instance_3XX_Count`, `HTTPCode_Instance_4XX_Count`,
     #     `HTTPCode_Instance_5XX_Count`, `InstanceResponseTime`,
     #     `RejectedConnectionCount`, and `RequestCount`.
     #
-    #   * **Relational databases**\: `CPUUtilization`,
-    #     `DatabaseConnections`, `DiskQueueDepth`, `FreeStorageSpace`,
-    #     `NetworkReceiveThroughput`, and `NetworkTransmitThroughput`.
+    #   * **Relational databases**: `CPUUtilization`, `DatabaseConnections`,
+    #     `DiskQueueDepth`, `FreeStorageSpace`, `NetworkReceiveThroughput`,
+    #     and `NetworkTransmitThroughput`.
     #
     #   For more information about these metrics, see [Metrics available in
     #   Lightsail][1].

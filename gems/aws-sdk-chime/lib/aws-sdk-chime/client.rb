@@ -1200,7 +1200,7 @@ module Aws::Chime
 
     # Creates a channel to which you can add users and send messages.
     #
-    # **Restriction**\: You can't change a channel's privacy.
+    # **Restriction**: You can't change a channel's privacy.
     #
     # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
     # `AppInstanceUserArn` of the user that makes the API call as the value
@@ -7760,7 +7760,7 @@ module Aws::Chime
 
     # Update a channel's attributes.
     #
-    # **Restriction**\: You can't change a channel's privacy.
+    # **Restriction**: You can't change a channel's privacy.
     #
     # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
     # `AppInstanceUserArn` of the user that makes the API call as the value

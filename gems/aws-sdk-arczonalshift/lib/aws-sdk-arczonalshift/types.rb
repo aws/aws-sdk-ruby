@@ -178,12 +178,12 @@ module Aws::ARCZonalShift
     #
     #   The `Status` for a zonal shift can have one of the following values:
     #
-    #   * **ACTIVE**\: The zonal shift is started and active.
+    #   * **ACTIVE**: The zonal shift is started and active.
     #
-    #   * **EXPIRED**\: The zonal shift has expired (the expiry time was
+    #   * **EXPIRED**: The zonal shift has expired (the expiry time was
     #     exceeded).
     #
-    #   * **CANCELED**\: The zonal shift was canceled.
+    #   * **CANCELED**: The zonal shift was canceled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ListZonalShiftsRequest AWS API Documentation

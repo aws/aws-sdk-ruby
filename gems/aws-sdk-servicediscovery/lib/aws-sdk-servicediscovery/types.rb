@@ -206,7 +206,7 @@ module Aws::ServiceDiscovery
     #
     #   If you want Cloud Map to create an `SRV` record when you register an
     #   instance and you're using a system that requires a specific `SRV`
-    #   format, such as [HAProxy][1], specify the following for `Name`\:
+    #   format, such as [HAProxy][1], specify the following for `Name`:
     #
     #   * Start the name with an underscore (\_), such as `_exampleservice`.
     #
@@ -1041,18 +1041,18 @@ module Aws::ServiceDiscovery
     #
     #   You can create the following types of health checks:
     #
-    #   * **HTTP**\: Route 53 tries to establish a TCP connection. If
+    #   * **HTTP**: Route 53 tries to establish a TCP connection. If
     #     successful, Route 53 submits an HTTP request and waits for an HTTP
     #     status code of 200 or greater and less than 400.
     #
-    #   * **HTTPS**\: Route 53 tries to establish a TCP connection. If
+    #   * **HTTPS**: Route 53 tries to establish a TCP connection. If
     #     successful, Route 53 submits an HTTPS request and waits for an
     #     HTTP status code of 200 or greater and less than 400.
     #
     #     If you specify HTTPS for the value of `Type`, the endpoint must
     #     support TLS v1.0 or later.
     #
-    #   * **TCP**\: Route 53 tries to establish a TCP connection.
+    #   * **TCP**: Route 53 tries to establish a TCP connection.
     #
     #     If you specify `TCP` for `Type`, don't specify a value for
     #     `ResourcePath`.
@@ -1291,7 +1291,7 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] attributes
     #   A string map that contains the following information for the service
-    #   that you specify in `ServiceId`\:
+    #   that you specify in `ServiceId`:
     #
     #   * The attributes that apply to the records that are defined in the
     #     service.
@@ -1896,23 +1896,23 @@ module Aws::ServiceDiscovery
     #   Specify the namespaces that you want to get using one of the
     #   following.
     #
-    #   * `TYPE`\: Gets the namespaces of the specified type.
+    #   * `TYPE`: Gets the namespaces of the specified type.
     #
-    #   * `NAME`\: Gets the namespaces with the specified name.
+    #   * `NAME`: Gets the namespaces with the specified name.
     #
-    #   * `HTTP_NAME`\: Gets the namespaces with the specified HTTP name.
+    #   * `HTTP_NAME`: Gets the namespaces with the specified HTTP name.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   Specify the values that are applicable to the value that you specify
     #   for `Name`.
     #
-    #   * `TYPE`\: Specify `HTTP`, `DNS_PUBLIC`, or `DNS_PRIVATE`.
+    #   * `TYPE`: Specify `HTTP`, `DNS_PUBLIC`, or `DNS_PRIVATE`.
     #
-    #   * `NAME`\: Specify the name of the namespace, which is found in
+    #   * `NAME`: Specify the name of the namespace, which is found in
     #     `Namespace.Name`.
     #
-    #   * `HTTP_NAME`\: Specify the HTTP name of the namespace, which is
+    #   * `HTTP_NAME`: Specify the HTTP name of the namespace, which is
     #     found in `Namespace.Properties.HttpProperties.HttpName`.
     #   @return [Array<String>]
     #
@@ -1921,13 +1921,13 @@ module Aws::ServiceDiscovery
     #   namespace matches the specified value. Valid values for `Condition`
     #   are one of the following.
     #
-    #   * `EQ`\: When you specify `EQ` for `Condition`, you can specify only
+    #   * `EQ`: When you specify `EQ` for `Condition`, you can specify only
     #     one value. `EQ` is supported for `TYPE`, `NAME`, and `HTTP_NAME`.
     #     `EQ` is the default condition and can be omitted.
     #
-    #   * `BEGINS_WITH`\: When you specify `BEGINS_WITH` for `Condition`,
-    #     you can specify only one value. `BEGINS_WITH` is supported for
-    #     `TYPE`, `NAME`, and `HTTP_NAME`.
+    #   * `BEGINS_WITH`: When you specify `BEGINS_WITH` for `Condition`, you
+    #     can specify only one value. `BEGINS_WITH` is supported for `TYPE`,
+    #     `NAME`, and `HTTP_NAME`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/NamespaceFilter AWS API Documentation
@@ -2134,36 +2134,36 @@ module Aws::ServiceDiscovery
     # @!attribute [rw] name
     #   Specify the operations that you want to get:
     #
-    #   * **NAMESPACE\_ID**\: Gets operations related to specified
+    #   * **NAMESPACE\_ID**: Gets operations related to specified
     #     namespaces.
     #
-    #   * **SERVICE\_ID**\: Gets operations related to specified services.
+    #   * **SERVICE\_ID**: Gets operations related to specified services.
     #
-    #   * **STATUS**\: Gets operations based on the status of the
-    #     operations: `SUBMITTED`, `PENDING`, `SUCCEED`, or `FAIL`.
+    #   * **STATUS**: Gets operations based on the status of the operations:
+    #     `SUBMITTED`, `PENDING`, `SUCCEED`, or `FAIL`.
     #
-    #   * **TYPE**\: Gets specified types of operation.
+    #   * **TYPE**: Gets specified types of operation.
     #
-    #   * **UPDATE\_DATE**\: Gets operations that changed status during a
+    #   * **UPDATE\_DATE**: Gets operations that changed status during a
     #     specified date/time range.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   Specify values that are applicable to the value that you specify for
-    #   `Name`\:
+    #   `Name`:
     #
-    #   * **NAMESPACE\_ID**\: Specify one namespace ID.
+    #   * **NAMESPACE\_ID**: Specify one namespace ID.
     #
-    #   * **SERVICE\_ID**\: Specify one service ID.
+    #   * **SERVICE\_ID**: Specify one service ID.
     #
-    #   * **STATUS**\: Specify one or more statuses: `SUBMITTED`, `PENDING`,
+    #   * **STATUS**: Specify one or more statuses: `SUBMITTED`, `PENDING`,
     #     `SUCCEED`, or `FAIL`.
     #
-    #   * **TYPE**\: Specify one or more of the following types:
+    #   * **TYPE**: Specify one or more of the following types:
     #     `CREATE_NAMESPACE`, `DELETE_NAMESPACE`, `UPDATE_SERVICE`,
     #     `REGISTER_INSTANCE`, or `DEREGISTER_INSTANCE`.
     #
-    #   * **UPDATE\_DATE**\: Specify a start date and an end date in Unix
+    #   * **UPDATE\_DATE**: Specify a start date and an end date in Unix
     #     date/time format and Coordinated Universal Time (UTC). The start
     #     date must be the first value.
     #   @return [Array<String>]
@@ -2172,17 +2172,17 @@ module Aws::ServiceDiscovery
     #   The operator that you want to use to determine whether an operation
     #   matches the specified value. Valid values for condition include:
     #
-    #   * `EQ`\: When you specify `EQ` for the condition, you can specify
+    #   * `EQ`: When you specify `EQ` for the condition, you can specify
     #     only one value. `EQ` is supported for `NAMESPACE_ID`,
     #     `SERVICE_ID`, `STATUS`, and `TYPE`. `EQ` is the default condition
     #     and can be omitted.
     #
-    #   * `IN`\: When you specify `IN` for the condition, you can specify a
+    #   * `IN`: When you specify `IN` for the condition, you can specify a
     #     list of one or more values. `IN` is supported for `STATUS` and
     #     `TYPE`. An operation must match one of the specified values to be
     #     returned in the response.
     #
-    #   * `BETWEEN`\: Specify a start date and an end date in Unix date/time
+    #   * `BETWEEN`: Specify a start date and an end date in Unix date/time
     #     format and Coordinated Universal Time (UTC). The start date must
     #     be the first value. `BETWEEN` is supported for `UPDATE_DATE`.
     #   @return [String]
@@ -2225,14 +2225,14 @@ module Aws::ServiceDiscovery
     # @!attribute [rw] status
     #   The status of the operation. Values include the following:
     #
-    #   * **SUBMITTED**\: This is the initial state immediately after you
+    #   * **SUBMITTED**: This is the initial state immediately after you
     #     submit a request.
     #
-    #   * **PENDING**\: Cloud Map is performing the operation.
+    #   * **PENDING**: Cloud Map is performing the operation.
     #
-    #   * **SUCCESS**\: The operation succeeded.
+    #   * **SUCCESS**: The operation succeeded.
     #
-    #   * **FAIL**\: The operation failed. For the failure reason, see
+    #   * **FAIL**: The operation failed. For the failure reason, see
     #     `ErrorMessage`.
     #   @return [String]
     #
@@ -2458,7 +2458,7 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] attributes
     #   A string map that contains the following information for the service
-    #   that you specify in `ServiceId`\:
+    #   that you specify in `ServiceId`:
     #
     #   * The attributes that apply to the records that are defined in the
     #     service.
@@ -2875,7 +2875,7 @@ module Aws::ServiceDiscovery
     #   returned by `ListServices`. Valid values for `Condition` include the
     #   following:
     #
-    #   * `EQ`\: When you specify `EQ`, specify one namespace ID for
+    #   * `EQ`: When you specify `EQ`, specify one namespace ID for
     #     `Values`. `EQ` is the default condition and can be omitted.
     #
     #   ^

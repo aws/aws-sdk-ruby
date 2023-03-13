@@ -238,8 +238,8 @@ module Aws::EC2
     end
 
     # The date and time to deprecate the AMI, in UTC, in the following
-    # format: *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z. If you specified a value
-    # for seconds, Amazon EC2 rounds the seconds to the nearest minute.
+    # format: *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z. If you specified a value for
+    # seconds, Amazon EC2 rounds the seconds to the nearest minute.
     # @return [String]
     def deprecation_time
       data[:deprecation_time]
@@ -536,10 +536,10 @@ module Aws::EC2
     # @option options [required, String] :attribute
     #   The AMI attribute.
     #
-    #   **Note**\: The `blockDeviceMapping` attribute is deprecated. Using
-    #   this attribute returns the `Client.AuthFailure` error. To get
-    #   information about the block device mappings for an AMI, use the
-    #   DescribeImages action.
+    #   **Note**: The `blockDeviceMapping` attribute is deprecated. Using this
+    #   attribute returns the `Client.AuthFailure` error. To get information
+    #   about the block device mappings for an AMI, use the DescribeImages
+    #   action.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

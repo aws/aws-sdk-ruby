@@ -544,9 +544,9 @@ module Aws::Cloud9
     #   The type of environment member permissions you want to associate with
     #   this environment member. Available values include:
     #
-    #   * `read-only`\: Has read-only access to the environment.
+    #   * `read-only`: Has read-only access to the environment.
     #
-    #   * `read-write`\: Has read-write access to the environment.
+    #   * `read-write`: Has read-write access to the environment.
     #
     # @return [Types::CreateEnvironmentMembershipResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -684,11 +684,11 @@ module Aws::Cloud9
     #   The type of environment member permissions to get information about.
     #   Available values include:
     #
-    #   * `owner`\: Owns the environment.
+    #   * `owner`: Owns the environment.
     #
-    #   * `read-only`\: Has read-only access to the environment.
+    #   * `read-only`: Has read-only access to the environment.
     #
-    #   * `read-write`\: Has read-write access to the environment.
+    #   * `read-write`: Has read-write access to the environment.
     #
     #   If no value is specified, information about all environment members
     #   are returned.
@@ -1166,9 +1166,9 @@ module Aws::Cloud9
     #   The replacement type of environment member permissions you want to
     #   associate with this environment member. Available values include:
     #
-    #   * `read-only`\: Has read-only access to the environment.
+    #   * `read-only`: Has read-only access to the environment.
     #
-    #   * `read-write`\: Has read-write access to the environment.
+    #   * `read-write`: Has read-write access to the environment.
     #
     # @return [Types::UpdateEnvironmentMembershipResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #

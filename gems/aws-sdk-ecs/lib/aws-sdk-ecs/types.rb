@@ -4566,14 +4566,14 @@ module Aws::ECS
     #   The log setting to use for redirecting logs for your execute command
     #   results. The following log settings are available.
     #
-    #   * `NONE`\: The execute command session is not logged.
+    #   * `NONE`: The execute command session is not logged.
     #
-    #   * `DEFAULT`\: The `awslogs` configuration in the task definition is
+    #   * `DEFAULT`: The `awslogs` configuration in the task definition is
     #     used. If no logging parameter is specified, it defaults to this
     #     value. If no `awslogs` log driver is configured in the task
     #     definition, the output won't be logged.
     #
-    #   * `OVERRIDE`\: Specify the logging details as a part of
+    #   * `OVERRIDE`: Specify the logging details as a part of
     #     `logConfiguration`. If the `OVERRIDE` logging option is specified,
     #     the `logConfiguration` is required.
     #   @return [String]
@@ -4887,14 +4887,14 @@ module Aws::ECS
     # @!attribute [rw] protected_tasks
     #   A list of tasks with the following information.
     #
-    #   * `taskArn`\: The task ARN.
+    #   * `taskArn`: The task ARN.
     #
-    #   * `protectionEnabled`\: The protection status of the task. If
+    #   * `protectionEnabled`: The protection status of the task. If
     #     scale-in protection is enabled for a task, the value is `true`.
     #     Otherwise, it is `false`.
     #
-    #   * `expirationDate`\: The epoch time when protection for the task
-    #     will expire.
+    #   * `expirationDate`: The epoch time when protection for the task will
+    #     expire.
     #   @return [Array<Types::ProtectedTask>]
     #
     # @!attribute [rw] failures
@@ -6570,7 +6570,7 @@ module Aws::ECS
     #   The port number range on the container that's bound to the
     #   dynamically mapped host port range.
     #
-    #   The following rules apply when you specify a `containerPortRange`\:
+    #   The following rules apply when you specify a `containerPortRange`:
     #
     #   * You must use either the `bridge` network mode or the `awsvpc`
     #     network mode.
@@ -6946,7 +6946,7 @@ module Aws::ECS
     #   The port number range on the container that's bound to the
     #   dynamically mapped host port range.
     #
-    #   The following rules apply when you specify a `containerPortRange`\:
+    #   The following rules apply when you specify a `containerPortRange`:
     #
     #   * You must use either the `bridge` network mode or the `awsvpc`
     #     network mode.
@@ -10597,7 +10597,7 @@ module Aws::ECS
     # @!attribute [rw] stability_status
     #   The stability status. This indicates whether the task set has
     #   reached a steady state. If the following conditions are met, the
-    #   task set are in `STEADY_STATE`\:
+    #   task set are in `STEADY_STATE`:
     #
     #   * The task `runningCount` is equal to the `computedDesiredCount`.
     #
@@ -11351,14 +11351,14 @@ module Aws::ECS
     # @!attribute [rw] protected_tasks
     #   A list of tasks with the following information.
     #
-    #   * `taskArn`\: The task ARN.
+    #   * `taskArn`: The task ARN.
     #
-    #   * `protectionEnabled`\: The protection status of the task. If
+    #   * `protectionEnabled`: The protection status of the task. If
     #     scale-in protection is enabled for a task, the value is `true`.
     #     Otherwise, it is `false`.
     #
-    #   * `expirationDate`\: The epoch time when protection for the task
-    #     will expire.
+    #   * `expirationDate`: The epoch time when protection for the task will
+    #     expire.
     #   @return [Array<Types::ProtectedTask>]
     #
     # @!attribute [rw] failures

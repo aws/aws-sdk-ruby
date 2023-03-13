@@ -430,7 +430,7 @@ module Aws::CustomerProfiles
     # Each Amazon Connect instance can be associated with only one domain.
     # Multiple Amazon Connect instances can be associated with one domain.
     #
-    # Use this API or [UpdateDomain][1] to enable [identity resolution][2]\:
+    # Use this API or [UpdateDomain][1] to enable [identity resolution][2]:
     # set `Matching` to true.
     #
     # To prevent cross-service impersonation when you call this API, see
@@ -2777,7 +2777,7 @@ module Aws::CustomerProfiles
     #
     # After a domain is created, the name can’t be changed.
     #
-    # Use this API or [CreateDomain][1] to enable [identity resolution][2]\:
+    # Use this API or [CreateDomain][1] to enable [identity resolution][2]:
     # set `Matching` to true.
     #
     # To prevent cross-service impersonation when you call this API, see

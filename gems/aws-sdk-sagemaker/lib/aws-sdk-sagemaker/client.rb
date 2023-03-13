@@ -2842,10 +2842,10 @@ module Aws::SageMaker
     #
     #   An `EventTime` can be a `String` or `Fractional`.
     #
-    #   * `Fractional`\: `EventTime` feature values must be a Unix timestamp
-    #     in seconds.
+    #   * `Fractional`: `EventTime` feature values must be a Unix timestamp in
+    #     seconds.
     #
-    #   * `String`\: `EventTime` feature values must be an ISO-8601 string in
+    #   * `String`: `EventTime` feature values must be an ISO-8601 string in
     #     the format. The following formats are supported
     #     `yyyy-MM-dd'T'HH:mm:ssZ` and `yyyy-MM-dd'T'HH:mm:ss.SSSZ` where
     #     `yyyy`, `MM`, and `dd` represent the year, month, and day
@@ -3682,28 +3682,28 @@ module Aws::SageMaker
     # @option params [String] :vendor_guidance
     #   The stability of the image version, specified by the maintainer.
     #
-    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for image
+    #   * `NOT_PROVIDED`: The maintainers did not provide a status for image
     #     version stability.
     #
-    #   * `STABLE`\: The image version is stable.
+    #   * `STABLE`: The image version is stable.
     #
-    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #   * `TO_BE_ARCHIVED`: The image version is set to be archived. Custom
     #     image versions that are set to be archived are automatically
     #     archived after three months.
     #
-    #   * `ARCHIVED`\: The image version is archived. Archived image versions
+    #   * `ARCHIVED`: The image version is archived. Archived image versions
     #     are not searchable and are no longer actively supported.
     #
     # @option params [String] :job_type
     #   Indicates SageMaker job type compatibility.
     #
-    #   * `TRAINING`\: The image version is compatible with SageMaker training
+    #   * `TRAINING`: The image version is compatible with SageMaker training
     #     jobs.
     #
-    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #   * `INFERENCE`: The image version is compatible with SageMaker
     #     inference jobs.
     #
-    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #   * `NOTEBOOK_KERNEL`: The image version is compatible with SageMaker
     #     notebook kernels.
     #
     # @option params [String] :ml_framework
@@ -3715,9 +3715,9 @@ module Aws::SageMaker
     # @option params [String] :processor
     #   Indicates CPU or GPU compatibility.
     #
-    #   * `CPU`\: The image version is compatible with CPU.
+    #   * `CPU`: The image version is compatible with CPU.
     #
-    #   * `GPU`\: The image version is compatible with GPU.
+    #   * `GPU`: The image version is compatible with GPU.
     #
     # @option params [Boolean] :horovod
     #   Indicates Horovod compatibility.
@@ -3785,7 +3785,7 @@ module Aws::SageMaker
     #   The type of the inference experiment that you want to run. The
     #   following types of experiments are possible:
     #
-    #   * `ShadowMode`\: You can use this type to validate a shadow variant.
+    #   * `ShadowMode`: You can use this type to validate a shadow variant.
     #     For more information, see [Shadow tests][1].
     #
     #   ^
@@ -4769,13 +4769,13 @@ module Aws::SageMaker
     #   Different organizations might have different criteria for model card
     #   review and approval.
     #
-    #   * `Draft`\: The model card is a work in progress.
+    #   * `Draft`: The model card is a work in progress.
     #
-    #   * `PendingReview`\: The model card is pending review.
+    #   * `PendingReview`: The model card is pending review.
     #
-    #   * `Approved`\: The model card is approved.
+    #   * `Approved`: The model card is approved.
     #
-    #   * `Archived`\: The model card is archived. No more updates should be
+    #   * `Archived`: The model card is archived. No more updates should be
     #     made to the model card, but it can still be exported.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -16510,7 +16510,7 @@ module Aws::SageMaker
     # @option params [String] :step_type
     #   A filter to return details about the specified type of subtask.
     #
-    #   `BENCHMARK`\: Evaluate the performance of your model on different
+    #   `BENCHMARK`: Evaluate the performance of your model on different
     #   instance types.
     #
     # @option params [Integer] :max_results
@@ -20316,9 +20316,9 @@ module Aws::SageMaker
     #   The desired state of the experiment after stopping. The possible
     #   states are the following:
     #
-    #   * `Completed`\: The experiment completed successfully
+    #   * `Completed`: The experiment completed successfully
     #
-    #   * `Cancelled`\: The experiment was canceled
+    #   * `Cancelled`: The experiment was canceled
     #
     # @option params [String] :reason
     #   The reason for stopping the experiment.
@@ -21459,28 +21459,28 @@ module Aws::SageMaker
     # @option params [String] :vendor_guidance
     #   The availability of the image version specified by the maintainer.
     #
-    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for image
+    #   * `NOT_PROVIDED`: The maintainers did not provide a status for image
     #     version stability.
     #
-    #   * `STABLE`\: The image version is stable.
+    #   * `STABLE`: The image version is stable.
     #
-    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #   * `TO_BE_ARCHIVED`: The image version is set to be archived. Custom
     #     image versions that are set to be archived are automatically
     #     archived after three months.
     #
-    #   * `ARCHIVED`\: The image version is archived. Archived image versions
+    #   * `ARCHIVED`: The image version is archived. Archived image versions
     #     are not searchable and are no longer actively supported.
     #
     # @option params [String] :job_type
     #   Indicates SageMaker job type compatibility.
     #
-    #   * `TRAINING`\: The image version is compatible with SageMaker training
+    #   * `TRAINING`: The image version is compatible with SageMaker training
     #     jobs.
     #
-    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #   * `INFERENCE`: The image version is compatible with SageMaker
     #     inference jobs.
     #
-    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #   * `NOTEBOOK_KERNEL`: The image version is compatible with SageMaker
     #     notebook kernels.
     #
     # @option params [String] :ml_framework
@@ -21492,9 +21492,9 @@ module Aws::SageMaker
     # @option params [String] :processor
     #   Indicates CPU or GPU compatibility.
     #
-    #   * `CPU`\: The image version is compatible with CPU.
+    #   * `CPU`: The image version is compatible with CPU.
     #
-    #   * `GPU`\: The image version is compatible with GPU.
+    #   * `GPU`: The image version is compatible with GPU.
     #
     # @option params [Boolean] :horovod
     #   Indicates Horovod compatibility.
@@ -21650,13 +21650,13 @@ module Aws::SageMaker
     #   Different organizations might have different criteria for model card
     #   review and approval.
     #
-    #   * `Draft`\: The model card is a work in progress.
+    #   * `Draft`: The model card is a work in progress.
     #
-    #   * `PendingReview`\: The model card is pending review.
+    #   * `PendingReview`: The model card is pending review.
     #
-    #   * `Approved`\: The model card is approved.
+    #   * `Approved`: The model card is approved.
     #
-    #   * `Archived`\: The model card is archived. No more updates should be
+    #   * `Archived`: The model card is archived. No more updates should be
     #     made to the model card, but it can still be exported.
     #
     # @return [Types::UpdateModelCardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:

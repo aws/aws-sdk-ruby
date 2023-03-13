@@ -595,12 +595,12 @@ module Aws::CognitoIdentityProvider
     #   attribute to `True`. You can also do this by calling
     #   [AdminUpdateUserAttributes][1].
     #
-    #   * **email**\: The email address of the user to whom the message that
+    #   * **email**: The email address of the user to whom the message that
     #     contains the code and username will be sent. Required if the
     #     `email_verified` attribute is set to `True`, or if `"EMAIL"` is
     #     specified in the `DesiredDeliveryMediums` parameter.
     #
-    #   * **phone\_number**\: The phone number of the user to whom the message
+    #   * **phone\_number**: The phone number of the user to whom the message
     #     that contains the code and username will be sent. Required if the
     #     `phone_number_verified` attribute is set to `True`, or if `"SMS"` is
     #     specified in the `DesiredDeliveryMediums` parameter.
@@ -1134,20 +1134,20 @@ module Aws::CognitoIdentityProvider
     #
     #   Valid values include:
     #
-    #   * `USER_SRP_AUTH`\: Authentication flow for the Secure Remote Password
+    #   * `USER_SRP_AUTH`: Authentication flow for the Secure Remote Password
     #     (SRP) protocol.
     #
-    #   * `REFRESH_TOKEN_AUTH`/`REFRESH_TOKEN`\: Authentication flow for
+    #   * `REFRESH_TOKEN_AUTH`/`REFRESH_TOKEN`: Authentication flow for
     #     refreshing the access token and ID token by supplying a valid
     #     refresh token.
     #
-    #   * `CUSTOM_AUTH`\: Custom authentication flow.
+    #   * `CUSTOM_AUTH`: Custom authentication flow.
     #
-    #   * `ADMIN_NO_SRP_AUTH`\: Non-SRP authentication flow; you can pass in
+    #   * `ADMIN_NO_SRP_AUTH`: Non-SRP authentication flow; you can pass in
     #     the USERNAME and PASSWORD directly if the flow is enabled for
     #     calling the app client.
     #
-    #   * `ADMIN_USER_PASSWORD_AUTH`\: Admin-based user password
+    #   * `ADMIN_USER_PASSWORD_AUTH`: Admin-based user password
     #     authentication. This replaces the `ADMIN_NO_SRP_AUTH` authentication
     #     flow. In this flow, Amazon Cognito receives the password in the
     #     request instead of using the SRP process to verify passwords.
@@ -1155,21 +1155,21 @@ module Aws::CognitoIdentityProvider
     # @option params [Hash<String,String>] :auth_parameters
     #   The authentication parameters. These are inputs corresponding to the
     #   `AuthFlow` that you're invoking. The required values depend on the
-    #   value of `AuthFlow`\:
+    #   value of `AuthFlow`:
     #
-    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRP_A` (required),
+    #   * For `USER_SRP_AUTH`: `USERNAME` (required), `SRP_A` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`.
     #
-    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `REFRESH_TOKEN` (required),
+    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`: `REFRESH_TOKEN` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`.
     #
-    #   * For `ADMIN_NO_SRP_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if
+    #   * For `ADMIN_NO_SRP_AUTH`: `USERNAME` (required), `SECRET_HASH` (if
     #     app client is configured with client secret), `PASSWORD` (required),
     #     `DEVICE_KEY`.
     #
-    #   * For `CUSTOM_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if app
+    #   * For `CUSTOM_AUTH`: `USERNAME` (required), `SECRET_HASH` (if app
     #     client is configured with client secret), `DEVICE_KEY`. To start the
     #     authentication flow with password verification, include
     #     `ChallengeName: SRP_A` and `SRP_A: (The SRP_A Value)`.
@@ -1761,10 +1761,10 @@ module Aws::CognitoIdentityProvider
     #   The challenge responses. These are inputs corresponding to the value
     #   of `ChallengeName`, for example:
     #
-    #   * `SMS_MFA`\: `SMS_MFA_CODE`, `USERNAME`, `SECRET_HASH` (if app client
+    #   * `SMS_MFA`: `SMS_MFA_CODE`, `USERNAME`, `SECRET_HASH` (if app client
     #     is configured with client secret).
     #
-    #   * `PASSWORD_VERIFIER`\: `PASSWORD_CLAIM_SIGNATURE`,
+    #   * `PASSWORD_VERIFIER`: `PASSWORD_CLAIM_SIGNATURE`,
     #     `PASSWORD_CLAIM_SECRET_BLOCK`, `TIMESTAMP`, `USERNAME`,
     #     `SECRET_HASH` (if app client is configured with client secret).
     #
@@ -1773,10 +1773,10 @@ module Aws::CognitoIdentityProvider
     #
     #      </note>
     #
-    #   * `ADMIN_NO_SRP_AUTH`\: `PASSWORD`, `USERNAME`, `SECRET_HASH` (if app
+    #   * `ADMIN_NO_SRP_AUTH`: `PASSWORD`, `USERNAME`, `SECRET_HASH` (if app
     #     client is configured with client secret).
     #
-    #   * `NEW_PASSWORD_REQUIRED`\: `NEW_PASSWORD`, `USERNAME`, `SECRET_HASH`
+    #   * `NEW_PASSWORD_REQUIRED`: `NEW_PASSWORD`, `USERNAME`, `SECRET_HASH`
     #     (if app client is configured with client secret). To set any
     #     required attributes that Amazon Cognito returned as
     #     `requiredAttributes` in the `AdminInitiateAuth` response, add a
@@ -3468,23 +3468,23 @@ module Aws::CognitoIdentityProvider
     #
     #   Valid values include:
     #
-    #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`\: Enable admin based user password
+    #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`: Enable admin based user password
     #     authentication flow `ADMIN_USER_PASSWORD_AUTH`. This setting
     #     replaces the `ADMIN_NO_SRP_AUTH` setting. With this authentication
     #     flow, your app passes a user name and password to Amazon Cognito in
     #     the request, instead of using the Secure Remote Password (SRP)
     #     protocol to securely transmit the password.
     #
-    #   * `ALLOW_CUSTOM_AUTH`\: Enable Lambda trigger based authentication.
+    #   * `ALLOW_CUSTOM_AUTH`: Enable Lambda trigger based authentication.
     #
-    #   * `ALLOW_USER_PASSWORD_AUTH`\: Enable user password-based
+    #   * `ALLOW_USER_PASSWORD_AUTH`: Enable user password-based
     #     authentication. In this flow, Amazon Cognito receives the password
     #     in the request instead of using the SRP protocol to verify
     #     passwords.
     #
-    #   * `ALLOW_USER_SRP_AUTH`\: Enable SRP-based authentication.
+    #   * `ALLOW_USER_SRP_AUTH`: Enable SRP-based authentication.
     #
-    #   * `ALLOW_REFRESH_TOKEN_AUTH`\: Enable authflow to refresh tokens.
+    #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
     #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
@@ -5041,16 +5041,16 @@ module Aws::CognitoIdentityProvider
     #
     #   Valid values include:
     #
-    #   * `USER_SRP_AUTH`\: Authentication flow for the Secure Remote Password
+    #   * `USER_SRP_AUTH`: Authentication flow for the Secure Remote Password
     #     (SRP) protocol.
     #
-    #   * `REFRESH_TOKEN_AUTH`/`REFRESH_TOKEN`\: Authentication flow for
+    #   * `REFRESH_TOKEN_AUTH`/`REFRESH_TOKEN`: Authentication flow for
     #     refreshing the access token and ID token by supplying a valid
     #     refresh token.
     #
-    #   * `CUSTOM_AUTH`\: Custom authentication flow.
+    #   * `CUSTOM_AUTH`: Custom authentication flow.
     #
-    #   * `USER_PASSWORD_AUTH`\: Non-SRP authentication flow; user name and
+    #   * `USER_PASSWORD_AUTH`: Non-SRP authentication flow; user name and
     #     password are passed directly. If a user migration Lambda trigger is
     #     set, this flow will invoke the user migration Lambda if it doesn't
     #     find the user name in the user pool.
@@ -5060,17 +5060,17 @@ module Aws::CognitoIdentityProvider
     # @option params [Hash<String,String>] :auth_parameters
     #   The authentication parameters. These are inputs corresponding to the
     #   `AuthFlow` that you're invoking. The required values depend on the
-    #   value of `AuthFlow`\:
+    #   value of `AuthFlow`:
     #
-    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRP_A` (required),
+    #   * For `USER_SRP_AUTH`: `USERNAME` (required), `SRP_A` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`.
     #
-    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `REFRESH_TOKEN` (required),
+    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`: `REFRESH_TOKEN` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`.
     #
-    #   * For `CUSTOM_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if app
+    #   * For `CUSTOM_AUTH`: `USERNAME` (required), `SECRET_HASH` (if app
     #     client is configured with client secret), `DEVICE_KEY`. To start the
     #     authentication flow with password verification, include
     #     `ChallengeName: SRP_A` and `SRP_A: (The SRP_A Value)`.
@@ -5610,14 +5610,14 @@ module Aws::CognitoIdentityProvider
     #   be escaped using the backslash (\\) character. For example,
     #   "`family_name` = \\"Reddy\\"".
     #
-    #   * *AttributeName*\: The name of the attribute to search for. You can
+    #   * *AttributeName*: The name of the attribute to search for. You can
     #     only search for one attribute at a time.
     #
-    #   * *Filter-Type*\: For an exact match, use =, for example,
+    #   * *Filter-Type*: For an exact match, use =, for example,
     #     "`given_name` = \\"Jon\\"". For a prefix ("starts with")
     #     match, use ^=, for example, "`given_name` ^= \\"Jon\\"".
     #
-    #   * *AttributeValue*\: The attribute value that must be matched for each
+    #   * *AttributeValue*: The attribute value that must be matched for each
     #     user.
     #
     #   If the filter string is empty, `ListUsers` returns all users in the
@@ -5956,9 +5956,9 @@ module Aws::CognitoIdentityProvider
     #
     #    </note>
     #
-    #   * `SMS_MFA`\: `SMS_MFA_CODE`, `USERNAME`.
+    #   * `SMS_MFA`: `SMS_MFA_CODE`, `USERNAME`.
     #
-    #   * `PASSWORD_VERIFIER`\: `PASSWORD_CLAIM_SIGNATURE`,
+    #   * `PASSWORD_VERIFIER`: `PASSWORD_CLAIM_SIGNATURE`,
     #     `PASSWORD_CLAIM_SECRET_BLOCK`, `TIMESTAMP`, `USERNAME`.
     #
     #     <note markdown="1"> `PASSWORD_VERIFIER` requires `DEVICE_KEY` when you sign in with a
@@ -5966,7 +5966,7 @@ module Aws::CognitoIdentityProvider
     #
     #      </note>
     #
-    #   * `NEW_PASSWORD_REQUIRED`\: `NEW_PASSWORD`, `USERNAME`, `SECRET_HASH`
+    #   * `NEW_PASSWORD_REQUIRED`: `NEW_PASSWORD`, `USERNAME`, `SECRET_HASH`
     #     (if app client is configured with client secret). To set any
     #     required attributes that Amazon Cognito returned as
     #     `requiredAttributes` in the `InitiateAuth` response, add a
@@ -5983,7 +5983,7 @@ module Aws::CognitoIdentityProvider
     #
     #      </note>
     #
-    #   * `SOFTWARE_TOKEN_MFA`\: `USERNAME` and `SOFTWARE_TOKEN_MFA_CODE` are
+    #   * `SOFTWARE_TOKEN_MFA`: `USERNAME` and `SOFTWARE_TOKEN_MFA_CODE` are
     #     required attributes.
     #
     #   * `DEVICE_SRP_AUTH` requires `USERNAME`, `DEVICE_KEY`, `SRP_A` (and
@@ -7546,23 +7546,23 @@ module Aws::CognitoIdentityProvider
     #
     #   Valid values include:
     #
-    #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`\: Enable admin based user password
+    #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`: Enable admin based user password
     #     authentication flow `ADMIN_USER_PASSWORD_AUTH`. This setting
     #     replaces the `ADMIN_NO_SRP_AUTH` setting. With this authentication
     #     flow, your app passes a user name and password to Amazon Cognito in
     #     the request, instead of using the Secure Remote Password (SRP)
     #     protocol to securely transmit the password.
     #
-    #   * `ALLOW_CUSTOM_AUTH`\: Enable Lambda trigger based authentication.
+    #   * `ALLOW_CUSTOM_AUTH`: Enable Lambda trigger based authentication.
     #
-    #   * `ALLOW_USER_PASSWORD_AUTH`\: Enable user password-based
+    #   * `ALLOW_USER_PASSWORD_AUTH`: Enable user password-based
     #     authentication. In this flow, Amazon Cognito receives the password
     #     in the request instead of using the SRP protocol to verify
     #     passwords.
     #
-    #   * `ALLOW_USER_SRP_AUTH`\: Enable SRP-based authentication.
+    #   * `ALLOW_USER_SRP_AUTH`: Enable SRP-based authentication.
     #
-    #   * `ALLOW_REFRESH_TOKEN_AUTH`\: Enable authflow to refresh tokens.
+    #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
     #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign

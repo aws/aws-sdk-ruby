@@ -374,7 +374,7 @@ module Aws::SageMaker
     #   * You use one of the SageMaker built-in algorithms
     #
     #   * You use one of the following [Prebuilt SageMaker Docker
-    #     Images][1]\:
+    #     Images][1]:
     #
     #     * Tensorflow (version &gt;= 1.15)
     #
@@ -2270,11 +2270,11 @@ module Aws::SageMaker
     #   If you do not specify a metric explicitly, the default behavior is
     #   to automatically use:
     #
-    #   * `MSE`\: for regression.
+    #   * `MSE`: for regression.
     #
-    #   * `F1`\: for binary classification
+    #   * `F1`: for binary classification
     #
-    #   * `Accuracy`\: for multiclass classification.
+    #   * `Accuracy`: for multiclass classification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobObjective AWS API Documentation
@@ -2860,10 +2860,10 @@ module Aws::SageMaker
     # @!attribute [rw] type
     #   Specifies the endpoint capacity type.
     #
-    #   * `INSTANCE_COUNT`\: The endpoint activates based on the number of
+    #   * `INSTANCE_COUNT`: The endpoint activates based on the number of
     #     instances.
     #
-    #   * `CAPACITY_PERCENT`\: The endpoint activates based on the specified
+    #   * `CAPACITY_PERCENT`: The endpoint activates based on the specified
     #     percentage of capacity.
     #   @return [String]
     #
@@ -3293,7 +3293,7 @@ module Aws::SageMaker
     #   from the model container output if the model container is in JSON
     #   Lines format.
     #
-    #   **Example**\: If the model container output of a single request is
+    #   **Example**: If the model container output of a single request is
     #   `'\{"predicted_label":1,"probability":0.6\}'`, then set
     #   `ProbabilityAttribute` to `'probability'`.
     #   @return [String]
@@ -3302,7 +3302,7 @@ module Aws::SageMaker
     #   A JMESPath expression used to locate the list of label headers in
     #   the model container output.
     #
-    #   **Example**\: If the model container output of a batch request is
+    #   **Example**: If the model container output of a batch request is
     #   `'\{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]\}'`,
     #   then set `LabelAttribute` to `'labels'` to extract the list of label
     #   headers `["cat","dog","fish"]`
@@ -4578,7 +4578,7 @@ module Aws::SageMaker
     #   response. Amazon SageMaker returns the following data in JSON
     #   format:
     #
-    #   * `CompilationJobArn`\: The Amazon Resource Name (ARN) of the
+    #   * `CompilationJobArn`: The Amazon Resource Name (ARN) of the
     #     compiled job.
     #
     #   ^
@@ -5244,11 +5244,11 @@ module Aws::SageMaker
     #
     #   An `EventTime` can be a `String` or `Fractional`.
     #
-    #   * `Fractional`\: `EventTime` feature values must be a Unix timestamp
+    #   * `Fractional`: `EventTime` feature values must be a Unix timestamp
     #     in seconds.
     #
-    #   * `String`\: `EventTime` feature values must be an ISO-8601 string
-    #     in the format. The following formats are supported
+    #   * `String`: `EventTime` feature values must be an ISO-8601 string in
+    #     the format. The following formats are supported
     #     `yyyy-MM-dd'T'HH:mm:ssZ` and `yyyy-MM-dd'T'HH:mm:ss.SSSZ` where
     #     `yyyy`, `MM`, and `dd` represent the year, month, and day
     #     respectively and `HH`, `mm`, `ss`, and if applicable, `SSS`
@@ -5668,29 +5668,29 @@ module Aws::SageMaker
     # @!attribute [rw] vendor_guidance
     #   The stability of the image version, specified by the maintainer.
     #
-    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for
-    #     image version stability.
+    #   * `NOT_PROVIDED`: The maintainers did not provide a status for image
+    #     version stability.
     #
-    #   * `STABLE`\: The image version is stable.
+    #   * `STABLE`: The image version is stable.
     #
-    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #   * `TO_BE_ARCHIVED`: The image version is set to be archived. Custom
     #     image versions that are set to be archived are automatically
     #     archived after three months.
     #
-    #   * `ARCHIVED`\: The image version is archived. Archived image
-    #     versions are not searchable and are no longer actively supported.
+    #   * `ARCHIVED`: The image version is archived. Archived image versions
+    #     are not searchable and are no longer actively supported.
     #   @return [String]
     #
     # @!attribute [rw] job_type
     #   Indicates SageMaker job type compatibility.
     #
-    #   * `TRAINING`\: The image version is compatible with SageMaker
+    #   * `TRAINING`: The image version is compatible with SageMaker
     #     training jobs.
     #
-    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #   * `INFERENCE`: The image version is compatible with SageMaker
     #     inference jobs.
     #
-    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #   * `NOTEBOOK_KERNEL`: The image version is compatible with SageMaker
     #     notebook kernels.
     #   @return [String]
     #
@@ -5705,9 +5705,9 @@ module Aws::SageMaker
     # @!attribute [rw] processor
     #   Indicates CPU or GPU compatibility.
     #
-    #   * `CPU`\: The image version is compatible with CPU.
+    #   * `CPU`: The image version is compatible with CPU.
     #
-    #   * `GPU`\: The image version is compatible with GPU.
+    #   * `GPU`: The image version is compatible with GPU.
     #   @return [String]
     #
     # @!attribute [rw] horovod
@@ -5756,7 +5756,7 @@ module Aws::SageMaker
     #   The type of the inference experiment that you want to run. The
     #   following types of experiments are possible:
     #
-    #   * `ShadowMode`\: You can use this type to validate a shadow variant.
+    #   * `ShadowMode`: You can use this type to validate a shadow variant.
     #     For more information, see [Shadow tests][1].
     #
     #   ^
@@ -6334,13 +6334,13 @@ module Aws::SageMaker
     #   Different organizations might have different criteria for model card
     #   review and approval.
     #
-    #   * `Draft`\: The model card is a work in progress.
+    #   * `Draft`: The model card is a work in progress.
     #
-    #   * `PendingReview`\: The model card is pending review.
+    #   * `PendingReview`: The model card is pending review.
     #
-    #   * `Approved`\: The model card is approved.
+    #   * `Approved`: The model card is approved.
     #
-    #   * `Archived`\: The model card is archived. No more updates should be
+    #   * `Archived`: The model card is archived. No more updates should be
     #     made to the model card, but it can still be exported.
     #   @return [String]
     #
@@ -11199,21 +11199,21 @@ module Aws::SageMaker
     # @!attribute [rw] endpoint_status
     #   The status of the endpoint.
     #
-    #   * `OutOfService`\: Endpoint is not available to take incoming
+    #   * `OutOfService`: Endpoint is not available to take incoming
     #     requests.
     #
-    #   * `Creating`\: CreateEndpoint is executing.
+    #   * `Creating`: CreateEndpoint is executing.
     #
-    #   * `Updating`\: UpdateEndpoint or UpdateEndpointWeightsAndCapacities
+    #   * `Updating`: UpdateEndpoint or UpdateEndpointWeightsAndCapacities
     #     is executing.
     #
-    #   * `SystemUpdating`\: Endpoint is undergoing maintenance and cannot
-    #     be updated or deleted or re-scaled until it has completed. This
+    #   * `SystemUpdating`: Endpoint is undergoing maintenance and cannot be
+    #     updated or deleted or re-scaled until it has completed. This
     #     maintenance operation does not change any customer-specified
     #     values such as VPC config, KMS encryption, model, instance type,
     #     or instance count.
     #
-    #   * `RollingBack`\: Endpoint fails to scale up or down or change its
+    #   * `RollingBack`: Endpoint fails to scale up or down or change its
     #     variant weight and is in the process of rolling back to its
     #     previous configuration. Once the rollback completes, endpoint
     #     returns to an `InService` status. This transitional status only
@@ -11222,11 +11222,11 @@ module Aws::SageMaker
     #     UpdateEndpointWeightsAndCapacities call or when the
     #     UpdateEndpointWeightsAndCapacities operation is called explicitly.
     #
-    #   * `InService`\: Endpoint is available to process incoming requests.
+    #   * `InService`: Endpoint is available to process incoming requests.
     #
-    #   * `Deleting`\: DeleteEndpoint is executing.
+    #   * `Deleting`: DeleteEndpoint is executing.
     #
-    #   * `Failed`\: Endpoint could not be created, updated, or re-scaled.
+    #   * `Failed`: Endpoint could not be created, updated, or re-scaled.
     #     Use DescribeEndpointOutput$FailureReason for information about the
     #     failure. DeleteEndpoint is the only operation that can be
     #     performed on a failed endpoint.
@@ -12130,29 +12130,29 @@ module Aws::SageMaker
     # @!attribute [rw] vendor_guidance
     #   The stability of the image version specified by the maintainer.
     #
-    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for
-    #     image version stability.
+    #   * `NOT_PROVIDED`: The maintainers did not provide a status for image
+    #     version stability.
     #
-    #   * `STABLE`\: The image version is stable.
+    #   * `STABLE`: The image version is stable.
     #
-    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #   * `TO_BE_ARCHIVED`: The image version is set to be archived. Custom
     #     image versions that are set to be archived are automatically
     #     archived after three months.
     #
-    #   * `ARCHIVED`\: The image version is archived. Archived image
-    #     versions are not searchable and are no longer actively supported.
+    #   * `ARCHIVED`: The image version is archived. Archived image versions
+    #     are not searchable and are no longer actively supported.
     #   @return [String]
     #
     # @!attribute [rw] job_type
     #   Indicates SageMaker job type compatibility.
     #
-    #   * `TRAINING`\: The image version is compatible with SageMaker
+    #   * `TRAINING`: The image version is compatible with SageMaker
     #     training jobs.
     #
-    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #   * `INFERENCE`: The image version is compatible with SageMaker
     #     inference jobs.
     #
-    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #   * `NOTEBOOK_KERNEL`: The image version is compatible with SageMaker
     #     notebook kernels.
     #   @return [String]
     #
@@ -12167,9 +12167,9 @@ module Aws::SageMaker
     # @!attribute [rw] processor
     #   Indicates CPU or GPU compatibility.
     #
-    #   * `CPU`\: The image version is compatible with CPU.
+    #   * `CPU`: The image version is compatible with CPU.
     #
-    #   * `GPU`\: The image version is compatible with GPU.
+    #   * `GPU`: The image version is compatible with GPU.
     #   @return [String]
     #
     # @!attribute [rw] horovod
@@ -12767,11 +12767,11 @@ module Aws::SageMaker
     # @!attribute [rw] status
     #   The completion status of the model card export job.
     #
-    #   * `InProgress`\: The model card export job is in progress.
+    #   * `InProgress`: The model card export job is in progress.
     #
-    #   * `Completed`\: The model card export job is complete.
+    #   * `Completed`: The model card export job is complete.
     #
-    #   * `Failed`\: The model card export job failed. To see the reason for
+    #   * `Failed`: The model card export job failed. To see the reason for
     #     the failure, see the `FailureReason` field in the response to a
     #     `DescribeModelCardExportJob` call.
     #   @return [String]
@@ -12860,13 +12860,13 @@ module Aws::SageMaker
     #   Different organizations might have different criteria for model card
     #   review and approval.
     #
-    #   * `Draft`\: The model card is a work in progress.
+    #   * `Draft`: The model card is a work in progress.
     #
-    #   * `PendingReview`\: The model card is pending review.
+    #   * `PendingReview`: The model card is pending review.
     #
-    #   * `Approved`\: The model card is approved.
+    #   * `Approved`: The model card is approved.
     #
-    #   * `Archived`\: The model card is archived. No more updates should be
+    #   * `Archived`: The model card is archived. No more updates should be
     #     made to the model card, but it can still be exported.
     #   @return [String]
     #
@@ -12897,18 +12897,18 @@ module Aws::SageMaker
     #   `ModelCardProcessingStatus` updates throughout the different
     #   deletion steps.
     #
-    #   * `DeletePending`\: Model card deletion request received.
+    #   * `DeletePending`: Model card deletion request received.
     #
-    #   * `DeleteInProgress`\: Model card deletion is in progress.
+    #   * `DeleteInProgress`: Model card deletion is in progress.
     #
-    #   * `ContentDeleted`\: Deleted model card content.
+    #   * `ContentDeleted`: Deleted model card content.
     #
-    #   * `ExportJobsDeleted`\: Deleted all export jobs associated with the
+    #   * `ExportJobsDeleted`: Deleted all export jobs associated with the
     #     model card.
     #
-    #   * `DeleteCompleted`\: Successfully deleted the model card.
+    #   * `DeleteCompleted`: Successfully deleted the model card.
     #
-    #   * `DeleteFailed`\: The model card failed to delete.
+    #   * `DeleteFailed`: The model card failed to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelCardResponse AWS API Documentation
@@ -16435,21 +16435,21 @@ module Aws::SageMaker
     # @!attribute [rw] endpoint_status
     #   The status of the endpoint.
     #
-    #   * `OutOfService`\: Endpoint is not available to take incoming
+    #   * `OutOfService`: Endpoint is not available to take incoming
     #     requests.
     #
-    #   * `Creating`\: CreateEndpoint is executing.
+    #   * `Creating`: CreateEndpoint is executing.
     #
-    #   * `Updating`\: UpdateEndpoint or UpdateEndpointWeightsAndCapacities
+    #   * `Updating`: UpdateEndpoint or UpdateEndpointWeightsAndCapacities
     #     is executing.
     #
-    #   * `SystemUpdating`\: Endpoint is undergoing maintenance and cannot
-    #     be updated or deleted or re-scaled until it has completed. This
+    #   * `SystemUpdating`: Endpoint is undergoing maintenance and cannot be
+    #     updated or deleted or re-scaled until it has completed. This
     #     maintenance operation does not change any customer-specified
     #     values such as VPC config, KMS encryption, model, instance type,
     #     or instance count.
     #
-    #   * `RollingBack`\: Endpoint fails to scale up or down or change its
+    #   * `RollingBack`: Endpoint fails to scale up or down or change its
     #     variant weight and is in the process of rolling back to its
     #     previous configuration. Once the rollback completes, endpoint
     #     returns to an `InService` status. This transitional status only
@@ -16458,11 +16458,11 @@ module Aws::SageMaker
     #     UpdateEndpointWeightsAndCapacities call or when the
     #     UpdateEndpointWeightsAndCapacities operation is called explicitly.
     #
-    #   * `InService`\: Endpoint is available to process incoming requests.
+    #   * `InService`: Endpoint is available to process incoming requests.
     #
-    #   * `Deleting`\: DeleteEndpoint is executing.
+    #   * `Deleting`: DeleteEndpoint is executing.
     #
-    #   * `Failed`\: Endpoint could not be created, updated, or re-scaled.
+    #   * `Failed`: Endpoint could not be created, updated, or re-scaled.
     #     Use DescribeEndpointOutput$FailureReason for information about the
     #     failure. DeleteEndpoint is the only operation that can be
     #     performed on a failed endpoint.
@@ -17087,7 +17087,7 @@ module Aws::SageMaker
     # : To define a metric filter, enter a value using the form
     #   `"Metrics.<name>"`, where `<name>` is a metric name. For example,
     #   the following filter searches for training jobs with an `"accuracy"`
-    #   metric greater than `"0.9"`\:
+    #   metric greater than `"0.9"`:
     #
     #   `\{`
     #
@@ -17107,7 +17107,7 @@ module Aws::SageMaker
     #   also a decimal value. If the specified `Value` is an integer, the
     #   decimal hyperparameter values are treated as integers. For example,
     #   the following filter is satisfied by training jobs with a
-    #   `"learning_rate"` hyperparameter that is less than `"0.5"`\:
+    #   `"learning_rate"` hyperparameter that is less than `"0.5"`:
     #
     #   ` \{`
     #
@@ -19892,7 +19892,7 @@ module Aws::SageMaker
     #   `MaxResource` is not provided, and `Hyperband` is selected as the
     #   hyperparameter tuning strategy, `HyperbandTrainingJ` attempts to
     #   infer `MaxResource` from the following keys (if present) in
-    #   [StaticsHyperParameters][1]\:
+    #   [StaticsHyperParameters][1]:
     #
     #   * `epochs`
     #
@@ -20422,7 +20422,7 @@ module Aws::SageMaker
     # @!attribute [rw] step_type
     #   The type of the subtask.
     #
-    #   `BENCHMARK`\: Evaluate the performance of your model on different
+    #   `BENCHMARK`: Evaluate the performance of your model on different
     #   instance types.
     #   @return [String]
     #
@@ -20508,8 +20508,8 @@ module Aws::SageMaker
     #   trained model with a JSON dictionary form. The data inputs are
     #   InputConfig$Framework specific.
     #
-    #   * `TensorFlow`\: You must specify the name and shape (NHWC format)
-    #     of the expected data inputs using a dictionary format for your
+    #   * `TensorFlow`: You must specify the name and shape (NHWC format) of
+    #     the expected data inputs using a dictionary format for your
     #     trained model. The dictionary formats required for the console and
     #     CLI are different.
     #
@@ -20527,7 +20527,7 @@ module Aws::SageMaker
     #       * If using the CLI, `\{"data1": [1,28,28,1],
     #         "data2":[1,28,28,1]\}`
     #
-    #   * `KERAS`\: You must specify the name and shape (NCHW format) of
+    #   * `KERAS`: You must specify the name and shape (NCHW format) of
     #     expected data inputs using a dictionary format for your trained
     #     model. Note that while Keras model artifacts should be uploaded in
     #     NHWC (channel-last) format, `DataInputConfig` should be specified
@@ -20548,7 +20548,7 @@ module Aws::SageMaker
     #       * If using the CLI, `\{"input_1": [1,3,224,224],
     #         "input_2":[1,3,224,224]\}`
     #
-    #   * `MXNET/ONNX/DARKNET`\: You must specify the name and shape (NCHW
+    #   * `MXNET/ONNX/DARKNET`: You must specify the name and shape (NCHW
     #     format) of the expected data inputs in order using a dictionary
     #     format for your trained model. The dictionary formats required for
     #     the console and CLI are different.
@@ -20567,12 +20567,12 @@ module Aws::SageMaker
     #       * If using the CLI, `\{"var1": [1,1,28,28],
     #         "var2":[1,1,28,28]\}`
     #
-    #   * `PyTorch`\: You can either specify the name and shape (NCHW
-    #     format) of expected data inputs in order using a dictionary format
-    #     for your trained model or you can specify the shape only using a
-    #     list format. The dictionary formats required for the console and
-    #     CLI are different. The list formats for the console and CLI are
-    #     the same.
+    #   * `PyTorch`: You can either specify the name and shape (NCHW format)
+    #     of expected data inputs in order using a dictionary format for
+    #     your trained model or you can specify the shape only using a list
+    #     format. The dictionary formats required for the console and CLI
+    #     are different. The list formats for the console and CLI are the
+    #     same.
     #
     #     * Examples for one input in dictionary format:
     #
@@ -20593,12 +20593,12 @@ module Aws::SageMaker
     #     * Example for two inputs in list format: `[[1,3,224,224],
     #       [1,3,224,224]]`
     #
-    #   * `XGBOOST`\: input data name and shape are not needed.
+    #   * `XGBOOST`: input data name and shape are not needed.
     #
     #   `DataInputConfig` supports the following parameters for `CoreML`
     #   OutputConfig$TargetDevice (ML Model format):
     #
-    #   * `shape`\: Input shape, for example `\{"input_1": \{"shape":
+    #   * `shape`: Input shape, for example `\{"input_1": \{"shape":
     #     [1,224,224,3]\}\}`. In addition to static input shapes, CoreML
     #     converter supports Flexible input shapes:
     #
@@ -20612,21 +20612,21 @@ module Aws::SageMaker
     #       input shapes, for example: `\{"input_1": \{"shape": [[1, 224,
     #       224, 3], [1, 160, 160, 3]]\}\}`
     #
-    #   * `default_shape`\: Default input shape. You can set a default shape
+    #   * `default_shape`: Default input shape. You can set a default shape
     #     during conversion for both Range Dimension and Enumerated Shapes.
     #     For example `\{"input_1": \{"shape": ["1..10", 224, 224, 3],
     #     "default_shape": [1, 224, 224, 3]\}\}`
     #
-    #   * `type`\: Input type. Allowed values: `Image` and `Tensor`. By
+    #   * `type`: Input type. Allowed values: `Image` and `Tensor`. By
     #     default, the converter generates an ML Model with inputs of type
     #     Tensor (MultiArray). User can set input type to be Image. Image
     #     input type requires additional input parameters such as `bias` and
     #     `scale`.
     #
-    #   * `bias`\: If the input type is an Image, you need to provide the
+    #   * `bias`: If the input type is an Image, you need to provide the
     #     bias vector.
     #
-    #   * `scale`\: If the input type is an Image, you need to provide a
+    #   * `scale`: If the input type is an Image, you need to provide a
     #     scale factor.
     #
     #   CoreML `ClassifierConfig` parameters can be specified using
@@ -21325,11 +21325,11 @@ module Aws::SageMaker
     #   one of the following keys: `source-ref` or `source`. The value of
     #   the keys are interpreted as follows:
     #
-    #   * `source-ref`\: The source of the object is the Amazon S3 object
+    #   * `source-ref`: The source of the object is the Amazon S3 object
     #     specified in the value. Use this value when the object is a binary
     #     object, such as an image.
     #
-    #   * `source`\: The source of the object is the value. Use this value
+    #   * `source`: The source of the object is the value. Use this value
     #     when the object is a text value.
     #
     #   If you are a new user of Ground Truth, it is recommended you review
@@ -23785,7 +23785,7 @@ module Aws::SageMaker
     # @!attribute [rw] step_type
     #   A filter to return details about the specified type of subtask.
     #
-    #   `BENCHMARK`\: Evaluate the performance of your model on different
+    #   `BENCHMARK`: Evaluate the performance of your model on different
     #   instance types.
     #   @return [String]
     #
@@ -26960,13 +26960,13 @@ module Aws::SageMaker
     #   Different organizations might have different criteria for model card
     #   review and approval.
     #
-    #   * `Draft`\: The model card is a work in progress.
+    #   * `Draft`: The model card is a work in progress.
     #
-    #   * `PendingReview`\: The model card is pending review.
+    #   * `PendingReview`: The model card is pending review.
     #
-    #   * `Approved`\: The model card is approved.
+    #   * `Approved`: The model card is approved.
     #
-    #   * `Archived`\: The model card is archived. No more updates should be
+    #   * `Archived`: The model card is archived. No more updates should be
     #     made to the model card, but it can still be exported.
     #   @return [String]
     #
@@ -27137,13 +27137,13 @@ module Aws::SageMaker
     #   Different organizations might have different criteria for model card
     #   review and approval.
     #
-    #   * `Draft`\: The model card is a work in progress.
+    #   * `Draft`: The model card is a work in progress.
     #
-    #   * `PendingReview`\: The model card is pending review.
+    #   * `PendingReview`: The model card is pending review.
     #
-    #   * `Approved`\: The model card is approved.
+    #   * `Approved`: The model card is approved.
     #
-    #   * `Archived`\: The model card is archived. No more updates should be
+    #   * `Archived`: The model card is archived. No more updates should be
     #     made to the model card, but it can still be exported.
     #   @return [String]
     #
@@ -27182,13 +27182,13 @@ module Aws::SageMaker
     #   organization. Different organizations might have different criteria
     #   for model card review and approval.
     #
-    #   * `Draft`\: The model card is a work in progress.
+    #   * `Draft`: The model card is a work in progress.
     #
-    #   * `PendingReview`\: The model card is pending review.
+    #   * `PendingReview`: The model card is pending review.
     #
-    #   * `Approved`\: The model card is approved.
+    #   * `Approved`: The model card is approved.
     #
-    #   * `Archived`\: The model card is archived. No more updates should be
+    #   * `Archived`: The model card is archived. No more updates should be
     #     made to the model card, but it can still be exported.
     #   @return [String]
     #
@@ -27659,7 +27659,7 @@ module Aws::SageMaker
     #   The inference option to which to deploy your model. Possible values
     #   are the following:
     #
-    #   * `RealTime`\: Deploy to real-time inference.
+    #   * `RealTime`: Deploy to real-time inference.
     #
     #   ^
     #   @return [String]
@@ -29886,7 +29886,7 @@ module Aws::SageMaker
     #   rest using Amazon S3 server-side encryption.
     #
     #   The caller (either IAM user or IAM role) of `CreateFeatureGroup`
-    #   must have below permissions to the `OnlineStore` `KmsKeyId`\:
+    #   must have below permissions to the `OnlineStore` `KmsKeyId`:
     #
     #   * `"kms:Encrypt"`
     #
@@ -29912,7 +29912,7 @@ module Aws::SageMaker
     #
     #   The caller (either user or IAM role) to all DataPlane operations
     #   (`PutRecord`, `GetRecord`, `DeleteRecord`) must have the following
-    #   permissions to the `KmsKeyId`\:
+    #   permissions to the `KmsKeyId`:
     #
     #   * `"kms:Decrypt"`
     #
@@ -30004,11 +30004,10 @@ module Aws::SageMaker
     #   for NVIDIA accelerators and highly recommended for CPU compilations.
     #   For any other cases, it is optional to specify `CompilerOptions.`
     #
-    #   * `DTYPE`\: Specifies the data type for the input. When compiling
-    #     for `ml_*` (except for `ml_inf`) instances using PyTorch
-    #     framework, provide the data type (dtype) of the model's input.
-    #     `"float32"` is used if `"DTYPE"` is not specified. Options for
-    #     data type are:
+    #   * `DTYPE`: Specifies the data type for the input. When compiling for
+    #     `ml_*` (except for `ml_inf`) instances using PyTorch framework,
+    #     provide the data type (dtype) of the model's input. `"float32"`
+    #     is used if `"DTYPE"` is not specified. Options for data type are:
     #
     #     * float32: Use either `"float"` or `"float32"`.
     #
@@ -30016,75 +30015,74 @@ module Aws::SageMaker
     #
     #     For example, `\{"dtype" : "float32"\}`.
     #
-    #   * `CPU`\: Compilation for CPU supports the following compiler
+    #   * `CPU`: Compilation for CPU supports the following compiler
     #     options.
     #
-    #     * `mcpu`\: CPU micro-architecture. For example, `\{'mcpu':
+    #     * `mcpu`: CPU micro-architecture. For example, `\{'mcpu':
     #       'skylake-avx512'\}`
     #
-    #     * `mattr`\: CPU flags. For example, `\{'mattr': ['+neon',
+    #     * `mattr`: CPU flags. For example, `\{'mattr': ['+neon',
     #       '+vfpv4']\}`
     #
-    #   * `ARM`\: Details of ARM CPU compilations.
+    #   * `ARM`: Details of ARM CPU compilations.
     #
-    #     * `NEON`\: NEON is an implementation of the Advanced SIMD
-    #       extension used in ARMv7 processors.
+    #     * `NEON`: NEON is an implementation of the Advanced SIMD extension
+    #       used in ARMv7 processors.
     #
     #       For example, add `\{'mattr': ['+neon']\}` to the compiler
     #       options if compiling for ARM 32-bit platform with the NEON
     #       support.
     #
-    #   * `NVIDIA`\: Compilation for NVIDIA GPU supports the following
+    #   * `NVIDIA`: Compilation for NVIDIA GPU supports the following
     #     compiler options.
     #
-    #     * `gpu_code`\: Specifies the targeted architecture.
+    #     * `gpu_code`: Specifies the targeted architecture.
     #
-    #     * `trt-ver`\: Specifies the TensorRT versions in x.y.z. format.
+    #     * `trt-ver`: Specifies the TensorRT versions in x.y.z. format.
     #
-    #     * `cuda-ver`\: Specifies the CUDA version in x.y format.
+    #     * `cuda-ver`: Specifies the CUDA version in x.y format.
     #
     #     For example, `\{'gpu-code': 'sm_72', 'trt-ver': '6.0.1',
     #     'cuda-ver': '10.1'\}`
     #
-    #   * `ANDROID`\: Compilation for the Android OS supports the following
+    #   * `ANDROID`: Compilation for the Android OS supports the following
     #     compiler options:
     #
-    #     * `ANDROID_PLATFORM`\: Specifies the Android API levels. Available
+    #     * `ANDROID_PLATFORM`: Specifies the Android API levels. Available
     #       levels range from 21 to 29. For example, `\{'ANDROID_PLATFORM':
     #       28\}`.
     #
-    #     * `mattr`\: Add `\{'mattr': ['+neon']\}` to compiler options if
+    #     * `mattr`: Add `\{'mattr': ['+neon']\}` to compiler options if
     #       compiling for ARM 32-bit platform with NEON support.
     #
-    #   * `INFERENTIA`\: Compilation for target ml\_inf1 uses compiler
+    #   * `INFERENTIA`: Compilation for target ml\_inf1 uses compiler
     #     options passed in as a JSON string. For example,
     #     `"CompilerOptions": ""--verbose 1 --num-neuroncores 2 -O2""`.
     #
     #     For information about supported compiler options, see [ Neuron
     #     Compiler CLI][1].
     #
-    #   * `CoreML`\: Compilation for the CoreML OutputConfig$TargetDevice
+    #   * `CoreML`: Compilation for the CoreML OutputConfig$TargetDevice
     #     supports the following compiler options:
     #
-    #     * `class_labels`\: Specifies the classification labels file name
+    #     * `class_labels`: Specifies the classification labels file name
     #       inside input tar.gz file. For example, `\{"class_labels":
     #       "imagenet_labels_1000.txt"\}`. Labels inside the txt file should
     #       be separated by newlines.
     #
     #     ^
     #
-    #   * `EIA`\: Compilation for the Elastic Inference Accelerator supports
+    #   * `EIA`: Compilation for the Elastic Inference Accelerator supports
     #     the following compiler options:
     #
-    #     * `precision_mode`\: Specifies the precision of compiled
-    #       artifacts. Supported values are `"FP16"` and `"FP32"`. Default
-    #       is `"FP32"`.
+    #     * `precision_mode`: Specifies the precision of compiled artifacts.
+    #       Supported values are `"FP16"` and `"FP32"`. Default is `"FP32"`.
     #
-    #     * `signature_def_key`\: Specifies the signature to use for models
+    #     * `signature_def_key`: Specifies the signature to use for models
     #       in SavedModel format. Defaults is TensorFlow's default
     #       signature def key.
     #
-    #     * `output_names`\: Specifies a list of output tensor names for
+    #     * `output_names`: Specifies a list of output tensor names for
     #       models in FrozenGraph format. Set at most one API field, either:
     #       `signature_def_key` or `output_names`.
     #
@@ -31702,18 +31700,18 @@ module Aws::SageMaker
     #   The endpoint variant status which describes the current deployment
     #   stage status or operational status.
     #
-    #   * `Creating`\: Creating inference resources for the production
+    #   * `Creating`: Creating inference resources for the production
     #     variant.
     #
-    #   * `Deleting`\: Terminating inference resources for the production
+    #   * `Deleting`: Terminating inference resources for the production
     #     variant.
     #
-    #   * `Updating`\: Updating capacity for the production variant.
+    #   * `Updating`: Updating capacity for the production variant.
     #
-    #   * `ActivatingTraffic`\: Turning on traffic for the production
+    #   * `ActivatingTraffic`: Turning on traffic for the production
     #     variant.
     #
-    #   * `Baking`\: Waiting period to monitor the CloudWatch alarms in the
+    #   * `Baking`: Waiting period to monitor the CloudWatch alarms in the
     #     automatic rollback configuration.
     #   @return [String]
     #
@@ -33877,7 +33875,7 @@ module Aws::SageMaker
     #   location.
     #
     #   The IAM `roleARN` that is passed as a parameter to
-    #   `CreateFeatureGroup` must have below permissions to the `KmsKeyId`\:
+    #   `CreateFeatureGroup` must have below permissions to the `KmsKeyId`:
     #
     #   * `"kms:GenerateDataKey"`
     #
@@ -34916,9 +34914,9 @@ module Aws::SageMaker
     #   The desired state of the experiment after stopping. The possible
     #   states are the following:
     #
-    #   * `Completed`\: The experiment completed successfully
+    #   * `Completed`: The experiment completed successfully
     #
-    #   * `Cancelled`\: The experiment was canceled
+    #   * `Cancelled`: The experiment was canceled
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -35263,9 +35261,9 @@ module Aws::SageMaker
     # @!attribute [rw] os
     #   Specifies a target platform OS.
     #
-    #   * `LINUX`\: Linux-based operating systems.
+    #   * `LINUX`: Linux-based operating systems.
     #
-    #   * `ANDROID`\: Android operating systems. Android API level can be
+    #   * `ANDROID`: Android operating systems. Android API level can be
     #     specified using the `ANDROID_PLATFORM` compiler option. For
     #     example, `"CompilerOptions": \{'ANDROID_PLATFORM': 28\}`
     #   @return [String]
@@ -35273,27 +35271,27 @@ module Aws::SageMaker
     # @!attribute [rw] arch
     #   Specifies a target platform architecture.
     #
-    #   * `X86_64`\: 64-bit version of the x86 instruction set.
+    #   * `X86_64`: 64-bit version of the x86 instruction set.
     #
-    #   * `X86`\: 32-bit version of the x86 instruction set.
+    #   * `X86`: 32-bit version of the x86 instruction set.
     #
-    #   * `ARM64`\: ARMv8 64-bit CPU.
+    #   * `ARM64`: ARMv8 64-bit CPU.
     #
-    #   * `ARM_EABIHF`\: ARMv7 32-bit, Hard Float.
+    #   * `ARM_EABIHF`: ARMv7 32-bit, Hard Float.
     #
-    #   * `ARM_EABI`\: ARMv7 32-bit, Soft Float. Used by Android 32-bit ARM
+    #   * `ARM_EABI`: ARMv7 32-bit, Soft Float. Used by Android 32-bit ARM
     #     platform.
     #   @return [String]
     #
     # @!attribute [rw] accelerator
     #   Specifies a target platform accelerator (optional).
     #
-    #   * `NVIDIA`\: Nvidia graphics processing unit. It also requires
+    #   * `NVIDIA`: Nvidia graphics processing unit. It also requires
     #     `gpu-code`, `trt-ver`, `cuda-ver` compiler options
     #
-    #   * `MALI`\: ARM Mali graphics processor
+    #   * `MALI`: ARM Mali graphics processor
     #
-    #   * `INTEL_GRAPHICS`\: Integrated Intel graphics
+    #   * `INTEL_GRAPHICS`: Integrated Intel graphics
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TargetPlatform AWS API Documentation
@@ -35399,15 +35397,15 @@ module Aws::SageMaker
     # @!attribute [rw] type
     #   Traffic routing strategy type.
     #
-    #   * `ALL_AT_ONCE`\: Endpoint traffic shifts to the new fleet in a
+    #   * `ALL_AT_ONCE`: Endpoint traffic shifts to the new fleet in a
     #     single step.
     #
-    #   * `CANARY`\: Endpoint traffic shifts to the new fleet in two steps.
+    #   * `CANARY`: Endpoint traffic shifts to the new fleet in two steps.
     #     The first step is the canary, which is a small portion of the
     #     traffic. The second step is the remainder of the traffic.
     #
-    #   * `LINEAR`\: Endpoint traffic shifts to the new fleet in n steps of
-    #     a configurable size.
+    #   * `LINEAR`: Endpoint traffic shifts to the new fleet in n steps of a
+    #     configurable size.
     #   @return [String]
     #
     # @!attribute [rw] wait_interval_in_seconds
@@ -36639,7 +36637,7 @@ module Aws::SageMaker
     #
     #     `]`
     #
-    #     The preceding JSON matches the following `S3Uris`\:
+    #     The preceding JSON matches the following `S3Uris`:
     #
     #     `s3://customer_bucket/some/prefix/relative/path/to/custdata-1`
     #
@@ -37997,29 +37995,29 @@ module Aws::SageMaker
     # @!attribute [rw] vendor_guidance
     #   The availability of the image version specified by the maintainer.
     #
-    #   * `NOT_PROVIDED`\: The maintainers did not provide a status for
-    #     image version stability.
+    #   * `NOT_PROVIDED`: The maintainers did not provide a status for image
+    #     version stability.
     #
-    #   * `STABLE`\: The image version is stable.
+    #   * `STABLE`: The image version is stable.
     #
-    #   * `TO_BE_ARCHIVED`\: The image version is set to be archived. Custom
+    #   * `TO_BE_ARCHIVED`: The image version is set to be archived. Custom
     #     image versions that are set to be archived are automatically
     #     archived after three months.
     #
-    #   * `ARCHIVED`\: The image version is archived. Archived image
-    #     versions are not searchable and are no longer actively supported.
+    #   * `ARCHIVED`: The image version is archived. Archived image versions
+    #     are not searchable and are no longer actively supported.
     #   @return [String]
     #
     # @!attribute [rw] job_type
     #   Indicates SageMaker job type compatibility.
     #
-    #   * `TRAINING`\: The image version is compatible with SageMaker
+    #   * `TRAINING`: The image version is compatible with SageMaker
     #     training jobs.
     #
-    #   * `INFERENCE`\: The image version is compatible with SageMaker
+    #   * `INFERENCE`: The image version is compatible with SageMaker
     #     inference jobs.
     #
-    #   * `NOTEBOOK_KERNEL`\: The image version is compatible with SageMaker
+    #   * `NOTEBOOK_KERNEL`: The image version is compatible with SageMaker
     #     notebook kernels.
     #   @return [String]
     #
@@ -38034,9 +38032,9 @@ module Aws::SageMaker
     # @!attribute [rw] processor
     #   Indicates CPU or GPU compatibility.
     #
-    #   * `CPU`\: The image version is compatible with CPU.
+    #   * `CPU`: The image version is compatible with CPU.
     #
-    #   * `GPU`\: The image version is compatible with GPU.
+    #   * `GPU`: The image version is compatible with GPU.
     #   @return [String]
     #
     # @!attribute [rw] horovod
@@ -38158,13 +38156,13 @@ module Aws::SageMaker
     #   Different organizations might have different criteria for model card
     #   review and approval.
     #
-    #   * `Draft`\: The model card is a work in progress.
+    #   * `Draft`: The model card is a work in progress.
     #
-    #   * `PendingReview`\: The model card is pending review.
+    #   * `PendingReview`: The model card is pending review.
     #
-    #   * `Approved`\: The model card is approved.
+    #   * `Approved`: The model card is approved.
     #
-    #   * `Archived`\: The model card is archived. No more updates should be
+    #   * `Archived`: The model card is archived. No more updates should be
     #     made to the model card, but it can still be exported.
     #   @return [String]
     #
@@ -39162,15 +39160,15 @@ module Aws::SageMaker
     # @!attribute [rw] variant_property_type
     #   The type of variant property. The supported values are:
     #
-    #   * `DesiredInstanceCount`\: Overrides the existing variant instance
+    #   * `DesiredInstanceCount`: Overrides the existing variant instance
     #     counts using the ProductionVariant$InitialInstanceCount values in
     #     the CreateEndpointConfigInput$ProductionVariants.
     #
-    #   * `DesiredWeight`\: Overrides the existing variant weights using the
+    #   * `DesiredWeight`: Overrides the existing variant weights using the
     #     ProductionVariant$InitialVariantWeight values in the
     #     CreateEndpointConfigInput$ProductionVariants.
     #
-    #   * `DataCaptureConfig`\: (Not currently supported.)
+    #   * `DataCaptureConfig`: (Not currently supported.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VariantProperty AWS API Documentation
@@ -39248,16 +39246,16 @@ module Aws::SageMaker
     # @!attribute [rw] status
     #   The status of the warm pool.
     #
-    #   * `InUse`\: The warm pool is in use for the training job.
+    #   * `InUse`: The warm pool is in use for the training job.
     #
-    #   * `Available`\: The warm pool is available to reuse for a matching
+    #   * `Available`: The warm pool is available to reuse for a matching
     #     training job.
     #
-    #   * `Reused`\: The warm pool moved to a matching training job for
+    #   * `Reused`: The warm pool moved to a matching training job for
     #     reuse.
     #
-    #   * `Terminated`\: The warm pool is no longer available. Warm pools
-    #     are unavailable if they are terminated by a user, terminated for a
+    #   * `Terminated`: The warm pool is no longer available. Warm pools are
+    #     unavailable if they are terminated by a user, terminated for a
     #     patch update, or terminated for exceeding the specified
     #     `KeepAlivePeriodInSeconds`.
     #   @return [String]

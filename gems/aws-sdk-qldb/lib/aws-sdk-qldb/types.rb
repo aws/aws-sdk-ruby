@@ -63,8 +63,8 @@ module Aws::QLDB
     #   The permissions mode to assign to the ledger that you want to
     #   create. This parameter can have one of the following values:
     #
-    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access
-    #     control with API-level granularity for ledgers.
+    #   * `ALLOW_ALL`: A legacy permissions mode that enables access control
+    #     with API-level granularity for ledgers.
     #
     #     This mode allows users who have the `SendCommand` API permission
     #     for this ledger to run all PartiQL commands (hence, `ALLOW_ALL`)
@@ -72,9 +72,9 @@ module Aws::QLDB
     #     table-level or command-level IAM permissions policies that you
     #     create for the ledger.
     #
-    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables
-    #     access control with finer granularity for ledgers, tables, and
-    #     PartiQL commands.
+    #   * `STANDARD`: (*Recommended*) A permissions mode that enables access
+    #     control with finer granularity for ledgers, tables, and PartiQL
+    #     commands.
     #
     #     By default, this mode denies all user requests to run any PartiQL
     #     commands on any tables in this ledger. To allow PartiQL commands
@@ -111,13 +111,13 @@ module Aws::QLDB
     #
     #   Use one of the following options to specify this parameter:
     #
-    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #   * `AWS_OWNED_KMS_KEY`: Use an KMS key that is owned and managed by
     #     Amazon Web Services on your behalf.
     #
-    #   * **Undefined**\: By default, use an Amazon Web Services owned KMS
+    #   * **Undefined**: By default, use an Amazon Web Services owned KMS
     #     key.
     #
-    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #   * **A valid symmetric customer managed KMS key**: Use the specified
     #     KMS key in your account that you create, own, and manage.
     #
     #     Amazon QLDB does not support asymmetric keys. For more
@@ -796,9 +796,9 @@ module Aws::QLDB
     #   The current state of encryption at rest for the ledger. This can be
     #   one of the following values:
     #
-    #   * `ENABLED`\: Encryption is fully enabled using the specified key.
+    #   * `ENABLED`: Encryption is fully enabled using the specified key.
     #
-    #   * `UPDATING`\: The ledger is actively processing the specified key
+    #   * `UPDATING`: The ledger is actively processing the specified key
     #     change.
     #
     #     Key changes in QLDB are asynchronous. The ledger is fully
@@ -806,7 +806,7 @@ module Aws::QLDB
     #     being processed. The amount of time it takes to update a key
     #     varies depending on the ledger size.
     #
-    #   * `KMS_KEY_INACCESSIBLE`\: The specified customer managed KMS key is
+    #   * `KMS_KEY_INACCESSIBLE`: The specified customer managed KMS key is
     #     not accessible, and the ledger is impaired. Either the key was
     #     disabled or deleted, or the grants on the key were revoked. When a
     #     ledger is impaired, it is not accessible and does not accept any
@@ -1434,8 +1434,8 @@ module Aws::QLDB
     #   The permissions mode to assign to the ledger. This parameter can
     #   have one of the following values:
     #
-    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access
-    #     control with API-level granularity for ledgers.
+    #   * `ALLOW_ALL`: A legacy permissions mode that enables access control
+    #     with API-level granularity for ledgers.
     #
     #     This mode allows users who have the `SendCommand` API permission
     #     for this ledger to run all PartiQL commands (hence, `ALLOW_ALL`)
@@ -1443,9 +1443,9 @@ module Aws::QLDB
     #     table-level or command-level IAM permissions policies that you
     #     create for the ledger.
     #
-    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables
-    #     access control with finer granularity for ledgers, tables, and
-    #     PartiQL commands.
+    #   * `STANDARD`: (*Recommended*) A permissions mode that enables access
+    #     control with finer granularity for ledgers, tables, and PartiQL
+    #     commands.
     #
     #     By default, this mode denies all user requests to run any PartiQL
     #     commands on any tables in this ledger. To allow PartiQL commands
@@ -1517,12 +1517,12 @@ module Aws::QLDB
     #
     #   Use one of the following options to specify this parameter:
     #
-    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #   * `AWS_OWNED_KMS_KEY`: Use an KMS key that is owned and managed by
     #     Amazon Web Services on your behalf.
     #
-    #   * **Undefined**\: Make no changes to the KMS key of the ledger.
+    #   * **Undefined**: Make no changes to the KMS key of the ledger.
     #
-    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #   * **A valid symmetric customer managed KMS key**: Use the specified
     #     KMS key in your account that you create, own, and manage.
     #
     #     Amazon QLDB does not support asymmetric keys. For more

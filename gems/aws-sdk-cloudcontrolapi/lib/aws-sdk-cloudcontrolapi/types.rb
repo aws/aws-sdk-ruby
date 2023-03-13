@@ -728,19 +728,19 @@ module Aws::CloudControlApi
     # @!attribute [rw] operation_status
     #   The current status of the resource operation request.
     #
-    #   * `PENDING`\: The resource operation hasn't yet started.
+    #   * `PENDING`: The resource operation hasn't yet started.
     #
-    #   * `IN_PROGRESS`\: The resource operation is currently in progress.
+    #   * `IN_PROGRESS`: The resource operation is currently in progress.
     #
-    #   * `SUCCESS`\: The resource operation has successfully completed.
+    #   * `SUCCESS`: The resource operation has successfully completed.
     #
-    #   * `FAILED`\: The resource operation has failed. Refer to the error
+    #   * `FAILED`: The resource operation has failed. Refer to the error
     #     code and status message for more information.
     #
-    #   * `CANCEL_IN_PROGRESS`\: The resource operation is in the process of
+    #   * `CANCEL_IN_PROGRESS`: The resource operation is in the process of
     #     being canceled.
     #
-    #   * `CANCEL_COMPLETE`\: The resource operation has been canceled.
+    #   * `CANCEL_COMPLETE`: The resource operation has been canceled.
     #   @return [String]
     #
     # @!attribute [rw] event_time
@@ -865,19 +865,19 @@ module Aws::CloudControlApi
     # @!attribute [rw] operation_statuses
     #   The operation statuses to include in the filter.
     #
-    #   * `PENDING`\: The operation has been requested, but not yet
+    #   * `PENDING`: The operation has been requested, but not yet
     #     initiated.
     #
-    #   * `IN_PROGRESS`\: The operation is in progress.
+    #   * `IN_PROGRESS`: The operation is in progress.
     #
-    #   * `SUCCESS`\: The operation completed.
+    #   * `SUCCESS`: The operation completed.
     #
-    #   * `FAILED`\: The operation failed.
+    #   * `FAILED`: The operation failed.
     #
-    #   * `CANCEL_IN_PROGRESS`\: The operation is in the process of being
+    #   * `CANCEL_IN_PROGRESS`: The operation is in the process of being
     #     canceled.
     #
-    #   * `CANCEL_COMPLETE`\: The operation has been canceled.
+    #   * `CANCEL_COMPLETE`: The operation has been canceled.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudcontrol-2021-09-30/ResourceRequestStatusFilter AWS API Documentation

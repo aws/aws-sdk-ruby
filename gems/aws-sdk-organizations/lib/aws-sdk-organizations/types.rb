@@ -1063,7 +1063,7 @@ module Aws::Organizations
     #   Specifies the feature set supported by the new organization. Each
     #   feature set supports different levels of functionality.
     #
-    #   * `CONSOLIDATED_BILLING`\: All member accounts have their bills
+    #   * `CONSOLIDATED_BILLING`: All member accounts have their bills
     #     consolidated to and paid by the management account. For more
     #     information, see [Consolidated billing][1] in the *Organizations
     #     User Guide.*
@@ -1071,7 +1071,7 @@ module Aws::Organizations
     #     The consolidated billing feature subset isn't available for
     #     organizations in the Amazon Web Services GovCloud (US) Region.
     #
-    #   * `ALL`\: In addition to all the features supported by the
+    #   * `ALL`: In addition to all the features supported by the
     #     consolidated billing feature set, the management account can also
     #     apply any policy type to any member account in the organization.
     #     For more information, see [All features][2] in the *Organizations
@@ -2106,26 +2106,26 @@ module Aws::Organizations
     #   of the handshake through the process from its creation to its
     #   acceptance. The meaning of each of the valid values is as follows:
     #
-    #   * **REQUESTED**\: This handshake was sent to multiple recipients
+    #   * **REQUESTED**: This handshake was sent to multiple recipients
     #     (applicable to only some handshake types) and not all recipients
     #     have responded yet. The request stays in this state until all
     #     recipients respond.
     #
-    #   * **OPEN**\: This handshake was sent to multiple recipients
+    #   * **OPEN**: This handshake was sent to multiple recipients
     #     (applicable to only some policy types) and all recipients have
     #     responded, allowing the originator to complete the handshake
     #     action.
     #
-    #   * **CANCELED**\: This handshake is no longer active because it was
+    #   * **CANCELED**: This handshake is no longer active because it was
     #     canceled by the originating account.
     #
-    #   * **ACCEPTED**\: This handshake is complete because it has been
+    #   * **ACCEPTED**: This handshake is complete because it has been
     #     accepted by the recipient.
     #
-    #   * **DECLINED**\: This handshake is no longer active because it was
+    #   * **DECLINED**: This handshake is no longer active because it was
     #     declined by the recipient account.
     #
-    #   * **EXPIRED**\: This handshake is no longer active because the
+    #   * **EXPIRED**: This handshake is no longer active because the
     #     originator did not receive a response of any kind from the
     #     recipient before the expiration time (15 days).
     #   @return [String]
@@ -2145,18 +2145,18 @@ module Aws::Organizations
     #   recipient accepts the handshake. The following handshake types are
     #   supported:
     #
-    #   * **INVITE**\: This type of handshake represents a request to join
-    #     an organization. It is always sent from the management account to
+    #   * **INVITE**: This type of handshake represents a request to join an
+    #     organization. It is always sent from the management account to
     #     only non-member accounts.
     #
-    #   * **ENABLE\_ALL\_FEATURES**\: This type of handshake represents a
+    #   * **ENABLE\_ALL\_FEATURES**: This type of handshake represents a
     #     request to enable all features in an organization. It is always
     #     sent from the management account to only *invited* member
     #     accounts. Created accounts do not receive this because those
     #     accounts were created by the organization's management account
     #     and approval is inferred.
     #
-    #   * **APPROVE\_ALL\_FEATURES**\: This type of handshake is sent from
+    #   * **APPROVE\_ALL\_FEATURES**: This type of handshake is sent from
     #     the Organizations service when all member accounts have approved
     #     the `ENABLE_ALL_FEATURES` invitation. It is sent only to the
     #     management account and signals the master that it can finalize the

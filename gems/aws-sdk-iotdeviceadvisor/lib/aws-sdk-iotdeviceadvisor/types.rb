@@ -693,23 +693,23 @@ module Aws::IoTDeviceAdvisor
     # @!attribute [rw] status
     #   Provides the test case run status. Status is one of the following:
     #
-    #   * `PASS`\: Test passed.
+    #   * `PASS`: Test passed.
     #
-    #   * `FAIL`\: Test failed.
+    #   * `FAIL`: Test failed.
     #
-    #   * `PENDING`\: Test has not started running but is scheduled.
+    #   * `PENDING`: Test has not started running but is scheduled.
     #
-    #   * `RUNNING`\: Test is running.
+    #   * `RUNNING`: Test is running.
     #
-    #   * `STOPPING`\: Test is performing cleanup steps. You will see this
+    #   * `STOPPING`: Test is performing cleanup steps. You will see this
     #     status only if you stop a suite run.
     #
     #   * `STOPPED` Test is stopped. You will see this status only if you
     #     stop a suite run.
     #
-    #   * `PASS_WITH_WARNINGS`\: Test passed with warnings.
+    #   * `PASS_WITH_WARNINGS`: Test passed with warnings.
     #
-    #   * `ERORR`\: Test faced an error when running due to an internal
+    #   * `ERORR`: Test faced an error when running due to an internal
     #     issue.
     #   @return [String]
     #
@@ -770,23 +770,23 @@ module Aws::IoTDeviceAdvisor
     #   Provides the test case scenario status. Status is one of the
     #   following:
     #
-    #   * `PASS`\: Test passed.
+    #   * `PASS`: Test passed.
     #
-    #   * `FAIL`\: Test failed.
+    #   * `FAIL`: Test failed.
     #
-    #   * `PENDING`\: Test has not started running but is scheduled.
+    #   * `PENDING`: Test has not started running but is scheduled.
     #
-    #   * `RUNNING`\: Test is running.
+    #   * `RUNNING`: Test is running.
     #
-    #   * `STOPPING`\: Test is performing cleanup steps. You will see this
+    #   * `STOPPING`: Test is performing cleanup steps. You will see this
     #     status only if you stop a suite run.
     #
     #   * `STOPPED` Test is stopped. You will see this status only if you
     #     stop a suite run.
     #
-    #   * `PASS_WITH_WARNINGS`\: Test passed with warnings.
+    #   * `PASS_WITH_WARNINGS`: Test passed with warnings.
     #
-    #   * `ERORR`\: Test faced an error when running due to an internal
+    #   * `ERORR`: Test faced an error when running due to an internal
     #     issue.
     #   @return [String]
     #

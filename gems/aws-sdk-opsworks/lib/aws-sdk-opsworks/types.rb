@@ -2100,17 +2100,17 @@ module Aws::OpsWorks
     #
     #   For stacks, the following commands are available:
     #
-    #   * `execute_recipes`\: Execute one or more recipes. To specify the
+    #   * `execute_recipes`: Execute one or more recipes. To specify the
     #     recipes, set an `Args` parameter named `recipes` to the list of
     #     recipes to be executed. For example, to execute
     #     `phpapp::appsetup`, set `Args` to
     #     `\{"recipes":["phpapp::appsetup"]\}`.
     #
-    #   * `install_dependencies`\: Install the stack's dependencies.
+    #   * `install_dependencies`: Install the stack's dependencies.
     #
-    #   * `update_custom_cookbooks`\: Update the stack's custom cookbooks.
+    #   * `update_custom_cookbooks`: Update the stack's custom cookbooks.
     #
-    #   * `update_dependencies`\: Update the stack's dependencies.
+    #   * `update_dependencies`: Update the stack's dependencies.
     #
     #   <note markdown="1"> The update\_dependencies and install\_dependencies commands are
     #   supported only for Linux instances. You can run the commands
@@ -2120,7 +2120,7 @@ module Aws::OpsWorks
     #
     #   For apps, the following commands are available:
     #
-    #   * `deploy`\: Deploy an app. Ruby on Rails apps have an optional
+    #   * `deploy`: Deploy an app. Ruby on Rails apps have an optional
     #     `Args` parameter named `migrate`. Set `Args` to
     #     \\\{"migrate":\["true"\]\\} to migrate the database. The
     #     default setting is \\\{"migrate":\["false"\]\\}.
@@ -2130,13 +2130,13 @@ module Aws::OpsWorks
     #     to a maximum of five versions. You can use this command to roll an
     #     app back as many as four versions.
     #
-    #   * `start`\: Start the app's web or application server.
+    #   * `start`: Start the app's web or application server.
     #
-    #   * `stop`\: Stop the app's web or application server.
+    #   * `stop`: Stop the app's web or application server.
     #
-    #   * `restart`\: Restart the app's web or application server.
+    #   * `restart`: Restart the app's web or application server.
     #
-    #   * `undeploy`\: Undeploy the app.
+    #   * `undeploy`: Undeploy the app.
     #   @return [String]
     #
     # @!attribute [rw] args

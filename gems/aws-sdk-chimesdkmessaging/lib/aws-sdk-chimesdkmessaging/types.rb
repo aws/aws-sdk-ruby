@@ -2426,7 +2426,7 @@ module Aws::ChimeSDKMessaging
     #
     # @!attribute [rw] type
     #   Enum value that indicates the type of the push notification for a
-    #   message. `DEFAULT`\: Normal mobile push notification. `VOIP`\: VOIP
+    #   message. `DEFAULT`: Normal mobile push notification. `VOIP`: VOIP
     #   mobile push notification.
     #   @return [String]
     #

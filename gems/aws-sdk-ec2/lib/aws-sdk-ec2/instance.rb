@@ -1219,30 +1219,30 @@ module Aws::EC2
     # @option options [required, Array<String>] :reason_codes
     #   The reason codes that describe the health state of your instance.
     #
-    #   * `instance-stuck-in-state`\: My instance is stuck in a state.
+    #   * `instance-stuck-in-state`: My instance is stuck in a state.
     #
-    #   * `unresponsive`\: My instance is unresponsive.
+    #   * `unresponsive`: My instance is unresponsive.
     #
-    #   * `not-accepting-credentials`\: My instance is not accepting my
+    #   * `not-accepting-credentials`: My instance is not accepting my
     #     credentials.
     #
-    #   * `password-not-available`\: A password is not available for my
+    #   * `password-not-available`: A password is not available for my
     #     instance.
     #
-    #   * `performance-network`\: My instance is experiencing performance
+    #   * `performance-network`: My instance is experiencing performance
     #     problems that I believe are network related.
     #
-    #   * `performance-instance-store`\: My instance is experiencing
+    #   * `performance-instance-store`: My instance is experiencing
     #     performance problems that I believe are related to the instance
     #     stores.
     #
-    #   * `performance-ebs-volume`\: My instance is experiencing performance
+    #   * `performance-ebs-volume`: My instance is experiencing performance
     #     problems that I believe are related to an EBS volume.
     #
-    #   * `performance-other`\: My instance is experiencing performance
+    #   * `performance-other`: My instance is experiencing performance
     #     problems.
     #
-    #   * `other`\: \[explain using the description parameter\]
+    #   * `other`: \[explain using the description parameter\]
     # @option options [Time,DateTime,Date,Integer,String] :start_time
     #   The time at which the reported instance health state began.
     # @option options [required, String] :status
@@ -1564,7 +1564,7 @@ module Aws::EC2
     #   * `status` - The state of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
@@ -1662,7 +1662,7 @@ module Aws::EC2
     #
     #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`

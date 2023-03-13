@@ -258,50 +258,49 @@ module Aws::SES
     #
     #   Possible values for this parameter include:
     #
-    #   * `Success`\: Amazon SES accepted the message, and will attempt to
+    #   * `Success`: Amazon SES accepted the message, and will attempt to
     #     deliver it to the recipients.
     #
-    #   * `MessageRejected`\: The message was rejected because it contained
-    #     a virus.
+    #   * `MessageRejected`: The message was rejected because it contained a
+    #     virus.
     #
-    #   * `MailFromDomainNotVerified`\: The sender's email address or
-    #     domain was not verified.
+    #   * `MailFromDomainNotVerified`: The sender's email address or domain
+    #     was not verified.
     #
-    #   * `ConfigurationSetDoesNotExist`\: The configuration set you
+    #   * `ConfigurationSetDoesNotExist`: The configuration set you
     #     specified does not exist.
     #
-    #   * `TemplateDoesNotExist`\: The template you specified does not
-    #     exist.
+    #   * `TemplateDoesNotExist`: The template you specified does not exist.
     #
-    #   * `AccountSuspended`\: Your account has been shut down because of
+    #   * `AccountSuspended`: Your account has been shut down because of
     #     issues related to your email sending practices.
     #
-    #   * `AccountThrottled`\: The number of emails you can send has been
+    #   * `AccountThrottled`: The number of emails you can send has been
     #     reduced because your account has exceeded its allocated sending
     #     limit.
     #
-    #   * `AccountDailyQuotaExceeded`\: You have reached or exceeded the
+    #   * `AccountDailyQuotaExceeded`: You have reached or exceeded the
     #     maximum number of emails you can send from your account in a
     #     24-hour period.
     #
-    #   * `InvalidSendingPoolName`\: The configuration set you specified
+    #   * `InvalidSendingPoolName`: The configuration set you specified
     #     refers to an IP pool that does not exist.
     #
-    #   * `AccountSendingPaused`\: Email sending for the Amazon SES account
+    #   * `AccountSendingPaused`: Email sending for the Amazon SES account
     #     was disabled using the UpdateAccountSendingEnabled operation.
     #
-    #   * `ConfigurationSetSendingPaused`\: Email sending for this
+    #   * `ConfigurationSetSendingPaused`: Email sending for this
     #     configuration set was disabled using the
     #     UpdateConfigurationSetSendingEnabled operation.
     #
-    #   * `InvalidParameterValue`\: One or more of the parameters you
+    #   * `InvalidParameterValue`: One or more of the parameters you
     #     specified when calling this operation was invalid. See the error
     #     message for additional information.
     #
-    #   * `TransientFailure`\: Amazon SES was unable to process your request
+    #   * `TransientFailure`: Amazon SES was unable to process your request
     #     because of a temporary issue.
     #
-    #   * `Failed`\: Amazon SES was unable to process your request. See the
+    #   * `Failed`: Amazon SES was unable to process your request. See the
     #     error message for additional information.
     #   @return [String]
     #

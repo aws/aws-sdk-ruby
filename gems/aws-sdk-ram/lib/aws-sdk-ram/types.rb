@@ -1881,7 +1881,7 @@ module Aws::RAM
     #
     # @!attribute [rw] type
     #   The resource type. This takes the form of:
-    #   `service-code`\:`resource-code`
+    #   `service-code`:`resource-code`
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arn

@@ -438,10 +438,10 @@ module Aws::CloudFormation
     #   version, if available. You can also use this parameter to update the
     #   value of `AutoUpdate`.
     #
-    #   * `MAJOR`\: CloudFormation updates the extension to the newest major
+    #   * `MAJOR`: CloudFormation updates the extension to the newest major
     #     version, if one is available.
     #
-    #   * `MINOR`\: CloudFormation updates the extension to the newest minor
+    #   * `MINOR`: CloudFormation updates the extension to the newest minor
     #     version, if one is available.
     #
     # @option params [Integer] :major_version
@@ -2729,16 +2729,16 @@ module Aws::CloudFormation
     #   The resource drift status values to use as filters for the resource
     #   drift results returned.
     #
-    #   * `DELETED`\: The resource differs from its expected template
+    #   * `DELETED`: The resource differs from its expected template
     #     configuration in that the resource has been deleted.
     #
-    #   * `MODIFIED`\: One or more resource properties differ from their
+    #   * `MODIFIED`: One or more resource properties differ from their
     #     expected template values.
     #
-    #   * `IN_SYNC`\: The resource's actual configuration matches its
-    #     expected template configuration.
+    #   * `IN_SYNC`: The resource's actual configuration matches its expected
+    #     template configuration.
     #
-    #   * `NOT_CHECKED`\: CloudFormation doesn't currently return this value.
+    #   * `NOT_CHECKED`: CloudFormation doesn't currently return this value.
     #
     # @option params [String] :next_token
     #   A string that identifies the next page of stack resource drift
@@ -4790,12 +4790,12 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `LIVE`\: The extension version is registered and can be used in
+    #   * `LIVE`: The extension version is registered and can be used in
     #     CloudFormation operations, dependent on its provisioning behavior
     #     and visibility scope.
     #
-    #   * `DEPRECATED`\: The extension version has been deregistered and can
-    #     no longer be used in CloudFormation operations.
+    #   * `DEPRECATED`: The extension version has been deregistered and can no
+    #     longer be used in CloudFormation operations.
     #
     #   The default is `LIVE`.
     #
@@ -4854,7 +4854,7 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `PRIVATE`\: Extensions that are visible and usable within this
+    #   * `PRIVATE`: Extensions that are visible and usable within this
     #     account and region. This includes:
     #
     #     * Private extensions you have registered in this account and region.
@@ -4862,7 +4862,7 @@ module Aws::CloudFormation
     #     * Public extensions that you have activated in this account and
     #       region.
     #
-    #   * `PUBLIC`\: Extensions that are publicly visible and available to be
+    #   * `PUBLIC`: Extensions that are publicly visible and available to be
     #     activated within any Amazon Web Services account. This includes
     #     extensions from Amazon Web Services, in addition to third-party
     #     publishers.
@@ -4877,14 +4877,14 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `FULLY_MUTABLE`\: The resource type includes an update handler to
+    #   * `FULLY_MUTABLE`: The resource type includes an update handler to
     #     process updates to the type during stack update operations.
     #
-    #   * `IMMUTABLE`\: The resource type doesn't include an update handler,
+    #   * `IMMUTABLE`: The resource type doesn't include an update handler,
     #     so the type can't be updated and must instead be replaced during
     #     stack update operations.
     #
-    #   * `NON_PROVISIONABLE`\: The resource type doesn't include create,
+    #   * `NON_PROVISIONABLE`: The resource type doesn't include create,
     #     read, and delete handlers, and therefore can't actually be
     #     provisioned.
     #
@@ -4896,10 +4896,10 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `LIVE`\: The extension is registered for use in CloudFormation
+    #   * `LIVE`: The extension is registered for use in CloudFormation
     #     operations.
     #
-    #   * `DEPRECATED`\: The extension has been deregistered and can no longer
+    #   * `DEPRECATED`: The extension has been deregistered and can no longer
     #     be used in CloudFormation operations.
     #
     # @option params [String] :type
@@ -5241,13 +5241,11 @@ module Aws::CloudFormation
     #
     #   We suggest that extension names adhere to the following patterns:
     #
-    #   * For resource types,
-    #     *company\_or\_organization*\::*service*\::*type*.
+    #   * For resource types, *company\_or\_organization*::*service*::*type*.
     #
-    #   * For modules,
-    #     *company\_or\_organization*\::*service*\::*type*\::MODULE.
+    #   * For modules, *company\_or\_organization*::*service*::*type*::MODULE.
     #
-    #   * For hooks, *MyCompany*\::*Testing*\::*MyTestHook*.
+    #   * For hooks, *MyCompany*::*Testing*::*MyTestHook*.
     #
     #   <note markdown="1"> The following organization namespaces are reserved and can't be used
     #   in your extension names:

@@ -1764,7 +1764,7 @@ module Aws::ComputeOptimizer
     #     `name` parameter as `RecommendationSourceType`.
     #
     #   * Specify one of the following options if you specify the `name`
-    #     parameter as `FindingReasonCodes`\:
+    #     parameter as `FindingReasonCodes`:
     #
     #     * <b> <code>CPUOverprovisioned</code> </b> — The instance’s CPU
     #       configuration can be sized down while still meeting the

@@ -1146,21 +1146,21 @@ module Aws::BillingConductor
     # The filter on the account ID of the linked account, or any of the
     # following:
     #
-    # `MONITORED`\: linked accounts that are associated to billing groups.
+    # `MONITORED`: linked accounts that are associated to billing groups.
     #
-    # `UNMONITORED`\: linked accounts that are not associated to billing
+    # `UNMONITORED`: linked accounts that are not associated to billing
     # groups.
     #
-    # `Billing Group Arn`\: linked accounts that are associated to the
+    # `Billing Group Arn`: linked accounts that are associated to the
     # provided Billing Group Arn.
     #
     # @!attribute [rw] association
-    #   `MONITORED`\: linked accounts that are associated to billing groups.
+    #   `MONITORED`: linked accounts that are associated to billing groups.
     #
-    #   `UNMONITORED`\: linked accounts that are not associated to billing
+    #   `UNMONITORED`: linked accounts that are not associated to billing
     #   groups.
     #
-    #   `Billing Group Arn`\: linked accounts that are associated to the
+    #   `Billing Group Arn`: linked accounts that are associated to the
     #   provided Billing Group Arn.
     #   @return [String]
     #
@@ -1185,12 +1185,12 @@ module Aws::BillingConductor
     #   The filter on the account ID of the linked account, or any of the
     #   following:
     #
-    #   `MONITORED`\: linked accounts that are associated to billing groups.
+    #   `MONITORED`: linked accounts that are associated to billing groups.
     #
-    #   `UNMONITORED`\: linked accounts that aren't associated to billing
+    #   `UNMONITORED`: linked accounts that aren't associated to billing
     #   groups.
     #
-    #   `Billing Group Arn`\: linked accounts that are associated to the
+    #   `Billing Group Arn`: linked accounts that are associated to the
     #   provided billing group Arn.
     #   @return [Types::ListAccountAssociationsFilter]
     #

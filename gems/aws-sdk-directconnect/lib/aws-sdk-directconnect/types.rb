@@ -409,30 +409,30 @@ module Aws::DirectConnect
     # @!attribute [rw] bgp_peer_state
     #   The state of the BGP peer. The following are the possible values:
     #
-    #   * `verifying`\: The BGP peering addresses or ASN require validation
+    #   * `verifying`: The BGP peering addresses or ASN require validation
     #     before the BGP peer can be created. This state applies only to
     #     public virtual interfaces.
     #
-    #   * `pending`\: The BGP peer is created, and remains in this state
+    #   * `pending`: The BGP peer is created, and remains in this state
     #     until it is ready to be established.
     #
-    #   * `available`\: The BGP peer is ready to be established.
+    #   * `available`: The BGP peer is ready to be established.
     #
-    #   * `deleting`\: The BGP peer is being deleted.
+    #   * `deleting`: The BGP peer is being deleted.
     #
-    #   * `deleted`\: The BGP peer is deleted and cannot be established.
+    #   * `deleted`: The BGP peer is deleted and cannot be established.
     #   @return [String]
     #
     # @!attribute [rw] bgp_status
     #   The status of the BGP peer. The following are the possible values:
     #
-    #   * `up`\: The BGP peer is established. This state does not indicate
+    #   * `up`: The BGP peer is established. This state does not indicate
     #     the state of the routing function. Ensure that you are receiving
     #     routes over the BGP session.
     #
-    #   * `down`\: The BGP peer is down.
+    #   * `down`: The BGP peer is down.
     #
-    #   * `unknown`\: The BGP peer status is not available.
+    #   * `unknown`: The BGP peer status is not available.
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2
@@ -477,31 +477,31 @@ module Aws::DirectConnect
     # @!attribute [rw] connection_state
     #   The state of the connection. The following are the possible values:
     #
-    #   * `ordering`\: The initial state of a hosted connection provisioned
+    #   * `ordering`: The initial state of a hosted connection provisioned
     #     on an interconnect. The connection stays in the ordering state
     #     until the owner of the hosted connection confirms or declines the
     #     connection order.
     #
-    #   * `requested`\: The initial state of a standard connection. The
+    #   * `requested`: The initial state of a standard connection. The
     #     connection stays in the requested state until the Letter of
     #     Authorization (LOA) is sent to the customer.
     #
-    #   * `pending`\: The connection has been approved and is being
+    #   * `pending`: The connection has been approved and is being
     #     initialized.
     #
-    #   * `available`\: The network link is up and the connection is ready
+    #   * `available`: The network link is up and the connection is ready
     #     for use.
     #
-    #   * `down`\: The network link is down.
+    #   * `down`: The network link is down.
     #
-    #   * `deleting`\: The connection is being deleted.
+    #   * `deleting`: The connection is being deleted.
     #
-    #   * `deleted`\: The connection has been deleted.
+    #   * `deleted`: The connection has been deleted.
     #
-    #   * `rejected`\: A hosted connection in the `ordering` state enters
-    #     the `rejected` state if it is deleted by the customer.
+    #   * `rejected`: A hosted connection in the `ordering` state enters the
+    #     `rejected` state if it is deleted by the customer.
     #
-    #   * `unknown`\: The state of the connection is not available.
+    #   * `unknown`: The state of the connection is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnectionResponse AWS API Documentation
@@ -563,36 +563,36 @@ module Aws::DirectConnect
     #   The state of the virtual interface. The following are the possible
     #   values:
     #
-    #   * `confirming`\: The creation of the virtual interface is pending
+    #   * `confirming`: The creation of the virtual interface is pending
     #     confirmation from the virtual interface owner. If the owner of the
     #     virtual interface is different from the owner of the connection on
     #     which it is provisioned, then the virtual interface will remain in
     #     this state until it is confirmed by the virtual interface owner.
     #
-    #   * `verifying`\: This state only applies to public virtual
-    #     interfaces. Each public virtual interface needs validation before
-    #     the virtual interface can be created.
+    #   * `verifying`: This state only applies to public virtual interfaces.
+    #     Each public virtual interface needs validation before the virtual
+    #     interface can be created.
     #
-    #   * `pending`\: A virtual interface is in this state from the time
-    #     that it is created until the virtual interface is ready to forward
+    #   * `pending`: A virtual interface is in this state from the time that
+    #     it is created until the virtual interface is ready to forward
     #     traffic.
     #
-    #   * `available`\: A virtual interface that is able to forward traffic.
+    #   * `available`: A virtual interface that is able to forward traffic.
     #
-    #   * `down`\: A virtual interface that is BGP down.
+    #   * `down`: A virtual interface that is BGP down.
     #
-    #   * `deleting`\: A virtual interface is in this state immediately
-    #     after calling DeleteVirtualInterface until it can no longer
-    #     forward traffic.
+    #   * `deleting`: A virtual interface is in this state immediately after
+    #     calling DeleteVirtualInterface until it can no longer forward
+    #     traffic.
     #
-    #   * `deleted`\: A virtual interface that cannot forward traffic.
+    #   * `deleted`: A virtual interface that cannot forward traffic.
     #
-    #   * `rejected`\: The virtual interface owner has declined creation of
+    #   * `rejected`: The virtual interface owner has declined creation of
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
     #
-    #   * `unknown`\: The state of the virtual interface is not available.
+    #   * `unknown`: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterfaceResponse AWS API Documentation
@@ -619,36 +619,36 @@ module Aws::DirectConnect
     #   The state of the virtual interface. The following are the possible
     #   values:
     #
-    #   * `confirming`\: The creation of the virtual interface is pending
+    #   * `confirming`: The creation of the virtual interface is pending
     #     confirmation from the virtual interface owner. If the owner of the
     #     virtual interface is different from the owner of the connection on
     #     which it is provisioned, then the virtual interface will remain in
     #     this state until it is confirmed by the virtual interface owner.
     #
-    #   * `verifying`\: This state only applies to public virtual
-    #     interfaces. Each public virtual interface needs validation before
-    #     the virtual interface can be created.
+    #   * `verifying`: This state only applies to public virtual interfaces.
+    #     Each public virtual interface needs validation before the virtual
+    #     interface can be created.
     #
-    #   * `pending`\: A virtual interface is in this state from the time
-    #     that it is created until the virtual interface is ready to forward
+    #   * `pending`: A virtual interface is in this state from the time that
+    #     it is created until the virtual interface is ready to forward
     #     traffic.
     #
-    #   * `available`\: A virtual interface that is able to forward traffic.
+    #   * `available`: A virtual interface that is able to forward traffic.
     #
-    #   * `down`\: A virtual interface that is BGP down.
+    #   * `down`: A virtual interface that is BGP down.
     #
-    #   * `deleting`\: A virtual interface is in this state immediately
-    #     after calling DeleteVirtualInterface until it can no longer
-    #     forward traffic.
+    #   * `deleting`: A virtual interface is in this state immediately after
+    #     calling DeleteVirtualInterface until it can no longer forward
+    #     traffic.
     #
-    #   * `deleted`\: A virtual interface that cannot forward traffic.
+    #   * `deleted`: A virtual interface that cannot forward traffic.
     #
-    #   * `rejected`\: The virtual interface owner has declined creation of
+    #   * `rejected`: The virtual interface owner has declined creation of
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
     #
-    #   * `unknown`\: The state of the virtual interface is not available.
+    #   * `unknown`: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceResponse AWS API Documentation
@@ -680,36 +680,36 @@ module Aws::DirectConnect
     #   The state of the virtual interface. The following are the possible
     #   values:
     #
-    #   * `confirming`\: The creation of the virtual interface is pending
+    #   * `confirming`: The creation of the virtual interface is pending
     #     confirmation from the virtual interface owner. If the owner of the
     #     virtual interface is different from the owner of the connection on
     #     which it is provisioned, then the virtual interface will remain in
     #     this state until it is confirmed by the virtual interface owner.
     #
-    #   * `verifying`\: This state only applies to public virtual
-    #     interfaces. Each public virtual interface needs validation before
-    #     the virtual interface can be created.
+    #   * `verifying`: This state only applies to public virtual interfaces.
+    #     Each public virtual interface needs validation before the virtual
+    #     interface can be created.
     #
-    #   * `pending`\: A virtual interface is in this state from the time
-    #     that it is created until the virtual interface is ready to forward
+    #   * `pending`: A virtual interface is in this state from the time that
+    #     it is created until the virtual interface is ready to forward
     #     traffic.
     #
-    #   * `available`\: A virtual interface that is able to forward traffic.
+    #   * `available`: A virtual interface that is able to forward traffic.
     #
-    #   * `down`\: A virtual interface that is BGP down.
+    #   * `down`: A virtual interface that is BGP down.
     #
-    #   * `deleting`\: A virtual interface is in this state immediately
-    #     after calling DeleteVirtualInterface until it can no longer
-    #     forward traffic.
+    #   * `deleting`: A virtual interface is in this state immediately after
+    #     calling DeleteVirtualInterface until it can no longer forward
+    #     traffic.
     #
-    #   * `deleted`\: A virtual interface that cannot forward traffic.
+    #   * `deleted`: A virtual interface that cannot forward traffic.
     #
-    #   * `rejected`\: The virtual interface owner has declined creation of
+    #   * `rejected`: The virtual interface owner has declined creation of
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
     #
-    #   * `unknown`\: The state of the virtual interface is not available.
+    #   * `unknown`: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmTransitVirtualInterfaceResponse AWS API Documentation
@@ -737,31 +737,31 @@ module Aws::DirectConnect
     # @!attribute [rw] connection_state
     #   The state of the connection. The following are the possible values:
     #
-    #   * `ordering`\: The initial state of a hosted connection provisioned
+    #   * `ordering`: The initial state of a hosted connection provisioned
     #     on an interconnect. The connection stays in the ordering state
     #     until the owner of the hosted connection confirms or declines the
     #     connection order.
     #
-    #   * `requested`\: The initial state of a standard connection. The
+    #   * `requested`: The initial state of a standard connection. The
     #     connection stays in the requested state until the Letter of
     #     Authorization (LOA) is sent to the customer.
     #
-    #   * `pending`\: The connection has been approved and is being
+    #   * `pending`: The connection has been approved and is being
     #     initialized.
     #
-    #   * `available`\: The network link is up and the connection is ready
+    #   * `available`: The network link is up and the connection is ready
     #     for use.
     #
-    #   * `down`\: The network link is down.
+    #   * `down`: The network link is down.
     #
-    #   * `deleting`\: The connection is being deleted.
+    #   * `deleting`: The connection is being deleted.
     #
-    #   * `deleted`\: The connection has been deleted.
+    #   * `deleted`: The connection has been deleted.
     #
-    #   * `rejected`\: A hosted connection in the `ordering` state enters
-    #     the `rejected` state if it is deleted by the customer.
+    #   * `rejected`: A hosted connection in the `ordering` state enters the
+    #     `rejected` state if it is deleted by the customer.
     #
-    #   * `unknown`\: The state of the connection is not available.
+    #   * `unknown`: The state of the connection is not available.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -1432,23 +1432,22 @@ module Aws::DirectConnect
     #   The state of the interconnect. The following are the possible
     #   values:
     #
-    #   * `requested`\: The initial state of an interconnect. The
+    #   * `requested`: The initial state of an interconnect. The
     #     interconnect stays in the requested state until the Letter of
     #     Authorization (LOA) is sent to the customer.
     #
-    #   * `pending`\: The interconnect is approved, and is being
-    #     initialized.
+    #   * `pending`: The interconnect is approved, and is being initialized.
     #
-    #   * `available`\: The network link is up, and the interconnect is
-    #     ready for use.
+    #   * `available`: The network link is up, and the interconnect is ready
+    #     for use.
     #
-    #   * `down`\: The network link is down.
+    #   * `down`: The network link is down.
     #
-    #   * `deleting`\: The interconnect is being deleted.
+    #   * `deleting`: The interconnect is being deleted.
     #
-    #   * `deleted`\: The interconnect is deleted.
+    #   * `deleted`: The interconnect is deleted.
     #
-    #   * `unknown`\: The state of the interconnect is not available.
+    #   * `unknown`: The state of the interconnect is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnectResponse AWS API Documentation
@@ -1487,36 +1486,36 @@ module Aws::DirectConnect
     #   The state of the virtual interface. The following are the possible
     #   values:
     #
-    #   * `confirming`\: The creation of the virtual interface is pending
+    #   * `confirming`: The creation of the virtual interface is pending
     #     confirmation from the virtual interface owner. If the owner of the
     #     virtual interface is different from the owner of the connection on
     #     which it is provisioned, then the virtual interface will remain in
     #     this state until it is confirmed by the virtual interface owner.
     #
-    #   * `verifying`\: This state only applies to public virtual
-    #     interfaces. Each public virtual interface needs validation before
-    #     the virtual interface can be created.
+    #   * `verifying`: This state only applies to public virtual interfaces.
+    #     Each public virtual interface needs validation before the virtual
+    #     interface can be created.
     #
-    #   * `pending`\: A virtual interface is in this state from the time
-    #     that it is created until the virtual interface is ready to forward
+    #   * `pending`: A virtual interface is in this state from the time that
+    #     it is created until the virtual interface is ready to forward
     #     traffic.
     #
-    #   * `available`\: A virtual interface that is able to forward traffic.
+    #   * `available`: A virtual interface that is able to forward traffic.
     #
-    #   * `down`\: A virtual interface that is BGP down.
+    #   * `down`: A virtual interface that is BGP down.
     #
-    #   * `deleting`\: A virtual interface is in this state immediately
-    #     after calling DeleteVirtualInterface until it can no longer
-    #     forward traffic.
+    #   * `deleting`: A virtual interface is in this state immediately after
+    #     calling DeleteVirtualInterface until it can no longer forward
+    #     traffic.
     #
-    #   * `deleted`\: A virtual interface that cannot forward traffic.
+    #   * `deleted`: A virtual interface that cannot forward traffic.
     #
-    #   * `rejected`\: The virtual interface owner has declined creation of
+    #   * `rejected`: The virtual interface owner has declined creation of
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
     #
-    #   * `unknown`\: The state of the virtual interface is not available.
+    #   * `unknown`: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterfaceResponse AWS API Documentation
@@ -2052,15 +2051,15 @@ module Aws::DirectConnect
     #   The state of the Direct Connect gateway. The following are the
     #   possible values:
     #
-    #   * `pending`\: The initial state after calling
+    #   * `pending`: The initial state after calling
     #     CreateDirectConnectGateway.
     #
-    #   * `available`\: The Direct Connect gateway is ready for use.
+    #   * `available`: The Direct Connect gateway is ready for use.
     #
-    #   * `deleting`\: The initial state after calling
+    #   * `deleting`: The initial state after calling
     #     DeleteDirectConnectGateway.
     #
-    #   * `deleted`\: The Direct Connect gateway is deleted and cannot pass
+    #   * `deleted`: The Direct Connect gateway is deleted and cannot pass
     #     traffic.
     #   @return [String]
     #
@@ -2096,18 +2095,18 @@ module Aws::DirectConnect
     # @!attribute [rw] association_state
     #   The state of the association. The following are the possible values:
     #
-    #   * `associating`\: The initial state after calling
+    #   * `associating`: The initial state after calling
     #     CreateDirectConnectGatewayAssociation.
     #
-    #   * `associated`\: The Direct Connect gateway and virtual private
+    #   * `associated`: The Direct Connect gateway and virtual private
     #     gateway or transit gateway are successfully associated and ready
     #     to pass traffic.
     #
-    #   * `disassociating`\: The initial state after calling
+    #   * `disassociating`: The initial state after calling
     #     DeleteDirectConnectGatewayAssociation.
     #
-    #   * `disassociated`\: The virtual private gateway or transit gateway
-    #     is disassociated from the Direct Connect gateway. Traffic flow
+    #   * `disassociated`: The virtual private gateway or transit gateway is
+    #     disassociated from the Direct Connect gateway. Traffic flow
     #     between the Direct Connect gateway and virtual private gateway or
     #     transit gateway is stopped.
     #   @return [String]
@@ -2179,14 +2178,14 @@ module Aws::DirectConnect
     # @!attribute [rw] proposal_state
     #   The state of the proposal. The following are possible values:
     #
-    #   * `accepted`\: The proposal has been accepted. The Direct Connect
+    #   * `accepted`: The proposal has been accepted. The Direct Connect
     #     gateway association is available to use in this state.
     #
-    #   * `deleted`\: The proposal has been deleted by the owner that made
+    #   * `deleted`: The proposal has been deleted by the owner that made
     #     the proposal. The Direct Connect gateway association cannot be
     #     used in this state.
     #
-    #   * `requested`\: The proposal has been requested. The Direct Connect
+    #   * `requested`: The proposal has been requested. The Direct Connect
     #     gateway association cannot be used in this state.
     #   @return [String]
     #
@@ -2241,16 +2240,16 @@ module Aws::DirectConnect
     # @!attribute [rw] attachment_state
     #   The state of the attachment. The following are the possible values:
     #
-    #   * `attaching`\: The initial state after a virtual interface is
+    #   * `attaching`: The initial state after a virtual interface is
     #     created using the Direct Connect gateway.
     #
-    #   * `attached`\: The Direct Connect gateway and virtual interface are
+    #   * `attached`: The Direct Connect gateway and virtual interface are
     #     attached and ready to pass traffic.
     #
-    #   * `detaching`\: The initial state after calling
+    #   * `detaching`: The initial state after calling
     #     DeleteVirtualInterface.
     #
-    #   * `detached`\: The virtual interface is detached from the Direct
+    #   * `detached`: The virtual interface is detached from the Direct
     #     Connect gateway. Traffic flow between the Direct Connect gateway
     #     and virtual interface is stopped.
     #   @return [String]
@@ -2371,23 +2370,22 @@ module Aws::DirectConnect
     #   The state of the interconnect. The following are the possible
     #   values:
     #
-    #   * `requested`\: The initial state of an interconnect. The
+    #   * `requested`: The initial state of an interconnect. The
     #     interconnect stays in the requested state until the Letter of
     #     Authorization (LOA) is sent to the customer.
     #
-    #   * `pending`\: The interconnect is approved, and is being
-    #     initialized.
+    #   * `pending`: The interconnect is approved, and is being initialized.
     #
-    #   * `available`\: The network link is up, and the interconnect is
-    #     ready for use.
+    #   * `available`: The network link is up, and the interconnect is ready
+    #     for use.
     #
-    #   * `down`\: The network link is down.
+    #   * `down`: The network link is down.
     #
-    #   * `deleting`\: The interconnect is being deleted.
+    #   * `deleting`: The interconnect is being deleted.
     #
-    #   * `deleted`\: The interconnect is deleted.
+    #   * `deleted`: The interconnect is deleted.
     #
-    #   * `unknown`\: The state of the interconnect is not available.
+    #   * `unknown`: The state of the interconnect is not available.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -2503,22 +2501,22 @@ module Aws::DirectConnect
     # @!attribute [rw] lag_state
     #   The state of the LAG. The following are the possible values:
     #
-    #   * `requested`\: The initial state of a LAG. The LAG stays in the
+    #   * `requested`: The initial state of a LAG. The LAG stays in the
     #     requested state until the Letter of Authorization (LOA) is
     #     available.
     #
-    #   * `pending`\: The LAG has been approved and is being initialized.
+    #   * `pending`: The LAG has been approved and is being initialized.
     #
-    #   * `available`\: The network link is established and the LAG is ready
+    #   * `available`: The network link is established and the LAG is ready
     #     for use.
     #
-    #   * `down`\: The network link is down.
+    #   * `down`: The network link is down.
     #
-    #   * `deleting`\: The LAG is being deleted.
+    #   * `deleting`: The LAG is being deleted.
     #
-    #   * `deleted`\: The LAG is deleted.
+    #   * `deleted`: The LAG is deleted.
     #
-    #   * `unknown`\: The state of the LAG is not available.
+    #   * `unknown`: The state of the LAG is not available.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -2778,17 +2776,17 @@ module Aws::DirectConnect
     #
     #   The possible values are:
     #
-    #   * `associating`\: The MAC Security (MACsec) secret key is being
+    #   * `associating`: The MAC Security (MACsec) secret key is being
     #     validated and not yet associated with the connection or LAG.
     #
-    #   * `associated`\: The MAC Security (MACsec) secret key is validated
+    #   * `associated`: The MAC Security (MACsec) secret key is validated
     #     and associated with the connection or LAG.
     #
-    #   * `disassociating`\: The MAC Security (MACsec) secret key is being
+    #   * `disassociating`: The MAC Security (MACsec) secret key is being
     #     disassociated from the connection or LAG
     #
-    #   * `disassociated`\: The MAC Security (MACsec) secret key is no
-    #     longer associated with the connection or LAG.
+    #   * `disassociated`: The MAC Security (MACsec) secret key is no longer
+    #     associated with the connection or LAG.
     #   @return [String]
     #
     # @!attribute [rw] start_on
@@ -3615,15 +3613,15 @@ module Aws::DirectConnect
     #   The state of the virtual private gateway. The following are the
     #   possible values:
     #
-    #   * `pending`\: Initial state after creating the virtual private
+    #   * `pending`: Initial state after creating the virtual private
     #     gateway.
     #
-    #   * `available`\: Ready for use by a private virtual interface.
+    #   * `available`: Ready for use by a private virtual interface.
     #
-    #   * `deleting`\: Initial state after deleting the virtual private
+    #   * `deleting`: Initial state after deleting the virtual private
     #     gateway.
     #
-    #   * `deleted`\: The virtual private gateway is deleted. The private
+    #   * `deleted`: The virtual private gateway is deleted. The private
     #     virtual interface is unable to send traffic over this gateway.
     #   @return [String]
     #
@@ -3716,36 +3714,36 @@ module Aws::DirectConnect
     #   The state of the virtual interface. The following are the possible
     #   values:
     #
-    #   * `confirming`\: The creation of the virtual interface is pending
+    #   * `confirming`: The creation of the virtual interface is pending
     #     confirmation from the virtual interface owner. If the owner of the
     #     virtual interface is different from the owner of the connection on
     #     which it is provisioned, then the virtual interface will remain in
     #     this state until it is confirmed by the virtual interface owner.
     #
-    #   * `verifying`\: This state only applies to public virtual
-    #     interfaces. Each public virtual interface needs validation before
-    #     the virtual interface can be created.
+    #   * `verifying`: This state only applies to public virtual interfaces.
+    #     Each public virtual interface needs validation before the virtual
+    #     interface can be created.
     #
-    #   * `pending`\: A virtual interface is in this state from the time
-    #     that it is created until the virtual interface is ready to forward
+    #   * `pending`: A virtual interface is in this state from the time that
+    #     it is created until the virtual interface is ready to forward
     #     traffic.
     #
-    #   * `available`\: A virtual interface that is able to forward traffic.
+    #   * `available`: A virtual interface that is able to forward traffic.
     #
-    #   * `down`\: A virtual interface that is BGP down.
+    #   * `down`: A virtual interface that is BGP down.
     #
-    #   * `deleting`\: A virtual interface is in this state immediately
-    #     after calling DeleteVirtualInterface until it can no longer
-    #     forward traffic.
+    #   * `deleting`: A virtual interface is in this state immediately after
+    #     calling DeleteVirtualInterface until it can no longer forward
+    #     traffic.
     #
-    #   * `deleted`\: A virtual interface that cannot forward traffic.
+    #   * `deleted`: A virtual interface that cannot forward traffic.
     #
-    #   * `rejected`\: The virtual interface owner has declined creation of
+    #   * `rejected`: The virtual interface owner has declined creation of
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
     #
-    #   * `unknown`\: The state of the virtual interface is not available.
+    #   * `unknown`: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @!attribute [rw] customer_router_config

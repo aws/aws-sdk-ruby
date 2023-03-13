@@ -482,9 +482,9 @@ module Aws::ResourceExplorer2
     # that allows Resource Explorer to enumerate your resources to populate
     # the index.
     #
-    # * **Action**\: `resource-explorer-2:CreateIndex`
+    # * **Action**: `resource-explorer-2:CreateIndex`
     #
-    #   **Resource**\: The ARN of the index (as it will exist after the
+    #   **Resource**: The ARN of the index (as it will exist after the
     #   operation completes) in the Amazon Web Services Region and account
     #   in which you're trying to create the index. Use the wildcard
     #   character (`*`) at the end of the string to match the eventual UUID.
@@ -498,9 +498,9 @@ module Aws::ResourceExplorer2
     #   Alternatively, you can use `"Resource": "*"` to allow the role or
     #   user to create an index in any Region.
     #
-    # * **Action**\: `iam:CreateServiceLinkedRole`
+    # * **Action**: `iam:CreateServiceLinkedRole`
     #
-    #   **Resource**\: No specific resource (*).
+    #   **Resource**: No specific resource (*).
     #
     #   This permission is required only the first time you create an index
     #   to turn on Resource Explorer in the account. Resource Explorer uses

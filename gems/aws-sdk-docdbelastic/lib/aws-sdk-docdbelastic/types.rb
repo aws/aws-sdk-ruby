@@ -61,7 +61,7 @@ module Aws::DocDBElastic
     #   The weekly time range during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC).
     #
-    #   *Format*\: `ddd:hh24:mi-ddd:hh24:mi`
+    #   *Format*: `ddd:hh24:mi-ddd:hh24:mi`
     #   @return [String]
     #
     # @!attribute [rw] shard_capacity
@@ -253,7 +253,7 @@ module Aws::DocDBElastic
     # @!attribute [rw] admin_user_name
     #   The name of the Elastic DocumentDB cluster administrator.
     #
-    #   *Constraints*\:
+    #   *Constraints*:
     #
     #   * Must be from 1 to 63 letters or numbers.
     #
@@ -266,7 +266,7 @@ module Aws::DocDBElastic
     #   The password for the Elastic DocumentDB cluster administrator and
     #   can contain any printable ASCII characters.
     #
-    #   *Constraints*\:
+    #   *Constraints*:
     #
     #   * Must contain from 8 to 100 characters.
     #
@@ -289,7 +289,7 @@ module Aws::DocDBElastic
     #   The name of the new Elastic DocumentDB cluster. This parameter is
     #   stored as a lowercase string.
     #
-    #   *Constraints*\:
+    #   *Constraints*:
     #
     #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
@@ -297,7 +297,7 @@ module Aws::DocDBElastic
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   *Example*\: `my-cluster`
+    #   *Example*: `my-cluster`
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -319,15 +319,15 @@ module Aws::DocDBElastic
     #   The weekly time range during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC).
     #
-    #   *Format*\: `ddd:hh24:mi-ddd:hh24:mi`
+    #   *Format*: `ddd:hh24:mi-ddd:hh24:mi`
     #
-    #   *Default*\: a 30-minute window selected at random from an 8-hour
+    #   *Default*: a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week.
     #
-    #   *Valid days*\: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    #   *Valid days*: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
-    #   *Constraints*\: Minimum 30-minute window.
+    #   *Constraints*: Minimum 30-minute window.
     #   @return [String]
     #
     # @!attribute [rw] shard_capacity
@@ -800,7 +800,7 @@ module Aws::DocDBElastic
     #   password can contain any printable ASCII character except forward
     #   slash (/), double quote ("), or the "at" symbol (@).
     #
-    #   *Constraints*\: Must contain from 8 to 100 characters.
+    #   *Constraints*: Must contain from 8 to 100 characters.
     #   @return [String]
     #
     # @!attribute [rw] auth_type
@@ -822,15 +822,15 @@ module Aws::DocDBElastic
     #   The weekly time range during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC).
     #
-    #   *Format*\: `ddd:hh24:mi-ddd:hh24:mi`
+    #   *Format*: `ddd:hh24:mi-ddd:hh24:mi`
     #
-    #   *Default*\: a 30-minute window selected at random from an 8-hour
+    #   *Default*: a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week.
     #
-    #   *Valid days*\: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    #   *Valid days*: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
-    #   *Constraints*\: Minimum 30-minute window.
+    #   *Constraints*: Minimum 30-minute window.
     #   @return [String]
     #
     # @!attribute [rw] shard_capacity

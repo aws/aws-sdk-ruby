@@ -3280,7 +3280,7 @@ module Aws::CloudFront
     # Delete a streaming distribution. To delete an RTMP distribution using
     # the CloudFront API, perform the following steps.
     #
-    # **To delete an RTMP distribution using the CloudFront API**\:
+    # **To delete an RTMP distribution using the CloudFront API**:
     #
     # 1.  Disable the RTMP distribution.
     #

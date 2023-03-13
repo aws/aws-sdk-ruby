@@ -203,25 +203,25 @@ module Aws::QuickSight
     # @!attribute [rw] categorical_aggregation_function
     #   Aggregation for categorical values.
     #
-    #   * `COUNT`\: Aggregate by the total number of values, including
+    #   * `COUNT`: Aggregate by the total number of values, including
     #     duplicates.
     #
-    #   * `DISTINCT_COUNT`\: Aggregate by the total number of distinct
+    #   * `DISTINCT_COUNT`: Aggregate by the total number of distinct
     #     values.
     #   @return [String]
     #
     # @!attribute [rw] date_aggregation_function
     #   Aggregation for date values.
     #
-    #   * `COUNT`\: Aggregate by the total number of values, including
+    #   * `COUNT`: Aggregate by the total number of values, including
     #     duplicates.
     #
-    #   * `DISTINCT_COUNT`\: Aggregate by the total number of distinct
+    #   * `DISTINCT_COUNT`: Aggregate by the total number of distinct
     #     values.
     #
-    #   * `MIN`\: Select the smallest date value.
+    #   * `MIN`: Select the smallest date value.
     #
-    #   * `MAX`\: Select the largest date value.
+    #   * `MAX`: Select the largest date value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AggregationFunction AWS API Documentation
@@ -243,9 +243,9 @@ module Aws::QuickSight
     # @!attribute [rw] sort_direction
     #   The sort direction of values.
     #
-    #   * `ASC`\: Sort in ascending order.
+    #   * `ASC`: Sort in ascending order.
     #
-    #   * `DESC`\: Sort in descending order.
+    #   * `DESC`: Sort in descending order.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_function
@@ -482,32 +482,32 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or group,
+    #   * `QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or group,
     #     and any analyses with that ARN listed as one of the analysis'
     #     owners or viewers are returned. Implicit permissions from folders
     #     or groups are considered.
     #
-    #   * `QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and any
+    #   * `QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and any
     #     analyses with that ARN listed as one of the owners of the analyses
     #     are returned. Implicit permissions from folders or groups are
     #     considered.
     #
-    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
-    #     group, and any analyses with that ARN listed as the only owner of
-    #     the analysis are returned. Implicit permissions from folders or
-    #     groups are not considered.
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`: Provide an ARN of a user or group,
+    #     and any analyses with that ARN listed as the only owner of the
+    #     analysis are returned. Implicit permissions from folders or groups
+    #     are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #   * `DIRECT_QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and
     #     any analyses with that ARN listed as one of the owners of the
     #     analyses are returned. Implicit permissions from folders or groups
     #     are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or
     #     group, and any analyses with that ARN listed as one of the owners
     #     or viewers of the analyses are returned. Implicit permissions from
     #     folders or groups are not considered.
     #
-    #   * `ANALYSIS_NAME`\: Any analyses whose names have a substring match
+    #   * `ANALYSIS_NAME`: Any analyses whose names have a substring match
     #     to this value will be returned.
     #   @return [String]
     #
@@ -1151,11 +1151,11 @@ module Aws::QuickSight
     #   The orientation of the bars in a bar chart visual. There are two
     #   valid values in this structure:
     #
-    #   * `HORIZONTAL`\: Used for charts that have horizontal bars. Visuals
+    #   * `HORIZONTAL`: Used for charts that have horizontal bars. Visuals
     #     that use this value are horizontal bar charts, horizontal stacked
     #     bar charts, and horizontal stacked 100% bar charts.
     #
-    #   * `VERTICAL`\: Used for charts that have vertical bars. Visuals that
+    #   * `VERTICAL`: Used for charts that have vertical bars. Visuals that
     #     use this value are vertical bar charts, vertical stacked bar
     #     charts, and vertical stacked 100% bar charts.
     #   @return [String]
@@ -1996,9 +1996,9 @@ module Aws::QuickSight
     #   The visibility of an axis label on a chart. Choose one of the
     #   following options:
     #
-    #   * `VISIBLE`\: Shows the axis.
+    #   * `VISIBLE`: Shows the axis.
     #
-    #   * `HIDDEN`\: Hides the axis.
+    #   * `HIDDEN`: Hides the axis.
     #   @return [String]
     #
     # @!attribute [rw] sort_icon_visibility
@@ -2375,11 +2375,11 @@ module Aws::QuickSight
     #   Determines the bar arrangement in a combo chart. The following are
     #   valid values in this structure:
     #
-    #   * `CLUSTERED`\: For clustered bar combo charts.
+    #   * `CLUSTERED`: For clustered bar combo charts.
     #
-    #   * `STACKED`\: For stacked bar combo charts.
+    #   * `STACKED`: For stacked bar combo charts.
     #
-    #   * `STACKED_PERCENT`\: Do not use. If you use this value, the
+    #   * `STACKED_PERCENT`: Do not use. If you use this value, the
     #     operation returns a validation error.
     #   @return [String]
     #
@@ -4577,11 +4577,11 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `NEW_TAB`\: Opens the target URL in a new browser tab.
+    #   * `NEW_TAB`: Opens the target URL in a new browser tab.
     #
-    #   * `NEW_WINDOW`\: Opens the target URL in a new browser window.
+    #   * `NEW_WINDOW`: Opens the target URL in a new browser window.
     #
-    #   * `SAME_TAB`\: Opens the target URL in the same browser tab.
+    #   * `SAME_TAB`: Opens the target URL in the same browser tab.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomActionURLOperation AWS API Documentation
@@ -4704,11 +4704,11 @@ module Aws::QuickSight
     #   This option determines how null values should be treated when
     #   filtering data.
     #
-    #   * `ALL_VALUES`\: Include null values in filtered results.
+    #   * `ALL_VALUES`: Include null values in filtered results.
     #
-    #   * `NULLS_ONLY`\: Only include null values in filtered results.
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
     #
-    #   * `NON_NULLS_ONLY`\: Exclude null values from filtered results.
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomFilterConfiguration AWS API Documentation
@@ -4747,11 +4747,11 @@ module Aws::QuickSight
     #   This option determines how null values should be treated when
     #   filtering data.
     #
-    #   * `ALL_VALUES`\: Include null values in filtered results.
+    #   * `ALL_VALUES`: Include null values in filtered results.
     #
-    #   * `NULLS_ONLY`\: Only include null values in filtered results.
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
     #
-    #   * `NON_NULLS_ONLY`\: Exclude null values from filtered results.
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomFilterListConfiguration AWS API Documentation
@@ -5022,32 +5022,32 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or group,
+    #   * `QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or group,
     #     and any dashboards with that ARN listed as one of the
     #     dashboards's owners or viewers are returned. Implicit permissions
     #     from folders or groups are considered.
     #
-    #   * `QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and any
+    #   * `QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and any
     #     dashboards with that ARN listed as one of the owners of the
     #     dashboards are returned. Implicit permissions from folders or
     #     groups are considered.
     #
-    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
-    #     group, and any dashboards with that ARN listed as the only owner
-    #     of the dashboard are returned. Implicit permissions from folders
-    #     or groups are not considered.
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`: Provide an ARN of a user or group,
+    #     and any dashboards with that ARN listed as the only owner of the
+    #     dashboard are returned. Implicit permissions from folders or
+    #     groups are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #   * `DIRECT_QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and
     #     any dashboards with that ARN listed as one of the owners of the
     #     dashboards are returned. Implicit permissions from folders or
     #     groups are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or
     #     group, and any dashboards with that ARN listed as one of the
     #     owners or viewers of the dashboards are returned. Implicit
     #     permissions from folders or groups are not considered.
     #
-    #   * `DASHBOARD_NAME`\: Any dashboards whose names have a substring
+    #   * `DASHBOARD_NAME`: Any dashboards whose names have a substring
     #     match to this value will be returned.
     #   @return [String]
     #
@@ -5895,33 +5895,33 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or group,
+    #   * `QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or group,
     #     and any datasets with that ARN listed as one of the dataset owners
     #     or viewers are returned. Implicit permissions from folders or
     #     groups are considered.
     #
-    #   * `QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and any
+    #   * `QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and any
     #     datasets with that ARN listed as one of the owners of the dataset
     #     are returned. Implicit permissions from folders or groups are
     #     considered.
     #
-    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
-    #     group, and any datasets with that ARN listed as the only owner of
-    #     the dataset are returned. Implicit permissions from folders or
-    #     groups are not considered.
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`: Provide an ARN of a user or group,
+    #     and any datasets with that ARN listed as the only owner of the
+    #     dataset are returned. Implicit permissions from folders or groups
+    #     are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #   * `DIRECT_QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and
     #     any datasets with that ARN listed as one of the owners if the
     #     dataset are returned. Implicit permissions from folders or groups
     #     are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or
     #     group, and any datasets with that ARN listed as one of the owners
     #     or viewers of the dataset are returned. Implicit permissions from
     #     folders or groups are not considered.
     #
-    #   * `DATASET_NAME`\: Any datasets whose names have a substring match
-    #     to this value will be returned.
+    #   * `DATASET_NAME`: Any datasets whose names have a substring match to
+    #     this value will be returned.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -6313,22 +6313,22 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or
     #     group, and any data sources with that ARN listed as one of the
     #     owners or viewers of the data sources are returned. Implicit
     #     permissions from folders or groups are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #   * `DIRECT_QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and
     #     any data sources with that ARN listed as one of the owners if the
     #     data source are returned. Implicit permissions from folders or
     #     groups are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
-    #     group, and any data sources with that ARN listed as the only owner
-    #     of the data source are returned. Implicit permissions from folders
-    #     or groups are not considered.
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`: Provide an ARN of a user or group,
+    #     and any data sources with that ARN listed as the only owner of the
+    #     data source are returned. Implicit permissions from folders or
+    #     groups are not considered.
     #
-    #   * `DATASOURCE_NAME`\: Any data sources whose names have a substring
+    #   * `DATASOURCE_NAME`: Any data sources whose names have a substring
     #     match to the provided value are returned.
     #   @return [String]
     #
@@ -6658,9 +6658,9 @@ module Aws::QuickSight
     #   The built-in options for default values. The value can be one of the
     #   following:
     #
-    #   * `RECOMMENDED`\: The recommended value.
+    #   * `RECOMMENDED`: The recommended value.
     #
-    #   * `NULL`\: The `NULL` value.
+    #   * `NULL`: The `NULL` value.
     #   @return [String]
     #
     # @!attribute [rw] custom_value
@@ -6770,9 +6770,9 @@ module Aws::QuickSight
     #   The built-in options for default values. The value can be one of the
     #   following:
     #
-    #   * `RECOMMENDED`\: The recommended value.
+    #   * `RECOMMENDED`: The recommended value.
     #
-    #   * `NULL`\: The `NULL` value.
+    #   * `NULL`: The `NULL` value.
     #   @return [String]
     #
     # @!attribute [rw] custom_value
@@ -9737,9 +9737,9 @@ module Aws::QuickSight
     #   The type for the &gt;tooltip title. Choose one of the following
     #   options:
     #
-    #   * `NONE`\: Doesn't use the primary value as the title.
+    #   * `NONE`: Doesn't use the primary value as the title.
     #
-    #   * `PRIMARY_VALUE`\: Uses primary value as the title.
+    #   * `PRIMARY_VALUE`: Uses primary value as the title.
     #   @return [String]
     #
     # @!attribute [rw] tooltip_fields
@@ -9830,9 +9830,9 @@ module Aws::QuickSight
     # @!attribute [rw] direction
     #   The sort direction. Choose one of the following options:
     #
-    #   * `ASC`\: Ascending
+    #   * `ASC`: Ascending
     #
-    #   * `DESC`\: Descending
+    #   * `DESC`: Descending
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldSort AWS API Documentation
@@ -10220,9 +10220,9 @@ module Aws::QuickSight
     #   The date time picker type of a `FilterDateTimePickerControl`. Choose
     #   one of the following options:
     #
-    #   * `SINGLE_VALUED`\: The filter condition is a fixed date.
+    #   * `SINGLE_VALUED`: The filter condition is a fixed date.
     #
-    #   * `DATE_RANGE`\: The filter condition is a date time range.
+    #   * `DATE_RANGE`: The filter condition is a date time range.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterDateTimePickerControl AWS API Documentation
@@ -10260,10 +10260,10 @@ module Aws::QuickSight
     #   The type of the `FilterDropDownControl`. Choose one of the following
     #   options:
     #
-    #   * `MULTI_SELECT`\: The user can select multiple entries from a
+    #   * `MULTI_SELECT`: The user can select multiple entries from a
     #     dropdown menu.
     #
-    #   * `SINGLE_SELECT`\: The user can select a single entry from a
+    #   * `SINGLE_SELECT`: The user can select a single entry from a
     #     dropdown menu.
     #   @return [String]
     #
@@ -10396,11 +10396,10 @@ module Aws::QuickSight
     #   The type of `FilterListControl`. Choose one of the following
     #   options:
     #
-    #   * `MULTI_SELECT`\: The user can select multiple entries from the
+    #   * `MULTI_SELECT`: The user can select multiple entries from the
     #     list.
     #
-    #   * `SINGLE_SELECT`\: The user can select a single entry from the
-    #     list.
+    #   * `SINGLE_SELECT`: The user can select a single entry from the list.
     #   @return [String]
     #
     # @!attribute [rw] selectable_values
@@ -10459,7 +10458,7 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `ALL_FIELDS`\: Applies the filter operation to all fields.
+    #   * `ALL_FIELDS`: Applies the filter operation to all fields.
     #
     #   ^
     #   @return [String]
@@ -10575,9 +10574,9 @@ module Aws::QuickSight
     #   The type of `FilterSliderControl`. Choose one of the following
     #   options:
     #
-    #   * `SINGLE_POINT`\: Filter against(equals) a single data point.
+    #   * `SINGLE_POINT`: Filter against(equals) a single data point.
     #
-    #   * `RANGE`\: Filter data that is in a specified range.
+    #   * `RANGE`: Filter data that is in a specified range.
     #   @return [String]
     #
     # @!attribute [rw] maximum_value
@@ -10762,35 +10761,35 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or group,
+    #   * `QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or group,
     #     and any folders with that ARN listed as one of the folder's
     #     owners or viewers are returned. Implicit permissions from folders
     #     or groups are considered.
     #
-    #   * `QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and any
+    #   * `QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and any
     #     folders with that ARN listed as one of the owners of the folders
     #     are returned. Implicit permissions from folders or groups are
     #     considered.
     #
-    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
-    #     group, and any folders with that ARN listed as the only owner of
-    #     the folder are returned. Implicit permissions from folders or
-    #     groups are not considered.
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`: Provide an ARN of a user or group,
+    #     and any folders with that ARN listed as the only owner of the
+    #     folder are returned. Implicit permissions from folders or groups
+    #     are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #   * `DIRECT_QUICKSIGHT_OWNER`: Provide an ARN of a user or group, and
     #     any folders with that ARN listed as one of the owners of the
     #     folders are returned. Implicit permissions from folders or groups
     #     are not considered.
     #
-    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`: Provide an ARN of a user or
     #     group, and any folders with that ARN listed as one of the owners
     #     or viewers of the folders are returned. Implicit permissions from
     #     folders or groups are not considered.
     #
-    #   * `FOLDER_NAME`\: Any folders whose names have a substring match to
+    #   * `FOLDER_NAME`: Any folders whose names have a substring match to
     #     this value will be returned.
     #
-    #   * `PARENT_FOLDER_ARN`\: Provide an ARN of a folder, and any folders
+    #   * `PARENT_FOLDER_ARN`: Provide an ARN of a folder, and any folders
     #     that are directly under that parent folder are returned. If you
     #     choose to use this option and leave the value blank, all
     #     root-level folders in the account are returned.
@@ -10973,7 +10972,7 @@ module Aws::QuickSight
     #
     #   * `AUTOMATIC`
     #
-    #   * `CUSTOM`\: Checks the custom seasonality value.
+    #   * `CUSTOM`: Checks the custom seasonality value.
     #   @return [String]
     #
     # @!attribute [rw] custom_seasonality_value
@@ -12396,10 +12395,10 @@ module Aws::QuickSight
     #   This value determines the layout behavior when the viewport is
     #   resized.
     #
-    #   * `FIXED`\: A fixed width will be used when optimizing the layout.
-    #     In the Amazon QuickSight console, this option is called `Classic`.
+    #   * `FIXED`: A fixed width will be used when optimizing the layout. In
+    #     the Amazon QuickSight console, this option is called `Classic`.
     #
-    #   * `RESPONSIVE`\: The width of the canvas will be responsive and
+    #   * `RESPONSIVE`: The width of the canvas will be responsive and
     #     optimized to the view port. In the Amazon QuickSight console, this
     #     option is called `Tiled`.
     #   @return [String]
@@ -13200,9 +13199,9 @@ module Aws::QuickSight
     #   The built-in options for default values. The value can be one of the
     #   following:
     #
-    #   * `RECOMMENDED`\: The recommended value.
+    #   * `RECOMMENDED`: The recommended value.
     #
-    #   * `NULL`\: The `NULL` value.
+    #   * `NULL`: The `NULL` value.
     #   @return [String]
     #
     # @!attribute [rw] custom_value
@@ -13953,21 +13952,21 @@ module Aws::QuickSight
     # @!attribute [rw] line_interpolation
     #   Interpolation style for line series.
     #
-    #   * `LINEAR`\: Show as default, linear style.
+    #   * `LINEAR`: Show as default, linear style.
     #
-    #   * `SMOOTH`\: Show as a smooth curve.
+    #   * `SMOOTH`: Show as a smooth curve.
     #
-    #   * `STEPPED`\: Show steps in line.
+    #   * `STEPPED`: Show steps in line.
     #   @return [String]
     #
     # @!attribute [rw] line_style
     #   Line style for line series.
     #
-    #   * `SOLID`\: Show as a solid line.
+    #   * `SOLID`: Show as a solid line.
     #
-    #   * `DOTTED`\: Show as a dotted line.
+    #   * `DOTTED`: Show as a dotted line.
     #
-    #   * `DASHED`\: Show as a dashed line.
+    #   * `DASHED`: Show as a dashed line.
     #   @return [String]
     #
     # @!attribute [rw] line_width
@@ -13995,15 +13994,15 @@ module Aws::QuickSight
     # @!attribute [rw] marker_shape
     #   Shape option for markers in the series.
     #
-    #   * `CIRCLE`\: Show marker as a circle.
+    #   * `CIRCLE`: Show marker as a circle.
     #
-    #   * `TRIANGLE`\: Show marker as a triangle.
+    #   * `TRIANGLE`: Show marker as a triangle.
     #
-    #   * `SQUARE`\: Show marker as a square.
+    #   * `SQUARE`: Show marker as a square.
     #
-    #   * `DIAMOND`\: Show marker as a diamond.
+    #   * `DIAMOND`: Show marker as a diamond.
     #
-    #   * `ROUNDED_SQUARE`\: Show marker as a rounded square.
+    #   * `ROUNDED_SQUARE`: Show marker as a rounded square.
     #   @return [String]
     #
     # @!attribute [rw] marker_size
@@ -15777,12 +15776,12 @@ module Aws::QuickSight
     #   The treatment option that determines how missing data should be
     #   rendered. Choose from the following options:
     #
-    #   * `INTERPOLATE`\: Interpolate missing values between the prior and
+    #   * `INTERPOLATE`: Interpolate missing values between the prior and
     #     the next known value.
     #
-    #   * `SHOW_AS_ZERO`\: Show missing values as the value `0`.
+    #   * `SHOW_AS_ZERO`: Show missing values as the value `0`.
     #
-    #   * `SHOW_AS_BLANK`\: Display a blank space when rendering missing
+    #   * `SHOW_AS_BLANK`: Display a blank space when rendering missing
     #     data.
     #   @return [String]
     #
@@ -16043,11 +16042,11 @@ module Aws::QuickSight
     #   This option determines how null values should be treated when
     #   filtering data.
     #
-    #   * `ALL_VALUES`\: Include null values in filtered results.
+    #   * `ALL_VALUES`: Include null values in filtered results.
     #
-    #   * `NULLS_ONLY`\: Only include null values in filtered results.
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
     #
-    #   * `NON_NULLS_ONLY`\: Exclude null values from filtered results.
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NumericEqualityFilter AWS API Documentation
@@ -16140,11 +16139,11 @@ module Aws::QuickSight
     #   This option determines how null values should be treated when
     #   filtering data.
     #
-    #   * `ALL_VALUES`\: Include null values in filtered results.
+    #   * `ALL_VALUES`: Include null values in filtered results.
     #
-    #   * `NULLS_ONLY`\: Only include null values in filtered results.
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
     #
-    #   * `NON_NULLS_ONLY`\: Exclude null values from filtered results.
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NumericRangeFilter AWS API Documentation
@@ -16206,29 +16205,29 @@ module Aws::QuickSight
     # @!attribute [rw] simple_numerical_aggregation
     #   Built-in aggregation functions for numerical values.
     #
-    #   * `SUM`\: The sum of a dimension or measure.
+    #   * `SUM`: The sum of a dimension or measure.
     #
-    #   * `AVERAGE`\: The average of a dimension or measure.
+    #   * `AVERAGE`: The average of a dimension or measure.
     #
-    #   * `MIN`\: The minimum value of a dimension or measure.
+    #   * `MIN`: The minimum value of a dimension or measure.
     #
-    #   * `MAX`\: The maximum value of a dimension or measure.
+    #   * `MAX`: The maximum value of a dimension or measure.
     #
-    #   * `COUNT`\: The count of a dimension or measure.
+    #   * `COUNT`: The count of a dimension or measure.
     #
-    #   * `DISTINCT_COUNT`\: The count of distinct values in a dimension or
+    #   * `DISTINCT_COUNT`: The count of distinct values in a dimension or
     #     measure.
     #
-    #   * `VAR`\: The variance of a dimension or measure.
+    #   * `VAR`: The variance of a dimension or measure.
     #
-    #   * `VARP`\: The partitioned variance of a dimension or measure.
+    #   * `VARP`: The partitioned variance of a dimension or measure.
     #
-    #   * `STDEV`\: The standard deviation of a dimension or measure.
+    #   * `STDEV`: The standard deviation of a dimension or measure.
     #
-    #   * `STDEVP`\: The partitioned standard deviation of a dimension or
+    #   * `STDEVP`: The partitioned standard deviation of a dimension or
     #     measure.
     #
-    #   * `MEDIAN`\: The median value of a dimension or measure.
+    #   * `MEDIAN`: The median value of a dimension or measure.
     #   @return [String]
     #
     # @!attribute [rw] percentile_aggregation
@@ -18353,10 +18352,9 @@ module Aws::QuickSight
     #   Amazon QuickSight supports several ways of managing the identity of
     #   users. This parameter accepts two values:
     #
-    #   * `IAM`\: A user whose identity maps to an existing IAM user or
-    #     role.
+    #   * `IAM`: A user whose identity maps to an existing IAM user or role.
     #
-    #   * `QUICKSIGHT`\: A user whose identity is owned and managed
+    #   * `QUICKSIGHT`: A user whose identity is owned and managed
     #     internally by Amazon QuickSight.
     #   @return [String]
     #
@@ -18368,19 +18366,17 @@ module Aws::QuickSight
     #   The Amazon QuickSight role for the user. The user role can be one of
     #   the following:
     #
-    #   * `READER`\: A user who has read-only access to dashboards.
+    #   * `READER`: A user who has read-only access to dashboards.
     #
-    #   * `AUTHOR`\: A user who can create data sources, datasets, analyses,
+    #   * `AUTHOR`: A user who can create data sources, datasets, analyses,
     #     and dashboards.
     #
-    #   * `ADMIN`\: A user who is an author, who can also manage Amazon
+    #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
-    #   * `RESTRICTED_READER`\: This role isn't currently available for
-    #     use.
+    #   * `RESTRICTED_READER`: This role isn't currently available for use.
     #
-    #   * `RESTRICTED_AUTHOR`\: This role isn't currently available for
-    #     use.
+    #   * `RESTRICTED_AUTHOR`: This role isn't currently available for use.
     #   @return [String]
     #
     # @!attribute [rw] iam_arn
@@ -18455,13 +18451,13 @@ module Aws::QuickSight
     #   Identity and Access Management(IAM) role. The type of supported
     #   external login provider can be one of the following.
     #
-    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #   * `COGNITO`: Amazon Cognito. The provider URL is
     #     cognito-identity.amazonaws.com. When choosing the `COGNITO`
     #     provider type, don’t use the "CustomFederationProviderUrl"
     #     parameter which is only needed when the external provider is
     #     custom.
     #
-    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When
+    #   * `CUSTOM_OIDC`: Custom OpenID Connect (OIDC) provider. When
     #     choosing `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl`
     #     parameter to provide the custom OIDC provider URL.
     #   @return [String]
@@ -18634,7 +18630,7 @@ module Aws::QuickSight
     #   the ` UpdateUser ` API operation. Use the ` RegisterUser ` API
     #   operation to add a new user with a custom permission profile
     #   attached. For more information, see the following sections in the
-    #   *Amazon QuickSight User Guide*\:
+    #   *Amazon QuickSight User Guide*:
     #
     #   * [Embedding the Full Functionality of the Amazon QuickSight Console
     #     for Authenticated Users][2]
@@ -18844,11 +18840,11 @@ module Aws::QuickSight
     #   This option determines how null values should be treated when
     #   filtering data.
     #
-    #   * `ALL_VALUES`\: Include null values in filtered results.
+    #   * `ALL_VALUES`: Include null values in filtered results.
     #
-    #   * `NULLS_ONLY`\: Only include null values in filtered results.
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
     #
-    #   * `NON_NULLS_ONLY`\: Exclude null values from filtered results.
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
     #   @return [String]
     #
     # @!attribute [rw] exclude_period_configuration
@@ -19280,7 +19276,7 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `ALL_VISUALS`\: Applies the filter operation to all visuals in the
+    #   * `ALL_VISUALS`: Applies the filter operation to all visuals in the
     #     same sheet.
     #
     #   ^
@@ -20420,9 +20416,9 @@ module Aws::QuickSight
     #   The layout content type of the sheet. Choose one of the following
     #   options:
     #
-    #   * `PAGINATED`\: Creates a sheet for a paginated report.
+    #   * `PAGINATED`: Creates a sheet for a paginated report.
     #
-    #   * `INTERACTIVE`\: Creates a sheet for an interactive dashboard.
+    #   * `INTERACTIVE`: Creates a sheet for an interactive dashboard.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetDefinition AWS API Documentation
@@ -20906,9 +20902,9 @@ module Aws::QuickSight
     #   The built-in options for default values. The value can be one of the
     #   following:
     #
-    #   * `RECOMMENDED`\: The recommended value.
+    #   * `RECOMMENDED`: The recommended value.
     #
-    #   * `NULL`\: The `NULL` value.
+    #   * `NULL`: The `NULL` value.
     #   @return [String]
     #
     # @!attribute [rw] custom_value
@@ -22453,9 +22449,9 @@ module Aws::QuickSight
     #   The seasonality setup of a forecast computation. Choose one of the
     #   following options:
     #
-    #   * `NULL`\: The input is set to `NULL`.
+    #   * `NULL`: The input is set to `NULL`.
     #
-    #   * `NON_NULL`\: The input is set to a custom value.
+    #   * `NON_NULL`: The input is set to a custom value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TimeBasedForecastProperties AWS API Documentation
@@ -22575,11 +22571,11 @@ module Aws::QuickSight
     #   This option determines how null values should be treated when
     #   filtering data.
     #
-    #   * `ALL_VALUES`\: Include null values in filtered results.
+    #   * `ALL_VALUES`: Include null values in filtered results.
     #
-    #   * `NULLS_ONLY`\: Only include null values in filtered results.
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
     #
-    #   * `NON_NULLS_ONLY`\: Exclude null values from filtered results.
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
     #   @return [String]
     #
     # @!attribute [rw] exclude_period_configuration
@@ -22666,9 +22662,9 @@ module Aws::QuickSight
     #   The selected type for the tooltip. Choose one of the following
     #   options:
     #
-    #   * `BASIC`\: A basic tooltip.
+    #   * `BASIC`: A basic tooltip.
     #
-    #   * `DETAILED`\: A detailed tooltip.
+    #   * `DETAILED`: A detailed tooltip.
     #   @return [String]
     #
     # @!attribute [rw] field_based_tooltip
@@ -25012,12 +25008,12 @@ module Aws::QuickSight
     #   The Amazon QuickSight role of the user. The role can be one of the
     #   following default security cohorts:
     #
-    #   * `READER`\: A user who has read-only access to dashboards.
+    #   * `READER`: A user who has read-only access to dashboards.
     #
-    #   * `AUTHOR`\: A user who can create data sources, datasets, analyses,
+    #   * `AUTHOR`: A user who can create data sources, datasets, analyses,
     #     and dashboards.
     #
-    #   * `ADMIN`\: A user who is an author, who can also manage Amazon
+    #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
     #   The name of the Amazon QuickSight role is invisible to the user
@@ -25067,17 +25063,17 @@ module Aws::QuickSight
     #   Identity and Access Management(IAM) role. The type of supported
     #   external login provider can be one of the following.
     #
-    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #   * `COGNITO`: Amazon Cognito. The provider URL is
     #     cognito-identity.amazonaws.com. When choosing the `COGNITO`
     #     provider type, don’t use the "CustomFederationProviderUrl"
     #     parameter which is only needed when the external provider is
     #     custom.
     #
-    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When
+    #   * `CUSTOM_OIDC`: Custom OpenID Connect (OIDC) provider. When
     #     choosing `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl`
     #     parameter to provide the custom OIDC provider URL.
     #
-    #   * `NONE`\: This clears all the previously saved external login
+    #   * `NONE`: This clears all the previously saved external login
     #     information for a user. Use the ` DescribeUser ` API operation to
     #     check the external login information.
     #   @return [String]
@@ -25189,19 +25185,17 @@ module Aws::QuickSight
     #   The Amazon QuickSight role for the user. The user role can be one of
     #   the following:.
     #
-    #   * `READER`\: A user who has read-only access to dashboards.
+    #   * `READER`: A user who has read-only access to dashboards.
     #
-    #   * `AUTHOR`\: A user who can create data sources, datasets, analyses,
+    #   * `AUTHOR`: A user who can create data sources, datasets, analyses,
     #     and dashboards.
     #
-    #   * `ADMIN`\: A user who is an author, who can also manage Amazon
+    #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     Amazon QuickSight settings.
     #
-    #   * `RESTRICTED_READER`\: This role isn't currently available for
-    #     use.
+    #   * `RESTRICTED_READER`: This role isn't currently available for use.
     #
-    #   * `RESTRICTED_AUTHOR`\: This role isn't currently available for
-    #     use.
+    #   * `RESTRICTED_AUTHOR`: This role isn't currently available for use.
     #   @return [String]
     #
     # @!attribute [rw] identity_type
@@ -25227,10 +25221,10 @@ module Aws::QuickSight
     #   to let the user federate into Amazon QuickSight with an associated
     #   IAM role. The type can be one of the following.
     #
-    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #   * `COGNITO`: Amazon Cognito. The provider URL is
     #     cognito-identity.amazonaws.com.
     #
-    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider.
+    #   * `CUSTOM_OIDC`: Custom OpenID Connect (OIDC) provider.
     #   @return [String]
     #
     # @!attribute [rw] external_login_federation_provider_url
@@ -25587,10 +25581,10 @@ module Aws::QuickSight
     #
     #   Valid values are defined as follows:
     #
-    #   * `DATA_POINT_CLICK`\: Initiates a custom action by a left pointer
+    #   * `DATA_POINT_CLICK`: Initiates a custom action by a left pointer
     #     click on a data point.
     #
-    #   * `DATA_POINT_MENU`\: Initiates a custom action by right pointer
+    #   * `DATA_POINT_MENU`: Initiates a custom action by right pointer
     #     click from the menu.
     #   @return [String]
     #

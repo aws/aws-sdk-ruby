@@ -1992,7 +1992,7 @@ module Aws::GlueDataBrew
     #   The expression which includes condition names followed by
     #   substitution variables, possibly grouped and combined with other
     #   conditions. For example, "(starts\_with :prefix1 or starts\_with
-    #   :prefix2) and (ends\_with :suffix1 or ends\_with :suffix2)".
+    #   \:prefix2) and (ends\_with :suffix1 or ends\_with :suffix2)".
     #   Substitution variables should start with ':' symbol.
     #   @return [String]
     #
@@ -3243,7 +3243,7 @@ module Aws::GlueDataBrew
     #   reference, then ColumnSelectors in the rule should be null. If
     #   ColumnSelectors has been defined, then there should be no column
     #   reference in the left side of a condition, for example, `is_between
-    #   :val1 and :val2`.
+    #   \:val1 and :val2`.
     #
     #   For more information, see [Available checks][1]
     #

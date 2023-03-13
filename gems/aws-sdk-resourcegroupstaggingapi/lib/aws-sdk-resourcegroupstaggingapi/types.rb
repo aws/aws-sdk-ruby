@@ -323,7 +323,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     #     For example, for the following filters: `filter1=
     #     \{keyA,\{value1\}\}`, `filter2=\{keyB,\{value2,value3,value4\}\}`,
-    #     `filter3= \{keyC\}`\:
+    #     `filter3= \{keyC\}`:
     #
     #     * `GetResources(\{filter1\})` returns resources tagged with
     #       `key1=value1`

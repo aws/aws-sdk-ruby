@@ -770,7 +770,7 @@ module Aws::SQS
     #     Default: 30. For more information about the visibility timeout, see
     #     [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
     #
-    #   The following attributes apply only to [server-side-encryption][4]\:
+    #   The following attributes apply only to [server-side-encryption][4]:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
     #     master key (CMK) for Amazon SQS or a custom CMK. For more
@@ -794,7 +794,7 @@ module Aws::SQS
     #     supported per queue (e.g. [SSE-KMS][9] or [SSE-SQS][10]).
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
-    #   queues][11]\:
+    #   queues][11]:
     #
     #   * `FifoQueue` – Designates a queue as FIFO. Valid values are `true`
     #     and `false`. If you don't specify the `FifoQueue` attribute, Amazon
@@ -840,7 +840,7 @@ module Aws::SQS
     #       duplicates and only one copy of the message is delivered.
     #
     #   The following attributes apply only to [high throughput for FIFO
-    #   queues][14]\:
+    #   queues][14]:
     #
     #   * `DeduplicationScope` – Specifies whether message deduplication
     #     occurs at the message group or queue level. Valid values are
@@ -1199,7 +1199,7 @@ module Aws::SQS
     #     For more information about the visibility timeout, see [Visibility
     #     Timeout][3] in the *Amazon SQS Developer Guide*.
     #
-    #   The following attributes apply only to [server-side-encryption][4]\:
+    #   The following attributes apply only to [server-side-encryption][4]:
     #
     #   * `KmsMasterKeyId` – Returns the ID of an Amazon Web Services managed
     #     customer master key (CMK) for Amazon SQS or a custom CMK. For more
@@ -1216,7 +1216,7 @@ module Aws::SQS
     #     [SSE-KMS][7] or [SSE-SQS][8]).
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
-    #   queues][9]\:
+    #   queues][9]:
     #
     #   * `FifoQueue` – Returns information about whether the queue is FIFO.
     #     For more information, see [FIFO queue logic][10] in the *Amazon SQS
@@ -1232,7 +1232,7 @@ module Aws::SQS
     #     [Exactly-once processing][11] in the *Amazon SQS Developer Guide*.
     #
     #   The following attributes apply only to [high throughput for FIFO
-    #   queues][12]\:
+    #   queues][12]:
     #
     #   * `DeduplicationScope` – Specifies whether message deduplication
     #     occurs at the message group or queue level. Valid values are
@@ -2274,7 +2274,7 @@ module Aws::SQS
     #     Default: 30. For more information about the visibility timeout, see
     #     [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
     #
-    #   The following attributes apply only to [server-side-encryption][4]\:
+    #   The following attributes apply only to [server-side-encryption][4]:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
     #     master key (CMK) for Amazon SQS or a custom CMK. For more
@@ -2297,7 +2297,7 @@ module Aws::SQS
     #     supported per queue (e.g. [SSE-KMS][9] or [SSE-SQS][10]).
     #
     #   The following attribute applies only to [FIFO (first-in-first-out)
-    #   queues][11]\:
+    #   queues][11]:
     #
     #   * `ContentBasedDeduplication` – Enables content-based deduplication.
     #     For more information, see [Exactly-once processing][12] in the
@@ -2332,7 +2332,7 @@ module Aws::SQS
     #       duplicates and only one copy of the message is delivered.
     #
     #   The following attributes apply only to [high throughput for FIFO
-    #   queues][13]\:
+    #   queues][13]:
     #
     #   * `DeduplicationScope` – Specifies whether message deduplication
     #     occurs at the message group or queue level. Valid values are

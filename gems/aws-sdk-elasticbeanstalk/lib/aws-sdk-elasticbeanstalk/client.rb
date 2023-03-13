@@ -2480,10 +2480,10 @@ module Aws::ElasticBeanstalk
     # @option params [Boolean] :include_deleted
     #   Indicates whether to include deleted environments:
     #
-    #   `true`\: Environments that have been deleted after
+    #   `true`: Environments that have been deleted after
     #   `IncludedDeletedBackTo` are displayed.
     #
-    #   `false`\: Do not include deleted environments.
+    #   `false`: Do not include deleted environments.
     #
     # @option params [Time,DateTime,Date,Integer,String] :included_deleted_back_to
     #   If specified when `IncludeDeleted` is set to `true`, then environments
@@ -3102,31 +3102,31 @@ module Aws::ElasticBeanstalk
     #   `SearchFilter` terms. Most operators take a single value. The `in` and
     #   `not_in` operators can take multiple values.
     #
-    #   * `Attribute = BranchName`\:
+    #   * `Attribute = BranchName`:
     #
-    #     * `Operator`\: `=` \| `!=` \| `begins_with` \| `ends_with` \|
+    #     * `Operator`: `=` \| `!=` \| `begins_with` \| `ends_with` \|
     #       `contains` \| `in` \| `not_in`
     #
     #     ^
     #
-    #   * `Attribute = LifecycleState`\:
+    #   * `Attribute = LifecycleState`:
     #
-    #     * `Operator`\: `=` \| `!=` \| `in` \| `not_in`
+    #     * `Operator`: `=` \| `!=` \| `in` \| `not_in`
     #
-    #     * `Values`\: `beta` \| `supported` \| `deprecated` \| `retired`
+    #     * `Values`: `beta` \| `supported` \| `deprecated` \| `retired`
     #
-    #   * `Attribute = PlatformName`\:
+    #   * `Attribute = PlatformName`:
     #
-    #     * `Operator`\: `=` \| `!=` \| `begins_with` \| `ends_with` \|
+    #     * `Operator`: `=` \| `!=` \| `begins_with` \| `ends_with` \|
     #       `contains` \| `in` \| `not_in`
     #
     #     ^
     #
-    #   * `Attribute = TierType`\:
+    #   * `Attribute = TierType`:
     #
-    #     * `Operator`\: `=` \| `!=`
+    #     * `Operator`: `=` \| `!=`
     #
-    #     * `Values`\: `WebServer/Standard` \| `Worker/SQS/HTTP`
+    #     * `Values`: `WebServer/Standard` \| `Worker/SQS/HTTP`
     #
     #   Array size: limited to 10 `SearchFilter` objects.
     #
@@ -3630,11 +3630,11 @@ module Aws::ElasticBeanstalk
     #   Indicates whether the associated AWS resources should shut down when
     #   the environment is terminated:
     #
-    #   * `true`\: The specified environment as well as the associated AWS
+    #   * `true`: The specified environment as well as the associated AWS
     #     resources, such as Auto Scaling group and LoadBalancer, are
     #     terminated.
     #
-    #   * `false`\: AWS Elastic Beanstalk resource management is removed from
+    #   * `false`: AWS Elastic Beanstalk resource management is removed from
     #     the environment, but the AWS resources continue to operate.
     #
     #   For more information, see the [ AWS Elastic Beanstalk User Guide. ][1]

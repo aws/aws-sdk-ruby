@@ -681,9 +681,9 @@ module Aws::DataSync
     #   The security groups must allow outbound traffic on the following ports
     #   (depending on the protocol you use):
     #
-    #   * **Network File System (NFS)**\: TCP ports 111, 635, and 2049
+    #   * **Network File System (NFS)**: TCP ports 111, 635, and 2049
     #
-    #   * **Server Message Block (SMB)**\: TCP port 445
+    #   * **Server Message Block (SMB)**: TCP port 445
     #
     #   Your file system's security groups must also allow inbound traffic on
     #   the same ports.

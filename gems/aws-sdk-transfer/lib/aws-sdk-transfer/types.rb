@@ -73,10 +73,10 @@ module Aws::Transfer
     #   transfers is synchronous or asynchronous. Specify either of the
     #   following values:
     #
-    #   * `SYNC`\: The system expects a synchronous MDN response, confirming
+    #   * `SYNC`: The system expects a synchronous MDN response, confirming
     #     that the file was transferred successfully (or not).
     #
-    #   * `NONE`\: Specifies that no MDN response is required.
+    #   * `NONE`: Specifies that no MDN response is required.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/As2ConnectorConfig AWS API Documentation
@@ -2695,36 +2695,36 @@ module Aws::Transfer
     # @!attribute [rw] type
     #   Specifies the error type.
     #
-    #   * `ALREADY_EXISTS`\: occurs for a copy step, if the overwrite option
+    #   * `ALREADY_EXISTS`: occurs for a copy step, if the overwrite option
     #     is not selected and a file with the same name already exists in
     #     the target location.
     #
-    #   * `BAD_REQUEST`\: a general bad request: for example, a step that
+    #   * `BAD_REQUEST`: a general bad request: for example, a step that
     #     attempts to tag an EFS file returns `BAD_REQUEST`, as only S3
     #     files can be tagged.
     #
-    #   * `CUSTOM_STEP_FAILED`\: occurs when the custom step provided a
+    #   * `CUSTOM_STEP_FAILED`: occurs when the custom step provided a
     #     callback that indicates failure.
     #
-    #   * `INTERNAL_SERVER_ERROR`\: a catch-all error that can occur for a
+    #   * `INTERNAL_SERVER_ERROR`: a catch-all error that can occur for a
     #     variety of reasons.
     #
-    #   * `NOT_FOUND`\: occurs when a requested entity, for example a source
+    #   * `NOT_FOUND`: occurs when a requested entity, for example a source
     #     file for a copy step, does not exist.
     #
-    #   * `PERMISSION_DENIED`\: occurs if your policy does not contain the
+    #   * `PERMISSION_DENIED`: occurs if your policy does not contain the
     #     correct permissions to complete one or more of the steps in the
     #     workflow.
     #
-    #   * `TIMEOUT`\: occurs when the execution times out.
+    #   * `TIMEOUT`: occurs when the execution times out.
     #
     #     <note markdown="1"> You can set the `TimeoutSeconds` for a custom step, anywhere from
     #     1 second to 1800 seconds (30 minutes).
     #
     #      </note>
     #
-    #   * `THROTTLED`\: occurs if you exceed the new execution refill rate
-    #     of one workflow per second.
+    #   * `THROTTLED`: occurs if you exceed the new execution refill rate of
+    #     one workflow per second.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -3302,7 +3302,7 @@ module Aws::Transfer
     #
     #   This is useful for pagination, for instance. If you have 100
     #   executions for a workflow, you might only want to list first 10. If
-    #   so, call the API by specifying the `max-results`\:
+    #   so, call the API by specifying the `max-results`:
     #
     #   `aws transfer list-executions --max-results 10`
     #
@@ -3345,16 +3345,16 @@ module Aws::Transfer
     # @!attribute [rw] executions
     #   Returns the details for each execution.
     #
-    #   * **NextToken**\: returned from a call to several APIs, you can use
+    #   * **NextToken**: returned from a call to several APIs, you can use
     #     pass it to a subsequent command to continue listing additional
     #     executions.
     #
-    #   * **StartTime**\: timestamp indicating when the execution began.
+    #   * **StartTime**: timestamp indicating when the execution began.
     #
-    #   * **Executions**\: details of the execution, including the execution
+    #   * **Executions**: details of the execution, including the execution
     #     ID, initial file location, and Service metadata.
     #
-    #   * **Status**\: one of the following values: `IN_PROGRESS`,
+    #   * **Status**: one of the following values: `IN_PROGRESS`,
     #     `COMPLETED`, `EXCEPTION`, `HANDLING_EXEPTION`.
     #   @return [Array<Types::ListedExecution>]
     #
@@ -4292,15 +4292,15 @@ module Aws::Transfer
     #   `TlsSessionResumptionMode` value is not specified during
     #   `CreateServer`, it is set to `ENFORCED` by default.
     #
-    #   * `DISABLED`\: the server does not process TLS session resumption
+    #   * `DISABLED`: the server does not process TLS session resumption
     #     client requests and creates a new TLS session for each request.
     #
-    #   * `ENABLED`\: the server processes and accepts clients that are
+    #   * `ENABLED`: the server processes and accepts clients that are
     #     performing TLS session resumption. The server doesn't reject
     #     client data connections that do not perform the TLS session
     #     resumption client processing.
     #
-    #   * `ENFORCED`\: the server processes and accepts clients that are
+    #   * `ENFORCED`: the server processes and accepts clients that are
     #     performing TLS session resumption. The server rejects client data
     #     connections that do not perform the TLS session resumption client
     #     processing. Before you set the value to `ENFORCED`, test your
@@ -4448,7 +4448,7 @@ module Aws::Transfer
     # For example, if your path is `shared-files/bob/`, your uploaded files
     # are copied to the `shared-files/bob/`, folder. If your path is
     # `shared-files/today`, each uploaded file is copied to the
-    # `shared-files` folder and named `today`\: each upload overwrites the
+    # `shared-files` folder and named `today`: each upload overwrites the
     # previous version of the *bob* file.
     #
     # @!attribute [rw] bucket

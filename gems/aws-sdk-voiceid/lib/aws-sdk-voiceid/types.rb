@@ -110,21 +110,21 @@ module Aws::VoiceID
     #   The type of conflict which caused a ConflictException. Possible
     #   types and the corresponding error messages are as follows:
     #
-    #   * `DOMAIN_NOT_ACTIVE`\: The domain is not active.
+    #   * `DOMAIN_NOT_ACTIVE`: The domain is not active.
     #
-    #   * `CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT`\: You cannot change the
+    #   * `CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT`: You cannot change the
     #     speaker ID after an enrollment has been requested.
     #
-    #   * `ENROLLMENT_ALREADY_EXISTS`\: There is already an enrollment for
+    #   * `ENROLLMENT_ALREADY_EXISTS`: There is already an enrollment for
     #     this session.
     #
-    #   * `SPEAKER_NOT_SET`\: You must set the speaker ID before requesting
+    #   * `SPEAKER_NOT_SET`: You must set the speaker ID before requesting
     #     an enrollment.
     #
-    #   * `SPEAKER_OPTED_OUT`\: You cannot request an enrollment for an
-    #     opted out speaker.
+    #   * `SPEAKER_OPTED_OUT`: You cannot request an enrollment for an opted
+    #     out speaker.
     #
-    #   * `CONCURRENT_CHANGES`\: The request could not be processed as the
+    #   * `CONCURRENT_CHANGES`: The request could not be processed as the
     #     resource was modified by another request during execution.
     #   @return [String]
     #

@@ -377,7 +377,7 @@ module Aws::RDS
     #   different Amazon Web Services account, specify the key ARN or alias
     #   ARN.
     #
-    #   When a KMS key isn't specified in `KmsKeyId`\:
+    #   When a KMS key isn't specified in `KmsKeyId`:
     #
     #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
     #     then Amazon RDS will use the KMS key used to encrypt the source.
@@ -535,7 +535,7 @@ module Aws::RDS
     #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
-    #   Guide*\:
+    #   Guide*:
     #
     #   * [Limitations of Aurora Serverless v1][1]
     #

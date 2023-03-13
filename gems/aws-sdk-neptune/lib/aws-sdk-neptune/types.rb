@@ -771,7 +771,7 @@ module Aws::Neptune
     #   new DB cluster, then you can use the KMS key alias instead of the
     #   ARN for the KMS encryption key.
     #
-    #   If an encryption key is not specified in `KmsKeyId`\:
+    #   If an encryption key is not specified in `KmsKeyId`:
     #
     #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
     #     then Amazon Neptune will use the encryption key used to encrypt

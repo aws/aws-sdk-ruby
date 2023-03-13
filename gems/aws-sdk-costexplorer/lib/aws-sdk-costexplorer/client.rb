@@ -2399,7 +2399,7 @@ module Aws::CostExplorer
     # @option params [Types::SortDefinition] :sort_by
     #   The value by which you want to sort the data.
     #
-    #   The following values are supported for `Key`\:
+    #   The following values are supported for `Key`:
     #
     #   * `OnDemandCost`
     #
@@ -2880,7 +2880,7 @@ module Aws::CostExplorer
     # @option params [Types::SortDefinition] :sort_by
     #   The value that you want to sort the data by.
     #
-    #   The following values are supported for `Key`\:
+    #   The following values are supported for `Key`:
     #
     #   * `UtilizationPercentage`
     #
@@ -3407,7 +3407,7 @@ module Aws::CostExplorer
     # @option params [Types::SortDefinition] :sort_by
     #   The value that you want to sort the data by.
     #
-    #   The following values are supported for `Key`\:
+    #   The following values are supported for `Key`:
     #
     #   * `SpendCoveredBySavingsPlan`
     #
@@ -3705,7 +3705,7 @@ module Aws::CostExplorer
     # @option params [Types::SortDefinition] :sort_by
     #   The value that you want to sort the data by.
     #
-    #   The following values are supported for `Key`\:
+    #   The following values are supported for `Key`:
     #
     #   * `UtilizationPercentage`
     #
@@ -3858,7 +3858,7 @@ module Aws::CostExplorer
     # @option params [Types::SortDefinition] :sort_by
     #   The value that you want to sort the data by.
     #
-    #   The following values are supported for `Key`\:
+    #   The following values are supported for `Key`:
     #
     #   * `UtilizationPercentage`
     #

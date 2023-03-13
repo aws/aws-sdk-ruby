@@ -1009,7 +1009,7 @@ module Aws::MigrationHub
 
     # Sets the migration state of an application. For a given application
     # identified by the value passed to `ApplicationId`, its status is set
-    # or updated by passing one of three values to `Status`\: `NOT_STARTED |
+    # or updated by passing one of three values to `Status`: `NOT_STARTED |
     # IN_PROGRESS | COMPLETED`.
     #
     # @option params [required, String] :application_id

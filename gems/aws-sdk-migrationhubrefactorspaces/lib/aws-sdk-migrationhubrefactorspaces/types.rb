@@ -1464,11 +1464,11 @@ module Aws::MigrationHubRefactorSpaces
     # @!attribute [rw] route_id
     #   The unique identifier of the route.
     #
-    #   **DEFAULT**\: All traffic that does not match another route is
+    #   **DEFAULT**: All traffic that does not match another route is
     #   forwarded to the default route. Applications must have a default
     #   route before any other routes can be created.
     #
-    #   **URI\_PATH**\: A route that is based on a URI path.
+    #   **URI\_PATH**: A route that is based on a URI path.
     #   @return [String]
     #
     # @!attribute [rw] route_type

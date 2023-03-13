@@ -2156,7 +2156,7 @@ module Aws::FSx
     # @option params [String] :file_system_type_version
     #   (Optional) For FSx for Lustre file systems, sets the Lustre version
     #   for the file system that you're creating. Valid values are `2.10` and
-    #   `2.12`\:
+    #   `2.12`:
     #
     #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre deployment
     #     types.

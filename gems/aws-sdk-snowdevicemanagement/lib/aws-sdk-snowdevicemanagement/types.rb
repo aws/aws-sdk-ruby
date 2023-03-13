@@ -614,17 +614,17 @@ module Aws::SnowDeviceManagement
     #   The valid values for the instance state code are all in the range of
     #   the low byte. These values are:
     #
-    #   * `0`\: `pending`
+    #   * `0` : `pending`
     #
-    #   * `16`\: `running`
+    #   * `16` : `running`
     #
-    #   * `32`\: `shutting-down`
+    #   * `32` : `shutting-down`
     #
-    #   * `48`\: `terminated`
+    #   * `48` : `terminated`
     #
-    #   * `64`\: `stopping`
+    #   * `64` : `stopping`
     #
-    #   * `80`\: `stopped`
+    #   * `80` : `stopped`
     #
     #   You can ignore the high byte value by zeroing out all of the bits
     #   above 2^8 or 256 in decimal.

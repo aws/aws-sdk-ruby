@@ -256,17 +256,17 @@ module Aws::CodeBuild
     # @!attribute [rw] build_status
     #   The current status of the build. Valid values include:
     #
-    #   * `FAILED`\: The build failed.
+    #   * `FAILED`: The build failed.
     #
-    #   * `FAULT`\: The build faulted.
+    #   * `FAULT`: The build faulted.
     #
-    #   * `IN_PROGRESS`\: The build is still in progress.
+    #   * `IN_PROGRESS`: The build is still in progress.
     #
-    #   * `STOPPED`\: The build stopped.
+    #   * `STOPPED`: The build stopped.
     #
-    #   * `SUCCEEDED`\: The build succeeded.
+    #   * `SUCCEEDED`: The build succeeded.
     #
-    #   * `TIMED_OUT`\: The build timed out.
+    #   * `TIMED_OUT`: The build timed out.
     #   @return [String]
     #
     # @!attribute [rw] source_version
@@ -1218,9 +1218,9 @@ module Aws::CodeBuild
     #   The current status of the logs in CloudWatch Logs for a build
     #   project. Valid values are:
     #
-    #   * `ENABLED`\: CloudWatch Logs are enabled for this build project.
+    #   * `ENABLED`: CloudWatch Logs are enabled for this build project.
     #
-    #   * `DISABLED`\: CloudWatch Logs are not enabled for this build
+    #   * `DISABLED`: CloudWatch Logs are not enabled for this build
     #     project.
     #   @return [String]
     #
@@ -2053,15 +2053,15 @@ module Aws::CodeBuild
     # @!attribute [rw] type
     #   The type of environment variable. Valid values include:
     #
-    #   * `PARAMETER_STORE`\: An environment variable stored in Systems
+    #   * `PARAMETER_STORE`: An environment variable stored in Systems
     #     Manager Parameter Store. To learn how to specify a parameter store
     #     environment variable, see [env/parameter-store][1] in the
     #     *CodeBuild User Guide*.
     #
-    #   * `PLAINTEXT`\: An environment variable in plain text format. This
-    #     is the default value.
+    #   * `PLAINTEXT`: An environment variable in plain text format. This is
+    #     the default value.
     #
-    #   * `SECRETS_MANAGER`\: An environment variable stored in Secrets
+    #   * `SECRETS_MANAGER`: An environment variable stored in Secrets
     #     Manager. To learn how to specify a secrets manager environment
     #     variable, see [env/secrets-manager][2] in the *CodeBuild User
     #     Guide*.
@@ -2340,11 +2340,11 @@ module Aws::CodeBuild
     #   Specifies the sort order of the returned items. Valid values
     #   include:
     #
-    #   * `ASCENDING`\: List the batch build identifiers in ascending order
+    #   * `ASCENDING`: List the batch build identifiers in ascending order
     #     by identifier.
     #
-    #   * `DESCENDING`\: List the batch build identifiers in descending
-    #     order by identifier.
+    #   * `DESCENDING`: List the batch build identifiers in descending order
+    #     by identifier.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2397,11 +2397,11 @@ module Aws::CodeBuild
     #   Specifies the sort order of the returned items. Valid values
     #   include:
     #
-    #   * `ASCENDING`\: List the batch build identifiers in ascending order
+    #   * `ASCENDING`: List the batch build identifiers in ascending order
     #     by identifier.
     #
-    #   * `DESCENDING`\: List the batch build identifiers in descending
-    #     order by identifier.
+    #   * `DESCENDING`: List the batch build identifiers in descending order
+    #     by identifier.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2451,10 +2451,10 @@ module Aws::CodeBuild
     #
     #   Valid values include:
     #
-    #   * `ASCENDING`\: List the build identifiers in ascending order, by
+    #   * `ASCENDING`: List the build identifiers in ascending order, by
     #     build number.
     #
-    #   * `DESCENDING`\: List the build identifiers in descending order, by
+    #   * `DESCENDING`: List the build identifiers in descending order, by
     #     build number.
     #
     #   If the project has more than 100 builds, setting the sort order will
@@ -2505,9 +2505,9 @@ module Aws::CodeBuild
     # @!attribute [rw] sort_order
     #   The order to list build IDs. Valid values include:
     #
-    #   * `ASCENDING`\: List the build IDs in ascending order by build ID.
+    #   * `ASCENDING`: List the build IDs in ascending order by build ID.
     #
-    #   * `DESCENDING`\: List the build IDs in descending order by build ID.
+    #   * `DESCENDING`: List the build IDs in descending order by build ID.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2572,13 +2572,12 @@ module Aws::CodeBuild
     #   The criterion to be used to list build project names. Valid values
     #   include:
     #
-    #   * `CREATED_TIME`\: List based on when each build project was
-    #     created.
+    #   * `CREATED_TIME`: List based on when each build project was created.
     #
-    #   * `LAST_MODIFIED_TIME`\: List based on when information about each
+    #   * `LAST_MODIFIED_TIME`: List based on when information about each
     #     build project was last changed.
     #
-    #   * `NAME`\: List based on each build project's name.
+    #   * `NAME`: List based on each build project's name.
     #
     #   Use `sortOrder` to specify in what order to list the build project
     #   names based on the preceding criteria.
@@ -2587,9 +2586,9 @@ module Aws::CodeBuild
     # @!attribute [rw] sort_order
     #   The order in which to list build projects. Valid values include:
     #
-    #   * `ASCENDING`\: List in ascending order.
+    #   * `ASCENDING`: List in ascending order.
     #
-    #   * `DESCENDING`\: List in descending order.
+    #   * `DESCENDING`: List in descending order.
     #
     #   Use `sortBy` to specify the criterion to be used to list build
     #   project names.
@@ -2645,12 +2644,12 @@ module Aws::CodeBuild
     #   The criterion to be used to list build report groups. Valid values
     #   include:
     #
-    #   * `CREATED_TIME`\: List based on when each report group was created.
+    #   * `CREATED_TIME`: List based on when each report group was created.
     #
-    #   * `LAST_MODIFIED_TIME`\: List based on when each report group was
+    #   * `LAST_MODIFIED_TIME`: List based on when each report group was
     #     last changed.
     #
-    #   * `NAME`\: List based on each report group's name.
+    #   * `NAME`: List based on each report group's name.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2773,10 +2772,10 @@ module Aws::CodeBuild
     #   Specifies the sort order for the list of returned reports. Valid
     #   values are:
     #
-    #   * `ASCENDING`\: return reports in chronological order based on their
+    #   * `ASCENDING`: return reports in chronological order based on their
     #     creation date.
     #
-    #   * `DESCENDING`\: return reports in the reverse chronological order
+    #   * `DESCENDING`: return reports in the reverse chronological order
     #     based on their creation date.
     #   @return [String]
     #
@@ -2839,9 +2838,9 @@ module Aws::CodeBuild
     #   The criterion to be used to list build projects shared with the
     #   current Amazon Web Services account or user. Valid values include:
     #
-    #   * `ARN`\: List based on the ARN.
+    #   * `ARN`: List based on the ARN.
     #
-    #   * `MODIFIED_TIME`\: List based on when information about the shared
+    #   * `MODIFIED_TIME`: List based on when information about the shared
     #     project was last changed.
     #   @return [String]
     #
@@ -2849,9 +2848,9 @@ module Aws::CodeBuild
     #   The order in which to list shared build projects. Valid values
     #   include:
     #
-    #   * `ASCENDING`\: List in ascending order.
+    #   * `ASCENDING`: List in ascending order.
     #
-    #   * `DESCENDING`\: List in descending order.
+    #   * `DESCENDING`: List in descending order.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2909,18 +2908,18 @@ module Aws::CodeBuild
     #   The order in which to list shared report groups. Valid values
     #   include:
     #
-    #   * `ASCENDING`\: List in ascending order.
+    #   * `ASCENDING`: List in ascending order.
     #
-    #   * `DESCENDING`\: List in descending order.
+    #   * `DESCENDING`: List in descending order.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
     #   The criterion to be used to list report groups shared with the
     #   current Amazon Web Services account or user. Valid values include:
     #
-    #   * `ARN`\: List based on the ARN.
+    #   * `ARN`: List based on the ARN.
     #
-    #   * `MODIFIED_TIME`\: List based on when information about the shared
+    #   * `MODIFIED_TIME`: List based on when information about the shared
     #     report group was last changed.
     #   @return [String]
     #
@@ -3354,17 +3353,17 @@ module Aws::CodeBuild
     # @!attribute [rw] type
     #   The type of build output artifact. Valid values include:
     #
-    #   * `CODEPIPELINE`\: The build project has build output generated
+    #   * `CODEPIPELINE`: The build project has build output generated
     #     through CodePipeline.
     #
     #     <note markdown="1"> The `CODEPIPELINE` type is not supported for `secondaryArtifacts`.
     #
     #      </note>
     #
-    #   * `NO_ARTIFACTS`\: The build project does not produce any build
+    #   * `NO_ARTIFACTS`: The build project does not produce any build
     #     output.
     #
-    #   * `S3`\: The build project stores build output in Amazon S3.
+    #   * `S3`: The build project stores build output in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -3413,10 +3412,10 @@ module Aws::CodeBuild
     #
     #   * If `type` is set to `S3`, valid values include:
     #
-    #     * `BUILD_ID`\: Include the build ID in the location of the build
+    #     * `BUILD_ID`: Include the build ID in the location of the build
     #       output artifact.
     #
-    #     * `NONE`\: Do not include the build ID. This is the default if
+    #     * `NONE`: Do not include the build ID. This is the default if
     #       `namespaceType` is not specified.
     #
     #   For example, if `path` is set to `MyArtifacts`, `namespaceType` is
@@ -3466,11 +3465,11 @@ module Aws::CodeBuild
     #
     #   * If `type` is set to `S3`, valid values include:
     #
-    #     * `NONE`\: CodeBuild creates in the output bucket a folder that
+    #     * `NONE`: CodeBuild creates in the output bucket a folder that
     #       contains the build output. This is the default if `packaging` is
     #       not specified.
     #
-    #     * `ZIP`\: CodeBuild creates in the output bucket a ZIP file that
+    #     * `ZIP`: CodeBuild creates in the output bucket a ZIP file that
     #       contains the build output.
     #   @return [String]
     #
@@ -3632,20 +3631,20 @@ module Aws::CodeBuild
     # @!attribute [rw] type
     #   The type of cache used by the build project. Valid values include:
     #
-    #   * `NO_CACHE`\: The build project does not use any cache.
+    #   * `NO_CACHE`: The build project does not use any cache.
     #
-    #   * `S3`\: The build project reads and writes from and to S3.
+    #   * `S3`: The build project reads and writes from and to S3.
     #
-    #   * `LOCAL`\: The build project stores a cache locally on a build host
+    #   * `LOCAL`: The build project stores a cache locally on a build host
     #     that is only available to that build host.
     #   @return [String]
     #
     # @!attribute [rw] location
     #   Information about the cache location:
     #
-    #   * `NO_CACHE` or `LOCAL`\: This value is ignored.
+    #   * `NO_CACHE` or `LOCAL`: This value is ignored.
     #
-    #   * `S3`\: This is the S3 bucket name/prefix.
+    #   * `S3`: This is the S3 bucket name/prefix.
     #   @return [String]
     #
     # @!attribute [rw] modes
@@ -3774,20 +3773,20 @@ module Aws::CodeBuild
     #   Information about the compute resources the build project uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`\: Use up to 3 GB memory and 2 vCPUs for
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`\: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`\: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`\: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
-    #   If you use `BUILD_GENERAL1_LARGE`\:
+    #   If you use `BUILD_GENERAL1_LARGE`:
     #
     #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
     #     memory and 8 vCPUs for builds.
@@ -3829,7 +3828,7 @@ module Aws::CodeBuild
     #   `- timeout 15 sh -c "until docker info; do echo .; sleep 1; done"`
     #
     #   If the operating system's base image is Alpine Linux and the
-    #   previous command does not work, add the `-t` argument to `timeout`\:
+    #   previous command does not work, add the `-t` argument to `timeout`:
     #
     #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
     #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay&`
@@ -3953,22 +3952,22 @@ module Aws::CodeBuild
     #   The type of repository that contains the source code to be built.
     #   Valid values include:
     #
-    #   * `BITBUCKET`\: The source code is in a Bitbucket repository.
+    #   * `BITBUCKET`: The source code is in a Bitbucket repository.
     #
-    #   * `CODECOMMIT`\: The source code is in an CodeCommit repository.
+    #   * `CODECOMMIT`: The source code is in an CodeCommit repository.
     #
-    #   * `CODEPIPELINE`\: The source code settings are specified in the
+    #   * `CODEPIPELINE`: The source code settings are specified in the
     #     source action of a pipeline in CodePipeline.
     #
-    #   * `GITHUB`\: The source code is in a GitHub or GitHub Enterprise
+    #   * `GITHUB`: The source code is in a GitHub or GitHub Enterprise
     #     Cloud repository.
     #
-    #   * `GITHUB_ENTERPRISE`\: The source code is in a GitHub Enterprise
+    #   * `GITHUB_ENTERPRISE`: The source code is in a GitHub Enterprise
     #     Server repository.
     #
-    #   * `NO_SOURCE`\: The project does not have input source code.
+    #   * `NO_SOURCE`: The project does not have input source code.
     #
-    #   * `S3`\: The source code is in an Amazon S3 bucket.
+    #   * `S3`: The source code is in an Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -4339,9 +4338,9 @@ module Aws::CodeBuild
     # @!attribute [rw] export_config_type
     #   The export configuration type. Valid values are:
     #
-    #   * `S3`\: The report results are exported to an S3 bucket.
+    #   * `S3`: The report results are exported to an S3 bucket.
     #
-    #   * `NO_EXPORT`\: The report results are not exported.
+    #   * `NO_EXPORT`: The report results are not exported.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination
@@ -4610,9 +4609,9 @@ module Aws::CodeBuild
     # @!attribute [rw] status
     #   The current status of the S3 build logs. Valid values are:
     #
-    #   * `ENABLED`\: S3 build logs are enabled for this build project.
+    #   * `ENABLED`: S3 build logs are enabled for this build project.
     #
-    #   * `DISABLED`\: S3 build logs are not enabled for this build project.
+    #   * `DISABLED`: S3 build logs are not enabled for this build project.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -4707,10 +4706,10 @@ module Aws::CodeBuild
     # @!attribute [rw] packaging
     #   The type of build output artifact to create. Valid values include:
     #
-    #   * `NONE`\: CodeBuild creates the raw data in the output bucket. This
+    #   * `NONE`: CodeBuild creates the raw data in the output bucket. This
     #     is the default if packaging is not specified.
     #
-    #   * `ZIP`\: CodeBuild creates a ZIP file with the raw data in the
+    #   * `ZIP`: CodeBuild creates a ZIP file with the raw data in the
     #     output bucket.
     #   @return [String]
     #
@@ -5851,9 +5850,9 @@ module Aws::CodeBuild
     # @!attribute [rw] export_config
     #   Used to specify an updated export type. Valid values are:
     #
-    #   * `S3`\: The report results are exported to an S3 bucket.
+    #   * `S3`: The report results are exported to an S3 bucket.
     #
-    #   * `NO_EXPORT`\: The report results are not exported.
+    #   * `NO_EXPORT`: The report results are not exported.
     #   @return [Types::ReportExportConfig]
     #
     # @!attribute [rw] tags

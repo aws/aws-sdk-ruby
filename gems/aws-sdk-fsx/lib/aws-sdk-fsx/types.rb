@@ -2075,7 +2075,7 @@ module Aws::FSx
     # @!attribute [rw] file_system_type_version
     #   (Optional) For FSx for Lustre file systems, sets the Lustre version
     #   for the file system that you're creating. Valid values are `2.10`
-    #   and `2.12`\:
+    #   and `2.12`:
     #
     #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre
     #     deployment types.
@@ -2387,17 +2387,16 @@ module Aws::FSx
     #   Specifies the snapshot policy for the volume. There are three
     #   built-in snapshot policies:
     #
-    #   * `default`\: This is the default policy. A maximum of six hourly
+    #   * `default`: This is the default policy. A maximum of six hourly
     #     snapshots taken five minutes past the hour. A maximum of two daily
     #     snapshots taken Monday through Saturday at 10 minutes after
     #     midnight. A maximum of two weekly snapshots taken every Sunday at
     #     15 minutes after midnight.
     #
-    #   * `default-1weekly`\: This policy is the same as the `default`
-    #     policy except that it only retains one snapshot from the weekly
-    #     schedule.
+    #   * `default-1weekly`: This policy is the same as the `default` policy
+    #     except that it only retains one snapshot from the weekly schedule.
     #
-    #   * `none`\: This policy does not take any snapshots. This policy can
+    #   * `none`: This policy does not take any snapshots. This policy can
     #     be assigned to volumes to prevent automatic snapshots from being
     #     taken.
     #
@@ -5910,7 +5909,7 @@ module Aws::FSx
     #   You enable root squash by setting a user ID (UID) and group ID (GID)
     #   for the file system in the format `UID:GID` (for example,
     #   `365534:65534`). The UID and GID values can range from `0` to
-    #   `4294967294`\:
+    #   `4294967294`:
     #
     #   * A non-zero value for UID and GID enables root squash. The UID and
     #     GID values can be different, but each must be a non-zero value.
@@ -6231,17 +6230,16 @@ module Aws::FSx
     #   Specifies the snapshot policy for the volume. There are three
     #   built-in snapshot policies:
     #
-    #   * `default`\: This is the default policy. A maximum of six hourly
+    #   * `default`: This is the default policy. A maximum of six hourly
     #     snapshots taken five minutes past the hour. A maximum of two daily
     #     snapshots taken Monday through Saturday at 10 minutes after
     #     midnight. A maximum of two weekly snapshots taken every Sunday at
     #     15 minutes after midnight.
     #
-    #   * `default-1weekly`\: This policy is the same as the `default`
-    #     policy except that it only retains one snapshot from the weekly
-    #     schedule.
+    #   * `default-1weekly`: This policy is the same as the `default` policy
+    #     except that it only retains one snapshot from the weekly schedule.
     #
-    #   * `none`\: This policy does not take any snapshots. This policy can
+    #   * `none`: This policy does not take any snapshots. This policy can
     #     be assigned to volumes to prevent automatic snapshots from being
     #     taken.
     #
@@ -8131,17 +8129,16 @@ module Aws::FSx
     #   Specifies the snapshot policy for the volume. There are three
     #   built-in snapshot policies:
     #
-    #   * `default`\: This is the default policy. A maximum of six hourly
+    #   * `default`: This is the default policy. A maximum of six hourly
     #     snapshots taken five minutes past the hour. A maximum of two daily
     #     snapshots taken Monday through Saturday at 10 minutes after
     #     midnight. A maximum of two weekly snapshots taken every Sunday at
     #     15 minutes after midnight.
     #
-    #   * `default-1weekly`\: This policy is the same as the `default`
-    #     policy except that it only retains one snapshot from the weekly
-    #     schedule.
+    #   * `default-1weekly`: This policy is the same as the `default` policy
+    #     except that it only retains one snapshot from the weekly schedule.
     #
-    #   * `none`\: This policy does not take any snapshots. This policy can
+    #   * `none`: This policy does not take any snapshots. This policy can
     #     be assigned to volumes to prevent automatic snapshots from being
     #     taken.
     #

@@ -1184,11 +1184,11 @@ module Aws::NetworkManager
     #   Network Manager console. If you specify the address, the latitude and
     #   longitude are automatically calculated.
     #
-    #   * `Address`\: The physical address of the site.
+    #   * `Address`: The physical address of the site.
     #
-    #   * `Latitude`\: The latitude of the site.
+    #   * `Latitude`: The latitude of the site.
     #
-    #   * `Longitude`\: The longitude of the site.
+    #   * `Longitude`: The longitude of the site.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to apply to the resource during creation.
@@ -5027,11 +5027,11 @@ module Aws::NetworkManager
     # @option params [Types::Location] :location
     #   The site location:
     #
-    #   * `Address`\: The physical address of the site.
+    #   * `Address`: The physical address of the site.
     #
-    #   * `Latitude`\: The latitude of the site.
+    #   * `Latitude`: The latitude of the site.
     #
-    #   * `Longitude`\: The longitude of the site.
+    #   * `Longitude`: The longitude of the site.
     #
     # @return [Types::UpdateSiteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #

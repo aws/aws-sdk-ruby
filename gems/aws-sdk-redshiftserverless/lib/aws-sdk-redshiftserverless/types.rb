@@ -1634,7 +1634,7 @@ module Aws::RedshiftServerless
     #   `snapshotName`.
     #
     #   The format of the ARN is
-    #   arn:aws:redshift:&lt;region&gt;\:&lt;account\_id&gt;\:snapshot:&lt;cluster\_identifier&gt;/&lt;snapshot\_identifier&gt;.
+    #   arn:aws:redshift:&lt;region&gt;:&lt;account\_id&gt;:snapshot:&lt;cluster\_identifier&gt;/&lt;snapshot\_identifier&gt;.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_name

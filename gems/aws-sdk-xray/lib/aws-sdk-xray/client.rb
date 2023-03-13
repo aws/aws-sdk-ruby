@@ -1499,12 +1499,12 @@ module Aws::XRay
     # A filter expression can target traced requests that hit specific
     # service nodes or edges, have errors, or come from a known user. For
     # example, the following filter expression targets traces that pass
-    # through `api.example.com`\:
+    # through `api.example.com`:
     #
     # `service("api.example.com")`
     #
     # This filter expression finds traces that have an annotation named
-    # `account` with the value `12345`\:
+    # `account` with the value `12345`:
     #
     # `annotation.account = "12345"`
     #

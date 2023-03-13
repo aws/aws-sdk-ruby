@@ -2510,7 +2510,7 @@ module Aws::LakeFormation
     # `ResourceArn = arn:aws:s3:::my-bucket UseServiceLinkedRole = true`
     #
     # If `UseServiceLinkedRole` is not set to true, you must provide or set
-    # the `RoleArn`\:
+    # the `RoleArn`:
     #
     # `arn:aws:iam::12345:role/my-data-access-role`
     #

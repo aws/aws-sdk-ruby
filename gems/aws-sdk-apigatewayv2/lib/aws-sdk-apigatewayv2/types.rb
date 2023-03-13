@@ -241,9 +241,9 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*:function:*\\\{lambda\_function\_name\\}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   arn:aws:apigateway:*\\\{region\\}*:lambda:path/*\\\{service\_api\\}*
     #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
@@ -829,9 +829,9 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*:function:*\\\{lambda\_function\_name\\}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   arn:aws:apigateway:*\\\{region\\}*:lambda:path/*\\\{service\_api\\}*
     #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
@@ -1387,7 +1387,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -1406,7 +1406,7 @@ module Aws::ApiGatewayV2
     #   selection key to response parameters. The selection key must be a
     #   valid HTTP status code within the range of 200-599. Response
     #   parameters are a key-value map. The key must match pattern
-    #   &lt;action&gt;\:&lt;header&gt;.&lt;location&gt; or
+    #   &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or
     #   overwrite.statuscode. The action can be append, overwrite or remove.
     #   The value can be a static value, or map to response data, stage
     #   variables, or context variables that are evaluated at runtime. To
@@ -1535,7 +1535,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -1685,7 +1685,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -1858,7 +1858,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -1939,7 +1939,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -3754,7 +3754,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -3881,7 +3881,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -4832,7 +4832,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to backend integrations. The key
     #   should follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;.
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;.
     #   The action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -4851,7 +4851,7 @@ module Aws::ApiGatewayV2
     #   selection key to response parameters. The selection key must be a
     #   valid HTTP status code within the range of 200-599. Response
     #   parameters are a key-value map. The key must match pattern
-    #   &lt;action&gt;\:&lt;header&gt;.&lt;location&gt; or
+    #   &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or
     #   overwrite.statuscode. The action can be append, overwrite or remove.
     #   The value can be a static value, or map to response data, stage
     #   variables, or context variables that are evaluated at runtime. To
@@ -6129,9 +6129,9 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*:function:*\\\{lambda\_function\_name\\}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   arn:aws:apigateway:*\\\{region\\}*:lambda:path/*\\\{service\_api\\}*
     #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
@@ -6668,7 +6668,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -6687,7 +6687,7 @@ module Aws::ApiGatewayV2
     #   selection key to response parameters. The selection key must be a
     #   valid HTTP status code within the range of 200-599. Response
     #   parameters are a key-value map. The key must match pattern
-    #   &lt;action&gt;\:&lt;header&gt;.&lt;location&gt; or
+    #   &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or
     #   overwrite.statuscode. The action can be append, overwrite or remove.
     #   The value can be a static value, or map to response data, stage
     #   variables, or context variables that are evaluated at runtime. To
@@ -6819,7 +6819,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -6970,7 +6970,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -7147,7 +7147,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
@@ -7229,7 +7229,7 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
     #   where action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see

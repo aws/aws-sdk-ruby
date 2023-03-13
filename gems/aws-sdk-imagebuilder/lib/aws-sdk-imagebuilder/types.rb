@@ -40,7 +40,7 @@ module Aws::Imagebuilder
     #
     #   <note markdown="1"> The user data is always base 64 encoded. For example, the following
     #   commands are encoded as
-    #   `IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$`\:
+    #   `IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$`:
     #
     #    *#!/bin/bash*
     #

@@ -388,7 +388,7 @@ module Aws::OpsWorks
     # * You cannot use this action with instances that were created with AWS
     #   OpsWorks Stacks.
     #
-    # **Required Permissions**\: To use this action, an AWS Identity and
+    # **Required Permissions**: To use this action, an AWS Identity and
     # Access Management (IAM) user must have a Manage permissions level for
     # the stack or an attached policy that explicitly grants permissions.
     # For more information on user permissions, see [Managing User
@@ -429,7 +429,7 @@ module Aws::OpsWorks
     # call UpdateVolume to specify a mount point before calling
     # `AssignVolume`. For more information, see [Resource Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -468,7 +468,7 @@ module Aws::OpsWorks
     # stack by calling RegisterElasticIp. For more information, see
     # [Resource Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -513,7 +513,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][3].
@@ -553,8 +553,8 @@ module Aws::OpsWorks
     # a Stack][1]. By default, all parameters are set to the values used by
     # the parent stack.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have
-    # an attached policy that explicitly grants permissions. For more
+    # **Required Permissions**: To use this action, an IAM user must have an
+    # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
     # Permissions][2].
     #
@@ -924,7 +924,7 @@ module Aws::OpsWorks
     # Creates an app for a specified stack. For more information, see
     # [Creating Apps][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -1058,7 +1058,7 @@ module Aws::OpsWorks
     # Runs deployment or stack commands. For more information, see
     # [Deploying Apps][1] and [Run Stack Commands][2].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Deploy or Manage permissions level for the stack, or an attached
     # policy that explicitly grants permissions. For more information on
     # user permissions, see [Managing User Permissions][3].
@@ -1142,7 +1142,7 @@ module Aws::OpsWorks
     # Creates an instance in a specified stack. For more information, see
     # [Adding an Instance to a Layer][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -1392,7 +1392,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -1596,8 +1596,8 @@ module Aws::OpsWorks
     # Creates a new stack. For more information, see [Create a New
     # Stack][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have
-    # an attached policy that explicitly grants permissions. For more
+    # **Required Permissions**: To use this action, an IAM user must have an
+    # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
     # Permissions][2].
     #
@@ -1961,8 +1961,8 @@ module Aws::OpsWorks
 
     # Creates a new user profile.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have
-    # an attached policy that explicitly grants permissions. For more
+    # **Required Permissions**: To use this action, an IAM user must have an
+    # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
     # Permissions][1].
     #
@@ -2021,7 +2021,7 @@ module Aws::OpsWorks
 
     # Deletes a specified app.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -2055,7 +2055,7 @@ module Aws::OpsWorks
     #
     # For more information, see [Deleting Instances][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -2097,7 +2097,7 @@ module Aws::OpsWorks
     # associated instances or unassign registered instances. For more
     # information, see [How to Delete a Layer][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -2131,7 +2131,7 @@ module Aws::OpsWorks
     # layers, and apps or deregister registered instances. For more
     # information, see [Shut Down a Stack][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -2163,8 +2163,8 @@ module Aws::OpsWorks
 
     # Deletes a user profile.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have
-    # an attached policy that explicitly grants permissions. For more
+    # **Required Permissions**: To use this action, an IAM user must have an
+    # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
     # Permissions][1].
     #
@@ -2195,7 +2195,7 @@ module Aws::OpsWorks
     # Deregisters a specified Amazon ECS cluster from a stack. For more
     # information, see [ Resource Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see
@@ -2230,7 +2230,7 @@ module Aws::OpsWorks
     # registered by another stack. For more information, see [Resource
     # Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -2265,7 +2265,7 @@ module Aws::OpsWorks
     # control. This action cannot be used with instances that were created
     # with AWS OpsWorks Stacks.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -2296,7 +2296,7 @@ module Aws::OpsWorks
 
     # Deregisters an Amazon RDS instance.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -2328,7 +2328,7 @@ module Aws::OpsWorks
     # Deregisters an Amazon EBS volume. The volume can then be registered by
     # another stack. For more information, see [Resource Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -2407,7 +2407,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -2490,7 +2490,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -2556,7 +2556,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -2631,7 +2631,7 @@ module Aws::OpsWorks
     # currently supports only one cluster per layer, so the result set has a
     # maximum of one element.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack or an attached
     # policy that explicitly grants permission. For more information about
     # user permissions, see [Managing User Permissions][1].
@@ -2704,7 +2704,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -2767,7 +2767,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -2827,7 +2827,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -2942,7 +2942,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3055,7 +3055,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3111,7 +3111,7 @@ module Aws::OpsWorks
 
     # Describes a user's SSH information.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have
+    # **Required Permissions**: To use this action, an IAM user must have
     # self-management enabled or an attached policy that explicitly grants
     # permissions. For more information about user permissions, see
     # [Managing User Permissions][1].
@@ -3171,7 +3171,7 @@ module Aws::OpsWorks
 
     # Describes the permissions for a specified stack.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -3226,7 +3226,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3289,7 +3289,7 @@ module Aws::OpsWorks
 
     # Describes Amazon RDS instances.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3343,7 +3343,7 @@ module Aws::OpsWorks
 
     # Describes AWS OpsWorks Stacks service errors.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3403,7 +3403,7 @@ module Aws::OpsWorks
 
     # Requests a description of a stack's provisioning parameters.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack or an attached
     # policy that explicitly grants permissions. For more information about
     # user permissions, see [Managing User Permissions][1].
@@ -3445,7 +3445,7 @@ module Aws::OpsWorks
     # number of instances in each state, such as `running_setup` or
     # `online`.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3507,7 +3507,7 @@ module Aws::OpsWorks
 
     # Requests a description of one or more stacks.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3582,7 +3582,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3635,8 +3635,8 @@ module Aws::OpsWorks
 
     # Describe specified users.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have
-    # an attached policy that explicitly grants permissions. For more
+    # **Required Permissions**: To use this action, an IAM user must have an
+    # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
     # Permissions][1].
     #
@@ -3682,7 +3682,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Show, Deploy, or Manage permissions level for the stack, or an
     # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
@@ -3752,7 +3752,7 @@ module Aws::OpsWorks
 
     # Detaches a specified Elastic Load Balancing instance from its layer.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -3790,7 +3790,7 @@ module Aws::OpsWorks
     # remains registered with the stack. For more information, see [Resource
     # Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -3823,7 +3823,7 @@ module Aws::OpsWorks
     # Gets a generated host name for the specified layer, based on the
     # current host name theme.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -3947,7 +3947,7 @@ module Aws::OpsWorks
     # Reboots a specified instance. For more information, see [Starting,
     # Stopping, and Rebooting Instances][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -3982,7 +3982,7 @@ module Aws::OpsWorks
     # with only one stack. For more information, see [ Resource
     # Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [ Managing User Permissions][2].
@@ -4028,7 +4028,7 @@ module Aws::OpsWorks
     # DeregisterElasticIp. For more information, see [Resource
     # Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4088,7 +4088,7 @@ module Aws::OpsWorks
     # about requirements for instances that you want to register, see [
     # Preparing the Instance][2].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][3].
@@ -4155,7 +4155,7 @@ module Aws::OpsWorks
 
     # Registers an Amazon RDS instance with a stack.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -4201,7 +4201,7 @@ module Aws::OpsWorks
     # registered, you must first deregister it by calling DeregisterVolume.
     # For more information, see [Resource Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4252,7 +4252,7 @@ module Aws::OpsWorks
     #
     #  </note>
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4319,7 +4319,7 @@ module Aws::OpsWorks
     # Specifies a user's permissions. For more information, see [Security
     # and Permissions][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4387,7 +4387,7 @@ module Aws::OpsWorks
     # instance. For more information, see [Managing Load with Time-based and
     # Load-based Instances][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4446,7 +4446,7 @@ module Aws::OpsWorks
     # Starts a specified instance. For more information, see [Starting,
     # Stopping, and Rebooting Instances][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4478,7 +4478,7 @@ module Aws::OpsWorks
 
     # Starts a stack's instances.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -4513,7 +4513,7 @@ module Aws::OpsWorks
     # more information, see [Starting, Stopping, and Rebooting
     # Instances][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4555,7 +4555,7 @@ module Aws::OpsWorks
 
     # Stops a specified stack.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -4639,7 +4639,7 @@ module Aws::OpsWorks
     # and can be assigned to another layer as needed. You cannot use this
     # action with instances that were created with AWS OpsWorks Stacks.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack or an attached policy that
     # explicitly grants permissions. For more information about user
     # permissions, see [Managing User Permissions][1].
@@ -4671,7 +4671,7 @@ module Aws::OpsWorks
     # Unassigns an assigned Amazon EBS volume. The volume remains registered
     # with the stack. For more information, see [Resource Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4729,7 +4729,7 @@ module Aws::OpsWorks
 
     # Updates a specified app.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Deploy or Manage permissions level for the stack, or an attached
     # policy that explicitly grants permissions. For more information on
     # user permissions, see [Managing User Permissions][1].
@@ -4847,7 +4847,7 @@ module Aws::OpsWorks
     # Updates a registered Elastic IP address's name. For more information,
     # see [Resource Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].
@@ -4883,7 +4883,7 @@ module Aws::OpsWorks
 
     # Updates a specified instance.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -5045,7 +5045,7 @@ module Aws::OpsWorks
 
     # Updates a specified layer.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -5229,7 +5229,7 @@ module Aws::OpsWorks
 
     # Updates a user's SSH public key.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have
+    # **Required Permissions**: To use this action, an IAM user must have
     # self-management enabled or an attached policy that explicitly grants
     # permissions. For more information about user permissions, see
     # [Managing User Permissions][1].
@@ -5260,7 +5260,7 @@ module Aws::OpsWorks
 
     # Updates an Amazon RDS instance.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -5299,7 +5299,7 @@ module Aws::OpsWorks
 
     # Updates a specified stack.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][1].
@@ -5584,8 +5584,8 @@ module Aws::OpsWorks
 
     # Updates a specified user profile.
     #
-    # **Required Permissions**\: To use this action, an IAM user must have
-    # an attached policy that explicitly grants permissions. For more
+    # **Required Permissions**: To use this action, an IAM user must have an
+    # attached policy that explicitly grants permissions. For more
     # information about user permissions, see [Managing User
     # Permissions][1].
     #
@@ -5639,7 +5639,7 @@ module Aws::OpsWorks
     # Updates an Amazon EBS volume's name or mount point. For more
     # information, see [Resource Management][1].
     #
-    # **Required Permissions**\: To use this action, an IAM user must have a
+    # **Required Permissions**: To use this action, an IAM user must have a
     # Manage permissions level for the stack, or an attached policy that
     # explicitly grants permissions. For more information on user
     # permissions, see [Managing User Permissions][2].

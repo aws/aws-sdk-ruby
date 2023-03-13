@@ -32,18 +32,18 @@ module Aws::CloudFormation
     # @!attribute [rw] status
     #   The status of the account gate function.
     #
-    #   * `SUCCEEDED`\: The account gate function has determined that the
+    #   * `SUCCEEDED`: The account gate function has determined that the
     #     account and Region passes any requirements for a stack set
     #     operation to occur. CloudFormation proceeds with the stack
     #     operation in that account and Region.
     #
-    #   * `FAILED`\: The account gate function has determined that the
+    #   * `FAILED`: The account gate function has determined that the
     #     account and Region doesn't meet the requirements for a stack set
     #     operation to occur. CloudFormation cancels the stack set operation
     #     in that account and Region, and sets the stack set operation
     #     result status for that account and Region to `FAILED`.
     #
-    #   * `SKIPPED`\: CloudFormation has skipped calling the account gate
+    #   * `SKIPPED`: CloudFormation has skipped calling the account gate
     #     function for this account and Region, for one of the following
     #     reasons:
     #
@@ -175,10 +175,10 @@ module Aws::CloudFormation
     #   version, if available. You can also use this parameter to update the
     #   value of `AutoUpdate`.
     #
-    #   * `MAJOR`\: CloudFormation updates the extension to the newest major
+    #   * `MAJOR`: CloudFormation updates the extension to the newest major
     #     version, if one is available.
     #
-    #   * `MINOR`\: CloudFormation updates the extension to the newest minor
+    #   * `MINOR`: CloudFormation updates the extension to the newest minor
     #     version, if one is available.
     #   @return [String]
     #
@@ -1992,14 +1992,14 @@ module Aws::CloudFormation
     #   The following is a list of possible values for the
     #   `AccountFilterType` operation.
     #
-    #   * `INTERSECTION`\: StackSets deploys to the accounts specified in
+    #   * `INTERSECTION`: StackSets deploys to the accounts specified in
     #     `Accounts` parameter.
     #
-    #   * `DIFFERENCE`\: StackSets excludes the accounts specified in
+    #   * `DIFFERENCE`: StackSets excludes the accounts specified in
     #     `Accounts` parameter. This enables user to avoid certain accounts
     #     within an OU such as suspended accounts.
     #
-    #   * `UNION`\: StackSets includes additional accounts deployment
+    #   * `UNION`: StackSets includes additional accounts deployment
     #     targets.
     #
     #     This is the default value if `AccountFilterType` is not provided.
@@ -2007,7 +2007,7 @@ module Aws::CloudFormation
     #     from a different OU in one request, which used to be two separate
     #     requests.
     #
-    #   * `NONE`\: Deploys to all the accounts in specified organizational
+    #   * `NONE`: Deploys to all the accounts in specified organizational
     #     units (OU).
     #   @return [String]
     #
@@ -2409,23 +2409,23 @@ module Aws::CloudFormation
     #   Status of the stack's actual configuration compared to its expected
     #   configuration.
     #
-    #   * `DRIFTED`\: The stack differs from its expected template
+    #   * `DRIFTED`: The stack differs from its expected template
     #     configuration. A stack is considered to have drifted if one or
     #     more of its resources have drifted.
     #
-    #   * `NOT_CHECKED`\: CloudFormation hasn't checked if the stack
-    #     differs from its expected template configuration.
+    #   * `NOT_CHECKED`: CloudFormation hasn't checked if the stack differs
+    #     from its expected template configuration.
     #
-    #   * `IN_SYNC`\: The stack's actual configuration matches its expected
+    #   * `IN_SYNC`: The stack's actual configuration matches its expected
     #     template configuration.
     #
-    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   * `UNKNOWN`: This value is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] detection_status
     #   The status of the stack drift detection operation.
     #
-    #   * `DETECTION_COMPLETE`\: The stack drift detection operation has
+    #   * `DETECTION_COMPLETE`: The stack drift detection operation has
     #     successfully completed for all resources in the stack that support
     #     drift detection. (Resources that don't currently support stack
     #     detection remain unchecked.)
@@ -2434,12 +2434,12 @@ module Aws::CloudFormation
     #     a filter for the stack drift detection operation, only the
     #     resources with those logical IDs are checked for drift.
     #
-    #   * `DETECTION_FAILED`\: The stack drift detection operation has
-    #     failed for at least one resource in the stack. Results will be
-    #     available for resources on which CloudFormation successfully
-    #     completed drift detection.
+    #   * `DETECTION_FAILED`: The stack drift detection operation has failed
+    #     for at least one resource in the stack. Results will be available
+    #     for resources on which CloudFormation successfully completed drift
+    #     detection.
     #
-    #   * `DETECTION_IN_PROGRESS`\: The stack drift detection operation is
+    #   * `DETECTION_IN_PROGRESS`: The stack drift detection operation is
     #     currently in progress.
     #   @return [String]
     #
@@ -2590,16 +2590,16 @@ module Aws::CloudFormation
     #   The resource drift status values to use as filters for the resource
     #   drift results returned.
     #
-    #   * `DELETED`\: The resource differs from its expected template
+    #   * `DELETED`: The resource differs from its expected template
     #     configuration in that the resource has been deleted.
     #
-    #   * `MODIFIED`\: One or more resource properties differ from their
+    #   * `MODIFIED`: One or more resource properties differ from their
     #     expected template values.
     #
-    #   * `IN_SYNC`\: The resource's actual configuration matches its
+    #   * `IN_SYNC`: The resource's actual configuration matches its
     #     expected template configuration.
     #
-    #   * `NOT_CHECKED`\: CloudFormation doesn't currently return this
+    #   * `NOT_CHECKED`: CloudFormation doesn't currently return this
     #     value.
     #   @return [Array<String>]
     #
@@ -3030,19 +3030,19 @@ module Aws::CloudFormation
     #   CloudFormation doesn't return this information for public
     #   extensions, whether they are activated in your account.
     #
-    #   * `PASSED`\: The extension has passed all its contract tests.
+    #   * `PASSED`: The extension has passed all its contract tests.
     #
     #     An extension must have a test status of `PASSED` before it can be
     #     published. For more information, see [Publishing extensions to
     #     make them available for public use][1] in the *CloudFormation
     #     Command Line Interface User Guide*.
     #
-    #   * `FAILED`\: The extension has failed one or more contract tests.
+    #   * `FAILED`: The extension has failed one or more contract tests.
     #
-    #   * `IN_PROGRESS`\: Contract tests are currently being performed on
-    #     the extension.
+    #   * `IN_PROGRESS`: Contract tests are currently being performed on the
+    #     extension.
     #
-    #   * `NOT_TESTED`\: Contract tests haven't been performed on the
+    #   * `NOT_TESTED`: Contract tests haven't been performed on the
     #     extension.
     #
     #
@@ -3083,14 +3083,14 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `FULLY_MUTABLE`\: The resource type includes an update handler to
+    #   * `FULLY_MUTABLE`: The resource type includes an update handler to
     #     process updates to the type during stack update operations.
     #
-    #   * `IMMUTABLE`\: The resource type doesn't include an update
-    #     handler, so the type can't be updated and must instead be
-    #     replaced during stack update operations.
+    #   * `IMMUTABLE`: The resource type doesn't include an update handler,
+    #     so the type can't be updated and must instead be replaced during
+    #     stack update operations.
     #
-    #   * `NON_PROVISIONABLE`\: The resource type doesn't include all the
+    #   * `NON_PROVISIONABLE`: The resource type doesn't include all the
     #     following handlers, and therefore can't actually be provisioned.
     #
     #     * create
@@ -3105,11 +3105,11 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `LIVE`\: The extension is activated or registered and can be used
+    #   * `LIVE`: The extension is activated or registered and can be used
     #     in CloudFormation operations, dependent on its provisioning
     #     behavior and visibility scope.
     #
-    #   * `DEPRECATED`\: The extension has been deactivated or deregistered
+    #   * `DEPRECATED`: The extension has been deactivated or deregistered
     #     and can no longer be used in CloudFormation operations.
     #
     #   For public third-party extensions, CloudFormation returns `null`.
@@ -3158,11 +3158,11 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `PRIVATE`\: The extension is only visible and usable within the
+    #   * `PRIVATE`: The extension is only visible and usable within the
     #     account in which it is registered. CloudFormation marks any
     #     extensions you register as `PRIVATE`.
     #
-    #   * `PUBLIC`\: The extension is publicly visible and usable within any
+    #   * `PUBLIC`: The extension is publicly visible and usable within any
     #     Amazon Web Services account.
     #   @return [String]
     #
@@ -4691,11 +4691,11 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `LIVE`\: The extension version is registered and can be used in
+    #   * `LIVE`: The extension version is registered and can be used in
     #     CloudFormation operations, dependent on its provisioning behavior
     #     and visibility scope.
     #
-    #   * `DEPRECATED`\: The extension version has been deregistered and can
+    #   * `DEPRECATED`: The extension version has been deregistered and can
     #     no longer be used in CloudFormation operations.
     #
     #   The default is `LIVE`.
@@ -4749,7 +4749,7 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `PRIVATE`\: Extensions that are visible and usable within this
+    #   * `PRIVATE`: Extensions that are visible and usable within this
     #     account and region. This includes:
     #
     #     * Private extensions you have registered in this account and
@@ -4758,8 +4758,8 @@ module Aws::CloudFormation
     #     * Public extensions that you have activated in this account and
     #       region.
     #
-    #   * `PUBLIC`\: Extensions that are publicly visible and available to
-    #     be activated within any Amazon Web Services account. This includes
+    #   * `PUBLIC`: Extensions that are publicly visible and available to be
+    #     activated within any Amazon Web Services account. This includes
     #     extensions from Amazon Web Services, in addition to third-party
     #     publishers.
     #
@@ -4774,14 +4774,14 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `FULLY_MUTABLE`\: The resource type includes an update handler to
+    #   * `FULLY_MUTABLE`: The resource type includes an update handler to
     #     process updates to the type during stack update operations.
     #
-    #   * `IMMUTABLE`\: The resource type doesn't include an update
-    #     handler, so the type can't be updated and must instead be
-    #     replaced during stack update operations.
+    #   * `IMMUTABLE`: The resource type doesn't include an update handler,
+    #     so the type can't be updated and must instead be replaced during
+    #     stack update operations.
     #
-    #   * `NON_PROVISIONABLE`\: The resource type doesn't include create,
+    #   * `NON_PROVISIONABLE`: The resource type doesn't include create,
     #     read, and delete handlers, and therefore can't actually be
     #     provisioned.
     #
@@ -4794,10 +4794,10 @@ module Aws::CloudFormation
     #
     #   Valid values include:
     #
-    #   * `LIVE`\: The extension is registered for use in CloudFormation
+    #   * `LIVE`: The extension is registered for use in CloudFormation
     #     operations.
     #
-    #   * `DEPRECATED`\: The extension has been deregistered and can no
+    #   * `DEPRECATED`: The extension has been deregistered and can no
     #     longer be used in CloudFormation operations.
     #   @return [String]
     #
@@ -5190,13 +5190,13 @@ module Aws::CloudFormation
     # @!attribute [rw] difference_type
     #   The type of property difference.
     #
-    #   * `ADD`\: A value has been added to a resource property that's an
+    #   * `ADD`: A value has been added to a resource property that's an
     #     array or list data type.
     #
-    #   * `REMOVE`\: The property has been removed from the current resource
+    #   * `REMOVE`: The property has been removed from the current resource
     #     configuration.
     #
-    #   * `NOT_EQUAL`\: The current property value differs from its expected
+    #   * `NOT_EQUAL`: The current property value differs from its expected
     #     value (as defined in the stack template and any values specified
     #     as template parameters).
     #   @return [String]
@@ -5409,12 +5409,12 @@ module Aws::CloudFormation
     #   We suggest that extension names adhere to the following patterns:
     #
     #   * For resource types,
-    #     *company\_or\_organization*\::*service*\::*type*.
+    #     *company\_or\_organization*::*service*::*type*.
     #
     #   * For modules,
-    #     *company\_or\_organization*\::*service*\::*type*\::MODULE.
+    #     *company\_or\_organization*::*service*::*type*::MODULE.
     #
-    #   * For hooks, *MyCompany*\::*Testing*\::*MyTestHook*.
+    #   * For hooks, *MyCompany*::*Testing*::*MyTestHook*.
     #
     #   <note markdown="1"> The following organization namespaces are reserved and can't be
     #   used in your extension names:
@@ -6229,9 +6229,9 @@ module Aws::CloudFormation
     # @!attribute [rw] disable_rollback
     #   Boolean to enable or disable rollback on stack creation failures:
     #
-    #   * `true`\: disable rollback.
+    #   * `true`: disable rollback.
     #
-    #   * `false`\: enable rollback.
+    #   * `false`: enable rollback.
     #   @return [Boolean]
     #
     # @!attribute [rw] notification_arns
@@ -6354,17 +6354,17 @@ module Aws::CloudFormation
     #   Status of the stack's actual configuration compared to its expected
     #   template configuration.
     #
-    #   * `DRIFTED`\: The stack differs from its expected template
+    #   * `DRIFTED`: The stack differs from its expected template
     #     configuration. A stack is considered to have drifted if one or
     #     more of its resources have drifted.
     #
-    #   * `NOT_CHECKED`\: CloudFormation hasn't checked if the stack
-    #     differs from its expected template configuration.
+    #   * `NOT_CHECKED`: CloudFormation hasn't checked if the stack differs
+    #     from its expected template configuration.
     #
-    #   * `IN_SYNC`\: The stack's actual configuration matches its expected
+    #   * `IN_SYNC`: The stack's actual configuration matches its expected
     #     template configuration.
     #
-    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   * `UNKNOWN`: This value is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] last_check_timestamp
@@ -6392,17 +6392,17 @@ module Aws::CloudFormation
     #   Status of the stack's actual configuration compared to its expected
     #   template configuration.
     #
-    #   * `DRIFTED`\: The stack differs from its expected template
+    #   * `DRIFTED`: The stack differs from its expected template
     #     configuration. A stack is considered to have drifted if one or
     #     more of its resources have drifted.
     #
-    #   * `NOT_CHECKED`\: CloudFormation hasn't checked if the stack
-    #     differs from its expected template configuration.
+    #   * `NOT_CHECKED`: CloudFormation hasn't checked if the stack differs
+    #     from its expected template configuration.
     #
-    #   * `IN_SYNC`\: The stack's actual configuration matches its expected
+    #   * `IN_SYNC`: The stack's actual configuration matches its expected
     #     template configuration.
     #
-    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   * `UNKNOWN`: This value is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] last_check_timestamp
@@ -6572,14 +6572,14 @@ module Aws::CloudFormation
     #   The status of the stack instance, in terms of its synchronization
     #   with its associated stack set.
     #
-    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #   * `INOPERABLE`: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
     #     excluded from further `UpdateStackSet` operations. You might need
     #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
     #     set to `true`, to delete the stack instance, and then delete the
     #     stack manually.
     #
-    #   * `OUTDATED`\: The stack isn't currently up to date with the stack
+    #   * `OUTDATED`: The stack isn't currently up to date with the stack
     #     set because:
     #
     #     * The associated stack failed during a `CreateStackSet` or
@@ -6589,7 +6589,7 @@ module Aws::CloudFormation
     #       operation that failed or was stopped before the stack was
     #       created or updated.
     #
-    #   * `CURRENT`\: The stack is currently up to date with the stack set.
+    #   * `CURRENT`: The stack is currently up to date with the stack set.
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_status
@@ -6616,18 +6616,18 @@ module Aws::CloudFormation
     #   expected template and parameter configuration of the stack set to
     #   which it belongs.
     #
-    #   * `DRIFTED`\: The stack differs from the expected template and
+    #   * `DRIFTED`: The stack differs from the expected template and
     #     parameter configuration of the stack set to which it belongs. A
     #     stack instance is considered to have drifted if one or more of the
     #     resources in the associated stack have drifted.
     #
-    #   * `NOT_CHECKED`\: CloudFormation hasn't checked if the stack
+    #   * `NOT_CHECKED`: CloudFormation hasn't checked if the stack
     #     instance differs from its expected stack set configuration.
     #
-    #   * `IN_SYNC`\: The stack instance's actual configuration matches its
+    #   * `IN_SYNC`: The stack instance's actual configuration matches its
     #     expected stack set configuration.
     #
-    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   * `UNKNOWN`: This value is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] last_drift_check_timestamp
@@ -6663,30 +6663,30 @@ module Aws::CloudFormation
     # The detailed status of the stack instance.
     #
     # @!attribute [rw] detailed_status
-    #   * `CANCELLED`\: The operation in the specified account and Region
-    #     has been canceled. This is either because a user has stopped the
-    #     stack set operation, or because the failure tolerance of the stack
-    #     set operation has been exceeded.
+    #   * `CANCELLED`: The operation in the specified account and Region has
+    #     been canceled. This is either because a user has stopped the stack
+    #     set operation, or because the failure tolerance of the stack set
+    #     operation has been exceeded.
     #
-    #   * `FAILED`\: The operation in the specified account and Region
+    #   * `FAILED`: The operation in the specified account and Region
     #     failed. If the stack set operation fails in enough accounts within
     #     a Region, the failure tolerance for the stack set operation as a
     #     whole might be exceeded.
     #
-    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #   * `INOPERABLE`: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
     #     excluded from further `UpdateStackSet` operations. You might need
     #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
     #     set to `true`, to delete the stack instance, and then delete the
     #     stack manually.
     #
-    #   * `PENDING`\: The operation in the specified account and Region has
+    #   * `PENDING`: The operation in the specified account and Region has
     #     yet to start.
     #
-    #   * `RUNNING`\: The operation in the specified account and Region is
+    #   * `RUNNING`: The operation in the specified account and Region is
     #     currently in progress.
     #
-    #   * `SUCCEEDED`\: The operation in the specified account and Region
+    #   * `SUCCEEDED`: The operation in the specified account and Region
     #     completed successfully.
     #   @return [String]
     #
@@ -6749,14 +6749,14 @@ module Aws::CloudFormation
     #   The status of the stack instance, in terms of its synchronization
     #   with its associated stack set.
     #
-    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #   * `INOPERABLE`: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
     #     excluded from further `UpdateStackSet` operations. You might need
     #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
     #     set to `true`, to delete the stack instance, and then delete the
     #     stack manually.
     #
-    #   * `OUTDATED`\: The stack isn't currently up to date with the stack
+    #   * `OUTDATED`: The stack isn't currently up to date with the stack
     #     set because:
     #
     #     * The associated stack failed during a `CreateStackSet` or
@@ -6766,7 +6766,7 @@ module Aws::CloudFormation
     #       operation that failed or was stopped before the stack was
     #       created or updated.
     #
-    #   * `CURRENT`\: The stack is currently up to date with the stack set.
+    #   * `CURRENT`: The stack is currently up to date with the stack set.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -6793,18 +6793,18 @@ module Aws::CloudFormation
     #   expected template and parameter configuration of the stack set to
     #   which it belongs.
     #
-    #   * `DRIFTED`\: The stack differs from the expected template and
+    #   * `DRIFTED`: The stack differs from the expected template and
     #     parameter configuration of the stack set to which it belongs. A
     #     stack instance is considered to have drifted if one or more of the
     #     resources in the associated stack have drifted.
     #
-    #   * `NOT_CHECKED`\: CloudFormation hasn't checked if the stack
+    #   * `NOT_CHECKED`: CloudFormation hasn't checked if the stack
     #     instance differs from its expected stack set configuration.
     #
-    #   * `IN_SYNC`\: The stack instance's actual configuration matches its
+    #   * `IN_SYNC`: The stack instance's actual configuration matches its
     #     expected stack set configuration.
     #
-    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   * `UNKNOWN`: This value is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] last_drift_check_timestamp
@@ -7086,17 +7086,17 @@ module Aws::CloudFormation
     #   Status of the resource's actual configuration compared to its
     #   expected configuration.
     #
-    #   * `DELETED`\: The resource differs from its expected template
+    #   * `DELETED`: The resource differs from its expected template
     #     configuration because the resource has been deleted.
     #
-    #   * `MODIFIED`\: One or more resource properties differ from their
+    #   * `MODIFIED`: One or more resource properties differ from their
     #     expected values (as defined in the stack template and any values
     #     specified as template parameters).
     #
-    #   * `IN_SYNC`\: The resource's actual configuration matches its
+    #   * `IN_SYNC`: The resource's actual configuration matches its
     #     expected template configuration.
     #
-    #   * `NOT_CHECKED`\: CloudFormation does not currently return this
+    #   * `NOT_CHECKED`: CloudFormation does not currently return this
     #     value.
     #   @return [String]
     #
@@ -7137,19 +7137,19 @@ module Aws::CloudFormation
     #   Status of the resource's actual configuration compared to its
     #   expected configuration
     #
-    #   * `DELETED`\: The resource differs from its expected configuration
-    #     in that it has been deleted.
+    #   * `DELETED`: The resource differs from its expected configuration in
+    #     that it has been deleted.
     #
-    #   * `MODIFIED`\: The resource differs from its expected configuration.
+    #   * `MODIFIED`: The resource differs from its expected configuration.
     #
-    #   * `NOT_CHECKED`\: CloudFormation has not checked if the resource
+    #   * `NOT_CHECKED`: CloudFormation has not checked if the resource
     #     differs from its expected configuration.
     #
     #     Any resources that do not currently support drift detection have a
     #     status of `NOT_CHECKED`. For more information, see [Resources that
     #     Support Drift Detection][1].
     #
-    #   * `IN_SYNC`\: The resource's actual configuration matches its
+    #   * `IN_SYNC`: The resource's actual configuration matches its
     #     expected configuration.
     #
     #
@@ -7179,12 +7179,12 @@ module Aws::CloudFormation
     #   Status of the resource's actual configuration compared to its
     #   expected configuration.
     #
-    #   * `DELETED`\: The resource differs from its expected configuration
-    #     in that it has been deleted.
+    #   * `DELETED`: The resource differs from its expected configuration in
+    #     that it has been deleted.
     #
-    #   * `MODIFIED`\: The resource differs from its expected configuration.
+    #   * `MODIFIED`: The resource differs from its expected configuration.
     #
-    #   * `NOT_CHECKED`\: CloudFormation hasn't checked if the resource
+    #   * `NOT_CHECKED`: CloudFormation hasn't checked if the resource
     #     differs from its expected configuration.
     #
     #     Any resources that don't currently support drift detection have a
@@ -7196,7 +7196,7 @@ module Aws::CloudFormation
     #     during rollback operations, see [Continue Rolling Back an
     #     Update][2] in the CloudFormation User Guide.
     #
-    #   * `IN_SYNC`\: The resource's actual configuration matches its
+    #   * `IN_SYNC`: The resource's actual configuration matches its
     #     expected configuration.
     #
     #
@@ -7459,15 +7459,15 @@ module Aws::CloudFormation
     #   have drifted from their expected template and parameter
     #   configuration.
     #
-    #   * `DRIFTED`\: One or more of the stack instances belonging to the
+    #   * `DRIFTED`: One or more of the stack instances belonging to the
     #     stack set stack differs from the expected template and parameter
     #     configuration. A stack instance is considered to have drifted if
     #     one or more of the resources in the associated stack have drifted.
     #
-    #   * `NOT_CHECKED`\: CloudFormation hasn't checked the stack set for
+    #   * `NOT_CHECKED`: CloudFormation hasn't checked the stack set for
     #     drift.
     #
-    #   * `IN_SYNC`\: All of the stack instances belonging to the stack set
+    #   * `IN_SYNC`: All of the stack instances belonging to the stack set
     #     stack match from the expected template and parameter
     #     configuration.
     #   @return [String]
@@ -7475,19 +7475,19 @@ module Aws::CloudFormation
     # @!attribute [rw] drift_detection_status
     #   The status of the stack set drift detection operation.
     #
-    #   * `COMPLETED`\: The drift detection operation completed without
+    #   * `COMPLETED`: The drift detection operation completed without
     #     failing on any stack instances.
     #
-    #   * `FAILED`\: The drift detection operation exceeded the specified
+    #   * `FAILED`: The drift detection operation exceeded the specified
     #     failure tolerance.
     #
-    #   * `PARTIAL_SUCCESS`\: The drift detection operation completed
-    #     without exceeding the failure tolerance for the operation.
+    #   * `PARTIAL_SUCCESS`: The drift detection operation completed without
+    #     exceeding the failure tolerance for the operation.
     #
-    #   * `IN_PROGRESS`\: The drift detection operation is currently being
+    #   * `IN_PROGRESS`: The drift detection operation is currently being
     #     performed.
     #
-    #   * `STOPPED`\: The user has canceled the drift detection operation.
+    #   * `STOPPED`: The user has canceled the drift detection operation.
     #   @return [String]
     #
     # @!attribute [rw] last_drift_check_timestamp
@@ -7584,7 +7584,7 @@ module Aws::CloudFormation
     # @!attribute [rw] status
     #   The status of the operation.
     #
-    #   * `FAILED`\: The operation exceeded the specified failure tolerance.
+    #   * `FAILED`: The operation exceeded the specified failure tolerance.
     #     The failure tolerance value that you've set for an operation is
     #     applied for each Region during stack create and update operations.
     #     If the number of failed stacks within a Region exceeds the failure
@@ -7593,19 +7593,19 @@ module Aws::CloudFormation
     #     to `FAILED`, and CloudFormation cancels the operation in any
     #     remaining Regions.
     #
-    #   * `QUEUED`\: \[Service-managed permissions\] For automatic
+    #   * `QUEUED`: \[Service-managed permissions\] For automatic
     #     deployments that require a sequence of operations, the operation
     #     is queued to be performed. For more information, see the [stack
     #     set operation status codes][1] in the CloudFormation User Guide.
     #
-    #   * `RUNNING`\: The operation is currently being performed.
+    #   * `RUNNING`: The operation is currently being performed.
     #
-    #   * `STOPPED`\: The user has canceled the operation.
+    #   * `STOPPED`: The user has canceled the operation.
     #
-    #   * `STOPPING`\: The operation is in the process of stopping, at user
+    #   * `STOPPING`: The operation is in the process of stopping, at user
     #     request.
     #
-    #   * `SUCCEEDED`\: The operation completed creating or updating all the
+    #   * `SUCCEEDED`: The operation completed creating or updating all the
     #     specified stacks without exceeding the failure tolerance for the
     #     operation.
     #
@@ -7828,25 +7828,25 @@ module Aws::CloudFormation
     #   The result status of the stack set operation for the given account
     #   in the given Region.
     #
-    #   * `CANCELLED`\: The operation in the specified account and Region
-    #     has been canceled. This is either because a user has stopped the
-    #     stack set operation, or because the failure tolerance of the stack
-    #     set operation has been exceeded.
+    #   * `CANCELLED`: The operation in the specified account and Region has
+    #     been canceled. This is either because a user has stopped the stack
+    #     set operation, or because the failure tolerance of the stack set
+    #     operation has been exceeded.
     #
-    #   * `FAILED`\: The operation in the specified account and Region
+    #   * `FAILED`: The operation in the specified account and Region
     #     failed.
     #
     #     If the stack set operation fails in enough accounts within a
     #     Region, the failure tolerance for the stack set operation as a
     #     whole might be exceeded.
     #
-    #   * `RUNNING`\: The operation in the specified account and Region is
+    #   * `RUNNING`: The operation in the specified account and Region is
     #     currently in progress.
     #
-    #   * `PENDING`\: The operation in the specified account and Region has
+    #   * `PENDING`: The operation in the specified account and Region has
     #     yet to start.
     #
-    #   * `SUCCEEDED`\: The operation in the specified account and Region
+    #   * `SUCCEEDED`: The operation in the specified account and Region
     #     completed successfully.
     #   @return [String]
     #
@@ -7914,7 +7914,7 @@ module Aws::CloudFormation
     # @!attribute [rw] status
     #   The overall status of the operation.
     #
-    #   * `FAILED`\: The operation exceeded the specified failure tolerance.
+    #   * `FAILED`: The operation exceeded the specified failure tolerance.
     #     The failure tolerance value that you've set for an operation is
     #     applied for each Region during stack create and update operations.
     #     If the number of failed stacks within a Region exceeds the failure
@@ -7923,19 +7923,19 @@ module Aws::CloudFormation
     #     to `FAILED`, and CloudFormation cancels the operation in any
     #     remaining Regions.
     #
-    #   * `QUEUED`\: \[Service-managed permissions\] For automatic
+    #   * `QUEUED`: \[Service-managed permissions\] For automatic
     #     deployments that require a sequence of operations, the operation
     #     is queued to be performed. For more information, see the [stack
     #     set operation status codes][1] in the CloudFormation User Guide.
     #
-    #   * `RUNNING`\: The operation is currently being performed.
+    #   * `RUNNING`: The operation is currently being performed.
     #
-    #   * `STOPPED`\: The user has canceled the operation.
+    #   * `STOPPED`: The user has canceled the operation.
     #
-    #   * `STOPPING`\: The operation is in the process of stopping, at user
+    #   * `STOPPING`: The operation is in the process of stopping, at user
     #     request.
     #
-    #   * `SUCCEEDED`\: The operation completed creating or updating all the
+    #   * `SUCCEEDED`: The operation completed creating or updating all the
     #     specified stacks without exceeding the failure tolerance for the
     #     operation.
     #
@@ -8048,19 +8048,19 @@ module Aws::CloudFormation
     #   have drifted from their expected template and parameter
     #   configuration.
     #
-    #   * `DRIFTED`\: One or more of the stack instances belonging to the
+    #   * `DRIFTED`: One or more of the stack instances belonging to the
     #     stack set stack differs from the expected template and parameter
     #     configuration. A stack instance is considered to have drifted if
     #     one or more of the resources in the associated stack have drifted.
     #
-    #   * `NOT_CHECKED`\: CloudFormation hasn't checked the stack set for
+    #   * `NOT_CHECKED`: CloudFormation hasn't checked the stack set for
     #     drift.
     #
-    #   * `IN_SYNC`\: All the stack instances belonging to the stack set
+    #   * `IN_SYNC`: All the stack instances belonging to the stack set
     #     stack match from the expected template and parameter
     #     configuration.
     #
-    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   * `UNKNOWN`: This value is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] last_drift_check_timestamp
@@ -8503,13 +8503,13 @@ module Aws::CloudFormation
     # @!attribute [rw] category
     #   The category of extensions to return.
     #
-    #   * `REGISTERED`\: Private extensions that have been registered for
+    #   * `REGISTERED`: Private extensions that have been registered for
     #     this account and region.
     #
-    #   * `ACTIVATED`\: Public extensions that have been activated for this
+    #   * `ACTIVATED`: Public extensions that have been activated for this
     #     account and region.
     #
-    #   * `THIRD_PARTY`\: Extensions available for use from publishers other
+    #   * `THIRD_PARTY`: Extensions available for use from publishers other
     #     than Amazon. This includes:
     #
     #     * Private extensions registered in the account.
@@ -8517,7 +8517,7 @@ module Aws::CloudFormation
     #     * Public extensions from publishers other than Amazon, whether
     #       activated or not.
     #
-    #   * `AWS_TYPES`\: Extensions available for use from Amazon.
+    #   * `AWS_TYPES`: Extensions available for use from Amazon.
     #   @return [String]
     #
     # @!attribute [rw] publisher_id

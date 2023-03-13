@@ -2725,15 +2725,15 @@ module Aws::ForecastService
     # Amazon Forecast resources possess the following parent-child resource
     # hierarchies:
     #
-    # * **Dataset**\: dataset import jobs
+    # * **Dataset**: dataset import jobs
     #
-    # * **Dataset Group**\: predictors, predictor backtest export jobs,
+    # * **Dataset Group**: predictors, predictor backtest export jobs,
     #   forecasts, forecast export jobs
     #
-    # * **Predictor**\: predictor backtest export jobs, forecasts, forecast
+    # * **Predictor**: predictor backtest export jobs, forecasts, forecast
     #   export jobs
     #
-    # * **Forecast**\: forecast export jobs
+    # * **Forecast**: forecast export jobs
     #
     # <note markdown="1"> `DeleteResourceTree` will only delete Amazon Forecast resources, and
     # will not delete datasets or exported files stored in Amazon S3.

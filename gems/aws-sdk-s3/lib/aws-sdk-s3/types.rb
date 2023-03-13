@@ -460,16 +460,15 @@ module Aws::S3
     # @!attribute [rw] file_header_info
     #   Describes the first line of input. Valid values are:
     #
-    #   * `NONE`\: First line is not a header.
+    #   * `NONE`: First line is not a header.
     #
-    #   * `IGNORE`\: First line is a header, but you can't use the header
+    #   * `IGNORE`: First line is a header, but you can't use the header
     #     values to indicate the column in an expression. You can use column
     #     position (such as \_1, \_2, …) to indicate the column (`SELECT
     #     s._1 FROM OBJECT s`).
     #
-    #   * `Use`\: First line is a header, and you can use the header value
-    #     to identify a column in an expression (`SELECT "name" FROM
-    #     OBJECT`).
+    #   * `Use`: First line is a header, and you can use the header value to
+    #     identify a column in an expression (`SELECT "name" FROM OBJECT`).
     #   @return [String]
     #
     # @!attribute [rw] comments
@@ -533,9 +532,9 @@ module Aws::S3
     # @!attribute [rw] quote_fields
     #   Indicates whether to use quotation marks around output fields.
     #
-    #   * `ALWAYS`\: Always use quotation marks for output fields.
+    #   * `ALWAYS`: Always use quotation marks for output fields.
     #
-    #   * `ASNEEDED`\: Use quotation marks for output fields when needed.
+    #   * `ASNEEDED`: Use quotation marks for output fields when needed.
     #   @return [String]
     #
     # @!attribute [rw] quote_escape_character
@@ -1298,7 +1297,7 @@ module Aws::S3
     # @!attribute [rw] copy_source
     #   Specifies the source object for the copy operation. You specify the
     #   value in one of two formats, depending on whether you want to access
-    #   the source object through an [access point][1]\:
+    #   the source object through an [access point][1]:
     #
     #   * For objects not accessed through an access point, specify the name
     #     of the source bucket and the key of the source object, separated
@@ -13107,7 +13106,7 @@ module Aws::S3
     # @!attribute [rw] copy_source
     #   Specifies the source object for the copy operation. You specify the
     #   value in one of two formats, depending on whether you want to access
-    #   the source object through an [access point][1]\:
+    #   the source object through an [access point][1]:
     #
     #   * For objects not accessed through an access point, specify the name
     #     of the source bucket and key of the source object, separated by a

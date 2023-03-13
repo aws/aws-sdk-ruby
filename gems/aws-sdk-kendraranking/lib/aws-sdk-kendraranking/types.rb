@@ -85,7 +85,7 @@ module Aws::KendraRanking
     #   execution plan. You can also use tags to help control access to the
     #   rescore execution plan. Tag keys and values can consist of Unicode
     #   letters, digits, white space, and any of the following symbols: \_ .
-    #   : / = + - @.
+    #   \: / = + - @.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_token

@@ -578,7 +578,7 @@ module Aws::MarketplaceMetering
     # the behavior of `RegisterUsage`. `RegisterUsage` performs two primary
     # functions: metering and entitlement.
     #
-    # * *Entitlement*\: `RegisterUsage` allows you to verify that the
+    # * *Entitlement*: `RegisterUsage` allows you to verify that the
     #   customer running your paid software is subscribed to your product on
     #   AWS Marketplace, enabling you to guard against unauthorized use.
     #   Your container image that integrates with `RegisterUsage` is only
@@ -590,7 +590,7 @@ module Aws::MarketplaceMetering
     #   `CustomerNotSubscribedException`, even if the customer unsubscribes
     #   while the Amazon ECS task or Amazon EKS pod is still running.
     #
-    # * *Metering*\: `RegisterUsage` meters software use per ECS task, per
+    # * *Metering*: `RegisterUsage` meters software use per ECS task, per
     #   hour, or per pod for Amazon EKS with usage prorated to the second. A
     #   minimum of 1 minute of usage applies to tasks that are short lived.
     #   For example, if a customer has a 10 node Amazon ECS or Amazon EKS

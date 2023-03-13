@@ -1746,31 +1746,31 @@ module Aws::Outposts
     #   about networking requirements for racks, see [Network][1] in the
     #   Amazon Web Services Outposts User Guide.
     #
-    #   * `OPTIC_10GBASE_SR`\: 10GBASE-SR
+    #   * `OPTIC_10GBASE_SR`: 10GBASE-SR
     #
-    #   * `OPTIC_10GBASE_IR`\: 10GBASE-IR
+    #   * `OPTIC_10GBASE_IR`: 10GBASE-IR
     #
-    #   * `OPTIC_10GBASE_LR`\: 10GBASE-LR
+    #   * `OPTIC_10GBASE_LR`: 10GBASE-LR
     #
-    #   * `OPTIC_40GBASE_SR`\: 40GBASE-SR
+    #   * `OPTIC_40GBASE_SR`: 40GBASE-SR
     #
-    #   * `OPTIC_40GBASE_ESR`\: 40GBASE-ESR
+    #   * `OPTIC_40GBASE_ESR`: 40GBASE-ESR
     #
-    #   * `OPTIC_40GBASE_IR4_LR4L`\: 40GBASE-IR (LR4L)
+    #   * `OPTIC_40GBASE_IR4_LR4L`: 40GBASE-IR (LR4L)
     #
-    #   * `OPTIC_40GBASE_LR4`\: 40GBASE-LR4
+    #   * `OPTIC_40GBASE_LR4`: 40GBASE-LR4
     #
-    #   * `OPTIC_100GBASE_SR4`\: 100GBASE-SR4
+    #   * `OPTIC_100GBASE_SR4`: 100GBASE-SR4
     #
-    #   * `OPTIC_100GBASE_CWDM4`\: 100GBASE-CWDM4
+    #   * `OPTIC_100GBASE_CWDM4`: 100GBASE-CWDM4
     #
-    #   * `OPTIC_100GBASE_LR4`\: 100GBASE-LR4
+    #   * `OPTIC_100GBASE_LR4`: 100GBASE-LR4
     #
-    #   * `OPTIC_100G_PSM4_MSA`\: 100G PSM4 MSA
+    #   * `OPTIC_100G_PSM4_MSA`: 100G PSM4 MSA
     #
-    #   * `OPTIC_1000BASE_LX`\: 1000Base-LX
+    #   * `OPTIC_1000BASE_LX`: 1000Base-LX
     #
-    #   * `OPTIC_1000BASE_SX`\: 1000Base-SX
+    #   * `OPTIC_1000BASE_SX` : 1000Base-SX
     #
     #
     #

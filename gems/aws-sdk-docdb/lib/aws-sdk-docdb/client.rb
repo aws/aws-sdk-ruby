@@ -889,7 +889,7 @@ module Aws::DocDB
     #   encrypt the new cluster, you can use the KMS key alias instead of the
     #   ARN for the KMS encryption key.
     #
-    #   If an encryption key is not specified in `KmsKeyId`\:
+    #   If an encryption key is not specified in `KmsKeyId`:
     #
     #   * If the `StorageEncrypted` parameter is `true`, Amazon DocumentDB
     #     uses your default encryption key.

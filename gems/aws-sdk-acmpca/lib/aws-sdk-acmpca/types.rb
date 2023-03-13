@@ -657,45 +657,45 @@ module Aws::ACMPCA
     #
     # CRLs contain the following fields:
     #
-    # * **Version**\: The current version number defined in RFC 5280 is V2.
+    # * **Version**: The current version number defined in RFC 5280 is V2.
     #   The integer value is 0x1.
     #
-    # * **Signature Algorithm**\: The name of the algorithm used to sign the
+    # * **Signature Algorithm**: The name of the algorithm used to sign the
     #   CRL.
     #
-    # * **Issuer**\: The X.500 distinguished name of your private CA that
+    # * **Issuer**: The X.500 distinguished name of your private CA that
     #   issued the CRL.
     #
-    # * **Last Update**\: The issue date and time of this CRL.
+    # * **Last Update**: The issue date and time of this CRL.
     #
-    # * **Next Update**\: The day and time by which the next CRL will be
+    # * **Next Update**: The day and time by which the next CRL will be
     #   issued.
     #
-    # * **Revoked Certificates**\: List of revoked certificates. Each list
+    # * **Revoked Certificates**: List of revoked certificates. Each list
     #   item contains the following information.
     #
-    #   * **Serial Number**\: The serial number, in hexadecimal format, of
+    #   * **Serial Number**: The serial number, in hexadecimal format, of
     #     the revoked certificate.
     #
-    #   * **Revocation Date**\: Date and time the certificate was revoked.
+    #   * **Revocation Date**: Date and time the certificate was revoked.
     #
-    #   * **CRL Entry Extensions**\: Optional extensions for the CRL entry.
+    #   * **CRL Entry Extensions**: Optional extensions for the CRL entry.
     #
-    #     * **X509v3 CRL Reason Code**\: Reason the certificate was revoked.
+    #     * **X509v3 CRL Reason Code**: Reason the certificate was revoked.
     #
     #     ^
     #
-    # * **CRL Extensions**\: Optional extensions for the CRL.
+    # * **CRL Extensions**: Optional extensions for the CRL.
     #
-    #   * **X509v3 Authority Key Identifier**\: Identifies the public key
+    #   * **X509v3 Authority Key Identifier**: Identifies the public key
     #     associated with the private key used to sign the certificate.
     #
-    #   * **X509v3 CRL Number:**\: Decimal sequence number for the CRL.
+    #   * **X509v3 CRL Number:**: Decimal sequence number for the CRL.
     #
-    # * **Signature Algorithm**\: Algorithm used by your private CA to sign
+    # * **Signature Algorithm**: Algorithm used by your private CA to sign
     #   the CRL.
     #
-    # * **Signature Value**\: Signature computed over the CRL.
+    # * **Signature Value**: Signature computed over the CRL.
     #
     # Certificate revocation lists created by Amazon Web Services Private CA
     # are DER-encoded. You can use the following OpenSSL command to list a
@@ -2526,10 +2526,10 @@ module Aws::ACMPCA
     #
     # Amazon Web Services Private CA API consumes the `Validity` data type
     # differently in two distinct parameters of the `IssueCertificate`
-    # action. The required parameter `IssueCertificate`\:`Validity`
-    # specifies the end of a certificate's validity period. The optional
-    # parameter `IssueCertificate`\:`ValidityNotBefore` specifies a
-    # customized starting time for the validity period.
+    # action. The required parameter `IssueCertificate`:`Validity` specifies
+    # the end of a certificate's validity period. The optional parameter
+    # `IssueCertificate`:`ValidityNotBefore` specifies a customized starting
+    # time for the validity period.
     #
     #
     #
@@ -2545,7 +2545,7 @@ module Aws::ACMPCA
     #   those listed below. Type definitions with values include a sample
     #   input value and the resulting output.
     #
-    #   `END_DATE`\: The specific date and time when the certificate will
+    #   `END_DATE`: The specific date and time when the certificate will
     #   expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime
     #   (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field
     #   (YY) is greater than or equal to 50, the year is interpreted as
@@ -2556,7 +2556,7 @@ module Aws::ACMPCA
     #
     #   * Output expiration date/time: 12/31/2049 23:59:59
     #
-    #   `ABSOLUTE`\: The specific date and time when the validity of a
+    #   `ABSOLUTE`: The specific date and time when the validity of a
     #   certificate will start or expire, expressed in seconds since the
     #   Unix Epoch.
     #
@@ -2564,7 +2564,7 @@ module Aws::ACMPCA
     #
     #   * Output expiration date/time: 01/01/2050 00:00:00
     #
-    #   `DAYS`, `MONTHS`, `YEARS`\: The relative time from the moment of
+    #   `DAYS`, `MONTHS`, `YEARS`: The relative time from the moment of
     #   issuance until the certificate will expire, expressed in days,
     #   months, or years.
     #

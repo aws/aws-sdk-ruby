@@ -390,12 +390,12 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][2] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:CancelKeyDeletion][3] (key policy)
+    # **Required permissions**: [kms:CancelKeyDeletion][3] (key policy)
     #
-    # **Related operations**\: ScheduleKeyDeletion
+    # **Related operations**: ScheduleKeyDeletion
     #
     #
     #
@@ -527,10 +527,10 @@ module Aws::KMS
     # store, see [Troubleshooting an external key store][6] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a
+    # **Cross-account use**: No. You cannot perform this operation on a
     # custom key store in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:ConnectCustomKeyStore][7] (IAM policy)
+    # **Required permissions**: [kms:ConnectCustomKeyStore][7] (IAM policy)
     #
     # **Related operations**
     #
@@ -624,7 +624,7 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][4] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on an
+    # **Cross-account use**: No. You cannot perform this operation on an
     # alias in a different Amazon Web Services account.
     #
     # **Required permissions**
@@ -788,10 +788,10 @@ module Aws::KMS
     # For help with failures, see [Troubleshooting a custom key store][7] in
     # the *Key Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a
+    # **Cross-account use**: No. You cannot perform this operation on a
     # custom key store in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:CreateCustomKeyStore][9] (IAM policy).
+    # **Required permissions**: [kms:CreateCustomKeyStore][9] (IAM policy).
     #
     # **Related operations:**
     #
@@ -1140,11 +1140,11 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][4] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation on a KMS key in
+    # **Cross-account use**: Yes. To perform this operation on a KMS key in
     # a different Amazon Web Services account, specify the key ARN in the
     # value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:CreateGrant][5] (key policy)
+    # **Required permissions**: [kms:CreateGrant][5] (key policy)
     #
     # **Related operations:**
     #
@@ -1552,13 +1552,13 @@ module Aws::KMS
     #
     #    </note>
     #
-    # **Cross-account use**\: No. You cannot use this operation to create a
+    # **Cross-account use**: No. You cannot use this operation to create a
     # KMS key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:CreateKey][11] (IAM policy). To use
-    # the `Tags` parameter, [kms:TagResource][11] (IAM policy). For examples
-    # and information about related permissions, see [Allow a user to create
-    # KMS keys][12] in the *Key Management Service Developer Guide*.
+    # **Required permissions**: [kms:CreateKey][11] (IAM policy). To use the
+    # `Tags` parameter, [kms:TagResource][11] (IAM policy). For examples and
+    # information about related permissions, see [Allow a user to create KMS
+    # keys][12] in the *Key Management Service Developer Guide*.
     #
     # **Related operations:**
     #
@@ -2307,11 +2307,11 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][7] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. If you use the `KeyId` parameter to
+    # **Cross-account use**: Yes. If you use the `KeyId` parameter to
     # identify a KMS key in a different Amazon Web Services account, specify
     # the key ARN or the alias ARN of the KMS key.
     #
-    # **Required permissions**\: [kms:Decrypt][8] (key policy)
+    # **Required permissions**: [kms:Decrypt][8] (key policy)
     #
     # **Related operations:**
     #
@@ -2484,7 +2484,7 @@ module Aws::KMS
     # create a new alias. To associate an existing alias with a different
     # KMS key, call UpdateAlias.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on an
+    # **Cross-account use**: No. You cannot perform this operation on an
     # alias in a different Amazon Web Services account.
     #
     # **Required permissions**
@@ -2578,10 +2578,10 @@ module Aws::KMS
     # If the operation succeeds, it returns a JSON object with no
     # properties.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a
+    # **Cross-account use**: No. You cannot perform this operation on a
     # custom key store in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:DeleteCustomKeyStore][5] (IAM policy)
+    # **Required permissions**: [kms:DeleteCustomKeyStore][5] (IAM policy)
     #
     # **Related operations:**
     #
@@ -2655,10 +2655,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][2] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:DeleteImportedKeyMaterial][3] (key
+    # **Required permissions**: [kms:DeleteImportedKeyMaterial][3] (key
     # policy)
     #
     # **Related operations:**
@@ -2750,10 +2750,10 @@ module Aws::KMS
     # see the [Troubleshooting external key stores][3]. Both topics are in
     # the *Key Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a
+    # **Cross-account use**: No. You cannot perform this operation on a
     # custom key store in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:DescribeCustomKeyStores][4] (IAM
+    # **Required permissions**: [kms:DescribeCustomKeyStores][4] (IAM
     # policy)
     #
     # **Related operations:**
@@ -2988,11 +2988,11 @@ module Aws::KMS
     # services use `DescribeKey` to create [Amazon Web Services managed
     # keys][2] from a *predefined Amazon Web Services alias* with no key ID.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:DescribeKey][4] (key policy)
+    # **Required permissions**: [kms:DescribeKey][4] (key policy)
     #
     # **Related operations:**
     #
@@ -3339,12 +3339,12 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][2] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:DisableKey][3] (key policy)
+    # **Required permissions**: [kms:DisableKey][3] (key policy)
     #
-    # **Related operations**\: EnableKey
+    # **Related operations**: EnableKey
     #
     #
     #
@@ -3419,10 +3419,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][10] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:DisableKeyRotation][11] (key policy)
+    # **Required permissions**: [kms:DisableKeyRotation][11] (key policy)
     #
     # **Related operations:**
     #
@@ -3524,10 +3524,10 @@ module Aws::KMS
     # If the operation succeeds, it returns a JSON object with no
     # properties.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a
+    # **Cross-account use**: No. You cannot perform this operation on a
     # custom key store in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:DisconnectCustomKeyStore][3] (IAM
+    # **Required permissions**: [kms:DisconnectCustomKeyStore][3] (IAM
     # policy)
     #
     # **Related operations:**
@@ -3593,12 +3593,12 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][2] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:EnableKey][3] (key policy)
+    # **Required permissions**: [kms:EnableKey][3] (key policy)
     #
-    # **Related operations**\: DisableKey
+    # **Related operations**: DisableKey
     #
     #
     #
@@ -3685,10 +3685,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][11] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:EnableKeyRotation][12] (key policy)
+    # **Required permissions**: [kms:EnableKeyRotation][12] (key policy)
     #
     # **Related operations:**
     #
@@ -3804,39 +3804,39 @@ module Aws::KMS
     #
     # * Symmetric encryption KMS keys
     #
-    #   * `SYMMETRIC_DEFAULT`\: 4096 bytes
+    #   * `SYMMETRIC_DEFAULT`: 4096 bytes
     #
     #   ^
     #
     # * `RSA_2048`
     #
-    #   * `RSAES_OAEP_SHA_1`\: 214 bytes
+    #   * `RSAES_OAEP_SHA_1`: 214 bytes
     #
-    #   * `RSAES_OAEP_SHA_256`\: 190 bytes
+    #   * `RSAES_OAEP_SHA_256`: 190 bytes
     #
     # * `RSA_3072`
     #
-    #   * `RSAES_OAEP_SHA_1`\: 342 bytes
+    #   * `RSAES_OAEP_SHA_1`: 342 bytes
     #
-    #   * `RSAES_OAEP_SHA_256`\: 318 bytes
+    #   * `RSAES_OAEP_SHA_256`: 318 bytes
     #
     # * `RSA_4096`
     #
-    #   * `RSAES_OAEP_SHA_1`\: 470 bytes
+    #   * `RSAES_OAEP_SHA_1`: 470 bytes
     #
-    #   * `RSAES_OAEP_SHA_256`\: 446 bytes
+    #   * `RSAES_OAEP_SHA_256`: 446 bytes
     #
-    # * `SM2PKE`\: 1024 bytes (China Regions only)
+    # * `SM2PKE`: 1024 bytes (China Regions only)
     #
     # The KMS key that you use for this operation must be in a compatible
     # key state. For details, see [Key states of KMS keys][2] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:Encrypt][3] (key policy)
+    # **Required permissions**: [kms:Encrypt][3] (key policy)
     #
     # **Related operations:**
     #
@@ -4049,11 +4049,11 @@ module Aws::KMS
     # 2.  Use the plaintext data key to decrypt data outside of KMS, then
     #     erase the plaintext data key from memory.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:GenerateDataKey][8] (key policy)
+    # **Required permissions**: [kms:GenerateDataKey][8] (key policy)
     #
     # **Related operations:**
     #
@@ -4257,11 +4257,11 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][4] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:GenerateDataKeyPair][5] (key policy)
+    # **Required permissions**: [kms:GenerateDataKeyPair][5] (key policy)
     #
     # **Related operations:**
     #
@@ -4448,12 +4448,12 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][3] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\:
-    # [kms:GenerateDataKeyPairWithoutPlaintext][4] (key policy)
+    # **Required permissions**: [kms:GenerateDataKeyPairWithoutPlaintext][4]
+    # (key policy)
     #
     # **Related operations:**
     #
@@ -4648,11 +4648,11 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][2] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:GenerateDataKeyWithoutPlaintext][3]
+    # **Required permissions**: [kms:GenerateDataKeyWithoutPlaintext][3]
     # (key policy)
     #
     # **Related operations:**
@@ -4815,13 +4815,13 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][3] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:GenerateMac][4] (key policy)
+    # **Required permissions**: [kms:GenerateMac][4] (key policy)
     #
-    # **Related operations**\: VerifyMac
+    # **Related operations**: VerifyMac
     #
     #
     #
@@ -4936,10 +4936,10 @@ module Aws::KMS
     # For more information about entropy and random number generation, see
     # [Key Management Service Cryptographic Details][3].
     #
-    # **Cross-account use**\: Not applicable. `GenerateRandom` does not use
+    # **Cross-account use**: Not applicable. `GenerateRandom` does not use
     # any account-specific resources, such as KMS keys.
     #
-    # **Required permissions**\: [kms:GenerateRandom][4] (IAM policy)
+    # **Required permissions**: [kms:GenerateRandom][4] (IAM policy)
     #
     #
     #
@@ -5000,12 +5000,12 @@ module Aws::KMS
 
     # Gets a key policy attached to the specified KMS key.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:GetKeyPolicy][1] (key policy)
+    # **Required permissions**: [kms:GetKeyPolicy][1] (key policy)
     #
-    # **Related operations**\: PutKeyPolicy
+    # **Related operations**: PutKeyPolicy
     #
     #
     #
@@ -5116,11 +5116,11 @@ module Aws::KMS
     #   If you cancel the deletion, the original key rotation status returns
     #   to `true`.
     #
-    # **Cross-account use**\: Yes. To perform this operation on a KMS key in
+    # **Cross-account use**: Yes. To perform this operation on a KMS key in
     # a different Amazon Web Services account, specify the key ARN in the
     # value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:GetKeyRotationStatus][11] (key policy)
+    # **Required permissions**: [kms:GetKeyRotationStatus][11] (key policy)
     #
     # **Related operations:**
     #
@@ -5223,11 +5223,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][2] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:GetParametersForImport][3] (key
-    # policy)
+    # **Required permissions**: [kms:GetParametersForImport][3] (key policy)
     #
     # **Related operations:**
     #
@@ -5348,12 +5347,12 @@ module Aws::KMS
     # returns important information about the public key in the response,
     # including:
     #
-    # * [KeySpec][2]\: The type of key material in the public key, such as
+    # * [KeySpec][2]: The type of key material in the public key, such as
     #   `RSA_4096` or `ECC_NIST_P521`.
     #
-    # * [KeyUsage][3]\: Whether the key is used for encryption or signing.
+    # * [KeyUsage][3]: Whether the key is used for encryption or signing.
     #
-    # * [EncryptionAlgorithms][4] or [SigningAlgorithms][5]\: A list of the
+    # * [EncryptionAlgorithms][4] or [SigningAlgorithms][5]: A list of the
     #   encryption algorithms or the signing algorithms for the key.
     #
     # Although KMS cannot enforce these restrictions on external operations,
@@ -5373,13 +5372,13 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][7] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:GetPublicKey][8] (key policy)
+    # **Required permissions**: [kms:GetPublicKey][8] (key policy)
     #
-    # **Related operations**\: CreateKey
+    # **Related operations**: CreateKey
     #
     #
     #
@@ -5544,10 +5543,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][4] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:ImportKeyMaterial][5] (key policy)
+    # **Required permissions**: [kms:ImportKeyMaterial][5] (key policy)
     #
     # **Related operations:**
     #
@@ -5679,10 +5678,10 @@ module Aws::KMS
     # Web Services creates in your account, including predefined aliases, do
     # not count against your [KMS aliases quota][1].
     #
-    # **Cross-account use**\: No. `ListAliases` does not return aliases in
+    # **Cross-account use**: No. `ListAliases` does not return aliases in
     # other Amazon Web Services accounts.
     #
-    # **Required permissions**\: [kms:ListAliases][2] (IAM policy)
+    # **Required permissions**: [kms:ListAliases][2] (IAM policy)
     #
     # For details, see [Controlling access to aliases][3] in the *Key
     # Management Service Developer Guide*.
@@ -5843,11 +5842,11 @@ module Aws::KMS
     #
     #  </note>
     #
-    # **Cross-account use**\: Yes. To perform this operation on a KMS key in
+    # **Cross-account use**: Yes. To perform this operation on a KMS key in
     # a different Amazon Web Services account, specify the key ARN in the
     # value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:ListGrants][4] (key policy)
+    # **Required permissions**: [kms:ListGrants][4] (key policy)
     #
     # **Related operations:**
     #
@@ -6022,10 +6021,10 @@ module Aws::KMS
     # GetKeyPolicy operation. However, the only valid policy name is
     # `default`.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:ListKeyPolicies][1] (key policy)
+    # **Required permissions**: [kms:ListKeyPolicies][1] (key policy)
     #
     # **Related operations:**
     #
@@ -6120,10 +6119,10 @@ module Aws::KMS
     # Gets a list of all KMS keys in the caller's Amazon Web Services
     # account and Region.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:ListKeys][1] (IAM policy)
+    # **Required permissions**: [kms:ListKeys][1] (IAM policy)
     #
     # **Related operations:**
     #
@@ -6235,10 +6234,10 @@ module Aws::KMS
     # Services General Reference*. For information about using tags in KMS,
     # see [Tagging keys][2].
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:ListResourceTags][3] (key policy)
+    # **Required permissions**: [kms:ListResourceTags][3] (key policy)
     #
     # **Related operations:**
     #
@@ -6362,14 +6361,14 @@ module Aws::KMS
     # Guide</i> </i>. For examples of working with grants in several
     # programming languages, see [Programming grants][2].
     #
-    # **Cross-account use**\: You must specify a principal in your Amazon
-    # Web Services account. However, this operation can return grants in any
+    # **Cross-account use**: You must specify a principal in your Amazon Web
+    # Services account. However, this operation can return grants in any
     # Amazon Web Services account. You do not need `kms:ListRetirableGrants`
     # permission (or any other additional permission) in any Amazon Web
     # Services account other than your own.
     #
-    # **Required permissions**\: [kms:ListRetirableGrants][3] (IAM policy)
-    # in your Amazon Web Services account.
+    # **Required permissions**: [kms:ListRetirableGrants][3] (IAM policy) in
+    # your Amazon Web Services account.
     #
     # **Related operations:**
     #
@@ -6498,12 +6497,12 @@ module Aws::KMS
     # programming languages, see [Setting a key policy][3] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:PutKeyPolicy][4] (key policy)
+    # **Required permissions**: [kms:PutKeyPolicy][4] (key policy)
     #
-    # **Related operations**\: GetKeyPolicy
+    # **Related operations**: GetKeyPolicy
     #
     #
     #
@@ -6686,12 +6685,12 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][6] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. The source KMS key and destination KMS
-    # key can be in different Amazon Web Services accounts. Either or both
-    # KMS keys can be in a different account than the caller. To specify a
-    # KMS key in a different account, you must use its key ARN or alias ARN.
+    # **Cross-account use**: Yes. The source KMS key and destination KMS key
+    # can be in different Amazon Web Services accounts. Either or both KMS
+    # keys can be in a different account than the caller. To specify a KMS
+    # key in a different account, you must use its key ARN or alias ARN.
     #
-    # **Required permissions**\:
+    # **Required permissions**:
     #
     # * [kms:ReEncryptFrom][7] permission on the source KMS key (key policy)
     #
@@ -6992,10 +6991,10 @@ module Aws::KMS
     #
     #  </note>
     #
-    # **Cross-account use**\: No. You cannot use this operation to create a
+    # **Cross-account use**: No. You cannot use this operation to create a
     # replica key in a different Amazon Web Services account.
     #
-    # **Required permissions**\:
+    # **Required permissions**:
     #
     # * `kms:ReplicateKey` on the primary key (in the primary key's
     #   Region). Include this permission in the primary key's key policy.
@@ -7327,10 +7326,10 @@ module Aws::KMS
     # Guide</i> </i>. For examples of working with grants in several
     # programming languages, see [Programming grants][4].
     #
-    # **Cross-account use**\: Yes. You can retire a grant on a KMS key in a
+    # **Cross-account use**: Yes. You can retire a grant on a KMS key in a
     # different Amazon Web Services account.
     #
-    # **Required permissions:**\:Permission to retire a grant is determined
+    # **Required permissions:**:Permission to retire a grant is determined
     # primarily by the grant. For details, see [Retiring and revoking
     # grants][2] in the *Key Management Service Developer Guide*.
     #
@@ -7425,11 +7424,11 @@ module Aws::KMS
     # Guide</i> </i>. For examples of working with grants in several
     # programming languages, see [Programming grants][4].
     #
-    # **Cross-account use**\: Yes. To perform this operation on a KMS key in
+    # **Cross-account use**: Yes. To perform this operation on a KMS key in
     # a different Amazon Web Services account, specify the key ARN in the
     # value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:RevokeGrant][5] (key policy).
+    # **Required permissions**: [kms:RevokeGrant][5] (key policy).
     #
     # **Related operations:**
     #
@@ -7546,10 +7545,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][6] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: kms:ScheduleKeyDeletion (key policy)
+    # **Required permissions**: kms:ScheduleKeyDeletion (key policy)
     #
     # **Related operations**
     #
@@ -7689,13 +7688,13 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][3] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:Sign][4] (key policy)
+    # **Required permissions**: [kms:Sign][4] (key policy)
     #
-    # **Related operations**\: Verify
+    # **Related operations**: Verify
     #
     #
     #
@@ -7899,10 +7898,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][9] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:TagResource][10] (key policy)
+    # **Required permissions**: [kms:TagResource][10] (key policy)
     #
     # **Related operations**
     #
@@ -8013,10 +8012,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][5] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:UntagResource][6] (key policy)
+    # **Required permissions**: [kms:UntagResource][6] (key policy)
     #
     # **Related operations**
     #
@@ -8117,7 +8116,7 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][2] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
     # **Required permissions**
@@ -8289,10 +8288,10 @@ module Aws::KMS
     # If the operation succeeds, it returns a JSON object with no
     # properties.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a
+    # **Cross-account use**: No. You cannot perform this operation on a
     # custom key store in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:UpdateCustomKeyStore][2] (IAM policy)
+    # **Required permissions**: [kms:UpdateCustomKeyStore][2] (IAM policy)
     #
     # **Related operations:**
     #
@@ -8565,10 +8564,10 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][1] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: No. You cannot perform this operation on a KMS
+    # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:UpdateKeyDescription][2] (key policy)
+    # **Required permissions**: [kms:UpdateKeyDescription][2] (key policy)
     #
     # **Related operations**
     #
@@ -8681,10 +8680,10 @@ module Aws::KMS
     # This operation does not return any output. To verify that primary key
     # is changed, use the DescribeKey operation.
     #
-    # **Cross-account use**\: No. You cannot use this operation in a
+    # **Cross-account use**: No. You cannot use this operation in a
     # different Amazon Web Services account.
     #
-    # **Required permissions**\:
+    # **Required permissions**:
     #
     # * `kms:UpdatePrimaryRegion` on the current primary key (in the primary
     #   key's Region). Include this permission primary key's key policy.
@@ -8810,13 +8809,13 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][3] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:Verify][4] (key policy)
+    # **Required permissions**: [kms:Verify][4] (key policy)
     #
-    # **Related operations**\: Sign
+    # **Related operations**: Sign
     #
     #
     #
@@ -9015,13 +9014,13 @@ module Aws::KMS
     # key state. For details, see [Key states of KMS keys][3] in the *Key
     # Management Service Developer Guide*.
     #
-    # **Cross-account use**\: Yes. To perform this operation with a KMS key
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:VerifyMac][4] (key policy)
+    # **Required permissions**: [kms:VerifyMac][4] (key policy)
     #
-    # **Related operations**\: GenerateMac
+    # **Related operations**: GenerateMac
     #
     #
     #

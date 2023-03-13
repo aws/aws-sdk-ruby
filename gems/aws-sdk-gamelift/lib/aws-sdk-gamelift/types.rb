@@ -7834,7 +7834,7 @@ module Aws::GameLift
     #     quotes. Special characters must be escaped. Boolean and string
     #     values can only be used with the comparators `=` and `<>`. For
     #     example, the following filter expression searches on
-    #     `gameSessionName`\: "`FilterExpression": "gameSessionName =
+    #     `gameSessionName`: "`FilterExpression": "gameSessionName =
     #     'Matt\'s Awesome Game 1'"`.
     #
     #   To chain multiple conditions in a single expression, use the logical

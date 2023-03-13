@@ -1460,9 +1460,9 @@ module Aws::Kinesis
     #   The encryption type to use on the record. This parameter can be one
     #   of the following values:
     #
-    #   * `NONE`\: Do not encrypt the records in the stream.
+    #   * `NONE`: Do not encrypt the records in the stream.
     #
-    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #   * `KMS`: Use server-side encryption on the records in the stream
     #     using a customer-managed Amazon Web Services KMS key.
     #   @return [String]
     #
@@ -1519,9 +1519,9 @@ module Aws::Kinesis
     #   The encryption type used on the records. This parameter can be one
     #   of the following values:
     #
-    #   * `NONE`\: Do not encrypt the records.
+    #   * `NONE`: Do not encrypt the records.
     #
-    #   * `KMS`\: Use server-side encryption on the records using a
+    #   * `KMS`: Use server-side encryption on the records using a
     #     customer-managed Amazon Web Services KMS key.
     #   @return [String]
     #
@@ -1637,9 +1637,9 @@ module Aws::Kinesis
     #   The encryption type used on the record. This parameter can be one of
     #   the following values:
     #
-    #   * `NONE`\: Do not encrypt the records in the stream.
+    #   * `NONE`: Do not encrypt the records in the stream.
     #
-    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #   * `KMS`: Use server-side encryption on the records in the stream
     #     using a customer-managed Amazon Web Services KMS key.
     #   @return [String]
     #
@@ -1951,20 +1951,20 @@ module Aws::Kinesis
     # @!attribute [rw] type
     #   You can set the starting position to one of the following values:
     #
-    #   `AT_SEQUENCE_NUMBER`\: Start streaming from the position denoted by
+    #   `AT_SEQUENCE_NUMBER`: Start streaming from the position denoted by
     #   the sequence number specified in the `SequenceNumber` field.
     #
-    #   `AFTER_SEQUENCE_NUMBER`\: Start streaming right after the position
+    #   `AFTER_SEQUENCE_NUMBER`: Start streaming right after the position
     #   denoted by the sequence number specified in the `SequenceNumber`
     #   field.
     #
-    #   `AT_TIMESTAMP`\: Start streaming from the position denoted by the
+    #   `AT_TIMESTAMP`: Start streaming from the position denoted by the
     #   time stamp specified in the `Timestamp` field.
     #
-    #   `TRIM_HORIZON`\: Start streaming at the last untrimmed record in the
+    #   `TRIM_HORIZON`: Start streaming at the last untrimmed record in the
     #   shard, which is the oldest data record in the shard.
     #
-    #   `LATEST`\: Start streaming just after the most recent record in the
+    #   `LATEST`: Start streaming just after the most recent record in the
     #   shard, so that you always read the most recent data in the shard.
     #   @return [String]
     #
@@ -2104,9 +2104,9 @@ module Aws::Kinesis
     #   The server-side encryption type used on the stream. This parameter
     #   can be one of the following values:
     #
-    #   * `NONE`\: Do not encrypt the records in the stream.
+    #   * `NONE`: Do not encrypt the records in the stream.
     #
-    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #   * `KMS`: Use server-side encryption on the records in the stream
     #     using a customer-managed Amazon Web Services KMS key.
     #   @return [String]
     #

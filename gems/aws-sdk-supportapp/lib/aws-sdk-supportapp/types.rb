@@ -95,7 +95,7 @@ module Aws::SupportApp
     #   * `notifyOnResolveCase`
     #
     #   If you specify `none`, the following parameters must be null or
-    #   `false`\:
+    #   `false`:
     #
     #   * `notifyOnAddCorrespondenceToCase`
     #
@@ -499,7 +499,7 @@ module Aws::SupportApp
     #   notifications.
     #
     #   If you specify `high` or `all`, at least one of the following
-    #   parameters must be `true`\:
+    #   parameters must be `true`:
     #
     #   * `notifyOnAddCorrespondenceToCase`
     #
@@ -508,7 +508,7 @@ module Aws::SupportApp
     #   * `notifyOnResolveCase`
     #
     #   If you specify `none`, any of the following parameters that you
-    #   specify in your request must be `false`\:
+    #   specify in your request must be `false`:
     #
     #   * `notifyOnAddCorrespondenceToCase`
     #

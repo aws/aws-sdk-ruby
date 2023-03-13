@@ -266,25 +266,25 @@ module Aws::ForecastService
     #   the "filling" featurization method for a **Target Time Series**
     #   dataset. Default values are bolded.
     #
-    #   * `aggregation`\: **sum**, `avg`, `first`, `min`, `max`
+    #   * `aggregation`: **sum**, `avg`, `first`, `min`, `max`
     #
-    #   * `frontfill`\: **none**
+    #   * `frontfill`: **none**
     #
-    #   * `middlefill`\: **zero**, `nan` (not a number), `value`, `median`,
+    #   * `middlefill`: **zero**, `nan` (not a number), `value`, `median`,
     #     `mean`, `min`, `max`
     #
-    #   * `backfill`\: **zero**, `nan`, `value`, `median`, `mean`, `min`,
+    #   * `backfill`: **zero**, `nan`, `value`, `median`, `mean`, `min`,
     #     `max`
     #
     #   The following list shows the parameters and their valid values for a
     #   **Related Time Series** featurization method (there are no
     #   defaults):
     #
-    #   * `middlefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #   * `middlefill`: `zero`, `value`, `median`, `mean`, `min`, `max`
     #
-    #   * `backfill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #   * `backfill`: `zero`, `value`, `median`, `mean`, `min`, `max`
     #
-    #   * `futurefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #   * `futurefill`: `zero`, `value`, `median`, `mean`, `min`, `max`
     #
     #   To set a filling method to a specific value, set the fill parameter
     #   to `value` and define the value in a corresponding `_value`
@@ -4275,25 +4275,25 @@ module Aws::ForecastService
     #   the "filling" featurization method for a **Target Time Series**
     #   dataset. Bold signifies the default value.
     #
-    #   * `aggregation`\: **sum**, `avg`, `first`, `min`, `max`
+    #   * `aggregation`: **sum**, `avg`, `first`, `min`, `max`
     #
-    #   * `frontfill`\: **none**
+    #   * `frontfill`: **none**
     #
-    #   * `middlefill`\: **zero**, `nan` (not a number), `value`, `median`,
+    #   * `middlefill`: **zero**, `nan` (not a number), `value`, `median`,
     #     `mean`, `min`, `max`
     #
-    #   * `backfill`\: **zero**, `nan`, `value`, `median`, `mean`, `min`,
+    #   * `backfill`: **zero**, `nan`, `value`, `median`, `mean`, `min`,
     #     `max`
     #
     #   The following list shows the parameters and their valid values for a
     #   **Related Time Series** featurization method (there are no
     #   defaults):
     #
-    #   * `middlefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #   * `middlefill`: `zero`, `value`, `median`, `mean`, `min`, `max`
     #
-    #   * `backfill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #   * `backfill`: `zero`, `value`, `median`, `mean`, `min`, `max`
     #
-    #   * `futurefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #   * `futurefill`: `zero`, `value`, `median`, `mean`, `min`, `max`
     #
     #   To set a filling method to a specific value, set the fill parameter
     #   to `value` and define the value in a corresponding `_value`

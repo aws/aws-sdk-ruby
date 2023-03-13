@@ -5883,29 +5883,29 @@ module Aws::Backup
     #   You need to specify specific metadata to restore an Amazon Elastic
     #   File System (Amazon EFS) instance:
     #
-    #   * `file-system-id`\: The ID of the Amazon EFS file system that is
+    #   * `file-system-id`: The ID of the Amazon EFS file system that is
     #     backed up by Backup. Returned in
     #     `GetRecoveryPointRestoreMetadata`.
     #
-    #   * `Encrypted`\: A Boolean value that, if true, specifies that the
+    #   * `Encrypted`: A Boolean value that, if true, specifies that the
     #     file system is encrypted. If `KmsKeyId` is specified, `Encrypted`
     #     must be set to `true`.
     #
-    #   * `KmsKeyId`\: Specifies the Amazon Web Services KMS key that is
-    #     used to encrypt the restored file system. You can specify a key
-    #     from another Amazon Web Services account provided that key it is
+    #   * `KmsKeyId`: Specifies the Amazon Web Services KMS key that is used
+    #     to encrypt the restored file system. You can specify a key from
+    #     another Amazon Web Services account provided that key it is
     #     properly shared with your account via Amazon Web Services KMS.
     #
-    #   * `PerformanceMode`\: Specifies the throughput mode of the file
+    #   * `PerformanceMode`: Specifies the throughput mode of the file
     #     system.
     #
-    #   * `CreationToken`\: A user-supplied value that ensures the
-    #     uniqueness (idempotency) of the request.
+    #   * `CreationToken`: A user-supplied value that ensures the uniqueness
+    #     (idempotency) of the request.
     #
-    #   * `newFileSystem`\: A Boolean value that, if true, specifies that
-    #     the recovery point is restored to a new Amazon EFS file system.
+    #   * `newFileSystem`: A Boolean value that, if true, specifies that the
+    #     recovery point is restored to a new Amazon EFS file system.
     #
-    #   * `ItemsToRestore`\: An array of one to five strings where each
+    #   * `ItemsToRestore`: An array of one to five strings where each
     #     string is a file path. Use `ItemsToRestore` to restore specific
     #     files or directories rather than the entire file system. This
     #     parameter is optional. For example,

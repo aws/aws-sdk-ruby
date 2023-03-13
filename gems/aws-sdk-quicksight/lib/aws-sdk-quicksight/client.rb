@@ -5189,7 +5189,7 @@ module Aws::QuickSight
     # permissions profile to the user with the ` UpdateUser ` API operation.
     # Use ` RegisterUser ` API operation to add a new user with a custom
     # permission profile attached. For more information, see the following
-    # sections in the *Amazon QuickSight User Guide*\:
+    # sections in the *Amazon QuickSight User Guide*:
     #
     # * [Embedding Analytics][1]
     #
@@ -6609,9 +6609,9 @@ module Aws::QuickSight
     #   Amazon QuickSight supports several ways of managing the identity of
     #   users. This parameter accepts two values:
     #
-    #   * `IAM`\: A user whose identity maps to an existing IAM user or role.
+    #   * `IAM`: A user whose identity maps to an existing IAM user or role.
     #
-    #   * `QUICKSIGHT`\: A user whose identity is owned and managed internally
+    #   * `QUICKSIGHT`: A user whose identity is owned and managed internally
     #     by Amazon QuickSight.
     #
     # @option params [required, String] :email
@@ -6621,17 +6621,17 @@ module Aws::QuickSight
     #   The Amazon QuickSight role for the user. The user role can be one of
     #   the following:
     #
-    #   * `READER`\: A user who has read-only access to dashboards.
+    #   * `READER`: A user who has read-only access to dashboards.
     #
-    #   * `AUTHOR`\: A user who can create data sources, datasets, analyses,
+    #   * `AUTHOR`: A user who can create data sources, datasets, analyses,
     #     and dashboards.
     #
-    #   * `ADMIN`\: A user who is an author, who can also manage Amazon
+    #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
-    #   * `RESTRICTED_READER`\: This role isn't currently available for use.
+    #   * `RESTRICTED_READER`: This role isn't currently available for use.
     #
-    #   * `RESTRICTED_AUTHOR`\: This role isn't currently available for use.
+    #   * `RESTRICTED_AUTHOR`: This role isn't currently available for use.
     #
     # @option params [String] :iam_arn
     #   The ARN of the IAM user or role that you are registering with Amazon
@@ -6699,12 +6699,12 @@ module Aws::QuickSight
     #   Identity and Access Management(IAM) role. The type of supported
     #   external login provider can be one of the following.
     #
-    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #   * `COGNITO`: Amazon Cognito. The provider URL is
     #     cognito-identity.amazonaws.com. When choosing the `COGNITO` provider
     #     type, don’t use the "CustomFederationProviderUrl" parameter which
     #     is only needed when the external provider is custom.
     #
-    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When choosing
+    #   * `CUSTOM_OIDC`: Custom OpenID Connect (OIDC) provider. When choosing
     #     `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl` parameter
     #     to provide the custom OIDC provider URL.
     #
@@ -9197,12 +9197,12 @@ module Aws::QuickSight
     #   The Amazon QuickSight role of the user. The role can be one of the
     #   following default security cohorts:
     #
-    #   * `READER`\: A user who has read-only access to dashboards.
+    #   * `READER`: A user who has read-only access to dashboards.
     #
-    #   * `AUTHOR`\: A user who can create data sources, datasets, analyses,
+    #   * `AUTHOR`: A user who can create data sources, datasets, analyses,
     #     and dashboards.
     #
-    #   * `ADMIN`\: A user who is an author, who can also manage Amazon
+    #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
     #   The name of the Amazon QuickSight role is invisible to the user except
@@ -9249,16 +9249,16 @@ module Aws::QuickSight
     #   Identity and Access Management(IAM) role. The type of supported
     #   external login provider can be one of the following.
     #
-    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #   * `COGNITO`: Amazon Cognito. The provider URL is
     #     cognito-identity.amazonaws.com. When choosing the `COGNITO` provider
     #     type, don’t use the "CustomFederationProviderUrl" parameter which
     #     is only needed when the external provider is custom.
     #
-    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When choosing
+    #   * `CUSTOM_OIDC`: Custom OpenID Connect (OIDC) provider. When choosing
     #     `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl` parameter
     #     to provide the custom OIDC provider URL.
     #
-    #   * `NONE`\: This clears all the previously saved external login
+    #   * `NONE`: This clears all the previously saved external login
     #     information for a user. Use the ` DescribeUser ` API operation to
     #     check the external login information.
     #
