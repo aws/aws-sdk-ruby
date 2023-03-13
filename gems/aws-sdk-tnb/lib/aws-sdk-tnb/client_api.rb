@@ -396,9 +396,11 @@ module Aws::Tnb
     InstantiateSolNetworkInstanceInput.add_member(:additional_params_for_ns, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParamsForNs"))
     InstantiateSolNetworkInstanceInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "dry_run"))
     InstantiateSolNetworkInstanceInput.add_member(:ns_instance_id, Shapes::ShapeRef.new(shape: NsInstanceId, required: true, location: "uri", location_name: "nsInstanceId"))
+    InstantiateSolNetworkInstanceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     InstantiateSolNetworkInstanceInput.struct_class = Types::InstantiateSolNetworkInstanceInput
 
     InstantiateSolNetworkInstanceOutput.add_member(:ns_lcm_op_occ_id, Shapes::ShapeRef.new(shape: NsLcmOpOccId, required: true, location_name: "nsLcmOpOccId"))
+    InstantiateSolNetworkInstanceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     InstantiateSolNetworkInstanceOutput.struct_class = Types::InstantiateSolNetworkInstanceOutput
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -605,9 +607,11 @@ module Aws::Tnb
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
     TerminateSolNetworkInstanceInput.add_member(:ns_instance_id, Shapes::ShapeRef.new(shape: NsInstanceId, required: true, location: "uri", location_name: "nsInstanceId"))
+    TerminateSolNetworkInstanceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     TerminateSolNetworkInstanceInput.struct_class = Types::TerminateSolNetworkInstanceInput
 
     TerminateSolNetworkInstanceOutput.add_member(:ns_lcm_op_occ_id, Shapes::ShapeRef.new(shape: NsLcmOpOccId, location_name: "nsLcmOpOccId"))
+    TerminateSolNetworkInstanceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     TerminateSolNetworkInstanceOutput.struct_class = Types::TerminateSolNetworkInstanceOutput
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -632,10 +636,12 @@ module Aws::Tnb
 
     UpdateSolNetworkInstanceInput.add_member(:modify_vnf_info_data, Shapes::ShapeRef.new(shape: UpdateSolNetworkModify, location_name: "modifyVnfInfoData"))
     UpdateSolNetworkInstanceInput.add_member(:ns_instance_id, Shapes::ShapeRef.new(shape: NsInstanceId, required: true, location: "uri", location_name: "nsInstanceId"))
+    UpdateSolNetworkInstanceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateSolNetworkInstanceInput.add_member(:update_type, Shapes::ShapeRef.new(shape: UpdateSolNetworkType, required: true, location_name: "updateType"))
     UpdateSolNetworkInstanceInput.struct_class = Types::UpdateSolNetworkInstanceInput
 
     UpdateSolNetworkInstanceOutput.add_member(:ns_lcm_op_occ_id, Shapes::ShapeRef.new(shape: NsLcmOpOccId, location_name: "nsLcmOpOccId"))
+    UpdateSolNetworkInstanceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateSolNetworkInstanceOutput.struct_class = Types::UpdateSolNetworkInstanceOutput
 
     UpdateSolNetworkModify.add_member(:vnf_configurable_properties, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "vnfConfigurableProperties"))

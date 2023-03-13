@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2023-03-13)
+------------------
+
+* Feature - Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.
+
 1.60.0 (2023-01-25)
 ------------------
 

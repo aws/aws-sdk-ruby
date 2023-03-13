@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-03-13)
+------------------
+
+* Feature - This release extends Wisdom CreateKnowledgeBase API to support SharePoint connector type by removing the @required trait for objectField
+
 1.12.0 (2023-01-18)
 ------------------
 

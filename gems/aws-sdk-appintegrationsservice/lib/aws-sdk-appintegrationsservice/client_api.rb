@@ -38,6 +38,11 @@ module Aws::AppIntegrationsService
     EventIntegrationAssociation = Shapes::StructureShape.new(name: 'EventIntegrationAssociation')
     EventIntegrationAssociationsList = Shapes::ListShape.new(name: 'EventIntegrationAssociationsList')
     EventIntegrationsList = Shapes::ListShape.new(name: 'EventIntegrationsList')
+    Fields = Shapes::StringShape.new(name: 'Fields')
+    FieldsList = Shapes::ListShape.new(name: 'FieldsList')
+    FieldsMap = Shapes::MapShape.new(name: 'FieldsMap')
+    FileConfiguration = Shapes::StructureShape.new(name: 'FileConfiguration')
+    FolderList = Shapes::ListShape.new(name: 'FolderList')
     GetDataIntegrationRequest = Shapes::StructureShape.new(name: 'GetDataIntegrationRequest')
     GetDataIntegrationResponse = Shapes::StructureShape.new(name: 'GetDataIntegrationResponse')
     GetEventIntegrationRequest = Shapes::StructureShape.new(name: 'GetEventIntegrationRequest')
@@ -60,13 +65,15 @@ module Aws::AppIntegrationsService
     Message = Shapes::StringShape.new(name: 'Message')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NonBlankLongString = Shapes::StringShape.new(name: 'NonBlankLongString')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     Object = Shapes::StringShape.new(name: 'Object')
+    ObjectConfiguration = Shapes::MapShape.new(name: 'ObjectConfiguration')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceQuotaExceededException = Shapes::StructureShape.new(name: 'ResourceQuotaExceededException')
-    Schedule = Shapes::StringShape.new(name: 'Schedule')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     Source = Shapes::StringShape.new(name: 'Source')
+    SourceURI = Shapes::StringShape.new(name: 'SourceURI')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -90,11 +97,13 @@ module Aws::AppIntegrationsService
 
     CreateDataIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateDataIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateDataIntegrationRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "KmsKey"))
-    CreateDataIntegrationRequest.add_member(:source_uri, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "SourceURI"))
-    CreateDataIntegrationRequest.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfig"))
+    CreateDataIntegrationRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "KmsKey"))
+    CreateDataIntegrationRequest.add_member(:source_uri, Shapes::ShapeRef.new(shape: SourceURI, required: true, location_name: "SourceURI"))
+    CreateDataIntegrationRequest.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfiguration, required: true, location_name: "ScheduleConfig"))
     CreateDataIntegrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateDataIntegrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataIntegrationRequest.add_member(:file_configuration, Shapes::ShapeRef.new(shape: FileConfiguration, location_name: "FileConfiguration"))
+    CreateDataIntegrationRequest.add_member(:object_configuration, Shapes::ShapeRef.new(shape: ObjectConfiguration, location_name: "ObjectConfiguration"))
     CreateDataIntegrationRequest.struct_class = Types::CreateDataIntegrationRequest
 
     CreateDataIntegrationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -102,10 +111,12 @@ module Aws::AppIntegrationsService
     CreateDataIntegrationResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     CreateDataIntegrationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDataIntegrationResponse.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "KmsKey"))
-    CreateDataIntegrationResponse.add_member(:source_uri, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "SourceURI"))
+    CreateDataIntegrationResponse.add_member(:source_uri, Shapes::ShapeRef.new(shape: SourceURI, location_name: "SourceURI"))
     CreateDataIntegrationResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
     CreateDataIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateDataIntegrationResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken"))
+    CreateDataIntegrationResponse.add_member(:file_configuration, Shapes::ShapeRef.new(shape: FileConfiguration, location_name: "FileConfiguration"))
+    CreateDataIntegrationResponse.add_member(:object_configuration, Shapes::ShapeRef.new(shape: ObjectConfiguration, location_name: "ObjectConfiguration"))
     CreateDataIntegrationResponse.struct_class = Types::CreateDataIntegrationResponse
 
     CreateEventIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
@@ -128,7 +139,7 @@ module Aws::AppIntegrationsService
 
     DataIntegrationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DataIntegrationSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    DataIntegrationSummary.add_member(:source_uri, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "SourceURI"))
+    DataIntegrationSummary.add_member(:source_uri, Shapes::ShapeRef.new(shape: SourceURI, location_name: "SourceURI"))
     DataIntegrationSummary.struct_class = Types::DataIntegrationSummary
 
     DataIntegrationsList.member = Shapes::ShapeRef.new(shape: DataIntegrationSummary)
@@ -169,6 +180,17 @@ module Aws::AppIntegrationsService
 
     EventIntegrationsList.member = Shapes::ShapeRef.new(shape: EventIntegration)
 
+    FieldsList.member = Shapes::ShapeRef.new(shape: Fields)
+
+    FieldsMap.key = Shapes::ShapeRef.new(shape: NonBlankString)
+    FieldsMap.value = Shapes::ShapeRef.new(shape: FieldsList)
+
+    FileConfiguration.add_member(:folders, Shapes::ShapeRef.new(shape: FolderList, required: true, location_name: "Folders"))
+    FileConfiguration.add_member(:filters, Shapes::ShapeRef.new(shape: FieldsMap, location_name: "Filters"))
+    FileConfiguration.struct_class = Types::FileConfiguration
+
+    FolderList.member = Shapes::ShapeRef.new(shape: NonBlankLongString)
+
     GetDataIntegrationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
     GetDataIntegrationRequest.struct_class = Types::GetDataIntegrationRequest
 
@@ -177,9 +199,11 @@ module Aws::AppIntegrationsService
     GetDataIntegrationResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     GetDataIntegrationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     GetDataIntegrationResponse.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "KmsKey"))
-    GetDataIntegrationResponse.add_member(:source_uri, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "SourceURI"))
+    GetDataIntegrationResponse.add_member(:source_uri, Shapes::ShapeRef.new(shape: SourceURI, location_name: "SourceURI"))
     GetDataIntegrationResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
     GetDataIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetDataIntegrationResponse.add_member(:file_configuration, Shapes::ShapeRef.new(shape: FileConfiguration, location_name: "FileConfiguration"))
+    GetDataIntegrationResponse.add_member(:object_configuration, Shapes::ShapeRef.new(shape: ObjectConfiguration, location_name: "ObjectConfiguration"))
     GetDataIntegrationResponse.struct_class = Types::GetDataIntegrationResponse
 
     GetEventIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
@@ -239,6 +263,9 @@ module Aws::AppIntegrationsService
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ObjectConfiguration.key = Shapes::ShapeRef.new(shape: NonBlankString)
+    ObjectConfiguration.value = Shapes::ShapeRef.new(shape: FieldsMap)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -247,7 +274,7 @@ module Aws::AppIntegrationsService
 
     ScheduleConfiguration.add_member(:first_execution_from, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "FirstExecutionFrom"))
     ScheduleConfiguration.add_member(:object, Shapes::ShapeRef.new(shape: Object, location_name: "Object"))
-    ScheduleConfiguration.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: Schedule, location_name: "ScheduleExpression"))
+    ScheduleConfiguration.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "ScheduleExpression"))
     ScheduleConfiguration.struct_class = Types::ScheduleConfiguration
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)

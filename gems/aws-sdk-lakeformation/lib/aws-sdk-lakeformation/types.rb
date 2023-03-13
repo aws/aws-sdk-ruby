@@ -497,6 +497,7 @@ module Aws::LakeFormation
     #   @return [Types::ColumnWildcard]
     #
     # @!attribute [rw] version_id
+    #   The ID of the data cells filter version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataCellsFilter AWS API Documentation
@@ -2590,7 +2591,7 @@ module Aws::LakeFormation
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] permissions_with_grant_option

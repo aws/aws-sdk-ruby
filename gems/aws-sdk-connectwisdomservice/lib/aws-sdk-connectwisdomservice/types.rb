@@ -29,11 +29,38 @@ module Aws::ConnectWisdomService
     # @!attribute [rw] app_integration_arn
     #   The Amazon Resource Name (ARN) of the AppIntegrations
     #   DataIntegration to use for ingesting content.
+    #
+    #   * For [ Salesforce][1], your AppIntegrations DataIntegration must
+    #     have an ObjectConfiguration if objectFields is not provided,
+    #     including at least `Id`, `ArticleNumber`, `VersionNumber`,
+    #     `Title`, `PublishStatus`, and `IsDeleted` as source fields.
+    #
+    #   * For [ ServiceNow][2], your AppIntegrations DataIntegration must
+    #     have an ObjectConfiguration if objectFields is not provided,
+    #     including at least `number`, `short_description`, `sys_mod_count`,
+    #     `workflow_state`, and `active` as source fields.
+    #
+    #   * For [ Zendesk][3], your AppIntegrations DataIntegration must have
+    #     an ObjectConfiguration if `objectFields` is not provided,
+    #     including at least `id`, `title`, `updated_at`, and `draft` as
+    #     source fields.
+    #
+    #   * For [ SharePoint][4], your AppIntegrations DataIntegration must
+    #     have a FileConfiguration, including only file extensions that are
+    #     among `docx`, `pdf`, `html`, `htm`, and `txt`.
+    #
+    #
+    #
+    #   [1]: https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm
+    #   [2]: https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api
+    #   [3]: https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/
+    #   [4]: https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index
     #   @return [String]
     #
     # @!attribute [rw] object_fields
     #   The fields from the source that are made available to your agents in
-    #   Wisdom.
+    #   Wisdom. Optional if ObjectConfiguration is included in the provided
+    #   DataIntegration.
     #
     #   * For [ Salesforce][1], you must include at least `Id`,
     #     `ArticleNumber`, `VersionNumber`, `Title`, `PublishStatus`, and
@@ -43,6 +70,9 @@ module Aws::ConnectWisdomService
     #     `short_description`, `sys_mod_count`, `workflow_state`, and
     #     `active`.
     #
+    #   * For [ Zendesk][3], you must include at least `id`, `title`,
+    #     `updated_at`, and `draft`.
+    #
     #   Make sure to include additional fields. These fields are indexed and
     #   used to source recommendations.
     #
@@ -50,6 +80,7 @@ module Aws::ConnectWisdomService
     #
     #   [1]: https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm
     #   [2]: https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api
+    #   [3]: https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/AppIntegrationsConfiguration AWS API Documentation
@@ -506,10 +537,16 @@ module Aws::ConnectWisdomService
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -543,10 +580,16 @@ module Aws::ConnectWisdomService
 
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -597,10 +640,16 @@ module Aws::ConnectWisdomService
 
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
@@ -680,10 +729,16 @@ module Aws::ConnectWisdomService
 
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -753,10 +808,16 @@ module Aws::ConnectWisdomService
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1774,7 +1835,7 @@ module Aws::ConnectWisdomService
     # @!attribute [rw] template_uri
     #   A URI template containing exactly one variable in `$\{variableName\}
     #   `format. This can only be set for `EXTERNAL` knowledge bases. For
-    #   Salesforce and ServiceNow, the variable must be one of the
+    #   Salesforce, ServiceNow, and Zendesk, the variable must be one of the
     #   following:
     #
     #   * Salesforce: `Id`, `ArticleNumber`, `VersionNumber`, `Title`,
@@ -1782,9 +1843,15 @@ module Aws::ConnectWisdomService
     #
     #   * ServiceNow: `number`, `short_description`, `sys_mod_count`,
     #     `workflow_state`, or `active`
-    #   ^
     #
-    #        <p>The variable is replaced with the actual value for a piece of content when calling <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html">GetContent</a>. </p>
+    #   * Zendesk: `id`, `title`, `updated_at`, or `draft`
+    #
+    #   The variable is replaced with the actual value for a piece of
+    #   content when calling [GetContent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/RenderingConfiguration AWS API Documentation
