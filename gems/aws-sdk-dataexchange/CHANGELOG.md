@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2023-03-14)
+------------------
+
+* Feature - This release enables data providers to license direct access to S3 objects encrypted with Customer Managed Keys (CMK) in AWS KMS through AWS Data Exchange. Subscribers can use these keys to decrypt, then use the encrypted S3 objects shared with them, without creating or managing copies.
+
 1.30.0 (2023-01-18)
 ------------------
 

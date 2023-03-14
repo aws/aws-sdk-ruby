@@ -1706,6 +1706,18 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.dimensions[0].value #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.statistic #=> String, one of "Average", "Minimum", "Maximum", "SampleCount", "Sum"
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.unit #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics #=> Array
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].expression #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].id #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].label #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions #=> Array
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.metric_name #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.namespace #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.stat #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.unit #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].return_data #=> Boolean
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
@@ -2242,16 +2254,38 @@ module Aws::ApplicationAutoScaling
     #         resource_label: "ResourceLabel",
     #       },
     #       customized_metric_specification: {
-    #         metric_name: "MetricName", # required
-    #         namespace: "MetricNamespace", # required
+    #         metric_name: "MetricName",
+    #         namespace: "MetricNamespace",
     #         dimensions: [
     #           {
     #             name: "MetricDimensionName", # required
     #             value: "MetricDimensionValue", # required
     #           },
     #         ],
-    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #         statistic: "Average", # accepts Average, Minimum, Maximum, SampleCount, Sum
     #         unit: "MetricUnit",
+    #         metrics: [
+    #           {
+    #             expression: "Expression",
+    #             id: "Id", # required
+    #             label: "XmlString",
+    #             metric_stat: {
+    #               metric: { # required
+    #                 dimensions: [
+    #                   {
+    #                     name: "TargetTrackingMetricDimensionName", # required
+    #                     value: "TargetTrackingMetricDimensionValue", # required
+    #                   },
+    #                 ],
+    #                 metric_name: "TargetTrackingMetricName",
+    #                 namespace: "TargetTrackingMetricNamespace",
+    #               },
+    #               stat: "XmlString", # required
+    #               unit: "TargetTrackingMetricUnit",
+    #             },
+    #             return_data: false,
+    #           },
+    #         ],
     #       },
     #       scale_out_cooldown: 1,
     #       scale_in_cooldown: 1,
@@ -2878,7 +2912,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

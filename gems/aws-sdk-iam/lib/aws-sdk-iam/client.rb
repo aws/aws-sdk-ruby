@@ -1289,6 +1289,8 @@ module Aws::IAM
     #   application or applications allowed to authenticate using the OIDC
     #   provider
     #
+    # * A list of tags that are attached to the specified IAM OIDC provider
+    #
     # * A list of thumbprints of one or more server certificates that the
     #   IdP uses
     #
@@ -1364,7 +1366,7 @@ module Aws::IAM
     #
     #   For more information about obtaining the OIDC provider thumbprint, see
     #   [Obtaining the thumbprint for an OpenID Connect provider][1] in the
-    #   *IAM User Guide*.
+    #   *IAM user Guide*.
     #
     #
     #
@@ -1736,6 +1738,15 @@ module Aws::IAM
     #   IAM user, group, role, and policy names must be unique within the
     #   account. Names are not distinguished by case. For example, you cannot
     #   create resources named both "MyResource" and "myresource".
+    #
+    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following characters:
+    #   \_+=,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :assume_role_policy_document
     #   The trust relationship policy document that grants an entity
@@ -2333,8 +2344,8 @@ module Aws::IAM
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :virtual_mfa_device_name
-    #   The name of the virtual MFA device. Use with path to uniquely identify
-    #   a virtual MFA device.
+    #   The name of the virtual MFA device, which must be unique. Use with
+    #   path to uniquely identify a virtual MFA device.
     #
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
@@ -5079,7 +5090,7 @@ module Aws::IAM
     # operation. For more information, see [Refining permissions using
     # service last accessed data][1] in the *IAM User Guide*.
     #
-    # For each service that principals in an account (root users, IAM users,
+    # For each service that principals in an account (root user, IAM users,
     # or IAM roles) could access using SCPs, the operation returns details
     # about the most recent access attempt. If there was no attempt, the
     # service is listed without details about the most recent attempt to
@@ -10986,7 +10997,7 @@ module Aws::IAM
     #   *MyImportantProject*. Or search for all resources with the key name
     #   *Cost Center* and the value *41200*.
     #
-    # * **Access control** - Include tags in IAM user-based and
+    # * **Access control** - Include tags in IAM identity-based and
     #   resource-based policies. You can use tags to restrict access to only
     #   an OIDC provider that has a specified tag attached. For examples of
     #   policies that show how to use tags to control access, see [Control
@@ -11405,7 +11416,7 @@ module Aws::IAM
     #   *MyImportantProject*. Or search for all resources with the key name
     #   *Cost Center* and the value *41200*.
     #
-    # * **Access control** - Include tags in IAM user-based and
+    # * **Access control** - Include tags in IAM identity-based and
     #   resource-based policies. You can use tags to restrict access to only
     #   an IAM requesting user that has a specified tag attached. You can
     #   also restrict access to only those resources that have a certain tag
@@ -13335,7 +13346,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

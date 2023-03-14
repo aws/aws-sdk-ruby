@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2023-03-14)
+------------------
+
+* Feature - describe-direct-connect-gateway-associations includes a new status, updating, indicating that the association is currently in-process of updating.
+
 1.56.0 (2023-01-18)
 ------------------
 

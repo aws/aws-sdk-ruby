@@ -18,6 +18,8 @@ module Aws::Keyspaces
     CapacitySpecification = Shapes::StructureShape.new(name: 'CapacitySpecification')
     CapacitySpecificationSummary = Shapes::StructureShape.new(name: 'CapacitySpecificationSummary')
     CapacityUnits = Shapes::IntegerShape.new(name: 'CapacityUnits')
+    ClientSideTimestamps = Shapes::StructureShape.new(name: 'ClientSideTimestamps')
+    ClientSideTimestampsStatus = Shapes::StringShape.new(name: 'ClientSideTimestampsStatus')
     ClusteringKey = Shapes::StructureShape.new(name: 'ClusteringKey')
     ClusteringKeyList = Shapes::ListShape.new(name: 'ClusteringKeyList')
     ColumnDefinition = Shapes::StructureShape.new(name: 'ColumnDefinition')
@@ -101,6 +103,9 @@ module Aws::Keyspaces
     CapacitySpecificationSummary.add_member(:last_update_to_pay_per_request_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateToPayPerRequestTimestamp"))
     CapacitySpecificationSummary.struct_class = Types::CapacitySpecificationSummary
 
+    ClientSideTimestamps.add_member(:status, Shapes::ShapeRef.new(shape: ClientSideTimestampsStatus, required: true, location_name: "status"))
+    ClientSideTimestamps.struct_class = Types::ClientSideTimestamps
+
     ClusteringKey.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "name"))
     ClusteringKey.add_member(:order_by, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "orderBy"))
     ClusteringKey.struct_class = Types::ClusteringKey
@@ -136,6 +141,7 @@ module Aws::Keyspaces
     CreateTableRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: TimeToLive, location_name: "ttl"))
     CreateTableRequest.add_member(:default_time_to_live, Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
     CreateTableRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateTableRequest.add_member(:client_side_timestamps, Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
     CreateTableRequest.struct_class = Types::CreateTableRequest
 
     CreateTableResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
@@ -179,6 +185,7 @@ module Aws::Keyspaces
     GetTableResponse.add_member(:ttl, Shapes::ShapeRef.new(shape: TimeToLive, location_name: "ttl"))
     GetTableResponse.add_member(:default_time_to_live, Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
     GetTableResponse.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    GetTableResponse.add_member(:client_side_timestamps, Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
     GetTableResponse.struct_class = Types::GetTableResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -296,6 +303,7 @@ module Aws::Keyspaces
     UpdateTableRequest.add_member(:point_in_time_recovery, Shapes::ShapeRef.new(shape: PointInTimeRecovery, location_name: "pointInTimeRecovery"))
     UpdateTableRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: TimeToLive, location_name: "ttl"))
     UpdateTableRequest.add_member(:default_time_to_live, Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
+    UpdateTableRequest.add_member(:client_side_timestamps, Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))

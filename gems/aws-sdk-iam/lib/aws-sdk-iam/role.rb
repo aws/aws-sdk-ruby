@@ -133,7 +133,7 @@ module Aws::IAM
     # period can be shorter if your Region began supporting these features
     # within the last year. The role might have been used more than 400 days
     # ago. For more information, see [Regions where data is tracked][1] in
-    # the *IAM User Guide*.
+    # the *IAM user Guide*.
     #
     #
     #

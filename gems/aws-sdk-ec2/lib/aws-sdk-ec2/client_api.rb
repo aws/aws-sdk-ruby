@@ -7778,9 +7778,11 @@ module Aws::EC2
     DnsEntrySet.member = Shapes::ShapeRef.new(shape: DnsEntry, location_name: "item")
 
     DnsOptions.add_member(:dns_record_ip_type, Shapes::ShapeRef.new(shape: DnsRecordIpType, location_name: "dnsRecordIpType"))
+    DnsOptions.add_member(:private_dns_only_for_inbound_resolver_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsOnlyForInboundResolverEndpoint"))
     DnsOptions.struct_class = Types::DnsOptions
 
     DnsOptionsSpecification.add_member(:dns_record_ip_type, Shapes::ShapeRef.new(shape: DnsRecordIpType, location_name: "DnsRecordIpType"))
+    DnsOptionsSpecification.add_member(:private_dns_only_for_inbound_resolver_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsOnlyForInboundResolverEndpoint"))
     DnsOptionsSpecification.struct_class = Types::DnsOptionsSpecification
 
     DnsServersOptionsModifyStructure.add_member(:custom_dns_servers, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "CustomDnsServers"))

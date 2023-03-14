@@ -2036,6 +2036,25 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the
+    # shared S3 objects.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The AWS KMS CMK (Key Management System Customer Managed Key) used to
+    #   encrypt S3 objects in the shared S3 Bucket. AWS Data exchange will
+    #   create a KMS grant for each subscriber to allow them to access and
+    #   decrypt their entitled data that is encrypted using this KMS key
+    #   specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/KmsKeyToGrant AWS API Documentation
+    #
+    class KmsKeyToGrant < Struct.new(
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the AWS Lake Formation resource (Table or Database)
     # included in the AWS Lake Formation data permission.
     #
@@ -2813,6 +2832,13 @@ module Aws::DataExchange
     #   their entitled data using the S3 Access Point ARN.
     #   @return [String]
     #
+    # @!attribute [rw] kms_keys_to_grant
+    #   List of AWS KMS CMKs (Key Management System Customer Managed Keys)
+    #   and ARNs used to encrypt S3 objects being shared in this S3 Data
+    #   Access asset. Providers must include all AWS KMS keys used to
+    #   encrypt these shared S3 objects.
+    #   @return [Array<Types::KmsKeyToGrant>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/S3DataAccessAsset AWS API Documentation
     #
     class S3DataAccessAsset < Struct.new(
@@ -2820,7 +2846,8 @@ module Aws::DataExchange
       :key_prefixes,
       :keys,
       :s3_access_point_alias,
-      :s3_access_point_arn)
+      :s3_access_point_arn,
+      :kms_keys_to_grant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2841,12 +2868,19 @@ module Aws::DataExchange
     #   The keys used to create the Amazon S3 data access.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] kms_keys_to_grant
+    #   List of AWS KMS CMKs (Key Management System Customer Managed Keys)
+    #   and ARNs used to encrypt S3 objects being shared in this S3 Data
+    #   Access asset.
+    #   @return [Array<Types::KmsKeyToGrant>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/S3DataAccessAssetSourceEntry AWS API Documentation
     #
     class S3DataAccessAssetSourceEntry < Struct.new(
       :bucket,
       :key_prefixes,
-      :keys)
+      :keys,
+      :kms_keys_to_grant)
       SENSITIVE = []
       include Aws::Structure
     end

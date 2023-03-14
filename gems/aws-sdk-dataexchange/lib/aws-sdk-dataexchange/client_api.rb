@@ -87,6 +87,8 @@ module Aws::DataExchange
     JobError = Shapes::StructureShape.new(name: 'JobError')
     JobErrorLimitName = Shapes::StringShape.new(name: 'JobErrorLimitName')
     JobErrorResourceTypes = Shapes::StringShape.new(name: 'JobErrorResourceTypes')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    KmsKeyToGrant = Shapes::StructureShape.new(name: 'KmsKeyToGrant')
     LFPermission = Shapes::StringShape.new(name: 'LFPermission')
     LFResourceDetails = Shapes::StructureShape.new(name: 'LFResourceDetails')
     LFResourceType = Shapes::StringShape.new(name: 'LFResourceType')
@@ -112,6 +114,7 @@ module Aws::DataExchange
     ListOfEventActionEntry = Shapes::ListShape.new(name: 'ListOfEventActionEntry')
     ListOfJobEntry = Shapes::ListShape.new(name: 'ListOfJobEntry')
     ListOfJobError = Shapes::ListShape.new(name: 'ListOfJobError')
+    ListOfKmsKeysToGrant = Shapes::ListShape.new(name: 'ListOfKmsKeysToGrant')
     ListOfLFPermissions = Shapes::ListShape.new(name: 'ListOfLFPermissions')
     ListOfLFTagValues = Shapes::ListShape.new(name: 'ListOfLFTagValues')
     ListOfLFTags = Shapes::ListShape.new(name: 'ListOfLFTags')
@@ -576,6 +579,9 @@ module Aws::DataExchange
     JobError.add_member(:resource_type, Shapes::ShapeRef.new(shape: JobErrorResourceTypes, location_name: "ResourceType"))
     JobError.struct_class = Types::JobError
 
+    KmsKeyToGrant.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "KmsKeyArn"))
+    KmsKeyToGrant.struct_class = Types::KmsKeyToGrant
+
     LFResourceDetails.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseLFTagPolicy, location_name: "Database"))
     LFResourceDetails.add_member(:table, Shapes::ShapeRef.new(shape: TableLFTagPolicy, location_name: "Table"))
     LFResourceDetails.struct_class = Types::LFResourceDetails
@@ -650,6 +656,8 @@ module Aws::DataExchange
     ListOfJobEntry.member = Shapes::ShapeRef.new(shape: JobEntry)
 
     ListOfJobError.member = Shapes::ShapeRef.new(shape: JobError)
+
+    ListOfKmsKeysToGrant.member = Shapes::ShapeRef.new(shape: KmsKeyToGrant)
 
     ListOfLFPermissions.member = Shapes::ShapeRef.new(shape: LFPermission)
 
@@ -766,11 +774,13 @@ module Aws::DataExchange
     S3DataAccessAsset.add_member(:keys, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Keys"))
     S3DataAccessAsset.add_member(:s3_access_point_alias, Shapes::ShapeRef.new(shape: __string, location_name: "S3AccessPointAlias"))
     S3DataAccessAsset.add_member(:s3_access_point_arn, Shapes::ShapeRef.new(shape: __string, location_name: "S3AccessPointArn"))
+    S3DataAccessAsset.add_member(:kms_keys_to_grant, Shapes::ShapeRef.new(shape: ListOfKmsKeysToGrant, location_name: "KmsKeysToGrant"))
     S3DataAccessAsset.struct_class = Types::S3DataAccessAsset
 
     S3DataAccessAssetSourceEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
     S3DataAccessAssetSourceEntry.add_member(:key_prefixes, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "KeyPrefixes"))
     S3DataAccessAssetSourceEntry.add_member(:keys, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Keys"))
+    S3DataAccessAssetSourceEntry.add_member(:kms_keys_to_grant, Shapes::ShapeRef.new(shape: ListOfKmsKeysToGrant, location_name: "KmsKeysToGrant"))
     S3DataAccessAssetSourceEntry.struct_class = Types::S3DataAccessAssetSourceEntry
 
     S3SnapshotAsset.add_member(:size, Shapes::ShapeRef.new(shape: __doubleMin0, required: true, location_name: "Size"))

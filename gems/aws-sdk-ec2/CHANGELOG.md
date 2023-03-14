@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.370.0 (2023-03-14)
+------------------
+
+* Feature - This release adds a new DnsOptions key (PrivateDnsOnlyForInboundResolverEndpoint) to CreateVpcEndpoint and ModifyVpcEndpoint APIs.
+
 1.369.0 (2023-03-08)
 ------------------
 

@@ -65,21 +65,14 @@ module Aws::ApplicationAutoScaling
     #   should decrease when capacity increases, and increase when capacity
     #   decreases.
     #
-    # For an example of how creating new metrics can be useful, see [Scaling
-    # based on Amazon SQS][3] in the *Amazon EC2 Auto Scaling User Guide*.
-    # This topic mentions Auto Scaling groups, but the same scenario for
-    # Amazon SQS can apply to the target tracking scaling policies that you
-    # create for a Spot Fleet by using the Application Auto Scaling API.
-    #
     # For more information about the CloudWatch terminology below, see
-    # [Amazon CloudWatch concepts][4] in the *Amazon CloudWatch User Guide*.
+    # [Amazon CloudWatch concepts][3] in the *Amazon CloudWatch User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
-    # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html
-    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     #
     # @!attribute [rw] metric_name
     #   The name of the metric. To get the exact metric name, namespace, and
@@ -117,6 +110,12 @@ module Aws::ApplicationAutoScaling
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #   @return [String]
     #
+    # @!attribute [rw] metrics
+    #   The metrics to include in the target tracking scaling policy, as a
+    #   metric data query. This can include both raw metric and metric math
+    #   expressions.
+    #   @return [Array<Types::TargetTrackingMetricDataQuery>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/CustomizedMetricSpecification AWS API Documentation
     #
     class CustomizedMetricSpecification < Struct.new(
@@ -124,7 +123,8 @@ module Aws::ApplicationAutoScaling
       :namespace,
       :dimensions,
       :statistic,
-      :unit)
+      :unit,
+      :metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3463,6 +3463,194 @@ module Aws::ApplicationAutoScaling
       :dynamic_scaling_in_suspended,
       :dynamic_scaling_out_suspended,
       :scheduled_scaling_suspended)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a specific metric.
+    #
+    # Metric is a property of the TargetTrackingMetricStat object.
+    #
+    # @!attribute [rw] dimensions
+    #   The dimensions for the metric. For the list of available dimensions,
+    #   see the Amazon Web Services documentation available from the table
+    #   in [Amazon Web Services services that publish CloudWatch metrics
+    #   ][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #   Conditional: If you published your metric with dimensions, you must
+    #   specify the same dimensions in your scaling policy.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
+    #   @return [Array<Types::TargetTrackingMetricDimension>]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the metric. For more information, see the table in
+    #   [Amazon Web Services services that publish CloudWatch metrics ][1]
+    #   in the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TargetTrackingMetric AWS API Documentation
+    #
+    class TargetTrackingMetric < Struct.new(
+      :dimensions,
+      :metric_name,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metric data to return. Also defines whether this call is returning
+    # data for one metric only, or whether it is performing a math
+    # expression on the values of returned metric statistics to create a new
+    # time series. A time series is a series of data points, each of which
+    # is associated with a timestamp.
+    #
+    # For more information and examples, see [Create a target tracking
+    # scaling policy for Application Auto Scaling using metric math][1] in
+    # the *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking-metric-math.html
+    #
+    # @!attribute [rw] expression
+    #   The math expression to perform on the returned data, if this object
+    #   is performing a math expression. This expression can use the `Id` of
+    #   the other metrics to refer to those metrics, and can also use the
+    #   `Id` of other expressions to use the result of those expressions.
+    #
+    #   Conditional: Within each `TargetTrackingMetricDataQuery` object, you
+    #   must specify either `Expression` or `MetricStat`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A short name that identifies the object's results in the response.
+    #   This name must be unique among all `MetricDataQuery` objects
+    #   specified for a single scaling policy. If you are performing math
+    #   expressions on this set of data, this name represents that data and
+    #   can serve as a variable in the mathematical expression. The valid
+    #   characters are letters, numbers, and underscores. The first
+    #   character must be a lowercase letter.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   A human-readable label for this metric or expression. This is
+    #   especially useful if this is a math expression, so that you know
+    #   what the value represents.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_stat
+    #   Information about the metric data to return.
+    #
+    #   Conditional: Within each `MetricDataQuery` object, you must specify
+    #   either `Expression` or `MetricStat`, but not both.
+    #   @return [Types::TargetTrackingMetricStat]
+    #
+    # @!attribute [rw] return_data
+    #   Indicates whether to return the timestamps and raw data values of
+    #   this metric.
+    #
+    #   If you use any math expressions, specify `true` for this value for
+    #   only the final math expression that the metric specification is
+    #   based on. You must specify `false` for `ReturnData` for all the
+    #   other metrics and expressions used in the metric specification.
+    #
+    #   If you are only retrieving metrics and not performing any math
+    #   expressions, do not specify anything for `ReturnData`. This sets it
+    #   to its default (`true`).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TargetTrackingMetricDataQuery AWS API Documentation
+    #
+    class TargetTrackingMetricDataQuery < Struct.new(
+      :expression,
+      :id,
+      :label,
+      :metric_stat,
+      :return_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the dimension of a metric.
+    #
+    # @!attribute [rw] name
+    #   The name of the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the dimension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TargetTrackingMetricDimension AWS API Documentation
+    #
+    class TargetTrackingMetricDimension < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure defines the CloudWatch metric to return, along with the
+    # statistic, period, and unit.
+    #
+    # For more information about the CloudWatch terminology below, see
+    # [Amazon CloudWatch concepts][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+    #
+    # @!attribute [rw] metric
+    #   The CloudWatch metric to return, including the metric name,
+    #   namespace, and dimensions. To get the exact metric name, namespace,
+    #   and dimensions, inspect the [Metric][1] object that is returned by a
+    #   call to [ListMetrics][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html
+    #   @return [Types::TargetTrackingMetric]
+    #
+    # @!attribute [rw] stat
+    #   The statistic to return. It can include any CloudWatch statistic or
+    #   extended statistic. For a list of valid values, see the table in
+    #   [Statistics][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #   The most commonly used metrics for scaling is `Average`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit to use for the returned data points. For a complete list of
+    #   the units that CloudWatch supports, see the [MetricDatum][1] data
+    #   type in the *Amazon CloudWatch API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TargetTrackingMetricStat AWS API Documentation
+    #
+    class TargetTrackingMetricStat < Struct.new(
+      :metric,
+      :stat,
+      :unit)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -35,7 +35,9 @@ module Aws::ApplicationAutoScaling
     DescribeScheduledActionsResponse = Shapes::StructureShape.new(name: 'DescribeScheduledActionsResponse')
     DisableScaleIn = Shapes::BooleanShape.new(name: 'DisableScaleIn')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    Expression = Shapes::StringShape.new(name: 'Expression')
     FailedResourceAccessException = Shapes::StructureShape.new(name: 'FailedResourceAccessException')
+    Id = Shapes::StringShape.new(name: 'Id')
     IncludeNotScaledActivities = Shapes::BooleanShape.new(name: 'IncludeNotScaledActivities')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
@@ -70,6 +72,7 @@ module Aws::ApplicationAutoScaling
     ResourceIdMaxLen1600 = Shapes::StringShape.new(name: 'ResourceIdMaxLen1600')
     ResourceIdsMaxLen1600 = Shapes::ListShape.new(name: 'ResourceIdsMaxLen1600')
     ResourceLabel = Shapes::StringShape.new(name: 'ResourceLabel')
+    ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
     ScalableDimension = Shapes::StringShape.new(name: 'ScalableDimension')
     ScalableTarget = Shapes::StructureShape.new(name: 'ScalableTarget')
     ScalableTargetAction = Shapes::StructureShape.new(name: 'ScalableTargetAction')
@@ -89,6 +92,17 @@ module Aws::ApplicationAutoScaling
     StepAdjustments = Shapes::ListShape.new(name: 'StepAdjustments')
     StepScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'StepScalingPolicyConfiguration')
     SuspendedState = Shapes::StructureShape.new(name: 'SuspendedState')
+    TargetTrackingMetric = Shapes::StructureShape.new(name: 'TargetTrackingMetric')
+    TargetTrackingMetricDataQueries = Shapes::ListShape.new(name: 'TargetTrackingMetricDataQueries')
+    TargetTrackingMetricDataQuery = Shapes::StructureShape.new(name: 'TargetTrackingMetricDataQuery')
+    TargetTrackingMetricDimension = Shapes::StructureShape.new(name: 'TargetTrackingMetricDimension')
+    TargetTrackingMetricDimensionName = Shapes::StringShape.new(name: 'TargetTrackingMetricDimensionName')
+    TargetTrackingMetricDimensionValue = Shapes::StringShape.new(name: 'TargetTrackingMetricDimensionValue')
+    TargetTrackingMetricDimensions = Shapes::ListShape.new(name: 'TargetTrackingMetricDimensions')
+    TargetTrackingMetricName = Shapes::StringShape.new(name: 'TargetTrackingMetricName')
+    TargetTrackingMetricNamespace = Shapes::StringShape.new(name: 'TargetTrackingMetricNamespace')
+    TargetTrackingMetricStat = Shapes::StructureShape.new(name: 'TargetTrackingMetricStat')
+    TargetTrackingMetricUnit = Shapes::StringShape.new(name: 'TargetTrackingMetricUnit')
     TargetTrackingScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingScalingPolicyConfiguration')
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -103,11 +117,12 @@ module Aws::ApplicationAutoScaling
     ConcurrentUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConcurrentUpdateException.struct_class = Types::ConcurrentUpdateException
 
-    CustomizedMetricSpecification.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
-    CustomizedMetricSpecification.add_member(:namespace, Shapes::ShapeRef.new(shape: MetricNamespace, required: true, location_name: "Namespace"))
+    CustomizedMetricSpecification.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    CustomizedMetricSpecification.add_member(:namespace, Shapes::ShapeRef.new(shape: MetricNamespace, location_name: "Namespace"))
     CustomizedMetricSpecification.add_member(:dimensions, Shapes::ShapeRef.new(shape: MetricDimensions, location_name: "Dimensions"))
-    CustomizedMetricSpecification.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, required: true, location_name: "Statistic"))
+    CustomizedMetricSpecification.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, location_name: "Statistic"))
     CustomizedMetricSpecification.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, location_name: "Unit"))
+    CustomizedMetricSpecification.add_member(:metrics, Shapes::ShapeRef.new(shape: TargetTrackingMetricDataQueries, location_name: "Metrics"))
     CustomizedMetricSpecification.struct_class = Types::CustomizedMetricSpecification
 
     DeleteScalingPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "PolicyName"))
@@ -331,6 +346,31 @@ module Aws::ApplicationAutoScaling
     SuspendedState.add_member(:dynamic_scaling_out_suspended, Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "DynamicScalingOutSuspended"))
     SuspendedState.add_member(:scheduled_scaling_suspended, Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "ScheduledScalingSuspended"))
     SuspendedState.struct_class = Types::SuspendedState
+
+    TargetTrackingMetric.add_member(:dimensions, Shapes::ShapeRef.new(shape: TargetTrackingMetricDimensions, location_name: "Dimensions"))
+    TargetTrackingMetric.add_member(:metric_name, Shapes::ShapeRef.new(shape: TargetTrackingMetricName, location_name: "MetricName"))
+    TargetTrackingMetric.add_member(:namespace, Shapes::ShapeRef.new(shape: TargetTrackingMetricNamespace, location_name: "Namespace"))
+    TargetTrackingMetric.struct_class = Types::TargetTrackingMetric
+
+    TargetTrackingMetricDataQueries.member = Shapes::ShapeRef.new(shape: TargetTrackingMetricDataQuery)
+
+    TargetTrackingMetricDataQuery.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "Expression"))
+    TargetTrackingMetricDataQuery.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    TargetTrackingMetricDataQuery.add_member(:label, Shapes::ShapeRef.new(shape: XmlString, location_name: "Label"))
+    TargetTrackingMetricDataQuery.add_member(:metric_stat, Shapes::ShapeRef.new(shape: TargetTrackingMetricStat, location_name: "MetricStat"))
+    TargetTrackingMetricDataQuery.add_member(:return_data, Shapes::ShapeRef.new(shape: ReturnData, location_name: "ReturnData"))
+    TargetTrackingMetricDataQuery.struct_class = Types::TargetTrackingMetricDataQuery
+
+    TargetTrackingMetricDimension.add_member(:name, Shapes::ShapeRef.new(shape: TargetTrackingMetricDimensionName, required: true, location_name: "Name"))
+    TargetTrackingMetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: TargetTrackingMetricDimensionValue, required: true, location_name: "Value"))
+    TargetTrackingMetricDimension.struct_class = Types::TargetTrackingMetricDimension
+
+    TargetTrackingMetricDimensions.member = Shapes::ShapeRef.new(shape: TargetTrackingMetricDimension)
+
+    TargetTrackingMetricStat.add_member(:metric, Shapes::ShapeRef.new(shape: TargetTrackingMetric, required: true, location_name: "Metric"))
+    TargetTrackingMetricStat.add_member(:stat, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Stat"))
+    TargetTrackingMetricStat.add_member(:unit, Shapes::ShapeRef.new(shape: TargetTrackingMetricUnit, location_name: "Unit"))
+    TargetTrackingMetricStat.struct_class = Types::TargetTrackingMetricStat
 
     TargetTrackingScalingPolicyConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: MetricScale, required: true, location_name: "TargetValue"))
     TargetTrackingScalingPolicyConfiguration.add_member(:predefined_metric_specification, Shapes::ShapeRef.new(shape: PredefinedMetricSpecification, location_name: "PredefinedMetricSpecification"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-03-14)
+------------------
+
+* Feature - Documentation only updates to correct customer-reported issues
+
 1.75.0 (2023-02-01)
 ------------------
 
