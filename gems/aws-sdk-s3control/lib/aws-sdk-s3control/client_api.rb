@@ -255,6 +255,9 @@ module Aws::S3Control
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     ObjectCreationTime = Shapes::TimestampShape.new(name: 'ObjectCreationTime')
     ObjectLambdaAccessPoint = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPoint')
+    ObjectLambdaAccessPointAlias = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPointAlias')
+    ObjectLambdaAccessPointAliasStatus = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointAliasStatus')
+    ObjectLambdaAccessPointAliasValue = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointAliasValue')
     ObjectLambdaAccessPointArn = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointArn')
     ObjectLambdaAccessPointList = Shapes::ListShape.new(name: 'ObjectLambdaAccessPointList')
     ObjectLambdaAccessPointName = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointName')
@@ -498,6 +501,7 @@ module Aws::S3Control
     CreateAccessPointForObjectLambdaRequest.struct_class = Types::CreateAccessPointForObjectLambdaRequest
 
     CreateAccessPointForObjectLambdaResult.add_member(:object_lambda_access_point_arn, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointArn, location_name: "ObjectLambdaAccessPointArn"))
+    CreateAccessPointForObjectLambdaResult.add_member(:alias, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAlias, location_name: "Alias"))
     CreateAccessPointForObjectLambdaResult.struct_class = Types::CreateAccessPointForObjectLambdaResult
 
     CreateAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
@@ -691,6 +695,7 @@ module Aws::S3Control
     GetAccessPointForObjectLambdaResult.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, location_name: "Name"))
     GetAccessPointForObjectLambdaResult.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     GetAccessPointForObjectLambdaResult.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    GetAccessPointForObjectLambdaResult.add_member(:alias, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAlias, location_name: "Alias"))
     GetAccessPointForObjectLambdaResult.struct_class = Types::GetAccessPointForObjectLambdaResult
 
     GetAccessPointPolicyForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
@@ -1104,7 +1109,12 @@ module Aws::S3Control
 
     ObjectLambdaAccessPoint.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location_name: "Name"))
     ObjectLambdaAccessPoint.add_member(:object_lambda_access_point_arn, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointArn, location_name: "ObjectLambdaAccessPointArn"))
+    ObjectLambdaAccessPoint.add_member(:alias, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAlias, location_name: "Alias"))
     ObjectLambdaAccessPoint.struct_class = Types::ObjectLambdaAccessPoint
+
+    ObjectLambdaAccessPointAlias.add_member(:value, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAliasValue, location_name: "Value"))
+    ObjectLambdaAccessPointAlias.add_member(:status, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAliasStatus, location_name: "Status"))
+    ObjectLambdaAccessPointAlias.struct_class = Types::ObjectLambdaAccessPointAlias
 
     ObjectLambdaAccessPointList.member = Shapes::ShapeRef.new(shape: ObjectLambdaAccessPoint, location_name: "ObjectLambdaAccessPoint")
 

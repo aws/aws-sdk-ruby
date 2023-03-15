@@ -414,6 +414,19 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.application_component_detail.recommendation_set.transformation_tool.name #=> String, one of "App2Container", "Porting Assistant For .NET", "End of Support Migration", "Windows Web Application Migration Assistant", "Application Migration Service", "Strategy Recommendation Support", "In Place Operating System Upgrade", "Schema Conversion Tool", "Database Migration Service", "Native SQL Server Backup/Restore"
     #   resp.application_component_detail.recommendation_set.transformation_tool.tranformation_tool_installation_link #=> String
     #   resp.application_component_detail.resource_sub_type #=> String, one of "Database", "Process", "DatabaseProcess"
+    #   resp.application_component_detail.result_list #=> Array
+    #   resp.application_component_detail.result_list[0].analysis_status.runtime_analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED"
+    #   resp.application_component_detail.result_list[0].analysis_status.src_code_or_db_analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED", "ANALYSIS_PARTIAL_SUCCESS", "UNCONFIGURED", "CONFIGURED"
+    #   resp.application_component_detail.result_list[0].analysis_type #=> String, one of "SOURCE_CODE_ANALYSIS", "DATABASE_ANALYSIS", "RUNTIME_ANALYSIS", "BINARY_ANALYSIS"
+    #   resp.application_component_detail.result_list[0].antipattern_report_result_list #=> Array
+    #   resp.application_component_detail.result_list[0].antipattern_report_result_list[0].analyzer_name.binary_analyzer_name #=> String, one of "DLL_ANALYZER", "BYTECODE_ANALYZER"
+    #   resp.application_component_detail.result_list[0].antipattern_report_result_list[0].analyzer_name.run_time_analyzer_name #=> String, one of "A2C_ANALYZER", "REHOST_ANALYZER", "EMP_PA_ANALYZER", "DATABASE_ANALYZER", "SCT_ANALYZER"
+    #   resp.application_component_detail.result_list[0].antipattern_report_result_list[0].analyzer_name.source_code_analyzer_name #=> String, one of "CSHARP_ANALYZER", "JAVA_ANALYZER", "BYTECODE_ANALYZER", "PORTING_ASSISTANT"
+    #   resp.application_component_detail.result_list[0].antipattern_report_result_list[0].anti_pattern_report_s3_object.s3_bucket #=> String
+    #   resp.application_component_detail.result_list[0].antipattern_report_result_list[0].anti_pattern_report_s3_object.s3key #=> String
+    #   resp.application_component_detail.result_list[0].antipattern_report_result_list[0].antipattern_report_status #=> String, one of "FAILED", "IN_PROGRESS", "SUCCESS"
+    #   resp.application_component_detail.result_list[0].antipattern_report_result_list[0].antipattern_report_status_message #=> String
+    #   resp.application_component_detail.result_list[0].status_message #=> String
     #   resp.application_component_detail.runtime_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED"
     #   resp.application_component_detail.runtime_status_message #=> String
     #   resp.application_component_detail.source_code_repositories #=> Array
@@ -903,6 +916,19 @@ module Aws::MigrationHubStrategyRecommendations
     #   resp.application_component_infos[0].recommendation_set.transformation_tool.name #=> String, one of "App2Container", "Porting Assistant For .NET", "End of Support Migration", "Windows Web Application Migration Assistant", "Application Migration Service", "Strategy Recommendation Support", "In Place Operating System Upgrade", "Schema Conversion Tool", "Database Migration Service", "Native SQL Server Backup/Restore"
     #   resp.application_component_infos[0].recommendation_set.transformation_tool.tranformation_tool_installation_link #=> String
     #   resp.application_component_infos[0].resource_sub_type #=> String, one of "Database", "Process", "DatabaseProcess"
+    #   resp.application_component_infos[0].result_list #=> Array
+    #   resp.application_component_infos[0].result_list[0].analysis_status.runtime_analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED"
+    #   resp.application_component_infos[0].result_list[0].analysis_status.src_code_or_db_analysis_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED", "ANALYSIS_PARTIAL_SUCCESS", "UNCONFIGURED", "CONFIGURED"
+    #   resp.application_component_infos[0].result_list[0].analysis_type #=> String, one of "SOURCE_CODE_ANALYSIS", "DATABASE_ANALYSIS", "RUNTIME_ANALYSIS", "BINARY_ANALYSIS"
+    #   resp.application_component_infos[0].result_list[0].antipattern_report_result_list #=> Array
+    #   resp.application_component_infos[0].result_list[0].antipattern_report_result_list[0].analyzer_name.binary_analyzer_name #=> String, one of "DLL_ANALYZER", "BYTECODE_ANALYZER"
+    #   resp.application_component_infos[0].result_list[0].antipattern_report_result_list[0].analyzer_name.run_time_analyzer_name #=> String, one of "A2C_ANALYZER", "REHOST_ANALYZER", "EMP_PA_ANALYZER", "DATABASE_ANALYZER", "SCT_ANALYZER"
+    #   resp.application_component_infos[0].result_list[0].antipattern_report_result_list[0].analyzer_name.source_code_analyzer_name #=> String, one of "CSHARP_ANALYZER", "JAVA_ANALYZER", "BYTECODE_ANALYZER", "PORTING_ASSISTANT"
+    #   resp.application_component_infos[0].result_list[0].antipattern_report_result_list[0].anti_pattern_report_s3_object.s3_bucket #=> String
+    #   resp.application_component_infos[0].result_list[0].antipattern_report_result_list[0].anti_pattern_report_s3_object.s3key #=> String
+    #   resp.application_component_infos[0].result_list[0].antipattern_report_result_list[0].antipattern_report_status #=> String, one of "FAILED", "IN_PROGRESS", "SUCCESS"
+    #   resp.application_component_infos[0].result_list[0].antipattern_report_result_list[0].antipattern_report_status_message #=> String
+    #   resp.application_component_infos[0].result_list[0].status_message #=> String
     #   resp.application_component_infos[0].runtime_status #=> String, one of "ANALYSIS_TO_BE_SCHEDULED", "ANALYSIS_STARTED", "ANALYSIS_SUCCESS", "ANALYSIS_FAILED"
     #   resp.application_component_infos[0].runtime_status_message #=> String
     #   resp.application_component_infos[0].source_code_repositories #=> Array
@@ -1471,7 +1497,7 @@ module Aws::MigrationHubStrategyRecommendations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubstrategyrecommendations'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

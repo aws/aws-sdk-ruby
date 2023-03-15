@@ -10,9 +10,8 @@
 module Aws::MigrationHubStrategyRecommendations
   module Types
 
-    # The AWS user account does not have permission to perform the action.
-    # Check the AWS Identity and Access Management (IAM) policy associated
-    # with this account.
+    # The user does not have permission to perform the action. Check the AWS
+    # Identity and Access Management (IAM) policy associated with this user.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -21,6 +20,95 @@ module Aws::MigrationHubStrategyRecommendations
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A combination of existing analysis statuses.
+    #
+    # @note AnalysisStatusUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnalysisStatusUnion corresponding to the set member.
+    #
+    # @!attribute [rw] runtime_analysis_status
+    #   The status of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] src_code_or_db_analysis_status
+    #   The status of the source code or database analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/AnalysisStatusUnion AWS API Documentation
+    #
+    class AnalysisStatusUnion < Struct.new(
+      :runtime_analysis_status,
+      :src_code_or_db_analysis_status,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RuntimeAnalysisStatus < AnalysisStatusUnion; end
+      class SrcCodeOrDbAnalysisStatus < AnalysisStatusUnion; end
+      class Unknown < AnalysisStatusUnion; end
+    end
+
+    # The combination of the existing analyzers.
+    #
+    # @note AnalyzerNameUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnalyzerNameUnion corresponding to the set member.
+    #
+    # @!attribute [rw] binary_analyzer_name
+    #   The binary analyzer names.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_time_analyzer_name
+    #   The assessment analyzer names.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_code_analyzer_name
+    #   The source code analyzer names.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/AnalyzerNameUnion AWS API Documentation
+    #
+    class AnalyzerNameUnion < Struct.new(
+      :binary_analyzer_name,
+      :run_time_analyzer_name,
+      :source_code_analyzer_name,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class BinaryAnalyzerName < AnalyzerNameUnion; end
+      class RunTimeAnalyzerName < AnalyzerNameUnion; end
+      class SourceCodeAnalyzerName < AnalyzerNameUnion; end
+      class Unknown < AnalyzerNameUnion; end
+    end
+
+    # The anti-pattern report result.
+    #
+    # @!attribute [rw] analyzer_name
+    #   The analyzer name.
+    #   @return [Types::AnalyzerNameUnion]
+    #
+    # @!attribute [rw] anti_pattern_report_s3_object
+    #   Contains the S3 bucket name and the Amazon S3 key name.
+    #   @return [Types::S3Object]
+    #
+    # @!attribute [rw] antipattern_report_status
+    #   The status of the anti-pattern report generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] antipattern_report_status_message
+    #   The status message for the anti-pattern.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/AntipatternReportResult AWS API Documentation
+    #
+    class AntipatternReportResult < Struct.new(
+      :analyzer_name,
+      :anti_pattern_report_s3_object,
+      :antipattern_report_status,
+      :antipattern_report_status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -137,6 +225,10 @@ module Aws::MigrationHubStrategyRecommendations
     #   The application component subtype.
     #   @return [String]
     #
+    # @!attribute [rw] result_list
+    #   A list of the analysis results.
+    #   @return [Array<Types::Result>]
+    #
     # @!attribute [rw] runtime_status
     #   The status of the application unit.
     #   @return [String]
@@ -176,6 +268,7 @@ module Aws::MigrationHubStrategyRecommendations
       :os_version,
       :recommendation_set,
       :resource_sub_type,
+      :result_list,
       :runtime_status,
       :runtime_status_message,
       :source_code_repositories,
@@ -1640,6 +1733,35 @@ module Aws::MigrationHubStrategyRecommendations
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error in server analysis.
+    #
+    # @!attribute [rw] analysis_status
+    #   The error in server analysis.
+    #   @return [Types::AnalysisStatusUnion]
+    #
+    # @!attribute [rw] analysis_type
+    #   The error in server analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] antipattern_report_result_list
+    #   The error in server analysis.
+    #   @return [Array<Types::AntipatternReportResult>]
+    #
+    # @!attribute [rw] status_message
+    #   The error in server analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/Result AWS API Documentation
+    #
+    class Result < Struct.new(
+      :analysis_status,
+      :analysis_type,
+      :antipattern_report_result_list,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end

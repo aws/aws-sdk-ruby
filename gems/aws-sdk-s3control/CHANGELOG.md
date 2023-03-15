@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-03-15)
+------------------
+
+* Feature - Added support for S3 Object Lambda aliases.
+
 1.61.0 (2023-03-13)
 ------------------
 

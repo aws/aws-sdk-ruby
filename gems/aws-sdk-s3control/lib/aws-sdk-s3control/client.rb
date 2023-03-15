@@ -532,6 +532,7 @@ module Aws::S3Control
     # @return [Types::CreateAccessPointForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessPointForObjectLambdaResult#object_lambda_access_point_arn #object_lambda_access_point_arn} => String
+    #   * {Types::CreateAccessPointForObjectLambdaResult#alias #alias} => Types::ObjectLambdaAccessPointAlias
     #
     # @example Request syntax with placeholder values
     #
@@ -559,6 +560,8 @@ module Aws::S3Control
     # @example Response structure
     #
     #   resp.object_lambda_access_point_arn #=> String
+    #   resp.alias.value #=> String
+    #   resp.alias.status #=> String, one of "PROVISIONING", "READY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambda AWS API Documentation
     #
@@ -1562,8 +1565,8 @@ module Aws::S3Control
     # point ARN, see the [Examples][4] section.
     #
     # For information about S3 replication on Outposts configuration, see
-    # [Replicating objects for Amazon Web Services Outposts][5] in the
-    # *Amazon S3 User Guide*.
+    # [Replicating objects for S3 on Outposts][5] in the *Amazon S3 User
+    # Guide*.
     #
     # The following operations are related to `DeleteBucketReplication`:
     #
@@ -2342,6 +2345,7 @@ module Aws::S3Control
     #   * {Types::GetAccessPointForObjectLambdaResult#name #name} => String
     #   * {Types::GetAccessPointForObjectLambdaResult#public_access_block_configuration #public_access_block_configuration} => Types::PublicAccessBlockConfiguration
     #   * {Types::GetAccessPointForObjectLambdaResult#creation_date #creation_date} => Time
+    #   * {Types::GetAccessPointForObjectLambdaResult#alias #alias} => Types::ObjectLambdaAccessPointAlias
     #
     # @example Request syntax with placeholder values
     #
@@ -2358,6 +2362,8 @@ module Aws::S3Control
     #   resp.public_access_block_configuration.block_public_policy #=> Boolean
     #   resp.public_access_block_configuration.restrict_public_buckets #=> Boolean
     #   resp.creation_date #=> Time
+    #   resp.alias.value #=> String
+    #   resp.alias.status #=> String, one of "PROVISIONING", "READY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambda AWS API Documentation
     #
@@ -2860,8 +2866,8 @@ module Aws::S3Control
     # Returns the replication configuration of an S3 on Outposts bucket. For
     # more information about S3 on Outposts, see [Using Amazon S3 on
     # Outposts][2] in the *Amazon S3 User Guide*. For information about S3
-    # replication on Outposts configuration, see [Replicating objects for
-    # Amazon Web Services Outposts][3] in the *Amazon S3 User Guide*.
+    # replication on Outposts configuration, see [Replicating objects for S3
+    # on Outposts][3] in the *Amazon S3 User Guide*.
     #
     # <note markdown="1"> It can take a while to propagate `PUT` or `DELETE` requests for a
     # replication configuration to all S3 on Outposts systems. Therefore,
@@ -3791,6 +3797,8 @@ module Aws::S3Control
     #   resp.object_lambda_access_point_list #=> Array
     #   resp.object_lambda_access_point_list[0].name #=> String
     #   resp.object_lambda_access_point_list[0].object_lambda_access_point_arn #=> String
+    #   resp.object_lambda_access_point_list[0].alias.value #=> String
+    #   resp.object_lambda_access_point_list[0].alias.status #=> String, one of "PROVISIONING", "READY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForObjectLambda AWS API Documentation
@@ -4488,8 +4496,8 @@ module Aws::S3Control
     #
     # Creates a replication configuration or replaces an existing one. For
     # information about S3 replication on Outposts configuration, see
-    # [Replicating objects for Amazon Web Services Outposts][2] in the
-    # *Amazon S3 User Guide*.
+    # [Replicating objects for S3 on Outposts][2] in the *Amazon S3 User
+    # Guide*.
     #
     # <note markdown="1"> It can take a while to propagate `PUT` or `DELETE` requests for a
     # replication configuration to all S3 on Outposts systems. Therefore,
@@ -4550,7 +4558,9 @@ module Aws::S3Control
     # buckets][6].
     #
     # <note markdown="1"> To perform this operation, the user or role must also have the
-    # [iam:PassRole][7] permission.
+    # `iam:CreateRole` and `iam:PassRole` permissions. For more information,
+    # see [Granting a user permissions to pass a role to an Amazon Web
+    # Services service][7].
     #
     #  </note>
     #
@@ -4571,13 +4581,13 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/AmazonS3/latest/userguide/S3OutpostsReplication.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsManagingVersioning.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-eventbridge.html#outposts-replication-failure-codes
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsBucketPolicy.html
     # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html#API_control_PutBucketReplication_Examples
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html
     #
@@ -4853,11 +4863,11 @@ module Aws::S3Control
     # and managing a lifecycle configuration for your S3 on Outposts
     # bucket][3] in the *Amazon S3 User Guide*.
     #
-    # If you have an object expiration lifecycle policy in your
+    # If you have an object expiration lifecycle configuration in your
     # non-versioned bucket and you want to maintain the same permanent
     # delete behavior when you enable versioning, you must add a noncurrent
-    # expiration policy. The noncurrent expiration lifecycle policy will
-    # manage the deletions of the noncurrent object versions in the
+    # expiration policy. The noncurrent expiration lifecycle configuration
+    # will manage the deletes of the noncurrent object versions in the
     # version-enabled bucket. For more information, see [Versioning][4] in
     # the *Amazon S3 User Guide*.
     #
@@ -5538,7 +5548,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

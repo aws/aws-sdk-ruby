@@ -502,10 +502,15 @@ module Aws::S3Control
     #   Specifies the ARN for the Object Lambda Access Point.
     #   @return [String]
     #
+    # @!attribute [rw] alias
+    #   The alias of the Object Lambda Access Point.
+    #   @return [Types::ObjectLambdaAccessPointAlias]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambdaResult AWS API Documentation
     #
     class CreateAccessPointForObjectLambdaResult < Struct.new(
-      :object_lambda_access_point_arn)
+      :object_lambda_access_point_arn,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1685,12 +1690,17 @@ module Aws::S3Control
     #   created.
     #   @return [Time]
     #
+    # @!attribute [rw] alias
+    #   The alias of the Object Lambda Access Point.
+    #   @return [Types::ObjectLambdaAccessPointAlias]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambdaResult AWS API Documentation
     #
     class GetAccessPointForObjectLambdaResult < Struct.new(
       :name,
       :public_access_block_configuration,
-      :creation_date)
+      :creation_date,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3162,8 +3172,8 @@ module Aws::S3Control
     #   Specifies the days since the initiation of an incomplete multipart
     #   upload that Amazon S3 waits before permanently removing all parts of
     #   the upload. For more information, see [ Aborting Incomplete
-    #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    #   S3 User Guide*.
+    #   Multipart Uploads Using a Bucket Lifecycle Configuration][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -3898,11 +3908,45 @@ module Aws::S3Control
     #   Specifies the ARN for the Object Lambda Access Point.
     #   @return [String]
     #
+    # @!attribute [rw] alias
+    #   The alias of the Object Lambda Access Point.
+    #   @return [Types::ObjectLambdaAccessPointAlias]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaAccessPoint AWS API Documentation
     #
     class ObjectLambdaAccessPoint < Struct.new(
       :name,
-      :object_lambda_access_point_arn)
+      :object_lambda_access_point_arn,
+      :alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The alias of an Object Lambda Access Point. For more information, see
+    # [How to use a bucket-style alias for your S3 bucket Object Lambda
+    # Access Point][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-use.html#ol-access-points-alias
+    #
+    # @!attribute [rw] value
+    #   The alias value of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Object Lambda Access Point alias. If the status is
+    #   `PROVISIONING`, the Object Lambda Access Point is provisioning the
+    #   alias and the alias is not ready for use yet. If the status is
+    #   `READY`, the Object Lambda Access Point alias is successfully
+    #   provisioned and ready for use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaAccessPointAlias AWS API Documentation
+    #
+    class ObjectLambdaAccessPointAlias < Struct.new(
+      :value,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4727,7 +4771,7 @@ module Aws::S3Control
     #   the highest priority. The higher the number, the higher the
     #   priority.
     #
-    #   For more information, see [Creating replication rules between
+    #   For more information, see [Creating replication rules on
     #   Outposts][1] in the *Amazon S3 User Guide*.
     #
     #

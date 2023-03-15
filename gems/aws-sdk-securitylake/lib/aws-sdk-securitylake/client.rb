@@ -701,6 +701,8 @@ module Aws::SecurityLake
     #
     # @return [Types::CreateSubscriberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateSubscriberResponse#resource_share_arn #resource_share_arn} => String
+    #   * {Types::CreateSubscriberResponse#resource_share_name #resource_share_name} => String
     #   * {Types::CreateSubscriberResponse#role_arn #role_arn} => String
     #   * {Types::CreateSubscriberResponse#s3_bucket_arn #s3_bucket_arn} => String
     #   * {Types::CreateSubscriberResponse#sns_arn #sns_arn} => String
@@ -724,6 +726,8 @@ module Aws::SecurityLake
     #
     # @example Response structure
     #
+    #   resp.resource_share_arn #=> String
+    #   resp.resource_share_name #=> String
     #   resp.role_arn #=> String
     #   resp.s3_bucket_arn #=> String
     #   resp.sns_arn #=> String
@@ -739,7 +743,8 @@ module Aws::SecurityLake
     end
 
     # Notifies the subscriber when new data is written to the data lake for
-    # the sources that the subscriber consumes in Security Lake.
+    # the sources that the subscriber consumes in Security Lake. You can
+    # create only one subscriber notification per subscriber.
     #
     # @option params [Boolean] :create_sqs
     #   Create an Amazon Simple Queue Service queue.
@@ -755,14 +760,21 @@ module Aws::SecurityLake
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the EventBridge API destinations IAM
-    #   role that you created.
+    #   role that you created. For more information about ARNs and how to use
+    #   them in policies, see [Managing data access][1] and [Amazon Web
+    #   Services Managed Policies][2] in the Amazon Security Lake User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html
+    #   [2]: https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html
     #
     # @option params [String] :subscription_endpoint
     #   The subscription endpoint in Security Lake. If you prefer notification
     #   with an HTTPs endpoint, populate this field.
     #
     # @option params [required, String] :subscription_id
-    #   The subscription ID for the notification subscription/
+    #   The subscription ID for the notification subscription.
     #
     # @return [Types::CreateSubscriptionNotificationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -927,27 +939,16 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Automatically deletes Amazon Security Lake to stop collecting security
-    # data. When you delete Amazon Security Lake from your account, Security
-    # Lake is disabled in all Regions. Also, this API automatically takes
-    # steps to remove the account from Security Lake .
-    #
-    # This operation disables security data collection from sources, deletes
-    # data stored, and stops making data accessible to subscribers. Security
-    # Lake also deletes all the existing settings and resources that it
-    # stores or maintains for your Amazon Web Services account in the
-    # current Region, including security log and event data. The
-    # `DeleteDatalake` operation does not delete the Amazon S3 bucket, which
-    # is owned by your Amazon Web Services account. For more information,
-    # see the [Amazon Security Lake User Guide][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html
+    # `DeleteDatalakeAutoEnable` removes automatic enablement of
+    # configuration settings for new member accounts (but keeps settings for
+    # the delegated administrator) from Amazon Security Lake. You must run
+    # this API using credentials of the delegated administrator. When you
+    # run this API, new member accounts that are added after the
+    # organization enables Security Lake won't contribute to the data lake.
     #
     # @option params [required, Array<Types::AutoEnableNewRegionConfiguration>] :remove_from_configuration_for_new_accounts
-    #   Delete Amazon Security Lake with the specified configuration settings
-    #   to stop ingesting security data for new accounts in Security Lake.
+    #   Remove automatic enablement of configuration settings for new member
+    #   accounts in Security Lake.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1087,6 +1088,10 @@ module Aws::SecurityLake
     #   resp.configurations["Region"].status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
     #   resp.configurations["Region"].tags_map #=> Hash
     #   resp.configurations["Region"].tags_map["String"] #=> String
+    #   resp.configurations["Region"].update_status.last_update_failure.code #=> String
+    #   resp.configurations["Region"].update_status.last_update_failure.reason #=> String
+    #   resp.configurations["Region"].update_status.last_update_request_id #=> String
+    #   resp.configurations["Region"].update_status.last_update_status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalake AWS API Documentation
     #
@@ -1247,6 +1252,8 @@ module Aws::SecurityLake
     #   resp.subscriber.account_id #=> String
     #   resp.subscriber.created_at #=> Time
     #   resp.subscriber.external_id #=> String
+    #   resp.subscriber.resource_share_arn #=> String
+    #   resp.subscriber.resource_share_name #=> String
     #   resp.subscriber.role_arn #=> String
     #   resp.subscriber.s3_bucket_arn #=> String
     #   resp.subscriber.sns_arn #=> String
@@ -1429,6 +1436,8 @@ module Aws::SecurityLake
     #   resp.subscribers[0].account_id #=> String
     #   resp.subscribers[0].created_at #=> Time
     #   resp.subscribers[0].external_id #=> String
+    #   resp.subscribers[0].resource_share_arn #=> String
+    #   resp.subscribers[0].resource_share_name #=> String
     #   resp.subscribers[0].role_arn #=> String
     #   resp.subscribers[0].s3_bucket_arn #=> String
     #   resp.subscribers[0].sns_arn #=> String
@@ -1596,6 +1605,8 @@ module Aws::SecurityLake
     #   resp.subscriber.account_id #=> String
     #   resp.subscriber.created_at #=> Time
     #   resp.subscriber.external_id #=> String
+    #   resp.subscriber.resource_share_arn #=> String
+    #   resp.subscriber.resource_share_name #=> String
     #   resp.subscriber.role_arn #=> String
     #   resp.subscriber.s3_bucket_arn #=> String
     #   resp.subscriber.sns_arn #=> String
@@ -1619,8 +1630,9 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Creates a new subscription notification or adds the existing
-    # subscription notification setting for the specified subscription ID.
+    # Updates an existing notification method for the subscription (SQS or
+    # HTTPs endpoint) or switches the notification subscription endpoint for
+    # a subscriber.
     #
     # @option params [Boolean] :create_sqs
     #   Create a new subscription notification for the specified subscription
@@ -1637,6 +1649,14 @@ module Aws::SecurityLake
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) specifying the role of the subscriber.
+    #   For more information about ARNs and how to use them in policies, see,
+    #   see the [Managing data access][1] and [Amazon Web Services Managed
+    #   Policies][2]in the Amazon Security Lake User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html
+    #   [2]: https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html
     #
     # @option params [String] :subscription_endpoint
     #   The subscription endpoint in Security Lake.
@@ -1687,7 +1707,7 @@ module Aws::SecurityLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
