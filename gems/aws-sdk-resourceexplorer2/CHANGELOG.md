@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2023-03-16)
+------------------
+
+* Feature - Documentation updates for APIs.
+
 1.3.0 (2023-01-18)
 ------------------
 

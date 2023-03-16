@@ -90,12 +90,12 @@ module Aws::SageMakerRuntime
     #
     # @!attribute [rw] request_ttl_seconds
     #   Maximum age in seconds a request can be in the queue before it is
-    #   marked as expired.
+    #   marked as expired. The default is 6 hours, or 21,600 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] invocation_timeout_seconds
     #   Maximum amount of time in seconds a request can be processed before
-    #   it is marked as expired.
+    #   it is marked as expired. The default is 15 minutes, or 900 seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointAsyncInput AWS API Documentation

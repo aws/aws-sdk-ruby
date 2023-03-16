@@ -147,11 +147,16 @@ module Aws::GuardDuty
     #   Describes the data source enabled for the GuardDuty member account.
     #   @return [Types::DataSourcesFreeTrial]
     #
+    # @!attribute [rw] features
+    #   A list of features enabled for the GuardDuty account.
+    #   @return [Array<Types::FreeTrialFeatureConfigurationResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountFreeTrialInfo AWS API Documentation
     #
     class AccountFreeTrialInfo < Struct.new(
       :account_id,
-      :data_sources)
+      :data_sources,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -201,6 +206,11 @@ module Aws::GuardDuty
     #   finding.
     #   @return [Types::KubernetesApiCallAction]
     #
+    # @!attribute [rw] rds_login_attempt_action
+    #   Information about `RDS_LOGIN_ATTEMPT` action described in this
+    #   finding.
+    #   @return [Types::RdsLoginAttemptAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action AWS API Documentation
     #
     class Action < Struct.new(
@@ -209,7 +219,8 @@ module Aws::GuardDuty
       :dns_request_action,
       :network_connection_action,
       :port_probe_action,
-      :kubernetes_api_call_action)
+      :kubernetes_api_call_action,
+      :rds_login_attempt_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -662,6 +673,10 @@ module Aws::GuardDuty
     #   The tags to be added to a new detector resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] features
+    #   A list of features that will be configured for the detector.
+    #   @return [Array<Types::DetectorFeatureConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest AWS API Documentation
     #
     class CreateDetectorRequest < Struct.new(
@@ -669,7 +684,8 @@ module Aws::GuardDuty
       :client_token,
       :finding_publishing_frequency,
       :data_sources,
-      :tags)
+      :tags,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -705,8 +721,9 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] description
     #   The description of the filter. Valid characters include alphanumeric
-    #   characters, and special characters such as `-`, `.`, `:`, `\{ \}`,
-    #   `[ ]`, `( )`, `/`, `\t`, `\n`, `\x0B`, `\f`, `\r`, `_`, and
+    #   characters, and special characters such as hyphen, period, colon,
+    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
+    #   horizontal tab, vertical tab, newline, form feed, return, and
     #   whitespace.
     #   @return [String]
     #
@@ -1520,10 +1537,25 @@ module Aws::GuardDuty
     #   administrator from.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   You can use this parameter to indicate the maximum number of items
+    #   that you want in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill `nextToken` in the request with
+    #   the value of `NextToken` from the previous response to continue
+    #   listing data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationRequest AWS API Documentation
     #
     class DescribeOrganizationConfigurationRequest < Struct.new(
-      :detector_id)
+      :detector_id,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1544,12 +1576,23 @@ module Aws::GuardDuty
     #   accounts.
     #   @return [Types::OrganizationDataSourceConfigurationsResult]
     #
+    # @!attribute [rw] features
+    #   A list of features that are configured for this organization.
+    #   @return [Array<Types::OrganizationFeatureConfigurationResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
     #
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
       :member_account_limit_reached,
-      :data_sources)
+      :data_sources,
+      :features,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1653,6 +1696,51 @@ module Aws::GuardDuty
     class DestinationProperties < Struct.new(
       :destination_arn,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a GuardDuty feature.
+    #
+    # @!attribute [rw] name
+    #   The name of the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectorFeatureConfiguration AWS API Documentation
+    #
+    class DetectorFeatureConfiguration < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a GuardDuty feature.
+    #
+    # @!attribute [rw] name
+    #   Indicates the name of the feature that can be enabled for the
+    #   detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the status of the feature that is enabled for the
+    #   detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the feature object was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectorFeatureConfigurationResult AWS API Documentation
+    #
+    class DetectorFeatureConfigurationResult < Struct.new(
+      :name,
+      :status,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2233,6 +2321,25 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the free trial period for a feature.
+    #
+    # @!attribute [rw] name
+    #   The name of the feature for which the free trial is configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] free_trial_days_remaining
+    #   The number of the remaining free trial days for the feature.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FreeTrialFeatureConfigurationResult AWS API Documentation
+    #
+    class FreeTrialFeatureConfigurationResult < Struct.new(
+      :name,
+      :free_trial_days_remaining)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the location of the remote IP address.
     #
     # @!attribute [rw] lat
@@ -2316,6 +2423,10 @@ module Aws::GuardDuty
     #   The tags of the detector resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] features
+    #   Describes the features that have been enabled for the detector.
+    #   @return [Array<Types::DetectorFeatureConfigurationResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorResponse AWS API Documentation
     #
     class GetDetectorResponse < Struct.new(
@@ -2325,7 +2436,8 @@ module Aws::GuardDuty
       :status,
       :updated_at,
       :data_sources,
-      :tags)
+      :tags,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3831,6 +3943,37 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about the login attempts.
+    #
+    # @!attribute [rw] user
+    #   Indicates the user name which attempted to log in.
+    #   @return [String]
+    #
+    # @!attribute [rw] application
+    #   Indicates the application name used to attempt log in.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_login_attempts
+    #   Represents the sum of failed (unsuccessful) login attempts made to
+    #   establish a connection to the database instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] successful_login_attempts
+    #   Represents the sum of successful connections (a correct combination
+    #   of login attributes) made to the database instance by the actor.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LoginAttribute AWS API Documentation
+    #
+    class LoginAttribute < Struct.new(
+      :user,
+      :application,
+      :failed_login_attempts,
+      :successful_login_attempts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes whether Malware Protection will be enabled as a data source.
     #
     # @!attribute [rw] scan_ec2_instance_with_findings
@@ -3975,11 +4118,61 @@ module Aws::GuardDuty
     #   Contains information on the status of data sources for the account.
     #   @return [Types::DataSourceConfigurationsResult]
     #
+    # @!attribute [rw] features
+    #   Contains information about the status of the features for the member
+    #   account.
+    #   @return [Array<Types::MemberFeaturesConfigurationResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MemberDataSourceConfiguration AWS API Documentation
     #
     class MemberDataSourceConfiguration < Struct.new(
       :account_id,
-      :data_sources)
+      :data_sources,
+      :features)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the features for the member account.
+    #
+    # @!attribute [rw] name
+    #   The name of the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MemberFeaturesConfiguration AWS API Documentation
+    #
+    class MemberFeaturesConfiguration < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the features for the member account.
+    #
+    # @!attribute [rw] name
+    #   Indicates the name of the feature that is enabled for the detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the status of the feature that is enabled for the
+    #   detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the feature object was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MemberFeaturesConfigurationResult AWS API Documentation
+    #
+    class MemberFeaturesConfigurationResult < Struct.new(
+      :name,
+      :status,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4202,6 +4395,54 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationEbsVolumesResult AWS API Documentation
     #
     class OrganizationEbsVolumesResult < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of features which will be configured for the organization.
+    #
+    # @!attribute [rw] name
+    #   The name of the feature that will be configured for the
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_enable
+    #   The status of the feature that will be configured for the
+    #   organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationFeatureConfiguration AWS API Documentation
+    #
+    class OrganizationFeatureConfiguration < Struct.new(
+      :name,
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of features which will be configured for the organization.
+    #
+    # @!attribute [rw] name
+    #   The name of the feature that is configured for the member accounts
+    #   within the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_enable
+    #   Describes how The status of the feature that are configured for the
+    #   member accounts within the organization.
+    #
+    #   If you set `AutoEnable` to `NEW`, a feature will be configured for
+    #   only the new accounts when they join the organization.
+    #
+    #   If you set `AutoEnable` to `NONE`, no feature will be configured for
+    #   the accounts when they join the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationFeatureConfigurationResult AWS API Documentation
+    #
+    class OrganizationFeatureConfigurationResult < Struct.new(
+      :name,
       :auto_enable)
       SENSITIVE = []
       include Aws::Structure
@@ -4510,6 +4751,107 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the resource type `RDSDBInstance` involved
+    # in a GuardDuty finding.
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The identifier associated to the database instance that was involved
+    #   in the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The database engine of the database instance involved in the
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the database engine that was involved in the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The identifier of the database cluster that contains the database
+    #   instance ID involved in the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_arn
+    #   The Amazon Resource Name (ARN) that identifies the database instance
+    #   involved in the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Instance tag key-value pairs associated with the database instance
+    #   ID.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RdsDbInstanceDetails AWS API Documentation
+    #
+    class RdsDbInstanceDetails < Struct.new(
+      :db_instance_identifier,
+      :engine,
+      :engine_version,
+      :db_cluster_identifier,
+      :db_instance_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the user and authentication details for a
+    # database instance involved in the finding.
+    #
+    # @!attribute [rw] user
+    #   The user name used in the anomalous login attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] application
+    #   The application name used in the anomalous login attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database instance involved in the anomalous login
+    #   attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl
+    #   The version of the Secure Socket Layer (SSL) used for the network.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_method
+    #   The authentication method used by the user involved in the finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RdsDbUserDetails AWS API Documentation
+    #
+    class RdsDbUserDetails < Struct.new(
+      :user,
+      :application,
+      :database,
+      :ssl,
+      :auth_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates that a login attempt was made to the potentially compromised
+    # database from a remote IP address.
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Contains information about the remote IP address of the connection.
+    #   @return [Types::RemoteIpDetails]
+    #
+    # @!attribute [rw] login_attributes
+    #   Indicates the login attributes used in the login attempt.
+    #   @return [Array<Types::LoginAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RdsLoginAttemptAction AWS API Documentation
+    #
+    class RdsLoginAttemptAction < Struct.new(
+      :remote_ip_details,
+      :login_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the remote Amazon Web Services account that
     # made the API call.
     #
@@ -4628,6 +4970,16 @@ module Aws::GuardDuty
     #   Details of a container.
     #   @return [Types::Container]
     #
+    # @!attribute [rw] rds_db_instance_details
+    #   Contains information about the database instance to which an
+    #   anomalous login attempt was made.
+    #   @return [Types::RdsDbInstanceDetails]
+    #
+    # @!attribute [rw] rds_db_user_details
+    #   Contains information about the user details through which anomalous
+    #   login attempt was made.
+    #   @return [Types::RdsDbUserDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -4639,7 +4991,9 @@ module Aws::GuardDuty
       :resource_type,
       :ebs_volume_details,
       :ecs_cluster_details,
-      :container_details)
+      :container_details,
+      :rds_db_instance_details,
+      :rds_db_user_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5497,13 +5851,18 @@ module Aws::GuardDuty
     #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #   @return [Types::DataSourceConfigurations]
     #
+    # @!attribute [rw] features
+    #   Provides the features that will be updated for the detector.
+    #   @return [Array<Types::DetectorFeatureConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest AWS API Documentation
     #
     class UpdateDetectorRequest < Struct.new(
       :detector_id,
       :enable,
       :finding_publishing_frequency,
-      :data_sources)
+      :data_sources,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5681,12 +6040,18 @@ module Aws::GuardDuty
     #   Describes which data sources will be updated.
     #   @return [Types::DataSourceConfigurations]
     #
+    # @!attribute [rw] features
+    #   A list of features that will be updated for the specified member
+    #   accounts.
+    #   @return [Array<Types::MemberFeaturesConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectorsRequest AWS API Documentation
     #
     class UpdateMemberDetectorsRequest < Struct.new(
       :detector_id,
       :account_ids,
-      :data_sources)
+      :data_sources,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5717,12 +6082,17 @@ module Aws::GuardDuty
     #   Describes which data sources will be updated.
     #   @return [Types::OrganizationDataSourceConfigurations]
     #
+    # @!attribute [rw] features
+    #   A list of features that will be configured for the organization.
+    #   @return [Array<Types::OrganizationFeatureConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :detector_id,
       :auto_enable,
-      :data_sources)
+      :data_sources,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5834,12 +6204,17 @@ module Aws::GuardDuty
     #   resource names.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] features
+    #   The features to aggregate usage statistics from.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageCriteria AWS API Documentation
     #
     class UsageCriteria < Struct.new(
       :account_ids,
       :data_sources,
-      :resources)
+      :resources,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5858,6 +6233,27 @@ module Aws::GuardDuty
     #
     class UsageDataSourceResult < Struct.new(
       :data_source,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the result of the total usage based on the
+    # feature.
+    #
+    # @!attribute [rw] feature
+    #   The feature that generated the usage cost.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Contains the total usage with the corresponding currency unit for
+    #   that value.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageFeatureResult AWS API Documentation
+    #
+    class UsageFeatureResult < Struct.new(
+      :feature,
       :total)
       SENSITIVE = []
       include Aws::Structure
@@ -5903,13 +6299,18 @@ module Aws::GuardDuty
     #   usage, in order from most to least expensive.
     #   @return [Array<Types::UsageResourceResult>]
     #
+    # @!attribute [rw] sum_by_feature
+    #   The usage statistic sum organized by feature.
+    #   @return [Array<Types::UsageFeatureResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageStatistics AWS API Documentation
     #
     class UsageStatistics < Struct.new(
       :sum_by_account,
       :sum_by_data_source,
       :sum_by_resource,
-      :top_resources)
+      :top_resources,
+      :sum_by_feature)
       SENSITIVE = []
       include Aws::Structure
     end

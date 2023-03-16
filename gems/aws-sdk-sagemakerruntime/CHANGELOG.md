@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-03-16)
+------------------
+
+* Feature - Documentation updates for SageMaker Runtime
+
 1.46.0 (2023-01-27)
 ------------------
 

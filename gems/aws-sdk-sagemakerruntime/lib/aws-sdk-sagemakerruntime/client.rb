@@ -601,11 +601,11 @@ module Aws::SageMakerRuntime
     #
     # @option params [Integer] :request_ttl_seconds
     #   Maximum age in seconds a request can be in the queue before it is
-    #   marked as expired.
+    #   marked as expired. The default is 6 hours, or 21,600 seconds.
     #
     # @option params [Integer] :invocation_timeout_seconds
     #   Maximum amount of time in seconds a request can be processed before it
-    #   is marked as expired.
+    #   is marked as expired. The default is 15 minutes, or 900 seconds.
     #
     # @return [Types::InvokeEndpointAsyncOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -652,7 +652,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
