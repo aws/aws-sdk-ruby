@@ -43,7 +43,9 @@ module Seahorse
           @h2_client = HTTP2::Client.new(
             settings_max_concurrent_streams: max_concurrent_streams
           )
-          @logger = options[:logger] || Logger.new($stdout) if @http_wire_trace
+          @logger = if @http_wire_trace
+            options[:logger] || Logger.new($stdout)
+          end
           @chunk_size = options[:read_chunk_size] || CHUNKSIZE
           @errors = []
           @status = :ready
@@ -180,11 +182,13 @@ module Seahorse
               @socket.flush
             end
           end
-          @h2_client.on(:frame_sent) do |frame|
-            debug_output("frame: #{frame.inspect}", :send)
-          end
-          @h2_client.on(:frame_received) do |frame|
-            debug_output("frame: #{frame.inspect}", :receive)
+          if @http_wire_trace
+            @h2_client.on(:frame_sent) do |frame|
+              debug_output("frame: #{frame.inspect}", :send)
+            end
+            @h2_client.on(:frame_received) do |frame|
+              debug_output("frame: #{frame.inspect}", :receive)
+            end
           end
         end
 

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Reduce memory usage in H2::Connection when `http_wire_log` is not set.
+
 3.170.0 (2023-01-25)
 ------------------
 
