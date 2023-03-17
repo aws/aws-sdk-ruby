@@ -905,6 +905,15 @@ module Aws::BillingConductor
     #   The end billing period of the custom line item version.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   A list of custom line item Amazon Resource Names (ARNs) to retrieve
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The inclusive start time.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemVersionListElement AWS API Documentation
     #
     class CustomLineItemVersionListElement < Struct.new(
@@ -918,7 +927,9 @@ module Aws::BillingConductor
       :last_modified_time,
       :association_size,
       :start_billing_period,
-      :end_billing_period)
+      :end_billing_period,
+      :arn,
+      :start_time)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -1168,11 +1179,17 @@ module Aws::BillingConductor
     #   The Amazon Web Services account ID to filter on.
     #   @return [String]
     #
+    # @!attribute [rw] account_ids
+    #   The list of Amazon Web Services IDs to retrieve their associated
+    #   billing group for a given time range.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListAccountAssociationsFilter AWS API Documentation
     #
     class ListAccountAssociationsFilter < Struct.new(
       :association,
-      :account_id)
+      :account_id,
+      :account_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1302,11 +1319,17 @@ module Aws::BillingConductor
     #   information.
     #   @return [String]
     #
+    # @!attribute [rw] statuses
+    #   A list of billing groups to retrieve their current status for a
+    #   specific time range
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupsFilter AWS API Documentation
     #
     class ListBillingGroupsFilter < Struct.new(
       :arns,
-      :pricing_plan)
+      :pricing_plan,
+      :statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2058,6 +2081,26 @@ module Aws::BillingConductor
     #   The set of tiering configurations for the pricing rule.
     #   @return [Types::Tiering]
     #
+    # @!attribute [rw] usage_type
+    #   Usage type is the unit that each service uses to measure the usage
+    #   of a specific type of resource.
+    #
+    #   If the `Scope` attribute is set to `SKU`, this attribute indicates
+    #   which usage type the `PricingRule` is modifying. For example,
+    #   `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra
+    #   Large` instance in the US West (Oregon) Region.     </p>
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   Operation is the specific Amazon Web Services action covered by this
+    #   line item. This describes the specific usage of the line item.
+    #
+    #   If the `Scope` attribute is set to `SKU`, this attribute indicates
+    #   which operation the `PricingRule` is modifying. For example, a value
+    #   of `RunInstances:0202` indicates the operation of running an Amazon
+    #   EC2 instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/PricingRuleListElement AWS API Documentation
     #
     class PricingRuleListElement < Struct.new(
@@ -2072,7 +2115,9 @@ module Aws::BillingConductor
       :creation_time,
       :last_modified_time,
       :billing_entity,
-      :tiering)
+      :tiering,
+      :usage_type,
+      :operation)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end

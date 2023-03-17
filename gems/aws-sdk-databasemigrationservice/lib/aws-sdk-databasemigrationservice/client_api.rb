@@ -197,6 +197,7 @@ module Aws::DatabaseMigrationService
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KMSNotFoundFault = Shapes::StructureShape.new(name: 'KMSNotFoundFault')
     KMSThrottlingFault = Shapes::StructureShape.new(name: 'KMSThrottlingFault')
+    KafkaSaslMechanism = Shapes::StringShape.new(name: 'KafkaSaslMechanism')
     KafkaSecurityProtocol = Shapes::StringShape.new(name: 'KafkaSecurityProtocol')
     KafkaSettings = Shapes::StructureShape.new(name: 'KafkaSettings')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
@@ -331,6 +332,7 @@ module Aws::DatabaseMigrationService
     TargetDbType = Shapes::StringShape.new(name: 'TargetDbType')
     TestConnectionMessage = Shapes::StructureShape.new(name: 'TestConnectionMessage')
     TestConnectionResponse = Shapes::StructureShape.new(name: 'TestConnectionResponse')
+    TlogAccessMode = Shapes::StringShape.new(name: 'TlogAccessMode')
     UpdateSubscriptionsToEventBridgeMessage = Shapes::StructureShape.new(name: 'UpdateSubscriptionsToEventBridgeMessage')
     UpdateSubscriptionsToEventBridgeResponse = Shapes::StructureShape.new(name: 'UpdateSubscriptionsToEventBridgeResponse')
     UpgradeDependencyFailureFault = Shapes::StructureShape.new(name: 'UpgradeDependencyFailureFault')
@@ -1147,6 +1149,7 @@ module Aws::DatabaseMigrationService
     KafkaSettings.add_member(:sasl_username, Shapes::ShapeRef.new(shape: String, location_name: "SaslUsername"))
     KafkaSettings.add_member(:sasl_password, Shapes::ShapeRef.new(shape: SecretString, location_name: "SaslPassword"))
     KafkaSettings.add_member(:no_hex_prefix, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoHexPrefix"))
+    KafkaSettings.add_member(:sasl_mechanism, Shapes::ShapeRef.new(shape: KafkaSaslMechanism, location_name: "SaslMechanism"))
     KafkaSettings.struct_class = Types::KafkaSettings
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
@@ -1195,6 +1198,8 @@ module Aws::DatabaseMigrationService
     MicrosoftSQLServerSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     MicrosoftSQLServerSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     MicrosoftSQLServerSettings.add_member(:trim_space_in_char, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TrimSpaceInChar"))
+    MicrosoftSQLServerSettings.add_member(:tlog_access_mode, Shapes::ShapeRef.new(shape: TlogAccessMode, location_name: "TlogAccessMode"))
+    MicrosoftSQLServerSettings.add_member(:force_lob_lookup, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForceLobLookup"))
     MicrosoftSQLServerSettings.struct_class = Types::MicrosoftSQLServerSettings
 
     ModifyEndpointMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
@@ -1373,6 +1378,7 @@ module Aws::DatabaseMigrationService
     OracleSettings.add_member(:secrets_manager_oracle_asm_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerOracleAsmAccessRoleArn"))
     OracleSettings.add_member(:secrets_manager_oracle_asm_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerOracleAsmSecretId"))
     OracleSettings.add_member(:trim_space_in_char, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TrimSpaceInChar"))
+    OracleSettings.add_member(:convert_timestamp_with_zone_to_utc, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ConvertTimestampWithZoneToUTC"))
     OracleSettings.struct_class = Types::OracleSettings
 
     OrderableReplicationInstance.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
@@ -1419,6 +1425,7 @@ module Aws::DatabaseMigrationService
     PostgreSQLSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     PostgreSQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     PostgreSQLSettings.add_member(:trim_space_in_char, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TrimSpaceInChar"))
+    PostgreSQLSettings.add_member(:map_boolean_as_boolean, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MapBooleanAsBoolean"))
     PostgreSQLSettings.struct_class = Types::PostgreSQLSettings
 
     RdsConfiguration.add_member(:engine_edition, Shapes::ShapeRef.new(shape: String, location_name: "EngineEdition"))
@@ -1508,6 +1515,7 @@ module Aws::DatabaseMigrationService
     RedshiftSettings.add_member(:write_buffer_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "WriteBufferSize"))
     RedshiftSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     RedshiftSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
+    RedshiftSettings.add_member(:map_boolean_as_boolean, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MapBooleanAsBoolean"))
     RedshiftSettings.struct_class = Types::RedshiftSettings
 
     RefreshSchemasMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
@@ -1740,6 +1748,7 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:date_partition_timezone, Shapes::ShapeRef.new(shape: String, location_name: "DatePartitionTimezone"))
     S3Settings.add_member(:add_trailing_padding_character, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AddTrailingPaddingCharacter"))
     S3Settings.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
+    S3Settings.add_member(:glue_catalog_generation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "GlueCatalogGeneration"))
     S3Settings.struct_class = Types::S3Settings
 
     SNSInvalidTopicFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))

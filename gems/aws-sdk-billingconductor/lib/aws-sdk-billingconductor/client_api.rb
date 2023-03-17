@@ -20,6 +20,7 @@ module Aws::BillingConductor
     AccountEmail = Shapes::StringShape.new(name: 'AccountEmail')
     AccountGrouping = Shapes::StructureShape.new(name: 'AccountGrouping')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AccountIdFilterList = Shapes::ListShape.new(name: 'AccountIdFilterList')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -47,6 +48,7 @@ module Aws::BillingConductor
     BillingGroupListElement = Shapes::StructureShape.new(name: 'BillingGroupListElement')
     BillingGroupName = Shapes::StringShape.new(name: 'BillingGroupName')
     BillingGroupStatus = Shapes::StringShape.new(name: 'BillingGroupStatus')
+    BillingGroupStatusList = Shapes::ListShape.new(name: 'BillingGroupStatusList')
     BillingGroupStatusReason = Shapes::StringShape.new(name: 'BillingGroupStatusReason')
     BillingPeriod = Shapes::StringShape.new(name: 'BillingPeriod')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -220,6 +222,8 @@ module Aws::BillingConductor
     AccountGrouping.add_member(:linked_account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "LinkedAccountIds"))
     AccountGrouping.struct_class = Types::AccountGrouping
 
+    AccountIdFilterList.member = Shapes::ShapeRef.new(shape: AccountId)
+
     AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     AssociateAccountsInput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "Arn"))
@@ -289,6 +293,8 @@ module Aws::BillingConductor
     BillingGroupListElement.add_member(:status, Shapes::ShapeRef.new(shape: BillingGroupStatus, location_name: "Status"))
     BillingGroupListElement.add_member(:status_reason, Shapes::ShapeRef.new(shape: BillingGroupStatusReason, location_name: "StatusReason"))
     BillingGroupListElement.struct_class = Types::BillingGroupListElement
+
+    BillingGroupStatusList.member = Shapes::ShapeRef.new(shape: BillingGroupStatus)
 
     ComputationPreference.add_member(:pricing_plan_arn, Shapes::ShapeRef.new(shape: PricingPlanFullArn, required: true, location_name: "PricingPlanArn"))
     ComputationPreference.struct_class = Types::ComputationPreference
@@ -409,6 +415,8 @@ module Aws::BillingConductor
     CustomLineItemVersionListElement.add_member(:association_size, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "AssociationSize"))
     CustomLineItemVersionListElement.add_member(:start_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "StartBillingPeriod"))
     CustomLineItemVersionListElement.add_member(:end_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "EndBillingPeriod"))
+    CustomLineItemVersionListElement.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, location_name: "Arn"))
+    CustomLineItemVersionListElement.add_member(:start_time, Shapes::ShapeRef.new(shape: Instant, location_name: "StartTime"))
     CustomLineItemVersionListElement.struct_class = Types::CustomLineItemVersionListElement
 
     DeleteBillingGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "Arn"))
@@ -465,6 +473,7 @@ module Aws::BillingConductor
 
     ListAccountAssociationsFilter.add_member(:association, Shapes::ShapeRef.new(shape: Association, location_name: "Association"))
     ListAccountAssociationsFilter.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    ListAccountAssociationsFilter.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdFilterList, location_name: "AccountIds"))
     ListAccountAssociationsFilter.struct_class = Types::ListAccountAssociationsFilter
 
     ListAccountAssociationsInput.add_member(:billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "BillingPeriod"))
@@ -491,6 +500,7 @@ module Aws::BillingConductor
 
     ListBillingGroupsFilter.add_member(:arns, Shapes::ShapeRef.new(shape: BillingGroupArnList, location_name: "Arns"))
     ListBillingGroupsFilter.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlanFullArn, location_name: "PricingPlan"))
+    ListBillingGroupsFilter.add_member(:statuses, Shapes::ShapeRef.new(shape: BillingGroupStatusList, location_name: "Statuses"))
     ListBillingGroupsFilter.struct_class = Types::ListBillingGroupsFilter
 
     ListBillingGroupsInput.add_member(:billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "BillingPeriod"))
@@ -658,6 +668,8 @@ module Aws::BillingConductor
     PricingRuleListElement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
     PricingRuleListElement.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
     PricingRuleListElement.add_member(:tiering, Shapes::ShapeRef.new(shape: Tiering, location_name: "Tiering"))
+    PricingRuleListElement.add_member(:usage_type, Shapes::ShapeRef.new(shape: UsageType, location_name: "UsageType"))
+    PricingRuleListElement.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
     PricingRuleListElement.struct_class = Types::PricingRuleListElement
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
