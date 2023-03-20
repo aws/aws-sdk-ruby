@@ -1212,6 +1212,8 @@ module Aws::WorkDocs
     #   * {Types::DescribeActivitiesResponse#user_activities #user_activities} => Array&lt;Types::Activity&gt;
     #   * {Types::DescribeActivitiesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_activities({
@@ -1291,6 +1293,7 @@ module Aws::WorkDocs
     #   resp.user_activities[0].comment_metadata.created_timestamp #=> Time
     #   resp.user_activities[0].comment_metadata.comment_status #=> String, one of "DRAFT", "PUBLISHED", "DELETED"
     #   resp.user_activities[0].comment_metadata.recipient_id #=> String
+    #   resp.user_activities[0].comment_metadata.contributor_id #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivities AWS API Documentation
@@ -1325,6 +1328,8 @@ module Aws::WorkDocs
     #
     #   * {Types::DescribeCommentsResponse#comments #comments} => Array&lt;Types::Comment&gt;
     #   * {Types::DescribeCommentsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1579,6 +1584,8 @@ module Aws::WorkDocs
     #   * {Types::DescribeGroupsResponse#groups #groups} => Array&lt;Types::GroupMetadata&gt;
     #   * {Types::DescribeGroupsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_groups({
@@ -1621,6 +1628,8 @@ module Aws::WorkDocs
     #
     #   * {Types::DescribeNotificationSubscriptionsResponse#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
     #   * {Types::DescribeNotificationSubscriptionsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1670,6 +1679,8 @@ module Aws::WorkDocs
     #
     #   * {Types::DescribeResourcePermissionsResponse#principals #principals} => Array&lt;Types::Principal&gt;
     #   * {Types::DescribeResourcePermissionsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1728,6 +1739,8 @@ module Aws::WorkDocs
     #
     #   * {Types::DescribeRootFoldersResponse#folders #folders} => Array&lt;Types::FolderMetadata&gt;
     #   * {Types::DescribeRootFoldersResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2486,6 +2499,182 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
+    # Searches metadata and the content of folders, documents, document
+    # versions, and comments.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
+    #
+    # @option params [String] :query_text
+    #   The String to search for. Searches across different text fields based
+    #   on request parameters. Use double quotes around the query string for
+    #   exact phrase matches.
+    #
+    # @option params [Array<String>] :query_scopes
+    #   Filter based on the text field type. A Folder has only a name and no
+    #   content. A Comment has only content and no name. A Document or
+    #   Document Version has a name and content
+    #
+    # @option params [String] :organization_id
+    #   Filters based on the resource owner OrgId. This is a mandatory
+    #   parameter when using Admin SigV4 credentials.
+    #
+    # @option params [Array<String>] :additional_response_fields
+    #   A list of attributes to include in the response. Used to request
+    #   fields that are not normally returned in a standard response.
+    #
+    # @option params [Types::Filters] :filters
+    #   Filters results based on entity metadata.
+    #
+    # @option params [Array<Types::SearchSortResult>] :order_by
+    #   Order by results in one or more categories.
+    #
+    # @option params [Integer] :limit
+    #   Max results count per page.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results.
+    #
+    # @return [Types::SearchResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchResourcesResponse#items #items} => Array&lt;Types::ResponseItem&gt;
+    #   * {Types::SearchResourcesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_resources({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     query_text: "SearchQueryType",
+    #     query_scopes: ["NAME"], # accepts NAME, CONTENT
+    #     organization_id: "IdType",
+    #     additional_response_fields: ["WEBURL"], # accepts WEBURL
+    #     filters: {
+    #       text_locales: ["AR"], # accepts AR, BG, BN, DA, DE, CS, EL, EN, ES, FA, FI, FR, HI, HU, ID, IT, JA, KO, LT, LV, NL, NO, PT, RO, RU, SV, SW, TH, TR, ZH, DEFAULT
+    #       content_categories: ["IMAGE"], # accepts IMAGE, DOCUMENT, PDF, SPREADSHEET, PRESENTATION, AUDIO, VIDEO, SOURCE_CODE, OTHER
+    #       resource_types: ["FOLDER"], # accepts FOLDER, DOCUMENT, COMMENT, DOCUMENT_VERSION
+    #       labels: ["SearchLabel"],
+    #       principals: [
+    #         {
+    #           id: "IdType", # required
+    #           roles: ["VIEWER"], # accepts VIEWER, CONTRIBUTOR, OWNER, COOWNER
+    #         },
+    #       ],
+    #       ancestor_ids: ["SearchAncestorId"],
+    #       search_collection_types: ["OWNED"], # accepts OWNED, SHARED_WITH_ME
+    #       size_range: {
+    #         start_value: 1,
+    #         end_value: 1,
+    #       },
+    #       created_range: {
+    #         start_value: Time.now,
+    #         end_value: Time.now,
+    #       },
+    #       modified_range: {
+    #         start_value: Time.now,
+    #         end_value: Time.now,
+    #       },
+    #     },
+    #     order_by: [
+    #       {
+    #         field: "RELEVANCE", # accepts RELEVANCE, NAME, SIZE, CREATED_TIMESTAMP, MODIFIED_TIMESTAMP
+    #         order: "ASC", # accepts ASC, DESC
+    #       },
+    #     ],
+    #     limit: 1,
+    #     marker: "NextMarkerType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].resource_type #=> String, one of "DOCUMENT", "FOLDER", "COMMENT", "DOCUMENT_VERSION"
+    #   resp.items[0].web_url #=> String
+    #   resp.items[0].document_metadata.id #=> String
+    #   resp.items[0].document_metadata.creator_id #=> String
+    #   resp.items[0].document_metadata.parent_folder_id #=> String
+    #   resp.items[0].document_metadata.created_timestamp #=> Time
+    #   resp.items[0].document_metadata.modified_timestamp #=> Time
+    #   resp.items[0].document_metadata.latest_version_metadata.id #=> String
+    #   resp.items[0].document_metadata.latest_version_metadata.name #=> String
+    #   resp.items[0].document_metadata.latest_version_metadata.content_type #=> String
+    #   resp.items[0].document_metadata.latest_version_metadata.size #=> Integer
+    #   resp.items[0].document_metadata.latest_version_metadata.signature #=> String
+    #   resp.items[0].document_metadata.latest_version_metadata.status #=> String, one of "INITIALIZED", "ACTIVE"
+    #   resp.items[0].document_metadata.latest_version_metadata.created_timestamp #=> Time
+    #   resp.items[0].document_metadata.latest_version_metadata.modified_timestamp #=> Time
+    #   resp.items[0].document_metadata.latest_version_metadata.content_created_timestamp #=> Time
+    #   resp.items[0].document_metadata.latest_version_metadata.content_modified_timestamp #=> Time
+    #   resp.items[0].document_metadata.latest_version_metadata.creator_id #=> String
+    #   resp.items[0].document_metadata.latest_version_metadata.thumbnail #=> Hash
+    #   resp.items[0].document_metadata.latest_version_metadata.thumbnail["DocumentThumbnailType"] #=> String
+    #   resp.items[0].document_metadata.latest_version_metadata.source #=> Hash
+    #   resp.items[0].document_metadata.latest_version_metadata.source["DocumentSourceType"] #=> String
+    #   resp.items[0].document_metadata.resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
+    #   resp.items[0].document_metadata.labels #=> Array
+    #   resp.items[0].document_metadata.labels[0] #=> String
+    #   resp.items[0].folder_metadata.id #=> String
+    #   resp.items[0].folder_metadata.name #=> String
+    #   resp.items[0].folder_metadata.creator_id #=> String
+    #   resp.items[0].folder_metadata.parent_folder_id #=> String
+    #   resp.items[0].folder_metadata.created_timestamp #=> Time
+    #   resp.items[0].folder_metadata.modified_timestamp #=> Time
+    #   resp.items[0].folder_metadata.resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
+    #   resp.items[0].folder_metadata.signature #=> String
+    #   resp.items[0].folder_metadata.labels #=> Array
+    #   resp.items[0].folder_metadata.labels[0] #=> String
+    #   resp.items[0].folder_metadata.size #=> Integer
+    #   resp.items[0].folder_metadata.latest_version_size #=> Integer
+    #   resp.items[0].comment_metadata.comment_id #=> String
+    #   resp.items[0].comment_metadata.contributor.id #=> String
+    #   resp.items[0].comment_metadata.contributor.username #=> String
+    #   resp.items[0].comment_metadata.contributor.email_address #=> String
+    #   resp.items[0].comment_metadata.contributor.given_name #=> String
+    #   resp.items[0].comment_metadata.contributor.surname #=> String
+    #   resp.items[0].comment_metadata.contributor.organization_id #=> String
+    #   resp.items[0].comment_metadata.contributor.root_folder_id #=> String
+    #   resp.items[0].comment_metadata.contributor.recycle_bin_folder_id #=> String
+    #   resp.items[0].comment_metadata.contributor.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
+    #   resp.items[0].comment_metadata.contributor.type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
+    #   resp.items[0].comment_metadata.contributor.created_timestamp #=> Time
+    #   resp.items[0].comment_metadata.contributor.modified_timestamp #=> Time
+    #   resp.items[0].comment_metadata.contributor.time_zone_id #=> String
+    #   resp.items[0].comment_metadata.contributor.locale #=> String, one of "en", "fr", "ko", "de", "es", "ja", "ru", "zh_CN", "zh_TW", "pt_BR", "default"
+    #   resp.items[0].comment_metadata.contributor.storage.storage_utilized_in_bytes #=> Integer
+    #   resp.items[0].comment_metadata.contributor.storage.storage_rule.storage_allocated_in_bytes #=> Integer
+    #   resp.items[0].comment_metadata.contributor.storage.storage_rule.storage_type #=> String, one of "UNLIMITED", "QUOTA"
+    #   resp.items[0].comment_metadata.created_timestamp #=> Time
+    #   resp.items[0].comment_metadata.comment_status #=> String, one of "DRAFT", "PUBLISHED", "DELETED"
+    #   resp.items[0].comment_metadata.recipient_id #=> String
+    #   resp.items[0].comment_metadata.contributor_id #=> String
+    #   resp.items[0].document_version_metadata.id #=> String
+    #   resp.items[0].document_version_metadata.name #=> String
+    #   resp.items[0].document_version_metadata.content_type #=> String
+    #   resp.items[0].document_version_metadata.size #=> Integer
+    #   resp.items[0].document_version_metadata.signature #=> String
+    #   resp.items[0].document_version_metadata.status #=> String, one of "INITIALIZED", "ACTIVE"
+    #   resp.items[0].document_version_metadata.created_timestamp #=> Time
+    #   resp.items[0].document_version_metadata.modified_timestamp #=> Time
+    #   resp.items[0].document_version_metadata.content_created_timestamp #=> Time
+    #   resp.items[0].document_version_metadata.content_modified_timestamp #=> Time
+    #   resp.items[0].document_version_metadata.creator_id #=> String
+    #   resp.items[0].document_version_metadata.thumbnail #=> Hash
+    #   resp.items[0].document_version_metadata.thumbnail["DocumentThumbnailType"] #=> String
+    #   resp.items[0].document_version_metadata.source #=> Hash
+    #   resp.items[0].document_version_metadata.source["DocumentSourceType"] #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SearchResources AWS API Documentation
+    #
+    # @overload search_resources(params = {})
+    # @param [Hash] params ({})
+    def search_resources(params = {}, options = {})
+      req = build_request(:search_resources, params)
+      req.send_request(options)
+    end
+
     # Updates the specified attributes of a document. The user must have
     # access to both the document and its parent folder, if applicable.
     #
@@ -2704,7 +2893,7 @@ module Aws::WorkDocs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workdocs'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

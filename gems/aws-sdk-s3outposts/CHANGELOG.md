@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-03-20)
+------------------
+
+* Feature - S3 On Outposts added support for endpoint status, and a failed endpoint reason, if any
+
 1.16.0 (2023-03-01)
 ------------------
 

@@ -16,6 +16,7 @@ module Aws::ApplicationAutoScaling
     AdjustmentType = Shapes::StringShape.new(name: 'AdjustmentType')
     Alarm = Shapes::StructureShape.new(name: 'Alarm')
     Alarms = Shapes::ListShape.new(name: 'Alarms')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ConcurrentUpdateException = Shapes::StructureShape.new(name: 'ConcurrentUpdateException')
     Cooldown = Shapes::IntegerShape.new(name: 'Cooldown')
     CustomizedMetricSpecification = Shapes::StructureShape.new(name: 'CustomizedMetricSpecification')
@@ -35,6 +36,7 @@ module Aws::ApplicationAutoScaling
     DescribeScheduledActionsResponse = Shapes::StructureShape.new(name: 'DescribeScheduledActionsResponse')
     DisableScaleIn = Shapes::BooleanShape.new(name: 'DisableScaleIn')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Expression = Shapes::StringShape.new(name: 'Expression')
     FailedResourceAccessException = Shapes::StructureShape.new(name: 'FailedResourceAccessException')
     Id = Shapes::StringShape.new(name: 'Id')
@@ -42,6 +44,8 @@ module Aws::ApplicationAutoScaling
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MetricAggregationType = Shapes::StringShape.new(name: 'MetricAggregationType')
     MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
@@ -72,6 +76,7 @@ module Aws::ApplicationAutoScaling
     ResourceIdMaxLen1600 = Shapes::StringShape.new(name: 'ResourceIdMaxLen1600')
     ResourceIdsMaxLen1600 = Shapes::ListShape.new(name: 'ResourceIdsMaxLen1600')
     ResourceLabel = Shapes::StringShape.new(name: 'ResourceLabel')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
     ScalableDimension = Shapes::StringShape.new(name: 'ScalableDimension')
     ScalableTarget = Shapes::StructureShape.new(name: 'ScalableTarget')
@@ -92,6 +97,12 @@ module Aws::ApplicationAutoScaling
     StepAdjustments = Shapes::ListShape.new(name: 'StepAdjustments')
     StepScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'StepScalingPolicyConfiguration')
     SuspendedState = Shapes::StructureShape.new(name: 'SuspendedState')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetTrackingMetric = Shapes::StructureShape.new(name: 'TargetTrackingMetric')
     TargetTrackingMetricDataQueries = Shapes::ListShape.new(name: 'TargetTrackingMetricDataQueries')
     TargetTrackingMetricDataQuery = Shapes::StructureShape.new(name: 'TargetTrackingMetricDataQuery')
@@ -105,6 +116,9 @@ module Aws::ApplicationAutoScaling
     TargetTrackingMetricUnit = Shapes::StringShape.new(name: 'TargetTrackingMetricUnit')
     TargetTrackingScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingScalingPolicyConfiguration')
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     XmlString = Shapes::StringShape.new(name: 'XmlString')
 
@@ -207,6 +221,12 @@ module Aws::ApplicationAutoScaling
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MetricDimension.add_member(:name, Shapes::ShapeRef.new(shape: MetricDimensionName, required: true, location_name: "Name"))
     MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: MetricDimensionValue, required: true, location_name: "Value"))
     MetricDimension.struct_class = Types::MetricDimension
@@ -261,11 +281,17 @@ module Aws::ApplicationAutoScaling
     RegisterScalableTargetRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MaxCapacity"))
     RegisterScalableTargetRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "RoleARN"))
     RegisterScalableTargetRequest.add_member(:suspended_state, Shapes::ShapeRef.new(shape: SuspendedState, location_name: "SuspendedState"))
+    RegisterScalableTargetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     RegisterScalableTargetRequest.struct_class = Types::RegisterScalableTargetRequest
 
+    RegisterScalableTargetResponse.add_member(:scalable_target_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "ScalableTargetARN"))
     RegisterScalableTargetResponse.struct_class = Types::RegisterScalableTargetResponse
 
     ResourceIdsMaxLen1600.member = Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ScalableTarget.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
     ScalableTarget.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
@@ -275,6 +301,7 @@ module Aws::ApplicationAutoScaling
     ScalableTarget.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "RoleARN"))
     ScalableTarget.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "CreationTime"))
     ScalableTarget.add_member(:suspended_state, Shapes::ShapeRef.new(shape: SuspendedState, location_name: "SuspendedState"))
+    ScalableTarget.add_member(:scalable_target_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "ScalableTargetARN"))
     ScalableTarget.struct_class = Types::ScalableTarget
 
     ScalableTargetAction.add_member(:min_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity"))
@@ -347,6 +374,17 @@ module Aws::ApplicationAutoScaling
     SuspendedState.add_member(:scheduled_scaling_suspended, Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "ScheduledScalingSuspended"))
     SuspendedState.struct_class = Types::SuspendedState
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TargetTrackingMetric.add_member(:dimensions, Shapes::ShapeRef.new(shape: TargetTrackingMetricDimensions, location_name: "Dimensions"))
     TargetTrackingMetric.add_member(:metric_name, Shapes::ShapeRef.new(shape: TargetTrackingMetricName, location_name: "MetricName"))
     TargetTrackingMetric.add_member(:namespace, Shapes::ShapeRef.new(shape: TargetTrackingMetricNamespace, location_name: "Namespace"))
@@ -379,6 +417,16 @@ module Aws::ApplicationAutoScaling
     TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "ScaleInCooldown"))
     TargetTrackingScalingPolicyConfiguration.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: DisableScaleIn, location_name: "DisableScaleIn"))
     TargetTrackingScalingPolicyConfiguration.struct_class = Types::TargetTrackingScalingPolicyConfiguration
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -511,6 +559,15 @@ module Aws::ApplicationAutoScaling
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:put_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutScalingPolicy"
         o.http_method = "POST"
@@ -548,6 +605,27 @@ module Aws::ApplicationAutoScaling
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end
 

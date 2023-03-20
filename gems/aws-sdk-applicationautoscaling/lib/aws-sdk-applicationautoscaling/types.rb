@@ -76,7 +76,7 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] metric_name
     #   The name of the metric. To get the exact metric name, namespace, and
-    #   dimensions, inspect the [Metric][1] object that is returned by a
+    #   dimensions, inspect the [Metric][1] object that's returned by a
     #   call to [ListMetrics][2].
     #
     #
@@ -1492,6 +1492,35 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   Specify the ARN of the scalable target.
+    #
+    #   For example:
+    #   `arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123`
+    #
+    #   To get the ARN for a scalable target, use DescribeScalableTargets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tags. Each tag consists of a tag key and a tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the dimension names and values associated with a metric.
     #
     # @!attribute [rw] name
@@ -2292,7 +2321,7 @@ module Aws::ApplicationAutoScaling
     #   target.
     #
     #   Although you can specify a large maximum capacity, note that service
-    #   quotas may impose lower limits. Each service has its own default
+    #   quotas might impose lower limits. Each service has its own default
     #   quotas for the maximum capacity of the resource. If you want to
     #   specify a higher limit, you can request an increase. For more
     #   information, consult the documentation for that service. For
@@ -2350,6 +2379,24 @@ module Aws::ApplicationAutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html
     #   @return [Types::SuspendedState]
     #
+    # @!attribute [rw] tags
+    #   Assigns one or more tags to the scalable target. Use this parameter
+    #   to tag the scalable target when it is created. To tag an existing
+    #   scalable target, use the TagResource operation.
+    #
+    #   Each tag consists of a tag key and a tag value. Both the tag key and
+    #   the tag value are required. You cannot have more than one tag on a
+    #   scalable target with the same tag key.
+    #
+    #   Use tags to control access to a scalable target. For more
+    #   information, see [Tagging support for Application Auto Scaling][1]
+    #   in the *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetRequest AWS API Documentation
     #
     class RegisterScalableTargetRequest < Struct.new(
@@ -2359,14 +2406,42 @@ module Aws::ApplicationAutoScaling
       :min_capacity,
       :max_capacity,
       :role_arn,
-      :suspended_state)
+      :suspended_state,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] scalable_target_arn
+    #   The ARN of the scalable target.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetResponse AWS API Documentation
     #
-    class RegisterScalableTargetResponse < Aws::EmptyStructure; end
+    class RegisterScalableTargetResponse < Struct.new(
+      :scalable_target_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified resource doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the Application Auto Scaling resource. This value is an
+    #   Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Represents a scalable target.
     #
@@ -2540,6 +2615,10 @@ module Aws::ApplicationAutoScaling
     #   in a suspended state.
     #   @return [Types::SuspendedState]
     #
+    # @!attribute [rw] scalable_target_arn
+    #   The ARN of the scalable target.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalableTarget AWS API Documentation
     #
     class ScalableTarget < Struct.new(
@@ -2550,7 +2629,8 @@ module Aws::ApplicationAutoScaling
       :max_capacity,
       :role_arn,
       :creation_time,
-      :suspended_state)
+      :suspended_state,
+      :scalable_target_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3256,13 +3336,13 @@ module Aws::ApplicationAutoScaling
     # For the following examples, suppose that you have an alarm with a
     # breach threshold of 50:
     #
-    # * To trigger the adjustment when the metric is greater than or equal
-    #   to 50 and less than 60, specify a lower bound of 0 and an upper
-    #   bound of 10.
+    # * To initiate the adjustment when the metric is greater than or equal
+    #   to 50 and less than 60, specify a lower bound of `0` and an upper
+    #   bound of `10`.
     #
-    # * To trigger the adjustment when the metric is greater than 40 and
-    #   less than or equal to 50, specify a lower bound of -10 and an upper
-    #   bound of 0.
+    # * To initiate the adjustment when the metric is greater than 40 and
+    #   less than or equal to 50, specify a lower bound of `-10` and an
+    #   upper bound of `0`.
     #
     # There are a few rules for the step adjustments for your step policy:
     #
@@ -3287,16 +3367,16 @@ module Aws::ApplicationAutoScaling
     #   The lower bound for the difference between the alarm threshold and
     #   the CloudWatch metric. If the metric value is above the breach
     #   threshold, the lower bound is inclusive (the metric must be greater
-    #   than or equal to the threshold plus the lower bound). Otherwise, it
-    #   is exclusive (the metric must be greater than the threshold plus the
-    #   lower bound). A null value indicates negative infinity.
+    #   than or equal to the threshold plus the lower bound). Otherwise,
+    #   it's exclusive (the metric must be greater than the threshold plus
+    #   the lower bound). A null value indicates negative infinity.
     #   @return [Float]
     #
     # @!attribute [rw] metric_interval_upper_bound
     #   The upper bound for the difference between the alarm threshold and
     #   the CloudWatch metric. If the metric value is above the breach
     #   threshold, the upper bound is exclusive (the metric must be less
-    #   than the threshold plus the upper bound). Otherwise, it is inclusive
+    #   than the threshold plus the upper bound). Otherwise, it's inclusive
     #   (the metric must be less than or equal to the threshold plus the
     #   upper bound). A null value indicates positive infinity.
     #
@@ -3467,6 +3547,49 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   Identifies the Application Auto Scaling scalable target that you
+    #   want to apply tags to.
+    #
+    #   For example:
+    #   `arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123`
+    #
+    #   To get the ARN for a scalable target, use DescribeScalableTargets.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the resource. A tag is a label that you assign
+    #   to an AWS resource.
+    #
+    #   Each tag consists of a tag key and a tag value.
+    #
+    #   You cannot have more than one tag on an Application Auto Scaling
+    #   scalable target with the same tag key. If you specify an existing
+    #   tag key with a different tag value, Application Auto Scaling
+    #   replaces the current tag value with the specified one.
+    #
+    #   For information about the rules that apply to tag keys and tag
+    #   values, see [User-defined tag restrictions][1] in the *Amazon Web
+    #   Services Billing and Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Represents a specific metric.
     #
     # Metric is a property of the TargetTrackingMetricStat object.
@@ -3628,7 +3751,7 @@ module Aws::ApplicationAutoScaling
     #   extended statistic. For a list of valid values, see the table in
     #   [Statistics][1] in the *Amazon CloudWatch User Guide*.
     #
-    #   The most commonly used metrics for scaling is `Average`
+    #   The most commonly used metric for scaling is `Average`.
     #
     #
     #
@@ -3799,6 +3922,53 @@ module Aws::ApplicationAutoScaling
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The request contains too many tags. Try the request again with fewer
+    # tags.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the Application Auto Scaling resource. This value is an
+    #   Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   Identifies the Application Auto Scaling scalable target from which
+    #   to remove tags.
+    #
+    #   For example:
+    #   `arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123`
+    #
+    #   To get the ARN for a scalable target, use DescribeScalableTargets.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   One or more tag keys. Specify only the tag keys, not the tag values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # An exception was thrown for a validation issue. Review the available
     # parameters for the API request.

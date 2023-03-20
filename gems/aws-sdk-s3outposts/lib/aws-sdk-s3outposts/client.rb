@@ -522,7 +522,7 @@ module Aws::S3Outposts
     #   resp.endpoints[0].endpoint_arn #=> String
     #   resp.endpoints[0].outposts_id #=> String
     #   resp.endpoints[0].cidr_block #=> String
-    #   resp.endpoints[0].status #=> String, one of "Pending", "Available", "Deleting"
+    #   resp.endpoints[0].status #=> String, one of "Pending", "Available", "Deleting", "Create_Failed", "Delete_Failed"
     #   resp.endpoints[0].creation_time #=> Time
     #   resp.endpoints[0].network_interfaces #=> Array
     #   resp.endpoints[0].network_interfaces[0].network_interface_id #=> String
@@ -531,6 +531,8 @@ module Aws::S3Outposts
     #   resp.endpoints[0].security_group_id #=> String
     #   resp.endpoints[0].access_type #=> String, one of "Private", "CustomerOwnedIp"
     #   resp.endpoints[0].customer_owned_ipv_4_pool #=> String
+    #   resp.endpoints[0].failed_reason.error_code #=> String
+    #   resp.endpoints[0].failed_reason.message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListEndpoints AWS API Documentation
@@ -634,7 +636,7 @@ module Aws::S3Outposts
     #   resp.endpoints[0].endpoint_arn #=> String
     #   resp.endpoints[0].outposts_id #=> String
     #   resp.endpoints[0].cidr_block #=> String
-    #   resp.endpoints[0].status #=> String, one of "Pending", "Available", "Deleting"
+    #   resp.endpoints[0].status #=> String, one of "Pending", "Available", "Deleting", "Create_Failed", "Delete_Failed"
     #   resp.endpoints[0].creation_time #=> Time
     #   resp.endpoints[0].network_interfaces #=> Array
     #   resp.endpoints[0].network_interfaces[0].network_interface_id #=> String
@@ -643,6 +645,8 @@ module Aws::S3Outposts
     #   resp.endpoints[0].security_group_id #=> String
     #   resp.endpoints[0].access_type #=> String, one of "Private", "CustomerOwnedIp"
     #   resp.endpoints[0].customer_owned_ipv_4_pool #=> String
+    #   resp.endpoints[0].failed_reason.error_code #=> String
+    #   resp.endpoints[0].failed_reason.message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListSharedEndpoints AWS API Documentation
@@ -667,7 +671,7 @@ module Aws::S3Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3outposts'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

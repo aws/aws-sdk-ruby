@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-03-20)
+------------------
+
+* Feature - With this release customers can now tag their Application Auto Scaling registered targets with key-value pairs and manage IAM permissions for all the tagged resources centrally.
+
 1.67.0 (2023-03-14)
 ------------------
 

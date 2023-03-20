@@ -29,7 +29,9 @@ module Aws::S3Outposts
     EndpointId = Shapes::StringShape.new(name: 'EndpointId')
     EndpointStatus = Shapes::StringShape.new(name: 'EndpointStatus')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FailedReason = Shapes::StructureShape.new(name: 'FailedReason')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListEndpointsRequest = Shapes::StructureShape.new(name: 'ListEndpointsRequest')
     ListEndpointsResult = Shapes::StructureShape.new(name: 'ListEndpointsResult')
@@ -38,6 +40,7 @@ module Aws::S3Outposts
     ListSharedEndpointsRequest = Shapes::StructureShape.new(name: 'ListSharedEndpointsRequest')
     ListSharedEndpointsResult = Shapes::StructureShape.new(name: 'ListSharedEndpointsResult')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    Message = Shapes::StringShape.new(name: 'Message')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
@@ -45,6 +48,7 @@ module Aws::S3Outposts
     Outpost = Shapes::StructureShape.new(name: 'Outpost')
     OutpostArn = Shapes::StringShape.new(name: 'OutpostArn')
     OutpostId = Shapes::StringShape.new(name: 'OutpostId')
+    OutpostOfflineException = Shapes::StructureShape.new(name: 'OutpostOfflineException')
     Outposts = Shapes::ListShape.new(name: 'Outposts')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
@@ -84,9 +88,14 @@ module Aws::S3Outposts
     Endpoint.add_member(:security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId"))
     Endpoint.add_member(:access_type, Shapes::ShapeRef.new(shape: EndpointAccessType, location_name: "AccessType"))
     Endpoint.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
+    Endpoint.add_member(:failed_reason, Shapes::ShapeRef.new(shape: FailedReason, location_name: "FailedReason"))
     Endpoint.struct_class = Types::Endpoint
 
     Endpoints.member = Shapes::ShapeRef.new(shape: Endpoint)
+
+    FailedReason.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    FailedReason.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    FailedReason.struct_class = Types::FailedReason
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -126,6 +135,9 @@ module Aws::S3Outposts
     Outpost.add_member(:owner_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "OwnerId"))
     Outpost.add_member(:capacity_in_bytes, Shapes::ShapeRef.new(shape: CapacityInBytes, location_name: "CapacityInBytes"))
     Outpost.struct_class = Types::Outpost
+
+    OutpostOfflineException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    OutpostOfflineException.struct_class = Types::OutpostOfflineException
 
     Outposts.member = Shapes::ShapeRef.new(shape: Outpost)
 
@@ -169,6 +181,7 @@ module Aws::S3Outposts
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: OutpostOfflineException)
       end)
 
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -182,6 +195,7 @@ module Aws::S3Outposts
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: OutpostOfflineException)
       end)
 
       api.add_operation(:list_endpoints, Seahorse::Model::Operation.new.tap do |o|

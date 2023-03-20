@@ -30,6 +30,7 @@ module Aws::S3Outposts
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {OutpostOfflineException}
   # * {ResourceNotFoundException}
   # * {ThrottlingException}
   # * {ValidationException}
@@ -75,6 +76,21 @@ module Aws::S3Outposts
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::S3Outposts::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OutpostOfflineException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3Outposts::Types::OutpostOfflineException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

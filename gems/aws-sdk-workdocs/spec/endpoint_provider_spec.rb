@@ -322,13 +322,27 @@ module Aws::WorkDocs
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack disabled' do
+    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :endpoint=>"https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})

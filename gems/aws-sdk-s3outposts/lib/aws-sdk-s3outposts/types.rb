@@ -165,6 +165,11 @@ module Aws::S3Outposts
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] failed_reason
+    #   The failure reason, if any, for a create or delete endpoint
+    #   operation.
+    #   @return [Types::FailedReason]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -178,7 +183,28 @@ module Aws::S3Outposts
       :subnet_id,
       :security_group_id,
       :access_type,
-      :customer_owned_ipv_4_pool)
+      :customer_owned_ipv_4_pool,
+      :failed_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The failure reason, if any, for a create or delete endpoint operation.
+    #
+    # @!attribute [rw] error_code
+    #   The failure code, if any, for a create or delete endpoint operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Additional error details describing the endpoint failure and
+    #   recommended action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/FailedReason AWS API Documentation
+    #
+    class FailedReason < Struct.new(
+      :error_code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -367,6 +393,20 @@ module Aws::S3Outposts
       :outpost_id,
       :owner_id,
       :capacity_in_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The service link connection to your Outposts home Region is down.
+    # Check your connection and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/OutpostOfflineException AWS API Documentation
+    #
+    class OutpostOfflineException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

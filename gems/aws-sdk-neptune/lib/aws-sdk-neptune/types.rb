@@ -231,6 +231,59 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # This data type is used as a response element in the `ModifyDBCluster`
+    # operation and contains changes that will be applied during the next
+    # maintenance window.
+    #
+    # @!attribute [rw] pending_cloudwatch_logs_exports
+    #   This `PendingCloudwatchLogsExports` structure specifies pending
+    #   changes to which CloudWatch logs are enabled and which are disabled.
+    #   @return [Types::PendingCloudwatchLogsExports]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DBClusterIdentifier value for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   A value that indicates whether mapping of Amazon Web Services
+    #   Identity and Access Management (IAM) accounts to database accounts
+    #   is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine_version
+    #   The database engine version.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days for which automatic DB snapshots are retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The allocated storage size in gibibytes (GiB) for database engines.
+    #   For Neptune, `AllocatedStorage` always returns 1, because Neptune DB
+    #   cluster storage size isn't fixed, but instead automatically adjusts
+    #   as needed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] iops
+    #   The Provisioned IOPS (I/O operations per second) value. This setting
+    #   is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
+    #
+    class ClusterPendingModifiedValues < Struct.new(
+      :pending_cloudwatch_logs_exports,
+      :db_cluster_identifier,
+      :iam_database_authentication_enabled,
+      :engine_version,
+      :backup_retention_period,
+      :allocated_storage,
+      :iops)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_db_cluster_parameter_group_identifier
     #   The identifier or Amazon Resource Name (ARN) for the source DB
     #   cluster parameter group. For information about creating an ARN, see
@@ -1837,6 +1890,12 @@ module Aws::Neptune
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] pending_modified_values
+    #   This data type is used as a response element in the
+    #   `ModifyDBCluster` operation and contains changes that will be
+    #   applied during the next maintenance window.
+    #   @return [Types::ClusterPendingModifiedValues]
+    #
     # @!attribute [rw] deletion_protection
     #   Indicates whether or not the DB cluster has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
@@ -1861,6 +1920,11 @@ module Aws::Neptune
     #
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #   @return [Types::ServerlessV2ScalingConfigurationInfo]
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   Contains a user-supplied global database cluster identifier. This
+    #   identifier is the unique key that identifies a global database.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBCluster AWS API Documentation
     #
@@ -1902,10 +1966,12 @@ module Aws::Neptune
       :cluster_create_time,
       :copy_tags_to_snapshot,
       :enabled_cloudwatch_logs_exports,
+      :pending_modified_values,
       :deletion_protection,
       :cross_account_clone,
       :automatic_restart_time,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :global_cluster_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
