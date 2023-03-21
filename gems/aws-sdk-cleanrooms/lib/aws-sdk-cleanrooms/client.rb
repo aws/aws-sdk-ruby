@@ -450,6 +450,12 @@ module Aws::CleanRooms
     #   An indicator as to whether query logging has been enabled or disabled
     #   for the collaboration.
     #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
     # @return [Types::CreateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCollaborationOutput#collaboration #collaboration} => Types::Collaboration
@@ -475,6 +481,9 @@ module Aws::CleanRooms
     #       preserve_nulls: false, # required
     #     },
     #     query_log_status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -524,6 +533,12 @@ module Aws::CleanRooms
     #   The analysis method for the configured tables. The only valid value is
     #   currently `DIRECT\_QUERY`.
     #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
     # @return [Types::CreateConfiguredTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConfiguredTableOutput#configured_table #configured_table} => Types::ConfiguredTable
@@ -541,6 +556,9 @@ module Aws::CleanRooms
     #     },
     #     allowed_columns: ["ColumnName"], # required
     #     analysis_method: "DIRECT_QUERY", # required, accepts DIRECT_QUERY
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -678,6 +696,12 @@ module Aws::CleanRooms
     #   The service will assume this role to access catalog metadata and query
     #   the table.
     #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
     # @return [Types::CreateConfiguredTableAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConfiguredTableAssociationOutput#configured_table_association #configured_table_association} => Types::ConfiguredTableAssociation
@@ -690,6 +714,9 @@ module Aws::CleanRooms
     #     membership_identifier: "MembershipIdentifier", # required
     #     configured_table_identifier: "ConfiguredTableIdentifier", # required
     #     role_arn: "RoleArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -725,6 +752,12 @@ module Aws::CleanRooms
     #   An indicator as to whether query logging has been enabled or disabled
     #   for the collaboration.
     #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
     # @return [Types::CreateMembershipOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMembershipOutput#membership #membership} => Types::Membership
@@ -734,6 +767,9 @@ module Aws::CleanRooms
     #   resp = client.create_membership({
     #     collaboration_identifier: "CollaborationIdentifier", # required
     #     query_log_status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1656,6 +1692,36 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Lists all of the tags that have been added to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) associated with the resource you want
+    #   to list tags on.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "CleanroomsArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Creates a protected query that is started by AWS Clean Rooms.
     #
     # @option params [required, String] :type
@@ -1716,6 +1782,62 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def start_protected_query(params = {}, options = {})
       req = build_request(:start_protected_query, params)
+      req.send_request(options)
+    end
+
+    # Tags a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) associated with the resource you want
+    #   to tag.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A map of objects specifying each key name and value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "CleanroomsArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a tag or list of tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) associated with the resource you want
+    #   to remove the tag from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of key names of tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "CleanroomsArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2069,7 +2191,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

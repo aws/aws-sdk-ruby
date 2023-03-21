@@ -854,6 +854,13 @@ module Aws::CleanRooms
     #   disabled for the collaboration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationInput AWS API Documentation
     #
     class CreateCollaborationInput < Struct.new(
@@ -863,7 +870,8 @@ module Aws::CleanRooms
       :creator_member_abilities,
       :creator_display_name,
       :data_encryption_metadata,
-      :query_log_status)
+      :query_log_status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -940,6 +948,13 @@ module Aws::CleanRooms
     #   query the table.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTableAssociationInput AWS API Documentation
     #
     class CreateConfiguredTableAssociationInput < Struct.new(
@@ -947,7 +962,8 @@ module Aws::CleanRooms
       :description,
       :membership_identifier,
       :configured_table_identifier,
-      :role_arn)
+      :role_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -986,6 +1002,13 @@ module Aws::CleanRooms
     #   is currently `DIRECT\_QUERY`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTableInput AWS API Documentation
     #
     class CreateConfiguredTableInput < Struct.new(
@@ -993,7 +1016,8 @@ module Aws::CleanRooms
       :description,
       :table_reference,
       :allowed_columns,
-      :analysis_method)
+      :analysis_method,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1019,11 +1043,19 @@ module Aws::CleanRooms
     #   disabled for the collaboration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembershipInput AWS API Documentation
     #
     class CreateMembershipInput < Struct.new(
       :collaboration_identifier,
-      :query_log_status)
+      :query_log_status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1757,6 +1789,31 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) associated with the resource you want
+    #   to list tags on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A map of objects specifying each key name and value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Basic metadata used to construct a new member.
     #
     # @!attribute [rw] account_id
@@ -2258,7 +2315,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] partition_keys
-    #   The partition keys for the data set underlying this schema.
+    #   The partition keys for the dataset underlying this schema.
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] analysis_rule_types
@@ -2443,7 +2500,7 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
-    # A pointer to the data set that underlies this table. Currently, this
+    # A pointer to the dataset that underlies this table. Currently, this
     # can only be an AWS Glue table.
     #
     # @note TableReference is a union - when making an API calls you must set exactly one of the members.
@@ -2468,6 +2525,28 @@ module Aws::CleanRooms
       class Unknown < TableReference; end
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) associated with the resource you want
+    #   to tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of objects specifying each key name and value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # Request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -2480,6 +2559,28 @@ module Aws::CleanRooms
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) associated with the resource you want
+    #   to remove the tag from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names of tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] collaboration_identifier
     #   The identifier for the collaboration.

@@ -536,6 +536,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
@@ -543,6 +544,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
@@ -575,6 +577,7 @@ module Aws::Mgn
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
     #   resp.is_archived #=> Boolean
     #   resp.launched_instance.ec2_instance_id #=> String
     #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
@@ -591,7 +594,7 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
     #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -616,6 +619,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
     #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ChangeServerLifeCycleState AWS API Documentation
@@ -778,6 +782,11 @@ module Aws::Mgn
     #       ssm_documents: [
     #         {
     #           action_name: "BoundedString", # required
+    #           external_parameters: {
+    #             "SsmDocumentParameterName" => {
+    #               dynamic_path: "JmesPathString",
+    #             },
+    #           },
     #           must_succeed_for_cutover: false,
     #           parameters: {
     #             "SsmDocumentParameterName" => [
@@ -826,6 +835,8 @@ module Aws::Mgn
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
     #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
@@ -1286,6 +1297,8 @@ module Aws::Mgn
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
@@ -1364,6 +1377,8 @@ module Aws::Mgn
     #   resp.items[0].post_launch_actions.s3_output_key_prefix #=> String
     #   resp.items[0].post_launch_actions.ssm_documents #=> Array
     #   resp.items[0].post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.items[0].post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.items[0].post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.items[0].post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
@@ -1473,7 +1488,7 @@ module Aws::Mgn
     #     filters: {
     #       application_i_ds: ["ApplicationID"],
     #       is_archived: false,
-    #       life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
+    #       life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED, PENDING_INSTALLATION
     #       replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
     #       source_server_i_ds: ["SourceServerID"],
     #     },
@@ -1503,6 +1518,7 @@ module Aws::Mgn
     #   resp.items[0].data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.items[0].fqdn_for_action_framework #=> String
     #   resp.items[0].is_archived #=> Boolean
     #   resp.items[0].launched_instance.ec2_instance_id #=> String
     #   resp.items[0].launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
@@ -1519,7 +1535,7 @@ module Aws::Mgn
     #   resp.items[0].life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.items[0].life_cycle.last_test.initiated.job_id #=> String
     #   resp.items[0].life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.items[0].life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.items[0].life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
     #   resp.items[0].replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.items[0].source_properties.cpus #=> Array
     #   resp.items[0].source_properties.cpus[0].cores #=> Integer
@@ -1544,6 +1560,7 @@ module Aws::Mgn
     #   resp.items[0].source_server_id #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].user_provided_id #=> String
     #   resp.items[0].vcenter_client_id #=> String
     #   resp.next_token #=> String
     #
@@ -1677,6 +1694,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
@@ -1684,6 +1702,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
@@ -1713,6 +1732,7 @@ module Aws::Mgn
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
     #   resp.is_archived #=> Boolean
     #   resp.launched_instance.ec2_instance_id #=> String
     #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
@@ -1729,7 +1749,7 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
     #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -1754,6 +1774,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
     #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisconnectFromService AWS API Documentation
@@ -1787,6 +1808,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
@@ -1794,6 +1816,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
@@ -1823,6 +1846,7 @@ module Aws::Mgn
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
     #   resp.is_archived #=> Boolean
     #   resp.launched_instance.ec2_instance_id #=> String
     #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
@@ -1839,7 +1863,7 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
     #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -1864,6 +1888,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
     #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/FinalizeCutover AWS API Documentation
@@ -1919,6 +1944,8 @@ module Aws::Mgn
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
     #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
@@ -2072,6 +2099,205 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # List export errors.
+    #
+    # @option params [required, String] :export_id
+    #   List export errors request export id.
+    #
+    # @option params [Integer] :max_results
+    #   List export errors request max results.
+    #
+    # @option params [String] :next_token
+    #   List export errors request next token.
+    #
+    # @return [Types::ListExportErrorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExportErrorsResponse#items #items} => Array&lt;Types::ExportTaskError&gt;
+    #   * {Types::ListExportErrorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_export_errors({
+    #     export_id: "ExportID", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].error_data.raw_error #=> String
+    #   resp.items[0].error_date_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExportErrors AWS API Documentation
+    #
+    # @overload list_export_errors(params = {})
+    # @param [Hash] params ({})
+    def list_export_errors(params = {}, options = {})
+      req = build_request(:list_export_errors, params)
+      req.send_request(options)
+    end
+
+    # List exports.
+    #
+    # @option params [Types::ListExportsRequestFilters] :filters
+    #   List exports request filters.
+    #
+    # @option params [Integer] :max_results
+    #   List export request max results.
+    #
+    # @option params [String] :next_token
+    #   List export request next token.
+    #
+    # @return [Types::ListExportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExportsResponse#items #items} => Array&lt;Types::ExportTask&gt;
+    #   * {Types::ListExportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exports({
+    #     filters: {
+    #       export_i_ds: ["ExportID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].creation_date_time #=> String
+    #   resp.items[0].end_date_time #=> String
+    #   resp.items[0].export_id #=> String
+    #   resp.items[0].progress_percentage #=> Float
+    #   resp.items[0].s3_bucket #=> String
+    #   resp.items[0].s3_bucket_owner #=> String
+    #   resp.items[0].s3_key #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED"
+    #   resp.items[0].summary.applications_count #=> Integer
+    #   resp.items[0].summary.servers_count #=> Integer
+    #   resp.items[0].summary.waves_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExports AWS API Documentation
+    #
+    # @overload list_exports(params = {})
+    # @param [Hash] params ({})
+    def list_exports(params = {}, options = {})
+      req = build_request(:list_exports, params)
+      req.send_request(options)
+    end
+
+    # List import errors.
+    #
+    # @option params [required, String] :import_id
+    #   List import errors request import id.
+    #
+    # @option params [Integer] :max_results
+    #   List import errors request max results.
+    #
+    # @option params [String] :next_token
+    #   List import errors request next token.
+    #
+    # @return [Types::ListImportErrorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportErrorsResponse#items #items} => Array&lt;Types::ImportTaskError&gt;
+    #   * {Types::ListImportErrorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_import_errors({
+    #     import_id: "ImportID", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].error_data.application_id #=> String
+    #   resp.items[0].error_data.ec2_launch_template_id #=> String
+    #   resp.items[0].error_data.raw_error #=> String
+    #   resp.items[0].error_data.row_number #=> Integer
+    #   resp.items[0].error_data.source_server_id #=> String
+    #   resp.items[0].error_data.wave_id #=> String
+    #   resp.items[0].error_date_time #=> String
+    #   resp.items[0].error_type #=> String, one of "VALIDATION_ERROR", "PROCESSING_ERROR"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportErrors AWS API Documentation
+    #
+    # @overload list_import_errors(params = {})
+    # @param [Hash] params ({})
+    def list_import_errors(params = {}, options = {})
+      req = build_request(:list_import_errors, params)
+      req.send_request(options)
+    end
+
+    # List imports.
+    #
+    # @option params [Types::ListImportsRequestFilters] :filters
+    #   List imports request filters.
+    #
+    # @option params [Integer] :max_results
+    #   List imports request max results.
+    #
+    # @option params [String] :next_token
+    #   List imports request next token.
+    #
+    # @return [Types::ListImportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportsResponse#items #items} => Array&lt;Types::ImportTask&gt;
+    #   * {Types::ListImportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_imports({
+    #     filters: {
+    #       import_i_ds: ["ImportID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].creation_date_time #=> String
+    #   resp.items[0].end_date_time #=> String
+    #   resp.items[0].import_id #=> String
+    #   resp.items[0].progress_percentage #=> Float
+    #   resp.items[0].s3_bucket_source.s3_bucket #=> String
+    #   resp.items[0].s3_bucket_source.s3_bucket_owner #=> String
+    #   resp.items[0].s3_bucket_source.s3_key #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED"
+    #   resp.items[0].summary.applications.created_count #=> Integer
+    #   resp.items[0].summary.applications.modified_count #=> Integer
+    #   resp.items[0].summary.servers.created_count #=> Integer
+    #   resp.items[0].summary.servers.modified_count #=> Integer
+    #   resp.items[0].summary.waves.created_count #=> Integer
+    #   resp.items[0].summary.waves.modified_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImports AWS API Documentation
+    #
+    # @overload list_imports(params = {})
+    # @param [Hash] params ({})
+    def list_imports(params = {}, options = {})
+      req = build_request(:list_imports, params)
+      req.send_request(options)
+    end
+
     # List source server post migration custom actions.
     #
     # @option params [Types::SourceServerActionsRequestFilters] :filters
@@ -2113,8 +2339,12 @@ module Aws::Mgn
     #   resp.items[0].action_id #=> String
     #   resp.items[0].action_name #=> String
     #   resp.items[0].active #=> Boolean
+    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
+    #   resp.items[0].description #=> String
     #   resp.items[0].document_identifier #=> String
     #   resp.items[0].document_version #=> String
+    #   resp.items[0].external_parameters #=> Hash
+    #   resp.items[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.items[0].must_succeed_for_cutover #=> Boolean
     #   resp.items[0].order #=> Integer
     #   resp.items[0].parameters #=> Hash
@@ -2201,8 +2431,12 @@ module Aws::Mgn
     #   resp.items[0].action_id #=> String
     #   resp.items[0].action_name #=> String
     #   resp.items[0].active #=> Boolean
+    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
+    #   resp.items[0].description #=> String
     #   resp.items[0].document_identifier #=> String
     #   resp.items[0].document_version #=> String
+    #   resp.items[0].external_parameters #=> Hash
+    #   resp.items[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.items[0].must_succeed_for_cutover #=> Boolean
     #   resp.items[0].operating_system #=> String
     #   resp.items[0].order #=> Integer
@@ -2292,6 +2526,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
@@ -2299,6 +2534,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
@@ -2328,6 +2564,7 @@ module Aws::Mgn
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
     #   resp.is_archived #=> Boolean
     #   resp.launched_instance.ec2_instance_id #=> String
     #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
@@ -2344,7 +2581,7 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
     #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -2369,6 +2606,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
     #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/MarkAsArchived AWS API Documentation
@@ -2391,11 +2629,20 @@ module Aws::Mgn
     # @option params [Boolean] :active
     #   Source server post migration custom action active status.
     #
+    # @option params [String] :category
+    #   Source server post migration custom action category.
+    #
+    # @option params [String] :description
+    #   Source server post migration custom action description.
+    #
     # @option params [required, String] :document_identifier
     #   Source server post migration custom action document identifier.
     #
     # @option params [String] :document_version
     #   Source server post migration custom action document version.
+    #
+    # @option params [Hash<String,Types::SsmExternalParameter>] :external_parameters
+    #   Source server post migration custom action external parameters.
     #
     # @option params [Boolean] :must_succeed_for_cutover
     #   Source server post migration custom action must succeed for cutover.
@@ -2417,8 +2664,11 @@ module Aws::Mgn
     #   * {Types::SourceServerActionDocument#action_id #action_id} => String
     #   * {Types::SourceServerActionDocument#action_name #action_name} => String
     #   * {Types::SourceServerActionDocument#active #active} => Boolean
+    #   * {Types::SourceServerActionDocument#category #category} => String
+    #   * {Types::SourceServerActionDocument#description #description} => String
     #   * {Types::SourceServerActionDocument#document_identifier #document_identifier} => String
     #   * {Types::SourceServerActionDocument#document_version #document_version} => String
+    #   * {Types::SourceServerActionDocument#external_parameters #external_parameters} => Hash&lt;String,Types::SsmExternalParameter&gt;
     #   * {Types::SourceServerActionDocument#must_succeed_for_cutover #must_succeed_for_cutover} => Boolean
     #   * {Types::SourceServerActionDocument#order #order} => Integer
     #   * {Types::SourceServerActionDocument#parameters #parameters} => Hash&lt;String,Array&lt;Types::SsmParameterStoreParameter&gt;&gt;
@@ -2430,8 +2680,15 @@ module Aws::Mgn
     #     action_id: "ActionID", # required
     #     action_name: "ActionName", # required
     #     active: false,
+    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
+    #     description: "ActionDescription",
     #     document_identifier: "BoundedString", # required
     #     document_version: "DocumentVersion",
+    #     external_parameters: {
+    #       "SsmDocumentParameterName" => {
+    #         dynamic_path: "JmesPathString",
+    #       },
+    #     },
     #     must_succeed_for_cutover: false,
     #     order: 1, # required
     #     parameters: {
@@ -2451,8 +2708,12 @@ module Aws::Mgn
     #   resp.action_id #=> String
     #   resp.action_name #=> String
     #   resp.active #=> Boolean
+    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
+    #   resp.description #=> String
     #   resp.document_identifier #=> String
     #   resp.document_version #=> String
+    #   resp.external_parameters #=> Hash
+    #   resp.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.must_succeed_for_cutover #=> Boolean
     #   resp.order #=> Integer
     #   resp.parameters #=> Hash
@@ -2481,11 +2742,20 @@ module Aws::Mgn
     # @option params [Boolean] :active
     #   Template post migration custom action active status.
     #
+    # @option params [String] :category
+    #   Template post migration custom action category.
+    #
+    # @option params [String] :description
+    #   Template post migration custom action description.
+    #
     # @option params [required, String] :document_identifier
     #   Template post migration custom action document identifier.
     #
     # @option params [String] :document_version
     #   Template post migration custom action document version.
+    #
+    # @option params [Hash<String,Types::SsmExternalParameter>] :external_parameters
+    #   Template post migration custom action external parameters.
     #
     # @option params [required, String] :launch_configuration_template_id
     #   Launch configuration template ID.
@@ -2511,8 +2781,11 @@ module Aws::Mgn
     #   * {Types::TemplateActionDocument#action_id #action_id} => String
     #   * {Types::TemplateActionDocument#action_name #action_name} => String
     #   * {Types::TemplateActionDocument#active #active} => Boolean
+    #   * {Types::TemplateActionDocument#category #category} => String
+    #   * {Types::TemplateActionDocument#description #description} => String
     #   * {Types::TemplateActionDocument#document_identifier #document_identifier} => String
     #   * {Types::TemplateActionDocument#document_version #document_version} => String
+    #   * {Types::TemplateActionDocument#external_parameters #external_parameters} => Hash&lt;String,Types::SsmExternalParameter&gt;
     #   * {Types::TemplateActionDocument#must_succeed_for_cutover #must_succeed_for_cutover} => Boolean
     #   * {Types::TemplateActionDocument#operating_system #operating_system} => String
     #   * {Types::TemplateActionDocument#order #order} => Integer
@@ -2525,8 +2798,15 @@ module Aws::Mgn
     #     action_id: "ActionID", # required
     #     action_name: "BoundedString", # required
     #     active: false,
+    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
+    #     description: "ActionDescription",
     #     document_identifier: "BoundedString", # required
     #     document_version: "DocumentVersion",
+    #     external_parameters: {
+    #       "SsmDocumentParameterName" => {
+    #         dynamic_path: "JmesPathString",
+    #       },
+    #     },
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     must_succeed_for_cutover: false,
     #     operating_system: "OperatingSystemString",
@@ -2547,8 +2827,12 @@ module Aws::Mgn
     #   resp.action_id #=> String
     #   resp.action_name #=> String
     #   resp.active #=> Boolean
+    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
+    #   resp.description #=> String
     #   resp.document_identifier #=> String
     #   resp.document_version #=> String
+    #   resp.external_parameters #=> Hash
+    #   resp.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.must_succeed_for_cutover #=> Boolean
     #   resp.operating_system #=> String
     #   resp.order #=> Integer
@@ -2633,6 +2917,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
@@ -2640,6 +2925,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
@@ -2669,6 +2955,7 @@ module Aws::Mgn
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
     #   resp.is_archived #=> Boolean
     #   resp.launched_instance.ec2_instance_id #=> String
     #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
@@ -2685,7 +2972,7 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
     #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -2710,6 +2997,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
     #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RetryDataReplication AWS API Documentation
@@ -2759,6 +3047,8 @@ module Aws::Mgn
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
@@ -2783,6 +3073,104 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Start export.
+    #
+    # @option params [required, String] :s3_bucket
+    #   Start export request s3 bucket.
+    #
+    # @option params [String] :s3_bucket_owner
+    #   Start export request s3 bucket owner.
+    #
+    # @option params [required, String] :s3_key
+    #   Start export request s3key.
+    #
+    # @return [Types::StartExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartExportResponse#export_task #export_task} => Types::ExportTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_export({
+    #     s3_bucket: "S3BucketName", # required
+    #     s3_bucket_owner: "AccountID",
+    #     s3_key: "S3Key", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_task.creation_date_time #=> String
+    #   resp.export_task.end_date_time #=> String
+    #   resp.export_task.export_id #=> String
+    #   resp.export_task.progress_percentage #=> Float
+    #   resp.export_task.s3_bucket #=> String
+    #   resp.export_task.s3_bucket_owner #=> String
+    #   resp.export_task.s3_key #=> String
+    #   resp.export_task.status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED"
+    #   resp.export_task.summary.applications_count #=> Integer
+    #   resp.export_task.summary.servers_count #=> Integer
+    #   resp.export_task.summary.waves_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartExport AWS API Documentation
+    #
+    # @overload start_export(params = {})
+    # @param [Hash] params ({})
+    def start_export(params = {}, options = {})
+      req = build_request(:start_export, params)
+      req.send_request(options)
+    end
+
+    # Start import.
+    #
+    # @option params [String] :client_token
+    #   Start import request client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::S3BucketSource] :s3_bucket_source
+    #   Start import request s3 bucket source.
+    #
+    # @return [Types::StartImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportResponse#import_task #import_task} => Types::ImportTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import({
+    #     client_token: "ClientIdempotencyToken",
+    #     s3_bucket_source: { # required
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID",
+    #       s3_key: "S3Key", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_task.creation_date_time #=> String
+    #   resp.import_task.end_date_time #=> String
+    #   resp.import_task.import_id #=> String
+    #   resp.import_task.progress_percentage #=> Float
+    #   resp.import_task.s3_bucket_source.s3_bucket #=> String
+    #   resp.import_task.s3_bucket_source.s3_bucket_owner #=> String
+    #   resp.import_task.s3_bucket_source.s3_key #=> String
+    #   resp.import_task.status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED"
+    #   resp.import_task.summary.applications.created_count #=> Integer
+    #   resp.import_task.summary.applications.modified_count #=> Integer
+    #   resp.import_task.summary.servers.created_count #=> Integer
+    #   resp.import_task.summary.servers.modified_count #=> Integer
+    #   resp.import_task.summary.waves.created_count #=> Integer
+    #   resp.import_task.summary.waves.modified_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartImport AWS API Documentation
+    #
+    # @overload start_import(params = {})
+    # @param [Hash] params ({})
+    def start_import(params = {}, options = {})
+      req = build_request(:start_import, params)
+      req.send_request(options)
+    end
+
     # Starts replication for SNAPSHOT\_SHIPPING agents.
     #
     # @option params [required, String] :source_server_id
@@ -2793,6 +3181,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
@@ -2800,6 +3189,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
@@ -2829,6 +3219,7 @@ module Aws::Mgn
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
     #   resp.is_archived #=> Boolean
     #   resp.launched_instance.ec2_instance_id #=> String
     #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
@@ -2845,7 +3236,7 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
     #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -2870,6 +3261,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
     #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartReplication AWS API Documentation
@@ -2919,6 +3311,8 @@ module Aws::Mgn
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
@@ -3013,6 +3407,8 @@ module Aws::Mgn
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
@@ -3292,6 +3688,11 @@ module Aws::Mgn
     #       ssm_documents: [
     #         {
     #           action_name: "BoundedString", # required
+    #           external_parameters: {
+    #             "SsmDocumentParameterName" => {
+    #               dynamic_path: "JmesPathString",
+    #             },
+    #           },
     #           must_succeed_for_cutover: false,
     #           parameters: {
     #             "SsmDocumentParameterName" => [
@@ -3327,6 +3728,8 @@ module Aws::Mgn
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
     #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
@@ -3437,6 +3840,11 @@ module Aws::Mgn
     #       ssm_documents: [
     #         {
     #           action_name: "BoundedString", # required
+    #           external_parameters: {
+    #             "SsmDocumentParameterName" => {
+    #               dynamic_path: "JmesPathString",
+    #             },
+    #           },
     #           must_succeed_for_cutover: false,
     #           parameters: {
     #             "SsmDocumentParameterName" => [
@@ -3482,6 +3890,8 @@ module Aws::Mgn
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
     #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
@@ -3776,6 +4186,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
@@ -3783,6 +4194,7 @@ module Aws::Mgn
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
@@ -3813,6 +4225,7 @@ module Aws::Mgn
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
     #   resp.is_archived #=> Boolean
     #   resp.launched_instance.ec2_instance_id #=> String
     #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
@@ -3829,7 +4242,7 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
     #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -3854,6 +4267,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
     #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateSourceServerReplicationType AWS API Documentation
@@ -3935,7 +4349,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

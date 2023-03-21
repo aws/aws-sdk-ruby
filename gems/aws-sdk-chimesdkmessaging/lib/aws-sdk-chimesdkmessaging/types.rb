@@ -1272,6 +1272,18 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the streaming configurations being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteMessagingStreamingConfigurationsRequest AWS API Documentation
+    #
+    class DeleteMessagingStreamingConfigurationsRequest < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_arn
     #   The ARN of the channel from which the user is banned.
     #   @return [String]
@@ -1718,6 +1730,30 @@ module Aws::ChimeSDKMessaging
     #
     class GetMessagingSessionEndpointResponse < Struct.new(
       :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the streaming configurations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetMessagingStreamingConfigurationsRequest AWS API Documentation
+    #
+    class GetMessagingStreamingConfigurationsRequest < Struct.new(
+      :app_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] streaming_configurations
+    #   The streaming settings.
+    #   @return [Array<Types::StreamingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetMessagingStreamingConfigurationsResponse AWS API Documentation
+    #
+    class GetMessagingStreamingConfigurationsResponse < Struct.new(
+      :streaming_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2512,6 +2548,35 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the streaming configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] streaming_configurations
+    #   The streaming configurations.
+    #   @return [Array<Types::StreamingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PutMessagingStreamingConfigurationsRequest AWS API Documentation
+    #
+    class PutMessagingStreamingConfigurationsRequest < Struct.new(
+      :app_instance_arn,
+      :streaming_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] streaming_configurations
+    #   The requested streaming configurations.
+    #   @return [Array<Types::StreamingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PutMessagingStreamingConfigurationsResponse AWS API Documentation
+    #
+    class PutMessagingStreamingConfigurationsResponse < Struct.new(
+      :streaming_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_arn
     #   The ARN of the channel containing the messages that you want to
     #   redact.
@@ -2788,6 +2853,25 @@ module Aws::ChimeSDKMessaging
     class ServiceUnavailableException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for connecting a messaging stream to Amazon Kinesis.
+    #
+    # @!attribute [rw] data_type
+    #   The data type of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource in the configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/StreamingConfiguration AWS API Documentation
+    #
+    class StreamingConfiguration < Struct.new(
+      :data_type,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end

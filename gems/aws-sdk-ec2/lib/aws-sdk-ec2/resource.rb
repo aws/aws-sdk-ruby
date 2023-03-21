@@ -1073,7 +1073,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :description
-    #   A description for the security group. This is informational only.
+    #   A description for the security group.
     #
     #   Constraints: Up to 255 characters in length
     #

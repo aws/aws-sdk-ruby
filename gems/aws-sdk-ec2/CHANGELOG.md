@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.371.0 (2023-03-21)
+------------------
+
+* Feature - This release adds support for AWS Network Firewall, AWS PrivateLink, and Gateway Load Balancers to Amazon VPC Reachability Analyzer, and it makes the path destination optional as long as a destination address in the filter at source is provided.
+
 1.370.0 (2023-03-14)
 ------------------
 

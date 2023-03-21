@@ -84,6 +84,8 @@ module Aws::ChimeSDKMessaging
             Aws::ChimeSDKMessaging::Endpoints::DeleteChannelMessage.build(context)
           when :delete_channel_moderator
             Aws::ChimeSDKMessaging::Endpoints::DeleteChannelModerator.build(context)
+          when :delete_messaging_streaming_configurations
+            Aws::ChimeSDKMessaging::Endpoints::DeleteMessagingStreamingConfigurations.build(context)
           when :describe_channel
             Aws::ChimeSDKMessaging::Endpoints::DescribeChannel.build(context)
           when :describe_channel_ban
@@ -108,6 +110,8 @@ module Aws::ChimeSDKMessaging
             Aws::ChimeSDKMessaging::Endpoints::GetChannelMessageStatus.build(context)
           when :get_messaging_session_endpoint
             Aws::ChimeSDKMessaging::Endpoints::GetMessagingSessionEndpoint.build(context)
+          when :get_messaging_streaming_configurations
+            Aws::ChimeSDKMessaging::Endpoints::GetMessagingStreamingConfigurations.build(context)
           when :list_channel_bans
             Aws::ChimeSDKMessaging::Endpoints::ListChannelBans.build(context)
           when :list_channel_flows
@@ -132,6 +136,8 @@ module Aws::ChimeSDKMessaging
             Aws::ChimeSDKMessaging::Endpoints::ListTagsForResource.build(context)
           when :put_channel_membership_preferences
             Aws::ChimeSDKMessaging::Endpoints::PutChannelMembershipPreferences.build(context)
+          when :put_messaging_streaming_configurations
+            Aws::ChimeSDKMessaging::Endpoints::PutMessagingStreamingConfigurations.build(context)
           when :redact_channel_message
             Aws::ChimeSDKMessaging::Endpoints::RedactChannelMessage.build(context)
           when :search_channels

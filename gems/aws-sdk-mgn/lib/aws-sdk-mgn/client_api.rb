@@ -15,6 +15,9 @@ module Aws::Mgn
 
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountID = Shapes::StringShape.new(name: 'AccountID')
+    ActionCategory = Shapes::StringShape.new(name: 'ActionCategory')
+    ActionDescription = Shapes::StringShape.new(name: 'ActionDescription')
     ActionID = Shapes::StringShape.new(name: 'ActionID')
     ActionIDs = Shapes::ListShape.new(name: 'ActionIDs')
     ActionName = Shapes::StringShape.new(name: 'ActionName')
@@ -42,6 +45,7 @@ module Aws::Mgn
     ChangeServerLifeCycleStateRequest = Shapes::StructureShape.new(name: 'ChangeServerLifeCycleStateRequest')
     ChangeServerLifeCycleStateSourceServerLifecycle = Shapes::StructureShape.new(name: 'ChangeServerLifeCycleStateSourceServerLifecycle')
     ChangeServerLifeCycleStateSourceServerLifecycleState = Shapes::StringShape.new(name: 'ChangeServerLifeCycleStateSourceServerLifecycleState')
+    ClientIdempotencyToken = Shapes::StringShape.new(name: 'ClientIdempotencyToken')
     CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionErrors = Shapes::ListShape.new(name: 'ConflictExceptionErrors')
@@ -104,18 +108,41 @@ module Aws::Mgn
     EC2InstanceType = Shapes::StringShape.new(name: 'EC2InstanceType')
     EC2LaunchConfigurationTemplateID = Shapes::StringShape.new(name: 'EC2LaunchConfigurationTemplateID')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
+    ExportErrorData = Shapes::StructureShape.new(name: 'ExportErrorData')
+    ExportErrors = Shapes::ListShape.new(name: 'ExportErrors')
+    ExportID = Shapes::StringShape.new(name: 'ExportID')
+    ExportStatus = Shapes::StringShape.new(name: 'ExportStatus')
+    ExportTask = Shapes::StructureShape.new(name: 'ExportTask')
+    ExportTaskError = Shapes::StructureShape.new(name: 'ExportTaskError')
+    ExportTaskSummary = Shapes::StructureShape.new(name: 'ExportTaskSummary')
+    ExportsList = Shapes::ListShape.new(name: 'ExportsList')
     FinalizeCutoverRequest = Shapes::StructureShape.new(name: 'FinalizeCutoverRequest')
     FirstBoot = Shapes::StringShape.new(name: 'FirstBoot')
+    Float = Shapes::FloatShape.new(name: 'Float')
     GetLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'GetLaunchConfigurationRequest')
     GetReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'GetReplicationConfigurationRequest')
     IPsList = Shapes::ListShape.new(name: 'IPsList')
     ISO8601DatetimeString = Shapes::StringShape.new(name: 'ISO8601DatetimeString')
     ISO8601DurationString = Shapes::StringShape.new(name: 'ISO8601DurationString')
     IdentificationHints = Shapes::StructureShape.new(name: 'IdentificationHints')
+    ImportErrorData = Shapes::StructureShape.new(name: 'ImportErrorData')
+    ImportErrorType = Shapes::StringShape.new(name: 'ImportErrorType')
+    ImportErrors = Shapes::ListShape.new(name: 'ImportErrors')
+    ImportID = Shapes::StringShape.new(name: 'ImportID')
+    ImportIDsFilter = Shapes::ListShape.new(name: 'ImportIDsFilter')
+    ImportList = Shapes::ListShape.new(name: 'ImportList')
+    ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
+    ImportTask = Shapes::StructureShape.new(name: 'ImportTask')
+    ImportTaskError = Shapes::StructureShape.new(name: 'ImportTaskError')
+    ImportTaskSummary = Shapes::StructureShape.new(name: 'ImportTaskSummary')
+    ImportTaskSummaryApplications = Shapes::StructureShape.new(name: 'ImportTaskSummaryApplications')
+    ImportTaskSummaryServers = Shapes::StructureShape.new(name: 'ImportTaskSummaryServers')
+    ImportTaskSummaryWaves = Shapes::StructureShape.new(name: 'ImportTaskSummaryWaves')
     InitializeServiceRequest = Shapes::StructureShape.new(name: 'InitializeServiceRequest')
     InitializeServiceResponse = Shapes::StructureShape.new(name: 'InitializeServiceResponse')
     InitiatedBy = Shapes::StringShape.new(name: 'InitiatedBy')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    JmesPathString = Shapes::StringShape.new(name: 'JmesPathString')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobID = Shapes::StringShape.new(name: 'JobID')
     JobLog = Shapes::StructureShape.new(name: 'JobLog')
@@ -151,6 +178,17 @@ module Aws::Mgn
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsRequestFilters = Shapes::StructureShape.new(name: 'ListApplicationsRequestFilters')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
+    ListExportErrorsRequest = Shapes::StructureShape.new(name: 'ListExportErrorsRequest')
+    ListExportErrorsResponse = Shapes::StructureShape.new(name: 'ListExportErrorsResponse')
+    ListExportsRequest = Shapes::StructureShape.new(name: 'ListExportsRequest')
+    ListExportsRequestFilters = Shapes::StructureShape.new(name: 'ListExportsRequestFilters')
+    ListExportsRequestFiltersExportIDs = Shapes::ListShape.new(name: 'ListExportsRequestFiltersExportIDs')
+    ListExportsResponse = Shapes::StructureShape.new(name: 'ListExportsResponse')
+    ListImportErrorsRequest = Shapes::StructureShape.new(name: 'ListImportErrorsRequest')
+    ListImportErrorsResponse = Shapes::StructureShape.new(name: 'ListImportErrorsResponse')
+    ListImportsRequest = Shapes::StructureShape.new(name: 'ListImportsRequest')
+    ListImportsRequestFilters = Shapes::StructureShape.new(name: 'ListImportsRequestFilters')
+    ListImportsResponse = Shapes::StructureShape.new(name: 'ListImportsResponse')
     ListSourceServerActionsRequest = Shapes::StructureShape.new(name: 'ListSourceServerActionsRequest')
     ListSourceServerActionsResponse = Shapes::StructureShape.new(name: 'ListSourceServerActionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -198,6 +236,9 @@ module Aws::Mgn
     ReplicationTypes = Shapes::ListShape.new(name: 'ReplicationTypes')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryDataReplicationRequest = Shapes::StructureShape.new(name: 'RetryDataReplicationRequest')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3BucketSource = Shapes::StructureShape.new(name: 'S3BucketSource')
+    S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3LogBucketName = Shapes::StringShape.new(name: 'S3LogBucketName')
     SecurityGroupID = Shapes::StringShape.new(name: 'SecurityGroupID')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -210,11 +251,13 @@ module Aws::Mgn
     SourceServerID = Shapes::StringShape.new(name: 'SourceServerID')
     SourceServersList = Shapes::ListShape.new(name: 'SourceServersList')
     SsmDocument = Shapes::StructureShape.new(name: 'SsmDocument')
+    SsmDocumentExternalParameters = Shapes::MapShape.new(name: 'SsmDocumentExternalParameters')
     SsmDocumentName = Shapes::StringShape.new(name: 'SsmDocumentName')
     SsmDocumentParameterName = Shapes::StringShape.new(name: 'SsmDocumentParameterName')
     SsmDocumentParameters = Shapes::MapShape.new(name: 'SsmDocumentParameters')
     SsmDocumentType = Shapes::StringShape.new(name: 'SsmDocumentType')
     SsmDocuments = Shapes::ListShape.new(name: 'SsmDocuments')
+    SsmExternalParameter = Shapes::UnionShape.new(name: 'SsmExternalParameter')
     SsmParameterStoreParameter = Shapes::StructureShape.new(name: 'SsmParameterStoreParameter')
     SsmParameterStoreParameterName = Shapes::StringShape.new(name: 'SsmParameterStoreParameterName')
     SsmParameterStoreParameterType = Shapes::StringShape.new(name: 'SsmParameterStoreParameterType')
@@ -222,6 +265,10 @@ module Aws::Mgn
     StartCutoverRequest = Shapes::StructureShape.new(name: 'StartCutoverRequest')
     StartCutoverRequestSourceServerIDs = Shapes::ListShape.new(name: 'StartCutoverRequestSourceServerIDs')
     StartCutoverResponse = Shapes::StructureShape.new(name: 'StartCutoverResponse')
+    StartExportRequest = Shapes::StructureShape.new(name: 'StartExportRequest')
+    StartExportResponse = Shapes::StructureShape.new(name: 'StartExportResponse')
+    StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
+    StartImportResponse = Shapes::StructureShape.new(name: 'StartImportResponse')
     StartReplicationRequest = Shapes::StructureShape.new(name: 'StartReplicationRequest')
     StartTestRequest = Shapes::StructureShape.new(name: 'StartTestRequest')
     StartTestRequestSourceServerIDs = Shapes::ListShape.new(name: 'StartTestRequestSourceServerIDs')
@@ -549,6 +596,33 @@ module Aws::Mgn
     ErrorDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "resourceType"))
     ErrorDetails.struct_class = Types::ErrorDetails
 
+    ExportErrorData.add_member(:raw_error, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "rawError"))
+    ExportErrorData.struct_class = Types::ExportErrorData
+
+    ExportErrors.member = Shapes::ShapeRef.new(shape: ExportTaskError)
+
+    ExportTask.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "creationDateTime"))
+    ExportTask.add_member(:end_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "endDateTime"))
+    ExportTask.add_member(:export_id, Shapes::ShapeRef.new(shape: ExportID, location_name: "exportID"))
+    ExportTask.add_member(:progress_percentage, Shapes::ShapeRef.new(shape: Float, location_name: "progressPercentage"))
+    ExportTask.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "s3Bucket"))
+    ExportTask.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: AccountID, location_name: "s3BucketOwner"))
+    ExportTask.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "s3Key"))
+    ExportTask.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, location_name: "status"))
+    ExportTask.add_member(:summary, Shapes::ShapeRef.new(shape: ExportTaskSummary, location_name: "summary"))
+    ExportTask.struct_class = Types::ExportTask
+
+    ExportTaskError.add_member(:error_data, Shapes::ShapeRef.new(shape: ExportErrorData, location_name: "errorData"))
+    ExportTaskError.add_member(:error_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "errorDateTime"))
+    ExportTaskError.struct_class = Types::ExportTaskError
+
+    ExportTaskSummary.add_member(:applications_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "applicationsCount"))
+    ExportTaskSummary.add_member(:servers_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "serversCount"))
+    ExportTaskSummary.add_member(:waves_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "wavesCount"))
+    ExportTaskSummary.struct_class = Types::ExportTaskSummary
+
+    ExportsList.member = Shapes::ShapeRef.new(shape: ExportTask)
+
     FinalizeCutoverRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     FinalizeCutoverRequest.struct_class = Types::FinalizeCutoverRequest
 
@@ -566,6 +640,51 @@ module Aws::Mgn
     IdentificationHints.add_member(:vm_path, Shapes::ShapeRef.new(shape: BoundedString, location_name: "vmPath"))
     IdentificationHints.add_member(:vm_ware_uuid, Shapes::ShapeRef.new(shape: BoundedString, location_name: "vmWareUuid"))
     IdentificationHints.struct_class = Types::IdentificationHints
+
+    ImportErrorData.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, location_name: "applicationID"))
+    ImportErrorData.add_member(:ec2_launch_template_id, Shapes::ShapeRef.new(shape: BoundedString, location_name: "ec2LaunchTemplateID"))
+    ImportErrorData.add_member(:raw_error, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "rawError"))
+    ImportErrorData.add_member(:row_number, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "rowNumber"))
+    ImportErrorData.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
+    ImportErrorData.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, location_name: "waveID"))
+    ImportErrorData.struct_class = Types::ImportErrorData
+
+    ImportErrors.member = Shapes::ShapeRef.new(shape: ImportTaskError)
+
+    ImportIDsFilter.member = Shapes::ShapeRef.new(shape: ImportID)
+
+    ImportList.member = Shapes::ShapeRef.new(shape: ImportTask)
+
+    ImportTask.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "creationDateTime"))
+    ImportTask.add_member(:end_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "endDateTime"))
+    ImportTask.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportID, location_name: "importID"))
+    ImportTask.add_member(:progress_percentage, Shapes::ShapeRef.new(shape: Float, location_name: "progressPercentage"))
+    ImportTask.add_member(:s3_bucket_source, Shapes::ShapeRef.new(shape: S3BucketSource, location_name: "s3BucketSource"))
+    ImportTask.add_member(:status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "status"))
+    ImportTask.add_member(:summary, Shapes::ShapeRef.new(shape: ImportTaskSummary, location_name: "summary"))
+    ImportTask.struct_class = Types::ImportTask
+
+    ImportTaskError.add_member(:error_data, Shapes::ShapeRef.new(shape: ImportErrorData, location_name: "errorData"))
+    ImportTaskError.add_member(:error_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "errorDateTime"))
+    ImportTaskError.add_member(:error_type, Shapes::ShapeRef.new(shape: ImportErrorType, location_name: "errorType"))
+    ImportTaskError.struct_class = Types::ImportTaskError
+
+    ImportTaskSummary.add_member(:applications, Shapes::ShapeRef.new(shape: ImportTaskSummaryApplications, location_name: "applications"))
+    ImportTaskSummary.add_member(:servers, Shapes::ShapeRef.new(shape: ImportTaskSummaryServers, location_name: "servers"))
+    ImportTaskSummary.add_member(:waves, Shapes::ShapeRef.new(shape: ImportTaskSummaryWaves, location_name: "waves"))
+    ImportTaskSummary.struct_class = Types::ImportTaskSummary
+
+    ImportTaskSummaryApplications.add_member(:created_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "createdCount"))
+    ImportTaskSummaryApplications.add_member(:modified_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "modifiedCount"))
+    ImportTaskSummaryApplications.struct_class = Types::ImportTaskSummaryApplications
+
+    ImportTaskSummaryServers.add_member(:created_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "createdCount"))
+    ImportTaskSummaryServers.add_member(:modified_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "modifiedCount"))
+    ImportTaskSummaryServers.struct_class = Types::ImportTaskSummaryServers
+
+    ImportTaskSummaryWaves.add_member(:created_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "createdCount"))
+    ImportTaskSummaryWaves.add_member(:modified_count, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "modifiedCount"))
+    ImportTaskSummaryWaves.struct_class = Types::ImportTaskSummaryWaves
 
     InitializeServiceRequest.struct_class = Types::InitializeServiceRequest
 
@@ -713,6 +832,50 @@ module Aws::Mgn
     ListApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
 
+    ListExportErrorsRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: ExportID, required: true, location_name: "exportID"))
+    ListExportErrorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListExportErrorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListExportErrorsRequest.struct_class = Types::ListExportErrorsRequest
+
+    ListExportErrorsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ExportErrors, location_name: "items"))
+    ListExportErrorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListExportErrorsResponse.struct_class = Types::ListExportErrorsResponse
+
+    ListExportsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListExportsRequestFilters, location_name: "filters"))
+    ListExportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListExportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListExportsRequest.struct_class = Types::ListExportsRequest
+
+    ListExportsRequestFilters.add_member(:export_i_ds, Shapes::ShapeRef.new(shape: ListExportsRequestFiltersExportIDs, location_name: "exportIDs"))
+    ListExportsRequestFilters.struct_class = Types::ListExportsRequestFilters
+
+    ListExportsRequestFiltersExportIDs.member = Shapes::ShapeRef.new(shape: ExportID)
+
+    ListExportsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ExportsList, location_name: "items"))
+    ListExportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListExportsResponse.struct_class = Types::ListExportsResponse
+
+    ListImportErrorsRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportID, required: true, location_name: "importID"))
+    ListImportErrorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListImportErrorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListImportErrorsRequest.struct_class = Types::ListImportErrorsRequest
+
+    ListImportErrorsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ImportErrors, location_name: "items"))
+    ListImportErrorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListImportErrorsResponse.struct_class = Types::ListImportErrorsResponse
+
+    ListImportsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListImportsRequestFilters, location_name: "filters"))
+    ListImportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListImportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListImportsRequest.struct_class = Types::ListImportsRequest
+
+    ListImportsRequestFilters.add_member(:import_i_ds, Shapes::ShapeRef.new(shape: ImportIDsFilter, location_name: "importIDs"))
+    ListImportsRequestFilters.struct_class = Types::ListImportsRequestFilters
+
+    ListImportsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ImportList, location_name: "items"))
+    ListImportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListImportsResponse.struct_class = Types::ListImportsResponse
+
     ListSourceServerActionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SourceServerActionsRequestFilters, location_name: "filters"))
     ListSourceServerActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
     ListSourceServerActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -789,8 +952,11 @@ module Aws::Mgn
     PutSourceServerActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, required: true, location_name: "actionID"))
     PutSourceServerActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
     PutSourceServerActionRequest.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
+    PutSourceServerActionRequest.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, location_name: "category"))
+    PutSourceServerActionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ActionDescription, location_name: "description"))
     PutSourceServerActionRequest.add_member(:document_identifier, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "documentIdentifier"))
     PutSourceServerActionRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "documentVersion"))
+    PutSourceServerActionRequest.add_member(:external_parameters, Shapes::ShapeRef.new(shape: SsmDocumentExternalParameters, location_name: "externalParameters"))
     PutSourceServerActionRequest.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
     PutSourceServerActionRequest.add_member(:order, Shapes::ShapeRef.new(shape: OrderType, required: true, location_name: "order"))
     PutSourceServerActionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
@@ -801,8 +967,11 @@ module Aws::Mgn
     PutTemplateActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, required: true, location_name: "actionID"))
     PutTemplateActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "actionName"))
     PutTemplateActionRequest.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
+    PutTemplateActionRequest.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, location_name: "category"))
+    PutTemplateActionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ActionDescription, location_name: "description"))
     PutTemplateActionRequest.add_member(:document_identifier, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "documentIdentifier"))
     PutTemplateActionRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "documentVersion"))
+    PutTemplateActionRequest.add_member(:external_parameters, Shapes::ShapeRef.new(shape: SsmDocumentExternalParameters, location_name: "externalParameters"))
     PutTemplateActionRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
     PutTemplateActionRequest.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
     PutTemplateActionRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystemString, location_name: "operatingSystem"))
@@ -883,6 +1052,11 @@ module Aws::Mgn
     RetryDataReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     RetryDataReplicationRequest.struct_class = Types::RetryDataReplicationRequest
 
+    S3BucketSource.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "s3Bucket"))
+    S3BucketSource.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: AccountID, location_name: "s3BucketOwner"))
+    S3BucketSource.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "s3Key"))
+    S3BucketSource.struct_class = Types::S3BucketSource
+
     ServiceQuotaExceededException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "quotaCode"))
@@ -905,6 +1079,7 @@ module Aws::Mgn
     SourceServer.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, location_name: "applicationID"))
     SourceServer.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     SourceServer.add_member(:data_replication_info, Shapes::ShapeRef.new(shape: DataReplicationInfo, location_name: "dataReplicationInfo"))
+    SourceServer.add_member(:fqdn_for_action_framework, Shapes::ShapeRef.new(shape: BoundedString, location_name: "fqdnForActionFramework"))
     SourceServer.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
     SourceServer.add_member(:launched_instance, Shapes::ShapeRef.new(shape: LaunchedInstance, location_name: "launchedInstance"))
     SourceServer.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "lifeCycle"))
@@ -912,14 +1087,18 @@ module Aws::Mgn
     SourceServer.add_member(:source_properties, Shapes::ShapeRef.new(shape: SourceProperties, location_name: "sourceProperties"))
     SourceServer.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
     SourceServer.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    SourceServer.add_member(:user_provided_id, Shapes::ShapeRef.new(shape: BoundedString, location_name: "userProvidedID"))
     SourceServer.add_member(:vcenter_client_id, Shapes::ShapeRef.new(shape: VcenterClientID, location_name: "vcenterClientID"))
     SourceServer.struct_class = Types::SourceServer
 
     SourceServerActionDocument.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, location_name: "actionID"))
     SourceServerActionDocument.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, location_name: "actionName"))
     SourceServerActionDocument.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
+    SourceServerActionDocument.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, location_name: "category"))
+    SourceServerActionDocument.add_member(:description, Shapes::ShapeRef.new(shape: ActionDescription, location_name: "description"))
     SourceServerActionDocument.add_member(:document_identifier, Shapes::ShapeRef.new(shape: BoundedString, location_name: "documentIdentifier"))
     SourceServerActionDocument.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "documentVersion"))
+    SourceServerActionDocument.add_member(:external_parameters, Shapes::ShapeRef.new(shape: SsmDocumentExternalParameters, location_name: "externalParameters"))
     SourceServerActionDocument.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
     SourceServerActionDocument.add_member(:order, Shapes::ShapeRef.new(shape: OrderType, location_name: "order"))
     SourceServerActionDocument.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
@@ -934,16 +1113,26 @@ module Aws::Mgn
     SourceServersList.member = Shapes::ShapeRef.new(shape: SourceServer)
 
     SsmDocument.add_member(:action_name, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "actionName"))
+    SsmDocument.add_member(:external_parameters, Shapes::ShapeRef.new(shape: SsmDocumentExternalParameters, location_name: "externalParameters"))
     SsmDocument.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
     SsmDocument.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
     SsmDocument.add_member(:ssm_document_name, Shapes::ShapeRef.new(shape: SsmDocumentName, required: true, location_name: "ssmDocumentName"))
     SsmDocument.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "timeoutSeconds"))
     SsmDocument.struct_class = Types::SsmDocument
 
+    SsmDocumentExternalParameters.key = Shapes::ShapeRef.new(shape: SsmDocumentParameterName)
+    SsmDocumentExternalParameters.value = Shapes::ShapeRef.new(shape: SsmExternalParameter)
+
     SsmDocumentParameters.key = Shapes::ShapeRef.new(shape: SsmDocumentParameterName)
     SsmDocumentParameters.value = Shapes::ShapeRef.new(shape: SsmParameterStoreParameters)
 
     SsmDocuments.member = Shapes::ShapeRef.new(shape: SsmDocument)
+
+    SsmExternalParameter.add_member(:dynamic_path, Shapes::ShapeRef.new(shape: JmesPathString, location_name: "dynamicPath"))
+    SsmExternalParameter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SsmExternalParameter.add_member_subclass(:dynamic_path, Types::SsmExternalParameter::DynamicPath)
+    SsmExternalParameter.add_member_subclass(:unknown, Types::SsmExternalParameter::Unknown)
+    SsmExternalParameter.struct_class = Types::SsmExternalParameter
 
     SsmParameterStoreParameter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: SsmParameterStoreParameterName, required: true, location_name: "parameterName"))
     SsmParameterStoreParameter.add_member(:parameter_type, Shapes::ShapeRef.new(shape: SsmParameterStoreParameterType, required: true, location_name: "parameterType"))
@@ -959,6 +1148,21 @@ module Aws::Mgn
 
     StartCutoverResponse.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "job"))
     StartCutoverResponse.struct_class = Types::StartCutoverResponse
+
+    StartExportRequest.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "s3Bucket"))
+    StartExportRequest.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: AccountID, location_name: "s3BucketOwner"))
+    StartExportRequest.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "s3Key"))
+    StartExportRequest.struct_class = Types::StartExportRequest
+
+    StartExportResponse.add_member(:export_task, Shapes::ShapeRef.new(shape: ExportTask, location_name: "exportTask"))
+    StartExportResponse.struct_class = Types::StartExportResponse
+
+    StartImportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartImportRequest.add_member(:s3_bucket_source, Shapes::ShapeRef.new(shape: S3BucketSource, required: true, location_name: "s3BucketSource"))
+    StartImportRequest.struct_class = Types::StartImportRequest
+
+    StartImportResponse.add_member(:import_task, Shapes::ShapeRef.new(shape: ImportTask, location_name: "importTask"))
+    StartImportResponse.struct_class = Types::StartImportResponse
 
     StartReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     StartReplicationRequest.struct_class = Types::StartReplicationRequest
@@ -984,8 +1188,11 @@ module Aws::Mgn
     TemplateActionDocument.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, location_name: "actionID"))
     TemplateActionDocument.add_member(:action_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "actionName"))
     TemplateActionDocument.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
+    TemplateActionDocument.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, location_name: "category"))
+    TemplateActionDocument.add_member(:description, Shapes::ShapeRef.new(shape: ActionDescription, location_name: "description"))
     TemplateActionDocument.add_member(:document_identifier, Shapes::ShapeRef.new(shape: BoundedString, location_name: "documentIdentifier"))
     TemplateActionDocument.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "documentVersion"))
+    TemplateActionDocument.add_member(:external_parameters, Shapes::ShapeRef.new(shape: SsmDocumentExternalParameters, location_name: "externalParameters"))
     TemplateActionDocument.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
     TemplateActionDocument.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystemString, location_name: "operatingSystem"))
     TemplateActionDocument.add_member(:order, Shapes::ShapeRef.new(shape: OrderType, location_name: "order"))
@@ -1538,6 +1745,69 @@ module Aws::Mgn
         )
       end)
 
+      api.add_operation(:list_export_errors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExportErrors"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListExportErrors"
+        o.input = Shapes::ShapeRef.new(shape: ListExportErrorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExportErrorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_exports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExports"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListExports"
+        o.input = Shapes::ShapeRef.new(shape: ListExportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_import_errors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImportErrors"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListImportErrors"
+        o.input = Shapes::ShapeRef.new(shape: ListImportErrorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImportErrorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_imports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImports"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListImports"
+        o.input = Shapes::ShapeRef.new(shape: ListImportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_source_server_actions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSourceServerActions"
         o.http_method = "POST"
@@ -1674,6 +1944,30 @@ module Aws::Mgn
         o.output = Shapes::ShapeRef.new(shape: StartCutoverResponse)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartExport"
+        o.input = Shapes::ShapeRef.new(shape: StartExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:start_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartImport"
+        o.input = Shapes::ShapeRef.new(shape: StartImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 

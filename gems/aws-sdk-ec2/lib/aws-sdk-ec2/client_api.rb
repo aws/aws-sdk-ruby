@@ -1301,7 +1301,10 @@ module Aws::EC2
     FederatedAuthenticationRequest = Shapes::StructureShape.new(name: 'FederatedAuthenticationRequest')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FilterPortRange = Shapes::StructureShape.new(name: 'FilterPortRange')
     FindingsFound = Shapes::StringShape.new(name: 'FindingsFound')
+    FirewallStatefulRule = Shapes::StructureShape.new(name: 'FirewallStatefulRule')
+    FirewallStatelessRule = Shapes::StructureShape.new(name: 'FirewallStatelessRule')
     FleetActivityStatus = Shapes::StringShape.new(name: 'FleetActivityStatus')
     FleetCapacityReservation = Shapes::StructureShape.new(name: 'FleetCapacityReservation')
     FleetCapacityReservationSet = Shapes::ListShape.new(name: 'FleetCapacityReservationSet')
@@ -1534,6 +1537,7 @@ module Aws::EC2
     ImportInstanceVolumeDetailSet = Shapes::ListShape.new(name: 'ImportInstanceVolumeDetailSet')
     ImportKeyPairRequest = Shapes::StructureShape.new(name: 'ImportKeyPairRequest')
     ImportKeyPairResult = Shapes::StructureShape.new(name: 'ImportKeyPairResult')
+    ImportManifestUrl = Shapes::StringShape.new(name: 'ImportManifestUrl')
     ImportSnapshotRequest = Shapes::StructureShape.new(name: 'ImportSnapshotRequest')
     ImportSnapshotResult = Shapes::StructureShape.new(name: 'ImportSnapshotResult')
     ImportSnapshotTask = Shapes::StructureShape.new(name: 'ImportSnapshotTask')
@@ -2162,6 +2166,8 @@ module Aws::EC2
     PartitionLoadFrequency = Shapes::StringShape.new(name: 'PartitionLoadFrequency')
     PathComponent = Shapes::StructureShape.new(name: 'PathComponent')
     PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
+    PathFilter = Shapes::StructureShape.new(name: 'PathFilter')
+    PathRequestFilter = Shapes::StructureShape.new(name: 'PathRequestFilter')
     PathStatement = Shapes::StructureShape.new(name: 'PathStatement')
     PathStatementRequest = Shapes::StructureShape.new(name: 'PathStatementRequest')
     PayerResponsibility = Shapes::StringShape.new(name: 'PayerResponsibility')
@@ -2240,6 +2246,7 @@ module Aws::EC2
     PrincipalIdFormat = Shapes::StructureShape.new(name: 'PrincipalIdFormat')
     PrincipalIdFormatList = Shapes::ListShape.new(name: 'PrincipalIdFormatList')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    Priority = Shapes::IntegerShape.new(name: 'Priority')
     PrivateDnsDetails = Shapes::StructureShape.new(name: 'PrivateDnsDetails')
     PrivateDnsDetailsSet = Shapes::ListShape.new(name: 'PrivateDnsDetailsSet')
     PrivateDnsNameConfiguration = Shapes::StructureShape.new(name: 'PrivateDnsNameConfiguration')
@@ -2261,6 +2268,8 @@ module Aws::EC2
     PropagatingVgw = Shapes::StructureShape.new(name: 'PropagatingVgw')
     PropagatingVgwList = Shapes::ListShape.new(name: 'PropagatingVgwList')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
+    ProtocolInt = Shapes::IntegerShape.new(name: 'ProtocolInt')
+    ProtocolIntList = Shapes::ListShape.new(name: 'ProtocolIntList')
     ProtocolList = Shapes::ListShape.new(name: 'ProtocolList')
     ProtocolValue = Shapes::StringShape.new(name: 'ProtocolValue')
     ProvisionByoipCidrRequest = Shapes::StructureShape.new(name: 'ProvisionByoipCidrRequest')
@@ -2348,6 +2357,7 @@ module Aws::EC2
     ReportInstanceReasonCodes = Shapes::StringShape.new(name: 'ReportInstanceReasonCodes')
     ReportInstanceStatusRequest = Shapes::StructureShape.new(name: 'ReportInstanceStatusRequest')
     ReportStatusType = Shapes::StringShape.new(name: 'ReportStatusType')
+    RequestFilterPortRange = Shapes::StructureShape.new(name: 'RequestFilterPortRange')
     RequestHostIdList = Shapes::ListShape.new(name: 'RequestHostIdList')
     RequestHostIdSet = Shapes::ListShape.new(name: 'RequestHostIdSet')
     RequestInstanceTypeList = Shapes::ListShape.new(name: 'RequestInstanceTypeList')
@@ -2452,6 +2462,12 @@ module Aws::EC2
     RouteTableIdStringList = Shapes::ListShape.new(name: 'RouteTableIdStringList')
     RouteTableList = Shapes::ListShape.new(name: 'RouteTableList')
     RuleAction = Shapes::StringShape.new(name: 'RuleAction')
+    RuleGroupRuleOptionsPair = Shapes::StructureShape.new(name: 'RuleGroupRuleOptionsPair')
+    RuleGroupRuleOptionsPairList = Shapes::ListShape.new(name: 'RuleGroupRuleOptionsPairList')
+    RuleGroupTypePair = Shapes::StructureShape.new(name: 'RuleGroupTypePair')
+    RuleGroupTypePairList = Shapes::ListShape.new(name: 'RuleGroupTypePairList')
+    RuleOption = Shapes::StructureShape.new(name: 'RuleOption')
+    RuleOptionList = Shapes::ListShape.new(name: 'RuleOptionList')
     RunInstancesMonitoringEnabled = Shapes::StructureShape.new(name: 'RunInstancesMonitoringEnabled')
     RunInstancesRequest = Shapes::StructureShape.new(name: 'RunInstancesRequest')
     RunInstancesUserData = Shapes::StringShape.new(name: 'RunInstancesUserData')
@@ -3121,6 +3137,12 @@ module Aws::EC2
 
     AdditionalDetail.add_member(:additional_detail_type, Shapes::ShapeRef.new(shape: String, location_name: "additionalDetailType"))
     AdditionalDetail.add_member(:component, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "component"))
+    AdditionalDetail.add_member(:vpc_endpoint_service, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "vpcEndpointService"))
+    AdditionalDetail.add_member(:rule_options, Shapes::ShapeRef.new(shape: RuleOptionList, location_name: "ruleOptionSet"))
+    AdditionalDetail.add_member(:rule_group_type_pairs, Shapes::ShapeRef.new(shape: RuleGroupTypePairList, location_name: "ruleGroupTypePairSet"))
+    AdditionalDetail.add_member(:rule_group_rule_options_pairs, Shapes::ShapeRef.new(shape: RuleGroupRuleOptionsPairList, location_name: "ruleGroupRuleOptionsPairSet"))
+    AdditionalDetail.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
+    AdditionalDetail.add_member(:load_balancers, Shapes::ShapeRef.new(shape: AnalysisComponentList, location_name: "loadBalancerSet"))
     AdditionalDetail.struct_class = Types::AdditionalDetail
 
     AdditionalDetailList.member = Shapes::ShapeRef.new(shape: AdditionalDetail, location_name: "item")
@@ -3279,6 +3301,9 @@ module Aws::EC2
     AnalysisRouteTableRoute.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayId"))
     AnalysisRouteTableRoute.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
     AnalysisRouteTableRoute.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
+    AnalysisRouteTableRoute.add_member(:carrier_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "carrierGatewayId"))
+    AnalysisRouteTableRoute.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "coreNetworkArn"))
+    AnalysisRouteTableRoute.add_member(:local_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayId"))
     AnalysisRouteTableRoute.struct_class = Types::AnalysisRouteTableRoute
 
     AnalysisSecurityGroupRule.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
@@ -4651,12 +4676,14 @@ module Aws::EC2
     CreateNetworkInsightsPathRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: IpAddress, location_name: "SourceIp"))
     CreateNetworkInsightsPathRequest.add_member(:destination_ip, Shapes::ShapeRef.new(shape: IpAddress, location_name: "DestinationIp"))
     CreateNetworkInsightsPathRequest.add_member(:source, Shapes::ShapeRef.new(shape: NetworkInsightsResourceId, required: true, location_name: "Source"))
-    CreateNetworkInsightsPathRequest.add_member(:destination, Shapes::ShapeRef.new(shape: NetworkInsightsResourceId, required: true, location_name: "Destination"))
+    CreateNetworkInsightsPathRequest.add_member(:destination, Shapes::ShapeRef.new(shape: NetworkInsightsResourceId, location_name: "Destination"))
     CreateNetworkInsightsPathRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "Protocol"))
     CreateNetworkInsightsPathRequest.add_member(:destination_port, Shapes::ShapeRef.new(shape: Port, location_name: "DestinationPort"))
     CreateNetworkInsightsPathRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateNetworkInsightsPathRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateNetworkInsightsPathRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkInsightsPathRequest.add_member(:filter_at_source, Shapes::ShapeRef.new(shape: PathRequestFilter, location_name: "FilterAtSource"))
+    CreateNetworkInsightsPathRequest.add_member(:filter_at_destination, Shapes::ShapeRef.new(shape: PathRequestFilter, location_name: "FilterAtDestination"))
     CreateNetworkInsightsPathRequest.struct_class = Types::CreateNetworkInsightsPathRequest
 
     CreateNetworkInsightsPathResult.add_member(:network_insights_path, Shapes::ShapeRef.new(shape: NetworkInsightsPath, location_name: "networkInsightsPath"))
@@ -7755,7 +7782,7 @@ module Aws::EC2
 
     DiskImageDetail.add_member(:bytes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "bytes"))
     DiskImageDetail.add_member(:format, Shapes::ShapeRef.new(shape: DiskImageFormat, required: true, location_name: "format"))
-    DiskImageDetail.add_member(:import_manifest_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "importManifestUrl"))
+    DiskImageDetail.add_member(:import_manifest_url, Shapes::ShapeRef.new(shape: ImportManifestUrl, required: true, location_name: "importManifestUrl"))
     DiskImageDetail.struct_class = Types::DiskImageDetail
 
     DiskImageList.member = Shapes::ShapeRef.new(shape: DiskImage)
@@ -8106,6 +8133,8 @@ module Aws::EC2
     Explanation.add_member(:transit_gateway_attachment, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayAttachment"))
     Explanation.add_member(:component_account, Shapes::ShapeRef.new(shape: ComponentAccount, location_name: "componentAccount"))
     Explanation.add_member(:component_region, Shapes::ShapeRef.new(shape: ComponentRegion, location_name: "componentRegion"))
+    Explanation.add_member(:firewall_stateless_rule, Shapes::ShapeRef.new(shape: FirewallStatelessRule, location_name: "firewallStatelessRule"))
+    Explanation.add_member(:firewall_stateful_rule, Shapes::ShapeRef.new(shape: FirewallStatefulRule, location_name: "firewallStatefulRule"))
     Explanation.struct_class = Types::Explanation
 
     ExplanationList.member = Shapes::ShapeRef.new(shape: Explanation, location_name: "item")
@@ -8246,6 +8275,30 @@ module Aws::EC2
     Filter.struct_class = Types::Filter
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter, location_name: "Filter")
+
+    FilterPortRange.add_member(:from_port, Shapes::ShapeRef.new(shape: Port, location_name: "fromPort"))
+    FilterPortRange.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
+    FilterPortRange.struct_class = Types::FilterPortRange
+
+    FirewallStatefulRule.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ruleGroupArn"))
+    FirewallStatefulRule.add_member(:sources, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "sourceSet"))
+    FirewallStatefulRule.add_member(:destinations, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "destinationSet"))
+    FirewallStatefulRule.add_member(:source_ports, Shapes::ShapeRef.new(shape: PortRangeList, location_name: "sourcePortSet"))
+    FirewallStatefulRule.add_member(:destination_ports, Shapes::ShapeRef.new(shape: PortRangeList, location_name: "destinationPortSet"))
+    FirewallStatefulRule.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
+    FirewallStatefulRule.add_member(:rule_action, Shapes::ShapeRef.new(shape: String, location_name: "ruleAction"))
+    FirewallStatefulRule.add_member(:direction, Shapes::ShapeRef.new(shape: String, location_name: "direction"))
+    FirewallStatefulRule.struct_class = Types::FirewallStatefulRule
+
+    FirewallStatelessRule.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ruleGroupArn"))
+    FirewallStatelessRule.add_member(:sources, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "sourceSet"))
+    FirewallStatelessRule.add_member(:destinations, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "destinationSet"))
+    FirewallStatelessRule.add_member(:source_ports, Shapes::ShapeRef.new(shape: PortRangeList, location_name: "sourcePortSet"))
+    FirewallStatelessRule.add_member(:destination_ports, Shapes::ShapeRef.new(shape: PortRangeList, location_name: "destinationPortSet"))
+    FirewallStatelessRule.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolIntList, location_name: "protocolSet"))
+    FirewallStatelessRule.add_member(:rule_action, Shapes::ShapeRef.new(shape: String, location_name: "ruleAction"))
+    FirewallStatelessRule.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "priority"))
+    FirewallStatelessRule.struct_class = Types::FirewallStatelessRule
 
     FleetCapacityReservation.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "capacityReservationId"))
     FleetCapacityReservation.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
@@ -11477,6 +11530,8 @@ module Aws::EC2
     NetworkInsightsPath.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     NetworkInsightsPath.add_member(:destination_port, Shapes::ShapeRef.new(shape: Integer, location_name: "destinationPort"))
     NetworkInsightsPath.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    NetworkInsightsPath.add_member(:filter_at_source, Shapes::ShapeRef.new(shape: PathFilter, location_name: "filterAtSource"))
+    NetworkInsightsPath.add_member(:filter_at_destination, Shapes::ShapeRef.new(shape: PathFilter, location_name: "filterAtDestination"))
     NetworkInsightsPath.struct_class = Types::NetworkInsightsPath
 
     NetworkInsightsPathIdList.member = Shapes::ShapeRef.new(shape: NetworkInsightsPathId, location_name: "item")
@@ -11652,9 +11707,24 @@ module Aws::EC2
     PathComponent.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
     PathComponent.add_member(:explanations, Shapes::ShapeRef.new(shape: ExplanationList, location_name: "explanationSet"))
     PathComponent.add_member(:elastic_load_balancer_listener, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "elasticLoadBalancerListener"))
+    PathComponent.add_member(:firewall_stateless_rule, Shapes::ShapeRef.new(shape: FirewallStatelessRule, location_name: "firewallStatelessRule"))
+    PathComponent.add_member(:firewall_stateful_rule, Shapes::ShapeRef.new(shape: FirewallStatefulRule, location_name: "firewallStatefulRule"))
+    PathComponent.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     PathComponent.struct_class = Types::PathComponent
 
     PathComponentList.member = Shapes::ShapeRef.new(shape: PathComponent, location_name: "item")
+
+    PathFilter.add_member(:source_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "sourceAddress"))
+    PathFilter.add_member(:source_port_range, Shapes::ShapeRef.new(shape: FilterPortRange, location_name: "sourcePortRange"))
+    PathFilter.add_member(:destination_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "destinationAddress"))
+    PathFilter.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: FilterPortRange, location_name: "destinationPortRange"))
+    PathFilter.struct_class = Types::PathFilter
+
+    PathRequestFilter.add_member(:source_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "SourceAddress"))
+    PathRequestFilter.add_member(:source_port_range, Shapes::ShapeRef.new(shape: RequestFilterPortRange, location_name: "SourcePortRange"))
+    PathRequestFilter.add_member(:destination_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "DestinationAddress"))
+    PathRequestFilter.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: RequestFilterPortRange, location_name: "DestinationPortRange"))
+    PathRequestFilter.struct_class = Types::PathRequestFilter
 
     PathStatement.add_member(:packet_header_statement, Shapes::ShapeRef.new(shape: PacketHeaderStatement, location_name: "packetHeaderStatement"))
     PathStatement.add_member(:resource_statement, Shapes::ShapeRef.new(shape: ResourceStatement, location_name: "resourceStatement"))
@@ -11906,6 +11976,8 @@ module Aws::EC2
     PropagatingVgw.struct_class = Types::PropagatingVgw
 
     PropagatingVgwList.member = Shapes::ShapeRef.new(shape: PropagatingVgw, location_name: "item")
+
+    ProtocolIntList.member = Shapes::ShapeRef.new(shape: ProtocolInt, location_name: "item")
 
     ProtocolList.member = Shapes::ShapeRef.new(shape: Protocol, location_name: "item")
 
@@ -12269,6 +12341,10 @@ module Aws::EC2
     ReportInstanceStatusRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     ReportInstanceStatusRequest.add_member(:status, Shapes::ShapeRef.new(shape: ReportStatusType, required: true, location_name: "status"))
     ReportInstanceStatusRequest.struct_class = Types::ReportInstanceStatusRequest
+
+    RequestFilterPortRange.add_member(:from_port, Shapes::ShapeRef.new(shape: Port, location_name: "FromPort"))
+    RequestFilterPortRange.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "ToPort"))
+    RequestFilterPortRange.struct_class = Types::RequestFilterPortRange
 
     RequestHostIdList.member = Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "item")
 
@@ -12733,6 +12809,24 @@ module Aws::EC2
     RouteTableIdStringList.member = Shapes::ShapeRef.new(shape: RouteTableId, location_name: "item")
 
     RouteTableList.member = Shapes::ShapeRef.new(shape: RouteTable, location_name: "item")
+
+    RuleGroupRuleOptionsPair.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ruleGroupArn"))
+    RuleGroupRuleOptionsPair.add_member(:rule_options, Shapes::ShapeRef.new(shape: RuleOptionList, location_name: "ruleOptionSet"))
+    RuleGroupRuleOptionsPair.struct_class = Types::RuleGroupRuleOptionsPair
+
+    RuleGroupRuleOptionsPairList.member = Shapes::ShapeRef.new(shape: RuleGroupRuleOptionsPair, location_name: "item")
+
+    RuleGroupTypePair.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ruleGroupArn"))
+    RuleGroupTypePair.add_member(:rule_group_type, Shapes::ShapeRef.new(shape: String, location_name: "ruleGroupType"))
+    RuleGroupTypePair.struct_class = Types::RuleGroupTypePair
+
+    RuleGroupTypePairList.member = Shapes::ShapeRef.new(shape: RuleGroupTypePair, location_name: "item")
+
+    RuleOption.add_member(:keyword, Shapes::ShapeRef.new(shape: String, location_name: "keyword"))
+    RuleOption.add_member(:settings, Shapes::ShapeRef.new(shape: StringList, location_name: "settingSet"))
+    RuleOption.struct_class = Types::RuleOption
+
+    RuleOptionList.member = Shapes::ShapeRef.new(shape: RuleOption, location_name: "item")
 
     RunInstancesMonitoringEnabled.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     RunInstancesMonitoringEnabled.struct_class = Types::RunInstancesMonitoringEnabled

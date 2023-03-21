@@ -576,21 +576,56 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an additional detail for a path analysis.
+    # Describes an additional detail for a path analysis. For more
+    # information, see [Reachability Analyzer additional detail codes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/reachability/additional-detail-codes.html
     #
     # @!attribute [rw] additional_detail_type
-    #   The information type.
+    #   The additional detail code.
     #   @return [String]
     #
     # @!attribute [rw] component
     #   The path component.
     #   @return [Types::AnalysisComponent]
     #
+    # @!attribute [rw] vpc_endpoint_service
+    #   The VPC endpoint service.
+    #   @return [Types::AnalysisComponent]
+    #
+    # @!attribute [rw] rule_options
+    #   The rule options.
+    #   @return [Array<Types::RuleOption>]
+    #
+    # @!attribute [rw] rule_group_type_pairs
+    #   The rule group type.
+    #   @return [Array<Types::RuleGroupTypePair>]
+    #
+    # @!attribute [rw] rule_group_rule_options_pairs
+    #   The rule options.
+    #   @return [Array<Types::RuleGroupRuleOptionsPair>]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the VPC endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancers
+    #   The load balancers.
+    #   @return [Array<Types::AnalysisComponent>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdditionalDetail AWS API Documentation
     #
     class AdditionalDetail < Struct.new(
       :additional_detail_type,
-      :component)
+      :component,
+      :vpc_endpoint_service,
+      :rule_options,
+      :rule_group_type_pairs,
+      :rule_group_rule_options_pairs,
+      :service_name,
+      :load_balancers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1389,6 +1424,18 @@ module Aws::EC2
     #   * blackhole
     #   @return [String]
     #
+    # @!attribute [rw] carrier_gateway_id
+    #   The ID of a carrier gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_gateway_id
+    #   The ID of a local gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AnalysisRouteTableRoute AWS API Documentation
     #
     class AnalysisRouteTableRoute < Struct.new(
@@ -1402,7 +1449,10 @@ module Aws::EC2
       :origin,
       :transit_gateway_id,
       :vpc_peering_connection_id,
-      :state)
+      :state,
+      :carrier_gateway_id,
+      :core_network_arn,
+      :local_gateway_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9013,22 +9063,21 @@ module Aws::EC2
     end
 
     # @!attribute [rw] source_ip
-    #   The IP address of the Amazon Web Services resource that is the
-    #   source of the path.
+    #   The IP address of the source.
     #   @return [String]
     #
     # @!attribute [rw] destination_ip
-    #   The IP address of the Amazon Web Services resource that is the
-    #   destination of the path.
+    #   The IP address of the destination.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The Amazon Web Services resource that is the source of the path.
+    #   The ID or ARN of the source. If the resource is in another account,
+    #   you must specify an ARN.
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The Amazon Web Services resource that is the destination of the
-    #   path.
+    #   The ID or ARN of the destination. If the resource is in another
+    #   account, you must specify an ARN.
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -9063,6 +9112,18 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] filter_at_source
+    #   Scopes the analysis to network paths that match specific filters at
+    #   the source. If you specify this parameter, you can't specify the
+    #   parameters for the source IP address or the destination port.
+    #   @return [Types::PathRequestFilter]
+    #
+    # @!attribute [rw] filter_at_destination
+    #   Scopes the analysis to network paths that match specific filters at
+    #   the destination. If you specify this parameter, you can't specify
+    #   the parameter for the destination IP address.
+    #   @return [Types::PathRequestFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInsightsPathRequest AWS API Documentation
     #
     class CreateNetworkInsightsPathRequest < Struct.new(
@@ -9074,7 +9135,9 @@ module Aws::EC2
       :destination_port,
       :tag_specifications,
       :dry_run,
-      :client_token)
+      :client_token,
+      :filter_at_source,
+      :filter_at_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9750,7 +9813,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] description
-    #   A description for the security group. This is informational only.
+    #   A description for the security group.
     #
     #   Constraints: Up to 255 characters in length
     #
@@ -21241,7 +21304,29 @@ module Aws::EC2
     #
     #   * destination - The ID of the resource.
     #
-    #   * destination-port - The destination port.
+    #   * filter-at-source.source-address - The source IPv4 address at the
+    #     source.
+    #
+    #   * filter-at-source.source-port-range - The source port range at the
+    #     source.
+    #
+    #   * filter-at-source.destination-address - The destination IPv4
+    #     address at the source.
+    #
+    #   * filter-at-source.destination-port-range - The destination port
+    #     range at the source.
+    #
+    #   * filter-at-destination.source-address - The source IPv4 address at
+    #     the destination.
+    #
+    #   * filter-at-destination.source-port-range - The source port range at
+    #     the destination.
+    #
+    #   * filter-at-destination.destination-address - The destination IPv4
+    #     address at the destination.
+    #
+    #   * filter-at-destination.destination-port-range - The destination
+    #     port range at the destination.
     #
     #   * protocol - The protocol.
     #
@@ -28244,7 +28329,7 @@ module Aws::EC2
       :bytes,
       :format,
       :import_manifest_url)
-      SENSITIVE = []
+      SENSITIVE = [:import_manifest_url]
       include Aws::Structure
     end
 
@@ -30007,6 +30092,14 @@ module Aws::EC2
     #   The Region for the component.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_stateless_rule
+    #   The Network Firewall stateless rule.
+    #   @return [Types::FirewallStatelessRule]
+    #
+    # @!attribute [rw] firewall_stateful_rule
+    #   The Network Firewall stateful rule.
+    #   @return [Types::FirewallStatefulRule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Explanation AWS API Documentation
     #
     class Explanation < Struct.new(
@@ -30060,7 +30153,9 @@ module Aws::EC2
       :transit_gateway_route_table_route,
       :transit_gateway_attachment,
       :component_account,
-      :component_region)
+      :component_region,
+      :firewall_stateless_rule,
+      :firewall_stateful_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30727,6 +30822,125 @@ module Aws::EC2
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a port range.
+    #
+    # @!attribute [rw] from_port
+    #   The first port in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The last port in the range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FilterPortRange AWS API Documentation
+    #
+    class FilterPortRange < Struct.new(
+      :from_port,
+      :to_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a stateful rule.
+    #
+    # @!attribute [rw] rule_group_arn
+    #   The ARN of the stateful rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The source IP addresses, in CIDR notation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destinations
+    #   The destination IP addresses, in CIDR notation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_ports
+    #   The source ports.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @!attribute [rw] destination_ports
+    #   The destination ports.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_action
+    #   The rule action. The possible values are `pass`, `drop`, and
+    #   `alert`.
+    #   @return [String]
+    #
+    # @!attribute [rw] direction
+    #   The direction. The possible values are `FORWARD` and `ANY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FirewallStatefulRule AWS API Documentation
+    #
+    class FirewallStatefulRule < Struct.new(
+      :rule_group_arn,
+      :sources,
+      :destinations,
+      :source_ports,
+      :destination_ports,
+      :protocol,
+      :rule_action,
+      :direction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a stateless rule.
+    #
+    # @!attribute [rw] rule_group_arn
+    #   The ARN of the stateless rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The source IP addresses, in CIDR notation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destinations
+    #   The destination IP addresses, in CIDR notation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_ports
+    #   The source ports.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @!attribute [rw] destination_ports
+    #   The destination ports.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @!attribute [rw] protocols
+    #   The protocols.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] rule_action
+    #   The rule action. The possible values are `pass`, `drop`, and
+    #   `forward_to_site`.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The rule priority.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FirewallStatelessRule AWS API Documentation
+    #
+    class FirewallStatelessRule < Struct.new(
+      :rule_group_arn,
+      :sources,
+      :destinations,
+      :source_ports,
+      :destination_ports,
+      :protocols,
+      :rule_action,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48069,8 +48283,8 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_in_arns
-    #   The Amazon Resource Names (ARN) of the Amazon Web Services resources
-    #   that the path must traverse.
+    #   The Amazon Resource Names (ARN) of the resources that the path must
+    #   traverse.
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_date
@@ -48160,12 +48374,11 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] source
-    #   The Amazon Web Services resource that is the source of the path.
+    #   The ID of the source.
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The Amazon Web Services resource that is the destination of the
-    #   path.
+    #   The ID of the destination.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -48177,13 +48390,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_ip
-    #   The IP address of the Amazon Web Services resource that is the
-    #   source of the path.
+    #   The IP address of the source.
     #   @return [String]
     #
     # @!attribute [rw] destination_ip
-    #   The IP address of the Amazon Web Services resource that is the
-    #   destination of the path.
+    #   The IP address of the destination.
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -48197,6 +48408,16 @@ module Aws::EC2
     # @!attribute [rw] tags
     #   The tags associated with the path.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] filter_at_source
+    #   Scopes the analysis to network paths that match specific filters at
+    #   the source.
+    #   @return [Types::PathFilter]
+    #
+    # @!attribute [rw] filter_at_destination
+    #   Scopes the analysis to network paths that match specific filters at
+    #   the destination.
+    #   @return [Types::PathFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInsightsPath AWS API Documentation
     #
@@ -48212,7 +48433,9 @@ module Aws::EC2
       :destination_ip,
       :protocol,
       :destination_port,
-      :tags)
+      :tags,
+      :filter_at_source,
+      :filter_at_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48985,6 +49208,18 @@ module Aws::EC2
     #   The load balancer listener.
     #   @return [Types::AnalysisComponent]
     #
+    # @!attribute [rw] firewall_stateless_rule
+    #   The Network Firewall stateless rule.
+    #   @return [Types::FirewallStatelessRule]
+    #
+    # @!attribute [rw] firewall_stateful_rule
+    #   The Network Firewall stateful rule.
+    #   @return [Types::FirewallStatefulRule]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the VPC endpoint service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PathComponent AWS API Documentation
     #
     class PathComponent < Struct.new(
@@ -49004,7 +49239,70 @@ module Aws::EC2
       :transit_gateway,
       :transit_gateway_route_table_route,
       :explanations,
-      :elastic_load_balancer_listener)
+      :elastic_load_balancer_listener,
+      :firewall_stateless_rule,
+      :firewall_stateful_rule,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a set of filters for a path analysis. Use path filters to
+    # scope the analysis when there can be multiple resulting paths.
+    #
+    # @!attribute [rw] source_address
+    #   The source IPv4 address.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_port_range
+    #   The source port range.
+    #   @return [Types::FilterPortRange]
+    #
+    # @!attribute [rw] destination_address
+    #   The destination IPv4 address.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination port range.
+    #   @return [Types::FilterPortRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PathFilter AWS API Documentation
+    #
+    class PathFilter < Struct.new(
+      :source_address,
+      :source_port_range,
+      :destination_address,
+      :destination_port_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a set of filters for a path analysis. Use path filters to
+    # scope the analysis when there can be multiple resulting paths.
+    #
+    # @!attribute [rw] source_address
+    #   The source IPv4 address.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_port_range
+    #   The source port range.
+    #   @return [Types::RequestFilterPortRange]
+    #
+    # @!attribute [rw] destination_address
+    #   The destination IPv4 address.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination port range.
+    #   @return [Types::RequestFilterPortRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PathRequestFilter AWS API Documentation
+    #
+    class PathRequestFilter < Struct.new(
+      :source_address,
+      :source_port_range,
+      :destination_address,
+      :destination_port_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51883,6 +52181,25 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a port range.
+    #
+    # @!attribute [rw] from_port
+    #   The first port in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The last port in the range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestFilterPortRange AWS API Documentation
+    #
+    class RequestFilterPortRange < Struct.new(
+      :from_port,
+      :to_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A tag on an IPAM resource.
     #
     # @!attribute [rw] key
@@ -54324,6 +54641,64 @@ module Aws::EC2
     class RouteTableAssociationState < Struct.new(
       :state,
       :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the rule options for a stateful rule group.
+    #
+    # @!attribute [rw] rule_group_arn
+    #   The ARN of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_options
+    #   The rule options.
+    #   @return [Array<Types::RuleOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RuleGroupRuleOptionsPair AWS API Documentation
+    #
+    class RuleGroupRuleOptionsPair < Struct.new(
+      :rule_group_arn,
+      :rule_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the type of a stateful rule group.
+    #
+    # @!attribute [rw] rule_group_arn
+    #   The ARN of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_group_type
+    #   The rule group type. The possible values are `Domain List` and
+    #   `Suricata`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RuleGroupTypePair AWS API Documentation
+    #
+    class RuleGroupTypePair < Struct.new(
+      :rule_group_arn,
+      :rule_group_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes additional settings for a stateful rule.
+    #
+    # @!attribute [rw] keyword
+    #   The Suricata keyword.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   The settings for the keyword.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RuleOption AWS API Documentation
+    #
+    class RuleOption < Struct.new(
+      :keyword,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end

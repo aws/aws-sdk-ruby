@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-03-21)
+------------------
+
+* Feature - GA Release of AWS Clean Rooms, Added Tagging Functionality
+
 1.1.0 (2023-01-18)
 ------------------
 

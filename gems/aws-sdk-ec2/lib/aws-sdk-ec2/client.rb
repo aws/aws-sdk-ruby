@@ -1114,6 +1114,12 @@ module Aws::EC2
     # For more information, see [Allocate CIDRs][1] in the *Amazon VPC IPAM
     # User Guide*.
     #
+    # <note markdown="1"> This action creates an allocation with strong consistency. The
+    # returned CIDR will not overlap with any other allocations from the
+    # same pool.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/allocate-cidrs-ipam.html
@@ -9799,25 +9805,25 @@ module Aws::EC2
     #
     # Reachability Analyzer enables you to analyze and debug network
     # reachability between two resources in your virtual private cloud
-    # (VPC). For more information, see [What is Reachability Analyzer][1].
+    # (VPC). For more information, see the [Reachability Analyzer Guide][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/reachability/
     #
     # @option params [String] :source_ip
-    #   The IP address of the Amazon Web Services resource that is the source
-    #   of the path.
+    #   The IP address of the source.
     #
     # @option params [String] :destination_ip
-    #   The IP address of the Amazon Web Services resource that is the
-    #   destination of the path.
+    #   The IP address of the destination.
     #
     # @option params [required, String] :source
-    #   The Amazon Web Services resource that is the source of the path.
+    #   The ID or ARN of the source. If the resource is in another account,
+    #   you must specify an ARN.
     #
-    # @option params [required, String] :destination
-    #   The Amazon Web Services resource that is the destination of the path.
+    # @option params [String] :destination
+    #   The ID or ARN of the destination. If the resource is in another
+    #   account, you must specify an ARN.
     #
     # @option params [required, String] :protocol
     #   The protocol.
@@ -9846,6 +9852,16 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
+    # @option params [Types::PathRequestFilter] :filter_at_source
+    #   Scopes the analysis to network paths that match specific filters at
+    #   the source. If you specify this parameter, you can't specify the
+    #   parameters for the source IP address or the destination port.
+    #
+    # @option params [Types::PathRequestFilter] :filter_at_destination
+    #   Scopes the analysis to network paths that match specific filters at
+    #   the destination. If you specify this parameter, you can't specify the
+    #   parameter for the destination IP address.
+    #
     # @return [Types::CreateNetworkInsightsPathResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkInsightsPathResult#network_insights_path #network_insights_path} => Types::NetworkInsightsPath
@@ -9856,7 +9872,7 @@ module Aws::EC2
     #     source_ip: "IpAddress",
     #     destination_ip: "IpAddress",
     #     source: "NetworkInsightsResourceId", # required
-    #     destination: "NetworkInsightsResourceId", # required
+    #     destination: "NetworkInsightsResourceId",
     #     protocol: "tcp", # required, accepts tcp, udp
     #     destination_port: 1,
     #     tag_specifications: [
@@ -9872,6 +9888,30 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     client_token: "String", # required
+    #     filter_at_source: {
+    #       source_address: "IpAddress",
+    #       source_port_range: {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       },
+    #       destination_address: "IpAddress",
+    #       destination_port_range: {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       },
+    #     },
+    #     filter_at_destination: {
+    #       source_address: "IpAddress",
+    #       source_port_range: {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       },
+    #       destination_address: "IpAddress",
+    #       destination_port_range: {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -9890,6 +9930,18 @@ module Aws::EC2
     #   resp.network_insights_path.tags #=> Array
     #   resp.network_insights_path.tags[0].key #=> String
     #   resp.network_insights_path.tags[0].value #=> String
+    #   resp.network_insights_path.filter_at_source.source_address #=> String
+    #   resp.network_insights_path.filter_at_source.source_port_range.from_port #=> Integer
+    #   resp.network_insights_path.filter_at_source.source_port_range.to_port #=> Integer
+    #   resp.network_insights_path.filter_at_source.destination_address #=> String
+    #   resp.network_insights_path.filter_at_source.destination_port_range.from_port #=> Integer
+    #   resp.network_insights_path.filter_at_source.destination_port_range.to_port #=> Integer
+    #   resp.network_insights_path.filter_at_destination.source_address #=> String
+    #   resp.network_insights_path.filter_at_destination.source_port_range.from_port #=> Integer
+    #   resp.network_insights_path.filter_at_destination.source_port_range.to_port #=> Integer
+    #   resp.network_insights_path.filter_at_destination.destination_address #=> String
+    #   resp.network_insights_path.filter_at_destination.destination_port_range.from_port #=> Integer
+    #   resp.network_insights_path.filter_at_destination.destination_port_range.to_port #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInsightsPath AWS API Documentation
     #
@@ -11013,7 +11065,7 @@ module Aws::EC2
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [required, String] :description
-    #   A description for the security group. This is informational only.
+    #   A description for the security group.
     #
     #   Constraints: Up to 255 characters in length
     #
@@ -11128,8 +11180,9 @@ module Aws::EC2
     # may remount and use your volume while the snapshot status is
     # `pending`.
     #
-    # To create a snapshot for Amazon EBS volumes that serve as root
-    # devices, you should stop the instance before taking the snapshot.
+    # When you create a snapshot for an EBS volume that serves as a root
+    # device, we recommend that you stop the instance before taking the
+    # snapshot.
     #
     # Snapshots that are taken from encrypted volumes are automatically
     # encrypted. Volumes that are created from encrypted snapshots are also
@@ -27338,6 +27391,9 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.cidr #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.direction #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.security_group_id #=> String
@@ -27359,6 +27415,27 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].component.id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].component.arn #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].component.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].vpc_endpoint_service.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].vpc_endpoint_service.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].vpc_endpoint_service.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_options #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_options[0].keyword #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_options[0].settings #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_options[0].settings[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_type_pairs #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_type #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_rule_options_pairs #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].keyword #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].service_name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].load_balancers #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].load_balancers[0].id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].load_balancers[0].arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].load_balancers[0].name #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway.id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway.arn #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway.name #=> String
@@ -27462,6 +27539,9 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table.id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table.arn #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table.name #=> String
@@ -27519,9 +27599,68 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].component_account #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].firewall_stateful_rule.direction #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].elastic_load_balancer_listener.id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].elastic_load_balancer_listener.arn #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].elastic_load_balancer_listener.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].firewall_stateful_rule.direction #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].service_name #=> String
     #   resp.network_insights_analyses[0].return_path_components #=> Array
     #   resp.network_insights_analyses[0].return_path_components[0].sequence_number #=> Integer
     #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.cidr #=> String
@@ -27573,6 +27712,9 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.cidr #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.direction #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.security_group_id #=> String
@@ -27594,6 +27736,27 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].component.id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].component.arn #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].component.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].vpc_endpoint_service.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].vpc_endpoint_service.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].vpc_endpoint_service.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_options #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_options[0].keyword #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_options[0].settings #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_options[0].settings[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_type_pairs #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_type #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_rule_options_pairs #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].keyword #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].service_name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].load_balancers #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].load_balancers[0].id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].load_balancers[0].arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].load_balancers[0].name #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway.id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway.arn #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway.name #=> String
@@ -27697,6 +27860,9 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table.id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table.arn #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table.name #=> String
@@ -27754,9 +27920,68 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].component_account #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].firewall_stateful_rule.direction #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].elastic_load_balancer_listener.id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].elastic_load_balancer_listener.arn #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].elastic_load_balancer_listener.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].firewall_stateful_rule.direction #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].service_name #=> String
     #   resp.network_insights_analyses[0].explanations #=> Array
     #   resp.network_insights_analyses[0].explanations[0].acl.id #=> String
     #   resp.network_insights_analyses[0].explanations[0].acl.arn #=> String
@@ -27850,6 +28075,9 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table.id #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table.arn #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table.name #=> String
@@ -27907,6 +28135,35 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.name #=> String
     #   resp.network_insights_analyses[0].explanations[0].component_account #=> String
     #   resp.network_insights_analyses[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].explanations[0].firewall_stateful_rule.direction #=> String
     #   resp.network_insights_analyses[0].alternate_path_hints #=> Array
     #   resp.network_insights_analyses[0].alternate_path_hints[0].component_id #=> String
     #   resp.network_insights_analyses[0].alternate_path_hints[0].component_arn #=> String
@@ -27936,7 +28193,29 @@ module Aws::EC2
     #
     #   * destination - The ID of the resource.
     #
-    #   * destination-port - The destination port.
+    #   * filter-at-source.source-address - The source IPv4 address at the
+    #     source.
+    #
+    #   * filter-at-source.source-port-range - The source port range at the
+    #     source.
+    #
+    #   * filter-at-source.destination-address - The destination IPv4 address
+    #     at the source.
+    #
+    #   * filter-at-source.destination-port-range - The destination port range
+    #     at the source.
+    #
+    #   * filter-at-destination.source-address - The source IPv4 address at
+    #     the destination.
+    #
+    #   * filter-at-destination.source-port-range - The source port range at
+    #     the destination.
+    #
+    #   * filter-at-destination.destination-address - The destination IPv4
+    #     address at the destination.
+    #
+    #   * filter-at-destination.destination-port-range - The destination port
+    #     range at the destination.
     #
     #   * protocol - The protocol.
     #
@@ -27995,6 +28274,18 @@ module Aws::EC2
     #   resp.network_insights_paths[0].tags #=> Array
     #   resp.network_insights_paths[0].tags[0].key #=> String
     #   resp.network_insights_paths[0].tags[0].value #=> String
+    #   resp.network_insights_paths[0].filter_at_source.source_address #=> String
+    #   resp.network_insights_paths[0].filter_at_source.source_port_range.from_port #=> Integer
+    #   resp.network_insights_paths[0].filter_at_source.source_port_range.to_port #=> Integer
+    #   resp.network_insights_paths[0].filter_at_source.destination_address #=> String
+    #   resp.network_insights_paths[0].filter_at_source.destination_port_range.from_port #=> Integer
+    #   resp.network_insights_paths[0].filter_at_source.destination_port_range.to_port #=> Integer
+    #   resp.network_insights_paths[0].filter_at_destination.source_address #=> String
+    #   resp.network_insights_paths[0].filter_at_destination.source_port_range.from_port #=> Integer
+    #   resp.network_insights_paths[0].filter_at_destination.source_port_range.to_port #=> Integer
+    #   resp.network_insights_paths[0].filter_at_destination.destination_address #=> String
+    #   resp.network_insights_paths[0].filter_at_destination.destination_port_range.from_port #=> Integer
+    #   resp.network_insights_paths[0].filter_at_destination.destination_port_range.to_port #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInsightsPaths AWS API Documentation
@@ -40108,6 +40399,18 @@ module Aws::EC2
 
     # Get a list of all the CIDR allocations in an IPAM pool.
     #
+    # <note markdown="1"> If you use this action after [AllocateIpamPoolCidr][1] or
+    # [ReleaseIpamPoolAllocation][2], note that all EC2 API actions follow
+    # an [eventual consistency][3] model.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency
+    #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response. If
@@ -40798,6 +41101,9 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.analysis_findings[0].finding_components[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.analysis_findings[0].finding_components[0].route_table_route.state #=> String
+    #   resp.analysis_findings[0].finding_components[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].route_table_route.core_network_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].route_table_route.local_gateway_id #=> String
     #   resp.analysis_findings[0].finding_components[0].security_group_rule.cidr #=> String
     #   resp.analysis_findings[0].finding_components[0].security_group_rule.direction #=> String
     #   resp.analysis_findings[0].finding_components[0].security_group_rule.security_group_id #=> String
@@ -40819,6 +41125,27 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].additional_details[0].component.id #=> String
     #   resp.analysis_findings[0].finding_components[0].additional_details[0].component.arn #=> String
     #   resp.analysis_findings[0].finding_components[0].additional_details[0].component.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].vpc_endpoint_service.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].vpc_endpoint_service.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].vpc_endpoint_service.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_options #=> Array
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_options[0].keyword #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_options[0].settings #=> Array
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_options[0].settings[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_type_pairs #=> Array
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_type #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_rule_options_pairs #=> Array
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_group_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options #=> Array
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].keyword #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings #=> Array
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].service_name #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].load_balancers #=> Array
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].load_balancers[0].id #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].load_balancers[0].arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].load_balancers[0].name #=> String
     #   resp.analysis_findings[0].finding_components[0].transit_gateway.id #=> String
     #   resp.analysis_findings[0].finding_components[0].transit_gateway.arn #=> String
     #   resp.analysis_findings[0].finding_components[0].transit_gateway.name #=> String
@@ -40922,6 +41249,9 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.core_network_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.local_gateway_id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table.id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table.arn #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table.name #=> String
@@ -40979,9 +41309,68 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_attachment.name #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].component_account #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].component_region #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.sources #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.sources #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.protocol #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].firewall_stateful_rule.direction #=> String
     #   resp.analysis_findings[0].finding_components[0].elastic_load_balancer_listener.id #=> String
     #   resp.analysis_findings[0].finding_components[0].elastic_load_balancer_listener.arn #=> String
     #   resp.analysis_findings[0].finding_components[0].elastic_load_balancer_listener.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.sources #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.sources #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.protocol #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.analysis_findings[0].finding_components[0].firewall_stateful_rule.direction #=> String
+    #   resp.analysis_findings[0].finding_components[0].service_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetNetworkInsightsAccessScopeAnalysisFindings AWS API Documentation
@@ -42604,7 +42993,7 @@ module Aws::EC2
     #         image: {
     #           bytes: 1, # required
     #           format: "VMDK", # required, accepts VMDK, RAW, VHD
-    #           import_manifest_url: "String", # required
+    #           import_manifest_url: "ImportManifestUrl", # required
     #         },
     #         volume: {
     #           size: 1, # required
@@ -42966,7 +43355,7 @@ module Aws::EC2
     #     image: { # required
     #       bytes: 1, # required
     #       format: "VMDK", # required, accepts VMDK, RAW, VHD
-    #       import_manifest_url: "String", # required
+    #       import_manifest_url: "ImportManifestUrl", # required
     #     },
     #     volume: { # required
     #       size: 1, # required
@@ -50494,10 +50883,15 @@ module Aws::EC2
     # false using [ModifyIpamResourceCidr][1]. For more information, see
     # [Release an allocation][2] in the *Amazon VPC IPAM User Guide*.
     #
+    # <note markdown="1"> All EC2 API actions follow an [eventual consistency][3] model.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyIpamResourceCidr.html
     # [2]: https://docs.aws.amazon.com/vpc/latest/ipam/release-pool-alloc-ipam.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -54639,6 +55033,9 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].route_table_route.state #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.cidr #=> String
     #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.direction #=> String
     #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.security_group_id #=> String
@@ -54660,6 +55057,27 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].component.id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].component.arn #=> String
     #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].component.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].vpc_endpoint_service.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].vpc_endpoint_service.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].vpc_endpoint_service.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_options #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_options[0].keyword #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_options[0].settings #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_options[0].settings[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_type_pairs #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_type #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_rule_options_pairs #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_group_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].keyword #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].service_name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].load_balancers #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].load_balancers[0].id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].load_balancers[0].arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].load_balancers[0].name #=> String
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway.id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway.arn #=> String
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway.name #=> String
@@ -54763,6 +55181,9 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table.id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table.arn #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table.name #=> String
@@ -54820,9 +55241,68 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].component_account #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].firewall_stateful_rule.direction #=> String
     #   resp.network_insights_analysis.forward_path_components[0].elastic_load_balancer_listener.id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].elastic_load_balancer_listener.arn #=> String
     #   resp.network_insights_analysis.forward_path_components[0].elastic_load_balancer_listener.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].firewall_stateful_rule.direction #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].service_name #=> String
     #   resp.network_insights_analysis.return_path_components #=> Array
     #   resp.network_insights_analysis.return_path_components[0].sequence_number #=> Integer
     #   resp.network_insights_analysis.return_path_components[0].acl_rule.cidr #=> String
@@ -54874,6 +55354,9 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].route_table_route.state #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].security_group_rule.cidr #=> String
     #   resp.network_insights_analysis.return_path_components[0].security_group_rule.direction #=> String
     #   resp.network_insights_analysis.return_path_components[0].security_group_rule.security_group_id #=> String
@@ -54895,6 +55378,27 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].additional_details[0].component.id #=> String
     #   resp.network_insights_analysis.return_path_components[0].additional_details[0].component.arn #=> String
     #   resp.network_insights_analysis.return_path_components[0].additional_details[0].component.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].vpc_endpoint_service.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].vpc_endpoint_service.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].vpc_endpoint_service.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_options #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_options[0].keyword #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_options[0].settings #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_options[0].settings[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_type_pairs #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_type_pairs[0].rule_group_type #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_rule_options_pairs #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_group_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].keyword #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].rule_group_rule_options_pairs[0].rule_options[0].settings[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].service_name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].load_balancers #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].load_balancers[0].id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].load_balancers[0].arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].load_balancers[0].name #=> String
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway.id #=> String
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway.arn #=> String
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway.name #=> String
@@ -54998,6 +55502,9 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table.id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table.arn #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table.name #=> String
@@ -55055,9 +55562,68 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].component_account #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].firewall_stateful_rule.direction #=> String
     #   resp.network_insights_analysis.return_path_components[0].elastic_load_balancer_listener.id #=> String
     #   resp.network_insights_analysis.return_path_components[0].elastic_load_balancer_listener.arn #=> String
     #   resp.network_insights_analysis.return_path_components[0].elastic_load_balancer_listener.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analysis.return_path_components[0].firewall_stateful_rule.direction #=> String
+    #   resp.network_insights_analysis.return_path_components[0].service_name #=> String
     #   resp.network_insights_analysis.explanations #=> Array
     #   resp.network_insights_analysis.explanations[0].acl.id #=> String
     #   resp.network_insights_analysis.explanations[0].acl.arn #=> String
@@ -55151,6 +55717,9 @@ module Aws::EC2
     #   resp.network_insights_analysis.explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analysis.explanations[0].route_table_route.vpc_peering_connection_id #=> String
     #   resp.network_insights_analysis.explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.carrier_gateway_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.core_network_arn #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.local_gateway_id #=> String
     #   resp.network_insights_analysis.explanations[0].route_table.id #=> String
     #   resp.network_insights_analysis.explanations[0].route_table.arn #=> String
     #   resp.network_insights_analysis.explanations[0].route_table.name #=> String
@@ -55208,6 +55777,35 @@ module Aws::EC2
     #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.name #=> String
     #   resp.network_insights_analysis.explanations[0].component_account #=> String
     #   resp.network_insights_analysis.explanations[0].component_region #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.sources #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.destinations #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.protocols #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.protocols[0] #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.rule_action #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateless_rule.priority #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.rule_group_arn #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.sources #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.sources[0] #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.destinations #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.destinations[0] #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.source_ports #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.source_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.source_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.destination_ports #=> Array
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.destination_ports[0].from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.destination_ports[0].to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.protocol #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.rule_action #=> String
+    #   resp.network_insights_analysis.explanations[0].firewall_stateful_rule.direction #=> String
     #   resp.network_insights_analysis.alternate_path_hints #=> Array
     #   resp.network_insights_analysis.alternate_path_hints[0].component_id #=> String
     #   resp.network_insights_analysis.alternate_path_hints[0].component_arn #=> String
@@ -56112,7 +56710,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.370.0'
+      context[:gem_version] = '1.371.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

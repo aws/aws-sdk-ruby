@@ -1590,7 +1590,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] entries
     #   The list of asset property value entries for the batch get request.
-    #   You can specify up to 16 entries per request.
+    #   You can specify up to 128 entries per request.
     #   @return [Array<Types::BatchGetAssetPropertyValueEntry>]
     #
     # @!attribute [rw] next_token
@@ -3654,6 +3654,16 @@ module Aws::IoTSiteWise
     #   The date that the time series was last updated, in Unix epoch time.
     #   @return [Time]
     #
+    # @!attribute [rw] time_series_arn
+    #   The [ARN][1] of the time series, which has the following format.
+    #
+    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:time-series/$\{TimeSeriesId\}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     class DescribeTimeSeriesResponse < Struct.new(
       :asset_id,
       :property_id,
@@ -3662,7 +3672,8 @@ module Aws::IoTSiteWise
       :data_type,
       :data_type_spec,
       :time_series_creation_date,
-      :time_series_last_update_date)
+      :time_series_last_update_date,
+      :time_series_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6142,6 +6153,16 @@ module Aws::IoTSiteWise
     #   The date that the time series was last updated, in Unix epoch time.
     #   @return [Time]
     #
+    # @!attribute [rw] time_series_arn
+    #   The [ARN][1] of the time series, which has the following format.
+    #
+    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:time-series/$\{TimeSeriesId\}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     class TimeSeriesSummary < Struct.new(
       :asset_id,
       :property_id,
@@ -6150,7 +6171,8 @@ module Aws::IoTSiteWise
       :data_type,
       :data_type_spec,
       :time_series_creation_date,
-      :time_series_last_update_date)
+      :time_series_last_update_date,
+      :time_series_arn)
       SENSITIVE = []
       include Aws::Structure
     end

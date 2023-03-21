@@ -116,6 +116,14 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::InitializeService.build(context)
           when :list_applications
             Aws::Mgn::Endpoints::ListApplications.build(context)
+          when :list_export_errors
+            Aws::Mgn::Endpoints::ListExportErrors.build(context)
+          when :list_exports
+            Aws::Mgn::Endpoints::ListExports.build(context)
+          when :list_import_errors
+            Aws::Mgn::Endpoints::ListImportErrors.build(context)
+          when :list_imports
+            Aws::Mgn::Endpoints::ListImports.build(context)
           when :list_source_server_actions
             Aws::Mgn::Endpoints::ListSourceServerActions.build(context)
           when :list_tags_for_resource
@@ -138,6 +146,10 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::RetryDataReplication.build(context)
           when :start_cutover
             Aws::Mgn::Endpoints::StartCutover.build(context)
+          when :start_export
+            Aws::Mgn::Endpoints::StartExport.build(context)
+          when :start_import
+            Aws::Mgn::Endpoints::StartImport.build(context)
           when :start_replication
             Aws::Mgn::Endpoints::StartReplication.build(context)
           when :start_test

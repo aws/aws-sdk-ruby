@@ -110,8 +110,14 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::ListProtectedQueries.build(context)
           when :list_schemas
             Aws::CleanRooms::Endpoints::ListSchemas.build(context)
+          when :list_tags_for_resource
+            Aws::CleanRooms::Endpoints::ListTagsForResource.build(context)
           when :start_protected_query
             Aws::CleanRooms::Endpoints::StartProtectedQuery.build(context)
+          when :tag_resource
+            Aws::CleanRooms::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::CleanRooms::Endpoints::UntagResource.build(context)
           when :update_collaboration
             Aws::CleanRooms::Endpoints::UpdateCollaboration.build(context)
           when :update_configured_table

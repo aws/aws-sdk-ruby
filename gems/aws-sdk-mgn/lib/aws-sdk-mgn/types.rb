@@ -1116,6 +1116,117 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Export errors data.
+    #
+    # @!attribute [rw] raw_error
+    #   Export errors data raw error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ExportErrorData AWS API Documentation
+    #
+    class ExportErrorData < Struct.new(
+      :raw_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Export task.
+    #
+    # @!attribute [rw] creation_date_time
+    #   Export task creation datetime.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date_time
+    #   Export task end datetime.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_id
+    #   Export task id.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_percentage
+    #   Export task progress percentage.
+    #   @return [Float]
+    #
+    # @!attribute [rw] s3_bucket
+    #   Export task s3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   Export task s3 bucket owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   Export task s3 key.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Export task status.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   Export task summary.
+    #   @return [Types::ExportTaskSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ExportTask AWS API Documentation
+    #
+    class ExportTask < Struct.new(
+      :creation_date_time,
+      :end_date_time,
+      :export_id,
+      :progress_percentage,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key,
+      :status,
+      :summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Export task error.
+    #
+    # @!attribute [rw] error_data
+    #   Export task error data.
+    #   @return [Types::ExportErrorData]
+    #
+    # @!attribute [rw] error_date_time
+    #   Export task error datetime.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ExportTaskError AWS API Documentation
+    #
+    class ExportTaskError < Struct.new(
+      :error_data,
+      :error_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Export task summary.
+    #
+    # @!attribute [rw] applications_count
+    #   Export task summary applications count.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] servers_count
+    #   Export task summary servers count.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] waves_count
+    #   Export task summary waves count.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ExportTaskSummary AWS API Documentation
+    #
+    class ExportTaskSummary < Struct.new(
+      :applications_count,
+      :servers_count,
+      :waves_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_server_id
     #   Request to finalize Cutover by Source Server ID.
     #   @return [String]
@@ -1182,6 +1293,194 @@ module Aws::Mgn
       :hostname,
       :vm_path,
       :vm_ware_uuid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Import error data.
+    #
+    # @!attribute [rw] application_id
+    #   Import error data application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_launch_template_id
+    #   Import error data ec2 LaunchTemplate ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_error
+    #   Import error data raw error.
+    #   @return [String]
+    #
+    # @!attribute [rw] row_number
+    #   Import error data row number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_server_id
+    #   Import error data source server ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] wave_id
+    #   Import error data wave id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportErrorData AWS API Documentation
+    #
+    class ImportErrorData < Struct.new(
+      :application_id,
+      :ec2_launch_template_id,
+      :raw_error,
+      :row_number,
+      :source_server_id,
+      :wave_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Import task.
+    #
+    # @!attribute [rw] creation_date_time
+    #   Import task creation datetime.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date_time
+    #   Import task end datetime.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_id
+    #   Import task id.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_percentage
+    #   Import task progress percentage.
+    #   @return [Float]
+    #
+    # @!attribute [rw] s3_bucket_source
+    #   Import task s3 bucket source.
+    #   @return [Types::S3BucketSource]
+    #
+    # @!attribute [rw] status
+    #   Import task status.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   Import task summary.
+    #   @return [Types::ImportTaskSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportTask AWS API Documentation
+    #
+    class ImportTask < Struct.new(
+      :creation_date_time,
+      :end_date_time,
+      :import_id,
+      :progress_percentage,
+      :s3_bucket_source,
+      :status,
+      :summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Import task error.
+    #
+    # @!attribute [rw] error_data
+    #   Import task error data.
+    #   @return [Types::ImportErrorData]
+    #
+    # @!attribute [rw] error_date_time
+    #   Import task error datetime.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_type
+    #   Import task error type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportTaskError AWS API Documentation
+    #
+    class ImportTaskError < Struct.new(
+      :error_data,
+      :error_date_time,
+      :error_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Import task summary.
+    #
+    # @!attribute [rw] applications
+    #   Import task summary applications.
+    #   @return [Types::ImportTaskSummaryApplications]
+    #
+    # @!attribute [rw] servers
+    #   Import task summary servers.
+    #   @return [Types::ImportTaskSummaryServers]
+    #
+    # @!attribute [rw] waves
+    #   Import task summary waves.
+    #   @return [Types::ImportTaskSummaryWaves]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportTaskSummary AWS API Documentation
+    #
+    class ImportTaskSummary < Struct.new(
+      :applications,
+      :servers,
+      :waves)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Import task summary applications.
+    #
+    # @!attribute [rw] created_count
+    #   Import task summary applications created count.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] modified_count
+    #   Import task summary applications modified count.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportTaskSummaryApplications AWS API Documentation
+    #
+    class ImportTaskSummaryApplications < Struct.new(
+      :created_count,
+      :modified_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Import task summary servers.
+    #
+    # @!attribute [rw] created_count
+    #   Import task summary servers created count.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] modified_count
+    #   Import task summary servers modified count.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportTaskSummaryServers AWS API Documentation
+    #
+    class ImportTaskSummaryServers < Struct.new(
+      :created_count,
+      :modified_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Import task summery waves.
+    #
+    # @!attribute [rw] created_count
+    #   Import task summery waves created count.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] modified_count
+    #   Import task summery waves modified count.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportTaskSummaryWaves AWS API Documentation
+    #
+    class ImportTaskSummaryWaves < Struct.new(
+      :created_count,
+      :modified_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1829,6 +2128,206 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # List export errors request.
+    #
+    # @!attribute [rw] export_id
+    #   List export errors request export id.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   List export errors request max results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   List export errors request next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExportErrorsRequest AWS API Documentation
+    #
+    class ListExportErrorsRequest < Struct.new(
+      :export_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List export errors response.
+    #
+    # @!attribute [rw] items
+    #   List export errors response items.
+    #   @return [Array<Types::ExportTaskError>]
+    #
+    # @!attribute [rw] next_token
+    #   List export errors response next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExportErrorsResponse AWS API Documentation
+    #
+    class ListExportErrorsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List export request.
+    #
+    # @!attribute [rw] filters
+    #   List exports request filters.
+    #   @return [Types::ListExportsRequestFilters]
+    #
+    # @!attribute [rw] max_results
+    #   List export request max results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   List export request next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExportsRequest AWS API Documentation
+    #
+    class ListExportsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List exports request filters.
+    #
+    # @!attribute [rw] export_i_ds
+    #   List exports request filters export ids.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExportsRequestFilters AWS API Documentation
+    #
+    class ListExportsRequestFilters < Struct.new(
+      :export_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List export response.
+    #
+    # @!attribute [rw] items
+    #   List export response items.
+    #   @return [Array<Types::ExportTask>]
+    #
+    # @!attribute [rw] next_token
+    #   List export response next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExportsResponse AWS API Documentation
+    #
+    class ListExportsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List import errors request.
+    #
+    # @!attribute [rw] import_id
+    #   List import errors request import id.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   List import errors request max results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   List import errors request next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportErrorsRequest AWS API Documentation
+    #
+    class ListImportErrorsRequest < Struct.new(
+      :import_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List imports errors response.
+    #
+    # @!attribute [rw] items
+    #   List imports errors response items.
+    #   @return [Array<Types::ImportTaskError>]
+    #
+    # @!attribute [rw] next_token
+    #   List imports errors response next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportErrorsResponse AWS API Documentation
+    #
+    class ListImportErrorsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List imports request.
+    #
+    # @!attribute [rw] filters
+    #   List imports request filters.
+    #   @return [Types::ListImportsRequestFilters]
+    #
+    # @!attribute [rw] max_results
+    #   List imports request max results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   List imports request next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportsRequest AWS API Documentation
+    #
+    class ListImportsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List imports request filters.
+    #
+    # @!attribute [rw] import_i_ds
+    #   List imports request filters import IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportsRequestFilters AWS API Documentation
+    #
+    class ListImportsRequestFilters < Struct.new(
+      :import_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List import response.
+    #
+    # @!attribute [rw] items
+    #   List import response items.
+    #   @return [Array<Types::ImportTask>]
+    #
+    # @!attribute [rw] next_token
+    #   List import response next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportsResponse AWS API Documentation
+    #
+    class ListImportsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filters
     #   Filters to apply when listing source server post migration custom
     #   actions.
@@ -2154,6 +2653,14 @@ module Aws::Mgn
     #   Source server post migration custom action active status.
     #   @return [Boolean]
     #
+    # @!attribute [rw] category
+    #   Source server post migration custom action category.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Source server post migration custom action description.
+    #   @return [String]
+    #
     # @!attribute [rw] document_identifier
     #   Source server post migration custom action document identifier.
     #   @return [String]
@@ -2161,6 +2668,10 @@ module Aws::Mgn
     # @!attribute [rw] document_version
     #   Source server post migration custom action document version.
     #   @return [String]
+    #
+    # @!attribute [rw] external_parameters
+    #   Source server post migration custom action external parameters.
+    #   @return [Hash<String,Types::SsmExternalParameter>]
     #
     # @!attribute [rw] must_succeed_for_cutover
     #   Source server post migration custom action must succeed for cutover.
@@ -2188,8 +2699,11 @@ module Aws::Mgn
       :action_id,
       :action_name,
       :active,
+      :category,
+      :description,
       :document_identifier,
       :document_version,
+      :external_parameters,
       :must_succeed_for_cutover,
       :order,
       :parameters,
@@ -2211,6 +2725,14 @@ module Aws::Mgn
     #   Template post migration custom action active status.
     #   @return [Boolean]
     #
+    # @!attribute [rw] category
+    #   Template post migration custom action category.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Template post migration custom action description.
+    #   @return [String]
+    #
     # @!attribute [rw] document_identifier
     #   Template post migration custom action document identifier.
     #   @return [String]
@@ -2218,6 +2740,10 @@ module Aws::Mgn
     # @!attribute [rw] document_version
     #   Template post migration custom action document version.
     #   @return [String]
+    #
+    # @!attribute [rw] external_parameters
+    #   Template post migration custom action external parameters.
+    #   @return [Hash<String,Types::SsmExternalParameter>]
     #
     # @!attribute [rw] launch_configuration_template_id
     #   Launch configuration template ID.
@@ -2250,8 +2776,11 @@ module Aws::Mgn
       :action_id,
       :action_name,
       :active,
+      :category,
+      :description,
       :document_identifier,
       :document_version,
+      :external_parameters,
       :launch_configuration_template_id,
       :must_succeed_for_cutover,
       :operating_system,
@@ -2545,6 +3074,30 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # S3 bucket source.
+    #
+    # @!attribute [rw] s3_bucket
+    #   S3 bucket source s3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   S3 bucket source s3 bucket owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   S3 bucket source s3 key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/S3BucketSource AWS API Documentation
+    #
+    class S3BucketSource < Struct.new(
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request could not be completed because its exceeded the service
     # quota.
     #
@@ -2649,6 +3202,10 @@ module Aws::Mgn
     #   Source server data replication info.
     #   @return [Types::DataReplicationInfo]
     #
+    # @!attribute [rw] fqdn_for_action_framework
+    #   Source server fqdn for action framework.
+    #   @return [String]
+    #
     # @!attribute [rw] is_archived
     #   Source server archived status.
     #   @return [Boolean]
@@ -2677,6 +3234,10 @@ module Aws::Mgn
     #   Source server Tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] user_provided_id
+    #   Source server user provided ID.
+    #   @return [String]
+    #
     # @!attribute [rw] vcenter_client_id
     #   Source server vCenter client id.
     #   @return [String]
@@ -2687,6 +3248,7 @@ module Aws::Mgn
       :application_id,
       :arn,
       :data_replication_info,
+      :fqdn_for_action_framework,
       :is_archived,
       :launched_instance,
       :life_cycle,
@@ -2694,6 +3256,7 @@ module Aws::Mgn
       :source_properties,
       :source_server_id,
       :tags,
+      :user_provided_id,
       :vcenter_client_id)
       SENSITIVE = [:tags]
       include Aws::Structure
@@ -2711,6 +3274,14 @@ module Aws::Mgn
     #   Source server post migration custom action active status.
     #   @return [Boolean]
     #
+    # @!attribute [rw] category
+    #   Source server post migration custom action category.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Source server post migration custom action description.
+    #   @return [String]
+    #
     # @!attribute [rw] document_identifier
     #   Source server post migration custom action document identifier.
     #   @return [String]
@@ -2718,6 +3289,10 @@ module Aws::Mgn
     # @!attribute [rw] document_version
     #   Source server post migration custom action document version.
     #   @return [String]
+    #
+    # @!attribute [rw] external_parameters
+    #   Source server post migration custom action external parameters.
+    #   @return [Hash<String,Types::SsmExternalParameter>]
     #
     # @!attribute [rw] must_succeed_for_cutover
     #   Source server post migration custom action must succeed for cutover.
@@ -2741,8 +3316,11 @@ module Aws::Mgn
       :action_id,
       :action_name,
       :active,
+      :category,
+      :description,
       :document_identifier,
       :document_version,
+      :external_parameters,
       :must_succeed_for_cutover,
       :order,
       :parameters,
@@ -2771,6 +3349,10 @@ module Aws::Mgn
     #   User-friendly name for the AWS Systems Manager Document.
     #   @return [String]
     #
+    # @!attribute [rw] external_parameters
+    #   AWS Systems Manager Document external parameters.
+    #   @return [Hash<String,Types::SsmExternalParameter>]
+    #
     # @!attribute [rw] must_succeed_for_cutover
     #   If true, Cutover will not be enabled if the document has failed.
     #   @return [Boolean]
@@ -2791,12 +3373,36 @@ module Aws::Mgn
     #
     class SsmDocument < Struct.new(
       :action_name,
+      :external_parameters,
       :must_succeed_for_cutover,
       :parameters,
       :ssm_document_name,
       :timeout_seconds)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # AWS Systems Manager Document external parameter.
+    #
+    # @note SsmExternalParameter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SsmExternalParameter is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SsmExternalParameter corresponding to the set member.
+    #
+    # @!attribute [rw] dynamic_path
+    #   AWS Systems Manager Document external parameters dynamic path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SsmExternalParameter AWS API Documentation
+    #
+    class SsmExternalParameter < Struct.new(
+      :dynamic_path,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DynamicPath < SsmExternalParameter; end
+      class Unknown < SsmExternalParameter; end
     end
 
     # AWS Systems Manager Parameter Store parameter.
@@ -2843,6 +3449,80 @@ module Aws::Mgn
     #
     class StartCutoverResponse < Struct.new(
       :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Start export request.
+    #
+    # @!attribute [rw] s3_bucket
+    #   Start export request s3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   Start export request s3 bucket owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   Start export request s3key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartExportRequest AWS API Documentation
+    #
+    class StartExportRequest < Struct.new(
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Start export response.
+    #
+    # @!attribute [rw] export_task
+    #   Start export response export task.
+    #   @return [Types::ExportTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartExportResponse AWS API Documentation
+    #
+    class StartExportResponse < Struct.new(
+      :export_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Start import request.
+    #
+    # @!attribute [rw] client_token
+    #   Start import request client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_source
+    #   Start import request s3 bucket source.
+    #   @return [Types::S3BucketSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartImportRequest AWS API Documentation
+    #
+    class StartImportRequest < Struct.new(
+      :client_token,
+      :s3_bucket_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Start import response.
+    #
+    # @!attribute [rw] import_task
+    #   Start import response import task.
+    #   @return [Types::ImportTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartImportResponse AWS API Documentation
+    #
+    class StartImportResponse < Struct.new(
+      :import_task)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2917,6 +3597,14 @@ module Aws::Mgn
     #   Template post migration custom action active status.
     #   @return [Boolean]
     #
+    # @!attribute [rw] category
+    #   Template post migration custom action category.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Template post migration custom action description.
+    #   @return [String]
+    #
     # @!attribute [rw] document_identifier
     #   Template post migration custom action document identifier.
     #   @return [String]
@@ -2924,6 +3612,10 @@ module Aws::Mgn
     # @!attribute [rw] document_version
     #   Template post migration custom action document version.
     #   @return [String]
+    #
+    # @!attribute [rw] external_parameters
+    #   Template post migration custom action external parameters.
+    #   @return [Hash<String,Types::SsmExternalParameter>]
     #
     # @!attribute [rw] must_succeed_for_cutover
     #   Template post migration custom action must succeed for cutover.
@@ -2952,8 +3644,11 @@ module Aws::Mgn
       :action_id,
       :action_name,
       :active,
+      :category,
+      :description,
       :document_identifier,
       :document_version,
+      :external_parameters,
       :must_succeed_for_cutover,
       :operating_system,
       :order,

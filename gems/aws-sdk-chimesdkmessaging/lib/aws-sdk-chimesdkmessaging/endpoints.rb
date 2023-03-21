@@ -207,6 +207,20 @@ module Aws::ChimeSDKMessaging
       end
     end
 
+    class DeleteMessagingStreamingConfigurations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMessaging::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeChannel
       def self.build(context)
         unless context.config.regional_endpoint
@@ -375,6 +389,20 @@ module Aws::ChimeSDKMessaging
       end
     end
 
+    class GetMessagingStreamingConfigurations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMessaging::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListChannelBans
       def self.build(context)
         unless context.config.regional_endpoint
@@ -530,6 +558,20 @@ module Aws::ChimeSDKMessaging
     end
 
     class PutChannelMembershipPreferences
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMessaging::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class PutMessagingStreamingConfigurations
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

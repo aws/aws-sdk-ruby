@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2023-03-21)
+------------------
+
+* Feature - This release introduces the Import and export feature and expansion of the post-launch actions
+
 1.17.0 (2023-01-18)
 ------------------
 

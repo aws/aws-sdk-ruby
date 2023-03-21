@@ -636,7 +636,7 @@ module Aws::IoTSiteWise
     #
     # @option params [required, Array<Types::BatchGetAssetPropertyValueEntry>] :entries
     #   The list of asset property value entries for the batch get request.
-    #   You can specify up to 16 entries per request.
+    #   You can specify up to 128 entries per request.
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
@@ -2698,6 +2698,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeTimeSeriesResponse#data_type_spec #data_type_spec} => String
     #   * {Types::DescribeTimeSeriesResponse#time_series_creation_date #time_series_creation_date} => Time
     #   * {Types::DescribeTimeSeriesResponse#time_series_last_update_date #time_series_last_update_date} => Time
+    #   * {Types::DescribeTimeSeriesResponse#time_series_arn #time_series_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2717,6 +2718,7 @@ module Aws::IoTSiteWise
     #   resp.data_type_spec #=> String
     #   resp.time_series_creation_date #=> Time
     #   resp.time_series_last_update_date #=> Time
+    #   resp.time_series_arn #=> String
     #
     # @overload describe_time_series(params = {})
     # @param [Hash] params ({})
@@ -4094,6 +4096,7 @@ module Aws::IoTSiteWise
     #   resp.time_series_summaries[0].data_type_spec #=> String
     #   resp.time_series_summaries[0].time_series_creation_date #=> Time
     #   resp.time_series_summaries[0].time_series_last_update_date #=> Time
+    #   resp.time_series_summaries[0].time_series_arn #=> String
     #   resp.next_token #=> String
     #
     # @overload list_time_series(params = {})
@@ -5026,7 +5029,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

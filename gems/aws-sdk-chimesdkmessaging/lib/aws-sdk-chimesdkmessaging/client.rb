@@ -1147,6 +1147,34 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Deletes the streaming configurations for an `AppInstance`. For more
+    # information, see [Streaming messaging data][1] in the *Amazon Chime
+    # SDK Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the streaming configurations being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_messaging_streaming_configurations({
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteMessagingStreamingConfigurations AWS API Documentation
+    #
+    # @overload delete_messaging_streaming_configurations(params = {})
+    # @param [Hash] params ({})
+    def delete_messaging_streaming_configurations(params = {}, options = {})
+      req = build_request(:delete_messaging_streaming_configurations, params)
+      req.send_request(options)
+    end
+
     # Returns the full details of a channel in an Amazon Chime
     # `AppInstance`.
     #
@@ -1739,6 +1767,42 @@ module Aws::ChimeSDKMessaging
     # @param [Hash] params ({})
     def get_messaging_session_endpoint(params = {}, options = {})
       req = build_request(:get_messaging_session_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the data streaming configuration for an `AppInstance`. For
+    # more information, see [Streaming messaging data][1] in the *Amazon
+    # Chime SDK Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the streaming configurations.
+    #
+    # @return [Types::GetMessagingStreamingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMessagingStreamingConfigurationsResponse#streaming_configurations #streaming_configurations} => Array&lt;Types::StreamingConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_messaging_streaming_configurations({
+    #     app_instance_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_configurations #=> Array
+    #   resp.streaming_configurations[0].data_type #=> String, one of "Channel", "ChannelMessage"
+    #   resp.streaming_configurations[0].resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetMessagingStreamingConfigurations AWS API Documentation
+    #
+    # @overload get_messaging_streaming_configurations(params = {})
+    # @param [Hash] params ({})
+    def get_messaging_streaming_configurations(params = {}, options = {})
+      req = build_request(:get_messaging_streaming_configurations, params)
       req.send_request(options)
     end
 
@@ -2454,6 +2518,51 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Sets the data streaming configuration for an `AppInstance`. For more
+    # information, see [Streaming messaging data][1] in the *Amazon Chime
+    # SDK Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the streaming configuration.
+    #
+    # @option params [required, Array<Types::StreamingConfiguration>] :streaming_configurations
+    #   The streaming configurations.
+    #
+    # @return [Types::PutMessagingStreamingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutMessagingStreamingConfigurationsResponse#streaming_configurations #streaming_configurations} => Array&lt;Types::StreamingConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_messaging_streaming_configurations({
+    #     app_instance_arn: "ChimeArn", # required
+    #     streaming_configurations: [ # required
+    #       {
+    #         data_type: "Channel", # required, accepts Channel, ChannelMessage
+    #         resource_arn: "ChimeArn", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_configurations #=> Array
+    #   resp.streaming_configurations[0].data_type #=> String, one of "Channel", "ChannelMessage"
+    #   resp.streaming_configurations[0].resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PutMessagingStreamingConfigurations AWS API Documentation
+    #
+    # @overload put_messaging_streaming_configurations(params = {})
+    # @param [Hash] params ({})
+    def put_messaging_streaming_configurations(params = {}, options = {})
+      req = build_request(:put_messaging_streaming_configurations, params)
+      req.send_request(options)
+    end
+
     # Redacts message content, but not metadata. The message exists in the
     # back end, but the action returns null content, and the state shows as
     # redacted.
@@ -2942,7 +3051,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

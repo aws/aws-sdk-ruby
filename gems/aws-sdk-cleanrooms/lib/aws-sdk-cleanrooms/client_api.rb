@@ -41,6 +41,7 @@ module Aws::CleanRooms
     BatchGetSchemaInput = Shapes::StructureShape.new(name: 'BatchGetSchemaInput')
     BatchGetSchemaOutput = Shapes::StructureShape.new(name: 'BatchGetSchemaOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CleanroomsArn = Shapes::StringShape.new(name: 'CleanroomsArn')
     Collaboration = Shapes::StructureShape.new(name: 'Collaboration')
     CollaborationArn = Shapes::StringShape.new(name: 'CollaborationArn')
     CollaborationDescription = Shapes::StringShape.new(name: 'CollaborationDescription')
@@ -131,6 +132,8 @@ module Aws::CleanRooms
     ListProtectedQueriesOutput = Shapes::StructureShape.new(name: 'ListProtectedQueriesOutput')
     ListSchemasInput = Shapes::StructureShape.new(name: 'ListSchemasInput')
     ListSchemasOutput = Shapes::StructureShape.new(name: 'ListSchemasOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberAbilities = Shapes::ListShape.new(name: 'MemberAbilities')
@@ -184,10 +187,18 @@ module Aws::CleanRooms
     TableAliasList = Shapes::ListShape.new(name: 'TableAliasList')
     TableDescription = Shapes::StringShape.new(name: 'TableDescription')
     TableReference = Shapes::UnionShape.new(name: 'TableReference')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetProtectedQueryStatus = Shapes::StringShape.new(name: 'TargetProtectedQueryStatus')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UUID = Shapes::StringShape.new(name: 'UUID')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateCollaborationInput = Shapes::StructureShape.new(name: 'UpdateCollaborationInput')
     UpdateCollaborationOutput = Shapes::StructureShape.new(name: 'UpdateCollaborationOutput')
     UpdateConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAnalysisRuleInput')
@@ -401,6 +412,7 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:creator_display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "creatorDisplayName"))
     CreateCollaborationInput.add_member(:data_encryption_metadata, Shapes::ShapeRef.new(shape: DataEncryptionMetadata, location_name: "dataEncryptionMetadata"))
     CreateCollaborationInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
+    CreateCollaborationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateCollaborationInput.struct_class = Types::CreateCollaborationInput
 
     CreateCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
@@ -419,6 +431,7 @@ module Aws::CleanRooms
     CreateConfiguredTableAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     CreateConfiguredTableAssociationInput.add_member(:configured_table_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableIdentifier, required: true, location_name: "configuredTableIdentifier"))
     CreateConfiguredTableAssociationInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateConfiguredTableAssociationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateConfiguredTableAssociationInput.struct_class = Types::CreateConfiguredTableAssociationInput
 
     CreateConfiguredTableAssociationOutput.add_member(:configured_table_association, Shapes::ShapeRef.new(shape: ConfiguredTableAssociation, required: true, location_name: "configuredTableAssociation"))
@@ -429,6 +442,7 @@ module Aws::CleanRooms
     CreateConfiguredTableInput.add_member(:table_reference, Shapes::ShapeRef.new(shape: TableReference, required: true, location_name: "tableReference"))
     CreateConfiguredTableInput.add_member(:allowed_columns, Shapes::ShapeRef.new(shape: AllowedColumnList, required: true, location_name: "allowedColumns"))
     CreateConfiguredTableInput.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, required: true, location_name: "analysisMethod"))
+    CreateConfiguredTableInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateConfiguredTableInput.struct_class = Types::CreateConfiguredTableInput
 
     CreateConfiguredTableOutput.add_member(:configured_table, Shapes::ShapeRef.new(shape: ConfiguredTable, required: true, location_name: "configuredTable"))
@@ -436,6 +450,7 @@ module Aws::CleanRooms
 
     CreateMembershipInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location_name: "collaborationIdentifier"))
     CreateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
+    CreateMembershipInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateMembershipInput.struct_class = Types::CreateMembershipInput
 
     CreateMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))
@@ -605,6 +620,12 @@ module Aws::CleanRooms
     ListSchemasOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListSchemasOutput.struct_class = Types::ListSchemasOutput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CleanroomsArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     MemberAbilities.member = Shapes::ShapeRef.new(shape: MemberAbility)
 
     MemberList.member = Shapes::ShapeRef.new(shape: MemberSpecification)
@@ -770,8 +791,25 @@ module Aws::CleanRooms
     TableReference.add_member_subclass(:unknown, Types::TableReference::Unknown)
     TableReference.struct_class = Types::TableReference
 
+    TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CleanroomsArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: CleanroomsArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateCollaborationInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     UpdateCollaborationInput.add_member(:name, Shapes::ShapeRef.new(shape: CollaborationName, location_name: "name"))
@@ -1144,6 +1182,7 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations"
         o.input = Shapes::ShapeRef.new(shape: ListConfiguredTableAssociationsInput)
         o.output = Shapes::ShapeRef.new(shape: ListConfiguredTableAssociationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1217,6 +1256,7 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/protectedQueries"
         o.input = Shapes::ShapeRef.new(shape: ListProtectedQueriesInput)
         o.output = Shapes::ShapeRef.new(shape: ListProtectedQueriesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1248,6 +1288,16 @@ module Aws::CleanRooms
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:start_protected_query, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartProtectedQuery"
         o.http_method = "POST"
@@ -1260,6 +1310,26 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_collaboration, Seahorse::Model::Operation.new.tap do |o|

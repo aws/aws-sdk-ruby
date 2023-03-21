@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2023-03-21)
+------------------
+
+* Feature - Provide support for tagging of data streams and enabling tag based authorization for property alias
+
 1.48.0 (2023-01-18)
 ------------------
 

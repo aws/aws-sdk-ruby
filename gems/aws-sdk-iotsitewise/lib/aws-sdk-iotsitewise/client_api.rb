@@ -1160,6 +1160,7 @@ module Aws::IoTSiteWise
     DescribeTimeSeriesResponse.add_member(:data_type_spec, Shapes::ShapeRef.new(shape: Name, location_name: "dataTypeSpec"))
     DescribeTimeSeriesResponse.add_member(:time_series_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timeSeriesCreationDate"))
     DescribeTimeSeriesResponse.add_member(:time_series_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timeSeriesLastUpdateDate"))
+    DescribeTimeSeriesResponse.add_member(:time_series_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "timeSeriesArn"))
     DescribeTimeSeriesResponse.struct_class = Types::DescribeTimeSeriesResponse
 
     DetailedError.add_member(:code, Shapes::ShapeRef.new(shape: DetailedErrorCode, required: true, location_name: "code"))
@@ -1651,6 +1652,7 @@ module Aws::IoTSiteWise
     TimeSeriesSummary.add_member(:data_type_spec, Shapes::ShapeRef.new(shape: Name, location_name: "dataTypeSpec"))
     TimeSeriesSummary.add_member(:time_series_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timeSeriesCreationDate"))
     TimeSeriesSummary.add_member(:time_series_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timeSeriesLastUpdateDate"))
+    TimeSeriesSummary.add_member(:time_series_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "timeSeriesArn"))
     TimeSeriesSummary.struct_class = Types::TimeSeriesSummary
 
     Timestamps.member = Shapes::ShapeRef.new(shape: TimeInNanos)

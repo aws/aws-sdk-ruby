@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2023-03-21)
+------------------
+
+* Feature - Amazon Chime SDK messaging customers can now manage streaming configuration for messaging data for archival and analysis.
+
 1.15.0 (2023-01-18)
 ------------------
 
