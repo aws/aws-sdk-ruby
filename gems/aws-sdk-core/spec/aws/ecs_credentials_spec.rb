@@ -195,6 +195,7 @@ module Aws
       let(:full_uri) { 'https://amazon.com:1234/path' }
       let(:loopback_uri) { 'http://localhost/path' }
       let(:loopback_ip) { 'http://127.0.0.1/path' }
+      let(:loopback_ipv6) { 'http://[::1]/path' }
       let(:expiration) { Time.now.utc + 3600 }
 
       let(:resp) { <<~JSON.strip }
@@ -250,6 +251,16 @@ module Aws
       it 'uses an http IP if it is a loopback' do
         ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_ip
         stub_request(:get, loopback_ip).to_return(status: 200, body: resp)
+        c = ECSCredentials.new(backoff: 0)
+        expect(c.credentials.access_key_id).to eq('akid-full')
+        expect(c.credentials.secret_access_key).to eq('secret-full')
+        expect(c.credentials.session_token).to eq('session-token-full')
+        expect(c.expiration.to_s).to eq(expiration.to_s)
+      end
+
+      it 'uses an http IPv6 if it is a loopback' do
+        ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_ipv6
+        stub_request(:get, loopback_ipv6).to_return(status: 200, body: resp)
         c = ECSCredentials.new(backoff: 0)
         expect(c.credentials.access_key_id).to eq('akid-full')
         expect(c.credentials.secret_access_key).to eq('secret-full')

@@ -105,7 +105,7 @@ module Aws
       return unless full_uri.scheme == 'http'
 
       begin
-        return if IPAddr.new(full_uri.host).loopback?
+        return if ip_address_loopback?(IPAddr.new(full_uri.host))
       rescue IPAddr::InvalidAddressError
         addresses = Resolv.getaddresses(full_uri.host)
         return if addresses.all? { |addr| IPAddr.new(addr).loopback? }
@@ -114,6 +114,19 @@ module Aws
       raise ArgumentError,
             'AWS_CONTAINER_CREDENTIALS_FULL_URI must use a loopback '\
             'address when using the http scheme.'
+    end
+
+    # loopback? method is available in Ruby 2.5+
+    # Replicate the logic here.
+    def ip_address_loopback?(ip_address)
+      case ip_address.family
+      when Socket::AF_INET
+        ip_address & 0xff000000 == 0x7f000000
+      when Socket::AF_INET6
+        ip_address == 1
+      else
+        false
+      end
     end
 
     def backoff(backoff)
