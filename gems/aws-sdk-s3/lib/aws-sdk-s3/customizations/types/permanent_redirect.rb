@@ -17,7 +17,7 @@ module Aws
       # @!attribute [rw] message
       #   @return [String]
       #
-      class PermanentRedirect < Struct.new(:endpoint, :bucket, :message)
+      class PermanentRedirect < Struct.new(:endpoint, :bucket, :region, :message)
         SENSITIVE = []
         include Aws::Structure
       end

@@ -18,6 +18,7 @@ module Aws
           if (bucket = body.match(/<Bucket>(.+?)<\/Bucket>/))
             data.bucket = bucket[1]
           end
+          data.region = context.http_response.headers['x-amz-bucket-region']
           super(context, message, data)
         end
       end

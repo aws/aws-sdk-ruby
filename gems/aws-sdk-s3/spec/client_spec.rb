@@ -111,7 +111,7 @@ module Aws
           client.handle(step: :send) do |context|
             context.http_response.signal_done(
               status_code: 301,
-              headers: {},
+              headers: { 'x-amz-bucket-region' => 'us-peccy-1' },
               body: <<-BODY)
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <Error>
@@ -129,6 +129,7 @@ BODY
             expect(error.message).to eq('Error message.')
             expect(error.data.endpoint).to eq('http://foo.com')
             expect(error.data.bucket).to eq('bucket')
+            expect(error.data.region).to eq('us-peccy-1')
           end
         end
       end
