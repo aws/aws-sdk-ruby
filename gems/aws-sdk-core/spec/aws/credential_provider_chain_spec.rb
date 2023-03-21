@@ -123,6 +123,14 @@ CREDS
       expect(credentials).to be(mock_ecs_creds)
     end
 
+    it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_FULL_URI is set' do
+      ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'test_uri'
+      mock_ecs_creds = double('ECSCredentials')
+      expect(ECSCredentials).to receive(:new).and_return(mock_ecs_creds)
+      expect(mock_ecs_creds).to receive(:set?).and_return(true)
+      expect(credentials).to be(mock_ecs_creds)
+    end
+
     describe 'with config set to nil' do
       let(:config) { nil }
 

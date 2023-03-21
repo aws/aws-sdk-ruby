@@ -161,7 +161,8 @@ module Aws
 
     def instance_profile_credentials(options)
       profile_name = determine_profile_name(options)
-      if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI']
+      if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
+         ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
         ECSCredentials.new(options)
       else
         InstanceProfileCredentials.new(options.merge(profile: profile_name))
