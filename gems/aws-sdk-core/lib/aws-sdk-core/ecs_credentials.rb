@@ -35,8 +35,10 @@ module Aws
     # @param [Hash] options
     # @option options [Integer] :retries (5) Number of times to retry
     #   when retrieving credentials.
-    # @option options [String] :ip_address ('169.254.170.2')
-    # @option options [Integer] :port (80)
+    # @option options [String] :ip_address ('169.254.170.2') This value is
+    #   ignored if `endpoint` is set and `credential_path` is not set.
+    # @option options [Integer] :port (80) This value is ignored if `endpoint`
+    #   is set and `credential_path` is not set.
     # @option options [String] :credential_path By default, the value of the
     #   AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variable.
     # @option options [String] :endpoint The ECS credential endpoint.
@@ -57,26 +59,14 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
-      @retries = options[:retries] || 5
-      @host = options[:ip_address] || '169.254.170.2'
-      @port = options[:port] || 80
-      @scheme = 'http'
-      @credential_path = options[:credential_path] ||
-                         ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI']
-
+      credential_path = options[:credential_path] ||
+                        ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI']
       endpoint = options[:endpoint] ||
                  ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
-
-      if !@credential_path && !endpoint
-        raise ArgumentError,
-              'Cannot instantiate an ECS Credential Provider '\
-              'without a credential path or endpoint.'
-      end
-
-      # Use FULL_URI/endpoint only if RELATIVE_URI/path is not set
-      override_full_uri(endpoint) unless @credential_path
+      initialize_uri(options, credential_path, endpoint)
       @authorization_token = ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN']
 
+      @retries = options[:retries] || 5
       @http_open_timeout = options[:http_open_timeout] || 5
       @http_read_timeout = options[:http_read_timeout] || 5
       @http_debug_output = options[:http_debug_output]
@@ -91,7 +81,27 @@ module Aws
 
     private
 
-    def override_full_uri(endpoint)
+    def initialize_uri(options, credential_path, endpoint)
+      if credential_path
+        initialize_relative_uri(options, credential_path)
+      # Use FULL_URI/endpoint only if RELATIVE_URI/path is not set
+      elsif endpoint
+        initialize_full_uri(endpoint)
+      else
+        raise ArgumentError,
+              'Cannot instantiate an ECS Credential Provider '\
+              'without a credential path or endpoint.'
+      end
+    end
+
+    def initialize_relative_uri(options, path)
+      @host = options[:ip_address] || '169.254.170.2'
+      @port = options[:port] || 80
+      @scheme = 'http'
+      @credential_path = path
+    end
+
+    def initialize_full_uri(endpoint)
       uri = URI.parse(endpoint)
       validate_full_uri!(uri)
       @host = uri.host
@@ -161,7 +171,7 @@ module Aws
 
       retry_errors(NETWORK_ERRORS, max_retries: @retries) do
         open_connection do |conn|
-          http_get(conn)
+          http_get(conn, @credential_path)
         end
       end
     rescue StandardError
@@ -178,8 +188,8 @@ module Aws
       yield(http).tap { http.finish }
     end
 
-    def http_get(connection)
-      request = Net::HTTP::Get.new(@credential_path)
+    def http_get(connection, path)
+      request = Net::HTTP::Get.new(path)
       request['Authorization'] = @authorization_token if @authorization_token
       response = connection.request(request)
       raise Non200Response unless response.code.to_i == 200
