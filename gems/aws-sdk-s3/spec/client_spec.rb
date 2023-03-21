@@ -105,6 +105,34 @@ module Aws
         end
       end
 
+      describe 'permanent redirect error' do
+        it 'includes endpoint and bucket in PermanentRedirect' do
+          client = Client.new(stub_responses: true)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 301,
+              headers: {},
+              body: <<-BODY)
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<Error>
+  <Code>PermanentRedirect</Code>
+  <Message>Error message.</Message>
+  <Endpoint>http://foo.com</Endpoint>
+  <Bucket>bucket</Bucket>
+</Error>
+BODY
+            Seahorse::Client::Response.new(context: context)
+          end
+          expect do
+            client.list_objects_v2(bucket: 'bucket')
+          end.to raise_error(Errors::PermanentRedirect) do |error|
+            expect(error.message).to eq('Error message.')
+            expect(error.data.endpoint).to eq('http://foo.com')
+            expect(error.data.bucket).to eq('bucket')
+          end
+        end
+      end
+
       describe 'unlinked tempfiles' do
         it 'can put an unlinked file descriptor' do
           data = '.' * 1024 * 1024

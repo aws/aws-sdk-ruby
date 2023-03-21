@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Provide `endpoint` and `bucket` attributes on `Aws::S3::Errors::PermanentRedirect` error objects.
+
 1.119.1 (2023-02-13)
 ------------------
 

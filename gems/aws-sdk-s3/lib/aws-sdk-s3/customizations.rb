@@ -18,10 +18,12 @@ require 'aws-sdk-s3/presigner'
 
 # customizations to generated classes
 require 'aws-sdk-s3/customizations/bucket'
+require 'aws-sdk-s3/customizations/errors'
 require 'aws-sdk-s3/customizations/object'
 require 'aws-sdk-s3/customizations/object_summary'
 require 'aws-sdk-s3/customizations/multipart_upload'
 require 'aws-sdk-s3/customizations/types/list_object_versions_output'
+require 'aws-sdk-s3/customizations/types/permanent_redirect'
 
 [
   Aws::S3::Object::Collection,
