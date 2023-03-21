@@ -737,6 +737,22 @@ module Aws::ApplicationAutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a scheduled action
+    #
+    #   # This example deletes a scheduled action for the AppStream 2.0 fleet called sample-fleet.
+    #
+    #   resp = client.delete_scheduled_action({
+    #     resource_id: "fleet/sample-fleet", 
+    #     scalable_dimension: "appstream:fleet:DesiredCapacity", 
+    #     scheduled_action_name: "my-recurring-action", 
+    #     service_namespace: "appstream", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_scheduled_action({
@@ -1172,6 +1188,7 @@ module Aws::ApplicationAutoScaling
     #   resp.scalable_targets[0].suspended_state.dynamic_scaling_in_suspended #=> Boolean
     #   resp.scalable_targets[0].suspended_state.dynamic_scaling_out_suspended #=> Boolean
     #   resp.scalable_targets[0].suspended_state.scheduled_scaling_suspended #=> Boolean
+    #   resp.scalable_targets[0].scalable_target_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets AWS API Documentation
@@ -1706,6 +1723,18 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.dimensions[0].value #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.statistic #=> String, one of "Average", "Minimum", "Maximum", "SampleCount", "Sum"
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.unit #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics #=> Array
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].expression #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].id #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].label #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions #=> Array
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.metric_name #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.metric.namespace #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.stat #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].metric_stat.unit #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metrics[0].return_data #=> Boolean
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
@@ -1906,6 +1935,47 @@ module Aws::ApplicationAutoScaling
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To describe scheduled actions
+    #
+    #   # This example describes the scheduled actions for the dynamodb service namespace.
+    #
+    #   resp = client.describe_scheduled_actions({
+    #     service_namespace: "dynamodb", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scheduled_actions: [
+    #       {
+    #         creation_time: Time.parse(1561571888.361), 
+    #         resource_id: "table/my-table", 
+    #         scalable_dimension: "dynamodb:table:WriteCapacityUnits", 
+    #         scalable_target_action: {
+    #           max_capacity: 20, 
+    #           min_capacity: 15, 
+    #         }, 
+    #         schedule: "at(2019-05-20T18:35:00)", 
+    #         scheduled_action_arn: "arn:aws:autoscaling:us-west-2:123456789012:scheduledAction:2d36aa3b-cdf9-4565-b290-81db519b227d:resource/dynamodb/table/my-table:scheduledActionName/my-first-scheduled-action", 
+    #         scheduled_action_name: "my-first-scheduled-action", 
+    #         service_namespace: "dynamodb", 
+    #       }, 
+    #       {
+    #         creation_time: Time.parse(1561571946.021), 
+    #         resource_id: "table/my-table", 
+    #         scalable_dimension: "dynamodb:table:WriteCapacityUnits", 
+    #         scalable_target_action: {
+    #           max_capacity: 10, 
+    #           min_capacity: 5, 
+    #         }, 
+    #         schedule: "at(2019-05-20T18:40:00)", 
+    #         scheduled_action_arn: "arn:aws:autoscaling:us-west-2:123456789012:scheduledAction:2d36aa3b-cdf9-4565-b290-81db519b227d:resource/dynamodb/table/my-table:scheduledActionName/my-second-scheduled-action", 
+    #         scheduled_action_name: "my-second-scheduled-action", 
+    #         service_namespace: "dynamodb", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scheduled_actions({
@@ -1943,6 +2013,65 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
+    # Returns all the tags on the specified Application Auto Scaling
+    # scalable target.
+    #
+    # For general information about tags, including the format and syntax,
+    # see [Tagging Amazon Web Services resources][1] in the *Amazon Web
+    # Services General Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @option params [required, String] :resource_arn
+    #   Specify the ARN of the scalable target.
+    #
+    #   For example:
+    #   `arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123`
+    #
+    #   To get the ARN for a scalable target, use DescribeScalableTargets.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To list tags for a scalable target
+    #
+    #   # This example lists the tag key names and values that are attached to the scalable target specified by its ARN.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:application-autoscaling:us-west-2:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "environment" => "production", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Creates or updates a scaling policy for an Application Auto Scaling
     # scalable target.
     #
@@ -1977,7 +2106,7 @@ module Aws::ApplicationAutoScaling
     # Guide*.
     #
     # <note markdown="1"> If a scalable target is deregistered, the scalable target is no longer
-    # available to execute scaling policies. Any scaling policies that were
+    # available to use scaling policies. Any scaling policies that were
     # specified for the scalable target are deleted.
     #
     #  </note>
@@ -2242,16 +2371,38 @@ module Aws::ApplicationAutoScaling
     #         resource_label: "ResourceLabel",
     #       },
     #       customized_metric_specification: {
-    #         metric_name: "MetricName", # required
-    #         namespace: "MetricNamespace", # required
+    #         metric_name: "MetricName",
+    #         namespace: "MetricNamespace",
     #         dimensions: [
     #           {
     #             name: "MetricDimensionName", # required
     #             value: "MetricDimensionValue", # required
     #           },
     #         ],
-    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #         statistic: "Average", # accepts Average, Minimum, Maximum, SampleCount, Sum
     #         unit: "MetricUnit",
+    #         metrics: [
+    #           {
+    #             expression: "Expression",
+    #             id: "Id", # required
+    #             label: "XmlString",
+    #             metric_stat: {
+    #               metric: { # required
+    #                 dimensions: [
+    #                   {
+    #                     name: "TargetTrackingMetricDimensionName", # required
+    #                     value: "TargetTrackingMetricDimensionValue", # required
+    #                   },
+    #                 ],
+    #                 metric_name: "TargetTrackingMetricName",
+    #                 namespace: "TargetTrackingMetricNamespace",
+    #               },
+    #               stat: "XmlString", # required
+    #               unit: "TargetTrackingMetricUnit",
+    #             },
+    #             return_data: false,
+    #           },
+    #         ],
     #       },
     #       scale_out_cooldown: 1,
     #       scale_in_cooldown: 1,
@@ -2284,8 +2435,8 @@ module Aws::ApplicationAutoScaling
     # scheduled action until you have registered the resource as a scalable
     # target.
     #
-    # When start and end times are specified with a recurring schedule using
-    # a cron expression or rates, they form the boundaries for when the
+    # When you specify start and end times with a recurring schedule using a
+    # cron expression or rates, they form the boundaries for when the
     # recurring action starts and stops.
     #
     # To update a scheduled action, specify the parameters that you want to
@@ -2513,6 +2664,28 @@ module Aws::ApplicationAutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create a recurring scheduled action
+    #
+    #   # This example adds a scheduled action to a DynamoDB table called TestTable to scale out on a recurring schedule. On the
+    #   # specified schedule (every day at 12:15pm UTC), if the current capacity is below the value specified for MinCapacity,
+    #   # Application Auto Scaling scales out to the value specified by MinCapacity.
+    #
+    #   resp = client.put_scheduled_action({
+    #     resource_id: "table/TestTable", 
+    #     scalable_dimension: "dynamodb:table:WriteCapacityUnits", 
+    #     scalable_target_action: {
+    #       min_capacity: 6, 
+    #     }, 
+    #     schedule: "cron(15 12 * * ? *)", 
+    #     scheduled_action_name: "my-recurring-action", 
+    #     service_namespace: "dynamodb", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_scheduled_action({
@@ -2539,8 +2712,8 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Registers or updates a scalable target, the resource that you want to
-    # scale.
+    # Registers or updates a scalable target, which is the resource that you
+    # want to scale.
     #
     # Scalable targets are uniquely identified by the combination of
     # resource ID, scalable dimension, and namespace, which represents some
@@ -2552,10 +2725,10 @@ module Aws::ApplicationAutoScaling
     # resource's current capacity. Otherwise, it changes the resource's
     # current capacity to a value that is inside of this range.
     #
-    # If you choose to add a scaling policy, current capacity is adjustable
-    # within the specified range when scaling starts. Application Auto
-    # Scaling scaling policies will not scale capacity to values that are
-    # outside of the minimum and maximum range.
+    # If you add a scaling policy, current capacity is adjustable within the
+    # specified range when scaling starts. Application Auto Scaling scaling
+    # policies will not scale capacity to values that are outside of the
+    # minimum and maximum range.
     #
     # After you register a scalable target, you do not need to register it
     # again to use other Application Auto Scaling operations. To see which
@@ -2569,12 +2742,20 @@ module Aws::ApplicationAutoScaling
     # resource ID, scalable dimension, and namespace. Any parameters that
     # you don't specify are not changed by this update request.
     #
-    # <note markdown="1"> If you call the `RegisterScalableTarget` API to update an existing
-    # scalable target, Application Auto Scaling retrieves the current
-    # capacity of the resource. If it is below the minimum capacity or above
-    # the maximum capacity, Application Auto Scaling adjusts the capacity of
-    # the scalable target to place it within these bounds, even if you
-    # don't include the `MinCapacity` or `MaxCapacity` request parameters.
+    # <note markdown="1"> If you call the `RegisterScalableTarget` API operation to create a
+    # scalable target, there might be a brief delay until the operation
+    # achieves [eventual consistency][3]. You might become aware of this
+    # brief delay if you get unexpected errors when performing sequential
+    # operations. The typical strategy is to retry the request, and some
+    # Amazon Web Services SDKs include automatic backoff and retry logic.
+    #
+    #  If you call the `RegisterScalableTarget` API operation to update an
+    # existing scalable target, Application Auto Scaling retrieves the
+    # current capacity of the resource. If it's below the minimum capacity
+    # or above the maximum capacity, Application Auto Scaling adjusts the
+    # capacity of the scalable target to place it within these bounds, even
+    # if you don't include the `MinCapacity` or `MaxCapacity` request
+    # parameters.
     #
     #  </note>
     #
@@ -2582,6 +2763,7 @@ module Aws::ApplicationAutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html
     # [2]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DeregisterScalableTarget.html
+    # [3]: https://en.wikipedia.org/wiki/Eventual_consistency
     #
     # @option params [required, String] :service_namespace
     #   The namespace of the Amazon Web Services service that provides the
@@ -2771,7 +2953,7 @@ module Aws::ApplicationAutoScaling
     #   This property is required when registering a new scalable target.
     #
     #   Although you can specify a large maximum capacity, note that service
-    #   quotas may impose lower limits. Each service has its own default
+    #   quotas might impose lower limits. Each service has its own default
     #   quotas for the maximum capacity of the resource. If you want to
     #   specify a higher limit, you can request an increase. For more
     #   information, consult the documentation for that service. For
@@ -2824,7 +3006,26 @@ module Aws::ApplicationAutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Hash<String,String>] :tags
+    #   Assigns one or more tags to the scalable target. Use this parameter to
+    #   tag the scalable target when it is created. To tag an existing
+    #   scalable target, use the TagResource operation.
+    #
+    #   Each tag consists of a tag key and a tag value. Both the tag key and
+    #   the tag value are required. You cannot have more than one tag on a
+    #   scalable target with the same tag key.
+    #
+    #   Use tags to control access to a scalable target. For more information,
+    #   see [Tagging support for Application Auto Scaling][1] in the
+    #   *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html
+    #
+    # @return [Types::RegisterScalableTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterScalableTargetResponse#scalable_target_arn #scalable_target_arn} => String
     #
     #
     # @example Example: To register an ECS service as a scalable target
@@ -2854,7 +3055,14 @@ module Aws::ApplicationAutoScaling
     #       dynamic_scaling_out_suspended: false,
     #       scheduled_scaling_suspended: false,
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scalable_target_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTarget AWS API Documentation
     #
@@ -2862,6 +3070,146 @@ module Aws::ApplicationAutoScaling
     # @param [Hash] params ({})
     def register_scalable_target(params = {}, options = {})
       req = build_request(:register_scalable_target, params)
+      req.send_request(options)
+    end
+
+    # Adds or edits tags on an Application Auto Scaling scalable target.
+    #
+    # Each tag consists of a tag key and a tag value, which are both
+    # case-sensitive strings. To add a tag, specify a new tag key and a tag
+    # value. To edit a tag, specify an existing tag key and a new tag value.
+    #
+    # You can use this operation to tag an Application Auto Scaling scalable
+    # target, but you cannot tag a scaling policy or scheduled action.
+    #
+    # You can also add tags to an Application Auto Scaling scalable target
+    # while creating it (`RegisterScalableTarget`).
+    #
+    # For general information about tags, including the format and syntax,
+    # see [Tagging Amazon Web Services resources][1] in the *Amazon Web
+    # Services General Reference*.
+    #
+    # Use tags to control access to a scalable target. For more information,
+    # see [Tagging support for Application Auto Scaling][2] in the
+    # *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html
+    #
+    # @option params [required, String] :resource_arn
+    #   Identifies the Application Auto Scaling scalable target that you want
+    #   to apply tags to.
+    #
+    #   For example:
+    #   `arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123`
+    #
+    #   To get the ARN for a scalable target, use DescribeScalableTargets.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags assigned to the resource. A tag is a label that you assign to
+    #   an AWS resource.
+    #
+    #   Each tag consists of a tag key and a tag value.
+    #
+    #   You cannot have more than one tag on an Application Auto Scaling
+    #   scalable target with the same tag key. If you specify an existing tag
+    #   key with a different tag value, Application Auto Scaling replaces the
+    #   current tag value with the specified one.
+    #
+    #   For information about the rules that apply to tag keys and tag values,
+    #   see [User-defined tag restrictions][1] in the *Amazon Web Services
+    #   Billing and Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add a tag to a scalable target
+    #
+    #   # This example adds a tag with the key name "environment" and the value "production" to the scalable target specified by
+    #   # its ARN.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:application-autoscaling:us-west-2:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123", 
+    #     tags: {
+    #       "environment" => "production", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes tags from an Application Auto Scaling scalable target. To
+    # delete a tag, specify the tag key and the Application Auto Scaling
+    # scalable target.
+    #
+    # @option params [required, String] :resource_arn
+    #   Identifies the Application Auto Scaling scalable target from which to
+    #   remove tags.
+    #
+    #   For example:
+    #   `arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123`
+    #
+    #   To get the ARN for a scalable target, use DescribeScalableTargets.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   One or more tag keys. Specify only the tag keys, not the tag values.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove a tag from a scalable target
+    #
+    #   # This example removes the tag pair with the key name "environment" from the scalable target specified by its ARN.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:application-autoscaling:us-west-2:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123", 
+    #     tag_keys: [
+    #       "environment", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2878,7 +3226,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

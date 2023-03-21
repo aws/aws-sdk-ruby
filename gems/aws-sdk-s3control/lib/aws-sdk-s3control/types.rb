@@ -25,6 +25,24 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for information about access control for replicas.
+    #
+    # <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] owner
+    #   Specifies the replica ownership.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccessControlTranslation AWS API Documentation
+    #
+    class AccessControlTranslation < Struct.new(
+      :owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An access point used to access a bucket.
     #
     # @!attribute [rw] name
@@ -484,10 +502,15 @@ module Aws::S3Control
     #   Specifies the ARN for the Object Lambda Access Point.
     #   @return [String]
     #
+    # @!attribute [rw] alias
+    #   The alias of the Object Lambda Access Point.
+    #   @return [Types::ObjectLambdaAccessPointAlias]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambdaResult AWS API Documentation
     #
     class CreateAccessPointForObjectLambdaResult < Struct.new(
-      :object_lambda_access_point_arn)
+      :object_lambda_access_point_arn,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -512,7 +535,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -707,7 +730,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -958,7 +981,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -989,7 +1012,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -1019,7 +1042,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1049,7 +1072,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1059,6 +1082,38 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketPolicyRequest AWS API Documentation
     #
     class DeleteBucketPolicyRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the Outposts bucket to delete
+    #   the replication configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   Specifies the S3 on Outposts bucket to delete the replication
+    #   configuration for.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket
+    #   accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through Outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketReplicationRequest AWS API Documentation
+    #
+    class DeleteBucketReplicationRequest < Struct.new(
       :account_id,
       :bucket)
       SENSITIVE = []
@@ -1079,7 +1134,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1110,7 +1165,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1148,6 +1203,33 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteJobTaggingResult AWS API Documentation
     #
     class DeleteJobTaggingResult < Aws::EmptyStructure; end
+
+    # Specifies whether S3 on Outposts replicates delete markers. If you
+    # specify a `Filter` element in your replication configuration, you must
+    # also include a `DeleteMarkerReplication` element. If your `Filter`
+    # includes a `Tag` element, the `DeleteMarkerReplication` element's
+    # `Status` child element must be set to `Disabled`, because S3 on
+    # Outposts does not support replicating delete markers for tag-based
+    # rules.
+    #
+    # For more information about delete marker replication, see [How delete
+    # operations affect replication][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated
+    #
+    # @!attribute [rw] status
+    #   Indicates whether to replicate delete markers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteMarkerReplication AWS API Documentation
+    #
+    class DeleteMarkerReplication < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A container for the information associated with a
     # [DeleteMultiRegionAccessPoint][1] request.
@@ -1331,6 +1413,83 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Specifies information about the replication destination bucket and its
+    # settings for an S3 on Outposts replication configuration.
+    #
+    # @!attribute [rw] account
+    #   The destination bucket owner's account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon Resource Name (ARN) of the access point for the
+    #   destination bucket where you want S3 on Outposts to store the
+    #   replication results.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_time
+    #   A container that specifies S3 Replication Time Control (S3 RTC)
+    #   settings, including whether S3 RTC is enabled and the time when all
+    #   objects and operations on objects must be replicated. Must be
+    #   specified together with a `Metrics` block.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #   @return [Types::ReplicationTime]
+    #
+    # @!attribute [rw] access_control_translation
+    #   Specify this property only in a cross-account scenario (where the
+    #   source and destination bucket owners are not the same), and you want
+    #   to change replica ownership to the Amazon Web Services account that
+    #   owns the destination bucket. If this property is not specified in
+    #   the replication configuration, the replicas are owned by same Amazon
+    #   Web Services account that owns the source object.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #   @return [Types::AccessControlTranslation]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   A container that provides information about encryption. If
+    #   `SourceSelectionCriteria` is specified, you must specify this
+    #   element.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] metrics
+    #   A container that specifies replication metrics-related settings.
+    #   @return [Types::Metrics]
+    #
+    # @!attribute [rw] storage_class
+    #   The storage class to use when replicating objects. All objects
+    #   stored on S3 on Outposts are stored in the `OUTPOSTS` storage class.
+    #   S3 on Outposts uses the `OUTPOSTS` storage class to create the
+    #   object replicas.
+    #
+    #   <note markdown="1"> Values other than `OUTPOSTS` are not supported by Amazon S3 on
+    #   Outposts.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :account,
+      :bucket,
+      :replication_time,
+      :access_control_translation,
+      :encryption_configuration,
+      :metrics,
+      :storage_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The container element for Amazon S3 Storage Lens detailed status code
     # metrics. Detailed status code metrics generate metrics for HTTP status
     # codes, such as `200 OK`, `403 Forbidden`, `503 Service Unavailable`
@@ -1355,6 +1514,35 @@ module Aws::S3Control
     #
     class DetailedStatusCodesMetrics < Struct.new(
       :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies encryption-related information for an Amazon S3 bucket that
+    # is a destination for replicated objects.
+    #
+    # <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] replica_kms_key_id
+    #   Specifies the ID of the customer managed KMS key that's stored in
+    #   Key Management Service (KMS) for the destination bucket. This ID is
+    #   either the Amazon Resource Name (ARN) for the KMS key or the alias
+    #   ARN for the KMS key. Amazon S3 uses this KMS key to encrypt replica
+    #   objects. Amazon S3 supports only symmetric encryption KMS keys. For
+    #   more information, see [Symmetric encryption KMS keys][1] in the
+    #   *Amazon Web Services Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :replica_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1395,6 +1583,25 @@ module Aws::S3Control
     class Exclude < Struct.new(
       :buckets,
       :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An optional configuration to replicate existing source bucket objects.
+    #
+    # <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] status
+    #   Specifies whether Amazon S3 replicates existing source bucket
+    #   objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ExistingObjectReplication AWS API Documentation
+    #
+    class ExistingObjectReplication < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1483,12 +1690,17 @@ module Aws::S3Control
     #   created.
     #   @return [Time]
     #
+    # @!attribute [rw] alias
+    #   The alias of the Object Lambda Access Point.
+    #   @return [Types::ObjectLambdaAccessPointAlias]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambdaResult AWS API Documentation
     #
     class GetAccessPointForObjectLambdaResult < Struct.new(
       :name,
       :public_access_block_configuration,
-      :creation_date)
+      :creation_date,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1537,7 +1749,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -1648,7 +1860,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -1759,7 +1971,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1801,7 +2013,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1834,6 +2046,50 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   Specifies the bucket to get the replication information for.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket
+    #   accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through Outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketReplicationRequest AWS API Documentation
+    #
+    class GetBucketReplicationRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_configuration
+    #   A container for one or more replication rules. A replication
+    #   configuration must have at least one rule and you can add up to 100
+    #   rules. The maximum size of a replication configuration is 128 KB.
+    #   @return [Types::ReplicationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketReplicationResult AWS API Documentation
+    #
+    class GetBucketReplicationResult < Struct.new(
+      :replication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the Outposts bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
     #   Specifies the bucket.
     #
     #   For using this parameter with Amazon S3 on Outposts with the REST
@@ -1843,7 +2099,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1894,7 +2150,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -2579,9 +2835,10 @@ module Aws::S3Control
     # @!attribute [rw] object_arn
     #   The Amazon Resource Name (ARN) for a manifest object.
     #
-    #   Replacement must be made for object keys containing special
-    #   characters (such as carriage returns) when using XML requests. For
-    #   more information, see [ XML related object key constraints][1].
+    #   When you're using XML requests, you must replace special characters
+    #   (such as carriage returns) in object keys with their equivalent XML
+    #   entity codes. For more information, see [ XML-related object key
+    #   constraints][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2670,10 +2927,10 @@ module Aws::S3Control
     #
     # @!attribute [rw] s3_put_object_legal_hold
     #   Contains the configuration for an S3 Object Lock legal hold
-    #   operation that an S3 Batch Operations job passes every object to the
-    #   underlying `PutObjectLegalHold` API. For more information, see
-    #   [Using S3 Object Lock legal hold with S3 Batch Operations][1] in the
-    #   *Amazon S3 User Guide*.
+    #   operation that an S3 Batch Operations job passes to every object to
+    #   the underlying `PutObjectLegalHold` API operation. For more
+    #   information, see [Using S3 Object Lock legal hold with S3 Batch
+    #   Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2683,8 +2940,8 @@ module Aws::S3Control
     # @!attribute [rw] s3_put_object_retention
     #   Contains the configuration parameters for the Object Lock retention
     #   action for an S3 Batch Operations job. Batch Operations passes every
-    #   object to the underlying `PutObjectRetention` API. For more
-    #   information, see [Using S3 Object Lock retention with S3 Batch
+    #   object to the underlying `PutObjectRetention` API operation. For
+    #   more information, see [Using S3 Object Lock retention with S3 Batch
     #   Operations][1] in the *Amazon S3 User Guide*.
     #
     #
@@ -2915,8 +3172,8 @@ module Aws::S3Control
     #   Specifies the days since the initiation of an incomplete multipart
     #   upload that Amazon S3 waits before permanently removing all parts of
     #   the upload. For more information, see [ Aborting Incomplete
-    #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    #   S3 User Guide*.
+    #   Multipart Uploads Using a Bucket Lifecycle Configuration][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -2973,9 +3230,10 @@ module Aws::S3Control
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
     #
-    #   Replacement must be made for object keys containing special
-    #   characters (such as carriage returns) when using XML requests. For
-    #   more information, see [ XML related object key constraints][1].
+    #   When you're using XML requests, you must replace special characters
+    #   (such as carriage returns) in object keys with their equivalent XML
+    #   entity codes. For more information, see [ XML-related object key
+    #   constraints][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3077,7 +3335,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -3343,6 +3601,30 @@ module Aws::S3Control
     class ListStorageLensConfigurationsResult < Struct.new(
       :next_token,
       :storage_lens_configuration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container that specifies replication metrics-related settings.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether replication metrics are enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_threshold
+    #   A container that specifies the time threshold for emitting the
+    #   `s3:Replication:OperationMissedThreshold` event.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #   @return [Types::ReplicationTimeValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Metrics AWS API Documentation
+    #
+    class Metrics < Struct.new(
+      :status,
+      :event_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3626,11 +3908,45 @@ module Aws::S3Control
     #   Specifies the ARN for the Object Lambda Access Point.
     #   @return [String]
     #
+    # @!attribute [rw] alias
+    #   The alias of the Object Lambda Access Point.
+    #   @return [Types::ObjectLambdaAccessPointAlias]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaAccessPoint AWS API Documentation
     #
     class ObjectLambdaAccessPoint < Struct.new(
       :name,
-      :object_lambda_access_point_arn)
+      :object_lambda_access_point_arn,
+      :alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The alias of an Object Lambda Access Point. For more information, see
+    # [How to use a bucket-style alias for your S3 bucket Object Lambda
+    # Access Point][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-use.html#ol-access-points-alias
+    #
+    # @!attribute [rw] value
+    #   The alias value of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Object Lambda Access Point alias. If the status is
+    #   `PROVISIONING`, the Object Lambda Access Point is provisioning the
+    #   alias and the alias is not ready for use yet. If the status is
+    #   `READY`, the Object Lambda Access Point alias is successfully
+    #   provisioned and ready for use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaAccessPointAlias AWS API Documentation
+    #
+    class ObjectLambdaAccessPointAlias < Struct.new(
+      :value,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3927,7 +4243,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -3991,7 +4307,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -4027,6 +4343,40 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] bucket
+    #   Specifies the S3 on Outposts bucket to set the configuration for.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST
+    #   API, you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket
+    #   accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through Outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_configuration
+    #   @return [Types::ReplicationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketReplicationRequest AWS API Documentation
+    #
+    class PutBucketReplicationRequest < Struct.new(
+      :account_id,
+      :bucket,
+      :replication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the Outposts bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
     #   The Amazon Resource Name (ARN) of the bucket.
     #
     #   For using this parameter with Amazon S3 on Outposts with the REST
@@ -4036,7 +4386,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -4271,10 +4621,16 @@ module Aws::S3Control
     #   The name of the associated bucket for the Region.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_account_id
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   that's associated with this Multi-Region Access Point.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Region AWS API Documentation
     #
     class Region < Struct.new(
-      :bucket)
+      :bucket,
+      :bucket_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4290,11 +4646,17 @@ module Aws::S3Control
     #   The name of the Region.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_account_id
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   that's associated with this Multi-Region Access Point.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/RegionReport AWS API Documentation
     #
     class RegionReport < Struct.new(
       :bucket,
-      :region)
+      :region,
+      :bucket_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4327,6 +4689,301 @@ module Aws::S3Control
       :public_access_block_enabled,
       :creation_date,
       :outpost_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that you can use to specify whether replica modification sync
+    # is enabled. S3 on Outposts replica modification sync can help you keep
+    # object metadata synchronized between replicas and source objects. By
+    # default, S3 on Outposts replicates metadata from the source objects to
+    # the replicas only. When replica modification sync is enabled, S3 on
+    # Outposts replicates metadata changes made to the replica copies back
+    # to the source object, making the replication bidirectional.
+    #
+    # To replicate object metadata modifications on replicas, you can
+    # specify this element and set the `Status` of this element to
+    # `Enabled`.
+    #
+    # <note markdown="1"> You must enable replica modification sync on the source and
+    # destination buckets to replicate replica metadata changes between the
+    # source and the replicas.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] status
+    #   Specifies whether S3 on Outposts replicates modifications to object
+    #   metadata on replicas.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ReplicaModifications AWS API Documentation
+    #
+    class ReplicaModifications < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for one or more replication rules. A replication
+    # configuration must have at least one rule and you can add up to 100
+    # rules. The maximum size of a replication configuration is 128 KB.
+    #
+    # @!attribute [rw] role
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that S3 on Outposts assumes when replicating objects. For
+    #   information about S3 replication on Outposts configuration, see
+    #   [Setting up replication][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-how-setup.html
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   A container for one or more replication rules. A replication
+    #   configuration must have at least one rule and can contain an array
+    #   of 100 rules at the most.
+    #   @return [Array<Types::ReplicationRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ReplicationConfiguration AWS API Documentation
+    #
+    class ReplicationConfiguration < Struct.new(
+      :role,
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies which S3 on Outposts objects to replicate and where to store
+    # the replicas.
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the rule. The maximum value is 255
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority indicates which rule has precedence whenever two or
+    #   more replication rules conflict. S3 on Outposts attempts to
+    #   replicate objects according to all replication rules. However, if
+    #   there are two or more rules with the same destination Outposts
+    #   bucket, then objects will be replicated according to the rule with
+    #   the highest priority. The higher the number, the higher the
+    #   priority.
+    #
+    #   For more information, see [Creating replication rules on
+    #   Outposts][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-between-outposts.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix
+    #   An object key name prefix that identifies the object or objects to
+    #   which the rule applies. The maximum prefix length is 1,024
+    #   characters. To include all objects in an Outposts bucket, specify an
+    #   empty string.
+    #
+    #   When you're using XML requests, you must replace special characters
+    #   (such as carriage returns) in object keys with their equivalent XML
+    #   entity codes. For more information, see [ XML-related object key
+    #   constraints][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A filter that identifies the subset of objects to which the
+    #   replication rule applies. A `Filter` element must specify exactly
+    #   one `Prefix`, `Tag`, or `And` child element.
+    #   @return [Types::ReplicationRuleFilter]
+    #
+    # @!attribute [rw] status
+    #   Specifies whether the rule is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_selection_criteria
+    #   A container that describes additional filters for identifying the
+    #   source Outposts objects that you want to replicate. You can choose
+    #   to enable or disable the replication of these objects.
+    #   @return [Types::SourceSelectionCriteria]
+    #
+    # @!attribute [rw] existing_object_replication
+    #   An optional configuration to replicate existing source bucket
+    #   objects.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #   @return [Types::ExistingObjectReplication]
+    #
+    # @!attribute [rw] destination
+    #   A container for information about the replication destination and
+    #   its configurations.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] delete_marker_replication
+    #   Specifies whether S3 on Outposts replicates delete markers. If you
+    #   specify a `Filter` element in your replication configuration, you
+    #   must also include a `DeleteMarkerReplication` element. If your
+    #   `Filter` includes a `Tag` element, the `DeleteMarkerReplication`
+    #   element's `Status` child element must be set to `Disabled`, because
+    #   S3 on Outposts doesn't support replicating delete markers for
+    #   tag-based rules.
+    #
+    #   For more information about delete marker replication, see [How
+    #   delete operations affect replication][1] in the *Amazon S3 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated
+    #   @return [Types::DeleteMarkerReplication]
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon Resource Name (ARN) of the access point for the source
+    #   Outposts bucket that you want S3 on Outposts to replicate the
+    #   objects from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ReplicationRule AWS API Documentation
+    #
+    class ReplicationRule < Struct.new(
+      :id,
+      :priority,
+      :prefix,
+      :filter,
+      :status,
+      :source_selection_criteria,
+      :existing_object_replication,
+      :destination,
+      :delete_marker_replication,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for specifying rule filters. The filters determine the
+    # subset of objects to which the rule applies. This element is required
+    # only if you specify more than one filter.
+    #
+    # For example:
+    #
+    # * If you specify both a `Prefix` and a `Tag` filter, wrap these
+    #   filters in an `And` element.
+    #
+    # * If you specify a filter based on multiple tags, wrap the `Tag`
+    #   elements in an `And` element.
+    #
+    # @!attribute [rw] prefix
+    #   An object key name prefix that identifies the subset of objects that
+    #   the rule applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags that contain key and value pairs.
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ReplicationRuleAndOperator AWS API Documentation
+    #
+    class ReplicationRuleAndOperator < Struct.new(
+      :prefix,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that identifies the subset of objects to which the
+    # replication rule applies. A `Filter` element must specify exactly one
+    # `Prefix`, `Tag`, or `And` child element.
+    #
+    # @!attribute [rw] prefix
+    #   An object key name prefix that identifies the subset of objects that
+    #   the rule applies to.
+    #
+    #   When you're using XML requests, you must replace special characters
+    #   (such as carriage returns) in object keys with their equivalent XML
+    #   entity codes. For more information, see [ XML-related object key
+    #   constraints][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   A container for a key-value name pair.
+    #   @return [Types::S3Tag]
+    #
+    # @!attribute [rw] and
+    #   A container for specifying rule filters. The filters determine the
+    #   subset of objects that the rule applies to. This element is required
+    #   only if you specify more than one filter. For example:
+    #
+    #   * If you specify both a `Prefix` and a `Tag` filter, wrap these
+    #     filters in an `And` element.
+    #
+    #   * If you specify a filter based on multiple tags, wrap the `Tag`
+    #     elements in an `And` element.
+    #   @return [Types::ReplicationRuleAndOperator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ReplicationRuleFilter AWS API Documentation
+    #
+    class ReplicationRuleFilter < Struct.new(
+      :prefix,
+      :tag,
+      :and)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container that specifies S3 Replication Time Control (S3 RTC)
+    # related information, including whether S3 RTC is enabled and the time
+    # when all objects and operations on objects must be replicated.
+    #
+    # <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] status
+    #   Specifies whether S3 Replication Time Control (S3 RTC) is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   A container that specifies the time by which replication should be
+    #   complete for all objects and operations on objects.
+    #   @return [Types::ReplicationTimeValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ReplicationTime AWS API Documentation
+    #
+    class ReplicationTime < Struct.new(
+      :status,
+      :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container that specifies the time value for S3 Replication Time
+    # Control (S3 RTC). This value is also used for the replication metrics
+    # `EventThreshold` element.
+    #
+    # <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] minutes
+    #   Contains an integer that specifies the time period in minutes.
+    #
+    #   Valid value: 15
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ReplicationTimeValue AWS API Documentation
+    #
+    class ReplicationTimeValue < Struct.new(
+      :minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4407,18 +5064,18 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a PUT Copy object operation.
-    # S3 Batch Operations passes every object to the underlying PUT Copy
-    # object API. For more information about the parameters for this
-    # operation, see [PUT Object - Copy][1].
+    # S3 Batch Operations passes every object to the underlying `CopyObject`
+    # API operation. For more information about the parameters for this
+    # operation, see [CopyObject][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html
     #
     # @!attribute [rw] target_resource
-    #   Specifies the destination bucket ARN for the batch copy operation.
-    #   For example, to copy objects to a bucket named `destinationBucket`,
-    #   set the `TargetResource` property to
+    #   Specifies the destination bucket Amazon Resource Name (ARN) for the
+    #   batch copy operation. For example, to copy objects to a bucket named
+    #   `destinationBucket`, set the `TargetResource` property to
     #   `arn:aws:s3:::destinationBucket`.
     #   @return [String]
     #
@@ -4463,9 +5120,9 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] target_key_prefix
-    #   Specifies the folder prefix into which you would like the objects to
-    #   be copied. For example, to copy objects into a folder named
-    #   `Folder1` in the destination bucket, set the TargetKeyPrefix to
+    #   Specifies the folder prefix that you want the objects to be copied
+    #   into. For example, to copy objects into a folder named `Folder1` in
+    #   the destination bucket, set the `TargetKeyPrefix` property to
     #   `Folder1`.
     #   @return [String]
     #
@@ -4495,8 +5152,8 @@ module Aws::S3Control
     #   @return [Boolean]
     #
     # @!attribute [rw] checksum_algorithm
-    #   Indicates the algorithm you want Amazon S3 to use to create the
-    #   checksum. For more information see [ Checking object integrity][1]
+    #   Indicates the algorithm that you want Amazon S3 to use to create the
+    #   checksum. For more information, see [ Checking object integrity][1]
     #   in the *Amazon S3 User Guide*.
     #
     #
@@ -4530,8 +5187,8 @@ module Aws::S3Control
     end
 
     # Contains no configuration parameters because the DELETE Object tagging
-    # API only accepts the bucket name and key name as parameters, which are
-    # defined in the job's manifest.
+    # (`DeleteObjectTagging`) API operation accepts only the bucket name and
+    # key name as parameters, which are defined in the job's manifest.
     #
     # @api private
     #
@@ -4594,10 +5251,10 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # Contains the configuration parameters for an S3 Initiate Restore
-    # Object job. S3 Batch Operations passes every object to the underlying
-    # POST Object restore API. For more information about the parameters for
-    # this operation, see [RestoreObject][1].
+    # Contains the configuration parameters for a POST Object restore job.
+    # S3 Batch Operations passes every object to the underlying
+    # `RestoreObject` API operation. For more information about the
+    # parameters for this operation, see [RestoreObject][1].
     #
     #
     #
@@ -4836,10 +5493,10 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # Contains the configuration parameters for a Set Object ACL operation.
+    # Contains the configuration parameters for a PUT Object ACL operation.
     # S3 Batch Operations passes every object to the underlying
-    # `PutObjectAcl` API. For more information about the parameters for this
-    # operation, see [ `PutObjectAcl` ][1].
+    # `PutObjectAcl` API operation. For more information about the
+    # parameters for this operation, see [PutObjectAcl][1].
     #
     #
     #
@@ -4857,10 +5514,10 @@ module Aws::S3Control
     end
 
     # Contains the configuration for an S3 Object Lock legal hold operation
-    # that an S3 Batch Operations job passes every object to the underlying
-    # `PutObjectLegalHold` API. For more information, see [Using S3 Object
-    # Lock legal hold with S3 Batch Operations][1] in the *Amazon S3 User
-    # Guide*.
+    # that an S3 Batch Operations job passes to every object to the
+    # underlying `PutObjectLegalHold` API operation. For more information,
+    # see [Using S3 Object Lock legal hold with S3 Batch Operations][1] in
+    # the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4881,7 +5538,7 @@ module Aws::S3Control
 
     # Contains the configuration parameters for the Object Lock retention
     # action for an S3 Batch Operations job. Batch Operations passes every
-    # object to the underlying `PutObjectRetention` API. For more
+    # object to the underlying `PutObjectRetention` API operation. For more
     # information, see [Using S3 Object Lock retention with S3 Batch
     # Operations][1] in the *Amazon S3 User Guide*.
     #
@@ -4915,10 +5572,10 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # Contains the configuration parameters for a Set Object Tagging
+    # Contains the configuration parameters for a PUT Object Tagging
     # operation. S3 Batch Operations passes every object to the underlying
-    # PUT Object tagging API. For more information about the parameters for
-    # this operation, see [PUT Object tagging][1].
+    # `PutObjectTagging` API operation. For more information about the
+    # parameters for this operation, see [PutObjectTagging][1].
     #
     #
     #
@@ -5024,6 +5681,72 @@ module Aws::S3Control
       :delimiter,
       :max_depth,
       :min_storage_bytes_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container that describes additional filters for identifying the
+    # source objects that you want to replicate. You can choose to enable or
+    # disable the replication of these objects.
+    #
+    # @!attribute [rw] sse_kms_encrypted_objects
+    #   A filter that you can use to select Amazon S3 objects that are
+    #   encrypted with server-side encryption by using Key Management
+    #   Service (KMS) keys. If you include `SourceSelectionCriteria` in the
+    #   replication configuration, this element is required.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #   @return [Types::SseKmsEncryptedObjects]
+    #
+    # @!attribute [rw] replica_modifications
+    #   A filter that you can use to specify whether replica modification
+    #   sync is enabled. S3 on Outposts replica modification sync can help
+    #   you keep object metadata synchronized between replicas and source
+    #   objects. By default, S3 on Outposts replicates metadata from the
+    #   source objects to the replicas only. When replica modification sync
+    #   is enabled, S3 on Outposts replicates metadata changes made to the
+    #   replica copies back to the source object, making the replication
+    #   bidirectional.
+    #
+    #   To replicate object metadata modifications on replicas, you can
+    #   specify this element and set the `Status` of this element to
+    #   `Enabled`.
+    #
+    #   <note markdown="1"> You must enable replica modification sync on the source and
+    #   destination buckets to replicate replica metadata changes between
+    #   the source and the replicas.
+    #
+    #    </note>
+    #   @return [Types::ReplicaModifications]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SourceSelectionCriteria AWS API Documentation
+    #
+    class SourceSelectionCriteria < Struct.new(
+      :sse_kms_encrypted_objects,
+      :replica_modifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for filter information that you can use to select S3
+    # objects that are encrypted with Key Management Service (KMS).
+    #
+    # <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] status
+    #   Specifies whether Amazon S3 replicates objects that are created with
+    #   server-side encryption by using an KMS key stored in Key Management
+    #   Service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SseKmsEncryptedObjects AWS API Documentation
+    #
+    class SseKmsEncryptedObjects < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

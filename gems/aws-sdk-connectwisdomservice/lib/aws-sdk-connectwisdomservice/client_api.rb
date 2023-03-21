@@ -171,7 +171,7 @@ module Aws::ConnectWisdomService
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AppIntegrationsConfiguration.add_member(:app_integration_arn, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "appIntegrationArn"))
-    AppIntegrationsConfiguration.add_member(:object_fields, Shapes::ShapeRef.new(shape: ObjectFieldsList, required: true, location_name: "objectFields"))
+    AppIntegrationsConfiguration.add_member(:object_fields, Shapes::ShapeRef.new(shape: ObjectFieldsList, location_name: "objectFields"))
     AppIntegrationsConfiguration.struct_class = Types::AppIntegrationsConfiguration
 
     AssistantAssociationData.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))

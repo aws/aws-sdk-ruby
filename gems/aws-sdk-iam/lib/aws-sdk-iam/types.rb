@@ -60,7 +60,7 @@ module Aws::IAM
     #   unauthenticated requests.
     #
     #   This field is null if no principals (IAM users, IAM roles, or root
-    #   users) in the reported Organizations entity attempted to access the
+    #   user) in the reported Organizations entity attempted to access the
     #   service within the [tracking period][1].
     #
     #
@@ -85,9 +85,9 @@ module Aws::IAM
     #   @return [Time]
     #
     # @!attribute [rw] total_authenticated_entities
-    #   The number of accounts with authenticated principals (root users,
-    #   IAM users, and IAM roles) that attempted to access the service in
-    #   the tracking period.
+    #   The number of accounts with authenticated principals (root user, IAM
+    #   users, and IAM roles) that attempted to access the service in the
+    #   tracking period.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessDetail AWS API Documentation
@@ -891,7 +891,7 @@ module Aws::IAM
     #
     #   For more information about obtaining the OIDC provider thumbprint,
     #   see [Obtaining the thumbprint for an OpenID Connect provider][1] in
-    #   the *IAM User Guide*.
+    #   the *IAM user Guide*.
     #
     #
     #
@@ -1191,6 +1191,15 @@ module Aws::IAM
     #   account. Names are not distinguished by case. For example, you
     #   cannot create resources named both "MyResource" and
     #   "myresource".
+    #
+    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: \_+=,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @!attribute [rw] assume_role_policy_document
@@ -1613,8 +1622,8 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] virtual_mfa_device_name
-    #   The name of the virtual MFA device. Use with path to uniquely
-    #   identify a virtual MFA device.
+    #   The name of the virtual MFA device, which must be unique. Use with
+    #   path to uniquely identify a virtual MFA device.
     #
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
@@ -8708,7 +8717,7 @@ module Aws::IAM
     #   period can be shorter if your Region began supporting these features
     #   within the last year. The role might have been used more than 400
     #   days ago. For more information, see [Regions where data is
-    #   tracked][1] in the *IAM User Guide*.
+    #   tracked][1] in the *IAM user Guide*.
     #
     #
     #
@@ -8862,7 +8871,7 @@ module Aws::IAM
     # period can be shorter if your Region began supporting these features
     # within the last year. The role might have been used more than 400 days
     # ago. For more information, see [Regions where data is tracked][1] in
-    # the *IAM User Guide*.
+    # the *IAM user Guide*.
     #
     # This data type is returned as a response element in the GetRole and
     # GetAccountAuthorizationDetails operations.

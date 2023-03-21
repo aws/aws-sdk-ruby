@@ -439,7 +439,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -532,6 +532,7 @@ module Aws::S3Control
     # @return [Types::CreateAccessPointForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessPointForObjectLambdaResult#object_lambda_access_point_arn #object_lambda_access_point_arn} => String
+    #   * {Types::CreateAccessPointForObjectLambdaResult#alias #alias} => Types::ObjectLambdaAccessPointAlias
     #
     # @example Request syntax with placeholder values
     #
@@ -559,6 +560,8 @@ module Aws::S3Control
     # @example Response structure
     #
     #   resp.object_lambda_access_point_arn #=> String
+    #   resp.alias.value #=> String
+    #   resp.alias.status #=> String, one of "PROVISIONING", "READY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambda AWS API Documentation
     #
@@ -1060,6 +1063,7 @@ module Aws::S3Control
     #       regions: [ # required
     #         {
     #           bucket: "BucketName", # required
+    #           bucket_account_id: "AccountId",
     #         },
     #       ],
     #     },
@@ -1117,7 +1121,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -1220,7 +1224,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -1332,7 +1336,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1414,7 +1418,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1502,7 +1506,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1523,6 +1527,99 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def delete_bucket_policy(params = {}, options = {})
       req = build_request(:delete_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation deletes an Amazon S3 on Outposts bucket's replication
+    # configuration. To delete an S3 bucket's replication configuration,
+    # see [DeleteBucketReplication][1] in the *Amazon S3 API Reference*.
+    #
+    #  </note>
+    #
+    # Deletes the replication configuration from the specified S3 on
+    # Outposts bucket.
+    #
+    # To use this operation, you must have permissions to perform the
+    # `s3-outposts:PutReplicationConfiguration` action. The Outposts bucket
+    # owner has this permission by default and can grant it to others. For
+    # more information about permissions, see [Setting up IAM with S3 on
+    # Outposts][2] and [Managing access to S3 on Outposts buckets][3] in the
+    # *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> It can take a while to propagate `PUT` or `DELETE` requests for a
+    # replication configuration to all S3 on Outposts systems. Therefore,
+    # the replication configuration that's returned by a `GET` request soon
+    # after a `PUT` or `DELETE` request might return a more recent result
+    # than what's on the Outpost. If an Outpost is offline, the delay in
+    # updating the replication configuration on that Outpost can be
+    # significant.
+    #
+    #  </note>
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request. In addition, you must use an S3 on Outposts endpoint hostname
+    # prefix instead of `s3-control`. For an example of the request syntax
+    # for Amazon S3 on Outposts that uses the S3 on Outposts endpoint
+    # hostname prefix and the `x-amz-outpost-id` derived by using the access
+    # point ARN, see the [Examples][4] section.
+    #
+    # For information about S3 replication on Outposts configuration, see
+    # [Replicating objects for S3 on Outposts][5] in the *Amazon S3 User
+    # Guide*.
+    #
+    # The following operations are related to `DeleteBucketReplication`:
+    #
+    # * [PutBucketReplication][6]
+    #
+    # * [GetBucketReplication][7]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsBucketPolicy.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html#API_control_DeleteBucketReplication_Examples
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID of the Outposts bucket to delete
+    #   the replication configuration for.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the S3 on Outposts bucket to delete the replication
+    #   configuration for.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through Outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_replication({
+    #     account_id: "AccountId",
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketReplication AWS API Documentation
+    #
+    # @overload delete_bucket_replication(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_replication(params = {}, options = {})
+      req = build_request(:delete_bucket_replication, params)
       req.send_request(options)
     end
 
@@ -1575,7 +1672,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -1600,9 +1697,10 @@ module Aws::S3Control
     end
 
     # Removes the entire tag set from the specified S3 Batch Operations job.
-    # To use this operation, you must have permission to perform the
-    # `s3:DeleteJobTagging` action. For more information, see [Controlling
-    # access and labeling jobs using tags][1] in the *Amazon S3 User Guide*.
+    # To use the `DeleteJobTagging` operation, you must have permission to
+    # perform the `s3:DeleteJobTagging` action. For more information, see
+    # [Controlling access and labeling jobs using tags][1] in the *Amazon S3
+    # User Guide*.
     #
     #
     #
@@ -2049,6 +2147,7 @@ module Aws::S3Control
     #   resp.async_operation.request_parameters.create_multi_region_access_point_request.public_access_block.restrict_public_buckets #=> Boolean
     #   resp.async_operation.request_parameters.create_multi_region_access_point_request.regions #=> Array
     #   resp.async_operation.request_parameters.create_multi_region_access_point_request.regions[0].bucket #=> String
+    #   resp.async_operation.request_parameters.create_multi_region_access_point_request.regions[0].bucket_account_id #=> String
     #   resp.async_operation.request_parameters.delete_multi_region_access_point_request.name #=> String
     #   resp.async_operation.request_parameters.put_multi_region_access_point_policy_request.name #=> String
     #   resp.async_operation.request_parameters.put_multi_region_access_point_policy_request.policy #=> String
@@ -2112,7 +2211,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -2246,6 +2345,7 @@ module Aws::S3Control
     #   * {Types::GetAccessPointForObjectLambdaResult#name #name} => String
     #   * {Types::GetAccessPointForObjectLambdaResult#public_access_block_configuration #public_access_block_configuration} => Types::PublicAccessBlockConfiguration
     #   * {Types::GetAccessPointForObjectLambdaResult#creation_date #creation_date} => Time
+    #   * {Types::GetAccessPointForObjectLambdaResult#alias #alias} => Types::ObjectLambdaAccessPointAlias
     #
     # @example Request syntax with placeholder values
     #
@@ -2262,6 +2362,8 @@ module Aws::S3Control
     #   resp.public_access_block_configuration.block_public_policy #=> Boolean
     #   resp.public_access_block_configuration.restrict_public_buckets #=> Boolean
     #   resp.creation_date #=> Time
+    #   resp.alias.value #=> String
+    #   resp.alias.status #=> String, one of "PROVISIONING", "READY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambda AWS API Documentation
     #
@@ -2299,7 +2401,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -2500,7 +2602,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -2601,7 +2703,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -2725,7 +2827,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -2752,6 +2854,137 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def get_bucket_policy(params = {}, options = {})
       req = build_request(:get_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation gets an Amazon S3 on Outposts bucket's replication
+    # configuration. To get an S3 bucket's replication configuration, see
+    # [GetBucketReplication][1] in the *Amazon S3 API Reference*.
+    #
+    #  </note>
+    #
+    # Returns the replication configuration of an S3 on Outposts bucket. For
+    # more information about S3 on Outposts, see [Using Amazon S3 on
+    # Outposts][2] in the *Amazon S3 User Guide*. For information about S3
+    # replication on Outposts configuration, see [Replicating objects for S3
+    # on Outposts][3] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> It can take a while to propagate `PUT` or `DELETE` requests for a
+    # replication configuration to all S3 on Outposts systems. Therefore,
+    # the replication configuration that's returned by a `GET` request soon
+    # after a `PUT` or `DELETE` request might return a more recent result
+    # than what's on the Outpost. If an Outpost is offline, the delay in
+    # updating the replication configuration on that Outpost can be
+    # significant.
+    #
+    #  </note>
+    #
+    # This action requires permissions for the
+    # `s3-outposts:GetReplicationConfiguration` action. The Outposts bucket
+    # owner has this permission by default and can grant it to others. For
+    # more information about permissions, see [Setting up IAM with S3 on
+    # Outposts][4] and [Managing access to S3 on Outposts bucket][5] in the
+    # *Amazon S3 User Guide*.
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request. In addition, you must use an S3 on Outposts endpoint hostname
+    # prefix instead of `s3-control`. For an example of the request syntax
+    # for Amazon S3 on Outposts that uses the S3 on Outposts endpoint
+    # hostname prefix and the `x-amz-outpost-id` derived by using the access
+    # point ARN, see the [Examples][6] section.
+    #
+    # If you include the `Filter` element in a replication configuration,
+    # you must also include the `DeleteMarkerReplication`, `Status`, and
+    # `Priority` elements. The response also returns those elements.
+    #
+    # For information about S3 on Outposts replication failure reasons, see
+    # [Replication failure reasons][7] in the *Amazon S3 User Guide*.
+    #
+    # The following operations are related to `GetBucketReplication`:
+    #
+    # * [PutBucketReplication][8]
+    #
+    # * [DeleteBucketReplication][9]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsBucketPolicy.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html#API_control_GetBucketReplication_Examples
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-eventbridge.html#outposts-replication-failure-codes
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the bucket to get the replication information for.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through Outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Types::GetBucketReplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketReplicationResult#replication_configuration #replication_configuration} => Types::ReplicationConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_replication({
+    #     account_id: "AccountId",
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_configuration.role #=> String
+    #   resp.replication_configuration.rules #=> Array
+    #   resp.replication_configuration.rules[0].id #=> String
+    #   resp.replication_configuration.rules[0].priority #=> Integer
+    #   resp.replication_configuration.rules[0].prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.tag.key #=> String
+    #   resp.replication_configuration.rules[0].filter.tag.value #=> String
+    #   resp.replication_configuration.rules[0].filter.and.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.and.tags #=> Array
+    #   resp.replication_configuration.rules[0].filter.and.tags[0].key #=> String
+    #   resp.replication_configuration.rules[0].filter.and.tags[0].value #=> String
+    #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].source_selection_criteria.replica_modifications.status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].existing_object_replication.status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].destination.account #=> String
+    #   resp.replication_configuration.rules[0].destination.bucket #=> String
+    #   resp.replication_configuration.rules[0].destination.replication_time.status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].destination.replication_time.time.minutes #=> Integer
+    #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
+    #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
+    #   resp.replication_configuration.rules[0].destination.metrics.status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].destination.metrics.event_threshold.minutes #=> Integer
+    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR"
+    #   resp.replication_configuration.rules[0].delete_marker_replication.status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].bucket #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketReplication AWS API Documentation
+    #
+    # @overload get_bucket_replication(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_replication(params = {}, options = {})
+      req = build_request(:get_bucket_replication, params)
       req.send_request(options)
     end
 
@@ -2812,7 +3045,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -2844,14 +3077,14 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This operation returns the versioning state only for S3 on Outposts
-    # buckets. To return the versioning state for an S3 bucket, see
+    # <note markdown="1"> This operation returns the versioning state for S3 on Outposts buckets
+    # only. To return the versioning state for an S3 bucket, see
     # [GetBucketVersioning][1] in the *Amazon S3 API Reference*.
     #
     #  </note>
     #
-    # Returns the versioning state for an S3 on Outposts bucket. With
-    # versioning, you can save multiple distinct copies of your data and
+    # Returns the versioning state for an S3 on Outposts bucket. With S3
+    # Versioning, you can save multiple distinct copies of your objects and
     # recover from unintended user actions and application failures.
     #
     # If you've never set versioning on your bucket, it has no versioning
@@ -2919,10 +3152,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Returns the tags on an S3 Batch Operations job. To use this operation,
-    # you must have permission to perform the `s3:GetJobTagging` action. For
-    # more information, see [Controlling access and labeling jobs using
-    # tags][1] in the *Amazon S3 User Guide*.
+    # Returns the tags on an S3 Batch Operations job. To use the
+    # `GetJobTagging` operation, you must have permission to perform the
+    # `s3:GetJobTagging` action. For more information, see [Controlling
+    # access and labeling jobs using tags][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3041,6 +3274,7 @@ module Aws::S3Control
     #   resp.access_point.regions #=> Array
     #   resp.access_point.regions[0].bucket #=> String
     #   resp.access_point.regions[0].region #=> String
+    #   resp.access_point.regions[0].bucket_account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPoint AWS API Documentation
     #
@@ -3403,12 +3637,12 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Returns a list of the access points owned by the current account
-    # associated with the specified bucket. You can retrieve up to 1000
-    # access points per call. If the specified bucket has more than 1,000
-    # access points (or the number specified in `maxResults`, whichever is
-    # less), the response will include a continuation token that you can use
-    # to list the additional access points.
+    # Returns a list of the access points that are owned by the current
+    # account that's associated with the specified bucket. You can retrieve
+    # up to 1000 access points per call. If the specified bucket has more
+    # than 1,000 access points (or the number specified in `maxResults`,
+    # whichever is less), the response will include a continuation token
+    # that you can use to list the additional access points.
     #
     #
     #
@@ -3450,7 +3684,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -3563,6 +3797,8 @@ module Aws::S3Control
     #   resp.object_lambda_access_point_list #=> Array
     #   resp.object_lambda_access_point_list[0].name #=> String
     #   resp.object_lambda_access_point_list[0].object_lambda_access_point_arn #=> String
+    #   resp.object_lambda_access_point_list[0].alias.value #=> String
+    #   resp.object_lambda_access_point_list[0].alias.status #=> String, one of "PROVISIONING", "READY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForObjectLambda AWS API Documentation
@@ -3727,6 +3963,7 @@ module Aws::S3Control
     #   resp.access_points[0].regions #=> Array
     #   resp.access_points[0].regions[0].bucket #=> String
     #   resp.access_points[0].regions[0].region #=> String
+    #   resp.access_points[0].regions[0].bucket_account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListMultiRegionAccessPoints AWS API Documentation
@@ -3954,7 +4191,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the access point
     #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
-    #   For example, to access the access point `reports-ap` through outpost
+    #   For example, to access the access point `reports-ap` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
@@ -4214,7 +4451,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -4248,6 +4485,213 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def put_bucket_policy(params = {}, options = {})
       req = build_request(:put_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This action creates an Amazon S3 on Outposts bucket's replication
+    # configuration. To create an S3 bucket's replication configuration,
+    # see [PutBucketReplication][1] in the *Amazon S3 API Reference*.
+    #
+    #  </note>
+    #
+    # Creates a replication configuration or replaces an existing one. For
+    # information about S3 replication on Outposts configuration, see
+    # [Replicating objects for S3 on Outposts][2] in the *Amazon S3 User
+    # Guide*.
+    #
+    # <note markdown="1"> It can take a while to propagate `PUT` or `DELETE` requests for a
+    # replication configuration to all S3 on Outposts systems. Therefore,
+    # the replication configuration that's returned by a `GET` request soon
+    # after a `PUT` or `DELETE` request might return a more recent result
+    # than what's on the Outpost. If an Outpost is offline, the delay in
+    # updating the replication configuration on that Outpost can be
+    # significant.
+    #
+    #  </note>
+    #
+    # Specify the replication configuration in the request body. In the
+    # replication configuration, you provide the following information:
+    #
+    # * The name of the destination bucket or buckets where you want S3 on
+    #   Outposts to replicate objects
+    #
+    # * The Identity and Access Management (IAM) role that S3 on Outposts
+    #   can assume to replicate objects on your behalf
+    #
+    # * Other relevant information, such as replication rules
+    #
+    # A replication configuration must include at least one rule and can
+    # contain a maximum of 100. Each rule identifies a subset of objects to
+    # replicate by filtering the objects in the source Outposts bucket. To
+    # choose additional subsets of objects to replicate, add a rule for each
+    # subset.
+    #
+    # To specify a subset of the objects in the source Outposts bucket to
+    # apply a replication rule to, add the `Filter` element as a child of
+    # the `Rule` element. You can filter objects based on an object key
+    # prefix, one or more object tags, or both. When you add the `Filter`
+    # element in the configuration, you must also add the following
+    # elements: `DeleteMarkerReplication`, `Status`, and `Priority`.
+    #
+    # Using `PutBucketReplication` on Outposts requires that both the source
+    # and destination buckets must have versioning enabled. For information
+    # about enabling versioning on a bucket, see [Managing S3 Versioning for
+    # your S3 on Outposts bucket][3].
+    #
+    # For information about S3 on Outposts replication failure reasons, see
+    # [Replication failure reasons][4] in the *Amazon S3 User Guide*.
+    #
+    # **Handling Replication of Encrypted Objects**
+    #
+    # Outposts buckets are encrypted at all times. All the objects in the
+    # source Outposts bucket are encrypted and can be replicated. Also, all
+    # the replicas in the destination Outposts bucket are encrypted with the
+    # same encryption key as the objects in the source Outposts bucket.
+    #
+    # **Permissions**
+    #
+    # To create a `PutBucketReplication` request, you must have
+    # `s3-outposts:PutReplicationConfiguration` permissions for the bucket.
+    # The Outposts bucket owner has this permission by default and can grant
+    # it to others. For more information about permissions, see [Setting up
+    # IAM with S3 on Outposts][5] and [Managing access to S3 on Outposts
+    # buckets][6].
+    #
+    # <note markdown="1"> To perform this operation, the user or role must also have the
+    # `iam:CreateRole` and `iam:PassRole` permissions. For more information,
+    # see [Granting a user permissions to pass a role to an Amazon Web
+    # Services service][7].
+    #
+    #  </note>
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request. In addition, you must use an S3 on Outposts endpoint hostname
+    # prefix instead of `s3-control`. For an example of the request syntax
+    # for Amazon S3 on Outposts that uses the S3 on Outposts endpoint
+    # hostname prefix and the `x-amz-outpost-id` derived by using the access
+    # point ARN, see the [Examples][8] section.
+    #
+    # The following operations are related to `PutBucketReplication`:
+    #
+    # * [GetBucketReplication][9]
+    #
+    # * [DeleteBucketReplication][10]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsManagingVersioning.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-eventbridge.html#outposts-replication-failure-codes
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsBucketPolicy.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html#API_control_PutBucketReplication_Examples
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the S3 on Outposts bucket to set the configuration for.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through Outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @option params [required, Types::ReplicationConfiguration] :replication_configuration
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_replication({
+    #     account_id: "AccountId",
+    #     bucket: "BucketName", # required
+    #     replication_configuration: { # required
+    #       role: "Role", # required
+    #       rules: [ # required
+    #         {
+    #           id: "ID",
+    #           priority: 1,
+    #           prefix: "Prefix",
+    #           filter: {
+    #             prefix: "Prefix",
+    #             tag: {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #             and: {
+    #               prefix: "Prefix",
+    #               tags: [
+    #                 {
+    #                   key: "TagKeyString", # required
+    #                   value: "TagValueString", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           status: "Enabled", # required, accepts Enabled, Disabled
+    #           source_selection_criteria: {
+    #             sse_kms_encrypted_objects: {
+    #               status: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #             replica_modifications: {
+    #               status: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #           },
+    #           existing_object_replication: {
+    #             status: "Enabled", # required, accepts Enabled, Disabled
+    #           },
+    #           destination: { # required
+    #             account: "AccountId",
+    #             bucket: "BucketIdentifierString", # required
+    #             replication_time: {
+    #               status: "Enabled", # required, accepts Enabled, Disabled
+    #               time: { # required
+    #                 minutes: 1,
+    #               },
+    #             },
+    #             access_control_translation: {
+    #               owner: "Destination", # required, accepts Destination
+    #             },
+    #             encryption_configuration: {
+    #               replica_kms_key_id: "ReplicaKmsKeyID",
+    #             },
+    #             metrics: {
+    #               status: "Enabled", # required, accepts Enabled, Disabled
+    #               event_threshold: {
+    #                 minutes: 1,
+    #               },
+    #             },
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
+    #           },
+    #           delete_marker_replication: {
+    #             status: "Enabled", # required, accepts Enabled, Disabled
+    #           },
+    #           bucket: "BucketIdentifierString", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketReplication AWS API Documentation
+    #
+    # @overload put_bucket_replication(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_replication(params = {}, options = {})
+      req = build_request(:put_bucket_replication, params)
       req.send_request(options)
     end
 
@@ -4356,7 +4800,7 @@ module Aws::S3Control
     #   Services SDK and CLI, you must specify the ARN of the bucket accessed
     #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
-    #   For example, to access the bucket `reports` through outpost
+    #   For example, to access the bucket `reports` through Outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
     #   use the URL encoding of
     #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
@@ -4390,14 +4834,14 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> This operation sets the versioning state only for S3 on Outposts
-    # buckets. To set the versioning state for an S3 bucket, see
+    # <note markdown="1"> This operation sets the versioning state for S3 on Outposts buckets
+    # only. To set the versioning state for an S3 bucket, see
     # [PutBucketVersioning][1] in the *Amazon S3 API Reference*.
     #
     #  </note>
     #
-    # Sets the versioning state for an S3 on Outposts bucket. With
-    # versioning, you can save multiple distinct copies of your data and
+    # Sets the versioning state for an S3 on Outposts bucket. With S3
+    # Versioning, you can save multiple distinct copies of your objects and
     # recover from unintended user actions and application failures.
     #
     # You can set the versioning state to one of the following:
@@ -4419,11 +4863,11 @@ module Aws::S3Control
     # and managing a lifecycle configuration for your S3 on Outposts
     # bucket][3] in the *Amazon S3 User Guide*.
     #
-    # If you have an object expiration lifecycle policy in your
+    # If you have an object expiration lifecycle configuration in your
     # non-versioned bucket and you want to maintain the same permanent
     # delete behavior when you enable versioning, you must add a noncurrent
-    # expiration policy. The noncurrent expiration lifecycle policy will
-    # manage the deletes of the noncurrent object versions in the
+    # expiration policy. The noncurrent expiration lifecycle configuration
+    # will manage the deletes of the noncurrent object versions in the
     # version-enabled bucket. For more information, see [Versioning][4] in
     # the *Amazon S3 User Guide*.
     #
@@ -4533,8 +4977,8 @@ module Aws::S3Control
     #
     #
     #
-    # To use this action, you must have permission to perform the
-    # `s3:PutJobTagging` action.
+    # To use the `PutJobTagging` operation, you must have permission to
+    # perform the `s3:PutJobTagging` action.
     #
     # Related actions include:
     #
@@ -5104,7 +5548,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

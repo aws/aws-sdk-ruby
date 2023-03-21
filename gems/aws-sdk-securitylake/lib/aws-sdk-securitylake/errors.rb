@@ -59,6 +59,11 @@ module Aws::SecurityLake
       end
 
       # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end

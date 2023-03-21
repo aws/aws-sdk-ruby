@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-03-15)
+------------------
+
+* Feature - This release adds the binary analysis that analyzes IIS application DLLs on Windows and Java applications on Linux to provide anti-pattern report without configuring access to the source code.
+
 1.8.0 (2023-03-02)
 ------------------
 

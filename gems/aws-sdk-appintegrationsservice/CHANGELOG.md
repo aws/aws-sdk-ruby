@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2023-03-13)
+------------------
+
+* Feature - Adds FileConfiguration to Amazon AppIntegrations CreateDataIntegration supporting scheduled downloading of third party files into Amazon Connect from sources such as Microsoft SharePoint.
+
 1.15.0 (2023-01-18)
 ------------------
 

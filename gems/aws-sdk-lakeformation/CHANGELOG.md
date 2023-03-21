@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-03-13)
+------------------
+
+* Feature - This release updates the documentation regarding Get/Update DataCellsFilter
+
 1.32.0 (2023-03-08)
 ------------------
 

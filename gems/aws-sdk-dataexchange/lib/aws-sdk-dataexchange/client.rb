@@ -617,6 +617,11 @@ module Aws::DataExchange
     #           bucket: "__string", # required
     #           key_prefixes: ["__string"],
     #           keys: ["__string"],
+    #           kms_keys_to_grant: [
+    #             {
+    #               kms_key_arn: "KmsKeyArn", # required
+    #             },
+    #           ],
     #         },
     #         data_set_id: "Id", # required
     #         revision_id: "Id", # required
@@ -705,6 +710,8 @@ module Aws::DataExchange
     #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes[0] #=> String
     #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.keys #=> Array
     #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.keys[0] #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.kms_keys_to_grant #=> Array
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.kms_keys_to_grant[0].kms_key_arn #=> String
     #   resp.details.create_s3_data_access_from_s3_bucket.data_set_id #=> String
     #   resp.details.create_s3_data_access_from_s3_bucket.revision_id #=> String
     #   resp.details.import_assets_from_lake_formation_tag_policy.catalog_id #=> String
@@ -966,6 +973,8 @@ module Aws::DataExchange
     #   resp.asset_details.s3_data_access_asset.keys[0] #=> String
     #   resp.asset_details.s3_data_access_asset.s3_access_point_alias #=> String
     #   resp.asset_details.s3_data_access_asset.s3_access_point_arn #=> String
+    #   resp.asset_details.s3_data_access_asset.kms_keys_to_grant #=> Array
+    #   resp.asset_details.s3_data_access_asset.kms_keys_to_grant[0].kms_key_arn #=> String
     #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.catalog_id #=> String
     #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_type #=> String, one of "TABLE", "DATABASE"
     #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression #=> Array
@@ -1166,6 +1175,8 @@ module Aws::DataExchange
     #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes[0] #=> String
     #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.keys #=> Array
     #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.keys[0] #=> String
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.kms_keys_to_grant #=> Array
+    #   resp.details.create_s3_data_access_from_s3_bucket.asset_source.kms_keys_to_grant[0].kms_key_arn #=> String
     #   resp.details.create_s3_data_access_from_s3_bucket.data_set_id #=> String
     #   resp.details.create_s3_data_access_from_s3_bucket.revision_id #=> String
     #   resp.details.import_assets_from_lake_formation_tag_policy.catalog_id #=> String
@@ -1511,6 +1522,8 @@ module Aws::DataExchange
     #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.key_prefixes[0] #=> String
     #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.keys #=> Array
     #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.keys[0] #=> String
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.kms_keys_to_grant #=> Array
+    #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.asset_source.kms_keys_to_grant[0].kms_key_arn #=> String
     #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.data_set_id #=> String
     #   resp.jobs[0].details.create_s3_data_access_from_s3_bucket.revision_id #=> String
     #   resp.jobs[0].details.import_assets_from_lake_formation_tag_policy.catalog_id #=> String
@@ -1609,6 +1622,8 @@ module Aws::DataExchange
     #   resp.assets[0].asset_details.s3_data_access_asset.keys[0] #=> String
     #   resp.assets[0].asset_details.s3_data_access_asset.s3_access_point_alias #=> String
     #   resp.assets[0].asset_details.s3_data_access_asset.s3_access_point_arn #=> String
+    #   resp.assets[0].asset_details.s3_data_access_asset.kms_keys_to_grant #=> Array
+    #   resp.assets[0].asset_details.s3_data_access_asset.kms_keys_to_grant[0].kms_key_arn #=> String
     #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.catalog_id #=> String
     #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_type #=> String, one of "TABLE", "DATABASE"
     #   resp.assets[0].asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression #=> Array
@@ -1941,6 +1956,8 @@ module Aws::DataExchange
     #   resp.asset_details.s3_data_access_asset.keys[0] #=> String
     #   resp.asset_details.s3_data_access_asset.s3_access_point_alias #=> String
     #   resp.asset_details.s3_data_access_asset.s3_access_point_arn #=> String
+    #   resp.asset_details.s3_data_access_asset.kms_keys_to_grant #=> Array
+    #   resp.asset_details.s3_data_access_asset.kms_keys_to_grant[0].kms_key_arn #=> String
     #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.catalog_id #=> String
     #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_type #=> String, one of "TABLE", "DATABASE"
     #   resp.asset_details.lake_formation_data_permission_asset.lake_formation_data_permission_details.lf_tag_policy.resource_details.database.expression #=> Array
@@ -2158,7 +2175,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

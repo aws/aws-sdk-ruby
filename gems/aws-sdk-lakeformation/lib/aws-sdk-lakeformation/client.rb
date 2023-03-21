@@ -2678,7 +2678,7 @@ module Aws::LakeFormation
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html
     #
     # @option params [Array<String>] :permissions_with_grant_option
     #   Indicates a list of permissions for which to revoke the grant option
@@ -3195,7 +3195,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

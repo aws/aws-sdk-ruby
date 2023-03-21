@@ -815,21 +815,23 @@ module Aws::ConfigService
     # Services resources. A rule can run when Config detects a configuration
     # change to an Amazon Web Services resource or at a periodic frequency
     # that you choose (for example, every 24 hours). There are two types of
-    # rules: Config Managed Rules and Config Custom Rules. Managed rules are
-    # predefined, customizable rules created by Config. For a list of
-    # managed rules, see [List of Config Managed Rules][1].
+    # rules: *Config Managed Rules* and *Config Custom Rules*.
     #
-    # Custom rules are rules that you can create using either Guard or
-    # Lambda functions. Guard ([Guard GitHub Repository][2]) is a
-    # policy-as-code language that allows you to write policies that are
-    # enforced by Config Custom Policy rules. Lambda uses custom code that
-    # you upload to evaluate a custom rule. It is invoked by events that are
-    # published to it by an event source, which Config invokes when the
-    # custom rule is initiated.
+    # Config Managed Rules are predefined, customizable rules created by
+    # Config. For a list of managed rules, see [List of Config Managed
+    # Rules][1].
+    #
+    # Config Custom Rules are rules that you create from scratch. There are
+    # two ways to create Config custom rules: with Lambda functions ([
+    # Lambda Developer Guide][2]) and with Guard ([Guard GitHub
+    # Repository][3]), a policy-as-code language. Config custom rules
+    # created with Lambda are called *Config Custom Lambda Rules* and Config
+    # custom rules created with Guard are called *Config Custom Policy
+    # Rules*.
     #
     # For more information about developing and using Config rules, see
-    # [Evaluating Amazon Web Services resource Configurations with
-    # Config][3] in the *Config Developer Guide*.
+    # [Evaluating Resource with Config Rules][4] in the *Config Developer
+    # Guide*.
     #
     # <note markdown="1"> You can use the Amazon Web Services CLI and Amazon Web Services SDKs
     # if you want to create a rule that triggers evaluations for your
@@ -841,8 +843,9 @@ module Aws::ConfigService
     #
     #
     # [1]: https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html
-    # [2]: https://github.com/aws-cloudformation/cloudformation-guard
-    # [3]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+    # [2]: https://docs.aws.amazon.com/config/latest/developerguide/gettingstarted-concepts.html#gettingstarted-concepts-function
+    # [3]: https://github.com/aws-cloudformation/cloudformation-guard
+    # [4]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #
     # @!attribute [rw] config_rule_name
     #   The name that you assign to the Config rule. The name is required if
@@ -1427,6 +1430,11 @@ module Aws::ConfigService
 
     # The current status of the configuration recorder.
     #
+    # <note markdown="1"> For a detailed status of recording events over time, add your Config
+    # events to CloudWatch metrics and use CloudWatch metrics.
+    #
+    #  </note>
+    #
     # @!attribute [rw] name
     #   The name of the configuration recorder.
     #   @return [String]
@@ -1444,19 +1452,20 @@ module Aws::ConfigService
     #   @return [Boolean]
     #
     # @!attribute [rw] last_status
-    #   The last (previous) status of the recorder.
+    #   The status of the latest recording event processed by the recorder.
     #   @return [String]
     #
     # @!attribute [rw] last_error_code
-    #   The error code indicating that the recording failed.
+    #   The latest error code from when the recorder last failed.
     #   @return [String]
     #
     # @!attribute [rw] last_error_message
-    #   The message indicating that the recording failed due to an error.
+    #   The latest error message from when the recorder last failed.
     #   @return [String]
     #
     # @!attribute [rw] last_status_change_time
-    #   The time when the status was last changed.
+    #   The time of the latest change in status of an recording event
+    #   processed by the recorder.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorderStatus AWS API Documentation
@@ -1556,8 +1565,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_compliance_status
-    #   The status of the conformance pack. The allowed values are
-    #   `COMPLIANT`, `NON_COMPLIANT` and `INSUFFICIENT_DATA`.
+    #   The status of the conformance pack.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackComplianceSummary AWS API Documentation
@@ -1747,9 +1755,6 @@ module Aws::ConfigService
     #
     # @!attribute [rw] compliance_type
     #   Compliance of the Config rule.
-    #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `INSUFFICIENT_DATA`.
     #   @return [String]
     #
     # @!attribute [rw] controls
@@ -1835,7 +1840,7 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # You have specified a template that is invalid or supported.
+    # You have specified a template that is not valid or supported.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackTemplateValidationException AWS API Documentation
     #
@@ -2394,8 +2399,6 @@ module Aws::ConfigService
     #
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
-    #
-    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -2447,9 +2450,6 @@ module Aws::ConfigService
     #
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
-    #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `INSUFFICIENT_DATA`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -2549,7 +2549,12 @@ module Aws::ConfigService
 
     # Returns a filtered list of Detective or Proactive Config rules. By
     # default, if the filter is not defined, this API returns an unfiltered
-    # list.
+    # list. For more information on Detective or Proactive Config rules, see
+    # [ **Evaluation Mode** ][1] in the Config Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html
     #
     # @!attribute [rw] evaluation_mode
     #   The mode of an evaluation. The valid values are Detective or
@@ -2575,8 +2580,14 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Returns a list of Detecive or Proactive Config rules. By default,
-    #   this API returns an unfiltered list.
+    #   Returns a list of Detective or Proactive Config rules. By default,
+    #   this API returns an unfiltered list. For more information on
+    #   Detective or Proactive Config rules, see [ **Evaluation Mode** ][1]
+    #   in the Config Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html
     #   @return [Types::DescribeConfigRulesFilters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRulesRequest AWS API Documentation
@@ -3980,8 +3991,10 @@ module Aws::ConfigService
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `NOT_APPLICABLE`.
+    #   `INSUFFICIENT_DATA` is a valid `ComplianceType` that is returned
+    #   when an Config rule cannot be evaluated. However,
+    #   `INSUFFICIENT_DATA` cannot be used as a `ComplianceType` for
+    #   filtering results.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -4038,8 +4051,10 @@ module Aws::ConfigService
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `NOT_APPLICABLE`.
+    #   `INSUFFICIENT_DATA` is a valid `ComplianceType` that is returned
+    #   when an Config rule cannot be evaluated. However,
+    #   `INSUFFICIENT_DATA` cannot be used as a `ComplianceType` for
+    #   filtering results.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -4683,7 +4698,7 @@ module Aws::ConfigService
     #
     class InvalidConfigurationRecorderNameException < Aws::EmptyStructure; end
 
-    # The specified delivery channel name is invalid.
+    # The specified delivery channel name is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidDeliveryChannelNameException AWS API Documentation
     #
@@ -4701,7 +4716,7 @@ module Aws::ConfigService
     #
     class InvalidLimitException < Aws::EmptyStructure; end
 
-    # The specified next token is invalid. Specify the `nextToken` string
+    # The specified next token is not valid. Specify the `nextToken` string
     # that was returned in the previous response to get the next page of
     # results.
     #
@@ -4709,22 +4724,22 @@ module Aws::ConfigService
     #
     class InvalidNextTokenException < Aws::EmptyStructure; end
 
-    # One or more of the specified parameters are invalid. Verify that your
-    # parameters are valid and try again.
+    # One or more of the specified parameters are not valid. Verify that
+    # your parameters are valid and try again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidParameterValueException AWS API Documentation
     #
     class InvalidParameterValueException < Aws::EmptyStructure; end
 
     # Config throws an exception if the recording group does not contain a
-    # valid list of resource types. Invalid values might also be incorrectly
-    # formatted.
+    # valid list of resource types. Values that are not valid might also be
+    # incorrectly formatted.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidRecordingGroupException AWS API Documentation
     #
     class InvalidRecordingGroupException < Aws::EmptyStructure; end
 
-    # The specified `ResultToken` is invalid.
+    # The specified `ResultToken` is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidResultTokenException AWS API Documentation
     #
@@ -4736,13 +4751,13 @@ module Aws::ConfigService
     #
     class InvalidRoleException < Aws::EmptyStructure; end
 
-    # The specified Amazon S3 key prefix is invalid.
+    # The specified Amazon S3 key prefix is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidS3KeyPrefixException AWS API Documentation
     #
     class InvalidS3KeyPrefixException < Aws::EmptyStructure; end
 
-    # The specified Amazon KMS Key ARN is invalid.
+    # The specified Amazon KMS Key ARN is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidS3KmsKeyArnException AWS API Documentation
     #
@@ -4754,7 +4769,7 @@ module Aws::ConfigService
     #
     class InvalidSNSTopicARNException < Aws::EmptyStructure; end
 
-    # The specified time range is invalid. The earlier time is not
+    # The specified time range is not valid. The earlier time is not
     # chronologically before the later time.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidTimeRangeException AWS API Documentation
@@ -4871,8 +4886,8 @@ module Aws::ConfigService
     #
     # @!attribute [rw] next_token
     #   The `nextToken` string in a prior request that you can use to get
-    #   the paginated response for next set of conformance pack compliance
-    #   scores.
+    #   the paginated response for the next set of conformance pack
+    #   compliance scores.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConformancePackComplianceScoresRequest AWS API Documentation
@@ -4912,7 +4927,8 @@ module Aws::ConfigService
     # @!attribute [rw] resource_ids
     #   The IDs of only those resources that you want Config to list in the
     #   response. If you do not specify this parameter, Config lists all
-    #   resources of the specified type that it has discovered.
+    #   resources of the specified type that it has discovered. You can list
+    #   a minimum of 1 resourceID and a maximum of 20 resourceIds.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_name
@@ -5285,8 +5301,8 @@ module Aws::ConfigService
     #
     class NoSuchBucketException < Aws::EmptyStructure; end
 
-    # The Config rule in the request is invalid. Verify that the rule is an
-    # Config Custom Policy rule, that the rule name is correct, and that
+    # The Config rule in the request is not valid. Verify that the rule is
+    # an Config Process Check rule, that the rule name is correct, and that
     # valid Amazon Resouce Names (ARNs) are used before trying again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/NoSuchConfigRuleException AWS API Documentation
@@ -5323,10 +5339,10 @@ module Aws::ConfigService
     #
     class NoSuchDeliveryChannelException < Aws::EmptyStructure; end
 
-    # The Config rule in the request is invalid. Verify that the rule is an
-    # organization Config Custom Policy rule, that the rule name is correct,
-    # and that valid Amazon Resouce Names (ARNs) are used before trying
-    # again.
+    # The Config rule in the request is not valid. Verify that the rule is
+    # an organization Config Process Check rule, that the rule name is
+    # correct, and that valid Amazon Resouce Names (ARNs) are used before
+    # trying again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/NoSuchOrganizationConfigRuleException AWS API Documentation
     #
@@ -5760,7 +5776,7 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # You have specified a template that is invalid or supported.
+    # You have specified a template that is not valid or supported.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConformancePackTemplateValidationException AWS API Documentation
     #
@@ -6891,7 +6907,8 @@ module Aws::ConfigService
     #   To record all configuration changes, you must set the `allSupported`
     #   option to `true`.
     #
-    #   If you set this option to `false`, when Config adds support for a
+    #   If you set the `AllSupported` option to false and populate the
+    #   `ResourceTypes` option with values, when Config adds support for a
     #   new type of resource, it will not record resources of that type
     #   unless you manually add that type to your recording group.
     #
@@ -7261,6 +7278,24 @@ module Aws::ConfigService
     #
     # @!attribute [rw] resource_configuration_schema_type
     #   The schema type of the resource configuration.
+    #
+    #   <note markdown="1"> You can find the [Resource type schema][1], or
+    #   `CFN_RESOURCE_SCHEMA`, in "*Amazon Web Services public
+    #   extensions*" within the CloudFormation registry or with the
+    #   following CLI commmand: `aws cloudformation describe-type
+    #   --type-name "AWS::S3::Bucket" --type RESOURCE`.
+    #
+    #    For more information, see [Managing extensions through the
+    #   CloudFormation registry][2] and [Amazon Web Services resource and
+    #   property types reference][3] in the CloudFormation User Guide.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceDetails AWS API Documentation
@@ -7876,8 +7911,8 @@ module Aws::ConfigService
     #   @return [Types::EvaluationContext]
     #
     # @!attribute [rw] evaluation_mode
-    #   The mode of an evaluation. The valid value for this API is
-    #   `Proactive`.
+    #   The mode of an evaluation. The valid values for this API are
+    #   `DETECTIVE` and `PROACTIVE`.
     #   @return [String]
     #
     # @!attribute [rw] evaluation_timeout
@@ -8220,7 +8255,7 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # The requested action is invalid.
+    # The requested action is not valid.
     #
     # For PutStoredQuery, you will see this exception if there are missing
     # required fields or if the input value fails the validation, or if you

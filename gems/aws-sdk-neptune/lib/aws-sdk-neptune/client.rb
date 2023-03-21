@@ -1160,11 +1160,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1591,7 +1602,7 @@ module Aws::Neptune
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the new instance.
     #
-    # @option params [String] :db_cluster_identifier
+    # @option params [required, String] :db_cluster_identifier
     #   The identifier of the DB cluster that the instance will belong to.
     #
     #   For information on creating a DB cluster, see CreateDBCluster.
@@ -1741,7 +1752,7 @@ module Aws::Neptune
     #         value: "String",
     #       },
     #     ],
-    #     db_cluster_identifier: "String",
+    #     db_cluster_identifier: "String", # required
     #     storage_type: "String",
     #     tde_credential_arn: "String",
     #     tde_credential_password: "String",
@@ -2326,11 +2337,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -3393,11 +3415,22 @@ module Aws::Neptune
     #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_clusters[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
+    #   resp.db_clusters[0].pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].cross_account_clone #=> Boolean
     #   resp.db_clusters[0].automatic_restart_time #=> Time
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_clusters[0].global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -4720,11 +4753,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -5111,11 +5155,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -6161,11 +6216,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -6852,11 +6918,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -7118,11 +7195,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -7204,11 +7292,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -7293,11 +7392,22 @@ module Aws::Neptune
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -7321,7 +7431,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -374,7 +374,7 @@ module Aws::Tnb
     # such as network instance instantiation or termination.
     #
     # @option params [required, String] :ns_lcm_op_occ_id
-    #   The ID of a network operation occurrence.
+    #   The identifier of the network operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -411,7 +411,7 @@ module Aws::Tnb
     #
     #
     # [1]: https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html
-    # [2]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html
+    # [2]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html
     #
     # @option params [Hash<String,String>] :tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
@@ -470,7 +470,7 @@ module Aws::Tnb
     #
     #
     # [1]: https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html
-    # [2]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_InstantiateSolNetworkInstance.html
+    # [2]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html
     #
     # @option params [String] :ns_description
     #   Network instance description.
@@ -546,7 +546,7 @@ module Aws::Tnb
     #
     #
     # [1]: https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html
-    # [2]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html
+    # [2]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html
     #
     # @option params [Hash<String,String>] :tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
@@ -603,7 +603,7 @@ module Aws::Tnb
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolFunctionPackage.html
+    # [1]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html
     #
     # @option params [required, String] :vnf_pkg_id
     #   ID of the function package.
@@ -637,7 +637,7 @@ module Aws::Tnb
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_TerminateSolNetworkInstance.html
+    # [1]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html
     #
     # @option params [required, String] :ns_instance_id
     #   Network instance ID.
@@ -670,7 +670,7 @@ module Aws::Tnb
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolNetworkPackage.html
+    # [1]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html
     #
     # @option params [required, String] :nsd_info_id
     #   ID of the network service descriptor in the network package.
@@ -957,7 +957,7 @@ module Aws::Tnb
     # such as network instance instantiation or termination.
     #
     # @option params [required, String] :ns_lcm_op_occ_id
-    #   The identifier of the operation occurrence.
+    #   The identifier of the network operation.
     #
     # @return [Types::GetSolNetworkOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1153,7 +1153,7 @@ module Aws::Tnb
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_CreateSolNetworkInstance.html
+    # [1]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_CreateSolNetworkInstance.html
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :additional_params_for_ns
     #   Provides values for the configurable properties.
@@ -1172,9 +1172,17 @@ module Aws::Tnb
     # @option params [required, String] :ns_instance_id
     #   ID of the network instance.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #
     # @return [Types::InstantiateSolNetworkInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InstantiateSolNetworkInstanceOutput#ns_lcm_op_occ_id #ns_lcm_op_occ_id} => String
+    #   * {Types::InstantiateSolNetworkInstanceOutput#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1183,11 +1191,16 @@ module Aws::Tnb
     #     },
     #     dry_run: false,
     #     ns_instance_id: "NsInstanceId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.ns_lcm_op_occ_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/InstantiateSolNetworkInstance AWS API Documentation
     #
@@ -1635,19 +1648,32 @@ module Aws::Tnb
     # @option params [required, String] :ns_instance_id
     #   ID of the network instance.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #
     # @return [Types::TerminateSolNetworkInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TerminateSolNetworkInstanceOutput#ns_lcm_op_occ_id #ns_lcm_op_occ_id} => String
+    #   * {Types::TerminateSolNetworkInstanceOutput#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.terminate_sol_network_instance({
     #     ns_instance_id: "NsInstanceId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.ns_lcm_op_occ_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/TerminateSolNetworkInstance AWS API Documentation
     #
@@ -1740,12 +1766,20 @@ module Aws::Tnb
     # @option params [required, String] :ns_instance_id
     #   ID of the network instance.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #
     # @option params [required, String] :update_type
     #   The type of update.
     #
     # @return [Types::UpdateSolNetworkInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSolNetworkInstanceOutput#ns_lcm_op_occ_id #ns_lcm_op_occ_id} => String
+    #   * {Types::UpdateSolNetworkInstanceOutput#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1756,12 +1790,17 @@ module Aws::Tnb
     #       vnf_instance_id: "VnfInstanceId", # required
     #     },
     #     ns_instance_id: "NsInstanceId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     update_type: "MODIFY_VNF_INFORMATION", # required, accepts MODIFY_VNF_INFORMATION
     #   })
     #
     # @example Response structure
     #
     #   resp.ns_lcm_op_occ_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/UpdateSolNetworkInstance AWS API Documentation
     #
@@ -1826,7 +1865,7 @@ module Aws::Tnb
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html
+    # [1]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html
     #
     # @option params [String] :content_type
     #   Function package content type.
@@ -1884,7 +1923,7 @@ module Aws::Tnb
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html
+    # [1]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html
     #
     # @option params [String] :content_type
     #   Network package content type.
@@ -1948,7 +1987,7 @@ module Aws::Tnb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-tnb'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

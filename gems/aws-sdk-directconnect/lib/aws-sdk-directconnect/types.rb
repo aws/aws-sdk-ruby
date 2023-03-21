@@ -2109,6 +2109,10 @@ module Aws::DirectConnect
     #     disassociated from the Direct Connect gateway. Traffic flow
     #     between the Direct Connect gateway and virtual private gateway or
     #     transit gateway is stopped.
+    #
+    #   * `updating`: The CIDR blocks for the virtual private gateway or
+    #     transit gateway are currently being updated. This could be new
+    #     CIDR blocks added or current CIDR blocks removed.
     #   @return [String]
     #
     # @!attribute [rw] state_change_error
@@ -3331,7 +3335,7 @@ module Aws::DirectConnect
     #   The time in minutes that the virtual interface failover test will
     #   last.
     #
-    #   Maximum value: 180 minutes (3 hours).
+    #   Maximum value: 4,320 minutes (72 hours).
     #
     #   Default: 180 minutes (3 hours).
     #   @return [Integer]

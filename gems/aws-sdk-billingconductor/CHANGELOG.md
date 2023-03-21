@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2023-03-17)
+------------------
+
+* Feature - This release adds a new filter to ListAccountAssociations API and a new filter to ListBillingGroups API.
+
 1.6.0 (2023-01-18)
 ------------------
 

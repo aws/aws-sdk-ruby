@@ -80,6 +80,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::DeleteBucketLifecycleConfiguration.build(context)
           when :delete_bucket_policy
             Aws::S3Control::Endpoints::DeleteBucketPolicy.build(context)
+          when :delete_bucket_replication
+            Aws::S3Control::Endpoints::DeleteBucketReplication.build(context)
           when :delete_bucket_tagging
             Aws::S3Control::Endpoints::DeleteBucketTagging.build(context)
           when :delete_job_tagging
@@ -116,6 +118,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::GetBucketLifecycleConfiguration.build(context)
           when :get_bucket_policy
             Aws::S3Control::Endpoints::GetBucketPolicy.build(context)
+          when :get_bucket_replication
+            Aws::S3Control::Endpoints::GetBucketReplication.build(context)
           when :get_bucket_tagging
             Aws::S3Control::Endpoints::GetBucketTagging.build(context)
           when :get_bucket_versioning
@@ -158,6 +162,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::PutBucketLifecycleConfiguration.build(context)
           when :put_bucket_policy
             Aws::S3Control::Endpoints::PutBucketPolicy.build(context)
+          when :put_bucket_replication
+            Aws::S3Control::Endpoints::PutBucketReplication.build(context)
           when :put_bucket_tagging
             Aws::S3Control::Endpoints::PutBucketTagging.build(context)
           when :put_bucket_versioning

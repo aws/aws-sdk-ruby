@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2023-03-20)
+------------------
+
+* Feature - This release adds a new API, SearchResources, which enable users to search through metadata and content of folders, documents, document versions and comments in a WorkDocs site.
+
 1.43.0 (2023-02-09)
 ------------------
 

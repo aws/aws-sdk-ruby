@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-03-20)
+------------------
+
+* Feature - With this release customers can now tag their Application Auto Scaling registered targets with key-value pairs and manage IAM permissions for all the tagged resources centrally.
+
+1.67.0 (2023-03-14)
+------------------
+
+* Feature - Application Auto Scaling customers can now use mathematical functions to customize the metric used with Target Tracking policies within the policy configuration itself, saving the cost and effort of publishing the customizations as a separate metric.
+
 1.66.0 (2023-01-27)
 ------------------
 

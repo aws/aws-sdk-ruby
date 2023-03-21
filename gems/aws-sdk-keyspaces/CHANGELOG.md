@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2023-03-14)
+------------------
+
+* Feature - Adding support for client-side timestamps
+
 1.5.0 (2023-02-02)
 ------------------
 

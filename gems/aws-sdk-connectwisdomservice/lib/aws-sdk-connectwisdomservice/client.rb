@@ -372,10 +372,16 @@ module Aws::ConnectWisdomService
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [String] :description
     #   The description of the assistant.
@@ -448,10 +454,16 @@ module Aws::ConnectWisdomService
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -504,10 +516,16 @@ module Aws::ConnectWisdomService
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :knowledge_base_id
     #   The identifier of the knowledge base. Can be either the ID or the ARN.
@@ -602,20 +620,40 @@ module Aws::ConnectWisdomService
     # DataIntegrations with external knowledge bases such as Salesforce and
     # ServiceNow. If you do, you'll get an `InvalidRequestException` error.
     #
-    #       <p>For example, you're programmatically managing your external knowledge base, and you want to add or remove one of the fields that is being ingested from Salesforce. Do the following:</p> <ol> <li> <p>Call <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html">DeleteKnowledgeBase</a>.</p> </li> <li> <p>Call <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html">DeleteDataIntegration</a>.</p> </li> <li> <p>Call <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> to recreate the DataIntegration or a create different one.</p> </li> <li> <p>Call CreateKnowledgeBase.</p> </li> </ol> </note>
+    #  For example, you're programmatically managing your external knowledge
+    # base, and you want to add or remove one of the fields that is being
+    # ingested from Salesforce. Do the following:
+    #
+    #  1.  Call [DeleteKnowledgeBase][2].
+    #
+    # 2.  Call [DeleteDataIntegration][3].
+    #
+    # 3.  Call [CreateDataIntegration][4] to recreate the DataIntegration or
+    #     a create different one.
+    #
+    # 4.  Call CreateKnowledgeBase.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html
+    # [2]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html
+    # [3]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html
+    # [4]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [String] :description
     #   The description.
@@ -661,7 +699,7 @@ module Aws::ConnectWisdomService
     #     source_configuration: {
     #       app_integrations: {
     #         app_integration_arn: "GenericArn", # required
-    #         object_fields: ["NonEmptyString"], # required
+    #         object_fields: ["NonEmptyString"],
     #       },
     #     },
     #     tags: {
@@ -705,10 +743,16 @@ module Aws::ConnectWisdomService
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [String] :description
     #   The description.
@@ -1966,7 +2010,7 @@ module Aws::ConnectWisdomService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectwisdomservice'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

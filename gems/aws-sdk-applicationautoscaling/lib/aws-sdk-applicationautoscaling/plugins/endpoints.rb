@@ -70,12 +70,18 @@ module Aws::ApplicationAutoScaling
             Aws::ApplicationAutoScaling::Endpoints::DescribeScalingPolicies.build(context)
           when :describe_scheduled_actions
             Aws::ApplicationAutoScaling::Endpoints::DescribeScheduledActions.build(context)
+          when :list_tags_for_resource
+            Aws::ApplicationAutoScaling::Endpoints::ListTagsForResource.build(context)
           when :put_scaling_policy
             Aws::ApplicationAutoScaling::Endpoints::PutScalingPolicy.build(context)
           when :put_scheduled_action
             Aws::ApplicationAutoScaling::Endpoints::PutScheduledAction.build(context)
           when :register_scalable_target
             Aws::ApplicationAutoScaling::Endpoints::RegisterScalableTarget.build(context)
+          when :tag_resource
+            Aws::ApplicationAutoScaling::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::ApplicationAutoScaling::Endpoints::UntagResource.build(context)
           end
         end
       end

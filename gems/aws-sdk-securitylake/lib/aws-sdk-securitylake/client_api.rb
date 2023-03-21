@@ -97,6 +97,7 @@ module Aws::SecurityLake
     LakeConfigurationRequestMap = Shapes::MapShape.new(name: 'LakeConfigurationRequestMap')
     LakeConfigurationResponse = Shapes::StructureShape.new(name: 'LakeConfigurationResponse')
     LakeConfigurationResponseMap = Shapes::MapShape.new(name: 'LakeConfigurationResponseMap')
+    LastUpdateFailure = Shapes::StructureShape.new(name: 'LastUpdateFailure')
     ListDatalakeExceptionsRequest = Shapes::StructureShape.new(name: 'ListDatalakeExceptionsRequest')
     ListDatalakeExceptionsResponse = Shapes::StructureShape.new(name: 'ListDatalakeExceptionsResponse')
     ListLogSourcesRequest = Shapes::StructureShape.new(name: 'ListLogSourcesRequest')
@@ -112,6 +113,8 @@ module Aws::SecurityLake
     RegionSet = Shapes::ListShape.new(name: 'RegionSet')
     RegionSourceTypesAccountsList = Shapes::ListShape.new(name: 'RegionSourceTypesAccountsList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceShareArn = Shapes::StringShape.new(name: 'ResourceShareArn')
+    ResourceShareName = Shapes::StringShape.new(name: 'ResourceShareName')
     RetentionSetting = Shapes::StructureShape.new(name: 'RetentionSetting')
     RetentionSettingList = Shapes::ListShape.new(name: 'RetentionSettingList')
     RetentionSettingRetentionPeriodInteger = Shapes::IntegerShape.new(name: 'RetentionSettingRetentionPeriodInteger')
@@ -142,6 +145,7 @@ module Aws::SecurityLake
     UpdateDatalakeExceptionsSubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateDatalakeExceptionsSubscriptionResponse')
     UpdateDatalakeRequest = Shapes::StructureShape.new(name: 'UpdateDatalakeRequest')
     UpdateDatalakeResponse = Shapes::StructureShape.new(name: 'UpdateDatalakeResponse')
+    UpdateStatus = Shapes::StructureShape.new(name: 'UpdateStatus')
     UpdateSubscriberRequest = Shapes::StructureShape.new(name: 'UpdateSubscriberRequest')
     UpdateSubscriberRequestSubscriberNameString = Shapes::StringShape.new(name: 'UpdateSubscriberRequestSubscriberNameString')
     UpdateSubscriberResponse = Shapes::StructureShape.new(name: 'UpdateSubscriberResponse')
@@ -155,6 +159,7 @@ module Aws::SecurityLake
     ValueSet = Shapes::ListShape.new(name: 'ValueSet')
     settingsStatus = Shapes::StringShape.new(name: 'settingsStatus')
 
+    AccessDeniedException.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
@@ -256,6 +261,8 @@ module Aws::SecurityLake
     CreateSubscriberRequest.add_member(:subscriber_name, Shapes::ShapeRef.new(shape: CreateSubscriberRequestSubscriberNameString, required: true, location_name: "subscriberName"))
     CreateSubscriberRequest.struct_class = Types::CreateSubscriberRequest
 
+    CreateSubscriberResponse.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: ResourceShareArn, location_name: "resourceShareArn"))
+    CreateSubscriberResponse.add_member(:resource_share_name, Shapes::ShapeRef.new(shape: ResourceShareName, location_name: "resourceShareName"))
     CreateSubscriberResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateSubscriberResponse.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "s3BucketArn"))
     CreateSubscriberResponse.add_member(:sns_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsArn"))
@@ -398,10 +405,15 @@ module Aws::SecurityLake
     LakeConfigurationResponse.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "s3BucketArn"))
     LakeConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: settingsStatus, location_name: "status"))
     LakeConfigurationResponse.add_member(:tags_map, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tagsMap"))
+    LakeConfigurationResponse.add_member(:update_status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "updateStatus"))
     LakeConfigurationResponse.struct_class = Types::LakeConfigurationResponse
 
     LakeConfigurationResponseMap.key = Shapes::ShapeRef.new(shape: Region)
     LakeConfigurationResponseMap.value = Shapes::ShapeRef.new(shape: LakeConfigurationResponse)
+
+    LastUpdateFailure.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    LastUpdateFailure.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    LastUpdateFailure.struct_class = Types::LastUpdateFailure
 
     ListDatalakeExceptionsRequest.add_member(:max_failures, Shapes::ShapeRef.new(shape: Integer, location_name: "maxFailures"))
     ListDatalakeExceptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SafeString, location_name: "nextToken"))
@@ -483,6 +495,8 @@ module Aws::SecurityLake
     SubscriberResource.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "accountId"))
     SubscriberResource.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     SubscriberResource.add_member(:external_id, Shapes::ShapeRef.new(shape: SafeString, location_name: "externalId"))
+    SubscriberResource.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: ResourceShareArn, location_name: "resourceShareArn"))
+    SubscriberResource.add_member(:resource_share_name, Shapes::ShapeRef.new(shape: ResourceShareName, location_name: "resourceShareName"))
     SubscriberResource.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     SubscriberResource.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "s3BucketArn"))
     SubscriberResource.add_member(:sns_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsArn"))
@@ -523,6 +537,11 @@ module Aws::SecurityLake
     UpdateDatalakeRequest.struct_class = Types::UpdateDatalakeRequest
 
     UpdateDatalakeResponse.struct_class = Types::UpdateDatalakeResponse
+
+    UpdateStatus.add_member(:last_update_failure, Shapes::ShapeRef.new(shape: LastUpdateFailure, location_name: "lastUpdateFailure"))
+    UpdateStatus.add_member(:last_update_request_id, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdateRequestId"))
+    UpdateStatus.add_member(:last_update_status, Shapes::ShapeRef.new(shape: settingsStatus, location_name: "lastUpdateStatus"))
+    UpdateStatus.struct_class = Types::UpdateStatus
 
     UpdateSubscriberRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: SafeString, location_name: "externalId"))
     UpdateSubscriberRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))

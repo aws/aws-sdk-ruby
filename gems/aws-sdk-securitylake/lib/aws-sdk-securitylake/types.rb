@@ -17,12 +17,18 @@ module Aws::SecurityLake
     # Services action. An implicit denial occurs when there is no applicable
     # Deny statement and also no applicable Allow statement.
     #
+    # @!attribute [rw] error_code
+    #   A coded string to provide more information about the access denied
+    #   exception. You can use the error code to check the exception type.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
+      :error_code,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -452,15 +458,24 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_share_arn
+    #   The Amazon Resource Name (ARN) which uniquely defines the AWS RAM
+    #   resource share. Before accepting the RAM resource share invitation,
+    #   you can view details related to the RAM resource share.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_name
+    #   The name of the resource share.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) created by you to provide to the
     #   subscriber. For more information about ARNs and how to use them in
-    #   policies, see [IAM identifiers in the Identity and Access Management
-    #   (IAM) User Guide][1]. .
+    #   policies, see [Amazon Security Lake User Guide][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
@@ -478,6 +493,8 @@ module Aws::SecurityLake
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriberResponse AWS API Documentation
     #
     class CreateSubscriberResponse < Struct.new(
+      :resource_share_arn,
+      :resource_share_name,
       :role_arn,
       :s3_bucket_arn,
       :sns_arn,
@@ -504,7 +521,15 @@ module Aws::SecurityLake
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the EventBridge API destinations
-    #   IAM role that you created.
+    #   IAM role that you created. For more information about ARNs and how
+    #   to use them in policies, see [Managing data access][1] and [Amazon
+    #   Web Services Managed Policies][2] in the Amazon Security Lake User
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html
+    #   [2]: https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html
     #   @return [String]
     #
     # @!attribute [rw] subscription_endpoint
@@ -513,7 +538,7 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] subscription_id
-    #   The subscription ID for the notification subscription/
+    #   The subscription ID for the notification subscription.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriptionNotificationConfigurationRequest AWS API Documentation
@@ -619,9 +644,8 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] remove_from_configuration_for_new_accounts
-    #   Delete Amazon Security Lake with the specified configuration
-    #   settings to stop ingesting security data for new accounts in
-    #   Security Lake.
+    #   Remove automatic enablement of configuration settings for new member
+    #   accounts in Security Lake.
     #   @return [Array<Types::AutoEnableNewRegionConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeAutoEnableRequest AWS API Documentation
@@ -1056,6 +1080,11 @@ module Aws::SecurityLake
     #   define.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] update_status
+    #   The status of the last `UpdateDatalake `or `DeleteDatalake` API
+    #   request.
+    #   @return [Types::UpdateStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/LakeConfigurationResponse AWS API Documentation
     #
     class LakeConfigurationResponse < Struct.new(
@@ -1065,7 +1094,30 @@ module Aws::SecurityLake
       :retention_settings,
       :s3_bucket_arn,
       :status,
-      :tags_map)
+      :tags_map,
+      :update_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the last `UpdateDatalake` or `DeleteDatalake` API
+    # request which failed.
+    #
+    # @!attribute [rw] code
+    #   The reason code for the failure of the last `UpdateDatalake` or
+    #   `DeleteDatalake` API request.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the failure of the last `UpdateDatalake`or
+    #   `DeleteDatalake` API request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/LastUpdateFailure AWS API Documentation
+    #
+    class LastUpdateFailure < Struct.new(
+      :code,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1431,6 +1483,19 @@ module Aws::SecurityLake
     #   the role to be assumed only under specific circumstances.
     #   @return [String]
     #
+    # @!attribute [rw] resource_share_arn
+    #   The Amazon Resource Name (ARN) which uniquely defines the AWS RAM
+    #   resource share. Before accepting the RAM resource share invitation,
+    #   you can view details related to the RAM resource share.
+    #
+    #   This field is available only for Lake Formation subscribers created
+    #   after March 8, 2023.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_name
+    #   The name of the resource share.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) specifying the role of the
     #   subscriber.
@@ -1488,6 +1553,8 @@ module Aws::SecurityLake
       :account_id,
       :created_at,
       :external_id,
+      :resource_share_arn,
+      :resource_share_name,
       :role_arn,
       :s3_bucket_arn,
       :sns_arn,
@@ -1586,6 +1653,35 @@ module Aws::SecurityLake
     #
     class UpdateDatalakeResponse < Aws::EmptyStructure; end
 
+    # The status of the last `UpdateDatalake` or `DeleteDatalake` API
+    # request. This is set to Completed after the configuration is updated,
+    # or removed if deletion of the data lake is successful.
+    #
+    # @!attribute [rw] last_update_failure
+    #   The details of the last `UpdateDatalake`or `DeleteDatalake` API
+    #   request which failed.
+    #   @return [Types::LastUpdateFailure]
+    #
+    # @!attribute [rw] last_update_request_id
+    #   The unique ID for the `UpdateDatalake` or `DeleteDatalake` API
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_status
+    #   The status of the last `UpdateDatalake` or `DeleteDatalake` API
+    #   request that was requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateStatus AWS API Documentation
+    #
+    class UpdateStatus < Struct.new(
+      :last_update_failure,
+      :last_update_request_id,
+      :last_update_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] external_id
     #   The external ID of the Security Lake account.
     #   @return [String]
@@ -1656,7 +1752,14 @@ module Aws::SecurityLake
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) specifying the role of the
-    #   subscriber.
+    #   subscriber. For more information about ARNs and how to use them in
+    #   policies, see, see the [Managing data access][1] and [Amazon Web
+    #   Services Managed Policies][2]in the Amazon Security Lake User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html
+    #   [2]: https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html
     #   @return [String]
     #
     # @!attribute [rw] subscription_endpoint

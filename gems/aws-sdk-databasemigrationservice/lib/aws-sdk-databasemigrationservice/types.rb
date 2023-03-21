@@ -4555,6 +4555,13 @@ module Aws::DatabaseMigrationService
     #   columns without adding the '0x' prefix.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sasl_mechanism
+    #   For SASL/SSL authentication, DMS supports the `SCRAM-SHA-512`
+    #   mechanism by default. DMS versions 3.5.0 and later also support the
+    #   `PLAIN` mechanism. To use the `PLAIN` mechanism, set this parameter
+    #   to `PLAIN.`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KafkaSettings AWS API Documentation
     #
     class KafkaSettings < Struct.new(
@@ -4575,7 +4582,8 @@ module Aws::DatabaseMigrationService
       :ssl_ca_certificate_arn,
       :sasl_username,
       :sasl_password,
-      :no_hex_prefix)
+      :no_hex_prefix,
+      :sasl_mechanism)
       SENSITIVE = [:ssl_client_key_password, :sasl_password]
       include Aws::Structure
     end
@@ -4886,6 +4894,14 @@ module Aws::DatabaseMigrationService
     #   `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tlog_access_mode
+    #   Indicates the mode used to fetch CDC data.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_lob_lookup
+    #   Forces LOB lookup on inline LOB.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSQLServerSettings AWS API Documentation
     #
     class MicrosoftSQLServerSettings < Struct.new(
@@ -4903,7 +4919,9 @@ module Aws::DatabaseMigrationService
       :use_third_party_backup_device,
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
-      :trim_space_in_char)
+      :trim_space_in_char,
+      :tlog_access_mode,
+      :force_lob_lookup)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -6392,6 +6410,11 @@ module Aws::DatabaseMigrationService
     #   `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] convert_timestamp_with_zone_to_utc
+    #   When true, converts timestamps with the `timezone` datatype to their
+    #   UTC value.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
     #
     class OracleSettings < Struct.new(
@@ -6435,7 +6458,8 @@ module Aws::DatabaseMigrationService
       :secrets_manager_secret_id,
       :secrets_manager_oracle_asm_access_role_arn,
       :secrets_manager_oracle_asm_secret_id,
-      :trim_space_in_char)
+      :trim_space_in_char,
+      :convert_timestamp_with_zone_to_utc)
       SENSITIVE = [:asm_password, :password, :security_db_encryption]
       include Aws::Structure
     end
@@ -6735,6 +6759,11 @@ module Aws::DatabaseMigrationService
     #   `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] map_boolean_as_boolean
+    #   When true, lets PostgreSQL migrate the boolean type as boolean. By
+    #   default, PostgreSQL migrates booleans as `varchar(5)`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
@@ -6756,7 +6785,8 @@ module Aws::DatabaseMigrationService
       :plugin_name,
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
-      :trim_space_in_char)
+      :trim_space_in_char,
+      :map_boolean_as_boolean)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -7342,6 +7372,11 @@ module Aws::DatabaseMigrationService
     #   connection details.
     #   @return [String]
     #
+    # @!attribute [rw] map_boolean_as_boolean
+    #   When true, lets Redshift migrate the boolean type as boolean. By
+    #   default, Redshift migrates booleans as `varchar(1)`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftSettings AWS API Documentation
     #
     class RedshiftSettings < Struct.new(
@@ -7374,7 +7409,8 @@ module Aws::DatabaseMigrationService
       :username,
       :write_buffer_size,
       :secrets_manager_access_role_arn,
-      :secrets_manager_secret_id)
+      :secrets_manager_secret_id,
+      :map_boolean_as_boolean)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -9101,6 +9137,11 @@ module Aws::DatabaseMigrationService
     #   parameter.
     #   @return [String]
     #
+    # @!attribute [rw] glue_catalog_generation
+    #   When true, allows Glue to catalog your S3 bucket. Creating an Glue
+    #   catalog lets you use Athena to query your data.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -9143,7 +9184,8 @@ module Aws::DatabaseMigrationService
       :rfc_4180,
       :date_partition_timezone,
       :add_trailing_padding_character,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :glue_catalog_generation)
       SENSITIVE = []
       include Aws::Structure
     end

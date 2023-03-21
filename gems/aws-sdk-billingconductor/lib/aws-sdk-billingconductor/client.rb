@@ -803,7 +803,7 @@ module Aws::BillingConductor
     #     client_token: "ClientToken",
     #     name: "PricingRuleName", # required
     #     description: "PricingRuleDescription",
-    #     scope: "GLOBAL", # required, accepts GLOBAL, SERVICE, BILLING_ENTITY
+    #     scope: "GLOBAL", # required, accepts GLOBAL, SERVICE, BILLING_ENTITY, SKU
     #     type: "MARKUP", # required, accepts MARKUP, DISCOUNT, TIERING
     #     modifier_percentage: 1.0,
     #     service: "Service",
@@ -1066,6 +1066,7 @@ module Aws::BillingConductor
     #     filters: {
     #       association: "Association",
     #       account_id: "AccountId",
+    #       account_ids: ["AccountId"],
     #     },
     #     next_token: "Token",
     #   })
@@ -1177,6 +1178,7 @@ module Aws::BillingConductor
     #     filters: {
     #       arns: ["BillingGroupArn"],
     #       pricing_plan: "PricingPlanFullArn",
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING
     #     },
     #   })
     #
@@ -1257,6 +1259,8 @@ module Aws::BillingConductor
     #   resp.custom_line_item_versions[0].association_size #=> Integer
     #   resp.custom_line_item_versions[0].start_billing_period #=> String
     #   resp.custom_line_item_versions[0].end_billing_period #=> String
+    #   resp.custom_line_item_versions[0].arn #=> String
+    #   resp.custom_line_item_versions[0].start_time #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersions AWS API Documentation
@@ -1484,7 +1488,7 @@ module Aws::BillingConductor
     #   resp.pricing_rules[0].name #=> String
     #   resp.pricing_rules[0].arn #=> String
     #   resp.pricing_rules[0].description #=> String
-    #   resp.pricing_rules[0].scope #=> String, one of "GLOBAL", "SERVICE", "BILLING_ENTITY"
+    #   resp.pricing_rules[0].scope #=> String, one of "GLOBAL", "SERVICE", "BILLING_ENTITY", "SKU"
     #   resp.pricing_rules[0].type #=> String, one of "MARKUP", "DISCOUNT", "TIERING"
     #   resp.pricing_rules[0].modifier_percentage #=> Float
     #   resp.pricing_rules[0].service #=> String
@@ -1493,6 +1497,8 @@ module Aws::BillingConductor
     #   resp.pricing_rules[0].last_modified_time #=> Integer
     #   resp.pricing_rules[0].billing_entity #=> String
     #   resp.pricing_rules[0].tiering.free_tier.activated #=> Boolean
+    #   resp.pricing_rules[0].usage_type #=> String
+    #   resp.pricing_rules[0].operation #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListPricingRules AWS API Documentation
@@ -1940,7 +1946,7 @@ module Aws::BillingConductor
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.scope #=> String, one of "GLOBAL", "SERVICE", "BILLING_ENTITY"
+    #   resp.scope #=> String, one of "GLOBAL", "SERVICE", "BILLING_ENTITY", "SKU"
     #   resp.type #=> String, one of "MARKUP", "DISCOUNT", "TIERING"
     #   resp.modifier_percentage #=> Float
     #   resp.service #=> String
@@ -1973,7 +1979,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

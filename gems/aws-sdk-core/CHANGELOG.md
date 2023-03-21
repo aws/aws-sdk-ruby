@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Add support for `AWS_CONTAINER_CREDENTIALS_FULL_URI` and `AWS_CONTAINER_AUTHORIZATION_TOKEN` environment variables to `ECSCredentials`.
 
+3.170.1 (2023-03-17)
+------------------
+
+* Issue - Reduce memory usage in H2::Connection when `http_wire_log` is not set.
+
 3.170.0 (2023-01-25)
 ------------------
 

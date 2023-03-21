@@ -21,6 +21,8 @@ module Aws::WorkDocs
     ActivityType = Shapes::StringShape.new(name: 'ActivityType')
     AddResourcePermissionsRequest = Shapes::StructureShape.new(name: 'AddResourcePermissionsRequest')
     AddResourcePermissionsResponse = Shapes::StructureShape.new(name: 'AddResourcePermissionsResponse')
+    AdditionalResponseFieldType = Shapes::StringShape.new(name: 'AdditionalResponseFieldType')
+    AdditionalResponseFieldsList = Shapes::ListShape.new(name: 'AdditionalResponseFieldsList')
     AuthenticationHeaderType = Shapes::StringShape.new(name: 'AuthenticationHeaderType')
     BooleanEnumType = Shapes::StringShape.new(name: 'BooleanEnumType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
@@ -33,6 +35,7 @@ module Aws::WorkDocs
     CommentVisibilityType = Shapes::StringShape.new(name: 'CommentVisibilityType')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConflictingOperationException = Shapes::StructureShape.new(name: 'ConflictingOperationException')
+    ContentCategoryType = Shapes::StringShape.new(name: 'ContentCategoryType')
     CreateCommentRequest = Shapes::StructureShape.new(name: 'CreateCommentRequest')
     CreateCommentResponse = Shapes::StructureShape.new(name: 'CreateCommentResponse')
     CreateCustomMetadataRequest = Shapes::StructureShape.new(name: 'CreateCustomMetadataRequest')
@@ -50,6 +53,7 @@ module Aws::WorkDocs
     CustomMetadataLimitExceededException = Shapes::StructureShape.new(name: 'CustomMetadataLimitExceededException')
     CustomMetadataMap = Shapes::MapShape.new(name: 'CustomMetadataMap')
     CustomMetadataValueType = Shapes::StringShape.new(name: 'CustomMetadataValueType')
+    DateRangeType = Shapes::StructureShape.new(name: 'DateRangeType')
     DeactivateUserRequest = Shapes::StructureShape.new(name: 'DeactivateUserRequest')
     DeactivatingLastSystemUserException = Shapes::StructureShape.new(name: 'DeactivatingLastSystemUserException')
     DeleteCommentRequest = Shapes::StructureShape.new(name: 'DeleteCommentRequest')
@@ -102,6 +106,7 @@ module Aws::WorkDocs
     ErrorMessageType = Shapes::StringShape.new(name: 'ErrorMessageType')
     FailedDependencyException = Shapes::StructureShape.new(name: 'FailedDependencyException')
     FieldNamesType = Shapes::StringShape.new(name: 'FieldNamesType')
+    Filters = Shapes::StructureShape.new(name: 'Filters')
     FolderContentType = Shapes::StringShape.new(name: 'FolderContentType')
     FolderMetadata = Shapes::StructureShape.new(name: 'FolderMetadata')
     FolderMetadataList = Shapes::ListShape.new(name: 'FolderMetadataList')
@@ -133,12 +138,17 @@ module Aws::WorkDocs
     InvalidCommentOperationException = Shapes::StructureShape.new(name: 'InvalidCommentOperationException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
+    LanguageCodeType = Shapes::StringShape.new(name: 'LanguageCodeType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitType = Shapes::IntegerShape.new(name: 'LimitType')
     LocaleType = Shapes::StringShape.new(name: 'LocaleType')
+    LongRangeType = Shapes::StructureShape.new(name: 'LongRangeType')
+    LongType = Shapes::IntegerShape.new(name: 'LongType')
     MarkerType = Shapes::StringShape.new(name: 'MarkerType')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
+    NextMarkerType = Shapes::StringShape.new(name: 'NextMarkerType')
     NotificationOptions = Shapes::StructureShape.new(name: 'NotificationOptions')
+    OrderByFieldType = Shapes::StringShape.new(name: 'OrderByFieldType')
     OrderType = Shapes::StringShape.new(name: 'OrderType')
     OrganizationUserList = Shapes::ListShape.new(name: 'OrganizationUserList')
     PageMarkerType = Shapes::StringShape.new(name: 'PageMarkerType')
@@ -150,6 +160,7 @@ module Aws::WorkDocs
     PositiveSizeType = Shapes::IntegerShape.new(name: 'PositiveSizeType')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
+    PrincipalRoleType = Shapes::StringShape.new(name: 'PrincipalRoleType')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     ProhibitedStateException = Shapes::StructureShape.new(name: 'ProhibitedStateException')
     RemoveAllResourcePermissionsRequest = Shapes::StructureShape.new(name: 'RemoveAllResourcePermissionsRequest')
@@ -166,11 +177,34 @@ module Aws::WorkDocs
     ResourceSortType = Shapes::StringShape.new(name: 'ResourceSortType')
     ResourceStateType = Shapes::StringShape.new(name: 'ResourceStateType')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResponseItem = Shapes::StructureShape.new(name: 'ResponseItem')
+    ResponseItemType = Shapes::StringShape.new(name: 'ResponseItemType')
+    ResponseItemWebUrl = Shapes::StringShape.new(name: 'ResponseItemWebUrl')
+    ResponseItemsList = Shapes::ListShape.new(name: 'ResponseItemsList')
     RestoreDocumentVersionsRequest = Shapes::StructureShape.new(name: 'RestoreDocumentVersionsRequest')
     RolePermissionType = Shapes::StringShape.new(name: 'RolePermissionType')
     RoleType = Shapes::StringShape.new(name: 'RoleType')
+    SearchAncestorId = Shapes::StringShape.new(name: 'SearchAncestorId')
+    SearchAncestorIdList = Shapes::ListShape.new(name: 'SearchAncestorIdList')
+    SearchCollectionType = Shapes::StringShape.new(name: 'SearchCollectionType')
+    SearchCollectionTypeList = Shapes::ListShape.new(name: 'SearchCollectionTypeList')
+    SearchContentCategoryTypeList = Shapes::ListShape.new(name: 'SearchContentCategoryTypeList')
+    SearchLabel = Shapes::StringShape.new(name: 'SearchLabel')
+    SearchLabelList = Shapes::ListShape.new(name: 'SearchLabelList')
     SearchMarkerType = Shapes::StringShape.new(name: 'SearchMarkerType')
+    SearchPrincipalRoleList = Shapes::ListShape.new(name: 'SearchPrincipalRoleList')
+    SearchPrincipalType = Shapes::StructureShape.new(name: 'SearchPrincipalType')
+    SearchPrincipalTypeList = Shapes::ListShape.new(name: 'SearchPrincipalTypeList')
+    SearchQueryScopeType = Shapes::StringShape.new(name: 'SearchQueryScopeType')
+    SearchQueryScopeTypeList = Shapes::ListShape.new(name: 'SearchQueryScopeTypeList')
     SearchQueryType = Shapes::StringShape.new(name: 'SearchQueryType')
+    SearchResourceType = Shapes::StringShape.new(name: 'SearchResourceType')
+    SearchResourceTypeList = Shapes::ListShape.new(name: 'SearchResourceTypeList')
+    SearchResourcesRequest = Shapes::StructureShape.new(name: 'SearchResourcesRequest')
+    SearchResourcesResponse = Shapes::StructureShape.new(name: 'SearchResourcesResponse')
+    SearchResultSortList = Shapes::ListShape.new(name: 'SearchResultSortList')
+    SearchResultsLimitType = Shapes::IntegerShape.new(name: 'SearchResultsLimitType')
+    SearchSortResult = Shapes::StructureShape.new(name: 'SearchSortResult')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SharePrincipal = Shapes::StructureShape.new(name: 'SharePrincipal')
     SharePrincipalList = Shapes::ListShape.new(name: 'SharePrincipalList')
@@ -181,6 +215,7 @@ module Aws::WorkDocs
     SharedLabels = Shapes::ListShape.new(name: 'SharedLabels')
     SignedHeaderMap = Shapes::MapShape.new(name: 'SignedHeaderMap')
     SizeType = Shapes::IntegerShape.new(name: 'SizeType')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StorageLimitExceededException = Shapes::StructureShape.new(name: 'StorageLimitExceededException')
     StorageLimitWillExceedException = Shapes::StructureShape.new(name: 'StorageLimitWillExceedException')
     StorageRuleType = Shapes::StructureShape.new(name: 'StorageRuleType')
@@ -190,6 +225,7 @@ module Aws::WorkDocs
     SubscriptionList = Shapes::ListShape.new(name: 'SubscriptionList')
     SubscriptionProtocolType = Shapes::StringShape.new(name: 'SubscriptionProtocolType')
     SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
+    TextLocaleTypeList = Shapes::ListShape.new(name: 'TextLocaleTypeList')
     TimeZoneIdType = Shapes::StringShape.new(name: 'TimeZoneIdType')
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
     TooManyLabelsException = Shapes::StructureShape.new(name: 'TooManyLabelsException')
@@ -248,6 +284,8 @@ module Aws::WorkDocs
     AddResourcePermissionsResponse.add_member(:share_results, Shapes::ShapeRef.new(shape: ShareResultsList, location_name: "ShareResults"))
     AddResourcePermissionsResponse.struct_class = Types::AddResourcePermissionsResponse
 
+    AdditionalResponseFieldsList.member = Shapes::ShapeRef.new(shape: AdditionalResponseFieldType)
+
     Comment.add_member(:comment_id, Shapes::ShapeRef.new(shape: CommentIdType, required: true, location_name: "CommentId"))
     Comment.add_member(:parent_id, Shapes::ShapeRef.new(shape: CommentIdType, location_name: "ParentId"))
     Comment.add_member(:thread_id, Shapes::ShapeRef.new(shape: CommentIdType, location_name: "ThreadId"))
@@ -266,6 +304,7 @@ module Aws::WorkDocs
     CommentMetadata.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreatedTimestamp"))
     CommentMetadata.add_member(:comment_status, Shapes::ShapeRef.new(shape: CommentStatusType, location_name: "CommentStatus"))
     CommentMetadata.add_member(:recipient_id, Shapes::ShapeRef.new(shape: IdType, location_name: "RecipientId"))
+    CommentMetadata.add_member(:contributor_id, Shapes::ShapeRef.new(shape: IdType, location_name: "ContributorId"))
     CommentMetadata.struct_class = Types::CommentMetadata
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
@@ -340,6 +379,10 @@ module Aws::WorkDocs
 
     CustomMetadataMap.key = Shapes::ShapeRef.new(shape: CustomMetadataKeyType)
     CustomMetadataMap.value = Shapes::ShapeRef.new(shape: CustomMetadataValueType)
+
+    DateRangeType.add_member(:start_value, Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartValue"))
+    DateRangeType.add_member(:end_value, Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndValue"))
+    DateRangeType.struct_class = Types::DateRangeType
 
     DeactivateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "UserId"))
     DeactivateUserRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
@@ -560,6 +603,18 @@ module Aws::WorkDocs
     FailedDependencyException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
     FailedDependencyException.struct_class = Types::FailedDependencyException
 
+    Filters.add_member(:text_locales, Shapes::ShapeRef.new(shape: TextLocaleTypeList, location_name: "TextLocales"))
+    Filters.add_member(:content_categories, Shapes::ShapeRef.new(shape: SearchContentCategoryTypeList, location_name: "ContentCategories"))
+    Filters.add_member(:resource_types, Shapes::ShapeRef.new(shape: SearchResourceTypeList, location_name: "ResourceTypes"))
+    Filters.add_member(:labels, Shapes::ShapeRef.new(shape: SearchLabelList, location_name: "Labels"))
+    Filters.add_member(:principals, Shapes::ShapeRef.new(shape: SearchPrincipalTypeList, location_name: "Principals"))
+    Filters.add_member(:ancestor_ids, Shapes::ShapeRef.new(shape: SearchAncestorIdList, location_name: "AncestorIds"))
+    Filters.add_member(:search_collection_types, Shapes::ShapeRef.new(shape: SearchCollectionTypeList, location_name: "SearchCollectionTypes"))
+    Filters.add_member(:size_range, Shapes::ShapeRef.new(shape: LongRangeType, location_name: "SizeRange"))
+    Filters.add_member(:created_range, Shapes::ShapeRef.new(shape: DateRangeType, location_name: "CreatedRange"))
+    Filters.add_member(:modified_range, Shapes::ShapeRef.new(shape: DateRangeType, location_name: "ModifiedRange"))
+    Filters.struct_class = Types::Filters
+
     FolderMetadata.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdType, location_name: "Id"))
     FolderMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameType, location_name: "Name"))
     FolderMetadata.add_member(:creator_id, Shapes::ShapeRef.new(shape: IdType, location_name: "CreatorId"))
@@ -680,6 +735,10 @@ module Aws::WorkDocs
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    LongRangeType.add_member(:start_value, Shapes::ShapeRef.new(shape: LongType, location_name: "StartValue"))
+    LongRangeType.add_member(:end_value, Shapes::ShapeRef.new(shape: LongType, location_name: "EndValue"))
+    LongRangeType.struct_class = Types::LongRangeType
+
     NotificationOptions.add_member(:send_email, Shapes::ShapeRef.new(shape: BooleanType, location_name: "SendEmail"))
     NotificationOptions.add_member(:email_message, Shapes::ShapeRef.new(shape: MessageType, location_name: "EmailMessage"))
     NotificationOptions.struct_class = Types::NotificationOptions
@@ -740,9 +799,60 @@ module Aws::WorkDocs
 
     ResourcePathComponentList.member = Shapes::ShapeRef.new(shape: ResourcePathComponent)
 
+    ResponseItem.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResponseItemType, location_name: "ResourceType"))
+    ResponseItem.add_member(:web_url, Shapes::ShapeRef.new(shape: ResponseItemWebUrl, location_name: "WebUrl"))
+    ResponseItem.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
+    ResponseItem.add_member(:folder_metadata, Shapes::ShapeRef.new(shape: FolderMetadata, location_name: "FolderMetadata"))
+    ResponseItem.add_member(:comment_metadata, Shapes::ShapeRef.new(shape: CommentMetadata, location_name: "CommentMetadata"))
+    ResponseItem.add_member(:document_version_metadata, Shapes::ShapeRef.new(shape: DocumentVersionMetadata, location_name: "DocumentVersionMetadata"))
+    ResponseItem.struct_class = Types::ResponseItem
+
+    ResponseItemsList.member = Shapes::ShapeRef.new(shape: ResponseItem)
+
     RestoreDocumentVersionsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     RestoreDocumentVersionsRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "DocumentId"))
     RestoreDocumentVersionsRequest.struct_class = Types::RestoreDocumentVersionsRequest
+
+    SearchAncestorIdList.member = Shapes::ShapeRef.new(shape: SearchAncestorId)
+
+    SearchCollectionTypeList.member = Shapes::ShapeRef.new(shape: SearchCollectionType)
+
+    SearchContentCategoryTypeList.member = Shapes::ShapeRef.new(shape: ContentCategoryType)
+
+    SearchLabelList.member = Shapes::ShapeRef.new(shape: SearchLabel)
+
+    SearchPrincipalRoleList.member = Shapes::ShapeRef.new(shape: PrincipalRoleType)
+
+    SearchPrincipalType.add_member(:id, Shapes::ShapeRef.new(shape: IdType, required: true, location_name: "Id"))
+    SearchPrincipalType.add_member(:roles, Shapes::ShapeRef.new(shape: SearchPrincipalRoleList, location_name: "Roles"))
+    SearchPrincipalType.struct_class = Types::SearchPrincipalType
+
+    SearchPrincipalTypeList.member = Shapes::ShapeRef.new(shape: SearchPrincipalType)
+
+    SearchQueryScopeTypeList.member = Shapes::ShapeRef.new(shape: SearchQueryScopeType)
+
+    SearchResourceTypeList.member = Shapes::ShapeRef.new(shape: SearchResourceType)
+
+    SearchResourcesRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
+    SearchResourcesRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: SearchQueryType, location_name: "QueryText"))
+    SearchResourcesRequest.add_member(:query_scopes, Shapes::ShapeRef.new(shape: SearchQueryScopeTypeList, location_name: "QueryScopes"))
+    SearchResourcesRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: IdType, location_name: "OrganizationId"))
+    SearchResourcesRequest.add_member(:additional_response_fields, Shapes::ShapeRef.new(shape: AdditionalResponseFieldsList, location_name: "AdditionalResponseFields"))
+    SearchResourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    SearchResourcesRequest.add_member(:order_by, Shapes::ShapeRef.new(shape: SearchResultSortList, location_name: "OrderBy"))
+    SearchResourcesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: SearchResultsLimitType, location_name: "Limit"))
+    SearchResourcesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: NextMarkerType, location_name: "Marker"))
+    SearchResourcesRequest.struct_class = Types::SearchResourcesRequest
+
+    SearchResourcesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ResponseItemsList, location_name: "Items"))
+    SearchResourcesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: NextMarkerType, location_name: "Marker"))
+    SearchResourcesResponse.struct_class = Types::SearchResourcesResponse
+
+    SearchResultSortList.member = Shapes::ShapeRef.new(shape: SearchSortResult)
+
+    SearchSortResult.add_member(:field, Shapes::ShapeRef.new(shape: OrderByFieldType, location_name: "Field"))
+    SearchSortResult.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "Order"))
+    SearchSortResult.struct_class = Types::SearchSortResult
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -785,6 +895,8 @@ module Aws::WorkDocs
     Subscription.struct_class = Types::Subscription
 
     SubscriptionList.member = Shapes::ShapeRef.new(shape: Subscription)
+
+    TextLocaleTypeList.member = Shapes::ShapeRef.new(shape: LanguageCodeType)
 
     TooManyLabelsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
     TooManyLabelsException.struct_class = Types::TooManyLabelsException
@@ -1170,6 +1282,12 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_comments, Seahorse::Model::Operation.new.tap do |o|
@@ -1184,6 +1302,12 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_document_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -1238,6 +1362,12 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_notification_subscriptions, Seahorse::Model::Operation.new.tap do |o|
@@ -1249,6 +1379,12 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_resource_permissions, Seahorse::Model::Operation.new.tap do |o|
@@ -1262,6 +1398,12 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_root_folders, Seahorse::Model::Operation.new.tap do |o|
@@ -1275,6 +1417,12 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_users, Seahorse::Model::Operation.new.tap do |o|
@@ -1414,6 +1562,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: DraftUploadOutOfSyncException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyCheckedOutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
 
       api.add_operation(:remove_all_resource_permissions, Seahorse::Model::Operation.new.tap do |o|
@@ -1454,6 +1603,24 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
+      end)
+
+      api.add_operation(:search_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/api/v1/search"
+        o.input = Shapes::ShapeRef.new(shape: SearchResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:update_document, Seahorse::Model::Operation.new.tap do |o|

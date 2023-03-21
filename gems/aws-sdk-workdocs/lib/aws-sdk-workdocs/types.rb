@@ -246,6 +246,10 @@ module Aws::WorkDocs
     #   The ID of the user being replied to.
     #   @return [String]
     #
+    # @!attribute [rw] contributor_id
+    #   The ID of the user who made the comment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CommentMetadata AWS API Documentation
     #
     class CommentMetadata < Struct.new(
@@ -253,7 +257,8 @@ module Aws::WorkDocs
       :contributor,
       :created_timestamp,
       :comment_status,
-      :recipient_id)
+      :recipient_id,
+      :contributor_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -401,7 +406,7 @@ module Aws::WorkDocs
       :authentication_token,
       :name,
       :parent_folder_id)
-      SENSITIVE = [:authentication_token]
+      SENSITIVE = [:authentication_token, :name]
       include Aws::Structure
     end
 
@@ -534,7 +539,7 @@ module Aws::WorkDocs
       :time_zone_id,
       :storage_rule,
       :authentication_token)
-      SENSITIVE = [:email_address, :password, :authentication_token]
+      SENSITIVE = [:username, :email_address, :given_name, :surname, :password, :authentication_token]
       include Aws::Structure
     end
 
@@ -560,6 +565,25 @@ module Aws::WorkDocs
     #
     class CustomMetadataLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters results based on timestamp range (in epochs).
+    #
+    # @!attribute [rw] start_value
+    #   Timestamp range start value (in epochs)
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_value
+    #   Timestamp range end value (in epochs).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DateRangeType AWS API Documentation
+    #
+    class DateRangeType < Struct.new(
+      :start_value,
+      :end_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1498,7 +1522,7 @@ module Aws::WorkDocs
       :creator_id,
       :thumbnail,
       :source)
-      SENSITIVE = []
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -1559,6 +1583,65 @@ module Aws::WorkDocs
     #
     class FailedDependencyException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters results based on entity metadata.
+    #
+    # @!attribute [rw] text_locales
+    #   Filters by the locale of the content or comment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content_categories
+    #   Filters by content category.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_types
+    #   Filters based on entity type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] labels
+    #   Filter by labels using exact match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] principals
+    #   Filter based on UserIds or GroupIds.
+    #   @return [Array<Types::SearchPrincipalType>]
+    #
+    # @!attribute [rw] ancestor_ids
+    #   Filter based on resource’s path.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] search_collection_types
+    #   Filter based on file groupings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] size_range
+    #   Filter based on size (in bytes).
+    #   @return [Types::LongRangeType]
+    #
+    # @!attribute [rw] created_range
+    #   Filter based on resource’s creation timestamp.
+    #   @return [Types::DateRangeType]
+    #
+    # @!attribute [rw] modified_range
+    #   Filter based on resource’s modified timestamp.
+    #   @return [Types::DateRangeType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Filters AWS API Documentation
+    #
+    class Filters < Struct.new(
+      :text_locales,
+      :content_categories,
+      :resource_types,
+      :labels,
+      :principals,
+      :ancestor_ids,
+      :search_collection_types,
+      :size_range,
+      :created_range,
+      :modified_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1624,7 +1707,7 @@ module Aws::WorkDocs
       :labels,
       :size,
       :latest_version_size)
-      SENSITIVE = []
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -2010,7 +2093,7 @@ module Aws::WorkDocs
       :content_type,
       :document_size_in_bytes,
       :parent_folder_id)
-      SENSITIVE = [:authentication_token]
+      SENSITIVE = [:authentication_token, :name]
       include Aws::Structure
     end
 
@@ -2094,6 +2177,25 @@ module Aws::WorkDocs
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filter based on size (in bytes).
+    #
+    # @!attribute [rw] start_value
+    #   The size start range (in bytes).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_value
+    #   The size end range (in bytes).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/LongRangeType AWS API Documentation
+    #
+    class LongRangeType < Struct.new(
+      :start_value,
+      :end_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2307,7 +2409,7 @@ module Aws::WorkDocs
       :version_id,
       :owner,
       :parent_id)
-      SENSITIVE = []
+      SENSITIVE = [:name, :original_name]
       include Aws::Structure
     end
 
@@ -2340,7 +2442,47 @@ module Aws::WorkDocs
     class ResourcePathComponent < Struct.new(
       :id,
       :name)
-      SENSITIVE = []
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # List of Documents, Folders, Comments, and Document Versions matching
+    # the query.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of item being returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_url
+    #   The webUrl of the item being returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_metadata
+    #   The document that matches the query.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] folder_metadata
+    #   The folder that matches the query.
+    #   @return [Types::FolderMetadata]
+    #
+    # @!attribute [rw] comment_metadata
+    #   The comment that matches the query.
+    #   @return [Types::CommentMetadata]
+    #
+    # @!attribute [rw] document_version_metadata
+    #   The document version that matches the metadata.
+    #   @return [Types::DocumentVersionMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResponseItem AWS API Documentation
+    #
+    class ResponseItem < Struct.new(
+      :resource_type,
+      :web_url,
+      :document_metadata,
+      :folder_metadata,
+      :comment_metadata,
+      :document_version_metadata)
+      SENSITIVE = [:web_url]
       include Aws::Structure
     end
 
@@ -2359,6 +2501,122 @@ module Aws::WorkDocs
       :authentication_token,
       :document_id)
       SENSITIVE = [:authentication_token]
+      include Aws::Structure
+    end
+
+    # Filter based on UserIds or GroupIds.
+    #
+    # @!attribute [rw] id
+    #   UserIds or GroupIds.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles
+    #   The Role of a User or Group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SearchPrincipalType AWS API Documentation
+    #
+    class SearchPrincipalType < Struct.new(
+      :id,
+      :roles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. Not required when using Amazon
+    #   Web Services administrator credentials to access the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_text
+    #   The String to search for. Searches across different text fields
+    #   based on request parameters. Use double quotes around the query
+    #   string for exact phrase matches.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_scopes
+    #   Filter based on the text field type. A Folder has only a name and no
+    #   content. A Comment has only content and no name. A Document or
+    #   Document Version has a name and content
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organization_id
+    #   Filters based on the resource owner OrgId. This is a mandatory
+    #   parameter when using Admin SigV4 credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_response_fields
+    #   A list of attributes to include in the response. Used to request
+    #   fields that are not normally returned in a standard response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Filters results based on entity metadata.
+    #   @return [Types::Filters]
+    #
+    # @!attribute [rw] order_by
+    #   Order by results in one or more categories.
+    #   @return [Array<Types::SearchSortResult>]
+    #
+    # @!attribute [rw] limit
+    #   Max results count per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SearchResourcesRequest AWS API Documentation
+    #
+    class SearchResourcesRequest < Struct.new(
+      :authentication_token,
+      :query_text,
+      :query_scopes,
+      :organization_id,
+      :additional_response_fields,
+      :filters,
+      :order_by,
+      :limit,
+      :marker)
+      SENSITIVE = [:authentication_token, :query_text]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   List of Documents, Folders, Comments, and Document Versions matching
+    #   the query.
+    #   @return [Array<Types::ResponseItem>]
+    #
+    # @!attribute [rw] marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SearchResourcesResponse AWS API Documentation
+    #
+    class SearchResourcesResponse < Struct.new(
+      :items,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of the sort operation.
+    #
+    # @!attribute [rw] field
+    #   Sort search results based on this field name.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Sort direction.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SearchSortResult AWS API Documentation
+    #
+    class SearchSortResult < Struct.new(
+      :field,
+      :order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2584,7 +2842,7 @@ module Aws::WorkDocs
       :name,
       :parent_folder_id,
       :resource_state)
-      SENSITIVE = [:authentication_token]
+      SENSITIVE = [:authentication_token, :name]
       include Aws::Structure
     end
 
@@ -2646,7 +2904,7 @@ module Aws::WorkDocs
       :name,
       :parent_folder_id,
       :resource_state)
-      SENSITIVE = [:authentication_token]
+      SENSITIVE = [:authentication_token, :name]
       include Aws::Structure
     end
 
@@ -2700,7 +2958,7 @@ module Aws::WorkDocs
       :time_zone_id,
       :locale,
       :grant_poweruser_privileges)
-      SENSITIVE = [:authentication_token]
+      SENSITIVE = [:authentication_token, :given_name, :surname]
       include Aws::Structure
     end
 
@@ -2815,7 +3073,7 @@ module Aws::WorkDocs
       :time_zone_id,
       :locale,
       :storage)
-      SENSITIVE = [:email_address]
+      SENSITIVE = [:username, :email_address, :given_name, :surname]
       include Aws::Structure
     end
 
@@ -2849,7 +3107,7 @@ module Aws::WorkDocs
       :given_name,
       :surname,
       :email_address)
-      SENSITIVE = [:email_address]
+      SENSITIVE = [:username, :given_name, :surname, :email_address]
       include Aws::Structure
     end
 

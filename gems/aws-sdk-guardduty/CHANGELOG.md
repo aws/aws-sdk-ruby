@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-03-16)
+------------------
+
+* Feature - Updated 9 APIs for feature enablement to reflect expansion of GuardDuty to features. Added new APIs and updated existing APIs to support RDS Protection GA.
+
 1.64.0 (2023-02-23)
 ------------------
 

@@ -979,6 +979,7 @@ module Aws::DatabaseMigrationService
     #       date_partition_timezone: "String",
     #       add_trailing_padding_character: false,
     #       expected_bucket_owner: "String",
+    #       glue_catalog_generation: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -1031,6 +1032,7 @@ module Aws::DatabaseMigrationService
     #       sasl_username: "String",
     #       sasl_password: "SecretString",
     #       no_hex_prefix: false,
+    #       sasl_mechanism: "scram-sha-512", # accepts scram-sha-512, plain
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -1079,6 +1081,7 @@ module Aws::DatabaseMigrationService
     #       write_buffer_size: 1,
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       map_boolean_as_boolean: false,
     #     },
     #     postgre_sql_settings: {
     #       after_connect_script: "String",
@@ -1100,6 +1103,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       trim_space_in_char: false,
+    #       map_boolean_as_boolean: false,
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -1159,6 +1163,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_oracle_asm_access_role_arn: "String",
     #       secrets_manager_oracle_asm_secret_id: "String",
     #       trim_space_in_char: false,
+    #       convert_timestamp_with_zone_to_utc: false,
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -1185,6 +1190,8 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       trim_space_in_char: false,
+    #       tlog_access_mode: "BackupOnly", # accepts BackupOnly, PreferBackup, PreferTlog, TlogOnly
+    #       force_lob_lookup: false,
     #     },
     #     ibm_db_2_settings: {
     #       database_name: "String",
@@ -1299,6 +1306,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.date_partition_timezone #=> String
     #   resp.endpoint.s3_settings.add_trailing_padding_character #=> Boolean
     #   resp.endpoint.s3_settings.expected_bucket_owner #=> String
+    #   resp.endpoint.s3_settings.glue_catalog_generation #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -1343,6 +1351,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.sasl_username #=> String
     #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
+    #   resp.endpoint.kafka_settings.sasl_mechanism #=> String, one of "scram-sha-512", "plain"
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -1385,6 +1394,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
     #   resp.endpoint.redshift_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.redshift_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.redshift_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
     #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
     #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
@@ -1404,6 +1414,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -1460,6 +1471,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.oracle_settings.convert_timestamp_with_zone_to_utc #=> Boolean
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -1482,6 +1494,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.microsoft_sql_server_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.tlog_access_mode #=> String, one of "BackupOnly", "PreferBackup", "PreferTlog", "TlogOnly"
+    #   resp.endpoint.microsoft_sql_server_settings.force_lob_lookup #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -2534,6 +2548,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.date_partition_timezone #=> String
     #   resp.endpoint.s3_settings.add_trailing_padding_character #=> Boolean
     #   resp.endpoint.s3_settings.expected_bucket_owner #=> String
+    #   resp.endpoint.s3_settings.glue_catalog_generation #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -2578,6 +2593,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.sasl_username #=> String
     #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
+    #   resp.endpoint.kafka_settings.sasl_mechanism #=> String, one of "scram-sha-512", "plain"
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -2620,6 +2636,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
     #   resp.endpoint.redshift_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.redshift_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.redshift_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
     #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
     #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
@@ -2639,6 +2656,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -2695,6 +2713,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.oracle_settings.convert_timestamp_with_zone_to_utc #=> Boolean
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -2717,6 +2736,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.microsoft_sql_server_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.tlog_access_mode #=> String, one of "BackupOnly", "PreferBackup", "PreferTlog", "TlogOnly"
+    #   resp.endpoint.microsoft_sql_server_settings.force_lob_lookup #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -3779,6 +3800,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.date_partition_timezone #=> String
     #   resp.endpoints[0].s3_settings.add_trailing_padding_character #=> Boolean
     #   resp.endpoints[0].s3_settings.expected_bucket_owner #=> String
+    #   resp.endpoints[0].s3_settings.glue_catalog_generation #=> Boolean
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -3823,6 +3845,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].kafka_settings.sasl_username #=> String
     #   resp.endpoints[0].kafka_settings.sasl_password #=> String
     #   resp.endpoints[0].kafka_settings.no_hex_prefix #=> Boolean
+    #   resp.endpoints[0].kafka_settings.sasl_mechanism #=> String, one of "scram-sha-512", "plain"
     #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -3865,6 +3888,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redshift_settings.write_buffer_size #=> Integer
     #   resp.endpoints[0].redshift_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].redshift_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].redshift_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].postgre_sql_settings.capture_ddls #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.max_file_size #=> Integer
@@ -3884,6 +3908,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].postgre_sql_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoints[0].postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
@@ -3940,6 +3965,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoints[0].oracle_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoints[0].oracle_settings.convert_timestamp_with_zone_to_utc #=> Boolean
     #   resp.endpoints[0].sybase_settings.database_name #=> String
     #   resp.endpoints[0].sybase_settings.password #=> String
     #   resp.endpoints[0].sybase_settings.port #=> Integer
@@ -3962,6 +3988,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoints[0].microsoft_sql_server_settings.tlog_access_mode #=> String, one of "BackupOnly", "PreferBackup", "PreferTlog", "TlogOnly"
+    #   resp.endpoints[0].microsoft_sql_server_settings.force_lob_lookup #=> Boolean
     #   resp.endpoints[0].ibm_db_2_settings.database_name #=> String
     #   resp.endpoints[0].ibm_db_2_settings.password #=> String
     #   resp.endpoints[0].ibm_db_2_settings.port #=> Integer
@@ -6220,6 +6248,7 @@ module Aws::DatabaseMigrationService
     #       date_partition_timezone: "String",
     #       add_trailing_padding_character: false,
     #       expected_bucket_owner: "String",
+    #       glue_catalog_generation: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -6272,6 +6301,7 @@ module Aws::DatabaseMigrationService
     #       sasl_username: "String",
     #       sasl_password: "SecretString",
     #       no_hex_prefix: false,
+    #       sasl_mechanism: "scram-sha-512", # accepts scram-sha-512, plain
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -6320,6 +6350,7 @@ module Aws::DatabaseMigrationService
     #       write_buffer_size: 1,
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       map_boolean_as_boolean: false,
     #     },
     #     postgre_sql_settings: {
     #       after_connect_script: "String",
@@ -6341,6 +6372,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       trim_space_in_char: false,
+    #       map_boolean_as_boolean: false,
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -6400,6 +6432,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_oracle_asm_access_role_arn: "String",
     #       secrets_manager_oracle_asm_secret_id: "String",
     #       trim_space_in_char: false,
+    #       convert_timestamp_with_zone_to_utc: false,
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -6426,6 +6459,8 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       trim_space_in_char: false,
+    #       tlog_access_mode: "BackupOnly", # accepts BackupOnly, PreferBackup, PreferTlog, TlogOnly
+    #       force_lob_lookup: false,
     #     },
     #     ibm_db_2_settings: {
     #       database_name: "String",
@@ -6540,6 +6575,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.date_partition_timezone #=> String
     #   resp.endpoint.s3_settings.add_trailing_padding_character #=> Boolean
     #   resp.endpoint.s3_settings.expected_bucket_owner #=> String
+    #   resp.endpoint.s3_settings.glue_catalog_generation #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -6584,6 +6620,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.sasl_username #=> String
     #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
+    #   resp.endpoint.kafka_settings.sasl_mechanism #=> String, one of "scram-sha-512", "plain"
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -6626,6 +6663,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
     #   resp.endpoint.redshift_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.redshift_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.redshift_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
     #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
     #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
@@ -6645,6 +6683,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -6701,6 +6740,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.oracle_settings.convert_timestamp_with_zone_to_utc #=> Boolean
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -6723,6 +6763,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.microsoft_sql_server_settings.trim_space_in_char #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.tlog_access_mode #=> String, one of "BackupOnly", "PreferBackup", "PreferTlog", "TlogOnly"
+    #   resp.endpoint.microsoft_sql_server_settings.force_lob_lookup #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -8236,7 +8278,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

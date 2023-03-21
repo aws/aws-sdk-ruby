@@ -24,7 +24,7 @@ module Aws::Tnb
     end
 
     # @!attribute [rw] ns_lcm_op_occ_id
-    #   The ID of a network operation occurrence.
+    #   The identifier of the network operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/CancelSolNetworkOperationInput AWS API Documentation
@@ -697,7 +697,7 @@ module Aws::Tnb
     end
 
     # @!attribute [rw] ns_lcm_op_occ_id
-    #   The identifier of the operation occurrence.
+    #   The identifier of the network operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/GetSolNetworkOperationInput AWS API Documentation
@@ -708,7 +708,7 @@ module Aws::Tnb
       include Aws::Structure
     end
 
-    # Metadata related to a network operation occurence.
+    # Metadata related to a network operation occurrence.
     #
     # A network operation is any operation that is done to your network,
     # such as network instance instantiation or termination.
@@ -735,7 +735,7 @@ module Aws::Tnb
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   Error related to this specific network operation occurence.
+    #   Error related to this specific network operation occurrence.
     #   @return [Types::ProblemDetails]
     #
     # @!attribute [rw] id
@@ -1084,25 +1084,43 @@ module Aws::Tnb
     #   ID of the network instance.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/InstantiateSolNetworkInstanceInput AWS API Documentation
     #
     class InstantiateSolNetworkInstanceInput < Struct.new(
       :additional_params_for_ns,
       :dry_run,
-      :ns_instance_id)
-      SENSITIVE = []
+      :ns_instance_id,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
     # @!attribute [rw] ns_lcm_op_occ_id
-    #   The identifier of the network instance.
+    #   The identifier of the network operation.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/InstantiateSolNetworkInstanceOutput AWS API Documentation
     #
     class InstantiateSolNetworkInstanceOutput < Struct.new(
-      :ns_lcm_op_occ_id)
-      SENSITIVE = []
+      :ns_lcm_op_occ_id,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -1125,8 +1143,7 @@ module Aws::Tnb
     # operations.
     #
     # @!attribute [rw] ns_lcm_op_occ_id
-    #   The identifier of the latest network lifecycle management operation
-    #   occurrence.
+    #   The identifier of the network operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/LcmOperationInfo AWS API Documentation
@@ -2019,23 +2036,41 @@ module Aws::Tnb
     #   ID of the network instance.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/TerminateSolNetworkInstanceInput AWS API Documentation
     #
     class TerminateSolNetworkInstanceInput < Struct.new(
-      :ns_instance_id)
-      SENSITIVE = []
+      :ns_instance_id,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
     # @!attribute [rw] ns_lcm_op_occ_id
-    #   The identifier of the operation occurrence.
+    #   The identifier of the network operation.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/TerminateSolNetworkInstanceOutput AWS API Documentation
     #
     class TerminateSolNetworkInstanceOutput < Struct.new(
-      :ns_lcm_op_occ_id)
-      SENSITIVE = []
+      :ns_lcm_op_occ_id,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -2130,6 +2165,14 @@ module Aws::Tnb
     #   ID of the network instance.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] update_type
     #   The type of update.
     #   @return [String]
@@ -2139,20 +2182,30 @@ module Aws::Tnb
     class UpdateSolNetworkInstanceInput < Struct.new(
       :modify_vnf_info_data,
       :ns_instance_id,
+      :tags,
       :update_type)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
     # @!attribute [rw] ns_lcm_op_occ_id
-    #   The identifier of the network instance operation occurrence.
+    #   The identifier of the network operation.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A tag is a label that you assign to an Amazon Web Services resource.
+    #   Each tag consists of a key and an optional value. When you use this
+    #   API, the tags are transferred to the network operation that is
+    #   created. Use tags to search and filter your resources or track your
+    #   Amazon Web Services costs.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/UpdateSolNetworkInstanceOutput AWS API Documentation
     #
     class UpdateSolNetworkInstanceOutput < Struct.new(
-      :ns_lcm_op_occ_id)
-      SENSITIVE = []
+      :ns_lcm_op_occ_id,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 

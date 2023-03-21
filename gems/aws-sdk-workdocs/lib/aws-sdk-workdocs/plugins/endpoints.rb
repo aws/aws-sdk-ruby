@@ -134,6 +134,8 @@ module Aws::WorkDocs
             Aws::WorkDocs::Endpoints::RemoveResourcePermission.build(context)
           when :restore_document_versions
             Aws::WorkDocs::Endpoints::RestoreDocumentVersions.build(context)
+          when :search_resources
+            Aws::WorkDocs::Endpoints::SearchResources.build(context)
           when :update_document
             Aws::WorkDocs::Endpoints::UpdateDocument.build(context)
           when :update_document_version

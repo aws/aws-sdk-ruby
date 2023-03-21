@@ -45,16 +45,32 @@ module Aws::AppIntegrationsService
     #   @return [Types::ScheduleConfiguration]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
+    #
+    # @!attribute [rw] file_configuration
+    #   The configuration for what files should be pulled from the source.
+    #   @return [Types::FileConfiguration]
+    #
+    # @!attribute [rw] object_configuration
+    #   The configuration for what data should be pulled from the source.
+    #   @return [Hash<String,Hash<String,Array<String>>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateDataIntegrationRequest AWS API Documentation
     #
@@ -65,7 +81,9 @@ module Aws::AppIntegrationsService
       :source_uri,
       :schedule_config,
       :tags,
-      :client_token)
+      :client_token,
+      :file_configuration,
+      :object_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -100,13 +118,29 @@ module Aws::AppIntegrationsService
     #   @return [Types::ScheduleConfiguration]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
+    #
+    # @!attribute [rw] file_configuration
+    #   The configuration for what files should be pulled from the source.
+    #   @return [Types::FileConfiguration]
+    #
+    # @!attribute [rw] object_configuration
+    #   The configuration for what data should be pulled from the source.
+    #   @return [Hash<String,Hash<String,Array<String>>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateDataIntegrationResponse AWS API Documentation
     #
@@ -119,7 +153,9 @@ module Aws::AppIntegrationsService
       :source_uri,
       :schedule_configuration,
       :tags,
-      :client_token)
+      :client_token,
+      :file_configuration,
+      :object_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -142,14 +178,22 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateEventIntegrationRequest AWS API Documentation
@@ -184,11 +228,11 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] data_integration_arn
-    #   The Amazon Resource Name (ARN)of the DataIntegration.
+    #   The Amazon Resource Name (ARN) of the DataIntegration.
     #   @return [String]
     #
     # @!attribute [rw] client_id
-    #   The identifier for teh client that is associated with the
+    #   The identifier for the client that is associated with the
     #   DataIntegration association.
     #   @return [String]
     #
@@ -308,7 +352,9 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/EventIntegration AWS API Documentation
@@ -365,6 +411,26 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # The configuration for what files should be pulled from the source.
+    #
+    # @!attribute [rw] folders
+    #   Identifiers for the source folders to pull all files from
+    #   recursively.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Restrictions for what files should be pulled from the source.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/FileConfiguration AWS API Documentation
+    #
+    class FileConfiguration < Struct.new(
+      :folders,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   A unique identifier.
     #   @return [String]
@@ -407,8 +473,18 @@ module Aws::AppIntegrationsService
     #   @return [Types::ScheduleConfiguration]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] file_configuration
+    #   The configuration for what files should be pulled from the source.
+    #   @return [Types::FileConfiguration]
+    #
+    # @!attribute [rw] object_configuration
+    #   The configuration for what data should be pulled from the source.
+    #   @return [Hash<String,Hash<String,Array<String>>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetDataIntegrationResponse AWS API Documentation
     #
@@ -420,7 +496,9 @@ module Aws::AppIntegrationsService
       :kms_key,
       :source_uri,
       :schedule_configuration,
-      :tags)
+      :tags,
+      :file_configuration,
+      :object_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -458,7 +536,9 @@ module Aws::AppIntegrationsService
     #   @return [Types::EventFilter]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetEventIntegrationResponse AWS API Documentation
@@ -713,7 +793,8 @@ module Aws::AppIntegrationsService
     # source.
     #
     # @!attribute [rw] first_execution_from
-    #   The start date for objects to import in the first flow run.
+    #   The start date for objects to import in the first flow run as an
+    #   Unix/epoch timestamp in milliseconds or in ISO-8601 format.
     #   @return [String]
     #
     # @!attribute [rw] object
@@ -739,7 +820,9 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/TagResourceRequest AWS API Documentation

@@ -509,6 +509,9 @@ module Aws::GuardDuty
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new detector resource.
     #
+    # @option params [Array<Types::DetectorFeatureConfiguration>] :features
+    #   A list of features that will be configured for the detector.
+    #
     # @return [Types::CreateDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDetectorResponse#detector_id #detector_id} => String
@@ -538,6 +541,12 @@ module Aws::GuardDuty
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     features: [
+    #       {
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -556,7 +565,13 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Creates a filter using the specified finding criteria.
+    # Creates a filter using the specified finding criteria. The maximum
+    # number of saved filters per Amazon Web Services account per Region is
+    # 100. For more information, see [Quotas for GuardDuty][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector belonging to the GuardDuty account that you
@@ -569,8 +584,10 @@ module Aws::GuardDuty
     #
     # @option params [String] :description
     #   The description of the filter. Valid characters include alphanumeric
-    #   characters, and special characters such as `-`, `.`, `:`, `\{ \}`, `[
-    #   ]`, `( )`, `/`, `\t`, `\n`, `\x0B`, `\f`, `\r`, `_`, and whitespace.
+    #   characters, and special characters such as hyphen, period, colon,
+    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
+    #   horizontal tab, vertical tab, newline, form feed, return, and
+    #   whitespace.
     #
     # @option params [String] :action
     #   Specifies the action that is to be applied to the findings that match
@@ -1382,16 +1399,33 @@ module Aws::GuardDuty
     #   The ID of the detector to retrieve information about the delegated
     #   administrator from.
     #
+    # @option params [Integer] :max_results
+    #   You can use this parameter to indicate the maximum number of items
+    #   that you want in the response.
+    #
+    # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill `nextToken` in the request with
+    #   the value of `NextToken` from the previous response to continue
+    #   listing data.
+    #
     # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#data_sources #data_sources} => Types::OrganizationDataSourceConfigurationsResult
+    #   * {Types::DescribeOrganizationConfigurationResponse#features #features} => Array&lt;Types::OrganizationFeatureConfigurationResult&gt;
+    #   * {Types::DescribeOrganizationConfigurationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_organization_configuration({
     #     detector_id: "DetectorId", # required
+    #     max_results: 1,
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -1401,6 +1435,10 @@ module Aws::GuardDuty
     #   resp.data_sources.s3_logs.auto_enable #=> Boolean
     #   resp.data_sources.kubernetes.audit_logs.auto_enable #=> Boolean
     #   resp.data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.auto_enable #=> Boolean
+    #   resp.features #=> Array
+    #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
+    #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfiguration AWS API Documentation
     #
@@ -1640,6 +1678,7 @@ module Aws::GuardDuty
     #   * {Types::GetDetectorResponse#updated_at #updated_at} => String
     #   * {Types::GetDetectorResponse#data_sources #data_sources} => Types::DataSourceConfigurationsResult
     #   * {Types::GetDetectorResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetDetectorResponse#features #features} => Array&lt;Types::DetectorFeatureConfigurationResult&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1664,6 +1703,10 @@ module Aws::GuardDuty
     #   resp.data_sources.malware_protection.service_role #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.features #=> Array
+    #   resp.features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
+    #   resp.features[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.features[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector AWS API Documentation
     #
@@ -1920,6 +1963,19 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.container_details.volume_mounts[0].name #=> String
     #   resp.findings[0].resource.container_details.volume_mounts[0].mount_path #=> String
     #   resp.findings[0].resource.container_details.security_context.privileged #=> Boolean
+    #   resp.findings[0].resource.rds_db_instance_details.db_instance_identifier #=> String
+    #   resp.findings[0].resource.rds_db_instance_details.engine #=> String
+    #   resp.findings[0].resource.rds_db_instance_details.engine_version #=> String
+    #   resp.findings[0].resource.rds_db_instance_details.db_cluster_identifier #=> String
+    #   resp.findings[0].resource.rds_db_instance_details.db_instance_arn #=> String
+    #   resp.findings[0].resource.rds_db_instance_details.tags #=> Array
+    #   resp.findings[0].resource.rds_db_instance_details.tags[0].key #=> String
+    #   resp.findings[0].resource.rds_db_instance_details.tags[0].value #=> String
+    #   resp.findings[0].resource.rds_db_user_details.user #=> String
+    #   resp.findings[0].resource.rds_db_user_details.application #=> String
+    #   resp.findings[0].resource.rds_db_user_details.database #=> String
+    #   resp.findings[0].resource.rds_db_user_details.ssl #=> String
+    #   resp.findings[0].resource.rds_db_user_details.auth_method #=> String
     #   resp.findings[0].schema_version #=> String
     #   resp.findings[0].service.action.action_type #=> String
     #   resp.findings[0].service.action.aws_api_call_action.api #=> String
@@ -1995,6 +2051,21 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.org #=> String
     #   resp.findings[0].service.action.kubernetes_api_call_action.status_code #=> Integer
     #   resp.findings[0].service.action.kubernetes_api_call_action.parameters #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.city.city_name #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.country.country_code #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.country.country_name #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.geo_location.lat #=> Float
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.geo_location.lon #=> Float
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.asn #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.asn_org #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.isp #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.org #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.login_attributes #=> Array
+    #   resp.findings[0].service.action.rds_login_attempt_action.login_attributes[0].user #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.login_attributes[0].application #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.login_attributes[0].failed_login_attempts #=> Integer
+    #   resp.findings[0].service.action.rds_login_attempt_action.login_attributes[0].successful_login_attempts #=> Integer
     #   resp.findings[0].service.evidence.threat_intelligence_details #=> Array
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_list_name #=> String
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names #=> Array
@@ -2288,6 +2359,10 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.reason #=> String
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.service_role #=> String
+    #   resp.member_data_source_configurations[0].features #=> Array
+    #   resp.member_data_source_configurations[0].features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
+    #   resp.member_data_source_configurations[0].features[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].features[0].updated_at #=> Time
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].result #=> String
@@ -2379,6 +2454,9 @@ module Aws::GuardDuty
     #   resp.accounts[0].data_sources.s3_logs.free_trial_days_remaining #=> Integer
     #   resp.accounts[0].data_sources.kubernetes.audit_logs.free_trial_days_remaining #=> Integer
     #   resp.accounts[0].data_sources.malware_protection.scan_ec2_instance_with_findings.free_trial_days_remaining #=> Integer
+    #   resp.accounts[0].features #=> Array
+    #   resp.accounts[0].features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
+    #   resp.accounts[0].features[0].free_trial_days_remaining #=> Integer
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].result #=> String
@@ -2481,11 +2559,12 @@ module Aws::GuardDuty
     #
     #   resp = client.get_usage_statistics({
     #     detector_id: "DetectorId", # required
-    #     usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
+    #     usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES, SUM_BY_FEATURES
     #     usage_criteria: { # required
     #       account_ids: ["AccountId"],
-    #       data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
+    #       data_sources: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
     #       resources: ["String"],
+    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING
     #     },
     #     unit: "String",
     #     max_results: 1,
@@ -2510,6 +2589,10 @@ module Aws::GuardDuty
     #   resp.usage_statistics.top_resources[0].resource #=> String
     #   resp.usage_statistics.top_resources[0].total.amount #=> String
     #   resp.usage_statistics.top_resources[0].total.unit #=> String
+    #   resp.usage_statistics.sum_by_feature #=> Array
+    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING"
+    #   resp.usage_statistics.sum_by_feature[0].total.amount #=> String
+    #   resp.usage_statistics.sum_by_feature[0].total.unit #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatistics AWS API Documentation
@@ -3368,6 +3451,9 @@ module Aws::GuardDuty
     #
     #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
+    # @option params [Array<Types::DetectorFeatureConfiguration>] :features
+    #   Provides the features that will be updated for the detector.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3391,6 +3477,12 @@ module Aws::GuardDuty
     #         },
     #       },
     #     },
+    #     features: [
+    #       {
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector AWS API Documentation
@@ -3633,6 +3725,10 @@ module Aws::GuardDuty
     # @option params [Types::DataSourceConfigurations] :data_sources
     #   Describes which data sources will be updated.
     #
+    # @option params [Array<Types::MemberFeaturesConfiguration>] :features
+    #   A list of features that will be updated for the specified member
+    #   accounts.
+    #
     # @return [Types::UpdateMemberDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMemberDetectorsResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::UnprocessedAccount&gt;
@@ -3657,6 +3753,12 @@ module Aws::GuardDuty
     #         },
     #       },
     #     },
+    #     features: [
+    #       {
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3695,6 +3797,9 @@ module Aws::GuardDuty
     # @option params [Types::OrganizationDataSourceConfigurations] :data_sources
     #   Describes which data sources will be updated.
     #
+    # @option params [Array<Types::OrganizationFeatureConfiguration>] :features
+    #   A list of features that will be configured for the organization.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3719,6 +3824,12 @@ module Aws::GuardDuty
     #         },
     #       },
     #     },
+    #     features: [
+    #       {
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS
+    #         auto_enable: "NEW", # accepts NEW, NONE
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfiguration AWS API Documentation
@@ -3821,7 +3932,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

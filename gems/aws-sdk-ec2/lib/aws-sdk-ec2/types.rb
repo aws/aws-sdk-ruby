@@ -28316,10 +28316,15 @@ module Aws::EC2
     #   The DNS records created for the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_only_for_inbound_resolver_endpoint
+    #   Indicates whether to enable private DNS only for inbound endpoints.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsOptions AWS API Documentation
     #
     class DnsOptions < Struct.new(
-      :dns_record_ip_type)
+      :dns_record_ip_type,
+      :private_dns_only_for_inbound_resolver_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28330,10 +28335,19 @@ module Aws::EC2
     #   The DNS records created for the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_only_for_inbound_resolver_endpoint
+    #   Indicates whether to enable private DNS only for inbound endpoints.
+    #   This option is available only for services that support both gateway
+    #   and interface endpoints. It routes traffic that originates from the
+    #   VPC to the gateway endpoint and traffic that originates from
+    #   on-premises to the interface endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsOptionsSpecification AWS API Documentation
     #
     class DnsOptionsSpecification < Struct.new(
-      :dns_record_ip_type)
+      :dns_record_ip_type,
+      :private_dns_only_for_inbound_resolver_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end

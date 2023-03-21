@@ -14226,6 +14226,7 @@ module Aws::EC2
     #     ip_address_type: "ipv4", # accepts ipv4, dualstack, ipv6
     #     dns_options: {
     #       dns_record_ip_type: "ipv4", # accepts ipv4, dualstack, ipv6, service-defined
+    #       private_dns_only_for_inbound_resolver_endpoint: false,
     #     },
     #     client_token: "String",
     #     private_dns_enabled: false,
@@ -14259,6 +14260,7 @@ module Aws::EC2
     #   resp.vpc_endpoint.groups[0].group_name #=> String
     #   resp.vpc_endpoint.ip_address_type #=> String, one of "ipv4", "dualstack", "ipv6"
     #   resp.vpc_endpoint.dns_options.dns_record_ip_type #=> String, one of "ipv4", "dualstack", "ipv6", "service-defined"
+    #   resp.vpc_endpoint.dns_options.private_dns_only_for_inbound_resolver_endpoint #=> Boolean
     #   resp.vpc_endpoint.private_dns_enabled #=> Boolean
     #   resp.vpc_endpoint.requester_managed #=> Boolean
     #   resp.vpc_endpoint.network_interface_ids #=> Array
@@ -35633,6 +35635,7 @@ module Aws::EC2
     #   resp.vpc_endpoints[0].groups[0].group_name #=> String
     #   resp.vpc_endpoints[0].ip_address_type #=> String, one of "ipv4", "dualstack", "ipv6"
     #   resp.vpc_endpoints[0].dns_options.dns_record_ip_type #=> String, one of "ipv4", "dualstack", "ipv6", "service-defined"
+    #   resp.vpc_endpoints[0].dns_options.private_dns_only_for_inbound_resolver_endpoint #=> Boolean
     #   resp.vpc_endpoints[0].private_dns_enabled #=> Boolean
     #   resp.vpc_endpoints[0].requester_managed #=> Boolean
     #   resp.vpc_endpoints[0].network_interface_ids #=> Array
@@ -47936,6 +47939,7 @@ module Aws::EC2
     #     ip_address_type: "ipv4", # accepts ipv4, dualstack, ipv6
     #     dns_options: {
     #       dns_record_ip_type: "ipv4", # accepts ipv4, dualstack, ipv6, service-defined
+    #       private_dns_only_for_inbound_resolver_endpoint: false,
     #     },
     #     private_dns_enabled: false,
     #   })
@@ -56108,7 +56112,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.369.0'
+      context[:gem_version] = '1.370.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-03-17)
+------------------
+
+* Feature - This release adds resourceType enums for types released from October 2022 through February 2023.
+
 1.87.0 (2023-01-18)
 ------------------
 

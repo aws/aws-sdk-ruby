@@ -382,25 +382,39 @@ module Aws::AppIntegrationsService
     # @option params [String] :description
     #   A description of the DataIntegration.
     #
-    # @option params [String] :kms_key
+    # @option params [required, String] :kms_key
     #   The KMS key for the DataIntegration.
     #
-    # @option params [String] :source_uri
+    # @option params [required, String] :source_uri
     #   The URI of the data source.
     #
-    # @option params [Types::ScheduleConfiguration] :schedule_config
+    # @option params [required, Types::ScheduleConfiguration] :schedule_config
     #   The name of the data and how often it should be pulled from the
     #   source.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Types::FileConfiguration] :file_configuration
+    #   The configuration for what files should be pulled from the source.
+    #
+    # @option params [Hash<String,Hash>] :object_configuration
+    #   The configuration for what data should be pulled from the source.
     #
     # @return [Types::CreateDataIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -413,23 +427,36 @@ module Aws::AppIntegrationsService
     #   * {Types::CreateDataIntegrationResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
     #   * {Types::CreateDataIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateDataIntegrationResponse#client_token #client_token} => String
+    #   * {Types::CreateDataIntegrationResponse#file_configuration #file_configuration} => Types::FileConfiguration
+    #   * {Types::CreateDataIntegrationResponse#object_configuration #object_configuration} => Hash&lt;String,Hash&lt;String,Array&lt;String&gt;&gt;&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_integration({
     #     name: "Name", # required
     #     description: "Description",
-    #     kms_key: "NonBlankString",
-    #     source_uri: "NonBlankString",
-    #     schedule_config: {
+    #     kms_key: "NonBlankString", # required
+    #     source_uri: "SourceURI", # required
+    #     schedule_config: { # required
     #       first_execution_from: "NonBlankString",
     #       object: "Object",
-    #       schedule_expression: "Schedule",
+    #       schedule_expression: "NonBlankString", # required
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #     client_token: "IdempotencyToken",
+    #     file_configuration: {
+    #       folders: ["NonBlankLongString"], # required
+    #       filters: {
+    #         "NonBlankString" => ["Fields"],
+    #       },
+    #     },
+    #     object_configuration: {
+    #       "NonBlankString" => {
+    #         "NonBlankString" => ["Fields"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -446,6 +473,15 @@ module Aws::AppIntegrationsService
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.client_token #=> String
+    #   resp.file_configuration.folders #=> Array
+    #   resp.file_configuration.folders[0] #=> String
+    #   resp.file_configuration.filters #=> Hash
+    #   resp.file_configuration.filters["NonBlankString"] #=> Array
+    #   resp.file_configuration.filters["NonBlankString"][0] #=> String
+    #   resp.object_configuration #=> Hash
+    #   resp.object_configuration["NonBlankString"] #=> Hash
+    #   resp.object_configuration["NonBlankString"]["NonBlankString"] #=> Array
+    #   resp.object_configuration["NonBlankString"]["NonBlankString"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateDataIntegration AWS API Documentation
     #
@@ -476,13 +512,21 @@ module Aws::AppIntegrationsService
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateEventIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -601,6 +645,8 @@ module Aws::AppIntegrationsService
     #   * {Types::GetDataIntegrationResponse#source_uri #source_uri} => String
     #   * {Types::GetDataIntegrationResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
     #   * {Types::GetDataIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetDataIntegrationResponse#file_configuration #file_configuration} => Types::FileConfiguration
+    #   * {Types::GetDataIntegrationResponse#object_configuration #object_configuration} => Hash&lt;String,Hash&lt;String,Array&lt;String&gt;&gt;&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -621,6 +667,15 @@ module Aws::AppIntegrationsService
     #   resp.schedule_configuration.schedule_expression #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.file_configuration.folders #=> Array
+    #   resp.file_configuration.folders[0] #=> String
+    #   resp.file_configuration.filters #=> Hash
+    #   resp.file_configuration.filters["NonBlankString"] #=> Array
+    #   resp.file_configuration.filters["NonBlankString"][0] #=> String
+    #   resp.object_configuration #=> Hash
+    #   resp.object_configuration["NonBlankString"] #=> Hash
+    #   resp.object_configuration["NonBlankString"]["NonBlankString"] #=> Array
+    #   resp.object_configuration["NonBlankString"]["NonBlankString"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetDataIntegration AWS API Documentation
     #
@@ -901,7 +956,9 @@ module Aws::AppIntegrationsService
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1029,7 +1086,7 @@ module Aws::AppIntegrationsService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

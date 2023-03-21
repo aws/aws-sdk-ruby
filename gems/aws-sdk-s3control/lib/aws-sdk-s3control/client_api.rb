@@ -14,6 +14,7 @@ module Aws::S3Control
     include Seahorse::Model
 
     AbortIncompleteMultipartUpload = Shapes::StructureShape.new(name: 'AbortIncompleteMultipartUpload')
+    AccessControlTranslation = Shapes::StructureShape.new(name: 'AccessControlTranslation')
     AccessPoint = Shapes::StructureShape.new(name: 'AccessPoint')
     AccessPointList = Shapes::ListShape.new(name: 'AccessPointList')
     AccessPointName = Shapes::StringShape.new(name: 'AccessPointName')
@@ -39,6 +40,7 @@ module Aws::S3Control
     BucketAlreadyExists = Shapes::StructureShape.new(name: 'BucketAlreadyExists')
     BucketAlreadyOwnedByYou = Shapes::StructureShape.new(name: 'BucketAlreadyOwnedByYou')
     BucketCannedACL = Shapes::StringShape.new(name: 'BucketCannedACL')
+    BucketIdentifierString = Shapes::StringShape.new(name: 'BucketIdentifierString')
     BucketLevel = Shapes::StructureShape.new(name: 'BucketLevel')
     BucketLocationConstraint = Shapes::StringShape.new(name: 'BucketLocationConstraint')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -72,10 +74,13 @@ module Aws::S3Control
     DeleteAccessPointRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointRequest')
     DeleteBucketLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketLifecycleConfigurationRequest')
     DeleteBucketPolicyRequest = Shapes::StructureShape.new(name: 'DeleteBucketPolicyRequest')
+    DeleteBucketReplicationRequest = Shapes::StructureShape.new(name: 'DeleteBucketReplicationRequest')
     DeleteBucketRequest = Shapes::StructureShape.new(name: 'DeleteBucketRequest')
     DeleteBucketTaggingRequest = Shapes::StructureShape.new(name: 'DeleteBucketTaggingRequest')
     DeleteJobTaggingRequest = Shapes::StructureShape.new(name: 'DeleteJobTaggingRequest')
     DeleteJobTaggingResult = Shapes::StructureShape.new(name: 'DeleteJobTaggingResult')
+    DeleteMarkerReplication = Shapes::StructureShape.new(name: 'DeleteMarkerReplication')
+    DeleteMarkerReplicationStatus = Shapes::StringShape.new(name: 'DeleteMarkerReplicationStatus')
     DeleteMultiRegionAccessPointInput = Shapes::StructureShape.new(name: 'DeleteMultiRegionAccessPointInput')
     DeleteMultiRegionAccessPointRequest = Shapes::StructureShape.new(name: 'DeleteMultiRegionAccessPointRequest')
     DeleteMultiRegionAccessPointResult = Shapes::StructureShape.new(name: 'DeleteMultiRegionAccessPointResult')
@@ -87,11 +92,15 @@ module Aws::S3Control
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
     DescribeMultiRegionAccessPointOperationRequest = Shapes::StructureShape.new(name: 'DescribeMultiRegionAccessPointOperationRequest')
     DescribeMultiRegionAccessPointOperationResult = Shapes::StructureShape.new(name: 'DescribeMultiRegionAccessPointOperationResult')
+    Destination = Shapes::StructureShape.new(name: 'Destination')
     DetailedStatusCodesMetrics = Shapes::StructureShape.new(name: 'DetailedStatusCodesMetrics')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     Endpoints = Shapes::MapShape.new(name: 'Endpoints')
     EstablishedMultiRegionAccessPointPolicy = Shapes::StructureShape.new(name: 'EstablishedMultiRegionAccessPointPolicy')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Exclude = Shapes::StructureShape.new(name: 'Exclude')
+    ExistingObjectReplication = Shapes::StructureShape.new(name: 'ExistingObjectReplication')
+    ExistingObjectReplicationStatus = Shapes::StringShape.new(name: 'ExistingObjectReplicationStatus')
     ExpirationStatus = Shapes::StringShape.new(name: 'ExpirationStatus')
     ExpiredObjectDeleteMarker = Shapes::BooleanShape.new(name: 'ExpiredObjectDeleteMarker')
     Format = Shapes::StringShape.new(name: 'Format')
@@ -116,6 +125,8 @@ module Aws::S3Control
     GetBucketLifecycleConfigurationResult = Shapes::StructureShape.new(name: 'GetBucketLifecycleConfigurationResult')
     GetBucketPolicyRequest = Shapes::StructureShape.new(name: 'GetBucketPolicyRequest')
     GetBucketPolicyResult = Shapes::StructureShape.new(name: 'GetBucketPolicyResult')
+    GetBucketReplicationRequest = Shapes::StructureShape.new(name: 'GetBucketReplicationRequest')
+    GetBucketReplicationResult = Shapes::StructureShape.new(name: 'GetBucketReplicationResult')
     GetBucketRequest = Shapes::StructureShape.new(name: 'GetBucketRequest')
     GetBucketResult = Shapes::StructureShape.new(name: 'GetBucketResult')
     GetBucketTaggingRequest = Shapes::StructureShape.new(name: 'GetBucketTaggingRequest')
@@ -214,7 +225,10 @@ module Aws::S3Control
     ManifestPrefixString = Shapes::StringShape.new(name: 'ManifestPrefixString')
     MaxLength1024String = Shapes::StringShape.new(name: 'MaxLength1024String')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    Metrics = Shapes::StructureShape.new(name: 'Metrics')
+    MetricsStatus = Shapes::StringShape.new(name: 'MetricsStatus')
     MinStorageBytesPercentage = Shapes::FloatShape.new(name: 'MinStorageBytesPercentage')
+    Minutes = Shapes::IntegerShape.new(name: 'Minutes')
     MultiRegionAccessPointAlias = Shapes::StringShape.new(name: 'MultiRegionAccessPointAlias')
     MultiRegionAccessPointClientToken = Shapes::StringShape.new(name: 'MultiRegionAccessPointClientToken')
     MultiRegionAccessPointId = Shapes::StringShape.new(name: 'MultiRegionAccessPointId')
@@ -241,6 +255,9 @@ module Aws::S3Control
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     ObjectCreationTime = Shapes::TimestampShape.new(name: 'ObjectCreationTime')
     ObjectLambdaAccessPoint = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPoint')
+    ObjectLambdaAccessPointAlias = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPointAlias')
+    ObjectLambdaAccessPointAliasStatus = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointAliasStatus')
+    ObjectLambdaAccessPointAliasValue = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointAliasValue')
     ObjectLambdaAccessPointArn = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointArn')
     ObjectLambdaAccessPointList = Shapes::ListShape.new(name: 'ObjectLambdaAccessPointList')
     ObjectLambdaAccessPointName = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointName')
@@ -259,11 +276,13 @@ module Aws::S3Control
     ObjectSizeLessThanBytes = Shapes::IntegerShape.new(name: 'ObjectSizeLessThanBytes')
     OperationName = Shapes::StringShape.new(name: 'OperationName')
     OutputSchemaVersion = Shapes::StringShape.new(name: 'OutputSchemaVersion')
+    OwnerOverride = Shapes::StringShape.new(name: 'OwnerOverride')
     Policy = Shapes::StringShape.new(name: 'Policy')
     PolicyStatus = Shapes::StructureShape.new(name: 'PolicyStatus')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     PrefixLevel = Shapes::StructureShape.new(name: 'PrefixLevel')
     PrefixLevelStorageMetrics = Shapes::StructureShape.new(name: 'PrefixLevelStorageMetrics')
+    Priority = Shapes::IntegerShape.new(name: 'Priority')
     ProposedMultiRegionAccessPointPolicy = Shapes::StructureShape.new(name: 'ProposedMultiRegionAccessPointPolicy')
     PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'PublicAccessBlockConfiguration')
     PublicAccessBlockEnabled = Shapes::BooleanShape.new(name: 'PublicAccessBlockEnabled')
@@ -272,6 +291,7 @@ module Aws::S3Control
     PutAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'PutAccessPointPolicyRequest')
     PutBucketLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleConfigurationRequest')
     PutBucketPolicyRequest = Shapes::StructureShape.new(name: 'PutBucketPolicyRequest')
+    PutBucketReplicationRequest = Shapes::StructureShape.new(name: 'PutBucketReplicationRequest')
     PutBucketTaggingRequest = Shapes::StructureShape.new(name: 'PutBucketTaggingRequest')
     PutBucketVersioningRequest = Shapes::StructureShape.new(name: 'PutBucketVersioningRequest')
     PutJobTaggingRequest = Shapes::StructureShape.new(name: 'PutJobTaggingRequest')
@@ -291,10 +311,24 @@ module Aws::S3Control
     RegionalBucket = Shapes::StructureShape.new(name: 'RegionalBucket')
     RegionalBucketList = Shapes::ListShape.new(name: 'RegionalBucketList')
     Regions = Shapes::ListShape.new(name: 'Regions')
+    ReplicaKmsKeyID = Shapes::StringShape.new(name: 'ReplicaKmsKeyID')
+    ReplicaModifications = Shapes::StructureShape.new(name: 'ReplicaModifications')
+    ReplicaModificationsStatus = Shapes::StringShape.new(name: 'ReplicaModificationsStatus')
+    ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
+    ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
+    ReplicationRuleAndOperator = Shapes::StructureShape.new(name: 'ReplicationRuleAndOperator')
+    ReplicationRuleFilter = Shapes::StructureShape.new(name: 'ReplicationRuleFilter')
+    ReplicationRuleStatus = Shapes::StringShape.new(name: 'ReplicationRuleStatus')
+    ReplicationRules = Shapes::ListShape.new(name: 'ReplicationRules')
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
     ReplicationStatusFilterList = Shapes::ListShape.new(name: 'ReplicationStatusFilterList')
+    ReplicationStorageClass = Shapes::StringShape.new(name: 'ReplicationStorageClass')
+    ReplicationTime = Shapes::StructureShape.new(name: 'ReplicationTime')
+    ReplicationTimeStatus = Shapes::StringShape.new(name: 'ReplicationTimeStatus')
+    ReplicationTimeValue = Shapes::StructureShape.new(name: 'ReplicationTimeValue')
     ReportPrefixString = Shapes::StringShape.new(name: 'ReportPrefixString')
     RequestedJobStatus = Shapes::StringShape.new(name: 'RequestedJobStatus')
+    Role = Shapes::StringShape.new(name: 'Role')
     RouteList = Shapes::ListShape.new(name: 'RouteList')
     S3AWSRegion = Shapes::StringShape.new(name: 'S3AWSRegion')
     S3AccessControlList = Shapes::StructureShape.new(name: 'S3AccessControlList')
@@ -346,6 +380,9 @@ module Aws::S3Control
     SSES3Encryption = Shapes::StructureShape.new(name: 'SSES3Encryption')
     SelectionCriteria = Shapes::StructureShape.new(name: 'SelectionCriteria')
     Setting = Shapes::BooleanShape.new(name: 'Setting')
+    SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
+    SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
+    SseKmsEncryptedObjectsStatus = Shapes::StringShape.new(name: 'SseKmsEncryptedObjectsStatus')
     StorageLensArn = Shapes::StringShape.new(name: 'StorageLensArn')
     StorageLensAwsOrg = Shapes::StructureShape.new(name: 'StorageLensAwsOrg')
     StorageLensConfiguration = Shapes::StructureShape.new(name: 'StorageLensConfiguration')
@@ -381,6 +418,9 @@ module Aws::S3Control
 
     AbortIncompleteMultipartUpload.add_member(:days_after_initiation, Shapes::ShapeRef.new(shape: DaysAfterInitiation, location_name: "DaysAfterInitiation"))
     AbortIncompleteMultipartUpload.struct_class = Types::AbortIncompleteMultipartUpload
+
+    AccessControlTranslation.add_member(:owner, Shapes::ShapeRef.new(shape: OwnerOverride, required: true, location_name: "Owner"))
+    AccessControlTranslation.struct_class = Types::AccessControlTranslation
 
     AccessPoint.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "Name"))
     AccessPoint.add_member(:network_origin, Shapes::ShapeRef.new(shape: NetworkOrigin, required: true, location_name: "NetworkOrigin"))
@@ -461,6 +501,7 @@ module Aws::S3Control
     CreateAccessPointForObjectLambdaRequest.struct_class = Types::CreateAccessPointForObjectLambdaRequest
 
     CreateAccessPointForObjectLambdaResult.add_member(:object_lambda_access_point_arn, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointArn, location_name: "ObjectLambdaAccessPointArn"))
+    CreateAccessPointForObjectLambdaResult.add_member(:alias, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAlias, location_name: "Alias"))
     CreateAccessPointForObjectLambdaResult.struct_class = Types::CreateAccessPointForObjectLambdaResult
 
     CreateAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
@@ -549,6 +590,10 @@ module Aws::S3Control
     DeleteBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     DeleteBucketPolicyRequest.struct_class = Types::DeleteBucketPolicyRequest
 
+    DeleteBucketReplicationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    DeleteBucketReplicationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
+    DeleteBucketReplicationRequest.struct_class = Types::DeleteBucketReplicationRequest
+
     DeleteBucketRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     DeleteBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     DeleteBucketRequest.struct_class = Types::DeleteBucketRequest
@@ -562,6 +607,9 @@ module Aws::S3Control
     DeleteJobTaggingRequest.struct_class = Types::DeleteJobTaggingRequest
 
     DeleteJobTaggingResult.struct_class = Types::DeleteJobTaggingResult
+
+    DeleteMarkerReplication.add_member(:status, Shapes::ShapeRef.new(shape: DeleteMarkerReplicationStatus, required: true, location_name: "Status"))
+    DeleteMarkerReplication.struct_class = Types::DeleteMarkerReplication
 
     DeleteMultiRegionAccessPointInput.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location_name: "Name"))
     DeleteMultiRegionAccessPointInput.struct_class = Types::DeleteMultiRegionAccessPointInput
@@ -601,8 +649,20 @@ module Aws::S3Control
     DescribeMultiRegionAccessPointOperationResult.add_member(:async_operation, Shapes::ShapeRef.new(shape: AsyncOperation, location_name: "AsyncOperation"))
     DescribeMultiRegionAccessPointOperationResult.struct_class = Types::DescribeMultiRegionAccessPointOperationResult
 
+    Destination.add_member(:account, Shapes::ShapeRef.new(shape: AccountId, location_name: "Account"))
+    Destination.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketIdentifierString, required: true, location_name: "Bucket"))
+    Destination.add_member(:replication_time, Shapes::ShapeRef.new(shape: ReplicationTime, location_name: "ReplicationTime"))
+    Destination.add_member(:access_control_translation, Shapes::ShapeRef.new(shape: AccessControlTranslation, location_name: "AccessControlTranslation"))
+    Destination.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    Destination.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
+    Destination.add_member(:storage_class, Shapes::ShapeRef.new(shape: ReplicationStorageClass, location_name: "StorageClass"))
+    Destination.struct_class = Types::Destination
+
     DetailedStatusCodesMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
     DetailedStatusCodesMetrics.struct_class = Types::DetailedStatusCodesMetrics
+
+    EncryptionConfiguration.add_member(:replica_kms_key_id, Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID", metadata: {"box"=>true}))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     Endpoints.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String)
     Endpoints.value = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
@@ -613,6 +673,9 @@ module Aws::S3Control
     Exclude.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
     Exclude.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "Regions"))
     Exclude.struct_class = Types::Exclude
+
+    ExistingObjectReplication.add_member(:status, Shapes::ShapeRef.new(shape: ExistingObjectReplicationStatus, required: true, location_name: "Status"))
+    ExistingObjectReplication.struct_class = Types::ExistingObjectReplication
 
     GeneratedManifestEncryption.add_member(:sses3, Shapes::ShapeRef.new(shape: SSES3Encryption, location_name: "SSE-S3"))
     GeneratedManifestEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMSEncryption, location_name: "SSE-KMS"))
@@ -632,6 +695,7 @@ module Aws::S3Control
     GetAccessPointForObjectLambdaResult.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, location_name: "Name"))
     GetAccessPointForObjectLambdaResult.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     GetAccessPointForObjectLambdaResult.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    GetAccessPointForObjectLambdaResult.add_member(:alias, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAlias, location_name: "Alias"))
     GetAccessPointForObjectLambdaResult.struct_class = Types::GetAccessPointForObjectLambdaResult
 
     GetAccessPointPolicyForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
@@ -691,6 +755,13 @@ module Aws::S3Control
 
     GetBucketPolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     GetBucketPolicyResult.struct_class = Types::GetBucketPolicyResult
+
+    GetBucketReplicationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetBucketReplicationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
+    GetBucketReplicationRequest.struct_class = Types::GetBucketReplicationRequest
+
+    GetBucketReplicationResult.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "ReplicationConfiguration"))
+    GetBucketReplicationResult.struct_class = Types::GetBucketReplicationResult
 
     GetBucketRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     GetBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
@@ -988,6 +1059,10 @@ module Aws::S3Control
     ListStorageLensConfigurationsResult.add_member(:storage_lens_configuration_list, Shapes::ShapeRef.new(shape: StorageLensConfigurationList, location_name: "StorageLensConfigurationList"))
     ListStorageLensConfigurationsResult.struct_class = Types::ListStorageLensConfigurationsResult
 
+    Metrics.add_member(:status, Shapes::ShapeRef.new(shape: MetricsStatus, required: true, location_name: "Status"))
+    Metrics.add_member(:event_threshold, Shapes::ShapeRef.new(shape: ReplicationTimeValue, location_name: "EventThreshold"))
+    Metrics.struct_class = Types::Metrics
+
     MultiRegionAccessPointPolicyDocument.add_member(:established, Shapes::ShapeRef.new(shape: EstablishedMultiRegionAccessPointPolicy, location_name: "Established"))
     MultiRegionAccessPointPolicyDocument.add_member(:proposed, Shapes::ShapeRef.new(shape: ProposedMultiRegionAccessPointPolicy, location_name: "Proposed"))
     MultiRegionAccessPointPolicyDocument.struct_class = Types::MultiRegionAccessPointPolicyDocument
@@ -1034,7 +1109,12 @@ module Aws::S3Control
 
     ObjectLambdaAccessPoint.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location_name: "Name"))
     ObjectLambdaAccessPoint.add_member(:object_lambda_access_point_arn, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointArn, location_name: "ObjectLambdaAccessPointArn"))
+    ObjectLambdaAccessPoint.add_member(:alias, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAlias, location_name: "Alias"))
     ObjectLambdaAccessPoint.struct_class = Types::ObjectLambdaAccessPoint
+
+    ObjectLambdaAccessPointAlias.add_member(:value, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAliasValue, location_name: "Value"))
+    ObjectLambdaAccessPointAlias.add_member(:status, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointAliasStatus, location_name: "Status"))
+    ObjectLambdaAccessPointAlias.struct_class = Types::ObjectLambdaAccessPointAlias
 
     ObjectLambdaAccessPointList.member = Shapes::ShapeRef.new(shape: ObjectLambdaAccessPoint, location_name: "ObjectLambdaAccessPoint")
 
@@ -1107,6 +1187,13 @@ module Aws::S3Control
     PutBucketPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutBucketPolicyRequest.struct_class = Types::PutBucketPolicyRequest
 
+    PutBucketReplicationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    PutBucketReplicationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
+    PutBucketReplicationRequest.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, required: true, location_name: "ReplicationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
+    PutBucketReplicationRequest.struct_class = Types::PutBucketReplicationRequest
+    PutBucketReplicationRequest[:payload] = :replication_configuration
+    PutBucketReplicationRequest[:payload_member] = PutBucketReplicationRequest.member(:replication_configuration)
+
     PutBucketTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     PutBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     PutBucketTaggingRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, required: true, location_name: "Tagging", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
@@ -1161,12 +1248,14 @@ module Aws::S3Control
     PutStorageLensConfigurationTaggingResult.struct_class = Types::PutStorageLensConfigurationTaggingResult
 
     Region.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+    Region.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
     Region.struct_class = Types::Region
 
     RegionCreationList.member = Shapes::ShapeRef.new(shape: Region, location_name: "Region")
 
     RegionReport.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
     RegionReport.add_member(:region, Shapes::ShapeRef.new(shape: RegionName, location_name: "Region"))
+    RegionReport.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
     RegionReport.struct_class = Types::RegionReport
 
     RegionReportList.member = Shapes::ShapeRef.new(shape: RegionReport, location_name: "Region")
@@ -1182,7 +1271,44 @@ module Aws::S3Control
 
     Regions.member = Shapes::ShapeRef.new(shape: S3AWSRegion, location_name: "Region")
 
+    ReplicaModifications.add_member(:status, Shapes::ShapeRef.new(shape: ReplicaModificationsStatus, required: true, location_name: "Status"))
+    ReplicaModifications.struct_class = Types::ReplicaModifications
+
+    ReplicationConfiguration.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
+    ReplicationConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: ReplicationRules, required: true, location_name: "Rules"))
+    ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
+
+    ReplicationRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
+    ReplicationRule.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
+    ReplicationRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, deprecated: true, location_name: "Prefix", metadata: {"deprecatedMessage"=>"Prefix has been deprecated"}))
+    ReplicationRule.add_member(:filter, Shapes::ShapeRef.new(shape: ReplicationRuleFilter, location_name: "Filter"))
+    ReplicationRule.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationRuleStatus, required: true, location_name: "Status"))
+    ReplicationRule.add_member(:source_selection_criteria, Shapes::ShapeRef.new(shape: SourceSelectionCriteria, location_name: "SourceSelectionCriteria"))
+    ReplicationRule.add_member(:existing_object_replication, Shapes::ShapeRef.new(shape: ExistingObjectReplication, location_name: "ExistingObjectReplication"))
+    ReplicationRule.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    ReplicationRule.add_member(:delete_marker_replication, Shapes::ShapeRef.new(shape: DeleteMarkerReplication, location_name: "DeleteMarkerReplication"))
+    ReplicationRule.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketIdentifierString, required: true, location_name: "Bucket"))
+    ReplicationRule.struct_class = Types::ReplicationRule
+
+    ReplicationRuleAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "Tags"))
+    ReplicationRuleAndOperator.struct_class = Types::ReplicationRuleAndOperator
+
+    ReplicationRuleFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleFilter.add_member(:tag, Shapes::ShapeRef.new(shape: S3Tag, location_name: "Tag"))
+    ReplicationRuleFilter.add_member(:and, Shapes::ShapeRef.new(shape: ReplicationRuleAndOperator, location_name: "And"))
+    ReplicationRuleFilter.struct_class = Types::ReplicationRuleFilter
+
+    ReplicationRules.member = Shapes::ShapeRef.new(shape: ReplicationRule, location_name: "Rule")
+
     ReplicationStatusFilterList.member = Shapes::ShapeRef.new(shape: ReplicationStatus)
+
+    ReplicationTime.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationTimeStatus, required: true, location_name: "Status"))
+    ReplicationTime.add_member(:time, Shapes::ShapeRef.new(shape: ReplicationTimeValue, required: true, location_name: "Time"))
+    ReplicationTime.struct_class = Types::ReplicationTime
+
+    ReplicationTimeValue.add_member(:minutes, Shapes::ShapeRef.new(shape: Minutes, location_name: "Minutes", metadata: {"box"=>true}))
+    ReplicationTimeValue.struct_class = Types::ReplicationTimeValue
 
     RouteList.member = Shapes::ShapeRef.new(shape: MultiRegionAccessPointRoute, location_name: "Route")
 
@@ -1319,6 +1445,13 @@ module Aws::S3Control
     SelectionCriteria.add_member(:max_depth, Shapes::ShapeRef.new(shape: StorageLensPrefixLevelMaxDepth, location_name: "MaxDepth"))
     SelectionCriteria.add_member(:min_storage_bytes_percentage, Shapes::ShapeRef.new(shape: MinStorageBytesPercentage, location_name: "MinStorageBytesPercentage"))
     SelectionCriteria.struct_class = Types::SelectionCriteria
+
+    SourceSelectionCriteria.add_member(:sse_kms_encrypted_objects, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjects, location_name: "SseKmsEncryptedObjects"))
+    SourceSelectionCriteria.add_member(:replica_modifications, Shapes::ShapeRef.new(shape: ReplicaModifications, location_name: "ReplicaModifications"))
+    SourceSelectionCriteria.struct_class = Types::SourceSelectionCriteria
+
+    SseKmsEncryptedObjects.add_member(:status, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjectsStatus, required: true, location_name: "Status"))
+    SseKmsEncryptedObjects.struct_class = Types::SseKmsEncryptedObjects
 
     StorageLensAwsOrg.add_member(:arn, Shapes::ShapeRef.new(shape: AwsOrgArn, required: true, location_name: "Arn"))
     StorageLensAwsOrg.struct_class = Types::StorageLensAwsOrg
@@ -1562,6 +1695,16 @@ module Aws::S3Control
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:delete_bucket_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBucketReplication"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/bucket/{name}/replication"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteBucketReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:delete_bucket_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketTagging"
         o.http_method = "DELETE"
@@ -1754,6 +1897,16 @@ module Aws::S3Control
         }
         o.input = Shapes::ShapeRef.new(shape: GetBucketPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketPolicyResult)
+      end)
+
+      api.add_operation(:get_bucket_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketReplication"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/bucket/{name}/replication"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetBucketReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketReplicationResult)
       end)
 
       api.add_operation(:get_bucket_tagging, Seahorse::Model::Operation.new.tap do |o|
@@ -2032,6 +2185,17 @@ module Aws::S3Control
             "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
           }
         )
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:put_bucket_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBucketReplication"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20180820/bucket/{name}/replication"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: PutBucketReplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
