@@ -798,6 +798,9 @@ module Aws::IoTTwinMaker
     # @option params [Hash<String,String>] :tags
     #   Metadata that you can use to manage the scene.
     #
+    # @option params [Hash<String,String>] :scene_metadata
+    #   The request metadata.
+    #
     # @return [Types::CreateSceneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSceneResponse#arn #arn} => String
@@ -813,6 +816,9 @@ module Aws::IoTTwinMaker
     #     capabilities: ["SceneCapability"],
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     scene_metadata: {
+    #       "Name" => "SceneMetadataValue",
     #     },
     #   })
     #
@@ -831,18 +837,18 @@ module Aws::IoTTwinMaker
     # This action creates a SyncJob.
     #
     # @option params [required, String] :workspace_id
-    #   The workspace Id.
+    #   The workspace ID.
     #
     # @option params [required, String] :sync_source
     #   The sync source.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSoource is `SITEWISE `.
     #
     #    </note>
     #
     # @option params [required, String] :sync_role
-    #   The SyncJob IAM role. This IAM role is used by the sync job to read
-    #   from the syncSource, and create, update or delete the corresponding
+    #   The SyncJob IAM role. This IAM role is used by the SyncJob to read
+    #   from the syncSource, and create, update, or delete the corresponding
     #   resources.
     #
     # @option params [Hash<String,String>] :tags
@@ -1017,12 +1023,12 @@ module Aws::IoTTwinMaker
     # Delete the SyncJob.
     #
     # @option params [required, String] :workspace_id
-    #   The workspace Id.
+    #   The workspace ID.
     #
     # @option params [required, String] :sync_source
     #   The sync source.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSource is `SITEWISE `.
     #
     #    </note>
     #
@@ -1694,6 +1700,8 @@ module Aws::IoTTwinMaker
     #   * {Types::GetSceneResponse#update_date_time #update_date_time} => Time
     #   * {Types::GetSceneResponse#description #description} => String
     #   * {Types::GetSceneResponse#capabilities #capabilities} => Array&lt;String&gt;
+    #   * {Types::GetSceneResponse#scene_metadata #scene_metadata} => Hash&lt;String,String&gt;
+    #   * {Types::GetSceneResponse#generated_scene_metadata #generated_scene_metadata} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1713,6 +1721,10 @@ module Aws::IoTTwinMaker
     #   resp.description #=> String
     #   resp.capabilities #=> Array
     #   resp.capabilities[0] #=> String
+    #   resp.scene_metadata #=> Hash
+    #   resp.scene_metadata["Name"] #=> String
+    #   resp.generated_scene_metadata #=> Hash
+    #   resp.generated_scene_metadata["Name"] #=> String
     #
     # @overload get_scene(params = {})
     # @param [Hash] params ({})
@@ -1724,14 +1736,14 @@ module Aws::IoTTwinMaker
     # Gets the SyncJob.
     #
     # @option params [required, String] :sync_source
-    #   The sync soucre.
+    #   The sync source.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSource is `SITEWISE `.
     #
     #    </note>
     #
     # @option params [String] :workspace_id
-    #   The workspace Id.
+    #   The workspace ID.
     #
     # @return [Types::GetSyncJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2036,14 +2048,22 @@ module Aws::IoTTwinMaker
     #   The ID of the workspace that contains the sync job.
     #
     # @option params [required, String] :sync_source
-    #   The sync soucre.
+    #   The sync source.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSource is `SITEWISE `.
     #
     #    </note>
     #
     # @option params [Array<Types::SyncResourceFilter>] :filters
     #   A list of objects that filter the request.
+    #
+    #   The following filter combinations are supported:
+    #
+    #   * Filter with state
+    #
+    #   * Filter with ResourceType and ResourceId
+    #
+    #   * Filter with ResourceType and ExternalId
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time. The default is
@@ -2258,7 +2278,7 @@ module Aws::IoTTwinMaker
     #   Each string in the mapping must be unique to this object.
     #
     # @option params [Hash<String,Types::PropertyGroupRequest>] :property_groups
-    #   The property groups
+    #   The property groups.
     #
     # @option params [String] :component_type_name
     #   The component type name.
@@ -2601,6 +2621,9 @@ module Aws::IoTTwinMaker
     # @option params [Array<String>] :capabilities
     #   A list of capabilities that the scene uses to render.
     #
+    # @option params [Hash<String,String>] :scene_metadata
+    #   The scene metadata.
+    #
     # @return [Types::UpdateSceneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSceneResponse#update_date_time #update_date_time} => Time
@@ -2613,6 +2636,9 @@ module Aws::IoTTwinMaker
     #     content_location: "S3Url",
     #     description: "Description",
     #     capabilities: ["SceneCapability"],
+    #     scene_metadata: {
+    #       "Name" => "SceneMetadataValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2673,7 +2699,7 @@ module Aws::IoTTwinMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iottwinmaker'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

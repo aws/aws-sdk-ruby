@@ -139,7 +139,7 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # Defines an AWS Resilience Hub application.
+    # Defines an Resilience Hub application.
     #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
@@ -500,14 +500,18 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # The list of AWS Resilience Hub application input sources.
+    # The list of Resilience Hub application input sources.
+    #
+    # @!attribute [rw] eks_source_cluster_namespace
+    #   The namespace on your Amazon Elastic Kubernetes Service cluster.
+    #   @return [Types::EksSourceClusterNamespace]
     #
     # @!attribute [rw] import_type
     #   The resource type of the input source.
     #   @return [String]
     #
     # @!attribute [rw] resource_count
-    #   The number of resources that were imported.
+    #   The number of resources.
     #   @return [Integer]
     #
     # @!attribute [rw] source_arn
@@ -531,6 +535,7 @@ module Aws::ResilienceHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/AppInputSource AWS API Documentation
     #
     class AppInputSource < Struct.new(
+      :eks_source_cluster_namespace,
       :import_type,
       :resource_count,
       :source_arn,
@@ -611,9 +616,9 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # Defines recommendations for an AWS Resilience Hub Application
-    # Component, returned as an object. This object contains component
-    # names, configuration recommendations, and recommendation statuses.
+    # Defines recommendations for an Resilience Hub Application Component,
+    # returned as an object. This object contains component names,
+    # configuration recommendations, and recommendation statuses.
     #
     # @!attribute [rw] app_component_name
     #   The name of the Application Component.
@@ -885,7 +890,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_component
-    #   Defines an Application Component.
+    #   The list of Application Components that belong to this resource.
     #   @return [Types::AppComponent]
     #
     # @!attribute [rw] app_version
@@ -1248,9 +1253,14 @@ module Aws::ResilienceHub
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] eks_source_cluster_namespace
+    #   The namespace on your Amazon Elastic Kubernetes Service cluster that
+    #   you want to delete from the Resilience Hub application.
+    #   @return [Types::EksSourceClusterNamespace]
+    #
     # @!attribute [rw] source_arn
     #   The Amazon Resource Name (ARN) of the imported resource you want to
-    #   remove from the AWS Resilience Hub application. For more information
+    #   remove from the Resilience Hub application. For more information
     #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *AWS
     #   General Reference* guide.
     #
@@ -1260,7 +1270,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] terraform_source
-    #   The imported Terraform s3 state ﬁle you want to remove from the AWS
+    #   The imported Terraform s3 state ﬁle you want to remove from the
     #   Resilience Hub application.
     #   @return [Types::TerraformSource]
     #
@@ -1269,6 +1279,7 @@ module Aws::ResilienceHub
     class DeleteAppInputSourceRequest < Struct.new(
       :app_arn,
       :client_token,
+      :eks_source_cluster_namespace,
       :source_arn,
       :terraform_source)
       SENSITIVE = []
@@ -1323,7 +1334,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] force_delete
-    #   A boolean option to force the deletion of an AWS Resilience Hub
+    #   A boolean option to force the deletion of an Resilience Hub
     #   application.
     #   @return [Boolean]
     #
@@ -1405,7 +1416,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_component
-    #   Defines an Application Component.
+    #   The list of Application Components that belong to this resource.
     #   @return [Types::AppComponent]
     #
     # @!attribute [rw] app_version
@@ -1619,7 +1630,7 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] assessment
-    #   The assessment for an AWS Resilience Hub application, returned as an
+    #   The assessment for an Resilience Hub application, returned as an
     #   object. This object includes Amazon Resource Names (ARNs),
     #   compliance information, compliance status, cost, messages,
     #   resiliency scores, and more.
@@ -1710,7 +1721,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_component
-    #   Defines an Application Component.
+    #   The list of Application Components that belong to this resource.
     #   @return [Types::AppComponent]
     #
     # @!attribute [rw] app_version
@@ -1986,7 +1997,7 @@ module Aws::ResilienceHub
     #   * <b> <code>resources</code> </b>
     #
     #     The list of logical resources that needs to be included in the
-    #     application.
+    #     Resilience Hub application.
     #
     #     Type: Array
     #
@@ -2040,6 +2051,22 @@ module Aws::ResilienceHub
     #       The name of the resource.
     #
     #       Type: String
+    #
+    #     * `additionalInfo`
+    #
+    #       Additional configuration parameters for an AWS Resilience Hub
+    #       application.
+    #
+    #       <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a
+    #       string format) of only one failover region and one associated
+    #       account.
+    #
+    #        Key: `"failover-regions"`
+    #
+    #        Value: `"[\{"region":"<REGION>",
+    #       "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #
+    #        </note>
     #
     #   * <b> <code>appComponents</code> </b>
     #
@@ -2143,6 +2170,25 @@ module Aws::ResilienceHub
     #         to.
     #
     #         Type: String
+    #
+    #   * <b> <code>version</code> </b>
+    #
+    #     The AWS Resilience Hub application version.
+    #
+    #   * `additionalInfo`
+    #
+    #     Additional configuration parameters for an AWS Resilience Hub
+    #     application.
+    #
+    #     <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
+    #     format) of only one failover region and one associated account.
+    #
+    #      Key: `"failover-regions"`
+    #
+    #      Value: `"[\{"region":"<REGION>",
+    #     "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #
+    #      </note>
     #
     #
     #
@@ -2318,6 +2364,63 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
+    # The input source of the Amazon Elastic Kubernetes Service cluster.
+    #
+    # @!attribute [rw] eks_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes
+    #   Service cluster. The format for this ARN is:
+    #   arn:`aws`:eks:`region`:`account-id`:cluster/`cluster-name`. For more
+    #   information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] namespaces
+    #   The list of namespaces located on your Amazon Elastic Kubernetes
+    #   Service cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/EksSource AWS API Documentation
+    #
+    class EksSource < Struct.new(
+      :eks_cluster_arn,
+      :namespaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input source of the namespace that is located on your Amazon
+    # Elastic Kubernetes Service cluster.
+    #
+    # @!attribute [rw] eks_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes
+    #   Service cluster. The format for this ARN is:
+    #   arn:`aws`:eks:`region`:`account-id`:cluster/`cluster-name`. For more
+    #   information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   Name of the namespace that is located on your Amazon Elastic
+    #   Kubernetes Service cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/EksSourceClusterNamespace AWS API Documentation
+    #
+    class EksSourceClusterNamespace < Struct.new(
+      :eks_cluster_arn,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a failure policy.
     #
     # @!attribute [rw] rpo_in_secs
@@ -2349,14 +2452,18 @@ module Aws::ResilienceHub
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @!attribute [rw] eks_sources
+    #   The input sources of the Amazon Elastic Kubernetes Service resources
+    #   you need to import.
+    #   @return [Array<Types::EksSource>]
+    #
     # @!attribute [rw] import_strategy
     #   The import strategy you would like to set to import resources into
-    #   AWS Resilience Hub application.
+    #   Resilience Hub application.
     #   @return [String]
     #
     # @!attribute [rw] source_arns
-    #   The Amazon Resource Names (ARNs) for the resources that you want to
-    #   import.
+    #   The Amazon Resource Names (ARNs) for the resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] terraform_sources
@@ -2367,6 +2474,7 @@ module Aws::ResilienceHub
     #
     class ImportResourcesToDraftAppVersionRequest < Struct.new(
       :app_arn,
+      :eks_sources,
       :import_strategy,
       :source_arns,
       :terraform_sources)
@@ -2390,8 +2498,13 @@ module Aws::ResilienceHub
     #   The version of the application.
     #   @return [String]
     #
+    # @!attribute [rw] eks_sources
+    #   The input sources of the Amazon Elastic Kubernetes Service resources
+    #   you have imported.
+    #   @return [Array<Types::EksSource>]
+    #
     # @!attribute [rw] source_arns
-    #   The Amazon Resource Names (ARNs) for the resources that you
+    #   The Amazon Resource Names (ARNs) for the resources you have
     #   imported.
     #   @return [Array<String>]
     #
@@ -2400,7 +2513,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] terraform_sources
-    #   A list of terraform file s3 URLs you need to import.
+    #   A list of terraform file s3 URLs you have imported.
     #   @return [Array<Types::TerraformSource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ImportResourcesToDraftAppVersionResponse AWS API Documentation
@@ -2408,6 +2521,7 @@ module Aws::ResilienceHub
     class ImportResourcesToDraftAppVersionResponse < Struct.new(
       :app_arn,
       :app_version,
+      :eks_sources,
       :source_arns,
       :status,
       :terraform_sources)
@@ -2415,7 +2529,7 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # This exception occurs when there is an internal failure in the AWS
+    # This exception occurs when there is an internal failure in the
     # Resilience Hub service.
     #
     # @!attribute [rw] message
@@ -2464,7 +2578,7 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] alarm_recommendations
-    #   The alarm recommendations for an AWS Resilience Hub application,
+    #   The alarm recommendations for an Resilience Hub application,
     #   returned as an object. This object includes Application Component
     #   names, descriptions, information about whether a recommendation has
     #   already been implemented or not, prerequisites, and more.
@@ -2601,7 +2715,7 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] component_compliances
-    #   The compliances for an AWS Resilience Hub Application Component,
+    #   The compliances for an Resilience Hub Application Component,
     #   returned as an object. This object contains the names of the
     #   Application Components, compliances, costs, resiliency scores,
     #   outage scores, and more.
@@ -2656,7 +2770,7 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] component_recommendations
-    #   The recommendations for an AWS Resilience Hub Application Component,
+    #   The recommendations for an Resilience Hub Application Component,
     #   returned as an object. This object contains the names of the
     #   Application Components, configuration recommendations, and
     #   recommendation statuses.
@@ -2693,8 +2807,8 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of input sources to be displayed per AWS Resilience
-    #   Hub application.
+    #   Maximum number of input sources to be displayed per Resilience Hub
+    #   application.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2714,7 +2828,7 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_input_sources
-    #   The list of AWS Resilience Hub application input sources.
+    #   The list of Resilience Hub application input sources.
     #   @return [Array<Types::AppInputSource>]
     #
     # @!attribute [rw] next_token
@@ -3025,7 +3139,7 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_summaries
-    #   Summaries for the AWS Resilience Hub application.
+    #   Summaries for the Resilience Hub application.
     #   @return [Array<Types::AppSummary>]
     #
     # @!attribute [rw] next_token
@@ -3103,8 +3217,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] recommendation_templates
-    #   The recommendation templates for the AWS Resilience Hub
-    #   applications.
+    #   The recommendation templates for the Resilience Hub applications.
     #   @return [Array<Types::RecommendationTemplate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListRecommendationTemplatesResponse AWS API Documentation
@@ -3148,7 +3261,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] resiliency_policies
-    #   The resiliency policies for the AWS Resilience Hub applications.
+    #   The resiliency policies for the Resilience Hub applications.
     #   @return [Array<Types::ResiliencyPolicy>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListResiliencyPoliciesResponse AWS API Documentation
@@ -3200,7 +3313,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] sop_recommendations
-    #   The standard operating procedure (SOP) recommendations for the AWS
+    #   The standard operating procedure (SOP) recommendations for the
     #   Resilience Hub applications.
     #   @return [Array<Types::SopRecommendation>]
     #
@@ -3240,7 +3353,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] resiliency_policies
-    #   The suggested resiliency policies for the AWS Resilience Hub
+    #   The suggested resiliency policies for the Resilience Hub
     #   applications.
     #   @return [Array<Types::ResiliencyPolicy>]
     #
@@ -3254,7 +3367,7 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) for a specific resource in your AWS
+    #   The Amazon Resource Name (ARN) for a specific resource in your
     #   Resilience Hub application.
     #   @return [String]
     #
@@ -3320,7 +3433,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] test_recommendations
-    #   The test recommendations for the AWS Resilience Hub application.
+    #   The test recommendations for the Resilience Hub application.
     #   @return [Array<Types::TestRecommendation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListTestRecommendationsResponse AWS API Documentation
@@ -3401,6 +3514,15 @@ module Aws::ResilienceHub
 
     # Defines a logical resource identifier.
     #
+    # @!attribute [rw] eks_source_name
+    #   The name of the Amazon Elastic Kubernetes Service cluster and
+    #   namespace this resource belongs to.
+    #
+    #   <note markdown="1"> This parameter accepts values in "eks-cluster/namespace" format.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] identifier
     #   The identifier of the resource.
     #   @return [String]
@@ -3420,6 +3542,7 @@ module Aws::ResilienceHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/LogicalResourceId AWS API Documentation
     #
     class LogicalResourceId < Struct.new(
+      :eks_source_name,
       :identifier,
       :logical_stack_name,
       :resource_group_name,
@@ -3430,7 +3553,7 @@ module Aws::ResilienceHub
 
     # Defines a physical resource. A physical resource is a resource that
     # exists in your account. It can be identified using an Amazon Resource
-    # Name (ARN) or an AWS Resilience Hub-native identifier.
+    # Name (ARN) or an Resilience Hub-native identifier.
     #
     # @!attribute [rw] additional_info
     #   Additional configuration parameters for an AWS Resilience Hub
@@ -3509,8 +3632,7 @@ module Aws::ResilienceHub
     #
     #   Native
     #
-    #   : The resource identifier is an AWS Resilience Hub-native
-    #     identifier.
+    #   : The resource identifier is an Resilience Hub-native identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/PhysicalResourceId AWS API Documentation
@@ -3591,7 +3713,7 @@ module Aws::ResilienceHub
     #   * <b> <code>resources</code> </b>
     #
     #     The list of logical resources that needs to be included in the
-    #     application.
+    #     Resilience Hub application.
     #
     #     Type: Array
     #
@@ -3645,6 +3767,22 @@ module Aws::ResilienceHub
     #       The name of the resource.
     #
     #       Type: String
+    #
+    #     * `additionalInfo`
+    #
+    #       Additional configuration parameters for an AWS Resilience Hub
+    #       application.
+    #
+    #       <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a
+    #       string format) of only one failover region and one associated
+    #       account.
+    #
+    #        Key: `"failover-regions"`
+    #
+    #        Value: `"[\{"region":"<REGION>",
+    #       "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #
+    #        </note>
     #
     #   * <b> <code>appComponents</code> </b>
     #
@@ -3748,6 +3886,25 @@ module Aws::ResilienceHub
     #         to.
     #
     #         Type: String
+    #
+    #   * <b> <code>version</code> </b>
+    #
+    #     The AWS Resilience Hub application version.
+    #
+    #   * `additionalInfo`
+    #
+    #     Additional configuration parameters for an AWS Resilience Hub
+    #     application.
+    #
+    #     <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
+    #     format) of only one failover region and one associated account.
+    #
+    #      Key: `"failover-regions"`
+    #
+    #      Value: `"[\{"region":"<REGION>",
+    #     "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #
+    #      </note>
     #
     #
     #
@@ -3993,6 +4150,15 @@ module Aws::ResilienceHub
     #   resource mappings.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] eks_source_names
+    #   The names of the Amazon Elastic Kubernetes Service clusters and
+    #   namespaces you want to remove from the resource mappings.
+    #
+    #   <note markdown="1"> This parameter accepts values in "eks-cluster/namespace" format.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] logical_stack_names
     #   The names of the CloudFormation stacks you want to remove from the
     #   resource mappings.
@@ -4018,6 +4184,7 @@ module Aws::ResilienceHub
     class RemoveDraftAppVersionResourceMappingsRequest < Struct.new(
       :app_arn,
       :app_registry_app_names,
+      :eks_source_names,
       :logical_stack_names,
       :resource_group_names,
       :resource_names,
@@ -4247,6 +4414,15 @@ module Aws::ResilienceHub
     #   The name of the application this resource is mapped to.
     #   @return [String]
     #
+    # @!attribute [rw] eks_source_name
+    #   The name of the Amazon Elastic Kubernetes Service cluster and
+    #   namespace this resource belongs to.
+    #
+    #   <note markdown="1"> This parameter accepts values in "eks-cluster/namespace" format.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] logical_stack_name
     #   The name of the CloudFormation stack this resource is mapped to.
     #   @return [String]
@@ -4272,7 +4448,7 @@ module Aws::ResilienceHub
     #
     #   ResourceGroup
     #
-    #   : The resource is mapped to a resource group. The name of the
+    #   : The resource is mapped to an Resource Groups. The name of the
     #     resource group is contained in the `resourceGroupName` property.
     #   @return [String]
     #
@@ -4296,6 +4472,7 @@ module Aws::ResilienceHub
     #
     class ResourceMapping < Struct.new(
       :app_registry_app_name,
+      :eks_source_name,
       :logical_stack_name,
       :mapping_type,
       :physical_resource_id,
@@ -4496,7 +4673,7 @@ module Aws::ResilienceHub
     # The Terraform s3 state file you need to import.
     #
     # @!attribute [rw] s3_state_file_url
-    #   The Terraform s3 state file you need to import.
+    #   The URL of the Terraform s3 state file you need to import.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/TerraformSource AWS API Documentation
@@ -4591,7 +4768,7 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # Defines a resource that is not supported by AWS Resilience Hub.
+    # Defines a resource that is not supported by Resilience Hub.
     #
     # @!attribute [rw] logical_resource_id
     #   The logical resource identifier for the unsupported resource.
@@ -4605,12 +4782,17 @@ module Aws::ResilienceHub
     #   The type of resource.
     #   @return [String]
     #
+    # @!attribute [rw] unsupported_resource_status
+    #   The status of unsupported resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/UnsupportedResource AWS API Documentation
     #
     class UnsupportedResource < Struct.new(
       :logical_resource_id,
       :physical_resource_id,
-      :resource_type)
+      :resource_type,
+      :unsupported_resource_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4758,7 +4940,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_component
-    #   Defines an Application Component.
+    #   The list of Application Components that belong to this resource.
     #   @return [Types::AppComponent]
     #
     # @!attribute [rw] app_version
@@ -4843,10 +5025,10 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] excluded
-    #   Indicates if a resource is excluded from an AWS Resilience Hub
+    #   Indicates if a resource is excluded from an Resilience Hub
     #   application.
     #
-    #   <note markdown="1"> You can exclude only imported resources from an AWS Resilience Hub
+    #   <note markdown="1"> You can exclude only imported resources from an Resilience Hub
     #   application.
     #
     #    </note>

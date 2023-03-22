@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2023-03-22)
+------------------
+
+* Feature - This Patch Manager release supports creating, updating, and deleting Patch Baselines for AmazonLinux2023, AlmaLinux.
+
 1.149.0 (2023-02-22)
 ------------------
 

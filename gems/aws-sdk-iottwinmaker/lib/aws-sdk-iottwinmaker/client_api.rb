@@ -92,6 +92,7 @@ module Aws::IoTTwinMaker
     FunctionResponse = Shapes::StructureShape.new(name: 'FunctionResponse')
     FunctionsRequest = Shapes::MapShape.new(name: 'FunctionsRequest')
     FunctionsResponse = Shapes::MapShape.new(name: 'FunctionsResponse')
+    GeneratedSceneMetadataMap = Shapes::MapShape.new(name: 'GeneratedSceneMetadataMap')
     GetComponentTypeRequest = Shapes::StructureShape.new(name: 'GetComponentTypeRequest')
     GetComponentTypeResponse = Shapes::StructureShape.new(name: 'GetComponentTypeResponse')
     GetEntityRequest = Shapes::StructureShape.new(name: 'GetEntityRequest')
@@ -193,6 +194,8 @@ module Aws::IoTTwinMaker
     S3Url = Shapes::StringShape.new(name: 'S3Url')
     SceneCapabilities = Shapes::ListShape.new(name: 'SceneCapabilities')
     SceneCapability = Shapes::StringShape.new(name: 'SceneCapability')
+    SceneMetadataMap = Shapes::MapShape.new(name: 'SceneMetadataMap')
+    SceneMetadataValue = Shapes::StringShape.new(name: 'SceneMetadataValue')
     SceneSummaries = Shapes::ListShape.new(name: 'SceneSummaries')
     SceneSummary = Shapes::StructureShape.new(name: 'SceneSummary')
     Scope = Shapes::StringShape.new(name: 'Scope')
@@ -384,6 +387,7 @@ module Aws::IoTTwinMaker
     CreateSceneRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateSceneRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
     CreateSceneRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSceneRequest.add_member(:scene_metadata, Shapes::ShapeRef.new(shape: SceneMetadataMap, location_name: "sceneMetadata"))
     CreateSceneRequest.struct_class = Types::CreateSceneRequest
 
     CreateSceneResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
@@ -534,6 +538,9 @@ module Aws::IoTTwinMaker
     FunctionsResponse.key = Shapes::ShapeRef.new(shape: Name)
     FunctionsResponse.value = Shapes::ShapeRef.new(shape: FunctionResponse)
 
+    GeneratedSceneMetadataMap.key = Shapes::ShapeRef.new(shape: Name)
+    GeneratedSceneMetadataMap.value = Shapes::ShapeRef.new(shape: SceneMetadataValue)
+
     GetComponentTypeRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     GetComponentTypeRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location: "uri", location_name: "componentTypeId"))
     GetComponentTypeRequest.struct_class = Types::GetComponentTypeRequest
@@ -628,6 +635,8 @@ module Aws::IoTTwinMaker
     GetSceneResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     GetSceneResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetSceneResponse.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
+    GetSceneResponse.add_member(:scene_metadata, Shapes::ShapeRef.new(shape: SceneMetadataMap, location_name: "sceneMetadata"))
+    GetSceneResponse.add_member(:generated_scene_metadata, Shapes::ShapeRef.new(shape: GeneratedSceneMetadataMap, location_name: "generatedSceneMetadata"))
     GetSceneResponse.struct_class = Types::GetSceneResponse
 
     GetSyncJobRequest.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, required: true, location: "uri", location_name: "syncSource"))
@@ -897,6 +906,9 @@ module Aws::IoTTwinMaker
 
     SceneCapabilities.member = Shapes::ShapeRef.new(shape: SceneCapability)
 
+    SceneMetadataMap.key = Shapes::ShapeRef.new(shape: Name)
+    SceneMetadataMap.value = Shapes::ShapeRef.new(shape: SceneMetadataValue)
+
     SceneSummaries.member = Shapes::ShapeRef.new(shape: SceneSummary)
 
     SceneSummary.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "sceneId"))
@@ -1030,6 +1042,7 @@ module Aws::IoTTwinMaker
     UpdateSceneRequest.add_member(:content_location, Shapes::ShapeRef.new(shape: S3Url, location_name: "contentLocation"))
     UpdateSceneRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateSceneRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
+    UpdateSceneRequest.add_member(:scene_metadata, Shapes::ShapeRef.new(shape: SceneMetadataMap, location_name: "sceneMetadata"))
     UpdateSceneRequest.struct_class = Types::UpdateSceneRequest
 
     UpdateSceneResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))

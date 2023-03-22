@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.171.0 (2023-03-22)
+------------------
+
 * Feature - Add support for `AWS_CONTAINER_CREDENTIALS_FULL_URI` and `AWS_CONTAINER_AUTHORIZATION_TOKEN` environment variables to `ECSCredentials`.
 
 3.170.1 (2023-03-17)

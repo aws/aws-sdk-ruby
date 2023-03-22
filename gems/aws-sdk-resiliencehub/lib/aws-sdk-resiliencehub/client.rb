@@ -403,8 +403,9 @@ module Aws::ResilienceHub
     #     resource_mappings: [ # required
     #       {
     #         app_registry_app_name: "EntityName",
+    #         eks_source_name: "String255",
     #         logical_stack_name: "String255",
-    #         mapping_type: "CfnStack", # required, accepts CfnStack, Resource, AppRegistryApp, ResourceGroup, Terraform
+    #         mapping_type: "CfnStack", # required, accepts CfnStack, Resource, AppRegistryApp, ResourceGroup, Terraform, EKS
     #         physical_resource_id: { # required
     #           aws_account_id: "CustomerId",
     #           aws_region: "AwsRegion",
@@ -424,8 +425,9 @@ module Aws::ResilienceHub
     #   resp.app_version #=> String
     #   resp.resource_mappings #=> Array
     #   resp.resource_mappings[0].app_registry_app_name #=> String
+    #   resp.resource_mappings[0].eks_source_name #=> String
     #   resp.resource_mappings[0].logical_stack_name #=> String
-    #   resp.resource_mappings[0].mapping_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform"
+    #   resp.resource_mappings[0].mapping_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform", "EKS"
     #   resp.resource_mappings[0].physical_resource_id.aws_account_id #=> String
     #   resp.resource_mappings[0].physical_resource_id.aws_region #=> String
     #   resp.resource_mappings[0].physical_resource_id.identifier #=> String
@@ -443,15 +445,15 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Creates an AWS Resilience Hub application. An AWS Resilience Hub
-    # application is a collection of Amazon Web Services resources
-    # structured to prevent and recover Amazon Web Services application
-    # disruptions. To describe a AWS Resilience Hub application, you provide
-    # an application name, resources from one or more–up to
-    # five–CloudFormation stacks, and an appropriate resiliency policy.
+    # Creates an Resilience Hub application. An Resilience Hub application
+    # is a collection of Amazon Web Services resources structured to prevent
+    # and recover Amazon Web Services application disruptions. To describe a
+    # Resilience Hub application, you provide an application name, resources
+    # from one or more–up to five–CloudFormation stacks, and an appropriate
+    # resiliency policy.
     #
-    # After you create an AWS Resilience Hub application, you publish it so
-    # that you can run a resiliency assessment on it. You can then use
+    # After you create an Resilience Hub application, you publish it so that
+    # you can run a resiliency assessment on it. You can then use
     # recommendations from the assessment to improve resiliency by running
     # another assessment, comparing results, and then iterating the process
     # until you achieve your goals for recovery time objective (RTO) and
@@ -532,13 +534,11 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Creates a new Application Component in the AWS Resilience Hub
-    # application.
+    # Creates a new Application Component in the Resilience Hub application.
     #
-    # <note markdown="1"> This API updates the AWS Resilience Hub application draft version. To
-    # use this Application Component for running assessments, you must
-    # publish the AWS Resilience Hub application using the
-    # `PublishAppVersion` API.
+    # <note markdown="1"> This API updates the Resilience Hub application draft version. To use
+    # this Application Component for running assessments, you must publish
+    # the Resilience Hub application using the `PublishAppVersion` API.
     #
     #  </note>
     #
@@ -619,17 +619,17 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Adds a resource to the AWS Resilience Hub applicationand assigns it to
+    # Adds a resource to the Resilience Hub application and assigns it to
     # the specified Application Components. If you specify a new Application
-    # Component, AWS Resilience Hub will automatically create the
-    # Application Component.
+    # Component, Resilience Hub will automatically create the Application
+    # Component.
     #
-    # <note markdown="1"> * This action has no effect outside AWS Resilience Hub.
+    # <note markdown="1"> * This action has no effect outside Resilience Hub.
     #
-    # * This API updates the AWS Resilience Hub application draft version.
-    #   To use this resource for running resiliency assessments, you must
-    #   publish the AWS Resilience Hub application using the
-    #   `PublishAppVersion` API.
+    # * This API updates the Resilience Hub application draft version. To
+    #   use this resource for running resiliency assessments, you must
+    #   publish the Resilience Hub application using the `PublishAppVersion`
+    #   API.
     #
     # * To update application version with new `physicalResourceID`, you
     #   must call `ResolveAppVersionResources` API.
@@ -699,6 +699,7 @@ module Aws::ResilienceHub
     #     aws_region: "AwsRegion",
     #     client_token: "ClientToken",
     #     logical_resource_id: { # required
+    #       eks_source_name: "String255",
     #       identifier: "String255", # required
     #       logical_stack_name: "String255",
     #       resource_group_name: "EntityName",
@@ -724,6 +725,7 @@ module Aws::ResilienceHub
     #   resp.physical_resource.app_components[0].name #=> String
     #   resp.physical_resource.app_components[0].type #=> String
     #   resp.physical_resource.excluded #=> Boolean
+    #   resp.physical_resource.logical_resource_id.eks_source_name #=> String
     #   resp.physical_resource.logical_resource_id.identifier #=> String
     #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
@@ -744,7 +746,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Creates a new recommendation template for the AWS Resilience Hub
+    # Creates a new recommendation template for the Resilience Hub
     # application.
     #
     # @option params [required, String] :assessment_arn
@@ -938,8 +940,8 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Deletes an AWS Resilience Hub application. This is a destructive
-    # action that can't be undone.
+    # Deletes an Resilience Hub application. This is a destructive action
+    # that can't be undone.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -961,7 +963,7 @@ module Aws::ResilienceHub
     #   not need to pass this option.**
     #
     # @option params [Boolean] :force_delete
-    #   A boolean option to force the deletion of an AWS Resilience Hub
+    #   A boolean option to force the deletion of an Resilience Hub
     #   application.
     #
     # @return [Types::DeleteAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -989,7 +991,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Deletes an AWS Resilience Hub application assessment. This is a
+    # Deletes an Resilience Hub application assessment. This is a
     # destructive action that can't be undone.
     #
     # @option params [required, String] :assessment_arn
@@ -1038,7 +1040,7 @@ module Aws::ResilienceHub
     end
 
     # Deletes the input source and all of its imported resources from the
-    # AWS Resilience Hub application.
+    # Resilience Hub application.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -1059,10 +1061,14 @@ module Aws::ResilienceHub
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::EksSourceClusterNamespace] :eks_source_cluster_namespace
+    #   The namespace on your Amazon Elastic Kubernetes Service cluster that
+    #   you want to delete from the Resilience Hub application.
+    #
     # @option params [String] :source_arn
     #   The Amazon Resource Name (ARN) of the imported resource you want to
-    #   remove from the AWS Resilience Hub application. For more information
-    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *AWS General
+    #   remove from the Resilience Hub application. For more information about
+    #   ARNs, see [ Amazon Resource Names (ARNs)][1] in the *AWS General
     #   Reference* guide.
     #
     #
@@ -1070,7 +1076,7 @@ module Aws::ResilienceHub
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Types::TerraformSource] :terraform_source
-    #   The imported Terraform s3 state ﬁle you want to remove from the AWS
+    #   The imported Terraform s3 state ﬁle you want to remove from the
     #   Resilience Hub application.
     #
     # @return [Types::DeleteAppInputSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1083,6 +1089,10 @@ module Aws::ResilienceHub
     #   resp = client.delete_app_input_source({
     #     app_arn: "Arn", # required
     #     client_token: "ClientToken",
+    #     eks_source_cluster_namespace: {
+    #       eks_cluster_arn: "Arn", # required
+    #       namespace: "EksNamespace", # required
+    #     },
     #     source_arn: "Arn",
     #     terraform_source: {
     #       s3_state_file_url: "S3Url", # required
@@ -1092,7 +1102,9 @@ module Aws::ResilienceHub
     # @example Response structure
     #
     #   resp.app_arn #=> String
-    #   resp.app_input_source.import_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform"
+    #   resp.app_input_source.eks_source_cluster_namespace.eks_cluster_arn #=> String
+    #   resp.app_input_source.eks_source_cluster_namespace.namespace #=> String
+    #   resp.app_input_source.import_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform", "EKS"
     #   resp.app_input_source.resource_count #=> Integer
     #   resp.app_input_source.source_arn #=> String
     #   resp.app_input_source.source_name #=> String
@@ -1107,13 +1119,12 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Deletes an Application Component from the AWS Resilience Hub
-    # application.
+    # Deletes an Application Component from the Resilience Hub application.
     #
-    # <note markdown="1"> * This API updates the AWS Resilience Hub application draft version.
-    #   To use this Application Component for running assessments, you must
-    #   publish the AWS Resilience Hub application using the
-    #   `PublishAppVersion` API.
+    # <note markdown="1"> * This API updates the Resilience Hub application draft version. To
+    #   use this Application Component for running assessments, you must
+    #   publish the Resilience Hub application using the `PublishAppVersion`
+    #   API.
     #
     # * You will not be able to delete an Application Component if it has
     #   resources associated with it.
@@ -1176,18 +1187,18 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Deletes a resource from the AWS Resilience Hub application.
+    # Deletes a resource from the Resilience Hub application.
     #
     # <note markdown="1"> * You can only delete a manually added resource. To exclude
     #   non-manually added resources, use the `UpdateAppVersionResource`
     #   API.
     #
-    # * This action has no effect outside AWS Resilience Hub.
+    # * This action has no effect outside Resilience Hub.
     #
-    # * This API updates the AWS Resilience Hub application draft version.
-    #   To use this resource for running resiliency assessments, you must
-    #   publish the AWS Resilience Hub application using the
-    #   `PublishAppVersion` API.
+    # * This API updates the Resilience Hub application draft version. To
+    #   use this resource for running resiliency assessments, you must
+    #   publish the Resilience Hub application using the `PublishAppVersion`
+    #   API.
     #
     #  </note>
     #
@@ -1239,6 +1250,7 @@ module Aws::ResilienceHub
     #     aws_region: "AwsRegion",
     #     client_token: "ClientToken",
     #     logical_resource_id: {
+    #       eks_source_name: "String255",
     #       identifier: "String255", # required
     #       logical_stack_name: "String255",
     #       resource_group_name: "EntityName",
@@ -1263,6 +1275,7 @@ module Aws::ResilienceHub
     #   resp.physical_resource.app_components[0].name #=> String
     #   resp.physical_resource.app_components[0].type #=> String
     #   resp.physical_resource.excluded #=> Boolean
+    #   resp.physical_resource.logical_resource_id.eks_source_name #=> String
     #   resp.physical_resource.logical_resource_id.identifier #=> String
     #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
@@ -1369,7 +1382,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Describes an AWS Resilience Hub application.
+    # Describes an Resilience Hub application.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -1417,7 +1430,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Describes an assessment for an AWS Resilience Hub application.
+    # Describes an assessment for an Resilience Hub application.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
@@ -1498,7 +1511,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Describes the AWS Resilience Hub application version.
+    # Describes the Resilience Hub application version.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -1544,8 +1557,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Describes an Application Component in the AWS Resilience Hub
-    # application.
+    # Describes an Application Component in the Resilience Hub application.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -1598,7 +1610,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Describes a resource of the AWS Resilience Hub application.
+    # Describes a resource of the Resilience Hub application.
     #
     # <note markdown="1"> This API accepts only one of the following parameters to descibe the
     # resource:
@@ -1655,6 +1667,7 @@ module Aws::ResilienceHub
     #     aws_account_id: "CustomerId",
     #     aws_region: "AwsRegion",
     #     logical_resource_id: {
+    #       eks_source_name: "String255",
     #       identifier: "String255", # required
     #       logical_stack_name: "String255",
     #       resource_group_name: "EntityName",
@@ -1679,6 +1692,7 @@ module Aws::ResilienceHub
     #   resp.physical_resource.app_components[0].name #=> String
     #   resp.physical_resource.app_components[0].type #=> String
     #   resp.physical_resource.excluded #=> Boolean
+    #   resp.physical_resource.logical_resource_id.eks_source_name #=> String
     #   resp.physical_resource.logical_resource_id.identifier #=> String
     #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
@@ -1753,7 +1767,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Describes details about an AWS Resilience Hub application.
+    # Describes details about an Resilience Hub application.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -1849,7 +1863,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Describes a specified resiliency policy for an AWS Resilience Hub
+    # Describes a specified resiliency policy for an Resilience Hub
     # application. The returned policy object includes creation time, data
     # location constraints, the Amazon Resource Name (ARN) for the policy,
     # tags, tier, and more.
@@ -1899,10 +1913,10 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Imports resources to AWS Resilience Hub application draft version from
+    # Imports resources to Resilience Hub application draft version from
     # different input sources. For more information about the input sources
-    # supported by AWS Resilience Hub, see [Discover the structure and
-    # describe your Resilience Hub application][1].
+    # supported by Resilience Hub, see [Discover the structure and describe
+    # your Resilience Hub application][1].
     #
     #
     #
@@ -1919,13 +1933,16 @@ module Aws::ResilienceHub
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
+    # @option params [Array<Types::EksSource>] :eks_sources
+    #   The input sources of the Amazon Elastic Kubernetes Service resources
+    #   you need to import.
+    #
     # @option params [String] :import_strategy
-    #   The import strategy you would like to set to import resources into AWS
+    #   The import strategy you would like to set to import resources into
     #   Resilience Hub application.
     #
     # @option params [Array<String>] :source_arns
-    #   The Amazon Resource Names (ARNs) for the resources that you want to
-    #   import.
+    #   The Amazon Resource Names (ARNs) for the resources.
     #
     # @option params [Array<Types::TerraformSource>] :terraform_sources
     #   A list of terraform file s3 URLs you need to import.
@@ -1934,6 +1951,7 @@ module Aws::ResilienceHub
     #
     #   * {Types::ImportResourcesToDraftAppVersionResponse#app_arn #app_arn} => String
     #   * {Types::ImportResourcesToDraftAppVersionResponse#app_version #app_version} => String
+    #   * {Types::ImportResourcesToDraftAppVersionResponse#eks_sources #eks_sources} => Array&lt;Types::EksSource&gt;
     #   * {Types::ImportResourcesToDraftAppVersionResponse#source_arns #source_arns} => Array&lt;String&gt;
     #   * {Types::ImportResourcesToDraftAppVersionResponse#status #status} => String
     #   * {Types::ImportResourcesToDraftAppVersionResponse#terraform_sources #terraform_sources} => Array&lt;Types::TerraformSource&gt;
@@ -1942,6 +1960,12 @@ module Aws::ResilienceHub
     #
     #   resp = client.import_resources_to_draft_app_version({
     #     app_arn: "Arn", # required
+    #     eks_sources: [
+    #       {
+    #         eks_cluster_arn: "Arn", # required
+    #         namespaces: ["EksNamespace"], # required
+    #       },
+    #     ],
     #     import_strategy: "AddOnly", # accepts AddOnly, ReplaceAll
     #     source_arns: ["Arn"],
     #     terraform_sources: [
@@ -1955,6 +1979,10 @@ module Aws::ResilienceHub
     #
     #   resp.app_arn #=> String
     #   resp.app_version #=> String
+    #   resp.eks_sources #=> Array
+    #   resp.eks_sources[0].eks_cluster_arn #=> String
+    #   resp.eks_sources[0].namespaces #=> Array
+    #   resp.eks_sources[0].namespaces[0] #=> String
     #   resp.source_arns #=> Array
     #   resp.source_arns[0] #=> String
     #   resp.status #=> String, one of "Pending", "InProgress", "Failed", "Success"
@@ -1970,7 +1998,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the alarm recommendations for an AWS Resilience Hub application.
+    # Lists the alarm recommendations for an Resilience Hub application.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
@@ -2034,8 +2062,8 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the assessments for an AWS Resilience Hub application. You can
-    # use request parameters to refine the results for the response object.
+    # Lists the assessments for an Resilience Hub application. You can use
+    # request parameters to refine the results for the response object.
     #
     # @option params [String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -2123,7 +2151,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the compliances for an AWS Resilience Hub Application Component.
+    # Lists the compliances for an Resilience Hub Application Component.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
@@ -2195,8 +2223,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the recommendations for an AWS Resilience Hub Application
-    # Component.
+    # Lists the recommendations for an Resilience Hub Application Component.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
@@ -2279,9 +2306,9 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists all the input sources of the AWS Resilience Hub application. For
-    # more information about the input sources supported by AWS Resilience
-    # Hub, see [Discover the structure and describe your Resilience Hub
+    # Lists all the input sources of the Resilience Hub application. For
+    # more information about the input sources supported by Resilience Hub,
+    # see [Discover the structure and describe your Resilience Hub
     # application][1].
     #
     #
@@ -2303,7 +2330,7 @@ module Aws::ResilienceHub
     #   The AWS Resilience Hub application version.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of input sources to be displayed per AWS Resilience Hub
+    #   Maximum number of input sources to be displayed per Resilience Hub
     #   application.
     #
     # @option params [String] :next_token
@@ -2329,7 +2356,9 @@ module Aws::ResilienceHub
     # @example Response structure
     #
     #   resp.app_input_sources #=> Array
-    #   resp.app_input_sources[0].import_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform"
+    #   resp.app_input_sources[0].eks_source_cluster_namespace.eks_cluster_arn #=> String
+    #   resp.app_input_sources[0].eks_source_cluster_namespace.namespace #=> String
+    #   resp.app_input_sources[0].import_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform", "EKS"
     #   resp.app_input_sources[0].resource_count #=> Integer
     #   resp.app_input_sources[0].source_arn #=> String
     #   resp.app_input_sources[0].source_name #=> String
@@ -2345,7 +2374,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists all the Application Components in the AWS Resilience Hub
+    # Lists all the Application Components in the Resilience Hub
     # application.
     #
     # @option params [required, String] :app_arn
@@ -2459,8 +2488,9 @@ module Aws::ResilienceHub
     #   resp.next_token #=> String
     #   resp.resource_mappings #=> Array
     #   resp.resource_mappings[0].app_registry_app_name #=> String
+    #   resp.resource_mappings[0].eks_source_name #=> String
     #   resp.resource_mappings[0].logical_stack_name #=> String
-    #   resp.resource_mappings[0].mapping_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform"
+    #   resp.resource_mappings[0].mapping_type #=> String, one of "CfnStack", "Resource", "AppRegistryApp", "ResourceGroup", "Terraform", "EKS"
     #   resp.resource_mappings[0].physical_resource_id.aws_account_id #=> String
     #   resp.resource_mappings[0].physical_resource_id.aws_region #=> String
     #   resp.resource_mappings[0].physical_resource_id.identifier #=> String
@@ -2478,7 +2508,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists all the resources in an AWS Resilience Hub application.
+    # Lists all the resources in an Resilience Hub application.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -2540,6 +2570,7 @@ module Aws::ResilienceHub
     #   resp.physical_resources[0].app_components[0].name #=> String
     #   resp.physical_resources[0].app_components[0].type #=> String
     #   resp.physical_resources[0].excluded #=> Boolean
+    #   resp.physical_resources[0].logical_resource_id.eks_source_name #=> String
     #   resp.physical_resources[0].logical_resource_id.identifier #=> String
     #   resp.physical_resources[0].logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resources[0].logical_resource_id.resource_group_name #=> String
@@ -2561,7 +2592,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the different versions for the AWS Resilience Hub applications.
+    # Lists the different versions for the Resilience Hub applications.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -2614,7 +2645,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists your AWS Resilience Hub applications.
+    # Lists your Resilience Hub applications.
     #
     # <note markdown="1"> You can filter applications using only one filter at a time or without
     # using any filter. If you try to filter applications using multiple
@@ -2687,7 +2718,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the recommendation templates for the AWS Resilience Hub
+    # Lists the recommendation templates for the Resilience Hub
     # applications.
     #
     # @option params [required, String] :assessment_arn
@@ -2775,7 +2806,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the resiliency policies for the AWS Resilience Hub applications.
+    # Lists the resiliency policies for the Resilience Hub applications.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
@@ -2832,7 +2863,7 @@ module Aws::ResilienceHub
     end
 
     # Lists the standard operating procedure (SOP) recommendations for the
-    # AWS Resilience Hub applications.
+    # Resilience Hub applications.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
@@ -2896,7 +2927,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the suggested resiliency policies for the AWS Resilience Hub
+    # Lists the suggested resiliency policies for the Resilience Hub
     # applications.
     #
     # @option params [Integer] :max_results
@@ -2949,11 +2980,10 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the tags for your resources in your AWS Resilience Hub
-    # applications.
+    # Lists the tags for your resources in your Resilience Hub applications.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) for a specific resource in your AWS
+    #   The Amazon Resource Name (ARN) for a specific resource in your
     #   Resilience Hub application.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2980,7 +3010,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the test recommendations for the AWS Resilience Hub application.
+    # Lists the test recommendations for the Resilience Hub application.
     #
     # @option params [required, String] :assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for this
@@ -3048,9 +3078,9 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Lists the resources that are not currently supported in AWS Resilience
+    # Lists the resources that are not currently supported in Resilience
     # Hub. An unsupported resource is a resource that exists in the object
-    # that was used to create an app, but is not supported by AWS Resilience
+    # that was used to create an app, but is not supported by Resilience
     # Hub.
     #
     # @option params [required, String] :app_arn
@@ -3103,6 +3133,7 @@ module Aws::ResilienceHub
     #   resp.next_token #=> String
     #   resp.resolution_id #=> String
     #   resp.unsupported_resources #=> Array
+    #   resp.unsupported_resources[0].logical_resource_id.eks_source_name #=> String
     #   resp.unsupported_resources[0].logical_resource_id.identifier #=> String
     #   resp.unsupported_resources[0].logical_resource_id.logical_stack_name #=> String
     #   resp.unsupported_resources[0].logical_resource_id.resource_group_name #=> String
@@ -3112,6 +3143,7 @@ module Aws::ResilienceHub
     #   resp.unsupported_resources[0].physical_resource_id.identifier #=> String
     #   resp.unsupported_resources[0].physical_resource_id.type #=> String, one of "Arn", "Native"
     #   resp.unsupported_resources[0].resource_type #=> String
+    #   resp.unsupported_resources[0].unsupported_resource_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListUnsupportedAppVersionResources AWS API Documentation
     #
@@ -3122,7 +3154,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Publishes a new version of a specific AWS Resilience Hub application.
+    # Publishes a new version of a specific Resilience Hub application.
     #
     # @option params [required, String] :app_arn
     #   The Amazon Resource Name (ARN) of the AWS Resilience Hub application.
@@ -3160,7 +3192,7 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Adds or updates the app template for an AWS Resilience Hub application
+    # Adds or updates the app template for an Resilience Hub application
     # draft version.
     #
     # @option params [required, String] :app_arn
@@ -3184,7 +3216,7 @@ module Aws::ResilienceHub
     #   * <b> <code>resources</code> </b>
     #
     #     The list of logical resources that needs to be included in the
-    #     application.
+    #     Resilience Hub application.
     #
     #     Type: Array
     #
@@ -3238,6 +3270,21 @@ module Aws::ResilienceHub
     #       The name of the resource.
     #
     #       Type: String
+    #
+    #     * `additionalInfo`
+    #
+    #       Additional configuration parameters for an AWS Resilience Hub
+    #       application.
+    #
+    #       <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
+    #       format) of only one failover region and one associated account.
+    #
+    #        Key: `"failover-regions"`
+    #
+    #        Value: `"[\{"region":"<REGION>",
+    #       "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #
+    #        </note>
     #
     #   * <b> <code>appComponents</code> </b>
     #
@@ -3341,6 +3388,25 @@ module Aws::ResilienceHub
     #
     #         Type: String
     #
+    #   * <b> <code>version</code> </b>
+    #
+    #     The AWS Resilience Hub application version.
+    #
+    #   * `additionalInfo`
+    #
+    #     Additional configuration parameters for an AWS Resilience Hub
+    #     application.
+    #
+    #     <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
+    #     format) of only one failover region and one associated account.
+    #
+    #      Key: `"failover-regions"`
+    #
+    #      Value: `"[\{"region":"<REGION>",
+    #     "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #
+    #      </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html
@@ -3388,6 +3454,14 @@ module Aws::ResilienceHub
     #   The names of the registered applications you want to remove from the
     #   resource mappings.
     #
+    # @option params [Array<String>] :eks_source_names
+    #   The names of the Amazon Elastic Kubernetes Service clusters and
+    #   namespaces you want to remove from the resource mappings.
+    #
+    #   <note markdown="1"> This parameter accepts values in "eks-cluster/namespace" format.
+    #
+    #    </note>
+    #
     # @option params [Array<String>] :logical_stack_names
     #   The names of the CloudFormation stacks you want to remove from the
     #   resource mappings.
@@ -3414,6 +3488,7 @@ module Aws::ResilienceHub
     #   resp = client.remove_draft_app_version_resource_mappings({
     #     app_arn: "Arn", # required
     #     app_registry_app_names: ["EntityName"],
+    #     eks_source_names: ["String255"],
     #     logical_stack_names: ["String255"],
     #     resource_group_names: ["EntityName"],
     #     resource_names: ["EntityName"],
@@ -3713,12 +3788,11 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Updates the AWS Resilience Hub application version.
+    # Updates the Resilience Hub application version.
     #
-    # <note markdown="1"> This API updates the AWS Resilience Hub application draft version. To
-    # use this information for running resiliency assessments, you must
-    # publish the AWS Resilience Hub application using the
-    # `PublishAppVersion` API.
+    # <note markdown="1"> This API updates the Resilience Hub application draft version. To use
+    # this information for running resiliency assessments, you must publish
+    # the Resilience Hub application using the `PublishAppVersion` API.
     #
     #  </note>
     #
@@ -3779,13 +3853,12 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Updates an existing Application Component in the AWS Resilience Hub
+    # Updates an existing Application Component in the Resilience Hub
     # application.
     #
-    # <note markdown="1"> This API updates the AWS Resilience Hub application draft version. To
-    # use this Application Component for running assessments, you must
-    # publish the AWS Resilience Hub application using the
-    # `PublishAppVersion` API.
+    # <note markdown="1"> This API updates the Resilience Hub application draft version. To use
+    # this Application Component for running assessments, you must publish
+    # the Resilience Hub application using the `PublishAppVersion` API.
     #
     #  </note>
     #
@@ -3857,14 +3930,14 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # Updates the resource details in the AWS Resilience Hub application.
+    # Updates the resource details in the Resilience Hub application.
     #
-    # <note markdown="1"> * This action has no effect outside AWS Resilience Hub.
+    # <note markdown="1"> * This action has no effect outside Resilience Hub.
     #
-    # * This API updates the AWS Resilience Hub application draft version.
-    #   To use this resource for running resiliency assessments, you must
-    #   publish the AWS Resilience Hub application using the
-    #   `PublishAppVersion` API.
+    # * This API updates the Resilience Hub application draft version. To
+    #   use this resource for running resiliency assessments, you must
+    #   publish the Resilience Hub application using the `PublishAppVersion`
+    #   API.
     #
     # * To update application version with new `physicalResourceID`, you
     #   must call `ResolveAppVersionResources` API.
@@ -3897,10 +3970,10 @@ module Aws::ResilienceHub
     #   The Amazon Web Services region that owns the physical resource.
     #
     # @option params [Boolean] :excluded
-    #   Indicates if a resource is excluded from an AWS Resilience Hub
+    #   Indicates if a resource is excluded from an Resilience Hub
     #   application.
     #
-    #   <note markdown="1"> You can exclude only imported resources from an AWS Resilience Hub
+    #   <note markdown="1"> You can exclude only imported resources from an Resilience Hub
     #   application.
     #
     #    </note>
@@ -3935,6 +4008,7 @@ module Aws::ResilienceHub
     #     aws_region: "AwsRegion",
     #     excluded: false,
     #     logical_resource_id: {
+    #       eks_source_name: "String255",
     #       identifier: "String255", # required
     #       logical_stack_name: "String255",
     #       resource_group_name: "EntityName",
@@ -3960,6 +4034,7 @@ module Aws::ResilienceHub
     #   resp.physical_resource.app_components[0].name #=> String
     #   resp.physical_resource.app_components[0].type #=> String
     #   resp.physical_resource.excluded #=> Boolean
+    #   resp.physical_resource.logical_resource_id.eks_source_name #=> String
     #   resp.physical_resource.logical_resource_id.identifier #=> String
     #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
@@ -4068,7 +4143,7 @@ module Aws::ResilienceHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

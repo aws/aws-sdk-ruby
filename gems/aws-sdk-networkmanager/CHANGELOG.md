@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-03-22)
+------------------
+
+* Feature - This release includes an update to create-transit-gateway-route-table-attachment, showing example usage for TransitGatewayRouteTableArn.
+
 1.29.0 (2023-03-09)
 ------------------
 

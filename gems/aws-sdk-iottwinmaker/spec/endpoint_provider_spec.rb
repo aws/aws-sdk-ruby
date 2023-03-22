@@ -14,13 +14,13 @@ module Aws::IoTTwinMaker
   describe EndpointProvider do
     subject { Aws::IoTTwinMaker::EndpointProvider.new }
 
-    context 'For region eu-central-1 with FIPS enabled and DualStack enabled' do
+    context 'For region ap-southeast-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.eu-central-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://iottwinmaker.ap-southeast-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"eu-central-1"})
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"ap-southeast-1"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -28,27 +28,13 @@ module Aws::IoTTwinMaker
       end
     end
 
-    context 'For region eu-central-1 with FIPS enabled and DualStack disabled' do
+    context 'For region ap-southeast-2 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.eu-central-1.amazonaws.com"}}
+        {"endpoint"=>{"url"=>"https://iottwinmaker.ap-southeast-2.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"eu-central-1"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-central-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.eu-central-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"eu-central-1"})
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"ap-southeast-2"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -70,104 +56,6 @@ module Aws::IoTTwinMaker
       end
     end
 
-    context 'For region us-west-2 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.us-west-2.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"us-west-2"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.us-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-west-2"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.us-west-2.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"us-west-2"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.us-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-west-2"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-west-1 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.eu-west-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"eu-west-1"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-west-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.eu-west-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"eu-west-1"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region eu-west-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.eu-west-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"eu-west-1"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
     context 'For region eu-west-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://iottwinmaker.eu-west-1.amazonaws.com"}}
@@ -182,13 +70,13 @@ module Aws::IoTTwinMaker
       end
     end
 
-    context 'For region ap-southeast-1 with FIPS enabled and DualStack enabled' do
+    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.ap-southeast-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://iottwinmaker.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"ap-southeast-1"})
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-east-1"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -196,97 +84,13 @@ module Aws::IoTTwinMaker
       end
     end
 
-    context 'For region ap-southeast-1 with FIPS enabled and DualStack disabled' do
+    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.ap-southeast-1.amazonaws.com"}}
+        {"endpoint"=>{"url"=>"https://iottwinmaker.us-west-2.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"ap-southeast-1"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-1 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.ap-southeast-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"ap-southeast-1"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-1 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.ap-southeast-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"ap-southeast-1"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-2 with FIPS enabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.ap-southeast-2.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"ap-southeast-2"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-2 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.ap-southeast-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"ap-southeast-2"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-2 with FIPS disabled and DualStack enabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.ap-southeast-2.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"ap-southeast-2"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region ap-southeast-2 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.ap-southeast-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"ap-southeast-2"})
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-west-2"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -336,13 +140,13 @@ module Aws::IoTTwinMaker
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://iottwinmaker.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-east-1"})
+        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"cn-north-1"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -350,13 +154,233 @@ module Aws::IoTTwinMaker
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack disabled' do
+    context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"cn-north-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"cn-north-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"cn-north-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"us-gov-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-gov-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"us-gov-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-gov-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"us-iso-east-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-iso-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"error"=>"DualStack is enabled but this partition does not support DualStack"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"us-iso-east-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-iso-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"us-isob-east-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker-fips.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-isob-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"error"=>"DualStack is enabled but this partition does not support DualStack"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"us-isob-east-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://iottwinmaker.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-isob-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :endpoint=>"https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -384,6 +408,19 @@ module Aws::IoTTwinMaker
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'Missing region' do
+      let(:expected) do
+        {"error"=>"Invalid Configuration: Missing Region"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

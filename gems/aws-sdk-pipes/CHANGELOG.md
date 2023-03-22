@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-03-22)
+------------------
+
+* Feature - This release improves validation on the ARNs in the API model
+
 1.2.0 (2023-03-02)
 ------------------
 

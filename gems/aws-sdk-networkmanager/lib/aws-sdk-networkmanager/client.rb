@@ -1377,6 +1377,8 @@ module Aws::NetworkManager
     #
     # @option params [required, String] :transit_gateway_route_table_arn
     #   The ARN of the transit gateway route table for the attachment request.
+    #   For example, `"TransitGatewayRouteTableArn":
+    #   "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The list of key-value tags associated with the request.
@@ -5153,7 +5155,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

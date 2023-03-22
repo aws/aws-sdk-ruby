@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-03-22)
+------------------
+
+* Feature - This release adds support of adding metadata when creating a new scene or updating an existing scene.
+
 1.9.0 (2023-01-18)
 ------------------
 

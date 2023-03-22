@@ -84,7 +84,7 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # Information about pricing bundle.
+    # Information about the pricing bundle.
     #
     # @!attribute [rw] bundle_names
     #   The bundle names.
@@ -118,6 +118,8 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
+    # The component property group request.
+    #
     # @!attribute [rw] group_type
     #   The group type.
     #   @return [String]
@@ -520,13 +522,18 @@ module Aws::IoTTwinMaker
     #   Metadata that you can use to manage the scene.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] scene_metadata
+    #   The request metadata.
+    #   @return [Hash<String,String>]
+    #
     class CreateSceneRequest < Struct.new(
       :workspace_id,
       :scene_id,
       :content_location,
       :description,
       :capabilities,
-      :tags)
+      :tags,
+      :scene_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -547,20 +554,20 @@ module Aws::IoTTwinMaker
     end
 
     # @!attribute [rw] workspace_id
-    #   The workspace Id.
+    #   The workspace ID.
     #   @return [String]
     #
     # @!attribute [rw] sync_source
     #   The sync source.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSoource is `SITEWISE `.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sync_role
-    #   The SyncJob IAM role. This IAM role is used by the sync job to read
-    #   from the syncSource, and create, update or delete the corresponding
+    #   The SyncJob IAM role. This IAM role is used by the SyncJob to read
+    #   from the syncSource, and create, update, or delete the corresponding
     #   resources.
     #   @return [String]
     #
@@ -819,13 +826,13 @@ module Aws::IoTTwinMaker
     class DeleteSceneResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] workspace_id
-    #   The workspace Id.
+    #   The workspace ID.
     #   @return [String]
     #
     # @!attribute [rw] sync_source
     #   The sync source.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSource is `SITEWISE `.
     #
     #    </note>
     #   @return [String]
@@ -1136,8 +1143,8 @@ module Aws::IoTTwinMaker
     #   @return [Hash<String,Types::PropertyGroupResponse>]
     #
     # @!attribute [rw] sync_source
-    #   The syncSource of the sync job, if this entity was created by a sync
-    #   job.
+    #   The syncSource of the SyncJob, if this entity was created by a
+    #   SyncJob.
     #   @return [String]
     #
     # @!attribute [rw] component_type_name
@@ -1502,6 +1509,14 @@ module Aws::IoTTwinMaker
     #   A list of capabilities that the scene uses to render.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scene_metadata
+    #   The response metadata.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] generated_scene_metadata
+    #   The generated scene metadata.
+    #   @return [Hash<String,String>]
+    #
     class GetSceneResponse < Struct.new(
       :workspace_id,
       :scene_id,
@@ -1510,21 +1525,23 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :update_date_time,
       :description,
-      :capabilities)
+      :capabilities,
+      :scene_metadata,
+      :generated_scene_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] sync_source
-    #   The sync soucre.
+    #   The sync source.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSource is `SITEWISE `.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
-    #   The workspace Id.
+    #   The workspace ID.
     #   @return [String]
     #
     class GetSyncJobRequest < Struct.new(
@@ -1545,7 +1562,7 @@ module Aws::IoTTwinMaker
     # @!attribute [rw] sync_source
     #   The sync soucre.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSource is `SITEWISE `.
     #
     #    </note>
     #   @return [String]
@@ -1916,15 +1933,23 @@ module Aws::IoTTwinMaker
     #   @return [String]
     #
     # @!attribute [rw] sync_source
-    #   The sync soucre.
+    #   The sync source.
     #
-    #   <note markdown="1"> Currently the only supported syncSoucre is `SITEWISE `.
+    #   <note markdown="1"> Currently the only supported syncSource is `SITEWISE `.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] filters
     #   A list of objects that filter the request.
+    #
+    #   The following filter combinations are supported:
+    #
+    #   * Filter with state
+    #
+    #   * Filter with ResourceType and ResourceId
+    #
+    #   * Filter with ResourceType and ExternalId
     #   @return [Array<Types::SyncResourceFilter>]
     #
     # @!attribute [rw] max_results
@@ -2092,7 +2117,7 @@ module Aws::IoTTwinMaker
     #   @return [Time]
     #
     # @!attribute [rw] update_reason
-    #   The update reason, for changing a pricing plan.
+    #   The update reason for changing a pricing plan.
     #   @return [String]
     #
     class PricingPlan < Struct.new(
@@ -2292,7 +2317,7 @@ module Aws::IoTTwinMaker
     # The latest value of the property.
     #
     # @!attribute [rw] property_reference
-    #   An object that specifies information about a property.&gt;
+    #   An object that specifies information about a property.
     #   @return [Types::EntityPropertyReference]
     #
     # @!attribute [rw] property_value
@@ -2636,15 +2661,15 @@ module Aws::IoTTwinMaker
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The sync resource filter resoucre type
+    #   The sync resource filter resource type
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The sync resource filter resource Id.
+    #   The sync resource filter resource ID.
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   The external Id.
+    #   The external ID.
     #   @return [String]
     #
     class SyncResourceFilter < Struct.new(
@@ -2688,11 +2713,11 @@ module Aws::IoTTwinMaker
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   The external Id.
+    #   The external ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The resource Id.
+    #   The resource ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2825,7 +2850,7 @@ module Aws::IoTTwinMaker
     #   @return [Hash<String,Types::FunctionRequest>]
     #
     # @!attribute [rw] property_groups
-    #   The property groups
+    #   The property groups.
     #   @return [Hash<String,Types::PropertyGroupRequest>]
     #
     # @!attribute [rw] component_type_name
@@ -2973,12 +2998,17 @@ module Aws::IoTTwinMaker
     #   A list of capabilities that the scene uses to render.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scene_metadata
+    #   The scene metadata.
+    #   @return [Hash<String,String>]
+    #
     class UpdateSceneRequest < Struct.new(
       :workspace_id,
       :scene_id,
       :content_location,
       :description,
-      :capabilities)
+      :capabilities,
+      :scene_metadata)
       SENSITIVE = []
       include Aws::Structure
     end

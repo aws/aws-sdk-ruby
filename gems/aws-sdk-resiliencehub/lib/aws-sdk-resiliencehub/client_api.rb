@@ -110,6 +110,11 @@ module Aws::ResilienceHub
     DisruptionType = Shapes::StringShape.new(name: 'DisruptionType')
     DocumentName = Shapes::StringShape.new(name: 'DocumentName')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EksNamespace = Shapes::StringShape.new(name: 'EksNamespace')
+    EksNamespaceList = Shapes::ListShape.new(name: 'EksNamespaceList')
+    EksSource = Shapes::StructureShape.new(name: 'EksSource')
+    EksSourceClusterNamespace = Shapes::StructureShape.new(name: 'EksSourceClusterNamespace')
+    EksSourceList = Shapes::ListShape.new(name: 'EksSourceList')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
@@ -347,6 +352,7 @@ module Aws::ResilienceHub
 
     AppComponentNameList.member = Shapes::ShapeRef.new(shape: String255)
 
+    AppInputSource.add_member(:eks_source_cluster_namespace, Shapes::ShapeRef.new(shape: EksSourceClusterNamespace, location_name: "eksSourceClusterNamespace"))
     AppInputSource.add_member(:import_type, Shapes::ShapeRef.new(shape: ResourceMappingType, required: true, location_name: "importType"))
     AppInputSource.add_member(:resource_count, Shapes::ShapeRef.new(shape: Integer, location_name: "resourceCount"))
     AppInputSource.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn"))
@@ -489,6 +495,7 @@ module Aws::ResilienceHub
 
     DeleteAppInputSourceRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     DeleteAppInputSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppInputSourceRequest.add_member(:eks_source_cluster_namespace, Shapes::ShapeRef.new(shape: EksSourceClusterNamespace, location_name: "eksSourceClusterNamespace"))
     DeleteAppInputSourceRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn"))
     DeleteAppInputSourceRequest.add_member(:terraform_source, Shapes::ShapeRef.new(shape: TerraformSource, location_name: "terraformSource"))
     DeleteAppInputSourceRequest.struct_class = Types::DeleteAppInputSourceRequest
@@ -644,6 +651,18 @@ module Aws::ResilienceHub
     DisruptionResiliencyScore.key = Shapes::ShapeRef.new(shape: DisruptionType)
     DisruptionResiliencyScore.value = Shapes::ShapeRef.new(shape: Double)
 
+    EksNamespaceList.member = Shapes::ShapeRef.new(shape: EksNamespace)
+
+    EksSource.add_member(:eks_cluster_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "eksClusterArn"))
+    EksSource.add_member(:namespaces, Shapes::ShapeRef.new(shape: EksNamespaceList, required: true, location_name: "namespaces"))
+    EksSource.struct_class = Types::EksSource
+
+    EksSourceClusterNamespace.add_member(:eks_cluster_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "eksClusterArn"))
+    EksSourceClusterNamespace.add_member(:namespace, Shapes::ShapeRef.new(shape: EksNamespace, required: true, location_name: "namespace"))
+    EksSourceClusterNamespace.struct_class = Types::EksSourceClusterNamespace
+
+    EksSourceList.member = Shapes::ShapeRef.new(shape: EksSource)
+
     EntityNameList.member = Shapes::ShapeRef.new(shape: EntityName)
 
     FailurePolicy.add_member(:rpo_in_secs, Shapes::ShapeRef.new(shape: Seconds, required: true, location_name: "rpoInSecs"))
@@ -651,6 +670,7 @@ module Aws::ResilienceHub
     FailurePolicy.struct_class = Types::FailurePolicy
 
     ImportResourcesToDraftAppVersionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    ImportResourcesToDraftAppVersionRequest.add_member(:eks_sources, Shapes::ShapeRef.new(shape: EksSourceList, location_name: "eksSources"))
     ImportResourcesToDraftAppVersionRequest.add_member(:import_strategy, Shapes::ShapeRef.new(shape: ResourceImportStrategyType, location_name: "importStrategy"))
     ImportResourcesToDraftAppVersionRequest.add_member(:source_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "sourceArns"))
     ImportResourcesToDraftAppVersionRequest.add_member(:terraform_sources, Shapes::ShapeRef.new(shape: TerraformSourceList, location_name: "terraformSources"))
@@ -658,6 +678,7 @@ module Aws::ResilienceHub
 
     ImportResourcesToDraftAppVersionResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     ImportResourcesToDraftAppVersionResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    ImportResourcesToDraftAppVersionResponse.add_member(:eks_sources, Shapes::ShapeRef.new(shape: EksSourceList, location_name: "eksSources"))
     ImportResourcesToDraftAppVersionResponse.add_member(:source_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "sourceArns"))
     ImportResourcesToDraftAppVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourceImportStatusType, required: true, location_name: "status"))
     ImportResourcesToDraftAppVersionResponse.add_member(:terraform_sources, Shapes::ShapeRef.new(shape: TerraformSourceList, location_name: "terraformSources"))
@@ -836,6 +857,7 @@ module Aws::ResilienceHub
     ListUnsupportedAppVersionResourcesResponse.add_member(:unsupported_resources, Shapes::ShapeRef.new(shape: UnsupportedResourceList, required: true, location_name: "unsupportedResources"))
     ListUnsupportedAppVersionResourcesResponse.struct_class = Types::ListUnsupportedAppVersionResourcesResponse
 
+    LogicalResourceId.add_member(:eks_source_name, Shapes::ShapeRef.new(shape: String255, location_name: "eksSourceName"))
     LogicalResourceId.add_member(:identifier, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "identifier"))
     LogicalResourceId.add_member(:logical_stack_name, Shapes::ShapeRef.new(shape: String255, location_name: "logicalStackName"))
     LogicalResourceId.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceGroupName"))
@@ -916,6 +938,7 @@ module Aws::ResilienceHub
 
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:app_registry_app_names, Shapes::ShapeRef.new(shape: EntityNameList, location_name: "appRegistryAppNames"))
+    RemoveDraftAppVersionResourceMappingsRequest.add_member(:eks_source_names, Shapes::ShapeRef.new(shape: String255List, location_name: "eksSourceNames"))
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:logical_stack_names, Shapes::ShapeRef.new(shape: String255List, location_name: "logicalStackNames"))
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:resource_group_names, Shapes::ShapeRef.new(shape: EntityNameList, location_name: "resourceGroupNames"))
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:resource_names, Shapes::ShapeRef.new(shape: EntityNameList, location_name: "resourceNames"))
@@ -967,6 +990,7 @@ module Aws::ResilienceHub
     ResourceErrorsDetails.struct_class = Types::ResourceErrorsDetails
 
     ResourceMapping.add_member(:app_registry_app_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "appRegistryAppName"))
+    ResourceMapping.add_member(:eks_source_name, Shapes::ShapeRef.new(shape: String255, location_name: "eksSourceName"))
     ResourceMapping.add_member(:logical_stack_name, Shapes::ShapeRef.new(shape: String255, location_name: "logicalStackName"))
     ResourceMapping.add_member(:mapping_type, Shapes::ShapeRef.new(shape: ResourceMappingType, required: true, location_name: "mappingType"))
     ResourceMapping.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, required: true, location_name: "physicalResourceId"))
@@ -1053,6 +1077,7 @@ module Aws::ResilienceHub
     UnsupportedResource.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "logicalResourceId"))
     UnsupportedResource.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, required: true, location_name: "physicalResourceId"))
     UnsupportedResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "resourceType"))
+    UnsupportedResource.add_member(:unsupported_resource_status, Shapes::ShapeRef.new(shape: String255, location_name: "unsupportedResourceStatus"))
     UnsupportedResource.struct_class = Types::UnsupportedResource
 
     UnsupportedResourceList.member = Shapes::ShapeRef.new(shape: UnsupportedResource)

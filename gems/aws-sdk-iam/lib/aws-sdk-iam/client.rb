@@ -3021,6 +3021,8 @@ module Aws::IAM
 
     # Deletes the permissions boundary for the specified IAM role.
     #
+    # You cannot set the boundary for a service-linked role.
+    #
     # Deleting the permissions boundary for a role might increase its
     # permissions. For example, it might allow anyone who assumes the role
     # to perform all the actions granted in its permissions policies.
@@ -13346,7 +13348,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
